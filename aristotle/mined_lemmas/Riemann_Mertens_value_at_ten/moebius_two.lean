@@ -8,12 +8,11 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open ArithmeticFunction
-
 namespace Riemann.Mertens
 
-/-- The Mertens function `M n = ∑_{k=1}^{n} μ k`. -/
+open ArithmeticFunction
 
-private lemma moebius_two : moebius 2 = -1 :=
-  ArithmeticFunction.moebius_apply_prime Nat.prime_two
+/-- The Mertens function `M n = ∑_{k=1}^{n} μ k`, where `μ` is the Möbius function. -/
+
+lemma moebius_two : moebius 2 = -1 := moebius_apply_prime (by norm_num)
 

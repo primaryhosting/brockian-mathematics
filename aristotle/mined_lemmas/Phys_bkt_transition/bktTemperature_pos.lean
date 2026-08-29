@@ -16,30 +16,61 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Phys
 
-/-- Energy cost of a single vortex in a 2D XY model with spin stiffness `J`, in a
-square sample of linear size `L` with short-distance (core) cutoff `a`:
-`E = π J log (L / a)`. -/
+/-!
+## The Berezinskii–Kosterlitz–Thouless transition of the 2D XY model
 
-lemma bktTemperature_pos {J kB : ℝ} (hJ : 0 < J) (hkB : 0 < kB) :
-    0 < bktTemperature J kB := by
+The BKT transition is the *topological* phase transition of the two–dimensional XY model
+(planar rotators with nearest–neighbour coupling `J` on a two–dimensional lattice of spacing
+`a`, confined to a box of linear size `L`).  Its mechanism is the *unbinding of vortices*,
+and the transition temperature is located by the classical Kosterlitz–Thouless
+*energy–entropy* balance:
+
+* a single vortex of unit topological charge in a box of size `L` costs the elastic energy
+  `E(L) = π J log (L / a)` (the spin–wave energy of the winding configuration, obtained by
+  integrating `J/2 |∇θ|² = J/(2 r²)` over the annulus `a ≤ r ≤ L`);
+* the vortex core can be placed at any of the `(L/a)²` lattice sites, so its entropy is
+  `S(L) = k_B log ((L/a)²) = 2 k_B log (L / a)` (we work in units `k_B = 1`);
+* hence the free energy of a single free vortex is
+  `F(T, L) = E(L) - T S(L) = (π J - 2 T) log (L / a)`.
+
+Below `T_BKT = π J / 2` the free energy of an isolated vortex is positive and *diverges*
+with the system size, so vortices only occur in tightly bound neutral pairs: the system is
+in the quasi–long–range–ordered (topologically ordered) phase.  Above `T_BKT` the free
+energy of an isolated vortex is negative and diverges to `-∞`, so free vortices proliferate
+and destroy the quasi–long–range order.  The temperature `T_BKT` is the unique temperature
+at which this change of sign occurs; this is the content of `Phys.bkt_transition` below.
+-/
+
+/-- Elastic (spin–wave) energy of a single unit–charge vortex of core size `a`
+in a two–dimensional box of linear size `L`, at coupling `J`. -/
+
+lemma bktTemperature_pos {J : ℝ} (hJ : 0 < J) : 0 < bktTemperature J := by
   unfold bktTemperature
   positivity
 
-/-- **Berezinskii–Kosterlitz–Thouless topological phase transition of the 2D XY model.**
-
-For a single vortex in a sample of linear size `L` with core size `a < L`, the free
-energy `F = E - T S`, with `E = π J log (L / a)` the vortex energy and
-`S = 2 k_B log (L / a)` its positional entropy, changes sign exactly at the
-BKT temperature `T_BKT = π J / (2 k_B)`:
-
-* below `T_BKT` the free energy of an isolated vortex is positive and diverges as
-  `L → ∞`, so free vortices are suppressed and the system is in the quasi-long-range
-  ordered (bound vortex–antivortex) phase;
-* at `T_BKT` the free energy vanishes identically;
-* above `T_BKT` the free energy is negative and diverges to `-∞` as `L → ∞`, so free
-  vortices proliferate and destroy the quasi-long-range order.
-
-The divergence in `L` is recorded by the fact that the free energy is the sign-fixed
-coefficient `π J - 2 k_B T` times `log (L / a) → ∞`. -/
+/-- Below `T_BKT` an isolated vortex has strictly positive free energy: vortices are bound. -/

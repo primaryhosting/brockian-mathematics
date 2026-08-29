@@ -1,5 +1,4 @@
-import Mathlib
-
+/-
 /-!
 # No Cloning
 Category: Quantum Computing
@@ -7,22 +6,27 @@ Target: QC.no_cloning
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-/
 
+import Mathlib
 
-open scoped ComplexConjugate InnerProductSpace
-
+/-!
+# No Cloning
+Category: Quantum Computing
+Target: QC.no_cloning
+Verification: verified (axioms: propext, Classical.choice, Quot.sound)
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 namespace QC
 
-/-- The state space of one qubit, `ℂ²` with the Euclidean (Hilbert) structure. -/
-noncomputable abbrev Qubit := EuclideanSpace ℂ (Fin 2)
+/-- The qubit Hilbert space `H = ℂ²`. -/
+abbrev Qubit := EuclideanSpace ℂ (Fin 2)
 
-/-- The state space of two qubits, i.e. `Qubit ⊗ Qubit` realized concretely as
-functions on `Fin 2 × Fin 2`. -/
-noncomputable abbrev Qubit2 := EuclideanSpace ℂ (Fin 2 × Fin 2)
+/-- The two-qubit space `H ⊗ H`, realized concretely as `ℂ^(2×2)`. -/
+abbrev QubitPair := EuclideanSpace ℂ (Fin 2 × Fin 2)
 
-/-- The tensor product of two qubit states. -/
+/-- The computational basis states `|0⟩` and `|1⟩`. -/
 
-noncomputable def tens (a b : Qubit) : Qubit2 := WithLp.toLp 2 (fun p => a p.1 * b p.2)
+noncomputable def tens (a b : Qubit) : QubitPair :=
+  WithLp.toLp 2 (fun p => a p.1 * b p.2)
 
-/-- The inner product on the tensor product factorizes:
-`⟪a ⊗ b, c ⊗ d⟫ = ⟪a, c⟫ * ⟪b, d⟫`. -/

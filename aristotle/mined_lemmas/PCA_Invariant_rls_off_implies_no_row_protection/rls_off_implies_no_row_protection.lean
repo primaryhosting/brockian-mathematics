@@ -1,66 +1,39 @@
-import Mathlib
-
 /-!
-# A formal model of the PCA isolation engine (row-level security)
-
-This file develops a small, fully formal model of the row-isolation ("row level
-security", RLS) engine of the PCA system, together with
-
-* a *declarative specification* `PCA.Spec.Allowed` describing when a subject is
-  entitled to see a row,
-* an *executable engine* `PCA.Engine.visible` implementing the access decision,
-* **soundness** (`PCA.Engine.sound`) and **completeness** (`PCA.Engine.complete`)
-  of the engine with respect to the specification, and
-* the main invariant
-  `PCA.Invariant.rls_off_implies_no_row_protection`: if row level security is
-  switched off on a table, then no row of that table is protected, i.e. every
-  subject can see every row.
+# Rls Off Implies No Row Protection
+Category: Proof-Carrying Apps
+Target: PCA.Invariant.rls_off_implies_no_row_protection
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace PCA
+namespace PCA.Invariant
 
-/-- Identifier of a role (a database principal). -/
-abbrev RoleId := Nat
+universe u v
 
-/-- Identifier of a row. -/
-abbrev RowId := Nat
+/-- A row-level security policy for a table: it names, for each principal,
+the set of rows that principal is permitted to see. -/
+structure Policy (Principal : Type u) (Row : Type v) where
+  /-- `permits p r` holds when this policy lets principal `p` see row `r`. -/
+  permits : Principal → Row → Prop
 
-/-- A row of a table: its identity, its owning role and its tenant. -/
-structure Row where
-  id : RowId
-  owner : RoleId
-  tenant : Nat
-  deriving DecidableEq, Repr
+/-- A table of the isolation engine's model: a row-level-security switch
+together with the list of policies attached to the table. -/
+structure Table (Principal : Type u) (Row : Type v) where
+  /-- Whether row-level security is switched on for this table. -/
+  rlsEnabled : Bool
+  /-- The row-level security policies attached to the table. -/
+  policies : List (Policy Principal Row)
 
-/-- A row level security policy: it applies to a set of roles (the empty list
-meaning "all roles") and carries a `USING`-style predicate on rows. -/
-structure Policy where
-  name : String
-  roles : List RoleId
-  predicate : Row → Bool
+variable {Principal : Type u} {Row : Type v}
 
-/-- A table: whether RLS is enabled, whether it is *forced* (so that the table
-owner is not exempt), the owning role, and the list of attached policies. -/
-structure Table where
-  rls : Bool
-  forceRls : Bool
-  owner : RoleId
-  policies : List Policy
+/-- Semantics of the engine: when row-level security is off the table is read
+wholesale, so every row is visible to every principal; when it is on a row is
+visible only if some attached policy permits it. -/
 
-/-- A subject performing an access: its role and whether it holds the
-`BYPASSRLS` attribute. -/
-structure Subject where
-  role : RoleId
-  bypassRls : Bool
-  deriving DecidableEq, Repr
+theorem rls_off_implies_no_row_protection
+    (t : Table Principal Row) (h : t.rlsEnabled = false) :
+    ∀ p : Principal, ∀ r : Row, ¬ RowProtected t p r := by
+  intro p r hprot
+  exact hprot (by simp [Visible, h])
 
-/-- A policy applies to a subject when its role list is empty (all roles) or
-mentions the subject's role. -/
-
-theorem rls_off_implies_no_row_protection {t : Table} (h : t.rls = false) :
-    ∀ r : Row, ¬ RowProtected t r := by
-  rintro r ⟨s, hs⟩
-  rw [Engine.visible, h] at hs
-  simp at hs
-
-/-- Contrapositive form: a protected row witnesses that RLS is enabled. -/
+/-- Equivalent packaging: with row-level security off, every row is visible. -/

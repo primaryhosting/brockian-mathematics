@@ -1,47 +1,58 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-theorem exists_support_le (G : FiniteGame ι S) {x : (i : ι) → S i → ℝ} (hx : IsMixed x)
-    (i : ι) : ∃ s : S i, 0 < x i s ∧ devPayoff G i s x ≤ expectedPayoff G i x := by
-  by_contra hcon
-  push_neg at hcon
-  have key : ∀ s : S i, x i s * expectedPayoff G i x ≤ x i s * devPayoff G i s x := by
-    intro s
-    rcases lt_or_eq_of_le ((hx i).1 s) with h | h
-    · exact mul_le_mul_of_nonneg_left (hcon s h).le h.le
-    · rw [← h]; simp
-  -- there is a strategy in the support
-  obtain ⟨s0, -, hs0⟩ : ∃ s0 ∈ (Finset.univ : Finset (S i)), 0 < x i s0 := by
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+lemma exists_support_le (u : ι → (∀ j, S j) → ℝ) {x : ∀ j, S j → ℝ} (hx : IsMixed x)
+    (i : ι) : ∃ s : S i, 0 < x i s ∧ devPayoff u i s x ≤ payoff u i x := by
+  classical
+  set T : Finset (S i) := univ.filter (fun s => 0 < x i s) with hT
+  have hTne : T.Nonempty := by
     by_contra h
-    push_neg at h
-    have : ∑ s : S i, x i s = 0 :=
-      Finset.sum_eq_zero fun s hs => le_antisymm (h s hs) ((hx i).1 s)
-    rw [(hx i).2] at this
-    exact one_ne_zero this
-  have hstrict : x i s0 * expectedPayoff G i x < x i s0 * devPayoff G i s0 x :=
-    (mul_lt_mul_of_pos_left (hcon s0 hs0) hs0)
-  have hsum : ∑ s : S i, x i s * expectedPayoff G i x
-      < ∑ s : S i, x i s * devPayoff G i s x := by
-    refine Finset.sum_lt_sum (fun s _ => ?_) ⟨s0, Finset.mem_univ _, hstrict⟩
-    exact key s
-  rw [← Finset.sum_mul, (hx i).2, one_mul, ← expectedPayoff_eq_sum] at hsum
-  exact lt_irrefl _ hsum
+    rw [Finset.not_nonempty_iff_eq_empty] at h
+    have hzero : ∀ s : S i, x i s = 0 := by
+      intro s
+      rcases lt_or_eq_of_le ((hx i).1 s) with hlt | heq
+      · exact absurd (Finset.mem_filter.mpr ⟨mem_univ s, hlt⟩) (by rw [← hT, h]; simp)
+      · exact heq.symm
+    have := (hx i).2
+    rw [Finset.sum_congr rfl fun s _ => hzero s] at this
+    simp at this
+  obtain ⟨s0, hs0T, hs0min⟩ := T.exists_min_image (fun s => devPayoff u i s x) hTne
+  have hs0pos : 0 < x i s0 := (Finset.mem_filter.mp hs0T).2
+  refine ⟨s0, hs0pos, ?_⟩
+  have hle : ∑ s, x i s * devPayoff u i s0 x ≤ ∑ s, x i s * devPayoff u i s x := by
+    refine Finset.sum_le_sum fun s _ => ?_
+    rcases lt_or_eq_of_le ((hx i).1 s) with hlt | heq
+    · exact mul_le_mul_of_nonneg_left
+        (hs0min s (Finset.mem_filter.mpr ⟨mem_univ s, hlt⟩)) hlt.le
+    · rw [← heq]; simp
+  rw [← Finset.sum_mul, (hx i).2, one_mul] at hle
+  rw [payoff_eq_sum]
+  exact hle
 
-/-- At a fixed point of Nash's map, no player has a profitable pure deviation. -/
+/-- A fixed point of Nash's map is a Nash equilibrium. -/

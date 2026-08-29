@@ -33,27 +33,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+set_option maxHeartbeats 2000000
 set_option maxRecDepth 10000
 
 namespace Brockian.OppermannConjecture
 
-/-- **Oppermann's conjecture** (statement form): for every `n ≥ 2` there is a prime strictly
-between `n(n-1)` and `n²`, and a prime strictly between `n²` and `n(n+1)`.
+/-- Oppermann's property for `n`: there is a prime strictly between `n(n-1)` and `n²`,
+and a prime strictly between `n²` and `n(n+1)`. -/
 
-This is an open problem in number theory; it is *not* proved here.  What is proved below
-(`OppermannConjecture`) is a conditional reduction: Oppermann's conjecture follows from the
-`√x` prime-gap hypothesis `SqrtGapHypothesis`, together with an unconditional finite
-verification for `2 ≤ n ≤ 30` (`oppermann_of_le_thirty`).
-
-Mathlib's strongest unconditional result in this direction is Bertrand's postulate,
-`Nat.exists_prime_lt_and_le_two_mul`, which gives a prime in `(n, 2n]` and is far too weak to
-reach intervals of length `n` around `n²`. -/
-
-lemma not_prime_mul_succ {n : ℕ} (hn : 2 ≤ n) : ¬ (n * (n + 1)).Prime := by
+lemma not_prime_mul_succ {n : ℕ} (h2 : 2 ≤ n) : ¬ Nat.Prime (n * n + n) := by
   intro hp
-  rcases (Nat.Prime.eq_one_or_self_of_dvd hp n ⟨n + 1, rfl⟩) with h | h
-  · omega
-  · nlinarith [h]
+  rcases (Nat.Prime.eq_one_or_self_of_dvd hp n ⟨n + 1, by ring⟩) with h | h <;> nlinarith
 
-/-- **Conditional Oppermann conjecture.**  Assuming that every interval `(m, m + √m]` with
-`m ≥ 2` contains a prime, Oppermann's conjecture holds. -/
+/-- Oppermann's property is equivalent to the classical statement
+`π(n² - n) < π(n²) < π(n² + n)` in terms of the prime counting function. -/

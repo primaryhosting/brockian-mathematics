@@ -2,49 +2,76 @@
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` commands to precede every declaration, including module
-docstrings, so the header above is a plain block comment.)
 -/
-import Mathlib
 import RequestProject.Savitch.Model
-import RequestProject.Savitch.Walk
-import RequestProject.Savitch.Sim
-import RequestProject.Savitch.Semantics
-import RequestProject.Savitch.Space
+import RequestProject.Savitch.Interp
 
 /-!
-The space-bounded machine model, the classes `CS.NSPACE`, `CS.DSPACE`,
-`CS.PSPACE` and `CS.NPSPACE`, and the simulator used in the proof are defined in
-the files `RequestProject/Savitch/*.lean`.
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-A machine reads its input through a head whose position is determined by its
-memory value, and it works in space `g` if on inputs of length `n` all reachable
-memory values lie in a set of at most `2 ^ g n` values depending only on `n`
-(the standard correspondence between `s` tape cells and `2 ^ O(s)`
-configurations).  The classes `NSPACE g` and `DSPACE g` are closed under
-constant factors by definition, as usual for space classes.
+/-
+`NSPACE f ⊆ DSPACE (16 * (f + 1)^2)`, i.e. Savitch's theorem, and the corollary
+`PSPACE = NPSPACE`.
 
-Savitch's theorem is proved for space bounds `f` with `n + 1 ≤ 2 ^ f n`
-(i.e. `f n ≥ log₂ (n+1)`), the standard hypothesis `f (n) ≥ log n`.
+The model of computation is set up in `RequestProject.Savitch.Model`: a device is
+a configuration graph with read-only access to the input tape, and the space it
+uses is the number of bits needed to encode a configuration.
+
+The proof follows the classical argument.  Given a nondeterministic device `M`
+using `s` bits of space, its configuration graph (extended by a single absorbing
+accepting vertex) has at most `2 ^ (s+1)` vertices, so acceptance amounts to
+reachability in a graph of that size.  Reachability is computed deterministically
+by the midpoint recursion `reach` of `RequestProject.Savitch.Reach`, of depth
+`K = s + 1`, and this recursion is executed by the explicit stack machine of
+`RequestProject.Savitch.Interp`, whose states consist of at most `K` frames, each
+holding three vertices and a bit.  That machine therefore has at most
+`2 ^ (16 * K ^ 2)` configurations, i.e. it runs in space `O(s²)`.
 -/
 
 namespace CS
 
-/-- **Savitch's theorem**: a language recognized by a nondeterministic machine in
-space `f` (with `f n ≥ log₂ (n + 1)`) is recognized by a deterministic machine in
-space `O(f²)`, i.e. `NSPACE f ⊆ DSPACE (f²)`. -/
+/-! ### Counting the states of the evaluator -/
 
-theorem reach_of_walk {a b : N.Mem} (ha : Reach N x a) :
-    ∀ (t : ℕ), Walk (stepR N x) t a b → Reach N x b := by
-  intro t
-  induction t generalizing b with
-  | zero => intro h; cases h; exact ha
-  | succ t iht =>
-    rintro ⟨c, hc, hcb⟩
-    exact Reach.step (iht hc) hcb
+section Card
 
-/-- Soundness: the Savitch predicate only reports genuine reachability. -/
+variable {C : Type} [Fintype C] (K : ℕ)
+
+/-- Encoding of a state of the evaluator by its mode and the (padded) list of its
+frames. -/
+
+lemma reach_of_walk : ∀ (k : ℕ) {v : ℕ → C} {ℓ : ℕ} {a b : C},
+    Walk R v ℓ a b → ℓ ≤ 2 ^ k → reach R k a b = true := by
+  intro k
+  induction k with
+  | zero =>
+      rintro v ℓ a b ⟨h0, hl, hstep⟩ hle
+      simp only [pow_zero] at hle
+      interval_cases ℓ
+      · exact bdec_of (Or.inl (by rw [← h0, ← hl]))
+      · have := hstep 0 (by norm_num)
+        rw [h0] at this
+        rw [show (0 : ℕ) + 1 = 1 from rfl] at this
+        exact bdec_of (Or.inr (by rw [← hl]; exact this))
+  | succ k ih =>
+      rintro v ℓ a b ⟨h0, hl, hstep⟩ hle
+      set i := min ℓ (2 ^ k) with hi
+      have hile : i ≤ ℓ := min_le_left _ _
+      have hi1 : i ≤ 2 ^ k := min_le_right _ _
+      have hpow : 2 ^ (k + 1) = 2 ^ k + 2 ^ k := by ring
+      have hi2 : ℓ - i ≤ 2 ^ k := by omega
+      have w1 : Walk R v i a (v i) := ⟨h0, rfl, fun j hj => hstep j (lt_of_lt_of_le hj hile)⟩
+      have w2 : Walk R (fun t => v (i + t)) (ℓ - i) (v i) b :=
+        ⟨by simp, by simp only []; rw [Nat.add_sub_cancel' hile]; exact hl,
+         fun j hj => by
+           have : i + j < ℓ := by omega
+           simpa [Nat.add_assoc] using hstep (i + j) this⟩
+      simp only [reach_succ, bdec_eq_true_iff]
+      exact ⟨v i, ih w1 hi1, ih w2 hi2⟩
+

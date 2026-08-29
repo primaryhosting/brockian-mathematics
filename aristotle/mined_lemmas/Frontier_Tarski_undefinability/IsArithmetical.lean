@@ -1,3 +1,15 @@
+/-
+# Tarski Undefinability
+Category: Frontier — Set Theory
+Target: Frontier.Tarski_undefinability
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the
+-- header above is given as a plain block comment and repeated below verbatim.)
+
+import Mathlib
+
 /-!
 # Tarski Undefinability
 Category: Frontier — Set Theory
@@ -6,28 +18,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-open FirstOrder Language
+set_option maxHeartbeats 1000000
+set_option autoImplicit false
 
 namespace Frontier
 
-/-! ## The first-order language of arithmetic -/
+open FirstOrder Language
 
-/-- The function symbols of the language of arithmetic: `0`, `1`, `+`, `*`. -/
+/-! ## The language of arithmetic -/
+
+/-- The function symbols of the language of arithmetic: `0`, the successor `S`,
+addition and multiplication. -/
 inductive arithFunc : ℕ → Type
   | zero : arithFunc 0
-  | one : arithFunc 0
+  | succ : arithFunc 1
   | add : arithFunc 2
   | mul : arithFunc 2
   deriving DecidableEq
 
-/-- The first-order language of arithmetic, with function symbols `0, 1, +, *`
-and no relation symbols. -/
+/-- The relation symbols of the language of arithmetic: the order relation `<`. -/
+inductive arithRel : ℕ → Type
+  | lt : arithRel 2
+  deriving DecidableEq
 
-def IsArithmetical (S : Set ℕ) : Prop :=
-  ∃ φ : arith.Formula (Fin 1), ∀ n : ℕ, n ∈ S ↔ φ.Realize (fun _ => n)
+/-- The first-order language of arithmetic, `(0, S, +, ·, <)`. -/
 
-/-- A binary relation on the natural numbers is *arithmetical* if it is the extension of some
-first-order formula of the language of arithmetic with two free variables, interpreted in the
-standard model `ℕ`. -/
+def IsArithmetical (A : Set ℕ) : Prop :=
+  ∃ φ : arith.Formula (Fin 1), ∀ n : ℕ, n ∈ A ↔ φ.Realize ![n]
+
+/-- A binary relation on the natural numbers is **arithmetical** when it is the extension,
+in the standard model `ℕ`, of a first-order formula of the language of arithmetic with two
+free variables. -/

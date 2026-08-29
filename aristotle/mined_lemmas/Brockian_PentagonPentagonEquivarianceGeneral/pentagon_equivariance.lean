@@ -4,7 +4,11 @@ Category: Brockian Corpus
 Target: Brockian.PentagonPentagonEquivarianceGeneral
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Lean does not allow a module docstring `/-!  -/` to precede `import`, so the header
+is repeated below as the module docstring, verbatim.)
 -/
+
 import Mathlib
 
 /-!
@@ -13,42 +17,7 @@ Category: Brockian Corpus
 Target: Brockian.PentagonPentagonEquivarianceGeneral
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-We generalize the `D₅` (regular pentagon) representation picture to arbitrary regular
-`n`-gons.  Concretely, for `n ≠ 0` we build
-
-* `Brockian.zpowRoot n m = exp (2πi·m/n)`, the `n`-th roots of unity indexed by `ℤ`;
-* `Brockian.vertex n k`, the vertices of the regular `n`-gon, indexed by `ZMod n`;
-* `Brockian.rho n`, the standard two dimensional real representation of
-  `DihedralGroup n` realized on `ℂ` (rotations act by multiplication by a root of unity,
-  reflections by a root of unity times complex conjugation);
-* `Brockian.act n`, the combinatorial action of `DihedralGroup n` on the vertex labels
-  `ZMod n`.
-
-The main theorem `Brockian.PentagonPentagonEquivarianceGeneral` states that `rho` is a
-representation, that `act` is an action, and that the vertex map
-`vertex n : ZMod n → ℂ` is an injective equivariant map between them.  Specializing to
-`n = 5` recovers the pentagon statement (`Brockian.pentagon_equivariance`).
 -/
-
-namespace Brockian
-
-open Complex
-
-section Aux
-
-/-- `((a.val : ℕ) : ZMod n) = a`. -/
-
-theorem pentagon_equivariance :
-    (rho 5 1 = id ∧ ∀ g h : DihedralGroup 5, rho 5 (g * h) = rho 5 g ∘ rho 5 h) ∧
-    (act 5 1 = id ∧ ∀ g h : DihedralGroup 5, act 5 (g * h) = act 5 g ∘ act 5 h) ∧
-    Function.Injective (vertex 5) ∧
-    (∀ (g : DihedralGroup 5) (k : ZMod 5), rho 5 g (vertex 5 k) = vertex 5 (act 5 g k)) :=
-  PentagonPentagonEquivarianceGeneral 5 (by norm_num)
-
-end Brockian
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -73,3 +42,22 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+namespace Brockian
+
+open DihedralGroup Complex
+
+/-! ## Vertices of a regular `n`-gon
+
+The `k`-th vertex of the standard regular `n`-gon inscribed in the unit circle of `ℂ` is
+`exp (2 π i k / n)`.  This only depends on `k` modulo `n`, so it is naturally indexed by
+`ZMod n`; Mathlib already packages this as the additive character `ZMod.toCircle`.
+-/
+
+/-- The `k`-th vertex of the standard regular `n`-gon, as a complex number.
+It equals `exp (2 * π * I * k / n)` (see `Brockian.ngonVertex_eq_exp`). -/
+
+theorem pentagon_equivariance (g : DihedralGroup 5) (k : ZMod 5) :
+    dihedralPlane 5 g (ngonVertex 5 k) = ngonVertex 5 (dihedralIdx 5 g k) :=
+  (PentagonPentagonEquivarianceGeneral 5).2.2.2.2 g k
+
+/-- The vertices of the regular `n`-gon are exactly the `n`-th roots of unity. -/

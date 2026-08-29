@@ -1,4 +1,20 @@
+/-
+# Pcp Dinur
+Category: Frontier Cs
+Target: CS.pcp_dinur
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Pcp Dinur
+Category: Frontier Cs
+Target: CS.pcp_dinur
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,35 +39,22 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
-# Pcp Dinur
-Category: Frontier Cs
-Target: CS.pcp_dinur
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace CS
 
-/-- A *constraint graph* (a binary constraint satisfaction instance): `n` variables taking
-values in the alphabet `Fin (q+1)`, together with a list of binary constraints, each given by
-an ordered pair of variables and a decidable relation on the alphabet. -/
-structure ConstraintGraph where
-  /-- Number of variables. -/
-  n : ℕ
-  /-- The alphabet is `Fin (q+1)`; in particular it is nonempty. -/
-  q : ℕ
-  /-- The constraints: each is a pair of variables together with a relation they must satisfy. -/
-  edges : List ((Fin n × Fin n) × (Fin (q + 1) → Fin (q + 1) → Bool))
+/-- A finite constraint satisfaction problem (CSP) instance: `numVars` variables taking
+values in an alphabet of size `alphabetSize`, together with a nonempty list of Boolean
+constraints on assignments. -/
+structure CSP where
+  numVars : ℕ
+  alphabetSize : ℕ
+  alphabet_pos : 0 < alphabetSize
+  constraints : List ((Fin numVars → Fin alphabetSize) → Bool)
+  constraints_ne : constraints ≠ []
 
-namespace ConstraintGraph
+namespace CSP
 
-/-- An assignment of alphabet values to the variables of `G`. -/
-abbrev Assignment (G : ConstraintGraph) := Fin G.n → Fin (G.q + 1)
+/-- Assignments of the CSP `G`. -/
 
-/-- The number of constraints of `G` (its size). -/
+def Satisfiable (G : CSP) : Prop := ∃ a : G.Assignment, ∀ c ∈ G.constraints, c a = true
 
-def Satisfiable (G : ConstraintGraph) : Prop := ∃ a : G.Assignment, G.unsatCount a = 0
-
+/-- The unsat value of `G`: the least fraction of constraints violated by an assignment. -/

@@ -83,7 +83,9 @@
           "compute",
           "distill",
           "decompose",
-          "dual_prover"
+          "dual_prover",
+          "harvest",
+          "repair"
         ]
       }
     },
@@ -139,7 +141,9 @@
             "type": "array",
             "items": { "type": "string" }
           },
-          "agent": { "type": "string" }
+          "agent": { "type": "string" },
+          "axle_verified": { "type": "boolean" },
+          "axioms_clean": { "type": "boolean" }
         }
       }
     },

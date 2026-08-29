@@ -42,7 +42,9 @@ theorem pumping_regular {α : Type*} (L : Language α) (hL : L.IsRegular) :
   apply hsub
   refine ⟨a ++ (List.replicate n b).flatten, ⟨a, rfl, (List.replicate n b).flatten, ?_, rfl⟩,
     c, rfl, by simp⟩
-  exact Language.join_mem_kstar (fun y hy => List.eq_of_mem_replicate hy)
+  rw [Language.mem_kstar]
+  exact ⟨List.replicate n b, rfl, fun y hy => by
+    simpa using (List.eq_of_mem_replicate hy)⟩
 
 end CS
 

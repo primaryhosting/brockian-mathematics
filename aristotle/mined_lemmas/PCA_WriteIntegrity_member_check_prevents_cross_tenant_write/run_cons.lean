@@ -1,10 +1,10 @@
-/-!
-# Member Check Prevents Cross Tenant Write
-Category: Proof-Carrying Apps
-Target: PCA.WriteIntegrity.member_check_prevents_cross_tenant_write
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -23,51 +23,31 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+# Member Check Prevents Cross Tenant Write
+Category: Proof-Carrying Apps
+Target: PCA.WriteIntegrity.member_check_prevents_cross_tenant_write
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option autoImplicit false
+
 namespace PCA
 namespace WriteIntegrity
 
-/-! ## The isolation engine model
+universe u v w x
 
-A minimal multi-tenant key–value service.  Every principal belongs to a tenant and
-every resource is owned by a tenant.  A write request is executed only if the
-*member check* succeeds, i.e. the writing principal's tenant is exactly the tenant
-owning the target resource.  Otherwise the request is dropped and the store is
-unchanged. -/
+variable {Tenant : Type u} {User : Type v} {Res : Type w} {Val : Type x}
 
-/-- Tenant identifiers. -/
-abbrev TenantId := Nat
-/-- Principal (user / service account) identifiers. -/
-abbrev PrincipalId := Nat
-/-- Resource (record) identifiers. -/
-abbrev ResourceId := Nat
-/-- Values stored in resources. -/
-abbrev Value := Nat
+/-- A store maps each resource to its current value. -/
+abbrev Store (Res : Type w) (Val : Type x) : Type (max w x) := Res → Val
 
-/-- The static environment: the tenant of each principal, and the owning tenant of
-each resource. -/
-structure Env where
-  /-- The tenant a principal belongs to. -/
-  tenantOf : PrincipalId → TenantId
-  /-- The tenant owning a resource. -/
-  ownerOf : ResourceId → TenantId
+/-- Pointwise update of a store. -/
 
-/-- A write request: a principal asks to store `value` into `resource`. -/
-structure Request where
-  /-- The requesting principal. -/
-  principal : PrincipalId
-  /-- The targeted resource. -/
-  resource : ResourceId
-  /-- The value to be written. -/
-  value : Value
+@[simp] theorem run_cons [DecidableEq Res] (pol : Policy Tenant User Res)
+    (req : Request User Res Val) (trace : List (Request User Res Val))
+    (st : Store Res Val) :
+    run pol (req :: trace) st = run pol trace (step pol req st) := rfl
 
-/-- The store maps every resource to its current value. -/
-abbrev Store := ResourceId → Value
-
-/-- The membership guard of the isolation engine: the principal's tenant must own
-the targeted resource. -/
-
-@[simp] theorem run_cons (E : Env) (s : Store) (r : Request) (rs : List Request) :
-    run E s (r :: rs) = run E (step E s r) rs := rfl
-
-/-- A single guarded step cannot modify a resource which is not owned by the
-requesting principal's tenant. -/
+/-- A rejected request has no effect at all. -/

@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Tightened Predicate Refines Original
-Category: Proof-Carrying Apps
-Target: PCA.Isolation.tightened_predicate_refines_original
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,14 +23,46 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+# Tightened Predicate Refines Original
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.tightened_predicate_refines_original
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace PCA.Isolation
 
-variable {S A : Type*}
+universe u
 
-/-- The state reached from `s` by executing the finite action trace `l`
-under the transition function `step`. -/
+/-- Syntax of the isolation engine's access predicates over a state type `σ`.
 
-def tighten (step : S → A → S) (P : S → Prop) : ℕ → S → Prop
-  | 0 => P
-  | n + 1 => fun s => P s ∧ ∀ a : A, tighten step P n (step s a)
+An `AccessPred σ` describes when a request in state `s : σ` is permitted.
+The language is monotone (no negation): `grant` always permits, `deny` never
+permits, `atom p` consults a primitive check `p`, and `both`/`either` are
+conjunction and disjunction of sub-policies. -/
+inductive AccessPred (σ : Type u) : Type u
+  | grant : AccessPred σ
+  | deny : AccessPred σ
+  | atom : (σ → Prop) → AccessPred σ
+  | both : AccessPred σ → AccessPred σ → AccessPred σ
+  | either : AccessPred σ → AccessPred σ → AccessPred σ
 
+namespace AccessPred
+
+/-- Denotational semantics of an access predicate: the set of states it permits. -/
+
+def tighten {σ : Type u} (g : AccessPred σ) : AccessPred σ → AccessPred σ
+  | grant => g
+  | deny => deny
+  | atom p => both (atom p) g
+  | both a b => both (tighten g a) (tighten g b)
+  | either a b => either (tighten g a) (tighten g b)
+
+end AccessPred
+
+open AccessPred
+
+/-- **Soundness of tightening.** The tightened policy refines the original one:
+anything the tightened policy permits was already permitted before tightening.
+Proved by structural induction on the policy. -/

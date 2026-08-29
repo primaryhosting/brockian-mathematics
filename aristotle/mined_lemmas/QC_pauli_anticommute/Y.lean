@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Pauli Anticommute
+Category: Quantum Computing
+Target: QC.pauli_anticommute
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat

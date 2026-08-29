@@ -23,17 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Fortune Conjecture
-Category: Brockian Conjecture
-Target: Brockian.FortunateNumbers.FortuneConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean requires `import` lines to precede any module docstring, so the header above is a
--- plain comment and is repeated verbatim as the module docstring below.)
-
 import Mathlib
 
 /-!
@@ -46,28 +35,18 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.FortunateNumbers
 
-open Finset
+open Nat
 
-/-!
-## Setup
+/-- Existence of a "fortunate offset": for every `n` there is some `m > 1` such that
+`n# + m` is prime, where `n#` is the primorial of `n`.  This follows from Bertrand's
+postulate applied to `n# + 1`. -/
 
-For a bound `N`, `primorial N` (Mathlib's `primorial`, notation `N#`) is the product of all
-primes `≤ N`.  The *fortunate number* attached to `N` is the least `m ≥ 2` such that
-`N# + m` is prime.  Fortune's conjecture asserts that this number is always prime.
+theorem exists_fortunate (n : ℕ) : ∃ m, 1 < m ∧ Nat.Prime (primorial n + m) := by
+  obtain ⟨p, hp, hlt, -⟩ :=
+    Nat.exists_prime_lt_and_le_two_mul (primorial n + 1) (by positivity)
+  refine ⟨p - primorial n, by omega, ?_⟩
+  have : primorial n + (p - primorial n) = p := by omega
+  rw [this]; exact hp
 
-The conjecture is open.  What we prove here is the classical unconditional dichotomy
-(`fortunate_prime_or_sq_le`): the fortunate number is either prime or at least `(N+1)^2`,
-because none of its prime factors can be `≤ N`.  The named target
-`FortuneConjecture` is therefore the corresponding *conditional* statement: the fortunate
-number is prime as soon as it is smaller than `(N+1)^2`.
--/
-
-/-- Every prime `q ≤ N` divides the primorial `N#`. -/
-
-theorem exists_fortunate (N : ℕ) : ∃ m, 2 ≤ m ∧ (primorial N + m).Prime := by
-  obtain ⟨p, hple, hp⟩ := Nat.exists_infinite_primes (primorial N + 2)
-  refine ⟨p - primorial N, by omega, ?_⟩
-  have : primorial N + (p - primorial N) = p := by omega
-  rwa [this]
-
-/-- The fortunate number of `N`: the least `m ≥ 2` such that `N# + m` is prime. -/
+/-- The Fortunate number of `n`: the least `m > 1` such that `n# + m` is prime,
+where `n#` denotes the primorial of `n` (the product of all primes `≤ n`). -/

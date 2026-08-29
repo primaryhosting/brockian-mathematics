@@ -1,68 +1,78 @@
-/-
-# Scholze Perfectoid Tilt
-Category: Frontier — Fields Medal Work
-Target: Frontier.scholze_perfectoid_tilt
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean requires `import` lines to precede any doc-comment command, so the header above is
--- written as a plain block comment; the same text is repeated as a module docstring below.)
-
-import Mathlib
-
 /-!
 # Scholze Perfectoid Tilt
 Category: Frontier — Fields Medal Work
 Target: Frontier.scholze_perfectoid_tilt
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-## Contents
-
-Let `K` be a field with a valuation `v : K → ℝ≥0` whose ring of integers is `O`
-(`hv : v.Integers O`), and let `p` be a prime with `v p ≠ 1`.  Mathlib implements Scholze's
-tilt `K♭` as `Tilt K v O hv p`, the fraction field of the perfection of `O/p`
-(`Mathlib.RingTheory.Perfection`, following [scholze2011perfectoid]).
-
-We prove:
-
-* `Frontier.charP_tilt` : the tilt has characteristic `p`;
-* `Frontier.tilt_pow_bijective` : the tilt is perfect, i.e. its Frobenius `x ↦ x ^ p` is
-  bijective — so `K♭` is a perfect field of characteristic `p`;
-* `Frontier.tilt_ringEquiv_self` : the base case of the tilting correspondence — if `K` is
-  already a perfect field of characteristic `p`, then tilting is the identity: `K♭ ≃+* K`;
-* `Frontier.scholze_perfectoid_tilt` : the three statements packaged together.
-
-Along the way we prove some results of independent interest:
-`Frontier.isFractionRing_integers` (a valued field is the fraction field of its ring of
-integers), `Frontier.isFractionRing_of_div_surjective` and
-`Frontier.isFractionRing_of_ringEquiv`.
 -/
 
-open scoped NNReal
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.structureInstances true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ### Generic helper lemmas -/
+/-!
+## The tilt construction
 
-/-- If `A` is a domain sitting inside a field `F` such that every element of `F` is a quotient
-of elements of `A`, then `F` is the fraction field of `A`. -/
+For a field (more generally, a commutative monoid) `K` and a prime `p`, Scholze's *tilt*
+`K♭` is, as a multiplicative monoid, the inverse limit
 
-theorem tilt_pow_bijective : Function.Bijective fun x : Tilt K v O hv p => x ^ p := by
-  haveI := Fact.mk <| mt hv.one_of_isUnit <| (map_natCast (algebraMap O K) p).symm ▸ hvp.1
-  haveI := PreTilt.isDomain K v O hv p
-  haveI := charP_tilt v hv p
-  have hp : p.Prime := Fact.out
-  refine ⟨pow_injective_of_charP (F := Tilt K v O hv p) p hp, ?_⟩
-  have hsurj : Function.Surjective fun a : PreTilt O p => a ^ p := by
-    intro a
-    obtain ⟨b, hb⟩ := (PerfectRing.bijective_frobenius (R := PreTilt O p) (p := p)).2 a
-    exact ⟨b, by simpa [frobenius_def] using hb⟩
-  show Function.Surjective fun x : FractionRing (PreTilt O p) => x ^ p
-  exact pow_surjective_fractionRing (A := PreTilt O p) p hsurj
+  `K♭ = lim (⋯ → K --x ↦ xᵖ--> K --x ↦ xᵖ--> K)`,
 
-/-- Base case of the tilting correspondence: if `K` is already a perfect field of
-characteristic `p`, then tilting does nothing, i.e. `K♭ ≃+* K`.
+realised here as the submonoid of sequences `f : ℕ → K` with `f (n+1) ^ p = f n`.
+This description of the underlying multiplicative monoid is characteristic-independent.
+The multiplicative map `♯ : K♭ → K`, `f ↦ f 0`, is the *sharp* map.
 
-Indeed in that case `p = 0` in `O`, so `O/p = O`; moreover `O` is perfect, hence equal to its
-own perfection, and `K` is the fraction field of `O`. -/
+Scholze's tilting equivalence asserts that `K ↦ K♭` is an equivalence between perfectoid
+fields of mixed characteristic and perfectoid fields of characteristic `p`, compatible
+with the Galois theory of the two sides.  Its *base case* — the content formalised and
+proved below — is that on characteristic `p` perfectoid fields (i.e. perfect fields of
+characteristic `p`) tilting is canonically the identity: the tilt is again a perfect ring
+of characteristic `p`, and the sharp map is an isomorphism `K♭ ≃ K`.
+-/
+
+section Sequences
+
+variable {K : Type*}
+
+/-- A sequence of `p`-power-compatible elements: `f (n+1) ^ p = f n`. -/
+
+theorem tilt_pow_bijective (K : Type*) [CommMonoid K] (p : ℕ) :
+    Function.Bijective (fun x : tiltMonoid K p => x ^ p) := by
+  constructor
+  · rintro ⟨f, hf⟩ ⟨g, hg⟩ h
+    have h' : ∀ n, f n ^ p = g n ^ p := by
+      intro n
+      exact congrFun (congrArg (fun x : tiltMonoid K p => (x : ℕ → K)) h) n
+    exact Subtype.ext (hf.eq_of_pow_eq hg h')
+  · rintro ⟨f, hf⟩
+    exact ⟨⟨fun n => f (n + 1), hf.shift⟩, Subtype.ext hf.pow_shift⟩
+
+/-!
+## The tilt in characteristic `p`
+
+In characteristic `p` the set of `p`-power-compatible sequences is not merely a submonoid
+but a subring of `ℕ → K`, since Frobenius is additive.
+-/
+
+/-- The tilt of a commutative ring `K` of characteristic `p`, as a subring of `ℕ → K`. -/

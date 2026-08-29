@@ -1,4 +1,20 @@
+/-
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -19,36 +35,20 @@ set_option pp.structureInstances true
 set_option pp.coercions.types true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Landau levels
-
-A charged particle of mass `m` and charge `q` moving in the plane in a uniform magnetic field `B`
-perpendicular to the plane has energy spectrum `ℏ ω_c (n + 1/2)`, where `ω_c = q B / m` is the
-cyclotron frequency.
-
-We work in the Landau gauge `A = (0, B x)`, so that the Hamiltonian is
-
-  `H = (1/(2m)) ( (-iℏ ∂ₓ)² + (-iℏ ∂_y - q B x)² )`
-    `= (1/(2m)) ( -ℏ² ∂ₓ² - ℏ² ∂_y² + 2iℏ q B x ∂_y + q²B²x² )`,
-
-which is `Frontier.landauH` below.
-
-The eigenfunctions are `exp (i k y)` times a shifted Hermite function of `x`
-(`Frontier.landauState`), and `Frontier.landau_levels` states that these are eigenfunctions of
-`landauH` with eigenvalue `ℏ (qB/m) (n + 1/2)`.
--/
-
 namespace Frontier
+
+noncomputable section
 
 open Polynomial
 
-/-! ### Hermite polynomial preliminaries -/
+/-! ## Probabilists' Hermite polynomials over `ℝ` -/
 
-/-- The derivative of the (probabilists') Hermite polynomial: `He_{n+1}' = (n+1) He_n`. -/
+/-- The `n`-th probabilists' Hermite polynomial, with real coefficients. -/
 
-noncomputable def He (n : ℕ) (y : ℝ) : ℝ := aeval y (hermite n)
+def He (n : ℕ) (x : ℝ) : ℝ := (Herm n).eval x
 
-/-- The first derivative of `He n`. -/
+/-- The derivative of `He n`. -/

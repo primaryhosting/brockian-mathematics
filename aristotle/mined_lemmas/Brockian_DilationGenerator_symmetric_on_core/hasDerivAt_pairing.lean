@@ -22,36 +22,22 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Brockian
 namespace DilationGenerator
 
-/-- The pointwise product `x ↦ x · f x · conj (g x)`, whose derivative encodes the
-integration-by-parts identity for the Berry–Keating dilation generator. -/
+open MeasureTheory
 
-theorem hasDerivAt_pairing {f g : ℝ → ℂ} (hf : ContDiff ℝ (⊤ : ℕ∞) f)
-    (hg : ContDiff ℝ (⊤ : ℕ∞) g) (x : ℝ) :
+/-- The auxiliary function `x ↦ x · f(x) · conj(g(x))`, whose derivative is exactly the
+integrand appearing in the difference of the two sides of the symmetry identity. -/
+
+theorem hasDerivAt_pairing {f g : ℝ → ℂ} {x : ℝ}
+    (hf : HasDerivAt f (deriv f x) x) (hg : HasDerivAt g (deriv g x) x) :
     HasDerivAt (pairing f g)
-      (f x * starRingEnd ℂ (g x) +
-        (x : ℂ) * (deriv f x * starRingEnd ℂ (g x) +
-          f x * starRingEnd ℂ (deriv g x))) x := by
+      ((1 * f x + (x : ℂ) * deriv f x) * (starRingEnd ℂ) (g x)
+        + ((x : ℂ) * f x) * (starRingEnd ℂ) (deriv g x)) x := by
   have hx : HasDerivAt (fun t : ℝ => (t : ℂ)) 1 x := by
-    simpa using (Complex.ofRealCLM.hasDerivAt (x := x))
-  have hfd : HasDerivAt f (deriv f x) x :=
-    (hf.differentiable (by norm_num) x).hasDerivAt
-  have hgd : HasDerivAt g (deriv g x) x :=
-    (hg.differentiable (by norm_num) x).hasDerivAt
-  have hgs : HasDerivAt (fun t : ℝ => starRingEnd ℂ (g t)) (starRingEnd ℂ (deriv g x)) x := by
-    simpa [Complex.star_def] using hgd.star
-  have := hx.mul (hfd.mul hgs)
-  simpa [pairing, one_mul] using this
+    simpa using Complex.ofRealCLM.hasDerivAt (x := x)
+  exact (hx.mul hf).mul hg.star
 
-/-- `pairing f g` is `C^1`. -/

@@ -1,30 +1,39 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
-
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem models_unionAx (hA : A.IsTransitive) (hun : ∀ x ∈ A, (⋃₀ x) ∈ A) :
-    (A : Type (u+1)) ⊨ unionAx := by
-  rw [unionAx]; realize_simp
-  intro a ha
-  refine ⟨⋃₀ a, hun a ha, fun w _ => ?_⟩
+theorem models_unionAx : VClass P ⊨ unionAx.{u + 1} := by
+  rw [realize_unionAx]
+  rintro ⟨a, ha⟩
+  refine ⟨⟨⋃₀ a, h.sUnion ha⟩, ?_⟩
+  rintro ⟨z, hz⟩
+  simp only [mem'_VClass]
   rw [ZFSet.mem_sUnion]
-  exact ⟨fun ⟨y, hy, hwy⟩ => ⟨y, hy, hA a ha hy, hwy⟩, fun ⟨y, hy, _, hwy⟩ => ⟨y, hy, hwy⟩⟩
+  constructor
+  · rintro ⟨y, hya, hzy⟩
+    exact ⟨⟨y, h.mem_trans ha hya⟩, hzy, hya⟩
+  · rintro ⟨⟨y, hy⟩, hzy, hya⟩
+    exact ⟨y, hya, hzy⟩
 

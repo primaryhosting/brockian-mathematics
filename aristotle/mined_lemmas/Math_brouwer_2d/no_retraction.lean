@@ -1,11 +1,3 @@
-/-
-# Brouwer 2 D
-Category: Pure Mathematics
-Target: Math.brouwer_2d
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,72 +8,64 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Metric Set Complex
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Math
 
-noncomputable section
+/-- The squared norm of a complex number, in coordinates. -/
 
-/-! ## Step 1: the radial projection onto the closed unit disk of `ℂ`. -/
-
-/-- Radial projection of `ℂ` onto the closed unit disk. -/
-
-theorem no_retraction (g : ℂ → ℂ) (hg : Continuous g) (hnorm : ∀ z, ‖g z‖ = 1)
-    (hbdry : ∀ z, ‖z‖ = 1 → g z = z) : False := by
-  -- Upgrade `g` to a continuous map into the circle.
-  have hmem : ∀ z : ℂ, g z ∈ Submonoid.unitSphere ℂ := by
-    intro z
-    simpa [Submonoid.unitSphere, mem_sphere_iff_norm] using hnorm z
-  let G : C(ℂ, Circle) := ⟨fun z => ⟨g z, hmem z⟩, by fun_prop⟩
-  -- Since `ℂ` is simply connected and locally path connected, `G` lifts along the
-  -- covering map `Circle.exp : ℝ → Circle`.
-  obtain ⟨F, ⟨-, hFlift⟩, -⟩ := Circle.isCoveringMap_exp.existsUnique_continuousMap_lifts
-      G 0 (Complex.arg ((G 0 : Circle) : ℂ)) (Circle.exp_arg (G 0))
-  -- The boundary circle, parametrized by angle.
-  set w : ℝ → ℂ := fun s => ((Circle.exp s : Circle) : ℂ) with hw
-  have hwc : Continuous w := by fun_prop
-  have hwnorm : ∀ s, ‖w s‖ = 1 := fun s => Circle.norm_coe _
-  have hGw : ∀ s, G (w s) = Circle.exp s := fun s =>
-    Circle.coe_inj.mp (hbdry (w s) (hwnorm s))
-  -- The lift differs from the angle by an integer multiple of `2 * π`.
-  have key : ∀ s : ℝ, ∃ m : ℤ, F (w s) = s + m * (2 * Real.pi) := by
-    intro s
-    rw [← Circle.exp_eq_exp]
-    have hFs : Circle.exp (F (w s)) = G (w s) := congrFun hFlift (w s)
-    rw [hFs, hGw s]
-  have hw0 : w (2 * Real.pi) = w 0 := by
-    have : Circle.exp (2 * Real.pi) = Circle.exp 0 :=
-      Circle.exp_eq_exp.mpr ⟨1, by push_cast; ring⟩
-    simp only [hw, this]
-  -- The normalized difference is a continuous integer-valued function, which is
-  -- impossible since it drops by exactly `1` along the loop.
-  have hpi : (0:ℝ) < 2 * Real.pi := by positivity
-  set h : ℝ → ℝ := fun s => (F (w s) - s) / (2 * Real.pi) with hh
-  have hcont : Continuous h := by fun_prop
-  have hint : ∀ s, ∃ m : ℤ, h s = m := by
-    intro s
-    obtain ⟨m, hm⟩ := key s
-    refine ⟨m, ?_⟩
-    have hd : F (w s) - s = (m:ℝ) * (2*Real.pi) := by rw [hm]; ring
-    simp only [hh, hd]
-    field_simp
-  have hend : h (2 * Real.pi) = h 0 - 1 := by
-    simp only [hh, hw0]
-    field_simp
-    ring
-  obtain ⟨k, hk⟩ := hint 0
-  have hsub := intermediate_value_uIcc (f := h) (a := (0:ℝ)) (b := 2*Real.pi) hcont.continuousOn
-  obtain ⟨s, -, hs⟩ := hsub (show (k:ℝ) - 1/2 ∈ uIcc (h 0) (h (2*Real.pi)) by
-    rw [Set.mem_uIcc]; right; rw [hend, hk]; constructor <;> linarith)
-  obtain ⟨m, hm⟩ := hint s
-  rw [hm] at hs
-  have h2 : (2*m + 1 : ℤ) = 2*k := by
-    have : ((2*m+1 : ℤ) : ℝ) = ((2*k : ℤ) : ℝ) := by push_cast; linarith
-    exact_mod_cast this
+private lemma no_retraction (g : ℂ → ℂ) (hg : Continuous g) (h1 : ∀ z, ‖g z‖ = 1)
+    (hb : ∀ z, ‖z‖ = 1 → g z = z) : False := by
+  have hmem : ∀ z : ℂ, g z ∈ Metric.sphere (0 : ℂ) 1 := by
+    intro z; simpa [mem_sphere_zero_iff_norm] using h1 z
+  set G : C(ℂ, Circle) := ⟨fun z => ⟨g z, hmem z⟩, hg.subtype_mk _⟩ with hG
+  obtain ⟨F, ⟨-, hF⟩, -⟩ := Circle.isCoveringMap_exp.existsUnique_continuousMap_lifts G 0
+      (Complex.arg (g 0)) (Circle.exp_arg ⟨g 0, hmem 0⟩)
+  have hFlift : ∀ z, Circle.exp (F z) = ⟨g z, hmem z⟩ := fun z => congrFun hF z
+  set phi : ℝ → ℝ := fun t => F ((Circle.exp t : Circle) : ℂ) with hphi
+  have hphicont : Continuous phi := F.continuous.comp (by fun_prop)
+  have key : ∀ t : ℝ, ∃ m : ℤ, phi t = t + m * (2 * π) := by
+    intro t
+    have hz : g ((Circle.exp t : Circle) : ℂ) = ((Circle.exp t : Circle) : ℂ) := hb _ (by simp)
+    have hexp : Circle.exp (phi t) = Circle.exp t := by
+      rw [hphi]; simp only []; rw [hFlift]; exact Subtype.ext hz
+    exact Circle.exp_eq_exp.mp hexp
+  set psi : ℝ → ℝ := fun t => phi t - t with hpsi
+  have hpsicont : Continuous psi := hphicont.sub continuous_id
+  have hper : phi (2 * π) = phi 0 := by rw [hphi]; norm_num
+  have hpi : 0 < π := Real.pi_pos
+  have hmem2 : phi 0 - π ∈ Set.Icc (psi (2 * π)) (psi 0) := by
+    constructor <;> simp [hpsi, hper] <;> linarith
+  obtain ⟨t, -, ht⟩ :=
+    intermediate_value_Icc' (by linarith : (0:ℝ) ≤ 2 * π) hpsicont.continuousOn hmem2
+  obtain ⟨m, hm⟩ := key t
+  obtain ⟨n, hn⟩ := key 0
+  rw [hpsi] at ht
+  simp only [] at ht
+  have h3 : π * ((2 * n - 1 - 2 * m : ℤ) : ℝ) = 0 := by push_cast; linarith
+  have h4 : ((2 * n - 1 - 2 * m : ℤ) : ℝ) = 0 := by
+    rcases mul_eq_zero.mp h3 with h | h
+    · exact absurd h (by positivity)
+    · exact h
+  have h5 : (2 * n - 1 - 2 * m : ℤ) = 0 := by exact_mod_cast h4
   omega
 
-/-! ## Step 3: a fixed-point-free self map of the disk yields a retraction. -/
+/-- **Brouwer's fixed point theorem for the closed unit disk in `ℂ`.**
 
-/-- If a continuous self-map `f` of the closed unit disk has no fixed point, then the map
-sending `z` to the point where the ray from `f z` through `z` meets the unit circle is a
-continuous retraction of `ℂ` onto the unit circle. -/
+If `f` had no fixed point, the map sending `z` to the point where the ray from `f z` through `z`
+meets the unit circle would be a retraction of the disk onto the circle; composing with the
+radial retraction of `ℂ` onto the disk contradicts `no_retraction`. -/

@@ -6,23 +6,28 @@ Category: Frontier Mind
 Target: Frontier.nash_equilibrium_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean 4 requires `import` to be the very first command in a file, so the header comment
-above is placed immediately after it.)
 -/
 
-open scoped BigOperators
+open Finset Set
 
 namespace Frontier
 
-section Defs
+universe u
 
-variable {ι : Type} [Fintype ι] [DecidableEq ι]
-  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+/-! ## Finite games in mixed strategies
 
-/-- The pure strategy `a`, viewed as a (degenerate) mixed strategy. -/
+A finite game is given by a finite type of players `I`, a finite nonempty type of pure
+strategies `S i` for each player, and a real payoff function
+`u : I → ((i : I) → S i) → ℝ`.
+-/
 
-theorem convex_mixedProfiles : Convex ℝ (MixedProfiles S) := by
-  rw [mixedProfiles_eq_pi]
-  exact convex_pi fun i _ => convex_stdSimplex ℝ (S i)
+variable {I : Type u} [Fintype I] [DecidableEq I]
+  {S : I → Type u} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
+/-- The set of mixed strategy profiles: for each player, a probability distribution on
+that player's pure strategies. -/
+
+lemma convex_mixedProfiles : Convex ℝ (mixedProfiles S) :=
+  convex_pi fun i _ => convex_stdSimplex ℝ (S i)
+
+omit [DecidableEq I] [∀ i, DecidableEq (S i)] in

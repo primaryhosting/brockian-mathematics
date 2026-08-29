@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Singular Series Gaps 16021610
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps16021610
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,34 +31,25 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Singular Series Gaps 16021610
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesGaps16021610
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Brockian
 
-/-- A finite set of integer shifts `H` is *admissible* if for every prime `p` the
-elements of `H` miss at least one residue class modulo `p`.  Equivalently, the
-singular series `𝔖(H) = ∏_p (1 - ν_H(p)/p)(1 - 1/p)^{-|H|}` attached to `H` is
-nonzero, which is the necessary local condition in the Hardy–Littlewood prime
-`k`-tuple conjecture. -/
+/-- A finite set of natural numbers is *admissible* (in the sense of the
+Hardy–Littlewood prime `k`-tuples conjecture: the associated singular series
+is non-zero) when for every prime `p` the elements of `H` omit at least one
+residue class modulo `p`. -/
 
-theorem exists_missed_residue_of_card_lt (H : Finset ℤ) (p : ℕ) (hp : 0 < p)
-    (hcard : H.card < p) : ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
-  haveI : NeZero p := ⟨hp.ne'⟩
-  by_contra hc
-  push_neg at hc
-  have hsub : (Finset.univ : Finset (ZMod p)) ⊆ H.image (fun x : ℤ => (x : ZMod p)) := by
-    intro r _
-    obtain ⟨x, hx, hxr⟩ := hc r
-    exact Finset.mem_image.2 ⟨x, hx, hxr⟩
-  have h2 := Finset.card_le_card hsub
-  simp only [Finset.card_univ, ZMod.card] at h2
-  have h3 := Finset.card_image_le (s := H) (f := fun x : ℤ => (x : ZMod p))
+theorem exists_missed_residue_of_card_lt {H : Finset ℕ} {p : ℕ} (hp : H.card < p) :
+    ∃ r < p, ∀ h ∈ H, h % p ≠ r := by
+  by_contra hcon
+  push_neg at hcon
+  have hsub : Finset.range p ⊆ H.image (fun h => h % p) := by
+    intro r hr
+    rcases hcon r (Finset.mem_range.mp hr) with ⟨h, hh, hhr⟩
+    exact Finset.mem_image.mpr ⟨h, hh, hhr⟩
+  have hcard : p ≤ H.card := by
+    calc p = (Finset.range p).card := (Finset.card_range p).symm
+      _ ≤ (H.image (fun h => h % p)).card := Finset.card_le_card hsub
+      _ ≤ H.card := Finset.card_image_le
   omega
 
-/-- The classical prime octuplet pattern `{0, 2, 6, 8, 12, 18, 20, 26}` is admissible. -/
+/-- Admissibility only needs to be checked at the primes `p ≤ |H|`. -/

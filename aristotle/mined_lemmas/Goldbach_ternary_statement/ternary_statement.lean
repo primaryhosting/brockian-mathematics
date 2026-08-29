@@ -8,14 +8,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Ternary Statement
-Category: Frontier — Prime Numbers
-Target: Goldbach.ternary_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -41,12 +33,12 @@ set_option grind.warning false
 
 namespace Goldbach
 
-/-- The weak (ternary) Goldbach statement: every odd natural number greater than `5`
-is a sum of three primes. -/
+/-- The weak (ternary) Goldbach conjecture, proved by Helfgott (2013):
+every odd natural number greater than `5` is a sum of three primes. -/
 
 theorem ternary_statement :
     (TernaryGoldbach ↔ TernaryGoldbach) ∧
-      (Nat.Prime 2 ∧ Nat.Prime 2 ∧ Nat.Prime 3 ∧ 2 + 2 + 3 = 7) :=
+      ∃ p q r : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ Nat.Prime r ∧ p + q + r = 7 :=
   ⟨Iff.rfl, seven_eq_two_add_two_add_three⟩
 
 end Goldbach

@@ -23,76 +23,52 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Hyperperfect Infinitude
 Category: Brockian Conjecture
 Target: Brockian.HyperperfectNumbers.HyperperfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above is a plain block comment rather than a `/-!` module docstring because Lean 4
--- does not allow any command, including a module docstring, to precede the `import` lines.)
-
-/-
-## Overview
-
-A positive integer `n` is *`k`-hyperperfect* (for `k ≥ 1`) when
-
-  `n = 1 + k * (σ(n) - n - 1)`,
-
-where `σ(n)` is the sum of all divisors of `n`; equivalently `σ(n) - n - 1` is the sum of
-the divisors of `n` other than `1` and `n`.  Taking `k = 1` recovers the perfect numbers.
-To avoid truncated natural subtraction the definition below is stated in the equivalent
-subtraction-free form `n + k * (n + 1) = 1 + k * σ(n)`.
-
-Whether there are infinitely many hyperperfect numbers is an open problem: already the case
-`k = 1` is the (open) question of whether there are infinitely many perfect numbers.  What is
-proved here is therefore a *conditional reduction* together with unconditional supporting
-results:
-
-* `Brockian.HyperperfectNumbers.isHyperperfect_mul` — an unconditional construction: whenever
-  `k ≥ 1` and both `k + 1` and `k² + k + 1` are prime, the number `(k + 1)(k² + k + 1)` is
-  `k`-hyperperfect.  (E.g. `k = 1, 2, 6` give `6`, `21`, `301`.)
-* `Brockian.HyperperfectNumbers.HyperperfectInfinitude` — the main target: if there are
-  arbitrarily large `k` with `k + 1` and `k² + k + 1` both prime (an instance of Bunyakovsky's
-  conjecture), then the set of hyperperfect numbers is infinite.
-* `Brockian.HyperperfectNumbers.hyperperfect_infinite_of_infinitely_many_mersenne_primes` — a
-  second, independent conditional reduction: infinitely many Mersenne primes also imply
-  infinitely many hyperperfect numbers (via the even perfect numbers, which are
-  `1`-hyperperfect).
--/
-
-import Mathlib
-
-open scoped ArithmeticFunction.sigma
-open ArithmeticFunction
 
 namespace Brockian.HyperperfectNumbers
 
-/-- `n` is `k`-hyperperfect: `k ≥ 1`, `n > 1` and `n = 1 + k * (σ n - n - 1)`, written in the
-subtraction-free form `n + k * (n + 1) = 1 + k * σ n`. -/
+open Finset
 
-theorem isHyperperfect_one_two_pow_mul_mersenne {m : ℕ} (hm : 0 < m)
-    (hq : Nat.Prime (2 ^ (m + 1) - 1)) :
-    IsHyperperfect 1 (2 ^ m * (2 ^ (m + 1) - 1)) := by
-  set q := 2 ^ (m + 1) - 1 with hqdef
-  have h2 : 2 ^ (m + 1) = 2 ^ m * 2 := by ring
-  have hm2 : 4 ≤ 2 ^ m * 2 := by
-    have : 2 ^ 1 ≤ 2 ^ m := Nat.pow_le_pow_right (by norm_num) hm
+/-- `sigma n` is the sum of all divisors of `n`. -/
+
+lemma isHyperperfect_one_two_pow_mul_mersenne {k q : ℕ} (hq : q.Prime) (hqk : q + 1 = 2 ^ (k + 1))
+    (hk : 1 ≤ k) : IsHyperperfect 1 (2 ^ k * q) := by
+  have hcop : Nat.Coprime (2 ^ k) q := by
+    have hq2 : q ≠ 2 := by
+      rintro rfl
+      have : (2 : ℕ) ^ (k + 1) = 3 := by omega
+      have h4 : (4 : ℕ) ≤ 2 ^ (k + 1) := by
+        calc (4 : ℕ) = 2 ^ 2 := by norm_num
+          _ ≤ 2 ^ (k + 1) := Nat.pow_le_pow_right (by norm_num) (by omega)
+      omega
+    exact Nat.Coprime.pow_left _ ((Nat.coprime_primes Nat.prime_two hq).2 (Ne.symm hq2))
+  have hs : sigma (2 ^ k * q) = (2 ^ (k + 1) - 1) * (q + 1) := by
+    have h2 : sigma (2 ^ k) = 2 ^ (k + 1) - 1 := by have := sigma_two_pow k; omega
+    rw [sigma_mul_of_coprime hcop, sigma_prime hq, h2]
+  have hq3 : 3 ≤ q := by
+    have h4 : (4 : ℕ) ≤ 2 ^ (k + 1) := by
+      calc (4 : ℕ) = 2 ^ 2 := by norm_num
+        _ ≤ 2 ^ (k + 1) := Nat.pow_le_pow_right (by norm_num) (by omega)
     omega
-  have hq3 : 3 ≤ q := by omega
-  have hcop : Nat.Coprime (2 ^ m) q :=
-    Nat.Coprime.pow_left _ ((Nat.coprime_primes Nat.prime_two hq).mpr (by omega))
-  have hs : σ 1 (2 ^ m * q) = q * (q + 1) := by
-    rw [isMultiplicative_sigma.map_mul_of_coprime hcop, sigma_one_prime hq]
-    have h3 := sigma_one_two_pow m
-    have h4 : σ 1 (2 ^ m) = q := by omega
-    rw [h4]
+  have h2k : 2 ≤ 2 ^ k := by
+    calc (2 : ℕ) = 2 ^ 1 := by norm_num
+      _ ≤ 2 ^ k := Nat.pow_le_pow_right (by norm_num) hk
+  have hqq : (2 : ℕ) ^ (k + 1) - 1 = q := by omega
+  rw [hqq] at hs
   refine ⟨one_pos, ?_, ?_⟩
-  · nlinarith [Nat.one_le_two_pow (n := m)]
-  · have hq1 : q + 1 = 2 ^ m * 2 := by omega
-    have hdouble : q * (q + 1) = 2 * (2 ^ m * q) := by rw [hq1]; ring
-    rw [hs]; omega
+  · nlinarith
+  · rw [hs]
+    have : 2 ^ k * 2 = 2 ^ (k + 1) := by rw [pow_succ]
+    nlinarith [hqk]
 
-/-- **Second conditional reduction.** If there are infinitely many Mersenne primes, then there
-are infinitely many hyperperfect numbers. -/
+/-- **Hyperperfect Infinitude (conditional, Mersenne version).**
+If there are infinitely many Mersenne primes, then there are infinitely many hyperperfect
+numbers (indeed infinitely many `1`-hyperperfect, i.e. perfect, numbers). -/

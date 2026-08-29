@@ -30,28 +30,27 @@ Target: Brockian.AmicableNumbers.AmicableInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
-# Amicable Infinitude
-Category: Brockian Conjecture
-Target: Brockian.AmicableNumbers.AmicableInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many amicable numbers is a well-known open problem.
-This file gives a Lean-checked **conditional reduction**: if there are infinitely many
-Thābit-type exponents `k` (i.e. `3·2^k - 1`, `3·2^(k+1) - 1` and `9·2^(2k+1) - 1` are all
-prime), then there are infinitely many amicable numbers.  It also records the
-unconditional partial result that amicable numbers exist (the pair `(220, 284)`).
+The infinitude of amicable numbers is a well-known open problem.  What is proved here is a
+*conditional reduction*: if Thabit ibn Qurra's rule produces amicable pairs for arbitrarily
+large parameters (i.e. there are arbitrarily large `m` for which the three Thabit numbers
+`3·2^m - 1`, `3·2^(m+1) - 1`, `9·2^(2m+1) - 1` are all prime), then there are infinitely many
+amicable numbers.  The Thabit construction itself is proved unconditionally
+(`Brockian.AmicableNumbers.isAmicablePair_thabit`), as is the classical example `(220, 284)`.
 -/
 
 namespace Brockian.AmicableNumbers
 
 open ArithmeticFunction
+open scoped ArithmeticFunction.sigma
 
-/-- The sum of the proper divisors of `n`. -/
+/-- `a` and `b` form an amicable pair: they are distinct and each one's proper divisors sum to
+the other, equivalently `σ a = σ b = a + b`. -/
 
-theorem sigma_one_prime {p : ℕ} (hp : p.Prime) : sigma 1 p = p + 1 := by
-  rw [sigma_one_apply, hp.divisors, Finset.sum_pair hp.one_lt.ne, Nat.add_comm]
+private lemma sigma_one_prime {p : ℕ} (hp : p.Prime) : σ 1 p = p + 1 := by
+  have h := ArithmeticFunction.sigma_one_apply_prime_pow (i := 1) hp
+  simpa [Finset.sum_range_succ, add_comm] using h
 

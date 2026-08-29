@@ -1,5 +1,4 @@
 import Mathlib
-
 /-!
 # Qft Unitary 7
 Category: Quantum Computing
@@ -8,42 +7,81 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators Real
+
 namespace QC
 
-open Complex ZMod AddChar Matrix Finset
+/-- The `N × N` quantum Fourier transform matrix:
+`(QFT_N) j k = N^(-1/2) * exp (2πi jk / N)`. -/
 
-/-- The `N`-dimensional quantum Fourier transform matrix: the entry in row `j`, column `k` is
-`exp (2 π i · j · k / N) / √N`, with rows and columns indexed by `ZMod N`. -/
-
-theorem qftMatrix_mem_unitaryGroup (N : ℕ) [NeZero N] :
-    qftMatrix N ∈ Matrix.unitaryGroup (ZMod N) ℂ := by
-  classical
+theorem qftMatrix_mem_unitaryGroup (N : ℕ) (hN : 0 < N) :
+    qftMatrix N ∈ Matrix.unitaryGroup (Fin N) ℂ := by
+  have hNC : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hN.ne'
+  have hsq : ((Real.sqrt N : ℂ))⁻¹ * ((Real.sqrt N : ℂ))⁻¹ = ((N : ℂ))⁻¹ := by
+    rw [← mul_inv]
+    congr 1
+    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (Nat.cast_nonneg N)]
+    norm_num
   rw [Matrix.mem_unitaryGroup_iff']
   ext j k
-  rw [Matrix.mul_apply, Matrix.one_apply]
-  have hNpos : (0 : ℝ) < (N : ℝ) := by exact_mod_cast Nat.pos_of_ne_zero (NeZero.ne N)
-  have hN : (Real.sqrt N : ℂ) ≠ 0 := by
-    simp only [ne_eq, Complex.ofReal_eq_zero]
-    positivity
-  have hsq : (Real.sqrt N : ℂ) * (Real.sqrt N : ℂ) = (N : ℂ) := by
-    rw [← Complex.ofReal_mul, Real.mul_self_sqrt hNpos.le]; norm_cast
-  have key : ∀ m : ZMod N, (star (qftMatrix N) j m) * qftMatrix N m k
-      = ((Real.sqrt N : ℂ)⁻¹ * (Real.sqrt N : ℂ)⁻¹) * stdAddChar (m * (k - j)) := by
-    intro m
-    have hchar : stdAddChar (-(m * j)) * stdAddChar (m * k) = stdAddChar (m * (k - j)) := by
-      rw [← AddChar.map_add_eq_mul]; congr 1; ring
-    rw [Matrix.star_eq_conjTranspose, Matrix.conjTranspose_apply]
-    simp only [qftMatrix_apply, star_def, map_mul, conj_stdAddChar]
-    rw [show (starRingEnd ℂ) ((Real.sqrt N : ℂ)⁻¹) = (Real.sqrt N : ℂ)⁻¹ by
-      simp [← Complex.ofReal_inv]]
-    linear_combination ((Real.sqrt N : ℂ)⁻¹ * (Real.sqrt N : ℂ)⁻¹) * hchar
-  rw [Finset.sum_congr rfl (fun m _ => key m), ← Finset.mul_sum, sum_stdAddChar_mul]
-  by_cases h : j = k
-  · subst h
-    rw [sub_self, if_pos rfl, if_pos rfl]
+  rw [Matrix.mul_apply]
+  simp only [Matrix.star_apply, Matrix.one_apply, qftMatrix, Matrix.of_apply]
+  have hsum : ∀ l : Fin N,
+      star ((Real.sqrt N : ℂ)⁻¹ *
+          Complex.exp (2 * Real.pi * Complex.I * (l : ℕ) * (j : ℕ) / N)) *
+        ((Real.sqrt N : ℂ)⁻¹ *
+          Complex.exp (2 * Real.pi * Complex.I * (l : ℕ) * (k : ℕ) / N))
+        = ((N : ℂ))⁻¹ *
+          Complex.exp (2 * Real.pi * Complex.I * (((k : ℤ) - (j : ℤ) : ℤ) * (l : ℕ)) / N) := by
+    intro l
+    have hstar : star ((Real.sqrt N : ℂ)⁻¹ *
+        Complex.exp (2 * Real.pi * Complex.I * (l : ℕ) * (j : ℕ) / N))
+        = (Real.sqrt N : ℂ)⁻¹ *
+          Complex.exp (-(2 * Real.pi * Complex.I * (l : ℕ) * (j : ℕ) / N)) := by
+      rw [Complex.star_def, map_mul, ← Complex.exp_conj]
+      congr 1
+      · simp
+      · congr 1
+        simp [Complex.ext_iff]
+        ring
+    rw [hstar]
+    rw [show (Real.sqrt N : ℂ)⁻¹ * Complex.exp (-(2 * Real.pi * Complex.I * (l : ℕ) * (j : ℕ) / N)) *
+        ((Real.sqrt N : ℂ)⁻¹ * Complex.exp (2 * Real.pi * Complex.I * (l : ℕ) * (k : ℕ) / N))
+        = ((Real.sqrt N : ℂ)⁻¹ * (Real.sqrt N : ℂ)⁻¹) *
+          (Complex.exp (-(2 * Real.pi * Complex.I * (l : ℕ) * (j : ℕ) / N)) *
+            Complex.exp (2 * Real.pi * Complex.I * (l : ℕ) * (k : ℕ) / N)) from by ring]
+    rw [hsq, ← Complex.exp_add]
+    congr 2
+    push_cast
     field_simp
-    rw [sq, hsq]
-  · rw [if_neg (by simpa [sub_eq_zero, eq_comm] using h), if_neg h, mul_zero]
+    ring
+  rw [Finset.sum_congr rfl (fun l _ => hsum l)]
+  rw [← Finset.mul_sum]
+  rw [show ∑ l : Fin N, Complex.exp
+        (2 * Real.pi * Complex.I * (((k : ℤ) - (j : ℤ) : ℤ) * (l : ℕ)) / N)
+      = ∑ l ∈ Finset.range N, Complex.exp
+        (2 * Real.pi * Complex.I * (((k : ℤ) - (j : ℤ) : ℤ) * (l : ℕ)) / N) from by
+    rw [Finset.sum_range fun l => Complex.exp
+        (2 * Real.pi * Complex.I * (((k : ℤ) - (j : ℤ) : ℤ) * (l : ℕ)) / N)]]
+  rw [sum_root_of_unity N hN ((k : ℤ) - (j : ℤ))]
+  have hiff : ((N : ℤ) ∣ ((k : ℤ) - (j : ℤ))) ↔ j = k := by
+    constructor
+    · intro h
+      have hj : (j : ℤ) < N := by exact_mod_cast j.isLt
+      have hk : (k : ℤ) < N := by exact_mod_cast k.isLt
+      have hj0 : (0 : ℤ) ≤ (j : ℕ) := Int.natCast_nonneg _
+      have hk0 : (0 : ℤ) ≤ (k : ℕ) := Int.natCast_nonneg _
+      have hzero : (k : ℤ) - (j : ℤ) = 0 := by
+        rcases h with ⟨c, hc⟩
+        have hc1 : c = 0 := by nlinarith [hc]
+        simp [hc1] at hc
+        exact hc
+      have : (j : ℕ) = (k : ℕ) := by omega
+      exact Fin.ext this
+    · intro h
+      simp [h]
+  by_cases h : j = k
+  · simp [h, hNC]
+  · rw [if_neg h, if_neg (fun hh => h (hiff.mp hh)), mul_zero]
 
-/-- **The 7-qubit quantum Fourier transform matrix is unitary.**
-It is the `2 ^ 7 = 128`-dimensional QFT matrix, acting on the state space of 7 qubits. -/
+/-- **The 7-qubit QFT matrix is unitary.** -/

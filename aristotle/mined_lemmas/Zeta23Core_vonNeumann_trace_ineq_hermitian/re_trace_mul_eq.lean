@@ -1,16 +1,15 @@
-/-
+import Mathlib
+/-!
 # Von Neumann Trace Ineq Hermitian
 Category: Brockian Corpus
 Target: Zeta23Core.vonNeumann_trace_ineq_hermitian
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -25,21 +24,22 @@ set_option grind.warning false
 
 namespace Zeta23Core
 
-open Matrix Finset
+open Finset Matrix
 
-variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
+section Rearrangement
 
-/-- The matrix of squared absolute values of the entries of a unitary matrix is doubly
-stochastic. -/
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
-lemma re_trace_mul_eq {A B : Matrix n n 𝕜} (hA : A.IsHermitian) (hB : B.IsHermitian) :
-    RCLike.re (Matrix.trace (A * B))
-      = ∑ p, ∑ q, hA.eigenvalues p * hB.eigenvalues q *
-          ‖(star (hA.eigenvectorUnitary : Matrix n n 𝕜) *
-            (hB.eigenvectorUnitary : Matrix n n 𝕜)) p q‖ ^ 2 := by
-  rw [trace_mul_eq_trace_diagonal_conj hA hB, trace_diagonal_conj, map_sum]
-  refine Finset.sum_congr rfl fun p _ => ?_
-  rw [map_sum]
-  exact Finset.sum_congr rfl fun q _ => RCLike.ofReal_re _
+/-- Value of the bilinear form `M ↦ ∑ j, ∑ k, M j k * (a j * b k)` at a permutation matrix. -/
 
-/-- Two antitone functions monovary. -/
+lemma re_trace_mul_eq (hA : A.IsHermitian) (hB : B.IsHermitian) :
+    RCLike.re ((A * B).trace)
+      = ∑ j, ∑ k, eigWeight hA hB j k * (hA.eigenvalues j * hB.eigenvalues k) := by
+  rw [trace_mul_eq_ofReal hA hB, RCLike.ofReal_re]
+
+end Weights
+
+/-- **Von Neumann trace inequality, Hermitian case.**
+For Hermitian matrices `A`, `B` over an `RCLike` field indexed by a finite type,
+the real part of `tr (A * B)` is at most the sum of the products of their eigenvalues,
+each family sorted in decreasing order (`Matrix.IsHermitian.eigenvalues₀`). -/

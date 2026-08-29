@@ -1,58 +1,35 @@
-import Mathlib
+import RequestProject.Places
 
 /-!
-# Riemann Roch Curve
-Category: Frontier Math
-Target: Math2.riemann_roch_curve
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Divisors, Riemann–Roch spaces and their dimensions on the projective line
+
+* `Math2.Divisor K` : divisors on `ℙ¹_K`, i.e. finitely supported `ℤ`-valued functions on the
+  set of closed points;
+* `Math2.deg D` : the degree of a divisor;
+* `Math2.riemannRochSpace D` : the Riemann–Roch space `L(D) = {f : ord_v f ≥ -D v for all v}`;
+* `Math2.ell D` : its dimension `ℓ(D)` over `K`.
+
+The main result of this file is `Math2.ell_eq`: `ℓ(D) = max (deg D + 1) 0`.
 -/
-
-open scoped BigOperators
-open scoped Classical
-
-set_option maxHeartbeats 1000000
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-/-!
-## Scope and setup
-
-We formalise the Riemann–Roch theorem for the projective line `ℙ¹` over an algebraically
-closed field `k`, a smooth projective curve, with everything built from scratch:
-
-* the places of `ℙ¹` are the points `a : k` of the affine line together with the point at
-  infinity, and the associated discrete valuations are `ordAt a` and `ordInf`;
-* a divisor is a finitely supported family of integers on the affine points together with a
-  coefficient at infinity, and `Divisor.deg` is its degree;
-* `RRSpace D` is the Riemann-Roch space `L(D) = {f : div f + D ≥ 0}` and
-  `ell D = ℓ(D) = dim_k L(D)`;
-* `canonicalDivisor k` is the divisor `-2·∞` of the differential `dt`, and the genus is
-  defined intrinsically as `genus k = ℓ(K)`.
-
-The main theorem `Math2.riemann_roch_curve` states `ℓ(D) - ℓ(K - D) = deg D + 1 - g`.
-It is deduced from the computation `Math2.ell_eq : ℓ(D) = max (deg D + 1) 0`, which is proved
-by exhibiting an explicit `k`-linear isomorphism between `L(D)` and the space of polynomials
-of degree at most `deg D`.
--/
-
-namespace Math2
 
 open Polynomial
 
-variable {k : Type*} [Field k]
+noncomputable section
 
-/-! ## Orders of vanishing (the discrete valuations of `ℙ¹`) -/
+namespace Math2
 
-/-- The order of vanishing at the point `a` of the affine line, of a rational function `f`. -/
+variable {K : Type*} [Field K]
 
-theorem finrank_polySpace (N : ℕ) : Module.finrank k (polySpace k N) = N := by
-  have hinj : Function.Injective
-      ⇑(IsScalarTower.toAlgHom k k[X] (RatFunc k)).toLinearMap :=
-    IsFractionRing.injective k[X] (RatFunc k)
-  have he := (Submodule.equivMapOfInjective _ hinj (Polynomial.degreeLT k N)).symm
-  rw [polySpace, he.finrank_eq]
-  simpa using Module.finrank_eq_card_basis (Polynomial.degreeLT.basis k N)
+/-- The degree of a closed point of `ℙ¹_K`: the degree of the corresponding monic irreducible
+polynomial, resp. `1` for the point at infinity. -/
 
-/-- The key computation: multiplication by `divisorFun D` identifies `L(D)` with the space of
-polynomials of degree at most `deg D`. -/
+theorem finrank_polySpace (m : ℕ) : Module.finrank K (polySpace K m) = m := by
+  have hinj : Function.Injective (Algebra.linearMap K[X] (RatFunc K)) := by
+    intro a b hab
+    exact RatFunc.algebraMap_injective K (by simpa using hab)
+  have e : (Polynomial.degreeLT K m) ≃ₗ[K] (polySpace K m) :=
+    Submodule.equivMapOfInjective _ hinj _
+  rw [← e.finrank_eq, (Polynomial.degreeLTEquiv K m).finrank_eq, Module.finrank_fin_fun]
+
+/-- The key structural result: `L(D)` is obtained from the space of polynomials of degree
+`≤ deg D` by dividing by the function `divFun D`. -/

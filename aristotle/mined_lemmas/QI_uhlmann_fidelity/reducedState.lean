@@ -4,38 +4,26 @@ import Mathlib
 # Uhlmann Fidelity
 Category: Frontier Qi
 Target: QI.uhlmann_fidelity
-Statement: Fidelity equals the maximal overlap over purifications (Uhlmann's theorem).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 1000000
-set_option maxRecDepth 4000
+open Matrix Finset
+open scoped MatrixOrder ComplexOrder
 
 namespace QI
 
-open Matrix
-open scoped ComplexOrder MatrixOrder
+variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-! ### Isometries defined on the range of a linear map -/
+/-! ### The dictionary between vectors of `H ⊗ H` and matrices
 
-section Isom
+We model the Hilbert space `H` of a finite quantum system by `EuclideanSpace ℂ n` and the
+composite system `H ⊗ H` by `EuclideanSpace ℂ (n × n)`.  A vector of the composite system is
+the same thing as a matrix of coefficients. -/
 
-variable {E F G : Type*}
-  [NormedAddCommGroup E] [InnerProductSpace ℂ E]
-  [NormedAddCommGroup F] [InnerProductSpace ℂ F]
-  [NormedAddCommGroup G] [InnerProductSpace ℂ G]
+/-- The matrix of coefficients of a vector of `H ⊗ H = EuclideanSpace ℂ (n × n)`. -/
 
-/-- If `f` and `g` have the same norm pointwise, there is a linear isometry defined on the
-range of `f` sending `f x` to `g x`. -/
+noncomputable def reducedState (ψ : EuclideanSpace ℂ (n × n)) : Matrix n n ℂ :=
+  .of fun i i' => ∑ j, ψ (i, j) * (starRingEnd ℂ) (ψ (i', j))
 
-noncomputable def reducedState (psi : Matrix n m ℂ) : Matrix n n ℂ := psi * psiᴴ
-
-/-- The inner product of two pure states of the bipartite system `H_n ⊗ H_m`:
-`overlap psi phi = ∑ i k, conj (psi i k) * phi i k`. -/
+/-- The trace norm `‖M‖₁ = Tr √(Mᴴ M)`. -/

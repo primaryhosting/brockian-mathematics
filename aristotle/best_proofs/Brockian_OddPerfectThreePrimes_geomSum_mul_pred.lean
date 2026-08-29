@@ -8,6 +8,7 @@ open Finset
 lemma geomSum_mul_pred (p a : ℕ) (hp : 1 ≤ p) :
     (∑ i ∈ Finset.range (a + 1), p ^ i) * (p - 1) + 1 = p ^ (a + 1) := by
   have h := geom_sum_mul (x := (p : ℤ)) (n := a + 1)
+  simp at h
   have h2 : (∑ i ∈ Finset.range (a + 1), (p : ℤ) ^ i) = (∑ i ∈ Finset.range (a + 1), p ^ i : ℕ) := by simp
   rw [h2] at h
   have h3 : ((p - 1 : ℕ) : ℤ) = (p : ℤ) - 1 := by omega

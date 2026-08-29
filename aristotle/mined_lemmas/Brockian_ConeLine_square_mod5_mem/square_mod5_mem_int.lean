@@ -22,25 +22,14 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Brockian.ConeLine
 
-/-- Perfect squares land only on rays `0`, `1`, `4` modulo `5`. -/
+/-- Perfect squares land only on rays `0`, `1`, `4` in `ZMod 5`. -/
 
-theorem square_mod5_mem_int :
-    ∀ n : ℤ, ((n ^ 2 : ℤ) : ZMod 5) = 0 ∨ ((n ^ 2 : ℤ) : ZMod 5) = 1 ∨
-      ((n ^ 2 : ℤ) : ZMod 5) = 4 := by
-  intro n
-  have h : ((n : ZMod 5)) ^ 2 = 0 ∨ ((n : ZMod 5)) ^ 2 = 1 ∨ ((n : ZMod 5)) ^ 2 = 4 :=
-    square_mod5_mem (n : ZMod 5)
-  simpa using h
+theorem square_mod5_mem_int (n : ℤ) :
+    ((n : ZMod 5)) ^ 2 = 0 ∨ ((n : ZMod 5)) ^ 2 = 1 ∨ ((n : ZMod 5)) ^ 2 = 4 :=
+  square_mod5_mem (n : ZMod 5)
 
-/-- The `Int.emod` form: `n ^ 2 % 5 ∈ ({0, 1, 4} : Set ℤ)`. -/
+/-- The `Int.emod` form: `n ^ 2 % 5 ∈ ({0, 1, 4} : Set ℤ)` for every integer `n`. -/

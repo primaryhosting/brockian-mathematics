@@ -16,15 +16,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Finset
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-open scoped Classical in
-/-- The number of elements of `A` below `n`. -/
+/-- `countUpTo A N` is the number of elements of `A` below `N`. -/
 
-noncomputable def countUpTo (A : Set ℕ) (n : ℕ) : ℕ :=
-  ((Finset.range n).filter (· ∈ A)).card
+noncomputable def countUpTo (A : Set ℕ) (N : ℕ) : ℕ :=
+  ((Finset.range N).filter (fun n => n ∈ A)).card
 
-open scoped Classical in
-/-- The upper (asymptotic) density of a set of naturals. -/
+/-- The upper (Banach) density of a set of naturals, `limsup_N |A ∩ [0,N)| / N`. -/

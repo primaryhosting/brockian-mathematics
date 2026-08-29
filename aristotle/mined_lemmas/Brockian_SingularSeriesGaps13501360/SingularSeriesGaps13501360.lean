@@ -1,30 +1,20 @@
+/-
+# Singular Series Gaps 13501360
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps13501360
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
-# Singular Series Gaps 13501360 — `ZMod`/Mathlib formulation
-
-Companion to `RequestProject/SingularSeriesGaps13501360.lean`.  The target file there is stated
-with elementary `Int` arithmetic (it must begin with a fixed header comment, which precludes an
-`import` line); here the same mathematics is recorded in the idiomatic Mathlib language of
-`Finset ℤ` and `ZMod p`.
+# Singular Series Gaps 13501360
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps13501360
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Brockian
-
-/-- A finite set of integers misses a residue class modulo `p`. -/
-
-theorem SingularSeriesGaps13501360 :
-    ∀ h : Int, 1350 ≤ h → h ≤ 1360 → (Admissible [0, h] ↔ h % 2 = 0) := by
-  intro h _ _
-  refine ⟨fun hadm => ?_, admissible_pair_of_even⟩
-  have hcases : h % 2 = 0 ∨ h % 2 = 1 := by omega
-  rcases hcases with h0 | h1
-  · exact h0
-  · exact absurd hadm (not_admissible_pair_of_odd h1)
-
-end Brockian
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -32,20 +22,51 @@ open scoped Nat
 open scoped Classical
 open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
+set_option maxHeartbeats 1000000
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace Brockian
 
-set_option grind.warning false
+/-- The number of distinct residue classes modulo `p` occupied by the tuple `H`.
+This is the local density `ν_p(H)` appearing in the Hardy–Littlewood singular series. -/
 
+theorem SingularSeriesGaps13501360 :
+    (∀ d ∈ Finset.Icc (1350 : ℤ) 1360, IsAdmissible ({0, d} : Finset ℤ) ↔ Even d) ∧
+    (Finset.Icc (1350 : ℤ) 1360).filter
+        (fun d => IsAdmissible ({0, d} : Finset ℤ)) =
+      ({1350, 1352, 1354, 1356, 1358, 1360} : Finset ℤ) ∧
+    ((Finset.Icc (1350 : ℤ) 1360).filter
+        (fun d => IsAdmissible ({0, d} : Finset ℤ))).card = 6 ∧
+    (∀ d ∈ Finset.Icc (1350 : ℤ) 1360, Even d →
+      ∀ p : ℕ, p.Prime → 0 < singularFactor p ({0, d} : Finset ℤ)) ∧
+    (∀ d ∈ Finset.Icc (1350 : ℤ) 1360, Even d →
+      ∀ N : ℕ, 0 < singularSeriesPartial N ({0, d} : Finset ℤ)) := by
+  have key : ∀ d ∈ Finset.Icc (1350 : ℤ) 1360,
+      (IsAdmissible ({0, d} : Finset ℤ) ↔ Even d) := by
+    intro d hd
+    rw [Finset.mem_Icc] at hd
+    exact isAdmissible_pair_iff (by omega)
+  have hset : (Finset.Icc (1350 : ℤ) 1360).filter
+      (fun d => IsAdmissible ({0, d} : Finset ℤ)) =
+      ({1350, 1352, 1354, 1356, 1358, 1360} : Finset ℤ) := by
+    ext d
+    simp only [Finset.mem_filter, Finset.mem_Icc, Finset.mem_insert, Finset.mem_singleton]
+    constructor
+    · rintro ⟨hd, hadm⟩
+      have he : Even d := (key d (Finset.mem_Icc.2 hd)).1 hadm
+      rw [Int.even_iff] at he
+      omega
+    · intro h
+      have hd : 1350 ≤ d ∧ d ≤ 1360 := by rcases h with h|h|h|h|h|h <;> omega
+      refine ⟨hd, (key d (Finset.mem_Icc.2 hd)).2 ?_⟩
+      rw [Int.even_iff]
+      rcases h with h|h|h|h|h|h <;> omega
+  refine ⟨key, hset, ?_, ?_, ?_⟩
+  · rw [hset]; decide
+  · intro d hd he p hp
+    exact singularFactor_pos ((key d hd).2 he) hp
+  · intro d hd he N
+    exact singularSeriesPartial_pos ((key d hd).2 he) N
+
+/-- Concrete instance: `3 ∣ 1350`, so the local factor at `3` of the gap `1350` is `3/2`. -/

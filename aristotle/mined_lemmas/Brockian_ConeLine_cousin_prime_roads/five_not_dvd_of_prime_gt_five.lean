@@ -36,12 +36,15 @@ namespace ConeLine
 
 /-- A prime `n` greater than `5` is not divisible by `5`. -/
 
-theorem five_not_dvd_of_prime_gt_five {n : ℕ} (hn : n.Prime) (h : 5 < n) : n % 5 ≠ 0 := by
-  intro hmod
-  have hdvd : (5 : ℕ) ∣ n := Nat.dvd_of_mod_eq_zero hmod
+theorem five_not_dvd_of_prime_gt_five {n : ℕ} (hn : Nat.Prime n) (h : 5 < n) :
+    ¬ (5 ∣ n) := by
+  intro hdvd
   rcases (Nat.Prime.eq_one_or_self_of_dvd hn 5 hdvd) with h1 | h2
   · omega
   · omega
 
-/-- Cousin primes `(p, p+4)` with `p > 5` travel exactly the roads
-`2 → 1`, `3 → 2`, `4 → 3` on the five-ray wheel. -/
+/--
+**Cousin prime roads.** If `p` and `p + 4` are both prime and `p > 5`, then on the
+five-ray wheel the pair `(p % 5, (p+4) % 5)` is exactly one of the roads
+`2 → 1`, `3 → 2`, `4 → 3`.
+-/

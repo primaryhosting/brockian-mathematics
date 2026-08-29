@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Cycle Gap Vanishes
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.cycle_gap_vanishes
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,26 +31,19 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Cycle Gap Vanishes
-Category: Frontier Spectral
-Target: Frontier.Spectral.cycle_gap_vanishes
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Frontier.Spectral
 
 /-- The Fiedler value (algebraic connectivity) of the cycle graph `C n`. -/
 
 theorem cycle_gap_vanishes :
     Filter.Tendsto cycleGap Filter.atTop (nhds 0) := by
-  have h : Filter.Tendsto (fun n : ℕ => 2 * Real.pi / (n : ℝ)) Filter.atTop (nhds 0) :=
-    Filter.Tendsto.div_atTop tendsto_const_nhds (tendsto_natCast_atTop_atTop (R := ℝ))
-  have h1 := (Real.continuous_cos.tendsto 0).comp h
-  simp only [Real.cos_zero] at h1
-  have h2 := (tendsto_const_nhds (x := (2 : ℝ)) (f := Filter.atTop (α := ℕ))).sub
-    (h1.const_mul (2 : ℝ))
+  have h : Filter.Tendsto (fun n : ℕ => 2 * Real.pi / (n : ℝ)) Filter.atTop (nhds 0) := by
+    simpa using
+      Filter.Tendsto.const_div_atTop (tendsto_natCast_atTop_atTop (R := ℝ)) (2 * Real.pi)
+  have hcos := (Real.continuous_cos.tendsto 0).comp h
+  simp only [Real.cos_zero] at hcos
+  have hmul := hcos.const_mul (2 : ℝ)
+  have h2 := (tendsto_const_nhds (x := (2 : ℝ)) (f := Filter.atTop (α := ℕ))).sub hmul
   simpa [cycleGap] using h2
 
 end Frontier.Spectral

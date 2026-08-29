@@ -1,3 +1,6 @@
+/- (Header kept verbatim below; Lean requires `import` before any module docstring,
+   so the `/-! ... -/` block is placed immediately after the imports.) -/
+
 import Mathlib
 
 /-!
@@ -7,7 +10,6 @@ Target: Ordinal.natCast_add
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 
 open scoped BigOperators
 open scoped Real
@@ -23,27 +25,19 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Ordinal
 
-/-- Casting natural numbers into the ordinals is additive. -/
+/-- Finite-ordinal addition agrees with `Nat` addition:
+the cast of a sum of naturals is the sum of the casts.
+(This is `Nat.cast_add` for the `AddMonoidWithOne` structure on `Ordinal`.) -/
 
-theorem natCast_mul' (m n : ℕ) : ((m * n : ℕ) : Ordinal) = (m : Ordinal) * (n : Ordinal) := by
-  induction n with
-  | zero => simp
-  | succ k ih =>
-      have h : m * (k + 1) = m * k + m := by ring
-      rw [h, natCast_add, ih, Nat.cast_add_one, mul_add, mul_one]
+theorem natCast_mul' (m n : ℕ) : ((m * n : ℕ) : Ordinal) = (m : Ordinal) * (n : Ordinal) :=
+  Ordinal.natCast_mul m n
 
 end Ordinal
+
 #print axioms Ordinal.natCast_add
 #print axioms Ordinal.natCast_mul'
 

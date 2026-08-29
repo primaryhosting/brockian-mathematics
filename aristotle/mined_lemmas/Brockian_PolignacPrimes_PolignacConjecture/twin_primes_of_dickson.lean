@@ -29,43 +29,61 @@ Category: Brockian Conjecture
 Target: Brockian.PolignacPrimes.PolignacConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Lean 4 requires every `import` to precede any module docstring, so the required header is
+reproduced verbatim as the module docstring immediately after the import below.)
 -/
--- (The header above is a plain block comment rather than a module docstring `/-! ... -/`
--- because Lean 4 requires `import` commands to precede every other command, including
--- module docstrings.)
 
 import Mathlib
 
 /-!
 # Polignac Conjecture
-
-De Polignac's conjecture states that for every positive even number `n` there are infinitely
-many pairs of *consecutive* primes `p < q` with `q - p = n`.  This is an open problem (the case
-`n = 2` is the twin prime conjecture), so what is proved here is a *conditional reduction*:
-Polignac's conjecture is derived from Dickson's conjecture on simultaneous primality of
-linear forms.
-
-The derivation is the classical one.  Given an even `n ≥ 2`, one chooses for each `j` with
-`0 < j < n` a distinct prime `q j > n`, sets `Q = ∏ q j` and uses the Chinese Remainder Theorem
-to find `a` with `q j ∣ a + j` for all such `j`.  The pair of linear forms `a + Q x`,
-`(a + n) + Q x` is then admissible, so Dickson's conjecture produces arbitrarily large `x`
-making both forms prime; and every intermediate value `a + Q x + j` (`0 < j < n`) is divisible
-by the prime `q j`, which is smaller than it, hence composite.  So the two primes are
-consecutive with difference exactly `n`.
+Category: Brockian Conjecture
+Target: Brockian.PolignacPrimes.PolignacConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian
-namespace PolignacPrimes
+/-!
+## Overview
 
-open Finset
-open scoped Function
+De Polignac's conjecture states that for every positive even number `n` there are infinitely
+many pairs of *consecutive* primes whose difference is `n`.  This is an open problem (it contains
+the twin prime conjecture as the case `n = 2`), so what is proved here is a *conditional
+reduction*: the full conjecture is derived from a two-form special case of Dickson's conjecture
+on prime values of linear forms (`DicksonPairHypothesis`).
 
-/-- `p` and `q` are consecutive primes: both are prime, `p < q`, and no prime lies strictly
-between them. -/
+The reduction is the classical sieve-free argument: given an even `n ≥ 2`, one uses the Chinese
+remainder theorem to build an arithmetic progression `r + M ℕ` such that
 
-theorem twin_primes_of_dickson (H : DicksonConjecture) :
-    {p : ℕ | IsConsecutivePrimePair p (p + 2)}.Infinite :=
-  infinite_consecutive_prime_pairs_of_dickson H 2 (by decide) (by norm_num)
+* every `p ≡ r [MOD M]` has `p + k` divisible by a fixed prime `< p` for each `0 < k < n`
+  (so all the numbers strictly between `p` and `p + n` are composite), and
+* the pair of linear forms `r + M m`, `r + n + M m` is admissible, i.e. no prime divides
+  the product for all `m`.
 
-/-- A sanity check that `IsConsecutivePrimePair` is satisfiable: `3` and `5` are consecutive
-primes. -/
+Dickson's conjecture applied to this pair then produces infinitely many consecutive prime pairs
+with gap exactly `n`.
+
+Unconditional results proved here as well:
+
+* `Brockian.PolignacPrimes.eq_two_of_odd_gap` – for odd `n` at most one prime `p` has `p + n`
+  prime, so the evenness hypothesis in the conjecture is necessary;
+* `Brockian.PolignacPrimes.not_polignacProperty_of_odd`;
+* `Brockian.PolignacPrimes.polignacProperty_iff` – reformulation of the "infinitely many"
+  clause as an unboundedness statement.
+-/
+
+namespace Brockian.PolignacPrimes
+
+/-- `p` and `p + n` are consecutive primes: both are prime and no number strictly between
+them is prime. -/
+
+theorem twin_primes_of_dickson (hD : DicksonPairHypothesis) :
+    {p : ℕ | Nat.Prime p ∧ Nat.Prime (p + 2)}.Infinite := by
+  have h := PolignacConjecture hD 2 (by norm_num) (by decide)
+  refine h.mono ?_
+  rintro p ⟨hp, hp2, -⟩
+  exact ⟨hp, hp2⟩
+
+end Brockian.PolignacPrimes
+

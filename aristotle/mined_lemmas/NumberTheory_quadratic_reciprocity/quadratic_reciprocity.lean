@@ -5,31 +5,27 @@ Target: NumberTheory.quadratic_reciprocity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- Note: the header above is written as a plain block comment (`/- -/`) rather than a
+-- module docstring (`/-! -/`), because Lean 4 rejects a module docstring that appears
+-- before the `import` commands. The text is otherwise exactly as requested.
 
 import Mathlib
 
-/-!
-# Quadratic Reciprocity
-Category: Frontier Wave 2 (deeper machinery)
-Target: NumberTheory.quadratic_reciprocity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace NumberTheory
 
-/-- Key intermediate lemma: for an odd natural number `n`, the "half" appearing in the
-exponent of quadratic reciprocity can be written either as `(n - 1) / 2` (natural
-subtraction) or as `n / 2`; these agree. -/
+/-- **Gauss's law of quadratic reciprocity**: for distinct odd primes `p` and `q`,
+`legendreSym p q * legendreSym q p = (-1) ^ ((p - 1) / 2 * ((q - 1) / 2))`,
+where the exponent is computed with natural number subtraction and division. -/
 
 theorem quadratic_reciprocity {p q : ℕ} [Fact p.Prime] [Fact q.Prime]
-    (hp : p ≠ 2) (hq : q ≠ 2) (hpq : p ≠ q) :
+    (hp2 : p ≠ 2) (hq2 : q ≠ 2) (hpq : p ≠ q) :
     legendreSym p q * legendreSym q p = (-1) ^ ((p - 1) / 2 * ((q - 1) / 2)) := by
-  have hp₁ : Odd p := (Fact.out (p := p.Prime)).odd_of_ne_two hp
-  have hq₁ : Odd q := (Fact.out (p := q.Prime)).odd_of_ne_two hq
-  rw [sub_one_div_two_eq_div_two_of_odd hp₁, sub_one_div_two_eq_div_two_of_odd hq₁,
-    mul_comm (legendreSym p q)]
-  exact legendreSym.quadratic_reciprocity hp hq hpq
+  have hp1 : p % 2 = 1 := (Fact.out (p := p.Prime)).eq_two_or_odd.resolve_left hp2
+  have hq1 : q % 2 = 1 := (Fact.out (p := q.Prime)).eq_two_or_odd.resolve_left hq2
+  have hpe : (p - 1) / 2 = p / 2 := by omega
+  have hqe : (q - 1) / 2 = q / 2 := by omega
+  rw [hpe, hqe, mul_comm (legendreSym p q)]
+  exact legendreSym.quadratic_reciprocity hp2 hq2 hpq
 
 end NumberTheory
 

@@ -1,3 +1,13 @@
+/-
+# No Deleting
+Category: Frontier Qi
+Target: QI.no_deleting
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- (Lean 4 requires `import` lines to precede any module docstring, so the header above is
+-- reproduced verbatim as a module docstring immediately after the import.)
 import Mathlib
 
 /-!
@@ -8,33 +18,20 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Setup
-
-We work with a single qubit `Qubit = EuclideanSpace ℂ (Fin 2)` and the two-qubit space
-`Qubit2 = EuclideanSpace ℂ (Fin 2 × Fin 2)`, which is the tensor square of `Qubit`
-(with the product basis indexed by `Fin 2 × Fin 2`).
-
-A *deleting machine* would be a unitary `U` on the two-qubit space with
-`U (ψ ⊗ ψ) = ψ ⊗ |0⟩` for every unit vector `ψ`, i.e. it erases the second copy of an
-unknown state.  The no-deleting theorem says no such unitary exists.
--/
-
 namespace QI
 
-noncomputable section
-
-/-- The state space of one qubit. -/
+/-- A single qubit: the two-dimensional complex Hilbert space. -/
 abbrev Qubit := EuclideanSpace ℂ (Fin 2)
 
-/-- The state space of two qubits, i.e. the tensor square of `Qubit`. -/
-abbrev Qubit2 := EuclideanSpace ℂ (Fin 2 × Fin 2)
+/-- Two qubits: the tensor product of two copies of `Qubit`, realized concretely as
+`EuclideanSpace ℂ (Fin 2 × Fin 2)`. -/
+abbrev TwoQubit := EuclideanSpace ℂ (Fin 2 × Fin 2)
 
-/-- The product (tensor) state `x ⊗ y`. -/
+/-- The tensor product `a ⊗ b` of two qubit states. -/
 
 lemma inner_tensor_tensor (a b c d : Qubit) :
-    inner ℂ (tensor a b) (tensor c d) = inner ℂ a c * inner ℂ b d := by
-  simp [PiLp.inner_apply, RCLike.inner_apply, tensor, Fintype.sum_prod_type]
-  ring
+    (inner ℂ (tensor a b) (tensor c d) : ℂ) = inner ℂ a c * inner ℂ b d := by
+  simp [PiLp.inner_apply, Fintype.sum_prod_type]
+  ring_nf
 
 /-- The computational basis state `|0⟩`. -/

@@ -1,3 +1,10 @@
+/-
+# Subclass Obstruction Statement
+Category: Brockian Conjecture
+Target: Zeta23Obstruction.subclass_obstruction_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -7,7 +14,6 @@ Target: Zeta23Obstruction.subclass_obstruction_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 
 open scoped BigOperators
 open scoped Real
@@ -34,24 +40,24 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- A *deep-pair configuration*: two distinct "deep points" carrying strictly positive
-species weights.  This is the abstract finite-dimensional model of the configuration data
-a fixed-kernel certificate is tested against. -/
-structure DeepPairConfig where
-  /-- The (strictly positive) per-species weights. -/
-  weight : Fin 2 → ℝ
-  /-- The deep points at which the fixed kernel is evaluated. -/
-  deep : Fin 2 → ℝ
-  weight_pos : ∀ i, 0 < weight i
-  deep_distinct : deep 0 ≠ deep 1
+/-- A **configuration** of deep points: finitely many species, each carrying a real
+"deep point" `pt i` and a strictly positive weight `wt i`. -/
+structure DeepConfig where
+  /-- number of species -/
+  n : ℕ
+  /-- the deep point attached to each species -/
+  pt : Fin n → ℝ
+  /-- the (strictly positive) weight attached to each species -/
+  wt : Fin n → ℝ
+  /-- positivity of the weights -/
+  wt_pos : ∀ i : Fin n, 0 < wt i
 
-/-- The *pointwise discard* step of the certificate chain: each species' contribution is
-discarded separately, so the chain's bound requires each term `weight i * R (deep i)` to be
-nonnegative. -/
+/-- The **linear charge** of a configuration relative to a fixed kernel `R`:
+the linear functional `c ↦ ∑ᵢ wᵢ · R(zᵢ)` obtained by per-species linear charging. -/
 
-noncomputable def charge (R : ℝ → ℝ) (c : DeepPairConfig) : ℝ :=
-  ∑ i : Fin 2, c.weight i * R (c.deep i)
+noncomputable def charge (R : ℝ → ℝ) (c : DeepConfig) : ℝ :=
+  ∑ i : Fin c.n, c.wt i * R (c.pt i)
 
-/-- Soundness of the certificate scheme under the pointwise-positivity hypothesis
-`h_pos : ∀ x, 0 ≤ R x`: with a globally nonnegative kernel, both the termwise (pointwise
-discard) bound and the resulting linear charge bound hold on every configuration. -/
+/-- The **termwise bound** required by the pointwise-discard step: the chain only
+concludes `0 ≤ charge R c` by discarding each summand separately, which is legitimate
+exactly when every term `wᵢ · R(zᵢ)` is itself nonnegative. -/

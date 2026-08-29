@@ -1,19 +1,9 @@
-/-
-# Yao Principle
-Category: Frontier Cs
-Target: CS.yao_principle
-Statement: Yao's minimax principle relates randomized and distributional complexity.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
 # Yao Principle
 Category: Frontier Cs
 Target: CS.yao_principle
-Statement: Yao's minimax principle relates randomized and distributional complexity.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
@@ -32,24 +22,18 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace CS
 
-variable {A I : Type*} [Fintype A] [Nonempty A] [Fintype I] [Nonempty I]
+section Yao
 
-/-- The expected cost of the randomized algorithm given by the mixed strategy `p`
-(a distribution over the deterministic algorithms `A`) on the worst-case input. -/
+variable {A I : Type*} [Fintype A] [Fintype I]
 
-noncomputable def distributionalCost (C : A → I → ℝ) (q : I → ℝ) : ℝ :=
-  ⨅ a : A, ∑ i, q i * C a i
+/-- The expected cost of the randomized algorithm given by the distribution `p` over
+deterministic algorithms, run on the input `i`. -/
 
-/-- The randomized complexity: the minimal worst-case expected cost over all
-randomized algorithms. -/
+noncomputable def distributionalCost [Nonempty A] (c : A → I → ℝ) (q : I → ℝ) : ℝ :=
+  Finset.univ.inf' Finset.univ_nonempty (expectedCostOn c q)
+
+/-- A convex combination is at least the minimum. -/

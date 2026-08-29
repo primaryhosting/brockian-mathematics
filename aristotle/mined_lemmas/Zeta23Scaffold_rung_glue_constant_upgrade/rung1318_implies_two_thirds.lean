@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-
 # Rung Glue Constant Upgrade
 Category: A Assembly
@@ -8,23 +33,18 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+set_option autoImplicit false
+
 namespace Zeta23Scaffold
 
-/-- Abbreviation for the eventual lower bound statement
-`∀ ε > 0, ∃ T₀, ∀ T ≥ T₀, (c - ε) * n T ≤ s T`. -/
+/-- Eventual lower bound of `s` by `(c - eps) * n`, for every `eps > 0`. -/
 
 theorem rung1318_implies_two_thirds (n s : ℝ → ℝ) (hn : ∀ T, 0 ≤ n T)
-    (H : EventualBound (13 / 18) n s) :
-    EventualBound (2 / 3) n s := by
-  intro ε hε
-  obtain ⟨T0, hT0⟩ := H ε hε
-  refine ⟨T0, fun T hT => ?_⟩
-  have h := hT0 T hT
-  have hmono : (2 / 3 - ε) * n T ≤ (13 / 18 - ε) * n T := by
-    have : (2 / 3 - ε) ≤ (13 / 18 - ε) := by norm_num
-    exact mul_le_mul_of_nonneg_right this (hn T)
-  linarith
+    (H : ∀ eps : ℝ, 0 < eps → ∃ T0 : ℝ, ∀ T : ℝ, T0 ≤ T → (13 / 18 - eps) * n T ≤ s T) :
+    ∀ eps : ℝ, 0 < eps → ∃ T0 : ℝ, ∀ T : ℝ, T0 ≤ T → (2 / 3 - eps) * n T ≤ s T :=
+  eventualBound_mono hn (by norm_num : (2 / 3 : ℝ) ≤ 13 / 18) H
 
-/-- **Rung glue constant upgrade.**  For any nonnegative comparison sequence `n`,
-the `(2*(31/36) - 1 - ε)`-bound yields both the `(13/18 - ε)`-bound and the
-`(2/3 - ε)`-bound. -/
+/-- **Rung glue constant upgrade.**
+From the `(2 * (31/36) - 1 - eps)`-bound one gets the `(13/18 - eps)`-bound
+(the constants are equal), and from the latter the weaker `(2/3 - eps)`-bound,
+since `2/3 ≤ 13/18` and `n` is nonnegative. -/

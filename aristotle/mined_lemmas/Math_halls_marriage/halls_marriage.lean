@@ -8,25 +8,45 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset Function
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Math
 
-/-- **Hall's Marriage Theorem** for a bipartite graph.
+open SimpleGraph
 
-The bipartite graph is given by its adjacency relation `r : V → W → Prop` between the two
-(finite) sides `V` and `W`.  A *matching saturating `V`* is an injective function `f : V → W`
-with `v` adjacent to `f v` for every `v : V`.
+/-- The union of the neighborhoods of a finite vertex set is finite in a locally finite graph. -/
 
-Such a matching exists if and only if *Hall's condition* holds: every set `A` of vertices of
-`V` has at least `#A` neighbours in `W`.
+theorem halls_marriage {V : Type*} {G : SimpleGraph V} [G.LocallyFinite] {p₁ p₂ : Set V}
+    (hG : G.IsBipartiteWith p₁ p₂) :
+    (∃ M : G.Subgraph, M.IsPerfectMatching) ↔
+      ∀ s : Set V, s.ncard ≤ (⋃ x ∈ s, G.neighborSet x).ncard := by
+  constructor
+  · rintro ⟨M, hM⟩
+    exact forall_ncard_le_of_isPerfectMatching hM
+  · intro h
+    exact SimpleGraph.exists_isPerfectMatching_of_forall_ncard_le hG h
 
-This is Mathlib's `Fintype.all_card_le_filter_rel_iff_exists_injective`. -/
+end Math
+#print axioms Math.halls_marriage
 
-theorem halls_marriage {V W : Type*} [Fintype V] [Fintype W] (r : V → W → Prop)
-    [DecidableRel r] :
-    (∀ A : Finset V, #A ≤ #{w | ∃ v ∈ A, r v w}) ↔
-      ∃ f : V → W, Function.Injective f ∧ ∀ v, r v (f v) :=
-  Fintype.all_card_le_filter_rel_iff_exists_injective r
-
-/-- The bipartite graph on `V ⊕ W` whose edges are given by the relation `r : V → W → Prop`. -/

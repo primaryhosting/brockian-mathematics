@@ -1,4 +1,21 @@
+/-
+# Admissibility Ktuple K 4
+Category: Brockian Corpus
+Target: Brockian.AdmissibilityKTupleK4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Admissibility Ktuple K 4
+Category: Brockian Corpus
+Target: Brockian.AdmissibilityKTupleK4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 
 open scoped BigOperators
 open scoped Real
@@ -25,22 +42,25 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- A `k`-tuple of integers `h : Fin k → ℤ` is *admissible* (in the sense of the
-Hardy–Littlewood prime `k`-tuple conjecture) if for every prime `p` the values
-`h 0, …, h (k-1)` do not cover every residue class modulo `p`. -/
+/-- A finite set of integers `H` (thought of as a tuple of shifts `h₁ < ⋯ < h_k`) is
+*admissible* if for every prime `p` the elements of `H` do not cover all residue classes
+modulo `p`; equivalently, some residue class mod `p` is missed by `H`.  This is the
+classical admissibility condition from the Hardy–Littlewood prime `k`-tuple conjecture. -/
 
-theorem missesResidue_of_card_lt {k : ℕ} (h : Fin k → ℤ) (p : ℕ) [Fact p.Prime]
-    (hp : k < p) : ∃ r : ZMod p, ∀ i, (h i : ZMod p) ≠ r := by
-  by_contra hcon
-  push_neg at hcon
-  have hsurj : Function.Surjective (fun i : Fin k => ((h i : ZMod p))) := by
-    intro r
-    obtain ⟨i, hi⟩ := hcon r
-    exact ⟨i, hi⟩
-  have := Fintype.card_le_of_surjective _ hsurj
-  simp [ZMod.card] at this
-  omega
+theorem missesResidue_of_card_lt (H : Finset ℤ) (p : ℕ) (hp : p.Prime) (hcard : H.card < p) :
+    ∃ a : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ a := by
+  haveI : NeZero p := ⟨hp.ne_zero⟩
+  have h1 : (H.image (fun h : ℤ => (h : ZMod p))).card < (Finset.univ : Finset (ZMod p)).card := by
+    calc (H.image (fun h : ℤ => (h : ZMod p))).card ≤ H.card := Finset.card_image_le
+      _ < p := hcard
+      _ = Fintype.card (ZMod p) := (ZMod.card p).symm
+      _ = (Finset.univ : Finset (ZMod p)).card := by simp [Finset.card_univ]
+  obtain ⟨a, -, ha⟩ := Finset.exists_mem_notMem_of_card_lt_card h1
+  refine ⟨a, ?_⟩
+  intro h hh hcon
+  exact ha (Finset.mem_image.2 ⟨h, hh, hcon⟩)
 
-/-- **Admissibility criterion for 4-tuples.** A 4-tuple of integers is admissible
-if and only if it fails to cover all residue classes modulo `2` and modulo `3`;
-no other prime needs to be checked. -/
+/-- **Admissibility criterion for `4`-tuples.**
+A `4`-element set of integers is admissible (i.e. misses a residue class modulo *every*
+prime) as soon as it misses a residue class modulo the primes `2` and `3`.  All larger
+primes are automatically fine, since `4` integers cannot cover `p ≥ 5` residue classes. -/

@@ -5,63 +5,60 @@ Target: CS.ladner
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean does not allow a module docstring before `import`; the header is repeated verbatim
--- as the module docstring immediately below the imports.)
+
 import Mathlib
 
-/-!
-# Ladner
-Category: Frontier Cs
-Target: CS.ladner
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
+set_option maxHeartbeats 1000000
 set_option autoImplicit false
 
-set_option grind.warning false
-
 /-!
-## Overview
+# Ladner's theorem
 
-We prove Ladner's theorem: *if `P ≠ NP` then there is an NP-intermediate language*, i.e. a
-language in `NP` which is neither in `P` nor `NP`-complete.
+This file formalises Ladner's theorem: if `P ≠ NP`, then there is an `NP`-intermediate
+language, i.e. a language that lies in `NP`, is not in `P`, and is not `NP`-complete.
 
-Complexity theory is not available in Mathlib, so the development is carried out over an
-explicit abstract model of polynomial time computation, packaged as the structure
-`PolyFramework` below.  Strings are encoded as natural numbers, the *size* (bit length) of a
-string `x` being `Nat.size x`, and a *language* is a function `ℕ → Bool`.
+Since Mathlib contains no development of time-bounded computation, the classes `P`, `NP` and the
+polynomial time computable functions are packaged into an abstract structure `CS.Setting`, whose
+fields are the standard, model independent facts used in Ladner's proof:
 
-A `PolyFramework` consists of an enumeration `Red : ℕ → ℕ → ℕ` of the polynomial time
-computable functions (`Red e` is the function computed by the `e`-th polynomial time program),
-together with a degree function `deg` (`Red e` runs in time `(size x + 2) ^ deg e`), subject to
-the standard closure properties of polynomial time:  closure under composition, pairing,
-conditionals, basic arithmetic, bit counting, *clocked universal simulation* (running a program
-with a unary time budget is polynomial), *bounded search* (searching a unary sized range for a
-certificate is polynomial) and *iteration* (iterating a polynomial time function a unary number
-of times, along an orbit whose sizes stay polynomially bounded, is polynomial).
+* `P` is contained in `NP`;
+* `P` and the polynomial time functions come with enumerations `Mdec`, `Redf` (recursive
+  presentability of `P`);
+* `P` is closed under finite variations, contains the empty language, and is closed downwards
+  under polynomial time many-one reductions;
+* `NP` is closed under intersection with a language in `P`;
+* `holeEff`: for `A` in `NP`, the hole pattern of the delayed diagonalisation, i.e. the set of
+  lengths `n` at which the stage function `CS.stage` is even, is decidable in polynomial time.
 
-All of these are standard true facts about polynomial time; they are taken as the hypotheses of
-the theorem rather than as Lean `axiom`s, so the final result is axiom clean.
+Only the last field depends on the machine model: it is the statement that Ladner's clocked
+delayed diagonalisation can be carried out in polynomial time.  Everything else -- the
+construction of the stage function, the case analysis on whether it is bounded, and the
+verification of the three requirements on the resulting language -- is proved here.
+
+The construction is Ladner's blowing-holes argument.  Given `A` in `NP` but not in `P` we build
+a nondecreasing stage function `stage A Mdec Redf : ℕ → ℕ`, increasing it by one exactly when the
+current requirement is met by some short string, and set
+`ladnerLang s A x = A x && (stage (x.length) is even)`.  If the stage function were bounded it
+would be eventually equal to some `k`: for even `k = 2 * i` the `i`-th polynomial time decider
+would decide `ladnerLang s A`, which is then a finite variant of `A`, so `A` would be in `P`;
+for odd `k = 2 * i + 1` the language `ladnerLang s A` would be finite (hence in `P`) while the
+`i`-th polynomial time function reduces `A` to it, so again `A` would be in `P`.  Hence the
+stage function is unbounded, and every even (resp. odd) stage is eventually left, which
+diagonalises against every polynomial time decider (resp. against every polynomial time
+reduction of `A` to `ladnerLang s A`).
 -/
 
-namespace Ladner
+namespace CS
 
-/-- The number of set bits of `h` at positions `< m`. -/
+/-- Binary strings. -/
+abbrev Str := List Bool
 
-def NPComplete (A : ℕ → Bool) : Prop :=
-  NPLang F A ∧ ∀ B, NPLang F B → PolyReduces F B A
+/-- A language is a decision predicate on binary strings. -/
+abbrev Lang := Str → Bool
 
-/-- A sanity check on the definitions: `P ⊆ NP`. -/
+/-- `holed A t` is the language `A` with "holes" punched into it: a string `x` of length `n`
+is kept only when the stage value `t n` is even. -/
+
+def NPComplete (L : Lang) : Prop := L ∈ s.NP ∧ ∀ K ∈ s.NP, s.Reduces K L
+
+/-- `L` is `NP`-intermediate: in `NP`, not in `P`, and not `NP`-complete. -/

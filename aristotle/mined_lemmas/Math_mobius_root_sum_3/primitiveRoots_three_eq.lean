@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Mobius Root Sum 3
 Category: Pure Mathematics
 Target: Math.mobius_root_sum_3
@@ -8,26 +6,29 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset Complex
+import Mathlib
 
 namespace Math
 
-/-- The set of primitive `3`-rd roots of unity in `ℂ` consists of `ζ` and `ζ ^ 2`, for any
-primitive `3`-rd root of unity `ζ`. -/
+open Finset ArithmeticFunction ArithmeticFunction.Moebius
 
-lemma primitiveRoots_three_eq {ζ : ℂ} (h : IsPrimitiveRoot ζ 3) :
-    primitiveRoots 3 ℂ = {ζ, ζ ^ 2} := by
-  ext z
-  rw [mem_primitiveRoots (by norm_num), h.isPrimitiveRoot_iff, Finset.mem_insert,
-    Finset.mem_singleton]
-  constructor
-  · rintro ⟨i, hi, hcop, rfl⟩
-    interval_cases i
-    · exact absurd hcop (by decide)
-    · exact Or.inl (pow_one ζ)
-    · exact Or.inr rfl
-  · rintro (rfl | rfl)
-    · exact ⟨1, by norm_num, by norm_num, pow_one _⟩
-    · exact ⟨2, by norm_num, by norm_num, rfl⟩
+/-- `ζ = exp (2 π i / 3)` is a primitive cube root of unity. -/
 
-/-- The sum of the primitive `3`-rd roots of unity in `ℂ` equals `μ 3 = -1`. -/
+theorem primitiveRoots_three_eq :
+    primitiveRoots 3 ℂ = {Complex.exp (2 * Real.pi * Complex.I / 3),
+      Complex.exp (2 * Real.pi * Complex.I / 3) ^ 2} := by
+  set ζ : ℂ := Complex.exp (2 * Real.pi * Complex.I / 3) with hζdef
+  have hζ : IsPrimitiveRoot ζ 3 := isPrimitiveRoot_exp_three
+  have hne : ζ ≠ ζ ^ 2 := exp_three_ne_sq
+  have hsub : ({ζ, ζ ^ 2} : Finset ℂ) ⊆ primitiveRoots 3 ℂ := by
+    intro x hx
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl
+    · exact (mem_primitiveRoots (by norm_num)).2 hζ
+    · exact (mem_primitiveRoots (by norm_num)).2 (hζ.pow_of_coprime 2 (by decide))
+  have hcard : (primitiveRoots 3 ℂ).card = 2 := by
+    rw [hζ.card_primitiveRoots]; decide
+  refine (Finset.eq_of_subset_of_card_le hsub ?_).symm
+  rw [hcard, Finset.card_insert_of_notMem (by simpa using hne), Finset.card_singleton]
+
+/-- The sum of the primitive `3`-rd roots of unity in `ℂ` equals `μ 3`. -/

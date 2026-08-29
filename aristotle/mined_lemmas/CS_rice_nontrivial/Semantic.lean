@@ -8,18 +8,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 1000000
-set_option autoImplicit false
-
 namespace CS
 
-open Nat.Partrec Nat.Partrec.Code ComputablePred
+open Nat.Partrec Nat.Partrec.Code
 
-/-- A property `P` of programs (codes) is *semantic* (extensional) when it depends only on the
+open scoped Classical
+
+/-- A property `C` of programs (codes) is *semantic* (extensional) if it depends only on the
 partial function the program computes. -/
 
-def Semantic (P : Code → Prop) : Prop :=
-  ∀ cf cg : Code, eval cf = eval cg → (P cf ↔ P cg)
+def Semantic (C : Set Code) : Prop :=
+  ∀ c₁ c₂ : Code, eval c₁ = eval c₂ → (c₁ ∈ C ↔ c₂ ∈ C)
 
-/-- A property `P` of programs is *nontrivial* when some program satisfies it and some
-program does not. -/
+/-- A property `C` of programs is *nontrivial* if some program has it and some program lacks it. -/

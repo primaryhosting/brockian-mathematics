@@ -23,7 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+/-!
 # Bloch Sphere Bijection
 Category: Quantum Computing
 Target: QC.bloch_sphere_bijection
@@ -33,21 +33,12 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Bloch Sphere Bijection
-Category: Quantum Computing
-Target: QC.bloch_sphere_bijection
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace QC
 
 open Complex
 
-/-- A pure qubit state: a unit vector in `ℂ²`, recorded as a pair of amplitudes
-`(a, b)` with `|a|² + |b|² = 1`. -/
+/-- A pure qubit state: a unit vector in `ℂ²`. -/
 
-def blochQuot : Qubit → Sphere2 :=
-  Quotient.lift bloch (fun _ _ h => bloch_phase_invariant h)
+def blochQuot : PureState → Sphere2 :=
+  Quotient.lift bloch fun _ _ h => bloch_phase_invariant h
 

@@ -23,28 +23,42 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-/-!
+/-
 # Same Parity Betrothed Exists
 Category: Brockian Conjecture
 Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
--- (Lean requires `import` to be the very first command in a file, so the header module
--- docstring above sits immediately after the single `import Mathlib` line.)
+/-!
+# Same Parity Betrothed Exists
+Category: Brockian Conjecture
+Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-namespace Brockian
-namespace BetrothedNumbers
+Two distinct positive integers `m`, `n` are *betrothed* (quasi-amicable) when the sum of the
+proper divisors of each is one more than the other, i.e. `σ₁ m = σ₁ n = m + n + 1`.
+All known betrothed pairs consist of one even and one odd number, and it is an open
+problem whether a betrothed pair of equal parity exists.
+
+This file proves a structural reduction for that open problem: in any same-parity betrothed
+pair, each member is a perfect square or twice a perfect square (and if both members are odd,
+each is a perfect square).  The main statement
+`Brockian.BetrothedNumbers.SameParityBetrothedExists` records the resulting equivalence.
+-/
+
+namespace Brockian.BetrothedNumbers
 
 open Finset
 
 /-- The sum-of-divisors function `σ₁`. -/
 
-theorem sigmaOne_mul_of_coprime {a b : ℕ} (h : Nat.Coprime a b) :
+lemma sigmaOne_mul_of_coprime {a b : ℕ} (h : Nat.Coprime a b) :
     sigmaOne (a * b) = sigmaOne a * sigmaOne b := by
-  simp only [sigmaOne_eq_sigma]
-  exact ArithmeticFunction.isMultiplicative_sigma.map_mul_of_coprime h
+  simpa [sigmaOne, ArithmeticFunction.sigma_one_apply] using
+    (ArithmeticFunction.isMultiplicative_sigma (k := 1)).map_mul_of_coprime h
 
-/-- Any number with an odd divisor sum is a square or twice a square. -/
+/-- `σ₁ (2 ^ a) = 2 ^ (a + 1) - 1` is odd. -/

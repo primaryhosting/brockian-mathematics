@@ -16,33 +16,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 1000000
-
-namespace Zeta23Scaffold
-
-/-- The `3 × 3` sine-kernel Hankel matrix. -/
-
-theorem christoffel_inverse_form :
-    christoffelHankelMatrix.det = 5/108 ∧
-      IsUnit christoffelHankelMatrix.det ∧
-      christoffelHankelMatrix⁻¹ 0 0 = 36/5 ∧
-      1 / (Pi.single (0 : Fin 3) (1 : ℚ) ⬝ᵥ
-            christoffelHankelMatrix⁻¹.mulVec (Pi.single (0 : Fin 3) (1 : ℚ))) = 5/36 := by
-  have hdet : christoffelHankelMatrix.det = 5/108 := christoffelHankelMatrix_det
-  have hunit : IsUnit christoffelHankelMatrix.det := by
-    rw [hdet]; exact isUnit_iff_ne_zero.mpr (by norm_num)
-  have hinv : christoffelHankelMatrix⁻¹ = christoffelHankelInv :=
-    Matrix.inv_eq_right_inv christoffelHankelMatrix_mul_inv
-  refine ⟨hdet, hunit, ?_, ?_⟩
-  · rw [hinv, christoffelHankelInv]
-    norm_num
-  · rw [hinv, christoffelHankelInv]
-    simp [Matrix.mulVec, dotProduct, Pi.single_apply]
-
-end Zeta23Scaffold
-
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -57,12 +30,21 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace Zeta23Scaffold
 
-set_option grind.warning false
+/-- The 3×3 sine-kernel Hankel matrix of moments. -/
+
+theorem christoffel_inverse_form :
+    hankelM.det = 5/108 ∧ IsUnit hankelM.det ∧ hankelM⁻¹ 0 0 = 36/5 ∧
+      (∑ i, ∑ j, (if i = 0 then (1:ℚ) else 0) * hankelM⁻¹ i j * (if j = 0 then (1:ℚ) else 0))⁻¹
+        = 5/36 := by
+  refine ⟨hankelM_det, ?_, ?_, ?_⟩
+  · rw [hankelM_det]
+    exact isUnit_iff_ne_zero.mpr (by norm_num)
+  · rw [hankelM_inv_eq]; simp [hankelMinv]
+  · rw [hankelM_inv_eq]
+    simp [Fin.sum_univ_succ, hankelMinv]
+    norm_num
+
+end Zeta23Scaffold
 

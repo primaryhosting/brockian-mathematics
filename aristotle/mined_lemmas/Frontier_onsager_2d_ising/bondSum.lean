@@ -8,41 +8,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+open scoped BigOperators Real
 
 namespace Frontier
 
-/-- Sites of the `m × n` square lattice with periodic (toroidal) boundary conditions. -/
-abbrev Site (m n : ℕ) : Type := ZMod m × ZMod n
+/-! ## The finite-volume 2D Ising model on an `L × L` torus -/
 
-/-- A spin configuration: a `± 1` value (encoded as a `Bool`) at every lattice site. -/
-abbrev Config (m n : ℕ) : Type := Site m n → Bool
+/-- Shift a periodic (torus) index by one site. -/
 
-/-- The real spin value attached to a `Bool`. -/
+def bondSum {L : ℕ} (σ : Config L) : ℝ :=
+  ∑ x : Fin L × Fin L,
+    (spin σ x * spin σ (shiftIdx x.1, x.2) + spin σ x * spin σ (x.1, shiftIdx x.2))
 
-def bondSum {m n : ℕ} [NeZero m] [NeZero n] (σ : Config m n) : ℝ :=
-  ∑ p : Site m n,
-    (spin (σ p) * spin (σ (p.1 + 1, p.2)) + spin (σ p) * spin (σ (p.1, p.2 + 1)))
-
-/-- The Ising partition function `Z = ∑_σ exp (K ∑_{⟨i,j⟩} s_i s_j)` where `K = βJ`. -/
+/-- The partition function `Z_L(K) = ∑_σ exp(K ∑_{⟨x,y⟩} σ_x σ_y)` of the square-lattice
+Ising model with periodic boundary conditions, where `K = βJ` is the reduced coupling.
+(The Hamiltonian is `H(σ) = -J ∑_{⟨x,y⟩} σ_x σ_y`, so `Z = ∑_σ e^{-βH(σ)}`.) -/

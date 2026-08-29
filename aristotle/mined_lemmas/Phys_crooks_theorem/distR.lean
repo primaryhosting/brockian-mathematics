@@ -33,48 +33,56 @@ set_option grind.warning false
 
 namespace Phys
 
-/-- A driven microscopic system on a finite state space, observed at times
-`0, 1, …, N`.
+/-!
+## Setup
 
-* `E k` is the energy function of the system after the `k`-th update of the
-  external protocol parameter.
-* `T k x y` is the probability that the thermalisation step performed while the
-  energy function is `E k` takes the system from `x` to `y`.  It is assumed to
-  satisfy *detailed balance* with respect to the Boltzmann weights of `E k` at
-  inverse temperature `beta`.
+We model a driven thermodynamic experiment microscopically.
 
-A forward trajectory is a sequence of states `x₀, x₁, …, x_N`: the system starts
-in thermal equilibrium for `E 0`, then alternately the protocol is advanced
-(`E k → E (k+1)`, which costs work) and the system relaxes with the kernel
-`T (k+1)`. -/
-structure CrooksSystem where
-  /-- the (finite, nonempty) microscopic state space -/
-  S : Type
-  [finS : Fintype S]
-  [decS : DecidableEq S]
-  [neS : Nonempty S]
-  /-- number of protocol steps -/
-  N : ℕ
-  /-- inverse temperature -/
+`Traj` is a (finite) set of microscopic trajectories of the *forward* protocol.
+`rev` is the time-reversal involution sending a forward trajectory to the
+corresponding trajectory of the *reverse* protocol, `work γ` is the work
+performed on the system along `γ`, `probF` / `probR` are the probabilities of
+the individual trajectories in the forward and reverse experiments,
+`beta` is the inverse temperature and `deltaF` the free energy difference.
+
+The single physical input is *microscopic reversibility* (generalized detailed
+balance):
+
+  `probF γ = exp (β (W γ - ΔF)) * probR (rev γ)`.
+
+Crooks' fluctuation theorem is the statement that the same relation survives
+coarse-graining, i.e. it holds for the *work distributions* obtained by summing
+over all trajectories with a given value of the work.
+-/
+
+/-- A microscopically reversible driven-thermodynamics setup. -/
+structure CrooksSystem (Traj : Type*) [Fintype Traj] where
+  /-- Time reversal, mapping a forward trajectory to the reverse trajectory. -/
+  rev : Traj → Traj
+  /-- Time reversal is an involution. -/
+  rev_involutive : Function.Involutive rev
+  /-- Work performed on the system along a trajectory. -/
+  work : Traj → ℝ
+  /-- The work along a reversed trajectory is the negative of the original work. -/
+  work_rev : ∀ γ, work (rev γ) = -work γ
+  /-- Probability of a trajectory in the forward experiment. -/
+  probF : Traj → ℝ
+  /-- Probability of a trajectory in the reverse experiment. -/
+  probR : Traj → ℝ
+  /-- Inverse temperature. -/
   beta : ℝ
-  beta_pos : 0 < beta
-  /-- energy function after `k` protocol updates -/
-  E : ℕ → S → ℝ
-  /-- thermalisation kernel used while the energy is `E k` -/
-  T : ℕ → S → S → ℝ
-  /-- detailed balance of `T k` with respect to the Boltzmann weights of `E k` -/
-  detailed_balance : ∀ (k : ℕ) (x y : S),
-    Real.exp (-beta * E k x) * T k x y = Real.exp (-beta * E k y) * T k y x
+  /-- Free energy difference between the final and initial equilibrium states. -/
+  deltaF : ℝ
+  /-- Microscopic reversibility (generalized detailed balance). -/
+  micro_rev : ∀ γ, probF γ = Real.exp (beta * (work γ - deltaF)) * probR (rev γ)
 
-attribute [instance] CrooksSystem.finS CrooksSystem.decS CrooksSystem.neS
+namespace CrooksSystem
 
-variable (C : CrooksSystem)
+variable {Traj : Type*} [Fintype Traj] (S : CrooksSystem Traj)
 
-/-- Partition function of the equilibrium state with energy `E k`. -/
+/-- The forward work distribution `P_F(w)`: total probability of forward
+trajectories whose work equals `w`. -/
 
-noncomputable def distR (w : ℝ) : ℝ :=
-  ∑ p ∈ Finset.univ.filter (fun p : Path C => workR C (toFun C p) = w),
-    probR C (toFun C p)
+noncomputable def distR (w : ℝ) : ℝ := ∑ γ : Traj, if S.work γ = w then S.probR γ else 0
 
-/-! ### Basic positivity facts -/
-
+/-- Time reversal as a permutation of the trajectory space. -/

@@ -1,31 +1,58 @@
+/-
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
 # Dijkstra Correct
 Category: Computer Science
 Target: CS.dijkstra_correct
-Statement: Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped ENNReal
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
 namespace CS
 
-open Finset
+universe u
 
-variable {V : Type*} [Fintype V] [DecidableEq V]
+variable {V : Type u}
 
 /-! ## Walks and shortest-path distances
 
-A weighted digraph on the finite vertex type `V` is given by a weight function
-`w : V → V → ℕ∞`, where `w u v = ⊤` encodes the absence of an edge from `u` to `v`.
-All weights are nonnegative by construction. -/
+A weighted directed graph on the vertex type `V` is given by a weight function
+`w : V → V → ℝ≥0∞`; the value `⊤` means "no edge", and all weights are nonnegative
+by construction.  A walk starting at `a` is described by the list `l` of the vertices
+it visits after `a`; its endpoint is `l.getLastD a`. -/
 
-/-- `walkCost w u l` is the total weight of the walk that starts at `u` and then visits
-the vertices of `l` in order. -/
+/-- The cost of the walk that starts at `a` and then visits the vertices of `l` in order. -/
 
-theorem inv_init (w : V → V → ℕ∞) (src : V) :
-    Inv w src (dijkstraAux w src 0).1 (dijkstraAux w src 0).2 := by
-  refine ⟨fun v => ?_, by simp [dijkstraAux], by simp [dijkstraAux]⟩
-  simp [dijkstraAux, tent]
+lemma inv_init (w : V → V → ℝ≥0∞) (s : V) : Inv w s (initState s) := by
+  constructor
+  · intro x hx
+    simp [initState] at hx
+  · intro v _
+    simp [initState]
 
+omit [Fintype V] in

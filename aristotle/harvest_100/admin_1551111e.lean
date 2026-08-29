@@ -1,0 +1,139 @@
+/-
+# Subclass Obstruction Statement
+Category: Brockian Conjecture
+Target: Zeta23Obstruction.subclass_obstruction_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Zeta23Obstruction
+
+/-- A **fixed-kernel pointwise-discard certificate**.
+
+Abstract model of the certificates in the subclass under consideration: the certificate is
+determined by one *fixed* kernel `R : ℝ → ℝ`, together with a region `shallow` of the parameter
+line on which the kernel is discarded pointwise, i.e. on which it is *assumed* nonnegative
+(`h_pos`).  Nothing at all is assumed about `R` off `shallow`; in the intended application the
+values of `R` off `shallow` are the values of its analytic continuation at the deep points. -/
+structure Certificate where
+  /-- The fixed kernel of the certificate. -/
+  R : ℝ → ℝ
+  /-- The region on which the kernel is discarded pointwise. -/
+  shallow : Set ℝ
+  /-- Pointwise discard: on the shallow region the kernel is nonnegative. -/
+  h_pos : ∀ x ∈ shallow, 0 ≤ R x
+
+/-- A **configuration** with `n` species: each species `i` sits at a point `z i` of the parameter
+line and carries a nonnegative weight `w i`.  This is the finite-dimensional stand-in for the
+configuration data that the certificate's linear charging chain is applied to. -/
+structure Config (n : ℕ) where
+  /-- Location of each species. -/
+  z : Fin n → ℝ
+  /-- Nonnegative weight (charge) of each species. -/
+  w : Fin n → ℝ
+  /-- Weights are nonnegative. -/
+  hw : ∀ i, 0 ≤ w i
+
+/-- **Per-species linear charging**: the certificate's linear functional evaluated on a
+configuration, i.e. the weighted sum of the kernel values at the species' locations. -/
+def charge (C : Certificate) {n : ℕ} (cfg : Config n) : ℝ :=
+  ∑ i, cfg.w i * C.R (cfg.z i)
+
+/-- The **termwise bound** that the certificate chain needs in order to conclude
+nonnegativity of the charge: the kernel is nonnegative at each of the configuration's points. -/
+def TermwiseBound (C : Certificate) {n : ℕ} (cfg : Config n) : Prop :=
+  ∀ i, 0 ≤ C.R (cfg.z i)
+
+/-- A **deep pair** is a two-species configuration, both species being placed off the shallow
+region (where the kernel is only known through analytic continuation). -/
+def IsDeepPair (C : Certificate) (cfg : Config 2) : Prop :=
+  ∀ i, cfg.z i ∉ C.shallow
+
+/-- The certificate is **valid against deep-pair configurations** when its termwise bound — and
+hence the nonnegativity of the charge it produces — really does hold for every deep pair. -/
+def ValidAgainstDeepPairs (C : Certificate) : Prop :=
+  ∀ cfg : Config 2, IsDeepPair C cfg → TermwiseBound C cfg
+
+/-- The charging functional is linear in the weights. -/
+theorem charge_add_weights (C : Certificate) {n : ℕ} (cfg₁ cfg₂ : Config n)
+    (hz : cfg₁.z = cfg₂.z) :
+    charge C
+        { z := cfg₁.z, w := cfg₁.w + cfg₂.w,
+          hw := fun i => add_nonneg (cfg₁.hw i) (cfg₂.hw i) } =
+      charge C cfg₁ + charge C cfg₂ := by
+  simp only [charge, hz, Pi.add_apply, add_mul]
+  exact Finset.sum_add_distrib
+
+/-- The termwise bound is exactly what makes the linear charge nonnegative, in the sense that it
+is sufficient. -/
+theorem charge_nonneg_of_termwiseBound (C : Certificate) {n : ℕ} (cfg : Config n)
+    (h : TermwiseBound C cfg) : 0 ≤ charge C cfg :=
+  Finset.sum_nonneg fun i _ => mul_nonneg (cfg.hw i) (h i)
+
+/-- **Subclass obstruction.**
+
+Let `C` be a fixed-kernel pointwise-discard certificate (so its kernel `R` is assumed nonnegative
+only on the shallow region, via pointwise discard), and suppose there is a single *deep* point
+`z₀` (a point off the shallow region, i.e. one reached only by analytic continuation) at which the
+kernel takes a negative value, `C.R z₀ < 0`.  Then:
+
+1. the certificate is **not** valid against deep-pair configurations; and
+2. there is an explicit deep-pair configuration — the pair of species both sitting at `z₀` with
+   unit weights — on which the chain's termwise bound fails and, moreover, the linear charge the
+   certificate produces is strictly negative; and
+3. conversely, validity against deep-pair configurations forces the kernel to be nonnegative at
+   *every* deep point, so no such bad value can exist.
+
+This is the class-named, abstract form of the obstruction: fixed kernel + pointwise discard +
+one bad deep value ⟹ the certificate is invalid. -/
+theorem subclass_obstruction_statement (C : Certificate) (z₀ : ℝ)
+    (hz₀_deep : z₀ ∉ C.shallow) (hz₀_neg : C.R z₀ < 0) :
+    ¬ ValidAgainstDeepPairs C ∧
+      (∃ cfg : Config 2, IsDeepPair C cfg ∧ ¬ TermwiseBound C cfg ∧ charge C cfg < 0) ∧
+      (ValidAgainstDeepPairs C → ∀ x ∉ C.shallow, 0 ≤ C.R x) := by
+  -- The witnessing deep pair: both species at `z₀`, both with unit weight.
+  set cfg : Config 2 := { z := fun _ => z₀, w := fun _ => 1, hw := fun _ => zero_le_one } with hcfg
+  have hdeep : IsDeepPair C cfg := fun _ => hz₀_deep
+  have hterm : ¬ TermwiseBound C cfg := by
+    intro h
+    exact absurd (h 0) (not_le.2 hz₀_neg)
+  have hcharge : charge C cfg < 0 := by
+    have : charge C cfg = C.R z₀ + C.R z₀ := by
+      simp [charge, hcfg]; ring
+    rw [this]
+    linarith
+  -- Conversely, validity against deep pairs forces nonnegativity at every deep point.
+  have hconv : ValidAgainstDeepPairs C → ∀ x ∉ C.shallow, 0 ≤ C.R x := by
+    intro hvalid x hx
+    exact hvalid { z := fun _ => x, w := fun _ => 1, hw := fun _ => zero_le_one }
+      (fun _ => hx) 0
+  refine ⟨?_, ⟨cfg, hdeep, hterm, hcharge⟩, hconv⟩
+  intro hvalid
+  exact hterm (hvalid cfg hdeep)
+
+end Zeta23Obstruction
+

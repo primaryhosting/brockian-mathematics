@@ -4,18 +4,32 @@ import Mathlib
 # Deutsch Jozsa
 Category: Frontier Qi
 Target: QI.deutsch_jozsa
-Statement: Deutsch–Jozsa decides constant-vs-balanced with one query.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
 namespace QI
 
-open Finset
+variable {n : ℕ}
 
-/-- The sign `(-1)^b` attached to a boolean. -/
+/-- The sign `(-1)^b` attached to a Boolean value. -/
 
-def sign (b : Bool) : ℝ := if b then -1 else 1
+def sign (b : Bool) : ℂ := if b then -1 else 1
 
-/-- The phase `(-1)^(x ⬝ y)` coming from the final layer of Hadamard gates,
-written as the product of the bitwise contributions. -/
+/-- The Walsh–Hadamard character `(-1)^(x ⬝ y)` on bit strings. -/

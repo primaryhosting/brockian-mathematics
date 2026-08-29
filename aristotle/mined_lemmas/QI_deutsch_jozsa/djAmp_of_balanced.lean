@@ -1,0 +1,62 @@
+/-
+# Deutsch Jozsa
+Category: Frontier Qi
+Target: QI.deutsch_jozsa
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Deutsch Jozsa
+Category: Frontier Qi
+Target: QI.deutsch_jozsa
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace QI
+
+/-!
+## The Deutsch–Jozsa circuit
+
+We model the `n`-qubit register by its (real) amplitude vector, a function
+`(Fin n → Bool) → ℝ`, indexed by bit strings.  The circuit is
+
+`|0…0⟩  --H^{⊗n}-->  --U_f (phase kickback)-->  --H^{⊗n}-->  measure`.
+
+Everything below is stated for real amplitudes, which suffices because all gates
+involved (Hadamard and the phase oracle) have real matrix entries.
+-/
+
+/-- The all-zeros bit string. -/
+
+theorem djAmp_of_balanced {n : ℕ} (f : (Fin n → Bool) → Bool) (h : IsBalancedFn f) :
+    djAmp f = 0 := by
+  rw [djAmp_eq]
+  have h' : (2 : ℝ) * (Finset.univ.filter fun x : Fin n → Bool => f x = true).card
+      = (2 : ℝ) ^ n := by
+    have := congrArg (fun k : ℕ => (k : ℝ)) h
+    push_cast at this
+    simpa using this
+  rw [h']
+  ring
+
+/-- If `f` is constant, the circuit output is `±|0…0⟩`: all the amplitude sits on the
+all-zeros string. -/

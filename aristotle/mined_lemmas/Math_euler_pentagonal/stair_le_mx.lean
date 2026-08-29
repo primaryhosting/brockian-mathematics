@@ -1,13 +1,23 @@
-/-
-Franklin's involution and the combinatorial core of Euler's pentagonal number theorem.
--/
 import Mathlib
 
-namespace EulerPentagonal
+/-!
+# Euler Pentagonal
+Category: Pure Mathematics
+Target: Math.euler_pentagonal
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-open Finset
+open Finset PowerSeries
+open scoped PowerSeries.WithPiTopology
 
-/-- The minimum of a finset of naturals (`0` for the empty set). -/
+namespace Math
 
-lemma stair_le_mx : stair S ≤ mx S := Nat.findGreatest_le _
+/-! ## Distinct partitions as finsets of positive integers -/
+
+/-- The finset of all "partitions of `n` into distinct parts", encoded as finsets of
+positive integers whose sum is `n`. -/
+
+lemma stair_le_mx {S : Finset ℕ} (h0 : 0 ∉ S) : stair S ≤ mx S :=
+  stair_le (by simpa using h0)
 

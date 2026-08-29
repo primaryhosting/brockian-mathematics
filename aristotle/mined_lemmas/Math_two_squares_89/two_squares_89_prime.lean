@@ -8,17 +8,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Math
 
-/-- **Two squares for 89.**  The number `89` is prime (stated elementarily: it is at least `2`
-and its only divisors are `1` and itself) and it is a sum of two squares, namely
-`89 = 5 ^ 2 + 8 ^ 2`.
+/-- **Two squares for 89.**  The number `89` is prime — it is at least `2` and its only
+divisors are `1` and `89` — and it is a sum of two squares, namely `89 = 8 ^ 2 + 5 ^ 2`.
 
-This file is deliberately import-free (the required header comment above is a module docstring,
-which must precede any `import`), so primality is phrased directly rather than via
-`Nat.Prime`; the file `RequestProject/TwoSquares89Mathlib.lean` derives the `Nat.Prime`
-version from this theorem. -/
+(The required header comment must be the first thing in the file, which rules out any
+`import` line here, so primality is spelled out directly rather than via `Nat.Prime`.
+The file `TwoSquares89Mathlib.lean` derives the Mathlib-flavoured statement, with
+`Nat.Prime 89`, from this one.) -/
 
 theorem two_squares_89_prime : Nat.Prime 89 ∧ ∃ a b : ℕ, 89 = a ^ 2 + b ^ 2 := by
-  refine ⟨Nat.prime_def.mpr ⟨two_squares_89.1, two_squares_89.2.1⟩, two_squares_89.2.2⟩
+  obtain ⟨⟨h2, hdvd⟩, hsq⟩ := two_squares_89
+  exact ⟨Nat.prime_def.2 ⟨h2, hdvd⟩, hsq⟩
 
 end Math
 

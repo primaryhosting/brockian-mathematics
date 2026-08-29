@@ -1,5 +1,30 @@
 import Mathlib
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
 /-!
 # Disjointness Lb
 Category: Frontier Cs
@@ -8,76 +33,46 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Contents
-
-We formalize deterministic two-party communication protocols as protocol trees
-(`CS.Protocol`), with `CS.Protocol.run` the output and `CS.Protocol.cost` the worst-case number
-of exchanged bits, and prove the fooling-set bound `CS.Protocol.card_fooling_le`: a protocol of
-cost `c` admits no fooling set of size larger than `2 ^ c`.
-
-Applying it to the fooling set `{(x, xᶜ) : x ⊆ [n]}` for set disjointness gives
-
-* `CS.disjointness_deterministic_lb`: every deterministic protocol computing set disjointness on
-  subsets of an `n`-element universe costs at least `n` bits;
-* `CS.disjointness_lb_of_success` and `CS.disjointness_lb`: every *public-coin randomized*
-  protocol with perfect soundness (it never answers "disjoint" on an intersecting pair) that
-  answers "disjoint" with probability at least `1/2` (more generally `δ`) on each disjoint pair
-  costs at least `n - 1` bits (more generally `δ * 2 ^ n ≤ 2 ^ c`).  Hence set disjointness has
-  `Ω(n)` randomized communication complexity in the one-sided-error model.
-* `CS.disjointness_ub`: a matching deterministic protocol of cost `n + 1`, so the bounds are
-  tight up to an additive constant and the hypotheses above are satisfiable.
-
-The randomized lower bound proved here is for the one-sided-error (perfectly sound) model; the
-two-sided bounded-error case (Kalyanasundaram–Schnitger, Razborov) is not formalized here.
--/
-
-open scoped BigOperators
-
-set_option maxHeartbeats 1000000
-set_option autoImplicit false
-
 namespace CS
 
 universe u v
 
-/-- A deterministic two-party communication protocol with Boolean output.
-`alice f t e` means Alice sends the bit `f x` and the parties continue with `t` or `e`;
-`bob g t e` is the same with Bob speaking. -/
+/-- A deterministic two-party communication protocol: a binary tree whose internal nodes
+are labelled either by a bit that Alice sends (a function of her input `x : X`) or by a bit
+that Bob sends (a function of his input `y : Y`), and whose leaves carry the output bit. -/
 inductive Protocol (X : Type u) (Y : Type v) : Type (max u v)
-  | leaf (b : Bool) : Protocol X Y
-  | alice (f : X → Bool) (t e : Protocol X Y) : Protocol X Y
-  | bob (g : Y → Bool) (t e : Protocol X Y) : Protocol X Y
+  | leaf : Bool → Protocol X Y
+  | alice : (X → Bool) → Protocol X Y → Protocol X Y → Protocol X Y
+  | bob : (Y → Bool) → Protocol X Y → Protocol X Y → Protocol X Y
 
 namespace Protocol
 
 variable {X : Type u} {Y : Type v}
 
-/-- The output of the protocol on the input pair `(x, y)`. -/
+/-- The communication cost of a protocol: the depth of the tree, i.e. the worst-case number
+of bits exchanged. -/
 
-theorem disjointness_deterministic_lb {n : ℕ} (P : Protocol (Finset (Fin n)) (Finset (Fin n)))
-    (hP : ∀ x y, P.run x y = Disj n x y) : n ≤ P.cost := by
+theorem disjointness_deterministic_lb (n : ℕ) (p : Protocol (Finset (Fin n)) (Finset (Fin n)))
+    (hp : ∀ S T : Finset (Fin n), p.run S T = Disj n S T) : n ≤ p.cost := by
   classical
-  have hT : (Finset.univ.image (fun x : Finset (Fin n) => (x, xᶜ))).card ≤ 2 ^ P.cost := by
-    refine Protocol.card_fooling_le P _ ?_ ?_
-    · intro p hp
-      simp only [Finset.mem_image, Finset.mem_univ, true_and] at hp
-      obtain ⟨x, rfl⟩ := hp
-      simp [hP, Disj, disjoint_compl_right]
-    · intro p hp q hq hne
-      simp only [Finset.mem_image, Finset.mem_univ, true_and] at hp hq
-      obtain ⟨x, rfl⟩ := hp
-      obtain ⟨z, rfl⟩ := hq
-      have hxz : x ≠ z := by
-        intro h; exact hne (by rw [h])
-      rcases cross_not_disjoint hxz with h | h
-      · exact Or.inl (by simp [hP, Disj, h])
-      · exact Or.inr (by simp [hP, Disj, h])
-  have hcard : (Finset.univ.image (fun x : Finset (Fin n) => (x, xᶜ))).card = 2 ^ n := by
-    rw [Finset.card_image_of_injective _ (fun a b hab => by simpa using congrArg Prod.fst hab)]
-    simp [Fintype.card_finset]
-  rw [hcard] at hT
-  exact (Nat.pow_le_pow_iff_right (by norm_num)).1 hT
+  have h := disjointness_lb n 1 (fun _ => p) ?_ ?_
+  · simpa using h
+  · intro _ S T hST
+    rw [hp]
+    simp [Disj, hST]
+  · intro S T hST
+    have hfil : (Finset.univ.filter fun _ : Fin 1 => p.run S T = true) = Finset.univ := by
+      apply Finset.filter_true_of_mem
+      intro r _
+      rw [hp]
+      simp [Disj, hST]
+    rw [hfil]
+    simp
 
-/-- The trivial protocol in which Alice reveals membership in `x` of each element of the list
-`L` (accumulating the revealed elements of `x` in `a`), after which Bob announces the answer. -/
+/-! ### A matching protocol: the lower bound is not vacuous -/
+
+namespace Protocol
+
+/-- The naive protocol for disjointness: Alice announces, one bit per element of the list `l`,
+which elements of `l` lie in her set, and Bob then answers with one bit.  `acc` accumulates the
+part of Alice's set already announced. -/

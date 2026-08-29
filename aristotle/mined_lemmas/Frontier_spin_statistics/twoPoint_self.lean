@@ -1,11 +1,3 @@
-/-
-# Spin Statistics
-Category: Frontier Physics
-Target: Frontier.spin_statistics
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,86 +31,81 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-## Mathlib provenance
-
-Mathlib contains no spin–statistics theorem (nor a Wightman-axioms framework), so the
-statement is formalized here from scratch. The proof is closed using the following existing
-Mathlib results:
-
-* `ContinuousLinearMap.adjoint_inner_left` and `ContinuousLinearMap.star_eq_adjoint`
-  (moving a self-adjoint operator across the inner product),
-* `inner_self_eq_zero` (positive definiteness of the inner product),
-* `Even.neg_one_pow` / `Odd.neg_one_pow` (the spin sign for integer / half-integer spin).
--/
+open scoped InnerProductSpace
 
 namespace Frontier
 
-/--
-Data of a (hermitian, smeared) relativistic quantum field in the Wightman framework,
-recorded at the level of structure needed for the spin–statistics connection.
+/-!
+## The spin–statistics connection
 
-* `H` is the Hilbert space of states, `vacuum` the vacuum vector `Ω`.
-* `TestFn` is the space of test functions; `field f` is the smeared field operator `φ(f)`
-  (assumed bounded here, so as to stay inside Mathlib's theory of adjoints of continuous
-  linear maps).
-* `spacelikeSep f g` records that the supports of `f` and `g` are spacelike separated.
-* `twiceSpin` is `2s`, twice the spin of the field, so that `(-1) ^ twiceSpin` is the
-  spin sign `(-1) ^ (2s)`: `+1` for integer spin, `-1` for half-integer spin.
-* `statistics` is the statistics sign `σ = ±1` appearing in the field's local
-  (anti)commutation relation: `σ = +1` is Bose statistics (commuting fields at spacelike
-  separation), `σ = -1` is Fermi statistics (anticommuting fields).
+We formalize the algebraic core of the spin–statistics theorem of relativistic quantum field
+theory in the Wightman framework.
 
-The two analytic inputs of the Wightman theory are recorded as fields of the structure:
+A *quantum field system* consists of
 
-* `weakLocalCommutativity` is Jost's weak local commutativity for the two-point function,
-  `W(f, g) = (-1) ^ (2s) * W(g, f)`, which follows from Lorentz covariance, the spectrum
-  condition and the analyticity of Wightman functions at Jost points;
-* `twoPoint_vanishing` is the (edge-of-the-wedge / analytic continuation) statement that a
-  two-point function vanishing for all spacelike separated arguments vanishes identically.
+* a complex Hilbert space `H` of states with a distinguished vacuum vector `Ω`;
+* a family of field operators `φ f`, indexed by a type `T` of (real) test functions, each of
+  which is a symmetric (hermitian) operator on `H`;
+* a relation `spacelike f g`, expressing that the supports of `f` and `g` are spacelike
+  separated;
+* a number `twoSpin : ℕ`, twice the spin of the field (so integer spin means `twoSpin` even,
+  half-integer spin means `twoSpin` odd);
+* a statistics sign `stat = ±1`: `+1` for Bose (commutation) statistics, `-1` for Fermi
+  (anticommutation) statistics, appearing in the *locality* axiom
+  `φ f ∘ φ g = stat • (φ g ∘ φ f)` for spacelike separated `f, g`.
+
+The nontrivial analytic input of the Wightman proof — Lorentz covariance, the spectral
+condition and the Bargmann–Hall–Wightman analytic continuation of the two point function — is
+summarized in the axiom of *weak local commutativity*: for spacelike separated `f, g` the
+two point function satisfies `W f g = (-1)^twoSpin * W g f`.  This is the point at which the
+spin enters, and it is Wightman's formulation of the input to the theorem.
+
+The theorem then states: a field system whose fields do not all annihilate the vacuum must have
+`stat = (-1)^twoSpin`, i.e. integer spin fields are bosonic and half-integer spin fields are
+fermionic.  Wrong statistics forces all two point functions at spacelike separation to vanish,
+hence (by the analytic continuation of the two point function to coincident arguments, which we
+carry as an explicit hypothesis `hAC`) `‖φ f Ω‖ = 0` for every `f`.
 -/
-structure WightmanField (H : Type*) (TestFn : Type*)
-    [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] where
-  /-- The smeared field operators `φ(f)`. -/
-  field : TestFn → (H →L[ℂ] H)
-  /-- The vacuum vector `Ω`. -/
-  vacuum : H
+
+/-- A Wightman-type relativistic quantum field system on a complex Hilbert space `H`, with
+fields indexed by a type `T` of test functions. -/
+structure WightmanField (T : Type*) (H : Type*) [NormedAddCommGroup H]
+    [InnerProductSpace ℂ H] where
   /-- Spacelike separation of the supports of two test functions. -/
-  spacelikeSep : TestFn → TestFn → Prop
+  spacelike : T → T → Prop
+  /-- The smeared field operators. -/
+  field : T → (H →ₗ[ℂ] H)
+  /-- The vacuum vector. -/
+  vacuum : H
   /-- Twice the spin of the field. -/
-  twiceSpin : ℕ
-  /-- The statistics sign `σ`. -/
-  statistics : ℤ
-  /-- The statistics sign is indeed a sign. -/
-  statistics_sign : statistics = 1 ∨ statistics = -1
-  /-- Hermiticity of the field (real test functions). -/
-  hermitian : ∀ f, IsSelfAdjoint (field f)
-  /-- Spacelike separation is a symmetric relation. -/
-  sep_symm : ∀ f g, spacelikeSep f g → spacelikeSep g f
-  /-- Locality: at spacelike separation the fields commute up to the statistics sign. -/
-  locality : ∀ f g, spacelikeSep f g →
-    (field f).comp (field g) = (statistics : ℂ) • (field g).comp (field f)
-  /-- Weak local commutativity for the two-point function (Jost). -/
-  weakLocalCommutativity : ∀ f g,
-    inner ℂ vacuum (field f (field g vacuum))
-      = (-1 : ℂ) ^ twiceSpin * inner ℂ vacuum (field g (field f vacuum))
-  /-- Analytic continuation: a two-point function vanishing at spacelike separation
-  vanishes identically. -/
-  twoPoint_vanishing :
-    (∀ f g, spacelikeSep f g → inner ℂ vacuum (field f (field g vacuum)) = 0) →
-    ∀ f g, inner ℂ vacuum (field f (field g vacuum)) = 0
+  twoSpin : ℕ
+  /-- The statistics sign: `1` for Bose–Einstein, `-1` for Fermi–Dirac statistics. -/
+  stat : ℤ
+  /-- The statistics sign is `±1`. -/
+  stat_sq : stat * stat = 1
+  /-- Fields smeared with real test functions are hermitian. -/
+  hermitian : ∀ f : T, (field f).IsSymmetric
+  /-- Locality: fields at spacelike separation commute (`stat = 1`) or anticommute
+  (`stat = -1`). -/
+  locality : ∀ f g : T, spacelike f g →
+    ∀ x : H, field f (field g x) = (stat : ℂ) • field g (field f x)
+  /-- Weak local commutativity: the consequence of Lorentz covariance, the spectral condition
+  and the Bargmann–Hall–Wightman theorem which ties the exchange symmetry of the two point
+  function to the spin. -/
+  weakLocalCommutativity : ∀ f g : T, spacelike f g →
+    ⟪vacuum, field f (field g vacuum)⟫_ℂ
+      = ((-1 : ℂ) ^ twoSpin) * ⟪vacuum, field g (field f vacuum)⟫_ℂ
 
 namespace WightmanField
 
-variable {H TestFn : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
-  (W : WightmanField H TestFn)
+variable {T : Type*} {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-/-- The two-point Wightman function `W(f, g) = ⟨Ω, φ(f) φ(g) Ω⟩`. -/
+/-- The two point Wightman function `W f g = ⟪Ω, φ f φ g Ω⟫`. -/
 
-theorem twoPoint_self (f : TestFn) :
-    W.twoPoint f f = inner ℂ (W.field f W.vacuum) (W.field f W.vacuum) := by
-  rw [twoPoint, ← ContinuousLinearMap.adjoint_inner_left,
-    ← ContinuousLinearMap.star_eq_adjoint, W.hermitian f]
+theorem twoPoint_self (W : WightmanField T H) (f : T) :
+    W.twoPoint f f = ⟪W.field f W.vacuum, W.field f W.vacuum⟫_ℂ :=
+  (W.hermitian f W.vacuum (W.field f W.vacuum)).symm
 
-/-- If the statistics sign disagrees with the spin sign, then the two-point function
-vanishes for spacelike separated test functions. -/
+/-- **Wrong statistics kills the two point function.**  If the statistics sign is opposite to
+the sign `(-1)^(2s)` dictated by the spin, then all two point functions at spacelike separation
+vanish. -/

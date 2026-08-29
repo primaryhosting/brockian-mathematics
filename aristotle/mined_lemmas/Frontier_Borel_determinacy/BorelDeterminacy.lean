@@ -1,63 +1,51 @@
-/-
+import Mathlib
+
+/-!
 # Borel Determinacy
 Category: Frontier — Set Theory
 Target: Frontier.Borel_determinacy
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`,
--- so the header above is written as a plain block comment.)
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-/-!
-## Overview
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-We formalise infinite two-player perfect-information games on Baire space `ℕ → ℕ`
-(the standard setting for Borel determinacy), together with strategies, winning
-strategies and determinacy.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-* `Frontier.BorelDeterminacy` is the full statement of Martin's theorem: every game whose
-  payoff set is Borel is determined.
-* `Frontier.Borel_determinacy` is the *base case* of that statement, proved here in full:
-  every game whose payoff set lies at the bottom level of the Borel hierarchy
-  (`Σ⁰₁`, i.e. open, or `Π⁰₁`, i.e. closed) is determined.  This is the Gale–Stewart
-  theorem, the base case on which Martin's inductive unravelling argument rests.
-  Mathlib contains no determinacy results, so the game-theoretic framework and the
-  proof are developed here from scratch.
-
-The proof of the base case is the classical one: if the first player has no winning
-strategy from the empty position, the second player can move so as to preserve the
-property "the first player has no winning strategy from the current position", and an
-open payoff set would be entered only at a position from which the first player wins
-trivially.
--/
+set_option grind.warning false
 
 namespace Frontier
 
-/-- Baire space: the space of plays of a game where each move is a natural number. -/
-abbrev Baire := ℕ → ℕ
+/-! ## Infinite games: positions, strategies, winning strategies
 
-/-- The position (finite sequence of moves) consisting of the first `n` moves of the
-play `f`. -/
+We consider infinite two-player games with perfect information played on an alphabet `X`.
+A *play* is a sequence `x : ℕ → X`; the move at time `n` is `x n`.  Which player moves at
+time `n` is recorded by a predicate `turn : ℕ → Prop` (the *turn set* of the player under
+consideration).  In the classical game `G(A)` on Baire space, player I moves at the even
+times and player II at the odd times, and player I wins the play `x` iff `x ∈ A`.
+-/
+
+variable {X : Type*}
+
+/-- The position reached after the first `n` moves of the play `x`. -/
 
 def BorelDeterminacy : Prop :=
-  ∀ A : Set Baire, @MeasurableSet Baire (borel Baire) A → Determined A
+  ∀ A : Set (ℕ → ℕ), @MeasurableSet (ℕ → ℕ) (borel (ℕ → ℕ)) A → Determined A
 
-/-- **Borel determinacy, base case (Gale–Stewart).**
+/-- **Borel determinacy (Martin's theorem)**, reduced to Martin's unraveling lemma.
 
-Martin's theorem states that every Borel game on Baire space is determined
-(`Frontier.BorelDeterminacy`).  Its proof is an induction along the Borel hierarchy whose
-base case — proved here — is the Gale–Stewart theorem: every game whose payoff set is at
-the bottom level of the hierarchy, i.e. open (`Σ⁰₁`) or closed (`Π⁰₁`), is determined.
-
-Concretely: for every open, and every closed, payoff set `A ⊆ ℕ → ℕ`, either the first
-player has a strategy forcing the play into `A`, or the second player has a strategy
-forcing the play into the complement of `A`.
-
-Mathlib contains no determinacy machinery, so games, strategies and determinacy are
-defined here (`Frontier.Determined`) and the result is proved from first principles.
-The positional form actually used in Martin's induction — determinacy of an open payoff
-set from an arbitrary position, for either player — is
-`Frontier.win_or_win_compl_of_isOpen`.  The full theorem `Frontier.BorelDeterminacy`
-is stated but not proved here. -/
+Every Borel game on Baire space `ℕ → ℕ` is determined, given the unraveling lemma
+`martin_unraveling`: every Borel payoff set is covered by a game with clopen payoff (see
+`Frontier.HasClopenUnraveling` and `Frontier.Covers`).  The reduction and the base case —
+determinacy of clopen, indeed of all closed and all open games, `Frontier.determined_of_isClosed`
+and `Frontier.determined_of_isOpen` — are proved here in full. -/

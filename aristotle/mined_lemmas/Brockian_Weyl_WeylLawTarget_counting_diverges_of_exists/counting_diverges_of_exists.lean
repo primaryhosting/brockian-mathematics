@@ -23,7 +23,8 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+/-!
 # Counting Diverges Of Exists
 Category: Brockian (Open Discharge)
 Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists
@@ -31,26 +32,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- The eigenvalue counting function of a sequence `lam : ℕ → ℝ` of eigenvalues:
-`spectralCounting lam t` is the number of indices `n` with `lam n ≤ t`.
-(If that index set were infinite the `Set.ncard` would be `0`; under the escape
-hypothesis used below the set is always finite.) -/
+open Filter Set
 
-theorem counting_diverges_of_exists {lam : ℕ → ℝ}
-    (hesc : ∀ t : ℝ, ∃ M : ℕ, ∀ n : ℕ, M ≤ n → t < lam n) :
-    Filter.Tendsto (spectralCounting lam) Filter.atTop Filter.atTop := by
-  refine Filter.tendsto_atTop.2 (fun k => ?_)
-  obtain ⟨t₀, ht₀⟩ := Finset.exists_le ((Finset.range k).image lam)
-  filter_upwards [Filter.eventually_ge_atTop t₀] with t ht
-  have hsub : (↑(Finset.range k) : Set ℕ) ⊆ {n : ℕ | lam n ≤ t} := by
-    intro n hn
-    simp only [Finset.coe_range, Set.mem_Iio] at hn
-    exact le_trans (ht₀ _ (Finset.mem_image_of_mem lam (Finset.mem_range.2 hn))) ht
-  have h := Set.ncard_le_ncard hsub (sublevel_finite hesc t)
-  simpa [spectralCounting] using h
+/-- The Weyl counting function of a spectrum `S ⊆ ℝ`: the number of spectral points
+that are `≤ lam`. -/
 
-/-- Consequence: under the same escape hypothesis the counting function is unbounded. -/
+theorem counting_diverges_of_exists (S : Set ℝ)
+    (hdisc : ∀ lam : ℝ, (S ∩ Set.Iic lam).Finite)
+    (hex : S.Infinite) :
+    Filter.Tendsto (counting S) Filter.atTop Filter.atTop := by
+  refine Filter.tendsto_atTop_atTop.2 fun n => ?_
+  obtain ⟨T, hTS, hTcard⟩ := hex.exists_subset_card_eq n
+  obtain ⟨M, hM⟩ := T.exists_le
+  refine ⟨M, fun lam hlam => ?_⟩
+  have hsub : (T : Set ℝ) ⊆ S ∩ Set.Iic lam := by
+    intro x hx
+    exact ⟨hTS hx, le_trans (hM x hx) hlam⟩
+  have hle := Set.ncard_le_ncard hsub (hdisc lam)
+  simpa [counting, hTcard] using hle
+
+end Brockian.Weyl.WeylLawTarget
+

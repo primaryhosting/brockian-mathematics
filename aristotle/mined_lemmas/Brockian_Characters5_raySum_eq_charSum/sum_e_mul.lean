@@ -30,17 +30,15 @@ namespace Characters5
 /-- A primitive fifth root of unity. -/
 noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
-/-- The standard additive character `e` of `ZMod 5`, `e x = ω ^ x.val`. -/
+/-- The standard additive character of `ZMod 5` valued in `ℂ`. -/
 
-lemma sum_e_mul (t : ZMod 5) :
-    ∑ a : ZMod 5, e (a * t) = if t = 0 then (5 : ℂ) else 0 := by
+theorem sum_e_mul (x : ZMod 5) :
+    ∑ a : ZMod 5, e (a * x) = if x = 0 then (5 : ℂ) else 0 := by
   haveI : Fact (Nat.Prime 5) := ⟨by norm_num⟩
-  by_cases ht : t = 0
-  · subst ht
-    simp [e]
-  · rw [if_neg ht]
-    have h : ∑ a : ZMod 5, e (a * t) = ∑ b : ZMod 5, e b :=
-      Fintype.sum_equiv (Equiv.mulRight₀ t ht) _ _ fun _ => rfl
-    rw [h, sum_e_univ]
+  by_cases hx : x = 0
+  · simp [hx, e]
+  · rw [if_neg hx]
+    rw [← sum_e]
+    exact Fintype.sum_equiv (Equiv.mulRight₀ x hx) _ _ (fun a => rfl)
 
-/-- The indicator of the ray `r` written as a character sum. -/
+/-- The indicator of the ray `{n : n ≡ r}` as a character sum. -/

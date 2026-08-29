@@ -23,8 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
+/-
 /-!
 # Even Perfect Infinitude
 Category: Brockian Conjecture
@@ -32,23 +31,38 @@ Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above is wrapped in an outer block comment because Lean 4 requires
+-- `import` commands to precede every other command, including module docstrings.)
+-/
 
-namespace Brockian
-namespace MersennePerfect
+import Mathlib
+import Archive.Wiedijk100Theorems.PerfectNumbers
 
-open ArithmeticFunction Finset
-open scoped sigma
+/-!
+Whether there are infinitely many even perfect numbers is an open problem (it is equivalent
+to the infinitude of Mersenne primes).  What is proved here is exactly that equivalence, i.e.
+a Lean-checked reduction of the conjecture:
 
-/-! ## The Euclid–Euler theorem
+  `{n | Even n ∧ n.Perfect}.Infinite ↔ {p | (mersenne p).Prime}.Infinite`
 
-The proofs in this section follow the classical Euclid–Euler argument (as formalized in
-`Archive/Wiedijk100Theorems/PerfectNumbers.lean` in mathlib, which is not available as an
-import here). -/
+The proof goes through the Euclid–Euler theorem: the map `p ↦ 2 ^ (p - 1) * (2 ^ p - 1)`
+is a bijection from the set of Mersenne exponents `p` with `2 ^ p - 1` prime onto the set of
+even perfect numbers.
+-/
 
+namespace Brockian.MersennePerfect
 
-theorem six_mem_evenPerfects : (6 : ℕ) ∈ EvenPerfects := by
-  refine ⟨by decide, ?_⟩
-  rw [Nat.perfect_iff_sum_divisors_eq_two_mul (by norm_num)]
-  decide
+open Set
 
-/-- `28` is an even perfect number. -/
+/-- The set of exponents `p` for which `mersenne p = 2 ^ p - 1` is prime. -/
+
+theorem six_mem_evenPerfects : 6 ∈ evenPerfects := by
+  have h : (2 : ℕ) ∈ mersenneExponents := by
+    show (mersenne 2).Prime
+    norm_num [mersenne]
+  simpa [euclidMap, mersenne] using euclidMap_mem_evenPerfects h
+
+#print axioms EvenPerfectInfinitude
+
+end Brockian.MersennePerfect
+

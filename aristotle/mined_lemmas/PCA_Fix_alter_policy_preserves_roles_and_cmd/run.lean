@@ -24,49 +24,40 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 /-!
-# A formal model of a policy-controlled isolation engine (`PCA`)
-
-This file develops a small but complete formal model of an *isolation engine*:
-a component that decides whether a command may be executed on behalf of a set of
-roles under a capability policy, and, if so, produces the sandbox in which the
-command is to be run.
-
-The main results are
-
-* `PCA.run_allow_iff` : soundness **and** completeness of the engine with respect
-  to the declarative specification `PCA.Permits`;
-* `PCA.run_sound`, `PCA.run_complete`, `PCA.run_deny_iff` : the two directions and
-  the corresponding characterisation of denials;
-* `PCA.allow_least_privilege` : the produced sandbox carries exactly the
-  capabilities the command needs, and every one of them is actually granted;
-* `PCA.run_congr` : the verdict only depends on the grants for the roles of the
-  request and the capabilities needed by the command (an isolation / non-interference
-  property);
-* `PCA.Fix.alter_policy_preserves_roles_and_cmd` and the surrounding lemmas: the
-  policy-repair operation changes nothing but the policy, only ever adds grants,
-  adds only grants that are needed, and does repair the request.
+# Alter Policy Preserves Roles And Cmd
+Category: Proof-Carrying Apps
+Target: PCA.Fix.alter_policy_preserves_roles_and_cmd
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace PCA
+set_option autoImplicit false
 
-/-- Capabilities that a command may require and a policy may grant. -/
-inductive Cap where
-  | read | write | net | exec
-  deriving DecidableEq, Repr
+namespace PCA.Fix
 
-/-- Principals are identified by a numeric role identifier. -/
-abbrev Role := ℕ
+/-- A role identifier used by the isolation engine. -/
+abbrev Role := String
 
-/-- A policy records, for every role and capability, whether the capability is granted. -/
+/-- A command identifier used by the isolation engine. -/
+abbrev Cmd := String
+
+/-- An access-control policy: for each role and command it records whether the
+command is explicitly allowed and whether it is explicitly denied. -/
 structure Policy where
-  grants : Role → Cap → Bool
+  allows : Role → Cmd → Bool
+  denies : Role → Cmd → Bool
 
-/-- A policy `p` is weaker than `q` if every grant of `p` is also a grant of `q`. -/
+/-- A task submitted to the isolation engine: the command to run, the roles the
+requesting principal holds, and the policy currently in force. -/
+structure Task where
+  cmd : Cmd
+  roles : List Role
+  policy : Policy
 
-def run (r : Request) : Verdict :=
-  match r.cmd.needs.find? (fun c => !r.granted c) with
-  | some c => .deny c
-  | none => .allow ⟨r.cmd.needs⟩
+/-- The engine admits a task when some role of the principal allows the command
+and no role of the principal denies it. -/
 
-/-- **Soundness**: an `allow` verdict really does witness admissibility, and the sandbox
-produced is the one determined by the command. -/
+def run (t : Task) : List Event → Task
+  | [] => t
+  | e :: es => run (alterPolicy t e) es
+

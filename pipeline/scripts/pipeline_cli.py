@@ -22,13 +22,14 @@ _REPO = Path(__file__).resolve().parents[2]
 if str(_REPO) not in sys.path:
     sys.path.insert(0, str(_REPO))
 
-from pipeline.core.ledger import summarize_ledger  # noqa: E402
+from pipeline.core.ledger import registry_evidence_for_cards, summarize_ledger  # noqa: E402
 from pipeline.core.schema import find_card, load_catalog, save_card  # noqa: E402
 from pipeline.core.stages import decompose_stub, record_attempt, triage  # noqa: E402
 from pipeline.core.triage import build_attack_queue  # noqa: E402
 from pipeline.distill.score import check_cheatsheet  # noqa: E402
 
 LEDGER_DIR = Path(__file__).resolve().parents[1] / "ledger"
+REGISTRY_PATH = _REPO / "registry" / "theorems.json"
 
 
 def cmd_list(args: argparse.Namespace) -> int:
@@ -100,7 +101,9 @@ def cmd_distill_check(args: argparse.Namespace) -> int:
 
 def cmd_ledger(args: argparse.Namespace) -> int:
     cards = load_catalog()
-    rows = summarize_ledger(cards)
+    registry_payload = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+    registry_by_id = registry_evidence_for_cards(cards, registry_payload)
+    rows = summarize_ledger(cards, registry_by_id=registry_by_id)
     LEDGER_DIR.mkdir(parents=True, exist_ok=True)
     json_path = LEDGER_DIR / "problems.json"
     md_path = LEDGER_DIR / "LEDGER.md"
@@ -152,6 +155,27 @@ def _render_md(payload: dict) -> str:
     ]
     for k, v in payload["by_domain"].items():
         lines.append(f"| {k} | {v} |")
+
+    registry_issues = []
+    for row in payload["problems"]:
+        verification = row.get("verification") or {}
+        for ref in verification.get("missing_registry_refs") or []:
+            registry_issues.append((row["id"], "missing", ref))
+        for ref in verification.get("unverified_registry_refs") or []:
+            registry_issues.append((row["id"], "unverified", ref))
+    if registry_issues:
+        lines += [
+            "",
+            "## Registry reference issues",
+            "",
+            "> Missing or unverified theorem refs block registry-backed PROVED promotion.",
+            "",
+            "| ID | Issue | Theorem reference |",
+            "|---|---|---|",
+        ]
+        for problem_id, issue, ref in registry_issues:
+            lines.append(f"| `{problem_id}` | {issue} | `{ref}` |")
+
     lines += [
         "",
         "## Problems",
@@ -198,8 +222,9 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("--note", default="")
     sp.add_argument("--agent", default="human")
     sp.add_argument("--artifact", action="append", default=[])
-    sp.add_argument("--axle-verified", action="store_true")
-    sp.add_argument("--axle-failed", action="store_true")
+    axle_group = sp.add_mutually_exclusive_group()
+    axle_group.add_argument("--axle-verified", action="store_true")
+    axle_group.add_argument("--axle-failed", action="store_true")
     sp.add_argument("--axioms-clean", action="store_true")
     sp.set_defaults(func=cmd_attempt)
 

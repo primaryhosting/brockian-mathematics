@@ -2,56 +2,60 @@
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` commands to precede any module documentation, so the header above is
--- written as a plain comment; it is repeated as the module docstring below.)
-import RequestProject.Savitch.Final
+
+import RequestProject.Savitch.Model
+import RequestProject.Savitch.Reach
+import RequestProject.Savitch.Interp
+import RequestProject.Savitch.BigStep
+import RequestProject.Savitch.Invariant
+import RequestProject.Savitch.Encode
 
 /-!
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-!
-The machine model is the standard off-line random-access model of space bounded computation
-(see `RequestProject/Savitch/Model.lean`): the memory of a machine is a bit string, one step
-rewrites the memory using the memory content and a single input bit, read at a position which
-is determined by the memory, and the space used on an input is the maximal length of a memory
-string occurring in the computation.
+## Statement
 
-`NSPACE f` and `DSPACE g` are the classes of languages accepted by nondeterministic,
-respectively deterministic, machines running in space `O (f n)`, respectively `O (g n)`.
+`NSPACE(f) ⊆ DSPACE(f²)`, and consequently `PSPACE = NPSPACE` (Savitch's theorem).
 
-The proof is Savitch's: for a nondeterministic machine `M` running in space `S` on the input
-`x`, deciding whether `M` accepts amounts to deciding reachability in the configuration graph
-of `M` on `x`, whose vertices are the words of length at most `S`.  Reachability by a path of
-length at most `2 ^ k` is decided by the midpoint recursion `savR`, whose recursion depth is
-`k`; taking `k = S + 1` suffices because there are only `2 ^ (S + 1) - 1` configurations.  The
-simulator runs this recursion with an explicit stack of at most `S + 2` frames, each holding
-three words of length at most `S`, so it uses `O (S ^ 2)` bits.  Since the simulator does not
-know `S`, it runs the whole procedure for stages `s = 0, 1, 2, …`, and at each stage also
-checks whether some reachable configuration has a successor of length more than `s`; the first
-stage at which this check fails gives the correct answer, and this happens at the latest at
-stage `S`.
+The model of computation is the standard configuration-graph model, set up in
+`RequestProject.Savitch.Model`: configurations are natural numbers (binary strings), a machine
+runs in space `f` on input `x` if all configurations reachable on `x` are `< 2 ^ f |x|`, and
+one step may depend on the current configuration together with the single input symbol scanned
+by the input head, whose position is determined by the configuration.  The initial
+configuration may depend on the input length (the usual assumption that the space bound is
+constructible).  No computability assumption is imposed on the transition functions.
+
+The deterministic simulator is built explicitly: it performs the depth-first evaluation of
+Savitch's divide-and-conquer recursion, its states are recursion stacks of depth at most `s`,
+each frame holding boundedly many numbers `< 2 ^ s`, and the whole state is encoded as a
+natural number `< 2 ^ (42 * (s + 1) ^ 2)`.  Hence a nondeterministic machine running in space
+`f` is simulated deterministically in space `42 * (f + 1) ^ 2`.
 -/
 
 namespace CS
 
-namespace Savitch
+open Classical
 
-/-- A deterministic machine viewed as a nondeterministic machine. -/
+variable {Γ : Type}
 
-def run (x : Word) : ℕ → Word
-  | 0 => []
+/-! ### Deterministic machines are nondeterministic machines -/
+
+/-- A deterministic machine, viewed as a nondeterministic one. -/
+
+def run (M : DMachine Γ) (x : List Γ) : ℕ → ℕ
+  | 0 => M.start x.length
   | t + 1 =>
-      let c := run x t
-      if D.verdict c = none then D.next c x[D.ask c]? else c
+      if M.result (M.run x t) = none then
+        M.next (M.run x t) x[M.head (M.run x t)]?
+      else M.run x t
 
-/-- The language accepted by a deterministic machine. -/
+/-- The configurations reachable on input `x`. -/

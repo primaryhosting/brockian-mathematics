@@ -5,16 +5,7 @@ Target: Frontier.Spectral.expander_uniform_gap_witness
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
-
-/-!
-# Expander Uniform Gap Witness
-Category: Frontier — Spectral Geometry
-Target: Frontier.Spectral.expander_uniform_gap_witness
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -30,26 +21,20 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Finset Matrix
-
 /-- The vertex set of the `k`-dimensional hypercube: bit strings of length `k`. -/
-abbrev Cube (k : ℕ) := Fin k → ZMod 2
+abbrev Cube (k : ℕ) : Type := Fin k → Bool
 
-/-- The hypercube `Q_k` has `2 ^ k` vertices. -/
+/-- Flip the `i`-th coordinate of a vertex of the hypercube. -/
 
 lemma lap_mulVec_apply {k : ℕ} (v : Cube k → ℝ) (x : Cube k) :
-    ((hypercube k).lapMatrix ℝ *ᵥ v) x = (k : ℝ) * v x - ∑ i : Fin k, v (x + bit i) := by
-  rw [SimpleGraph.lapMatrix_mulVec_apply, degree_hypercube, neighborFinset_eq,
-    Finset.sum_image (by intro i _ j _ h; exact bit_injective (by simpa using h))]
+    ((hypercube k).lapMatrix ℝ).mulVec v x = k * v x - ∑ i : Fin k, v (cflip x i) := by
+  rw [SimpleGraph.lapMatrix, Matrix.sub_mulVec]
+  simp only [Pi.sub_apply, SimpleGraph.adjMatrix_mulVec_apply, sum_over_neighbors]
+  congr 1
+  rw [SimpleGraph.degMatrix, Matrix.mulVec_diagonal, hypercube_degree]
 
+/-- The `cflip` map along a fixed coordinate is a bijection of the cube. -/

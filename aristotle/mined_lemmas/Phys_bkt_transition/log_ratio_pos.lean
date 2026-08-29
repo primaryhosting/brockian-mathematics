@@ -22,34 +22,39 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Phys
 
-/-- The Kosterlitz–Thouless transition temperature of the 2D XY model with spin
-stiffness (coupling) `J`, in units where the Boltzmann constant is `1`:
-`T_BKT = π J / 2`. -/
+/-! ## The Kosterlitz–Thouless vortex-unbinding criterion
 
-lemma log_ratio_pos {L a : ℝ} (ha : 0 < a) (hL : a < L) : 0 < Real.log (L / a) := by
-  have h1 : 1 < L / a := (one_lt_div ha).2 hL
-  exact Real.log_pos h1
+We formalise the standard energy–entropy argument for the Berezinskii–Kosterlitz–Thouless
+(BKT) topological phase transition of the two–dimensional XY model, in units where the
+Boltzmann constant is `k_B = 1`.
 
-/-- **Berezinskii–Kosterlitz–Thouless topological phase transition of the 2D XY
-model.**
+For a 2D XY model with spin stiffness `J` on a disc of radius `R` with vortex core size `a`,
+a single vortex costs energy `π J log (R / a)`, while the number of possible core positions is
+`(R / a) ^ 2`, giving entropy `2 log (R / a)`.  The resulting free energy
 
-For a two-dimensional XY model with spin stiffness `J > 0`, vortex core size
-`a > 0` and linear system size `L > a`, the single-vortex free energy
-`F(T) = (π J - 2 T) log (L / a)` changes sign exactly at the BKT temperature
-`T_BKT = π J / 2`:
+`F = (π J - 2 T) log (R / a)`
 
-* for `T < T_BKT` the free energy cost of a free vortex is strictly positive, so
-  isolated vortices are suppressed (bound vortex–antivortex pairs, topologically
-  ordered / quasi-long-range-ordered phase);
-* at `T = T_BKT` the cost vanishes;
-* for `T > T_BKT` the cost is strictly negative, so free vortices proliferate and
-  destroy quasi-long-range order (disordered phase).
+is positive below `T_BKT = π J / 2` (isolated vortices are thermodynamically suppressed and
+the vortices remain bound in neutral pairs — the quasi–long-range ordered phase) and negative
+above `T_BKT` (free vortices proliferate — the disordered phase).  Exactly at `T_BKT` the free
+energy vanishes; this is the transition point.  At the transition the spin-wave correlation
+exponent `η(T) = T / (2 π J)` takes the universal value `1/4`.
+-/
 
-Moreover `F` is strictly decreasing in `T`, the transition temperature is
-strictly positive, and at the transition the spin-correlation exponent takes the
-universal value `η(T_BKT) = 1/4`, equivalently the reduced stiffness jumps by the
-universal amount `J / T_BKT = 2 / π`. -/
+/-- Energy of a single vortex in a 2D XY model with spin stiffness `J`, in a system of
+radius `R` with vortex core size `a`. -/
+
+lemma log_ratio_pos {R a : ℝ} (ha : 0 < a) (hR : a < R) : 0 < Real.log (R / a) :=
+  Real.log_pos ((one_lt_div ha).mpr hR)
+

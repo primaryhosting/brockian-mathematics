@@ -23,7 +23,9 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Sixth Unitary Perfect Exists
 Category: Brockian Conjecture
 Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
@@ -31,16 +33,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-namespace Brockian.UnitaryPerfect
+set_option maxRecDepth 8000
 
 open Finset
 
-/-- The unitary divisors of `n`: the divisors `d` of `n` with `gcd d (n / d) = 1`. -/
+namespace Brockian.UnitaryPerfect
 
-lemma usigma_mul_prime_pow {m p k : ℕ} (hm : m ≠ 0) (hp : p.Prime) (hk : k ≠ 0)
-    (h : Nat.Coprime (p ^ k) m) : usigma (p ^ k * m) = (p ^ k + 1) * usigma m := by
-  rw [usigma_mul_of_coprime (pow_ne_zero _ hp.pos.ne') hm h, usigma_prime_pow hp hk]
+/-! ## Unitary divisors and the unitary divisor sum -/
 
-/-- One step of the computation of `σ*` from a prime factorization. -/
+/-- The unitary divisors of `n`: the divisors `d` of `n` with `d` coprime to `n / d`. -/
+
+theorem usigma_mul_prime_pow {m p k : ℕ} (hm : m ≠ 0) (hp : p.Prime) (hk : k ≠ 0)
+    (hcop : Nat.Coprime m (p ^ k)) : usigma (m * p ^ k) = usigma m * (p ^ k + 1) := by
+  rw [usigma_mul_of_coprime hm (pow_ne_zero _ hp.pos.ne') hcop, usigma_prime_pow hp hk]
+
+/-- Peeling off a coprime prime factor. -/

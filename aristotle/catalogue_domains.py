@@ -7,12 +7,14 @@ and writes registry/domains.json — deduped, with verification status + provena
 Never touches the Brockian registry. Domain proofs are a distinct catalogue.
 """
 import json
-import hashlib
 import pathlib
 import re
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
+sys.path.insert(0, str(REPO))
+from engine.verify import content_hash  # noqa: E402 — the one canonical proof hash
 QUEUES = [ROOT / q for q in ("reconciled_queue.json", "domains_queue.json", "mined_queue.json", "next_100.json",
           "pca_lean_queue.json", "frontier_queue.json", "frontier2.json",
           "reattack_queue.json", "frontier_spectral.json", "frontier_betrothed_queue.json", "frontier_linalg.json", "frontier_riemann.json", "frontier_infinity.json", "frontier_fibonacci.json", "frontier_primes.json", "frontier_rh2.json", "frontier_wave2.json", "frontier_wave3.json", "frontier_wave4.json", "frontier_wave5.json")]
@@ -21,21 +23,6 @@ VSTATE = ROOT / "harvest_100" / "verify_state.json"
 BEST = ROOT / "best_proofs" / "manifest.json"
 BEST_DIR = ROOT / "best_proofs"
 OUT = REPO / "registry" / "domains.json"
-
-
-def normalize(content: str) -> str:
-    imports, body = [], []
-    for line in content.splitlines():
-        if line.strip().startswith("import "):
-            if line.strip() not in imports:
-                imports.append(line.strip())
-        else:
-            body.append(line)
-    return "\n".join(imports + [""] + body)
-
-
-def content_hash(content: str) -> str:
-    return hashlib.sha256(normalize(content).encode()).hexdigest()[:16]
 
 
 def main():

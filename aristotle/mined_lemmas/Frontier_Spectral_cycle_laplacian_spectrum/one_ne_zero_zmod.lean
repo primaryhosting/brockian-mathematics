@@ -1,4 +1,14 @@
+/-
+# Cycle Laplacian Spectrum
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.cycle_laplacian_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to be the first command; the module docstring below
+-- repeats the header verbatim.)
 import Mathlib
+
 /-!
 # Cycle Laplacian Spectrum
 Category: Frontier — Spectral Geometry
@@ -10,6 +20,7 @@ Provenance: Aristotle theorem prover (Harmonic)
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -24,17 +35,15 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Polynomial Matrix Complex
+open Matrix Polynomial
 
-variable (n : ℕ) [NeZero n]
-
-/-- The cyclic shift matrix on `ZMod n`: `(S *ᵥ v) i = v (i + 1)`. -/
+/-- The cyclic shift matrix on `ZMod n`: `shiftM n a i j = 1` exactly when `i - j = a`. -/
 
 lemma one_ne_zero_zmod (hn : 3 ≤ n) : (1 : ZMod n) ≠ 0 := by
+  haveI : Fact (1 < n) := ⟨by omega⟩
   intro h
-  have : ((1 : ℕ) : ZMod n) = 0 := by exact_mod_cast h
-  have hd := (ZMod.natCast_eq_zero_iff 1 n).mp this
-  have := Nat.le_of_dvd Nat.one_pos hd
-  omega
+  have h1 : (1 : ZMod n).val = 1 := ZMod.val_one n
+  rw [h, ZMod.val_zero] at h1
+  exact absurd h1 (by norm_num)
 
-omit [NeZero n] in
+/-- For `3 ≤ n`, `1 ≠ -1` in `ZMod n`. -/

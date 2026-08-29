@@ -6,18 +6,7 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (The header above is a plain block comment because Lean 4 requires `import` commands to
--- precede every other command, including module doc-strings.)
-
 import Mathlib
-
-/-!
-# Lieb Robinson
-Category: Frontier Physics
-Target: Frontier.lieb_robinson
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -44,18 +33,11 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- Spin configurations of a chain of `N` sites (each site carries a qubit). -/
-abbrev Config (N : ℕ) := Fin N → Fin 2
+/-- The `r`-neighbourhood of a set of sites `X` inside a metric space of sites. -/
 
-/-- Observables of the spin chain: linear operators on the `2^N`-dimensional Hilbert space,
-represented as matrices indexed by spin configurations. -/
-abbrev SpinOp (N : ℕ) := Matrix (Config N) (Config N) ℂ
+theorem subset_nbhd {r : ℝ} (hr : 0 ≤ r) (X : Set Site) : X ⊆ nbhd r X := by
+  intro x hx
+  exact ⟨x, hx, by simpa using hr⟩
 
-/-- `Supported S M` says that the observable `M` acts only on the sites in `S`, i.e.
-`M = M₀ ⊗ 1` with `M₀` acting on the sites of `S`.  Concretely, matrix elements vanish
-unless the configurations agree off `S`, and they depend only on the restrictions to `S`. -/
-
-theorem subset_nbhd {N : ℕ} (S : Set (Fin N)) : S ⊆ nbhd S :=
-  fun x hx => ⟨x, hx, by simp⟩
-
-/-- One step of the Heisenberg generator enlarges the support by at most one site. -/
+/-- If a gate region `Z` of diameter at most `1` meets the `k`-neighbourhood of `X`,
+then the union of the two is contained in the `(k+1)`-neighbourhood of `X`. -/

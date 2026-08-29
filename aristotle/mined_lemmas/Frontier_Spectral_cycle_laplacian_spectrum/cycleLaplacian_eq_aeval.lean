@@ -1,8 +1,17 @@
+/-
+# Cycle Laplacian Spectrum
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.cycle_laplacian_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to be the first command; the module docstring below
+-- repeats the header verbatim.)
 import Mathlib
 
 /-!
 # Cycle Laplacian Spectrum
-Category: Frontier Spectral
+Category: Frontier — Spectral Geometry
 Target: Frontier.Spectral.cycle_laplacian_spectrum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
@@ -10,31 +19,46 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 open scoped BigOperators
 open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Matrix Polynomial
+open Matrix Polynomial
 
-/-- The cyclic shift matrix indexed by `ZMod n`: the circulant matrix whose `(i, j)` entry is `1`
-exactly when `i - j = 1`. -/
+/-- The cyclic shift matrix on `ZMod n`: `shiftM n a i j = 1` exactly when `i - j = a`. -/
 
-lemma cycleLaplacian_eq_aeval (n : ℕ) [NeZero n] (hn : 3 ≤ n) :
-    cycleLaplacian n = aeval (cycleShift n) (C 2 - X - X ^ (n - 1) : ℂ[X]) := by
-  obtain ⟨e1, e2, e3⟩ := zmod_zero_one_neg_one_distinct n hn
+lemma cycleLaplacian_eq_aeval (hn : 3 ≤ n) :
+    (Polynomial.aeval (shiftM n (-1))) ((C 2 - X - X ^ (n - 1) : ℂ[X])) = cycleLaplacian n := by
   have hcast : ((n - 1 : ℕ) : ZMod n) = -1 := by
-    have h1 : (1 : ℕ) ≤ n := by omega
-    push_cast [Nat.cast_sub h1]
+    have h : ((n - 1 : ℕ) : ZMod n) = ((n : ℕ) : ZMod n) - ((1 : ℕ) : ZMod n) := by
+      rw [← Nat.cast_sub (by omega)]
+    rw [h, ZMod.natCast_self]
     simp
-  rw [show (aeval (cycleShift n) (C 2 - X - X ^ (n - 1) : ℂ[X]))
-      = algebraMap ℂ (Matrix (ZMod n) (ZMod n) ℂ) 2 - cycleShift n - (cycleShift n) ^ (n - 1) by
-    simp [map_sub]]
-  rw [cycleShift_pow, hcast, cycleShift, cycleLaplacian]
+  rw [map_sub, map_sub, aeval_C, map_pow, aeval_X, shiftM_neg_one_pow, hcast, neg_neg]
+  have h10 : (1 : ZMod n) ≠ 0 := one_ne_zero_zmod hn
+  have h1n : (1 : ZMod n) ≠ -1 := one_ne_neg_one_zmod hn
   ext i j
-  simp only [Matrix.circulant_apply, Matrix.sub_apply, Pi.single_apply,
-    Matrix.algebraMap_matrix_apply, ← sub_eq_zero (a := i) (b := j)]
-  by_cases h0 : i - j = 0 <;> by_cases h1 : i - j = 1 <;> by_cases h2 : i - j = -1 <;> simp_all
+  have hij : (i = j) ↔ (i - j = 0) := sub_eq_zero.symm
+  simp only [Matrix.sub_apply, shiftM_apply, cycleLaplacian_apply,
+    Algebra.algebraMap_eq_smul_one, Matrix.smul_apply, Matrix.one_apply, smul_eq_mul, hij]
+  exact laplacian_entry_identity h10 h1n (i - j)
 
-/-- If `v ^ n = 1` then the exponent of `v` only matters modulo `n`. -/
+end Distinct
+
+section Eigen
+
+variable {n : ℕ} [NeZero n]
+
+/-- If `M *ᵥ v = μ • v` for some nonzero `v`, then `μ` lies in the spectrum of `M`. -/

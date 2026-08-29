@@ -1,21 +1,33 @@
 import Mathlib
-import RequestProject.Vinogradov
 
 /-!
-# Vinogradov three primes: Mathlib-phrased companion
-
-`RequestProject/Vinogradov.lean` is import-free (its required header comment must be the
-very first thing in the file, and Lean forbids `import` after any other command), so it
-uses a self-contained trial-division primality predicate `Frontier.IsPrime` and encodes
-oddness as `n % 2 = 1`.  Here we check that these agree with Mathlib's `Nat.Prime` and
-`Odd`, and restate the results in Mathlib's vocabulary.
+# Vinogradov Three Primes
+Category: Frontier — Prime Numbers
+Target: Frontier.Vinogradov_three_primes
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 40000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Frontier
 
-/-- The trial-division predicate used in the import-free file agrees with `Nat.Prime`. -/
+/-- `IsSumOfThreePrimes n` means that `n` can be written as a sum of three
+(not necessarily distinct) prime numbers. -/
 
 def VinogradovStatement : Prop :=
-  ∃ N : Nat, ∀ n : Nat, N ≤ n → n % 2 = 1 → IsSumOfThreePrimes n
+  ∃ N : ℕ, ∀ n : ℕ, N ≤ n → Odd n → IsSumOfThreePrimes n
 
-/-- The binary (strong) Goldbach conjecture: every even number `≥ 4` is a sum of two primes. -/
+/-- The binary Goldbach conjecture: every even number `≥ 4` is a sum of two primes. -/

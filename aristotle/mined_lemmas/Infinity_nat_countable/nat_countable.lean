@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Nat Countable
+Category: Frontier — Set Theory
+Target: Infinity.nat_countable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,20 +31,13 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
--- (Lean requires `import` to be the first command; the requested header follows.)
-
-/-!
-# Nat Countable
-Category: Frontier — Set Theory
-Target: Infinity.nat_countable
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Infinity
 
-/-- `ℕ` is countably infinite: it is a `Countable` type and an `Infinite` type. -/
+/-- The naturals are countably infinite: `ℕ` is a `Countable` type and is `Infinite`.
+
+The two components are supplied by Mathlib's instances
+`Nat.instCountable` (via `Encodable.countable` / `instCountableNat`) and
+`Nat.infinite`. -/
 
 theorem nat_countable : Countable ℕ ∧ Infinite ℕ :=
   ⟨inferInstance, inferInstance⟩

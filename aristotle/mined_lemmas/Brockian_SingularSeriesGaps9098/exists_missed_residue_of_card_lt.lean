@@ -5,20 +5,8 @@ Target: Brockian.SingularSeriesGaps9098
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above is a plain block comment because Lean 4 does not permit a module
--- docstring before `import`; the same header is repeated as a module docstring below.)
-
 
 import Mathlib
-
-/-!
-# Singular Series Gaps 9098
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesGaps9098
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 
 open scoped BigOperators
 open scoped Real
@@ -45,27 +33,25 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- A finite set `H` of integers is *admissible* (in the sense of the Hardy–Littlewood
-prime `k`-tuples conjecture: the singular series `𝔖(H)` is nonzero exactly for such `H`)
-if for every prime `p` the reductions of the elements of `H` modulo `p` miss at least one
-residue class. -/
+/-- The number of residue classes modulo `p` occupied by a finite set `H` of natural numbers.
+This is the quantity `ν_H(p)` appearing in the Euler factors of the Hardy–Littlewood
+singular series of the tuple `H`. -/
 
-theorem exists_missed_residue_of_card_lt (H : Finset ℤ) (p : ℕ) [Fact p.Prime]
-    (hp : H.card < p) : ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
-  by_contra hcon
-  push_neg at hcon
-  -- if no residue is missed, the cast map from `H` is onto `ZMod p`
-  have hsub : (Finset.univ : Finset (ZMod p)) ⊆ H.image (fun h : ℤ => (h : ZMod p)) := by
-    intro r _
-    obtain ⟨h, hh, hr⟩ := hcon r
-    exact Finset.mem_image.2 ⟨h, hh, hr⟩
-  have hcard : p ≤ H.card := by
-    have h1 : (Finset.univ : Finset (ZMod p)).card ≤ (H.image fun h : ℤ => (h : ZMod p)).card :=
-      Finset.card_le_card hsub
-    have h2 : (H.image fun h : ℤ => (h : ZMod p)).card ≤ H.card := Finset.card_image_le
-    have h3 : (Finset.univ : Finset (ZMod p)).card = p := by
-      simp [ZMod.card]
-    omega
-  omega
+theorem exists_missed_residue_of_card_lt (H : Finset ℕ) {p : ℕ} (hp : 0 < p)
+    (hcard : H.card < p) : ∃ r < p, ∀ h ∈ H, h % p ≠ r := by
+  have hsub : H.image (· % p) ⊆ Finset.range p := by
+    intro x hx
+    simp only [Finset.mem_image] at hx
+    obtain ⟨h, _, rfl⟩ := hx
+    exact Finset.mem_range.2 (Nat.mod_lt _ hp)
+  have hlt : (H.image (· % p)).card < (Finset.range p).card := by
+    rw [Finset.card_range]
+    exact lt_of_le_of_lt (Finset.card_image_le) hcard
+  have hne : H.image (· % p) ≠ Finset.range p := fun h => by
+    rw [h] at hlt; exact lt_irrefl _ hlt
+  obtain ⟨r, hr, hrmem⟩ := Finset.exists_of_ssubset (Finset.ssubset_iff_subset_ne.2 ⟨hsub, hne⟩)
+  refine ⟨r, Finset.mem_range.1 hr, ?_⟩
+  intro h hh hmod
+  exact hrmem (Finset.mem_image.2 ⟨h, hh, hmod⟩)
 
-/-- `0 ≠ 1` in `ZMod 2`. -/
+/-- Admissibility is a *finite* condition: it suffices to check the primes `p ≤ |H|`. -/

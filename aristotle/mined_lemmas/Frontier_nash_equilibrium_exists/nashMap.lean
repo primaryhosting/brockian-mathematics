@@ -1,24 +1,32 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-noncomputable def nashMap (G : FiniteGame ι S) (x : (i : ι) → S i → ℝ) :
-    (i : ι) → S i → ℝ :=
-  fun i s => (x i s + gain G i s x) / (1 + ∑ t : S i, gain G i t x)
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+noncomputable def nashMap (u : ι → (∀ j, S j) → ℝ) (x : ∀ j, S j → ℝ) : ∀ j, S j → ℝ :=
+  fun i s => (x i s + gain u i s x) / (1 + ∑ t, gain u i t x)
 

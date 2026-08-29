@@ -1,4 +1,4 @@
-/-
+/-!
 # Insertion Sort Correct
 Category: Computer Science
 Target: CS.insertion_sort_correct
@@ -6,21 +6,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+set_option autoImplicit false
 
-/-!
-# Insertion Sort Correct
-
-A self-contained development of insertion sort and its correctness proof.
--/
+universe u
 
 namespace CS
 
-variable {α : Type*} (r : α → α → Prop) [DecidableRel r]
+/-- `orderedInsert r a l` inserts `a` into `l` in front of the first element
+`b` of `l` with `r a b`. -/
 
-/-- Insert `a` into the list `l`, assumed sorted with respect to `r`. -/
-
-@[simp] theorem insertionSort_cons (a : α) (l : List α) :
+theorem insertionSort_cons (a : α) (l : List α) :
     insertionSort r (a :: l) = orderedInsert r a (insertionSort r l) := rfl
 
-/-- `orderedInsert` produces a permutation of `a :: l`. -/
+/-- `orderedInsert r a l` is a permutation of `a :: l`. -/

@@ -1,11 +1,13 @@
 import Mathlib
-
 /-!
 # BSD Statement
 Category: Frontier — Moonshot
 Target: Frontier.BSD_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: in Lean 4.28 the `import` command must be the very first command in a file, so the
+required header docstring appears immediately after it.)
 -/
 
 open scoped BigOperators
@@ -13,6 +15,7 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped Topology
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -27,26 +30,39 @@ set_option grind.warning false
 namespace Frontier
 
 /-!
-## The arithmetic side: the Mordell–Weil rank
+## Setup
 
-We work with an integral Weierstrass model `W : WeierstrassCurve ℤ` with nonzero
-discriminant; the associated elliptic curve over `ℚ` is the base change
-`W.map (Int.castRingHom ℚ)`, whose group of rational points is
-`(W.map (Int.castRingHom ℚ)).toAffine.Point` (affine nonsingular points together with
-the point at infinity).
+We work with an elliptic curve over `ℚ` presented by an integral Weierstrass model
+`W : WeierstrassCurve ℤ` (any elliptic curve over `ℚ` admits such a model).
+
+* The *algebraic rank* is the rank of the Mordell–Weil group `E(ℚ)`, defined as the
+  dimension of `ℚ ⊗_ℤ E(ℚ)` over `ℚ`.
+* The *analytic rank* is the order of vanishing at `s = 1` of the Hasse–Weil `L`-function,
+  where the `L`-function is specified by its Euler product on the half-plane of absolute
+  convergence together with analytic continuation to `ℂ`.
+
+Birch–Swinnerton-Dyer asserts that these two numbers agree.
 -/
 
-/-- The Mordell–Weil group `E(ℚ)` of the integral Weierstrass model `W`. -/
+section Rank
+
+/-- The Mordell–Weil group `E(ℚ)` of the elliptic curve given by the integral Weierstrass
+model `W`, i.e. the group of rational points of the base change of `W` to `ℚ`. -/
 abbrev MordellWeil (W : WeierstrassCurve ℤ) : Type :=
   (W.map (Int.castRingHom ℚ)).toAffine.Point
 
-/-- The Mordell–Weil rank of `E(ℚ)`, defined as the `ℚ`-dimension of `ℚ ⊗_ℤ E(ℚ)`
-(equivalently, the rank of the free part of the finitely generated abelian group `E(ℚ)`). -/
+/-- The *algebraic rank* of `W`: the rank of the Mordell–Weil group `E(ℚ)`, defined as
+`dim_ℚ (ℚ ⊗_ℤ E(ℚ))`. -/
 
 noncomputable def eulerFactor (W : WeierstrassCurve ℤ) (p : ℕ) (s : ℂ) : ℂ :=
-  1 - (apCoeff W p : ℂ) * (p : ℂ) ^ (-s) +
-    (if (p : ℤ) ∣ W.Δ then 0 else (p : ℂ) ^ (1 - 2 * s))
+  if (p : ℤ) ∣ W.Δ then
+    1 - (traceOfFrobenius W p : ℂ) * (p : ℂ) ^ (-s)
+  else
+    1 - (traceOfFrobenius W p : ℂ) * (p : ℂ) ^ (-s) + (p : ℂ) ^ (1 - 2 * s)
 
-/-- `L` is *the* Hasse–Weil `L`-function of `W`: it is entire (this is the content of the
-modularity theorem) and on the half plane `Re s > 3/2` it is given by the Euler product
-`∏_p (1 - a_p p^{-s} + ε_p p^{1-2s})^{-1}`. -/
+/-- `L` is *the* Hasse–Weil `L`-function of the elliptic curve `W`: it is entire, and on the
+half-plane of absolute convergence `Re s > 3/2` it is given by the Euler product
+`L(E, s) = ∏_p (local factor at p)⁻¹`.
+
+(The Hasse–Weil `L`-function of an elliptic curve over `ℚ` is known to exist and to be
+entire, by modularity; we take this predicate as the specification of `L`.) -/

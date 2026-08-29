@@ -1,75 +1,56 @@
-/-
-# Riemann Roch Curve
-Category: Frontier Math
-Target: Math2.riemann_roch_curve
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 open scoped BigOperators
+open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+General linear algebra helpers: quotients `b / a` of nested submodules and additivity
+of their dimensions along chains.
+-/
+import Mathlib
 
 set_option maxHeartbeats 1000000
-set_option synthInstance.maxHeartbeats 400000
-set_option maxRecDepth 4000
-
-open Polynomial
-
-/-!
-# Riemann–Roch for a smooth projective curve
-
-Mathlib (as of this development) contains no Riemann–Roch theorem, no theory of divisors on
-curves, no sheaf cohomology of curves and no Serre duality, so the whole set-up below is built
-from scratch on top of Mathlib's theory of the rational function field `RatFunc k` and of
-polynomials.
-
-We work with the smooth projective curve `ℙ¹_k` over an arbitrary field `k`, described through
-its function field `k(X) = RatFunc k`:
-
-* its closed points (`Math2.Place`) are the monic irreducible polynomials together with the
-  point at infinity;
-* `Math2.ord` is the normalized valuation (order of vanishing) at a closed point;
-* `Math2.Divisor` is the group of divisors, `Math2.degDiv` the degree of a divisor
-  (each point counted with the degree of its residue field);
-* `Math2.RRSpace D` is the Riemann–Roch space `L(D) = {f ≠ 0 : div f + D ≥ 0} ∪ {0}` and
-  `Math2.ell D = ℓ(D)` its dimension over `k`;
-* `Math2.canonicalDivisor` is the canonical divisor `-2·∞` and `Math2.genus` the genus `0`.
-
-The main result `Math2.riemann_roch_curve` is the Riemann–Roch formula
-`ℓ(D) - ℓ(K - D) = deg D + 1 - g`, valid for every divisor `D`.
--/
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
 
 namespace Math2
 
-/-!
-## The smooth projective curve
+open Submodule
 
-We work with the projective line `ℙ¹_k` over an arbitrary field `k`, presented through its
-function field `k(X) = RatFunc k`.  Its closed points (places of the function field) are the
-monic irreducible polynomials (the finite closed points) together with the point at infinity.
--/
+variable {k M N : Type*} [Field k] [AddCommGroup M] [Module k M] [AddCommGroup N] [Module k N]
 
-variable {k : Type*} [Field k]
+/-- The quotient `b / a` of two submodules (interesting when `a ≤ b`). -/
+abbrev Qt (a b : Submodule k M) : Type _ := b ⧸ a.submoduleOf b
 
-/-- A closed point of the projective line `ℙ¹_k`: either a monic irreducible polynomial
-(a finite closed point) or `none`, the point at infinity. -/
-abbrev Place (k : Type*) [Field k] := Option {p : k[X] // p.Monic ∧ Irreducible p}
+/-- `b / ⊥ ≃ b`. -/
 
-/-- A divisor on `ℙ¹_k`: a finitely supported formal `ℤ`-combination of closed points. -/
-abbrev Divisor (k : Type*) [Field k] := Place k →₀ ℤ
+noncomputable def mulEquiv {u : K} (hu : u ≠ 0) : K ≃ₗ[k] K where
+  toFun x := u * x
+  map_add' a b := by ring
+  map_smul' c a := by
+    simp only [RingHom.id_apply, Algebra.smul_def]
+    ring
+  invFun x := u⁻¹ * x
+  left_inv x := by field_simp
+  right_inv x := by field_simp
 
-/-! ### Order functions (normalized valuations) at the closed points -/
-
-
-noncomputable def mulEquiv {a : RatFunc k} (ha : a ≠ 0) : RatFunc k ≃ₗ[k] RatFunc k where
-  toFun f := f * a
-  map_add' f g := by ring
-  map_smul' c f := by simp
-  invFun f := f * a⁻¹
-  left_inv f := by field_simp
-  right_inv f := by field_simp
-
-/-- An auxiliary description of the Riemann–Roch space: `f ∈ L(D)` iff `f · ∏ p ^ D p` is a
-polynomial of degree at most `deg D`. -/

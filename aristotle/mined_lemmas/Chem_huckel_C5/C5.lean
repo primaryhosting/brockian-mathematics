@@ -1,28 +1,33 @@
+/-
+# Huckel C 5
+Category: Chemistry
+Target: Chem.huckel_C5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 100000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+set_option maxHeartbeats 1000000
+set_option maxRecDepth 4000
 
 namespace Chem
 
-open Matrix Polynomial
+open Matrix
 
-/-- The adjacency matrix of the cycle graph `C₅`, i.e. the Hückel matrix of
-cyclopentadienyl (with `α = 0`, `β = 1`). -/
+/-- The adjacency matrix of the cycle graph `C₅` (the Hückel matrix of cyclopentadienyl
+in units where the Coulomb integral `α` is `0` and the resonance integral `β` is `1`). -/
 
-noncomputable def C5 : Matrix (Fin 5) (Fin 5) ℝ := (SimpleGraph.cycleGraph 5).adjMatrix ℝ
+def C5 : Matrix (Fin 5) (Fin 5) ℝ :=
+  !![0, 1, 0, 0, 1;
+     1, 0, 1, 0, 0;
+     0, 1, 0, 1, 0;
+     0, 0, 1, 0, 1;
+     1, 0, 0, 1, 0]
 
-/-- Explicit description of the adjacency matrix of `C₅`. -/
+/-- `C₅`'s adjacency matrix satisfies its minimal polynomial `x³ - x² - 3x + 2`. -/

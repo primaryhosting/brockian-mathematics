@@ -1,10 +1,3 @@
-/-
-# Prime Power Member Structure
-Category: Frontier — Betrothed Numbers
-Target: Brockian.BetrothedNumbers.primePower_member_structure
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -15,25 +8,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 1000000
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
 open ArithmeticFunction Finset
-open scoped ArithmeticFunction.sigma
 
-namespace Brockian.BetrothedNumbers
+namespace Brockian
+namespace BetrothedNumbers
 
-/-- `m` and `n` form a *betrothed* (quasi-amicable) pair: both are positive, distinct, and the
-sum of the divisors of each equals `m + n + 1` (equivalently, the sum of the *proper* divisors of
-each one is the other one plus one). -/
+/-- `IsBetrothedPair m n` says that `(m, n)` is a betrothed (quasi-amicable) pair: two distinct
+positive integers, each of whose sum of divisors equals `m + n + 1`. -/
 
-lemma geom_sum_mod_two {p : ℕ} (hp : Odd p) (k : ℕ) :
-    (∑ i ∈ Finset.range k, p ^ i) % 2 = k % 2 := by
-  induction k with
+theorem geom_sum_mod_two {p : ℕ} (hp : p % 2 = 1) (m : ℕ) :
+    (∑ k ∈ range m, p ^ k) % 2 = m % 2 := by
+  induction m with
   | zero => simp
-  | succ k ih =>
-      rw [Finset.sum_range_succ]
-      have : p ^ k % 2 = 1 := Nat.odd_iff.mp hp.pow
-      omega
+  | succ m ih =>
+      rw [Finset.sum_range_succ, Nat.add_mod, ih, Nat.pow_mod, hp]
+      simp [Nat.add_mod]
 

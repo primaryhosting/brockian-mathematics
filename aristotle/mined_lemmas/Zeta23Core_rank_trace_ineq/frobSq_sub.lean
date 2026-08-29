@@ -1,12 +1,3 @@
-/-
-/-!
-# Rank Trace Ineq
-Category: Brockian Corpus
-Target: Zeta23Core.rank_trace_ineq
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--/
 import Mathlib
 
 /-!
@@ -15,40 +6,42 @@ Category: Brockian Corpus
 Target: Zeta23Core.rank_trace_ineq
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-Rank–trace inequality (preprint Lemma 3.2):
-`c·tr P − (c²/4)·r + 2c·tr Q − c²·b ≤ ‖P+Q‖_F²`,
-for `P` positive semidefinite of rank at most `r`, `Q` Hermitian with at most `b` positive
-eigenvalues, and `c > 0`.
-
-The proof does not use von Neumann's trace inequality; instead it uses the two orthogonal
-projections `Pi` (onto the positive spectral subspace of `Q`) and `R` (onto the range of the
-compression `(1 - Pi) P (1 - Pi)`), and the elementary estimate `0 ≤ ‖S - M‖_F²` for
-`S = P + Q` and `M = c·Pi + (c/2)·R`.
 -/
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Pointwise
+open scoped ComplexOrder
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Core
 
 open Matrix
-open scoped ComplexOrder
 
 variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
 
-/-! ## Basic notions -/
+/-! ## Basic definitions -/
 
-/-- The squared Frobenius norm of a matrix, `‖M‖_F² = Re tr(Mᴴ M)`. -/
+/-- The squared Frobenius norm of a matrix, `‖M‖_F² = Re tr (Mᴴ M)`. -/
 
-theorem frobSq_sub {S T : Matrix n n 𝕜} (hS : S.IsHermitian) (hT : T.IsHermitian) :
-    frobSq (S - T) = frobSq S - 2 * RCLike.re (Matrix.trace (S * T)) + frobSq T := by
-  simp only [frobSq, Matrix.conjTranspose_sub, hS.eq, hT.eq, Matrix.sub_mul, Matrix.mul_sub,
-    Matrix.trace_sub, map_sub]
-  rw [Matrix.trace_mul_comm T S]
+lemma frobSq_sub (M X : Matrix n n 𝕜) :
+    frobSq (M - X) = frobSq M - 2 * RCLike.re (Matrix.trace (Mᴴ * X)) + frobSq X := by
+  have hcross : RCLike.re (Matrix.trace (Xᴴ * M)) = RCLike.re (Matrix.trace (Mᴴ * X)) := by
+    have h : (Mᴴ * X)ᴴ = Xᴴ * M := by simp
+    rw [← h, Matrix.trace_conjTranspose]
+    simp
+  simp only [frobSq, conjTranspose_sub, Matrix.sub_mul, Matrix.mul_sub, Matrix.trace_sub, map_sub,
+    hcross]
   ring
 
+omit [DecidableEq n] in

@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Pauli Anticommute
+Category: Quantum Computing
+Target: QC.pauli_anticommute
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -29,5 +37,4 @@ namespace QC
 
 def Z : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
 
-/-- The Pauli matrices `X`, `Y`, `Z` pairwise anticommute and each squares to the
-identity matrix. -/
+/-- The 2×2 identity matrix. -/

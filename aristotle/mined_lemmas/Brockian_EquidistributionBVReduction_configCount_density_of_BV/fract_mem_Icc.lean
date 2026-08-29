@@ -33,14 +33,32 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Topology Set MeasureTheory
-open scoped BigOperators Classical
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Brockian.EquidistributionBVReduction
 
-/-- The number of indices `n < N` whose fractional part `Int.fract (x n)` lies in `S`:
-the count of "configurations" of the first `N` terms of the sequence inside the window `S`. -/
+open Filter Set MeasureTheory
 
-lemma fract_mem_Icc (x : ℕ → ℝ) (n : ℕ) : Int.fract (x n) ∈ Icc (0 : ℝ) 1 :=
-  ⟨Int.fract_nonneg _, (Int.fract_lt_one _).le⟩
+/-- `configCount x S N` is the number of indices `n < N` whose fractional part
+`Int.fract (x n)` lands in the "configuration window" `S`. -/
 
+lemma fract_mem_Icc (t : ℝ) : Int.fract t ∈ Set.Icc (0 : ℝ) 1 :=
+  ⟨Int.fract_nonneg t, (Int.fract_lt_one t).le⟩
+
+/-! ### Riemann-sum machinery for a globally monotone function -/
+
+section MonotoneCase
+
+variable (x : ℕ → ℝ)
+
+/-- The lower Riemann sum of `G` for the uniform partition of `[0,1]` into `k` pieces. -/

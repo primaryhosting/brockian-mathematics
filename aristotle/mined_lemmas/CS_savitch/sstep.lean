@@ -1,54 +1,81 @@
-/-
-# Savitch
-Category: Frontier Cs
-Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean requires `import` commands to precede any module documentation, so the header above is
--- written as a plain comment; it is repeated as the module docstring below.)
-import RequestProject.Savitch.Final
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+import RequestProject.Savitch.Reach
 
 /-!
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-!
-The machine model is the standard off-line random-access model of space bounded computation
-(see `RequestProject/Savitch/Model.lean`): the memory of a machine is a bit string, one step
-rewrites the memory using the memory content and a single input bit, read at a position which
-is determined by the memory, and the space used on an input is the maximal length of a memory
-string occurring in the computation.
+## The deterministic simulator
 
-`NSPACE f` and `DSPACE g` are the classes of languages accepted by nondeterministic,
-respectively deterministic, machines running in space `O (f n)`, respectively `O (g n)`.
+This file defines the deterministic machine used in Savitch's theorem: an explicit
+iterative (stack based) implementation of the recursive procedure
 
-The proof is Savitch's: for a nondeterministic machine `M` running in space `S` on the input
-`x`, deciding whether `M` accepts amounts to deciding reachability in the configuration graph
-of `M` on `x`, whose vertices are the words of length at most `S`.  Reachability by a path of
-length at most `2 ^ k` is decided by the midpoint recursion `savR`, whose recursion depth is
-`k`; taking `k = S + 1` suffices because there are only `2 ^ (S + 1) - 1` configurations.  The
-simulator runs this recursion with an explicit stack of at most `S + 2` frames, each holding
-three words of length at most `S`, so it uses `O (S ^ 2)` bits.  Since the simulator does not
-know `S`, it runs the whole procedure for stages `s = 0, 1, 2, …`, and at each stage also
-checks whether some reachable configuration has a successor of length more than `s`; the first
-stage at which this check fails gives the correct answer, and this happens at the latest at
-stage `S`.
+```
+REACH d u v  =  if d = 0 then (u = v ∨ u → v)
+                else ∃ m, REACH (d-1) u m ∧ REACH (d-1) m v
+```
+
+together with its encoding into bit strings and the space accounting: a well-formed
+state occupies `O((f n)²)` bits, because the stack holds at most `f n + 2` frames of
+`O(f n)` bits each.
 -/
 
 namespace CS
-
 namespace Savitch
 
-/-- A deterministic machine viewed as a nondeterministic machine. -/
+/-- Classical truth value of a proposition. -/
 
-def sstep (M : NMachine) (bit : Option Bool) (σ : SState) : SState :=
-  if σ.done = none then sstepAux M bit σ else σ
+noncomputable def sstep (N : NDetMachine) (f : ℕ → ℕ) : SavState → Option Bool → SavState
+  | .count k, none => .scan k 0
+  | .count k, some _ => .count (k + 1)
+  | .scan n j, _ =>
+      if j < (cands (f n)).length then
+        (if toBool (N.accept ((cands (f n)).getD j [])) then
+          .main n j [⟨f n + 1, N.init, (cands (f n)).getD j [], 0, 0⟩] false
+        else .scan n (j + 1))
+      else .done false
+  | .main n j [] ret, _ => if ret then .done true else .scan n (j + 1)
+  | .main n j (F :: rest) ret, b =>
+      if F.phase = 0 then
+        (if F.level = 0 then .main n j rest (toBool (F.u = F.v ∨ N.step F.u b F.v))
+        else .main n j (⟨F.level - 1, F.u, (cands (f n)).getD 0 [], 0, 0⟩ ::
+          ⟨F.level, F.u, F.v, 1, 0⟩ :: rest) ret)
+      else if F.phase = 1 then
+        (if ret then .main n j (⟨F.level - 1, (cands (f n)).getD F.idx [], F.v, 0, 0⟩ ::
+            ⟨F.level, F.u, F.v, 2, F.idx⟩ :: rest) ret
+        else advance n j F rest ret (f n))
+      else
+        (if ret then .main n j rest true else advance n j F rest ret (f n))
+  | .done b, _ => .done b
 
-/-- The configuration of `M` about which the simulator needs to read an input bit. -/
+/-- Halting states. -/

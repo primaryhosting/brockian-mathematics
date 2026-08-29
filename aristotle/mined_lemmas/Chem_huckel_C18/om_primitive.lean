@@ -16,12 +16,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open Complex
+
 namespace Chem
 
-open Matrix SimpleGraph Complex
+/-- A primitive 18-th root of unity. -/
 
-/-- The primitive 18-th root of unity `exp(2πi/18)`. -/
-
-lemma om_primitive : IsPrimitiveRoot om 18 := by
-  simpa [om] using Complex.isPrimitiveRoot_exp 18 (by norm_num)
+theorem om_primitive : IsPrimitiveRoot om 18 := by
+  have h := Complex.isPrimitiveRoot_exp 18 (by norm_num)
+  simpa [om] using h
 

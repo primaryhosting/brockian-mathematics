@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Constellation Local Count K 3
 Category: Brockian Corpus
 Target: Brockian.ConstellationLocalCountK3
@@ -6,7 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,12 +34,14 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- The local count of a constellation (`k`-tuple of shifts) `H` modulo `p`: the number of
-residues `n` such that none of the shifted values `n + h`, `h ∈ H`, is divisible by `p`.
-This is the quantity `p - ν_H(p)` appearing in the singular series of the Hardy–Littlewood
-prime `k`-tuple heuristic. -/
+open Finset
 
-noncomputable def constellationLocalCount (p : ℕ) [NeZero p] (H : Finset (ZMod p)) : ℕ :=
-  (Finset.univ.filter (fun n : ZMod p => ∀ h ∈ H, n + h ≠ 0)).card
+variable {G : Type*} [AddCommGroup G] [Fintype G] [DecidableEq G]
 
-/-- The set of residues avoiding all shifts in `H` is the complement of `-H`. -/
+/-- The set of base points `x` of a translate of the shift `d` landing inside `S`,
+i.e. `{x | x + d ∈ S}`. -/
+
+def constellationLocalCount {k : ℕ} (S : Finset G) (d : Fin k → G) : ℕ :=
+  (Finset.univ.filter (fun x => ∀ i : Fin k, x + d i ∈ S)).card
+
+/-- Translation is a bijection, so a shifted preimage has the same cardinality as `S`. -/

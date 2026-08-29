@@ -23,48 +23,51 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Fermat Prime Beyond Four
 Category: Brockian Conjecture
 Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment rather than a `/-!` module docstring.)
 
-/-
-Note on file layout: Lean 4 requires `import` commands to precede every other
-command in a file, so the header block above is placed immediately after the
-single `import Mathlib` line.
+import Mathlib
 
-Mathematical content.  The Fermat numbers are `F n = 2 ^ (2 ^ n) + 1`.  The
-only known Fermat primes are `F 0, …, F 4` (namely `3, 5, 17, 257, 65537`), and
-whether any Fermat prime exists beyond `F 4` is an open problem.  We therefore
-prove a Lean-checked *conditional reduction*: the existence of a Fermat prime
-`F n` with `n > 4` is equivalent to the existence of `n > 4` satisfying Pépin's
-residue condition `3 ^ ((F n - 1) / 2) = -1` in `ZMod (F n)`.  Both directions
-of Pépin's test are proved: sufficiency via the Lucas primality criterion, and
-necessity via quadratic reciprocity.  We also record that `F 5` and `F 6` are
-composite, so the search for a Fermat prime beyond four starts at `n = 7`.
+/-!
+## Overview
+
+The `n`-th Fermat number is `Fₙ = 2 ^ 2 ^ n + 1`.  The numbers `F₀, …, F₄` are prime, and no
+further Fermat prime is known; whether some `Fₙ` with `n > 4` is prime is a famous open problem.
+
+This file contains:
+
+* `Brockian.FermatNumbers.fermat` — the Fermat numbers;
+* `Brockian.FermatNumbers.prime_of_pepin` — the sufficiency half of Pépin's test;
+* `Brockian.FermatNumbers.pepin_of_prime` — the necessity half of Pépin's test;
+* `Brockian.FermatNumbers.FermatPrimeBeyondFour` — the main result: an unconditional
+  *Lean-checked reduction* of the open conjecture "there is a Fermat prime beyond `F₄`" to a
+  purely modular-arithmetic statement (Pépin's criterion);
+* verified data: `F₀, …, F₄` are prime, and `F₅`, `F₆` are composite.
 -/
 
 namespace Brockian.FermatNumbers
 
-/-- The `n`-th Fermat number `F n = 2 ^ (2 ^ n) + 1`. -/
+/-- The `n`-th Fermat number `Fₙ = 2 ^ 2 ^ n + 1`. -/
 
-lemma fermat_mod_three {n : ℕ} (hn : 1 ≤ n) : fermat n % 3 = 2 := by
-  have h : 2 ^ 2 ^ n = 4 ^ 2 ^ (n - 1) := by
-    rw [show (4 : ℕ) = 2 ^ 2 from rfl, ← pow_mul]
-    congr 1
-    rw [mul_comm, ← pow_succ]
+lemma fermat_mod_three (n : ℕ) (hn : 1 ≤ n) : fermat n % 3 = 2 := by
+  have h : 2 ^ n = 2 * 2 ^ (n - 1) := by
+    rw [← pow_succ']
     congr 1
     omega
-  have h4 : 4 ^ 2 ^ (n - 1) % 3 = 1 := by
+  have h2 : 2 ^ (2 ^ n) = 4 ^ (2 ^ (n - 1)) := by
+    rw [h, pow_mul]
+    norm_num
+  have h3 : 4 ^ (2 ^ (n - 1)) % 3 = 1 := by
     rw [Nat.pow_mod]
     norm_num
-  rw [fermat, Nat.add_mod, h, h4]
+  rw [fermat, h2]
+  generalize (4:ℕ) ^ (2 ^ (n - 1)) = m at h3 ⊢
+  omega
 
-/-- Sufficiency in Pépin's test: the residue condition certifies primality.
-This is the Lucas primality criterion applied to the base `3`, whose order is
-forced to be the full group order `F n - 1 = 2 ^ (2 ^ n)`. -/

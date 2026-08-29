@@ -1,80 +1,38 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-!
-# The Gibbs phase rule as an affine dimension count
-
-The Gibbs phase rule states that a heterogeneous system at equilibrium with `C` chemical
-components distributed over `P` coexisting phases has
-
-  `F = C - P + 2`
-
-thermodynamic degrees of freedom.  The classical derivation is a dimension count:
-
-* **Intensive variables.**  Temperature `T`, pressure `p`, and, for every phase `j` and every
-  component `i`, the mole fraction `x i j`.  That is `2 + P * C` real variables, i.e. the
-  ambient affine space is `Chem.StateSpace C P` with `dim = 2 + P * C`.
-
-* **Equilibrium constraints.**
-  - for each of the `P` phases, the mole fractions of that phase sum to `1` (`P` equations);
-  - for each of the `C` components, its chemical potential agrees across all `P` phases,
-    which is `C * (P - 1)` equations.
-
-  Altogether the constraints are recorded as a map into `Chem.ConstraintSpace C Q` (with
-  `P = Q + 1`), a space of dimension `(Q + 1) + Q * C = P + C * (P - 1)`.
-
-* **Genericity.**  The count is only correct when the constraints are independent; formally,
-  this is the hypothesis that the (linearised) constraint map is *surjective*.
-
-Under these hypotheses the equilibrium locus is an affine subspace of the state space whose
-dimension is
-  `(2 + P * C) - (P + C * (P - 1)) = C - P + 2`,
-which is the content of `Chem.gibbs_phase_rule` below.
+# Gibbs Phase Rule
+Category: Chemistry
+Target: Chem.gibbs_phase_rule
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped Pointwise
 
 namespace Chem
 
-/-- The space of intensive state variables of a system with `C` components and `P` phases:
-temperature, pressure, and the mole fraction of each component in each phase.  Its dimension
-is `2 + P * C`. -/
-abbrev StateSpace (C P : ℕ) : Type := (ℝ × ℝ) × (Fin P → Fin C → ℝ)
+/-- The intensive state variables of a system with `C` chemical components distributed over
+`P` phases: temperature, pressure, and the `C` mole fractions of each of the `P` phases,
+i.e. `2 + P * C` real variables. -/
+abbrev StateVars (C P : ℕ) : Type := Fin (2 + P * C) → ℝ
 
-/-- The space in which the equilibrium constraints of a system with `C` components and
-`P = Q + 1` phases take their values: one real number per phase (the "mole fractions sum to
-one" equations) together with one real number per component and per pair of consecutive phases
-(the "equality of chemical potentials" equations).  Its dimension is
-`(Q + 1) + Q * C = P + C * (P - 1)`. -/
-abbrev ConstraintSpace (C Q : ℕ) : Type := (Fin (Q + 1) → ℝ) × (Fin Q → Fin C → ℝ)
+/-- The equilibrium constraints on the intensive variables: one normalization condition
+`∑ mole fractions = 1` per phase (`P` equations) together with the equality of the chemical
+potential of each component across consecutive phases (`C * (P - 1)` equations). -/
+abbrev Constraints (C P : ℕ) : Type := Fin (P + C * (P - 1)) → ℝ
 
+/-- Number of variables minus number of constraints, computed in `ℤ`. -/
 
-theorem exists_surjective_constraints {C Q : ℕ} (h : Q ≤ C + 1) :
-    ∃ L : StateSpace C (Q + 1) →ₗ[ℝ] ConstraintSpace C Q, Function.Surjective L := by
-  apply exists_surjective_of_finrank_le
-  rw [finrank_stateSpace, finrank_constraintSpace]
-  have hmul : (Q + 1) * C = Q * C + C := by ring
-  omega
+theorem exists_surjective_constraints (C P : ℕ) (hP : 1 ≤ P) (hPC : P ≤ C + 2) :
+    ∃ L : StateVars C P →ₗ[ℝ] Constraints C P, Function.Surjective L := by
+  have hle : P + C * (P - 1) ≤ 2 + P * C := by
+    obtain ⟨Q, rfl⟩ := Nat.exists_eq_add_of_le hP
+    simp only [Nat.add_sub_cancel_left]
+    have : (1 + Q) * C = C * Q + C := by ring
+    omega
+  refine ⟨LinearMap.funLeft ℝ ℝ (Fin.castLE hle), ?_⟩
+  exact LinearMap.funLeft_surjective_of_injective ℝ ℝ _ (Fin.castLE_injective hle)
 
-end Chem
-
+/-- The set of equilibrium states, i.e. the solutions of the constraint equations `L x = b`,
+is an affine subset whose difference set is exactly the kernel of `L`. -/

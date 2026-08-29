@@ -1,3 +1,15 @@
+/-
+# Tarski Undefinability
+Category: Frontier — Set Theory
+Target: Frontier.Tarski_undefinability
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the
+-- header above is given as a plain block comment and repeated below verbatim.)
+
+import Mathlib
+
 /-!
 # Tarski Undefinability
 Category: Frontier — Set Theory
@@ -6,30 +18,35 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-open FirstOrder Language
+set_option maxHeartbeats 1000000
+set_option autoImplicit false
 
 namespace Frontier
 
-/-! ## The first-order language of arithmetic -/
+open FirstOrder Language
 
-/-- The function symbols of the language of arithmetic: `0`, `1`, `+`, `*`. -/
+/-! ## The language of arithmetic -/
+
+/-- The function symbols of the language of arithmetic: `0`, the successor `S`,
+addition and multiplication. -/
 inductive arithFunc : ℕ → Type
   | zero : arithFunc 0
-  | one : arithFunc 0
+  | succ : arithFunc 1
   | add : arithFunc 2
   | mul : arithFunc 2
   deriving DecidableEq
 
-/-- The first-order language of arithmetic, with function symbols `0, 1, +, *`
-and no relation symbols. -/
+/-- The relation symbols of the language of arithmetic: the order relation `<`. -/
+inductive arithRel : ℕ → Type
+  | lt : arithRel 2
+  deriving DecidableEq
+
+/-- The first-order language of arithmetic, `(0, S, +, ·, <)`. -/
 
 def IsArithmetical₂ (R : Set (ℕ × ℕ)) : Prop :=
-  ∃ φ : arith.Formula (Fin 2), ∀ v : Fin 2 → ℕ, (v 0, v 1) ∈ R ↔ φ.Realize v
+  ∃ φ : arith.Formula (Fin 2), ∀ m n : ℕ, (m, n) ∈ R ↔ φ.Realize ![m, n]
 
-/-! ## Gödel numberings and the satisfaction relation -/
+/-! ## Tarski's undefinability theorem -/
 
-/-- A *Gödel numbering* of the arithmetical formulas in one free variable is any surjection
-from `ℕ` onto those formulas. (Formulas form a countable set, so such numberings exist; see
-`exists_goedelNumbering`.) -/
+/-- Diagonalising a binary formula: `diagonal θ` is the formula in one free variable
+`¬ θ(x, x)`. -/

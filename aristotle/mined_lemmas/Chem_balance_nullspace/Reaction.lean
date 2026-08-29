@@ -1,3 +1,11 @@
+/-
+# Balance Nullspace
+Category: Chemistry
+Target: Chem.balance_nullspace
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -14,32 +22,28 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Chem
 
-/-- A chemical reaction over `m` chemical elements and `n` chemical species.
+/-! ## A ℚ-linear functional that is positive on a finite family of positive reals -/
 
-`comp i e` is the number of atoms of element `e` in one formula unit of species `i`,
-and `isProduct i` says whether species `i` sits on the product side of the reaction
-(otherwise it is a reactant). -/
-structure Reaction (m n : ℕ) where
-  /-- `comp i e` = number of atoms of element `e` in one unit of species `i`. -/
-  comp : Fin n → Fin m → ℕ
-  /-- whether species `i` is on the product side. -/
-  isProduct : Fin n → Bool
+/-- Given finitely many *positive* real numbers `x s`, there is a `ℚ`-linear functional
+`f : ℝ →ₗ[ℚ] ℚ` which is positive on all of them.  (Such an `f` is a rational
+"approximation of the identity" on the `ℚ`-span of the `x s`.) -/
 
-variable {m n : ℕ}
+def Reaction.Balances {Elem Species : Type*} [Fintype Species]
+    (R : Reaction Elem Species) : Prop :=
+  ∃ c : Species → ℝ, (∀ s, 0 < c s) ∧
+    ((R.stoich).map (Int.cast : ℤ → ℝ)).mulVec c = 0
 
-/-- The stoichiometric matrix of a reaction: rows are elements, columns are species,
-the entry being the atom count of the element in the species, signed `+` for products
-and `-` for reactants. -/
-
-def Reaction.Balances (R : Reaction m n) : Prop :=
-  ∃ x : Fin n → ℤ, (∀ i, 0 < x i) ∧
-    ∀ e : Fin m,
-      ∑ i ∈ Finset.univ.filter (fun i => ¬ R.isProduct i), x i * (R.comp i e : ℤ) =
-      ∑ i ∈ Finset.univ.filter (fun i => R.isProduct i), x i * (R.comp i e : ℤ)
-
-/-- **Balancing a chemical reaction = finding a positive integer null vector of the
-stoichiometric matrix.** -/
+/-- **Balancing a chemical reaction is a nullspace problem.**  A reaction balances if and
+only if its stoichiometric matrix admits a coordinatewise positive integer null vector,
+i.e. a genuine set of stoichiometric coefficients. -/

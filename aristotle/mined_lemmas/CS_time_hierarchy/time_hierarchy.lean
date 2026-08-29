@@ -2,91 +2,49 @@
 # Time Hierarchy
 Category: Frontier Cs
 Target: CS.time_hierarchy
-Statement: The time hierarchy theorem: more time gives strictly more languages (diagonalization).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
-
-/-!
-# Time Hierarchy
-Category: Frontier Cs
-Target: CS.time_hierarchy
-Statement: The time hierarchy theorem: more time gives strictly more languages (diagonalization).
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-/-!
-## Formalization notes
-
-The model of computation is Mathlib's partial recursive `Nat.Partrec.Code`, whose
-step-indexed evaluator `Nat.Partrec.Code.evaln k c n` runs the program `c` on input `n`
-for `k` steps of fuel.  "Running time" is the amount of fuel consumed, and
-`CS.DTIME t` is the class of languages decided within fuel `t n` on input `n`.
-
-The theorem `CS.time_hierarchy` says: for every computable time bound `t` there is a
-pointwise larger bound `t'` with `DTIME t ⊊ DTIME t'`, i.e. more time really does decide
-strictly more languages.  The witness separating the two classes is the diagonal language
-`CS.diagLang t = {n | the n-th program does not output 1 on input n within t n steps}`,
-which is not in `DTIME t` by diagonalization, but is computable (because `evaln` is), hence
-lies in `DTIME t'` for `t'` its own running time.
--/
-
-open scoped Classical
-
-open Nat.Partrec Nat.Partrec.Code Denumerable
 
 namespace CS
 
-/-- `DTIME t` is the class of languages `L ⊆ ℕ` decided within time bound `t`:
-there is a program (a `Nat.Partrec.Code`) which, run on input `n` with `t n` steps of
-fuel, halts and outputs `1` if `n ∈ L` and `0` otherwise.  Here "time" is measured by
-the step-index (fuel) of Mathlib's step-indexed evaluator `Nat.Partrec.Code.evaln`. -/
+/-! ## A clocked model of computation
 
-theorem time_hierarchy (t : ℕ → ℕ) (ht : Computable t) :
-    ∃ t' : ℕ → ℕ, (∀ n, t n ≤ t' n) ∧ DTIME t ⊂ DTIME t' := by
-  obtain ⟨c, hcode⟩ :=
-    Nat.Partrec.Code.exists_code.1
-      (Partrec.nat_iff.1 (computable_diagBit ht).partrec)
-  have hex : ∀ n, ∃ k, evaln k c n = some (diagBit t n) := by
-    intro n
-    have : diagBit t n ∈ eval c n := by rw [hcode]; simp
-    obtain ⟨k, hk⟩ := Nat.Partrec.Code.evaln_complete.1 this
-    exact ⟨k, hk⟩
-  have hmem : diagLang t ∈ DTIME fun n => max (t n) (Nat.find (hex n)) := by
-    refine ⟨c, fun n => ?_⟩
-    rw [← diagBit_eq_ite]
-    exact evaln_mono (le_max_right _ _) (Nat.find_spec (hex n))
-  exact ⟨fun n => max (t n) (Nat.find (hex n)), fun n => le_max_left _ _,
-    DTIME_mono fun n => le_max_left _ _,
-    fun hsub => diagLang_not_mem_DTIME t (hsub hmem)⟩
+Programs are natural numbers (their own Gödel numbers).  A code `c` is decoded
+on the fly:
 
-end CS
+* `0` : the constant `0`
+* `1` : the successor function
+* `2` : first projection of the Cantor pairing
+* `3` : second projection of the Cantor pairing
+* `4` : the *clocked universal machine*: on input `⟪c', y, k⟫` it simulates the
+  program `c'` on input `y` for `k` steps and outputs the result (or `0` if
+  the simulation did not finish);  this costs `k + 1` steps
+* `5` : the boolean complement `x ↦ if x = 0 then 1 else 0`
+* `6` : the identity
+* `7 + 4 * ⟪i, j⟫ + 0` : pairing of the results of `i` and `j`
+* `7 + 4 * ⟪i, j⟫ + 1` : composition `i ∘ j`
+* `7 + 4 * ⟪i, j⟫ + 2` : primitive recursion
+* `7 + 4 * ⟪i, j⟫ + 3` : unbounded search (`rfind`)
 
-import Mathlib
+`eval s c x` runs the program `c` on input `x` with a budget of `s` steps and
+returns `none` if the budget is exhausted.  Every constructor consumes one unit
+of the budget, so `eval` is a genuine (if coarse) cost model. -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+theorem time_hierarchy (t T τ : ℕ → ℕ) (ct : ℕ)
+    (hct : ∀ x, eval (τ x) ct x = some (Nat.pair x (Nat.pair x (t x))))
+    (hT : ∀ x, τ x + t x + 3 ≤ T x) :
+    TIME t ⊂ TIME T := by
+  have hsub : TIME t ⊆ TIME T := TIME_mono (fun x => by have := hT x; omega)
+  rw [Set.ssubset_iff_of_subset hsub]
+  refine ⟨diag t, ⟨cDiag ct, fun x => ?_⟩, diag_not_mem_TIME t⟩
+  exact eval_mono (hT x) (eval_cDiag t τ ct hct x)
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+/-! ## The hypotheses are satisfiable: constant time bounds
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+To see that the hierarchy theorem is not vacuous we exhibit, for every constant
+time bound, a program computing the required triple `⟪x, x, t x⟫`. -/
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-- A program computing the constant `n`. -/

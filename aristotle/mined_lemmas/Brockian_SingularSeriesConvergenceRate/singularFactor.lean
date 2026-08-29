@@ -5,26 +5,39 @@ Target: Brockian.SingularSeriesConvergenceRate
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the header
--- above is written as an ordinary block comment and repeated as a module docstring below.)
 
 import Mathlib
 
-/-!
-# Singular Series Convergence Rate
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesConvergenceRate
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Brockian
 
-open Finset
+/-- The local (Euler) factor of the twin-prime singular series at `p`:
+`1 - 1/(p-1)^2` at odd primes, and `1` at all other natural numbers. -/
 
-/-- The `p`-th term of the (twin-prime) singular series: `1/(p-1)^2` for odd primes `p`,
-and `0` otherwise. -/
+noncomputable def singularFactor (p : ℕ) : ℝ :=
+  if Nat.Prime p then 1 - 1 / ((p : ℝ) - 1) ^ 2 else 1
 
-noncomputable def singularFactor (n : ℕ) : ℝ := 1 - singularTerm n
-
-/-- The truncated singular series product `∏_{2 < p < N} (1 - 1/(p-1)^2)`. -/
+/-- The `N`-th partial product of the twin-prime singular series,
+`∏_{3 ≤ p ≤ N, p prime} (1 - 1/(p-1)^2)`. -/

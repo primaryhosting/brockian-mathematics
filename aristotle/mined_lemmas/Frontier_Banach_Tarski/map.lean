@@ -1,26 +1,36 @@
-import RequestProject.BT.Ball
+import RequestProject.Equidecomp
 
 /-!
-# Banach Tarski
-Category: Frontier — Set Theory
-Target: Frontier.Banach_Tarski
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Rotations of `ℝ³`
+
+Set-up for the Banach–Tarski paradox: the group `SO(3)` of rotations acting on
+`E = EuclideanSpace ℝ (Fin 3)`, the group of isometries of `E`, and the fact that a
+non-identity rotation fixes at most two points of the unit sphere.
 -/
 
-open Metric Set
-open scoped Pointwise
+open Matrix
 
-namespace Frontier
+namespace BanachTarski
 
-/-- The vector by which the second copy of the ball is translated. -/
+/-- Three dimensional Euclidean space. -/
+abbrev E := EuclideanSpace ℝ (Fin 3)
 
-theorem map (φ : G →* H) (hφ : ∀ (g : G) (x : X), φ g • x = g • x) (hP : Paradoxical G A) :
-    Paradoxical H A := by
-  obtain ⟨A₁, A₂, hunion, hd, h₁, h₂⟩ := hP
-  exact ⟨A₁, A₂, hunion, hd, h₁.map φ hφ, h₂.map φ hφ⟩
+/-- The group of rotations of `ℝ³`. -/
+abbrev SO3 := Matrix.specialOrthogonalGroup (Fin 3) ℝ
 
-end Paradoxical
+noncomputable instance : SMul ↥SO3 E :=
+  ⟨fun M x => WithLp.toLp 2 ((M : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ WithLp.ofLp x)⟩
 
-/-- Absorbing a "small" set `D` into `A` using an element `g` whose iterates move `D` to
-disjoint copies of itself inside `A`. -/
+
+theorem map {H : Type*} [Group H] [MulAction H X] (σ : G →* H)
+    (hσ : ∀ (g : G) (x : X), σ g • x = g • x) {A B : Set X} (h : Equidecomp G A B) :
+    Equidecomp H A B := by
+  obtain ⟨f, S, hSfin, hbij, hS⟩ := h
+  refine ⟨f, σ '' S, hSfin.image _, hbij, fun x hx => ?_⟩
+  obtain ⟨g, hg, hgx⟩ := hS x hx
+  exact ⟨σ g, ⟨g, hg, rfl⟩, by rw [hσ, hgx]⟩
+
+end Equidecomp
+
+/-- `A` is `G`-paradoxical: it splits into two disjoint pieces, each equidecomposable with
+the whole of `A`. -/

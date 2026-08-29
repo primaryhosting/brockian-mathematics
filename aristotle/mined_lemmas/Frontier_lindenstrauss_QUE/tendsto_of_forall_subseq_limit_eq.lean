@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Lindenstrauss QUE
 Category: Frontier — Fields Medal Work
 Target: Frontier.lindenstrauss_QUE
@@ -6,13 +8,12 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped ENNReal NNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -22,48 +23,41 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-open MeasureTheory Filter Topology TopologicalSpace
-open scoped BoundedContinuousFunction
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-section Abstract
+open MeasureTheory Filter Topology
 
 variable {X : Type*} [MetricSpace X] [CompactSpace X] [MeasurableSpace X] [BorelSpace X]
 
-omit [CompactSpace X] in
-/-- A weak-* limit of a sequence of `T`-invariant probability measures is `T`-invariant.
-
-This is the standard "limit measures are geodesic-flow invariant" step in the
-quantum-unique-ergodicity argument. -/
+/-- **Weak-\* compactness reduction.**  If every subsequential weak-\* limit of a sequence of
+probability measures on a compact metric space equals `vol`, then the whole sequence converges
+weak-\* to `vol`. -/
 
 theorem tendsto_of_forall_subseq_limit_eq
-    (haar : ProbabilityMeasure X) (mu : ℕ → ProbabilityMeasure X)
-    (hclass : ∀ nu : ProbabilityMeasure X,
-      (∃ ns : ℕ → ℕ, StrictMono ns ∧ Tendsto (fun k => mu (ns k)) atTop (𝓝 nu)) → nu = haar) :
-    Tendsto mu atTop (𝓝 haar) := by
-  by_contra h
-  rw [not_tendsto_iff_exists_frequently_notMem] at h
-  obtain ⟨U, hU, hfreq⟩ := h
-  obtain ⟨ns, hns, hP⟩ := Filter.extraction_of_frequently_atTop hfreq
-  obtain ⟨nu, ms, hms, hconv⟩ := SeqCompactSpace.tendsto_subseq (fun k => mu (ns k))
-  have hnu : nu = haar := hclass nu ⟨ns ∘ ms, hns.comp hms, hconv⟩
-  subst hnu
-  obtain ⟨k, hk⟩ := (hconv.eventually (eventually_mem_nhds_iff.mpr hU)).exists
-  exact hP (ms k) (mem_of_mem_nhds hk)
+    (μ : ℕ → ProbabilityMeasure X) (vol : ProbabilityMeasure X)
+    (h : ∀ ns : ℕ → ℕ, StrictMono ns → ∀ ν : ProbabilityMeasure X,
+      Tendsto (fun k => μ (ns k)) atTop (𝓝 ν) → ν = vol) :
+    Tendsto μ atTop (𝓝 vol) := by
+  by_contra hcon
+  rw [Filter.tendsto_iff_forall_eventually_mem] at hcon
+  push_neg at hcon
+  obtain ⟨U, hU, hfreq⟩ := hcon
+  obtain ⟨ψ, hψ, hψU⟩ := extraction_of_frequently_atTop hfreq
+  obtain ⟨ν, ms, hms, htend⟩ := CompactSpace.tendsto_subseq (fun k => μ (ψ k))
+  have hν : ν = vol := h (ψ ∘ ms) (hψ.comp hms) ν htend
+  subst hν
+  have hev : ∀ᶠ k in atTop, μ (ψ (ms k)) ∈ U := htend hU
+  obtain ⟨k, hk⟩ := hev.exists
+  exact hψU (ms k) hk
 
-/-- **Arithmetic quantum unique ergodicity (Lindenstrauss), in reduced form.**
-
-`X` is a compact metric measurable space (the unit cotangent bundle `Γ \ SL₂(ℝ)` of a compact
-congruence surface), `T` is the time-one map of the geodesic flow, `haar` is the normalized
-Haar/Liouville probability measure, and `mu n` is the sequence of microlocal lifts of the
-Hecke–Maass eigenfunctions.
-
-The hypotheses are:
-* `hinv` : each microlocal lift is asymptotically invariant under the geodesic flow (here: exactly
-  invariant, as holds for the limit objects);
-* `hclass` : Lindenstrauss' measure classification input — any geodesic-flow-invariant weak-*
-  subsequential limit of the lifts is the Haar measure.
-
-The conclusion is quantum unique ergodicity: the microlocal lifts converge weak-* to Haar
-measure, equivalently `∫ f dμₙ → ∫ f dhaar` for every bounded continuous observable `f`. -/
+/-- The measure `|f|² · vol`, the natural "quantum probability measure" attached to an
+`L²`-normalised (eigen)function `f`. -/

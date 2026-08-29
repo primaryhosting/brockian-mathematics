@@ -2,51 +2,52 @@
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` commands to precede any module documentation, so the header above is
--- written as a plain comment; it is repeated as the module docstring below.)
-import RequestProject.Savitch.Final
+import RequestProject.Savitch.Model
+import RequestProject.Savitch.Interp
 
 /-!
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-The machine model is the standard off-line random-access model of space bounded computation
-(see `RequestProject/Savitch/Model.lean`): the memory of a machine is a bit string, one step
-rewrites the memory using the memory content and a single input bit, read at a position which
-is determined by the memory, and the space used on an input is the maximal length of a memory
-string occurring in the computation.
+/-
+`NSPACE f ⊆ DSPACE (16 * (f + 1)^2)`, i.e. Savitch's theorem, and the corollary
+`PSPACE = NPSPACE`.
 
-`NSPACE f` and `DSPACE g` are the classes of languages accepted by nondeterministic,
-respectively deterministic, machines running in space `O (f n)`, respectively `O (g n)`.
+The model of computation is set up in `RequestProject.Savitch.Model`: a device is
+a configuration graph with read-only access to the input tape, and the space it
+uses is the number of bits needed to encode a configuration.
 
-The proof is Savitch's: for a nondeterministic machine `M` running in space `S` on the input
-`x`, deciding whether `M` accepts amounts to deciding reachability in the configuration graph
-of `M` on `x`, whose vertices are the words of length at most `S`.  Reachability by a path of
-length at most `2 ^ k` is decided by the midpoint recursion `savR`, whose recursion depth is
-`k`; taking `k = S + 1` suffices because there are only `2 ^ (S + 1) - 1` configurations.  The
-simulator runs this recursion with an explicit stack of at most `S + 2` frames, each holding
-three words of length at most `S`, so it uses `O (S ^ 2)` bits.  Since the simulator does not
-know `S`, it runs the whole procedure for stages `s = 0, 1, 2, …`, and at each stage also
-checks whether some reachable configuration has a successor of length more than `s`; the first
-stage at which this check fails gives the correct answer, and this happens at the latest at
-stage `S`.
+The proof follows the classical argument.  Given a nondeterministic device `M`
+using `s` bits of space, its configuration graph (extended by a single absorbing
+accepting vertex) has at most `2 ^ (s+1)` vertices, so acceptance amounts to
+reachability in a graph of that size.  Reachability is computed deterministically
+by the midpoint recursion `reach` of `RequestProject.Savitch.Reach`, of depth
+`K = s + 1`, and this recursion is executed by the explicit stack machine of
+`RequestProject.Savitch.Interp`, whose states consist of at most `K` frames, each
+holding three vertices and a bit.  That machine therefore has at most
+`2 ^ (16 * K ^ 2)` configurations, i.e. it runs in space `O(s²)`.
 -/
 
 namespace CS
 
-namespace Savitch
+/-! ### Counting the states of the evaluator -/
 
-/-- A deterministic machine viewed as a nondeterministic machine. -/
+section Card
 
-theorem reach_refl (x : Word) : M.Reach x [] := Relation.ReflTransGen.refl
+variable {C : Type} [Fintype C] (K : ℕ)
+
+/-- Encoding of a state of the evaluator by its mode and the (padded) list of its
+frames. -/
+
+lemma reach_refl (k : ℕ) (a : C) : reach R k a a = true := by
+  induction k with
+  | zero => simp
+  | succ k ih => simp only [reach_succ, bdec_eq_true_iff]; exact ⟨a, ih, ih⟩
 

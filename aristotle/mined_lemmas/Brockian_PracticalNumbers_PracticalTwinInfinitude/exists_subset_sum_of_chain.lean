@@ -30,83 +30,66 @@ Target: Brockian.PracticalNumbers.PracticalTwinInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any doc-comment command, so the header above is written as a
--- plain block comment; its text is verbatim as requested.)
 
 import Mathlib
 
-/-!
-The main result of this file is `Brockian.PracticalNumbers.PracticalTwinInfinitude`:
-there are infinitely many `n` such that both `n` and `n + 2` are practical numbers.
-
-The proof is completely explicit. We show that for every `t`, the pair
-`(2 * (3 ^ 2 ^ t - 1), 2 * 3 ^ 2 ^ t)` is a pair of practical numbers differing by `2`
-(e.g. `(4, 6)`, `(16, 18)`, `(160, 162)`, `(13120, 13122)`, ...).
-
-The engine is the classical closure property `IsPractical.mul`: if `n` is practical and
-`0 < m ≤ σ n + 1`, then `n * m` is practical. Iterating it along the factorisation
-`3 ^ 2 ^ t - 1 = 2 * (3 ^ 2 ^ 0 + 1) * (3 ^ 2 ^ 1 + 1) * ⋯ * (3 ^ 2 ^ (t-1) + 1)`
-(realised here as a simple induction on `t`) yields practicality of `2 * (3 ^ 2 ^ t - 1)`,
-while practicality of `2 * 3 ^ a` is an even simpler induction.
--/
+open Finset
 
 namespace Brockian.PracticalNumbers
 
-open Finset
+/-- A positive natural number `n` is *practical* when every `m ≤ n` can be written as a sum
+of distinct divisors of `n`. -/
 
-/-- `n` is a *practical number* if it is positive and every `k ≤ n` can be written as a sum of
-distinct divisors of `n`. -/
-
-theorem exists_subset_sum_of_chain {S : Finset ℕ} (hpos : ∀ x ∈ S, 0 < x)
-    (h : ∀ x ∈ S, x ≤ 1 + ∑ y ∈ S.filter (· < x), y) :
-    ∀ k ≤ ∑ x ∈ S, x, ∃ T ⊆ S, ∑ x ∈ T, x = k := by
-  induction S using Finset.strongInduction with
-  | _ S ih =>
-    intro k hk
-    rcases S.eq_empty_or_nonempty with rfl | hne
-    · simp only [Finset.sum_empty, Nat.le_zero] at hk
-      exact ⟨∅, by simp [hk]⟩
-    · set M := S.max' hne with hMdef
-      have hM : M ∈ S := S.max'_mem hne
-      set S' := S.erase M with hS'def
-      have hsub : S' ⊂ S := Finset.erase_ssubset hM
-      have hfil : ∀ x ∈ S', S'.filter (· < x) = S.filter (· < x) := by
+lemma exists_subset_sum_of_chain :
+    ∀ D : Finset ℕ, (∀ x ∈ D, x ≤ 1 + ∑ y ∈ D.filter (fun y => y < x), y) →
+      ∀ m ≤ ∑ x ∈ D, x, ∃ S ⊆ D, ∑ d ∈ S, d = m := by
+  intro D
+  induction D using Finset.strongInduction with
+  | _ D IH =>
+    intro hchain m hm
+    rcases D.eq_empty_or_nonempty with rfl | hne
+    · simp only [Finset.sum_empty, Nat.le_zero] at hm
+      exact ⟨∅, by simp [hm]⟩
+    · set x0 := D.max' hne with hx0def
+      have hx0D : x0 ∈ D := D.max'_mem hne
+      set D' := D.erase x0 with hD'def
+      have hsub : D' ⊂ D := Finset.erase_ssubset hx0D
+      have hfilter : D.filter (fun y => y < x0) = D' := by
+        ext y
+        simp only [Finset.mem_filter, hD'def, Finset.mem_erase]
+        constructor
+        · rintro ⟨hy, hlt⟩; exact ⟨ne_of_lt hlt, hy⟩
+        · rintro ⟨hne', hy⟩
+          exact ⟨hy, lt_of_le_of_ne (D.le_max' y hy) hne'⟩
+      have hsum : ∑ x ∈ D, x = x0 + ∑ x ∈ D', x := (Finset.add_sum_erase _ _ hx0D).symm
+      have hchain' : ∀ x ∈ D', x ≤ 1 + ∑ y ∈ D'.filter (fun y => y < x), y := by
         intro x hx
-        have hxS : x ∈ S := Finset.mem_of_mem_erase hx
-        apply Finset.Subset.antisymm
-        · exact Finset.filter_subset_filter _ (Finset.erase_subset _ _)
-        · intro y hy
-          simp only [Finset.mem_filter] at hy ⊢
-          refine ⟨Finset.mem_erase.2 ⟨?_, hy.1⟩, hy.2⟩
-          intro hyM
-          have : x ≤ M := S.le_max' x hxS
+        have hxD : x ∈ D := Finset.mem_of_mem_erase hx
+        have heq : D'.filter (fun y => y < x) = D.filter (fun y => y < x) := by
+          ext y
+          simp only [Finset.mem_filter, hD'def, Finset.mem_erase]
+          constructor
+          · rintro ⟨⟨_, hy⟩, hlt⟩; exact ⟨hy, hlt⟩
+          · rintro ⟨hy, hlt⟩
+            refine ⟨⟨?_, hy⟩, hlt⟩
+            rintro rfl
+            exact absurd (D.le_max' x hxD) (not_le.mpr hlt)
+        rw [heq]
+        exact hchain x hxD
+      by_cases hcase : m ≤ ∑ x ∈ D', x
+      · obtain ⟨S, hS, hSsum⟩ := IH D' hsub hchain' m hcase
+        exact ⟨S, hS.trans (Finset.erase_subset _ _), hSsum⟩
+      · push_neg at hcase
+        have hx0le : x0 ≤ m := by
+          have := hchain x0 hx0D
+          rw [hfilter] at this
           omega
-      have hpos' : ∀ x ∈ S', 0 < x := fun x hx => hpos x (Finset.mem_of_mem_erase hx)
-      have h' : ∀ x ∈ S', x ≤ 1 + ∑ y ∈ S'.filter (· < x), y := by
-        intro x hx
-        rw [hfil x hx]
-        exact h x (Finset.mem_of_mem_erase hx)
-      have hsum : ∑ x ∈ S', x + M = ∑ x ∈ S, x := Finset.sum_erase_add _ _ hM
-      by_cases hk' : k ≤ ∑ x ∈ S', x
-      · obtain ⟨T, hT, hTsum⟩ := ih S' hsub hpos' h' k hk'
-        exact ⟨T, hT.trans (Finset.erase_subset _ _), hTsum⟩
-      · push_neg at hk'
-        have hMle : M ≤ 1 + ∑ x ∈ S', x := by
-          refine le_trans (h M hM) ?_
-          have hsubf : S.filter (· < M) ⊆ S' := by
-            intro y hy
-            simp only [Finset.mem_filter] at hy
-            exact Finset.mem_erase.2 ⟨by omega, hy.1⟩
-          exact Nat.add_le_add_left (Finset.sum_le_sum_of_subset hsubf) 1
-        have hMk : M ≤ k := by omega
-        obtain ⟨T, hT, hTsum⟩ := ih S' hsub hpos' h' (k - M) (by omega)
-        refine ⟨insert M T, ?_, ?_⟩
-        · intro x hx
-          rcases Finset.mem_insert.1 hx with rfl | hx
-          · exact hM
-          · exact (hT.trans (Finset.erase_subset _ _)) hx
-        · have hMT : M ∉ T := fun hc => (Finset.mem_erase.1 (hT hc)).1 rfl
-          rw [Finset.sum_insert hMT, hTsum]
+        have hle : m - x0 ≤ ∑ x ∈ D', x := by omega
+        obtain ⟨S, hS, hSsum⟩ := IH D' hsub hchain' (m - x0) hle
+        have hx0S : x0 ∉ S := fun h => (Finset.mem_erase.mp (hS h)).1 rfl
+        refine ⟨insert x0 S, ?_, ?_⟩
+        · exact Finset.insert_subset hx0D (hS.trans (Finset.erase_subset _ _))
+        · rw [Finset.sum_insert hx0S, hSsum]
           omega
 
 /-- For a practical number, each divisor is at most one more than the sum of the smaller

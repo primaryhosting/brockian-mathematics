@@ -1,0 +1,41 @@
+/-!
+# Cook Levin
+Category: Frontier — Moonshot
+Target: Frontier.cook_levin
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+This development is deliberately self-contained (it uses no `import`, so that the module
+docstring above can literally be the first thing in the file).  The definitions of `Lit`,
+`Clause`, `CNF`, `Clause.eval` and `CNF.eval` below mirror `Std.Sat.Literal`,
+`Std.Sat.CNF.Clause`, `Std.Sat.CNF`, `Std.Sat.CNF.Clause.eval` and `Std.Sat.CNF.eval`
+from the Lean standard library.
+-/
+
+namespace Frontier
+
+/-! ## Propositional formulas in conjunctive normal form -/
+
+/-- A literal: a variable together with the sign with which it occurs. -/
+abbrev Lit (V : Type) := V × Bool
+
+/-- A clause is a disjunction of literals. -/
+abbrev Clause (V : Type) := List (Lit V)
+
+/-- A CNF formula is a conjunction of clauses. -/
+abbrev CNF (V : Type) := List (Clause V)
+
+/-- Value of a clause under an assignment. -/
+
+theorem run_state_lt (hrun : M.Run x T c) : ∀ t, t ≤ T → (c t).state < M.numStates := by
+  intro t
+  induction t with
+  | zero => intro _; rw [hrun.1]; exact M.start_lt
+  | succ t ih =>
+    intro ht
+    obtain ⟨p, hp, h1, -, -⟩ := hrun.2 t (by omega)
+    rw [h1]
+    exact M.step_lt _ _ p hp
+

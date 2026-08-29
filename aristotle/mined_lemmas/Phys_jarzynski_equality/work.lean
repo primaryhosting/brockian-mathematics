@@ -1,4 +1,5 @@
-/-
+import Mathlib
+/-!
 # Jarzynski Equality
 Category: Frontier Phys
 Target: Phys.jarzynski_equality
@@ -6,15 +7,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 namespace Phys
 
 open Finset
 
-variable {S : Type*} [Fintype S] [Nonempty S]
+variable {Ω : Type*} [Fintype Ω]
 
-/-- Canonical partition function at inverse temperature `β` for energy function `H`. -/
+/-- Canonical partition function `Z = ∑ₓ e^{-βH(x)}` of a Hamiltonian `H` on a finite
+state space at inverse temperature `β`. -/
 
-def work (H₀ H₁ : S → ℝ) (T : S ≃ S) (x : S) : ℝ := H₁ (T x) - H₀ x
+def work (H₀ H₁ : Ω → ℝ) (Φ : Equiv.Perm Ω) (x : Ω) : ℝ := H₁ (Φ x) - H₀ x
 

@@ -8,99 +8,12 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace QPhys
-
-open ComplexConjugate Finset
-
-variable {n : ℕ}
-
-/-- The expectation value `⟨A⟩ = ⟪ψ, A ψ⟫` of an observable `A` (given as a matrix)
-in the state `ψ` (a vector of `ℂ^n`). -/
-
-theorem ehrenfest
-    (ℏ : ℝ) (hℏ : ℏ ≠ 0)
-    (ψ dψ : ℝ → Fin n → ℂ) (H : Matrix (Fin n) (Fin n) ℂ)
-    (A dA : ℝ → Matrix (Fin n) (Fin n) ℂ) (t : ℝ)
-    (hψ : ∀ i, HasDerivAt (fun s => ψ s i) (dψ t i) t)
-    (hA : ∀ i j, HasDerivAt (fun s => A s i j) (dA t i j) t)
-    (hH : H.IsHermitian)
-    (hSch : ∀ i, (Complex.I * ℏ) * dψ t i = ∑ j, H i j * ψ t j) :
-    HasDerivAt (fun s => expect (ψ s) (A s))
-      ((Complex.I / ℏ) * expect (ψ t) (commMat H (A t)) + expect (ψ t) (dA t)) t := by
-  have key := hasDerivAt_expect ψ dψ A dA t hψ hA
-  refine key.congr_deriv ?_
-  have hc : (ℏ : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hℏ
-  -- explicit formula for the time derivative of the state
-  have hd : ∀ i, dψ t i = (-Complex.I / ℏ) * ∑ j, H i j * ψ t j := by
-    intro i
-    have hcancel : (-Complex.I / (ℏ : ℂ)) * ((Complex.I * ℏ) * dψ t i) = dψ t i := by
-      field_simp
-      ring_nf
-      rw [Complex.I_sq]
-      ring
-    rw [← hSch i, hcancel]
-  -- and of its complex conjugate, using hermiticity of `H`
-  have hdc : ∀ i, conj (dψ t i) = (Complex.I / ℏ) * ∑ j, H j i * conj (ψ t j) := by
-    intro i
-    rw [hd i, map_mul, map_sum]
-    have hcj : conj (-Complex.I / (ℏ : ℂ)) = Complex.I / (ℏ : ℂ) := by
-      simp [div_eq_mul_inv]
-    rw [hcj]
-    refine congrArg _ (Finset.sum_congr rfl fun j _ => ?_)
-    rw [map_mul, ← Complex.star_def, hH.apply j i]
-  -- the term coming from `dψ` on the left of the inner product
-  have S1 : ∑ i, ∑ j, conj (dψ t i) * (A t i j * ψ t j)
-      = (Complex.I / ℏ) * ∑ i, ∑ j, conj (ψ t i) * ((H * A t) i j * ψ t j) := by
-    have e1 : ∀ i j, conj (dψ t i) * (A t i j * ψ t j)
-        = ∑ k, ((Complex.I / (ℏ : ℂ)) * (H k i * conj (ψ t k))) * (A t i j * ψ t j) := by
-      intro i j
-      rw [hdc i, Finset.mul_sum, Finset.sum_mul]
-    simp only [e1]
-    rw [sum3_swap13 (fun i j k =>
-      ((Complex.I / (ℏ : ℂ)) * (H k i * conj (ψ t k))) * (A t i j * ψ t j)), Finset.mul_sum]
-    refine Finset.sum_congr rfl fun k _ => ?_
-    rw [Finset.mul_sum]
-    refine Finset.sum_congr rfl fun j _ => ?_
-    rw [Matrix.mul_apply, Finset.sum_mul, Finset.mul_sum, Finset.mul_sum]
-    exact Finset.sum_congr rfl fun i _ => by ring
-  -- the term coming from `dψ` on the right of the inner product
-  have S3 : ∑ i, ∑ j, conj (ψ t i) * (A t i j * dψ t j)
-      = -(Complex.I / ℏ) * ∑ i, ∑ j, conj (ψ t i) * ((A t * H) i j * ψ t j) := by
-    have e3 : ∀ i j, conj (ψ t i) * (A t i j * dψ t j)
-        = ∑ k, conj (ψ t i) * (A t i j * ((-Complex.I / (ℏ : ℂ)) * (H j k * ψ t k))) := by
-      intro i j
-      rw [hd j, Finset.mul_sum, Finset.mul_sum, Finset.mul_sum]
-    simp only [e3]
-    rw [Finset.mul_sum]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    rw [Finset.sum_comm, Finset.mul_sum]
-    refine Finset.sum_congr rfl fun j _ => ?_
-    rw [Matrix.mul_apply, Finset.sum_mul, Finset.mul_sum, Finset.mul_sum]
-    exact Finset.sum_congr rfl fun k _ => by ring
-  have expand : ∑ i, ∑ j, (conj (dψ t i) * (A t i j * ψ t j)
-        + conj (ψ t i) * (dA t i j * ψ t j)
-        + conj (ψ t i) * (A t i j * dψ t j))
-      = (∑ i, ∑ j, conj (dψ t i) * (A t i j * ψ t j))
-        + (∑ i, ∑ j, conj (ψ t i) * (dA t i j * ψ t j))
-        + ∑ i, ∑ j, conj (ψ t i) * (A t i j * dψ t j) := by
-    simp [Finset.sum_add_distrib]
-  have hcomm : expect (ψ t) (commMat H (A t))
-      = (∑ i, ∑ j, conj (ψ t i) * ((H * A t) i j * ψ t j))
-        - ∑ i, ∑ j, conj (ψ t i) * ((A t * H) i j * ψ t j) := by
-    simp [expect, commMat, Matrix.sub_apply, sub_mul, mul_sub, Finset.sum_sub_distrib]
-  rw [expand, S1, S3, hcomm]
-  simp only [expect]
-  ring
-
-end QPhys
-
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped InnerProductSpace
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -110,12 +23,58 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
+namespace QPhys
+
+open ContinuousLinearMap
+
+/-- **Ehrenfest theorem.**
+
+Let `psi : ℝ → E` be a state trajectory in a complex inner product space `E`, obeying the
+Schrödinger equation `i ℏ ψ'(t) = H ψ(t)` with a (bounded) self-adjoint Hamiltonian `H`, and let
+`A : ℝ → (E →L[ℂ] E)` be a (possibly time dependent) observable with time derivative `A'` at `t`.
+Writing the expectation value as `⟨A⟩(s) = ⟪ψ(s), A(s) ψ(s)⟫`, we have
+
+`d⟨A⟩/dt = (i/ℏ) ⟪ψ, [H, A] ψ⟫ + ⟪ψ, (∂A/∂t) ψ⟫`,
+
+where `[H, A] = H A - A H`. -/
+
+theorem ehrenfest
+    {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+    (hbar : ℝ) (hbar_ne : hbar ≠ 0)
+    (psi : ℝ → E) (A : ℝ → (E →L[ℂ] E)) (H : E →L[ℂ] E)
+    (hH : ∀ x y : E, ⟪H x, y⟫_ℂ = ⟪x, H y⟫_ℂ)
+    (t : ℝ) (psi' : E) (A' : E →L[ℂ] E)
+    (hpsi : HasDerivAt psi psi' t)
+    (hA : HasDerivAt A A' t)
+    (hSchrodinger : (Complex.I * (hbar : ℂ)) • psi' = H (psi t)) :
+    HasDerivAt (fun s => ⟪psi s, A s (psi s)⟫_ℂ)
+      ((Complex.I / (hbar : ℂ)) * ⟪psi t, (H.comp (A t) - (A t).comp H) (psi t)⟫_ℂ
+        + ⟪psi t, A' (psi t)⟫_ℂ) t := by
+  have hbarC : (hbar : ℂ) ≠ 0 := by
+    simpa using hbar_ne
+  -- Solve the Schrödinger equation for `ψ'`.
+  have hpsi'_eq : psi' = (-(Complex.I / (hbar : ℂ))) • H (psi t) := by
+    rw [← hSchrodinger, smul_smul]
+    have : (-(Complex.I / (hbar : ℂ))) * (Complex.I * (hbar : ℂ)) = 1 := by
+      field_simp
+      simp [Complex.I_sq]
+    rw [this, one_smul]
+  have hB : HasDerivAt (fun s => (A s).restrictScalars ℝ) (A'.restrictScalars ℝ) t :=
+    (ContinuousLinearMap.restrictScalarsL ℂ E E ℝ ℝ).hasFDerivAt.comp_hasDerivAt t hA
+  have hAp : HasDerivAt (fun s => A s (psi s)) (A' (psi t) + A t psi') t := by
+    simpa using hB.clm_apply hpsi
+  have hd : HasDerivAt (fun s => ⟪psi s, A s (psi s)⟫_ℂ)
+      (⟪psi t, A' (psi t) + A t psi'⟫_ℂ + ⟪psi', A t (psi t)⟫_ℂ) t :=
+    hpsi.inner ℂ hAp
+  convert hd using 1
+  rw [inner_add_right, hpsi'_eq, ContinuousLinearMap.map_smul, inner_smul_right, inner_smul_left,
+    hH (psi t) (A t (psi t))]
+  have hconj : (starRingEnd ℂ) (-(Complex.I / (hbar : ℂ))) = Complex.I / (hbar : ℂ) := by
+    simp [map_div₀, Complex.conj_I, Complex.conj_ofReal, neg_div]
+  rw [hconj]
+  simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.comp_apply, inner_sub_right]
+  ring
+
+/-- The Ehrenfest theorem, expressed with `deriv`. -/

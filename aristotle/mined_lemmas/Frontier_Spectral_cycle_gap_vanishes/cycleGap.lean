@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Cycle Gap Vanishes
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.cycle_gap_vanishes
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,18 +31,11 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Cycle Gap Vanishes
-Category: Frontier Spectral
-Target: Frontier.Spectral.cycle_gap_vanishes
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Frontier.Spectral
 
 /-- The Fiedler value (algebraic connectivity) of the cycle graph `C n`. -/
 
 noncomputable def cycleGap (n : ℕ) : ℝ := 2 - 2 * Real.cos (2 * Real.pi / n)
 
-/-- The spectral gap of the cycle family vanishes as `n → ∞`. -/
+/-- The spectral gap of the cycle family vanishes: `2 - 2 cos (2π/n) → 0` as `n → ∞`.
+Hence the plain cycle family has no uniform spectral gap. -/

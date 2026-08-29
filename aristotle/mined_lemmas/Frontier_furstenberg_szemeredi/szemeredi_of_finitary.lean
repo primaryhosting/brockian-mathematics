@@ -1,11 +1,3 @@
-/-
-# Furstenberg Szemeredi
-Category: Frontier Abel
-Target: Frontier.furstenberg_szemeredi
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -33,24 +25,33 @@ set_option autoImplicit false
 set_option pp.fullNames true
 set_option pp.structureInstances true
 set_option pp.coercions.types true
+set_option pp.piBinderTypes true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
 namespace Frontier
 
-/-- The counting function of a set of naturals: the number of elements of `A` below `n`. -/
+open Finset
 
-theorem szemeredi_of_finitary (h : FinitarySzemeredi) : SzemerediStatement := by
-  intro A hA k
-  obtain ⟨ε, hε, hcount⟩ := exists_pos_frequently_count hA
-  obtain ⟨N, hN⟩ := h k ε hε
-  obtain ⟨n, hn, -, hcard⟩ := hcount N
-  obtain ⟨a, d, hd, hmem⟩ := hN n hn ((Finset.range n).filter (· ∈ A))
-    (Finset.filter_subset _ _) hcard
-  exact ⟨a, d, hd, fun i hi => (Finset.mem_filter.mp (hmem i hi)).2⟩
+/-- The trace of a set `A ⊆ ℕ` on the initial segment `{0, 1, ..., N - 1}`. -/
 
-/-- Sanity check (non-vacuity): the whole of `ℕ` has upper density `1`, so the hypothesis of
-positive upper density is satisfiable. -/
+theorem szemeredi_of_finitary (hSz : SzemerediFinitary) {A : Set ℕ} (hA : HasPosUpperDensity A)
+    (k : ℕ) : HasAPOfLength A k := by
+  obtain ⟨δ, hδ, hdens⟩ := hA
+  obtain ⟨N₀, hN₀⟩ := hSz k δ hδ
+  obtain ⟨N, hN, hcard⟩ := hdens N₀
+  obtain ⟨a, d, hd, hmem⟩ := hN₀ N hN (trace A N) (trace_subset A N) hcard
+  exact ⟨a, d, hd, fun i hi => mem_of_mem_trace (hmem i hi)⟩
+
+/-- **Furstenberg–Szemerédi.**
+
+Positive-density subsets of `ℕ` contain arbitrarily long arithmetic progressions.
+
+Two Lean-checked components are recorded here:
+
+* the *base case*: unconditionally, every set of positive upper density contains an arithmetic
+  progression of length `k` for every `k ≤ 3` (the length-three case being Roth's theorem);
+* the *reduction*: assuming the finitary form of Szemerédi's theorem (`SzemerediFinitary`), every
+  set of positive upper density contains arithmetic progressions of *every* length. -/

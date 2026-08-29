@@ -6,8 +6,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to precede any module doc-comment, so the header above is
--- reproduced verbatim as a module doc-comment immediately after the import.)
 import Mathlib
 
 /-!
@@ -49,8 +47,8 @@ open Polynomial
 
 /-- The (probabilists') Hermite polynomials, with real coefficients. -/
 
-lemma hermiteR_succ (n : ℕ) :
-    hermiteR (n + 1) = X * hermiteR n - derivative (hermiteR n) := by
-  simp [hermiteR, Polynomial.hermite_succ, Polynomial.derivative_map]
+theorem hermiteR_succ (n : ℕ) : hermiteR (n + 1) = X * hermiteR n - derivative (hermiteR n) := by
+  unfold hermiteR
+  rw [hermite_succ, Polynomial.map_sub, Polynomial.map_mul, derivative_map]
+  simp
 
-/-- `He_{n+1}' = (n+1) He_n`. -/

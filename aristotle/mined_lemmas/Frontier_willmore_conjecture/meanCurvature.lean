@@ -5,7 +5,6 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -30,9 +29,9 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
+set_option pp.fullNames false
 set_option pp.structureInstances true
-set_option pp.coercions.types true
+set_option pp.coercions.types false
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
@@ -41,24 +40,14 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Basic vector algebra in `ℝ³` -/
+open Real
 
-/-- Euclidean three-space, as a triple of reals. -/
-abbrev R3 := ℝ × ℝ × ℝ
+/-! ## Partial derivatives of functions of two real variables -/
 
-/-- The standard inner product on `ℝ³`. -/
+/-- Partial derivative with respect to the first variable. -/
 
-noncomputable def meanCurvature (X : ℝ → ℝ → R3) (u v : ℝ) : ℝ :=
-  let Xu := pd1 X u v
-  let Xv := pd2 X u v
-  let Xuu := pd1 (pd1 X) u v
-  let Xuv := pd2 (pd1 X) u v
-  let Xvv := pd2 (pd2 X) u v
-  let E := dot3 Xu Xu
-  let F := dot3 Xu Xv
-  let G := dot3 Xv Xv
-  let N := cross3 Xu Xv
-  let W := nrm3 N
-  ((dot3 Xuu N / W) * G - 2 * (dot3 Xuv N / W) * F + (dot3 Xvv N / W) * E) / (2 * (E * G - F * F))
+noncomputable def meanCurvature (u v : ℝ) : ℝ :=
+  (S.Efst u v * S.Nsnd u v - 2 * S.Ffst u v * S.Msnd u v + S.Gfst u v * S.Lsnd u v) /
+    (2 * (S.Efst u v * S.Gfst u v - S.Ffst u v ^ 2))
 
-/-- The Willmore energy `∫ H² dA` of a surface parametrized by the square `[0, 2π]²`. -/
+/-- The area element `√(EG - F²)`. -/

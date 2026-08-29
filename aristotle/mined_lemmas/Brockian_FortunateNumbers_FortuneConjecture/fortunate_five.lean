@@ -23,17 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Fortune Conjecture
-Category: Brockian Conjecture
-Target: Brockian.FortunateNumbers.FortuneConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean requires `import` lines to precede any module docstring, so the header above is a
--- plain comment and is repeated verbatim as the module docstring below.)
-
 import Mathlib
 
 /-!
@@ -46,32 +35,16 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.FortunateNumbers
 
-open Finset
+open Nat
 
-/-!
-## Setup
-
-For a bound `N`, `primorial N` (Mathlib's `primorial`, notation `N#`) is the product of all
-primes `≤ N`.  The *fortunate number* attached to `N` is the least `m ≥ 2` such that
-`N# + m` is prime.  Fortune's conjecture asserts that this number is always prime.
-
-The conjecture is open.  What we prove here is the classical unconditional dichotomy
-(`fortunate_prime_or_sq_le`): the fortunate number is either prime or at least `(N+1)^2`,
-because none of its prime factors can be `≤ N`.  The named target
-`FortuneConjecture` is therefore the corresponding *conditional* statement: the fortunate
-number is prime as soon as it is smaller than `(N+1)^2`.
--/
-
-/-- Every prime `q ≤ N` divides the primorial `N#`. -/
+/-- Existence of a "fortunate offset": for every `n` there is some `m > 1` such that
+`n# + m` is prime, where `n#` is the primorial of `n`.  This follows from Bertrand's
+postulate applied to `n# + 1`. -/
 
 theorem fortunate_five : fortunate 5 = 7 := by
-  have h30 : primorial 5 = 30 := by decide
-  refine le_antisymm (fortunate_le (by norm_num) (by rw [h30]; decide)) ?_
-  refine le_csInf ⟨_, Nat.sInf_mem (exists_fortunate 5)⟩ ?_
-  rintro m ⟨h2, hp⟩
-  rw [h30] at hp
-  by_contra hlt
-  push_neg at hlt
-  interval_cases m <;> revert hp <;> decide
+  have h : primorial 5 = 30 := by decide
+  rw [fortunate, Nat.find_eq_iff]
+  refine ⟨⟨by norm_num, by rw [h]; norm_num⟩, ?_⟩
+  intro m hm
+  interval_cases m <;> norm_num [h]
 
-/-- The conditional form applies to `N = 5`: `fortunate 5 = 7 < 36`, so it is prime. -/

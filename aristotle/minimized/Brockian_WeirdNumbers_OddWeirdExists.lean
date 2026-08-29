@@ -23,7 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+/-!
 # Odd Weird Exists
 Category: Brockian Conjecture
 Target: Brockian.WeirdNumbers.OddWeirdExists
@@ -33,41 +33,88 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+## Overview
+
+A natural number `n` is *weird* (`Nat.Weird`, from Mathlib) when it is abundant
+(the sum of its proper divisors exceeds `n`) but not pseudoperfect (no subset of its
+proper divisors sums to `n`).  Whether an **odd** weird number exists is a well-known
+open problem, so the unconditional statement `∃ n, Odd n ∧ Nat.Weird n` is not proved
+here.  Instead this file contains:
+
+* `Brockian.WeirdNumbers.abundance`: the abundance `σ(n) - 2n` of `n`.
+* `Brockian.WeirdNumbers.pseudoperfect_iff_exists_sum_eq_abundance`: for an abundant `n`,
+  `n` is pseudoperfect iff some subset of its proper divisors sums to the *abundance* of
+  `n` (complementation of subsets).  This turns the subset-sum target `n` into the much
+  smaller target `abundance n`.
+* `Brockian.WeirdNumbers.OddWeirdExists`: an unconditional Lean-checked **reduction** of
+  the open problem: an odd weird number exists **iff** there is an odd abundant number no
+  subset of whose proper divisors sums to its abundance.
+* `Brockian.WeirdNumbers.weird_of_abundance_small`: a practical sufficient criterion for
+  weirdness (abundance different from `1` and smaller than every proper divisor `> 1`).
+* `Brockian.WeirdNumbers.weird_seventy` / `exists_weird`: `70` is weird, so weird numbers
+  do exist (unconditionally, by a finite kernel computation).
+-/
+
 open Finset
 
-/-!
-## Status
-
-`OddWeirdExists` (the existence of an odd weird number) is an open problem, and is **not** proved
-here. What is proved, axiom-cleanly:
-
-* `oddWeirdExists_iff` — an elementary restatement of the target;
-* `pseudoperfect_mul_left`, `pseudoperfect_of_dvd`, `not_pseudoperfect_of_dvd_of_weird` — every
-  multiple of a pseudoperfect number is pseudoperfect, hence no divisor of a weird number is
-  pseudoperfect;
-* `not_dvd_945_of_weird`, `not_dvd_of_perfect_of_weird`, `not_perfect_of_weird` — concrete
-  consequences (e.g. no weird number is a multiple of `945`, the smallest odd abundant number);
-* `weird_mul_prime` — if `n` is weird and `p` is a prime exceeding the sum of the divisors of `n`,
-  then `n * p` is weird;
-* `oddWeirdExists_iff_infinite` — the conditional reduction: one odd weird number would already
-  force infinitely many;
-* `even_weird_exists` — the even case, via Mathlib's `Nat.weird_seventy`.
-
-The relevant existing Mathlib material is `Mathlib/NumberTheory/FactorisationProperties.lean`
-(`Nat.Abundant`, `Nat.Pseudoperfect`, `Nat.Weird`, `Nat.Abundant.of_dvd`, `Nat.weird_seventy`);
-no Mathlib lemma closes the target itself.
--/
+set_option maxRecDepth 40000
 
 namespace Brockian.WeirdNumbers
 
-/-- The Brockian statement "an odd weird number exists".
+/-- The *abundance* of `n`, i.e. `σ(n) - 2n`, written as the excess of the sum of the
+proper divisors of `n` over `n` itself (truncated subtraction). -/
 
-A natural number is *weird* (`Nat.Weird`, from Mathlib's
-`Mathlib/NumberTheory/FactorisationProperties.lean`) when it is abundant (the sum of its proper
-divisors exceeds it) but not pseudoperfect (no subset of its proper divisors sums to it).
-Whether an odd weird number exists is an open problem; this file therefore develops
-Lean-checked reductions and partial results around the statement. -/
+def abundance (n : ℕ) : ℕ := (∑ i ∈ n.properDivisors, i) - n
 
-def OddWeirdExists : Prop := ∃ n : ℕ, Odd n ∧ n.Weird
+lemma sum_eq_add_abundance {n : ℕ} (h : n.Abundant) :
+    (∑ i ∈ n.properDivisors, i) = n + abundance n := by
+  have h' : n < ∑ i ∈ n.properDivisors, i := h
+  unfold abundance
+  omega
 
-/-- Unfolding of `OddWeirdExists` into elementary arithmetic terms. -/
+lemma pseudoperfect_iff_exists_sum_eq_abundance {n : ℕ} (hn : 0 < n) (h : n.Abundant) :
+    n.Pseudoperfect ↔ ∃ t ⊆ n.properDivisors, ∑ i ∈ t, i = abundance n := by
+  have h2 := sum_eq_add_abundance h
+  constructor
+  · rintro ⟨-, s, hs, hsum⟩
+    refine ⟨n.properDivisors \ s, sdiff_subset, ?_⟩
+    have hsd : (∑ i ∈ n.properDivisors \ s, i) + ∑ i ∈ s, i = ∑ i ∈ n.properDivisors, i :=
+      Finset.sum_sdiff hs
+    omega
+  · rintro ⟨t, ht, hsum⟩
+    refine ⟨hn, n.properDivisors \ t, sdiff_subset, ?_⟩
+    have hsd : (∑ i ∈ n.properDivisors \ t, i) + ∑ i ∈ t, i = ∑ i ∈ n.properDivisors, i :=
+      Finset.sum_sdiff ht
+    omega
+
+/-- Characterisation of weird numbers by the abundance subset-sum problem. -/
+
+theorem weird_iff_abundant_and_abundance_not_subset_sum {n : ℕ} (hn : 0 < n) :
+    n.Weird ↔ n.Abundant ∧ ∀ t ⊆ n.properDivisors, ∑ i ∈ t, i ≠ abundance n := by
+  constructor
+  · rintro ⟨hab, hnp⟩
+    refine ⟨hab, fun t ht hsum =>
+      hnp ((pseudoperfect_iff_exists_sum_eq_abundance hn hab).2 ⟨t, ht, hsum⟩)⟩
+  · rintro ⟨hab, ht⟩
+    refine ⟨hab, fun hp => ?_⟩
+    obtain ⟨t, hts, hsum⟩ := (pseudoperfect_iff_exists_sum_eq_abundance hn hab).1 hp
+    exact ht t hts hsum
+
+/-- A sufficient criterion for weirdness: if `n` is abundant, its abundance is not `1`,
+and every proper divisor other than `1` exceeds the abundance, then `n` is weird. -/
+
+theorem OddWeirdExists :
+    (∃ n : ℕ, Odd n ∧ Nat.Weird n) ↔
+      ∃ n : ℕ, Odd n ∧ n.Abundant ∧ ∀ t ⊆ n.properDivisors, ∑ i ∈ t, i ≠ abundance n := by
+  constructor
+  · rintro ⟨n, hodd, hw⟩
+    have hn : 0 < n := hodd.pos
+    obtain ⟨hab, ht⟩ := (weird_iff_abundant_and_abundance_not_subset_sum hn).1 hw
+    exact ⟨n, hodd, hab, ht⟩
+  · rintro ⟨n, hodd, hab, ht⟩
+    have hn : 0 < n := hodd.pos
+    exact ⟨n, hodd, (weird_iff_abundant_and_abundance_not_subset_sum hn).2 ⟨hab, ht⟩⟩
+
+/-- A concrete sufficient condition for the open problem: an odd abundant number whose
+abundance is neither `1` nor `≥` some proper divisor `> 1` would be an odd weird number. -/

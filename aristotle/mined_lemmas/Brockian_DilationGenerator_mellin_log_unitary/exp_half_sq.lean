@@ -33,18 +33,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open MeasureTheory Set Real
-open scoped ENNReal NNReal
+open scoped Real ENNReal
+open MeasureTheory Set
 
-namespace Brockian.DilationGenerator
+namespace Brockian
+namespace DilationGenerator
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
-/-- The substitution `x = exp t` maps `ℝ` onto `(0, ∞)`. -/
+/-- The image of `ℝ` under `exp` is the positive half line. -/
 
 lemma exp_half_sq (t : ℝ) : Real.exp (t / 2) ^ 2 = Real.exp t := by
-  rw [sq, ← Real.exp_add, add_halves]
+  rw [sq, ← Real.exp_add]
+  ring_nf
 
-/-- **Mellin log unitary (L²-norm preservation).**
-The substitution `x = e^t`, together with the weight `e^{t/2}`, preserves the `L²` integral:
-`∫_{(0,∞)} ‖f x‖² dx = ∫_ℝ ‖e^{t/2} f(e^t)‖² dt`. -/
+/-- Pointwise form of the Jacobian factor: `‖e^{t/2} • f (e^t)‖² = e^t ‖f (e^t)‖²`. -/

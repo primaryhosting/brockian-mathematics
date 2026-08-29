@@ -29,6 +29,10 @@ Category: Brockian Conjecture
 Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: Lean 4 requires `import` commands to precede every other command, including
+module docstrings, so the header above is a plain block comment `/- ... -/`; the same
+text is repeated as the module docstring `/-! ... -/` immediately after the import.)
 -/
 
 import Mathlib
@@ -39,42 +43,37 @@ Category: Brockian Conjecture
 Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many base-10 palindromic primes is an open problem, so
-what is proved here is an unconditional *reduction*: the infinitude of palindromic
-primes is equivalent to the existence of arbitrarily large palindromic primes whose
-decimal expansion has an **odd** number of digits.
-
-The key intermediate lemma is that a base-10 palindrome with an even number of
-digits is divisible by `11`; hence `11` is the only palindromic prime with an even
-number of digits.
 -/
 
 namespace Brockian.PalindromicPrimes
 
-open List
+open Nat
 
-/-- `n` is a palindrome in base `b` if its list of base-`b` digits reads the same
-backwards as forwards. -/
+/-- `IsPalindromic b n` says that the base-`b` digit expansion of `n` reads the same
+forwards and backwards. -/
 
 theorem PalindromicPrimeInfinitude :
-    {p : ℕ | p.Prime ∧ IsPalindrome 10 p}.Infinite ↔
-      ∀ N : ℕ, ∃ p : ℕ, N < p ∧ p.Prime ∧ IsPalindrome 10 p ∧
+    {p : ℕ | p.Prime ∧ IsPalindromic 10 p}.Infinite ↔
+      ∀ k : ℕ, ∃ p : ℕ, p.Prime ∧ IsPalindromic 10 p ∧ k < (Nat.digits 10 p).length ∧
         Odd (Nat.digits 10 p).length := by
   constructor
-  · intro hinf N
-    obtain ⟨p, hpmem, hplt⟩ := hinf.exists_gt (max N 11)
+  · intro hinf k
+    obtain ⟨p, hpmem, hplt⟩ := hinf.exists_gt (10 ^ (k + 2))
     obtain ⟨hp, hpal⟩ := hpmem
-    have hN : N < p := lt_of_le_of_lt (le_max_left N 11) hplt
+    have hlen : k + 2 < (Nat.digits 10 p).length :=
+      (Nat.lt_digits_length_iff (b := 10) (by norm_num) p).2 hplt.le
     have hne : p ≠ 11 := by
-      have : 11 < p := lt_of_le_of_lt (le_max_right N 11) hplt
-      omega
-    exact ⟨p, hN, hp, hpal, odd_length_digits_of_prime_of_isPalindrome hp hpal hne⟩
+      rintro rfl
+      norm_num at hlen
+    exact ⟨p, hp, hpal, by omega, odd_length_of_palindromic_prime hp hpal hne⟩
   · intro h
-    refine Set.infinite_of_forall_exists_gt ?_
+    apply Set.infinite_of_forall_exists_gt
     intro a
-    obtain ⟨p, hlt, hp, hpal, _⟩ := h a
-    exact ⟨p, ⟨hp, hpal⟩, hlt⟩
+    obtain ⟨p, hp, hpal, hlen, -⟩ := h a
+    refine ⟨p, ⟨hp, hpal⟩, ?_⟩
+    have hle : 10 ^ a ≤ p := (Nat.lt_digits_length_iff (b := 10) (by norm_num) p).1 hlen
+    calc a < 10 ^ a := Nat.lt_pow_self (by norm_num)
+      _ ≤ p := hle
 
 end Brockian.PalindromicPrimes
 

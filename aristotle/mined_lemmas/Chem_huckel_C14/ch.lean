@@ -1,34 +1,25 @@
+/-
+# Huckel C 14
+Category: Chemistry
+Target: Chem.huckel_C14
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Hückel theory for the C₁₄ ring
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+The adjacency eigenvalues of the cycle graph `C₁₄` are exactly the numbers
+`2 * cos (2πk/14)` for `k = 0, …, 13`.
+-/
 
 namespace Chem
 
-open Matrix SimpleGraph
+open Finset Complex
 
-/-- The adjacency matrix of the cycle graph `C₁₄`, viewed with vertex set `ZMod 14`
-(which is definitionally `Fin 14`). -/
+/-- A primitive 14-th root of unity. -/
 
-noncomputable def ch (x : ZMod 14) : ℂ := zeta ^ x.val
+noncomputable def ch (x : Fin 14) : ℂ := om ^ x.val
 

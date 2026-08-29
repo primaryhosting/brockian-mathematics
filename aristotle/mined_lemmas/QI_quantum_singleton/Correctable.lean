@@ -5,7 +5,6 @@ Target: QI.quantum_singleton
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -14,25 +13,54 @@ Category: Frontier Qi
 Target: QI.quantum_singleton
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+An `[[n, k, d]]_q` quantum error-correcting code is a subspace `C` of the `n`-qudit space
+`(ℂ^q)^{⊗ n}`, here modelled as `EuclideanSpace ℂ (Fin n → Fin q)` (functions on the set of
+classical configurations), of dimension `q ^ k`, such that every set `A` of at most `d - 1`
+sites is *correctable*, i.e. satisfies the Knill–Laflamme condition
+`P E P = λ(E) P` for all operators `E` supported on `A` (equivalently, for all matrix units,
+which is the form used below).
+
+The main result `QI.quantum_singleton` is the quantum Singleton bound `n - k ≥ 2 (d - 1)`.
+
+The proof is the rank version of the standard entropic argument: for two disjoint correctable
+sets `A`, `B`, writing `K` for the dimension of the code, `r_A`, `r_B` for the ranks of the
+reduced density matrices on `A`, `B` and `γ` for the configuration space of the remaining
+sites, one has `K * r_A ≤ |γ| * r_B` and `K * r_B ≤ |γ| * r_A`, whence `K ≤ |γ|`.
 -/
 
-open Matrix ComplexConjugate
-open scoped BigOperators ComplexOrder
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+open scoped ComplexConjugate
+open Module (finrank)
 
 namespace QI
 
-/-! ## Linear-algebra preliminaries -/
+noncomputable section Core
 
-section RankLemmas
+variable {X α β γ Ya Yb : Type*} [Fintype X] [Fintype α] [Fintype β] [Fintype γ]
+  [Fintype Ya] [Fintype Yb]
 
-variable {X Y : Type*}
+/-- The slice of `f` along the cut `e : X ≃ α × Y` at the value `a`: the vector
+`y ↦ f (e.symm (a, y))`. -/
 
-/-- Rank–nullity for the linear map `v ↦ M *ᵥ v`. -/
+def Correctable (q : ℕ) (C : Submodule ℂ (EuclideanSpace ℂ (ι → Fin q))) (A : Finset ι) : Prop :=
+  ∃ lam : ({i // i ∈ A} → Fin q) → ({i // i ∈ A} → Fin q) → ℂ,
+    ∀ f ∈ C, ∀ g ∈ C, ∀ a a' : {i // i ∈ A} → Fin q,
+      ∑ y : {i // i ∉ A} → Fin q,
+        conj (f (joinAt q A a y)) * g (joinAt q A a' y) = lam a a' * inner ℂ f g
 
-def Correctable (V : Matrix (Fin n → Fin q) (Fin K) ℂ) (S : Finset (Fin n)) : Prop :=
-  ∃ σ : Matrix ({i : Fin n // i ∈ S} → Fin q) ({i : Fin n // i ∈ S} → Fin q) ℂ,
-    ∀ (i j : Fin K) (x y : {i : Fin n // i ∈ S} → Fin q),
-      (∑ z : {i : Fin n // i ∉ S} → Fin q, V (glue S x z) i * conj (V (glue S y z) j))
-        = (if i = j then (1 : ℂ) else 0) * σ x y
-
-/-- Configurations on the complement of the empty set are just configurations. -/

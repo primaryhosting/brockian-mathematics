@@ -1,11 +1,3 @@
-/-
-# Box Level 2
-Category: Quantum Physics
-Target: QPhys.box_level_2
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,20 +7,6 @@ Target: QPhys.box_level_2
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace QPhys
-
-/-- Energy levels of a particle of mass `m` in a one-dimensional infinite potential well
-("particle in a box") of width `L`, with reduced Planck constant `hbar`:
-`E n = n² π² ħ² / (2 m L²)`. -/
-
-theorem boxEnergy_ratio (m L hbar : ℝ) (n : ℕ) (h : boxEnergy m L hbar 1 ≠ 0) :
-    boxEnergy m L hbar n / boxEnergy m L hbar 1 = (n : ℝ) ^ 2 := by
-  rw [boxEnergy_eq_sq_mul_boxEnergy_one m L hbar n, mul_div_assoc, div_self h, mul_one]
-
-end QPhys
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -52,4 +30,21 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace QPhys
+
+/-- The `n`-th stationary state of a particle of mass `m` in a one-dimensional
+infinite square well ("particle in a box") of width `L`, up to normalization:
+`ψ_n(x) = sin (n π x / L)`.  It vanishes at both walls `x = 0` and `x = L`. -/
+
+theorem boxEnergy_ratio (hbar m L : ℝ) (hbar0 : hbar ≠ 0) (hm : m ≠ 0) (hL : L ≠ 0) (n : ℕ) :
+    boxEnergy hbar m L n / boxEnergy hbar m L 1 = (n : ℝ) ^ 2 := by
+  have hpi : Real.pi ≠ 0 := Real.pi_ne_zero
+  simp only [boxEnergy]
+  rw [div_div_div_cancel_right₀]
+  · field_simp
+    norm_num
+  · exact mul_ne_zero (mul_ne_zero two_ne_zero hm) (pow_ne_zero 2 hL)
+
+end QPhys
 

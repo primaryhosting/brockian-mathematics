@@ -5,7 +5,6 @@ Target: Frontier.hodge_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -25,61 +24,32 @@ open scoped TensorProduct
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxHeartbeats 40000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option grind.warning false
-
 namespace Frontier
 
-/-!
-## The set-up
+/-! ## Complexification -/
 
-Let `X` be a smooth complex projective variety and let `p : ℤ`.  The Hodge conjecture
-concerns the rational cohomology group `V = H^{2p}(X, ℚ)`, which carries a rational
-Hodge structure of weight `2p`: its complexification `ℂ ⊗[ℚ] V ≃ H^{2p}(X, ℂ)`
-decomposes as an internal direct sum of the Hodge pieces `H^{i, 2p-i}`, and complex
-conjugation on the complexification interchanges `H^{i, 2p-i}` and `H^{2p-i, i}`.
-
-The group of *Hodge classes* is `Hdg^p(X) = V ∩ H^{p,p}`, the set of rational classes
-whose image in the complexification lies in the middle piece.  The group of *algebraic
-classes* is the ℚ-span of the cycle classes of the codimension-`p` algebraic subvarieties
-of `X`; it is contained in `Hdg^p(X)`.
-
-Since Mathlib contains neither the singular cohomology of a complex variety nor the cycle
-class map, we axiomatise exactly this data: a `Frontier.HodgeDatum V p` records the
-rational Hodge structure of weight `2p` on `V` together with the subspace of algebraic
-classes and the (elementary) fact that algebraic classes are Hodge classes.  The Hodge
-conjecture is then the statement `Frontier.HodgeConjecture`, namely that every Hodge class
-is algebraic.
--/
-
-section Complexification
-
-variable (V : Type*) [AddCommGroup V] [Module ℚ V]
-
-/-- Complex conjugation on the complexification `ℂ ⊗[ℚ] V` of a rational vector space `V`,
-i.e. the map `z ⊗ v ↦ conj z ⊗ v`.  It is only `ℚ`-linear (it is conjugate-linear over `ℂ`). -/
+/-- Complex conjugation acting on the complexification `ℂ ⊗[ℚ] V` of a `ℚ`-vector space `V`,
+as a `ℚ`-linear automorphism. -/
 
 theorem hodge_statement :
-    (∀ {V : Type} [AddCommGroup V] [Module ℚ V] {p : ℤ} (D : HodgeDatum V p),
-        HodgeConjecture D ↔ ∀ v : V, v ∈ D.hs.hodgeClasses p → v ∈ D.alg) ∧
-      (∀ {V : Type} [AddCommGroup V] [Module ℚ V] {p : ℤ} (D : HodgeDatum V p),
-        D.hs.piece p = ⊥ → HodgeConjecture D) ∧
-      (∀ {V : Type} [AddCommGroup V] [Module ℚ V] {p : ℤ} (D : HodgeDatum V p),
-        (∀ i, i ≠ p → D.hs.piece i = ⊥) → D.alg = ⊤ → HodgeConjecture D) ∧
-      (∀ {V W : Type} [AddCommGroup V] [Module ℚ V] [AddCommGroup W] [Module ℚ W] {p : ℤ}
-          (D₁ : HodgeDatum V p) (D₂ : HodgeDatum W p),
-        HodgeConjecture (D₁.prod D₂) ↔ HodgeConjecture D₁ ∧ HodgeConjecture D₂) ∧
-      (∀ (V : Type) [AddCommGroup V] [Module ℚ V] (p : ℤ),
-        HodgeConjecture (HodgeDatum.concentrated V p)) :=
-  ⟨fun D => hodgeConjecture_iff D, fun D h => hodgeConjecture_of_piece_eq_bot D h,
-    fun D h1 h2 => hodgeConjecture_of_concentrated D h1 h2,
-    fun D₁ D₂ => hodgeConjecture_prod_iff D₁ D₂,
-    fun V _ _ p => hodgeConjecture_concentrated V p⟩
+    (∀ X : HodgeDatum, HodgeConjecture X ↔ X.hodgeClasses = X.alg) ∧
+    (HodgeConjecture pointDatum) ∧
+    (∀ (X : HodgeDatum) (s : Set X.V), Submodule.span ℚ s = X.hodgeClasses →
+      (∀ v ∈ s, v ∈ X.alg) → HodgeConjecture X) ∧
+    (∀ (X Y : HodgeDatum) (e : X.V ≃ₗ[ℚ] Y.V),
+      (∀ v : X.V, v ∈ X.hodgeClasses ↔ e v ∈ Y.hodgeClasses) →
+      (∀ v : X.V, v ∈ X.alg ↔ e v ∈ Y.alg) →
+      (HodgeConjecture X ↔ HodgeConjecture Y)) ∧
+    (∀ X : HodgeDatum, X.Hpq ((X.p : ℤ), (X.p : ℤ)) = ⊥ → HodgeConjecture X) ∧
+    (∀ X : HodgeDatum, Module.rank ℚ X.V ≤ 1 → X.alg ≠ ⊥ → HodgeConjecture X) :=
+  ⟨hodgeConjecture_iff_eq, hodgeConjecture_pointDatum, hodgeConjecture_of_span,
+    hodgeConjecture_congr, hodgeConjecture_of_Hpp_eq_bot, hodgeConjecture_of_rank_le_one⟩
 
 end Frontier
 

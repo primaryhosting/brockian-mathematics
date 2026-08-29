@@ -31,15 +31,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Betrothed Infinitude
-Category: Brockian Conjecture
-Target: Brockian.BetrothedNumbers.BetrothedInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 /-!
 # Betrothed Infinitude
 Category: Brockian Conjecture
@@ -48,128 +39,80 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.BetrothedNumbers
+namespace Brockian
+namespace BetrothedNumbers
 
-open Finset
+open ArithmeticFunction
 
-/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d`. -/
-def sigmaOne (n : ℕ) : ℕ := ∑ d ∈ n.divisors, d
+/-- `IsBetrothed m n` says that `(m, n)` is a *betrothed* (quasi-amicable) pair:
+`0 < m < n` and the sum of the divisors of each of `m` and `n`, excluding the number
+itself and `1`, equals the other number.  Equivalently `σ m = σ n = m + n + 1`. -/
+def IsBetrothed (m n : ℕ) : Prop :=
+  0 < m ∧ m < n ∧ sigma 1 m = m + n + 1 ∧ sigma 1 n = m + n + 1
 
-/-- `m` and `n` form a *betrothed* (quasi-amicable) pair:
-they are distinct positive integers with
-`σ₁ m = σ₁ n = m + n + 1`, i.e. each is the sum of the *proper* divisors
-(excluding `1` and the number itself) of the other. -/
-def IsBetrothedPair (m n : ℕ) : Prop :=
-  0 < m ∧ 0 < n ∧ m ≠ n ∧ sigmaOne m = m + n + 1 ∧ sigmaOne n = m + n + 1
+instance decidableIsBetrothed (m n : ℕ) : Decidable (IsBetrothed m n) := by
+  unfold IsBetrothed; infer_instance
 
 /-- The set of betrothed pairs. -/
-def betrothedSet : Set (ℕ × ℕ) := {p | IsBetrothedPair p.1 p.2}
+def betrothedPairs : Set (ℕ × ℕ) := {p : ℕ × ℕ | IsBetrothed p.1 p.2}
 
-/-- The smallest betrothed pair. -/
-theorem isBetrothedPair_48_75 : IsBetrothedPair 48 75 :=
-  ⟨by norm_num, by norm_num, by norm_num, by decide, by decide⟩
+/-- `(48, 75)` is a betrothed pair: `σ 48 = σ 75 = 124 = 48 + 75 + 1`. -/
+theorem isBetrothed_48_75 : IsBetrothed 48 75 := by
+  refine ⟨by norm_num, by norm_num, ?_, ?_⟩ <;> decide
 
-theorem isBetrothedPair_140_195 : IsBetrothedPair 140 195 :=
-  ⟨by norm_num, by norm_num, by norm_num, by decide, by decide⟩
-
-set_option maxRecDepth 20000 in
-theorem isBetrothedPair_1050_1925 : IsBetrothedPair 1050 1925 :=
-  ⟨by norm_num, by norm_num, by norm_num, by decide, by decide⟩
+theorem betrothedPairs_nonempty : betrothedPairs.Nonempty :=
+  ⟨(48, 75), isBetrothed_48_75⟩
 
 set_option maxRecDepth 40000 in
-theorem isBetrothedPair_1575_1648 : IsBetrothedPair 1575 1648 :=
-  ⟨by norm_num, by norm_num, by norm_num, by decide, by decide⟩
+/-- The seven smallest known betrothed pairs, verified by direct computation. -/
+theorem isBetrothed_known_pairs :
+    ∀ p ∈ [(48, 75), (140, 195), (1050, 1925), (1575, 1648), (2024, 2295), (5775, 6128),
+      (8892, 16587)], IsBetrothed p.1 p.2 := by
+  decide
 
-set_option maxRecDepth 40000 in
-theorem isBetrothedPair_2024_2295 : IsBetrothedPair 2024 2295 :=
-  ⟨by norm_num, by norm_num, by norm_num, by decide, by decide⟩
-
-/-- Betrothedness is symmetric. -/
-theorem isBetrothedPair_comm {m n : ℕ} (h : IsBetrothedPair m n) : IsBetrothedPair n m := by
-  obtain ⟨hm, hn, hmn, h1, h2⟩ := h
-  exact ⟨hn, hm, hmn.symm, by omega, by omega⟩
-
-/-- The defining condition restated with proper divisors: `m` and `n` are betrothed iff the
-sum of the proper divisors of each, with `1` removed, is the other number. -/
-theorem isBetrothedPair_iff_sum_properDivisors {m n : ℕ} :
-    IsBetrothedPair m n ↔
-      0 < m ∧ 0 < n ∧ m ≠ n ∧
-        (∑ d ∈ m.properDivisors, d) = n + 1 ∧ (∑ d ∈ n.properDivisors, d) = m + 1 := by
-  have hm : sigmaOne m = (∑ d ∈ m.properDivisors, d) + m :=
-    Nat.sum_divisors_eq_sum_properDivisors_add_self
-  have hn : sigmaOne n = (∑ d ∈ n.properDivisors, d) + n :=
-    Nat.sum_divisors_eq_sum_properDivisors_add_self
-  unfold IsBetrothedPair
-  constructor
-  · rintro ⟨h1, h2, h3, h4, h5⟩; exact ⟨h1, h2, h3, by omega, by omega⟩
-  · rintro ⟨h1, h2, h3, h4, h5⟩; exact ⟨h1, h2, h3, by omega, by omega⟩
-
-/-- The sum of divisors of a prime `p` is `p + 1`. -/
-theorem sigmaOne_prime {p : ℕ} (hp : p.Prime) : sigmaOne p = p + 1 := by
-  rw [sigmaOne, hp.divisors, Finset.sum_pair hp.ne_one.symm]
+/-- In a betrothed pair the larger member is determined by the smaller one. -/
+theorem snd_eq_of_isBetrothed {m n : ℕ} (h : IsBetrothed m n) :
+    n = sigma 1 m - m - 1 := by
+  have := h.2.2.1
   omega
 
-/-- No member of a betrothed pair is prime. -/
-theorem not_prime_of_isBetrothedPair {m n : ℕ} (h : IsBetrothedPair m n) : ¬ m.Prime := by
-  intro hp
-  obtain ⟨-, hn, -, h1, -⟩ := h
-  rw [sigmaOne_prime hp] at h1
-  omega
+/-- The first projection is injective on the set of betrothed pairs. -/
+theorem injOn_fst_betrothedPairs : Set.InjOn Prod.fst betrothedPairs := by
+  rintro ⟨m₁, n₁⟩ h₁ ⟨m₂, n₂⟩ h₂ (hm : m₁ = m₂)
+  have e₁ : n₁ = sigma 1 m₁ - m₁ - 1 := snd_eq_of_isBetrothed h₁
+  have e₂ : n₂ = sigma 1 m₂ - m₂ - 1 := snd_eq_of_isBetrothed h₂
+  simp [hm, e₁, e₂]
 
-/-- No member of a betrothed pair equals `1`. -/
-theorem ne_one_of_isBetrothedPair {m n : ℕ} (h : IsBetrothedPair m n) : m ≠ 1 := by
-  rintro rfl
-  obtain ⟨-, hn, -, h1, -⟩ := h
-  rw [sigmaOne] at h1
-  simp at h1
+/--
+**Betrothed Infinitude (reduction).**
 
-/-- In a betrothed pair the second member is determined by the first. -/
-theorem eq_of_fst_eq {m n m' n' : ℕ} (h : IsBetrothedPair m n) (h' : IsBetrothedPair m' n')
-    (hm : m = m') : n = n' := by
-  obtain ⟨-, -, -, h1, -⟩ := h
-  obtain ⟨-, -, -, h1', -⟩ := h'
-  subst hm
-  omega
+There are infinitely many betrothed (quasi-amicable) pairs if and only if the smaller
+members of betrothed pairs are unbounded.
 
-/-- Taking the first component is injective on the set of betrothed pairs. -/
-theorem injOn_fst_betrothedSet : Set.InjOn Prod.fst betrothedSet := by
-  rintro ⟨m, n⟩ hp ⟨m', n'⟩ hq hmm
-  simp only [betrothedSet, Set.mem_setOf_eq] at hp hq
-  simp only at hmm
-  exact Prod.ext hmm (eq_of_fst_eq hp hq hmm)
-
-/-!
-## Main statement
-
-Whether there are infinitely many betrothed (quasi-amicable) pairs is an open
-problem.  What we prove here is the exact *reduction* of infinitude to
-unboundedness: the set of betrothed pairs is infinite if and only if the first
-members of betrothed pairs are unbounded.  Both directions are unconditional
-theorems; the conjecture itself is the (unproved) right-hand side.
+Whether either side holds is an open problem; this theorem is the unconditional
+equivalence of the two formulations, so producing arbitrarily large betrothed pairs
+suffices to establish infinitude.
 -/
-
-/-- **Betrothed infinitude, as a reduction.**
-The set of betrothed pairs is infinite iff for every bound `N` there is a
-betrothed pair `(m, n)` with `N < m`. -/
 theorem BetrothedInfinitude :
-    betrothedSet.Infinite ↔ ∀ N : ℕ, ∃ m n : ℕ, N < m ∧ IsBetrothedPair m n := by
+    (∀ N : ℕ, ∃ m n : ℕ, N < m ∧ IsBetrothed m n) ↔ betrothedPairs.Infinite := by
   constructor
-  · intro hinf N
-    have himg : (Prod.fst '' betrothedSet).Infinite := hinf.image injOn_fst_betrothedSet
-    obtain ⟨m, hm, hNm⟩ := himg.exists_gt N
-    obtain ⟨⟨m', n⟩, hmem, rfl⟩ := hm
-    exact ⟨m', n, hNm, hmem⟩
-  · intro h
-    refine Set.Infinite.of_image Prod.fst ?_
-    apply Set.infinite_of_not_bddAbove
-    rintro ⟨N, hN⟩
-    obtain ⟨m, n, hNm, hmn⟩ := h N
-    have : m ≤ N := hN ⟨(m, n), hmn, rfl⟩
-    omega
+  · -- unboundedness of the smaller members forces the set of pairs to be infinite
+    intro h hfin
+    obtain ⟨N, hN⟩ := (hfin.image Prod.fst).bddAbove
+    obtain ⟨m, n, hmN, hmn⟩ := h N
+    have hmem : m ∈ Prod.fst '' betrothedPairs := ⟨(m, n), hmn, rfl⟩
+    exact absurd (hN hmem) (by omega)
+  · -- conversely, a bound on the smaller members forces finiteness
+    intro hinf N
+    by_contra hcon
+    push_neg at hcon
+    have hsub : Prod.fst '' betrothedPairs ⊆ Set.Iic N := by
+      rintro _ ⟨⟨m, n⟩, hmn, rfl⟩
+      by_contra hlt
+      exact hcon m n (by simpa using hlt) hmn
+    have hfin : (Prod.fst '' betrothedPairs).Finite := (Set.finite_Iic N).subset hsub
+    exact hinf (hfin.of_finite_image injOn_fst_betrothedPairs)
 
-/-- The set of betrothed pairs is nonempty. -/
-theorem betrothedSet_nonempty : betrothedSet.Nonempty :=
-  ⟨(48, 75), isBetrothedPair_48_75⟩
-
-end Brockian.BetrothedNumbers
+end BetrothedNumbers
+end Brockian
 

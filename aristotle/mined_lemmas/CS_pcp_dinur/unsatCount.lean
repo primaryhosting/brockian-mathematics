@@ -1,4 +1,11 @@
 import Mathlib
+/-!
+# Pcp Dinur
+Category: Frontier Cs
+Target: CS.pcp_dinur
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,37 +30,43 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
-# Pcp Dinur
-Category: Frontier Cs
-Target: CS.pcp_dinur
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace CS
 
-/-- A *constraint graph* (a binary constraint satisfaction instance): `n` variables taking
-values in the alphabet `Fin (q+1)`, together with a list of binary constraints, each given by
-an ordered pair of variables and a decidable relation on the alphabet. -/
+/-!
+## Constraint graphs (binary CSPs)
+
+Dinur's proof of the PCP theorem is phrased in terms of *constraint graphs*: binary
+constraint satisfaction problems whose variables are the vertices of a graph and whose
+constraints sit on the edges.  We model such an instance by
+
+* a number `n` of variables, indexed by `Fin n`;
+* an alphabet `Fin q` with `q > 0`;
+* a list `cs` of constraints, each a triple `(u, v, R)` with `u v : Fin n` and
+  `R : Fin q → Fin q → Bool`.
+
+An assignment is a map `Fin n → Fin q`, and the *unsat value* `UNSAT G` is the minimum,
+over all assignments, of the fraction of constraints that are violated.
+-/
+
+/-- A binary constraint satisfaction instance ("constraint graph"): `n` variables taking
+values in an alphabet of size `q > 0`, subject to a list of binary constraints. -/
 structure ConstraintGraph where
   /-- Number of variables. -/
   n : ℕ
-  /-- The alphabet is `Fin (q+1)`; in particular it is nonempty. -/
+  /-- Size of the alphabet. -/
   q : ℕ
-  /-- The constraints: each is a pair of variables together with a relation they must satisfy. -/
-  edges : List ((Fin n × Fin n) × (Fin (q + 1) → Fin (q + 1) → Bool))
+  /-- The alphabet is nonempty. -/
+  hq : 0 < q
+  /-- The list of constraints, each relating two variables. -/
+  cs : List (Fin n × Fin n × (Fin q → Fin q → Bool))
 
 namespace ConstraintGraph
 
-/-- An assignment of alphabet values to the variables of `G`. -/
-abbrev Assignment (G : ConstraintGraph) := Fin G.n → Fin (G.q + 1)
+variable (G : ConstraintGraph)
 
-/-- The number of constraints of `G` (its size). -/
+/-- The "all-zero" assignment; it exists because the alphabet is nonempty. -/
 
-def unsatCount (G : ConstraintGraph) (a : G.Assignment) : ℕ :=
-  (G.edges.filter (fun e => !(e.2 (a e.1.1) (a e.1.2)))).length
+def unsatCount (a : Fin G.n → Fin G.q) : ℕ := G.cs.countP (fun c => !(G.satC a c))
 
-/-- The minimal number of violated constraints, over all assignments. -/
+/-- The fraction of constraints violated by an assignment (defined to be `0` when there
+are no constraints). -/

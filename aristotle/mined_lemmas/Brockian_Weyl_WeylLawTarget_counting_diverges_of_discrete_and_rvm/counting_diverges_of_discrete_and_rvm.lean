@@ -33,22 +33,55 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Counting Diverges Of Discrete And Rvm
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+The Weyl-law style statement proved here: for a linear operator `T` on an infinite
+dimensional real vector space (in particular on a real inner product space) whose spectrum is
+*discrete* — every spectral subspace below a level is finite dimensional — and whose
+eigensystem is *complete*, as furnished by the Rayleigh variational method (RVM), the
+eigenvalue counting function `lam ↦ dim (span of eigenvectors with eigenvalue ≤ lam)`
+diverges to `+∞`.
+
+The final section exhibits an explicit model (the diagonal operator `f ↦ (n ↦ n * f n)` on
+finitely supported real sequences) satisfying all the hypotheses, so the theorem is not
+vacuous.
+-/
+
 open scoped BigOperators
 open scoped Real
+open scoped Nat
 open scoped Classical
+
+set_option maxHeartbeats 1000000
 
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- A spectrum `S ⊆ ℝ` is *discrete* (in the Weyl-law sense: discrete and proper, i.e.
-locally finite with no accumulation at finite energy) when only finitely many spectral
-points lie below any threshold `T`. -/
+section General
 
-theorem counting_diverges_of_discrete_and_rvm {S : Set ℝ}
-    (hdisc : SpectrumDiscrete S) (hrvm : RVM S) :
-    Filter.Tendsto (countingFunction S) Filter.atTop Filter.atTop := by
-  refine Filter.tendsto_atTop_atTop.mpr ?_
-  intro b
-  obtain ⟨T, hT⟩ := exists_threshold_countingFunction_ge hdisc hrvm b
-  exact ⟨T, fun a ha => hT.trans (countingFunction_mono hdisc ha)⟩
+variable {H : Type*} [AddCommGroup H] [Module ℝ H]
 
-/-- The hypotheses are satisfiable: the model spectrum `{0, 1, 2, …}` is discrete. -/
+/-- The low-lying spectral subspace: the span of all eigenvectors of `T` whose
+eigenvalue is at most `lam`. -/
+
+theorem counting_diverges_of_discrete_and_rvm (T : Module.End ℝ H)
+    (hinf : ¬ FiniteDimensional ℝ H) (hdisc : HasDiscreteSpectrum T)
+    (hrvm : RVMComplete T) :
+    Filter.Tendsto (counting T) Filter.atTop Filter.atTop := by
+  refine Filter.tendsto_atTop_atTop.mpr fun k => ?_
+  obtain ⟨lam, hlam⟩ := exists_le_counting T hinf hdisc hrvm k
+  exact ⟨lam, fun a ha => hlam.trans (counting_mono T hdisc ha)⟩
+
+end General
+
+section InnerProduct
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+
+/-- **Weyl law in the inner product space setting.**
+Specialization of `counting_diverges_of_discrete_and_rvm` to an operator on an infinite
+dimensional real inner product space. -/

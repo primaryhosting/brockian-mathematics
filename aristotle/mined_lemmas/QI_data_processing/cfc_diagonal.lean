@@ -1,55 +1,42 @@
-import RequestProject.Kron
+import Mathlib
+import RequestProject.Classical
 
 /-!
-# Vectorization, the modular operator and relative entropy
+# Quantum relative entropy
 
-We vectorize matrices, express the relative entropy `Tr ρ log ρ - Tr ρ log σ` as (minus) a
-quadratic form of `log (σ ⊗ (ρ⁻¹)ᵀ)` at the vectorization of `√ρ`, and record the
-variational ("completing the square") characterization of resolvent quadratic forms.
+Definitions of the matrix logarithm (via the continuous functional calculus), the Umegaki
+relative entropy of two density matrices, and quantum channels in Kraus form.
 -/
 
-open Matrix
-open scoped Kronecker ComplexOrder BigOperators MatrixOrder
+open Matrix Unitary
+open scoped BigOperators ComplexOrder
 
 namespace QI
 
-variable {n m N : Type*} [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m]
-  [Fintype N] [DecidableEq N]
+variable {m n ι : Type*} [Fintype m] [DecidableEq m] [Fintype n] [DecidableEq n] [Fintype ι]
 
-/-! ### Vectorization -/
+/-- The matrix logarithm of a Hermitian matrix, defined through the continuous functional
+calculus (with the convention `log 0 = 0`, so that vanishing eigenvalues contribute nothing). -/
 
-/-- Vectorization of a matrix: the vector of all its entries, indexed by pairs. -/
+theorem cfc_diagonal (d : n → ℝ) (f : ℝ → ℝ) :
+    cfc f (diagonal fun i => (d i : ℂ)) = diagonal (fun i => ((f (d i) : ℝ) : ℂ)) := by
+  classical
+  have hA : IsSelfAdjoint (diagonal fun i => (d i : ℂ)) := isSelfAdjoint_diagonal d
+  set s : Finset ℝ := Finset.image d Finset.univ with hs
+  set P : Polynomial ℝ := Lagrange.interpolate s id f with hP
+  have hnode : ∀ i : n, P.eval (d i) = f (d i) := by
+    intro i
+    have hmem : d i ∈ s := by simp [hs]
+    have := Lagrange.eval_interpolate_at_node (F := ℝ) (ι := ℝ) (s := s) (v := id) f
+      (Set.injOn_id _) hmem
+    simpa [hP] using this
+  have h1 : cfc f (diagonal fun i => (d i : ℂ))
+      = cfc (fun x => P.eval x) (diagonal fun i => (d i : ℂ)) := by
+    refine cfc_congr ?_
+    intro r hr
+    obtain ⟨i, rfl⟩ := spectrum_real_diagonal d hr
+    exact (hnode i).symm
+  rw [h1, cfc_polynomial P _ hA, aeval_diagonal d P]
+  simp only [hnode]
 
-theorem cfc_diagonal (f : ℝ → ℝ) (d : n → ℝ) :
-    cfc f (diagonal fun i => ((d i : ℝ) : ℂ)) = diagonal (fun i => ((f (d i) : ℝ) : ℂ)) := by
-  have key : ∀ i : n, spectrum ℝ ((d i : ℝ) : ℂ) = {d i} := fun i =>
-    spectrum.scalar_eq (𝕜 := ℝ) (A := ℂ) (d i)
-  have hd : IsSelfAdjoint (fun i => ((d i : ℝ) : ℂ)) := by ext i; simp
-  have hsp : spectrum ℝ (fun i => ((d i : ℝ) : ℂ)) = Set.range d := by
-    rw [Pi.spectrum_eq]
-    ext r
-    simp only [Set.mem_iUnion, key, Set.mem_singleton_iff, Set.mem_range]
-    exact ⟨fun ⟨i, hi⟩ => ⟨i, hi.symm⟩, fun ⟨i, hi⟩ => ⟨i, hi.symm⟩⟩
-  have hcont : ContinuousOn f (spectrum ℝ (fun i => ((d i : ℝ) : ℂ))) := by
-    rw [hsp]; exact (Set.finite_range d).continuousOn f
-  have hcd : Continuous (diagSAH : (n → ℂ) → Matrix n n ℂ) := by
-    refine continuous_matrix fun i j => ?_
-    show Continuous fun v : n → ℂ => Matrix.diagonal v i j
-    simp only [Matrix.diagonal_apply]
-    split <;> fun_prop
-  have hself : IsSelfAdjoint (diagSAH (fun i => ((d i : ℝ) : ℂ))) := by
-    rw [IsSelfAdjoint, ← map_star, hd.star_eq]
-  have h := (diagSAH (n := n)).map_cfc f (fun i => ((d i : ℝ) : ℂ)) hcont hcd hd hself
-  have hpi : (cfc f (fun i => ((d i : ℝ) : ℂ))) = fun i => ((f (d i) : ℝ) : ℂ) := by
-    rw [cfc_map_pi (S := ℂ) f _ (by
-      rw [show (⋃ i, spectrum ℝ ((d i : ℝ) : ℂ)) = Set.range d from by
-        rw [← Pi.spectrum_eq]; exact hsp]
-      exact (Set.finite_range d).continuousOn f) hd (fun i => by rw [IsSelfAdjoint]; simp)]
-    funext i
-    rw [show ((d i : ℝ) : ℂ) = algebraMap ℝ ℂ (d i) from rfl, cfc_algebraMap]
-    rfl
-  have hdd : diagSAH (fun i => ((d i : ℝ) : ℂ)) = diagonal (fun i => ((d i : ℝ) : ℂ)) := rfl
-  rw [← hdd, ← h, hpi]
-  rfl
-
-/-- The continuous functional calculus commutes with unitary conjugation. -/
+/-- The continuous functional calculus commutes with conjugation by a unitary. -/

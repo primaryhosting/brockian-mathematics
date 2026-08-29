@@ -9,67 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-set_option autoImplicit false
-
-namespace Frontier
-
-/-- `PrimeAP k` says that the primes contain an arithmetic progression of length `k`:
-there are `a` and a positive common difference `d` with `a + i * d` prime for all `i < k`. -/
-def PrimeAP (k : ℕ) : Prop :=
-  ∃ a d : ℕ, 0 < d ∧ ∀ i < k, Nat.Prime (a + i * d)
-
-/-- The full Green–Tao theorem: the primes contain arbitrarily long arithmetic progressions.
-This statement is *not* available in Mathlib (a search for Szemerédi-type or Green–Tao
-statements turns up only Dirichlet's theorem, `Nat.infinite_setOf_prime_and_modEq`), and it
-is not proved here; it is recorded as a `Prop` so that the results below can refer to it. -/
-def GreenTaoStatement : Prop := ∀ k : ℕ, PrimeAP k
-
-/-- Shorter progressions are contained in longer ones. -/
-theorem PrimeAP.mono {k k' : ℕ} (hk : k ≤ k') (h : PrimeAP k') : PrimeAP k := by
-  obtain ⟨a, d, hd, h⟩ := h
-  exact ⟨a, d, hd, fun i hi => h i (lt_of_lt_of_le hi hk)⟩
-
-/-- Base case, verified unconditionally: `199, 409, 619, …, 2089` is an arithmetic progression
-of ten primes with common difference `210`. -/
-theorem primeAP_ten : PrimeAP 10 := by
-  refine ⟨199, 210, by norm_num, ?_⟩
-  intro i hi
-  interval_cases i <;> norm_num
-
-/-- Every progression length up to `10` is unconditionally realised inside the primes. -/
-theorem primeAP_of_le_ten {k : ℕ} (hk : k ≤ 10) : PrimeAP k :=
-  primeAP_ten.mono hk
-
-/-- **Green–Tao, formalized statement together with a Lean-checked reduction.**
-
-The primes contain arbitrarily long arithmetic progressions *if and only if* they contain
-arbitrarily long arithmetic progressions arbitrarily far out (all of whose terms exceed any
-prescribed bound `N`).  Thus the seemingly stronger "infinitely often" form of the Green–Tao
-theorem is equivalent to the plain form, and proving the plain form for every length `k`
-suffices.  The plain form itself is verified here only for lengths `k ≤ 10`
-(see `Frontier.primeAP_of_le_ten`); the general case is the Green–Tao theorem, which is not
-available in Mathlib. -/
-theorem Green_Tao :
-    GreenTaoStatement ↔
-      ∀ k N : ℕ, ∃ a d : ℕ, 0 < d ∧ N < a ∧ ∀ i < k, Nat.Prime (a + i * d) := by
-  constructor
-  · intro h k N
-    obtain ⟨a, d, hd, hp⟩ := h (k + N + 1)
-    refine ⟨a + (N + 1) * d, d, hd, ?_, ?_⟩
-    · calc N < (N + 1) * 1 := by omega
-        _ ≤ (N + 1) * d := Nat.mul_le_mul_left _ hd
-        _ ≤ a + (N + 1) * d := Nat.le_add_left _ _
-    · intro i hi
-      have : a + (N + 1) * d + i * d = a + (N + 1 + i) * d := by ring
-      rw [this]
-      exact hp (N + 1 + i) (by omega)
-  · intro h k
-    obtain ⟨a, d, hd, _, hp⟩ := h k 0
-    exact ⟨a, d, hd, hp⟩
-
-end Frontier
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -87,9 +26,48 @@ set_option autoImplicit false
 set_option pp.fullNames true
 set_option pp.structureInstances true
 set_option pp.coercions.types true
-set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Frontier
+
+/-- `HasAPOfLength S k` says that the set `S ⊆ ℕ` contains a `k`-term arithmetic
+progression `a, a + d, …, a + (k-1) d` with positive common difference `d`. -/
+def HasAPOfLength (S : Set ℕ) (k : ℕ) : Prop :=
+  ∃ a d : ℕ, 0 < d ∧ ∀ i < k, a + i * d ∈ S
+
+/-- Containing an arithmetic progression of length `k` is monotone in `k`. -/
+theorem HasAPOfLength.mono {S : Set ℕ} {k l : ℕ} (h : HasAPOfLength S k) (hlk : l ≤ k) :
+    HasAPOfLength S l := by
+  obtain ⟨a, d, hd, ha⟩ := h
+  exact ⟨a, d, hd, fun i hi => ha i (lt_of_lt_of_le hi hlk)⟩
+
+/-- **Unconditional base cases.** The primes contain arithmetic progressions of every
+length `k ≤ 10`: the ten numbers `199 + 210 i`, `i < 10`, are all prime. -/
+theorem primes_hasAPOfLength_of_le_ten (k : ℕ) (hk : k ≤ 10) :
+    HasAPOfLength {p : ℕ | Nat.Prime p} k := by
+  refine HasAPOfLength.mono (k := 10) ⟨199, 210, by norm_num, ?_⟩ hk
+  intro i hi
+  interval_cases i <;> norm_num [Set.mem_setOf_eq]
+
+/-- The Erdős conjecture on arithmetic progressions: any set of natural numbers whose
+sum of reciprocals diverges contains arbitrarily long arithmetic progressions. -/
+def ErdosAPConjecture : Prop :=
+  ∀ S : Set ℕ, ¬ Summable (Set.indicator S fun n : ℕ => (1 : ℝ) / n) →
+    ∀ k : ℕ, HasAPOfLength S k
+
+/-- **Green–Tao (Lean-checked reduction).**
+
+The primes contain arbitrarily long arithmetic progressions, conditional on the Erdős
+conjecture on arithmetic progressions.  The reduction is unconditional and complete: it
+combines the hypothesis with the (Mathlib-proved) divergence of the sum of the reciprocals
+of the primes.  The unconditional Green–Tao theorem itself is not proved here; see
+`Frontier.primes_hasAPOfLength_of_le_ten` for the unconditional base cases `k ≤ 10`. -/
+theorem Green_Tao (hErdos : ErdosAPConjecture) (k : ℕ) :
+    HasAPOfLength {p : ℕ | Nat.Prime p} k :=
+  hErdos {p : ℕ | Nat.Prime p} not_summable_one_div_on_primes k
+
+end Frontier
 

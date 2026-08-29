@@ -2,73 +2,84 @@
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` commands to precede any module documentation, so the header above is
--- written as a plain comment; it is repeated as the module docstring below.)
-import RequestProject.Savitch.Final
+import RequestProject.Savitch.Model
+import RequestProject.Savitch.Stack
 
 /-!
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-!
-The machine model is the standard off-line random-access model of space bounded computation
-(see `RequestProject/Savitch/Model.lean`): the memory of a machine is a bit string, one step
-rewrites the memory using the memory content and a single input bit, read at a position which
-is determined by the memory, and the space used on an input is the maximal length of a memory
-string occurring in the computation.
+## Savitch's theorem
 
-`NSPACE f` and `DSPACE g` are the classes of languages accepted by nondeterministic,
-respectively deterministic, machines running in space `O (f n)`, respectively `O (g n)`.
+`NSPACE f ⊆ DSPACE (f²)`.
 
-The proof is Savitch's: for a nondeterministic machine `M` running in space `S` on the input
-`x`, deciding whether `M` accepts amounts to deciding reachability in the configuration graph
-of `M` on `x`, whose vertices are the words of length at most `S`.  Reachability by a path of
-length at most `2 ^ k` is decided by the midpoint recursion `savR`, whose recursion depth is
-`k`; taking `k = S + 1` suffices because there are only `2 ^ (S + 1) - 1` configurations.  The
-simulator runs this recursion with an explicit stack of at most `S + 2` frames, each holding
-three words of length at most `S`, so it uses `O (S ^ 2)` bits.  Since the simulator does not
-know `S`, it runs the whole procedure for stages `s = 0, 1, 2, …`, and at each stage also
-checks whether some reachable configuration has a successor of length more than `s`; the first
-stage at which this check fails gives the correct answer, and this happens at the latest at
-stage `S`.
+Given a nondeterministic machine with at most `2 ^ (c * f n + c)` configurations we build a
+deterministic machine which decides, by Savitch's midpoint recursion, whether an accepting
+configuration is reachable in the configuration graph.  The deterministic machine stores an
+explicit recursion stack of depth `c * f n + c + 2`, each frame holding a constant number of
+configurations and indices, hence it has `2 ^ O(f n ^ 2)` configurations.
+
+As a corollary, `PSPACE = NPSPACE`.
 -/
 
 namespace CS
 
-namespace Savitch
+open Savitch
 
-/-- A deterministic machine viewed as a nondeterministic machine. -/
+section Construction
 
-theorem firstBit_mem_DSPACE :
-    {x : Word | x[0]? = some true} ∈ DSPACE (fun _ => 1) := by
-  refine ⟨Savitch.firstBitD, 1, ?_, ?_⟩
-  · intro x t
-    cases t with
-    | zero => simp [DMachine.run]
-    | succ t =>
-        rw [Savitch.firstBitD_run_succ]
-        by_cases h : x[0]? = some true <;> simp [h]
-  · ext x
-    simp only [DMachine.lang, Set.mem_setOf_eq]
+variable (M : NMachine)
+
+/-- The vertices of the configuration graph: the configurations of `M`, together with an extra
+sink `none` which is reachable exactly from the accepting configurations.  Thus `M` accepts iff
+the sink is reachable from the initial configuration. -/
+abbrev Vtx (M : NMachine) (n : ℕ) : Type := Option (M.Conf n)
+
+instance vtxFinite (n : ℕ) : Finite (Vtx M n) := by
+  haveI := M.finite n; infer_instance
+
+noncomputable instance vtxFintype (n : ℕ) : Fintype (Vtx M n) := Fintype.ofFinite _
+
+noncomputable instance vtxDecEq (n : ℕ) : DecidableEq (Vtx M n) := Classical.decEq _
+
+/-- An enumeration of the vertices of the configuration graph. -/
+
+theorem firstBit_mem_dspace :
+    (fun x : List Bool => readBit x 0 = true) ∈ DSPACE (fun _ => 0) := by
+  refine ⟨firstBitMachine, 2, fun n => ?_, fun x => ?_⟩
+  · simp [firstBitMachine, Nat.card_eq_fintype_card]
+  · have hstep : ∀ q : Option Bool, firstBitMachine.stepFun x q = some (q.getD (readBit x 0)) :=
+      fun _ => rfl
     constructor
+    · intro hx
+      refine ⟨1, ?_⟩
+      rw [Function.iterate_one]
+      simp [DMachine.stepFun, firstBitMachine, hx]
     · rintro ⟨t, ht⟩
-      cases t with
-      | zero => simp [DMachine.run, Savitch.firstBitD] at ht
-      | succ t =>
-          rw [Savitch.firstBitD_run_succ] at ht
-          by_contra h
-          simp [h, Savitch.firstBitD] at ht
-    · intro h
-      exact ⟨1, by rw [Savitch.firstBitD_run_succ]; simp [h, Savitch.firstBitD]⟩
+      by_contra hx
+      have hx' : readBit x 0 = false := by
+        cases h : readBit x 0 with
+        | false => rfl
+        | true => exact absurd h hx
+      have key : ∀ t : ℕ,
+          ((firstBitMachine.stepFun x)^[t] (firstBitMachine.start x.length) : Option Bool) = none ∨
+          ((firstBitMachine.stepFun x)^[t] (firstBitMachine.start x.length) : Option Bool) =
+            some false := by
+        intro t
+        induction t with
+        | zero => exact Or.inl rfl
+        | succ t ih =>
+          rw [Function.iterate_succ_apply', hstep]
+          rcases ih with h | h <;> rw [h] <;> simp [hx']
+      rcases key t with h | h <;> rw [h] at ht <;> simp [firstBitMachine] at ht
 
 end CS
 
@@ -97,22 +108,20 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Bounded reachability and the Savitch recursion
+import Mathlib
 
-`PathN E s n a b` says that there is a path of length exactly `n` from `a` to `b` for the edge
-relation `E`, all of whose vertices, except possibly the last one, are words of length at most
-`s`.
+/-!
+# Walks in a finite digraph and the Savitch recursion
 
-`savR E s k a b` is the midpoint recursion of Savitch's algorithm; it decides whether `b` can be
-reached from `a` by a path of length at most `2 ^ k` inside the set of words of length `≤ s`.
+`PathTo adj m u v` says that there is a walk with exactly `m` edges from `u` to `v`.
+`Reach adj k u v` is the predicate computed by Savitch's midpoint recursion; we show it is
+equivalent to the existence of a walk of length at most `2 ^ k`, and that in a finite digraph
+reachability is witnessed by a walk shorter than the number of vertices.
 -/
-import RequestProject.Savitch.Words
 
 namespace CS
 namespace Savitch
 
-variable {E : Word → Word → Bool} {s : ℕ}
+variable {X : Type}
 
-/-- A path of length `n` from `a` to `b`, staying (except possibly for its last vertex)
-inside the words of length at most `s`. -/
+/-- There is a walk with exactly `m` edges from `u` to `v`. -/

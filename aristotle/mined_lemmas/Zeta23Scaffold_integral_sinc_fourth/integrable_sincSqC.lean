@@ -1,3 +1,10 @@
+/-
+# Integral Sinc Fourth
+Category: C Integral
+Target: Zeta23Scaffold.integral_sinc_fourth
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -8,37 +15,28 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open MeasureTheory Real Complex
-open scoped FourierTransform
+open MeasureTheory Complex intervalIntegral
+open scoped FourierTransform Real
 
 namespace Zeta23Scaffold
 
-/-- Explicit antiderivative computation: the interval integral of a linear function times a
-complex exponential. -/
+/-! ## Overview
 
-lemma integrable_sincSqC : Integrable sincSqC := by
-  have hbound : ∀ ξ : ℝ, ‖sincSqC ξ‖ ≤ 2 * (1 + ξ ^ 2)⁻¹ := by
-    intro ξ
-    have h1 : ‖sincSqC ξ‖ = Real.sinc (π * ξ) ^ 2 := by
-      simp [sincSqC, Complex.norm_real]
-    rw [h1]
-    have hle1 : Real.sinc (π * ξ) ^ 2 ≤ 1 := by
-      have := Real.abs_sinc_le_one (π * ξ)
-      nlinarith [abs_nonneg (Real.sinc (π * ξ)), sq_abs (Real.sinc (π * ξ))]
-    have hpos : (0 : ℝ) < 1 + ξ ^ 2 := by positivity
-    rw [show (2 : ℝ) * (1 + ξ ^ 2)⁻¹ = 2 / (1 + ξ ^ 2) by ring, le_div_iff₀ hpos]
-    rcases eq_or_ne ξ 0 with rfl | hξ
-    · norm_num
-    · have hpx : π * ξ ≠ 0 := mul_ne_zero Real.pi_ne_zero hξ
-      have h2 : Real.sinc (π * ξ) ^ 2 * (π * ξ) ^ 2 = Real.sin (π * ξ) ^ 2 := by
-        rw [Real.sinc_of_ne_zero hpx]; field_simp
-      have h3 : Real.sinc (π * ξ) ^ 2 * (π * ξ) ^ 2 ≤ 1 := by
-        rw [h2]; nlinarith [Real.neg_one_le_sin (π * ξ), Real.sin_le_one (π * ξ)]
-      have hπ : (1 : ℝ) ≤ π ^ 2 := by nlinarith [Real.pi_gt_three]
-      have hξ2 : (0 : ℝ) < ξ ^ 2 := by positivity
-      have hs : (0 : ℝ) ≤ Real.sinc (π * ξ) ^ 2 := sq_nonneg _
-      nlinarith [mul_nonneg hs hξ2.le, mul_le_mul_of_nonneg_right hπ (mul_nonneg hs hξ2.le)]
-  refine Integrable.mono' (g := fun ξ : ℝ => 2 * (1 + ξ ^ 2)⁻¹) ?_
-    continuous_sincSqC.aestronglyMeasurable (Filter.Eventually.of_forall hbound)
-  simpa using (integrable_inv_one_add_sq).const_mul 2
+We prove `∫ x : ℝ, (sin x / x) ^ 4 = 2 π / 3`.
 
+The strategy is the Fourier multiplication formula `∫ 𝓕 f · g = ∫ f · 𝓕 g`.
+Let `T` be the tent function `T x = max (1 - π |x|) 0`, supported in `[-1/π, 1/π]`.
+An explicit computation gives `𝓕 T ξ = sinc(ξ)^2 / π =: S ξ`, and Fourier inversion
+gives `𝓕 S = T` (both `T` and `S` are integrable, `T` is continuous, and `S` is even).
+Hence `∫ S^2 = ∫ 𝓕 T · S = ∫ T · 𝓕 S = ∫ T^2 = 2/(3π)`, and since
+`S^2 = sinc^4 / π^2` we get `∫ sinc^4 = 2π/3`.
+-/
+
+/-- The "tent" function `x ↦ max (1 - π|x|) 0`, supported on `[-1/π, 1/π]`. -/
+
+theorem integrable_sincSqC : Integrable sincSqC :=
+  Integrable.ofReal integrable_sincSq
+
+/-! ### The Fourier transform of the tent function -/
+
+/-- An antiderivative of `x ↦ exp (-c x i) (A + B x)`. -/

@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Mersenne Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.MersennePerfect.MersennePrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,35 +31,55 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.MersennePrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-The infinitude of Mersenne primes is a famous open problem, so what is established here is a
-*Lean-checked conditional reduction*: the set of Mersenne prime exponents is infinite **iff**
-the set of even perfect numbers is infinite.  This is obtained from an explicit, unconditional
-bijection (Euclid–Euler): the strictly monotone map `k ↦ 2 ^ (k - 1) * (2 ^ k - 1)` carries the
-set of exponents `k` with `2 ^ k - 1` prime *onto* the set of even perfect numbers.
+/-!
+## Overview
 
-The proof of the Euclid–Euler theorem itself is reproduced here (it lives in the `Archive`
-component of Mathlib, which is not importable from this project); the argument follows
-`Archive/Wiedijk100Theorems/PerfectNumbers.lean` by Aaron Anderson.
+Whether there are infinitely many Mersenne primes is a well-known open problem, so no
+unconditional proof is attempted here.  What is proved is an *unconditional equivalence*:
+
+  there are infinitely many Mersenne primes  ↔  there are infinitely many even perfect numbers.
+
+The equivalence rests on the Euclid–Euler theorem, which is developed from scratch below
+(`Brockian.MersennePerfect.even_and_perfect_iff`), together with an explicit size estimate
+translating "unboundedly large even perfect numbers" into "unboundedly large Mersenne
+exponents".
+
+The main statement `Brockian.MersennePerfect.MersennePrimeInfinitude` is this equivalence.
+Two conditional corollaries are also recorded.
 -/
 
 namespace Brockian.MersennePerfect
 
 open ArithmeticFunction Finset
+
 open scoped sigma
 
-/-! ## Euclid–Euler -/
+/-- The set of exponents `p` for which `mersenne p = 2 ^ p - 1` is prime. -/
 
-
-theorem MersennePrimeInfinitude :
-    MersenneExponents.Infinite ↔ EvenPerfects.Infinite := by
+theorem MersennePrimeInfinitude : MersenneExponents.Infinite ↔ EvenPerfects.Infinite := by
+  rw [Set.infinite_iff_exists_gt, Set.infinite_iff_exists_gt]
   constructor
-  · intro h
-    rw [← image_mersenneExponents_eq_evenPerfects]
-    exact h.image euclidEuler_injective.injOn
-  · intro h
-    rw [← image_mersenneExponents_eq_evenPerfects] at h
-    exact h.of_image _
+  · intro h N
+    obtain ⟨p, hp, hNp⟩ := h N
+    have hp' : (mersenne p).Prime := hp
+    obtain ⟨k, rfl⟩ : ∃ k, p = k + 1 := by
+      cases p with
+      | zero => simp [mersenne, Nat.not_prime_zero] at hp'
+      | succ k => exact ⟨k, rfl⟩
+    refine ⟨2 ^ k * mersenne (k + 1), ⟨even_two_pow_mul_mersenne hp',
+      perfect_two_pow_mul_mersenne hp'⟩, ?_⟩
+    calc N < k + 1 := hNp
+      _ ≤ mersenne (k + 1) := self_le_mersenne _
+      _ ≤ 2 ^ k * mersenne (k + 1) := Nat.le_mul_of_pos_left _ (Nat.two_pow_pos k)
+  · intro h N
+    obtain ⟨n, ⟨hev, hperf⟩, hNn⟩ := h (2 ^ (2 * N + 1))
+    obtain ⟨k, hk, rfl⟩ := eq_two_pow_mul_mersenne_of_even_perfect hev hperf
+    have hlt : 2 ^ (2 * N + 1) < 2 ^ (2 * k + 1) := lt_trans hNn (two_pow_mul_mersenne_lt k)
+    have : 2 * N + 1 < 2 * k + 1 := by
+      by_contra hcon
+      exact absurd (Nat.pow_le_pow_right (by norm_num) (by omega)) (not_le.mpr hlt)
+    exact ⟨k + 1, hk, by omega⟩
 
-/-- Equivalently: there are infinitely many Mersenne primes iff there are arbitrarily large
-even perfect numbers. -/
+/-- The set of Mersenne primes is infinite exactly when the set of their exponents is. -/

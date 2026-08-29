@@ -1,10 +1,29 @@
+/-
+# Density Matrix Unitary Invariant
+Category: Quantum Computing
+Target: QC.density_matrix_unitary_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Density Matrix Unitary Invariant
+Category: Quantum Computing
+Target: QC.density_matrix_unitary_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped Matrix
+open scoped ComplexOrder
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -23,24 +42,19 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-open scoped ComplexOrder
-
 namespace QC
 
-open Matrix
-
-/-- **Unitary invariance of density matrices.**
-If `ρ` is positive semidefinite with `Tr ρ = 1` and `U` is unitary, then `U ρ U†` is
-positive semidefinite and `Tr (U ρ U†) = 1`. -/
+/-- Conjugating a positive semidefinite matrix by any matrix keeps it
+positive semidefinite: `U ρ U†  ⪰ 0`. -/
 
 theorem density_matrix_unitary_invariant {n : Type*} [Fintype n] [DecidableEq n]
-    (ρ U : Matrix n n ℂ) (hρ : ρ.PosSemidef) (htr : ρ.trace = 1)
-    (hU : U ∈ Matrix.unitaryGroup n ℂ) :
+    (U ρ : Matrix n n ℂ) (hU : U ∈ Matrix.unitaryGroup n ℂ)
+    (hρ : ρ.PosSemidef) (htr : ρ.trace = 1) :
     (U * ρ * Uᴴ).PosSemidef ∧ (U * ρ * Uᴴ).trace = 1 := by
-  have h : Uᴴ * U = 1 := by
-    simpa [Matrix.star_eq_conjTranspose] using (Matrix.mem_unitaryGroup_iff' (A := U)).mp hU
-  refine ⟨hρ.mul_mul_conjTranspose_same U, ?_⟩
-  rw [Matrix.trace_mul_cycle, h, Matrix.one_mul, htr]
+  refine ⟨posSemidef_conj U ρ hρ, ?_⟩
+  have hU' : Uᴴ * U = 1 := by
+    simpa [Matrix.star_eq_conjTranspose] using (Unitary.mem_iff.mp hU).1
+  rw [trace_conj_unitary U ρ hU', htr]
 
 end QC
 

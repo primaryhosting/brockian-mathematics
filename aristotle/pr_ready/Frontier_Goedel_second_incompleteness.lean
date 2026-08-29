@@ -9,15 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Goedel Second Incompleteness
-Category: Frontier — Set Theory
-Target: Frontier.Goedel_second_incompleteness
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -43,137 +34,106 @@ set_option grind.warning false
 
 namespace Frontier
 
-/--
-An abstract **formal system with a provability predicate**.
-
-This packages exactly the structure that a consistent, recursively axiomatized theory `T`
-extending `PA` provides:
-
-* a type of sentences, with implication `imp`, falsity `bot`, and the internal provability
-  predicate `box p = Pr_T(⌜p⌝)`;
-* the theory is closed under modus ponens and contains the implicational fragment of
-  propositional logic (the combinators `axK` and `axS`);
-* the **Hilbert–Bernays–Löb derivability conditions**
-  `necessitation` (D1: `T ⊢ p` implies `T ⊢ Pr(⌜p⌝)`),
-  `boxK` (D2: `T ⊢ Pr(⌜p → q⌝) → Pr(⌜p⌝) → Pr(⌜q⌝)`), and
-  `boxFour` (D3: `T ⊢ Pr(⌜p⌝) → Pr(⌜Pr(⌜p⌝)⌝)`), which hold for such theories because
-  `Pr_T` is a `Σ₁` formula and `T` proves `Σ₁`-completeness;
-* the **diagonal (fixed point) lemma**: for every sentence `p` there is a sentence `h` with
-  `T ⊢ h ↔ (Pr(⌜h⌝) → p)`, available since `T` is recursively axiomatized and extends `PA`.
-
-Note that no negation axiom (double negation elimination) is assumed: the results below use
-only the positive implicational fragment, so they apply a fortiori to any theory extending `PA`.
--/
-structure ProvabilitySystem where
-  /-- The type of sentences of the theory. -/
-  Sentence : Type
-  /-- `Provable p` means that the theory proves the sentence `p`. -/
-  Provable : Sentence → Prop
-  /-- Implication of sentences. -/
-  imp : Sentence → Sentence → Sentence
-  /-- The false sentence. -/
-  bot : Sentence
-  /-- `box p` is the sentence `Pr(⌜p⌝)` expressing that `p` is provable in the theory. -/
-  box : Sentence → Sentence
-  /-- The theory is closed under modus ponens. -/
-  modusPonens : ∀ {p q : Sentence}, Provable (imp p q) → Provable p → Provable q
-  /-- The propositional axiom `p → (q → p)`. -/
-  axK : ∀ p q : Sentence, Provable (imp p (imp q p))
-  /-- The propositional axiom `(p → q → r) → (p → q) → (p → r)`. -/
-  axS : ∀ p q r : Sentence,
-    Provable (imp (imp p (imp q r)) (imp (imp p q) (imp p r)))
-  /-- Derivability condition D1. -/
-  necessitation : ∀ {p : Sentence}, Provable p → Provable (box p)
-  /-- Derivability condition D2. -/
-  boxK : ∀ p q : Sentence, Provable (imp (box (imp p q)) (imp (box p) (box q)))
-  /-- Derivability condition D3. -/
-  boxFour : ∀ p : Sentence, Provable (imp (box p) (box (box p)))
-  /-- The diagonal lemma, in the form needed for Löb's theorem. -/
-  diagonal : ∀ p : Sentence, ∃ h : Sentence,
-    Provable (imp h (imp (box h) p)) ∧ Provable (imp (imp (box h) p) h)
-
-namespace ProvabilitySystem
-
-variable (T : ProvabilitySystem)
-
-/-- The theory is consistent when it does not prove falsity. -/
-def Consistent : Prop := ¬ T.Provable T.bot
-
-/-- The consistency statement `Con(T) = ¬ Pr(⌜⊥⌝)` of the theory, as an internal sentence. -/
-def Con : T.Sentence := T.imp (T.box T.bot) T.bot
-
-variable {T}
-
-/-- Hypothetical syllogism: provable implications compose. -/
-theorem impTrans {p q r : T.Sentence} (hpq : T.Provable (T.imp p q))
-    (hqr : T.Provable (T.imp q r)) : T.Provable (T.imp p r) :=
-  T.modusPonens (T.modusPonens (T.axS p q r) (T.modusPonens (T.axK (T.imp q r) p) hqr)) hpq
-
-/-- Modus ponens under a common hypothesis. -/
-theorem mpUnderImp {p q r : T.Sentence} (h1 : T.Provable (T.imp p (T.imp q r)))
-    (h2 : T.Provable (T.imp p q)) : T.Provable (T.imp p r) :=
-  T.modusPonens (T.modusPonens (T.axS p q r) h1) h2
-
-/--
-**Löb's theorem** (the key intermediate lemma): if the theory proves `Pr(⌜p⌝) → p`,
-then it proves `p`.
--/
-theorem loeb {p : T.Sentence} (h : T.Provable (T.imp (T.box p) p)) : T.Provable p := by
-  obtain ⟨g, hg1, hg2⟩ := T.diagonal p
-  -- `⊢ □g → □(□g → p)` from D1 and D2 applied to `⊢ g → (□g → p)`
-  have step2 : T.Provable (T.imp (T.box g) (T.box (T.imp (T.box g) p))) :=
-    T.modusPonens (T.boxK g (T.imp (T.box g) p)) (T.necessitation hg1)
-  -- `⊢ □(□g → p) → (□□g → □p)` is D2
-  have step3 : T.Provable (T.imp (T.box (T.imp (T.box g) p))
-      (T.imp (T.box (T.box g)) (T.box p))) := T.boxK (T.box g) p
-  have step4 : T.Provable (T.imp (T.box g) (T.imp (T.box (T.box g)) (T.box p))) :=
-    impTrans step2 step3
-  -- `⊢ □g → □□g` is D3
-  have step6 : T.Provable (T.imp (T.box g) (T.box p)) := mpUnderImp step4 (T.boxFour g)
-  have step7 : T.Provable (T.imp (T.box g) p) := impTrans step6 h
-  have step8 : T.Provable g := T.modusPonens hg2 step7
-  exact T.modusPonens step7 (T.necessitation step8)
-
-end ProvabilitySystem
-
-/--
-**Gödel's second incompleteness theorem** (abstract form, via the Hilbert–Bernays–Löb
-derivability conditions and the diagonal lemma).
-
-No consistent theory satisfying the derivability conditions — in particular, no consistent
-recursively axiomatized theory extending `PA` — proves its own consistency statement
-`Con(T) = ¬ Pr_T(⌜⊥⌝)`.
--/
-theorem Goedel_second_incompleteness (T : ProvabilitySystem) (hT : T.Consistent) :
-    ¬ T.Provable T.Con := fun h => hT (ProvabilitySystem.loeb h)
-
 /-!
-### Non-vacuity
+## Setting
 
-The hypotheses of `Frontier.Goedel_second_incompleteness` are satisfiable by a *consistent*
-system, so the theorem is not vacuously true.  (Of course, the intended instance is `PA`
-itself; the witness below is only a cheap sanity check that the axioms of
-`ProvabilitySystem` are jointly consistent with `Consistent`.)
+Gödel's second incompleteness theorem states that no consistent, recursively axiomatized
+theory `T` extending `PA` proves the arithmetical sentence `Con(T)` expressing its own
+consistency.
+
+The theorem is formalized here in the standard *abstract* (Hilbert–Bernays–Löb) form, i.e.
+as the Lean-checked reduction of the theorem to the derivability conditions.  The data are:
+
+* `B`, the Lindenbaum–Tarski algebra of `T`: sentences of the language of `T` modulo
+  `T`-provable equivalence.  Since `T` extends `PA`, its underlying logic is classical, so `B`
+  is a Boolean algebra, and a sentence `a` is *provable in `T`* exactly when its class satisfies
+  `a = ⊤`.  Consistency of `T` says precisely that `⊥ ≠ ⊤` in `B`, i.e. that `T` does not
+  prove a contradiction.
+* `box : B → B`, the provability predicate `a ↦ ⌜Prov_T(⌜a⌝)⌝`.  (For a *recursively
+  axiomatized* `T` such a `Σ₁` predicate exists by arithmetization of syntax, and it descends
+  to the Lindenbaum algebra because `T ⊢ a ↔ b` implies `T ⊢ □a ↔ □b`.)
+
+The hypotheses `D1`, `D2`, `D3` are the three Hilbert–Bernays–Löb derivability conditions,
+which hold for every recursively axiomatized theory extending `PA`:
+
+* `D1`  (necessitation)      `T ⊢ a  ⟹  T ⊢ □a`;
+* `D2`  (internal modus ponens) `T ⊢ □(a → b) → (□a → □b)`;
+* `D3`  (provable Σ₁-completeness) `T ⊢ □a → □□a`.
+
+Finally `hg` is the Gödel fixed point supplied by the diagonal lemma: a sentence `g` with
+`T ⊢ g ↔ ¬□g`.
+
+Note that these hypotheses are satisfiable by a *consistent* system (see
+`Frontier.goedel_hypotheses_satisfiable` below), so the theorem below is not vacuous.
 -/
 
-/-- A trivial consistent instance of `ProvabilitySystem`. -/
-def boolSystem : ProvabilitySystem where
-  Sentence := Bool
-  Provable p := p = true
-  imp p q := (!p || q)
-  bot := false
-  box _ := true
-  modusPonens {p q} hpq hp := by
-    revert hpq hp; cases p <;> cases q <;> simp
-  axK p q := by cases p <;> cases q <;> simp
-  axS p q r := by cases p <;> cases q <;> cases r <;> simp
-  necessitation _ := rfl
-  boxK p q := by cases p <;> cases q <;> simp
-  boxFour p := by cases p <;> simp
-  diagonal p := ⟨p, by cases p <;> simp, by cases p <;> simp⟩
+section
+variable {B : Type*} [BooleanAlgebra B]
 
-theorem boolSystem_consistent : boolSystem.Consistent := by
-  simp [ProvabilitySystem.Consistent, boolSystem]
+/-- The internal consistency statement `Con(T) = ¬ Prov_T(⌜⊥⌝)`, as an element of the
+Lindenbaum algebra. -/
+def Con (box : B → B) : B := (box ⊥)ᶜ
+
+/-- **Formalized first incompleteness step.**  If `g` is a Gödel fixed point (`T ⊢ g ↔ ¬□g`)
+then `T ⊢ □g → □⊥`: the theory proves that provability of its Gödel sentence would make it
+inconsistent. -/
+theorem box_goedel_le_box_bot (box : B → B)
+    (D1 : ∀ a : B, a = ⊤ → box a = ⊤)
+    (D2 : ∀ a b : B, box (a ⇨ b) ⊓ box a ≤ box b)
+    (D3 : ∀ a : B, box a ≤ box (box a))
+    (g : B) (hg : g = (box g)ᶜ) :
+    box g ≤ box ⊥ := by
+  have h1 : g ≤ box g ⇨ (⊥ : B) := by
+    rw [himp_bot]
+    exact hg.le
+  have h2 : box (g ⇨ (box g ⇨ (⊥ : B))) = ⊤ := D1 _ (himp_eq_top_iff.mpr h1)
+  have h3 : box g ≤ box (box g ⇨ (⊥ : B)) := by
+    calc box g = box (g ⇨ (box g ⇨ (⊥ : B))) ⊓ box g := by rw [h2, top_inf_eq]
+      _ ≤ box (box g ⇨ (⊥ : B)) := D2 _ _
+  exact le_trans (le_inf h3 (D3 g)) (D2 _ _)
+
+/-- **Gödel's second incompleteness theorem** (abstract Hilbert–Bernays–Löb form).
+
+Let `B` be the Lindenbaum–Tarski algebra of a theory `T` (so `a = ⊤` means `T ⊢ a`), let
+`box` be a provability predicate for `T` satisfying the three derivability conditions
+`D1`, `D2`, `D3`, and let `g` be a Gödel fixed point for `box`, as provided by the diagonal
+lemma.  If `T` is consistent (`⊥ ≠ ⊤`, i.e. `T ⊬ ⊥`), then `T` does not prove its own
+consistency statement `Con(T) = ¬□⊥`.
+
+Every consistent recursively axiomatized theory extending `PA` provides such data, so no such
+theory proves its own consistency. -/
+theorem Goedel_second_incompleteness (box : B → B)
+    (D1 : ∀ a : B, a = ⊤ → box a = ⊤)
+    (D2 : ∀ a b : B, box (a ⇨ b) ⊓ box a ≤ box b)
+    (D3 : ∀ a : B, box a ≤ box (box a))
+    (g : B) (hg : g = (box g)ᶜ)
+    (hcon : (⊥ : B) ≠ ⊤) :
+    Con box ≠ ⊤ := by
+  intro hProvCon
+  -- If `T ⊢ Con(T)` then `□⊥` is refutable, i.e. `□⊥ = ⊥` in the Lindenbaum algebra.
+  have hbot : box (⊥ : B) = ⊥ := compl_eq_top.mp hProvCon
+  -- Hence the Gödel sentence is not provably provable.
+  have hboxg : box g = ⊥ :=
+    le_bot_iff.mp (hbot ▸ box_goedel_le_box_bot box D1 D2 D3 g hg)
+  -- Therefore `T ⊢ g`, ...
+  have hgtop : g = ⊤ := by rw [hg, hboxg, compl_bot]
+  -- ... so by necessitation `T ⊢ □g`, contradicting `□g = ⊥` in a consistent theory.
+  exact hcon (hboxg ▸ D1 g hgtop)
+
+end
+
+/-- The hypotheses of `Frontier.Goedel_second_incompleteness` are satisfiable by a *consistent*
+system (here the two-element algebra with `box a = ⊤`), so the theorem is not vacuous: it
+really rules out `Con(T) = ⊤` rather than resting on contradictory assumptions. -/
+theorem goedel_hypotheses_satisfiable :
+    ∃ (box : Prop → Prop) (g : Prop),
+      (∀ a : Prop, a = ⊤ → box a = ⊤) ∧
+      (∀ a b : Prop, box (a ⇨ b) ⊓ box a ≤ box b) ∧
+      (∀ a : Prop, box a ≤ box (box a)) ∧
+      g = (box g)ᶜ ∧ (⊥ : Prop) ≠ ⊤ := by
+  refine ⟨fun _ => ⊤, ⊥, fun a _ => rfl, fun a b => le_top, fun a => le_top, ?_, ?_⟩
+  · simp
+  · simp
 
 end Frontier
 

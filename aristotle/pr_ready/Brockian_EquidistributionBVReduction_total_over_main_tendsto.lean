@@ -31,14 +31,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Total Over Main Tendsto
-Category: Brockian (Literature Discharge)
-Target: Brockian.EquidistributionBVReduction.total_over_main_tendsto
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 
 /-!
 # Total Over Main Tendsto
@@ -48,70 +40,51 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Topology
+open Filter Topology Asymptotics
+open scoped BigOperators
 
-namespace Brockian.EquidistributionBVReduction
+namespace Brockian
+namespace EquidistributionBVReduction
 
-/-!
-In the Bombieri–Vinogradov style reduction of an equidistribution statement one
-splits a counting function `total` into a `main` term plus an `error` term,
-shows that the main term grows without bound, and that the error term is
-negligible compared with the main term.  The conclusion used downstream is that
-the ratio `total / main` converges to `1`.
+/-- **Total over main tendsto.**
 
-Previously this conclusion was carried around as a named hypothesis; the lemma
-below discharges it from the two structural inputs, making it unconditional.
--/
+In the bounded-variation reduction step of an equidistribution argument one writes a
+total quantity as `main + err`, where the error term is asymptotically negligible
+compared with the main term.  Under exactly these hypotheses — the main term is
+eventually nonzero, and `err = o(main)` — the ratio of the total to the main term
+tends to `1`. -/
+theorem total_over_main_tendsto {main err : ℕ → ℝ}
+    (hne : ∀ᶠ N in atTop, main N ≠ 0) (hlo : err =o[atTop] main) :
+    Tendsto (fun N => (main N + err N) / main N) atTop (𝓝 1) := by
+  have h0 : Tendsto (fun N => err N / main N) atTop (𝓝 0) := hlo.tendsto_div_nhds_zero
+  have h1 : Tendsto (fun N => 1 + err N / main N) atTop (𝓝 (1 + 0)) :=
+    tendsto_const_nhds.add h0
+  rw [add_zero] at h1
+  refine h1.congr' ?_
+  filter_upwards [hne] with N hN
+  field_simp
 
-/-- **Total over main tends to one.**
-
-If a counting function `total` splits as `main + error`, the main term tends to
-infinity, and the relative error `error / main` tends to `0`, then
-`total / main` tends to `1`.
-
-The proof is elementary: eventually `main N ≠ 0`, so
-`total N / main N = 1 + error N / main N`, and one concludes with
-`Filter.Tendsto.add` (applied to `tendsto_const_nhds` and the error hypothesis)
-together with `Filter.Tendsto.congr'`. -/
-theorem total_over_main_tendsto
-    (total main error : ℕ → ℝ)
-    (hsplit : ∀ N, total N = main N + error N)
-    (hmain : Tendsto main atTop atTop)
-    (herror : Tendsto (fun N => error N / main N) atTop (𝓝 0)) :
+/-- Reformulation of `total_over_main_tendsto` for a `total`/`main` pair, where the
+error is the difference of the two. -/
+theorem total_div_main_tendsto {total main : ℕ → ℝ}
+    (hne : ∀ᶠ N in atTop, main N ≠ 0)
+    (hlo : (fun N => total N - main N) =o[atTop] main) :
     Tendsto (fun N => total N / main N) atTop (𝓝 1) := by
-  have key : Tendsto (fun N => 1 + error N / main N) atTop (𝓝 (1 + 0)) :=
-    tendsto_const_nhds.add herror
-  rw [add_zero] at key
-  refine key.congr' ?_
-  filter_upwards [hmain.eventually_gt_atTop 0] with N hN
-  have hne : main N ≠ 0 := ne_of_gt hN
-  rw [hsplit N, add_div, div_self hne]
+  have h := total_over_main_tendsto hne hlo
+  refine h.congr fun N => ?_
+  ring_nf
 
-/-- A variant with the relative-error hypothesis phrased via `Asymptotics.IsLittleO`:
-`error =o[atTop] main` together with `main → ∞` gives `total / main → 1`. -/
-theorem total_over_main_tendsto_of_isLittleO
-    (total main error : ℕ → ℝ)
-    (hsplit : ∀ N, total N = main N + error N)
-    (hmain : Tendsto main atTop atTop)
-    (herror : Asymptotics.IsLittleO atTop error main) :
-    Tendsto (fun N => total N / main N) atTop (𝓝 1) := by
-  refine total_over_main_tendsto total main error hsplit hmain ?_
-  have hne : ∀ᶠ N in atTop, main N ≠ 0 := by
-    filter_upwards [hmain.eventually_gt_atTop 0] with N hN using ne_of_gt hN
-  have h := (Asymptotics.isLittleO_iff_tendsto' (hne.mono fun _ h hm => absurd hm h)).1 herror
-  simpa using h
+/-- Concrete instance: if the Cesàro averages of `f` converge to a nonzero mean `I`,
+then the total sum divided by the main term `N * I` tends to `1`. -/
+theorem sum_div_mul_mean_tendsto {f : ℕ → ℝ} {I : ℝ} (hI : I ≠ 0)
+    (h : Tendsto (fun N => (∑ n ∈ Finset.range N, f n) / (N : ℝ)) atTop (𝓝 I)) :
+    Tendsto (fun N => (∑ n ∈ Finset.range N, f n) / ((N : ℝ) * I)) atTop (𝓝 1) := by
+  have h' : Tendsto (fun N => ((∑ n ∈ Finset.range N, f n) / (N : ℝ)) / I) atTop (𝓝 (I / I)) :=
+    h.div_const I
+  rw [div_self hI] at h'
+  refine h'.congr fun N => ?_
+  rw [div_div]
 
-/-- Sanity check that the hypotheses of `total_over_main_tendsto` are satisfiable:
-with `main N = N`, `error N = √N` and `total N = N + √N` the conclusion holds. -/
-example :
-    Tendsto (fun N : ℕ => ((N : ℝ) + Real.sqrt N) / (N : ℝ)) atTop (𝓝 1) := by
-  refine total_over_main_tendsto _ (fun N => (N : ℝ)) (fun N => Real.sqrt N)
-    (fun _ => rfl) tendsto_natCast_atTop_atTop ?_
-  have h : (fun N : ℕ => Real.sqrt N / (N : ℝ)) =ᶠ[atTop] fun N : ℕ => 1 / Real.sqrt N :=
-    Eventually.of_forall fun _ => Real.sqrt_div_self'
-  refine Tendsto.congr' h.symm ?_
-  exact tendsto_const_nhds.div_atTop
-    (Real.tendsto_sqrt_atTop.comp tendsto_natCast_atTop_atTop)
-
-end Brockian.EquidistributionBVReduction
+end EquidistributionBVReduction
+end Brockian
 

@@ -30,39 +30,44 @@ Target: Brockian.WeirdNumbers.OddWeirdExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to be the first command, so the header above is a plain block comment
--- and is repeated verbatim as the module docstring below.)
 
 import Mathlib
 
 /-!
-# Odd Weird Exists
-Category: Brockian Conjecture
-Target: Brockian.WeirdNumbers.OddWeirdExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+## Overview
 
-open Finset
+A natural number `n` is *weird* when it is abundant (the sum of its proper divisors exceeds
+`n`) but not semiperfect (no set of distinct proper divisors of `n` sums to `n`).  The smallest
+weird number is `70`.
+
+Whether an **odd** weird number exists is a well-known open problem; none is known, and none
+exists below very large search bounds.  Accordingly, the target statement
+`Brockian.WeirdNumbers.OddWeirdExists` is formalised here as a *conditional reduction*: it derives
+the existence of an odd weird number from the existence of an odd abundant number whose
+*abundance* `σ(n) - 2n` is not a subset sum of the proper divisors of `n`.
+
+The reduction is not a weakening: `weird_iff_abundance_not_representable` shows that the
+hypothesis is in fact equivalent to the conclusion's content, and it is the numerically more
+convenient criterion (the abundance is usually far smaller than `n`).
+
+Besides that, this file contains:
+
+* `isWeird_70` — a machine-checked verification that `70` is weird (a sanity check on the
+  definitions);
+* `no_odd_weird_below_1000` — no odd weird number is smaller than `1000`;
+* `isWeird_mul_prime` — if `n` is weird and `p` is a prime larger than `σ n`, then `n * p` is
+  weird; hence (`infinite_odd_weird_of_odd_weird`) a single odd weird number would produce
+  infinitely many.
+-/
 
 namespace Brockian.WeirdNumbers
 
-/-! ## Setup
+open Finset
 
-We use Mathlib's `Nat.Weird`: `n` is weird if it is *abundant*
-(`n < ∑ i ∈ n.properDivisors, i`) but not *pseudoperfect* (no subset of its proper divisors
-sums to `n`).
+/-- `n` is *semiperfect* (pseudoperfect) if some set of distinct proper divisors of `n`
+sums to `n`. -/
 
-The statement "there exists an odd weird number" is an open problem, so the target
-`OddWeirdExists` is formalised as a **conditional reduction**: from a verifiable criterion on a
-single odd number we deduce the existence of an odd weird number.  The criterion involves the
-*abundance* `∑ i ∈ n.properDivisors, i - n`, which is typically far smaller than `n`, so it is a
-genuine reduction of the search problem.
--/
+def abundance (n : ℕ) : ℕ := (∑ d ∈ n.properDivisors, d) - n
 
-/-- The abundance of `n`: the sum of the proper divisors of `n` minus `n` (truncated
-subtraction). -/
-
-def abundance (n : ℕ) : ℕ := (∑ i ∈ n.properDivisors, i) - n
-
-/-- The statement of the open problem: there exists an odd weird number. -/
+/-- Complementation inside the set of proper divisors: for an abundant `n`, a subset of the
+proper divisors sums to `n` exactly when some subset sums to the abundance of `n`. -/

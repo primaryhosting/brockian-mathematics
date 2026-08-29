@@ -5,21 +5,26 @@ Target: Frontier.Aronszajn_tree_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
-open Ordinal Set Cardinal
-open scoped Classical
+/-!
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-namespace Frontier
+open Ordinal Cardinal Set
 
-/-- The first uncountable ordinal `ω₁`. -/
+namespace Aronszajn
 
-theorem E_succ (b x : Ordinal) : E (b + 1) x = if x < b then E b x else 0 := by
-  have hs : ∃ c, b + 1 = c + 1 := ⟨b, rfl⟩
-  have hc : hs.choose = b := (ord_add_one_inj hs.choose_spec).symm
-  rw [E_eq]; unfold Estep
-  rw [dif_neg (add_one_ne_zero' b), dif_pos hs]
-  simp only [hc]
+/-! ## Cofinal `ω`-sequences in countable limit ordinals -/
 
-/-- The `ω`-approximation sequence used at limit stages of the recursion. -/
+/-- `c` is a nondecreasing `ω`-indexed sequence, starting at `0`, cofinal in `l`. -/
+
+theorem E_succ (γ ξ : Ordinal) : E (γ + 1) ξ = if ξ < γ then E γ ξ else 0 := by
+  unfold E
+  rw [show γ + 1 = Order.succ γ from (Order.succ_eq_add_one γ).symm,
+    Ordinal.limitRecOn_succ]
+

@@ -1,38 +1,31 @@
+/-
+# Heisenberg Uncertainty
+Category: Quantum Physics
+Target: QPhys.heisenberg_uncertainty
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Heisenberg Uncertainty
+Category: Quantum Physics
+Target: QPhys.heisenberg_uncertainty
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace QPhys
 
-local notation "⟪" x ", " y "⟫" => inner ℂ x y
+open scoped ComplexConjugate
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-/-- An operator `A` on a complex inner product space is *symmetric* (formally self-adjoint)
-when `⟪A x, y⟫ = ⟪x, A y⟫` for all `x, y`. -/
+/-- The expectation value `⟨A⟩_ψ = ⟪ψ, A ψ⟫` of an observable `A` in the state `ψ`. -/
 
-noncomputable def stdDev (A : E →ₗ[ℂ] E) (ψ : E) : ℝ :=
-  ‖A ψ - ((expect A ψ : ℝ) : ℂ) • ψ‖
+noncomputable def stdDev (A : H →ₗ[ℂ] H) (ψ : H) : ℝ := ‖A ψ - expectation A ψ • ψ‖
 
-/-- For a symmetric operator the expectation value is real, i.e. `⟪ψ, A ψ⟫ = ⟨A⟩`. -/
+/-- If the "commutator" `⟪u,v⟫ - ⟪v,u⟫` equals `c * i` for a real `c`, then
+`c/2 ≤ ‖u‖ * ‖v‖`.  This is the Cauchy–Schwarz half of the uncertainty principle. -/

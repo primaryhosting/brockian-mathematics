@@ -1,53 +1,32 @@
 import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+import RequestProject.Main
 
 /-!
-# Mergesort Correct
-Category: Computer Science
-Target: CS.mergesort_correct
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Mergesort on a linear order
+
+A Mathlib-facing corollary of `CS.mergesort_correct`: on any linear order,
+`CS.mergeSort (· ≤ ·)` produces a `List.Sorted (· ≤ ·)` permutation of its input.
 -/
 
 namespace CS
 
-universe u
+/-- On a linear order, `mergeSort (· ≤ ·) l` is sorted and a permutation of `l`. -/
 
-variable {α : Type u}
-
-/-- Merge two lists with respect to a boolean comparison `le`. -/
-
-theorem mergeSort_pairwise (le : α → α → Bool)
-    (htotal : ∀ a b, le a b || le b a) (htrans : ∀ a b c, le a b → le b c → le a c)
-    (l : List α) : (mergeSort le l).Pairwise (fun a b => le a b = true) := by
-  induction l using mergeSort.induct with
-  | case1 => simp [mergeSort]
-  | case2 x => simp [mergeSort]
-  | case3 x y t ih1 ih2 =>
+theorem mergeSort_pairwise (r : α → α → Prop) [DecidableRel r]
+    (htotal : ∀ a b : α, r a b ∨ r b a) (htrans : ∀ a b c : α, r a b → r b c → r a c) :
+    ∀ l : List α, List.Pairwise r (mergeSort r l)
+  | [] => by rw [mergeSort]; exact List.Pairwise.nil
+  | [x] => by rw [mergeSort]; simp
+  | x :: y :: t => by
       rw [mergeSort]
-      exact merge_pairwise le htotal htrans ih1 ih2
+      exact merge_pairwise r htotal htrans _ _
+        (mergeSort_pairwise r htotal htrans (split (x :: y :: t)).1)
+        (mergeSort_pairwise r htotal htrans (split (x :: y :: t)).2)
+termination_by l => l.length
+decreasing_by
+  · exact split_fst_length_lt x y t
+  · exact split_snd_length_lt x y t
 
-/-- **Mergesort is correct**: for any total, transitive boolean comparison `le`,
-`mergeSort le l` is a permutation of `l` which is sorted with respect to `le`. -/
+/-- **Mergesort is correct**: for a total, transitive (decidable) relation `r`,
+`mergeSort r l` is sorted with respect to `r` (i.e. pairwise `r`-related, in order)
+and is a permutation of the input list `l`. -/

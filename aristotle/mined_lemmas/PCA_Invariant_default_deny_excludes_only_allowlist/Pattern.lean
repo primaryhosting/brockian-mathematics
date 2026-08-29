@@ -24,58 +24,52 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 /-!
-# A formal model of a default-deny isolation engine
-
-This file develops a small, self-contained model of a *policy controlled access* (PCA)
-isolation engine and proves its central security invariant: the engine is **default deny**,
-so the set of requests it admits is *exactly* the set of requests captured by the
-allowlist (minus anything the denylist covers).  Nothing else can slip through.
-
-The two halves of the statement are:
-
-* **soundness**  – every admitted request is matched by some allowlist rule
-  (and by no denylist rule);
-* **completeness** – every request matched by an allowlist rule and by no denylist rule
-  is admitted.
-
-Together these say the engine's behaviour is characterised by its policy, which is
-`PCA.Invariant.default_deny_excludes_only_allowlist`.
+# Default Deny Excludes Only Allowlist
+Category: Proof-Carrying Apps
+Target: PCA.Invariant.default_deny_excludes_only_allowlist
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace PCA
 
-/-- A *pattern* for one field of a request: `Pattern.any` is a wildcard, while
-`Pattern.exact s` matches the single label `s`. -/
-inductive Pattern (α : Type) where
+/-! ## The capability model of the isolation engine -/
+
+/-- A *pattern* used inside an allowlist rule: either the wildcard `any`, which
+matches every value, or `exact v`, which matches only `v`. -/
+inductive Pattern (α : Type _) where
   | any : Pattern α
   | exact : α → Pattern α
   deriving DecidableEq, Repr
 
-/-- Does a field pattern match a concrete label? -/
+/-- Does a pattern match a concrete value? -/
 
-def Pattern.Matches {α : Type} (p : Pattern α) (a : α) : Prop :=
-  match p with
-  | .any => True
-  | .exact b => b = a
+def Pattern.Matches {α : Type _} : Pattern α → α → Prop
+  | .any, _ => True
+  | .exact v, w => v = w
 
-instance {α : Type} [DecidableEq α] (p : Pattern α) (a : α) : Decidable (p.Matches a) := by
-  cases p <;> simp [Pattern.Matches] <;> infer_instance
+instance {α : Type _} [DecidableEq α] (p : Pattern α) (v : α) :
+    Decidable (Pattern.Matches p v) := by
+  cases p with
+  | any => exact isTrue trivial
+  | exact w => exact (inferInstance : Decidable (w = v))
 
-/-- A request presented to the isolation engine: a principal in some domain asks to
-perform an action on a resource. -/
-structure Request (Principal Resource Action : Type) where
-  principal : Principal
-  resource : Resource
-  action : Action
+/-- A concrete capability request presented to the isolation engine: a subject
+(the running app / principal), a resource, and an action. -/
+structure Capability (S R A : Type _) where
+  subject : S
+  resource : R
+  action : A
   deriving DecidableEq, Repr
 
-/-- A policy rule: a triple of patterns, one for each field of a request. -/
-structure Rule (Principal Resource Action : Type) where
-  principal : Pattern Principal
-  resource : Pattern Resource
-  action : Pattern Action
+/-- An allowlist rule: a pattern for each of the three components of a request. -/
+structure Rule (S R A : Type _) where
+  subject : Pattern S
+  resource : Pattern R
+  action : Pattern A
   deriving DecidableEq, Repr
 
-variable {Principal Resource Action : Type}
-
-/-- A rule matches a request when all three of its field patterns match. -/
+/-- A rule *covers* a capability when all three of its patterns match. -/

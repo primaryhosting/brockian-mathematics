@@ -8,7 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -34,15 +33,15 @@ set_option grind.warning false
 
 namespace Combinatorics
 
-/-- **Pigeonhole principle.** If `f : s → t` maps a finite type `s` into a finite type `t`
-with `Fintype.card t < Fintype.card s`, then `f` is not injective: there are distinct
+/-- **Pigeonhole principle.** If `f : s → t` is a map between finite types with
+`Fintype.card t < Fintype.card s`, then `f` is not injective: there are distinct
 `a b : s` with `f a = f b`. -/
 
 theorem pigeonhole {s t : Type*} [Fintype s] [Fintype t] (f : s → t)
     (h : Fintype.card t < Fintype.card s) :
-    ∃ a b : s, a ≠ b ∧ f a = f b := by
+    (∃ a b : s, a ≠ b ∧ f a = f b) ∧ ¬ Function.Injective f := by
   obtain ⟨a, b, hab, hfab⟩ := Fintype.exists_ne_map_eq_of_card_lt f h
-  exact ⟨a, b, hab, hfab⟩
+  exact ⟨⟨a, b, hab, hfab⟩, fun hinj => hab (hinj hfab)⟩
 
-/-- Equivalent formulation of the pigeonhole principle: under the same cardinality
-hypothesis, `f` fails to be injective. -/
+end Combinatorics
+

@@ -8,11 +8,20 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Cos Trace Norm 3499
+Category: Brockian Corpus
+Target: Brockian.CosTraceNorm3499
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped Matrix
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -25,23 +34,21 @@ set_option autoImplicit false
 set_option pp.fullNames true
 set_option pp.structureInstances true
 set_option pp.coercions.types true
+set_option pp.piBinderTypes true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
 namespace Brockian
 
-open Matrix
+/-- The `n × n` real "cosine Gram" matrix attached to a family of phases `x : Fin n → ℝ`,
+with entries `cos (x i - x j)`. -/
 
-/-- The cosine Gram matrix of a family of angles: `C i j = cos (θ i - θ j)`. -/
-
-lemma cosGram_trace {n : ℕ} (θ : Fin n → ℝ) : (cosGram θ).trace = (n : ℝ) := by
+lemma cosGram_trace (n : ℕ) (x : Fin n → ℝ) : (cosGram n x).trace = (n : ℝ) := by
   simp [Matrix.trace, Matrix.diag, cosGram]
 
-/-- **Trace-norm bound for the cosine Gram matrix.**
-
-For any angles `θ : Fin n → ℝ`, the matrix `C i j = cos (θ i - θ j)` is symmetric positive
-semidefinite, and its trace norm (the sum of the absolute values of its eigenvalues, i.e. the
-sum of its singular values) is exactly `n`; in particular it is bounded by `n`. -/
+/-- **Cos Trace Norm 3499.**  For any family of phases `x : Fin n → ℝ`, the trace norm
+(the sum of the absolute values of the eigenvalues) of the cosine Gram matrix
+`A i j = cos (x i - x j)` is exactly `n`.  In particular the trace norm is bounded by `n`,
+this bound being attained. -/

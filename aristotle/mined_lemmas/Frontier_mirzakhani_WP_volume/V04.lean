@@ -1,27 +1,51 @@
+/-
+# Mirzakhani WP Volume
+Category: Frontier — Fields Medal Work
+Target: Frontier.mirzakhani_WP_volume
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
-import RequestProject.Kernel
-import RequestProject.TwoDim
 
 /-!
-# Weil–Petersson volume polynomials in low complexity
-
-We record the Weil–Petersson volume polynomials `V_{0,3}`, `V_{0,4}` and `V_{0,5}`, the
-right-hand sides of Mirzakhani's recursion in the cases `(g,n) = (0,4)` and `(0,5)`, and
-verify the recursion in both cases, together with the fact that the recursion determines
-the volume polynomial.
+# Mirzakhani WP Volume
+Category: Frontier — Fields Medal Work
+Target: Frontier.mirzakhani_WP_volume
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators Real
-open MeasureTheory Set Real
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+open MeasureTheory Set Real Asymptotics
 
 namespace Frontier
 
-set_option maxHeartbeats 1000000
+/-! ## Mirzakhani's integration kernel -/
 
-/-! ## The volume polynomials -/
+/-- The basic "logistic" profile appearing in Mirzakhani's kernels:
+`logistic u = 1 / (1 + exp (u / 2))`. -/
 
-/-- `V_{0,3} ≡ 1`: the moduli space of pairs of pants is a point. -/
+noncomputable def V04 (L₁ L₂ L₃ L₄ : ℝ) : ℝ :=
+  2 * π ^ 2 + (L₁ ^ 2 + L₂ ^ 2 + L₃ ^ 2 + L₄ ^ 2) / 2
 
-noncomputable def V04 (L : Fin 4 → ℝ) : ℝ := 2 * π ^ 2 + (∑ i, (L i) ^ 2) / 2
+/-- The Weil–Petersson volume polynomial of `M_{1,1}`.
 
-/-- `V_{0,5}(L) = (Σ Lᵢ²)²/4 − (Σ Lᵢ⁴)/8 + 3π² Σ Lᵢ² + 10π⁴`. -/
+We use the orbifold normalisation `V_{1,1}(L) = (L² + 4π²)/48` (so that `V_{1,1}(0) = π²/12`),
+which is the one for which Mirzakhani's recursion is stated with its usual constants; the
+generic one-holed torus has the elliptic involution as an automorphism, which accounts for
+the factor `2` relative to the normalisation `(L² + 4π²)/24`. -/

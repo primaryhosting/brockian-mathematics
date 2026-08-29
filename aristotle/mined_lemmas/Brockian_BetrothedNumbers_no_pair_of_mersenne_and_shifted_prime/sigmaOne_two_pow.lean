@@ -1,3 +1,10 @@
+/-
+# No Pair Of Mersenne And Shifted Prime
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.no_pair_of_mersenne_and_shifted_prime
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -22,17 +29,27 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian.BetrothedNumbers
 
-open Finset ArithmeticFunction
-open scoped ArithmeticFunction.sigma
-
 /-- The sum-of-divisors function `σ₁`. -/
 
 lemma sigmaOne_two_pow (k : ℕ) : sigmaOne (2 ^ k) + 1 = 2 ^ (k + 1) := by
-  rw [sigmaOne_eq_sigma, sigma_one_apply_prime_pow Nat.prime_two]
-  exact sum_range_two_pow (k + 1)
+  induction k with
+  | zero => simp [sigmaOne]
+  | succ n ih =>
+      have hcalc : sigmaOne (2 ^ (n + 1)) = sigmaOne (2 ^ n) + 2 ^ (n + 1) := by
+        simp only [sigmaOne, Nat.sum_divisors_prime_pow Nat.prime_two,
+          Finset.sum_range_succ]
+      rw [hcalc]
+      have : 2 ^ (n + 1 + 1) = 2 ^ (n + 1) + 2 ^ (n + 1) := by ring
+      omega
 
-/-- For an odd prime `p`, `σ₁ (2^k p) = (2^{k+1} - 1)(p+1)`, stated without subtraction. -/

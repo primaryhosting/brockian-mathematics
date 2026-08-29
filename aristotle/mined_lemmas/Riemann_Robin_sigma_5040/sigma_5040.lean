@@ -8,14 +8,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Sigma 5040
-Category: Riemann Program
-Target: Riemann.Robin.sigma_5040
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -41,22 +33,20 @@ set_option grind.warning false
 
 namespace Riemann.Robin
 
-/-- The sum of divisors of `5040 = 2^4 * 3^2 * 5 * 7` is `19344`.
+/-- The sum of divisors of `5040 = 2^4 * 3^2 * 5 * 7` equals `19344`.
 
-The proof uses multiplicativity of `σ₁`
-(`ArithmeticFunction.isMultiplicative_sigma`) together with the values on the
-pairwise coprime prime-power factors `16, 9, 5, 7`. -/
+The proof uses multiplicativity of `σ₁`: since `5040 = 16 * 9 * 5 * 7` with pairwise
+coprime factors, `σ₁(5040) = 31 * 13 * 6 * 8 = 19344`. -/
 
 theorem sigma_5040 : ArithmeticFunction.sigma 1 5040 = 19344 := by
-  have hm : (ArithmeticFunction.sigma 1).IsMultiplicative :=
-    ArithmeticFunction.isMultiplicative_sigma
-  have h16 : ArithmeticFunction.sigma 1 16 = 31 := by decide
-  have h9 : ArithmeticFunction.sigma 1 9 = 13 := by decide
-  have h5 : ArithmeticFunction.sigma 1 5 = 6 := by decide
-  have h7 : ArithmeticFunction.sigma 1 7 = 8 := by decide
-  have e : (5040 : ℕ) = 16 * (9 * (5 * 7)) := by norm_num
-  rw [e, hm.map_mul_of_coprime (by norm_num), hm.map_mul_of_coprime (by norm_num),
-    hm.map_mul_of_coprime (by norm_num), h16, h9, h5, h7]
-  norm_num
+  have hmul := ArithmeticFunction.isMultiplicative_sigma (k := 1)
+  have e1 : (5040 : ℕ) = 16 * 315 := by norm_num
+  have e2 : (315 : ℕ) = 9 * 35 := by norm_num
+  have e3 : (35 : ℕ) = 5 * 7 := by norm_num
+  rw [e1, hmul.map_mul_of_coprime (by decide), e2, hmul.map_mul_of_coprime (by decide),
+    e3, hmul.map_mul_of_coprime (by decide)]
+  simp [ArithmeticFunction.sigma_one_apply]
+  decide
 
-/-- Restatement of `sigma_5040` as an explicit sum over the divisors of `5040`. -/
+end Riemann.Robin
+

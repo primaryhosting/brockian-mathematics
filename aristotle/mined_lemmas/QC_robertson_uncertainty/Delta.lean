@@ -1,5 +1,4 @@
-import Mathlib
-/-!
+/-
 # Robertson Uncertainty
 Category: Quantum Computing
 Target: QC.robertson_uncertainty
@@ -7,22 +6,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Note: Lean 4 requires `import` lines to precede every other command in a file
--- (a `/-! ... -/` module docstring is a command), so the required header comment
--- appears immediately after the single `import Mathlib` line.
+import Mathlib
 
-open scoped ComplexConjugate
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace QC
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] [CompleteSpace E]
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 
-local notation "⟪" x ", " y "⟫" => (inner ℂ x y : ℂ)
+/-- The expectation value `⟨A⟩_ψ = ⟪ψ, A ψ⟫` of an operator `A` in the state `ψ`. -/
 
-/-- The expectation value `⟨A⟩_ψ = ⟪ψ, A ψ⟫` of an observable `A` in the state `ψ`
-(a real number when `A` is self-adjoint and `ψ` is a unit vector). -/
+noncomputable def Delta (A : Module.End ℂ E) (ψ : E) : ℝ := ‖A ψ - expect A ψ • ψ‖
 
-noncomputable def Delta (A : E →L[ℂ] E) (ψ : E) : ℝ :=
-  ‖A ψ - ((mean A ψ : ℂ)) • ψ‖
-
-/-- The commutator `[A, B] = AB - BA` of two observables. -/
+/-- An operator is symmetric (self-adjoint) when `⟪A x, y⟫ = ⟪x, A y⟫` for all `x, y`. -/

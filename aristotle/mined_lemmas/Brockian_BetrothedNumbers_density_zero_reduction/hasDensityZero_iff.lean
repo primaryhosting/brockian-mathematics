@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Density Zero Reduction
-Category: Frontier — Betrothed Numbers
-Target: Brockian.BetrothedNumbers.density_zero_reduction
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,77 +14,108 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames false
+set_option pp.fullNames true
 set_option pp.structureInstances true
-set_option pp.coercions.types false
+set_option pp.coercions.types true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Density Zero Reduction
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.density_zero_reduction
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import RequestProject.Brockian.BetrothedNumbers.Basic
+
 /-!
-## Overview
+# Density Zero Reduction
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.density_zero_reduction
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-Betrothed (quasi-amicable) numbers are the members of pairs `(m, n)` with `m ≠ n` and
-`σ(m) = σ(n) = m + n + 1`.  Pollack proved that the set of betrothed numbers has asymptotic
-density zero.  This file decomposes that theorem into reusable pieces and proves everything
-except one clearly isolated analytic input, which concerns only pairs of bounded ratio.
+## Elementary analytic input: numbers of large abundancy are rare
 
-Dependency graph (every node is proved in this file, except the node marked `HYP`, which is
-the hypothesis of the final reduction theorem):
+This file proves, unconditionally, the analytic-number-theory ingredients of the
+reduction:
 
-```
-   sum_inv_sq_le                     (∑_{d ≤ x} 1/d² ≤ 2)
-        │
-        ├──────────────► sum_sigmaOne_div_le      (∑_{m ≤ x} σ(m)/m ≤ 2x)
-   sigmaOne_div_self ────►      │
-   (σ(m)/m = ∑_{d ∣ m} 1/d)     │
-                                ▼
-                     count_highly_abundant_le     (#{m ≤ x : σ(m) ≥ K·m} ≤ 2x/K)
-                                │
-   partner_eq                   │
-        │                       │
-        ▼                       │
-   count_larger_le_count_smaller │        (the partner map is injective)
-        │                       │
-        ▼                       ▼
-   count_betrothed_le_two_mul   count_smaller_le_add
-        │                       │
-        └───────────┬───────────┘
-                    ▼
-          density_zero_reduction  ◄── HYP: for every K, the smaller members of betrothed
-                                          pairs of bounded ratio (n < K·m) have density 0
-```
+* `Brockian.BetrothedNumbers.sum_divisors_swap`: Dirichlet's hyperbola-style
+  interchange `∑_{n ≤ x} ∑_{d ∣ n} f d = ∑_{d ≤ x} ⌊x/d⌋ f d`;
+* `Brockian.BetrothedNumbers.sum_sigma_div_self_le`: the mean value bound
+  `∑_{n ≤ x} σ(n)/n ≤ 2x`;
+* `Brockian.BetrothedNumbers.abundant_count_le`: the Markov/Chebyshev bound
+  `#{n ≤ x : σ(n) > K n} ≤ 2x/K`;
+* `Brockian.BetrothedNumbers.hasDensityZero_of_forall_le`: a convenient
+  criterion for asymptotic density zero.
+-/
 
-Also proved here, as independent reusable infrastructure for the remaining bounded-ratio step:
-`count_multiples_le` (`#{n ≤ x : d ∣ n} ≤ x/d`) and the sieve criterion
-`hasDensityZero_of_covered_by_multiples`.
+namespace Brockian
+namespace BetrothedNumbers
 
-The remaining hypothesis is strictly weaker than Pollack's theorem: it only concerns betrothed
-pairs whose two members have bounded ratio.  The unbounded-ratio part is handled here
-unconditionally, via the average order bound `∑_{m ≤ x} σ(m)/m ≤ 2x`.  Accordingly, the density
+open ArithmeticFunction Finset
 
-lemma hasDensityZero_iff (P : ℕ → Prop) :
-    HasDensityZero P ↔ ∀ ε : ℝ, 0 < ε → ∀ᶠ x : ℕ in atTop, (countUpTo P x : ℝ) ≤ ε * x := by
-  rw [HasDensityZero, Metric.tendsto_atTop]
+/-- The set of integers of abundancy larger than `K`, i.e. `σ(n) > K n`. -/
+
+theorem hasDensityZero_iff (S : Set ℕ) :
+    HasDensityZero S ↔ ∀ ε : ℝ, 0 < ε → ∀ᶠ x : ℕ in Filter.atTop,
+      (countUpTo S x : ℝ) / x < ε := by
   constructor
   · intro h ε hε
-    obtain ⟨N, hN⟩ := h (ε / 2) (half_pos hε)
-    filter_upwards [eventually_ge_atTop N, eventually_ge_atTop 1] with x hx hx1
-    have hxpos : (0 : ℝ) < x := by exact_mod_cast hx1
-    have hd := hN x hx
-    rw [Real.dist_eq, sub_zero] at hd
-    have h2 : (countUpTo P x : ℝ) / x < ε / 2 := lt_of_abs_lt hd
-    have h3 := (div_lt_iff₀ hxpos).1 h2
-    nlinarith
-  · intro h ε hε
-    obtain ⟨N, hN⟩ := (h (ε / 2) (half_pos hε)).exists_forall_of_atTop
-    refine ⟨max N 1, fun x hx => ?_⟩
-    have hx1 : 1 ≤ x := le_trans (le_max_right N 1) hx
-    have hxpos : (0 : ℝ) < x := by exact_mod_cast hx1
-    have hle := hN x (le_trans (le_max_left N 1) hx)
-    rw [Real.dist_eq, sub_zero, abs_of_nonneg (by positivity), div_lt_iff₀ hxpos]
-    nlinarith
+    have := (Metric.tendsto_atTop.mp (show Filter.Tendsto _ _ _ from h)) ε hε
+    obtain ⟨N, hN⟩ := this
+    filter_upwards [Filter.eventually_ge_atTop N] with x hx
+    have := hN x hx
+    rw [Real.dist_eq, sub_zero] at this
+    exact (le_abs_self _).trans_lt this
+  · intro h
+    rw [HasDensityZero, Metric.tendsto_atTop]
+    intro ε hε
+    obtain ⟨N, hN⟩ := Filter.eventually_atTop.mp (h ε hε)
+    refine ⟨N, fun x hx => ?_⟩
+    have hpos : (0 : ℝ) ≤ (countUpTo S x : ℝ) / x := by positivity
+    rw [Real.dist_eq, sub_zero, abs_of_nonneg hpos]
+    exact hN x hx
 
-/-- The multiples of `d` up to `x` number at most `x/d`. -/
+end BetrothedNumbers
+end Brockian
+
+/-
+# Density Zero Reduction
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.density_zero_reduction
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Density Zero Reduction
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.density_zero_reduction
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+## Basic definitions for betrothed (quasi-amicable) numbers
+
+A pair `(m, n)` of positive integers is *betrothed* (or *quasi-amicable*) if
+`σ m = σ n = m + n + 1`, i.e. each of the two numbers is the sum of the
+non-trivial proper divisors of the other.  This file sets up the basic
+definitions, the elementary structure theory of such pairs (in particular the
+fact that the partner of a betrothed number is *determined* by the number),
+and the notion of asymptotic density zero used in the main reduction theorem.
+-/
+
+namespace Brockian
+namespace BetrothedNumbers
+
+open ArithmeticFunction Finset
+
+/-- `(m, n)` is a betrothed (quasi-amicable) pair: both are positive and
+`σ m = σ n = m + n + 1`. -/

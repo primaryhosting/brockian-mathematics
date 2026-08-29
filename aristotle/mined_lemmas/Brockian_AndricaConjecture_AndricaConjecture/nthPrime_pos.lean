@@ -33,19 +33,11 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Andrica Conjecture
-Category: Brockian Conjecture
-Target: Brockian.AndricaConjecture.AndricaConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-set_option maxRecDepth 100000
-
 namespace Brockian.AndricaConjecture
 
-/-- `nthPrime n` is the `n`-th prime number (`nthPrime 0 = 2`, `nthPrime 1 = 3`, ...). -/
+open Real
 
-lemma nthPrime_pos (n : ℕ) : 0 < nthPrime n := (prime_nthPrime n).pos
+/-- `nthPrime n` is the `n`-th prime number (`nthPrime 0 = 2`). -/
+
+lemma nthPrime_pos (n : ℕ) : 0 < nthPrime n := (nthPrime_prime n).pos
 

@@ -1,39 +1,67 @@
-import RequestProject.Main
-
-/-!
-# A consistency witness for `CS.LadnerSetup`
-
-`CS.ladner` is stated relative to the abstract axiomatisation `CS.LadnerSetup`.
-To rule out the possibility that this package of hypotheses is contradictory
-(in which case the theorem would be vacuous), we build an explicit model of it.
-
-The model takes both classes to be the class `FC` of languages that are *finite
-variations of a constant language* (equivalently: finite or cofinite sets), which
-is enumerable, closed under finite variation, contains the finite languages and is
-closed downwards under the reductions of the model; `SAT` is taken to be the
-cofinite language `{x | x ≠ 0}`, which is complete for `FC` under those
-reductions, and the clock is taken to be constant (so all four clock-semantics
-fields hold trivially or vacuously).
-
-Of course `P = NP` holds in this model, so `CS.ladner` says nothing about it; the
-point of the construction is only that the hypotheses of `CS.LadnerSetup` are
-jointly satisfiable, hence consistent.
+/-
+# Ladner
+Category: Frontier Cs
+Target: CS.ladner
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
+set_option maxHeartbeats 1000000
 set_option autoImplicit false
-set_option relaxedAutoImplicit false
+
+/-!
+# Ladner's theorem
+
+This file formalises Ladner's theorem: if `P ≠ NP`, then there is an `NP`-intermediate
+language, i.e. a language that lies in `NP`, is not in `P`, and is not `NP`-complete.
+
+Since Mathlib contains no development of time-bounded computation, the classes `P`, `NP` and the
+polynomial time computable functions are packaged into an abstract structure `CS.Setting`, whose
+fields are the standard, model independent facts used in Ladner's proof:
+
+* `P` is contained in `NP`;
+* `P` and the polynomial time functions come with enumerations `Mdec`, `Redf` (recursive
+  presentability of `P`);
+* `P` is closed under finite variations, contains the empty language, and is closed downwards
+  under polynomial time many-one reductions;
+* `NP` is closed under intersection with a language in `P`;
+* `holeEff`: for `A` in `NP`, the hole pattern of the delayed diagonalisation, i.e. the set of
+  lengths `n` at which the stage function `CS.stage` is even, is decidable in polynomial time.
+
+Only the last field depends on the machine model: it is the statement that Ladner's clocked
+delayed diagonalisation can be carried out in polynomial time.  Everything else -- the
+construction of the stage function, the case analysis on whether it is bounded, and the
+verification of the three requirements on the resulting language -- is proved here.
+
+The construction is Ladner's blowing-holes argument.  Given `A` in `NP` but not in `P` we build
+a nondecreasing stage function `stage A Mdec Redf : ℕ → ℕ`, increasing it by one exactly when the
+current requirement is met by some short string, and set
+`ladnerLang s A x = A x && (stage (x.length) is even)`.  If the stage function were bounded it
+would be eventually equal to some `k`: for even `k = 2 * i` the `i`-th polynomial time decider
+would decide `ladnerLang s A`, which is then a finite variant of `A`, so `A` would be in `P`;
+for odd `k = 2 * i + 1` the language `ladnerLang s A` would be finite (hence in `P`) while the
+`i`-th polynomial time function reduces `A` to it, so again `A` would be in `P`.  Hence the
+stage function is unbounded, and every even (resp. odd) stage is eventually left, which
+diagonalises against every polynomial time decider (resp. against every polynomial time
+reduction of `A` to `ladnerLang s A`).
+-/
 
 namespace CS
 
-namespace FinCofinModel
+/-- Binary strings. -/
+abbrev Str := List Bool
 
-attribute [local instance] Classical.propDecidable
+/-- A language is a decision predicate on binary strings. -/
+abbrev Lang := Str → Bool
 
-/-! ### Binary digits -/
+/-- `holed A t` is the language `A` with "holes" punched into it: a string `x` of length `n`
+is kept only when the stage value `t n` is even. -/
 
-/-- `bit n x` says that the `x`-th binary digit of `n` is `1`. -/
+lemma ladnerLang_mem_NP : ladnerLang s A ∈ s.NP :=
+  s.NP_inter_P A hA _ (s.holeEff A hA)
 
-theorem ladnerLang_mem_NP : S.NP S.ladnerLang :=
-  S.NP_inter_P _ _ S.SAT_mem_NP S.gap_mem_P
-
-/-- Ladner's language is not in `P`. -/
+include hAP in
+/-- The stage function of the construction is unbounded: otherwise it would be eventually
+constant, and the corresponding requirement would show that `A` is in `P`. -/

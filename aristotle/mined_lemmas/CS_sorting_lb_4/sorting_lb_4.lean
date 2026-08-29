@@ -1,4 +1,11 @@
 import Mathlib
+/-!
+# Sorting Lb 4
+Category: Computer Science
+Target: CS.sorting_lb_4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,46 +21,38 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-# Information-theoretic lower bound for comparison sorting of 4 elements
-
-We model a comparison-based sorting algorithm on `n` inputs as a binary decision tree
-(`CS.CompTree n`): each internal node compares two input positions `i j` (asking `a i ≤ a j`)
-and branches accordingly; each leaf outputs a permutation, which is meant to list the input
-positions in sorted order.
-
-A tree *sorts* if, for every injective input `a : Fin n → ℕ`, the output permutation `p`
-satisfies that `a ∘ p` is strictly monotone.
-
-The main theorem `CS.sorting_lb_4` states that any comparison tree that sorts `4` elements has
-depth at least `⌈log₂ (4!)⌉ = 5`, i.e. it performs at least 5 comparisons in the worst case.
--/
 
 namespace CS
 
-/-- A comparison-based decision tree on `n` inputs: internal nodes compare two positions,
-leaves output a permutation. -/
-inductive CompTree (n : ℕ) : Type
-  | leaf : Equiv.Perm (Fin n) → CompTree n
-  | node : Fin n → Fin n → CompTree n → CompTree n → CompTree n
+/-- A comparison-based decision tree sorting 4 elements.
 
-namespace CompTree
+An input is modelled by a permutation `σ : Equiv.Perm (Fin 4)`, where `σ i` is the rank
+of the `i`-th input element (so all inputs are distinct and every ranking occurs).
+An internal node `node i j l r` performs the single comparison `σ i ≤ σ j`, i.e. it asks
+whether the `i`-th element is smaller than the `j`-th element, and branches accordingly.
+A leaf outputs a permutation, the algorithm's claimed ranking of the input. -/
+inductive DTree : Type
+  | leaf : Equiv.Perm (Fin 4) → DTree
+  | node : Fin 4 → Fin 4 → DTree → DTree → DTree
 
-variable {n : ℕ}
+/-- The output of the decision tree on the input with ranking `σ`. -/
 
-/-- The depth of a comparison tree: the worst-case number of comparisons performed. -/
+theorem sorting_lb_4 (t : DTree) (h : Correct t) :
+    ⌈Real.logb 2 (Nat.factorial 4 : ℝ)⌉ ≤ (depth t : ℤ) := by
+  have h5 : (5:ℕ) ≤ depth t := five_le_depth t h
+  have hceil : ⌈Real.logb 2 (Nat.factorial 4 : ℝ)⌉ ≤ (5 : ℤ) := by
+    rw [Int.ceil_le]
+    have h24 : ((Nat.factorial 4 : ℕ) : ℝ) = 24 := by norm_num [Nat.factorial]
+    rw [h24]
+    have hle : Real.logb 2 24 ≤ Real.logb 2 32 := by
+      apply Real.logb_le_logb_of_le (by norm_num) (by norm_num) (by norm_num)
+    have h32 : Real.logb 2 32 = 5 := by
+      rw [show (32:ℝ) = 2 ^ (5:ℕ) by norm_num, Real.logb_pow, Real.logb_self_eq_one] <;> norm_num
+    push_cast
+    linarith
+  exact le_trans hceil (by exact_mod_cast h5)
 
-theorem sorting_lb_4 (t : CompTree 4) (h : t.Sorts) :
-    Nat.clog 2 (Nat.factorial 4) ≤ t.depth :=
-  sorting_lb 4 t h
+/-! ### Non-vacuity: correct decision trees do exist -/
 
-/-- Explicit form of the bound for `4` elements: at least `5` comparisons are needed. -/
+/-- A permutation of `Fin 4` is determined by the outcomes of all comparisons. -/

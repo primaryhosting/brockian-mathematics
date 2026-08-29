@@ -1,10 +1,3 @@
-/-
-# Integral Sinc Fourth
-Category: C Integral
-Target: Zeta23Scaffold.integral_sinc_fourth
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -13,27 +6,32 @@ Category: C Integral
 Target: Zeta23Scaffold.integral_sinc_fourth
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-The header above is repeated as a plain comment on the first line of this file, since Lean 4
-requires `import` commands to precede any module docstring.
-
-## Method
-
-With `T u = max 0 (1 - |u|)` the tent function, an explicit computation gives
-`𝓕 T ξ = sinc (π ξ) ^ 2`.  The convolution theorem then yields `𝓕 (T ⋆ T) ξ = sinc (π ξ) ^ 4`,
-and Fourier inversion at `0` gives
-`∫ sinc (π ξ) ^ 4 dξ = (T ⋆ T) 0 = ∫ T ² = 2/3`.
-Rescaling by `π` produces `∫ (sin x / x) ^ 4 dx = 2π/3`.
 -/
 
-open MeasureTheory Convolution FourierTransform
+open scoped BigOperators
 open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Scaffold
 
-/-- The tent (triangle) function `u ↦ max 0 (1 - |u|)`. -/
+open MeasureTheory Real FourierTransform intervalIntegral
 
-lemma tent_eq_zero {u : ℝ} (h : 1 ≤ |u|) : tent u = 0 := by
-  simp only [tent, max_eq_left_iff, sub_nonpos]
-  linarith
+/-! ## The tent function and its Fourier transform -/
+
+/-- The tent (triangle) function, supported on `[-1, 1]`. -/
+
+lemma tent_eq_zero {x : ℝ} (hx : 1 ≤ |x|) : tent x = 0 := by
+  simp [tent, sub_nonpos.2 hx]
 

@@ -9,34 +9,24 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-
+# Cassini 2
+Category: Pure Mathematics
+Target: Math.cassini_2
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- NOTE: the header above is written as a plain block comment `/- ... -/` rather than a
+-- module docstring `/-! ... -/`, because Lean 4 does not allow a module docstring to
+-- appear before the `import` commands. The text is otherwise verbatim.
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace Math
 
-/-- Cassini's identity at `n = 1`: `F(1) * F(3) - F(2)^2 = (-1)^2`. -/
+/-- Cassini's identity at `n = 2`: `F(1) * F(3) - F(2) ^ 2 = (-1) ^ 2`,
+where `F` is the Fibonacci sequence (`Nat.fib`). -/
 theorem cassini_2 :
-    (Nat.fib 1 : ℤ) * (Nat.fib 3 : ℤ) - ((Nat.fib 2 : ℤ)) ^ 2 = (-1) ^ 2 := by
+    (Nat.fib 1 : ℤ) * (Nat.fib 3 : ℤ) - (Nat.fib 2 : ℤ) ^ 2 = (-1) ^ 2 := by
   norm_num [Nat.fib]
 
 end Math

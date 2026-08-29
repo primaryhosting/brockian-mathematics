@@ -5,148 +5,89 @@ Target: QPhys.oscillator_spectrum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
-/-!
-# Oscillator Spectrum
-
-(Lean requires `import` commands to precede every other command, including module
-documentation, so the header comment above is a plain block comment.)
-
-We realise the one-dimensional quantum harmonic oscillator algebraically on the Fock space
-`ℕ →₀ ℂ`, whose basis vector `Finsupp.single n 1` is the number state `|n⟩`.  The ladder
-operators `a` (`QPhys.ann`) and `a†` (`QPhys.cre`) satisfy the canonical commutation
-relation `[a, a†] = 1`, the number operator `N = a† a` acts diagonally, and the Hamiltonian
-`H = ℏω (a†a + ½)` has eigenvalues exactly `ℏω(n + ½)`, `n ∈ ℕ`.
--/
+set_option autoImplicit false
 
 namespace QPhys
 
-/-! ## Ladder operators -/
+open Polynomial
 
-/-- The annihilation (lowering) operator, `a |n⟩ = √n |n-1⟩`.  For `n = 0` the prefactor
-`√0 = 0` vanishes, so `|0⟩` is the vacuum. -/
+section Oscillator
 
-noncomputable def ann : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) :=
-  Finsupp.lsum ℂ fun n => LinearMap.toSpanSingleton ℂ _ (Finsupp.single (n - 1) (Real.sqrt n : ℂ))
+variable (m ω hbar : ℝ)
 
-/-- The creation (raising) operator, `a† |n⟩ = √(n+1) |n+1⟩`. -/
+/-- The Gaussian ground-state profile `exp (-m ω x² / (2ℏ))`. -/
 
-noncomputable def cre : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) :=
-  Finsupp.lsum ℂ fun n =>
-    LinearMap.toSpanSingleton ℂ _ (Finsupp.single (n + 1) (Real.sqrt (n + 1) : ℂ))
+noncomputable def gauss (x : ℝ) : ℝ := Real.exp (-(m * ω / (2 * hbar)) * x ^ 2)
 
-/-- The number operator `N = a† a`. -/
+/-- A state of the form (polynomial) × (Gaussian). -/
 
-noncomputable def numOp : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) := cre ∘ₗ ann
+noncomputable def stateFun (p : Polynomial ℝ) : ℝ → ℝ :=
+  fun x => p.eval x * gauss m ω hbar x
 
-/-- The Hamiltonian of the harmonic oscillator, `H = ℏω (a† a + ½)`. -/
+/-- The harmonic-oscillator Hamiltonian `H = -ℏ²/(2m) d²/dx² + ½ m ω² x²`. -/
 
-noncomputable def hamiltonian (hbar omega : ℝ) : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) :=
-  ((hbar * omega : ℝ) : ℂ) • (numOp + (1 / 2 : ℂ) • LinearMap.id)
+noncomputable def hamiltonian (f : ℝ → ℝ) : ℝ → ℝ :=
+  fun x => -(hbar ^ 2 / (2 * m)) * deriv (deriv f) x + (1 / 2) * m * ω ^ 2 * x ^ 2 * f x
 
-@[simp] lemma ann_single (n : ℕ) (c : ℂ) :
-    ann (Finsupp.single n c) = c • Finsupp.single (n - 1) (Real.sqrt n : ℂ) := by
-  simp [ann, LinearMap.toSpanSingleton_apply]
+/-- The creation (raising) ladder operator `a† = (mωx - ℏ d/dx)/√(2mℏω)`. -/
 
-@[simp] lemma cre_single (n : ℕ) (c : ℂ) :
-    cre (Finsupp.single n c) = c • Finsupp.single (n + 1) (Real.sqrt (n + 1) : ℂ) := by
-  simp [cre, LinearMap.toSpanSingleton_apply]
+noncomputable def Dpoly (p : Polynomial ℝ) : Polynomial ℝ :=
+  derivative p - Polynomial.C (m * ω / hbar) * (X * p)
 
-private lemma sqrt_mul_sqrt_succ (m : ℕ) :
-    ((Real.sqrt (m + 1) : ℂ)) * (Real.sqrt (m + 1) : ℂ) = ((m : ℂ) + 1) := by
-  rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by positivity)]
-  push_cast; ring
+/-- Polynomial-level raising operator: `a†(p·gauss) = const · (upPoly p)·gauss`. -/
 
-/-! ## The number operator is diagonal -/
+noncomputable def upPoly (p : Polynomial ℝ) : Polynomial ℝ :=
+  X * p - Polynomial.C (hbar / (2 * m * ω)) * derivative p
 
-/-- `a† a` is diagonal in the number basis: `(N v) n = n * v n`. -/
+/-- Polynomial-level Hamiltonian (divided by `ℏω`): `H (p·gauss) = ℏω · (Mpoly p)·gauss`. -/
 
-theorem numOp_apply (v : ℕ →₀ ℂ) (n : ℕ) : (numOp v) n = (n : ℂ) * v n := by
-  induction v using Finsupp.induction_linear with
-  | zero => simp
-  | add f g hf hg => simp [hf, hg]; ring
-  | single a b =>
-      rw [numOp, LinearMap.comp_apply, ann_single, map_smul, cre_single]
-      rcases a with _ | m
-      · simp only [Nat.cast_zero, Real.sqrt_zero, Complex.ofReal_zero, Finsupp.single_apply]
-        push_cast
-        split_ifs with h <;> simp [h]
-      · simp only [Nat.add_sub_cancel, Finsupp.smul_single, Finsupp.single_apply, smul_eq_mul]
-        split_ifs with h
-        · subst h
-          push_cast
-          linear_combination b * sqrt_mul_sqrt_succ m
-        · ring
+noncomputable def Mpoly (p : Polynomial ℝ) : Polynomial ℝ :=
+  -(Polynomial.C (hbar / (2 * m * ω)) * derivative (derivative p)) + X * derivative p
+    + Polynomial.C (1 / 2) * p
 
-/-- `a a†` is diagonal in the number basis: `(a a† v) n = (n+1) * v n`. -/
+/-- The eigenpolynomials, obtained by applying the raising operator `n` times to `1`. -/
 
-theorem numOp_single (n : ℕ) (c : ℂ) :
-    numOp (Finsupp.single n c) = (n : ℂ) • Finsupp.single n c := by
-  refine Finsupp.ext fun k => ?_
-  rw [numOp_apply, Finsupp.smul_apply, smul_eq_mul]
-  rcases eq_or_ne n k with rfl | h
-  · rfl
-  · rw [Finsupp.single_apply, if_neg h]; ring
+lemma hasDerivAt_gauss (x : ℝ) :
+    HasDerivAt (gauss m ω hbar) (-(m * ω / hbar) * x * gauss m ω hbar x) x := by
+  have h1 : HasDerivAt (fun y : ℝ => -(m * ω / (2 * hbar)) * y ^ 2)
+      (-(m * ω / (2 * hbar)) * (2 * x)) x := by
+    simpa using (hasDerivAt_pow 2 x).const_mul (-(m * ω / (2 * hbar)))
+  have h2 := (Real.hasDerivAt_exp (-(m * ω / (2 * hbar)) * x ^ 2)).comp x h1
+  have hd : m * ω / (2 * hbar) = (m * ω / hbar) / 2 := by
+    rw [show (2 : ℝ) * hbar = hbar * 2 from mul_comm _ _, ← div_div]
+  convert h2 using 1
+  unfold gauss
+  rw [hd]
+  ring
 
-/-! ## Ladder construction of the eigenstates -/
+lemma hasDerivAt_stateFun (p : Polynomial ℝ) (x : ℝ) :
+    HasDerivAt (stateFun m ω hbar p) (stateFun m ω hbar (Dpoly m ω hbar p) x) x := by
+  have hp : HasDerivAt (fun y : ℝ => p.eval y) ((derivative p).eval x) x := p.hasDerivAt x
+  have h := hp.mul (hasDerivAt_gauss m ω hbar x)
+  convert h using 1
+  simp [stateFun, Dpoly]
+  ring
 
-/-- The vacuum `|0⟩` is annihilated by `a`. -/
+lemma deriv_stateFun (p : Polynomial ℝ) :
+    deriv (stateFun m ω hbar p) = stateFun m ω hbar (Dpoly m ω hbar p) := by
+  funext x
+  exact (hasDerivAt_stateFun m ω hbar p x).deriv
 
-theorem cre_pow_vacuum (n : ℕ) :
-    (cre ^ n) (Finsupp.single 0 (1 : ℂ)) = Finsupp.single n ((Real.sqrt n.factorial : ℂ)) := by
-  induction n with
-  | zero => simp
-  | succ m ih =>
-      rw [pow_succ', show ((cre * cre ^ m) (Finsupp.single 0 (1 : ℂ)))
-            = cre ((cre ^ m) (Finsupp.single 0 (1 : ℂ))) from rfl, ih, cre_single, Finsupp.smul_single, smul_eq_mul]
-      congr 1
-      rw [← Complex.ofReal_mul, ← Real.sqrt_mul (Nat.cast_nonneg _)]
-      norm_cast
-      rw [Nat.factorial_succ]
-      push_cast
-      rw [mul_comm]
+lemma hamiltonian_stateFun (hm : m ≠ 0) (hw : ω ≠ 0) (hh : hbar ≠ 0) (p : Polynomial ℝ) :
+    hamiltonian m ω hbar (stateFun m ω hbar p)
+      = fun x => hbar * ω * stateFun m ω hbar (Mpoly m ω hbar p) x := by
+  funext x
+  unfold hamiltonian
+  rw [deriv_stateFun, deriv_stateFun]
+  simp only [stateFun, Dpoly, Mpoly, eval_sub, eval_add, eval_neg, eval_mul, eval_C, eval_X,
+    derivative_sub, derivative_mul, derivative_C, derivative_X, zero_mul, one_mul, zero_add,
+    add_zero, mul_zero]
+  field_simp
+  ring
 
-/-- The energy eigenstates: `H |n⟩ = ℏω (n + ½) |n⟩`. -/
-
-theorem hamiltonian_eigenstate (hbar omega : ℝ) (n : ℕ) (c : ℂ) :
-    hamiltonian hbar omega (Finsupp.single n c)
-      = (((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2)) • Finsupp.single n c := by
-  rw [hamiltonian]
-  simp only [LinearMap.smul_apply, LinearMap.add_apply, LinearMap.id_coe, id_eq, numOp_single,
-    LinearMap.smul_apply]
-  rw [← add_smul, smul_smul]
-
-/-! ## The spectrum -/
-
-/-- **Spectrum of the quantum harmonic oscillator.**
-A complex number `lam` is an eigenvalue of the harmonic-oscillator Hamiltonian
-`H = ℏω (a†a + ½)` on the Fock space `ℕ →₀ ℂ` if and only if `lam = ℏω (n + ½)` for some
-natural number `n`; that is, the spectrum is exactly `{ℏω(n + ½) : n ∈ ℕ}`.  The eigenvector
-for the level `n` is the ladder-operator state `(a†)^n |0⟩` (see `QPhys.cre_pow_vacuum`). -/
-
-theorem oscillator_spectrum (hbar omega : ℝ) (lam : ℂ) :
-    (∃ v : ℕ →₀ ℂ, v ≠ 0 ∧ hamiltonian hbar omega v = lam • v) ↔
-      ∃ n : ℕ, lam = ((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2) := by
-  constructor
-  · rintro ⟨v, hv, hEq⟩
-    obtain ⟨n, hn⟩ := Finsupp.support_nonempty_iff.mpr hv
-    refine ⟨n, ?_⟩
-    have hvn : v n ≠ 0 := Finsupp.mem_support_iff.mp hn
-    have h1 : (hamiltonian hbar omega v) n
-        = ((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2) * v n := by
-      rw [hamiltonian]
-      simp only [LinearMap.smul_apply, LinearMap.add_apply, LinearMap.id_coe, id_eq,
-        Finsupp.coe_smul, Pi.smul_apply, Finsupp.add_apply, smul_eq_mul, numOp_apply]
-      ring
-    have h2 : (hamiltonian hbar omega v) n = lam * v n := by
-      rw [hEq]; simp
-    exact (mul_right_cancel₀ hvn (h1.symm.trans h2)).symm
-  · rintro ⟨n, rfl⟩
-    exact ⟨Finsupp.single n 1, Finsupp.single_ne_zero.mpr one_ne_zero,
-      hamiltonian_eigenstate hbar omega n 1⟩
-
+end Oscillator
 end QPhys
 
 import Mathlib

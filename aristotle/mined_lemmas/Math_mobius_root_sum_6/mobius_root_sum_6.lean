@@ -8,36 +8,28 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Mobius Root Sum 6
-Category: Pure Mathematics
-Target: Math.mobius_root_sum_6
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open Finset
+open Finset Complex
 
 namespace Math
 
-/-- The Möbius function at `6` equals `1` (since `6 = 2 * 3` is squarefree with two prime
-factors). -/
+/-- The two primitive 6-th roots of unity, written explicitly. -/
+private noncomputable def zA : ℂ := (1 + Complex.I * (Real.sqrt 3 : ℝ)) / 2
+private noncomputable def zB : ℂ := (1 - Complex.I * (Real.sqrt 3 : ℝ)) / 2
+
 
 theorem mobius_root_sum_6 :
-    ∑ z ∈ primitiveRoots 6 ℂ, z = (ArithmeticFunction.moebius 6 : ℂ) := by
-  have h : IsPrimitiveRoot (Complex.exp (2 * (Real.pi : ℂ) * Complex.I / 6)) 6 :=
-    Complex.isPrimitiveRoot_exp 6 (by norm_num)
-  set z := Complex.exp (2 * (Real.pi : ℂ) * Complex.I / 6)
-  have hz2 : z ^ 2 - z + 1 = 0 := cyclotomic_six_eq_zero_of_isPrimitiveRoot h
-  have hne : z ≠ z ^ 5 := by
-    intro he
-    have h1 : 2 * z - 1 = 0 := by linear_combination he + (z ^ 3 + z ^ 2 - 1) * hz2
-    have h3 : (3 : ℂ) = 0 := by linear_combination 4 * hz2 - (2 * z - 1) * h1
-    norm_num at h3
-  rw [primitiveRoots_six_eq h, Finset.sum_insert (by simpa using hne), Finset.sum_singleton,
-    moebius_six]
+    ∑ ζ ∈ primitiveRoots 6 ℂ, ζ = (ArithmeticFunction.moebius 6 : ℂ) := by
+  have hmu : ArithmeticFunction.moebius 6 = 1 := by
+    rw [show (6 : ℕ) = 2 * 3 by norm_num,
+      ArithmeticFunction.isMultiplicative_moebius.map_mul_of_coprime
+        (show Nat.Coprime 2 3 by decide),
+      ArithmeticFunction.moebius_apply_prime Nat.prime_two,
+      ArithmeticFunction.moebius_apply_prime Nat.prime_three]
+    norm_num
+  rw [primitiveRoots_six, Finset.sum_pair zA_ne_zB, hmu]
+  unfold zA zB
   push_cast
-  linear_combination (z ^ 3 + z ^ 2 - 1) * hz2
+  ring
 
 end Math
 

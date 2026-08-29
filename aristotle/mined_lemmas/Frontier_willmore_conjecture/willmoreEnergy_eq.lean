@@ -1,4 +1,15 @@
+/-
+# Willmore Conjecture
+Category: Frontier — Fields Medal Work
+Target: Frontier.willmore_conjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the header above is
+-- therefore a plain block comment, and is repeated verbatim as a module docstring below.)
+
 import Mathlib
+
 /-!
 # Willmore Conjecture
 Category: Frontier — Fields Medal Work
@@ -7,65 +18,46 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-The Willmore conjecture (proved by Marques and Neves) states that every immersed torus
-`Σ ⊆ ℝ³` satisfies `∫_Σ H² dA ≥ 2π²`, with equality (up to conformal transformations of
-`ℝ³`) exactly for the Clifford torus, i.e. the torus of revolution whose radii satisfy
-`R = √2 · r`.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-This file formalizes and proves the *base case* of the conjecture: the case of tori of
-revolution, which is Willmore's original computation and the case that fixes the constant
-`2π²`.  Everything is done from first principles:
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-* for an arbitrary parametrized surface `X : ℝ → ℝ → ℝ³`, the tangent vectors
-  `Frontier.surfDu`, `Frontier.surfDv` and the second derivatives are literally `deriv`s
-  of `X`; `Frontier.surfMeanCurvature` is the mean curvature computed from the first and
-  second fundamental forms, `Frontier.surfAreaElement` is the area element
-  `‖X_u × X_v‖`, and `Frontier.willmoreEnergyOf` is the iterated integral `∫∫ H² dA`
-  over a fundamental domain `[0, 2π] × [0, 2π]`;
-* `Frontier.torusParam` is the usual parametrization of the torus of revolution with
-  radii `R > r > 0`, and `Frontier.willmoreEnergy R r` its Willmore energy;
-* `Frontier.IsImmersedTorus` and `Frontier.WillmoreConjectureStatement` record the
-  statement of the conjecture in full generality.
-
-The main results are
-
-* `Frontier.torusMeanCurvature_eq` and `Frontier.torusAreaElement_eq`: the classical
-  formulas `H = (R + 2r cos u) / (2r(R + r cos u))` and `dA = r (R + r cos u)`;
-* `Frontier.integral_inv_add_cos` : `∫₀^{2π} du / (R + r cos u) = 2π / √(R² - r²)`;
-* `Frontier.willmoreEnergy_eq` : `W(R, r) = π² R² / (r √(R² - r²))`;
-* `Frontier.willmore_conjecture` : `2π²` is the least Willmore energy of a torus of
-  revolution, and it is attained exactly by the Clifford torus `R = √2 · r`;
-* `Frontier.willmore_bound_sharp` : the constant `2π²` in the general conjecture is
-  attained by an immersed torus, so it cannot be improved.
--/
-
-open Real Matrix
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ### Differential geometry of a parametrized surface in `ℝ³`
+open Real intervalIntegral
 
-For a map `X : ℝ → ℝ → ℝ³` we define the tangent vectors, the first and second fundamental
-forms, the area element and the mean curvature by the classical formulas.  All derivatives
-are honest `deriv`s of `X`. -/
+/-! ## Vector algebra in `ℝ³`
 
-/-- The tangent vector `X_u`. -/
+We use `ℝ × ℝ × ℝ` as a model of `ℝ³` together with explicitly defined dot product,
+cross product and Euclidean norm.  (The ambient `Prod` norm of Mathlib is the sup norm,
+so we never use `‖·‖`; note that the notion of (Fréchet/one-variable) derivative does
+not depend on the choice of an equivalent norm, so `deriv` below is the usual derivative
+of an `ℝ³`-valued function.) -/
 
-theorem willmoreEnergy_eq (R r : ℝ) (hr : 0 < r) (hRr : r < R) :
+/-- Euclidean dot product on `ℝ³`. -/
+
+theorem willmoreEnergy_eq {R r : ℝ} (hr : 0 < r) (hR : r < R) :
     willmoreEnergy R r = π ^ 2 * R ^ 2 / (r * Real.sqrt (R ^ 2 - r ^ 2)) := by
-  have hpos : 0 < R ^ 2 - r ^ 2 := by nlinarith [lt_trans hr hRr]
-  have hk : 0 < Real.sqrt (R ^ 2 - r ^ 2) := Real.sqrt_pos.mpr hpos
-  rw [willmoreEnergy, willmoreEnergyOf,
-    intervalIntegral.integral_congr (g := fun _ => π * R ^ 2 / (2 * r * Real.sqrt (R ^ 2 - r ^ 2)))
-      (fun v _ => inner_integral R r hr hRr v)]
+  have hs := sqrt_sub_pos hr hR
+  rw [willmoreEnergy, intervalIntegral.integral_congr
+      (g := fun _ : ℝ => π * R ^ 2 / (2 * r * Real.sqrt (R ^ 2 - r ^ 2)))
+      (fun v _ => inner_integral_eq hr hR v)]
   rw [intervalIntegral.integral_const, smul_eq_mul]
   field_simp
   ring
 
-/-! ### The Willmore bound -/
 
-/-- The elementary inequality behind the Willmore bound: `2 r √(R² - r²) ≤ R²`, an equivalent
-form of `(R² - 2r²)² ≥ 0`. -/
+/-! ## Minimization: the Clifford torus -/
+

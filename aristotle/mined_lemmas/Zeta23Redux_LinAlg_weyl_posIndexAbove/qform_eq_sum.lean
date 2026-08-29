@@ -23,7 +23,8 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+/-!
 # Weyl Pos Index Above
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
 Target: Zeta23Redux.LinAlg.weyl_posIndexAbove
@@ -31,9 +32,8 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-open Matrix Finset
+open scoped InnerProductSpace
+open Matrix
 
 namespace Zeta23Redux.LinAlg
 
@@ -41,21 +41,10 @@ variable {d : ℕ}
 
 /-- The number of strictly positive eigenvalues of a Hermitian matrix. -/
 
-lemma qform_eq_sum {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.IsHermitian)
+lemma qform_eq_sum {M : Matrix (Fin d) (Fin d) ℂ} (hM : M.IsHermitian)
     (x : EuclideanSpace ℂ (Fin d)) :
-    qform A x = ∑ i, hA.eigenvalues i * ‖(hA.eigenvectorBasis.repr x).ofLp i‖ ^ 2 := by
-  have h : (inner ℂ x (Matrix.toLpLin 2 2 A x) : ℂ)
-      = ∑ i, ((hA.eigenvalues i * ‖(hA.eigenvectorBasis.repr x).ofLp i‖ ^ 2 : ℝ) : ℂ) := by
-    rw [← hA.eigenvectorBasis.repr.inner_map_map x (Matrix.toLpLin 2 2 A x), PiLp.inner_apply]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    rw [repr_toLpLin hA x i, RCLike.inner_apply]
-    have hmul : (hA.eigenvalues i : ℂ) * (hA.eigenvectorBasis.repr x).ofLp i
-          * (starRingEnd ℂ) ((hA.eigenvectorBasis.repr x).ofLp i)
-        = (hA.eigenvalues i : ℂ) * ((hA.eigenvectorBasis.repr x).ofLp i
-          * (starRingEnd ℂ) ((hA.eigenvectorBasis.repr x).ofLp i)) := by ring
-    rw [hmul, Complex.mul_conj']
-    push_cast
-    ring
-  rw [qform, h, Complex.re_sum]
-  simp only [Complex.ofReal_re]
+    qform M x = ∑ i, hM.eigenvalues i * ‖⟪hM.eigenvectorBasis i, x⟫_ℂ‖ ^ 2 := by
+  rw [qform, inner_toEuclideanLin_eq_sum hM x, Complex.re_sum]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  norm_cast
 

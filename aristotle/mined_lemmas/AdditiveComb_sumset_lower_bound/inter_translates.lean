@@ -8,23 +8,39 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open Finset Pointwise
+/-!
+# Sumset Lower Bound
+Category: Frontier Wave 2 (deeper machinery)
+Target: AdditiveComb.sumset_lower_bound
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace AdditiveComb
 
-/-- The two "extremal translates" `A + {min B}` and `{max A} + B` meet in exactly one point. -/
+open Finset Pointwise
 
-lemma inter_translates (A B : Finset ℤ) (hA : A.Nonempty) (hB : B.Nonempty) :
-    (A.image (· + B.min' hB)) ∩ (B.image (A.max' hA + ·)) = {A.max' hA + B.min' hB} := by
-  ext x
-  simp only [Finset.mem_inter, Finset.mem_image, Finset.mem_singleton]
-  constructor
-  · rintro ⟨⟨a, ha, rfl⟩, ⟨b, hb, hab⟩⟩
-    have h1 : a ≤ A.max' hA := A.le_max' a ha
-    have h2 : B.min' hB ≤ b := B.min'_le b hb
-    omega
-  · rintro rfl
-    exact ⟨⟨A.max' hA, A.max'_mem hA, rfl⟩, ⟨B.min' hB, B.min'_mem hB, rfl⟩⟩
+/-- The two translated copies `A + max B` and `min A + B` both sit inside `A + B`. -/
 
-/-- **Sumset lower bound** (the Cauchy–Davenport analogue over `ℤ`, i.e. the base case of
-Freiman's lemma): for nonempty finite sets of integers, `|A| + |B| - 1 ≤ |A + B|`. -/
+private lemma inter_translates {A B : Finset ℤ} (hA : A.Nonempty) (hB : B.Nonempty) :
+    (A.image (· + B.max' hB)) ∩ (B.image (fun b => A.min' hA + b))
+      = {A.min' hA + B.max' hB} := by
+  apply Finset.Subset.antisymm
+  · intro x hx
+    rcases Finset.mem_inter.1 hx with ⟨h1, h2⟩
+    rcases Finset.mem_image.1 h1 with ⟨a, ha, rfl⟩
+    rcases Finset.mem_image.1 h2 with ⟨b, hb, hab⟩
+    have ha' : A.min' hA ≤ a := A.min'_le a ha
+    have hb' : b ≤ B.max' hB := B.le_max' b hb
+    have : a = A.min' hA := by omega
+    simp [this]
+  · intro x hx
+    rw [Finset.mem_singleton] at hx
+    subst hx
+    exact Finset.mem_inter.2
+      ⟨Finset.mem_image.2 ⟨A.min' hA, A.min'_mem hA, rfl⟩,
+       Finset.mem_image.2 ⟨B.max' hB, B.max'_mem hB, rfl⟩⟩
+
+/-- **Sumset lower bound over the integers** (the Cauchy–Davenport analogue / base case of
+Freiman's lemma): for finite nonempty sets `A`, `B` of integers,
+`|A| + |B| - 1 ≤ |A + B|`. -/

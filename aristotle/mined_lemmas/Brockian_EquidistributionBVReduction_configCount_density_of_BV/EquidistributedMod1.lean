@@ -26,31 +26,34 @@ set_option grind.warning false
 import Mathlib
 
 /-!
-# Equidistribution: reduction from continuous test functions to BV (indicator) test functions
-
-This file contains the classical "bounded variation reduction" step in the theory of
-equidistribution modulo one: if a sequence `x : ℕ → ℝ` is equidistributed mod `1` in Weyl's
-sense (Cesàro averages of *continuous* `1`-periodic test functions converge to the mean of the
-test function), then the counting density of the "configurations" `n ↦ Int.fract (x n)` lying in
-a subinterval `[a, b) ⊆ [0, 1)` converges to the length `b - a`.
-
-The indicator of an interval is the basic example of a function of bounded variation which is not
-continuous, so the content of the main theorem is exactly that the class of admissible test
-functions may be enlarged from continuous functions to such BV functions.
-
-The main result is `Brockian.EquidistributionBVReduction.configCount_density_of_BV`; it is
-unconditional apart from the (necessary) equidistribution hypothesis on the sequence itself.
+# Config Count Density Of BV
+Category: Brockian (Literature Discharge)
+Target: Brockian.EquidistributionBVReduction.configCount_density_of_BV
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Set MeasureTheory
-open scoped Topology BigOperators Classical
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Brockian.EquidistributionBVReduction
 
-/-- The number of indices `n < N` whose fractional part `Int.fract (x n)` lies in `[a, b)`. -/
+open Filter Set MeasureTheory
+
+/-- `configCount x S N` is the number of indices `n < N` whose fractional part
+`Int.fract (x n)` lands in the "configuration window" `S`. -/
 
 def EquidistributedMod1 (x : ℕ → ℝ) : Prop :=
-  ∀ f : ℝ → ℝ, Continuous f → Function.Periodic f 1 →
-    Tendsto (fun N : ℕ => (∑ n ∈ Finset.range N, f (x n)) / N) atTop (𝓝 (∫ t in (0:ℝ)..1, f t))
+  ∀ a b : ℝ, 0 ≤ a → a ≤ b → b ≤ 1 →
+    Tendsto (fun N : ℕ => (configCount x (Set.Ico a b) N : ℝ) / N) atTop (nhds (b - a))
 
-/-- Periodization: the `1`-periodic function agreeing with `f` on `[0, 1)`. -/
+/-- The Cesàro average of `f` along the fractional parts of the first `N` terms of `x`. -/

@@ -8,15 +8,16 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Math
 
-/-- **Two squares for 101.** The number `101` is prime — primality is spelled out
-elementarily as `2 ≤ 101` together with "every divisor is `1` or `101`", so that the
-statement is self-contained — and it is a sum of two squares, namely `101 = 10 ^ 2 + 1 ^ 2`.
+/-- **The prime `101` is a sum of two squares.**
 
-(The same statement phrased with Mathlib's `Nat.Prime` is `Math.two_squares_101_prime`
-in `RequestProject/TwoSquares101Mathlib.lean`.) -/
+Primality of `101` is spelled out elementarily (`2 ≤ 101` and every proper divisor equals `1`),
+so that the statement is self-contained; the sum-of-two-squares decomposition is
+`101 = 1 ^ 2 + 10 ^ 2`.
+
+(See `Math.two_squares_101_prime` for the version phrased with Mathlib's `Nat.Prime`.) -/
 
 theorem two_squares_101_prime : Nat.Prime 101 ∧ ∃ a b : ℕ, 101 = a ^ 2 + b ^ 2 :=
-  ⟨(Nat.prime_def.2 ⟨two_squares_101.1.1, two_squares_101.1.2⟩), two_squares_101.2⟩
+  ⟨by norm_num, two_squares_101.2⟩
 
 end Math
 

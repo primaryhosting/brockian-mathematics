@@ -9,18 +9,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace Zeta23Redux.LinAlg
-
-/-- Montgomery's integrality step: for every natural number `m`, `2 * m ≤ m ^ 2 + 1`,
-which is the shadow of `(m - 1) ^ 2 ≥ 0`. -/
-theorem integrality_shadow (m : ℕ) : 2 * m ≤ m ^ 2 + 1 := by
-  nlinarith [sq_nonneg ((m : ℤ) - 1)]
-
-/-- Integer form of the same statement: `(m : ℤ) ^ 2 ≥ 2 * m - 1`. -/
-theorem integrality_shadow_int (m : ℕ) : ((m : ℤ)) ^ 2 ≥ 2 * (m : ℤ) - 1 := by
-  nlinarith [sq_nonneg ((m : ℤ) - 1)]
-
-end Zeta23Redux.LinAlg
+/-
+# Integrality Shadow
+Category: Zeta-23 §3 Linear Algebra (re-derivation)
+Target: Zeta23Redux.LinAlg.integrality_shadow
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
@@ -37,12 +32,16 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace Zeta23Redux.LinAlg
 
-set_option grind.warning false
+/-- Montgomery's integrality step: for every natural number `m`, `2 * m ≤ m ^ 2 + 1`,
+which is the shadow of `(m - 1) ^ 2 ≥ 0`. -/
+theorem integrality_shadow (m : ℕ) : 2 * m ≤ m ^ 2 + 1 := by
+  nlinarith [sq_nonneg ((m : ℤ) - 1), sq_nonneg m]
+
+/-- Integer reformulation: `(m : ℤ) ^ 2 ≥ 2 * m - 1` for every natural number `m`. -/
+theorem integrality_shadow_int (m : ℕ) : ((m : ℤ)) ^ 2 ≥ 2 * (m : ℤ) - 1 := by
+  nlinarith [sq_nonneg ((m : ℤ) - 1)]
+
+end Zeta23Redux.LinAlg
 

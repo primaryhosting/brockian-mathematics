@@ -1,11 +1,3 @@
-/-
-# Huckel C 6
-Category: Chemistry
-Target: Chem.huckel_C6
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -14,23 +6,31 @@ Category: Chemistry
 Target: Chem.huckel_C6
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-The adjacency eigenvalues of the cycle graph `C₆` (the Hückel π-system of benzene) are
-`2 cos (2πk/6)` for `k = 0, …, 5`.  This is stated as the factorization of the characteristic
-polynomial of the adjacency matrix, so that eigenvalues are counted with multiplicity.
-
-The proof diagonalizes the adjacency matrix explicitly: `A = P D P⁻¹` with `P` the (real)
-matrix of eigenvectors and `D = diag(2, 1, 1, -1, -1, -2)`, then uses the Mathlib lemmas
-`Matrix.charpoly_units_conj` and `Matrix.charpoly_diagonal`.
 -/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Chem
 
-open Polynomial Matrix
+open Matrix Polynomial
 
 /-- The adjacency matrix of the cycle graph `C₆`, written out explicitly. -/
 
-lemma adjMatrix_cycleGraph_six : (SimpleGraph.cycleGraph 6).adjMatrix ℝ = C6adj := by
+theorem adjMatrix_cycleGraph_six : (SimpleGraph.cycleGraph 6).adjMatrix ℝ = A6 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> simp [SimpleGraph.adjMatrix_apply, C6adj] <;> decide
+  fin_cases i <;> fin_cases j <;> simp [A6, SimpleGraph.adjMatrix_apply] <;> decide
 

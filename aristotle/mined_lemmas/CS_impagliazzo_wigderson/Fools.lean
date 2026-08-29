@@ -1,67 +1,47 @@
+/-!
+# Impagliazzo Wigderson
+Category: Frontier Cs
+Target: CS.impagliazzo_wigderson
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 /-
-# Impagliazzo Wigderson
-Category: Frontier Cs
-Target: CS.impagliazzo_wigderson
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import Mathlib
+This file is deliberately written without any `import`, because the required header above is a
+module doc comment and Lean does not allow `import` commands after it.  All notions below are
+therefore developed from scratch in core Lean 4.
 
-/-!
-# Impagliazzo Wigderson
-Category: Frontier Cs
-Target: CS.impagliazzo_wigderson
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+Probabilities over `k` random bits are represented exactly by integer counts: instead of saying
+that the acceptance probability is at least `2/3` we say `2 * 2 ^ m ≤ 3 * (number of accepting
+random strings)`, and similarly for the other bounds.  This is an exact (not approximate)
+reformulation, and it avoids any need for rational arithmetic.
 -/
 
-/-!
-## Scope of the formalization
-
-We work with explicitly defined Boolean circuits (`CS.Circuit`, with `size` and `eval`), with
-exact acceptance counts and rational acceptance probabilities (`CS.accept`, `CS.prob`), and with
-an abstract uniform model of computation (`CS.UniformModel`) recording the classes `P`, `BPP`,
-polynomial-time generators and `E`, together with the standard structural facts about them
-(a deterministic algorithm is a randomized one; conversion of an algorithm on a fixed input into
-a polynomial-size circuit in its random bits; polynomial-time enumeration of the polynomially
-many seeds of a logarithmic-seed generator).  `CS.nonempty_uniformModel` shows these
-requirements are consistent.
-
-The deep construction of Nisan–Wigderson and Impagliazzo–Wigderson -- turning an exponentially
-hard language in `E` into a polynomial-time generator with logarithmic seed length that fools all
-polynomial-size circuits -- is taken as the hypothesis `CS.IWGeneratorConstruction`.  What is
-proved here is the rest of the theorem: the hard language supplied by the circuit lower bound is
-fed to that construction and the resulting generator is used to derandomize an arbitrary `BPP`
-algorithm by a strict majority vote over all seeds (`CS.derandomize`, proved in full), yielding
-`P = BPP`.
--/
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace CS
 
-open Finset
+/-! ## Strings, languages, algorithms -/
 
-/-- Bit strings of length `n`. -/
-abbrev Bits (n : ℕ) : Type := Fin n → Bool
+/-- A finite binary string. -/
+abbrev Bits := List Bool
 
-/-- A language, given by its characteristic function on each input length. -/
-abbrev Lang : Type := (n : ℕ) → Bits n → Bool
+/-- A language is a set of binary strings. -/
+abbrev Language := Bits → Prop
 
-/-! ### Boolean circuits -/
+/-- A randomized algorithm: it reads an input string and a random string, the latter encoded as
+a natural number `r < 2 ^ m`, where `m` is the number of random bits used. -/
+abbrev RAlgo := Bits → Nat → Bool
 
-/-- Boolean circuits over `n` input variables, with `¬`, `∧`, `∨` gates. -/
-inductive Circuit (n : ℕ) : Type
-  | var : Fin n → Circuit n
-  | tru : Circuit n
-  | fls : Circuit n
-  | neg : Circuit n → Circuit n
-  | conj : Circuit n → Circuit n → Circuit n
-  | disj : Circuit n → Circuit n → Circuit n
-  deriving Inhabited
+/-- A deterministic algorithm. -/
+abbrev DAlgo := Bits → Bool
 
-/-- The Boolean function computed by a circuit. -/
+/-- `countUpTo f N` is the number of `r < N` with `f r = true`. -/
 
-def Fools (s r : ℕ → ℕ) (G : (n : ℕ) → Bits (s n) → Bits (r n)) (bound : ℕ → ℕ) : Prop :=
-  ∀ (n : ℕ) (C : Circuit (r n)), C.size ≤ bound n →
-    |prob (s n) (fun σ => C.eval (G n σ)) - prob (r n) C.eval| ≤ 1 / 10
+def Fools (A : RAlgo) (G : Nat → Nat → Nat) (x : Bits) (m s : Nat) : Prop :=
+  12 * (acceptCount A x m * 2 ^ s) ≤ 12 * (genAcceptCount A G x s * 2 ^ m) + 2 ^ s * 2 ^ m ∧
+  12 * (genAcceptCount A G x s * 2 ^ m) ≤ 12 * (acceptCount A x m * 2 ^ s) + 2 ^ s * 2 ^ m
 
-/-- `s` is logarithmic, so that there are only polynomially many seeds. -/
+/-- The derandomized algorithm: enumerate all `2 ^ (s |x|)` seeds and take the majority vote of
+the outcomes of `A` on the corresponding pseudorandom strings. -/

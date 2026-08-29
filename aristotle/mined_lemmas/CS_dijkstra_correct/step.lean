@@ -1,4 +1,20 @@
+/-
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -17,34 +33,25 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-/-!
-# Dijkstra's algorithm
-
-We formalize Dijkstra's algorithm on a finite directed graph with nonnegative edge weights,
-and prove that it computes the shortest-path distances.
-
-Weights take values in `ℝ≥0∞` (the nonnegative extended reals): this encodes both the
-nonnegativity of the weights and the absence of an edge (weight `⊤`).
-
-* `CS.walkWeight` : the weight of a walk, given as the list of vertices visited after the source.
-* `CS.graphDist w src v` : the shortest-path distance, i.e. the infimum of the weights of
-  all walks from `src` to `v`.
-* `CS.dijkstra w src` : the output of Dijkstra's algorithm.
-* `CS.dijkstra_correct` : `CS.dijkstra w src v = CS.graphDist w src v` for every `v`.
--/
-
 namespace CS
 
-variable {V : Type*}
+universe u
 
-/-- A walk starting at `src` is represented by the list `p` of the vertices visited after
-`src`; its endpoint is the last element of `p`, or `src` if `p` is empty. -/
+variable {V : Type u}
 
-noncomputable def step [Fintype V] [DecidableEq V] (w : V → V → ℝ≥0∞)
-    (st : Finset V × (V → ℝ≥0∞)) : Finset V × (V → ℝ≥0∞) :=
-  if h : (Finset.univ \ st.1).Nonempty then
-    (insert (pick _ h st.2) st.1,
-      fun v => min (st.2 v) (st.2 (pick _ h st.2) + w (pick _ h st.2) v))
+/-! ## Walks and shortest-path distances
+
+A weighted directed graph on the vertex type `V` is given by a weight function
+`w : V → V → ℝ≥0∞`; the value `⊤` means "no edge", and all weights are nonnegative
+by construction.  A walk starting at `a` is described by the list `l` of the vertices
+it visits after `a`; its endpoint is `l.getLastD a`. -/
+
+/-- The cost of the walk that starts at `a` and then visits the vertices of `l` in order. -/
+
+noncomputable def step (w : V → V → ℝ≥0∞) (st : DState V) : DState V :=
+  if h : (st.visitedᶜ : Finset V).Nonempty then
+    let u := ((st.visitedᶜ : Finset V).exists_min_image st.dist h).choose
+    ⟨insert u st.visited, fun v => st.dist v ⊓ (st.dist u + w u v)⟩
   else st
 
-/-- The initial state of Dijkstra's algorithm. -/
+/-- The initial state: nothing visited, `dist s = 0` and `dist v = ⊤` otherwise. -/

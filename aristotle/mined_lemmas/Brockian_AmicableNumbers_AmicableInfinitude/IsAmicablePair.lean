@@ -34,27 +34,23 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 /-!
-# Amicable Infinitude
-Category: Brockian Conjecture
-Target: Brockian.AmicableNumbers.AmicableInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many amicable numbers is an open problem.  What is proved here
-is an unconditional formalisation of Thabit ibn Qurra's rule together with the resulting
-*conditional reduction*: if there are infinitely many Thabit indices `k` (i.e. indices for
-which `3·2^(k-1) - 1`, `3·2^k - 1` and `9·2^(2k-1) - 1` are all prime), then there are
-infinitely many amicable numbers.
+The infinitude of amicable numbers is a well-known open problem.  What is proved here is a
+*conditional reduction*: if Thabit ibn Qurra's rule produces amicable pairs for arbitrarily
+large parameters (i.e. there are arbitrarily large `m` for which the three Thabit numbers
+`3·2^m - 1`, `3·2^(m+1) - 1`, `9·2^(2m+1) - 1` are all prime), then there are infinitely many
+amicable numbers.  The Thabit construction itself is proved unconditionally
+(`Brockian.AmicableNumbers.isAmicablePair_thabit`), as is the classical example `(220, 284)`.
 -/
 
 namespace Brockian.AmicableNumbers
 
-open Finset ArithmeticFunction
+open ArithmeticFunction
 open scoped ArithmeticFunction.sigma
 
-/-- The sum of the proper divisors of `n` (the classical `s`-function). -/
+/-- `a` and `b` form an amicable pair: they are distinct and each one's proper divisors sum to
+the other, equivalently `σ a = σ b = a + b`. -/
 
-def IsAmicablePair (m n : ℕ) : Prop :=
-  0 < m ∧ 0 < n ∧ m ≠ n ∧ properDivisorSum m = n ∧ properDivisorSum n = m
+def IsAmicablePair (a b : ℕ) : Prop :=
+  a ≠ b ∧ σ 1 a = a + b ∧ σ 1 b = a + b
 
-/-- `n` is an *amicable number* if it belongs to some amicable pair. -/
+/-- `a` is an amicable number if it belongs to some amicable pair. -/

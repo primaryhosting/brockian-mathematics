@@ -1,3 +1,11 @@
+/-
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -27,24 +35,24 @@ set_option grind.warning false
 
 namespace CS
 
-variable {V : Type*}
+universe u
 
-/-! ## Graphs, walks and shortest-path distance
+variable {V : Type u}
 
-A weighted digraph on the vertex type `V` is given by a weight function
-`w : V → V → ℝ≥0∞`.  Weights are nonnegative by construction (this is exactly the
-hypothesis Dijkstra's algorithm needs), and the value `⊤` encodes the absence of an edge. -/
+/-! ## Walks and shortest-path distances
 
-/-- `walkCost w a l` is the total weight of the walk that starts at `a` and then visits
-the vertices of `l` in order. -/
+A weighted directed graph on the vertex type `V` is given by a weight function
+`w : V → V → ℝ≥0∞`; the value `⊤` means "no edge", and all weights are nonnegative
+by construction.  A walk starting at `a` is described by the list `l` of the vertices
+it visits after `a`; its endpoint is `l.getLastD a`. -/
 
-lemma walkCost_append (w : V → V → ℝ≥0∞) :
-    ∀ (l m : List V) (a : V),
-      walkCost w a (l ++ m) = walkCost w a l + walkCost w (l.getLastD a) m := by
-  intro l
-  induction l with
-  | nil => intro m a; simp [walkCost]
-  | cons x t ih =>
-      intro m a
-      simp only [List.cons_append, walkCost, ih, List.getLastD_cons, add_assoc]
+/-- The cost of the walk that starts at `a` and then visits the vertices of `l` in order. -/
 
+lemma walkCost_append (w : V → V → ℝ≥0∞) (a t : V) (l : List V) :
+    walkCost w a (l ++ [t]) = walkCost w a l + w (l.getLastD a) t := by
+  induction l generalizing a with
+  | nil => simp [walkCost]
+  | cons b l ih =>
+      rw [List.cons_append, walkCost, walkCost, ih b, List.getLastD_cons, add_assoc]
+
+/-- The single-edge bound. -/

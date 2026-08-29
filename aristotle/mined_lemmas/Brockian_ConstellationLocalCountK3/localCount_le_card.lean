@@ -1,4 +1,4 @@
-/-
+/-!
 # Constellation Local Count K 3
 Category: Brockian Corpus
 Target: Brockian.ConstellationLocalCountK3
@@ -33,10 +33,10 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- The *local count* `ν_p(H)` of a finite set of integer offsets `H` at a modulus `p`:
+/-- The *local count* `ν_p(H)` of a finite tuple `H` of integers at a modulus `p`:
 the number of distinct residue classes modulo `p` occupied by the members of `H`. -/
 
-theorem localCount_le_card (H : Finset ℤ) (p : ℕ) : localCount H p ≤ H.card :=
+theorem localCount_le_card (p : ℕ) (H : Finset ℤ) : localCount p H ≤ H.card :=
   Finset.card_image_le
 
-/-- The local count never exceeds the modulus, for a positive modulus. -/
+/-- For a modulus larger than the size of the tuple, the local condition is automatic. -/

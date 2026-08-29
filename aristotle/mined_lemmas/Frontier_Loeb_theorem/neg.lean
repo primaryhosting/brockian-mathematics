@@ -1,0 +1,84 @@
+/-!
+# Loeb Theorem
+Category: Frontier — Set Theory
+Target: Frontier.Loeb_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+## Overview
+
+Löb's theorem states: if `PA ⊢ (□φ → φ)` then `PA ⊢ φ`, where `□φ` abbreviates the
+arithmetized provability statement `Prov(⌜φ⌝)`.
+
+The proof of Löb's theorem uses exactly two ingredients about `PA`:
+
+* the *Hilbert–Bernays–Löb derivability conditions*, i.e. that `PA` proves all
+  propositional tautologies, is closed under modus ponens and necessitation
+  (`PA ⊢ φ` implies `PA ⊢ □φ`), and proves the distribution axiom
+  `□(φ → ψ) → (□φ → □ψ)` and the formalized `Σ₁`-completeness axiom `□φ → □□φ`;
+* the *diagonal (fixed point) lemma*, which supplies, for each `φ`, a sentence `ψ`
+  with `PA ⊢ ψ ↔ (□ψ → φ)`.
+
+Accordingly we formalize the syntax of the language of sentences (propositional
+connectives together with the provability operator `□`), and the deductive
+apparatus for `PA` given by the derivability conditions, as the inductive predicate
+`Frontier.Prov`.  This is the standard axiomatization of the provability logic of
+`PA` (classical propositional logic plus the modal axioms `K` and `4`); every one of
+its clauses is a theorem about `PA` proved by Gödel and Hilbert–Bernays.  The
+diagonal lemma is taken as an explicit hypothesis of the theorem, since it is the
+purely arithmetical input to the argument.
+
+`Frontier.Loeb_theorem` is then the precise statement: for every sentence `φ`, if
+some sentence `ψ` is a fixed point of `□· → φ` (i.e. `PA` proves both implications
+of `ψ ↔ (□ψ → φ)`) and `PA ⊢ □φ → φ`, then `PA ⊢ φ`.
+-/
+
+namespace Frontier
+
+/-- Sentences: propositional formulas built from atoms and falsity using
+implication, together with the provability operator `box`, whose intended reading
+is `box φ = Prov(⌜φ⌝)`, the arithmetized statement "`φ` is provable in `PA`". -/
+inductive Form : Type
+  | atom : ℕ → Form
+  | bot : Form
+  | imp : Form → Form → Form
+  | box : Form → Form
+
+namespace Form
+
+/-- Implication. -/
+scoped infixr:25 " ⟶ " => Form.imp
+/-- Provability operator. -/
+scoped prefix:max "□" => Form.box
+
+/-- Negation, `¬φ := φ → ⊥`. -/
+
+def neg (a : Form) : Form := a ⟶ Form.bot
+
+end Form
+
+open Form
+
+/-- `Prov φ` means `PA ⊢ φ`.  The clauses are exactly the properties of the
+provability relation of `PA` that Löb's argument uses: closure of provability
+under the rules of a classical Hilbert calculus (`ax_k`, `ax_s`, `ax_dne`, `mp`),
+and the Hilbert–Bernays–Löb derivability conditions
+(`nec`: `PA ⊢ φ` implies `PA ⊢ □φ`;
+`ax_distr`: `PA ⊢ □(φ → ψ) → (□φ → □ψ)`;
+`ax_four`: `PA ⊢ □φ → □□φ`). -/
+inductive Prov : Form → Prop
+  | ax_k (a b : Form) : Prov (a ⟶ (b ⟶ a))
+  | ax_s (a b c : Form) : Prov ((a ⟶ (b ⟶ c)) ⟶ ((a ⟶ b) ⟶ (a ⟶ c)))
+  | ax_dne (a : Form) : Prov (((a ⟶ Form.bot) ⟶ Form.bot) ⟶ a)
+  | ax_distr (a b : Form) : Prov (□(a ⟶ b) ⟶ (□a ⟶ □b))
+  | ax_four (a : Form) : Prov (□a ⟶ □□a)
+  | mp {a b : Form} : Prov (a ⟶ b) → Prov a → Prov b
+  | nec {a : Form} : Prov a → Prov (□a)
+
+namespace Prov
+
+variable {a b c : Form}
+
+/-- Weakening: a provable sentence is implied by anything. -/

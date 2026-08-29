@@ -8,6 +8,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Yao Principle
+Category: Frontier Cs
+Target: CS.yao_principle
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- (Lean requires `import` to come before any module docstring, so the required header appears
+-- at the top of the file as a plain comment and again here as the module docstring.)
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,33 +33,16 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-
 set_option grind.warning false
-
-/-!
-## Overview
-
-Mathlib has no minimax theorem, so the result is proved from scratch.  The only nontrivial
-input from Mathlib is the separation theorem `geometric_hahn_banach_compact_closed`
-(`Mathlib/Analysis/LocallyConvex/Separation.lean`), which is used to prove Ville's theorem of
-the alternative (`CS.ville_alternative`).  Yao's principle then follows by applying the
-alternative to the shifted cost matrix `cost a x - v`, where `v` is the randomized complexity,
-together with weak duality (`CS.distCost_le_randCost`).
--/
 
 namespace CS
 
-section Orthant
+variable {A I : Type*} [Fintype A] [Fintype I] [Nonempty A] [Nonempty I]
 
-variable {A : Type*}
+/-- The worst-case expected cost of the randomized algorithm given by the distribution `p`
+over deterministic algorithms:  `max over inputs i of  E_{a ~ p} [c a i]`. -/
 
-/-- The nonnegative orthant in `A → ℝ` is convex. -/
+noncomputable def randCost (c : A → I → ℝ) (p : A → ℝ) : ℝ := ⨆ i, ∑ a, p a * c a i
 
-noncomputable def randCost (cost : A → X → ℝ) (p : A → ℝ) : ℝ :=
-  ⨆ x : X, ∑ a, p a * cost a x
-
-/-- The expected cost of the best deterministic algorithm against the input distribution `q`. -/
+/-- The distributional complexity of the input distribution `q`:
+`min over deterministic algorithms a of  E_{i ~ q} [c a i]`. -/

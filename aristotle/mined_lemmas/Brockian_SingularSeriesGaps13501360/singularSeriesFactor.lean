@@ -1,37 +1,26 @@
+/-
+# Singular Series Gaps 13501360
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps13501360
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
 
 namespace Brockian
 
-/-! # Admissible gap ranges and the Hardy–Littlewood singular series for prime pairs
+open Finset
 
-For a gap `g` we consider the two–element pattern `{0, g}`.  Such a pattern is
-*admissible* when, for every prime `p`, its residues do not cover all of `ZMod p`.
-The Hardy–Littlewood singular series of the pattern `{0, g}` is
-`𝔖(g) = 2 C₂ ∏_{p ∣ g, p odd} (p-1)/(p-2)` for even `g`, and `0` for odd `g`;
-here we work with the arithmetic factor `∏_{p ∣ g, p odd} (p-1)/(p-2)` and with the
-convention that the factor vanishes for odd `g` (matching the vanishing of `𝔖`).
--/
+/-- A finite set of integers is *admissible* if, for every prime `p`, it fails to cover
+all residue classes modulo `p`.  This is exactly the condition under which the
+Hardy–Littlewood singular series of the tuple is nonzero. -/
 
-/-- A finite pattern `H ⊆ ℤ` is *admissible* if for every prime `p` some residue class
-mod `p` is missed by `H`. -/
+noncomputable def singularSeriesFactor (d : ℤ) : ℝ :=
+  if Even d ∧ d ≠ 0 then
+    ∏ p ∈ d.natAbs.primeFactors.erase 2, ((p : ℝ) - 1) / ((p : ℝ) - 2)
+  else 0
 
-noncomputable def singularSeriesFactor (g : ℕ) : ℝ :=
-  if Even g then ∏ p ∈ g.primeFactors with p ≠ 2, ((p : ℝ) - 1) / ((p : ℝ) - 2) else 0
+section Basic
 
-/-- A pattern with fewer elements than `p` misses a residue class mod `p`. -/
+/-- Pigeonhole: a set with fewer than `p` elements misses a residue class mod `p`. -/

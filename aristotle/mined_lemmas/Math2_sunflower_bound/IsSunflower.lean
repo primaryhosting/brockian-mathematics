@@ -1,4 +1,5 @@
-/-
+import Mathlib
+/-!
 # Sunflower Bound
 Category: Frontier Math
 Target: Math2.sunflower_bound
@@ -6,33 +7,37 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Math2
 
-/-- A family of sets `S` is a *sunflower* if all pairwise intersections of distinct
-members are equal to a common `core`. -/
+variable {α : Type*} [DecidableEq α]
 
-def IsSunflower {α : Type*} [DecidableEq α] (S : Finset (Finset α)) : Prop :=
-  ∃ core : Finset α, ∀ A ∈ S, ∀ B ∈ S, A ≠ B → A ∩ B = core
+/-- A family `S` of finite sets is a *sunflower with core `K`* if any two distinct members
+of `S` meet exactly in `K`. -/
 
-/-!
-### Statement and status
+def IsSunflower (S : Finset (Finset α)) (K : Finset α) : Prop :=
+  ∀ A ∈ S, ∀ B ∈ S, A ≠ B → A ∩ B = K
 
-`Math2.sunflower_bound` below is the **Erdős–Rado sunflower lemma**: every family `F` of
-`w`-element sets with `w ! * (r - 1) ^ w < F.card` contains a sunflower with `r` petals.
-
-The Alweiss–Lovett–Wu–Zhang improvement asserts the stronger bound
-
-```
-∃ C : ℝ, ∀ w r F, (∀ A ∈ F, A.card = w) → (C * r * Real.log w) ^ w < F.card →
-  ∃ S ⊆ F, S.card = r ∧ IsSunflower S
-```
-
-which is *not* established in this file; only the classical bound above is proved here.
--/
-
-/-- **Erdős–Rado sunflower lemma.**  If every member of the family `F` of finite sets has
-exactly `w` elements and `F` has more than `w ! * (r - 1) ^ w` members, then `F` contains a
-sunflower with `r` petals, i.e. `r` distinct members whose pairwise intersections all equal a
-common core. -/
+/-- A family of finite sets whose members are pairwise disjoint. -/

@@ -1,22 +1,20 @@
-import RequestProject.Main
-
-/-! Sanity checks for `Frontier.aumann_agreement`: the hypotheses are satisfiable by a
-concrete example with two genuinely different information partitions. -/
-
-example : (1 : ℝ) = 1 :=
-  Frontier.aumann_agreement (Ω := Bool) (fun _ => (1 : ℝ) / 2) Finset.univ
-    (fun _ => Finset.univ) (fun ω => {ω})
-    (fun _ => Finset.mem_univ _) (fun _ _ _ => rfl)
-    (fun _ => Finset.mem_singleton_self _)
-    (fun _ _ h => by simp only [Finset.mem_singleton] at h; subst h; rfl)
-    Finset.univ (fun _ _ => Finset.subset_univ _) (fun _ _ => Finset.subset_univ _)
-    (by norm_num [Frontier.prob, Fintype.sum_bool]) 1 1
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
+/-
+# Aumann Agreement
+Category: Frontier Mind
+Target: Frontier.aumann_agreement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 import Mathlib
+
+/-!
+# Aumann Agreement
+Category: Frontier Mind
+Target: Frontier.aumann_agreement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -43,7 +41,14 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- The prior probability (mass) that the common prior `p` assigns to a finite event `s`. -/
+section Aumann
 
-noncomputable def prob {Ω : Type*} (p : Ω → ℝ) (s : Finset Ω) : ℝ := ∑ x ∈ s, p x
+variable {Ω : Type*} [Fintype Ω] [DecidableEq Ω] {κ : Type*} [DecidableEq κ]
 
+/-- The prior probability of an event `S ⊆ Ω`, for a weight function `p : Ω → ℝ`. -/
+
+def prob (p : Ω → ℝ) (S : Finset Ω) : ℝ := ∑ ω ∈ S, p ω
+
+/-- An agent's information structure is encoded by a labelling map `part : Ω → κ`:
+the agent, at state `ω`, learns exactly the label `part ω`, i.e. the agent's
+information cell at `ω` is the set of states carrying the same label. -/

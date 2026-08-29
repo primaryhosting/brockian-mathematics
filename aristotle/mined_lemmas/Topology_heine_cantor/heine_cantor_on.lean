@@ -35,7 +35,7 @@ namespace Topology
 /-- **Heine–Cantor theorem**: a continuous map from a compact uniform space to any
 uniform space is uniformly continuous. -/
 
-theorem heine_cantor_on {X Y : Type*} [UniformSpace X] [UniformSpace Y]
+theorem heine_cantor_on {X : Type*} {Y : Type*} [UniformSpace X] [UniformSpace Y]
     {s : Set X} (hs : IsCompact s) {f : X → Y} (hf : ∀ x ∈ s, ContinuousWithinAt f s x) :
     UniformContinuousOn f s :=
   hs.uniformContinuousOn_of_continuous hf

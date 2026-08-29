@@ -26,13 +26,14 @@ set_option grind.warning false
 
 namespace Math
 
-section Mirsky
+open Finset
 
 variable {α : Type*} [Fintype α] [PartialOrder α]
 
-/-- The finset of all chains of a finite partial order. -/
+/-- The finset of all chains (as finsets) of a finite partial order. -/
 
-lemma card_le_maxChainCard {C : Finset α} (hC : IsChain (· ≤ ·) (↑C : Set α)) :
-    C.card ≤ maxChainCard α :=
-  Finset.le_sup (f := Finset.card) (mem_chainsOf.2 hC)
+lemma card_le_maxChainCard {c : Finset α} (hc : IsChain (· ≤ ·) (c : Set α)) :
+    c.card ≤ maxChainCard α :=
+  Finset.le_sup (f := Finset.card) (mem_chainFinsets.2 hc)
 
+/-- The height of `x`: the maximal cardinality of a chain all of whose elements are `≤ x`. -/

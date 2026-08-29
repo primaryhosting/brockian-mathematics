@@ -9,14 +9,8 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace Goldbach
-
-/-- Goldbach for 100: `100 = 47 + 53`, with both `47` and `53` prime. -/
-theorem instance_100 : Nat.Prime 47 ∧ Nat.Prime 53 ∧ 47 + 53 = 100 :=
-  ⟨by norm_num, by norm_num, by norm_num⟩
-
-end Goldbach
-
+-- Note: Lean 4 requires `import` commands to precede every other command, including
+-- module documentation blocks, so the header comment is placed directly after the import.
 
 open scoped BigOperators
 open scoped Real
@@ -32,12 +26,13 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+namespace Goldbach
+
+/-- Goldbach's conjecture for 100: it is the sum of the two primes 47 and 53. -/
+theorem instance_100 : Nat.Prime 47 ∧ Nat.Prime 53 ∧ 47 + 53 = 100 :=
+  ⟨by norm_num, by norm_num, by norm_num⟩
+
+end Goldbach
 

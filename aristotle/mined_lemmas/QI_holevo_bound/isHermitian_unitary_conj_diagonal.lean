@@ -5,7 +5,6 @@ Target: QI.holevo_bound
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -14,45 +13,23 @@ Category: Frontier Qi
 Target: QI.holevo_bound
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-## Contents
-
-* `QI.log_sum_le`, `QI.klDiv_stochastic_le`, `QI.classical_holevo`: the classical core, namely the
-  log-sum inequality, the data-processing inequality for the Kullback–Leibler divergence, and the
-  resulting data-processing inequality for mutual information.
-* `QI.vonNeumannEntropy`, `QI.IsState`, `QI.IsPOVM`, `QI.outcomeProb`, `QI.holevoChi`,
-  `QI.measuredInfo`, `QI.accessibleInfo`: the quantum-information definitions.
-* `QI.holevo_bound`: for an ensemble of density matrices measured by an arbitrary POVM, the
-  mutual information between the ensemble label and the measurement outcome is at most the
-  Holevo quantity `χ`.
-* `QI.accessibleInfo_le_holevoChi`: the same statement for the supremum over POVMs.
-
-## Scope
-
-The ensemble is assumed to consist of *commuting* density matrices: they are given as
-`ρ x = U * diagonal (r x) * Uᴴ` for one fixed unitary `U` and probability vectors `r x`.  The
-measurement, on the other hand, is a completely arbitrary POVM, so the argument is not a purely
-classical one: the POVM has to be turned into a stochastic matrix via `i ↦ (Uᴴ (E y) U) i i`.
-The fully general (non-commuting) Holevo bound needs monotonicity of the *quantum* relative
-entropy under measurement, which is not available in Mathlib.
 -/
-
-open Finset
 
 namespace QI
 
-/-! ## Classical information-theoretic core -/
+open Matrix Finset ComplexOrder
 
-/-- Shannon entropy of a finite (sub)probability vector, with the convention `0 * log 0 = 0`. -/
+/-! ## Classical information quantities -/
 
-theorem isHermitian_unitary_conj_diagonal (U : Matrix n n ℂ) (v : n → ℝ) :
-    (U * diagonal (fun i => (v i : ℂ)) * Uᴴ).IsHermitian := by
-  have hD : (diagonal (fun i => (v i : ℂ)))ᴴ = diagonal (fun i => (v i : ℂ)) := by
-    rw [Matrix.diagonal_conjTranspose]
-    congr 1
-    funext i
-    simp
-  unfold Matrix.IsHermitian
-  simp [Matrix.conjTranspose_mul, mul_assoc, hD]
+variable {ι X I Y : Type*}
 
-/-- The von Neumann entropy of `U * diag v * Uᴴ` is the Shannon entropy of `v`. -/
+/-- Shannon entropy of a finite (sub)probability vector, `H(p) = -∑ p i log (p i)`. -/
+
+lemma isHermitian_unitary_conj_diagonal (U : Matrix n n ℂ) (d : n → ℝ) :
+    (U * diagonal (fun i => (d i : ℂ)) * star U).IsHermitian := by
+  rw [Matrix.IsHermitian, Matrix.star_eq_conjTranspose, Matrix.conjTranspose_mul,
+    Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose,
+    (isHermitian_diagonal_real d).eq, ← Matrix.star_eq_conjTranspose, mul_assoc]
+
+/-- The von Neumann entropy of a unitary conjugate of a real diagonal matrix is the Shannon
+entropy of the diagonal. -/

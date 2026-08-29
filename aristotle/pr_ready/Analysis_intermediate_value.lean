@@ -9,15 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Intermediate Value
-Category: Frontier Wave 2 (deeper machinery)
-Target: Analysis.intermediate_value
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -43,12 +34,11 @@ set_option grind.warning false
 
 namespace Analysis
 
-/-- **Intermediate value theorem.** If `a ≤ b` and `f` is continuous on `Set.Icc a b`,
-then every value between `f a` and `f b` is attained by `f` on `Set.Icc a b`.
-This is `intermediate_value_Icc` from Mathlib. -/
+/-- **Intermediate value theorem.** If `a ≤ b` and `f : ℝ → ℝ` is continuous on `Set.Icc a b`,
+then every value between `f a` and `f b` is attained by `f` on `Set.Icc a b`. -/
 theorem intermediate_value {f : ℝ → ℝ} {a b : ℝ} (hab : a ≤ b)
     (hf : ContinuousOn f (Set.Icc a b)) :
-    Set.Icc (f a) (f b) ⊆ f '' (Set.Icc a b) :=
+    Set.Icc (f a) (f b) ⊆ f '' Set.Icc a b :=
   intermediate_value_Icc hab hf
 
 end Analysis

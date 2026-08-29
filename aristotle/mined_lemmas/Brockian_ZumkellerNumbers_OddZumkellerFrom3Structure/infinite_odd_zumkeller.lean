@@ -42,31 +42,28 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
-open scoped Classical
 
-set_option maxHeartbeats 4000000
-set_option maxRecDepth 100000
+namespace Brockian.ZumkellerNumbers
 
-namespace Brockian
-namespace ZumkellerNumbers
+/-- A positive integer `n` is a *Zumkeller number* if its set of divisors can be split into
+two parts with equal sums, i.e. there is a set `A` of divisors of `n` whose sum is exactly
+half of `σ(n)`. -/
 
-/-- A positive natural number `n` is a *Zumkeller number* if the set of its divisors can be
-split into two parts having the same sum. -/
+theorem infinite_odd_zumkeller : {n : ℕ | Odd n ∧ IsZumkeller n}.Infinite := by
+  apply Set.infinite_of_forall_exists_gt
+  intro N
+  refine ⟨3 ^ 3 * 35 * 11 ^ N, ?_, ?_⟩
+  · obtain ⟨h1, h2, -, -⟩ := OddZumkellerFrom3Structure 3 (11 ^ N) le_rfl
+      (Odd.pow (by decide)) (Nat.Coprime.pow_right _ (by decide))
+    exact ⟨h1, h2⟩
+  · have hlt : N < 11 ^ N := Nat.lt_pow_self (by norm_num)
+    nlinarith [pow_pos (show 0 < 11 by norm_num) N]
 
-theorem infinite_odd_zumkeller : {n : ℕ | Odd n ∧ Zumkeller n}.Infinite := by
-  refine Set.infinite_of_injective_forall_mem (f := fun k : ℕ => 945 * 11 ^ k) ?_ ?_
-  · intro a b hab
-    have h11 : (11 : ℕ) ^ a = 11 ^ b := by
-      have := hab
-      simp only at this
-      omega
-    exact Nat.pow_right_injective (by norm_num) h11
-  · intro k
-    have hodd : Odd ((11 : ℕ) ^ k) := Odd.pow (by decide)
-    have hcop : Nat.Coprime 945 (11 ^ k) := Nat.Coprime.pow_right k (by decide)
-    obtain ⟨h1, _, h3⟩ := OddZumkellerFrom3Structure hodd hcop
-    exact ⟨h1, h3⟩
+/-!
+## Necessary conditions: the shape of an odd Zumkeller number
 
-end ZumkellerNumbers
-end Brockian
+The family produced above uses the three smallest odd primes `3, 5, 7`.  This is optimal:
+an odd Zumkeller number is never a prime power or a product of two prime powers.
+-/
 
+/-- A Zumkeller number is abundant or perfect: `σ(n) ≥ 2 * n`. -/

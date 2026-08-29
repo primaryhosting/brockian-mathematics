@@ -1,10 +1,3 @@
-/-
-# Huckel Cycle Spectrum
-Category: Chemistry
-Target: Chem.huckel_cycle_spectrum
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -13,28 +6,43 @@ Category: Chemistry
 Target: Chem.huckel_cycle_spectrum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-The adjacency eigenvalues of the cycle graph `C n` (for `n ≥ 3`) are exactly
-`2 cos (2πk/n)`, `k = 0, …, n-1`; these are the Hückel π-electron energies
-(in units of the resonance integral `β`, measured from the Coulomb integral `α`).
-
-The proof diagonalises the adjacency matrix by the discrete Fourier matrix
-`F j k = ζ^(jk)` with `ζ = exp(2πi/n)`, and then uses `spectrum_diagonal`
-(Mathlib, `Mathlib/LinearAlgebra/Eigenspace/Matrix.lean`) together with
-`spectrum.units_conjugate`.
 -/
 
 open scoped BigOperators
 open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Chem
 
-open Complex Matrix Finset SimpleGraph
+open Matrix Complex
 
-/-- The primitive `n`-th root of unity `exp(2πi/n)`. -/
+/-! ## The `n`-th root of unity and its basic arithmetic -/
 
-lemma zeta_pow_inj {n : ℕ} (hn : n ≠ 0) {j l : Fin n}
-    (h : zeta n ^ (j : ℕ) = zeta n ^ (l : ℕ)) : j = l :=
-  Fin.ext ((isPrimitiveRoot_zeta hn).pow_inj j.isLt l.isLt h)
+section Roots
 
-/-- The (unnormalised) discrete Fourier matrix `F j k = ζ ^ (j * k)`. -/
+variable (n : ℕ) [NeZero n]
+
+/-- The primitive `n`-th root of unity `exp (2 π i / n)`. -/
+
+lemma zeta_pow_inj {j l : Fin n} (h : (zeta n) ^ (j : ℕ) = (zeta n) ^ (l : ℕ)) : j = l :=
+  Fin.ext ((isPrimitiveRoot_zeta n).pow_inj j.isLt l.isLt h)
+

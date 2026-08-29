@@ -8,44 +8,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Pointwise
-open scoped Computability
-open scoped Classical
+/-!
+Kleene's theorem: over a finite alphabet, a language is denoted by a regular expression
+if and only if it is accepted by a deterministic finite automaton with finitely many states.
+-/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+open Language Computability
 
 namespace CS
 
-universe u v
+variable {α : Type*}
 
-/-- A language is *regex-expressible* if some regular expression matches exactly it. -/
 
-lemma append_mem_kstar {L : Language α} {u v : List α} (hu : u ∈ L∗) (hv : v ∈ L∗) :
-    u ++ v ∈ L∗ := by
-  obtain ⟨U, rfl, hU⟩ := Language.mem_kstar.mp hu
-  obtain ⟨V, rfl, hV⟩ := Language.mem_kstar.mp hv
-  refine Language.mem_kstar.mpr ⟨U ++ V, by simp, ?_⟩
-  intro y hy
-  rcases List.mem_append.mp hy with h | h
-  · exact hU y h
-  · exact hV y h
+theorem append_mem_kstar {A : Language α} {u v : List α} (hu : u ∈ A∗) (hv : v ∈ A∗) :
+    u ++ v ∈ A∗ := by
+  obtain ⟨L₁, rfl, hL₁⟩ := Language.mem_kstar.mp hu
+  obtain ⟨L₂, rfl, hL₂⟩ := Language.mem_kstar.mp hv
+  refine Language.mem_kstar.mpr ⟨L₁ ++ L₂, by simp, ?_⟩
+  intro z hz
+  rcases List.mem_append.mp hz with hz | hz
+  · exact hL₁ z hz
+  · exact hL₂ z hz
 
-end Star
-
-/-! ## Part A: from regular expressions to DFAs, via Myhill–Nerode -/
-
-section PartA
-
-variable {α : Type u}
-
+/-- Splitting a word of `A∗` at the position separating a prefix `x` from a suffix `y`. -/

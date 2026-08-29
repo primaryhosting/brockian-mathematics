@@ -6,17 +6,20 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option autoImplicit false
+
 namespace CS
 
-/-- Euclid's algorithm, by repeated remainder.
-
-The recursion terminates because the second argument strictly decreases at every
-recursive call (`Nat.mod_lt`); this is exactly what the `termination_by` /
-`decreasing_by` clauses certify, so `euclid` is a total function. -/
+/-- **Euclid's algorithm.**  On input `(a, b)` it returns `b` when `a = 0`, and otherwise
+recurses on `(b % a, a)`.  The recursion is well founded: the first argument strictly
+decreases at every step (`b % (a+1) < a+1`), which is exactly the termination argument
+discharged by `decreasing_by` below.  Consequently `euclid` is a total function, i.e. the
+algorithm terminates on every input. -/
 
 def euclid : Nat → Nat → Nat
-  | a, 0 => a
-  | a, (b + 1) => euclid (b + 1) (a % (b + 1))
-  termination_by _ b => b
-  decreasing_by exact Nat.mod_lt _ (Nat.succ_pos b)
+  | 0, b => b
+  | (a + 1), b => euclid (b % (a + 1)) (a + 1)
+  decreasing_by exact Nat.mod_lt _ (Nat.succ_pos a)
 
+/-- The termination measure of Euclid's algorithm: on a recursive call the first
+argument strictly decreases.  Since `Nat` is well founded, the algorithm terminates. -/

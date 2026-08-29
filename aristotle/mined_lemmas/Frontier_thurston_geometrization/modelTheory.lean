@@ -1,4 +1,14 @@
+-- (Lean 4 requires `import` to be the very first command in a file, so the
+-- module docstring header below follows the import.)
 import Mathlib
+
+/-!
+# Thurston Geometrization
+Category: Frontier — Fields Medal Work
+Target: Frontier.thurston_geometrization
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,85 +33,48 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Thurston Geometrization
-Category: Frontier — Fields Medal Work
-Target: Frontier.thurston_geometrization
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-/-!
-## Overview
-
-Thurston's geometrization conjecture (proved by Perelman) states:
-
-> Every closed orientable 3-manifold can be cut, first along spheres into prime summands
-> (Kneser–Milnor) and then along incompressible tori (JSJ), into pieces each of which
-> admits a complete locally homogeneous Riemannian metric modelled on one of the
-> **eight** Thurston geometries
-> `E³, S³, H³, S²×ℝ, H²×ℝ, SL₂(ℝ)~, Nil, Sol`.
-
-Formalizing 3-manifold topology from scratch (smooth structures, connected sums,
-incompressible surfaces, the JSJ decomposition, Ricci flow with surgery) is far beyond
-what is available in Mathlib.  What is done here instead is an honest, *axiom-free*
-formalization at the level of an abstract theory of 3-manifolds:
-
-* `Frontier.ThurstonGeometry` — the eight model geometries, an eight-element type
-  (`Frontier.length_allThurstonGeometries`).
-* `Frontier.ThreeManifoldTheory` — a signature packaging the primitive notions used in
-  the statement (closed, orientable, prime, geometric, prime decomposition, JSJ
-  decomposition, atoroidal-or-Seifert pieces).  No axioms are asserted about it: all
-  content enters as explicit hypotheses of the theorems.
-* `Frontier.Geometrizable` — the conclusion of geometrization for a single manifold.
-* `Frontier.thurston_geometrization` — the **Lean-checked reduction**: from the three
-  standard inputs (Kneser–Milnor prime decomposition, existence of the JSJ
-  decomposition, and geometrization of the individual JSJ pieces, i.e. hyperbolization
-  plus the classification of Seifert fibred pieces) every closed orientable
-  3-manifold is geometrizable.
-* `Frontier.geometrizable_of_geometric` — the **base case**: a manifold that already
-  carries one of the eight geometries is geometrizable.
-* `Frontier.modelTheory` and `Frontier.model_satisfies_hypotheses` — a concrete model
-  of the signature satisfying all hypotheses, certifying that the statement above is
-  not vacuous.
-
-Nothing here is asserted by `axiom`; the deep analytic input is exactly the hypothesis
-`hGeom` of `thurston_geometrization`.
--/
-
 namespace Frontier
 
-/-- The eight Thurston model geometries: the eight maximal simply connected
-homogeneous 3-dimensional model geometries admitting a compact quotient. -/
-inductive ThurstonGeometry
-  /-- Euclidean space `E³`. -/
-  | E3
-  /-- The round 3-sphere `S³`. -/
-  | S3
-  /-- Hyperbolic 3-space `H³`. -/
-  | H3
-  /-- The product geometry `S² × ℝ`. -/
-  | S2xR
-  /-- The product geometry `H² × ℝ`. -/
-  | H2xR
-  /-- The universal cover of `SL(2, ℝ)`. -/
-  | SL2R
-  /-- Nil geometry (the Heisenberg group). -/
-  | Nil
-  /-- Sol geometry. -/
-  | Sol
-  deriving DecidableEq, Repr
+/-!
+## 1. The eight Thurston geometries
 
-/-- The list of all eight Thurston geometries. -/
+Thurston's list of the eight maximal, simply connected, three–dimensional model
+geometries admitting a compact quotient:
+
+`E³`, `S³`, `H³`, `S² × ℝ`, `H² × ℝ`, `SL(2,ℝ)~`, `Nil`, `Sol`.
+-/
+
+/-- The eight three–dimensional Thurston model geometries. -/
+inductive Geometry where
+  /-- Euclidean geometry `E³`. -/
+  | euclidean : Geometry
+  /-- Spherical geometry `S³`. -/
+  | spherical : Geometry
+  /-- Hyperbolic geometry `H³`. -/
+  | hyperbolic : Geometry
+  /-- The product geometry `S² × ℝ`. -/
+  | sphereTimesLine : Geometry
+  /-- The product geometry `H² × ℝ`. -/
+  | hyperbolicTimesLine : Geometry
+  /-- The geometry of the universal cover of `SL(2,ℝ)`. -/
+  | slTwoRCover : Geometry
+  /-- Nil geometry (the Heisenberg group). -/
+  | nil : Geometry
+  /-- Sol geometry (the three-dimensional solvable Lie group). -/
+  | sol : Geometry
+  deriving DecidableEq, Fintype, Repr
+
+/-- There are exactly eight Thurston geometries. -/
 
 def modelTheory : ThreeManifoldTheory where
-  Mfld := ThurstonGeometry
-  Closed := fun _ => True
-  Orientable := fun _ => True
-  Prime := fun _ => True
-  Geometric := fun m g => m = g
-  PrimeDecomp := fun m ms => ms = [m]
-  JSJDecomp := fun m ps => ps = [m]
-  AtoroidalOrSeifert := fun _ => True
+  Mfld := ℕ
+  connSum := (· + ·)
+  sphere3 := 0
+  IsPrime := fun n => n = 1
+  Piece := Unit
+  IsJSJ := fun n l => l.length = n
+  AdmitsGeometry := fun _ g => g = Geometry.hyperbolic
 
-/-- The model satisfies all three hypotheses of `thurston_geometrization`, so the
+/-- **Non-vacuity.** In the model theory the hypotheses of
+`thurston_geometrization` all hold, and the conclusion — every manifold is
+geometrizable — follows from the general theorem. -/

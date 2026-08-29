@@ -1,0 +1,18 @@
+/-!
+# Two Squares 89
+Category: Pure Mathematics
+Target: Math.two_squares_89
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Math
+
+/-- Primality of a natural number, spelled out: `n` is at least `2` and its only
+divisors are `1` and `n`.  (This is definitionally the same notion as
+`Nat.Prime`; it is stated here directly because the required file header must be
+the very first thing in the file, which precludes an `import` command.) -/
+
+def IsPrimeNat (n : Nat) : Prop := 2 ≤ n ∧ ∀ m : Nat, m ∣ n → m = 1 ∨ m = n
+
+/-- Every divisor of `89` is `1` or `89`. -/

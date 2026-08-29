@@ -1,3 +1,14 @@
+/-
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: Lean 4 does not permit a module docstring before the `import` line; the required
+header is reproduced verbatim below as the module docstring.)
+-/
+
 import Mathlib
 
 /-!
@@ -6,286 +17,252 @@ Category: Frontier Mind
 Target: Frontier.nash_equilibrium_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean 4 requires `import` to be the very first command in a file, so the header comment
-above is placed immediately after it.)
 -/
 
 open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier
+
+open Finset Set
+
+/-! ## Finite games in normal form -/
 
 section Defs
 
 variable {ι : Type} [Fintype ι] [DecidableEq ι]
-  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+variable {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
-/-- The pure strategy `a`, viewed as a (degenerate) mixed strategy. -/
+/-- The set of mixed strategy profiles of a finite game: for each player `i` a probability
+distribution on that player's (finite) pure strategy set `S i`. -/
+def mixedProfiles (S : ι → Type) [∀ i, Fintype (S i)] : Set (∀ i, S i → ℝ) :=
+  Set.univ.pi fun i => stdSimplex ℝ (S i)
 
-def pureStrat {i : ι} (a : S i) : S i → ℝ := fun b => if b = a then 1 else 0
+/-- The expected payoff of player `i` when the players independently randomize
+according to the mixed profile `x`. -/
+noncomputable def expectedPayoff (u : ι → (∀ i, S i) → ℝ) (x : ∀ i, S i → ℝ) (i : ι) : ℝ :=
+  ∑ p : (∀ i, S i), (∏ j, x j (p j)) * u i p
 
-/-- The set of mixed strategy profiles: each player `i` picks a probability
-distribution on their finite pure strategy set `S i`. -/
-
-def MixedProfiles (S : ι → Type) [∀ i, Fintype (S i)] : Set (∀ i, S i → ℝ) :=
-  {x | ∀ i, x i ∈ stdSimplex ℝ (S i)}
-
-/-- The expected payoff of player `i` under the mixed profile `x`, for the game with
-pure payoff functions `g`. -/
-
-def expectedPayoff (g : ι → (∀ i, S i) → ℝ) (i : ι) (x : ∀ i, S i → ℝ) : ℝ :=
-  ∑ s : (∀ i, S i), (∏ j, x j (s j)) * g i s
-
-/-- The expected payoff to player `i` when they deviate to the pure strategy `a`. -/
-
-def deviationPayoff (g : ι → (∀ i, S i) → ℝ) (i : ι) (x : ∀ i, S i → ℝ) (a : S i) : ℝ :=
-  expectedPayoff g i (Function.update x i (pureStrat a))
-
-/-- `x` is a mixed-strategy Nash equilibrium of the finite game with payoffs `g`:
-it is a mixed profile, and no player can strictly improve their expected payoff by
-unilaterally switching to another mixed strategy. -/
-
-def IsNashEquilibrium (g : ι → (∀ i, S i) → ℝ) (x : ∀ i, S i → ℝ) : Prop :=
-  x ∈ MixedProfiles S ∧
+/-- A mixed profile `x` is a Nash equilibrium if it is a profile of probability distributions
+and no player can strictly increase their expected payoff by a unilateral deviation. -/
+def IsMixedNashEquilibrium (u : ι → (∀ i, S i) → ℝ) (x : ∀ i, S i → ℝ) : Prop :=
+  x ∈ mixedProfiles S ∧
     ∀ i, ∀ y ∈ stdSimplex ℝ (S i),
-      expectedPayoff g i (Function.update x i y) ≤ expectedPayoff g i x
+      expectedPayoff u (Function.update x i y) i ≤ expectedPayoff u x i
 
-/-- `s` is a pure-strategy Nash equilibrium: no player can improve by switching to
-another pure strategy. -/
+end Defs
 
+/-- Brouwer's fixed point theorem, stated as a property (it is not available in Mathlib):
+every continuous self-map of a nonempty compact convex subset of a finite-dimensional real
+normed space has a fixed point. -/
 def BrouwerFixedPointProperty : Prop :=
   ∀ (E : Type) [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]
-    (K : Set E), K.Nonempty → IsCompact K → Convex ℝ K →
-      ∀ f : E → E, ContinuousOn f K → Set.MapsTo f K K → ∃ x ∈ K, f x = x
+    (K : Set E), K.Nonempty → Convex ℝ K → IsCompact K →
+    ∀ f : E → E, ContinuousOn f K → Set.MapsTo f K K → ∃ x ∈ K, f x = x
 
-section Basic
+section Nash
 
 variable {ι : Type} [Fintype ι] [DecidableEq ι]
-  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
-  {g : ι → (∀ i, S i) → ℝ}
+variable {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)] [∀ i, Nonempty (S i)]
+variable (u : ι → (∀ i, S i) → ℝ)
 
-theorem pureStrat_mem_stdSimplex {i : ι} (a : S i) : pureStrat a ∈ stdSimplex ℝ (S i) := by
-  constructor
-  · intro b
-    by_cases h : b = a <;> simp [pureStrat, h]
-  · simp [pureStrat]
+/-- A Dirac measure on a pure strategy is a mixed strategy. -/
+lemma single_mem_stdSimplex {α : Type} [Fintype α] [DecidableEq α] (s : α) :
+    (Pi.single s (1 : ℝ)) ∈ stdSimplex ℝ α := by
+  refine ⟨fun t => ?_, ?_⟩
+  · rw [Pi.single_apply]; split <;> norm_num
+  · simp
 
-theorem prod_update (i : ι) (x : ∀ i, S i → ℝ) (y : S i → ℝ) (s : ∀ j, S j) :
-    (∏ j, Function.update x i y j (s j))
-      = y (s i) * ∏ j ∈ Finset.univ.erase i, x j (s j) := by
-  rw [← Finset.mul_prod_erase Finset.univ _ (Finset.mem_univ i), Function.update_self]
-  congr 1
-  refine Finset.prod_congr rfl fun j hj => ?_
-  rw [Function.update_of_ne (Finset.ne_of_mem_erase hj)]
+omit [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)] [∀ i, Nonempty (S i)] in
+lemma prod_update (x : ∀ i, S i → ℝ) (i : ι) (y : S i → ℝ) (p : ∀ i, S i) :
+    (∏ j, Function.update x i y j (p j))
+      = y (p i) * ∏ j ∈ Finset.univ \ {i}, x j (p j) := by
+  have h : (fun j => Function.update x i y j (p j))
+      = Function.update (fun j => x j (p j)) i (y (p i)) := by
+    funext j
+    by_cases h : j = i
+    · subst h; simp
+    · simp [Function.update_of_ne h]
+  rw [show (∏ j, Function.update x i y j (p j))
+      = ∏ j, Function.update (fun j => x j (p j)) i (y (p i)) j from by rw [h]]
+  exact Finset.prod_update_of_mem (Finset.mem_univ i) _ _
 
-/-- The expected payoff is multilinear: as a function of player `i`'s mixed strategy it is
-linear, so it is the corresponding convex combination of the pure deviation payoffs. -/
-
-theorem expectedPayoff_update (i : ι) (x : ∀ i, S i → ℝ) (y : S i → ℝ) :
-    expectedPayoff g i (Function.update x i y) = ∑ a : S i, y a * deviationPayoff g i x a := by
-  have hL : expectedPayoff g i (Function.update x i y)
-      = ∑ s : (∀ j, S j), y (s i) * ((∏ j ∈ Finset.univ.erase i, x j (s j)) * g i s) := by
-    refine Finset.sum_congr rfl fun s _ => ?_
-    rw [prod_update i x y s, mul_assoc]
-  have hR : ∀ a : S i, deviationPayoff g i x a
-      = ∑ s : (∀ j, S j),
-          (if s i = a then (1 : ℝ) else 0) * ((∏ j ∈ Finset.univ.erase i, x j (s j)) * g i s) := by
-    intro a
-    refine Finset.sum_congr rfl fun s _ => ?_
-    rw [prod_update i x (pureStrat a) s, mul_assoc]
-    rfl
-  rw [hL]
-  simp_rw [hR, Finset.mul_sum]
+omit [∀ i, Nonempty (S i)] in
+/-- The expected payoff is linear in the deviating player's own mixed strategy. -/
+lemma expectedPayoff_update (x : ∀ i, S i → ℝ) (i : ι) (y : S i → ℝ) :
+    expectedPayoff u (Function.update x i y) i
+      = ∑ s, y s * expectedPayoff u (Function.update x i (Pi.single s 1)) i := by
+  simp only [expectedPayoff, prod_update, Finset.mul_sum]
   rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl fun s _ => ?_
-  simp
+  refine Finset.sum_congr rfl fun p _ => ?_
+  simp [Pi.single_apply, mul_assoc]
 
-theorem expectedPayoff_eq_sum (i : ι) (x : ∀ i, S i → ℝ) :
-    expectedPayoff g i x = ∑ a : S i, x i a * deviationPayoff g i x a := by
-  conv_lhs => rw [← Function.update_eq_self i x]
-  rw [expectedPayoff_update]
+/-- The expected payoff of a mixed profile is the average of the payoffs of the pure
+deviations of any given player. -/
+lemma expectedPayoff_eq_sum (x : ∀ i, S i → ℝ) (i : ι) :
+    expectedPayoff u x i
+      = ∑ s, x i s * expectedPayoff u (Function.update x i (Pi.single s 1)) i := by
+  have h := expectedPayoff_update u x i (x i)
+  rwa [Function.update_eq_self] at h
 
-/-- A mixed profile is a Nash equilibrium iff no *pure* deviation is profitable. -/
+omit [∀ i, DecidableEq (S i)] [∀ i, Nonempty (S i)] in
+lemma continuous_expectedPayoff (i : ι) :
+    Continuous fun x : (∀ i, S i → ℝ) => expectedPayoff u x i := by
+  unfold expectedPayoff
+  refine continuous_finset_sum _ fun p _ => Continuous.mul ?_ continuous_const
+  exact continuous_finset_prod _ fun j _ => (continuous_apply (p j)).comp (continuous_apply j)
 
-theorem isNashEquilibrium_iff {x : ∀ i, S i → ℝ} (hx : x ∈ MixedProfiles S) :
-    IsNashEquilibrium g x ↔ ∀ (i : ι) (a : S i), deviationPayoff g i x a ≤ expectedPayoff g i x := by
-  constructor
-  · rintro ⟨-, h⟩ i a
-    exact h i (pureStrat a) (pureStrat_mem_stdSimplex a)
-  · intro h
-    refine ⟨hx, fun i y hy => ?_⟩
-    rw [expectedPayoff_update]
-    calc ∑ a : S i, y a * deviationPayoff g i x a
-        ≤ ∑ a : S i, y a * expectedPayoff g i x := by
-          refine Finset.sum_le_sum fun a _ => ?_
-          exact mul_le_mul_of_nonneg_left (h i a) (hy.1 a)
-      _ = expectedPayoff g i x := by rw [← Finset.sum_mul, hy.2, one_mul]
-
-theorem continuous_expectedPayoff (i : ι) :
-    Continuous fun x : (∀ i, S i → ℝ) => expectedPayoff g i x := by
-  refine continuous_finset_sum _ fun s _ => ?_
-  exact ((continuous_finset_prod _ fun j _ => (continuous_apply (s j)).comp
-    (continuous_apply (A := fun j => S j → ℝ) j)).mul continuous_const)
-
-theorem continuous_update (i : ι) (y : S i → ℝ) :
-    Continuous fun x : (∀ j, S j → ℝ) => Function.update x i y := by
+omit [Fintype ι] [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)] [∀ i, Nonempty (S i)] in
+lemma continuous_update_const (i : ι) (c : S i → ℝ) :
+    Continuous fun x : (∀ i, S i → ℝ) => Function.update x i c := by
   refine continuous_pi fun j => ?_
   by_cases h : j = i
   · subst h
-    simpa [Function.update_self] using (continuous_const : Continuous fun _ : (∀ j, S j → ℝ) => y)
-  · simpa [Function.update_of_ne h] using
-      (continuous_apply (A := fun j => S j → ℝ) j)
+    simpa using continuous_const
+  · simpa only [Function.update_of_ne h] using continuous_apply j
 
-theorem continuous_deviationPayoff (i : ι) (a : S i) :
-    Continuous fun x : (∀ i, S i → ℝ) => deviationPayoff g i x a :=
-  (continuous_expectedPayoff i).comp (continuous_update i (pureStrat a))
+/-- The gain player `i` would obtain by switching to the pure strategy `s`. -/
+noncomputable def gain (x : ∀ i, S i → ℝ) (i : ι) (s : S i) : ℝ :=
+  expectedPayoff u (Function.update x i (Pi.single s 1)) i - expectedPayoff u x i
 
-theorem mixedProfiles_eq_pi :
-    MixedProfiles S = Set.univ.pi fun i => stdSimplex ℝ (S i) := by
-  ext x
-  simp [MixedProfiles]
+/-- Nash's map: each player shifts weight towards their profitable deviations. -/
+noncomputable def nashMap (x : ∀ i, S i → ℝ) : ∀ i, S i → ℝ :=
+  fun i s => (x i s + max 0 (gain u x i s)) / (1 + ∑ t, max 0 (gain u x i t))
 
-theorem isCompact_mixedProfiles : IsCompact (MixedProfiles S) := by
-  rw [mixedProfiles_eq_pi]
-  exact isCompact_univ_pi fun i => isCompact_stdSimplex _
-
-theorem convex_mixedProfiles : Convex ℝ (MixedProfiles S) := by
-  rw [mixedProfiles_eq_pi]
-  exact convex_pi fun i _ => convex_stdSimplex ℝ (S i)
-
-theorem nonempty_mixedProfiles [∀ i, Nonempty (S i)] : (MixedProfiles S).Nonempty :=
-  ⟨fun i => pureStrat (Classical.arbitrary (S i)), fun i => pureStrat_mem_stdSimplex _⟩
-
-end Basic
-
-section NashMap
-
-variable {ι : Type} [Fintype ι] [DecidableEq ι]
-  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
-
-/-- The regret of player `i` at `x` for the pure strategy `a`: the (nonnegative part of the)
-gain from deviating to `a`. -/
-
-def gain (g : ι → (∀ i, S i) → ℝ) (i : ι) (x : ∀ i, S i → ℝ) (a : S i) : ℝ :=
-  max 0 (deviationPayoff g i x a - expectedPayoff g i x)
-
-/-- Nash's map: shift each player's mixed strategy towards its profitable deviations and
-renormalize. -/
-
-noncomputable def nashMap (g : ι → (∀ i, S i) → ℝ) (x : ∀ i, S i → ℝ) : ∀ i, S i → ℝ :=
-  fun i a => (x i a + gain g i x a) / (1 + ∑ b : S i, gain g i x b)
-
-variable {g : ι → (∀ i, S i) → ℝ}
-
-theorem gain_nonneg (i : ι) (x : ∀ i, S i → ℝ) (a : S i) : 0 ≤ gain g i x a :=
-  le_max_left _ _
-
-theorem sum_gain_nonneg (i : ι) (x : ∀ i, S i → ℝ) : 0 ≤ ∑ b : S i, gain g i x b :=
-  Finset.sum_nonneg fun b _ => gain_nonneg i x b
-
-theorem gain_denom_pos (i : ι) (x : ∀ i, S i → ℝ) :
-    (0 : ℝ) < 1 + ∑ b : S i, gain g i x b := by
-  have := sum_gain_nonneg i x (g := g)
+omit [∀ i, Nonempty (S i)] in
+lemma one_le_nashDen (x : ∀ i, S i → ℝ) (i : ι) :
+    1 ≤ 1 + ∑ t, max 0 (gain u x i t) := by
+  have : (0:ℝ) ≤ ∑ t, max 0 (gain u x i t) :=
+    Finset.sum_nonneg fun t _ => le_max_left _ _
   linarith
 
-theorem continuous_gain (i : ι) (a : S i) :
-    Continuous fun x : (∀ i, S i → ℝ) => gain g i x a :=
-  continuous_const.max ((continuous_deviationPayoff i a).sub (continuous_expectedPayoff i))
+lemma continuous_gain (i : ι) (s : S i) :
+    Continuous fun x : (∀ i, S i → ℝ) => gain u x i s := by
+  unfold gain
+  exact ((continuous_expectedPayoff u i).comp
+    (continuous_update_const i (Pi.single s 1))).sub (continuous_expectedPayoff u i)
 
-theorem continuous_nashMap : Continuous (nashMap g) := by
-  refine continuous_pi fun i => continuous_pi fun a => ?_
-  refine Continuous.div
-    (((continuous_apply a).comp (continuous_apply (A := fun j => S j → ℝ) i)).add
-      (continuous_gain i a))
-    (continuous_const.add (continuous_finset_sum _ fun b _ => continuous_gain i b))
-    (fun x => ne_of_gt (gain_denom_pos i x))
+lemma continuous_nashMap : Continuous (nashMap u) := by
+  refine continuous_pi fun i => continuous_pi fun s => ?_
+  refine Continuous.div ?_ ?_ ?_
+  · exact ((continuous_apply s).comp (continuous_apply i)).add
+      ((continuous_const (y := (0:ℝ))).max (continuous_gain u i s))
+  · exact continuous_const.add
+      (continuous_finset_sum _ fun t _ => (continuous_const (y := (0:ℝ))).max (continuous_gain u i t))
+  · intro x
+    have := one_le_nashDen u x i
+    linarith
 
-theorem nashMap_mapsTo : Set.MapsTo (nashMap g) (MixedProfiles S) (MixedProfiles S) := by
-  intro x hx i
-  have hden : (0 : ℝ) < 1 + ∑ b : S i, gain g i x b := gain_denom_pos i x
+lemma mapsTo_nashMap : Set.MapsTo (nashMap u) (mixedProfiles S) (mixedProfiles S) := by
+  intro x hx i _
+  have hxi : x i ∈ stdSimplex ℝ (S i) := hx i (Set.mem_univ i)
+  have hden : (0:ℝ) < 1 + ∑ t, max 0 (gain u x i t) := lt_of_lt_of_le one_pos (one_le_nashDen u x i)
   constructor
-  · intro a
-    exact div_nonneg (add_nonneg ((hx i).1 a) (gain_nonneg i x a)) hden.le
-  · simp only [nashMap]
-    rw [← Finset.sum_div, Finset.sum_add_distrib, (hx i).2]
-    exact div_self (ne_of_gt hden)
+  · intro s
+    have h1 : 0 ≤ x i s + max 0 (gain u x i s) :=
+      add_nonneg (hxi.1 s) (le_max_left _ _)
+    exact div_nonneg h1 hden.le
+  · show ∑ s, nashMap u x i s = 1
+    unfold nashMap
+    rw [← Finset.sum_div, Finset.sum_add_distrib, hxi.2]
+    field_simp
 
-/-- A fixed point of Nash's map inside the mixed profiles is a Nash equilibrium. -/
+lemma isNash_of_fixed {x : ∀ i, S i → ℝ} (hx : x ∈ mixedProfiles S)
+    (hfix : nashMap u x = x) : IsMixedNashEquilibrium u x := by
+  refine ⟨hx, ?_⟩
+  intro i y hy
+  have hxi : x i ∈ stdSimplex ℝ (S i) := hx i (Set.mem_univ i)
+  set c : ℝ := ∑ t, max 0 (gain u x i t) with hc
+  have hcnonneg : 0 ≤ c := Finset.sum_nonneg fun t _ => le_max_left _ _
+  have hden : (0:ℝ) < 1 + c := by linarith
+  have hkey : ∀ s, x i s * c = max 0 (gain u x i s) := by
+    intro s
+    have h := congrFun (congrFun hfix i) s
+    unfold nashMap at h
+    rw [← hc, div_eq_iff (ne_of_gt hden)] at h
+    nlinarith [h]
+  have hzero : ∑ s, x i s * gain u x i s = 0 := by
+    simp only [gain, mul_sub]
+    rw [Finset.sum_sub_distrib, ← Finset.sum_mul, hxi.2, one_mul,
+      ← expectedPayoff_eq_sum, sub_self]
+  have hc0 : c = 0 := by
+    by_contra hne
+    have hcpos : 0 < c := lt_of_le_of_ne hcnonneg (Ne.symm hne)
+    have hterm : ∀ s ∈ Finset.univ, 0 ≤ x i s * gain u x i s := by
+      intro s _
+      rcases eq_or_lt_of_le (hxi.1 s) with h | h
+      · rw [← h]; simp
+      · have hm : 0 < max 0 (gain u x i s) := by
+          rw [← hkey s]; positivity
+        have : 0 < gain u x i s := by
+          rcases max_cases 0 (gain u x i s) with ⟨he, _⟩ | ⟨he, hle⟩
+          · rw [he] at hm; exact absurd hm (lt_irrefl 0)
+          · rw [he] at hm; exact hm
+        positivity
+    have hall := (Finset.sum_eq_zero_iff_of_nonneg hterm).1 hzero
+    have hzeros : ∀ s, x i s = 0 := by
+      intro s
+      by_contra hs
+      have hpos : 0 < x i s := lt_of_le_of_ne (hxi.1 s) (Ne.symm hs)
+      have hg : gain u x i s = 0 := by
+        have := hall s (Finset.mem_univ s)
+        rcases mul_eq_zero.1 this with h | h
+        · exact absurd h (ne_of_gt hpos)
+        · exact h
+      have hm : 0 < max 0 (gain u x i s) := by rw [← hkey s]; positivity
+      rw [hg] at hm
+      simp at hm
+    have := hxi.2
+    rw [Finset.sum_congr rfl fun s _ => hzeros s] at this
+    simp at this
+  have hgain : ∀ s, gain u x i s ≤ 0 := by
+    intro s
+    have := hkey s
+    rw [hc0, mul_zero] at this
+    have h2 : gain u x i s ≤ max 0 (gain u x i s) := le_max_right _ _
+    linarith [this ▸ h2]
+  rw [expectedPayoff_update]
+  have hle : ∀ s ∈ Finset.univ,
+      y s * expectedPayoff u (Function.update x i (Pi.single s 1)) i
+        ≤ y s * expectedPayoff u x i := by
+    intro s _
+    have := hgain s
+    unfold gain at this
+    exact mul_le_mul_of_nonneg_left (by linarith) (hy.1 s)
+  calc ∑ s, y s * expectedPayoff u (Function.update x i (Pi.single s 1)) i
+      ≤ ∑ s, y s * expectedPayoff u x i := Finset.sum_le_sum hle
+    _ = expectedPayoff u x i := by rw [← Finset.sum_mul, hy.2, one_mul]
 
-theorem isNashEquilibrium_of_fixed {x : ∀ i, S i → ℝ} (hx : x ∈ MixedProfiles S)
-    (hfix : nashMap g x = x) : IsNashEquilibrium g x := by
-  rw [isNashEquilibrium_iff hx]
-  intro i
-  have hden : (0 : ℝ) < 1 + ∑ b : S i, gain g i x b := gain_denom_pos i x
-  -- at a fixed point, each regret is proportional to the probability weight
-  have key : ∀ a : S i, gain g i x a = x i a * ∑ b : S i, gain g i x b := by
-    intro a
-    have h := congrFun (congrFun hfix i) a
-    simp only [nashMap] at h
-    rw [div_eq_iff (ne_of_gt hden)] at h
-    linear_combination h
-  have hnn : ∀ a : S i, 0 ≤ x i a := (hx i).1
-  have hsum1 : ∑ a : S i, x i a = 1 := (hx i).2
-  -- some strategy in the support does no better than average
-  have hstep : ∃ a : S i, x i a ≠ 0 ∧ deviationPayoff g i x a ≤ expectedPayoff g i x := by
-    by_contra hcon
-    push_neg at hcon
-    have hv : expectedPayoff g i x = ∑ a : S i, x i a * deviationPayoff g i x a :=
-      expectedPayoff_eq_sum i x
-    obtain ⟨a₀, ha₀⟩ : ∃ a : S i, x i a ≠ 0 := by
-      by_contra h
-      push_neg at h
-      rw [Finset.sum_congr rfl fun a _ => h a] at hsum1
-      simp at hsum1
-    have hlt : ∑ a : S i, x i a * expectedPayoff g i x
-        < ∑ a : S i, x i a * deviationPayoff g i x a := by
-      refine Finset.sum_lt_sum (fun a _ => ?_) ⟨a₀, Finset.mem_univ _, ?_⟩
-      · rcases eq_or_lt_of_le (hnn a) with h | h
-        · simp [← h]
-        · exact mul_le_mul_of_nonneg_left (hcon a (ne_of_gt h)).le h.le
-      · exact mul_lt_mul_of_pos_left (hcon a₀ ha₀) (lt_of_le_of_ne (hnn a₀) (Ne.symm ha₀))
-    rw [← Finset.sum_mul, hsum1, one_mul] at hlt
-    exact absurd hv (ne_of_lt hlt)
-  obtain ⟨a₀, hne, hle⟩ := hstep
-  have hg0 : gain g i x a₀ = 0 := max_eq_left (by linarith)
-  have hDzero : ∑ b : S i, gain g i x b = 0 := by
-    have := key a₀
-    rw [hg0] at this
-    rcases mul_eq_zero.1 this.symm with h | h
-    · exact absurd h hne
-    · exact h
-  intro a
-  have h0 : gain g i x a = 0 := by rw [key a, hDzero, mul_zero]
-  have hmax : deviationPayoff g i x a - expectedPayoff g i x ≤ gain g i x a := le_max_right _ _
-  linarith
+/-- **Nash's theorem** (a Lean-checked reduction to Brouwer's fixed point theorem).
+Every finite game in normal form — a finite set of players `ι`, a nonempty finite set of pure
+strategies `S i` for each player, and an arbitrary real payoff function `u i` on pure strategy
+profiles — has a mixed-strategy Nash equilibrium, given Brouwer's fixed point theorem. -/
+theorem nash_equilibrium_exists (brouwer : BrouwerFixedPointProperty) :
+    ∃ x, IsMixedNashEquilibrium u x := by
+  have hne : (mixedProfiles S).Nonempty :=
+    ⟨fun i => Pi.single (Classical.arbitrary (S i)) 1, fun i _ => single_mem_stdSimplex _⟩
+  have hconv : Convex ℝ (mixedProfiles S) :=
+    convex_pi fun i _ => convex_stdSimplex ℝ (S i)
+  have hcomp : IsCompact (mixedProfiles S) :=
+    isCompact_univ_pi fun i => isCompact_stdSimplex (S i)
+  obtain ⟨x, hxK, hfix⟩ := brouwer ((i : ι) → S i → ℝ) (mixedProfiles S) hne hconv hcomp
+    (nashMap u) (continuous_nashMap u).continuousOn (mapsTo_nashMap u)
+  exact ⟨x, isNash_of_fixed u hxK hfix⟩
 
-end NashMap
+end Nash
 
-section Main
+end Frontier
 
-variable {ι : Type} [Fintype ι] [DecidableEq ι]
-  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)] [∀ i, Nonempty (S i)]
-
-/-- **Nash's theorem**: every finite game (finitely many players, each with a finite nonempty
-set of pure strategies, and arbitrary real payoffs) has a mixed-strategy Nash equilibrium.
-
-This is a Lean-checked reduction to Brouwer's fixed point theorem (hypothesis `hB`), which is
-not available in Mathlib; everything else — Nash's map, its continuity, that it preserves the
-product of simplices, and that its fixed points are exactly the equilibria — is proved here. -/
-
-theorem nash_equilibrium_exists (hB : BrouwerFixedPointProperty) (g : ι → (∀ i, S i) → ℝ) :
-    ∃ x, IsNashEquilibrium g x := by
-  obtain ⟨x, hxK, hfix⟩ :=
-    hB (∀ i, S i → ℝ) (MixedProfiles S) nonempty_mixedProfiles isCompact_mixedProfiles
-      convex_mixedProfiles (nashMap g) continuous_nashMap.continuousOn nashMap_mapsTo
-  exact ⟨x, isNashEquilibrium_of_fixed hxK hfix⟩
-
-end Main
-
-section Unconditional
-
-variable {ι : Type} [Fintype ι] [DecidableEq ι]
-  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)] [∀ i, Nonempty (S i)]
-  {g : ι → (∀ i, S i) → ℝ}
-
-/-- The Dirac mixed profile concentrated on the pure profile `s`. -/

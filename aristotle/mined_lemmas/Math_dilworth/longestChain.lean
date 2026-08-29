@@ -8,10 +8,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Dilworth
+Category: Pure Mathematics
+Target: Math.dilworth
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -26,11 +33,11 @@ set_option grind.warning false
 
 namespace Math
 
-variable {α : Type*} [Fintype α] [PartialOrder α]
+variable {α : Type*} [PartialOrder α]
 
-/-- A colouring of the poset by `{0, …, n-1}` whose colour classes are antichains. -/
+/-- The finset of all chains (as finsets) contained in a given finset `t`. -/
 
-noncomputable def longestChain (α : Type*) [Fintype α] [PartialOrder α] : ℕ :=
-  (chains α).sup Finset.card
+noncomputable def longestChain (α : Type*) [PartialOrder α] [Fintype α] : ℕ :=
+  maxChainCardIn (Finset.univ : Finset α)
 
-/-- The "height" of `x`: the size of a longest chain with maximum element `x`. -/
+/-- The height of an element: the maximal cardinality of a chain below `x`. -/

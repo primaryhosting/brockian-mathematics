@@ -18,55 +18,38 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Frontier
 
-/-! ## Setting
+open Metric Filter Topology
 
-We work with the standard "conjugacy" formulation of KAM theory.  The phase space is an
-arbitrary type `P`, the `n`-dimensional torus is modelled by its universal cover
-`Fin n → ℝ` (all objects below are invariant under the choice of representative, so
-nothing is lost), and a *torus with rotation vector `ω`* for a dynamical system
-`f : P → P` is an embedding `Ψ : (Fin n → ℝ) → P` satisfying the conjugacy equation
+/-- A parameterization `K : Θ → P` of a torus is *invariant* for the dynamics `F : P → P`
+with internal (rigid rotation) dynamics `R : Θ → Θ` if it conjugates `R` to `F`:
+`F (K θ) = K (R θ)` for all `θ`.  This is the standard "parameterization method"
+formulation of an invariant torus carrying quasi-periodic motion with rotation `R`. -/
 
-  `f (Ψ θ) = Ψ (θ + ω)`  for all `θ`,
+theorem kam_theorem {Θ P X : Type*} [MetricSpace X] [CompleteSpace X]
+    (F : ℝ → P → P) (R : Θ → Θ) (emb : X → Θ → P) (T : ℝ → X → X)
+    (hsol : ∀ ε u, T ε u = u → IsInvariantTorus (F ε) R (emb u))
+    (L : NNReal) (hL : L < 1) (hlip : ∀ ε, LipschitzWith L (T ε))
+    (u₀ : X) (h₀ : T 0 u₀ = u₀)
+    (c : ℝ) (hc : ∀ ε, dist (T ε u₀) u₀ ≤ c * |ε|) (ε : ℝ) :
+    ∃ u : X, IsInvariantTorus (F ε) R (emb u) ∧ T ε u = u ∧
+      dist u u₀ ≤ c * |ε| / (1 - L) ∧ (∀ v, T ε v = v → v = u) ∧ (ε = 0 → u = u₀) := by
+  haveI : Nonempty X := ⟨u₀⟩
+  have hcon : ∀ δ : ℝ, ContractingWith L (T δ) := fun δ => ⟨hL, hlip δ⟩
+  refine ⟨ContractingWith.fixedPoint (T ε) (hcon ε), ?_, ?_, ?_, ?_, ?_⟩
+  · exact hsol ε _ (hcon ε).fixedPoint_isFixedPt
+  · exact (hcon ε).fixedPoint_isFixedPt
+  · have h1 := (hcon ε).dist_fixedPoint_le u₀
+    rw [dist_comm]
+    refine h1.trans ?_
+    have h2 : dist u₀ (T ε u₀) ≤ c * |ε| := by rw [dist_comm]; exact hc ε
+    have h3 : (0:ℝ) < 1 - L := (hcon ε).one_sub_K_pos
+    gcongr
+  · exact fun v hv => (hcon ε).fixedPoint_unique hv
+  · rintro rfl
+    exact ((hcon 0).fixedPoint_unique h₀).symm
 
-i.e. `f` restricted to the image of `Ψ` is the rigid rotation by `ω`.
--/
+/-! ### Base case: the unperturbed integrable system is foliated by invariant tori -/
 
-/-- `IsInvariantTorus n f ω Ψ` : the parametrised torus `Ψ` is invariant under the
-dynamics `f` and the induced motion on it is the rigid rotation by the frequency
-vector `ω`. -/
-
-theorem kam_theorem {P : Type*} {n : ℕ} {E : Type*} [NormedAddCommGroup E]
-    (f : ℝ → P → P) (ω : Fin n → ℝ) (Ψ : E → ((Fin n → ℝ) → P))
-    (T : ℝ → E → E) (K : NNReal) (C : ℝ) [CompleteSpace E]
-    (hK : K < 1)
-    (hlip : ∀ ε : ℝ, LipschitzWith K (T ε))
-    (hfix : ∀ (ε : ℝ) (u : E), T ε u = u → IsInvariantTorus (f ε) ω (Ψ u))
-    (hzero : T 0 0 = 0)
-    (hpert : ∀ (ε : ℝ) (u : E), ‖T ε u - T 0 u‖ ≤ C * |ε|) :
-    ∀ ε : ℝ, ∃ u : E, IsInvariantTorus (f ε) ω (Ψ u) ∧ ‖u‖ ≤ C * |ε| / (1 - K) := by
-  intro ε
-  have hcon : ContractingWith K (T ε) := ⟨hK, hlip ε⟩
-  set u := hcon.fixedPoint
-  have hufix : T ε u = u := hcon.fixedPoint_isFixedPt
-  refine ⟨u, hfix ε u hufix, ?_⟩
-  have h0 : dist (0 : E) u ≤ dist (0 : E) (T ε 0) / (1 - K) := hcon.dist_fixedPoint_le 0
-  have hnum : dist (0 : E) (T ε 0) ≤ C * |ε| := by
-    have := hpert ε 0
-    rw [hzero, sub_zero] at this
-    simpa [dist_eq_norm, norm_sub_rev] using this
-  have hK' : (0 : ℝ) < 1 - K := by
-    have : (K : ℝ) < 1 := by exact_mod_cast hK
-    linarith
-  calc ‖u‖ = dist (0 : E) u := by simp [dist_eq_norm]
-    _ ≤ dist (0 : E) (T ε 0) / (1 - K) := h0
-    _ ≤ C * |ε| / (1 - K) := by
-        gcongr
-
-/-! ## Small divisors
-
-The hypothesis `hlip` above is exactly what the classical KAM scheme establishes, and its
-crucial ingredient is the solvability of the *homological equation* with control on the
-small divisors `⟨k, ω⟩`.  We record the corresponding elementary estimate for a Diophantine
-frequency vector. -/
-
-/-- The `ℓ¹`-norm of an integer frequency multi-index, as a real number. -/
+/-- **Base case of KAM.**  For the integrable system `(p, q) ↦ (p, q + ω p)` on the phase space
+`ℝⁿ × 𝕋ⁿ` (the time-one map of an integrable Hamiltonian flow with frequency map `ω`), every
+torus `{p₀} × 𝕋ⁿ` is invariant and carries the rigid rotation by the frequency vector `ω p₀`. -/

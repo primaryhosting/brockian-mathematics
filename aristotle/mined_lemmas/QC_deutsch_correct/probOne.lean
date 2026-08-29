@@ -1,5 +1,4 @@
 import Mathlib
-
 /-!
 # Deutsch Correct
 Category: Quantum Computing
@@ -26,12 +25,10 @@ set_option grind.warning false
 
 namespace QC
 
-/-- A state of a two–qubit register: a complex amplitude for each computational
-basis state `|x y⟩`, `x y : Bool`. -/
-abbrev State := Bool × Bool → ℂ
-
-/-- The sign `(-1)^b`. -/
+/-- The sign `(-1)^b` of a bit, as a complex number. -/
 
 noncomputable def probOne (f : Bool → Bool) : ℝ :=
-  ‖deutschState f (true, false)‖ ^ 2 + ‖deutschState f (true, true)‖ ^ 2
+  ‖deutsch f (true, false)‖ ^ 2 + ‖deutsch f (true, true)‖ ^ 2
 
+/-- Closed form for the amplitudes of the final state on the basis vectors whose first
+qubit is `0`: they are proportional to `(-1)^{f 0} + (-1)^{f 1}`. -/

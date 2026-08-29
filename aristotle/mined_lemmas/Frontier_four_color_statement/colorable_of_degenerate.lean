@@ -1,14 +1,12 @@
-import Mathlib
--- (Lean 4 requires `import` lines to precede any module docstring, so the requested
--- header comment appears immediately below the import.)
-
-/-!
+/-
 # Four Color Statement
 Category: Frontier — Moonshot
 Target: Frontier.four_color_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -24,78 +22,54 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+universe u
 
 namespace Frontier
 
-open SimpleGraph
+/-- The Euclidean plane, in which planar graphs are drawn. -/
+abbrev Plane : Type := ℝ × ℝ
 
-/-! ## Planarity
+/-- A *plane drawing* of a simple graph `G`: an injective placement of the vertices in the
+plane together with, for every edge, an arc (a homeomorphic image of `[0,1]`) joining the
+positions of its endpoints, such that arcs meet the vertex set only at their own endpoints and
+two arcs belonging to distinct edges meet only at common endpoints. -/
+structure Drawing {V : Type*} (G : SimpleGraph V) where
+  /-- The position of each vertex in the plane. -/
+  pos : V → Plane
+  /-- Distinct vertices are drawn at distinct points. -/
+  pos_injective : Function.Injective pos
+  /-- The point set of the arc drawn for the (unordered) edge `{u, v}`. -/
+  arc : V → V → Set Plane
+  /-- The arc of an edge does not depend on the order of its endpoints. -/
+  arc_symm : ∀ u v : V, arc u v = arc v u
+  /-- The arc of an edge is a simple curve running from one endpoint to the other. -/
+  arc_isArc : ∀ u v : V, G.Adj u v →
+    ∃ f : ℝ → Plane, ContinuousOn f (Set.Icc 0 1) ∧ Set.InjOn f (Set.Icc 0 1) ∧
+      f 0 = pos u ∧ f 1 = pos v ∧ arc u v = f '' Set.Icc 0 1
+  /-- An arc passes through no vertices other than its own endpoints. -/
+  arc_inter_pos : ∀ u v : V, G.Adj u v → ∀ w : V, pos w ∈ arc u v → w = u ∨ w = v
+  /-- Two arcs belonging to distinct edges meet only at common endpoints. -/
+  arc_inter_arc : ∀ u v x y : V, G.Adj u v → G.Adj x y → s(u, v) ≠ s(x, y) →
+    ∀ p ∈ arc u v ∩ arc x y, ∃ w : V, (w = u ∨ w = v) ∧ (w = x ∨ w = y) ∧ p = pos w
 
-We use the *straight-line* notion of planarity: a graph is planar when its vertices can be
-placed at distinct points of the plane `ℝ × ℝ` in such a way that the closed segments
-representing the edges meet only in common endpoints, and no vertex lies on a segment
-representing an edge that is not incident to it.
+/-- A graph is *planar* when it admits a plane drawing. -/
 
-By Fáry's theorem this is equivalent, for finite simple graphs, to the usual topological
-notion of planarity (embeddability of the graph into the plane with arbitrary arcs as edges).
--/
+theorem colorable_of_degenerate {V : Type*} [Fintype V] (G : SimpleGraph V) (k : ℕ)
+    (h : ∀ s : Finset V, s.Nonempty → ∃ v ∈ s, (s.filter (fun w => G.Adj v w)).card ≤ k) :
+    G.Colorable (k + 1) := by
+  classical
+  obtain ⟨c, hc⟩ := exists_partial_coloring G k h Finset.univ
+  exact ⟨⟨c, fun {u w} hadj => hc u (Finset.mem_univ u) w (Finset.mem_univ w) hadj⟩⟩
 
-/-- A straight-line planar drawing of `G`: an injective placement `p` of the vertices in the
-plane such that (i) a vertex lying on the segment of an edge is an endpoint of that edge, and
-(ii) the segments of two distinct edges meet only in common endpoints. -/
-
-theorem colorable_of_degenerate {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V)
-    [DecidableRel G.Adj] (n : ℕ)
-    (h : ∀ s : Finset V, s.Nonempty → ∃ v ∈ s, (s.filter (fun w => G.Adj v w)).card < n) :
-    G.Colorable n := by
-  have key : ∀ s : Finset V, ∃ f : V → ℕ, (∀ v ∈ s, f v < n) ∧
-      ∀ a ∈ s, ∀ b ∈ s, G.Adj a b → f a ≠ f b := by
-    intro s
-    induction s using Finset.strongInduction with
-    | _ s ih =>
-      rcases s.eq_empty_or_nonempty with rfl | hs
-      · exact ⟨fun _ => 0, by simp, by simp⟩
-      obtain ⟨v, hv, hvcard⟩ := h s hs
-      obtain ⟨f, hfb, hfp⟩ := ih (s.erase v) (Finset.erase_ssubset hv)
-      set N : Finset V := s.filter (fun w => G.Adj v w) with hN
-      have hlt : (N.image f).card < n := lt_of_le_of_lt (Finset.card_image_le) hvcard
-      have hex : ∃ c ∈ Finset.range n, c ∉ N.image f := by
-        by_contra hcon
-        push_neg at hcon
-        have : (Finset.range n).card ≤ (N.image f).card :=
-          Finset.card_le_card (fun x hx => hcon x hx)
-        simp only [Finset.card_range] at this
-        omega
-      obtain ⟨c, hcn, hcnot⟩ := hex
-      rw [Finset.mem_range] at hcn
-      refine ⟨Function.update f v c, ?_, ?_⟩
-      · intro x hx
-        by_cases hxv : x = v
-        · subst hxv
-          rw [Function.update_self]
-          exact hcn
-        · rw [Function.update_of_ne hxv]
-          exact hfb x (Finset.mem_erase.2 ⟨hxv, hx⟩)
-      · intro a ha b hb hab
-        have hne : a ≠ b := hab.ne
-        by_cases hav : a = v
-        · subst hav
-          have hbv : b ≠ a := hne.symm
-          rw [Function.update_of_ne hbv, Function.update_self]
-          intro hcontra
-          exact hcnot (Finset.mem_image.2 ⟨b, Finset.mem_filter.2 ⟨hb, hab⟩, hcontra.symm⟩)
-        · by_cases hbv : b = v
-          · subst hbv
-            rw [Function.update_of_ne hav, Function.update_self]
-            intro hcontra
-            exact hcnot (Finset.mem_image.2 ⟨a, Finset.mem_filter.2 ⟨ha, hab.symm⟩, hcontra⟩)
-          · rw [Function.update_of_ne hav, Function.update_of_ne hbv]
-            exact hfp a (Finset.mem_erase.2 ⟨hav, ha⟩) b (Finset.mem_erase.2 ⟨hbv, hb⟩) hab
-  obtain ⟨f, hfb, hfp⟩ := key Finset.univ
-  rw [SimpleGraph.colorable_iff_exists_bdd_nat_coloring]
-  exact ⟨SimpleGraph.Coloring.mk f fun {a b} hab =>
-    hfp a (Finset.mem_univ a) b (Finset.mem_univ b) hab, fun v => hfb v (Finset.mem_univ v)⟩
-
-/-- Base case: any graph on at most four vertices is 4-colourable, in particular any such
-planar graph. -/
+/-- Base case of the four colour theorem: every finite `3`-degenerate graph — for instance every
+finite planar graph in which each subgraph has a vertex of degree at most `3` — is
+4-colourable. -/

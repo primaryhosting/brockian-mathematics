@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Ray Indicator Eq Char Sum
 Category: Characters
@@ -21,20 +22,20 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option grind.warning false
+
 namespace Brockian
 namespace Characters5
 
 /-- A primitive fifth root of unity. -/
-noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
-/-- The additive character of `ZMod 5` sending `a` to `ω ^ a`. -/
-
-lemma sum_e_univ : ∑ a : ZMod 5, e a = 0 := by
-  have h : ∑ i ∈ Finset.range 5, ω ^ i = 0 :=
+theorem sum_e_univ : ∑ c : ZMod 5, e c = 0 := by
+  have h : ∑ i ∈ Finset.range 5, omega ^ i = 0 :=
     omega_isPrimitiveRoot.geom_sum_eq_zero (by norm_num)
-  have h2 : ∑ a : ZMod 5, e a = ∑ i ∈ Finset.range 5, ω ^ i := by
-    show ∑ a : Fin 5, ω ^ (ZMod.val (n := 5) a) = _
-    simp [Fin.sum_univ_five, Finset.sum_range_succ, ZMod.val]
-  rw [h2, h]
+  rw [Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ,
+    Finset.sum_range_succ, Finset.sum_range_one] at h
+  show ∑ c : Fin 5, e c = 0
+  rw [Fin.sum_univ_five]
+  simpa [e, ZMod.val] using h
 
 /-- Orthogonality relation for the character `e`. -/

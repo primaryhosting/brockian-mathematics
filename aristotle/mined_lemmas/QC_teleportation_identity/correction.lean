@@ -1,5 +1,12 @@
 import Mathlib
 
+/-!
+# Teleportation Identity
+Category: Quantum Computing
+Target: QC.teleportation_identity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -14,31 +21,22 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace QC
 
-/-! ## Quantum teleportation
+/-! ## Setup
 
-A single qubit is a vector in `ℂ²`, represented as `Fin 2 → ℂ`.
-Multi-qubit states are represented by their coefficient functions on the
-computational basis (so a three-qubit state is `Fin 2 → Fin 2 → Fin 2 → ℂ`).
-Addition on `Fin 2` is addition mod 2, i.e. the XOR of classical bits.
+A qubit state is a vector of amplitudes indexed by `Fin 2`.  Addition on `Fin 2`
+is addition modulo `2`, i.e. the classical `xor` used to describe the Pauli `X`
+gate and the Bell basis.
 -/
 
-/-- A one-qubit state vector, given by its coefficients in the basis `|0⟩, |1⟩`. -/
-abbrev Qubit : Type := Fin 2 → ℂ
+/-- The amplitude `1/√2`, as a complex number. -/
 
-/-- The scalar `1/√2`. -/
+noncomputable def correction (m n : Fin 2) (chi : Fin 2 → ℂ) (k : Fin 2) : ℂ :=
+  (-1 : ℂ) ^ ((m : ℕ) * (k : ℕ)) * chi (k + n)
 
-def correction (m₁ m₂ : Fin 2) (v : Qubit) : Qubit :=
-  pauliZ^[(m₁ : ℕ)] (pauliX^[(m₂ : ℕ)] v)
-
-/-- Bob's normalized state after correction (the residual has norm `1/2` of `‖ψ‖`). -/
+/-- Sanity check on the definitions: the four Bell states really do form an
+orthonormal basis of the two–qubit space, so the Bell measurement above is a
+genuine projective measurement. -/

@@ -1,4 +1,20 @@
+/-
+# Bcs Gap Binding
+Category: Frontier Physics
+Target: Frontier.bcs_gap_binding
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Bcs Gap Binding
+Category: Frontier Physics
+Target: Frontier.bcs_gap_binding
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,50 +39,45 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# BCS gap equation: existence of a nonzero gap for any attractive coupling
-
-At zero temperature, in the standard BCS model with a constant density of states and a
-Debye cut-off `ω > 0`, the gap equation reads
-
-  `1 = g * ∫_0^ω dξ / sqrt(ξ² + Δ²)`,
-
-where `g > 0` is the (attractive) dimensionless coupling `N(0)·V`.  The integral is
-computed in closed form as `arsinh (ω / Δ)`, and the equation therefore always has the
-strictly positive solution `Δ = ω / sinh (1 / g)` — the Cooper instability: *any*
-attractive coupling, no matter how weak, binds a nonzero gap.
--/
-
 namespace Frontier
 
-/-- The BCS gap functional: `∫_0^ω dξ / sqrt(ξ² + Δ²)` (constant density of states,
-zero temperature, Debye cut-off `ω`). -/
+/-- The right-hand side of the (zero-temperature, constant density of states) BCS gap
+equation: the pairing integral
 
-theorem bcsGapIntegral_eq_arsinh (ω Δ : ℝ) (hΔ : 0 < Δ) :
-    bcsGapIntegral ω Δ = Real.arsinh (ω / Δ) := by
-  have hcont : Continuous fun ξ : ℝ => (Real.sqrt (ξ ^ 2 + Δ ^ 2))⁻¹ := by
-    apply Continuous.inv₀
-    · fun_prop
-    · intro x
-      have : 0 < x ^ 2 + Δ ^ 2 := by positivity
-      positivity
-  have hderiv : ∀ ξ ∈ Set.uIcc (0 : ℝ) ω,
-      HasDerivAt (fun t : ℝ => Real.arsinh (t / Δ)) (Real.sqrt (ξ ^ 2 + Δ ^ 2))⁻¹ ξ := by
+  `∫_0^ω dξ / √(ξ² + Δ²)`
+
+over the energy shell `[0, ω]` around the Fermi surface, for a gap parameter `Δ`. -/
+
+theorem bcsGapIntegral_eq_arsinh (Δ ω : ℝ) (hΔ : 0 < Δ) :
+    bcsGapIntegral Δ ω = Real.arsinh (ω / Δ) := by
+  have hderiv : ∀ ξ ∈ Set.uIcc (0:ℝ) ω,
+      HasDerivAt (fun t : ℝ => Real.arsinh (t / Δ)) (1 / Real.sqrt (ξ ^ 2 + Δ ^ 2)) ξ := by
     intro ξ _
     have h1 : HasDerivAt (fun t : ℝ => t / Δ) (1 / Δ) ξ := by
       simpa using (hasDerivAt_id ξ).div_const Δ
     have h2 := (Real.hasDerivAt_arsinh (ξ / Δ)).comp ξ h1
+    rw [one_div]
     convert h2 using 1
-    have he : 1 + (ξ / Δ) ^ 2 = (ξ ^ 2 + Δ ^ 2) / Δ ^ 2 := by field_simp; ring
-    have hs : Real.sqrt (1 + (ξ / Δ) ^ 2) = Real.sqrt (ξ ^ 2 + Δ ^ 2) / Δ := by
-      rw [he, Real.sqrt_div (by positivity), Real.sqrt_sq hΔ.le]
-    rw [hs]
-    have hpos : 0 < Real.sqrt (ξ ^ 2 + Δ ^ 2) := Real.sqrt_pos.mpr (by positivity)
-    field_simp
-  rw [bcsGapIntegral,
-    intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv (hcont.intervalIntegrable 0 ω)]
+    have key : (1 + (ξ / Δ) ^ 2) * Δ ^ 2 = ξ ^ 2 + Δ ^ 2 := by field_simp; ring
+    have hs : Real.sqrt (ξ ^ 2 + Δ ^ 2) = Real.sqrt (1 + (ξ / Δ) ^ 2) * Δ := by
+      rw [← key, Real.sqrt_mul (by positivity), Real.sqrt_sq hΔ.le]
+    have hp : (0:ℝ) < Real.sqrt (1 + (ξ / Δ) ^ 2) := Real.sqrt_pos.2 (by positivity)
+    rw [hs]; field_simp
+  have hint : IntervalIntegrable (fun ξ : ℝ => 1 / Real.sqrt (ξ ^ 2 + Δ ^ 2))
+      MeasureTheory.volume 0 ω := by
+    apply Continuous.intervalIntegrable
+    apply Continuous.div continuous_const
+    · exact Real.continuous_sqrt.comp (by continuity)
+    · intro ξ; exact ne_of_gt (Real.sqrt_pos.2 (by positivity))
+  rw [bcsGapIntegral, intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv hint]
   simp
 
-/-- **Cooper pairing / BCS gap binding.**  For every attractive coupling `g > 0` and every
-Debye cut-off `ω > 0`, the BCS gap equation `g * ∫_0^ω dξ / sqrt(ξ² + Δ²) = 1` has a
-solution with a strictly positive (in particular nonzero) gap `Δ`. -/
+/-- **Cooper pairing / BCS gap binding.**
+
+For any attractive coupling strength `g > 0` and any positive Debye cutoff `ω`, the BCS gap
+equation
+
+  `g * ∫_0^ω dξ / √(ξ² + Δ²) = 1`
+
+admits a *nonzero* (indeed strictly positive) solution `Δ`, given explicitly by the familiar
+BCS form `Δ = ω / sinh (1 / g)`.  Thus an arbitrarily weak attraction always binds a gap. -/

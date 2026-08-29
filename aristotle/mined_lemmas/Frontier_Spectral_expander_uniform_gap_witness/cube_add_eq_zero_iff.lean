@@ -1,13 +1,4 @@
-/-
-# Expander Uniform Gap Witness
-Category: Frontier — Spectral Geometry
-Target: Frontier.Spectral.expander_uniform_gap_witness
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Expander Uniform Gap Witness
 Category: Frontier — Spectral Geometry
@@ -41,25 +32,17 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Finset Matrix
+/-- The vertex set of the `k`-dimensional hypercube: bit strings of length `k`
+(there are `2 ^ k` of them). -/
+abbrev Cube (k : ℕ) : Type := Fin k → ZMod 2
 
-/-- The vertex set of the `k`-dimensional hypercube: bit strings of length `k`. -/
-abbrev Cube (k : ℕ) := Fin k → ZMod 2
 
-/-- The hypercube `Q_k` has `2 ^ k` vertices. -/
-
-lemma cube_add_eq_zero_iff {k : ℕ} (a b : Cube k) : a + b = 0 ↔ a = b := by
+theorem cube_add_eq_zero_iff {k : ℕ} (x y : Cube k) : x + y = 0 ↔ x = y := by
   constructor
   · intro h
-    funext j
-    have h2 := congrFun h j
-    simp only [Pi.add_apply, Pi.zero_apply] at h2
-    revert h2
-    generalize a j = p
-    generalize b j = q
-    revert p q
-    decide
+    have : x + y + y = 0 + y := by rw [h]
+    rwa [add_assoc, cube_add_self, add_zero, zero_add] at this
   · rintro rfl
-    funext j
-    simpa using CharTwo.add_self_eq_zero (a j)
+    exact cube_add_self x
 
+/-- The unit vector in direction `i`, i.e. the bit string that is `1` exactly at `i`. -/

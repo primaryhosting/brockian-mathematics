@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Gcd
 Category: Fibonacci
@@ -6,18 +7,6 @@ Target: Fibonacci.gcd
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Fibonacci
-
-/-- The Fibonacci gcd identity: `Nat.fib (gcd m n) = gcd (Nat.fib m) (Nat.fib n)`. -/
-theorem gcd (m n : ℕ) : Nat.fib (Nat.gcd m n) = Nat.gcd (Nat.fib m) (Nat.fib n) :=
-  Nat.fib_gcd m n
-
-end Fibonacci
-
-#print axioms Fibonacci.gcd
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,12 +22,11 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace Fibonacci
 
-set_option grind.warning false
+/-- For all naturals `m n`, `fib (gcd m n) = gcd (fib m) (fib n)`. -/
+theorem gcd (m n : ℕ) : Nat.fib (Nat.gcd m n) = Nat.gcd (Nat.fib m) (Nat.fib n) :=
+  Nat.fib_gcd m n
+
+end Fibonacci
 

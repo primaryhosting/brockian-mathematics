@@ -1,66 +1,47 @@
 import Mathlib
+import RequestProject.Main
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Mergesort on a linear order
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+A Mathlib-facing corollary of `CS.mergesort_correct`: on any linear order,
+`CS.mergeSort (· ≤ ·)` produces a `List.Sorted (· ≤ ·)` permutation of its input.
+-/
 
 namespace CS
 
-variable {α : Type*}
+/-- On a linear order, `mergeSort (· ≤ ·) l` is sorted and a permutation of `l`. -/
 
-/-- Merge two lists with respect to a boolean comparison `le`. -/
+theorem merge_pairwise (r : α → α → Prop) [DecidableRel r]
+    (htotal : ∀ a b : α, r a b ∨ r b a) (htrans : ∀ a b c : α, r a b → r b c → r a c) :
+    ∀ xs ys : List α, List.Pairwise r xs → List.Pairwise r ys →
+      List.Pairwise r (merge r xs ys)
+  | [], ys, _, hy => by rw [merge]; exact hy
+  | x :: xs, [], hx, _ => by
+      rw [merge]
+      · exact hx
+      · simp
+  | x :: xs, y :: ys, hx, hy => by
+      rw [List.pairwise_cons] at hx hy
+      by_cases h : r x y
+      · rw [merge, if_pos h, List.pairwise_cons]
+        refine ⟨?_, merge_pairwise r htotal htrans xs (y :: ys) hx.2
+          (List.pairwise_cons.mpr hy)⟩
+        intro b hb
+        rcases mem_merge.mp hb with hb | hb
+        · exact hx.1 b hb
+        · rcases List.mem_cons.mp hb with rfl | hb
+          · exact h
+          · exact htrans x y b h (hy.1 b hb)
+      · rw [merge, if_neg h, List.pairwise_cons]
+        refine ⟨?_, merge_pairwise r htotal htrans (x :: xs) ys
+          (List.pairwise_cons.mpr hx) hy.2⟩
+        have hyx : r y x := (htotal x y).resolve_left h
+        intro b hb
+        rcases mem_merge.mp hb with hb | hb
+        · rcases List.mem_cons.mp hb with rfl | hb
+          · exact hyx
+          · exact htrans y x b hyx (hx.1 b hb)
+        · exact hy.1 b hb
+termination_by xs ys => xs.length + ys.length
 
-theorem merge_pairwise (le : α → α → Bool)
-    (trans : ∀ a b c, le a b → le b c → le a c)
-    (total : ∀ a b, le a b ∨ le b a) (xs ys : List α)
-    (hx : xs.Pairwise (fun a b => le a b = true))
-    (hy : ys.Pairwise (fun a b => le a b = true)) :
-    (merge le xs ys).Pairwise (fun a b => le a b = true) := by
-  induction xs, ys using CS.merge.induct (le := le) with
-  | case1 ys => simpa [merge] using hy
-  | case2 xs h => simpa [merge] using hx
-  | case3 x xs y ys h ih =>
-      rw [List.pairwise_cons] at hx
-      rw [merge]; simp only [h, if_true, List.pairwise_cons]
-      refine ⟨?_, ih hx.2 hy⟩
-      intro a ha
-      rcases mem_merge.1 ha with ha | ha
-      · exact hx.1 a ha
-      · rcases List.mem_cons.1 ha with rfl | ha
-        · exact h
-        · exact trans _ _ _ h ((List.pairwise_cons.1 hy).1 a ha)
-  | case4 x xs y ys h ih =>
-      have hyx : le y x = true := by
-        rcases total x y with h' | h'
-        · exact absurd h' h
-        · exact h'
-      rw [List.pairwise_cons] at hy
-      rw [merge]; simp only [h, if_false, Bool.false_eq_true, List.pairwise_cons]
-      refine ⟨?_, ih hx hy.2⟩
-      intro a ha
-      rcases mem_merge.1 ha with ha | ha
-      · rcases List.mem_cons.1 ha with rfl | ha
-        · exact hyx
-        · exact trans _ _ _ hyx ((List.pairwise_cons.1 hx).1 a ha)
-      · exact hy.1 a ha
-
-/-- `msort` returns a permutation of its input. -/

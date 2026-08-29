@@ -23,13 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Sixth Unitary Perfect Exists
-Category: Brockian Conjecture
-Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -38,32 +31,36 @@ Category: Brockian Conjecture
 Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(The header above is repeated here as a module docstring: Lean requires all
-`import` statements to precede any module documentation comment.)
-
-## Contents
-
-A *unitary divisor* of `n` is a divisor `d` with `gcd (d, n/d) = 1`, and `n` is
-*unitary perfect* when the sum `σ*(n)` of its unitary divisors equals `2 * n`.
-Only five unitary perfect numbers are known, and whether a sixth exists is open.
-
-This file develops the basic theory (`σ*` is multiplicative, its value on prime
-powers, and hence the product formula `σ*(n) = ∏_{p^a ‖ n} (p^a + 1)`), verifies
-the five classically known unitary perfect numbers, proves the partial result
-that no odd number is unitary perfect, and finally states and proves the
-conditional reduction `SixthUnitaryPerfectExists`: as soon as there is *one*
-unitary perfect number outside the known list of five, there are at least six
-unitary perfect numbers.
 -/
 
-namespace Brockian.UnitaryPerfect
+/-!
+## Overview
+
+A *unitary divisor* of `n` is a divisor `d` with `gcd d (n / d) = 1`, and `n` is *unitary
+perfect* when the sum `σ*(n)` of its unitary divisors equals `2 * n`.  Exactly five unitary
+perfect numbers are known:
+
+`6`, `60`, `90`, `87360`, `146361946186458562560000`,
+
+and whether a sixth one exists is an open problem.  This file develops the basic theory
+(`σ*` is multiplicative, `σ*(p^a) = 1 + p^a`, the factorization formula), verifies the five
+known examples, proves that every unitary perfect number is even, and reduces the existence
+of a sixth unitary perfect number to an explicit arithmetic criterion on the odd part.
+-/
 
 open Finset
 
-/-- The unitary divisors of `n`: the divisors `d` of `n` with `gcd (d, n / d) = 1`. -/
+namespace Brockian.UnitaryPerfect
 
-theorem usigma_sixty : usigma 60 = 120 :=
-  usigma_step (p := 2) (k := 2) (m := 15) (by norm_num) two_ne_zero (by norm_num)
-    usigma_fifteen (by norm_num) (by norm_num)
+/-- The unitary divisors of `n`: divisors `d` of `n` with `gcd d (n / d) = 1`. -/
+
+theorem usigma_sixty : usigma 60 = 120 := by
+  have h5 : usigma 15 = 24 := by
+    rw [show (15 : ℕ) = 3 * 5 by norm_num,
+      usigma_prime_mul (p := 3) (by norm_num) (by norm_num) (by norm_num),
+      usigma_prime (p := 5) (by norm_num)]
+  rw [show (60 : ℕ) = 2 ^ 2 * 15 by norm_num,
+    usigma_prime_pow_mul (p := 2) (k := 2) (by norm_num) (by norm_num) (by norm_num)
+      (by norm_num), h5]
+  norm_num
 

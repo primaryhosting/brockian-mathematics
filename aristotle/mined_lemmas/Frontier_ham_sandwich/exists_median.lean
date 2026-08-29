@@ -1,4 +1,20 @@
+/-
+# Ham Sandwich
+Category: Frontier Physics
+Target: Frontier.ham_sandwich
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Ham Sandwich
+Category: Frontier Physics
+Target: Frontier.ham_sandwich
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,159 +39,151 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# The Ham–Sandwich theorem
-
-The Ham–Sandwich theorem states that any `n` finite measures on `ℝⁿ` can be simultaneously
-bisected by a single affine hyperplane.  Here a hyperplane is described by a nonzero normal
-vector `v` and a level `c`, and "bisecting" a measure `μ` means that each of the two closed
-half-spaces `{x | ⟪v, x⟫ ≤ c}` and `{x | c ≤ ⟪v, x⟫}` carries at least half of the total mass
-of `μ`.
-
-The general statement is recorded as `Frontier.HamSandwich n`.  The full theorem for arbitrary
-`n` rests on the Borsuk–Ulam theorem, which is not available in Mathlib.  We prove here the base
-case `n = 1` (`Frontier.ham_sandwich`), together with a genuinely more general statement
-(`Frontier.bisect_one_measure`): a *single* finite measure on `ℝⁿ` can be bisected by a
-hyperplane with any prescribed normal direction.  Both rest on the existence of a median of a
-real random variable (`Frontier.exists_median`).
--/
-
 namespace Frontier
 
 open MeasureTheory Filter Set Topology
+open scoped ENNReal
 
-/-- A hyperplane with normal vector `v` and level `c` bisects the measure `μ` if each of the two
-closed half-spaces it bounds carries at least half of the total mass of `μ`. -/
+/-!
+## Step 1: existence of a median for a finite measure on `ℝ`
 
-theorem exists_median {α : Type*} [MeasurableSpace α] (μ : Measure α) [IsFiniteMeasure μ]
-    {f : α → ℝ} (hf : Measurable f) :
-    ∃ c : ℝ, μ Set.univ ≤ 2 * μ {x | f x ≤ c} ∧ μ Set.univ ≤ 2 * μ {x | c ≤ f x} := by
-  have hmeas : ∀ t : ℝ, MeasurableSet {x | f x ≤ t} := fun t => hf measurableSet_Iic
-  have hmeas2 : ∀ t : ℝ, MeasurableSet {x | t < f x} := fun t => hf measurableSet_Ioi
-  have hmono' : ∀ {s t : ℝ}, s ≤ t → μ {x | f x ≤ s} ≤ μ {x | f x ≤ t} :=
-    fun hst => measure_mono fun x hx => le_trans hx hst
-  have hrecip : ∀ a b : ℕ, a ≤ b → (1:ℝ)/((b:ℝ)+1) ≤ 1/((a:ℝ)+1) := by
-    intro a b hab
-    have hab' : (a:ℝ) ≤ (b:ℝ) := by exact_mod_cast hab
-    apply one_div_le_one_div_of_le (by positivity)
-    linarith
-  rcases eq_or_ne (μ Set.univ) 0 with h0 | h0
-  · exact ⟨0, by simp [h0], by simp [h0]⟩
-  have hhalf : μ Set.univ / 2 < μ Set.univ := ENNReal.half_lt_self h0 (measure_ne_top μ _)
-  have htwo : 2 * (μ Set.univ / 2) = μ Set.univ := by
-    rw [ENNReal.mul_div_cancel'] <;> simp
-  set S : Set ℝ := {t : ℝ | μ Set.univ ≤ 2 * μ {x | f x ≤ t}} with hSdef
-  -- `S` is nonempty, since `μ {f ≤ k} → μ univ` as `k → ∞`.
-  have hup : Tendsto (fun k : ℕ => μ {x | f x ≤ (k:ℝ)}) atTop (𝓝 (μ Set.univ)) := by
-    have hmono : Monotone (fun k : ℕ => {x | f x ≤ (k:ℝ)}) := by
-      intro a b hab x hx
-      simp only [Set.mem_setOf_eq] at hx ⊢
-      exact hx.trans (by exact_mod_cast Nat.cast_le.2 hab)
-    have h := tendsto_measure_iUnion_atTop (μ := μ) hmono
-    have he : (⋃ k : ℕ, {x | f x ≤ (k:ℝ)}) = Set.univ := by
-      ext x; simpa using exists_nat_ge (f x)
+A *median* of a finite measure `ν` on `ℝ` is a point `c` such that both closed half-lines
+`Iic c` and `Ici c` carry at least half of the total mass.  This is the one-dimensional
+form of "bisection by a hyperplane"; it is obtained by taking `c` to be the infimum of the
+set of points where the cumulative distribution function has reached half of the total mass.
+-/
+
+/-- **Existence of a median.**  Every finite measure `ν` on `ℝ` admits a point `c` such that
+each of the two closed half-lines determined by `c` carries at least half of the total mass. -/
+
+theorem exists_median (ν : Measure ℝ) [IsFiniteMeasure ν] :
+    ∃ c : ℝ, ν Set.univ ≤ 2 * ν (Set.Iic c) ∧ ν Set.univ ≤ 2 * ν (Set.Ici c) := by
+  by_cases hm0 : ν Set.univ = 0
+  · exact ⟨0, by simp [hm0], by simp [hm0]⟩
+  have h2top : (2 : ℝ≥0∞) ≠ ⊤ := by norm_num
+  have hmtop : ν Set.univ ≠ ⊤ := measure_ne_top ν _
+  have hmono : Monotone (fun c : ℝ => Set.Iic c) := fun a b h => Set.Iic_subset_Iic.2 h
+  -- the cumulative mass tends to the total mass at `+∞` and to `0` at `-∞`
+  have htop : Tendsto (fun c : ℝ => ν (Set.Iic c)) atTop (𝓝 (ν Set.univ)) := by
+    have h := tendsto_measure_iUnion_atTop (μ := ν) hmono
+    have he : (⋃ c : ℝ, Set.Iic c) = Set.univ := by ext x; simp
     rw [he] at h
     exact h
+  have hbot : Tendsto (fun c : ℝ => ν (Set.Iic c)) atBot (𝓝 0) := by
+    have h := tendsto_measure_iInter_atBot (μ := ν)
+      (fun _ : ℝ => measurableSet_Iic.nullMeasurableSet) hmono ⟨0, measure_ne_top _ _⟩
+    have he : (⋂ c : ℝ, Set.Iic c) = (∅ : Set ℝ) := by
+      ext x
+      simp only [mem_iInter, mem_Iic, mem_empty_iff_false, iff_false, not_forall, not_le]
+      exact ⟨x - 1, by linarith⟩
+    rw [he, measure_empty] at h
+    exact h
+  -- the set of points where at least half of the mass has accumulated
+  set S := {c : ℝ | ν Set.univ ≤ 2 * ν (Set.Iic c)} with hS
+  have hmemS : ∀ c : ℝ, c ∈ S ↔ ν Set.univ ≤ 2 * ν (Set.Iic c) := fun _ => Iff.rfl
+  have hSup : ∀ a ∈ S, ∀ b : ℝ, a ≤ b → b ∈ S := by
+    intro a ha b hab
+    rw [hmemS] at ha ⊢
+    refine ha.trans ?_
+    gcongr
   have hSne : S.Nonempty := by
-    obtain ⟨k, hk⟩ := (hup.eventually_const_lt hhalf).exists
-    refine ⟨(k:ℝ), ?_⟩
-    calc μ Set.univ = 2 * (μ Set.univ / 2) := htwo.symm
-      _ ≤ 2 * μ {x | f x ≤ (k:ℝ)} := by gcongr
-  -- `S` is bounded below, since `μ {f ≤ -k} → 0` as `k → ∞`.
-  have hdown : Tendsto (fun k : ℕ => μ {x | f x ≤ -(k:ℝ)}) atTop (𝓝 0) := by
-    have hanti : Antitone (fun k : ℕ => {x | f x ≤ -(k:ℝ)}) := by
-      intro a b hab x hx
-      simp only [Set.mem_setOf_eq] at hx ⊢
-      refine hx.trans ?_
-      simp only [neg_le_neg_iff]
-      exact_mod_cast Nat.cast_le.2 hab
-    have h := tendsto_measure_iInter_atTop (μ := μ)
-      (fun k => (hmeas _).nullMeasurableSet) hanti ⟨0, measure_ne_top μ _⟩
-    have he : (⋂ k : ℕ, {x | f x ≤ -(k:ℝ)}) = (∅ : Set α) := by
-      ext x
-      simp only [Set.mem_iInter, Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false, not_forall]
-      obtain ⟨k, hk⟩ := exists_nat_ge (-f x)
-      exact ⟨k + 1, by push_cast; nlinarith [Nat.cast_nonneg (α := ℝ) k]⟩
-    rw [he] at h
-    simpa using h
-  have hbdd : BddBelow S := by
-    obtain ⟨k, hk⟩ := (hdown.eventually_lt_const (ENNReal.half_pos h0)).exists
-    refine ⟨-(k:ℝ), fun t ht => ?_⟩
-    by_contra hlt
-    push_neg at hlt
-    have h1 : 2 * μ {x | f x ≤ t} ≤ 2 * μ {x | f x ≤ -(k:ℝ)} := by gcongr
-    have h2 : 2 * μ {x | f x ≤ -(k:ℝ)} < μ Set.univ := ENNReal.mul_lt_of_lt_div' hk
-    exact absurd (ht.trans_lt (h1.trans_lt h2)) (lt_irrefl _)
-  -- The median is the infimum of `S`.
-  set c := sInf S with hc
-  refine ⟨c, ?_, ?_⟩
-  · have key : ∀ k : ℕ, μ Set.univ ≤ 2 * μ {x | f x ≤ c + 1/((k:ℝ)+1)} := by
-      intro k
-      obtain ⟨a, haS, ha⟩ := Real.lt_sInf_add_pos hSne (ε := 1/((k:ℝ)+1)) (by positivity)
-      rw [hSdef] at haS
-      exact haS.trans (by gcongr)
-    have hanti : Antitone (fun k : ℕ => {x | f x ≤ c + 1/((k:ℝ)+1)}) := by
-      intro a b hab x hx
-      simp only [Set.mem_setOf_eq] at hx ⊢
-      have := hrecip a b hab
+    have hlt : ν Set.univ < 2 * ν Set.univ := by
+      rw [two_mul]
+      exact ENNReal.lt_add_right hmtop hm0
+    have h2 : Tendsto (fun c : ℝ => 2 * ν (Set.Iic c)) atTop (𝓝 (2 * ν Set.univ)) :=
+      ENNReal.Tendsto.const_mul htop (Or.inr h2top)
+    obtain ⟨c, hc⟩ := (h2.eventually_const_lt hlt).exists
+    exact ⟨c, hc.le⟩
+  have hSbdd : BddBelow S := by
+    have hlt : (0 : ℝ≥0∞) < ν Set.univ := pos_iff_ne_zero.2 hm0
+    have h2 : Tendsto (fun c : ℝ => 2 * ν (Set.Iic c)) atBot (𝓝 0) := by
+      simpa using ENNReal.Tendsto.const_mul hbot (Or.inr h2top)
+    obtain ⟨b, hb⟩ := eventually_atBot.1 (h2.eventually_lt_const hlt)
+    refine ⟨b, fun c hc => ?_⟩
+    by_contra hcb
+    push_neg at hcb
+    exact absurd ((hmemS c).1 hc) (not_le.2 (hb c hcb.le))
+  -- the candidate median
+  refine ⟨sInf S, ?_, ?_⟩
+  · -- right continuity of the cumulative mass at `sInf S`
+    have hanti : Antitone (fun k : ℕ => Set.Iic (sInf S + 1 / ((k : ℝ) + 1))) := by
+      intro a b hab
+      refine Set.Iic_subset_Iic.2 ?_
+      have hab' : (a : ℝ) ≤ (b : ℝ) := by exact_mod_cast hab
+      have : (1 : ℝ) / ((b : ℝ) + 1) ≤ 1 / ((a : ℝ) + 1) := by
+        apply one_div_le_one_div_of_le
+        · positivity
+        · linarith
       linarith
-    have he : (⋂ k : ℕ, {x | f x ≤ c + 1/((k:ℝ)+1)}) = {x | f x ≤ c} := by
+    have hIic : Set.Iic (sInf S) = ⋂ k : ℕ, Set.Iic (sInf S + 1 / ((k : ℝ) + 1)) := by
       ext x
-      simp only [Set.mem_iInter, Set.mem_setOf_eq]
+      simp only [mem_Iic, mem_iInter]
       constructor
-      · intro h
-        refine le_of_forall_pos_le_add fun ε hε => ?_
-        obtain ⟨k, hk⟩ := exists_nat_one_div_lt hε
-        exact (h k).trans (by linarith)
-      · intro h k
-        have : (0:ℝ) < 1/((k:ℝ)+1) := by positivity
+      · intro hx k
+        have : (0 : ℝ) < 1 / ((k : ℝ) + 1) := by positivity
         linarith
-    have hA := tendsto_measure_iInter_atTop (μ := μ)
-      (fun k : ℕ => (hmeas (c + 1/((k:ℝ)+1))).nullMeasurableSet) hanti ⟨0, measure_ne_top μ _⟩
-    rw [he] at hA
-    exact ge_of_tendsto (ENNReal.Tendsto.const_mul (a := 2) hA (Or.inr (by norm_num)))
-      (Eventually.of_forall key)
-  · have key : ∀ k : ℕ, μ Set.univ ≤ 2 * μ {x | c - 1/((k:ℝ)+1) < f x} := by
-      intro k
-      set t := c - 1/((k:ℝ)+1) with ht
-      have hpos : (0:ℝ) < 1/((k:ℝ)+1) := by positivity
-      have htc : t < c := by rw [ht]; linarith
-      have htS : t ∉ S := fun h => absurd (csInf_le hbdd h) (not_le.2 htc)
-      rw [hSdef] at htS
-      simp only [Set.mem_setOf_eq, not_le] at htS
-      have hcompl : {x | f x ≤ t}ᶜ = {x | t < f x} := by ext x; simp [not_le]
-      have hsum : μ {x | f x ≤ t} + μ {x | t < f x} = μ Set.univ := by
-        rw [← hcompl]
-        exact measure_add_measure_compl (hmeas t)
-      have hab : μ {x | f x ≤ t} < μ {x | t < f x} := by
-        have h2 : μ {x | f x ≤ t} + μ {x | f x ≤ t} < μ {x | f x ≤ t} + μ {x | t < f x} := by
-          rw [hsum, ← two_mul]; exact htS
-        exact (ENNReal.add_lt_add_iff_left (measure_ne_top μ _)).1 h2
-      calc μ Set.univ = μ {x | f x ≤ t} + μ {x | t < f x} := hsum.symm
-        _ ≤ μ {x | t < f x} + μ {x | t < f x} := by gcongr
-        _ = 2 * μ {x | t < f x} := by rw [two_mul]
-    have hanti : Antitone (fun k : ℕ => {x | c - 1/((k:ℝ)+1) < f x}) := by
-      intro a b hab x hx
-      simp only [Set.mem_setOf_eq] at hx ⊢
-      have := hrecip a b hab
+      · intro hx
+        by_contra hlt
+        push_neg at hlt
+        obtain ⟨k, hk⟩ := exists_nat_one_div_lt (show (0 : ℝ) < x - sInf S by linarith)
+        have h1 := hx k
+        linarith
+    have hlim := tendsto_measure_iInter_atTop (μ := ν)
+      (fun _ : ℕ => measurableSet_Iic.nullMeasurableSet) hanti ⟨0, measure_ne_top _ _⟩
+    rw [← hIic] at hlim
+    have h2 : Tendsto (fun k : ℕ => 2 * ν (Set.Iic (sInf S + 1 / ((k : ℝ) + 1)))) atTop
+        (𝓝 (2 * ν (Set.Iic (sInf S)))) := ENNReal.Tendsto.const_mul hlim (Or.inr h2top)
+    refine ge_of_tendsto h2 (Filter.Eventually.of_forall fun k => ?_)
+    obtain ⟨c, hcS, hc⟩ :=
+      Real.lt_sInf_add_pos hSne (show (0 : ℝ) < 1 / ((k : ℝ) + 1) by positivity)
+    exact (hmemS _).1 (hSup c hcS _ hc.le)
+  · -- everything strictly below `sInf S` carries at most half of the mass
+    have hmono' : Monotone (fun k : ℕ => Set.Iic (sInf S - 1 / ((k : ℝ) + 1))) := by
+      intro a b hab
+      refine Set.Iic_subset_Iic.2 ?_
+      have hab' : (a : ℝ) ≤ (b : ℝ) := by exact_mod_cast hab
+      have : (1 : ℝ) / ((b : ℝ) + 1) ≤ 1 / ((a : ℝ) + 1) := by
+        apply one_div_le_one_div_of_le
+        · positivity
+        · linarith
       linarith
-    have he : (⋂ k : ℕ, {x | c - 1/((k:ℝ)+1) < f x}) = {x | c ≤ f x} := by
+    have hIio : Set.Iio (sInf S) = ⋃ k : ℕ, Set.Iic (sInf S - 1 / ((k : ℝ) + 1)) := by
       ext x
-      simp only [Set.mem_iInter, Set.mem_setOf_eq]
+      simp only [mem_Iio, mem_iUnion, mem_Iic]
       constructor
-      · intro h
-        refine le_of_forall_pos_le_add fun ε hε => ?_
-        obtain ⟨k, hk⟩ := exists_nat_one_div_lt hε
-        have := h k
+      · intro hx
+        obtain ⟨k, hk⟩ := exists_nat_one_div_lt (show (0 : ℝ) < sInf S - x by linarith)
+        exact ⟨k, by linarith⟩
+      · rintro ⟨k, hk⟩
+        have : (0 : ℝ) < 1 / ((k : ℝ) + 1) := by positivity
         linarith
-      · intro h k
-        have : (0:ℝ) < 1/((k:ℝ)+1) := by positivity
+    have hlim := tendsto_measure_iUnion_atTop (μ := ν) hmono'
+    rw [← hIio] at hlim
+    have h2 : Tendsto (fun k : ℕ => 2 * ν (Set.Iic (sInf S - 1 / ((k : ℝ) + 1)))) atTop
+        (𝓝 (2 * ν (Set.Iio (sInf S)))) := ENNReal.Tendsto.const_mul hlim (Or.inr h2top)
+    have hkey : 2 * ν (Set.Iio (sInf S)) ≤ ν Set.univ := by
+      refine le_of_tendsto h2 (Filter.Eventually.of_forall fun k => ?_)
+      have hlt : sInf S - 1 / ((k : ℝ) + 1) < sInf S := by
+        have : (0 : ℝ) < 1 / ((k : ℝ) + 1) := by positivity
         linarith
-    have hA := tendsto_measure_iInter_atTop (μ := μ)
-      (fun k : ℕ => (hmeas2 (c - 1/((k:ℝ)+1))).nullMeasurableSet) hanti ⟨0, measure_ne_top μ _⟩
-    rw [he] at hA
-    exact ge_of_tendsto (ENNReal.Tendsto.const_mul (a := 2) hA (Or.inr (by norm_num)))
-      (Eventually.of_forall key)
+      have hnot := notMem_of_lt_csInf hlt hSbdd
+      rw [hmemS] at hnot
+      exact (not_le.1 hnot).le
+    have hsplit : ν (Set.Iio (sInf S)) + ν (Set.Ici (sInf S)) = ν Set.univ := by
+      rw [← measure_add_measure_compl (measurableSet_Iio (a := sInf S))]
+      simp
+    have hfin : ν (Set.Iio (sInf S)) ≠ ⊤ := measure_ne_top _ _
+    have hle : ν (Set.Iio (sInf S)) ≤ ν (Set.Ici (sInf S)) := by
+      rw [← hsplit, two_mul] at hkey
+      exact (ENNReal.add_le_add_iff_left hfin).1 hkey
+    calc ν Set.univ = ν (Set.Iio (sInf S)) + ν (Set.Ici (sInf S)) := hsplit.symm
+      _ ≤ ν (Set.Ici (sInf S)) + ν (Set.Ici (sInf S)) := by gcongr
+      _ = 2 * ν (Set.Ici (sInf S)) := (two_mul _).symm
 
-/-- A single finite measure on `ℝⁿ` can be bisected by a hyperplane with any prescribed nonzero
-normal vector. -/
+/-!
+## Step 2: bisection of a single finite measure on `ℝⁿ` by a hyperplane
+-/
+
+/-- **Bisection of one measure.**  For every `n ≥ 1` and every finite measure `μ` on `ℝⁿ`
+there is an affine hyperplane `{x | ⟪v, x⟫ = c}` (with `v ≠ 0`) such that each of the two
+closed half-spaces it bounds carries at least half of the total mass of `μ`. -/

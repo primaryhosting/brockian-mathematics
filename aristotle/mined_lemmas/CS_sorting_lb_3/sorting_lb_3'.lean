@@ -1,5 +1,38 @@
 import Mathlib
 
+/-!
+# Sorting Lb 3
+Category: Computer Science
+Target: CS.sorting_lb_3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace CS
+
+/-- A comparison-based sorting algorithm for `3` elements, presented as a (binary)
+decision tree.  An internal node `node i j l r` asks the comparison "is the `i`-th
+input element smaller than the `j`-th one?" and branches accordingly; a leaf
+`leaf p` outputs the permutation `p`. -/
+inductive DTree : Type
+  | leaf : Equiv.Perm (Fin 3) → DTree
+  | node : Fin 3 → Fin 3 → DTree → DTree → DTree
+  deriving Inhabited
+
+namespace DTree
+
+/-- Running the decision tree on the input whose ranking is the permutation `σ`
+(i.e. the `i`-th input element has rank `σ i`): each comparison `i` vs `j`
+is answered by the truth value of `σ i < σ j`. -/
+
+theorem sorting_lb_3' (t : DTree) (ht : Sorts t) : 3 ≤ t.depth := by
+  have := sorting_lb_3 t ht
+  rwa [clog_two_factorial_three] at this
+
+end CS
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,39 +56,3 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace CS
-
-/-! # Information-theoretic lower bound for comparison sorting of 3 elements
-
-We model a comparison-based sorting algorithm on `n` elements as a binary decision tree.
-An internal node is a comparison query of two input positions `(i, j)`, whose two subtrees
-are followed according to the (boolean) answer; a leaf is labelled with the answer the
-algorithm outputs (the permutation that sorts the input).
-
-The worst-case number of comparisons performed by the algorithm is the depth of the tree.
-
-For `n = 3` we prove that any correct comparison sort has depth at least
-`⌈log₂ (3!)⌉ = Nat.clog 2 (3!) = 3`.
--/
-
-/-- A comparison decision tree on `n` positions with answers in `α`:
-either a leaf carrying an output, or a comparison of two positions with the
-two continuation subtrees. -/
-inductive DTree (n : ℕ) (α : Type*) where
-  | leaf : α → DTree n α
-  | node : Fin n → Fin n → DTree n α → DTree n α → DTree n α
-  deriving Inhabited
-
-namespace DTree
-
-variable {n : ℕ} {α : Type*}
-
-/-- The depth of a decision tree: the worst-case number of comparisons it performs. -/
-
-theorem sorting_lb_3' (t : DTree 3 (Equiv.Perm (Fin 3))) (ht : IsSort t) : 3 ≤ t.depth := by
-  have := sorting_lb_3 t ht
-  rwa [clog_two_factorial_three] at this
-
-/-- An explicit comparison sort of 3 elements using at most 3 comparisons: it first compares
-positions `0` and `1`, and then resolves the remaining ambiguity with at most two further
-comparisons. -/

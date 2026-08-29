@@ -1,4 +1,4 @@
-/-
+/-!
 # Chinese Remainder
 Category: Pure Mathematics
 Target: Math.chinese_remainder
@@ -8,33 +8,24 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Chinese Remainder
-Category: Pure Mathematics
-Target: Math.chinese_remainder
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open scoped Function -- for the `on` notation
+open scoped Function -- for the scoped `on` notation
 
 namespace Math
 
-/-- **Chinese Remainder Theorem.**  For a finite family of pairwise coprime moduli `a i`,
-the ring `ZMod (∏ i, a i)` is isomorphic to the product ring `Π i, ZMod (a i)`.
+/-- Each modulus of a finite family divides the product of the family. -/
 
-This is `ZMod.prodEquivPi` from Mathlib (`Mathlib/Data/ZMod/QuotientRing.lean`). -/
-
-theorem chinese_remainder_bijective {ι : Type*} [Fintype ι] (a : ι → ℕ)
-    (coprime : Pairwise (Nat.Coprime on a)) :
-    Function.Bijective (fun (x : ZMod (∏ i, a i)) (i : ι) =>
-      ZMod.castHom (dvd_prod a i) (ZMod (a i)) x) := by
-  have : (fun (x : ZMod (∏ i, a i)) (i : ι) =>
-      ZMod.castHom (dvd_prod a i) (ZMod (a i)) x) = chinese_remainder a coprime := by
+theorem chinese_remainder_bijective {ι : Type*} [Fintype ι] (n : ι → ℕ)
+    (hcop : Pairwise (Nat.Coprime on n)) :
+    Function.Bijective
+      (fun (x : ZMod (∏ i, n i)) (i : ι) =>
+        ZMod.castHom (dvd_prod_of_family n i) (ZMod (n i)) x) := by
+  obtain ⟨e, he⟩ := chinese_remainder n hcop
+  have : (fun (x : ZMod (∏ i, n i)) (i : ι) =>
+      ZMod.castHom (dvd_prod_of_family n i) (ZMod (n i)) x) = e := by
     funext x i
-    exact (chinese_remainder_apply a coprime x i).symm
+    exact (he x i).symm
   rw [this]
-  exact (chinese_remainder a coprime).bijective
+  exact e.bijective
 
 end Math
 

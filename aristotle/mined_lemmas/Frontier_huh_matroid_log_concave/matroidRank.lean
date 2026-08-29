@@ -1,24 +1,46 @@
-import RequestProject.Main
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
 
 /-!
-# Log-concavity of the characteristic polynomial of a uniform matroid
-
-This file constructs the uniform matroid `U_{r,E}` on a finite ground set `E` and proves that
-the coefficients of its characteristic polynomial form a log-concave sequence, i.e. the
-Adiprasito–Huh–Katz theorem for uniform matroids.
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open Polynomial Finset
 
 namespace Frontier
 
-open Finset Polynomial
+/-- The rank of a finite set `S` in a matroid `M`, as a natural number. -/
 
-variable {α : Type*}
+noncomputable def matroidRank {α : Type*} (M : Matroid α) (S : Finset α) : ℕ :=
+  (M.eRk (S : Set α)).toNat
 
-/-- The uniform matroid `U_{r,E}`: the independent sets are the subsets of `E` of size at most
-`r`. -/
-
-noncomputable def matroidRank (M : Matroid α) (X : Set α) : ℕ := (M.eRk X).toNat
-
-/-- The characteristic polynomial of a matroid `M` with finite ground set `E`, defined by the
-Whitney rank-generating formula
-`χ_M(t) = ∑_{S ⊆ E} (-1)^{|S|} t^{r(E) - r(S)}`. -/
+/-- Whitney's rank formula for the characteristic polynomial of a matroid `M` with
+finite ground set `E`:  `χ_M(t) = ∑_{S ⊆ E} (-1)^{|S|} t^{r(E) - r(S)}`. -/

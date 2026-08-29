@@ -1,3 +1,40 @@
+import Mathlib
+import RequestProject.Main
+
+/-!
+# Admissibility of 4-tuples, `ZMod` formulation
+
+Companion to `RequestProject.Main`.  The main file is developed without `import`s (its header
+comment must be the very first thing in the file, which rules out importing Mathlib), so the
+notions used there — primality and "the tuple avoids a residue class mod `p`" — are spelled out
+from first principles.  Here we check, using Mathlib, that those notions agree with the
+standard ones (`Nat.Prime` and non-surjectivity into `ZMod p`), and restate the main theorem
+`Brockian.AdmissibilityKTupleK4` in that language.
+-/
+
+namespace Brockian
+
+/-- The primality notion of `RequestProject.Main` is Mathlib's `Nat.Prime`. -/
+
+theorem admissibility_kTuple_k4_zmod (h : Fin 4 → ℤ) :
+    (∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ i, ((h i : ZMod p)) ≠ r) ↔
+      ((∃ r : ZMod 2, ∀ i, ((h i : ZMod 2)) ≠ r) ∧
+       (∃ r : ZMod 3, ∀ i, ((h i : ZMod 3)) ≠ r)) := by
+  rw [← admissible_iff_zmod, AdmissibilityKTupleK4]
+  constructor
+  · rintro ⟨⟨r2, hr2⟩, ⟨r3, hr3⟩⟩
+    refine ⟨⟨(r2 : ZMod 2), fun i => ?_⟩, ⟨(r3 : ZMod 3), fun i => ?_⟩⟩
+    · simpa using (not_dvd_sub_iff_zmod_ne 2 (h i) r2).mp (by simpa using hr2 i)
+    · simpa using (not_dvd_sub_iff_zmod_ne 3 (h i) r3).mp (by simpa using hr3 i)
+  · rintro ⟨⟨r2, hr2⟩, ⟨r3, hr3⟩⟩
+    obtain ⟨z2, rfl⟩ := ZMod.intCast_surjective (n := 2) r2
+    obtain ⟨z3, rfl⟩ := ZMod.intCast_surjective (n := 3) r3
+    refine ⟨⟨z2, fun i => ?_⟩, ⟨z3, fun i => ?_⟩⟩
+    · simpa using (not_dvd_sub_iff_zmod_ne 2 (h i) z2).mpr (hr2 i)
+    · simpa using (not_dvd_sub_iff_zmod_ne 3 (h i) z3).mpr (hr3 i)
+
+end Brockian
+
 /-!
 # Admissibility Ktuple K 4
 Category: Brockian Corpus
@@ -6,46 +43,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+/-
+This file is deliberately self-contained (no `import`s): Lean requires every `import`
+command to precede all other syntax, so keeping the header comment above at the very top
+of the file rules out importing Mathlib.  Everything below is therefore developed from
+first principles using only the Lean 4 core library.
+-/
+
 namespace Brockian
 
-/-- Primality of a natural number, stated from first principles:
-`p` is at least `2` and its only divisors are `1` and `p`. -/
-
-theorem admissibility_kTuple_k4_zmod (p : ℕ) (hp : p.Prime) :
-    ∃ a : ZMod p, ∀ h ∈ ({0, 2, 6, 8} : Finset ℕ), (h : ZMod p) ≠ a := by
-  obtain ⟨a, ha, hall⟩ := AdmissibilityKTupleK4 p (isPrimeNat_of_prime hp)
-  refine ⟨(a : ZMod p), ?_⟩
-  intro h hh hcast
-  have hmem : h ∈ [0, 2, 6, 8] := by
-    fin_cases hh <;> simp
-  have := hall h hmem
-  rw [ZMod.natCast_eq_natCast_iff', Nat.mod_eq_of_lt ha] at hcast
-  exact this hcast
-
-end Brockian
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-- Primality of a natural number, in the usual sense: `p ≥ 2` and every divisor of `p`
+is either `1` or `p`. -/

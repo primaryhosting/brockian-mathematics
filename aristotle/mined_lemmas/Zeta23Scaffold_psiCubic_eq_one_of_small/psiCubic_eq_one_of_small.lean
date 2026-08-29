@@ -1,4 +1,4 @@
-/-
+/-!
 # Psi Cubic Eq One Of Small
 Category: A Assembly
 Target: Zeta23Scaffold.psiCubic_eq_one_of_small
@@ -6,15 +6,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 namespace Zeta23Scaffold
 
-/-- The cubic weight `psi(m) = m/2 + (2m^2 - m^3)/18 + (4/9)·[m = 1]`. -/
+/-- The cubic weight `psi(m) = m/2 + (2·m^2 - m^3)/18 + (4/9)·[m = 1]`
+of preprint SS7.5(g). -/
 
 theorem psiCubic_eq_one_of_small :
     psiCubic 1 = 1 ∧ psiCubic 2 = 1 ∧ psiCubic 3 = 1 := by
-  refine ⟨?_, ?_, ?_⟩ <;> · unfold psiCubic; norm_num
+  refine ⟨?_, ?_, ?_⟩ <;> decide
 
 end Zeta23Scaffold
 

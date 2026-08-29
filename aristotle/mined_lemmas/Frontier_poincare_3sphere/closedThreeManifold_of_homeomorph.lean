@@ -1,0 +1,78 @@
+/-
+# Poincare 3 Sphere
+Category: Frontier — Moonshot
+Target: Frontier.poincare_3sphere
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Poincare 3 Sphere
+Category: Frontier — Moonshot
+Target: Frontier.poincare_3sphere
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+open scoped Manifold ContDiff
+open Metric (sphere)
+
+namespace Frontier
+
+/-- `ℝ³`, the Euclidean model space of dimension `3`. -/
+abbrev EuclideanThree : Type := EuclideanSpace ℝ (Fin 3)
+
+/-- The standard `3`-sphere `𝕊³ ⊆ ℝ⁴`. -/
+abbrev ThreeSphere : Type := sphere (0 : EuclideanSpace ℝ (Fin 4)) 1
+
+/-- `ℝ⁴` is `4 = 3 + 1`-dimensional; this is what equips `𝕊³` with its charts. -/
+instance factFinrankFour : Fact (Module.finrank ℝ (EuclideanSpace ℝ (Fin 4)) = 3 + 1) :=
+  ⟨by simp⟩
+
+/-- **The 3-dimensional topological Poincaré conjecture** (Perelman):
+every simply-connected closed (compact, boundaryless) topological `3`-manifold is
+homeomorphic to the `3`-sphere.  Here "closed `3`-manifold" is spelled as in Mathlib:
+a compact Hausdorff space charted on `ℝ³`. -/
+
+theorem closedThreeManifold_of_homeomorph {N M : Type} [TopologicalSpace N] [TopologicalSpace M]
+    [T2Space M] [ChartedSpace EuclideanThree M] [SimplyConnectedSpace M] [CompactSpace M]
+    (e : N ≃ₜ M) :
+    T2Space N ∧ Nonempty (ChartedSpace EuclideanThree N) ∧ SimplyConnectedSpace N ∧
+      CompactSpace N := by
+  refine ⟨e.isEmbedding.t2Space, ⟨?_⟩, ?_, e.symm.compactSpace⟩
+  · letI : ChartedSpace M N :=
+      e.toOpenPartialHomeomorph.singletonChartedSpace (by simp)
+    exact ChartedSpace.comp EuclideanThree M N
+  · exact e.toHomotopyEquiv.simplyConnectedSpace
+
+/-- **Lean-checked reduction of the Poincaré conjecture in dimension 3.**
+
+The conjecture "every simply-connected closed 3-manifold is homeomorphic to `𝕊³`" is
+*equivalent* to each of three formally weaker or dual statements:
+
+1. every such manifold admits merely a continuous bijection onto `𝕊³`
+   (the inverse is then automatically continuous, by compactness and the Hausdorff property);
+2. every such manifold admits merely a continuous injection into `𝕊³` with dense range
+   (the image is then compact, hence closed, hence all of `𝕊³`);
+3. the contrapositive form: there is no counterexample, i.e. no simply-connected closed
+   3-manifold admitting no homeomorphism to `𝕊³`.
+
+So it suffices to attack any one of these reformulations. -/

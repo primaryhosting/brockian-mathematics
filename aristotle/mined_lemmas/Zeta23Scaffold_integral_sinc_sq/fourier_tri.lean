@@ -1,3 +1,11 @@
+/-
+# Integral Sinc Sq
+Category: C Integral
+Target: Zeta23Scaffold.integral_sinc_sq
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -6,73 +14,87 @@ Category: C Integral
 Target: Zeta23Scaffold.integral_sinc_sq
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+The normalization integral of the sine kernel,
+`∫ x : ℝ, (sin x / x) ^ 2 = π`.
+
+The proof computes the Fourier transform of the triangle function
+`tri x = max (1 - |x|) 0`, which is `w ↦ sinc (π w) ^ 2`, and then applies the
+Fourier inversion formula at `0`.
+
+Note that in Lean `sin 0 / 0 = 0`, so the integrand of the main statement differs from the
+continuous extension `sinc` only on the null set `{0}`; the value of the integral is unaffected.
 -/
 
-open MeasureTheory Complex Filter intervalIntegral
-open scoped FourierTransform Topology Real
+open MeasureTheory Real Complex
+open scoped FourierTransform
 
 namespace Zeta23Scaffold
 
-/-- The triangle ("tent") function `x ↦ max 0 (1 - |x|)`, viewed as a complex-valued function. -/
+/-- The triangle function `x ↦ max (1 - |x|) 0`, viewed as a complex-valued function on `ℝ`. -/
 
-lemma fourier_tri {ξ : ℝ} (hξ : ξ ≠ 0) :
-    𝓕 tri ξ = ((Real.sin (π * ξ) / (π * ξ)) ^ 2 : ℝ) := by
-  set k : ℂ := ((-2 * π * ξ : ℝ) : ℂ) * Complex.I with hk
-  have hkne : k ≠ 0 := by
-    simp [hk, Complex.ext_iff, Real.pi_ne_zero, hξ]
-  have step1 : 𝓕 tri ξ = ∫ v : ℝ, Complex.exp (k * v) • tri v := by
-    rw [Real.fourier_real_eq_integral_exp_smul]
-    congr 1
-    ext v
+lemma fourier_tri (w : ℝ) : 𝓕 tri w = ((Real.sinc (π * w) ^ 2 : ℝ) : ℂ) := by
+  have hrw : 𝓕 tri w = ∫ v : ℝ, Complex.exp ((-(2 * π * w : ℝ) * Complex.I) * v) * tri v := by
+    rw [Real.fourier_real_eq]
+    simp only [Real.fourierChar_apply, Circle.smul_def, smul_eq_mul]
+    congr 1 with v
     congr 2
-    rw [hk]
     push_cast
     ring
-  have step2 : (∫ v : ℝ, Complex.exp (k * v) • tri v)
-      = ∫ v in Set.Ioc (-1:ℝ) 1, Complex.exp (k * v) • tri v := by
-    rw [setIntegral_eq_integral_of_forall_compl_eq_zero]
-    intro x hx
-    simp only [Set.mem_Ioc, not_and_or, not_lt, not_le] at hx
-    rw [tri_eq_zero ?_, smul_zero]
-    rcases hx with h | h
-    · rw [abs_of_nonpos (by linarith)]; linarith
-    · rw [abs_of_nonneg (by linarith)]; linarith
-  have step3 : (∫ v in Set.Ioc (-1:ℝ) 1, Complex.exp (k * v) • tri v)
-      = ∫ v in (-1:ℝ)..1, ((1 - |v| : ℝ) : ℂ) * Complex.exp (k * v) := by
-    rw [integral_of_le (by norm_num : (-1:ℝ) ≤ 1)]
-    apply setIntegral_congr_fun measurableSet_Ioc
-    intro v hv
-    simp only [Set.mem_Ioc] at hv
-    have hv' : |v| ≤ 1 := abs_le.2 ⟨hv.1.le, hv.2⟩
-    simp only [tri, smul_eq_mul, max_eq_right (by linarith : (0:ℝ) ≤ 1 - |v|)]
-    ring
-  rw [step1, step2, step3, tri_interval k hkne]
-  have hcos : Complex.exp k + Complex.exp (-k) = 2 * ((Real.cos (2*π*ξ) : ℝ) : ℂ) := by
-    rw [hk, Complex.exp_mul_I, ← neg_mul, Complex.exp_mul_I]
-    push_cast
-    simp only [Complex.cos_neg, Complex.sin_neg]
-    rw [show ((-2 * (π:ℂ) * ξ)) = -(2*(π:ℂ)*ξ) by ring]
-    simp [Complex.cos_neg, Complex.sin_neg]
-    ring
-  have hk2 : k^2 = -(((2*π*ξ)^2 : ℝ) : ℂ) := by
-    rw [hk]
-    push_cast
-    rw [mul_pow, Complex.I_sq]
-    ring
-  rw [hcos, hk2]
-  have hπξ : (π * ξ) ≠ 0 := mul_ne_zero Real.pi_ne_zero hξ
-  have hreal : (Real.sin (π * ξ) / (π * ξ)) ^ 2 * (-((2*π*ξ)^2)) = 2 * Real.cos (2*π*ξ) - 2 := by
-    have hcc : Real.cos (2*π*ξ) = 1 - 2*Real.sin (π*ξ)^2 := by
-      rw [show 2*π*ξ = 2*(π*ξ) by ring, Real.cos_two_mul, Real.cos_sq']
+  rw [hrw, integral_exp_mul_tri]
+  rcases eq_or_ne w 0 with rfl | hw
+  · have e1 : ∫ v in (-1:ℝ)..0, (1 + (v:ℂ)) * Complex.exp ((-(2*π*0 : ℝ) * Complex.I) * v)
+        = ((∫ v in (-1:ℝ)..0, (1 + v) : ℝ) : ℂ) := by
+      rw [← intervalIntegral.integral_ofReal]
+      refine intervalIntegral.integral_congr fun x _ => ?_
+      push_cast
+      simp
+    have e2 : ∫ v in (0:ℝ)..1, (1 - (v:ℂ)) * Complex.exp ((-(2*π*0 : ℝ) * Complex.I) * v)
+        = ((∫ v in (0:ℝ)..1, (1 - v) : ℝ) : ℂ) := by
+      rw [← intervalIntegral.integral_ofReal]
+      refine intervalIntegral.integral_congr fun x _ => ?_
+      push_cast
+      simp
+    rw [e1, e2]
+    have h1 : ∫ v in (-1:ℝ)..0, (1 + v) = (1:ℝ)/2 := by
+      rw [intervalIntegral.integral_add intervalIntegrable_const
+        intervalIntegral.intervalIntegrable_id]
+      norm_num
+    have h2 : ∫ v in (0:ℝ)..1, (1 - v) = (1:ℝ)/2 := by
+      rw [intervalIntegral.integral_sub intervalIntegrable_const
+        intervalIntegral.intervalIntegrable_id]
+      norm_num
+    rw [h1, h2]
+    norm_num
+  · set c : ℂ := -(2 * π * w : ℝ) * Complex.I with hcdef
+    have hpi := Real.pi_ne_zero
+    have hpw : (π * w) ≠ 0 := mul_ne_zero hpi hw
+    have hc : c ≠ 0 := by
+      rw [hcdef]
+      refine mul_ne_zero ?_ Complex.I_ne_zero
+      simp only [neg_ne_zero, ne_eq, Complex.ofReal_eq_zero]
+      exact mul_ne_zero (mul_ne_zero two_ne_zero hpi) hw
+    rw [integral_left_half c hc, integral_right_half c hc]
+    have hsum : (1 / c - 1 / c ^ 2 + Complex.exp (-c) / c ^ 2)
+        + (Complex.exp c / c ^ 2 - 1 / c - 1 / c ^ 2)
+        = (Complex.exp c + Complex.exp (-c) - 2) / c ^ 2 := by
+      field_simp
       ring
-    rw [hcc]
+    rw [hsum]
+    have hcos : Complex.exp c + Complex.exp (-c) = 2 * (Real.cos (2 * π * w) : ℂ) := by
+      rw [hcdef, Complex.ofReal_cos, Complex.cos]
+      ring_nf
+    have hcsq : c ^ 2 = -(((2 * π * w : ℝ)) : ℂ) ^ 2 := by
+      rw [hcdef]; ring_nf; simp [Complex.I_sq]
+    have h2 : (Real.cos (2 * π * w) : ℂ) = 1 - 2 * (Real.sin (π * w) : ℂ) ^ 2 := by
+      have h : Real.cos (2 * π * w) = 1 - 2 * Real.sin (π * w) ^ 2 := by
+        have h1 := Real.cos_two_mul (π * w)
+        have h2 := Real.sin_sq_add_cos_sq (π * w)
+        rw [show 2 * π * w = 2 * (π * w) by ring, h1]; nlinarith
+      rw [h]; push_cast; ring
+    rw [Real.sinc_of_ne_zero hpw, hcos, hcsq, h2]
+    push_cast
     field_simp
     ring
-  have hne : (-(((2*π*ξ)^2 : ℝ) : ℂ)) ≠ 0 := by
-    simp only [ne_eq, neg_eq_zero, Complex.ofReal_eq_zero]
-    intro h
-    exact hπξ (by nlinarith [h])
-  rw [div_eq_iff hne]
-  exact_mod_cast hreal.symm
 
-/-- The (continuous) function `sinc²` is integrable on `ℝ`. -/
+/-- The Fourier transform of the triangle function is integrable. -/

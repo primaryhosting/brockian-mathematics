@@ -1,4 +1,20 @@
+/-
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,24 +30,26 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Frontier
 
 open Polynomial
 
-/-! ## Physicists' Hermite polynomials -/
+/-! ## Hermite polynomials over `ℝ` -/
 
-/-- The physicists' Hermite polynomials, defined by `H₀ = 1` and
-`H_{n+1} = 2X H_n - H_n'`. -/
+/-- The (probabilists') Hermite polynomials, with real coefficients. -/
 
 theorem hasDerivAt_cexp_lin (k y : ℝ) :
-    HasDerivAt (fun s : ℝ => Complex.exp (Complex.I * k * s))
-      (Complex.exp (Complex.I * k * y) * (Complex.I * k)) y := by
-  have h0 : HasDerivAt (fun s : ℝ => ((s : ℝ) : ℂ)) (1 : ℂ) y := (hasDerivAt_id y).ofReal_comp
-  have h1 : HasDerivAt (fun s : ℝ => Complex.I * (k : ℂ) * (s : ℂ)) (Complex.I * k) y := by
-    simpa using h0.const_mul (Complex.I * (k : ℂ))
-  simpa using h1.cexp
+    HasDerivAt (fun t : ℝ => Complex.exp (Complex.I * (k : ℂ) * (t : ℂ)))
+      (Complex.exp (Complex.I * (k : ℂ) * (y : ℂ)) * (Complex.I * (k : ℂ))) y := by
+  have h0 : HasDerivAt (fun t : ℝ => ((t : ℂ))) 1 y := (hasDerivAt_id y).ofReal_comp
+  simpa using (h0.const_mul (Complex.I * (k : ℂ))).cexp
 
-/-- On a separated state `exp (i k y) f(x)`, the operator `π_y` acts as multiplication by
-`ℏk - qBx`. -/

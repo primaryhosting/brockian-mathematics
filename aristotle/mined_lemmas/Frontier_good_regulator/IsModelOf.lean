@@ -1,63 +1,68 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-!
+# Good Regulator
+Category: Frontier Mind
+Target: Frontier.good_regulator
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Frontier
 
 /-!
-# The Conant–Ashby "good regulator" theorem (deterministic base case)
+## Setting
 
-Setting: a system with a set `S` of disturbances, a regulator with a set `R` of possible
-actions, and a set `Z` of outcomes.  The outcome of the joint system is given by
-`psi : R → S → Z`, and a (deterministic) regulator is a map `rho : S → R` choosing an
-action for each disturbance.
+We formalise the deterministic (base) case of the Conant–Ashby "Good Regulator"
+theorem: *every good regulator of a system is (contains) a model of that system*.
 
-* Regulation is *perfect* / the regulator is *good* when the outcome is constantly the
-  target value `z0` (this is the base case `H(Z) = 0` of the entropy formulation:
-  the outcome variable is deterministic).
-* The regulator is *simplest* when, for each disturbance, at most one action attains the
-  target outcome (Conant and Ashby's restriction to regulators with no superfluous
-  variety).
+The set‑up is Conant and Ashby's:
 
-The system, as it presents itself to the regulator, is the map `s ↦ psi · s`, i.e. the
-"column" of the outcome table belonging to the disturbance `s`; we call it `systemMap`.
-A regulator *is (contains) a model of the system* when its action is a function of that
-column alone, i.e. `rho` factors through `systemMap`.
+* `S` is the set of disturbances / states of the regulated system,
+* `R` is the set of actions available to the regulator,
+* `Z` is the set of outcomes,
+* `sys : S → R → Z` is the system: it maps a disturbance and a regulatory action
+  to an outcome,
+* `goal : Z` is the single acceptable ("good") outcome.
 
-`Frontier.good_regulator` states exactly this: every simplest good regulator is a model
-of the system.
+A regulator is a map `ρ : S → R` (it observes the disturbance and picks an
+action). It is *good* when the outcome is always acceptable, i.e. the outcome
+variable is constant — the deterministic form of "the entropy of the outcome is
+minimal".
+
+The system is *regular* at `goal` when for each disturbance exactly one action
+achieves the goal; this is Conant and Ashby's standing assumption that the
+optimal response is well defined.
+
+The conclusion is that a good regulator *is* a model of the system: its mapping
+is uniquely determined by the system, `ρ s` being exactly the system's optimal
+response to `s`; equivalently, from `ρ` alone one can read off, for every
+disturbance and action, whether that action is the successful one. Any two good
+regulators therefore coincide.
+
+No Mathlib result states this theorem; the argument is elementary and the only
+library lemma it needs is function extensionality (`funext`), used to pass from
+pointwise agreement of two good regulators to equality of the two mappings.
+The file therefore has no imports and is axiom-clean.
+
+Finally, "contains a model": a regulator whose action is computed through an
+internal representation, `ρ = act ∘ rep`, must have an internal representation
+`rep` which already distinguishes disturbances at least as finely as the model
+does, and through which the model factors.
 -/
 
-/-- The system as seen by the regulator: for a disturbance `s`, the map sending a
-regulator action `r` to the resulting outcome `psi r s`. -/
+section
 
-def IsModelOf {R S Z : Type*} (psi : R → S → Z) (rho : S → R) : Prop :=
-  ∃ M : (R → Z) → R, ∀ s : S, rho s = M (systemMap psi s)
+universe u v w x
 
-/-- **Every good regulator of a system is a model of that system** (Conant–Ashby,
-deterministic base case).  If `rho` regulates perfectly (the outcome is constantly `z0`)
-and the regulation problem is simplest (for each disturbance at most one action attains
-`z0`), then `rho` factors through the system map `s ↦ psi · s`: the regulator's behaviour
-is a function of the system's behaviour, i.e. the regulator contains a model of the
-system. -/
+variable {S : Type u} {R : Type v} {Z : Type w}
+
+/-- A regulator `ρ` is **good** for the system `sys` with target outcome `goal`
+when every disturbance is met with an action producing the target outcome. -/
+
+def IsModelOf (sys : S → R → Z) (goal : Z) (m : S → R) : Prop :=
+  ∀ s r, sys s r = goal ↔ r = m s
+
+/-- **Good Regulator Theorem** (Conant–Ashby, deterministic base case).
+
+If the system `sys` has a well-defined optimal response to each disturbance
+(`RegularAt`), then every good regulator is a model of the system: the
+regulator's mapping reproduces the system's success relation exactly. -/

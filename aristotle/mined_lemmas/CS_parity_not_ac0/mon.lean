@@ -1,33 +1,49 @@
-import RequestProject.Basic
+/-
+# Parity Not Ac 0
+Category: Frontier Cs
+Target: CS.parity_not_ac0
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
 
 /-!
-# Unbounded fan-in Boolean circuits, the class `AC⁰`, and `PARITY`
-
-A `Circuit n` is a Boolean circuit on `n` inputs built from constants, input
-variables, negations, and *unbounded fan-in* `AND`/`OR` gates.
-
-* `Circuit.depth` counts the maximal number of `AND`/`OR` gates on a root-to-leaf
-  path (negations are free, as is standard for `AC⁰`).
-* `Circuit.size` counts the number of `AND`/`OR` gates.
-
-`InAC0 f` says that the family `f` is computed by circuits of some fixed depth and
-polynomial size.  Making negations free and not counting them in the size only
-makes the class larger, hence the lower bound proved later stronger.
+# Parity Not Ac 0
+Category: Frontier Cs
+Target: CS.parity_not_ac0
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace CS
 
-/-- Boolean circuits with unbounded fan-in `AND`/`OR` gates. -/
-inductive Circuit (n : ℕ) where
-  | const : Bool → Circuit n
-  | var : Fin n → Circuit n
-  | neg : Circuit n → Circuit n
-  | or : (m : ℕ) → (Fin m → Circuit n) → Circuit n
-  | and : (m : ℕ) → (Fin m → Circuit n) → Circuit n
+/-! ## The Boolean cube and `ZMod 3`-valued functions on it -/
 
-namespace Circuit
+/-- The Boolean cube on `n` coordinates. -/
+abbrev Cube (n : ℕ) := Fin n → Bool
 
-/-- The Boolean function computed by a circuit. -/
+/-- Functions from the Boolean cube to the field `ZMod 3`. -/
+abbrev CFun (n : ℕ) := Cube n → ZMod 3
 
-def mon {n : ℕ} (T : Finset (Fin n)) : Fn n := fun x => ∏ i ∈ T, sgn (x i)
+/-- The `±1` encoding of a bit inside `ZMod 3`. -/
 
+def mon {n : ℕ} (S : Finset (Fin n)) : CFun n := fun x => ∏ i ∈ S, sgn (x i)
+
+/-- The finite set of monomials of degree at most `D`. -/

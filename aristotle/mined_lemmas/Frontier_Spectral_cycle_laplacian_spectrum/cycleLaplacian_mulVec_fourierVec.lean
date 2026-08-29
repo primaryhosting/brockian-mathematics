@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Cycle Laplacian Spectrum
 Category: Frontier — Spectral Geometry
@@ -25,20 +26,26 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Matrix Finset
+open Matrix
 
-/-- The graph Laplacian of the cycle `C n`, as the `n × n` circulant matrix (indexed by
-`ZMod n`) with diagonal entries `2` and `-1` on the two cyclic off-diagonals. -/
+/-- The graph Laplacian of the cycle graph `C n`: the `n × n` circulant matrix with `2` on the
+diagonal and `-1` on the two cyclic off-diagonals. -/
 
-lemma cycleLaplacian_mulVec_fourierVec (hn : 3 ≤ n) (k : ZMod n) :
-    cycleLaplacian n *ᵥ (fun j => ZMod.stdAddChar (j * k))
-      = ((2 - 2 * Real.cos (2 * Real.pi * k.val / n) : ℝ) : ℂ) •
-          (fun j => ZMod.stdAddChar (j * k)) := by
+theorem cycleLaplacian_mulVec_fourierVec (n : ℕ) (hn : 3 ≤ n) (k : Fin n) :
+    cycleLaplacian n *ᵥ (fun j : Fin n => Complex.exp (2 * Real.pi * Complex.I * k * j / n))
+      = ((2 - 2 * Real.cos (2 * Real.pi * k / n) : ℝ) : ℂ) •
+        (fun j : Fin n => Complex.exp (2 * Real.pi * Complex.I * k * j / n)) := by
+  have hn0 : n ≠ 0 := by omega
+  have hv : ∀ j : Fin n,
+      Complex.exp (2 * Real.pi * Complex.I * k * j / n) = fourierMat n j k := by
+    intro j
+    rw [fourierMat_apply_exp hn0]
+    ring_nf
   funext i
-  simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul]
-  rw [cycleLaplacian_row_sum hn i (fun j => ZMod.stdAddChar (j * k)), ← cycleEigenvalue_eq,
-    cycleEigenvalue, show ((i + 1) * k) = i * k + k by ring,
-    show ((i - 1) * k) = i * k + -k by ring, AddChar.map_add_eq_mul, AddChar.map_add_eq_mul]
-  ring
+  have h := congrFun (congrFun (laplacian_mul_fourier hn) i) k
+  rw [Matrix.mul_apply, Matrix.mul_diagonal, cycleEig_eq hn0] at h
+  simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul, hv]
+  rw [h, mul_comm]
 
-/-- Membership in the spectrum of a matrix is having an eigenvector. -/
+/-- **Spectrum of the cycle Laplacian.**  For `n ≥ 3` the eigenvalues of the Laplacian of the
+cycle graph `C n` are exactly the numbers `2 - 2 cos (2 π k / n)` for `k = 0, …, n - 1`. -/

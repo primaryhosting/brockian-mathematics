@@ -24,25 +24,39 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
-import RequestProject.Savitch.Enc
+import RequestProject.Savitch.Reach
 
 /-!
-# The Savitch simulator and its correctness
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-We build, from a nondeterministic machine `M` and a recursion depth `K`, a
-deterministic machine `savitchDM M K` which decides, by Savitch's recursive midpoint
-search, whether the sink vertex `none` of the configuration graph of `M` is reachable
-from the start vertex within `2 ^ K` steps.  If `cV M ≤ 2 ^ K` this is exactly
-acceptance by `M`.
+/-!
+## The deterministic simulator
+
+This file defines the deterministic machine used in Savitch's theorem: an explicit
+iterative (stack based) implementation of the recursive procedure
+
+```
+REACH d u v  =  if d = 0 then (u = v ∨ u → v)
+                else ∃ m, REACH (d-1) u m ∧ REACH (d-1) m v
+```
+
+together with its encoding into bit strings and the space accounting: a well-formed
+state occupies `O((f n)²)` bits, because the stack holds at most `f n + 2` frames of
+`O(f n)` bits each.
 -/
 
 namespace CS
 namespace Savitch
 
-variable {Sigma : Type}
+/-- Classical truth value of a proposition. -/
 
+def ReachIn (N : NDetMachine) (x : Word) (k : ℕ) (u v : Word) : Prop :=
+  ∃ j ≤ k, stepsTo N x j u v
 
-def reachIn (E : V → V → Prop) : ℕ → V → V → Prop
-  | 0 => fun u v => u = v ∨ E u v
-  | i + 1 => fun u v => ∃ w, reachIn E i u w ∧ reachIn E i w v
+variable (N : NDetMachine) (x : Word)
 

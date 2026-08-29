@@ -1,56 +1,56 @@
-/-
-# Shor Code Corrects
-Category: Frontier Qi
-Target: QI.shor_code_corrects
-Statement: The 9-qubit Shor code corrects an arbitrary single-qubit error.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
 # Shor Code Corrects
 Category: Frontier Qi
 Target: QI.shor_code_corrects
-Statement: The 9-qubit Shor code corrects an arbitrary single-qubit error.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
+open ComplexConjugate
+open scoped InnerProductSpace
 
 namespace QI
 
-/-- Index set of the nine qubits: three blocks of three. -/
-abbrev Idx : Type := Fin 3 × Fin 3
+/-! ## Setup
 
-/-- Computational basis states of the nine qubits are bit strings. -/
-abbrev Bits : Type := Idx → Bool
+Nine qubits, indexed by `Idx = Fin 3 × Fin 3`: the first component is the block
+(one of the three "outer" repetition-code slots), the second is the position of the
+qubit inside its block.  A computational basis state is a bit string `Idx → Bool`,
+and the state space is the corresponding `512`-dimensional complex Hilbert space. -/
 
-/-- Pointwise `xor` of two bit strings. -/
+/-- Index of a qubit: `(block, position within block)`. -/
+abbrev Idx := Fin 3 × Fin 3
 
-theorem shor_code_corrects :
-    (∀ a b : Bool, ip (psi a) (psi b) = if a = b then 1 else 0) ∧
-      ∀ (k l : Idx) (M N : Bool → Bool → ℂ), ∃ w : ℂ, ∀ a b : Bool,
-        ip (applyOp k M (psi a)) (applyOp l N (psi b)) = if a = b then w else 0 := by
-  refine ⟨ip_psi, ?_⟩
-  intro k l M N
-  refine ⟨ip (applyOp k M (psi false)) (applyOp l N (psi false)), ?_⟩
+/-- Computational basis states of the nine qubits. -/
+abbrev BasisIdx := Idx → Bool
+
+/-- The nine-qubit state space. -/
+abbrev QState := EuclideanSpace ℂ BasisIdx
+
+/-- The operator acting as the `2 × 2` matrix `M` on qubit `q` and as the identity
+on the remaining eight qubits.  Every single-qubit error on qubit `q` is of this form. -/
+
+theorem shor_code_corrects (q r : Idx) (M N : Bool → Bool → ℂ) :
+    ∃ c : ℂ, ∀ a b : Bool,
+      ⟪qubitOp q M (codeword a), qubitOp r N (codeword b)⟫_ℂ = if a = b then c else 0 := by
+  refine ⟨(8 : ℂ)⁻¹ * ∑ s : Bool × Bool × Bool,
+      gmat q r M N (blockVal s q.1) (blockVal s r.1), ?_⟩
   intro a b
+  rw [inner_codeword_errors]
   by_cases hab : a = b
   · subst hab
-    cases a
-    · rfl
-    · rw [ip_applyOp_expand, ip_applyOp_expand]
-      refine Finset.sum_congr rfl fun p _ => Finset.sum_congr rfl fun q _ => ?_
-      rw [(pauli_ip_core (sel_support p.1 k) (sel_support p.2 k) (sel_support q.1 l)
-        (sel_support q.2 l)).2]
-  · simp only [if_neg hab]
-    rw [ip_applyOp_expand]
-    refine Finset.sum_eq_zero fun p _ => Finset.sum_eq_zero fun q _ => ?_
-    rw [(pauli_ip_core (sel_support p.1 k) (sel_support p.2 k) (sel_support q.1 l)
-      (sel_support q.2 l)).1 a b hab, mul_zero]
+    rw [if_pos rfl]
+    congr 1
+    exact Finset.sum_congr rfl (fun s _ => by rw [sgn_mul_self, one_mul])
+  · rw [if_neg hab]
+    have h : ∀ s : Bool × Bool × Bool,
+        sgn a s * sgn b s * gmat q r M N (blockVal s q.1) (blockVal s r.1) =
+          sgn true s * gmat q r M N (blockVal s q.1) (blockVal s r.1) := by
+      intro s; rw [sgn_mul_sgn_of_ne hab]
+    rw [Finset.sum_congr rfl (fun s _ => h s), sum_sgn_true_mul, mul_zero]
 
-/-! ## Sanity checks on the model of single-qubit operators -/
+/-! ## Nondegeneracy and error detection -/
 
-/-- The identity matrix acts as the identity operator. -/
+/-- The identity `2 × 2` matrix, i.e. the trivial (no-)error on a qubit. -/

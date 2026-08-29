@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Palindromic Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,35 +31,18 @@ Category: Brockian Conjecture
 Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-The infinitude of decimal palindromic primes is an open problem.  This file develops
-what can be established unconditionally, and reduces the conjecture to a statement
-about *odd* digit lengths only.
-
-Main contents:
-
-* `Brockian.PalindromicPrimes.IsPalindrome` — decimal palindromes.
-* `eleven_dvd_of_isPalindrome_even_length` — every decimal palindrome with an even
-  number of digits is divisible by `11`.
-* `eq_eleven_of_prime_palindrome_even_length` — hence `11` is the *only* palindromic
-  prime with an even number of digits.
-* `palindromes_infinite` — there are infinitely many decimal palindromes
-  (the repunits).
-* `PalindromicPrimeInfinitude` — the conditional reduction: if for arbitrarily large
-  `m` there is a prime palindrome with exactly `2 * m + 1` digits, then there are
-  infinitely many palindromic primes.
-* `palindromicPrimes_infinite_iff` — the reduction is in fact an equivalence, so no
-  strength is lost by restricting attention to odd digit lengths.
 -/
 
 namespace Brockian.PalindromicPrimes
 
-/-- A natural number is a (decimal) palindrome when its list of base-10 digits is
-equal to its own reversal. -/
+/-- `IsPalindrome b n` says that the base-`b` digit expansion of `n` reads the same
+forwards and backwards. -/
 
-theorem eq_eleven_of_prime_palindrome_even_length {p : ℕ} (hp : Nat.Prime p)
-    (hpal : IsPalindrome p) (hlen : Even (Nat.digits 10 p).length) : p = 11 := by
-  have hdvd : 11 ∣ p := eleven_dvd_of_isPalindrome_even_length hpal hlen
-  exact ((Nat.prime_dvd_prime_iff_eq (by norm_num) hp).mp hdvd).symm
+theorem eq_eleven_of_prime_palindrome_even_length {p : ℕ} (hprime : Nat.Prime p)
+    (hpal : IsPalindrome 10 p) (hlen : Even (Nat.digits 10 p).length) : p = 11 := by
+  have h11 : 11 ∣ p := eleven_dvd_of_palindrome_even_length hpal hlen
+  rcases hprime.eq_one_or_self_of_dvd 11 h11 with h | h
+  · exact absurd h (by norm_num)
+  · exact h.symm
 
-/-- `11` is indeed a palindromic prime with an even number of digits. -/
+/-- `101` is a palindromic prime, so the set of palindromic primes is nonempty. -/

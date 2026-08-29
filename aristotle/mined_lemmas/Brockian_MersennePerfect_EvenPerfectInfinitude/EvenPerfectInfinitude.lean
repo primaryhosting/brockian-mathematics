@@ -32,6 +32,7 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
+import Archive.Wiedijk100Theorems.PerfectNumbers
 
 /-!
 # Even Perfect Infinitude
@@ -39,32 +40,46 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many even perfect numbers is a famous open problem, equivalent
-to the infinitude of Mersenne primes.  What is proved here is exactly that equivalence: the
-set of even perfect numbers is infinite **iff** the set of Mersenne primes is infinite.
-
-The mathematical input is the Euclid–Euler theorem.  Mathlib contains it in the
-`Archive` (see `Archive/Wiedijk100Theorems/PerfectNumbers.lean`, Theorem 70 of the
-100 Theorems list, by Aaron Anderson), but the `Archive` is not importable from a
-downstream project, so the relevant statements are reproved here, following that file.
 -/
 
 namespace Brockian
-
 namespace MersennePerfect
 
-open ArithmeticFunction Finset
-
-open scoped sigma
-
-/-- `σ 1 (2 ^ k) = 2 ^ (k+1) - 1`. -/
+/-- The set of even perfect natural numbers. -/
 
 theorem EvenPerfectInfinitude :
-    {n : ℕ | Even n ∧ Nat.Perfect n}.Infinite ↔
-      {k : ℕ | Nat.Prime (mersenne (k + 1))}.Infinite := by
-  rw [evenPerfect_eq_image]
-  exact ⟨fun h => h.of_image _, fun h => h.image euclidEuler_injective.injOn⟩
+    evenPerfects.Infinite ↔ mersenneExponents.Infinite := by
+  constructor
+  · intro h
+    by_contra hfin
+    rw [Set.not_infinite] at hfin
+    exact h ((hfin.image _).subset evenPerfects_subset_image)
+  · intro h
+    apply Set.infinite_of_not_bddAbove
+    rintro ⟨N, hN⟩
+    obtain ⟨p, hp, hpN⟩ := h.exists_gt (N + 1)
+    have h1 : 2 ^ (p - 1) * mersenne p ∈ evenPerfects :=
+      mem_evenPerfects_of_mem_mersenneExponents hp
+    have h2 : N < 2 ^ (p - 1) * mersenne p := by
+      have hm : 1 ≤ mersenne p := by
+        have hpp : (mersenne p).Prime := hp
+        exact hpp.one_lt.le.trans' (by norm_num)
+      calc N < 2 ^ N := Nat.lt_two_pow_self
+        _ ≤ 2 ^ (p - 1) := Nat.pow_le_pow_right (by norm_num) (by omega)
+        _ ≤ 2 ^ (p - 1) * mersenne p := Nat.le_mul_of_pos_right _ hm
+    exact absurd (hN h1) (by omega)
 
-/-- Unbounded form of the reduction: if there are infinitely many Mersenne primes, then for
-every `N` there is an even perfect number exceeding `N`. -/
+/-- Non-vacuity check: `6` is an even perfect number. -/
+example : (6 : ℕ) ∈ evenPerfects := ⟨by decide, by unfold Nat.Perfect; decide⟩
+
+/-- Non-vacuity check: `28` is an even perfect number. -/
+example : (28 : ℕ) ∈ evenPerfects := ⟨by decide, by unfold Nat.Perfect; decide⟩
+
+/-- Non-vacuity check: `3` is a Mersenne prime exponent (`2 ^ 3 - 1 = 7`). -/
+example : 3 ∈ mersenneExponents := by
+  show (mersenne 3).Prime
+  norm_num [mersenne]
+
+end MersennePerfect
+end Brockian
+

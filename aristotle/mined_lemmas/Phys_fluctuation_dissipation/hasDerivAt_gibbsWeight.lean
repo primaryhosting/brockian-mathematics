@@ -1,3 +1,11 @@
+/-
+# Fluctuation Dissipation
+Category: Frontier Phys
+Target: Phys.fluctuation_dissipation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -26,18 +34,19 @@ set_option grind.warning false
 
 namespace Phys
 
-open Set MeasureTheory Filter Topology
+variable {ι : Type*} [Fintype ι] [Nonempty ι]
 
-/-!
-## The classical fluctuation–dissipation relation
+/-- Boltzmann weight `e^{-β H(i)}` of the microstate `i`. -/
 
-Let `C t = ⟨A(0) A(t)⟩` be the equilibrium autocorrelation function of an observable `A`
-in a system at inverse temperature `β`.  The (classical, Kubo) fluctuation–dissipation
+lemma hasDerivAt_gibbsWeight (β : ℝ) (H B : ι → ℝ) (i : ι) :
+    HasDerivAt (fun l : ℝ => gibbsWeight β (fun j => H j - l * B j) i)
+      (β * B i * gibbsWeight β H i) 0 := by
+  have h1 : HasDerivAt (fun l : ℝ => -β * (H i - l * B i)) (β * B i) 0 := by
+    have := (((hasDerivAt_id (0 : ℝ)).mul_const (B i)).const_sub (H i)).const_mul (-β)
+    simpa using this
+  have h2 := h1.exp
+  simp only [gibbsWeight]
+  simpa [mul_comm] using h2
 
-lemma hasDerivAt_gibbsWeight (β : ℝ) (E A : ι → ℝ) (f : ℝ) (i : ι) :
-    HasDerivAt (fun f => gibbsWeight β E A f i) (β * A i * gibbsWeight β E A f i) f := by
-  have h1 : HasDerivAt (fun f : ℝ => -β * (E i - f * A i)) (β * A i) f := by
-    have h := (((hasDerivAt_id f).mul_const (A i)).const_sub (E i)).const_mul (-β)
-    simpa using h.congr_deriv (by ring)
-  simpa [gibbsWeight, mul_comm] using h1.exp
-
+omit [Nonempty ι] in
+/-- Derivative of the perturbed partition function at zero coupling. -/

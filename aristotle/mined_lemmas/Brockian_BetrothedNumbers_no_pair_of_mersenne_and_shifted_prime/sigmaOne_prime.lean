@@ -1,3 +1,10 @@
+/-
+# No Pair Of Mersenne And Shifted Prime
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.no_pair_of_mersenne_and_shifted_prime
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -22,15 +29,20 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian.BetrothedNumbers
 
-open Finset ArithmeticFunction
-open scoped ArithmeticFunction.sigma
-
 /-- The sum-of-divisors function `σ₁`. -/
 
-lemma sigmaOne_prime {q : ℕ} (hq : q.Prime) : sigmaOne q = q + 1 := by
-  simp [sigmaOne, hq.divisors, Finset.sum_pair hq.one_lt.ne, Nat.add_comm]
+lemma sigmaOne_prime {p : ℕ} (hp : p.Prime) : sigmaOne p = p + 1 := by
+  have h1 : p ≠ 1 := hp.ne_one
+  simp [sigmaOne, hp.divisors, Finset.sum_pair (Ne.symm h1), Nat.add_comm]
 

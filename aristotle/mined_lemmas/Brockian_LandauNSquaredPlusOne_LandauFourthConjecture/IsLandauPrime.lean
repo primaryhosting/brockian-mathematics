@@ -30,8 +30,6 @@ Target: Brockian.LandauNSquaredPlusOne.LandauFourthConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the header above is
--- given as a plain block comment and repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -45,8 +43,10 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.LandauNSquaredPlusOne
 
-/-- A *Landau prime* is a prime of the form `n ^ 2 + 1`. -/
+open Zsqrtd
 
-def IsLandauPrime (p : ℕ) : Prop := p.Prime ∧ ∃ n : ℕ, p = n ^ 2 + 1
+/-- A *Landau prime* is a prime natural number of the form `n ^ 2 + 1`. -/
 
-/-- The counting function `#{n ≤ x : n ^ 2 + 1 is prime}`. -/
+def IsLandauPrime (p : ℕ) : Prop := Nat.Prime p ∧ ∃ n : ℕ, p = n ^ 2 + 1
+
+/-- The set of primes of the form `n ^ 2 + 1`. -/

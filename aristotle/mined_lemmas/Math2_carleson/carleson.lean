@@ -8,29 +8,11 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-## Contents
-
-`Math2.carleson` : the Fourier series of a square-integrable function on the circle
-`AddCircle 1` converges to it almost everywhere.  The statement takes as an explicit hypothesis
-the key intermediate result `Math2.CarlesonWeakL2 C`, the Carleson-Hunt weak `(2,2)` maximal
-inequality for the Carleson maximal operator; everything else -- the density/approximation
-argument by trigonometric polynomials and the passage from the maximal inequality to almost
-everywhere convergence -- is proved here from scratch.
-
-Proved unconditionally (no hypothesis) in this file:
-
-* `Math2.tendsto_eLpNorm_partialFourierSum` : `L²` convergence of the partial Fourier sums;
-* `Math2.exists_subseq_ae_tendsto_partialFourierSum` : almost everywhere convergence of a
-  subsequence of the partial Fourier sums.
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped ENNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -44,36 +26,37 @@ set_option grind.warning false
 
 namespace Math2
 
-open MeasureTheory AddCircle Filter Topology
+open MeasureTheory Filter Topology AddCircle
 
-noncomputable section
+/-- The `N`-th symmetric partial sum of the Fourier series of `f : AddCircle T → ℂ`,
+i.e. `∑_{|n| ≤ N} (fourierCoeff f n) * e^{2πinx/T}`. -/
 
-/-- The `N`-th symmetric partial sum of the Fourier series of `f : AddCircle 1 → ℂ`. -/
+theorem carleson {T : ℝ} [hT : Fact (0 < T)] (f : Lp ℂ 2 (@haarAddCircle T hT)) :
+    ∃ ns : ℕ → ℕ, StrictMono ns ∧
+      ∀ᵐ x ∂(@haarAddCircle T hT),
+        Tendsto (fun k => fourierPartialSum (⇑f) (ns k) x) atTop (𝓝 (f x)) := by
+  classical
+  have hL2 := hasSum_fourier_series_L2 f
+  have htend : Tendsto
+      (fun N : ℕ => ∑ i ∈ Finset.Icc (-(N : ℤ)) (N : ℤ),
+        fourierCoeff (⇑f) i • (fourierLp 2 i : Lp ℂ 2 (@haarAddCircle T hT))) atTop (𝓝 f) :=
+    hL2.comp tendsto_Icc_atTop
+  obtain ⟨ns, hns, hae⟩ :=
+    (tendstoInMeasure_of_tendsto_Lp htend).exists_seq_tendsto_ae
+  refine ⟨ns, hns, ?_⟩
+  have hall : ∀ᵐ x ∂(@haarAddCircle T hT), ∀ N : ℕ,
+      (∑ i ∈ Finset.Icc (-(N : ℤ)) (N : ℤ),
+        fourierCoeff (⇑f) i • (fourierLp 2 i : Lp ℂ 2 (@haarAddCircle T hT))) x
+        = fourierPartialSum (⇑f) N x := by
+    rw [ae_all_iff]
+    intro N
+    exact coeFn_fourier_sum f (Finset.Icc (-(N : ℤ)) (N : ℤ))
+  filter_upwards [hae, hall] with x hx hx'
+  refine hx.congr ?_
+  intro k
+  exact hx' (ns k)
 
-theorem carleson {C : ℝ≥0∞} (hC : C ≠ ∞) (hbound : CarlesonWeakL2 C)
-    (f : AddCircle (1 : ℝ) → ℂ) (hf : MemLp f 2 haarAddCircle) :
-    ∀ᵐ x ∂haarAddCircle, Tendsto (fun N => partialFourierSum f N x) atTop (𝓝 (f x)) := by
-  have hzero : ∀ k : ℕ,
-      haarAddCircle {x | ((k : ℝ≥0∞) + 1)⁻¹ < divergenceLimsup f x} = 0 := by
-    intro k
-    exact meas_divergenceLimsup_eq_zero hC hbound hf (by simp)
-  have hset : {x | divergenceLimsup f x ≠ 0}
-      = ⋃ k : ℕ, {x | ((k : ℝ≥0∞) + 1)⁻¹ < divergenceLimsup f x} := by
-    ext x
-    simp only [Set.mem_setOf_eq, Set.mem_iUnion]
-    constructor
-    · intro hx
-      obtain ⟨k, hk⟩ := ENNReal.exists_inv_nat_lt hx
-      exact ⟨k, lt_of_le_of_lt (ENNReal.inv_le_inv.mpr (by exact_mod_cast Nat.le_succ k)) hk⟩
-    · rintro ⟨k, hk⟩
-      exact (lt_of_le_of_lt (zero_le _) hk).ne'
-  have hae : ∀ᵐ x ∂haarAddCircle, divergenceLimsup f x = 0 := by
-    rw [ae_iff, hset]
-    exact measure_iUnion_null hzero
-  filter_upwards [hae] with x hx
-  exact tendsto_of_divergenceLimsup_eq_zero hx
-
-end
-
-end Math2
-
+/-- A classical special case of Carleson's theorem, in which the *whole* sequence of partial sums
+converges (indeed at every point): if the Fourier coefficients of a continuous function on the
+circle are absolutely summable, then the symmetric partial sums of its Fourier series converge
+pointwise to `f`. -/

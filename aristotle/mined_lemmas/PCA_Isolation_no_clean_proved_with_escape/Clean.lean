@@ -6,36 +6,75 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on imports: the required header above must be the very first thing in the file, and
-Lean forbids any `import` after a leading module doc-comment.  The development below is
-therefore carried out in plain Lean 4 core (`Init`), with no Mathlib import; every notion
-used (`List`, membership, decidability) is available there.
+/-!
+## The isolation engine's model
+
+A proof-carrying app is modelled as a small nondeterministic program `Prog`.
+Running it emits *effects*: either the exercise of a capability (`Effect.cap`)
+or the touching of a memory address (`Effect.mem`).
+
+A `Sandbox` fixes which capabilities are granted and how large the isolated
+memory region is.  An app *escapes* the sandbox if some reachable configuration
+of its small-step operational semantics emits an effect the sandbox does not
+permit.
+
+The engine certifies apps in two independent ways:
+
+* a **static capability scan** (`Clean`), a decidable syntactic check, and
+* a **memory-safety certificate** (`Proved`), an inductive derivation shipped
+  with the app.
+
+The target theorem `no_clean_proved_with_escape` is the *soundness* of this
+certification: no app can be clean, proved and still escape.  The converse,
+`clean_and_proved_of_not_escapes`, is its *completeness*: every non-escaping
+app is accepted by both certificates.  Both certificates are load-bearing and
+the statement is non-vacuous; see the examples at the end of the file.
+
+The development is self-contained (no imports), so that the file can begin with
+the required header comment.
 -/
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-/-- A capability is an abstract resource token that the isolation engine mediates. -/
-abbrev Cap := Nat
+/-- Capabilities that an app may exercise. -/
+inductive Cap
+  | read
+  | write
+  | net
+  | exec
+  | spawnProc
+  deriving DecidableEq, Repr
 
-/-- An application, described by the list of capabilities it *declares* it will use.
-This declaration is what the proof carried by the app talks about. -/
-structure App where
-  declared : List Cap
-  deriving DecidableEq
+/-- Memory addresses. -/
+abbrev Addr := Nat
 
-/-- A sandbox policy, described by the list of capabilities the isolation engine actually
-*grants* at run time. -/
-structure Policy where
-  granted : List Cap
-  deriving DecidableEq
+/-- Observable effects of a single execution step. -/
+inductive Effect
+  | cap (c : Cap)
+  | mem (a : Addr)
+  deriving DecidableEq, Repr
 
-/-- An execution trace is the list of capabilities exercised, in order. -/
-abbrev Trace := List Cap
+/-- A sandbox: the granted capabilities and the size of the isolated region. -/
+structure Sandbox where
+  /-- Which capabilities the sandbox grants. -/
+  allowed : Cap → Bool
+  /-- The size of the isolated memory region: addresses `< size` are internal. -/
+  size : Nat
 
-/-- A trace is *clean* for an app when every capability it exercises was declared. -/
+/-- The effects a sandbox permits. -/
 
-def Clean (a : App) (t : Trace) : Prop := ∀ c ∈ t, c ∈ a.declared
+def Clean (s : Sandbox) (p : Prog) : Prop := scan s p = true
 
-/-- An app is *proved* against a policy when its carried certificate checks out, i.e. every
-declared capability is granted by the policy. -/
+instance (s : Sandbox) (p : Prog) : Decidable (Clean s p) :=
+  inferInstanceAs (Decidable (scan s p = true))
+
+/-- The memory-safety certificate carried by a proof-carrying app. -/
+inductive MemSafe (s : Sandbox) : Prog → Prop
+  | skip : MemSafe s .skip
+  | use (c k) : MemSafe s k → MemSafe s (.use c k)
+  | touch (a k) : a < s.size → MemSafe s k → MemSafe s (.touch a k)
+  | branch (t e) : MemSafe s t → MemSafe s e → MemSafe s (.branch t e)
+  | loop (b k) : MemSafe s b → MemSafe s k → MemSafe s (.loop b k)
+
+/-- An app is *proved* when it carries a memory-safety certificate. -/

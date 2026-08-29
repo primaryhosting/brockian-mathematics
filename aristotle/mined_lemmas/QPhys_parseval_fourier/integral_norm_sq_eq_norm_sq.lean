@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Parseval Fourier
 Category: Quantum Physics
 Target: QPhys.parseval_fourier
@@ -6,25 +8,27 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open MeasureTheory SchwartzMap FourierTransform ComplexInnerProductSpace
 
-open MeasureTheory FourierTransform ComplexInnerProductSpace
+noncomputable section
 
 namespace QPhys
 
-/-- For an `L²` function `f : ℝ → ℂ` (a one–dimensional wavefunction), the integral of `‖f‖²`
-is the square of its `L²` norm. -/
+variable {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V] [FiniteDimensional ℝ V]
+  [MeasurableSpace V] [BorelSpace V]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
-theorem integral_norm_sq_eq_norm_sq (f : Lp (α := ℝ) ℂ 2) :
-    ∫ x : ℝ, ‖f x‖ ^ 2 = ‖f‖ ^ 2 := by
-  have h : ‖f‖ ^ 2 = RCLike.re (inner ℂ f f) := norm_sq_eq_re_inner f
-  rw [h, MeasureTheory.L2.inner_def]
-  simp only [inner_self_eq_norm_sq_to_K, ← RCLike.ofReal_pow, integral_ofReal, RCLike.ofReal_re]
+omit [CompleteSpace H] in
+/-- For an `L²` function, the integral of the squared norm is the square of the `L²` norm. -/
 
-/-- **Parseval/Plancherel theorem.** The Fourier transform on `L²(ℝ, ℂ)` preserves the total
-probability: the integral of the squared modulus of a wavefunction equals the integral of the
-squared modulus of its Fourier transform (its momentum-space wavefunction).
+theorem integral_norm_sq_eq_norm_sq (f : Lp (α := V) H 2) :
+    ∫ x : V, ‖(f : V → H) x‖ ^ 2 = ‖f‖ ^ 2 := by
+  have h1 : (inner ℂ f f : ℂ) = ∫ a : V, (inner ℂ ((f : V → H) a) ((f : V → H) a) : ℂ) :=
+    L2.inner_def f f
+  simp_rw [inner_self_eq_norm_sq_to_K] at h1
+  exact_mod_cast h1.symm
 
-This is a consequence of Mathlib's `MeasureTheory.Lp.norm_fourier_eq`, which states that the
-Fourier transform `𝓕` on `L²` is norm preserving (it is defined via the linear isometry
-equivalence `MeasureTheory.Lp.fourierTransformₗᵢ`). -/
+/-- **Parseval/Plancherel theorem.** The Fourier transform is an isometry of `L²`: for every
+square-integrable function `f`, the total squared magnitude of its Fourier transform equals the
+total squared magnitude of `f`.  (In quantum mechanics: the position-space and momentum-space
+wave functions carry the same total probability.) -/

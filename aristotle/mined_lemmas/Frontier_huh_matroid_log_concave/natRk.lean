@@ -23,28 +23,47 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 /-!
-# Log-concavity of the characteristic polynomial of a matroid (base case)
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-The Adiprasito–Huh–Katz theorem states that the coefficients `w₀, w₁, …, w_r` of the
-characteristic polynomial of a matroid form a log-concave sequence in absolute value,
-i.e. `|w_{k+1}|² ≥ |w_k| · |w_{k+2}|`.
+/-!
+The Adiprasito–Huh–Katz theorem states that the coefficients of the characteristic
+polynomial of a matroid form a log-concave sequence (in absolute value).
 
-Here we formalise the Whitney rank-generating definition of the characteristic polynomial
-of a matroid on a finite ground type, and prove the base case of the theorem: the free
-(Boolean) matroid `U_{n,n}` on an `n`-element ground set, whose characteristic polynomial
-is `(X - 1)^n`, so that the absolute values of its coefficients are the binomial
-coefficients `C(n, k)`, which are log-concave.
+Here we set up the characteristic polynomial of a finite matroid through Whitney's
+rank-generating (Möbius) formula
+`χ_M(X) = ∑_{S ⊆ E} (-1)^{|S|} X^{r(E) - r(S)}`
+and prove the base case of the theorem for the *free matroid* (the Boolean matroid,
+in which every subset of the ground set is independent), whose characteristic
+polynomial is `(X - 1)^n`, so that the absolute values of its coefficients are the
+binomial coefficients `C(n, k)`, which are log-concave.
 -/
 
 namespace Frontier
 
-open Polynomial Finset Matroid
+open Finset Polynomial
 
-/-- The `ℕ`-valued rank function of a matroid. -/
+variable {α : Type*}
 
-noncomputable def natRk {α : Type*} (M : Matroid α) (X : Set α) : ℕ := (M.eRk X).toNat
+/-- The natural-number rank function of a matroid, obtained from the `ℕ∞`-valued rank. -/
 
-/-- The characteristic polynomial of a matroid on a finite ground type, defined by the
-Whitney rank-generating formula
-`χ_M(X) = ∑_{S ⊆ E} (-1)^{|S|} X^{rk(E) - rk(S)}`. -/
+noncomputable def natRk (M : Matroid α) (S : Set α) : ℕ := (M.eRk S).toNat
+
+/-- The characteristic polynomial of a matroid on a finite ground set `α`,
+defined by Whitney's rank-generating formula
+`χ_M(X) = ∑_{S ⊆ E} (-1)^{|S|} X^{r(E) - r(S)}`. -/

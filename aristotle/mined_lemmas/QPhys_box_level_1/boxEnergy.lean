@@ -23,14 +23,24 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Box Level 1
+Category: Quantum Physics
+Target: QPhys.box_level_1
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 namespace QPhys
 
-/-- Energy levels of a quantum particle of mass `m` in a one-dimensional infinite
-potential well ("particle in a box") of width `L`, in units where the reduced
-Planck constant is `hbar`:  `E n = n² π² ħ² / (2 m L²)`. -/
+/-- Energy levels of a particle of mass `m` in a one-dimensional infinite
+potential well ("particle in a box") of width `L`, with reduced Planck
+constant `hbar`:  `E n = n² π² ħ² / (2 m L²)`. -/
 
 noncomputable def boxEnergy (hbar m L : ℝ) (n : ℕ) : ℝ :=
-  (n : ℝ) ^ 2 * Real.pi ^ 2 * hbar ^ 2 / (2 * m * L ^ 2)
+    (n : ℝ) ^ 2 * (Real.pi ^ 2 * hbar ^ 2) / (2 * m * L ^ 2)
 
-/-- The infinite-well energy ratio `E₁ / E₁ = 1²`, for a well of positive width
-holding a particle of positive mass with `hbar ≠ 0`. -/
+/-- The infinite-well energy ratio `E₁ / E₁ = 1²`, for positive values of the
+physical parameters `ħ`, `m`, `L` (which guarantee `E₁ ≠ 0`). -/

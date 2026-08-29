@@ -8,25 +8,40 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
 namespace Frontier
 
-universe u
+/-! ## Infinite games: positions, strategies, winning strategies
 
-variable {A : Type u}
+We consider infinite two-player games with perfect information played on an alphabet `X`.
+A *play* is a sequence `x : ℕ → X`; the move at time `n` is `x n`.  Which player moves at
+time `n` is recorded by a predicate `turn : ℕ → Prop` (the *turn set* of the player under
+consideration).  In the classical game `G(A)` on Baire space, player I moves at the even
+times and player II at the odd times, and player I wins the play `x` iff `x ∈ A`.
+-/
 
-/-! ## The game framework
+variable {X : Type*}
 
-We consider infinite two–player games on a set `A` of moves.  A *play* is a sequence
-`x : ℕ → A`; player `0` chooses the moves `x n` with `n` even, player `1` chooses the moves
-`x n` with `n` odd.  A *strategy* is a function `List A → A` assigning a move to every finite
-position (the player only consults it at their own turns). -/
+/-- The position reached after the first `n` moves of the play `x`. -/
 
-/-- The length-`n` initial segment of a play. -/
+def Determined (A : Set (ℕ → X)) : Prop :=
+  WinsFrom (fun n => Even n) A [] ∨ WinsFrom (fun n => ¬ Even n) Aᶜ []
 
-def Determined (S : Set (ℕ → A)) : Prop :=
-  (∃ s, WinsFor 0 S s) ∨ (∃ s, WinsFor 1 Sᶜ s)
+/-! ## Elementary facts about winning positions -/
 
-/-- Both games attached to `S` are determined: the one in which player `0` wants the play in
-`S`, and the one in which player `0` wants the play outside `S`.  (Determinacy of a single
-game is not preserved by complementation, so this symmetric notion is the one that behaves
-well along the Borel hierarchy.) -/
+/-- If *every* play through `p` lies in `A`, the position `p` is trivially won. -/

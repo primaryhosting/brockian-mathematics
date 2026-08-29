@@ -1,0 +1,70 @@
+import Mathlib
+
+/-!
+# Valiant Permanent
+Category: Frontier Cs
+Target: CS.valiant_permanent
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+## Scope of this formalization
+
+Valiant's theorem states that the 0/1 permanent is `#P`-complete. This file develops:
+
+* Boolean circuits with evaluation and size, and a definition of `#P` in its nonuniform
+  circuit-verifier form (`CS.InSharpP`), of parsimonious reductions computed by
+  polynomial-size circuits (`CS.ParsimoniousReduction`), and of `#P`-completeness
+  (`CS.IsSharpPComplete`).
+* The 0/1 permanent as a counting problem (`CS.permProblem`), its identification with
+  `Matrix.permanent` of the encoded 0/1 matrix, and its identification with the problem of
+  counting perfect matchings of a bipartite graph (`CS.matchingProblem`).
+* A proof that the 0/1 permanent problem lies in `#P` (`CS.permProblem_inSharpP`), by an
+  explicit polynomial-size verifier circuit family checking that the witness is a permutation
+  matrix supported on the `1`-entries of the instance.
+* `CS.valiant_permanent`: `#P`-completeness of the 0/1 permanent, given the `#P`-hardness of
+  counting bipartite perfect matchings. That hardness — the combinatorial core of Valiant's
+  original argument, proved there by an intricate gadget construction — is taken as an explicit
+  hypothesis and is *not* formalized here.
+-/
+
+namespace CS
+
+/-! ## Boolean circuits -/
+
+/-- Boolean circuits (formulas) over `N` input variables. -/
+inductive BoolCircuit (N : ℕ) : Type
+  | const : Bool → BoolCircuit N
+  | var : Fin N → BoolCircuit N
+  | neg : BoolCircuit N → BoolCircuit N
+  | conj : BoolCircuit N → BoolCircuit N → BoolCircuit N
+  | disj : BoolCircuit N → BoolCircuit N → BoolCircuit N
+
+namespace BoolCircuit
+
+variable {N : ℕ}
+
+/-- Evaluation of a circuit on an input assignment. -/
+
+lemma size_bigOr_le (s : ℕ) :
+    ∀ l : List (BoolCircuit N), (∀ c ∈ l, c.size ≤ s) →
+      (bigOr l).size ≤ 1 + l.length * (s + 1) := by
+  intro l
+  induction l with
+  | nil => simp [bigOr, size]
+  | cons c cs ih =>
+      intro h
+      have h1 : c.size ≤ s := h c (by simp)
+      have h2 := ih (fun d hd => h d (by simp [hd]))
+      simp only [bigOr, size, List.length_cons]
+      nlinarith [h1, h2]
+
+end BoolCircuit
+
+/-! ## Counting problems, `#P`, and parsimonious reductions -/
+
+/-- A counting problem: for every input length `n`, a function from `n`-bit inputs to `ℕ`. -/
+abbrev CountingProblem := (n : ℕ) → (Fin n → Bool) → ℕ
+
+/-- A function `ℕ → ℕ` is polynomially bounded. -/

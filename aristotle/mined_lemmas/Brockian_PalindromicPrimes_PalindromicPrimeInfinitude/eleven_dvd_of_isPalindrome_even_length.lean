@@ -33,47 +33,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Palindromic Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-The infinitude of decimal palindromic primes is an open problem.  This file develops
-what can be established unconditionally, and reduces the conjecture to a statement
-about *odd* digit lengths only.
-
-Main contents:
-
-* `Brockian.PalindromicPrimes.IsPalindrome` — decimal palindromes.
-* `eleven_dvd_of_isPalindrome_even_length` — every decimal palindrome with an even
-  number of digits is divisible by `11`.
-* `eq_eleven_of_prime_palindrome_even_length` — hence `11` is the *only* palindromic
-  prime with an even number of digits.
-* `palindromes_infinite` — there are infinitely many decimal palindromes
-  (the repunits).
-* `PalindromicPrimeInfinitude` — the conditional reduction: if for arbitrarily large
-  `m` there is a prime palindrome with exactly `2 * m + 1` digits, then there are
-  infinitely many palindromic primes.
-* `palindromicPrimes_infinite_iff` — the reduction is in fact an equivalence, so no
-  strength is lost by restricting attention to odd digit lengths.
--/
-
 namespace Brockian.PalindromicPrimes
 
-/-- A natural number is a (decimal) palindrome when its list of base-10 digits is
-equal to its own reversal. -/
+/-- `n` is a palindrome in base `b` if its list of base-`b` digits is equal to its reverse. -/
 
-theorem eleven_dvd_of_isPalindrome_even_length {n : ℕ} (hpal : IsPalindrome n)
+theorem eleven_dvd_of_isPalindrome_even_length {n : ℕ} (hpal : IsPalindrome 10 n)
     (hlen : Even (Nat.digits 10 n).length) : 11 ∣ n := by
-  rw [Nat.eleven_dvd_iff]
-  have hrev : ((Nat.digits 10 n).map (fun d : ℕ => (d : ℤ))).reverse
-      = (Nat.digits 10 n).map (fun d : ℕ => (d : ℤ)) := by
-    rw [← List.map_reverse, hpal]
-  have hlen' : Even ((Nat.digits 10 n).map (fun d : ℕ => (d : ℤ))).length := by
-    simpa using hlen
-  rw [alternatingSum_eq_zero_of_palindrome_even _ hrev hlen']
+  have hzero : ((Nat.digits 10 n).map (fun m : ℕ => (m : ℤ))).alternatingSum = 0 := by
+    refine alternatingSum_eq_zero_of_palindrome_even (List.Palindrome.of_reverse_eq ?_) ?_
+    · rw [← List.map_reverse, hpal]
+    · simpa using hlen
+  rw [Nat.eleven_dvd_iff, hzero]
   exact dvd_zero 11
 
-/-- `11` is the only palindromic prime with an even number of digits. -/
+/-- `11` is the only base-10 palindromic prime with an even number of digits. -/

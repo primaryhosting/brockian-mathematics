@@ -30,11 +30,14 @@ open Matrix
 
 variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- The positive index (number of positive eigenvalues) of a Hermitian matrix. -/
+/-- The positive index of inertia of a Hermitian matrix: the number of indices `i` such that
+the `i`-th eigenvalue is positive (i.e. the number of positive eigenvalues, counted with
+multiplicity). -/
 
 lemma posCoords_apply {A : Matrix n n 𝕜} (hA : A.IsHermitian) (x : n → 𝕜)
     (i : {i : n // 0 < hA.eigenvalues i}) :
     posCoords hA x i = (star (hA.eigenvectorUnitary : Matrix n n 𝕜) *ᵥ x) i.1 := rfl
 
-/-- **Sylvester's law of inertia**, hard direction: any subspace on which the Hermitian form
-of `A` is positive definite has dimension at most the number of positive eigenvalues of `A`. -/
+/-- **Sylvester's law of inertia**, hard direction: if the Hermitian form associated with a
+Hermitian matrix `A` is positive definite on a submodule `W` of `n → 𝕜`, then the dimension of
+`W` is at most the number of positive eigenvalues of `A`. -/

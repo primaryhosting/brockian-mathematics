@@ -9,6 +9,23 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+/-!
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -34,220 +51,157 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Gibbs' inequality (nonnegativity of relative entropy) -/
+variable {V : Type*} [Fintype V] [DecidableEq V]
 
-/-- Gibbs' inequality on a finite index type: the relative entropy (Kullback–Leibler
-divergence) of two probability distributions is nonnegative, provided `p` is absolutely
-continuous with respect to `q`. -/
-theorem sum_mul_log_div_nonneg {ι : Type*} [Fintype ι] (p q : ι → ℝ)
-    (hp : ∀ i, 0 ≤ p i) (hq : ∀ i, 0 ≤ q i)
-    (hac : ∀ i, 0 < p i → 0 < q i)
-    (hsp : ∑ i, p i = 1) (hsq : ∑ i, q i = 1) :
-    0 ≤ ∑ i, p i * Real.log (p i / q i) := by
-  have key : ∀ i, p i * Real.log (q i / p i) ≤ q i - p i := by
-    intro i
-    rcases (hp i).lt_or_eq with h | h
-    · have hqi := hac i h
-      have hlog := Real.log_le_sub_one_of_pos (div_pos hqi h)
-      calc p i * Real.log (q i / p i) ≤ p i * (q i / p i - 1) :=
-            mul_le_mul_of_nonneg_left hlog h.le
-        _ = q i - p i := by field_simp
-    · rw [← h]
-      simpa using hq i
-  have hsum : ∑ i, p i * Real.log (q i / p i) ≤ 0 := by
-    calc ∑ i, p i * Real.log (q i / p i) ≤ ∑ i, (q i - p i) :=
-          Finset.sum_le_sum fun i _ => key i
-      _ = 0 := by rw [Finset.sum_sub_distrib, hsp, hsq, sub_self]
-  have heq : ∑ i, p i * Real.log (p i / q i) = -∑ i, p i * Real.log (q i / p i) := by
-    rw [← Finset.sum_neg_distrib]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    rw [show p i / q i = (q i / p i)⁻¹ from (inv_div _ _).symm, Real.log_inv]
-    ring
-  rw [heq]
-  linarith
+/-- A discrete (binary-node) dynamical system in the style of Integrated Information
+Theory: a finite set `V` of nodes, each node `v` carrying a stochastic mechanism
+`k v s : Bool → ℝ` giving the probability distribution of its next state given the
+current global state `s : V → Bool`. -/
+structure IITSystem (V : Type*) [Fintype V] where
+  /-- `k v s b` is the probability that node `v` takes value `b` at the next step,
+  given the current global state `s`. -/
+  k : V → (V → Bool) → Bool → ℝ
+  k_nonneg : ∀ v s b, 0 ≤ k v s b
+  k_sum : ∀ v s, k v s true + k v s false = 1
 
-/-! ## Systems, mechanisms and the cut (partitioned) dynamics -/
+/-- The transition probability matrix of the system: nodes update independently
+(conditionally on the current global state), so the probability of moving from state
+`s` to state `t` is the product of the individual node probabilities. -/
+def tpm (S : IITSystem V) (s t : V → Bool) : ℝ := ∏ v : V, S.k v s (t v)
 
-/-- A finite discrete dynamical system: `V` is the set of elements (nodes), `S` the set of
-states of a single element, and `tpm v s t` is the probability that element `v` is in state
-`t` at the next time step, given that the whole system is in state `s` now.  Elements update
-independently of each other given the current global state (this is the standard
-transition-probability-matrix setting used in integrated information theory). -/
-structure System (V S : Type*) [Fintype V] [DecidableEq V] [Fintype S] where
-  /-- `tpm v s t`: probability that node `v` transitions to state `t` from global state `s`. -/
-  tpm : V → (V → S) → S → ℝ
-  tpm_nonneg : ∀ v s t, 0 ≤ tpm v s t
-  tpm_sum : ∀ v s, ∑ t, tpm v s t = 1
+/-- The state that agrees with `s` on `A` and with the "noise" state `t` off `A`.
+This implements the IIT operation of injecting independent noise on the connections
+that cross a partition. -/
+def noiseOutside (A : Finset V) (s t : V → Bool) : V → Bool :=
+  fun u => if u ∈ A then s u else t u
 
-namespace System
+/-- The mechanism of node `v` after all its incoming connections from outside `A` have
+been cut, i.e. replaced by uniform independent noise: one averages the mechanism over
+all states of the nodes outside `A`. -/
+noncomputable def cutKernel (S : IITSystem V) (A : Finset V) (v : V) (s : V → Bool) (b : Bool) : ℝ :=
+  (∑ t : V → Bool, S.k v (noiseOutside A s t) b) / (Fintype.card (V → Bool) : ℝ)
 
-variable {V S : Type*} [Fintype V] [DecidableEq V] [Fintype S] [Nonempty S]
+/-- The transition probability matrix of the system cut along the bipartition
+`(A, Aᶜ)`: each node only "sees" the current state of its own part, the other part
+being replaced by noise. -/
+noncomputable def cutTpm (S : IITSystem V) (A : Finset V) (s t : V → Bool) : ℝ :=
+  ∏ v : V, if v ∈ A then cutKernel S A v s (t v) else cutKernel S Aᶜ v s (t v)
 
-/-- The joint transition probability of the whole system: the probability of the next global
-state `s'` given the current global state `s`. -/
-noncomputable def prob (M : System V S) (s s' : V → S) : ℝ := ∏ v, M.tpm v s (s' v)
+/-- The effective information generated by the system in state `s` relative to the
+bipartition `(A, Aᶜ)`: the distance (here the `L¹` / total-variation-type distance)
+between the actual next-state repertoire and the repertoire of the cut system. -/
+noncomputable def effectiveInformation (S : IITSystem V) (A : Finset V) (s : V → Bool) : ℝ :=
+  ∑ t : V → Bool, |tpm S s t - cutTpm S A s t|
 
-/-- `glue A s u` is the state that agrees with `s` on `A` and with `u` off `A`. -/
-def glue (A : Finset V) (s u : V → S) : V → S := fun w => if w ∈ A then s w else u w
+/-- Integrated information `Φ`: the effective information minimized over all
+bipartitions of the system. -/
+noncomputable def Phi (S : IITSystem V) (s : V → Bool) : ℝ :=
+  sInf {x : ℝ | ∃ A : Finset V, A.Nonempty ∧ A ≠ Finset.univ ∧
+    x = effectiveInformation S A s}
 
-/-- The mechanism of node `v` after cutting all connections coming from outside the part `A`:
-the inputs from outside `A` are replaced by independent uniform noise (i.e. averaged over). -/
-noncomputable def cutTpm (M : System V S) (A : Finset V) (v : V) (s : V → S) (t : S) : ℝ :=
-  (∑ u : V → S, M.tpm v (glue A s u) t) / (Fintype.card (V → S) : ℝ)
+/-- The system is disconnected along the bipartition `(A, Aᶜ)`: the mechanism of a node
+inside `A` depends only on the current state of `A`, and the mechanism of a node outside
+`A` depends only on the current state of `Aᶜ`. -/
+def Disconnected (S : IITSystem V) (A : Finset V) : Prop :=
+  (∀ v ∈ A, ∀ s s' : V → Bool, (∀ u ∈ A, s u = s' u) → ∀ b, S.k v s b = S.k v s' b) ∧
+  (∀ v ∉ A, ∀ s s' : V → Bool, (∀ u ∉ A, s u = s' u) → ∀ b, S.k v s b = S.k v s' b)
 
-/-- The part of the bipartition `{A, Aᶜ}` containing the node `v`. -/
-def part (A : Finset V) (v : V) : Finset V := if v ∈ A then A else Aᶜ
+section Lemmas
 
-/-- The joint transition probability of the system after applying the cut associated with the
-bipartition `{A, Aᶜ}`: every node is driven by its own part only, the inputs coming from the
-other part being replaced by noise. -/
-noncomputable def cutProb (M : System V S) (A : Finset V) (s s' : V → S) : ℝ :=
-  ∏ v, M.cutTpm (part A v) v s (s' v)
+variable {S : IITSystem V} {A : Finset V}
 
-/-- The effective information of the bipartition `{A, Aᶜ}` at the state `s`: the relative
-entropy between the actual next-state distribution and the one produced by the cut system. -/
-noncomputable def EI (M : System V S) (A : Finset V) (s : V → S) : ℝ :=
-  ∑ s' : V → S, M.prob s s' * Real.log (M.prob s s' / M.cutProb A s s')
+lemma card_state_pos : 0 < (Fintype.card (V → Bool) : ℝ) := by
+  exact_mod_cast Fintype.card_pos
 
-/-- The set of bipartitions of the system: nonempty proper subsets `A` of the set of nodes,
-each one standing for the bipartition `{A, Aᶜ}`. -/
-def Bipartitions (V : Type*) [Fintype V] [DecidableEq V] : Set (Finset V) :=
-  {A | A.Nonempty ∧ A ≠ Finset.univ}
-
-/-- **Integrated information** `Φ` of the system at a state `s`: the minimum of the effective
-information over all bipartitions of the system. -/
-noncomputable def Phi (M : System V S) (s : V → S) : ℝ :=
-  sInf {x : ℝ | ∃ A ∈ Bipartitions V, x = M.EI A s}
-
-/-- The mechanisms of the nodes of `A` depend only on the current state of `A`. -/
-def IndepOn (M : System V S) (A : Finset V) : Prop :=
-  ∀ v ∈ A, ∀ s s' : V → S, (∀ w ∈ A, s w = s' w) → M.tpm v s = M.tpm v s'
-
-/-- The system splits into the two non-interacting subsystems `A` and `Aᶜ`. -/
-def Disconnected (M : System V S) (A : Finset V) : Prop :=
-  M.IndepOn A ∧ M.IndepOn Aᶜ
-
-/-! ## Basic facts -/
-
-omit [Nonempty S] in
-theorem prob_nonneg (M : System V S) (s s' : V → S) : 0 ≤ M.prob s s' :=
-  Finset.prod_nonneg fun v _ => M.tpm_nonneg v s (s' v)
-
-omit [Nonempty S] in
-theorem sum_prob (M : System V S) (s : V → S) : ∑ s' : V → S, M.prob s s' = 1 := by
-  have h : ∑ s' : V → S, (∏ v, M.tpm v s (s' v)) = ∏ v, ∑ t, M.tpm v s t := by
-    rw [Finset.prod_univ_sum, Fintype.piFinset_univ]
-  simp [prob, h, M.tpm_sum]
-
-omit [Nonempty S] in
-theorem cutTpm_nonneg (M : System V S) (A : Finset V) (v : V) (s : V → S) (t : S) :
-    0 ≤ M.cutTpm A v s t :=
-  div_nonneg (Finset.sum_nonneg fun _ _ => M.tpm_nonneg _ _ _) (Nat.cast_nonneg _)
-
-theorem card_pi_pos : (0 : ℝ) < (Fintype.card (V → S) : ℝ) := by
-  exact_mod_cast Fintype.card_pos (α := V → S)
-
-theorem sum_cutTpm (M : System V S) (A : Finset V) (v : V) (s : V → S) :
-    ∑ t, M.cutTpm A v s t = 1 := by
-  unfold cutTpm
-  rw [← Finset.sum_div, Finset.sum_comm]
-  simp only [M.tpm_sum]
-  simp [Finset.card_univ]
-
-omit [Nonempty S] in
-theorem cutProb_nonneg (M : System V S) (A : Finset V) (s s' : V → S) :
-    0 ≤ M.cutProb A s s' :=
-  Finset.prod_nonneg fun _ _ => M.cutTpm_nonneg _ _ _ _
-
-theorem sum_cutProb (M : System V S) (A : Finset V) (s : V → S) :
-    ∑ s' : V → S, M.cutProb A s s' = 1 := by
-  have h : ∑ s' : V → S, (∏ v, M.cutTpm (part A v) v s (s' v))
-      = ∏ v, ∑ t, M.cutTpm (part A v) v s t := by
-    rw [Finset.prod_univ_sum, Fintype.piFinset_univ]
-  simp [cutProb, h, M.sum_cutTpm]
-
-/-- Absolute continuity: the cut dynamics can do everything the actual dynamics can. -/
-theorem cutProb_pos_of_prob_pos (M : System V S) (A : Finset V) (s s' : V → S)
-    (h : 0 < M.prob s s') : 0 < M.cutProb A s s' := by
-  have hfac : ∀ v : V, 0 < M.tpm v s (s' v) := by
-    intro v
-    rcases (M.tpm_nonneg v s (s' v)).lt_or_eq with hv | hv
-    · exact hv
-    · exact absurd (Finset.prod_eq_zero (Finset.mem_univ v) hv.symm) h.ne'
-  refine Finset.prod_pos fun v _ => ?_
-  have hglue : glue (part A v) s s = s := by
-    funext w; simp [glue]
-  have hle : M.tpm v s (s' v) ≤ ∑ u : V → S, M.tpm v (glue (part A v) s u) (s' v) := by
-    have := Finset.single_le_sum
-      (f := fun u : V → S => M.tpm v (glue (part A v) s u) (s' v))
-      (fun u _ => M.tpm_nonneg _ _ _) (Finset.mem_univ s)
-    simpa only [hglue] using this
-  exact div_pos (lt_of_lt_of_le (hfac v) hle) (card_pi_pos (V := V) (S := S))
-
-/-- Effective information is always nonnegative. -/
-theorem EI_nonneg (M : System V S) (A : Finset V) (s : V → S) : 0 ≤ M.EI A s :=
-  Frontier.sum_mul_log_div_nonneg _ _ (fun s' => M.prob_nonneg s s')
-    (fun s' => M.cutProb_nonneg A s s') (fun s' h => M.cutProb_pos_of_prob_pos A s s' h)
-    (M.sum_prob s) (M.sum_cutProb A s)
-
-/-- For a disconnected system, the cut along the splitting bipartition changes nothing. -/
-theorem cutProb_eq_prob_of_disconnected (M : System V S) {A : Finset V}
-    (hA : M.Disconnected A) (s s' : V → S) : M.cutProb A s s' = M.prob s s' := by
-  have hN : (Fintype.card (V → S) : ℝ) ≠ 0 := (card_pi_pos (V := V) (S := S)).ne'
-  refine Finset.prod_congr rfl fun v _ => ?_
-  have hconst : ∀ u : V → S, M.tpm v (glue (part A v) s u) = M.tpm v s := by
-    intro u
-    by_cases hv : v ∈ A
-    · refine hA.1 v hv _ _ fun w hw => ?_
-      simp [glue, part, hv, hw]
-    · have hv' : v ∈ Aᶜ := Finset.mem_compl.2 hv
-      refine hA.2 v hv' _ _ fun w hw => ?_
-      simp [glue, part, hv, hw]
-  unfold cutTpm
-  simp only [fun u => congrFun (hconst u) (s' v)]
-  rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+/-- Cutting the connections coming from outside `A` does not change the mechanism of a
+node `v ∈ A` whose mechanism only depends on `A`. -/
+lemma cutKernel_eq_of_indep (v : V)
+    (hv : ∀ s s' : V → Bool, (∀ u ∈ A, s u = s' u) → ∀ b, S.k v s b = S.k v s' b)
+    (s : V → Bool) (b : Bool) : cutKernel S A v s b = S.k v s b := by
+  have hconst : ∀ t : V → Bool, S.k v (noiseOutside A s t) b = S.k v s b := by
+    intro t
+    refine hv _ _ ?_ b
+    intro u hu
+    simp [noiseOutside, hu]
+  unfold cutKernel
+  rw [Finset.sum_congr rfl (fun t _ => hconst t), Finset.sum_const, Finset.card_univ,
+    nsmul_eq_mul]
   field_simp
 
-/-- For a disconnected system, the effective information of the splitting bipartition is `0`. -/
-theorem EI_eq_zero_of_disconnected (M : System V S) {A : Finset V}
-    (hA : M.Disconnected A) (s : V → S) : M.EI A s = 0 := by
-  refine Finset.sum_eq_zero fun s' _ => ?_
-  rw [M.cutProb_eq_prob_of_disconnected hA s s']
-  rcases eq_or_ne (M.prob s s') 0 with h | h
-  · simp [h]
-  · simp [div_self h]
+/-- The complementary statement: cutting the connections coming from `A` does not change
+the mechanism of a node `v ∉ A` whose mechanism only depends on `Aᶜ`. -/
+lemma cutKernel_compl_eq_of_indep (v : V)
+    (hv : ∀ s s' : V → Bool, (∀ u ∉ A, s u = s' u) → ∀ b, S.k v s b = S.k v s' b)
+    (s : V → Bool) (b : Bool) : cutKernel S Aᶜ v s b = S.k v s b := by
+  refine cutKernel_eq_of_indep (A := Aᶜ) v ?_ s b
+  intro s₁ s₂ h b'
+  exact hv s₁ s₂ (fun u hu => h u (by simpa using hu)) b'
 
-end System
+/-- For a system disconnected along `(A, Aᶜ)`, the cut transition matrix coincides with
+the actual transition matrix. -/
+lemma cutTpm_eq_tpm (h : Disconnected S A) (s t : V → Bool) :
+    cutTpm S A s t = tpm S s t := by
+  unfold cutTpm tpm
+  refine Finset.prod_congr rfl ?_
+  intro v _
+  by_cases hv : v ∈ A
+  · simp only [if_pos hv]
+    exact cutKernel_eq_of_indep v (h.1 v hv) s (t v)
+  · simp only [if_neg hv]
+    exact cutKernel_compl_eq_of_indep v (h.2 v hv) s (t v)
+
+/-- Effective information is nonnegative. -/
+lemma effectiveInformation_nonneg (S : IITSystem V) (A : Finset V) (s : V → Bool) :
+    0 ≤ effectiveInformation S A s :=
+  Finset.sum_nonneg fun _ _ => abs_nonneg _
+
+/-- A disconnected bipartition carries zero effective information. -/
+lemma effectiveInformation_eq_zero_of_disconnected (h : Disconnected S A) (s : V → Bool) :
+    effectiveInformation S A s = 0 := by
+  unfold effectiveInformation
+  refine Finset.sum_eq_zero ?_
+  intro t _
+  rw [cutTpm_eq_tpm h s t, sub_self, abs_zero]
+
+end Lemmas
 
 /-- **Integrated information vanishes for a disconnected system.**
 
-`Φ`, defined as the minimum over all bipartitions `{A, Aᶜ}` of the system of the effective
-information `EI` (the relative entropy between the actual next-state distribution and the
-distribution obtained after cutting the connections between the two parts), is equal to `0`
-whenever the system splits into two non-interacting subsystems. -/
-theorem iit_phi_partition {V S : Type*} [Fintype V] [DecidableEq V] [Fintype S] [Nonempty S]
-    (M : System V S) {A : Finset V} (hA : A ∈ System.Bipartitions V)
-    (hdis : M.Disconnected A) (s : V → S) :
-    M.Phi s = 0 := by
-  have hlb : ∀ x ∈ {x : ℝ | ∃ A ∈ System.Bipartitions V, x = M.EI A s}, 0 ≤ x := by
-    rintro x ⟨B, -, rfl⟩
-    exact M.EI_nonneg B s
-  have hmem : (0 : ℝ) ∈ {x : ℝ | ∃ A ∈ System.Bipartitions V, x = M.EI A s} :=
-    ⟨A, hA, (M.EI_eq_zero_of_disconnected hdis s).symm⟩
+Given a finite binary-node stochastic system `S` and a bipartition `(A, Aᶜ)` into two
+nonempty parts such that no node's mechanism depends on the other part, the integrated
+information `Φ` (effective information minimized over all bipartitions) is zero. -/
+theorem iit_phi_partition (S : IITSystem V) (A : Finset V)
+    (hA : A.Nonempty) (hA' : A ≠ Finset.univ) (hdisc : Disconnected S A)
+    (s : V → Bool) : Phi S s = 0 := by
+  set T : Set ℝ := {x : ℝ | ∃ B : Finset V, B.Nonempty ∧ B ≠ Finset.univ ∧
+    x = effectiveInformation S B s} with hT
+  have hmem : (0 : ℝ) ∈ T := by
+    refine ⟨A, hA, hA', ?_⟩
+    exact (effectiveInformation_eq_zero_of_disconnected hdisc s).symm
+  have hlb : ∀ x ∈ T, (0 : ℝ) ≤ x := by
+    rintro x ⟨B, -, -, rfl⟩
+    exact effectiveInformation_nonneg S B s
   refine le_antisymm ?_ ?_
   · exact csInf_le ⟨0, fun x hx => hlb x hx⟩ hmem
   · exact le_csInf ⟨0, hmem⟩ hlb
 
-/-- The hypotheses of `Frontier.iit_phi_partition` are satisfiable: there is a genuine
-two-element system together with a bipartition along which it is disconnected. -/
-theorem exists_disconnected_system :
-    ∃ (M : System Bool Bool) (A : Finset Bool),
-      A ∈ System.Bipartitions Bool ∧ M.Disconnected A := by
-  refine ⟨⟨fun _ _ _ => 1 / 2, by norm_num, by intro _ _; simp⟩, {true}, ⟨⟨true, by simp⟩, ?_⟩,
-    ⟨fun _ _ _ _ _ => rfl, fun _ _ _ _ _ => rfl⟩⟩
-  intro h
-  have : (false : Bool) ∈ ({true} : Finset Bool) := h ▸ Finset.mem_univ false
-  simp at this
+/-- Sanity check: the hypotheses of `iit_phi_partition` are satisfiable, so the theorem
+is not vacuous. Take two nodes (indexed by `Bool`), each of which deterministically
+copies its own current state; this system is disconnected along the bipartition
+`({true}, {false})`. -/
+example : ∃ (S : IITSystem Bool) (A : Finset Bool),
+    A.Nonempty ∧ A ≠ Finset.univ ∧ Disconnected S A := by
+  refine ⟨⟨fun v s b => if b = s v then 1 else 0, ?_, ?_⟩, {true}, ⟨true, by simp⟩, ?_, ?_, ?_⟩
+  · intro v s b; positivity
+  · intro v s; cases h : s v <;> simp [h]
+  · intro hcontra
+    have : (false : Bool) ∈ ({true} : Finset Bool) := by rw [hcontra]; simp
+    simp at this
+  · intro v hv s s' hs b
+    simp only [Finset.mem_singleton] at hv
+    simp only [hs v (by simp [hv])]
+  · intro v hv s s' hs b
+    simp only [hs v hv]
 
 end Frontier
 

@@ -23,7 +23,9 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Data Processing
 Category: Frontier Qi
 Target: QI.data_processing
@@ -31,42 +33,67 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+/-
+Scope note.
 
-/-!
-# Data Processing
+The data-processing inequality states that relative entropy is monotone under
+channels.  This file develops the inequality in the *commutative* (equivalently:
+jointly diagonalisable / classical) sector of quantum information theory, where a
+CPTP map restricted to a commuting family of states is exactly a stochastic map
+between the corresponding spectra, and the quantum relative entropy
+`Tr ρ (log ρ - log σ)` is exactly the Kullback-Leibler divergence of the two
+spectra.
 
-Category: Frontier Qi.  Target: `QI.data_processing`.
+Everything below is proved from scratch: the log-sum inequality (from convexity
+of `x ↦ x log x`), the data-processing inequality `QI.data_processing`, and, as a
+corollary of it, Gibbs' inequality (nonnegativity of relative entropy).
 
-(The header above is repeated as a plain comment at the top of the file, since Lean does not
-allow a module docstring to precede the `import` commands.)
-
-## Quantum relative entropy and the data-processing inequality
-
-We work with finite-dimensional quantum systems, i.e. complex matrices indexed by a finite
-type `n`, and we use the Umegaki relative entropy
-`D(ρ‖σ) = Tr[ρ (log ρ - log σ)]`,
-where the matrix logarithm is the one provided by the continuous functional calculus.
+The last section leaves the commutative sector: it proves the data-processing
+inequality `QI.data_processing_max` for the max-relative entropy
+`D_max(ρ‖σ) = log inf {λ ≥ 0 | ρ ≤ λ σ}` for arbitrary, possibly noncommuting,
+density matrices and arbitrary positive trace-preserving maps (in particular all
+CPTP maps).
 -/
+
+open Finset
 
 namespace QI
 
-open Matrix Unitary
+variable {ι κ : Type*}
+
+/-- Relative entropy (Kullback–Leibler divergence) of two finite nonnegative
+weight vectors, with the usual conventions `0 log (0/b) = 0` and
+`0 log (0/0) = 0` (implemented via `Real.log 0 = 0` and `x / 0 = 0`). -/
+
+theorem relEntropy_nonneg [Fintype ι] (p q : ι → ℝ) (hp : ∀ i, 0 ≤ p i)
+    (hq : ∀ i, 0 ≤ q i) (hac : ∀ i, q i = 0 → p i = 0)
+    (hps : ∑ i, p i = 1) (hqs : ∑ i, q i = 1) :
+    0 ≤ relEntropy p q := by
+  have h := data_processing (trivialChannel ι) p q hp hq hac
+  have hap : (trivialChannel ι).apply p = fun _ => 1 := by
+    funext k
+    simp [Channel.apply, trivialChannel, hps]
+  have haq : (trivialChannel ι).apply q = fun _ => 1 := by
+    funext k
+    simp [Channel.apply, trivialChannel, hqs]
+  rw [hap, haq] at h
+  simpa [relEntropy] using h
+
+/-! ### A genuinely noncommutative instance: the max-relative entropy
+
+The *max-relative entropy* `D_max(ρ‖σ) = log inf {λ ≥ 0 | ρ ≤ λ σ}` (the `α = ∞`
+member of the Rényi family of quantum relative entropies) also satisfies the
+data-processing inequality, and here we prove it for genuine, possibly
+noncommuting density matrices and arbitrary positive trace-preserving maps (in
+particular all CPTP maps).  The proof uses the hint's reformulation: instead of
+comparing the two infima directly one shows the *reverse inclusion of the
+admissible sets*, `{λ | ρ ≤ λσ} ⊆ {λ | Φρ ≤ λΦσ}`, from which monotonicity of
+the infimum, and hence of the logarithm, is immediate. -/
+
+open Matrix
 open scoped ComplexOrder
 
-variable {n : Type*} [Fintype n] [DecidableEq n]
+variable {n m : Type*}
 
-/-- The matrix logarithm, defined through the continuous functional calculus. -/
-
-theorem relEntropy_nonneg (hρ : ρ.PosDef) (hσ : σ.PosDef) (h : ρ.trace = σ.trace) :
-    0 ≤ relEntropy ρ σ := by
-  have := relEntropy_ge_trace_sub hρ hσ
-  rw [h] at this
-  simpa using this
-
-end Klein
-
-section Dephasing
-
-variable {ρ σ : Matrix n n ℂ}
-
+/-- The Loewner (positive semidefinite) order on matrices: `A ≼ B` iff `B - A` is
+positive semidefinite. -/

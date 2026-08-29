@@ -23,6 +23,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Counting Diverges Of Discrete And Rvm
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -31,17 +39,38 @@ Category: Brockian (Open Discharge)
 Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+The Weyl-law style statement proved here: for a linear operator `T` on an infinite
+dimensional real vector space (in particular on a real inner product space) whose spectrum is
+*discrete* — every spectral subspace below a level is finite dimensional — and whose
+eigensystem is *complete*, as furnished by the Rayleigh variational method (RVM), the
+eigenvalue counting function `lam ↦ dim (span of eigenvectors with eigenvalue ≤ lam)`
+diverges to `+∞`.
+
+The final section exhibits an explicit model (the diagonal operator `f ↦ (n ↦ n * f n)` on
+finitely supported real sequences) satisfying all the hypotheses, so the theorem is not
+vacuous.
 -/
 
-open Filter Set
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+
+set_option maxHeartbeats 1000000
 
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- The eigenvalue counting function of a spectrum `S ⊆ ℝ`:
-`counting S T` is the number of spectral points that are `≤ T`. -/
+section General
 
-noncomputable def counting (S : Set ℝ) (T : ℝ) : ℕ := (S ∩ Set.Iic T).ncard
+variable {H : Type*} [AddCommGroup H] [Module ℝ H]
 
-/-- `S` is a *discrete spectrum*: every half-line `(-∞, T]` contains only finitely many
-spectral points.  (Equivalently, the spectrum has no finite accumulation point and each
-eigenvalue has finite multiplicity, so that `counting S T` is a genuine natural number.) -/
+/-- The low-lying spectral subspace: the span of all eigenvectors of `T` whose
+eigenvalue is at most `lam`. -/
+
+noncomputable def counting (T : Module.End ℝ H) (lam : ℝ) : ℕ :=
+  Module.finrank ℝ (lowSpectrumSpan T lam)
+
+/-- Discreteness of the spectrum: below every level `lam` only finitely much spectrum
+(counted with multiplicity) accumulates, i.e. the corresponding spectral subspace is
+finite dimensional. -/

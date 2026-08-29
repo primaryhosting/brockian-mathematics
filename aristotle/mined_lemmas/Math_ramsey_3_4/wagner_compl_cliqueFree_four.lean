@@ -1,35 +1,41 @@
 import Mathlib
 
+/-!
+# Ramsey 3 4
+Category: Pure Mathematics
+Target: Math.ramsey_3_4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
+set_option maxRecDepth 40000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace Math
 
-/-- `RamseyProp s t n` says that for every graph `G` on `n` vertices (equivalently, every
-two-colouring of the edges of the complete graph on `n` vertices) either `G` contains a clique
-of size `s`, or the complement of `G` contains a clique of size `t` (i.e. `G` contains an
-independent set of size `t`). -/
+open SimpleGraph Finset
 
-theorem wagner_compl_cliqueFree_four : (wagnerᶜ).CliqueFree 4 := by decide
+/-- `RamseyProp n k l` says that every simple graph on `n` vertices contains either a clique
+of size `k` or an independent set (a clique of its complement) of size `l`. -/
 
-/-- Lower bound: `R(3,4) > 8`, witnessed by the Wagner graph. -/
+theorem wagner_compl_cliqueFree_four : wagnerᶜ.CliqueFree 4 := by
+  intro t; revert t; decide
+
+/-! ### The upper bound -/
+
+section Upper
+
+variable {V : Type*} [DecidableEq V] {G : SimpleGraph V}
+
+/-- Ramsey `R(3,3) ≤ 6`, in the form needed below: in a triangle-free graph, any set of at
+least `6` vertices contains an independent set of size `3`. -/

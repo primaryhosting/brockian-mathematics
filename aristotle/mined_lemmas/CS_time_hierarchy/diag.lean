@@ -1,5 +1,4 @@
-import Mathlib
-/-!
+/-
 # Time Hierarchy
 Category: Frontier Cs
 Target: CS.time_hierarchy
@@ -7,31 +6,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-The time hierarchy theorem, by diagonalization, in the step-indexed model of
-computation provided by Mathlib's Gödel-numbered partial recursive functions
-(`Nat.Partrec.Code`) together with its step-indexed evaluator
-`Nat.Partrec.Code.evaln : ℕ → Code → ℕ → Option ℕ`.
-
-For a time bound `t : ℕ → ℕ`, `CS.TIME t` is the set of languages `L : ℕ → Bool`
-for which some code `c` outputs `L x` on input `x` within `t x` steps.
-
-The main theorem `CS.time_hierarchy` states: for every computable time bound `f`
-there is a larger time bound `g` with `TIME f ⊊ TIME g`; i.e. more time gives
-strictly more languages.
--/
+import Mathlib
 
 namespace CS
 
-open Nat.Partrec Nat.Partrec.Code Denumerable
+/-! ## A clocked model of computation
 
-/-- A language: a decision problem on the natural numbers. -/
-abbrev Language := ℕ → Bool
+Programs are natural numbers (their own Gödel numbers).  A code `c` is decoded
+on the fly:
 
-/-- `TIME t` is the class of languages decided within `t x` steps on input `x`,
-where a step budget is measured by Mathlib's step-indexed evaluator `evaln`. -/
+* `0` : the constant `0`
+* `1` : the successor function
+* `2` : first projection of the Cantor pairing
+* `3` : second projection of the Cantor pairing
+* `4` : the *clocked universal machine*: on input `⟪c', y, k⟫` it simulates the
+  program `c'` on input `y` for `k` steps and outputs the result (or `0` if
+  the simulation did not finish);  this costs `k + 1` steps
+* `5` : the boolean complement `x ↦ if x = 0 then 1 else 0`
+* `6` : the identity
+* `7 + 4 * ⟪i, j⟫ + 0` : pairing of the results of `i` and `j`
+* `7 + 4 * ⟪i, j⟫ + 1` : composition `i ∘ j`
+* `7 + 4 * ⟪i, j⟫ + 2` : primitive recursion
+* `7 + 4 * ⟪i, j⟫ + 3` : unbounded search (`rfind`)
 
-def diag (f : ℕ → ℕ) : Language :=
-  fun x => decide (evaln (f x) (ofNat Code x) x ≠ some 1)
+`eval s c x` runs the program `c` on input `x` with a budget of `s` steps and
+returns `none` if the budget is exhausted.  Every constructor consumes one unit
+of the budget, so `eval` is a genuine (if coarse) cost model. -/
 
-/-- Diagonalization: the diagonal language is not decidable in time `f`. -/
+def diag (t : ℕ → ℕ) : ℕ → Bool := fun x => decide ((eval (t x) x x).getD 0 = 0)
+
+/-- The diagonal language is not decidable within time `t`: this is the
+diagonalization step. -/

@@ -8,6 +8,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Yao Principle
+Category: Frontier Cs
+Target: CS.yao_principle
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- (Lean requires `import` to come before any module docstring, so the required header appears
+-- at the top of the file as a plain comment and again here as the module docstring.)
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,55 +33,41 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-
 set_option grind.warning false
-
-/-!
-## Overview
-
-Mathlib has no minimax theorem, so the result is proved from scratch.  The only nontrivial
-input from Mathlib is the separation theorem `geometric_hahn_banach_compact_closed`
-(`Mathlib/Analysis/LocallyConvex/Separation.lean`), which is used to prove Ville's theorem of
-the alternative (`CS.ville_alternative`).  Yao's principle then follows by applying the
-alternative to the shifted cost matrix `cost a x - v`, where `v` is the randomized complexity,
-together with weak duality (`CS.distCost_le_randCost`).
--/
 
 namespace CS
 
-section Orthant
+variable {A I : Type*} [Fintype A] [Fintype I] [Nonempty A] [Nonempty I]
 
-variable {A : Type*}
+/-- The worst-case expected cost of the randomized algorithm given by the distribution `p`
+over deterministic algorithms:  `max over inputs i of  E_{a ~ p} [c a i]`. -/
 
-/-- The nonnegative orthant in `A → ℝ` is convex. -/
+theorem distCost_le_randCost {c : A → I → ℝ} {p : A → ℝ} {q : I → ℝ}
+    (hp : p ∈ stdSimplex ℝ A) (hq : q ∈ stdSimplex ℝ I) :
+    distCost c q ≤ randCost c p := by
+  have key : ∑ a, p a * (∑ i, q i * c a i) = ∑ i, q i * (∑ a, p a * c a i) := by
+    have e1 : ∀ a : A, p a * (∑ i, q i * c a i) = ∑ i, p a * q i * c a i := by
+      intro a; rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun i _ => by ring
+    have e2 : ∀ i : I, q i * (∑ a, p a * c a i) = ∑ a, p a * q i * c a i := by
+      intro i; rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun a _ => by ring
+    rw [Finset.sum_congr rfl fun a _ => e1 a, Finset.sum_congr rfl fun i _ => e2 i]
+    exact Finset.sum_comm
+  have h1 : distCost c q = ∑ a, p a * distCost c q := by
+    rw [← Finset.sum_mul, hp.2, one_mul]
+  have h2 : ∑ a, p a * distCost c q ≤ ∑ a, p a * (∑ i, q i * c a i) :=
+    Finset.sum_le_sum fun a _ => by
+      exact mul_le_mul_of_nonneg_left (distCost_le c q a) (hp.1 a)
+  have h3 : ∑ i, q i * (∑ a, p a * c a i) ≤ ∑ i, q i * randCost c p :=
+    Finset.sum_le_sum fun i _ => by
+      exact mul_le_mul_of_nonneg_left (le_randCost c p i) (hq.1 i)
+  have h4 : ∑ i, q i * randCost c p = randCost c p := by
+    rw [← Finset.sum_mul, hq.2, one_mul]
+  calc distCost c q = ∑ a, p a * distCost c q := h1
+    _ ≤ ∑ a, p a * (∑ i, q i * c a i) := h2
+    _ = ∑ i, q i * (∑ a, p a * c a i) := key
+    _ ≤ ∑ i, q i * randCost c p := h3
+    _ = randCost c p := h4
 
-theorem distCost_le_randCost (cost : A → X → ℝ) {p : A → ℝ} (hp : p ∈ stdSimplex ℝ A)
-    {q : X → ℝ} (hq : q ∈ stdSimplex ℝ X) : distCost cost q ≤ randCost cost p := by
-  obtain ⟨hp0, hp1⟩ := hp
-  obtain ⟨hq0, hq1⟩ := hq
-  have hbdd : BddBelow (Set.range fun a : A => ∑ x, q x * cost a x) :=
-    Finite.bddBelow_range _
-  have hbdd' : BddAbove (Set.range fun x : X => ∑ a, p a * cost a x) :=
-    Finite.bddAbove_range _
-  have h1 : distCost cost q ≤ ∑ a, p a * (∑ x, q x * cost a x) := by
-    calc distCost cost q = ∑ a, p a * distCost cost q := by
-            rw [← Finset.sum_mul, hp1, one_mul]
-      _ ≤ ∑ a, p a * (∑ x, q x * cost a x) := by
-            refine Finset.sum_le_sum fun a _ => ?_
-            exact mul_le_mul_of_nonneg_left (ciInf_le hbdd a) (hp0 a)
-  have h2 : ∑ x, q x * (∑ a, p a * cost a x) ≤ randCost cost p := by
-    calc ∑ x, q x * (∑ a, p a * cost a x)
-        ≤ ∑ x, q x * randCost cost p := by
-          refine Finset.sum_le_sum fun x _ => ?_
-          exact mul_le_mul_of_nonneg_left (le_ciSup hbdd' x) (hq0 x)
-      _ = randCost cost p := by rw [← Finset.sum_mul, hq1, one_mul]
-  have hswap : ∑ a, p a * (∑ x, q x * cost a x) = ∑ x, q x * (∑ a, p a * cost a x) := by
-    simp only [Finset.mul_sum]
-    rw [Finset.sum_comm]
-    exact Finset.sum_congr rfl fun x _ => Finset.sum_congr rfl fun a _ => by ring
-  linarith [h1, h2, hswap.le, hswap.ge]
+/-! ### The separation argument (the "hard" direction) -/
 
+/-- The linear map sending a distribution over algorithms to its vector of expected costs. -/

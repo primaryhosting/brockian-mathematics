@@ -5,6 +5,8 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the header above is
+-- therefore a plain block comment, and is repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -16,21 +18,41 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
 open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Euclidean 3-space as `ℝ × ℝ × ℝ`
+open Real intervalIntegral
 
-We use the plain product type and equip it with an explicit dot product and cross
-product, so that all differential-geometric quantities below are literally the
-classical ones. -/
+/-! ## Vector algebra in `ℝ³`
 
-/-- Ambient space `ℝ³`. -/
-abbrev E3 := ℝ × ℝ × ℝ
+We use `ℝ × ℝ × ℝ` as a model of `ℝ³` together with explicitly defined dot product,
+cross product and Euclidean norm.  (The ambient `Prod` norm of Mathlib is the sup norm,
+so we never use `‖·‖`; note that the notion of (Fréchet/one-variable) derivative does
+not depend on the choice of an equivalent norm, so `deriv` below is the usual derivative
+of an `ℝ³`-valued function.) -/
 
-/-- The Euclidean dot product on `ℝ³`. -/
+/-- Euclidean dot product on `ℝ³`. -/
 
-noncomputable def nrm3 (a : E3) : ℝ := Real.sqrt (dot3 a a)
+noncomputable def nrm3 (a : ℝ × ℝ × ℝ) : ℝ := Real.sqrt (dot3 a a)
 
-/-- Componentwise derivative of an `ℝ³`-valued function of one real variable. -/
+/-! ## The torus of revolution
+
+`torusMap R r` is the standard parametrization of the torus of revolution obtained by
+rotating the circle of radius `r` centred at distance `R` from the axis. -/
+
+/-- The standard parametrization of the torus of revolution with radii `R > r > 0`. -/

@@ -1,13 +1,3 @@
-/-
-# Superdense Two Bits
-Category: Quantum Computing
-Target: QC.superdense_two_bits
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`;
--- the required header is reproduced verbatim as a module docstring below.)
-
 import Mathlib
 
 /-!
@@ -32,84 +22,70 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-## Superdense coding
-
-Alice and Bob share the Bell pair `|Φ⁺⟩ = (|00⟩ + |11⟩)/√2` on two qubits
-(state space `Fin 2 × Fin 2 → ℂ`, first component = Alice's qubit).
-To send the two classical bits `(a, b)`, Alice applies the Pauli operator
-`Z^b X^a` to *her* qubit only (i.e. the operator `Z^b X^a ⊗ I` acts on the pair)
-and sends that single qubit to Bob.  The four resulting states are the four Bell
-states, which are pairwise distinct; equivalently, the encoding map is injective,
-so two classical bits are transmitted by one qubit plus prior entanglement.
--/
 
 namespace QC
 
-/-- Pure states of a two-qubit system (unnormalised amplitudes are allowed;
-all states used here are unit vectors). -/
-abbrev TwoQubit := Fin 2 × Fin 2 → ℂ
+/-- A two-qubit pure state is a vector of amplitudes indexed by the computational
+basis `|ij⟩`, `i j : Fin 2`. -/
+abbrev TwoQubit : Type := Fin 2 × Fin 2 → ℂ
 
-/-- The Bell state `|Φ⁺⟩ = (|00⟩ + |11⟩)/√2`. -/
-noncomputable def bellPhiPlus : TwoQubit :=
-  fun p => if p.1 = p.2 then ((Real.sqrt 2)⁻¹ : ℝ) else 0
+/-- The Bell state `Φ⁺ = (|00⟩ + |11⟩)/√2`, shared by Alice (first qubit) and Bob
+(second qubit) before the protocol starts. -/
+noncomputable def bell : TwoQubit :=
+  fun p => if p.1 = p.2 then ((Real.sqrt 2 : ℝ) : ℂ)⁻¹ else 0
 
-/-- The Pauli `X` (bit flip) matrix. -/
+/-- Action of a one-qubit gate `M` on the *first* tensor factor, i.e. `M ⊗ I`.
+This is exactly the set of operations Alice can perform locally on her qubit. -/
+noncomputable def applyFirst (M : Matrix (Fin 2) (Fin 2) ℂ) (v : TwoQubit) : TwoQubit :=
+  fun p => ∑ k : Fin 2, M p.1 k * v (k, p.2)
+
+/-- The Pauli `X` (bit flip) gate. -/
 def pauliX : Matrix (Fin 2) (Fin 2) ℂ := !![0, 1; 1, 0]
 
-/-- The Pauli `Z` (phase flip) matrix. -/
+/-- The Pauli `Z` (phase flip) gate. -/
 def pauliZ : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
 
-/-- The encoding unitary `Z^b X^a` that Alice applies to her qubit for the
-message `m = (a, b)`. -/
-noncomputable def pauliOp (m : Bool × Bool) : Matrix (Fin 2) (Fin 2) ℂ :=
-  (if m.2 then pauliZ else 1) * (if m.1 then pauliX else 1)
+/-- Alice's encoding gate for the two classical bits `m = (a, b)`: she applies `Z`
+iff `a = 1` and then `X` iff `b = 1`, i.e. the gate `X^b Z^a`. -/
+noncomputable def encodeOp (m : Fin 2 × Fin 2) : Matrix (Fin 2) (Fin 2) ℂ :=
+  (if m.2 = 1 then pauliX else 1) * (if m.1 = 1 then pauliZ else 1)
 
-/-- Superdense encoding: apply `(Z^b X^a) ⊗ I` to the shared Bell pair. -/
-noncomputable def encode (m : Bool × Bool) : TwoQubit :=
-  fun p => ∑ k : Fin 2, pauliOp m p.1 k * bellPhiPlus (k, p.2)
+/-- Superdense coding: to send the two classical bits `m = (a, b)`, Alice applies
+`X^b Z^a` to her half of the shared Bell pair and sends that single qubit to Bob.
+`encode m` is the resulting two-qubit state held by Bob. -/
+noncomputable def encode (m : Fin 2 × Fin 2) : TwoQubit := applyFirst (encodeOp m) bell
 
-/-- The amplitudes of the encoded state are exactly the entries of the Pauli
-operator, scaled by `1/√2`. -/
-lemma encode_apply (m : Bool × Bool) (i j : Fin 2) :
-    encode m (i, j) = pauliOp m i j * ((Real.sqrt 2)⁻¹ : ℝ) := by
-  simp [encode, bellPhiPlus]
+private theorem sqrt_two_inv_ne_zero : ((Real.sqrt 2 : ℝ) : ℂ)⁻¹ ≠ 0 := by
+  simp
 
-lemma sqrt2_inv_ne_zero : ((Real.sqrt 2)⁻¹ : ℂ) ≠ 0 := by simp
-
-/-- **Superdense coding transmits two classical bits.**  The encoding map
-sending a two-bit message `(a, b)` to the two-qubit state obtained by applying
-`(Z^b X^a) ⊗ I` to the shared Bell pair `|Φ⁺⟩` is injective on the four
-messages, so Bob can recover both bits from the single qubit Alice sends
-together with his half of the entangled pair. -/
+/-- **Superdense coding transmits two classical bits.**
+The four states Bob ends up holding, one for each of the four possible two-bit
+messages, are pairwise distinct: the encoding
+`m ↦ (X^{m.2} Z^{m.1} ⊗ I) Φ⁺` is injective on the four messages, so Bob can
+recover both classical bits from the single qubit he receives. -/
 theorem superdense_two_bits : Function.Injective encode := by
-  rintro ⟨a1, b1⟩ ⟨a2, b2⟩ h
-  have hc := sqrt2_inv_ne_zero
-  have e00 : encode (a1, b1) (0, 0) = encode (a2, b2) (0, 0) := by rw [h]
-  have e11 : encode (a1, b1) (1, 1) = encode (a2, b2) (1, 1) := by rw [h]
-  have e10 : encode (a1, b1) (1, 0) = encode (a2, b2) (1, 0) := by rw [h]
-  rw [encode_apply, encode_apply] at e00 e11 e10
+  have hs := sqrt_two_inv_ne_zero
+  rintro ⟨a, b⟩ ⟨c, d⟩ h
+  have h00 := congrFun h (0, 0)
+  have h11 := congrFun h (1, 1)
+  have h01 := congrFun h (0, 1)
   clear h
-  cases a1 <;> cases b1 <;> cases a2 <;> cases b2 <;>
-    simp [pauliOp, pauliX, pauliZ, Matrix.mul_apply, Fin.sum_univ_two,
-      Matrix.one_apply] at e00 e11 e10 ⊢ <;>
-    first
-      | rfl
-      | exact hc e00
-      | exact hc e00.symm
-      | exact hc (self_eq_neg.mp e11)
-      | exact hc (neg_eq_self.mp e11)
-      | exact hc (self_eq_neg.mp e10)
-      | exact hc (neg_eq_self.mp e10)
+  fin_cases a <;> fin_cases b <;> fin_cases c <;> fin_cases d
+  all_goals (try (simp [encode, applyFirst, encodeOp, bell, Fin.sum_univ_two, Matrix.mul_apply,
+      pauliX, pauliZ] at h00))
+  all_goals (try (simp [encode, applyFirst, encodeOp, bell, Fin.sum_univ_two, Matrix.mul_apply,
+      pauliX, pauliZ] at h11))
+  all_goals (try (simp [encode, applyFirst, encodeOp, bell, Fin.sum_univ_two, Matrix.mul_apply,
+      pauliX, pauliZ] at h01))
+  all_goals (try rfl)
+  all_goals
+    (apply hs
+     first
+       | linear_combination h11 / 2
+       | linear_combination -h11 / 2
+       | linear_combination h01 / 2
+       | linear_combination -h01 / 2)
 
 end QC
 

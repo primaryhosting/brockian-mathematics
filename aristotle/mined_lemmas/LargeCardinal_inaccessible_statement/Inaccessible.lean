@@ -1,11 +1,3 @@
-/-
-# Inaccessible Statement
-Category: Frontier Wave 2 (deeper machinery)
-Target: LargeCardinal.inaccessible_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,6 +7,9 @@ Target: LargeCardinal.inaccessible_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+-- Note: Lean 4 requires `import` lines to come first in a file, so the header
+-- comment above is placed immediately after the single `import Mathlib` line.
 
 open scoped BigOperators
 open scoped Real
@@ -43,9 +38,11 @@ namespace LargeCardinal
 
 /-- A cardinal `k` is *inaccessible* if it is uncountable, regular, and a strong limit. -/
 
-def Inaccessible (k : Cardinal) : Prop :=
-  Cardinal.aleph0 < k ∧ k.IsRegular ∧ ∀ c : Cardinal, c < k → 2 ^ c < k
+def Inaccessible (k : Cardinal.{0}) : Prop :=
+  Cardinal.aleph0 < k ∧ k.IsRegular ∧ ∀ c : Cardinal.{0}, c < k → 2 ^ c < k
 
 /-- Well-formedness / self-equivalence of the inaccessible-cardinal statement.
 
-Existence of an inaccessible cardinal is independent of ZFC and is *not* asserted here. -/
+This asserts only that the statement `∃ k, Inaccessible k` is a well-formed `Prop`
+equivalent to itself; it does **not** assert the existence of an inaccessible
+cardinal, which is independent of ZFC. -/

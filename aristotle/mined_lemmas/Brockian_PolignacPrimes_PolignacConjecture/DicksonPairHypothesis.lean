@@ -29,6 +29,9 @@ Category: Brockian Conjecture
 Target: Brockian.PolignacPrimes.PolignacConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Lean 4 requires every `import` to precede any module docstring, so the required header is
+reproduced verbatim as the module docstring immediately after the import below.)
 -/
 
 import Mathlib
@@ -42,31 +45,43 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-!
-Polignac's conjecture ("for every even `n > 0` there are infinitely many pairs of
-*consecutive* primes whose difference is `n`") is a well-known open problem, and it is
-not available in Mathlib.  What is proved here is a *conditional reduction*: Polignac's
-conjecture follows from the two-linear-form case of Dickson's conjecture.
+## Overview
 
-The reduction itself is unconditional Lean-checked mathematics:
+De Polignac's conjecture states that for every positive even number `n` there are infinitely
+many pairs of *consecutive* primes whose difference is `n`.  This is an open problem (it contains
+the twin prime conjecture as the case `n = 2`), so what is proved here is a *conditional
+reduction*: the full conjecture is derived from a two-form special case of Dickson's conjecture
+on prime values of linear forms (`DicksonPairHypothesis`).
 
-* pick `n - 1` distinct primes `q 0, …, q (n-2)`, all larger than `n`;
-* by the Chinese Remainder Theorem choose `a` with `a ≡ -(i+1) [MOD q i]`;
-* with `M = ∏ q i`, every number of the form `M * x + a + (i+1)` is divisible by `q i`,
-  hence composite once it exceeds `q i`;
-* the pair of linear forms `M * x + a`, `M * x + (a + n)` is admissible, so Dickson's
-  conjecture supplies arbitrarily large `x` making both values prime.  Those two primes
-  are then *consecutive* primes differing by exactly `n`.
+The reduction is the classical sieve-free argument: given an even `n ≥ 2`, one uses the Chinese
+remainder theorem to build an arithmetic progression `r + M ℕ` such that
+
+* every `p ≡ r [MOD M]` has `p + k` divisible by a fixed prime `< p` for each `0 < k < n`
+  (so all the numbers strictly between `p` and `p + n` are composite), and
+* the pair of linear forms `r + M m`, `r + n + M m` is admissible, i.e. no prime divides
+  the product for all `m`.
+
+Dickson's conjecture applied to this pair then produces infinitely many consecutive prime pairs
+with gap exactly `n`.
+
+Unconditional results proved here as well:
+
+* `Brockian.PolignacPrimes.eq_two_of_odd_gap` – for odd `n` at most one prime `p` has `p + n`
+  prime, so the evenness hypothesis in the conjecture is necessary;
+* `Brockian.PolignacPrimes.not_polignacProperty_of_odd`;
+* `Brockian.PolignacPrimes.polignacProperty_iff` – reformulation of the "infinitely many"
+  clause as an unboundedness statement.
 -/
 
 namespace Brockian.PolignacPrimes
 
-/-- `n` is a Polignac gap: there are arbitrarily large primes `p` such that `p + n` is
-prime and no number strictly between `p` and `p + n` is prime, i.e. `p` and `p + n` are
-consecutive primes at distance `n`. -/
+/-- `p` and `p + n` are consecutive primes: both are prime and no number strictly between
+them is prime. -/
 
 def DicksonPairHypothesis : Prop :=
-  ∀ m b c : ℕ, 0 < m →
-    (∀ Q : ℕ, Nat.Prime Q → ∃ x : ℕ, ¬ Q ∣ (m * x + b) ∧ ¬ Q ∣ (m * x + c)) →
-    ∀ N : ℕ, ∃ x : ℕ, N < x ∧ Nat.Prime (m * x + b) ∧ Nat.Prime (m * x + c)
+  ∀ r M n : ℕ, 0 < M → 0 < n →
+    (∀ q : ℕ, Nat.Prime q → ∃ m : ℕ, ¬ q ∣ (r + M * m) ∧ ¬ q ∣ (r + n + M * m)) →
+    ∀ N : ℕ, ∃ m : ℕ, N ≤ m ∧ Nat.Prime (r + M * m) ∧ Nat.Prime (r + n + M * m)
 
-/-- Divisibility only depends on the residue class. -/
+/-! ### Elementary reformulations -/
+

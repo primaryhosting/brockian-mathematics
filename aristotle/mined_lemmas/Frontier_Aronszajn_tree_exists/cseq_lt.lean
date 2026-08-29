@@ -1,34 +1,35 @@
+/-
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
-# Construction of an Aronszajn tree
-
-We build the classical (special) Aronszajn tree: nodes at level `α < ω₁` are strictly
-increasing bounded functions `α → ℚ`, constructed by transfinite recursion so that each
-level is countable and every node can be extended to any higher level while keeping a
-prescribed rational bound.
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Ordinal Cardinal Set Order
-open scoped Classical
+open Ordinal Cardinal Set
 
 namespace Aronszajn
 
-set_option autoImplicit false
-set_option maxRecDepth 8000
+/-! ## Cofinal `ω`-sequences in countable limit ordinals -/
 
-/-- A node is (the total extension by `0` of) a function from a countable ordinal to `ℚ`. -/
-abbrev Nd : Type 1 := Ordinal.{0} → ℚ
+/-- `c` is a nondecreasing `ω`-indexed sequence, starting at `0`, cofinal in `l`. -/
 
-/-- `SBd f α q` says the values of `f` below `α` are bounded by some rational `< q`. -/
+theorem cseq_lt {l : Ordinal} (hl : Order.IsSuccLimit l) (n : ℕ) : cseq l n < l := by
+  unfold cseq
+  split
+  · rename_i h
+    exact h.choose_spec.2.2.1 n
+  · exact hl.bot_lt
 
-theorem cseq_lt {α β : Ordinal.{0}} (hl : IsSuccLimit α) (hβ : β < α) (n : ℕ) :
-    cseq α β n < α := by
-  induction n with
-  | zero => exact hβ
-  | succ n ih =>
-      have h1 : cseq α β (n+1) = max (cseq α β n + 1) (enumOrd' α n + 1) := rfl
-      rw [h1]
-      exact max_lt (hl.add_one_lt ih)
-        (hl.add_one_lt (enumOrd'_lt (lt_of_le_of_lt (zero_le β) hβ) n))
+/-! ## The coherent family `E` -/
 
+/-- Index of the block of `cseq l` containing `ξ`. -/

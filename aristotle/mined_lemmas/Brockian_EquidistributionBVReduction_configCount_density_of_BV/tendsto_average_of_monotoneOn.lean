@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Config Count Density Of BV
 Category: Brockian (Literature Discharge)
 Target: Brockian.EquidistributionBVReduction.configCount_density_of_BV
@@ -33,70 +31,99 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Topology Set MeasureTheory
-open scoped BigOperators Classical
+import Mathlib
+
+open MeasureTheory Filter Topology Set
 
 namespace Brockian.EquidistributionBVReduction
 
-/-- The number of indices `n < N` whose fractional part `Int.fract (x n)` lies in `S`:
-the count of "configurations" of the first `N` terms of the sequence inside the window `S`. -/
+open scoped Classical in
+/-- `configCount x A N` is the number of indices `n < N` whose orbit point `x n`,
+reduced mod `1`, lands in the configuration set `A`. -/
 
-lemma tendsto_average_of_monotoneOn {x : ℕ → ℝ} (hx : EquidistributedMod1 x) {g : ℝ → ℝ}
-    (hg : MonotoneOn g (Icc (0 : ℝ) 1)) :
-    Tendsto (fun N : ℕ => (∑ n ∈ Finset.range N, g (Int.fract (x n))) / N) atTop
-      (𝓝 (∫ t in (0 : ℝ)..1, g t)) := by
-  set I : ℝ := ∫ t in (0 : ℝ)..1, g t with hI
+theorem tendsto_average_of_monotoneOn (hx : EquidistributedMod1 x)
+    (hg : MonotoneOn g (Set.Icc (0:ℝ) 1)) :
+    Tendsto (fun N : ℕ => (∑ n ∈ Finset.range N, g (Int.fract (x n))) / N)
+      atTop (𝓝 (∫ t in (0:ℝ)..1, g t)) := by
+  classical
+  set I := ∫ t in (0:ℝ)..1, g t with hI
   rw [Metric.tendsto_atTop]
   intro ε hε
-  have hD : 0 ≤ g 1 - g 0 :=
-    sub_nonneg.2 (hg (by norm_num) (by norm_num) zero_le_one)
-  obtain ⟨k, hkgt⟩ := exists_nat_gt (2 * (g 1 - g 0) / ε)
-  have hknn : (0 : ℝ) ≤ 2 * (g 1 - g 0) / ε := by positivity
-  have hk0 : 0 < k := by
-    by_contra h
-    push_neg at h
-    interval_cases k
-    · simp at hkgt; linarith
-  have hk' : (0 : ℝ) < k := by exact_mod_cast hk0
-  have hkD : (g 1 - g 0) / k < ε / 2 := by
-    rw [div_lt_iff₀ hε] at hkgt
-    rw [div_lt_iff₀ hk']
+  have hg01 : g 0 ≤ g 1 := hg (by norm_num) (by norm_num) (by norm_num)
+  -- choose a fine enough partition
+  obtain ⟨K, hK1, hKε⟩ : ∃ K : ℕ, 0 < K ∧ (g 1 - g 0) / K < ε / 4 := by
+    obtain ⟨K, hK⟩ := exists_nat_gt (max 1 (4 * (g 1 - g 0) / ε))
+    have h1 : (1:ℝ) < K := lt_of_le_of_lt (le_max_left _ _) hK
+    have h2 : 4 * (g 1 - g 0) / ε < K := lt_of_le_of_lt (le_max_right _ _) hK
+    have hK' : (0:ℝ) < K := by linarith
+    refine ⟨K, by exact_mod_cast hK', ?_⟩
+    rw [div_lt_div_iff₀ hK' (by norm_num : (0:ℝ) < 4)]
+    rw [div_lt_iff₀ hε] at h2
     linarith
-  set L : ℝ := ∑ i ∈ Finset.range k, g ((i : ℝ) / k) / k with hLdef
-  set U : ℝ := ∑ i ∈ Finset.range k, g (((i : ℝ) + 1) / k) / k with hUdef
-  have hLI : L ≤ I := lower_sum_le_integral hg hk0
-  have hIU : I ≤ U := integral_le_upper_sum hg hk0
-  have hUL : U - L = (g 1 - g 0) / k := upper_sub_lower hk0
-  have hlow := tendsto_weighted_density hx hk0 (fun i : ℕ => g ((i : ℝ) / k))
-  have hupp := tendsto_weighted_density hx hk0 (fun i : ℕ => g (((i : ℝ) + 1) / k))
-  rw [Metric.tendsto_atTop] at hlow hupp
-  obtain ⟨N1, hN1⟩ := hlow (ε / 4) (by linarith)
-  obtain ⟨N2, hN2⟩ := hupp (ε / 4) (by linarith)
-  refine ⟨max (max N1 N2) 1, fun N hN => ?_⟩
-  have hNN1 : N1 ≤ N := le_trans (le_trans (le_max_left _ _) (le_max_left _ _)) hN
-  have hNN2 : N2 ≤ N := le_trans (le_trans (le_max_right _ _) (le_max_left _ _)) hN
-  have hN0 : 1 ≤ N := le_trans (le_max_right _ _) hN
-  have hNpos : (0 : ℝ) < N := by exact_mod_cast hN0
-  have hl := hN1 N hNN1
-  have hu := hN2 N hNN2
-  rw [Real.dist_eq, abs_lt] at hl hu
-  have hlow_le : (∑ i ∈ Finset.range k,
-        (configCount x (Ico ((i : ℝ) / k) (((i : ℝ) + 1) / k)) N : ℝ) * g ((i : ℝ) / k)) / N
+  have hK' : (0:ℝ) < K := by exact_mod_cast hK1
+  set L := ∑ j ∈ Finset.range K, (1 / (K:ℝ)) * g ((j:ℝ)/K) with hL
+  set U := ∑ j ∈ Finset.range K, (1 / (K:ℝ)) * g (((j:ℝ)+1)/K) with hU
+  have hLI : L ≤ I := lower_riemann_le_integral hg hK1
+  have hIU : I ≤ U := integral_le_upper_riemann hg hK1
+  have hUL : U - L = (g 1 - g 0) / K := by
+    rw [hU, hL, ← Finset.sum_sub_distrib]
+    have : ∀ j ∈ Finset.range K,
+        (1 / (K:ℝ)) * g (((j:ℝ)+1)/K) - (1 / (K:ℝ)) * g ((j:ℝ)/K)
+          = (1 / (K:ℝ)) * ((fun m : ℕ => g ((m:ℝ)/K)) (j+1) - (fun m : ℕ => g ((m:ℝ)/K)) j) := by
+      intro j _
+      simp only
+      push_cast
+      ring
+    rw [Finset.sum_congr rfl this, ← Finset.mul_sum, Finset.sum_range_sub
+      (fun m : ℕ => g ((m:ℝ)/K))]
+    simp only [Nat.cast_zero, zero_div]
+    rw [div_self hK'.ne']
+    ring
+  -- the two empirical Riemann sums converge
+  have hSL := tendsto_riemann_sums (x := x) hx hK1 (fun j => g ((j:ℝ)/K))
+  have hSU := tendsto_riemann_sums (x := x) hx hK1 (fun j => g (((j:ℝ)+1)/K))
+  rw [Metric.tendsto_atTop] at hSL hSU
+  obtain ⟨N₁, hN₁⟩ := hSL (ε/4) (by linarith)
+  obtain ⟨N₂, hN₂⟩ := hSU (ε/4) (by linarith)
+  refine ⟨max 1 (max N₁ N₂), ?_⟩
+  intro N hN
+  have hN1 : 1 ≤ N := le_trans (le_max_left _ _) hN
+  have hNpos : (0:ℝ) < N := by exact_mod_cast hN1
+  have h1 := hN₁ N (le_trans (le_trans (le_max_left _ _) (le_max_right 1 _)) hN)
+  have h2 := hN₂ N (le_trans (le_trans (le_max_right _ _) (le_max_right 1 _)) hN)
+  rw [Real.dist_eq, abs_lt] at h1 h2
+  -- sandwich the orbit average
+  have hlow : ∑ j ∈ Finset.range K,
+      ((configCount x (Set.Ico ((j : ℝ) / K) (((j : ℝ) + 1) / K)) N : ℝ) / N) * g ((j:ℝ)/K)
       ≤ (∑ n ∈ Finset.range N, g (Int.fract (x n))) / N := by
-    gcongr
-    exact lower_sum_le hg x hk0 N
-  have hle_upp : (∑ n ∈ Finset.range N, g (Int.fract (x n))) / N
-      ≤ (∑ i ∈ Finset.range k,
-        (configCount x (Ico ((i : ℝ) / k) (((i : ℝ) + 1) / k)) N : ℝ)
-          * g (((i : ℝ) + 1) / k)) / N := by
-    gcongr
-    exact le_upper_sum hg x hk0 N
+    have heq : ∑ j ∈ Finset.range K,
+        ((configCount x (Set.Ico ((j : ℝ) / K) (((j : ℝ) + 1) / K)) N : ℝ) / N) * g ((j:ℝ)/K)
+        = (∑ j ∈ Finset.range K,
+          (configCount x (Set.Ico ((j : ℝ) / K) (((j : ℝ) + 1) / K)) N : ℝ) * g ((j:ℝ)/K)) / N := by
+      rw [Finset.sum_div]
+      exact Finset.sum_congr rfl (fun j _ => by ring)
+    rw [heq]
+    exact (div_le_div_iff_of_pos_right hNpos).mpr (sum_fiber_lower x hg hK1 N)
+  have hhigh : (∑ n ∈ Finset.range N, g (Int.fract (x n))) / N
+      ≤ ∑ j ∈ Finset.range K,
+      ((configCount x (Set.Ico ((j : ℝ) / K) (((j : ℝ) + 1) / K)) N : ℝ) / N)
+        * g (((j:ℝ)+1)/K) := by
+    have heq : ∑ j ∈ Finset.range K,
+        ((configCount x (Set.Ico ((j : ℝ) / K) (((j : ℝ) + 1) / K)) N : ℝ) / N)
+          * g (((j:ℝ)+1)/K)
+        = (∑ j ∈ Finset.range K,
+          (configCount x (Set.Ico ((j : ℝ) / K) (((j : ℝ) + 1) / K)) N : ℝ)
+            * g (((j:ℝ)+1)/K)) / N := by
+      rw [Finset.sum_div]
+      exact Finset.sum_congr rfl (fun j _ => by ring)
+    rw [heq]
+    exact (div_le_div_iff_of_pos_right hNpos).mpr (sum_fiber_upper x hg hK1 N)
   rw [Real.dist_eq, abs_lt]
-  constructor
-  · linarith [hl.1, hu.2]
-  · linarith [hl.1, hu.2]
+  constructor <;> [linarith; linarith]
 
-/-- **Config count density for functions of bounded variation.**
-If the configuration counts of `x` have the expected densities on all windows
-(`EquidistributedMod1`), then the Birkhoff averages along `x` of any function of bounded
-variation on `[0,1]` converge to its integral. -/
+end Monotone
+
+variable {x : ℕ → ℝ} {f : ℝ → ℝ}
+
+/-- Koksma-type reduction: for a function of bounded variation on `[0,1]`, the Cesàro
+averages along an equidistributed sequence converge to the integral. -/

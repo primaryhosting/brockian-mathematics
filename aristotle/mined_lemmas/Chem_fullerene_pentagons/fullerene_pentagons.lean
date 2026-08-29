@@ -1,4 +1,4 @@
-/-!
+/-
 # Fullerene Pentagons
 Category: Chemistry
 Target: Chem.fullerene_pentagons
@@ -6,34 +6,58 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Chem
+import Mathlib
 
-/-- **Fullerene pentagon count.**
+/-!
+# Fullerene Pentagons
 
-Let a polyhedron have `V` vertices, `E` edges and `F` faces, of which `P` are pentagons and
-`H` are hexagons.  Assume:
-
-* Euler's formula `V - E + F = 2`, stated subtraction-free as `V + F = E + 2`;
-* trivalence: every vertex meets exactly three edges, so `3 * V = 2 * E`;
-* every face is a pentagon or a hexagon: `F = P + H`, and counting edge-face incidences
-  (each edge lies on exactly two faces) gives `5 * P + 6 * H = 2 * E`.
-
-Then the polyhedron has exactly `12` pentagonal faces — the combinatorial reason why every
-fullerene molecule contains precisely twelve pentagonal rings.
-
-Proof: from `3V = 2E` and `V + F = E + 2` we get `3P + 3H = 3F = E + 6`, i.e. `6P + 6H = 2E + 12`,
-while `2E = 5P + 6H`; subtracting yields `P = 12`.  (The `omega` decision procedure for linear
-integer arithmetic performs exactly this elimination.)
+A trivalent polyhedron all of whose faces are pentagons or hexagons has exactly 12 pentagons.
 -/
 
-theorem fullerene_pentagons
-    (V E F P H : Nat)
-    (euler : V + F = E + 2)
-    (trivalent : 3 * V = 2 * E)
-    (faces : F = P + H)
-    (edge_face : 5 * P + 6 * H = 2 * E) :
-    P = 12 := by
-  omega
+namespace Chem
+
+/-- Arithmetic core of the fullerene count: if `p` faces are pentagons and `h` faces are
+hexagons, every vertex has degree `3`, and Euler's formula `V - E + F = 2` holds, then
+`p = 12`. -/
+
+theorem fullerene_pentagons {𝒱 ℰ ℱ : Type*}
+    [Fintype 𝒱] [Fintype ℰ] [Fintype ℱ] [DecidableEq ℱ]
+    (size : ℱ → ℕ)
+    (euler : (Fintype.card 𝒱 : ℤ) - Fintype.card ℰ + Fintype.card ℱ = 2)
+    (trivalent : 2 * Fintype.card ℰ = 3 * Fintype.card 𝒱)
+    (pentagon_or_hexagon : ∀ f, size f = 5 ∨ size f = 6)
+    (edge_faces : ∑ f, size f = 2 * Fintype.card ℰ) :
+    ({f | size f = 5} : Finset ℱ).card = 12 := by
+  classical
+  set P : Finset ℱ := {f | size f = 5} with hP
+  set H : Finset ℱ := {f | size f = 6} with hH
+  -- the two sets partition all faces
+  have hdisj : Disjoint P H := by
+    simp only [hP, hH, Finset.disjoint_left, Finset.mem_filter, Finset.mem_univ, true_and]
+    intro a ha hb
+    omega
+  have hunion : P ∪ H = Finset.univ := by
+    ext f
+    simp only [Finset.mem_union, Finset.mem_univ, iff_true, hP, hH, Finset.mem_filter,
+      true_and]
+    exact pentagon_or_hexagon f
+  have hcard : P.card + H.card = Fintype.card ℱ := by
+    rw [← Finset.card_union_of_disjoint hdisj, hunion, Finset.card_univ]
+  -- the sum of face sizes splits accordingly
+  have hsum : ∑ f, size f = 5 * P.card + 6 * H.card := by
+    rw [← hunion, Finset.sum_union hdisj]
+    have h1 : ∑ f ∈ P, size f = 5 * P.card := by
+      rw [Finset.sum_congr rfl (fun f hf => by
+        simpa [hP, Finset.mem_filter] using (Finset.mem_filter.mp hf).2)]
+      simp [mul_comm]
+    have h2 : ∑ f ∈ H, size f = 6 * H.card := by
+      rw [Finset.sum_congr rfl (fun f hf => by
+        simpa [hH, Finset.mem_filter] using (Finset.mem_filter.mp hf).2)]
+      simp [mul_comm]
+    rw [h1, h2]
+  refine fullerene_pentagons_arith (Fintype.card 𝒱) (Fintype.card ℰ) (Fintype.card ℱ)
+    P.card H.card euler trivalent hcard ?_
+  rw [← hsum, edge_faces]
 
 end Chem
 

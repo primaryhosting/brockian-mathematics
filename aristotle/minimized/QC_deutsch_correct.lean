@@ -1,4 +1,11 @@
 import Mathlib
+/-!
+# Deutsch Correct
+Category: Quantum Computing
+Target: QC.deutsch_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,118 +21,66 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-# Deutsch's algorithm
-
-We model a two-qubit quantum register by its amplitude vector
-`Bool × Bool → ℂ` (the computational basis is indexed by pairs of bits),
-implement the Hadamard gates on each qubit and the phase-kickback oracle
-`U_f |x,y⟩ = |x, y ⊕ f x⟩` as linear maps on this space, and prove that
-Deutsch's algorithm — which queries the oracle exactly once — decides
-whether `f : {0,1} → {0,1}` is constant or balanced with certainty.
--/
 
 namespace QC
 
-noncomputable section
+/-! ## Setup
 
-/-- The state space of two qubits: amplitudes indexed by the computational basis. -/
-abbrev State : Type := Bool × Bool → ℂ
+We model a two–qubit system by its amplitude function on the computational basis
+`Bool × Bool`, the first component being the query register and the second the
+answer register.  All gates are the usual `2 × 2` (resp. `4 × 4`) unitaries written
+out on amplitudes. -/
 
-/-- The sign `(-1)^b` of a bit. -/
+/-- The scalar `1/√2` occurring in the Hadamard gate. -/
+
+noncomputable def sq2inv : ℂ := ((Real.sqrt 2 : ℝ) : ℂ)⁻¹
+
+/-- `sgn b = (-1)^b`. -/
 
 def sgn (b : Bool) : ℂ := if b then -1 else 1
 
-def H1 (s : State) : State :=
-  fun p => (Real.sqrt 2 : ℂ)⁻¹ * (s (false, p.2) + sgn p.1 * s (true, p.2))
+/-- A two–qubit state, given by its amplitudes in the computational basis. -/
+abbrev State := Bool × Bool → ℂ
 
-/-- The Hadamard gate applied to the second qubit. -/
+/-- Hadamard gate on the first (query) qubit:
+`H|x⟩ = 2^(-1/2) ∑_{x'} (-1)^{x·x'} |x'⟩`. -/
 
-def H2 (s : State) : State :=
-  fun p => (Real.sqrt 2 : ℂ)⁻¹ * (s (p.1, false) + sgn p.2 * s (p.1, true))
+noncomputable def hadFirst (v : State) : State :=
+  fun p => sq2inv * ∑ x : Bool, sgn (p.1 && x) * v (x, p.2)
 
-/-- The oracle `U_f : |x, y⟩ ↦ |x, y ⊕ f x⟩`, acting on amplitude vectors. -/
+/-- Hadamard gate on the second (answer) qubit. -/
 
-def oracle (f : Bool → Bool) (s : State) : State :=
-  fun p => s (p.1, xor p.2 (f p.1))
+noncomputable def hadSecond (v : State) : State :=
+  fun p => sq2inv * ∑ y : Bool, sgn (p.2 && y) * v (p.1, y)
 
-/-- The initial state `|0⟩|1⟩`. -/
+/-- The oracle `U_f |x, y⟩ = |x, y ⊕ f x⟩`.  Since `U_f` is a permutation matrix which is
+its own inverse, on amplitudes it acts by `(U_f ψ)(x, y) = ψ (x, y ⊕ f x)`. -/
+
+def oracle (f : Bool → Bool) (v : State) : State :=
+  fun p => v (p.1, xor p.2 (f p.1))
+
+/-- The input state `|0⟩ ⊗ |1⟩`. -/
 
 def init : State := fun p => if p = (false, true) then 1 else 0
 
-/-- The state produced by Deutsch's algorithm: prepare `|0⟩|1⟩`, apply a
-Hadamard gate to each qubit, query the oracle **once**, then apply a Hadamard
-gate to the first qubit. -/
+/-- The output state of Deutsch's algorithm:
+`(H ⊗ I) U_f (H ⊗ H) (|0⟩ ⊗ |1⟩)`.  The oracle `U_f` is applied exactly once. -/
 
-def deutschState (f : Bool → Bool) : State := H1 (oracle f (H1 (H2 init)))
+noncomputable def deutschFinal (f : Bool → Bool) : State :=
+  hadFirst (oracle f (hadFirst (hadSecond init)))
 
-/-- Probability of measuring `0` on the first qubit of the final state. -/
+/-- Probability that measuring the first (query) qubit of the output state yields `0`. -/
 
-def probZero (f : Bool → Bool) : ℝ := ∑ y : Bool, ‖deutschState f (false, y)‖ ^ 2
+noncomputable def prob0 (f : Bool → Bool) : ℝ :=
+  ‖deutschFinal f (false, false)‖ ^ 2 + ‖deutschFinal f (false, true)‖ ^ 2
 
-/-- Probability of measuring `1` on the first qubit of the final state. -/
-
-def probOne (f : Bool → Bool) : ℝ := ∑ y : Bool, ‖deutschState f (true, y)‖ ^ 2
-
-/-- Closed form for the final amplitudes. -/
-
-lemma deutschState_apply (f : Bool → Bool) (b y : Bool) :
-    deutschState f (b, y)
-      = ((Real.sqrt 2 : ℂ)⁻¹) ^ 3 * sgn y * (sgn (f false) + sgn b * sgn (f true)) := by
-  simp only [deutschState, H1, H2, oracle, init]
-  cases b <;>
-    cases hy : y <;>
-      cases h0 : f false <;>
-        cases h1 : f true <;>
-          simp [sgn] <;> ring
-
-lemma sqrt_two_cube_sq : (Real.sqrt 2 ^ 3) ^ 2 = 8 := by
-  have hsq : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
-  calc (Real.sqrt 2 ^ 3) ^ 2 = (Real.sqrt 2 ^ 2) ^ 3 := by ring
-    _ = 8 := by rw [hsq]; norm_num
-
-/-- The measurement probabilities of Deutsch's algorithm. -/
-
-theorem probZero_eq (f : Bool → Bool) :
-    probZero f = if f false = f true then 1 else 0 := by
-  have hs : (0:ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
-  simp only [probZero, deutschState_apply, Fintype.sum_bool]
-  cases h0 : f false <;> cases h1 : f true <;>
-    simp [norm_pow, mul_pow, inv_pow, sgn, abs_of_pos hs] <;>
-    rw [sqrt_two_cube_sq] <;> norm_num
-
-/-- The measurement probabilities of Deutsch's algorithm. -/
-
-theorem probOne_eq (f : Bool → Bool) :
-    probOne f = if f false = f true then 0 else 1 := by
-  have hs : (0:ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
-  simp only [probOne, deutschState_apply, Fintype.sum_bool]
-  cases h0 : f false <;> cases h1 : f true <;>
-    simp [norm_pow, mul_pow, inv_pow, sgn, abs_of_pos hs] <;>
-    rw [sqrt_two_cube_sq] <;> norm_num
-
-/-- **Deutsch's algorithm.**  Using a single query to the oracle `U_f`, the
-measurement of the first qubit of `deutschState f` returns `0` with
-probability `1` when `f` is constant, and returns `1` with probability `1`
-when `f` is balanced.  In particular the outcome decides constant vs.
-balanced with certainty. -/
+/-- Probability that measuring the first (query) qubit of the output state yields `1`. -/
 
 theorem deutsch_correct (f : Bool → Bool) :
-    (f false = f true → probZero f = 1 ∧ probOne f = 0) ∧
-    (f false ≠ f true → probZero f = 0 ∧ probOne f = 1) := by
-  constructor
-  · intro h
-    simp [probZero_eq, probOne_eq, h]
-  · intro h
-    simp [probZero_eq, probOne_eq, h]
+    prob0 f = if f false = f true then 1 else 0 := by
+  cases h0 : f false <;> cases h1 : f true <;>
+    simp [prob0, deutschFinal, hadFirst, hadSecond, oracle, init, sgn, h0, h1,
+      sq2inv] <;> ring_nf <;> norm_num
 
-/-- Sanity check: the two measurement outcomes have total probability one. -/
+/-- Complementary form: the query register measures to `1` exactly when `f` is balanced. -/

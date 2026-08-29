@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Cos Trace Norm 1279
 Category: Brockian Corpus
@@ -7,6 +5,8 @@ Target: Brockian.CosTraceNorm1279
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,10 +33,13 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- The cosine Gram matrix of a family of angles: `C i j = cos (θ i - θ j)`. -/
+open Matrix
 
-noncomputable def cosSinRows (n : ℕ) (θ : Fin n → ℝ) : Matrix (Fin 2) (Fin n) ℝ :=
-  Matrix.of fun k j => if k = 0 then Real.cos (θ j) else Real.sin (θ j)
+/-- The "cosine kernel" matrix attached to a family of angles `x : Fin n → ℝ`:
+its `(i, j)` entry is `cos (x i - x j)`. -/
 
-/-- Key factorization: the cosine Gram matrix is the Gram matrix of the planar unit vectors
-`(cos θ j, sin θ j)`, i.e. `C = Bᴴ * B` with `B = cosSinRows`. -/
+noncomputable def cosSinRows {n : ℕ} (x : Fin n → ℝ) : Matrix (Fin n) (Fin 2) ℝ :=
+  Matrix.of fun i k => ![Real.cos (x i), Real.sin (x i)] k
+
+/-- The cosine kernel matrix is the Gram matrix of the unit vectors
+`(cos (x i), sin (x i))`. -/

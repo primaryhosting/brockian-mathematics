@@ -30,7 +30,6 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,32 +40,29 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open MeasureTheory SchwartzMap FourierTransform Laplacian LineDeriv
+namespace Brockian.Weyl.FreeLaplacian2
+
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
-
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-  [MeasurableSpace E] [BorelSpace E]
-
-/-- The complex Hilbert space `L²(E)` of square integrable functions on a finite-dimensional
-real inner product space `E`, with respect to the Lebesgue (Haar) measure. -/
-abbrev L2Space (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-    [MeasurableSpace E] [BorelSpace E] : Type _ := ↥(Lp (α := E) ℂ 2 volume)
-
-/-- Schwartz functions viewed as elements of `L²(E)`. -/
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
 theorem freeLaplacian_essentiallySelfAdjoint_of_fourier :
-    IsEssentiallySelfAdjoint (freeLaplacian (E := E)) := by
-  refine ⟨dense_freeLaplacian_domain, freeLaplacian_symmetric, ?_⟩
-  exact le_antisymm adjoint_adjoint_le
-    (LinearPMap.IsFormalAdjoint.le_adjoint dense_adjoint_domain adjoint_symmetric)
+    IsEssentiallySelfAdjoint (freeLaplacian V) := by
+  refine ⟨dense_domain_freeLaplacian V, ?_⟩
+  have hdense := dense_domain_freeLaplacian V
+  have hle : freeLaplacian V ≤ (freeLaplacian V).adjoint :=
+    (freeLaplacian_isFormalAdjoint_self V).le_adjoint hdense
+  have hdense' : Dense (((freeLaplacian V).adjoint.domain : Submodule ℂ (L2Space V)) :
+      Set (L2Space V)) :=
+    hdense.mono (fun _ hx => hle.1 hx)
+  have h1 : (freeLaplacian V).adjoint ≤ (freeLaplacian V).adjoint.adjoint :=
+    (adjoint_isFormalAdjoint_self V).le_adjoint hdense'
+  have h2 : (freeLaplacian V).adjoint.adjoint ≤ (freeLaplacian V).adjoint :=
+    adjoint_antitone hdense' hdense hle
+  exact LinearPMap.isSelfAdjoint_def.2 (le_antisymm h2 h1)
 
-/-- Unfolding of `IsSelfAdjoint` for partially defined operators: the adjoint of the adjoint
-equals the adjoint. -/
-example : IsSelfAdjoint (freeLaplacian (E := E)).adjoint ↔
-    (freeLaplacian (E := E)).adjoint.adjoint = (freeLaplacian (E := E)).adjoint := Iff.rfl
-
-/-- The free Laplacian on `L²(ℝᵈ)` is essentially self-adjoint on the Schwartz space. -/
+/-- The free Laplacian on `L²(ℝ^d, ℂ)` is essentially self-adjoint on the Schwartz space. -/

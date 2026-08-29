@@ -1,51 +1,37 @@
-/-
+import Mathlib
+
+/-!
 # No Deleting
 Category: Frontier Qi
 Target: QI.no_deleting
-Statement: There is no unitary that deletes an unknown quantum state (no-deleting theorem).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+/-
+Formalization notes.
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-open scoped ComplexConjugate
+We model a single qubit as `EuclideanSpace ℂ (Fin 2)` and a pair of qubits as
+`EuclideanSpace ℂ (Fin 2 × Fin 2)`, with `QI.tens a b` the product (tensor) state
+`(i, j) ↦ a i * b j`.
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+The no-deleting theorem states that there is no unitary `U` on the two-qubit system
+which maps `ψ ⊗ ψ` to `ψ ⊗ |0⟩` for every (unknown) unit vector `ψ`; i.e. no unitary
+can delete one of two identical copies of an arbitrary state.
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+The proof: a unitary preserves inner products, and `⟪ψ ⊗ ψ, φ ⊗ φ⟫ = ⟪ψ, φ⟫ ^ 2`
+while `⟪ψ ⊗ |0⟩, φ ⊗ |0⟩⟫ = ⟪ψ, φ⟫`, so we would need `c ^ 2 = c` for the overlap `c`
+of any two unit vectors. Taking `ψ = |0⟩` and `φ = (3/5) |0⟩ + (4/5) |1⟩` gives
+`c = 3/5`, and `9/25 ≠ 3/5`.
+-/
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+open scoped InnerProductSpace
 
 namespace QI
 
-/-- A qubit: the two-dimensional complex Hilbert space. -/
-abbrev Qubit : Type := EuclideanSpace ℂ (Fin 2)
+/-- The product (tensor) state of two qubits, `(i, j) ↦ a i * b j`. -/
 
-/-- The register of a deleting machine: two qubits together with an ancilla indexed by `ι`.
-Concretely this is the Hilbert space `ℂ^(2 × 2 × ι)`, which is the tensor product of two
-qubit spaces with the ancilla space `ℂ^ι`. -/
-abbrev Register (ι : Type) : Type := EuclideanSpace ℂ (Fin 2 × Fin 2 × ι)
-
-/-- The product (tensor) state `x ⊗ y ⊗ a` of two qubits and an ancilla. -/
-
-theorem inner_ket0_ket0 : inner ℂ ket0 ket0 = (1 : ℂ) := by
-  simp only [PiLp.inner_apply, RCLike.inner_apply, ket0, Fin.sum_univ_two]
-  norm_num
+lemma inner_ket0_ket0 : ⟪ket0, ket0⟫_ℂ = 1 := by
+  rw [PiLp.inner_apply]
+  norm_num [ket0, RCLike.inner_apply, Fin.sum_univ_succ]
 

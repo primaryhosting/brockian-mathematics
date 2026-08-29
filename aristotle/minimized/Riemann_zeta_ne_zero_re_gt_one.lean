@@ -8,16 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Riemann.zeta
-
-/-- The Riemann zeta function does not vanish on the half-plane `1 < s.re`. -/
-theorem ne_zero_re_gt_one {s : ℂ} (hs : 1 < s.re) : riemannZeta s ≠ 0 :=
-  riemannZeta_ne_zero_of_one_lt_re hs
-
-end Riemann.zeta
-
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -40,4 +30,12 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Riemann.zeta
+
+/-- The Riemann zeta function has no zeros in the half-plane `1 < s.re`. -/
+theorem ne_zero_re_gt_one (s : ℂ) (hs : 1 < s.re) : riemannZeta s ≠ 0 :=
+  riemannZeta_ne_zero_of_one_lt_re hs
+
+end Riemann.zeta
 

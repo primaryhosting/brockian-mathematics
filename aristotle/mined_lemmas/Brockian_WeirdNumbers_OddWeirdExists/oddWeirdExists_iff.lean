@@ -33,52 +33,33 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open Finset
-
 /-!
-## Status
-
-`OddWeirdExists` (the existence of an odd weird number) is an open problem, and is **not** proved
-here. What is proved, axiom-cleanly:
-
-* `oddWeirdExists_iff` — an elementary restatement of the target;
-* `pseudoperfect_mul_left`, `pseudoperfect_of_dvd`, `not_pseudoperfect_of_dvd_of_weird` — every
-  multiple of a pseudoperfect number is pseudoperfect, hence no divisor of a weird number is
-  pseudoperfect;
-* `not_dvd_945_of_weird`, `not_dvd_of_perfect_of_weird`, `not_perfect_of_weird` — concrete
-  consequences (e.g. no weird number is a multiple of `945`, the smallest odd abundant number);
-* `weird_mul_prime` — if `n` is weird and `p` is a prime exceeding the sum of the divisors of `n`,
-  then `n * p` is weird;
-* `oddWeirdExists_iff_infinite` — the conditional reduction: one odd weird number would already
-  force infinitely many;
-* `even_weird_exists` — the even case, via Mathlib's `Nat.weird_seventy`.
-
-The relevant existing Mathlib material is `Mathlib/NumberTheory/FactorisationProperties.lean`
-(`Nat.Abundant`, `Nat.Pseudoperfect`, `Nat.Weird`, `Nat.Abundant.of_dvd`, `Nat.weird_seventy`);
-no Mathlib lemma closes the target itself.
+# Odd Weird Exists
+Category: Brockian Conjecture
+Target: Brockian.WeirdNumbers.OddWeirdExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.WeirdNumbers
+set_option maxRecDepth 4000000
+set_option maxHeartbeats 4000000
 
-/-- The Brockian statement "an odd weird number exists".
+namespace Brockian
+namespace WeirdNumbers
 
-A natural number is *weird* (`Nat.Weird`, from Mathlib's
-`Mathlib/NumberTheory/FactorisationProperties.lean`) when it is abundant (the sum of its proper
-divisors exceeds it) but not pseudoperfect (no subset of its proper divisors sums to it).
-Whether an odd weird number exists is an open problem; this file therefore develops
-Lean-checked reductions and partial results around the statement. -/
+/-- `n` is *semiperfect* (pseudoperfect) if `n` is positive and some set of proper divisors
+of `n` sums to `n`. -/
 
 theorem oddWeirdExists_iff :
     OddWeirdExists ↔
-      ∃ n : ℕ, Odd n ∧ n < ∑ i ∈ n.properDivisors, i ∧
-        ∀ s ⊆ n.properDivisors, ∑ i ∈ s, i ≠ n := by
+      ∃ n : ℕ, Odd n ∧ Weird n ∧ 947 ≤ n ∧ ¬ (945 ∣ n) ∧ ∀ d, d ∣ n → ¬ Semiperfect d := by
   constructor
-  · rintro ⟨n, hodd, ⟨hab, hps⟩⟩
-    refine ⟨n, hodd, hab, ?_⟩
-    rcases Nat.not_pseudoperfect_iff_forall.1 hps with h | h
-    · simp [Nat.Abundant, h] at hab
-    · exact h
-  · rintro ⟨n, hodd, hab, h⟩
-    exact ⟨n, hodd, hab, Nat.not_pseudoperfect_iff_forall.2 (Or.inr h)⟩
+  · rintro ⟨n, hodd, hw⟩
+    exact ⟨n, hodd, hw, odd_weird_ge_947 hodd hw, hw.not_dvd_945,
+      fun d hd => hw.no_semiperfect_divisor hd⟩
+  · rintro ⟨n, hodd, hw, -⟩
+    exact ⟨n, hodd, hw⟩
 
-/-- Multiples of pseudoperfect numbers are pseudoperfect. -/
+end WeirdNumbers
+end Brockian
+

@@ -30,48 +30,43 @@ Target: Brockian.LandauNSquaredPlusOne.LandauFourthConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 rejects a module doc comment `/-! ... -/` before `import`, so the header above
--- is an ordinary block comment; its text is otherwise exactly as requested.)
 
 import Mathlib
 
 /-!
-# Landau's fourth problem: infinitely many primes of the form `n ^ 2 + 1`
-
-Landau's fourth conjecture is an open problem.  This file provides:
-
-* a formal statement of Bunyakovsky's conjecture (`Bunyakovsky`);
-* a Lean-checked *conditional reduction*: Landau's fourth conjecture follows from
-  Bunyakovsky's conjecture (`LandauFourthConjecture`), via the irreducibility of
-  `X ^ 2 + 1` over `ℤ` and the absence of a fixed divisor;
-* unconditional partial results: an odd prime divides some `n ^ 2 + 1` iff it is
-  `1 mod 4`, and hence infinitely many primes divide numbers of the form `n ^ 2 + 1`.
+# Landau Fourth Conjecture
+Category: Brockian Conjecture
+Target: Brockian.LandauNSquaredPlusOne.LandauFourthConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 namespace Brockian.LandauNSquaredPlusOne
 
-open Polynomial
+open Zsqrtd
 
-/-- The set of natural numbers `n` such that `n ^ 2 + 1` is prime. -/
+/-- A *Landau prime* is a prime natural number of the form `n ^ 2 + 1`. -/
 
-theorem prime_dvd_sq_add_one_iff {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) :
-    (∃ n : ℕ, p ∣ n ^ 2 + 1) ↔ p % 4 = 1 := by
+theorem prime_dvd_sq_add_one_iff {p : ℕ} (hp : Nat.Prime p) :
+    (∃ n : ℕ, p ∣ n ^ 2 + 1) ↔ (p = 2 ∨ p % 4 = 1) := by
   haveI : Fact p.Prime := ⟨hp⟩
-  have hodd : p % 2 = 1 := hp.eq_two_or_odd.resolve_left hp2
   constructor
   · rintro ⟨n, hn⟩
-    have h : ((n ^ 2 + 1 : ℕ) : ZMod p) = 0 := (ZMod.natCast_eq_zero_iff _ _).2 hn
-    push_cast at h
-    have hsq : IsSquare (-1 : ZMod p) := ⟨(n : ZMod p), by linear_combination -h⟩
-    have := (ZMod.exists_sq_eq_neg_one_iff (p := p)).1 hsq
-    omega
-  · intro h4
-    obtain ⟨y, hy⟩ := (ZMod.exists_sq_eq_neg_one_iff (p := p)).2 (by omega)
-    refine ⟨y.val, ?_⟩
-    have h : ((y.val ^ 2 + 1 : ℕ) : ZMod p) = 0 := by
-      push_cast
-      rw [ZMod.natCast_val, ZMod.cast_id]
-      linear_combination -hy
-    exact (ZMod.natCast_eq_zero_iff _ _).1 h
+    have h0 : ((n : ZMod p)) ^ 2 + 1 = 0 := by
+      have h := (ZMod.natCast_eq_zero_iff (n ^ 2 + 1) p).2 hn
+      push_cast at h
+      exact h
+    have hsq : IsSquare (-1 : ZMod p) := ⟨(n : ZMod p), by linear_combination -h0⟩
+    have h3 : p % 4 ≠ 3 := (ZMod.exists_sq_eq_neg_one_iff (p := p)).1 hsq
+    rcases hp.eq_two_or_odd with h | h
+    · exact Or.inl h
+    · exact Or.inr (by omega)
+  · intro h
+    have h3 : p % 4 ≠ 3 := by rcases h with rfl | h <;> omega
+    obtain ⟨y, hy⟩ := (ZMod.exists_sq_eq_neg_one_iff (p := p)).2 h3
+    refine ⟨y.val, (ZMod.natCast_eq_zero_iff _ p).1 ?_⟩
+    push_cast [ZMod.natCast_val, ZMod.cast_id]
+    rw [sq, ← hy]
+    ring
 
-/-- Unconditionally, infinitely many primes divide some number of the form `n ^ 2 + 1`. -/
+/-- There are also infinitely many `n` for which `n ^ 2 + 1` is *not* prime. -/

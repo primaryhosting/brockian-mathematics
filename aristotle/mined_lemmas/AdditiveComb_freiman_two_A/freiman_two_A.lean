@@ -5,23 +5,6 @@ Target: AdditiveComb.freiman_two_A
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
-
-open scoped Pointwise
-
-namespace AdditiveComb
-
-/-- **Basic doubling bound.** For a finite nonempty set `A` of integers, the sumset `A + A`
-has size at least `2 * |A| - 1`. -/
-
-theorem freiman_two_A (A : Finset ℤ) (hA : A.Nonempty) :
-    2 * A.card - 1 ≤ (A + A).card := by
-  have h := cauchy_davenport_add_of_linearOrder_isCancelAdd hA hA
-  omega
-
-end AdditiveComb
-
 import Mathlib
 
 open scoped BigOperators
@@ -38,12 +21,18 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+namespace AdditiveComb
+
+open Finset
+
+/-- Auxiliary induction: a nonempty finite set of integers of cardinality `n` has
+`|A + A| ≥ 2n - 1`. -/
+
+theorem freiman_two_A (A : Finset ℤ) (hA : A.Nonempty) :
+    2 * A.card - 1 ≤ (A + A).card :=
+  card_add_self_aux A.card A rfl hA
+
+end AdditiveComb
 

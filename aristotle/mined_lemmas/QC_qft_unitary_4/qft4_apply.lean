@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Qft Unitary 4
 Category: Quantum Computing
 Target: QC.qft_unitary_4
@@ -6,30 +8,31 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-/-!
-# The quantum Fourier transform is unitary
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-We define the `n`-point discrete/quantum Fourier transform matrix
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-`qftMatrix n = (1/√n) * (ω^(j*k))_{j,k}` with `ω = exp (2πi/n)`,
-
-prove it is unitary for every `n ≠ 0`, and specialize to the 4-qubit case `n = 2^4 = 16`,
-giving the target theorem `QC.qft_unitary_4`.
--/
+set_option grind.warning false
 
 namespace QC
 
-open Complex Matrix Finset
-
-/-- The primitive `n`-th root of unity `exp (2πi/n)`. -/
+/-- The primitive 16-th root of unity `exp (2πi/16)`. -/
 
 lemma qft4_apply (j k : Fin 16) :
-    qft4 j k = (1 / 4 : ℂ) * Complex.exp (2 * Real.pi * Complex.I / 16) ^ (j.val * k.val) := by
-  have h : Real.sqrt (16 : ℕ) = 4 := by
-    rw [show ((16 : ℕ) : ℝ) = 4 ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]
-  simp only [qft4, qftMatrix, zeta, Matrix.of_apply, h]
+    qft4 j k = Complex.exp (2 * Real.pi * Complex.I * (j.val * k.val) / 16) / 4 := by
+  rw [qft4, zeta16, ← Complex.exp_nat_mul]
   norm_num
+  congr 1
+  ring
 
-/-- **The 4-qubit quantum Fourier transform matrix is unitary.** -/
+/-- Explicit form of unitarity: `QFT^† * QFT = 1`. -/

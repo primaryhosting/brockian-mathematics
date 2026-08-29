@@ -24,12 +24,12 @@ set_option autoImplicit false
 
 namespace Goldbach
 
-/-- The weak (ternary) Goldbach conjecture, proved by Helfgott (2013), not in Mathlib:
-every odd natural number greater than `5` is a sum of three primes. -/
+/-- The weak (ternary) Goldbach statement: every odd natural number greater than 5
+is the sum of three primes. -/
 
 theorem ternary_seven :
     ∃ p q r : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ Nat.Prime r ∧ p + q + r = 7 :=
-  ⟨2, 2, 3, seven_eq_two_add_two_add_three⟩
+  ⟨2, 2, 3, Nat.prime_two, Nat.prime_two, Nat.prime_three, rfl⟩
 
-/-- The target statement: the self-equivalence of the ternary Goldbach statement,
-together with the concrete witness `7 = 2 + 2 + 3`. -/
+/-- The target: the self-equivalence of the ternary Goldbach statement, together with
+the concrete witness `7 = 2 + 2 + 3`. -/

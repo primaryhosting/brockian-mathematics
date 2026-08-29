@@ -45,23 +45,27 @@ namespace Brockian.RepunitPrimes
 
 open Finset
 
-/-- The `n`-th base-ten repunit `1, 11, 111, ...` (with `repunit 0 = 0`). -/
+/-- The `n`-th repunit `R n = 1 + 10 + ... + 10^(n-1) = (10^n - 1)/9`, i.e. the number
+whose decimal expansion consists of `n` ones. -/
 
 theorem infinite_primes_dvd_repunit :
-    {p : ℕ | Nat.Prime p ∧ ∃ n, 0 < n ∧ p ∣ repunit n}.Infinite := by
-  have hsub : ({p : ℕ | Nat.Prime p} \ {2, 5}) ⊆
-      {p : ℕ | Nat.Prime p ∧ ∃ n, 0 < n ∧ p ∣ repunit n} := by
-    rintro p ⟨hp, hne⟩
-    simp only [Set.mem_insert_iff, Set.mem_singleton_iff, not_or] at hne
-    exact ⟨hp, exists_repunit_dvd_of_prime hp hne.1 hne.2⟩
-  exact Set.Infinite.mono hsub (Nat.infinite_setOf_prime.diff (Set.toFinite _))
+    {q : ℕ | q.Prime ∧ ∃ n : ℕ, 0 < n ∧ q ∣ repunit n}.Infinite := by
+  refine Set.infinite_of_forall_exists_gt (fun N => ?_)
+  obtain ⟨p, hpge, hp⟩ := Nat.exists_infinite_primes (max N 3 + 1)
+  have hp3 : 3 < p := by omega
+  have hR : repunit p ≠ 1 := by
+    have := one_lt_repunit (n := p) (by omega); omega
+  set q := (repunit p).minFac with hqdef
+  have hqp : q.Prime := Nat.minFac_prime hR
+  have hqd : q ∣ repunit p := Nat.minFac_dvd _
+  have hmod : q % (2 * p) = 1 := prime_factor_mod_two_mul hp hp3 hqp hqd
+  have hlt : N < q := by
+    have h1 : q % (2 * p) ≤ q := Nat.mod_le _ _
+    rcases Nat.lt_or_ge q (2 * p) with hcase | hcase
+    · rw [Nat.mod_eq_of_lt hcase] at hmod
+      exact absurd hmod hqp.one_lt.ne'
+    · have : N < 2 * p := by omega
+      omega
+  exact ⟨q, ⟨hqp, p, by omega, hqd⟩, hlt⟩
 
-/-!
-## The main equivalence
-
-The Brockian repunit-prime conjecture asserts that there are arbitrarily large `n` with `Rₙ`
-prime.  The theorem below shows this is equivalent to the infinitude of the *set* of repunit
-primes, and (by `prime_index_of_repunit_prime`) that any such index is itself prime.
--/
-
-/-- The set of primes that are repunits. -/
+/-- The set of repunit primes is nonempty: `R 2 = 11` is prime. -/

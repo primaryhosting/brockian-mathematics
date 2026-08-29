@@ -1,29 +1,33 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
-
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem models_extAx (hA : A.IsTransitive) : (A : Type (u+1)) ⊨ extAx := by
-  rw [extAx]; realize_simp
-  intro a ha b hb h
-  apply ZFSet.ext
-  intro z
-  exact ⟨fun hz => (h z (hA a ha hz)).1 hz, fun hz => (h z (hA b hb hz)).2 hz⟩
+theorem models_extAx : VClass P ⊨ extAx.{u + 1} := by
+  rw [realize_extAx]
+  rintro ⟨x, hx⟩ ⟨y, hy⟩ hxy
+  refine Subtype.ext (ZFSet.ext fun z => ⟨fun hz => ?_, fun hz => ?_⟩)
+  · exact (hxy ⟨z, h.mem_trans hx hz⟩).1 hz
+  · exact (hxy ⟨z, h.mem_trans hy hz⟩).2 hz
 

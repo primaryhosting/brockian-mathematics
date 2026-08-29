@@ -1,13 +1,4 @@
-/-
-# Coprime Same Parity Twenty One Prime Factors
-Category: Frontier — Betrothed Numbers
-Target: Brockian.BetrothedNumbers.coprime_sameParity_twentyOne_primeFactors
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Coprime Same Parity Twenty One Prime Factors
 Category: Frontier — Betrothed Numbers
@@ -23,63 +14,64 @@ open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 40000
+set_option maxRecDepth 4000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option grind.warning false
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-open Finset
-open scoped ArithmeticFunction.sigma
+set_option grind.warning false
 
 namespace Brockian
 namespace BetrothedNumbers
 
-/-!
-## Betrothed (quasi-amicable) pairs
+open ArithmeticFunction
+open scoped ArithmeticFunction.sigma
 
-A pair `(m, n)` of positive integers is *betrothed* (also called *quasi-amicable*, or a
-*reduced amicable pair*) when each of the two numbers is the sum of the *nontrivial* proper
-divisors of the other, i.e. `σ₁ m = σ₁ n = m + n + 1`.
--/
+/-! ## Betrothed (quasi-amicable) pairs -/
 
-/-- `Betrothed m n` says that `(m, n)` is a betrothed (quasi-amicable) pair:
-the sum of divisors of each of `m` and `n` equals `m + n + 1`. -/
+/-- A *betrothed* (quasi-amicable) pair: two positive integers each of whose sum of
+divisors equals `m + n + 1`; equivalently `s(m) = n + 1` and `s(n) = m + 1`, where `s`
+denotes the sum of the proper divisors. -/
 
-theorem geom_sum_div_pow_le {p a : ℕ} (hp : p.Prime) :
-    (∑ k ∈ Finset.range (a + 1), (p : ℚ) ^ k) / (p : ℚ) ^ a ≤ (p : ℚ) / (p - 1) := by
-  have hp2 : (2 : ℚ) ≤ (p : ℚ) := by exact_mod_cast hp.two_le
-  have h1 : (0 : ℚ) < (p : ℚ) - 1 := by linarith
-  have hpa : (0 : ℚ) < (p : ℚ) ^ a := by positivity
-  rw [div_le_div_iff₀ hpa h1]
-  have hg : (∑ k ∈ Finset.range (a + 1), (p : ℚ) ^ k) * ((p : ℚ) - 1) = (p : ℚ) ^ (a + 1) - 1 :=
-    geom_sum_mul (p : ℚ) (a + 1)
-  have hs : (p : ℚ) ^ (a + 1) = (p : ℚ) * (p : ℚ) ^ a := by ring
+theorem sigma_one_prime_pow_le {p e : ℕ} (hp : p.Prime) :
+    ((σ 1 (p ^ e) : ℚ)) ≤ (p : ℚ) ^ e * ((p : ℚ) / ((p : ℚ) - 1)) := by
+  have h2 : (2 : ℚ) ≤ (p : ℚ) := by exact_mod_cast hp.two_le
+  have hne : (p : ℚ) ≠ 1 := by linarith
+  have hpos : (0 : ℚ) < (p : ℚ) - 1 := by linarith
+  rw [ArithmeticFunction.sigma_one_apply_prime_pow hp]
+  push_cast
+  rw [geom_sum_eq hne, mul_div_assoc']
+  gcongr
+  rw [pow_succ]
   linarith
 
-/-- **Rational abundancy bound.** For `N ≠ 0`, the abundancy index `σ₁ N / N` is at most
-`∏_{p ∣ N} p / (p - 1)`, the product being over the distinct prime factors of `N`. -/
+/-- **The rational abundancy bound.** The abundancy index of `N` is at most
+`∏_{p ∣ N} p / (p - 1)`. -/
 
-theorem abundancy_le_prod_primeFactors {N : ℕ} (hN : N ≠ 0) :
-    (σ 1 N : ℚ) / N ≤ ∏ p ∈ N.primeFactors, (p : ℚ) / (p - 1) := by
-  have hNq : (N : ℚ) = ∏ p ∈ N.primeFactors, (p : ℚ) ^ (N.factorization p) := by
+theorem sigma_one_le_prod_primeFactors {N : ℕ} (hN : N ≠ 0) :
+    ((σ 1 N : ℚ)) ≤ (N : ℚ) * ∏ p ∈ N.primeFactors, (p : ℚ) / ((p : ℚ) - 1) := by
+  have hmul : σ 1 N = N.factorization.prod fun p k => σ 1 (p ^ k) :=
+    (ArithmeticFunction.isMultiplicative_sigma (k := 1)).multiplicative_factorization _ hN
+  rw [Finsupp.prod, Nat.support_factorization] at hmul
+  have hNeq : (N : ℚ) = ∏ p ∈ N.primeFactors, (p : ℚ) ^ (N.factorization p) := by
     conv_lhs => rw [← Nat.factorization_prod_pow_eq_self hN]
     rw [Finsupp.prod, Nat.support_factorization]
-    push_cast; ring
-  have hσ : (σ 1 N : ℚ)
-      = ∏ p ∈ N.primeFactors, (∑ k ∈ Finset.range (N.factorization p + 1), (p : ℚ) ^ k) := by
-    rw [ArithmeticFunction.sigma_one_apply, Nat.sum_divisors hN]
-    push_cast; ring
-  rw [hσ, hNq, ← Finset.prod_div_distrib]
-  refine Finset.prod_le_prod (fun p hp => ?_) (fun p hp => ?_)
-  · positivity
-  · exact geom_sum_div_pow_le (Nat.prime_of_mem_primeFactors hp)
+    push_cast
+    ring
+  rw [hmul, hNeq, ← Finset.prod_mul_distrib]
+  push_cast
+  refine Finset.prod_le_prod (fun p _ => by positivity) (fun p hp => ?_)
+  exact sigma_one_prime_pow_le (Nat.prime_of_mem_primeFactors hp)
 
-/-!
-## Extremality of the twenty smallest odd primes
--/
+/-! ## An elementary bound on Euler products over sets of odd primes -/
 
-/-- The twenty smallest odd primes. -/
+/-- The first twenty odd primes. -/

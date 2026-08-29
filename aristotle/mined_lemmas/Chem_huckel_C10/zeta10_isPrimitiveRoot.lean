@@ -1,3 +1,11 @@
+/-
+# Huckel C 10
+Category: Chemistry
+Target: Chem.huckel_C10
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -8,18 +16,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-
-open Matrix Polynomial
+open scoped Matrix
+open Complex
 
 namespace Chem
 
-/-! ## A primitive tenth root of unity and the associated additive character -/
-
-/-- A primitive `10`-th root of unity. -/
+/-- The adjacency matrix (Hückel matrix, with `α = 0`, `β = 1`) of the cycle graph `C₁₀`. -/
 
 lemma zeta10_isPrimitiveRoot : IsPrimitiveRoot zeta10 10 := by
-  have h := Complex.isPrimitiveRoot_exp 10 (by norm_num)
-  simpa [zeta10] using h
+  simpa [zeta10] using Complex.isPrimitiveRoot_exp 10 (by norm_num)
 

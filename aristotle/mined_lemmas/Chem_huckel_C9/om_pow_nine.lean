@@ -8,12 +8,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators Real
-open Complex Polynomial
-
 namespace Chem
 
-/-- A primitive 9th root of unity. -/
+open Complex Matrix Finset
 
-theorem om_pow_nine : om ^ 9 = 1 := om_primitive.pow_eq_one
+noncomputable section
+
+/-- A primitive 9-th root of unity. -/
+
+lemma om_pow_nine : om ^ 9 = 1 := om_primitive.pow_eq_one
 

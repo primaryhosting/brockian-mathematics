@@ -22,19 +22,34 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- `exp 9 ≥ 10`, a crude bound from `1 + x ≤ exp x`. -/
+/-- `cosh (6π) > 10`, via `cosh x ≥ exp x / 2`, `6π ≥ 18` and `exp 18 = (exp 3)^6 ≥ 4^6`. -/
 
-lemma ten_lt_cosh_six_pi : (10 : ℝ) < Real.cosh (6 * Real.pi) := by
-  have hc : Real.cosh (6 * Real.pi)
+theorem ten_lt_cosh_six_pi : (10 : ℝ) < Real.cosh (6 * Real.pi) := by
+  have hpi : (3 : ℝ) < Real.pi := Real.pi_gt_three
+  have h18 : (18 : ℝ) ≤ 6 * Real.pi := by linarith
+  have h3 : (4 : ℝ) ≤ Real.exp 3 := by
+    have := Real.add_one_le_exp (3 : ℝ); linarith
+  have hpow : (4 : ℝ) ^ 6 ≤ (Real.exp 3) ^ 6 := by gcongr
+  have he18 : (4096 : ℝ) ≤ Real.exp 18 := by
+    have h : (Real.exp 3) ^ 6 = Real.exp 18 := by
+      rw [← Real.exp_nat_mul]; norm_num
+    rw [← h]; linarith [hpow]
+  have hmono : Real.exp 18 ≤ Real.exp (6 * Real.pi) := Real.exp_le_exp.2 h18
+  have hcosh : Real.cosh (6 * Real.pi)
       = (Real.exp (6 * Real.pi) + Real.exp (-(6 * Real.pi))) / 2 := Real.cosh_eq _
   have hpos : 0 < Real.exp (-(6 * Real.pi)) := Real.exp_pos _
-  have h := twenty_lt_exp_six_pi
-  rw [hc]
-  linarith
+  rw [hcosh]; linarith
 
 /-- The repaired witness kernel is strictly negative at the deep point `2i`:
-`(sinh (2π) / (2π))^2 * (1 - cosh (6π) / 10) < 0`. -/
+`(sinh 2π / 2π)^2 * (1 - cosh(6π)/10) < 0`. -/

@@ -1,53 +1,27 @@
-/-
-# Gleason Theorem
-Category: Frontier Physics
-Target: Frontier.gleason_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean 4.28's module system forbids a `/-!` module docstring before `import`;
--- the header above is therefore a plain block comment and is repeated below.)
-
-import Mathlib
-
+import RequestProject.Main
 /-!
-# Gleason Theorem
-Category: Frontier Physics
-Target: Frontier.gleason_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Gleason's theorem fails in dimension two
 
-A *quantum measure* on a finite dimensional complex Hilbert space `ℂⁿ` is a map `μ` from the
-orthogonal projections to `ℝ` which is nonnegative, finitely additive on orthogonal pairs, and
-normalized (`μ 1 = 1`).  Gleason's theorem says that in dimension at least three every such `μ`
-is given by the Born rule `μ P = Tr(ρ P)` for a unique density operator `ρ`.
+This file complements `RequestProject/Main.lean`.  It constructs an explicit quantum measure on
+the projection lattice of `ℂ²` which does not come from any density operator, showing that the
+dimension hypothesis `3 ≤ N` in Gleason's theorem cannot be dropped.
 
-This file contains:
-
-* `Frontier.QuantumMeasure`, `Frontier.IsDensity`, `Frontier.Represents`: the formalized
-  statement ingredients;
-* `Frontier.born_rule_quantumMeasure`: every density operator gives a quantum measure;
-* `Frontier.density_of_positive_linear`: a linear functional on matrices that is nonnegative
-  on projections and normalized is the trace against a density operator;
-* `Frontier.density_unique`: the density operator representing a measure is unique;
-* `Frontier.gleason_theorem`: the Lean-checked reduction of Gleason's theorem to the linearity
-  of the frame function (the analytic heart of the classical proof);
-* `Frontier.gleason_fails_in_dimension_two`: an explicit quantum measure on the projections of
-  `ℂ²` that is represented by no operator, showing that the dimension hypothesis is necessary.
+The measure is the two-valued "lexicographic sign" measure: in dimension two the only nontrivial
+orthogonality relation between projections is `Q = 1 - P` for a rank-one projection `P`, so any
+function on rank-one projections satisfying `f P + f (1 - P) = 1` is finitely additive.
 -/
 
-open Matrix Complex
+open scoped Classical
 open scoped ComplexOrder
 
 namespace Frontier
 
-section Defs
+open Matrix
 
-variable {n : Type*} [Fintype n] [DecidableEq n]
+/-! ## Structure of projections in dimension two -/
 
-/-- An orthogonal projection: a Hermitian idempotent matrix. -/
+/-- The Cayley–Hamilton identity for `2 × 2` matrices. -/
 
-noncomputable def badMeasure (P : Matrix (Fin 2) (Fin 2) ℂ) : ℝ :=
-  (1 + (2 * (P 0 0).re - 1) ^ 3) / 2
+noncomputable def badMeasure (M : Matrix (Fin 2) (Fin 2) ℂ) : ℝ :=
+  if sgnPos (M 0 0).re (M 0 1).re (M 0 1).im then 1 else 0
 
-/-- Basic relations satisfied by the entries of a `2 × 2` projection. -/

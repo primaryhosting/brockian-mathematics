@@ -23,7 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+/-!
 # Bloch Sphere Bijection
 Category: Quantum Computing
 Target: QC.bloch_sphere_bijection
@@ -33,23 +33,11 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Bloch Sphere Bijection
-Category: Quantum Computing
-Target: QC.bloch_sphere_bijection
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace QC
 
 open Complex
 
-/-- A pure qubit state: a unit vector in `ℂ²`, recorded as a pair of amplitudes
-`(a, b)` with `|a|² + |b|² = 1`. -/
+/-- A pure qubit state: a unit vector in `ℂ²`. -/
 
-theorem norm_eq (p : PureState) : normSq p.a + normSq p.b = 1 := p.2
+theorem norm_eq (v : Qubit) : normSq v.fst + normSq v.snd = 1 := v.2
 
-end PureState
-
-/-- Two pure states are physically identical when they differ by a global phase. -/

@@ -1,22 +1,48 @@
-/-
-`m` independent runs of Simon's algorithm, and the analysis showing that `n + 2` quantum
-queries determine the hidden shift with probability at least `3/4`.
+import Mathlib
+
+/-!
+# Simon Algorithm
+Category: Frontier Qi
+Target: QI.simon_algorithm
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-import RequestProject.SimonQuantum
 
 open scoped BigOperators
+open scoped Real
+open scoped Nat
 open scoped Classical
-open Finset
+open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
 set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace QI
 
-/-- The state of `m` independent copies of the Simon circuit (a product state, using
-`m` quantum queries in total). -/
+/-! ## The Boolean cube as an `𝔽₂`-vector space -/
 
-def Solves {n : ℕ} (A : ClassicalAlg n) (q : ℕ) : Prop :=
-  ∀ (f : Bits n → Bits n) (s : Bits n), SimonPromise f s → output A q f = s
+/-- `n`-bit strings, viewed as the elementary abelian 2-group `(ℤ/2)ⁿ`;
+addition is bitwise XOR. -/
+abbrev V (n : ℕ) : Type := Fin n → ZMod 2
 
-/-- The `k`-th query point of the algorithm when all queries are answered by the identity. -/
+
+def Solves {n d : ℕ} (T : DTree n d) : Prop :=
+  (∀ f : V n → V n, Function.Injective f → T.run f = false) ∧
+  (∀ (f : V n → V n) (s : V n), s ≠ 0 → IsShift f s → T.run f = true)
+
+/-- The two-to-one oracle with hidden shift `s` built by the adversary: it agrees with the
+identity on the queried set `Q` (which contains no two points differing by `s`). -/

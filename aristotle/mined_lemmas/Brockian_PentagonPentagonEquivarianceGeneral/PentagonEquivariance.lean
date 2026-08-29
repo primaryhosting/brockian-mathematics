@@ -1,0 +1,85 @@
+/-
+# Pentagon Pentagon Equivariance General
+Category: Brockian Corpus
+Target: Brockian.PentagonPentagonEquivarianceGeneral
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment; the identical module docstring is repeated below.)
+import Mathlib
+
+/-!
+# Pentagon Pentagon Equivariance General
+Category: Brockian Corpus
+Target: Brockian.PentagonPentagonEquivarianceGeneral
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Classical
+
+set_option maxHeartbeats 1000000
+
+namespace Brockian
+
+open Complex DihedralGroup
+
+/-!
+## Setup
+
+We generalize the `D₅` pentagon representation picture to an arbitrary regular `n`-gon.
+
+* The vertices of the regular `n`-gon are labelled by `ZMod n`; the geometric realization of the
+  vertex `k` is the complex number `ngonVertex n k = exp (2 π I k / n)`, obtained from Mathlib's
+  additive character `ZMod.toCircle`.
+* `ngonAct` is the combinatorial action of `DihedralGroup n` on the vertex labels `ZMod n`.
+* `ngonSymm` is the geometric action of `DihedralGroup n` on `ℂ` by rotations `z ↦ ζₙ^i * z` and
+  reflections `z ↦ ζₙ^(-i) * conj z`.
+
+The main theorem `PentagonPentagonEquivarianceGeneral` says that the vertex realization map
+intertwines these two actions, i.e. it is `DihedralGroup n`-equivariant.
+
+The analytic content is supplied entirely by existing Mathlib results about the additive character
+`ZMod.toCircle` (`Mathlib/Analysis/SpecialFunctions/Complex/CircleAddChar.lean`), namely
+`AddChar.map_add_eq_mul`, `AddChar.map_neg_eq_inv`, `Circle.coe_inv_eq_conj` and
+`ZMod.injective_toCircle`.
+-/
+
+/-- The geometric realization of the vertex `k` of the regular `n`-gon:
+`ngonVertex n k = exp (2 * π * I * k / n)`. -/
+
+theorem PentagonEquivariance (g : DihedralGroup 5) (k : ZMod 5) :
+    ngonVertex 5 (ngonAct g k) = ngonSymm 5 g (ngonVertex 5 k) :=
+  PentagonPentagonEquivarianceGeneral 5 g k
+
+end Brockian
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+

@@ -1,8 +1,4 @@
-import RequestProject.Paradoxical
-
-/-!
-# Banach Tarski: a free group of rotations of `ℝ³`
--/
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -18,28 +14,33 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace Frontier
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-open Set Function
+set_option grind.warning false
 
-/-! ## A free group of rotations of `ℝ³`
+import Mathlib
 
-Following the classical argument, the two rotations by `arccos (3/5)` about the `z`- and the
-`x`-axis generate a free subgroup of `SO(3)`.  Freeness is proved by a `5`-adic argument:
-a nonempty reduced word of length `n`, applied to the integral vector `(1,0,2)` and rescaled
-by `5 ^ n`, gives an integral vector which is nonzero modulo `5`.
+/-!
+# Rotations of three dimensional Euclidean space
+
+Explicit rotations about the `z`- and `x`-axes, the cross product, and the fact that a
+nontrivial rotation fixes at most two points of the unit sphere.
 -/
 
-namespace FreeRotations
+open scoped RealInnerProductSpace
 
-open Matrix
+namespace BT
 
-/-- The special orthogonal group of `ℝ³`. -/
-abbrev SO3 := Matrix.specialOrthogonalGroup (Fin 3) ℝ
+/-- Three dimensional Euclidean space. -/
+abbrev E3 := EuclideanSpace ℝ (Fin 3)
 
-instance : Fact (Nat.Prime 5) := ⟨by norm_num⟩
+/-- A vector of `E3` given by its three coordinates. -/
 
-
-def cross3 (u v : Fin 3 → ℝ) : Fin 3 → ℝ :=
-  ![u 1 * v 2 - u 2 * v 1, u 2 * v 0 - u 0 * v 2, u 0 * v 1 - u 1 * v 0]
+noncomputable def cross3 (u v : E3) : E3 :=
+  vec3 (u 1 * v 2 - u 2 * v 1) (u 2 * v 0 - u 0 * v 2) (u 0 * v 1 - u 1 * v 0)
 

@@ -1,11 +1,5 @@
-/-
-# FLT Statement
-Category: Frontier — Prime Numbers
-Target: Frontier.FLT_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
+-- (Lean 4 requires `import` lines to precede any module docstring, so the required
+-- header comment appears immediately below the import.)
 import Mathlib
 
 /-!
@@ -16,12 +10,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option autoImplicit false
+
 namespace Frontier
 
-/-- Fermat's Last Theorem for a fixed exponent `n`, stated with positive integers:
-`x ^ n + y ^ n = z ^ n` has no solution with `x, y, z > 0`. -/
+/-- Fermat's Last Theorem for a fixed exponent `n`, stated with *positive* integers:
+there are no `x, y, z > 0` with `x ^ n + y ^ n = z ^ n`. -/
 
 def FLT : Prop := ∀ n : ℕ, 2 < n → FLTFor n
 
-/-- The positivity form `FLTFor n` agrees with Mathlib's `FermatLastTheoremFor n`
-(which is phrased with `≠ 0`). -/
+/-- The positive-integer formulation for a fixed exponent agrees with Mathlib's
+`FermatLastTheoremFor` (which phrases the same thing via nonvanishing). -/

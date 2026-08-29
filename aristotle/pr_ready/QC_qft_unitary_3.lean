@@ -9,13 +9,78 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Qft Unitary 3
-Category: Quantum Computing
-Target: QC.qft_unitary_3
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace QC
+
+open Complex Matrix
+
+/-- The primitive `8`-th root of unity `ω = exp(2πi/8)` used by the 3-qubit QFT. -/
+noncomputable def qftOmega : ℂ := Complex.exp (2 * Real.pi * Complex.I / 8)
+
+/-- The 3-qubit quantum Fourier transform matrix: the `8 × 8` matrix with entries
+`(1/√8) · ω^(jk)`, where `ω = exp(2πi/8)`. -/
+noncomputable def qft3 : Matrix (Fin 8) (Fin 8) ℂ :=
+  Matrix.of fun j k => ((1 / Real.sqrt 8 : ℝ) : ℂ) * qftOmega ^ ((j : ℕ) * (k : ℕ))
+
+lemma qftOmega_primitive : IsPrimitiveRoot qftOmega 8 := by
+  have h := Complex.isPrimitiveRoot_exp 8 (by norm_num)
+  simpa [qftOmega] using h
+
+lemma qftOmega_pow_eight : qftOmega ^ 8 = 1 := qftOmega_primitive.pow_eq_one
+
+lemma qftOmega_pow_eq_one_iff (m : ℕ) : qftOmega ^ m = 1 ↔ 8 ∣ m :=
+  qftOmega_primitive.pow_eq_one_iff_dvd m
+
+lemma conj_qftOmega : (starRingEnd ℂ) qftOmega = qftOmega ^ 7 := by
+  have h1 : (starRingEnd ℂ) qftOmega = Complex.exp (-(2 * Real.pi * Complex.I / 8)) := by
+    rw [qftOmega, ← Complex.exp_conj]
+    congr 1
+    simp only [map_div₀, map_mul, Complex.conj_I, Complex.conj_ofReal, map_ofNat]
+    ring
+  rw [h1, Complex.exp_neg, ← qftOmega]
+  have hne : qftOmega ≠ 0 := Complex.exp_ne_zero _
+  field_simp
+  exact qftOmega_pow_eight.symm
+
+/-- Orthogonality relation for the 8-th roots of unity. -/
+lemma qftOmega_sum (m : ℕ) :
+    ∑ k : Fin 8, qftOmega ^ ((k : ℕ) * m) = if 8 ∣ m then 8 else 0 := by
+  have hrw : ∀ k : Fin 8, qftOmega ^ ((k : ℕ) * m) = (qftOmega ^ m) ^ (k : ℕ) := by
+    intro k; rw [← pow_mul, Nat.mul_comm]
+  simp_rw [hrw]
+  rw [Fin.sum_univ_eq_sum_range (fun i => (qftOmega ^ m) ^ i) 8]
+  by_cases h : 8 ∣ m
+  · have hm : qftOmega ^ m = 1 := (qftOmega_pow_eq_one_iff m).mpr h
+    simp [hm, h]
+  · have hm : qftOmega ^ m ≠ 1 := fun hc => h ((qftOmega_pow_eq_one_iff m).mp hc)
+    rw [geom_sum_eq hm]
+    have h8 : (qftOmega ^ m) ^ 8 = 1 := by
+      rw [← pow_mul, Nat.mul_comm, pow_mul, qftOmega_pow_eight, one_pow]
+    simp [h8, h]
+
+lemma dvd_add_seven_iff_eq : ∀ j l : Fin 8, 8 ∣ ((j : ℕ) + 7 * (l : ℕ)) ↔ j = l := by decide
+
+/-- The 3-qubit quantum Fourier transform matrix is unitary. -/
+theorem qft_unitary_3 : qft3 ∈ Matrix.unitaryGroup (Fin 8) ℂ := by
+  have hr : (1 / Real.sqrt 8 : ℝ) * (1 / Real.sqrt 8) = 1 / 8 := by
+    rw [div_mul_div_comm, Real.mul_self_sqrt (by norm_num : (0:ℝ) ≤ 8)]
+    norm_num
+  have hc : ((1 / Real.sqrt 8 : ℝ) : ℂ) * ((1 / Real.sqrt 8 : ℝ) : ℂ) = 1 / 8 := by
+    rw [← Complex.ofReal_mul, hr]; norm_num
+  rw [Matrix.mem_unitaryGroup_iff]
+  ext j l
+  rw [Matrix.mul_apply]
+  have key : ∀ k : Fin 8, qft3 j k * (star qft3) k l
+      = ((1 : ℂ) / 8) * qftOmega ^ ((k : ℕ) * ((j : ℕ) + 7 * (l : ℕ))) := by
+    intro k
+    simp only [Matrix.star_apply, qft3, Matrix.of_apply, RCLike.star_def, map_mul,
+      Complex.conj_ofReal, map_pow, conj_qftOmega, ← pow_mul]
+    rw [← hc]
+    ring_nf
+  simp_rw [key, ← Finset.mul_sum, qftOmega_sum, dvd_add_seven_iff_eq]
+  rw [Matrix.one_apply]
+  split <;> norm_num
+
+end QC
 
 
 open scoped BigOperators
@@ -32,91 +97,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
-
-namespace QC
-
-open Complex
-
-/-- The primitive 8-th root of unity `exp(2πi/8)`. -/
-noncomputable def omega8 : ℂ := Complex.exp (2 * Real.pi * Complex.I / 8)
-
-/-- The 3-qubit quantum Fourier transform matrix, of size `8 × 8`, with entries
-`ω^(j*k) / √8` where `ω = exp(2πi/8)`. -/
-noncomputable def qft3 : Matrix (Fin 8) (Fin 8) ℂ :=
-  Matrix.of fun j k => omega8 ^ ((j : ℕ) * (k : ℕ)) / (Real.sqrt 8 : ℝ)
-
-lemma isPrimitiveRoot_omega8 : IsPrimitiveRoot omega8 8 := by
-  simpa [omega8] using Complex.isPrimitiveRoot_exp 8 (by norm_num)
-
-lemma omega8_pow_eight : omega8 ^ 8 = 1 := isPrimitiveRoot_omega8.pow_eq_one
-
-lemma norm_omega8 : ‖omega8‖ = 1 := by
-  simp [omega8, Complex.norm_exp]
-
-lemma conj_omega8 : (starRingEnd ℂ) omega8 = omega8 ^ 7 := by
-  have h : omega8 * omega8 ^ 7 = 1 := by
-    rw [← pow_succ']
-    exact omega8_pow_eight
-  have hinv : omega8⁻¹ = (starRingEnd ℂ) omega8 := Complex.inv_eq_conj norm_omega8
-  rw [← hinv]
-  exact inv_eq_of_mul_eq_one_right h
-
-/-- Sum of the 8-th roots of unity along an arithmetic progression of exponents. -/
-lemma sum_omega8_pow (d : ℕ) :
-    ∑ k ∈ Finset.range 8, (omega8 ^ d) ^ k = if 8 ∣ d then 8 else 0 := by
-  by_cases hd : 8 ∣ d
-  · have h1 : omega8 ^ d = 1 := (isPrimitiveRoot_omega8.pow_eq_one_iff_dvd d).2 hd
-    simp [h1, hd]
-  · have h1 : omega8 ^ d ≠ 1 := fun h =>
-      hd ((isPrimitiveRoot_omega8.pow_eq_one_iff_dvd d).1 h)
-    have h8 : (omega8 ^ d) ^ 8 = 1 := by
-      rw [← pow_mul, mul_comm, pow_mul, omega8_pow_eight, one_pow]
-    rw [geom_sum_eq h1 8, h8, if_neg hd]
-    simp
-
-lemma sqrt8_sq : ((Real.sqrt 8 : ℝ) : ℂ) * ((Real.sqrt 8 : ℝ) : ℂ) = 8 := by
-  have : Real.sqrt 8 * Real.sqrt 8 = 8 := Real.mul_self_sqrt (by norm_num)
-  exact_mod_cast congrArg (fun x : ℝ => (x : ℂ)) this
-
-/-- **The 3-qubit QFT matrix is unitary.** -/
-theorem qft_unitary_3 : qft3 ∈ Matrix.unitaryGroup (Fin 8) ℂ := by
-  rw [Matrix.mem_unitaryGroup_iff']
-  ext a b
-  rw [Matrix.mul_apply]
-  have key : ∀ k : Fin 8,
-      (star qft3) a k * qft3 k b = (omega8 ^ (7 * (a : ℕ) + (b : ℕ))) ^ (k : ℕ) / 8 := by
-    intro k
-    rw [Matrix.star_apply]
-    show (starRingEnd ℂ) (qft3 k a) * qft3 k b = _
-    simp only [qft3, Matrix.of_apply, map_div₀, map_pow, conj_omega8,
-      Complex.conj_ofReal]
-    rw [div_mul_div_comm, sqrt8_sq, ← pow_mul, ← pow_add, ← pow_mul]
-    congr 1
-    ring
-  simp only [key]
-  rw [← Finset.sum_div]
-  rw [Fin.sum_univ_eq_sum_range (fun k => (omega8 ^ (7 * (a : ℕ) + (b : ℕ))) ^ k) 8]
-  rw [sum_omega8_pow]
-  have ha := a.isLt
-  have hb := b.isLt
-  by_cases hab : a = b
-  · subst hab
-    have : (8 : ℕ) ∣ 7 * (a : ℕ) + (a : ℕ) := ⟨(a : ℕ), by ring⟩
-    simp [this]
-  · have hne : (a : ℕ) ≠ (b : ℕ) := fun h => hab (Fin.ext h)
-    have : ¬ (8 : ℕ) ∣ 7 * (a : ℕ) + (b : ℕ) := by omega
-    simp [this, hab]
-
-/-- The QFT matrix satisfies `Qᴴ * Q = 1`. -/
-theorem qft3_conjTranspose_mul_self : qft3.conjTranspose * qft3 = 1 :=
-  (Matrix.mem_unitaryGroup_iff'.1 qft_unitary_3)
-
-/-- The QFT matrix satisfies `Q * Qᴴ = 1`. -/
-theorem qft3_mul_conjTranspose_self : qft3 * qft3.conjTranspose = 1 :=
-  (Matrix.mem_unitaryGroup_iff.1 qft_unitary_3)
-
-#print axioms QC.qft_unitary_3
-
-end QC
 

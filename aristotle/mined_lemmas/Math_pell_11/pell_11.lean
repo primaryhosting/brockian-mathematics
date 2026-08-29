@@ -1,28 +1,25 @@
-/-
-# Pell 11
-Category: Pure Mathematics
-Target: Math.pell_11
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- Note: the header above uses `/- -/` rather than `/-! -/` because a module
--- docstring is a command and may not precede `import` lines in Lean 4.
-
 import Mathlib
+
+/-!
+# Pell 11 (companion file)
+
+This file complements `RequestProject/Main.lean`, which contains the target theorem
+`Math.pell_11` stated over core `Int` (the target file must begin with a fixed header
+comment, and in Lean 4 a module docstring cannot precede an `import`, so that file is
+Mathlib-free).
+
+Here we restate the result over `ℤ` with Mathlib available, and strengthen it:
+the Pell equation `x² - 11 y² = 1` has infinitely many solutions, obtained by iterating
+the fundamental solution `(10, 3)`.
+-/
 
 namespace Math
 
-/-- **Pell's equation for `d = 11`.** The equation `x² - 11·y² = 1` has a
-nontrivial integer solution, i.e. one with `y ≠ 0`: take `(x, y) = (10, 3)`,
-since `100 - 11 * 9 = 1`.
+/-- Iterating the fundamental solution `(10, 3)` of `x² - 11 y² = 1`:
+`(a, b) ↦ (10a + 33b, 3a + 10b)`, starting from the trivial solution `(1, 0)`. -/
 
-Mathlib also provides the general existence result
-`Pell.exists_of_not_isSquare : 1 < d → ¬IsSquare d → ∃ x y : ℤ, x ^ 2 - d * y ^ 2 = 1 ∧ y ≠ 0`;
-see `pell_11_via_mathlib` below for a derivation using it. -/
+theorem pell_11 : ∃ x y : Int, x ^ 2 - 11 * y ^ 2 = 1 ∧ y ≠ 0 :=
+  ⟨10, 3, by decide, by decide⟩
 
-theorem pell_11 : ∃ x y : ℤ, x ^ 2 - 11 * y ^ 2 = 1 ∧ y ≠ 0 :=
-  ⟨10, 3, by norm_num, by norm_num⟩
+end Math
 
-/-- The same statement obtained from Mathlib's general theorem
-`Pell.exists_of_not_isSquare`, using that `11` is not a perfect square. -/

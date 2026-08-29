@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Config Count Density Of BV
+Category: Brockian (Literature Discharge)
+Target: Brockian.EquidistributionBVReduction.configCount_density_of_BV
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -14,38 +22,21 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
-import Mathlib
+namespace Brockian
+namespace EquidistributionBVReduction
 
-/-!
-# Config Count Density Of BV
-Category: Brockian (Literature Discharge)
-Target: Brockian.EquidistributionBVReduction.configCount_density_of_BV
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open Filter Set MeasureTheory
+open scoped Topology
 
-open Filter Topology Set MeasureTheory
-open scoped BigOperators Classical
+/-- `configCount f x N` is the number of the first `N` points of the sequence `x`, each
+configuration `x n` being counted with the weight `f (x n)`. -/
 
-namespace Brockian.EquidistributionBVReduction
+lemma div_mem_Icc {m i : ℕ} (hm : 0 < m) (hi : i ≤ m) : ((i : ℝ) / m) ∈ Icc (0:ℝ) 1 := by
+  have hm' : (0 : ℝ) < m := by exact_mod_cast hm
+  have hi' : (i : ℝ) ≤ m := by exact_mod_cast hi
+  constructor
+  · positivity
+  · rw [div_le_one hm']; exact hi'
 
-/-- The number of indices `n < N` whose fractional part `Int.fract (x n)` lies in `S`:
-the count of "configurations" of the first `N` terms of the sequence inside the window `S`. -/
-
-lemma div_mem_Icc (hk : 0 < k) {i : ℕ} (hi : i ≤ k) : ((i : ℝ) / k) ∈ Icc (0 : ℝ) 1 := by
-  have hk' : (0 : ℝ) < k := by exact_mod_cast hk
-  refine ⟨by positivity, ?_⟩
-  rw [div_le_one hk']
-  exact_mod_cast hi
-
-/-- The index of the window of the `k`-fold equal partition of `[0,1)` containing the
-`n`-th configuration. -/

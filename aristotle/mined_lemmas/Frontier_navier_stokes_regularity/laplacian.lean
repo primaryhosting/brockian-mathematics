@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Navier Stokes Regularity
 Category: Frontier — Moonshot
 Target: Frontier.navier_stokes_regularity
@@ -8,23 +6,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on the header: Lean 4 requires `import` to be the very first command of a
-module, so the mandated header comment is placed immediately after the import.
--/
+import Mathlib
 
-open scoped BigOperators ContDiff
+open scoped BigOperators
+open ContDiff
 
 namespace Frontier
 
-namespace NavierStokes
-
-/-- Points/vectors of `ℝ³`. -/
+/-- The physical space `ℝ³`, modelled as `Fin 3 → ℝ`. -/
 abbrev Vec := Fin 3 → ℝ
 
 /-- The `i`-th partial derivative of a scalar field on `ℝ³`. -/
 
-noncomputable def laplacian (F : Vec → ℝ) (x : Vec) : ℝ :=
-  ∑ i, pderiv (pderiv F i) i x
+noncomputable def laplacian (f : Vec → ℝ) (x : Vec) : ℝ :=
+  ∑ j, partialDeriv (partialDeriv f j) j x
 
-/-- The `j`-th component of the convective term `(u · ∇) u`. -/
+/-- The divergence `∇ · v = ∑ᵢ ∂ᵢ vᵢ` of a vector field on `ℝ³`. -/

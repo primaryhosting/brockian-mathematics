@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Config Count Density Of BV
 Category: Brockian (Literature Discharge)
 Target: Brockian.EquidistributionBVReduction.configCount_density_of_BV
@@ -33,20 +31,22 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Topology Set MeasureTheory
-open scoped BigOperators Classical
+import Mathlib
+
+open MeasureTheory Filter Topology Set
 
 namespace Brockian.EquidistributionBVReduction
 
-/-- The number of indices `n < N` whose fractional part `Int.fract (x n)` lies in `S`:
-the count of "configurations" of the first `N` terms of the sequence inside the window `S`. -/
+open scoped Classical in
+/-- `configCount x A N` is the number of indices `n < N` whose orbit point `x n`,
+reduced mod `1`, lands in the configuration set `A`. -/
 
-lemma configCount_eq_card_fiber (x : ℕ → ℝ) (hk : 0 < k) (i N : ℕ) :
-    configCount x (Ico ((i : ℝ) / k) (((i : ℝ) + 1) / k)) N
-      = ((Finset.range N).filter fun n => idx x k n = i).card := by
-  rw [configCount]
+lemma configCount_eq_card_fiber (x : ℕ → ℝ) {K : ℕ} (hK : 0 < K) (j N : ℕ) :
+    configCount x (Set.Ico ((j : ℝ) / K) (((j : ℝ) + 1) / K)) N
+      = ((Finset.range N).filter (fun n => ⌊(K : ℝ) * Int.fract (x n)⌋₊ = j)).card := by
+  classical
+  simp only [configCount]
   congr 1
   ext n
-  simp [Finset.mem_filter, idx_eq_iff x hk i n]
+  simp [floor_mul_eq_iff_mem_Ico hK j (Int.fract_nonneg (x n))]
 
-/-- The `k` equal windows partition the first `N` configurations. -/

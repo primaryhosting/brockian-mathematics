@@ -12,14 +12,16 @@ Safety:
 Env: AUTO_PR_LIVE=1 to actually push+open; PR_DIR (default contrib/aristotle-domains).
 """
 import datetime
-import hashlib
 import json
 import os
 import pathlib
 import subprocess
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
+sys.path.insert(0, str(REPO))
+from engine.verify import content_hash  # noqa: E402 — the one canonical proof hash
 # cloud axiom audit (AXLE) is the soundness gate; the local lake audit
 # (cross_check.json) cannot run on this box and is only an optional confirmation.
 AUDIT = ROOT / "axle_axiom_audit.json"
@@ -32,20 +34,6 @@ LIVE = os.environ.get("AUTO_PR_LIVE") == "1"
 PR_DIR = os.environ.get("PR_DIR", "contrib/aristotle-domains")
 
 
-def normalize(content: str) -> str:
-    """Return the exact byte form axle_verify checked."""
-    imports, body = [], []
-    for line in content.splitlines():
-        if line.strip().startswith("import "):
-            if line.strip() not in imports:
-                imports.append(line.strip())
-        else:
-            body.append(line)
-    return "\n".join(imports + [""] + body)
-
-
-def content_hash(content: str) -> str:
-    return hashlib.sha256(normalize(content).encode()).hexdigest()[:16]
 
 
 def eligible():

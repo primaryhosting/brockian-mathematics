@@ -41,37 +41,10 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Betrothed (quasi-amicable) numbers
-
-Two distinct natural numbers `m ≠ n` are *betrothed* (also called *quasi-amicable*)
-when each is the sum of the *nontrivial* proper divisors of the other, i.e.
-
-  `σ m = σ n = m + n + 1`,
-
-where `σ = ArithmeticFunction.sigma 1` is the sum-of-divisors function.
-The smallest example is `(48, 75)`.
-
-Whether there are infinitely many betrothed pairs is an open problem.  What is
-proved here is therefore a *conditional reduction* together with the unconditional
-structural facts it rests on:
-
-* `Brockian.BetrothedNumbers.quasiAliquot_iff` — the key intermediate lemma:
-  a pair is betrothed exactly when the *quasi-aliquot* map
-  `q n = σ n - n - 1` swaps `m` and `n` (and `m ≠ n`, `2 ≤ m`, `2 ≤ n`).
-  In particular each member of a betrothed pair determines the other.
-* `Brockian.BetrothedNumbers.BetrothedInfinitude` — from the (open) hypothesis
-  that betrothed pairs have arbitrarily large members it follows that the set of
-  betrothed pairs is infinite.
--/
-
 namespace Brockian.BetrothedNumbers
 
-open ArithmeticFunction
+/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d` (with the convention `σ₁ 0 = 0`). -/
 
-/-- The quasi-aliquot sum of `n`: the sum of the divisors of `n` other than `1` and `n`
-itself (using truncated subtraction, so the value at `n ≤ 1` is `0`). -/
+def betrothedPairs : Set (ℕ × ℕ) := {p : ℕ × ℕ | Betrothed p.1 p.2}
 
-def betrothedPairs : Set (ℕ × ℕ) := {p | IsBetrothedPair p.1 p.2}
-
-/-- The set of betrothed numbers is nonempty. -/
+/-- `(48, 75)` is a betrothed pair: `σ₁ 48 = σ₁ 75 = 124 = 48 + 75 + 1`. -/

@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Lambda 2 Positive
-Category: Riemann Program
-Target: Riemann.Li.lambda2_positive
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,15 +23,33 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Lambda 2 Positive
+Category: Riemann Program
+Target: Riemann.Li.lambda2_positive
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Lambda 2 Positive
+Category: Riemann Program
+Target: Riemann.Li.lambda2_positive
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace Riemann.Li
 
-/-- **Lambda 2 positive.**  Any real number that is at least `0.09` is positive.
+/-- If `0.09 ≤ x` then `0 < x`.
 
-This encodes the positivity of Li's second coefficient `λ₂ ≈ 0.0923` (Li's criterion:
-RH holds iff `λ_n ≥ 0` for all `n ≥ 1`), given the numerical lower bound `0.09 ≤ λ₂`.
+This encodes the positivity of Li's second coefficient `λ₂ ≈ 0.0923`
+(Li's criterion: RH holds iff `λ_n ≥ 0` for all `n ≥ 1`): any real number
+bounded below by `0.09` is positive.
 
-The proof is by transitivity of `<` and `≤` (`lt_of_lt_of_le`), with the strict
-positivity of the numeral `0.09` discharged by `norm_num`. -/
+The proof is Mathlib's `lt_of_lt_of_le` applied to the numeric fact
+`(0 : ℝ) < 0.09`. -/
 
 theorem lambda2_positive (x : ℝ) (hx : 0.09 ≤ x) : 0 < x :=
   lt_of_lt_of_le (by norm_num) hx

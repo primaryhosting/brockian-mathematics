@@ -1,13 +1,3 @@
-/-
-# Integrality Shadow
-Category: Zeta-23 §3 Linear Algebra (re-derivation)
-Target: Zeta23Redux.LinAlg.integrality_shadow
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
 /-!
 # Integrality Shadow
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
@@ -15,6 +5,22 @@ Target: Zeta23Redux.LinAlg.integrality_shadow
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+namespace Zeta23Redux.LinAlg
+
+/-- **Integrality shadow** (Montgomery's integrality step).
+For every natural number `m`, `2 * m ≤ m ^ 2 + 1`; this is the scalar shadow of
+`(m - 1) ^ 2 ≥ 0`, whose matrix analogue is Lemma 3.2. -/
+
+theorem integrality_shadow_int (m : Nat) : ((m : Int)) ^ 2 ≥ 2 * (m : Int) - 1 := by
+  have h := integrality_shadow m
+  have h2 : ((2 * m : Nat) : Int) ≤ ((m ^ 2 + 1 : Nat) : Int) := Int.ofNat_le.mpr h
+  simp [Int.natCast_pow] at h2
+  omega
+
+end Zeta23Redux.LinAlg
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -30,18 +36,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace Zeta23Redux.LinAlg
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-/-- **Integrality shadow.** For every natural number `m`, `2 * m ≤ m ^ 2 + 1`.
-This is Montgomery's integrality step, i.e. the shadow of `(m - 1) ^ 2 ≥ 0`.
-The Mathlib lemma `two_mul_le_add_sq : 2 * a * b ≤ a ^ 2 + b ^ 2` closes it
-directly (with `b = 1`), after casting to `ℤ`. -/
-
-theorem integrality_shadow_int (m : ℕ) : (2 : ℤ) * (m : ℤ) - 1 ≤ (m : ℤ) ^ 2 := by
-  have h := integrality_shadow m
-  have : (2 * m : ℤ) ≤ ((m ^ 2 + 1 : ℕ) : ℤ) := by exact_mod_cast h
-  push_cast at this
-  linarith
-
-end Zeta23Redux.LinAlg
+set_option grind.warning false
 

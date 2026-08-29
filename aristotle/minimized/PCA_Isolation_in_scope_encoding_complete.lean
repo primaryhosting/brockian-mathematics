@@ -19,6 +19,7 @@ Provenance: Aristotle theorem prover (Harmonic)
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -29,55 +30,63 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA
-namespace Isolation
+set_option pp.fullNames false
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-/-- A resource the isolation engine may be asked to mediate access to:
-a domain (the isolation boundary it lives behind) together with a path inside it. -/
-structure Resource where
-  domain : String
-  path : List String
-  deriving DecidableEq, Repr
+set_option grind.warning false
 
-/-- An isolation scope: a list of permitted domains together with a maximal path depth. -/
-structure Scope where
-  allowed : List String
-  maxDepth : Nat
-  deriving Repr
+namespace PCA.Isolation
 
-/-- A resource is *in scope* when its domain is permitted and its path is not too deep. -/
+/-- A request made by a sandboxed app: a resource together with a write flag
+(`write = false` means read-only access). -/
+structure Request (R : Type*) where
+  resource : R
+  write : Bool
+  deriving DecidableEq
 
-def InScope (sc : Scope) (r : Resource) : Prop :=
-  r.domain ∈ sc.allowed ∧ r.path.length ≤ sc.maxDepth
+/-- A *scope* granted to a sandboxed app is the set of resources it may touch. -/
+abbrev Scope (R : Type*) := Set R
 
-instance (sc : Scope) (r : Resource) : Decidable (InScope sc r) := by
-  unfold InScope; infer_instance
+variable {R : Type*}
 
-/-- The engine's wire encoding: an in-scope resource is encoded as the flat token list
-`domain :: path`; an out-of-scope resource has no encoding at all. -/
+/-- A request is *in scope* when the resource it names belongs to the granted scope. -/
 
-def encode (sc : Scope) (r : Resource) : Option (List String) :=
-  if InScope sc r then some (r.domain :: r.path) else none
+def InScope (s : Scope R) (req : Request R) : Prop := req.resource ∈ s
 
-/-- Decoding a token list back into a resource. The empty list is not a valid encoding. -/
+variable [Encodable R]
 
-def decode : List String → Option Resource
-  | [] => none
-  | d :: p => some ⟨d, p⟩
+/-- The isolation engine's wire encoding of a request: the code of its resource
+paired with its write bit. -/
 
-/-- Decoding inverts encoding on every value the encoder actually produces. -/
+def encodeRequest (req : Request R) : ℕ :=
+  Nat.pair (Encodable.encode req.resource) (cond req.write 1 0)
 
-theorem in_scope_encoding_complete (sc : Scope) (r : Resource) :
-    InScope sc r ↔ ∃ c, encode sc r = some c ∧ decode c = some r := by
-  constructor
-  · intro hs
-    refine ⟨r.domain :: r.path, ?_, ?_⟩
-    · simp [encode, if_pos hs]
-    · cases r; rfl
-  · rintro ⟨c, hc, -⟩
-    by_contra hs
-    rw [encode, if_neg hs] at hc
-    exact absurd hc (by simp)
+/-- The isolation engine's decoder, *relative to a granted scope*: a code is
+accepted only if it names a decodable resource lying inside the scope. -/
 
-/-- Encoding is injective on in-scope resources: distinct in-scope resources never
-collide on the wire. -/
+def decodeRequest (s : Scope R) [DecidablePred (· ∈ s)] (n : ℕ) : Option (Request R) :=
+  (Encodable.decode (α := R) (Nat.unpair n).1).bind fun r =>
+    if r ∈ s then some ⟨r, decide ((Nat.unpair n).2 = 1)⟩ else none
+
+/-- **Completeness of the in-scope encoding.** Every request that lies inside the
+granted scope survives the engine's encode/decode round trip: no in-scope request
+is ever rejected or altered by the isolation boundary.
+
+The key ingredient is Mathlib's `Encodable.encodek` (`decode (encode a) = some a`),
+together with `Nat.unpair_pair`. -/
+
+theorem in_scope_encoding_complete (s : Scope R) [DecidablePred (· ∈ s)]
+    (req : Request R) (h : InScope s req) :
+    decodeRequest s (encodeRequest req) = some req := by
+  obtain ⟨r, w⟩ := req
+  simp only [InScope] at h
+  simp only [decodeRequest, encodeRequest, Nat.unpair_pair, Encodable.encodek,
+    Option.bind_some, if_pos h, Option.some.injEq, Request.mk.injEq, true_and]
+  cases w <;> simp
+
+/-- **Soundness of the in-scope decoder.** Anything the decoder accepts is a
+request that lies inside the granted scope. -/

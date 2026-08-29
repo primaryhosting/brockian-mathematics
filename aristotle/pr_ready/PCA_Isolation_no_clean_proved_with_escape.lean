@@ -8,137 +8,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-Note on imports: the required header above must be the very first thing in the file, and
-Lean forbids any `import` after a leading module doc-comment.  The development below is
-therefore carried out in plain Lean 4 core (`Init`), with no Mathlib import; every notion
-used (`List`, membership, decidability) is available there.
--/
-
-namespace PCA.Isolation
-
-/-- A capability is an abstract resource token that the isolation engine mediates. -/
-abbrev Cap := Nat
-
-/-- An application, described by the list of capabilities it *declares* it will use.
-This declaration is what the proof carried by the app talks about. -/
-structure App where
-  declared : List Cap
-  deriving DecidableEq
-
-/-- A sandbox policy, described by the list of capabilities the isolation engine actually
-*grants* at run time. -/
-structure Policy where
-  granted : List Cap
-  deriving DecidableEq
-
-/-- An execution trace is the list of capabilities exercised, in order. -/
-abbrev Trace := List Cap
-
-/-- A trace is *clean* for an app when every capability it exercises was declared. -/
-def Clean (a : App) (t : Trace) : Prop := ∀ c ∈ t, c ∈ a.declared
-
-/-- An app is *proved* against a policy when its carried certificate checks out, i.e. every
-declared capability is granted by the policy. -/
-def Proved (p : Policy) (a : App) : Prop := ∀ c ∈ a.declared, c ∈ p.granted
-
-/-- A trace *escapes* the sandbox when it exercises some capability that is not granted. -/
-def Escapes (p : Policy) (t : Trace) : Prop := ∃ c ∈ t, c ∉ p.granted
-
-/-! ### The engine's checks are effective -/
-
-instance (a : App) (t : Trace) : Decidable (Clean a t) := by
-  unfold Clean; infer_instance
-
-instance (p : Policy) (a : App) : Decidable (Proved p a) := by
-  unfold Proved; infer_instance
-
-instance (p : Policy) (t : Trace) : Decidable (Escapes p t) := by
-  unfold Escapes; infer_instance
-
-/-! ### Soundness of the isolation engine -/
-
-/-- **Main theorem (soundness).** No clean run of a proved app ever escapes the sandbox:
-if every capability used was declared, and every declared capability is granted, then no
-used capability can be ungranted. -/
-theorem no_clean_proved_with_escape
-    (p : Policy) (a : App) (t : Trace)
-    (hc : Clean a t) (hp : Proved p a) : ¬ Escapes p t := by
-  rintro ⟨c, hct, hcg⟩
-  exact hcg (hp c (hc c hct))
-
-/-- Predicate-level restatement: no triple `(app, trace)` is simultaneously clean, proved
-and escaping. -/
-theorem no_clean_proved_escaping_triple (p : Policy) :
-    ∀ x : App × Trace, ¬ (Clean x.1 x.2 ∧ Proved p x.1 ∧ Escapes p x.2) := by
-  rintro ⟨a, t⟩ ⟨hc, hp, he⟩
-  exact no_clean_proved_with_escape p a t hc hp he
-
-/-- Contrapositive form: an escaping run means either the app misbehaved (it used an
-undeclared capability) or its certificate does not check out against the policy. -/
-theorem escape_imp_not_clean_or_not_proved
-    (p : Policy) (a : App) (t : Trace) (he : Escapes p t) :
-    ¬ Clean a t ∨ ¬ Proved p a := by
-  by_cases hc : Clean a t
-  · exact Or.inr fun hp => no_clean_proved_with_escape p a t hc hp he
-  · exact Or.inl hc
-
-/-! ### Completeness: both hypotheses are necessary -/
-
-/-- Decidable de Morgan for bounded universal quantification over a list. -/
-private theorem exists_not_of_not_forall_mem
-    {P : Cap → Prop} [DecidablePred P] :
-    ∀ {l : List Cap}, ¬ (∀ c ∈ l, P c) → ∃ c ∈ l, ¬ P c
-  | [], h => absurd (by intro c hc; cases hc) h
-  | b :: l, h => by
-      by_cases hb : P b
-      · have h' : ¬ (∀ c ∈ l, P c) := by
-          intro hall
-          exact h (by
-            intro c hc
-            cases hc with
-            | head => exact hb
-            | tail _ hc => exact hall c hc)
-        obtain ⟨c, hc, hnc⟩ := exists_not_of_not_forall_mem h'
-        exact ⟨c, List.mem_cons_of_mem _ hc, hnc⟩
-      · exact ⟨b, List.mem_cons_self .., hb⟩
-
-/-- If an app's certificate fails (some declared capability is not granted) then there is a
-*clean* trace of that app which escapes.  Hence the hypothesis `Proved` in the main theorem
-cannot be dropped. -/
-theorem exists_clean_escape_of_not_proved
-    (p : Policy) (a : App) (hp : ¬ Proved p a) :
-    ∃ t : Trace, Clean a t ∧ Escapes p t := by
-  obtain ⟨c, hcd, hcg⟩ := exists_not_of_not_forall_mem (P := fun c => c ∈ p.granted) hp
-  refine ⟨[c], ?_, ⟨c, List.mem_cons_self .., hcg⟩⟩
-  intro d hd
-  cases hd with
-  | head => exact hcd
-  | tail _ hd => cases hd
-
-/-- If some capability lies outside the policy then escaping traces exist at all; for a
-proved app such a trace is necessarily unclean.  Hence the hypothesis `Clean` in the main
-theorem cannot be dropped either. -/
-theorem exists_escape_of_ungranted
-    (p : Policy) {c : Cap} (hc : c ∉ p.granted) :
-    ∃ t : Trace, Escapes p t :=
-  ⟨[c], c, List.mem_cons_self .., hc⟩
-
-/-- Full characterisation of sandbox safety for a run: a trace fails to escape exactly when
-every capability it exercises is granted. -/
-theorem not_escapes_iff (p : Policy) (t : Trace) :
-    ¬ Escapes p t ↔ ∀ c ∈ t, c ∈ p.granted := by
-  constructor
-  · intro h c hct
-    by_cases hcg : c ∈ p.granted
-    · exact hcg
-    · exact absurd ⟨c, hct, hcg⟩ h
-  · rintro h ⟨c, hct, hcg⟩
-    exact hcg (h c hct)
-
-end PCA.Isolation
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -161,4 +30,123 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+/-!
+# No Clean Proved With Escape
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.no_clean_proved_with_escape
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+
+namespace PCA
+namespace Isolation
+
+universe u v
+
+/-- An abstract model of a sandboxed application: a labelled transition system whose
+labels are the observable effects (syscalls, resource accesses, ...) that the isolation
+engine mediates. -/
+structure Machine (State : Type u) (Effect : Type v) where
+  /-- The set of admissible initial states. -/
+  init : State → Prop
+  /-- `step s e s'` : from state `s` the app may perform effect `e` and move to `s'`. -/
+  step : State → Effect → State → Prop
+
+variable {State : Type u} {Effect : Type v}
+
+/-- A sandbox policy: the predicate holding of exactly the permitted effects. -/
+abbrev Policy (Effect : Type v) : Type v := Effect → Prop
+
+/-- States reachable from an initial state by finitely many steps. -/
+inductive Reach (M : Machine State Effect) : State → Prop
+  | init {s : State} (h : M.init s) : Reach M s
+  | step {s : State} {e : Effect} {s' : State}
+      (hs : Reach M s) (hstep : M.step s e s') : Reach M s'
+
+/-- The app *escapes* the sandbox described by `allowed` if some reachable state can
+perform an effect outside the policy. -/
+def Escapes (M : Machine State Effect) (allowed : Policy Effect) : Prop :=
+  ∃ s e s', Reach M s ∧ M.step s e s' ∧ ¬ allowed e
+
+/-- A proof certificate carried by the app: an inductive invariant witnessing that every
+effect the app can ever perform lies inside the policy. This is exactly the artifact the
+isolation engine's checker validates. -/
+structure Certificate (M : Machine State Effect) (allowed : Policy Effect) where
+  /-- The claimed inductive invariant. -/
+  Inv : State → Prop
+  /-- The invariant holds initially. -/
+  init_mem : ∀ s, M.init s → Inv s
+  /-- The invariant is preserved by every step. -/
+  step_closed : ∀ s e s', Inv s → M.step s e s' → Inv s'
+  /-- Every effect enabled in an invariant state is permitted by the policy. -/
+  effects_allowed : ∀ s e s', Inv s → M.step s e s' → allowed e
+
+/-- An app is *proved clean* when it carries a valid certificate. -/
+def ProvedClean (M : Machine State Effect) (allowed : Policy Effect) : Prop :=
+  Nonempty (Certificate M allowed)
+
+/-- A valid certificate over-approximates reachability. -/
+theorem Certificate.reach_imp {M : Machine State Effect} {allowed : Policy Effect}
+    (C : Certificate M allowed) : ∀ {s : State}, Reach M s → C.Inv s := by
+  intro s hs
+  induction hs with
+  | init h => exact C.init_mem _ h
+  | step _ hstep ih => exact C.step_closed _ _ _ ih hstep
+
+/-- **Soundness of the isolation engine.** No app is simultaneously proved clean and able
+to escape its sandbox. -/
+theorem no_clean_proved_with_escape (M : Machine State Effect) (allowed : Policy Effect) :
+    ¬ (ProvedClean M allowed ∧ Escapes M allowed) := by
+  rintro ⟨⟨C⟩, s, e, s', hreach, hstep, hbad⟩
+  exact hbad (C.effects_allowed s e s' (C.reach_imp hreach) hstep)
+
+/-- **Completeness of the certificate discipline.** If an app cannot escape, then the
+reachability predicate itself is a valid certificate, so the app is provably clean. -/
+theorem provedClean_of_not_escapes (M : Machine State Effect) (allowed : Policy Effect)
+    (h : ¬ Escapes M allowed) : ProvedClean M allowed :=
+  ⟨{ Inv := Reach M
+     init_mem := fun _ hs => Reach.init hs
+     step_closed := fun _ _ _ hs hstep => Reach.step hs hstep
+     effects_allowed := fun s e s' hs hstep =>
+       Classical.byContradiction fun hbad => h ⟨s, e, s', hs, hstep, hbad⟩ }⟩
+
+/-- Soundness and completeness combined: being proved clean is *equivalent* to not
+escaping. -/
+theorem provedClean_iff_not_escapes (M : Machine State Effect) (allowed : Policy Effect) :
+    ProvedClean M allowed ↔ ¬ Escapes M allowed :=
+  ⟨fun hC hE => no_clean_proved_with_escape M allowed ⟨hC, hE⟩,
+   provedClean_of_not_escapes M allowed⟩
+
+/-! ### A concrete instance: the model is not vacuous.
+
+`loopMachine e₀` is a one-state machine that performs the effect `e₀` forever, run against
+the policy that permits only the effect `true`.  For `e₀ = false` it escapes and therefore
+carries no certificate; for `e₀ = true` it is proved clean. -/
+
+/-- A machine that performs the single effect `e₀` forever. -/
+def loopMachine (e₀ : Bool) : Machine Unit Bool where
+  init := fun _ => True
+  step := fun _ e _ => e = e₀
+
+/-- The policy permitting exactly the effect `true`. -/
+def onlyTrue : Policy Bool := fun e => e = true
+
+theorem loopMachine_escapes : Escapes (loopMachine false) onlyTrue :=
+  ⟨(), false, (), Reach.init trivial, rfl, by simp [onlyTrue]⟩
+
+theorem loopMachine_not_provedClean : ¬ ProvedClean (loopMachine false) onlyTrue := fun h =>
+  no_clean_proved_with_escape _ _ ⟨h, loopMachine_escapes⟩
+
+theorem loopMachine_provedClean : ProvedClean (loopMachine true) onlyTrue :=
+  ⟨{ Inv := fun _ => True
+     init_mem := fun _ _ => trivial
+     step_closed := fun _ _ _ _ _ => trivial
+     effects_allowed := fun _ _ _ _ hstep => hstep }⟩
+
+end Isolation
+end PCA
 

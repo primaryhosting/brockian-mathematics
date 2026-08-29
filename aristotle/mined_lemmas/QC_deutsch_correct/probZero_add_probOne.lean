@@ -1,5 +1,4 @@
 import Mathlib
-
 /-!
 # Deutsch Correct
 Category: Quantum Computing
@@ -26,18 +25,15 @@ set_option grind.warning false
 
 namespace QC
 
-/-- A state of a two–qubit register: a complex amplitude for each computational
-basis state `|x y⟩`, `x y : Bool`. -/
-abbrev State := Bool × Bool → ℂ
-
-/-- The sign `(-1)^b`. -/
+/-- The sign `(-1)^b` of a bit, as a complex number. -/
 
 theorem probZero_add_probOne (f : Bool → Bool) : probZero f + probOne f = 1 := by
-  have hs : (0:ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
-  have hs2 : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
-  simp only [probZero, probOne, deutschState_false, deutschState_true]
-  cases hf0 : f false <;> cases hf1 : f true <;>
-    simp [div_pow, abs_of_pos hs, mul_pow, hs2] <;> norm_num
+  by_cases h : f false = f true
+  · rw [probZero_of_const f h, probOne_of_const f h]; norm_num
+  · rw [probZero_of_balanced f h, probOne_of_balanced f h]; norm_num
 
-end QC
-
+/-- **Deutsch's algorithm is correct.** Using a single query to the oracle `U_f`, the
+measurement of the first qubit of the final state distinguishes constant from balanced
+functions with certainty: the outcome is `0` with probability `1` exactly when `f` is
+constant, and it is `1` with probability `1` (equivalently, `0` occurs with probability
+`0`) exactly when `f` is balanced. -/

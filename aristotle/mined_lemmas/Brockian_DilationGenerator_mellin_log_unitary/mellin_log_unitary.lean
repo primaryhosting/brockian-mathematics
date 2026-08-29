@@ -5,8 +5,28 @@ Target: Brockian.DilationGenerator.mellin_log_unitary
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the required header
+-- appears verbatim above as a block comment and is repeated as a module docstring below.)
 import Mathlib
+
+/-!
+# Mellin Log Unitary
+Category: Gate1 Operator
+Target: Brockian.DilationGenerator.mellin_log_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+## Contents
+
+The substitution `x = e^t` induces a unitary `U : L²(0,∞) ≃ L²(ℝ)`,
+`(U f)(t) = e^{t/2} · f(e^t)`, with inverse `(U⁻¹ h)(x) = x^{-1/2} · h(log x)`.
+
+* `Brockian.DilationGenerator.mellin_log_unitary` — the target: the change of variables identity
+  `∫_{(0,∞)} ‖f x‖² dx = ∫_ℝ ‖e^{t/2} • f(e^t)‖² dt`, valid for every `f : ℝ → E`.
+* `Brockian.DilationGenerator.mellin_log_unitary_symm` — the same for the inverse substitution.
+* `Brockian.DilationGenerator.mellinLogLpEquiv` — the upgrade to the `Lp` API: a linear isometry
+  equivalence `L²((0,∞)) ≃ₗᵢ L²(ℝ)` implementing `f ↦ (t ↦ e^{t/2} • f (e^t))`.
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -22,22 +42,31 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-open MeasureTheory Set Real
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Brockian
 namespace DilationGenerator
 
-variable {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+open MeasureTheory Set
 
-/-- The substitution operator `U : (U f)(t) = e^{t/2} · f(eᵗ)`, at the level of functions. -/
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
-theorem mellin_log_unitary (f : ℝ → F) :
-    ∫ x in Ioi (0 : ℝ), ‖f x‖ ^ 2 = ∫ t : ℝ, ‖Real.exp (t / 2) • f (Real.exp t)‖ ^ 2 := by
+/-! ### The change of variables `x = exp t` -/
+
+/-- The exponential map sends `ℝ` onto the positive half-line. -/
+
+theorem mellin_log_unitary (f : ℝ → E) :
+    ∫ x in Set.Ioi (0 : ℝ), ‖f x‖ ^ 2 = ∫ t : ℝ, ‖Real.exp (t / 2) • f (Real.exp t)‖ ^ 2 := by
   rw [integral_Ioi_eq_integral_exp_smul (fun x => ‖f x‖ ^ 2)]
-  refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
-  have hexp : Real.exp (t / 2) ^ 2 = Real.exp t := by
-    rw [← Real.exp_nat_mul]; norm_num; ring
-  simp only [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _), mul_pow, smul_eq_mul,
-    hexp]
+  refine integral_congr_ae (.of_forall fun t => ?_)
+  simp only [smul_eq_mul, norm_sq_exp_half_smul f t]
 
-/-- Scalar cancellation: `e^{t/2} · (eᵗ)^{-1/2} = 1`. -/
+/-- The inverse substitution `(U⁻¹ h)(x) = x^{-1/2} · h (log x)` is norm preserving in the other
+direction: `∫_ℝ ‖h t‖² dt = ∫_{(0,∞)} ‖x^{-1/2} • h (log x)‖² dx`. -/

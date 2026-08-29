@@ -1,51 +1,49 @@
-/-
-# Time Hierarchy
-Category: Frontier Cs
-Target: CS.time_hierarchy
-Statement: The time hierarchy theorem: more time gives strictly more languages (diagonalization).
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
 # Time Hierarchy
 Category: Frontier Cs
 Target: CS.time_hierarchy
-Statement: The time hierarchy theorem: more time gives strictly more languages (diagonalization).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Formalization notes
-
-The model of computation is Mathlib's partial recursive `Nat.Partrec.Code`, whose
-step-indexed evaluator `Nat.Partrec.Code.evaln k c n` runs the program `c` on input `n`
-for `k` steps of fuel.  "Running time" is the amount of fuel consumed, and
-`CS.DTIME t` is the class of languages decided within fuel `t n` on input `n`.
-
-The theorem `CS.time_hierarchy` says: for every computable time bound `t` there is a
-pointwise larger bound `t'` with `DTIME t ⊊ DTIME t'`, i.e. more time really does decide
-strictly more languages.  The witness separating the two classes is the diagonal language
-`CS.diagLang t = {n | the n-th program does not output 1 on input n within t n steps}`,
-which is not in `DTIME t` by diagonalization, but is computable (because `evaln` is), hence
-lies in `DTIME t'` for `t'` its own running time.
--/
-
+open scoped BigOperators
+open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
 
-open Nat.Partrec Nat.Partrec.Code Denumerable
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace CS
 
-/-- `DTIME t` is the class of languages `L ⊆ ℕ` decided within time bound `t`:
-there is a program (a `Nat.Partrec.Code`) which, run on input `n` with `t n` steps of
-fuel, halts and outputs `1` if `n ∈ L` and `0` otherwise.  Here "time" is measured by
-the step-index (fuel) of Mathlib's step-indexed evaluator `Nat.Partrec.Code.evaln`. -/
+open Nat.Partrec Nat.Partrec.Code Denumerable Encodable
 
-def DTIME (t : ℕ → ℕ) : Set (Set ℕ) :=
-  {L | ∃ c : Nat.Partrec.Code, ∀ n, evaln (t n) c n = some (if n ∈ L then 1 else 0)}
+/-- A language: a decision problem whose instances are encoded as natural numbers. -/
+abbrev Language : Type := ℕ → Bool
 
-/-- Giving a program more time can only increase the class of languages it decides. -/
+/-- `DTIME t` is the class of languages decided by some partial recursive program
+(a `Nat.Partrec.Code`) within `t n` steps on input `n`, where "steps" is measured by the
+step-indexed evaluator `Nat.Partrec.Code.evaln`: the machine must output `1` on inputs in the
+language and `0` on inputs outside it, using at most `t n` fuel. -/
+
+def DTIME (t : ℕ → ℕ) : Set Language :=
+  {L | ∃ c : Code, ∀ n : ℕ, evaln (t n) c n = some (if L n then 1 else 0)}
+
+/-- Time classes are monotone in the time bound. -/

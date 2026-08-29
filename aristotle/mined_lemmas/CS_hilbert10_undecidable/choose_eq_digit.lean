@@ -1,50 +1,75 @@
 import Mathlib
 
-/-!
-# Further Diophantine functions: binomial coefficients and factorials
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Mathlib's `Mathlib/NumberTheory/Dioph.lean` develops the basic theory of Diophantine sets and
-functions and culminates in Matiyasevich's theorem that exponentiation is Diophantine
-(`Dioph.pow_dioph`).  Two further classical steps on the way to the MRDP theorem are formalized
-here, both unconditionally:
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-* `CS.choose_dioph`: the binomial coefficient `(n, k) ↦ n.choose k` is a Diophantine function.
-  This follows from `Dioph.pow_dioph` because `n.choose k` is the `k`-th digit of `(u + 1) ^ n`
-  in base `u := 2 ^ n + 1`, and division and remainder are Diophantine.
-* `CS.factorial_dioph`: the factorial `r ↦ r !` is a Diophantine function.  This follows from
-  `CS.choose_dioph` because `r ! = u ^ r / u.choose r` as soon as `u` is large enough compared
-  to `r`, and `u := (2 * r) ^ (r + 2) + 2 * r + 1` is large enough.
--/
-
+set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace CS
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-open Finset Nat
+set_option grind.warning false
 
-/-! ## Digits in base `u` -/
+import Mathlib
+import RequestProject.H10.Factorial
 
-/-- A number with all digits `< u` and at most `k` digits is `< u ^ k`. -/
+/-!
+# The product `∏_{k=1}^{y} (a + b*k)` is Diophantine
 
-theorem choose_eq_digit (n k : ℕ) :
-    n.choose k = (2 ^ n + 2) ^ n / (2 ^ n + 1) ^ k % (2 ^ n + 1) := by
-  set u := 2 ^ n + 1 with hudef
-  have hu : 1 < u := by
-    have : 1 ≤ 2 ^ n := Nat.one_le_two_pow
-    omega
-  have ha : ∀ i, n.choose i < u := fun i => lt_of_le_of_lt (Nat.choose_le_two_pow n i) (by omega)
-  have hexp : (2 ^ n + 2) ^ n = ∑ i ∈ range (n + 1), n.choose i * u ^ i := by
-    have h : (2 : ℕ) ^ n + 2 = u + 1 := by omega
-    rw [h, add_pow]
-    exact Finset.sum_congr rfl fun i _ => by simp [mul_comm]
-  rcases lt_or_ge k (n + 1) with hk | hk
-  · rw [hexp, digit_extract u hu _ ha (n + 1) k hk]
-  · have h0 : n.choose k = 0 := Nat.choose_eq_zero_of_lt (by omega)
-    have hlt : (2 ^ n + 2) ^ n < u ^ (n + 1) := by
-      rw [hexp]; exact sum_digits_lt u _ ha (n + 1)
-    have hle : u ^ (n + 1) ≤ u ^ k := Nat.pow_le_pow_right (by omega) hk
-    rw [h0, Nat.div_eq_of_lt (lt_of_lt_of_le hlt hle)]
-    simp
+This is the last of the classical auxiliary Diophantine functions needed for the
+Davis–Putnam–Robinson elimination of bounded universal quantifiers.
 
-open Dioph in
-/-- **Binomial coefficients are Diophantine.** -/
+The idea is that modulo a large `N` coprime to `b`, one has
+`∏_{k=1}^{y} (a + b k) ≡ b^y ∏_{k=1}^{y} (m + k) = b^y y! binom(m+y, y)`
+where `m` is the residue `a * b⁻¹ mod N`.
+-/
+
+namespace H10
+
+open Nat Finset Dioph
+
+/-- `prodAB a b y = (a + b) * (a + 2b) * ⋯ * (a + y b)`. -/
+
+theorem choose_eq_digit (n k u : ℕ) (hu : 2 ^ n < u) :
+    n.choose k = digit ((u + 1) ^ n) u k := by
+  have hexp : (u + 1) ^ n = ∑ i ∈ range (n + 1), n.choose i * u ^ i := by
+    rw [add_pow]; simp [mul_comm]
+  have hlt : ∀ i, n.choose i < u := fun i => lt_of_le_of_lt (Nat.choose_le_two_pow n i) hu
+  rw [hexp, digit_ofSum u _ hlt]
+  by_cases h : k < n + 1
+  · rw [if_pos h]
+  · rw [if_neg h, Nat.choose_eq_zero_of_lt (by omega)]
+
+end H10
+
+import Mathlib
+
+/-!
+# Auxiliary facts about `Poly` and `Dioph`
+
+* `isPoly_support`: a polynomial depends on finitely many variables;
+* `isPoly_majorant`: a polynomial is dominated by a monotone polynomial;
+* `isPoly_modEq`: polynomials respect congruences;
+* `dioph_fin_dummies`: a Diophantine set can be defined using finitely many dummy variables.
+-/
+
+namespace H10
+
+open Dioph
+
+local infixr:65 " ⊗ " => Sum.elim
+
+/-- A polynomial depends only on finitely many of its variables. -/

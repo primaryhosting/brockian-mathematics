@@ -5,29 +5,41 @@ Target: Brockian.SingularSeriesConvergenceRate
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the header
--- above is written as an ordinary block comment and repeated as a module docstring below.)
 
 import Mathlib
 
-/-!
-# Singular Series Convergence Rate
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesConvergenceRate
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Brockian
 
-open Finset
+/-- The local (Euler) factor of the twin-prime singular series at `p`:
+`1 - 1/(p-1)^2` at odd primes, and `1` at all other natural numbers. -/
 
-/-- The `p`-th term of the (twin-prime) singular series: `1/(p-1)^2` for odd primes `p`,
-and `0` otherwise. -/
-
-lemma singularFactor_le_one (n : ℕ) : singularFactor n ≤ 1 := by
-  have := singularTerm_nonneg n
+lemma singularFactor_le_one (p : ℕ) : singularFactor p ≤ 1 := by
   unfold singularFactor
-  linarith
+  split
+  · have : (0:ℝ) ≤ 1 / ((p : ℝ) - 1) ^ 2 := by positivity
+    linarith
+  · exact le_rfl
 
-/-- Telescoping step: for `3 ≤ k`, `singularTerm k ≤ 1/(k-2) - 1/(k-1)`. -/

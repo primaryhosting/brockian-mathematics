@@ -5,15 +5,21 @@ Target: Frontier.figalli_OT_regularity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
+
+/-!
+# Figalli OT Regularity
+Category: Frontier — Fields Medal Work
+Target: Frontier.figalli_OT_regularity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped NNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -23,47 +29,50 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Frontier
 
-open MeasureTheory Set
+/-! ## The cost function and the Ma–Trudinger–Wang condition -/
 
-/-!
-## Setting
+/-- The quadratic (Brenier) transport cost `c(x,y) = ‖x - y‖² / 2` on a real inner product
+space. -/
 
-Figalli's regularity theory for optimal transport says, roughly, that if the cost function
-satisfies the Ma–Trudinger–Wang (MTW) condition, and the two measures have densities that
-are bounded away from `0` and from `∞` on suitable domains, then the Brenier optimal
-transport map is regular.
+theorem figalli_OT_regularity (n : ℕ) (lam Lam : ℝ) (hlam : 0 < lam)
+    (F G T : Fin n → ℝ → ℝ)
+    (hFmono : ∀ i, Monotone (F i))
+    (hFup : ∀ (i : Fin n) (x y : ℝ), x ≤ y → F i y - F i x ≤ Lam * (y - x))
+    (hGlow : ∀ (i : Fin n) (y y' : ℝ), y ≤ y' → lam * (y' - y) ≤ G i y' - G i y)
+    (hT : ∀ (i : Fin n) (x : ℝ), G i (T i x) = F i x) :
+    ∀ v w : Fin n → ℝ,
+      Real.sqrt (∑ i, (T i (v i) - T i (w i)) ^ 2) ≤
+        (Lam / lam) * Real.sqrt (∑ i, (v i - w i) ^ 2) := by
+  intro v w
+  rcases isEmpty_or_nonempty (Fin n) with hn | hn
+  · simp
+  obtain ⟨i₀⟩ := hn
+  have hLam : 0 ≤ Lam := by
+    have h1 : F i₀ 0 ≤ F i₀ 1 := hFmono i₀ (by norm_num)
+    have h2 : F i₀ 1 - F i₀ 0 ≤ Lam * (1 - 0) := hFup i₀ 0 1 (by norm_num)
+    nlinarith
+  have hK : (0:ℝ) ≤ Lam / lam := div_nonneg hLam hlam.le
+  have hcoord : ∀ i : Fin n, |T i (v i) - T i (w i)| ≤ (Lam / lam) * |v i - w i| := by
+    intro i
+    exact transport_lipschitz_one_dim hlam (hFmono i) (hFup i) (hGlow i) (hT i) (v i) (w i)
+  have hsum : ∑ i, (T i (v i) - T i (w i)) ^ 2
+      ≤ (Lam / lam) ^ 2 * ∑ i, (v i - w i) ^ 2 :=
+    sum_sq_le_of_coord_le (Lam / lam) n _ _ hcoord
+  calc Real.sqrt (∑ i, (T i (v i) - T i (w i)) ^ 2)
+      ≤ Real.sqrt ((Lam / lam) ^ 2 * ∑ i, (v i - w i) ^ 2) := Real.sqrt_le_sqrt hsum
+    _ = (Lam / lam) * Real.sqrt (∑ i, (v i - w i) ^ 2) := by
+        rw [Real.sqrt_mul (by positivity), Real.sqrt_sq hK]
 
-Here we formalize and prove in full the **base case** of that theory: dimension one with
-quadratic cost.  In dimension one the MTW condition is vacuous, the Brenier map is the
-*monotone rearrangement* `T = G⁻¹ ∘ F`, characterized by the matching of cumulative
-distribution functions `G (T x) = F x`, and the regularity statement takes the sharp
-quantitative form
+end Frontier
 
-  (density of `μ` `≤ Λ`) and (density of `ν` `≥ lam > 0`)  ⟹  `T` is `(Λ / lam)`-Lipschitz.
-
-The density bounds are used only through their integrated consequences,
-`μ (Ioc x y) ≤ Λ (y - x)` and `ν (Ioc x y) ≥ lam (y - x)`, so these are taken as the
-hypotheses.  As in the classical theory, the lower bound on the target density is imposed
-only on the (bounded) target domain `B`, and the estimate is obtained on the source
-domain `A`; a global lower bound would be incompatible with finiteness of `ν`.
--/
-
-/-- The (real valued) cumulative distribution function of a measure on `ℝ`. -/
-
-theorem figalli_OT_regularity
-    (mu nu : Measure ℝ) [IsFiniteMeasure mu] [IsFiniteMeasure nu] {A B : Set ℝ}
-    {lam Lam : ℝ} (hlam : 0 < lam) (hLam : 0 ≤ Lam)
-    (hmu : ∀ x ∈ A, ∀ y ∈ A, x ≤ y → mu (Set.Ioc x y) ≤ ENNReal.ofReal (Lam * (y - x)))
-    (hnu : ∀ u ∈ B, ∀ v ∈ B, u ≤ v → ENNReal.ofReal (lam * (v - u)) ≤ nu (Set.Ioc u v))
-    {T : ℝ → ℝ} (hTB : ∀ x ∈ A, T x ∈ B)
-    (hT : ∀ x ∈ A, cdfReal nu (T x) = cdfReal mu x) :
-    ∀ x ∈ A, ∀ y ∈ A, |T y - T x| ≤ (Lam / lam) * |y - x| :=
-  transport_lipschitzOn_of_cdf_bounds hlam ((cdfReal_mono mu).monotoneOn A)
-    (fun x hx y hy hxy => cdfReal_sub_le mu hLam hxy (hmu x hx y hy hxy))
-    (fun u hu v hv huv => le_cdfReal_sub nu huv (hnu u hu v hv huv)) hTB hT
-
-/-- Packaged form of `figalli_OT_regularity` as `LipschitzOnWith`. -/

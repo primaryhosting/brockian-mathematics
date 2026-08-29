@@ -23,36 +23,15 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Oppermann Conjecture
-Category: Brockian Conjecture
-Target: Brockian.OppermannConjecture.OppermannConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
-import Mathlib
-
-/-!
-# Oppermann Conjecture
-Category: Brockian Conjecture
-Target: Brockian.OppermannConjecture.OppermannConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-namespace Brockian.OppermannConjecture
-
-/-- **Oppermann's conjecture**: for every `n > 1` there is a prime strictly between
-`n(n-1)` and `n²`, and a prime strictly between `n²` and `n(n+1)`. -/
-
-theorem legendre_of_oppermann (h : OppermannStatement) (k : ℕ) (hk : 1 ≤ k) :
-    ∃ p : ℕ, p.Prime ∧ k * k < p ∧ p < (k + 1) * (k + 1) := by
-  rcases eq_or_lt_of_le hk with h1 | h1
+theorem legendre_of_oppermann (H : OppermannConjecture) : LegendreConjecture := by
+  intro n hn
+  by_cases h1 : n = 1
   · subst h1
-    exact ⟨3, by norm_num, by norm_num, by norm_num⟩
-  · obtain ⟨-, p, hp, hlt, hub⟩ := h k h1
-    exact ⟨p, hp, hlt, by nlinarith⟩
+    exact ⟨3, (isPrimeB_iff 3).mp (by decide), by omega, by omega⟩
+  · obtain ⟨-, p, hp, hp1, hp2⟩ := H n (by omega)
+    exact ⟨p, hp, hp1,
+      Nat.lt_of_lt_of_le hp2 (Nat.mul_le_mul_right _ (Nat.le_succ n))⟩
 
-end Brockian.OppermannConjecture
-
+/-- Oppermann's conjecture implies the strong Bertrand-type statement that there is a prime
+strictly between `n²` and `n² + n`. -/

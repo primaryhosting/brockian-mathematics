@@ -1,60 +1,46 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import RequestProject.NashEquilibrium
-
-/-!
-# Minimax for two player zero sum finite games
--/
-
-open scoped BigOperators
-
-namespace Frontier
-
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
-
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
-
-theorem nash_equilibrium_exists_of_potential [∀ i, Nonempty (S i)]
-    (G : FiniteGame ι S) (P : ((i : ι) → S i) → ℝ)
-    (hP : ∀ (i : ι) (s : (i : ι) → S i) (t : S i),
-      G.payoff i (Function.update s i t) - G.payoff i s
-        = P (Function.update s i t) - P s) :
-    ∃ x : (i : ι) → S i → ℝ, IsNash G x := by
-  obtain ⟨s, hmax⟩ := Finite.exists_max (fun σ : (i : ι) → S i => P σ)
-  refine ⟨fun i => pureVec (s i), isNash_pure G ?_⟩
-  intro i t
-  have h1 := hP i s t
-  have h2 := hmax (Function.update s i t)
-  linarith
-
-end Frontier
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+namespace Frontier
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+open Finset
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+/-! ## Finite games in normal form -/
 
-set_option grind.warning false
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+theorem nash_equilibrium_exists_of_potential [∀ i, Nonempty (S i)]
+    (u : ι → (∀ j, S j) → ℝ) (P : (∀ j, S j) → ℝ)
+    (hP : ∀ (i : ι) (p : ∀ j, S j) (s : S i),
+      u i (Function.update p i s) - u i p = P (Function.update p i s) - P p) :
+    ∃ x : ∀ j, S j → ℝ, IsNashEquilibrium u x := by
+  obtain ⟨p, -, hp⟩ := Finset.exists_max_image (univ : Finset (∀ j, S j)) P
+    ⟨Classical.arbitrary _, mem_univ _⟩
+  refine ⟨pureProfile p, isNashEquilibrium_of_pure u (isMixed_pureProfile p) ?_⟩
+  intro i s
+  rw [devPayoff_pureProfile, payoff_pureProfile]
+  have h1 := hP i p s
+  have h2 : P (Function.update p i s) ≤ P p := hp _ (mem_univ _)
+  linarith
+
+/-- A concrete instance, showing the definitions are satisfiable: the two-player
+coordination game on `Bool` (both players get `1` if they choose the same action and `0`
+otherwise) has a Nash equilibrium. -/

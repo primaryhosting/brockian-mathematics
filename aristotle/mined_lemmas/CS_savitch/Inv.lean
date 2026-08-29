@@ -1,67 +1,28 @@
 /-
-# Savitch
-Category: Frontier Cs
-Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+The configuration graph of a space bounded nondeterministic machine, and the
+deterministic middle-first search run on it.
 -/
--- (Lean requires `import` commands to precede any module documentation, so the header above is
--- written as a plain comment; it is repeated as the module docstring below.)
-import RequestProject.Savitch.Final
+import RequestProject.NTM
 
-/-!
-# Savitch
-Category: Frontier Cs
-Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-/-!
-The machine model is the standard off-line random-access model of space bounded computation
-(see `RequestProject/Savitch/Model.lean`): the memory of a machine is a bit string, one step
-rewrites the memory using the memory content and a single input bit, read at a position which
-is determined by the memory, and the space used on an input is the maximal length of a memory
-string occurring in the computation.
-
-`NSPACE f` and `DSPACE g` are the classes of languages accepted by nondeterministic,
-respectively deterministic, machines running in space `O (f n)`, respectively `O (g n)`.
-
-The proof is Savitch's: for a nondeterministic machine `M` running in space `S` on the input
-`x`, deciding whether `M` accepts amounts to deciding reachability in the configuration graph
-of `M` on `x`, whose vertices are the words of length at most `S`.  Reachability by a path of
-length at most `2 ^ k` is decided by the midpoint recursion `savR`, whose recursion depth is
-`k`; taking `k = S + 1` suffices because there are only `2 ^ (S + 1) - 1` configurations.  The
-simulator runs this recursion with an explicit stack of at most `S + 2` frames, each holding
-three words of length at most `S`, so it uses `O (S ^ 2)` bits.  Since the simulator does not
-know `S`, it runs the whole procedure for stages `s = 0, 1, 2, …`, and at each stage also
-checks whether some reachable configuration has a successor of length more than `s`; the first
-stage at which this check fails gives the correct answer, and this happens at the latest at
-stage `S`.
--/
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+set_option maxRecDepth 4000
 
 namespace CS
+namespace Sim
 
-namespace Savitch
+variable (M : NTM) (s : ℕ) (x : List Bool)
 
-/-- A deterministic machine viewed as a nondeterministic machine. -/
+/-- Vertices of the configuration graph: the configurations of `M`, plus a sink
+`none` which is entered from every accepting configuration. -/
+abbrev Node : Type := Option (Conf M x.length s)
 
-theorem Inv.inner_length {σ : SState} (h : Inv σ) :
-    (codeInner σ.inner).length ≤ 5 * σ.stage + 5 := by
-  obtain ⟨-, h2⟩ := h
-  revert h2
-  cases hi : σ.inner with
-  | call k a b =>
-      intro h2
-      obtain ⟨ha, hb, hst⟩ := h2
-      have hk : k ≤ σ.stage + 1 := by
-        have := StackOK.length_add_le σ.stack k hst
-        omega
-      simp only [codeInner, List.length_cons, List.length_append, codeN_length, codeW_length]
-      omega
-  | ret v => intro _; simp [codeInner]
+/-- Edges of the configuration graph.  A single edge query only inspects the
+local transition table of `M` at the scanned symbols. -/
 
-/-! ## The length of an encoded state -/
+def Inv (K : ℕ) : Cfg V → Prop
+  | .call k _ _ st => k + st.length = K ∧ StackChain st ∧ ∀ f ∈ st.head?, f.level = k
+  | .ret _ st => st.length ≤ K ∧ StackChain st ∧ ∀ f ∈ st.head?, f.level + st.length = K
+  | .done _ => True
 
+omit [DecidableEq V] in

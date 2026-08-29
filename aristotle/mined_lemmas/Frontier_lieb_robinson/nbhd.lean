@@ -6,18 +6,7 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (The header above is a plain block comment because Lean 4 requires `import` commands to
--- precede every other command, including module doc-strings.)
-
 import Mathlib
-
-/-!
-# Lieb Robinson
-Category: Frontier Physics
-Target: Frontier.lieb_robinson
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -44,17 +33,10 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- Spin configurations of a chain of `N` sites (each site carries a qubit). -/
-abbrev Config (N : ℕ) := Fin N → Fin 2
+/-- The `r`-neighbourhood of a set of sites `X` inside a metric space of sites. -/
 
-/-- Observables of the spin chain: linear operators on the `2^N`-dimensional Hilbert space,
-represented as matrices indexed by spin configurations. -/
-abbrev SpinOp (N : ℕ) := Matrix (Config N) (Config N) ℂ
+def nbhd {Site : Type*} [PseudoMetricSpace Site] (r : ℝ) (X : Set Site) : Set Site :=
+  {z | ∃ x ∈ X, dist z x ≤ r}
 
-/-- `Supported S M` says that the observable `M` acts only on the sites in `S`, i.e.
-`M = M₀ ⊗ 1` with `M₀` acting on the sites of `S`.  Concretely, matrix elements vanish
-unless the configurations agree off `S`, and they depend only on the restrictions to `S`. -/
-
-def nbhd {N : ℕ} (S : Set (Fin N)) : Set (Fin N) := {j | ∃ x ∈ S, |(j : ℤ) - (x : ℤ)| ≤ 1}
-
-/-- `m`-fold neighbourhood. -/
+/-- Discrete-time Heisenberg evolution of an observable `a` under `n` layers of local
+gates: `evol u v n a = u (n-1) * ⋯ * u 0 * a * v 0 * ⋯ * v (n-1)`. -/

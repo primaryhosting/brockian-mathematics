@@ -1,4 +1,4 @@
-/-
+/-!
 # Pauli Anticommute
 Category: Quantum Computing
 Target: QC.pauli_anticommute
@@ -22,30 +22,17 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace QC
 
 /-- The Pauli `X` matrix. -/
 
 theorem pauli_anticommute :
-    PauliX * PauliY + PauliY * PauliX = 0 ∧
-    PauliY * PauliZ + PauliZ * PauliY = 0 ∧
-    PauliX * PauliZ + PauliZ * PauliX = 0 ∧
-    PauliX * PauliX = 1 ∧
-    PauliY * PauliY = 1 ∧
-    PauliZ * PauliZ = 1 := by
+    sx * sy + sy * sx = 0 ∧ sy * sz + sz * sy = 0 ∧ sz * sx + sx * sz = 0 ∧
+      sx * sx = 1 ∧ sy * sy = 1 ∧ sz * sz = 1 := by
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;>
-    · ext i j
-      fin_cases i <;> fin_cases j <;>
-        simp [PauliX, PauliY, PauliZ, Matrix.mul_apply, Fin.sum_univ_succ]
+    simp [sx, sy, sz, Matrix.mul_fin_two, Matrix.one_fin_two, ← Matrix.ext_iff,
+      Fin.forall_fin_two, Complex.ext_iff] <;>
+    norm_num [Complex.I_mul_I]
 
 end QC
 

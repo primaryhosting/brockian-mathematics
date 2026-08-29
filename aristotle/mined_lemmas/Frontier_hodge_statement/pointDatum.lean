@@ -1,29 +1,10 @@
-import Mathlib
-import RequestProject.Hodge
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-
+# Hodge Statement
+Category: Frontier — Moonshot
+Target: Frontier.hodge_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -34,45 +15,73 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open TensorProduct
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped TensorProduct
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Frontier
 
-/-! ## Rational Hodge structures -/
+/-! ## Complexification -/
 
-/-- A **rational Hodge structure of weight `w`** on a finite–dimensional `ℚ`-vector space `V`:
-a decomposition of the complexification `ℂ ⊗[ℚ] V` into complex subspaces
-`piece q = V^{q, w - q}`, together with the complex conjugation of `ℂ ⊗[ℚ] V`
-(semilinear over `ℂ`, the identity on the rational points `1 ⊗ v`), subject to the
-symmetry `conj (V^{q, w - q}) ⊆ V^{w - q, q}`.
+/-- Complex conjugation acting on the complexification `ℂ ⊗[ℚ] V` of a `ℚ`-vector space `V`,
+as a `ℚ`-linear automorphism. -/
 
-This is the standard linear–algebra package carried by the singular cohomology
-`H^w(X, ℚ)` of a smooth projective complex variety `X`. -/
-structure HodgeStructure (w : ℤ) (V : Type*) [AddCommGroup V] [Module ℚ V] where
-  /-- The Hodge piece `V^{q, w - q}` of the complexification. -/
-  piece : ℤ → Submodule ℂ (ℂ ⊗[ℚ] V)
-  /-- The Hodge decomposition `ℂ ⊗ V = ⨁_q V^{q, w - q}`. -/
-  decomposition : DirectSum.IsInternal piece
-  /-- Complex conjugation on the complexification. -/
-  conj : (ℂ ⊗[ℚ] V) →ₗ[ℚ] (ℂ ⊗[ℚ] V)
-  /-- Conjugation acts on the first tensor factor. -/
-  conj_tmul : ∀ (c : ℂ) (v : V), conj (c ⊗ₜ[ℚ] v) = (starRingEnd ℂ c) ⊗ₜ[ℚ] v
-  /-- The Hodge symmetry `conj (V^{q, w - q}) ⊆ V^{w - q, q}`. -/
-  conj_piece : ∀ q, Submodule.map conj ((piece q).restrictScalars ℚ)
-      ≤ (piece (w - q)).restrictScalars ℚ
+noncomputable def pointDatum : HodgeDatum where
+  V := ℚ
+  p := 0
+  Hpq := fun ab => if ab = (0, 0) then ⊤ else ⊥
+  pure' := by
+    rintro ⟨a, b⟩ h
+    simp only [Nat.cast_zero, mul_zero] at h
+    have hne : ((a, b) : ℤ × ℤ) ≠ (0, 0) := by
+      intro hh
+      rw [Prod.mk.injEq] at hh
+      obtain ⟨rfl, rfl⟩ := hh
+      simp at h
+    simp [hne]
+  internal := by
+    rw [DirectSum.isInternal_submodule_iff_iSupIndep_and_iSup_eq_top]
+    constructor
+    · intro i
+      by_cases hi : i = (0, 0)
+      · subst hi
+        have hsup : (⨆ (j : ℤ × ℤ) (_ : j ≠ ((0 : ℤ), (0 : ℤ))),
+            (fun ab : ℤ × ℤ => if ab = (0, 0) then (⊤ : Submodule ℂ (ℂ ⊗[ℚ] ℚ)) else ⊥) j)
+            = ⊥ := by
+          refine iSup_eq_bot.2 fun j => iSup_eq_bot.2 fun hj => ?_
+          simp [hj]
+        rw [hsup]
+        exact disjoint_bot_right
+      · have hbot : ((fun ab : ℤ × ℤ => if ab = (0, 0) then (⊤ : Submodule ℂ (ℂ ⊗[ℚ] ℚ)) else ⊥) i)
+            = ⊥ := by simp [hi]
+        rw [hbot]
+        exact disjoint_bot_left
+    · refine le_antisymm le_top ?_
+      refine le_trans ?_ (le_iSup (fun j : ℤ × ℤ => if j = (0, 0) then
+        (⊤ : Submodule ℂ (ℂ ⊗[ℚ] ℚ)) else ⊥) (0, 0))
+      simp
+  conj_mem := by
+    intro a b x hx
+    by_cases hab : (a, b) = (0, 0)
+    · rw [Prod.mk.injEq] at hab
+      obtain ⟨rfl, rfl⟩ := hab
+      simp
+    · have hx' : x ∈ (⊥ : Submodule ℂ (ℂ ⊗[ℚ] ℚ)) := by simpa [hab] using hx
+      rw [Submodule.mem_bot] at hx'
+      subst hx'
+      simp
+  alg := ⊤
+  alg_le := le_top
 
-namespace HodgeStructure
-
-variable {w : ℤ} {V : Type*} [AddCommGroup V] [Module ℚ V]
-
-/-- The rational classes of type `(q, w - q)`: those `v ∈ V` whose image `1 ⊗ v` in the
-complexification lies in the Hodge piece `V^{q, w - q}`.  For `w = 2 p` and `q = p` these are
-the **Hodge classes** of the Hodge structure. -/
-
-noncomputable def pointDatum : HodgeDatum 0 where
-  coh := ℚ
-  hodge := trivialHodgeStructure ℚ
-  algebraic := ⊤
-  algebraic_le_hodgeClasses := by simp
-
-/-- The Hodge conjecture holds for the Hodge datum of a point. -/
+/-- The Hodge conjecture holds for the datum of a point. -/

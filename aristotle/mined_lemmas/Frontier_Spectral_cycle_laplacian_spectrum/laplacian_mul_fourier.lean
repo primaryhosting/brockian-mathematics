@@ -1,10 +1,27 @@
+/-
+# Cycle Laplacian Spectrum
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.cycle_laplacian_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Cycle Laplacian Spectrum
 Category: Frontier — Spectral Geometry
 Target: Frontier.Spectral.cycle_laplacian_spectrum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(The header above is repeated as a plain comment at the very top of the file, since Lean does not
+allow a module docstring to precede the `import` commands.)
+
+We model the cycle graph `C n` on the vertex set `ZMod n` and its graph Laplacian as the circulant
+matrix with `2` on the diagonal and `-1` on the two cyclic off-diagonals.  Conjugating by the
+discrete Fourier matrix `F j k = exp (2 π i j k / n)` diagonalises it, which identifies the spectrum
+as `{2 - 2 cos (2 π k / n) : k ∈ range n}`.
 -/
 
 open scoped BigOperators
@@ -25,29 +42,36 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Matrix ZMod AddChar Finset
+open Matrix
 
-/-- The generating vector of the cycle Laplacian: `2` at `0`, `-1` at `±1`, `0` elsewhere. -/
+/-- The graph Laplacian of the cycle graph `C n`, indexed by `ZMod n`:
+the circulant matrix with `2` on the diagonal and `-1` on the two cyclic off-diagonals. -/
 
-lemma laplacian_mul_fourier (hn : 3 ≤ n) :
-    cycleLaplacian n * fourierMat n = fourierMat n * Matrix.diagonal (cycleEigen n) := by
-  ext i k
+theorem laplacian_mul_fourier (hn : 3 ≤ n) :
+    cycleLaplacian n * fourier n =
+      fourier n * Matrix.diagonal (fun k : ZMod n => ((cycleEigenvalue n k.val : ℝ) : ℂ)) := by
+  ext j k
   rw [Matrix.mul_apply, Matrix.mul_diagonal]
-  have re : ∑ j : ZMod n, cycleLaplacian n i j * fourierMat n j k
-      = ∑ d : ZMod n, cycleLapVec n d * ZMod.stdAddChar ((i - d) * k) := by
-    refine (Fintype.sum_equiv (Equiv.subLeft i) _ _ ?_).symm
-    intro d
-    simp only [Equiv.subLeft_apply, cycleLaplacian, Matrix.circulant_apply, fourierMat,
-      Matrix.of_apply]
-    congr 2
-    ring
-  rw [re, sum_cycleLapVec_mul hn]
-  simp only [fourierMat, Matrix.of_apply, cycleEigen]
-  have e1 : ZMod.stdAddChar ((i - 1) * k) = ZMod.stdAddChar (i * k) * ZMod.stdAddChar (-k) := by
-    rw [← AddChar.map_add_eq_mul]; congr 1; ring
-  have e2 : ZMod.stdAddChar ((i - -1) * k) = ZMod.stdAddChar (i * k) * ZMod.stdAddChar k := by
-    rw [← AddChar.map_add_eq_mul]; congr 1; ring
-  rw [e1, e2, sub_zero]
+  have hrow : ∀ m : ZMod n, cycleLaplacian n j m * fourier n m k
+      = (if m = j then 2 * fourier n m k else 0) - (if m = j + 1 then fourier n m k else 0)
+        - (if m = j - 1 then fourier n m k else 0) := by
+    intro m
+    rw [cycleLaplacian_apply_eq n hn]
+    split_ifs <;> ring
+  rw [Finset.sum_congr rfl (fun m _ => hrow m)]
+  simp only [Finset.sum_sub_distrib, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  have hplus : fourier n (j + 1) k = fourier n j k * zeta n ^ k.val := fourier_shift n hn j k
+  have hminus : fourier n (j - 1) k = fourier n j k * (zeta n ^ k.val)⁻¹ := by
+    have h := fourier_shift n hn (j - 1) k
+    rw [sub_add_cancel] at h
+    have hz : zeta n ^ k.val ≠ 0 := pow_ne_zero _ (zeta_ne_zero n)
+    show zeta n ^ ((j - 1).val * k.val) = zeta n ^ (j.val * k.val) * (zeta n ^ k.val)⁻¹
+    rw [h, mul_assoc, mul_inv_cancel₀ hz, mul_one]
+  rw [hplus, hminus, ← zeta_eigen n k.val]
   ring
 
-/-- The eigenvalues are `2 - 2 cos (2 π k / n)`. -/
+end
+
+/-- **The Laplacian spectrum of the cycle graph `C n`.**  For `n ≥ 3`, the eigenvalues of the graph
+Laplacian of the cycle `C n` (the circulant matrix with `2` on the diagonal and `-1` on the two
+cyclic off-diagonals) are exactly the numbers `2 - 2 * cos (2 * π * k / n)` for `k ∈ range n`. -/

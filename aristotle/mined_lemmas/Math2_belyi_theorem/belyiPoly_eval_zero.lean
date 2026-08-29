@@ -1,23 +1,25 @@
-import Mathlib
+import RequestProject.BelyiPoly
 
 /-!
-# Belyi Theorem
-Category: Frontier Math
-Target: Math2.belyi_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Belyi polynomials for finite sets of rational points
+
+A polynomial `f ∈ ℚ[X]` is *Belyi* if it is non-constant and all of its finite critical values
+(computed over `ℂ`) lie in `{0, 1}`; viewed as a map `ℙ¹ → ℙ¹` such an `f` is ramified only
+above `{0, 1, ∞}`.
+
+The main result of this file is `Math2.exists_belyiPolynomial_of_rat`: for every finite set of
+rational numbers there is a Belyi polynomial taking each of them to `0` or `1`.
 -/
 
-open scoped BigOperators
-open scoped Classical
-
-set_option maxHeartbeats 1000000
-
-open Polynomial IntermediateField
+set_option maxRecDepth 8000
 
 namespace Math2
 
-/-- A complex number is a *rational point* if it lies in the image of `ℚ`. -/
+open Polynomial
 
-lemma belyiPoly_eval_zero (a b : ℕ) : (belyiPoly a b).eval 0 = 0 := by simp [belyiPoly]
+/-- `f` is a Belyi polynomial: non-constant, with all finite critical values in `{0, 1}`. -/
 
+lemma belyiPoly_eval_zero {m n : ℕ} (hm : 0 < m) : (belyiPoly m n).eval 0 = 0 := by
+  simp [belyiPoly_eval, zero_pow hm.ne']
+
+/-- `B_{m,n}(1) = 0`. -/

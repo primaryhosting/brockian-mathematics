@@ -1,26 +1,18 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+/-!
+# Huckel C 18
+Category: Chemistry
+Target: Chem.huckel_C18
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Chem
 
-open Complex Polynomial Matrix
+open Complex Real Matrix Finset
 
-/-- The primitive 18-th root of unity `exp (2πi/18)`. -/
+/-- A primitive 18-th root of unity. -/
 
-noncomputable def ee (m : ℤ) : ℂ := zeta ^ m
+noncomputable def ee (a : ZMod 18) : ℂ := om ^ a.val
 

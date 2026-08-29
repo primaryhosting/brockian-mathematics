@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Practical Twin Infinitude
 Category: Brockian Conjecture
 Target: Brockian.PracticalNumbers.PracticalTwinInfinitude
@@ -33,25 +31,21 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.PracticalNumbers
+import Mathlib
 
 open Finset
 
-/-- A natural number `n` is *practical* if it is positive and every `m ≤ n` can be written
-as a sum of distinct divisors of `n`. -/
+namespace Brockian.PracticalNumbers
 
-lemma practical_two_pow (k : ℕ) : Practical (2 ^ k) := by
-  refine ⟨Nat.two_pow_pos k, ?_⟩
-  intro m hm
-  rcases lt_or_eq_of_le hm with h | h
-  · obtain ⟨S, hS, hSsum⟩ := pow_two_rep k m h
-    refine ⟨S, ?_, hSsum⟩
-    intro x hx
-    obtain ⟨j, hj, rfl⟩ := Finset.mem_image.mp (hS hx)
-    exact Nat.mem_divisors.mpr ⟨pow_dvd_pow 2 (le_of_lt (Finset.mem_range.mp hj)),
-      (Nat.two_pow_pos k).ne'⟩
-  · exact ⟨{2 ^ k}, by simp [Nat.mem_divisors], by simpa using h.symm⟩
+/-- A positive natural number `n` is *practical* when every `m ≤ n` can be written as a sum
+of distinct divisors of `n`. -/
 
-/-! ### The family `N i = 2 ^ (2 ^ i + 1) - 2` -/
+lemma practical_two_pow (a : ℕ) : Practical (2 ^ a) := by
+  induction a with
+  | zero => simpa using practical_one
+  | succ a ih =>
+    have h1 : (1 : ℕ) ≤ 2 ^ a := Nat.one_le_two_pow
+    have h2 : 2 ^ a ≤ ∑ y ∈ (2 ^ a : ℕ).divisors, y := self_le_sum_divisors (by positivity)
+    have h := practical_mul ih (d := 2) (by norm_num) (by omega)
+    rwa [show 2 ^ a * 2 = 2 ^ (a + 1) by ring] at h
 
-/-- Fermat-type factors `F i = 2 ^ (2 ^ i) + 1`. -/

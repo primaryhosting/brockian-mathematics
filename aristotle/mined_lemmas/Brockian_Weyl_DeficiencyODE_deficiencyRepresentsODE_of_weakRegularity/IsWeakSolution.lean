@@ -33,22 +33,50 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Classical
 
-open MeasureTheory
+open MeasureTheory Set
 
 namespace Brockian.Weyl.DeficiencyODE
 
-/-- A *weak* (Carathéodory / integrated form) solution of the Sturm–Liouville equation
-`u'' = (q - z) u` on the whole line: there is a continuous "quasi-derivative" `v` such that
-`u` is the primitive of `v` and `v` is the primitive of `(q - z) u`.
+/-- `IsWeakSolution q z u v` says that the pair `(u, v)` is a *weak* solution of the
+deficiency equation `u'' = (q - z) * u` of the Sturm–Liouville expression
+`L u = -u'' + q u`, in the sense that `u` and `v` are merely continuous and satisfy the
+integrated (Volterra) form of the system `u' = v`, `v' = (q - z) u`.
 
-This is the regularity that is available a priori for elements of the deficiency space of the
-minimal operator `L u = -u'' + q u`: such an element is only known to solve the equation in the
-integrated (distributional) sense. -/
+No differentiability whatsoever is assumed: this is the "weak regularity" hypothesis. -/
+structure IsWeakSolution (q : ℝ → ℂ) (z : ℂ) (u v : ℝ → ℂ) : Prop where
+  continuous_u : Continuous u
+  continuous_v : Continuous v
+  integral_u : ∀ t : ℝ, u t = u 0 + ∫ s in (0:ℝ)..t, v s
+  integral_v : ∀ t : ℝ, v t = v 0 + ∫ s in (0:ℝ)..t, (q s - z) * u s
 
-def IsWeakSolution (q : ℝ → ℂ) (z : ℂ) (u : ℝ → ℂ) : Prop :=
-  ∃ v : ℝ → ℂ, Continuous v ∧
-    (∀ x, u x = u 0 + ∫ t in (0:ℝ)..x, v t) ∧
-    (∀ x, v x = v 0 + ∫ t in (0:ℝ)..x, (q t - z) * u t)
+variable {q : ℝ → ℂ} {z : ℂ} {u v : ℝ → ℂ}
 
-/-- A *classical* (pointwise, twice differentiable) solution of `u'' = (q - z) u`. -/
+/-- A weak solution is automatically differentiable, with derivative the second component. -/
+
+theorem IsWeakSolution.smul (c : ℂ) (h : IsWeakSolution q z u v) :
+    IsWeakSolution q z (c • u) (c • v) where
+  continuous_u := h.continuous_u.const_smul c
+  continuous_v := h.continuous_v.const_smul c
+  integral_u := by
+    intro t
+    have hint : ∫ s in (0:ℝ)..t, c * v s = c * ∫ s in (0:ℝ)..t, v s :=
+      intervalIntegral.integral_const_mul c v
+    simp only [Pi.smul_apply, smul_eq_mul]
+    rw [hint, h.integral_u t]
+    ring
+  integral_v := by
+    intro t
+    have hint : ∫ s in (0:ℝ)..t, (q s - z) * (c * u s)
+        = c * ∫ s in (0:ℝ)..t, (q s - z) * u s := by
+      rw [← intervalIntegral.integral_const_mul c fun s => (q s - z) * u s]
+      exact intervalIntegral.integral_congr fun s _ => by ring
+    simp only [Pi.smul_apply, smul_eq_mul]
+    rw [hint, h.integral_v t]
+    ring
+
+/-- The deficiency space of the Sturm–Liouville expression `L u = -u'' + q u` at the
+spectral parameter `z`: the square-integrable weak solutions of `u'' = (q - z) u`. -/

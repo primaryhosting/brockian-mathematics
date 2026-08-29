@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Banach Fixed Point
 Category: Frontier Wave 2 (deeper machinery)
@@ -32,9 +33,9 @@ set_option grind.warning false
 
 namespace Analysis
 
-/-- **Banach fixed-point theorem** (contraction mapping principle):
-a contraction `f` with constant `K` on a complete nonempty metric space `X`
-has a fixed point, namely `ContractingWith.fixedPoint f hf`, and it is unique. -/
+/-- **Banach fixed-point theorem** (contraction mapping theorem):
+a contraction `f` with constant `K < 1` on a complete, nonempty metric space
+has a unique fixed point, namely `ContractingWith.fixedPoint f hf`. -/
 
 theorem banach_fixed_point_exists {X : Type*} [MetricSpace X] [CompleteSpace X] [Nonempty X]
     {K : NNReal} {f : X → X} (hf : ContractingWith K f) :

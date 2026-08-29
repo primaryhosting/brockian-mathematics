@@ -23,7 +23,9 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Sixth Unitary Perfect Exists
 Category: Brockian Conjecture
 Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
@@ -31,21 +33,38 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+/-!
+## Overview
 
-namespace Brockian.UnitaryPerfect
+A *unitary divisor* of `n` is a divisor `d` with `gcd d (n / d) = 1`, and `n` is *unitary
+perfect* when the sum `σ*(n)` of its unitary divisors equals `2 * n`.  Exactly five unitary
+perfect numbers are known:
+
+`6`, `60`, `90`, `87360`, `146361946186458562560000`,
+
+and whether a sixth one exists is an open problem.  This file develops the basic theory
+(`σ*` is multiplicative, `σ*(p^a) = 1 + p^a`, the factorization formula), verifies the five
+known examples, proves that every unitary perfect number is even, and reduces the existence
+of a sixth unitary perfect number to an explicit arithmetic criterion on the odd part.
+-/
 
 open Finset
 
-/-- The unitary divisors of `n`: the divisors `d` of `n` with `gcd d (n / d) = 1`. -/
+namespace Brockian.UnitaryPerfect
+
+/-- The unitary divisors of `n`: divisors `d` of `n` with `gcd d (n / d) = 1`. -/
 
 theorem isUnitaryPerfect_of_mem_known {n : ℕ} (hn : n ∈ knownUnitaryPerfect) :
     IsUnitaryPerfect n := by
-  fin_cases hn
-  · exact ⟨by norm_num, by rw [usigma_6]⟩
-  · exact ⟨by norm_num, by rw [usigma_60]⟩
-  · exact ⟨by norm_num, by rw [usigma_90]⟩
-  · exact ⟨by norm_num, by rw [usigma_87360]⟩
-  · exact ⟨by norm_num, by rw [usigma_146361946186458562560000]⟩
+  simp only [knownUnitaryPerfect, Finset.mem_insert, Finset.mem_singleton] at hn
+  rcases hn with rfl | rfl | rfl | rfl | rfl
+  · exact isUnitaryPerfect_six
+  · exact isUnitaryPerfect_sixty
+  · exact isUnitaryPerfect_ninety
+  · exact isUnitaryPerfect_87360
+  · exact isUnitaryPerfect_big
 
-/-- A unitary perfect number is not a prime power. -/
+/-! ### Every unitary perfect number is even -/
+
+/-- There is no odd unitary perfect number: if `n` is odd with `k` distinct prime factors,
+then `2 ^ k ∣ σ*(n)`, which forces `k ≤ 1`, and both remaining cases are impossible. -/

@@ -1,34 +1,36 @@
-import Mathlib
-import RequestProject.Main
-
 /-!
-# In-scope encoding soundness, Mathlib (`Finset`) formulation
-
-`RequestProject/Main.lean` states and proves the target theorem
-`PCA.Isolation.in_scope_encoding_sound` for policies given as lists.  (That file must
-begin with the prescribed header docstring, which Lean does not allow to precede an
-`import`, so it is written against Lean's core `List`/`String` API only.)
-
-This companion file works in full Mathlib and restates the same soundness /
-completeness result for policies given as `Finset`s of paths, deriving it from the
-encoding lemmas of `RequestProject.Main`.
+# In Scope Encoding Sound
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.in_scope_encoding_sound
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option maxRecDepth 4000
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-/-- The isolation policy with policy sets given as `Finset`s of paths. -/
-structure FinScope where
-  /-- Roots of the sub-trees the app may access. -/
-  allowed : Finset Path
-  /-- Roots of the sub-trees explicitly denied to the app. -/
-  denied : Finset Path
+/-- A resource is identified by a hierarchical path: a list of name segments,
+read from the root downwards. -/
+abbrev Path := List String
 
-/-- Abstract scope membership for a `Finset`-valued policy. -/
+/-- The isolation policy of a sandboxed app: a list of granted subtrees
+(`roots`) together with a list of explicitly revoked subtrees (`denied`). -/
+structure Scope where
+  /-- Subtrees the app has been granted access to. -/
+  roots : List Path
+  /-- Subtrees carved out of the grants; denial takes precedence. -/
+  denied : List Path
+  deriving Repr
+
+/-- Declarative semantics of the isolation engine: a resource `p` lies in the
+scope `s` when some granted root is an ancestor of (or equal to) `p`, and no
+denied subtree is an ancestor of (or equal to) `p`. -/
 
 def InScope (s : Scope) (p : Path) : Prop :=
-  (∃ r ∈ s.allowed, r <+: p) ∧ ∀ d ∈ s.denied, ¬ d <+: p
+  (∃ r ∈ s.roots, r <+: p) ∧ ∀ d ∈ s.denied, ¬ d <+: p
 
-/-- The encoding of a path used by the isolation engine. -/
+/-- The executable encoding of the scope check used by the isolation engine. -/

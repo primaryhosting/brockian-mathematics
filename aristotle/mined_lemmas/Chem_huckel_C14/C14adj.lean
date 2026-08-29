@@ -1,11 +1,3 @@
-/-
-# Huckel C 14
-Category: Chemistry
-Target: Chem.huckel_C14
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,13 +8,17 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped Real
+open Complex SimpleGraph
+
 namespace Chem
 
-open Complex Matrix Polynomial SimpleGraph
+/-- The adjacency matrix (over `ℂ`) of the cycle graph `C₁₄`, i.e. the Hückel matrix of the
+carbon skeleton of a 14-membered annulene in units where `α = 0` and `β = 1`. -/
 
-/-- The adjacency matrix (Hückel matrix, with `α = 0`, `β = 1`) of the cycle graph `C₁₄`. -/
+noncomputable def C14adj : Matrix (Fin 14) (Fin 14) ℂ := (cycleGraph 14).adjMatrix ℂ
 
-noncomputable def C14adj : Matrix (Fin 14) (Fin 14) ℂ :=
-  (cycleGraph 14).adjMatrix ℂ
+/-- The standard additive character `j ↦ exp (2 π I j / 14)` on `ZMod 14`. -/
+private noncomputable abbrev chi : AddChar (ZMod 14) ℂ := ZMod.stdAddChar
 
-/-- The primitive 14-th root of unity `exp (2πi/14)`. -/
+/-- Multiplying by the adjacency matrix of `C₁₄` sums the two cyclic neighbours. -/

@@ -1,11 +1,3 @@
-/-
-# Baire Category
-Category: Frontier Wave 2 (deeper machinery)
-Target: Topology.baire_category
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -33,22 +25,21 @@ set_option autoImplicit false
 set_option pp.fullNames true
 set_option pp.structureInstances true
 set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
 namespace Topology
 
-/-- **Baire category theorem**: in a complete metric space, the intersection of a countable
-family of dense open sets is dense.
+/-- **Baire category theorem** (complete metric space version): in a complete metric space,
+the intersection of a countable family of dense open sets is dense. -/
 
-The proof uses Mathlib's `BaireSpace` instance for complete (pseudo)metric spaces together with
-`dense_iInter_of_isOpen`. -/
+theorem baire_category_nat {X : Type*} [MetricSpace X] [CompleteSpace X] {S : ℕ → Set X}
+    (hopen : ∀ n, IsOpen (S n)) (hdense : ∀ n, Dense (S n)) :
+    Dense (⋂ n, S n) :=
+  baire_category hopen hdense
 
-theorem baire_category_nat {X : Type*} [MetricSpace X] [CompleteSpace X]
-    (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : ∀ n, Dense (f n)) :
-    Dense (⋂ n, f n) :=
-  baire_category f ho hd
-
-end Topology
-
+/-- Set-indexed form: the intersection of a countable collection of dense open subsets of a
+complete metric space is dense. -/

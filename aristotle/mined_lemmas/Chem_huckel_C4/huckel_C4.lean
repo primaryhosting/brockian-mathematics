@@ -1,10 +1,36 @@
-/-
+import Mathlib
+
+/-!
 # Huckel C 4
 Category: Chemistry
 Target: Chem.huckel_C4
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open Real Matrix
+
+namespace Chem
+
+/-- The adjacency matrix of the cycle graph `C₄` (the Hückel matrix of cyclobutadiene,
+with `α = 0`, `β = 1`): vertices are `Fin 4` arranged in a cycle, and `i ~ j` iff
+`j = i + 1` or `i = j + 1` (addition modulo `4`). -/
+
+theorem huckel_C4 (μ : ℝ) :
+    (∃ v : Fin 4 → ℝ, v ≠ 0 ∧ C4adj *ᵥ v = μ • v) ↔
+      ∃ k : Fin 4, μ = 2 * Real.cos (2 * π * k / 4) := by
+  rw [eigen_iff_det, cos_values]
+  constructor
+  · intro h
+    have h' : μ ^ 2 * ((μ - 2) * (μ + 2)) = 0 := by linear_combination h
+    rcases mul_eq_zero.mp h' with h1 | h1
+    · exact Or.inr (Or.inl (by simpa using pow_eq_zero_iff (n := 2) (by norm_num) |>.mp h1))
+    · rcases mul_eq_zero.mp h1 with h2 | h2
+      · exact Or.inl (by linarith)
+      · exact Or.inr (Or.inr (by linarith))
+  · rintro (rfl | rfl | rfl) <;> norm_num
+
+end Chem
 
 import Mathlib
 
@@ -22,38 +48,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
-
-namespace Chem
-
-open Polynomial
-
-/-- The Hückel matrix of the carbon skeleton of cyclobutadiene, in units where the Coulomb
-integral `α` is `0` and the resonance integral `β` is `1`: the adjacency matrix of the cycle
-graph `C₄`. -/
-
-theorem huckel_C4 :
-    C4adj.charpoly = ∏ k ∈ Finset.range 4, (X - C (2 * Real.cos (2 * π * k / 4))) ∧
-      ∀ μ : ℝ, (∃ v : Fin 4 → ℝ, v ≠ 0 ∧ C4adj.mulVec v = μ • v) ↔
-        ∃ k ∈ Finset.range 4, μ = 2 * Real.cos (2 * π * k / 4) := by
-  refine ⟨by rw [C4adj_charpoly, prod_cos_factors], fun μ => ?_⟩
-  rw [exists_eigenvector_iff_eval_charpoly, C4adj_charpoly]
-  simp only [eval_mul, eval_sub, eval_add, eval_X, eval_C, mul_eq_zero, sub_eq_zero,
-    add_eq_zero_iff_eq_neg]
-  constructor
-  · rintro ((h | h) | h)
-    · rcases h with h | h
-      · exact ⟨0, by simp, by rw [cos_zero_four]; linarith⟩
-      · exact ⟨1, by simp, by rw [cos_one_four]; linarith⟩
-    · exact ⟨2, by simp, by rw [cos_two_four]; linarith⟩
-    · exact ⟨1, by simp, by rw [cos_one_four]; linarith⟩
-  · rintro ⟨k, hk, rfl⟩
-    simp only [Finset.mem_range] at hk
-    interval_cases k
-    · rw [cos_zero_four]; norm_num
-    · rw [cos_one_four]; norm_num
-    · rw [cos_two_four]; norm_num
-    · rw [cos_three_four]; norm_num
-
-end Chem
 

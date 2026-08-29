@@ -29,10 +29,6 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Note: Lean 4 does not permit a module doc-comment before the import lines, so the
-required header appears here as an ordinary block comment; the same text is repeated
-as the module docstring immediately after the imports.)
 -/
 
 import Mathlib
@@ -44,28 +40,17 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-The statement "there are infinitely many even perfect numbers" is open, since it is
-equivalent to the (open) conjecture that there are infinitely many Mersenne primes.
-
-What is proved here is exactly that equivalence: a Lean-checked *conditional reduction*
-of the infinitude of even perfect numbers to the infinitude of Mersenne primes.
-
-The key input is the Euclid–Euler theorem, already available in Mathlib's Archive as
-`Theorems100.Nat.even_and_perfect_iff`
-(`Archive/Wiedijk100Theorems/PerfectNumbers.lean`), which states
-`Even n ∧ n.Perfect ↔ ∃ k, (mersenne (k + 1)).Prime ∧ n = 2 ^ k * mersenne (k + 1)`.
 -/
 
 namespace Brockian
 namespace MersennePerfect
 
-open Nat
+/-- The set of even perfect natural numbers. -/
 
-/-- The set of even perfect numbers. -/
-
-lemma evenPerfects_subset_image : evenPerfects ⊆ euclid '' mersenneExponents := by
-  intro n hn
+lemma evenPerfects_subset_image :
+    evenPerfects ⊆ (fun p => 2 ^ (p - 1) * mersenne p) '' mersenneExponents := by
+  rintro n hn
   obtain ⟨k, hk, rfl⟩ := Theorems100.Nat.even_and_perfect_iff.mp hn
-  exact ⟨k, hk, rfl⟩
+  exact ⟨k + 1, hk, by simp⟩
 
+/-- Euclid's direction: a Mersenne prime exponent produces an even perfect number. -/

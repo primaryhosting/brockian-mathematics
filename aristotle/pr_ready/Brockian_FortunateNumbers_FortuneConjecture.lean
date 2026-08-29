@@ -39,9 +39,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` lines to precede any module docstring, so the header above is a
--- plain comment and is repeated verbatim as the module docstring below.)
-
 
 /-!
 # Fortune Conjecture
@@ -55,102 +52,100 @@ namespace Brockian.FortunateNumbers
 
 open Finset
 
-/-!
-## Setup
+/-- `IsFortunate n m` says that `m` is the *fortunate number* attached to the primorial `n#`:
+it is the least integer `m > 1` such that `n# + m` is prime. -/
+def IsFortunate (n m : ℕ) : Prop :=
+  IsLeast {k : ℕ | 1 < k ∧ Nat.Prime (primorial n + k)} m
 
-For a bound `N`, `primorial N` (Mathlib's `primorial`, notation `N#`) is the product of all
-primes `≤ N`.  The *fortunate number* attached to `N` is the least `m ≥ 2` such that
-`N# + m` is prime.  Fortune's conjecture asserts that this number is always prime.
+/-- Fortunate numbers exist: for every `n` there is a least `m > 1` with `n# + m` prime. -/
+theorem exists_fortunate (n : ℕ) : ∃ m, IsFortunate n m := by
+  have hne : {k : ℕ | 1 < k ∧ Nat.Prime (primorial n + k)}.Nonempty := by
+    obtain ⟨p, hp1, hp⟩ := Nat.exists_infinite_primes (primorial n + 2)
+    refine ⟨p - primorial n, by omega, ?_⟩
+    rwa [Nat.add_sub_cancel' (by omega : primorial n ≤ p)]
+  exact ⟨_, Nat.sInf_mem hne, fun _ hk => Nat.sInf_le hk⟩
 
-The conjecture is open.  What we prove here is the classical unconditional dichotomy
-(`fortunate_prime_or_sq_le`): the fortunate number is either prime or at least `(N+1)^2`,
-because none of its prime factors can be `≤ N`.  The named target
-`FortuneConjecture` is therefore the corresponding *conditional* statement: the fortunate
-number is prime as soon as it is smaller than `(N+1)^2`.
--/
+/-- **Unconditional structure result.** If `m > 1` and `n# + m` is prime, then no prime `q ≤ n`
+divides `m`; i.e. every prime factor of `m` exceeds `n`.  (In particular a fortunate number is
+coprime to `n#`.) -/
+theorem not_dvd_of_prime_le {n m q : ℕ} (hm1 : 1 < m) (hp : Nat.Prime (primorial n + m))
+    (hq : Nat.Prime q) (hqn : q ≤ n) : ¬ q ∣ m := by
+  intro hdvdm
+  have hdvdN : q ∣ primorial n :=
+    Finset.dvd_prod_of_mem _ (Finset.mem_filter.2 ⟨Finset.mem_range.2 (by omega), hq⟩)
+  have hdvd : q ∣ primorial n + m := Nat.dvd_add hdvdN hdvdm
+  have hle' : q ≤ m := Nat.le_of_dvd (by omega) hdvdm
+  have hpos : 0 < primorial n := primorial_pos n
+  rcases Nat.Prime.eq_one_or_self_of_dvd hp _ hdvd with h | h
+  · exact hq.one_lt.ne' h
+  · omega
 
-/-- Every prime `q ≤ N` divides the primorial `N#`. -/
-theorem prime_dvd_primorial {q N : ℕ} (hq : q.Prime) (hqN : q ≤ N) : q ∣ primorial N := by
-  refine Finset.dvd_prod_of_mem (fun p => p) ?_
-  simp [Finset.mem_filter, Finset.mem_range, hq, Nat.lt_succ_of_le hqN]
+/-- **Key unconditional step.** If `m > 1`, `n# + m` is prime and `m ≤ n ^ 2`, then `m` is prime.
 
-/-- There is always some `m ≥ 2` with `N# + m` prime (by the infinitude of primes). -/
-theorem exists_fortunate (N : ℕ) : ∃ m, 2 ≤ m ∧ (primorial N + m).Prime := by
-  obtain ⟨p, hple, hp⟩ := Nat.exists_infinite_primes (primorial N + 2)
-  refine ⟨p - primorial N, by omega, ?_⟩
-  have : primorial N + (p - primorial N) = p := by omega
-  rwa [this]
+Indeed, a composite `m` would have a prime factor `q` with `q ^ 2 ≤ m ≤ n ^ 2`, hence `q ≤ n`,
+so `q` divides the primorial `n#` as well as `m`, hence divides the prime `n# + m`, which is
+impossible since `1 < q < n# + m`. -/
+theorem prime_of_prime_primorial_add_of_le_sq {n m : ℕ} (hm1 : 1 < m)
+    (hp : Nat.Prime (primorial n + m)) (hle : m ≤ n ^ 2) : Nat.Prime m := by
+  by_contra hmp
+  have hqp : Nat.Prime m.minFac := Nat.minFac_prime (by omega)
+  have hq2 : m.minFac ^ 2 ≤ m := Nat.minFac_sq_le_self (by omega) hmp
+  have hqn : m.minFac ≤ n := by
+    by_contra hc
+    have : n ^ 2 < m.minFac ^ 2 := Nat.pow_lt_pow_left (by omega) (by norm_num)
+    omega
+  exact not_dvd_of_prime_le hm1 hp hqp hqn (Nat.minFac_dvd m)
 
-/-- The fortunate number of `N`: the least `m ≥ 2` such that `N# + m` is prime. -/
-noncomputable def fortunate (N : ℕ) : ℕ := sInf {m | 2 ≤ m ∧ (primorial N + m).Prime}
+/-- A sharper version of `prime_of_prime_primorial_add_of_le_sq`: it suffices that `m < r ^ 2`
+where `r` is any prime with the property that there is no prime in the interval `(n, r)`
+(e.g. `r` the least prime exceeding `n`). -/
+theorem prime_of_prime_primorial_add_of_lt_sq {n m r : ℕ} (hm1 : 1 < m)
+    (hp : Nat.Prime (primorial n + m)) (hgap : ∀ q : ℕ, Nat.Prime q → n < q → r ≤ q)
+    (hlt : m < r ^ 2) : Nat.Prime m := by
+  by_contra hmp
+  have hqp : Nat.Prime m.minFac := Nat.minFac_prime (by omega)
+  have hq2 : m.minFac ^ 2 ≤ m := Nat.minFac_sq_le_self (by omega) hmp
+  have hqn : m.minFac ≤ n := by
+    by_contra hc
+    have : r ≤ m.minFac := hgap _ hqp (by omega)
+    have : r ^ 2 ≤ m.minFac ^ 2 := Nat.pow_le_pow_left this 2
+    omega
+  exact not_dvd_of_prime_le hm1 hp hqp hqn (Nat.minFac_dvd m)
 
-theorem fortunate_mem (N : ℕ) : 2 ≤ fortunate N ∧ (primorial N + fortunate N).Prime :=
-  Nat.sInf_mem (exists_fortunate N)
+/-- **Fortune's conjecture, conditional reduction.**
 
-theorem two_le_fortunate (N : ℕ) : 2 ≤ fortunate N := (fortunate_mem N).1
+Fortune's conjecture states that every fortunate number is prime; it is open.  The statement
+below reduces it to the size bound saying that the fortunate number attached to `n#` is at
+most `n ^ 2`.  (Fortunate numbers are conjecturally of size `O((log n)^2)`, far below `n ^ 2`,
+so `hgap` is a very weak form of the expected prime-gap behaviour after primorials.) -/
+theorem FortuneConjecture (hgap : ∀ n m : ℕ, IsFortunate n m → m ≤ n ^ 2) :
+    ∀ n m : ℕ, IsFortunate n m → Nat.Prime m := fun n m hm =>
+  prime_of_prime_primorial_add_of_le_sq hm.1.1 hm.1.2 (hgap n m hm)
 
-theorem prime_primorial_add_fortunate (N : ℕ) : (primorial N + fortunate N).Prime :=
-  (fortunate_mem N).2
+/-- Sharper conditional form of Fortune's conjecture: it is enough to know that the fortunate
+number attached to `n#` is smaller than the square of the least prime exceeding `n`. -/
+theorem fortuneConjecture_of_lt_next_prime_sq
+    (hgap : ∀ n m r : ℕ, IsFortunate n m → (∀ q : ℕ, Nat.Prime q → n < q → r ≤ q) → m < r ^ 2) :
+    ∀ n m : ℕ, IsFortunate n m → Nat.Prime m := by
+  intro n m hm
+  obtain ⟨r, -, hrmin⟩ : ∃ r : ℕ, Nat.Prime r ∧ ∀ q : ℕ, Nat.Prime q → n < q → r ≤ q := by
+    have hne : {q : ℕ | Nat.Prime q ∧ n < q}.Nonempty := by
+      obtain ⟨p, hp1, hp⟩ := Nat.exists_infinite_primes (n + 1)
+      exact ⟨p, hp, by omega⟩
+    obtain ⟨hr1, -⟩ := Nat.sInf_mem hne
+    exact ⟨_, hr1, fun q hq hqn => Nat.sInf_le ⟨hq, hqn⟩⟩
+  exact prime_of_prime_primorial_add_of_lt_sq hm.1.1 hm.1.2 hrmin (hgap n m r hm hrmin)
 
-theorem fortunate_le {N m : ℕ} (hm : 2 ≤ m) (h : (primorial N + m).Prime) :
-    fortunate N ≤ m :=
-  Nat.sInf_le ⟨hm, h⟩
-
-/-- No prime `q ≤ N` divides the fortunate number of `N`. -/
-theorem not_prime_dvd_fortunate {q N : ℕ} (hq : q.Prime) (hqN : q ≤ N) :
-    ¬ q ∣ fortunate N := by
-  intro hdvd
-  have hqP : q ∣ primorial N := prime_dvd_primorial hq hqN
-  have hsum : q ∣ primorial N + fortunate N := Nat.dvd_add hqP hdvd
-  have hprime := prime_primorial_add_fortunate N
-  have hq_eq : q = primorial N + fortunate N :=
-    ((Nat.Prime.eq_one_or_self_of_dvd hprime q hsum).resolve_left hq.ne_one)
-  have hqle : q ≤ primorial N := Nat.le_of_dvd (primorial_pos N) hqP
-  have := two_le_fortunate N
-  omega
-
-/-- Every prime factor of the fortunate number of `N` exceeds `N`. -/
-theorem lt_minFac_fortunate (N : ℕ) : N < (fortunate N).minFac := by
-  by_contra h
-  push_neg at h
-  have hne : fortunate N ≠ 1 := by have := two_le_fortunate N; omega
-  exact not_prime_dvd_fortunate (Nat.minFac_prime hne) h (Nat.minFac_dvd _)
-
-/-- **Unconditional dichotomy.** The fortunate number of `N` is either prime, or it is at
-least `(N+1)^2`. -/
-theorem fortunate_prime_or_sq_le (N : ℕ) :
-    (fortunate N).Prime ∨ (N + 1) ^ 2 ≤ fortunate N := by
-  by_cases hp : (fortunate N).Prime
-  · exact Or.inl hp
-  · refine Or.inr ?_
-    have hpos : 0 < fortunate N := by have := two_le_fortunate N; omega
-    have h1 : (fortunate N).minFac ^ 2 ≤ fortunate N := Nat.minFac_sq_le_self hpos hp
-    have h2 : N + 1 ≤ (fortunate N).minFac := lt_minFac_fortunate N
-    exact le_trans (Nat.pow_le_pow_left h2 2) h1
-
-/-- **Fortune's conjecture, conditional form.**  The fortunate number of `N` — the least
-`m ≥ 2` with `N# + m` prime — is prime, provided it is smaller than `(N+1)^2`.
-
-Fortune's conjecture itself (that this holds unconditionally) is open; the hypothesis
-`fortunate N < (N + 1) ^ 2` is exactly the classical gap, and it is known to hold for all
-values that have been computed. -/
-theorem FortuneConjecture (N : ℕ) (h : fortunate N < (N + 1) ^ 2) : (fortunate N).Prime :=
-  (fortunate_prime_or_sq_le N).resolve_right (by omega)
-
-/-- A concrete instance: `5# = 30` and the least `m ≥ 2` with `30 + m` prime is `m = 7`. -/
-theorem fortunate_five : fortunate 5 = 7 := by
-  have h30 : primorial 5 = 30 := by decide
-  refine le_antisymm (fortunate_le (by norm_num) (by rw [h30]; decide)) ?_
-  refine le_csInf ⟨_, Nat.sInf_mem (exists_fortunate 5)⟩ ?_
-  rintro m ⟨h2, hp⟩
-  rw [h30] at hp
-  by_contra hlt
-  push_neg at hlt
-  interval_cases m <;> revert hp <;> decide
-
-/-- The conditional form applies to `N = 5`: `fortunate 5 = 7 < 36`, so it is prime. -/
-theorem fortunate_five_prime : (fortunate 5).Prime :=
-  FortuneConjecture 5 (by rw [fortunate_five]; norm_num)
+/-- Unconditional instance: the fortunate number attached to `7# = 210` is `13`, which is prime. -/
+theorem isFortunate_seven : IsFortunate 7 13 := by
+  have h210 : primorial 7 = 210 := by decide
+  constructor
+  · refine ⟨by norm_num, ?_⟩
+    rw [h210]; norm_num
+  · rintro k ⟨hk1, hk2⟩
+    rw [h210] at hk2
+    by_contra hc
+    interval_cases k <;> revert hk2 <;> norm_num
 
 end Brockian.FortunateNumbers
 

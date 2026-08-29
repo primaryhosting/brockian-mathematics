@@ -1,57 +1,28 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-!
-# Information-theoretic lower bound for comparison sorting of 4 elements
-
-We model a comparison-based sorting algorithm on `n` inputs as a binary decision tree
-(`CS.CompTree n`): each internal node compares two input positions `i j` (asking `a i ≤ a j`)
-and branches accordingly; each leaf outputs a permutation, which is meant to list the input
-positions in sorted order.
-
-A tree *sorts* if, for every injective input `a : Fin n → ℕ`, the output permutation `p`
-satisfies that `a ∘ p` is strictly monotone.
-
-The main theorem `CS.sorting_lb_4` states that any comparison tree that sorts `4` elements has
-depth at least `⌈log₂ (4!)⌉ = 5`, i.e. it performs at least 5 comparisons in the worst case.
+# Sorting Lb 4
+Category: Computer Science
+Target: CS.sorting_lb_4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 namespace CS
 
-/-- A comparison-based decision tree on `n` inputs: internal nodes compare two positions,
-leaves output a permutation. -/
-inductive CompTree (n : ℕ) : Type
-  | leaf : Equiv.Perm (Fin n) → CompTree n
-  | node : Fin n → Fin n → CompTree n → CompTree n → CompTree n
+/-- A comparison-based decision tree for sorting four elements.
+Each internal node compares two positions `i j` of the input; the algorithm
+branches on the answer.  Each leaf outputs a permutation (the claimed sorted
+order of the input). -/
+inductive CompTree : Type
+  | leaf (out : Equiv.Perm (Fin 4)) : CompTree
+  | node (i j : Fin 4) (l r : CompTree) : CompTree
+  deriving Inhabited
 
 namespace CompTree
 
-variable {n : ℕ}
+/-- The worst-case number of comparisons performed by the tree. -/
 
-/-- The depth of a comparison tree: the worst-case number of comparisons performed. -/
+def Sorts (t : CompTree) : Prop := ∀ p : Equiv.Perm (Fin 4), t.run p = p
 
-def Sorts (t : CompTree n) : Prop :=
-  ∀ a : Fin n → ℕ, Function.Injective a → StrictMono (a ∘ (run a t))
-
+/-- The six comparisons between distinct positions of a four-element input. -/

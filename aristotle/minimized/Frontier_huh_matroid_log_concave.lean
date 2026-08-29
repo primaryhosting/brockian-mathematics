@@ -1,3 +1,11 @@
+/-
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -7,8 +15,6 @@ Target: Frontier.huh_matroid_log_concave
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- Note: Lean 4 requires `import` lines to precede all other commands (including module
--- docstrings), so the required header comment appears immediately after the import.
 
 open scoped BigOperators
 open scoped Real
@@ -24,36 +30,50 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.piBinderTypes true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+
+set_option grind.warning false
+
 namespace Frontier
 
 open Polynomial Finset
 
-/-- The characteristic polynomial of a matroid `M` on a finite ground set, defined by the
-Whitney rank expression `χ_M(X) = ∑_{S ⊆ E} (-1)^{|S|} X^{r(E) - r(S)}`, where `r` is the
-rank function of `M`. -/
+/-- The characteristic polynomial of a matroid `M` with finite ground set `E`, given by
+Whitney's rank generating formula
+`χ_M(X) = ∑_{S ⊆ E} (-1)^{|S|} X^{r(E) - r(S)}`,
+where `r` is the (natural-number valued) rank function of `M`. -/
 
-theorem choose_log_concave (n k : ℕ) :
-    n.choose k * n.choose (k + 2) ≤ (n.choose (k + 1)) ^ 2 := by
-  rcases le_or_gt n (k + 1) with h | h
-  · have hz : n.choose (k + 2) = 0 := Nat.choose_eq_zero_of_lt (by omega)
-    simp [hz]
-  · obtain ⟨j, rfl⟩ : ∃ j, n = k + j + 2 := ⟨n - k - 2, by omega⟩
-    have h1 := Nat.choose_succ_right_eq (k + j + 2) k
-    have h2 := Nat.choose_succ_right_eq (k + j + 2) (k + 1)
-    have e1 : k + j + 2 - k = j + 2 := by omega
-    have e2 : k + j + 2 - (k + 1) = j + 1 := by omega
-    rw [e1] at h1
-    rw [e2] at h2
-    set a := (k + j + 2).choose k with ha
-    set b := (k + j + 2).choose (k + 1) with hb
-    set c := (k + j + 2).choose (k + 2) with hc
-    have key : (a * c) * ((j + 2) * (k + 2)) = b ^ 2 * ((k + 1) * (j + 1)) :=
-      calc (a * c) * ((j + 2) * (k + 2)) = (a * (j + 2)) * (c * (k + 1 + 1)) := by ring
-        _ = (b * (k + 1)) * (b * (j + 1)) := by rw [← h1, h2]
-        _ = b ^ 2 * ((k + 1) * (j + 1)) := by ring
-    have hle : b ^ 2 * ((k + 1) * (j + 1)) ≤ b ^ 2 * ((j + 2) * (k + 2)) := by
-      apply Nat.mul_le_mul_left
-      nlinarith
-    exact Nat.le_of_mul_le_mul_right (key ▸ hle) (by positivity)
+theorem choose_log_concave (n k : ℕ) : n.choose k * n.choose (k + 2) ≤ (n.choose (k + 1)) ^ 2 := by
+  rcases lt_or_ge k n with hk | hk
+  · have h1 : n.choose (k + 1) * (k + 1) = n.choose k * (n - k) := Nat.choose_succ_right_eq n k
+    have h2 : n.choose (k + 2) * (k + 2) = n.choose (k + 1) * (n - (k + 1)) :=
+      Nat.choose_succ_right_eq n (k + 1)
+    have key : (n.choose k * n.choose (k + 2)) * ((n - k) * (k + 2))
+        ≤ (n.choose (k + 1)) ^ 2 * ((n - k) * (k + 2)) := by
+      have e1 : (n.choose k * n.choose (k + 2)) * ((n - k) * (k + 2))
+          = (n.choose k * (n - k)) * (n.choose (k + 2) * (k + 2)) := by ring
+      rw [e1, ← h1, h2]
+      have e2 : (n.choose (k + 1) * (k + 1)) * (n.choose (k + 1) * (n - (k + 1)))
+          = (n.choose (k + 1)) ^ 2 * ((k + 1) * (n - (k + 1))) := by ring
+      rw [e2]
+      refine Nat.mul_le_mul_left _ ?_
+      calc (k + 1) * (n - (k + 1)) ≤ (k + 2) * (n - k) := Nat.mul_le_mul (by omega) (by omega)
+        _ = (n - k) * (k + 2) := mul_comm _ _
+    have hpos : 0 < (n - k) * (k + 2) := by
+      have h3 : 0 < n - k := by omega
+      positivity
+    exact Nat.le_of_mul_le_mul_right key hpos
+  · have h4 : n.choose (k + 2) = 0 := Nat.choose_eq_zero_of_lt (by omega)
+    simp [h4]
 
-/-- Coefficients of `(X - 1) ^ n` in `ℤ[X]`. -/
+/-- **Log-concavity of the characteristic polynomial of a matroid** (Adiprasito–Huh–Katz),
+base case: the free (Boolean) matroid on a finite ground set `E`.
+
+The absolute values `w_k` of the coefficients of the characteristic polynomial
+`χ_M(X) = ∑_{S ⊆ E} (-1)^{|S|} X^{r(E)-r(S)}` of the free matroid on `E` satisfy the
+log-concavity inequality `w_k * w_{k+2} ≤ w_{k+1}^2` for all `k`. -/

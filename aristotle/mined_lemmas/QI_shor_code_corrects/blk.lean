@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Shor Code Corrects
 Category: Frontier Qi
@@ -7,32 +8,39 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on the header: Lean 4 requires `import` commands to be the very first commands in a
-file, and `/-! ... -/` is a module doc-comment *command*, not a comment token.  The
-required header block is therefore placed immediately after the single `import Mathlib`
-line, which is the closest legal position to the top of the file.
+/-!
+## Overview
+
+We formalise the statement that the nine–qubit Shor code corrects an arbitrary
+single–qubit error, in the form of the Knill–Laflamme error–correction conditions.
+
+* The nine qubits are grouped into three blocks of three: a computational basis
+  state is a function `Cfg = Fin 3 → Blk` with `Blk = Bool × Bool × Bool`.
+* The two logical codewords are
+  `|0_L⟩ = ((|000⟩+|111⟩)/√2)^{⊗3}` and `|1_L⟩ = ((|000⟩-|111⟩)/√2)^{⊗3}`.
+* A Pauli operator `P a b` acts by `|x⟩ ↦ (-1)^{b·x} |x ⊕ a⟩`; taking `a`, `b`
+  supported on a single qubit `q` gives the four operators `I, X_q, Z_q, X_q Z_q`,
+  which span all operators acting on qubit `q` alone (since `Y_q = i X_q Z_q`).
+  A general single–qubit error on `q` is therefore `err q g` for an arbitrary
+  coefficient vector `g : Bool × Bool → ℂ`.
+* The Knill–Laflamme condition `⟨i_L| E† F |j_L⟩ = c(E,F) δ_{ij}` is stated as
+  `ip (err q g (cw i)) (err r h (cw j)) = if i = j then c else 0`, using
+  `⟨i|E†F|j⟩ = ⟨E i, F j⟩`.
 -/
 
 namespace QI
 
-open Finset
+/-! ### Basic combinatorial set-up -/
 
-noncomputable section
+/-- A block of three qubits. -/
+abbrev Blk := Bool × Bool × Bool
 
-/-! ## The 9-qubit state space -/
+/-- A computational basis configuration of the nine qubits (three blocks of three). -/
+abbrev Cfg := Fin 3 → Blk
 
-/-- Qubit labels: three blocks of three qubits. -/
-abbrev Qb := Fin 3 × Fin 3
+/-- The all-zero block. -/
 
-/-- Computational basis labels for 9 qubits. -/
-abbrev Cfg := Qb → Bool
+def blk (s : Bool) (w : Blk) : ℤ :=
+  if w = zb then 1 else if w = ob then (if s then -1 else 1) else 0
 
-/-- The state space of 9 qubits, `ℂ^(2^9)`. -/
-abbrev H := Cfg → ℂ
-
-/-- Hermitian inner product, conjugate linear in the first argument. -/
-
-def blk (c : Fin 3 → Bool) : Cfg := fun q => c q.1
-
-/-- The bits of a block-constant configuration. -/
+/-- Unnormalised integer amplitudes of the logical codewords. -/

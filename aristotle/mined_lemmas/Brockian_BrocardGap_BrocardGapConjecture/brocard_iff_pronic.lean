@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Brocard Gap Conjecture
 Category: Brockian Conjecture
 Target: Brockian.BrocardGap.BrocardGapConjecture
@@ -33,50 +31,31 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+import Mathlib
 
-Brocard's problem asks for the solutions of `n ! + 1 = m ^ 2`.  The only known
-solutions are `n = 4, 5, 7` (with `m = 5, 11, 71`), and it is conjectured that
-there are no others; in *gap* form the conjecture states that the distance from
-`n ! + 1` to the nearest perfect square is positive (indeed large) for all
-`n ≥ 8`.  This is an open problem.
-
-This file contains:
-
-* `Brockian.BrocardGap.brocardGap`, the distance from `n ! + 1` to the nearest
-  perfect square, and the characterisation `brocardGap_pos_iff`;
-* `Brockian.BrocardGap.ABC`, the `abc` conjecture (in radical form);
-* `Brockian.BrocardGap.BrocardGapConjecture`, a Lean-checked **conditional
-  reduction**: the `abc` conjecture implies that the Brocard gap is positive for
-  all sufficiently large `n` (this is Overholt's argument);
-* `Brockian.BrocardGap.brocardGap_pos_of_mem_Icc`, an unconditional verification
-  of the gap positivity for `8 ≤ n ≤ 200`;
-* `Brockian.BrocardGap.brocard_iff_pronic`, the elementary reformulation of
-  Brocard's equation as `n ! = 4 * a * (a + 1)`.
--/
+open scoped Nat
 
 namespace Brockian.BrocardGap
 
-open Nat Finset
+/-! ### Elementary facts about perfect squares -/
 
-/-- The radical of a natural number: the product of its distinct prime factors. -/
+/-- If `k` lies strictly between two consecutive squares, it is not a square. -/
 
-theorem brocard_iff_pronic {n : ℕ} (hn : 4 ≤ n) :
-    (∃ m : ℕ, n ! + 1 = m ^ 2) ↔ ∃ a : ℕ, n ! = 4 * a * (a + 1) := by
-  have h2 : (2 : ℕ) ∣ n ! := Nat.dvd_factorial (by norm_num) (by omega)
+theorem brocard_iff_pronic (n : ℕ) (hn : 2 ≤ n) :
+    (∃ m, n ! + 1 = m ^ 2) ↔ ∃ a : ℕ, n ! = 4 * (a * (a + 1)) := by
   constructor
   · rintro ⟨m, hm⟩
-    have hodd : ¬ Even m := by
-      intro he
-      have hev : Even (m ^ 2) := Nat.even_pow.2 ⟨he, two_ne_zero⟩
-      rw [← hm] at hev
-      obtain ⟨c, hc⟩ := h2
-      obtain ⟨d, hd⟩ := hev
+    have hev : 2 ∣ n ! := Nat.dvd_factorial (by norm_num) hn
+    have hodd : ¬ 2 ∣ m := by
+      rintro ⟨t, rfl⟩
+      have h4 : 2 ∣ (2 * t) ^ 2 := ⟨2 * t * t, by ring⟩
+      rw [← hm] at h4
       omega
-    obtain ⟨a, ha⟩ := Nat.not_even_iff_odd.1 hodd
-    subst ha
-    exact ⟨a, by nlinarith [hm]⟩
+    obtain ⟨a, rfl⟩ : ∃ a, m = 2 * a + 1 := ⟨m / 2, by omega⟩
+    refine ⟨a, ?_⟩
+    have hx : (2 * a + 1) ^ 2 = 4 * (a * (a + 1)) + 1 := by ring
+    rw [hx] at hm
+    exact Nat.add_right_cancel hm
   · rintro ⟨a, ha⟩
     exact ⟨2 * a + 1, by rw [ha]; ring⟩
 

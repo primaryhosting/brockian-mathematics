@@ -8,17 +8,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 1000000
-set_option autoImplicit false
-
 namespace CS
 
-open Nat.Partrec Nat.Partrec.Code ComputablePred
+open Nat.Partrec Nat.Partrec.Code
 
-/-- A property `P` of programs (codes) is *semantic* (extensional) when it depends only on the
+open scoped Classical
+
+/-- A property `C` of programs (codes) is *semantic* (extensional) if it depends only on the
 partial function the program computes. -/
 
-def Nontrivial (P : Code → Prop) : Prop :=
-  (∃ c : Code, P c) ∧ ∃ c : Code, ¬ P c
+def Nontrivial (C : Set Code) : Prop :=
+  (∃ c, c ∈ C) ∧ ∃ c, c ∉ C
 
-/-- **Rice's theorem.**  Every nontrivial semantic property of programs is undecidable. -/
+/-- If membership in a set of codes is decidable by a computable procedure, then the "flip"
+function, sending codes in `C` to a fixed code `a` and codes outside `C` to a fixed code `b`,
+is computable. -/

@@ -10,15 +10,14 @@ import Mathlib
 
 namespace NumberTheory
 
-/-- Every natural number congruent to `3` modulo `4` has a prime factor congruent to `3`
-modulo `4`.  Indeed such a number is odd, and a product of primes all congruent to `1`
-modulo `4` is again congruent to `1` modulo `4`. -/
+/-- Any natural number congruent to `3` modulo `4` has a prime divisor congruent to `3`
+modulo `4`.  (A product of numbers that are `1` mod `4` is again `1` mod `4`.) -/
 
-theorem infinite_setOf_primes_4k3 : {p : ℕ | Nat.Prime p ∧ p % 4 = 3}.Infinite := by
+theorem infinite_setOf_primes_4k3 : {p : ℕ | p.Prime ∧ p % 4 = 3}.Infinite := by
   refine Set.infinite_of_not_bddAbove ?_
   rintro ⟨N, hN⟩
-  obtain ⟨p, hp, hlt, hmod⟩ := infinitude_primes_4k3 N
-  exact absurd (hN ⟨hp, hmod⟩) (by omega)
+  obtain ⟨p, hpp, hpN, hp4⟩ := infinitude_primes_4k3 N
+  exact absurd (hN (show p ∈ {p : ℕ | p.Prime ∧ p % 4 = 3} from ⟨hpp, hp4⟩)) (by omega)
 
 end NumberTheory
 

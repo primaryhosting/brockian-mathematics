@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Integral Sinc Fourth
 Category: C Integral
@@ -7,45 +8,51 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-The proof follows the classical Fourier-analytic route.  Writing `Λ` for the tent function
-`Λ x = max (1 - |x|) 0`, an elementary computation gives `𝓕 Λ ξ = (sin (π ξ) / (π ξ))²`.
-Fourier inversion then gives `𝓕 ((sin (π ·) / (π ·))²) = Λ`, and the multiplication formula
-`∫ 𝓕 f · g = ∫ f · 𝓕 g` yields
-`∫ (sin (π ξ) / (π ξ))⁴ dξ = ∫ Λ² = 2/3`.
-Rescaling `x = π ξ` produces `∫ (sin x / x)⁴ dx = 2 π / 3`.
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-open MeasureTheory Real Complex intervalIntegral
-open scoped FourierTransform
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Scaffold
 
-/-! ### The tent function and the squared sinc -/
+open MeasureTheory Real FourierTransform intervalIntegral
 
-/-- The tent (triangle) function `x ↦ max (1 - |x|) 0`. -/
+/-! ## The tent function and its Fourier transform -/
 
-lemma integral_sincSq_sq : ∫ ξ : ℝ, sincSq ξ ^ 2 = 2/3 := by
-  have h := integral_fourier_mul tentC (fun ξ : ℝ => (sincSq ξ : ℂ))
-    tentC_integrable sincSqC_integrable
-  rw [fourier_tentC, fourier_sincSqC] at h
-  have hL : ∫ ξ : ℝ, ((sincSq ξ : ℂ) * (sincSq ξ : ℂ))
-      = ((∫ ξ : ℝ, sincSq ξ ^ 2 : ℝ) : ℂ) := by
-    rw [← integral_complex_ofReal]
-    congr 1
-    funext ξ
-    push_cast
-    ring
-  have hR : ∫ x : ℝ, (tentC x * tentC x) = ((∫ x : ℝ, tent x ^ 2 : ℝ) : ℂ) := by
-    rw [← integral_complex_ofReal]
-    congr 1
-    funext x
-    simp only [tentC]
-    push_cast
-    ring
+/-- The tent (triangle) function, supported on `[-1, 1]`. -/
+
+lemma integral_sincSq_sq : ∫ ξ : ℝ, Real.sinc (π * ξ) ^ 4 = 2 / 3 := by
+  have hL : ∫ ξ : ℝ, (𝓕 tentC ξ) * (𝓕 tentC ξ)
+      = ((∫ ξ : ℝ, Real.sinc (π * ξ) ^ 4 : ℝ) : ℂ) := by
+    have e1 : ∫ ξ : ℝ, (𝓕 tentC ξ) * (𝓕 tentC ξ)
+        = ∫ ξ : ℝ, ((Real.sinc (π * ξ) ^ 4 : ℝ) : ℂ) := by
+      refine MeasureTheory.integral_congr_ae ?_
+      filter_upwards [fourier_tentC_ae] with ξ hξ
+      rw [hξ]
+      push_cast
+      ring
+    rw [e1]
+    exact _root_.integral_complex_ofReal
+  have hR : ∫ x : ℝ, tentC x * tentC (-x) = ((∫ x : ℝ, tent x ^ 2 : ℝ) : ℂ) := by
+    have e2 : ∫ x : ℝ, tentC x * tentC (-x) = ∫ x : ℝ, ((tent x ^ 2 : ℝ) : ℂ) := by
+      refine MeasureTheory.integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+      simp only [tentC, tent_neg]
+      push_cast
+      ring
+    rw [e2]
+    exact _root_.integral_complex_ofReal
+  have h := integral_fourier_sq
   rw [hL, hR, integral_tent_sq] at h
   exact_mod_cast h
 
-/-! ### The main theorem -/
-
-/-- **The fourth-power sinc integral**: `∫_ℝ (sin x / x)⁴ dx = 2π/3`. -/

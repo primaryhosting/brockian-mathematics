@@ -1,15 +1,3 @@
-/-
-# Goldbach Wheel K 2 727
-Category: Brockian Corpus
-Target: Brockian.GoldbachWheelK2_727
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean requires `import` to be the first command, so the header above is written as a
--- plain block comment; the identical text is repeated as a module docstring below.)
-
-import Mathlib
-
 /-!
 # Goldbach Wheel K 2 727
 Category: Brockian Corpus
@@ -17,6 +5,8 @@ Target: Brockian.GoldbachWheelK2_727
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -32,39 +22,33 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 
-/-- Trial divisors: all primes below `41`.  A number `m < 41 ^ 2 = 1681` is prime iff it is
-at least `2` and is not divisible by any of these (other than possibly being one of them). -/
+/-- A trial-division primality test, valid for `n ≤ 727` (since `27 * 27 = 729 > 727`,
+it suffices to rule out divisors `d` with `2 ≤ d < 27`). -/
 
 theorem GoldbachWheelK2_727 :
-    ∀ r : ZMod 727, ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ (p : ZMod 727) + (q : ZMod 727) = r := by
-  intro r
-  set v : ℕ := r.val with hv
-  have hvlt : v < 727 := ZMod.val_lt r
-  have hvr : (v : ZMod 727) = r := by
-    simp [hv, ZMod.natCast_val, ZMod.cast_id]
-  -- choose an even representative `n` of `r` in the range `[4, 1456]`
-  obtain ⟨n, hn1, hn2, hn3, hn4⟩ :
-      ∃ n : ℕ, Even n ∧ 4 ≤ n ∧ n ≤ 1456 ∧ (n : ZMod 727) = r := by
-    rcases Nat.even_or_odd v with he | ho
-    · rcases lt_or_ge v 4 with hlt | hge
-      · obtain ⟨t, ht⟩ := he
-        refine ⟨v + 1454, ⟨t + 727, by omega⟩, by omega, by omega, ?_⟩
-        · have h1454 : ((1454 : ℕ) : ZMod 727) = 0 := by decide
-          rw [Nat.cast_add, hvr, h1454, add_zero]
-      · exact ⟨v, he, hge, by omega, hvr⟩
-    · refine ⟨v + 727, ?_, by omega, by omega, ?_⟩
-      · rcases ho with ⟨t, ht⟩; exact ⟨t + 364, by omega⟩
-      · have h727 : ((727 : ℕ) : ZMod 727) = 0 := by decide
-        rw [Nat.cast_add, hvr, h727, add_zero]
-  obtain ⟨p, q, hp, hq, hpq⟩ := goldbach_even_le_1456 hn1 hn2 hn3
-  refine ⟨p, q, hp, hq, ?_⟩
-  rw [← hn4, ← hpq]
-  push_cast
-  ring
+    ∀ n : ℕ, 4 ≤ n → n ≤ 727 → Even n → ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n := by
+  have key : (List.range 728).all
+      (fun n => !(decide (4 ≤ n) && decide (n % 2 = 0)) || wheelGoldbachTest n) = true := by
+    decide
+  rw [List.all_eq_true] at key
+  intro n h4 h727 hev
+  have hmem : n ∈ List.range 728 := List.mem_range.mpr (by omega)
+  have h := key n hmem
+  have hpar : n % 2 = 0 := Nat.even_iff.mp hev
+  simp only [Bool.or_eq_true, Bool.not_eq_true', Bool.and_eq_false_imp, decide_eq_true_eq,
+    decide_eq_false_iff_not, hpar, h4, not_true_eq_false, false_and, false_or] at h
+  exact wheelGoldbachTest_sound h727 h
 
 end Brockian
 

@@ -9,14 +9,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace Infinity
-
-/-- Cantor's theorem: for any type `X`, no function `f : X → Set X` is surjective.
-This is immediate from Mathlib's `Function.cantor_surjective`. -/
-theorem cantor_no_surjection {X : Type*} (f : X → Set X) : ¬ Function.Surjective f :=
-  Function.cantor_surjective f
-
-end Infinity
+/-
+# Cantor No Surjection
+Category: Frontier — Set Theory
+Target: Infinity.cantor_no_surjection
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
@@ -41,4 +40,12 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Infinity
+
+/-- Cantor's theorem: for any type `X`, no function `f : X → Set X` is surjective. -/
+theorem cantor_no_surjection {X : Type*} (f : X → Set X) : ¬ Function.Surjective f :=
+  Function.cantor_surjective f
+
+end Infinity
 

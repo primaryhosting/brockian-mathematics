@@ -1,11 +1,3 @@
-/-
-# Parseval Fourier
-Category: Quantum Physics
-Target: QPhys.parseval_fourier
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -14,34 +6,27 @@ Category: Quantum Physics
 Target: QPhys.parseval_fourier
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+Note: Lean 4 requires `import` statements to come first in a file, so the header
+module docstring above is placed immediately after the single `import Mathlib` line.
 -/
 
 open scoped BigOperators
 open scoped Real
-open scoped Classical
-open scoped Pointwise
+open scoped FourierTransform
+open scoped ComplexInnerProductSpace
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 40000
-set_option synthInstance.maxSize 128
+open MeasureTheory SchwartzMap
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+noncomputable section
 
 namespace QPhys
 
-open MeasureTheory Complex
-open scoped FourierTransform
+/-- The one-dimensional Fourier transform of a wave function, written with the explicit
+oscillatory kernel `e^{-2πi x p}` used in physics:
+`(𝓕 ψ)(p) = ∫ e^{-2 π i x p} ψ(x) dx`. -/
 
-/-- The momentum-space wave function associated to a position-space wave function `psi`,
-i.e. the (unitary, angular-frequency-free) Fourier transform
-`(𝓕 psi)(p) = ∫ e^{-2πi p x} psi x dx`. -/
-
-theorem parseval_fourier_L2 (f : Lp (α := ℝ) ℂ 2) : ‖𝓕 f‖ = ‖f‖ :=
+theorem parseval_fourier_L2 (f : Lp (α := ℝ) ℂ 2) : ‖(𝓕 f : Lp (α := ℝ) ℂ 2)‖ = ‖f‖ :=
   MeasureTheory.Lp.norm_fourier_eq f
 
-end QPhys
-
+/-- The `L²` Fourier transform preserves inner products (polarized Plancherel). -/

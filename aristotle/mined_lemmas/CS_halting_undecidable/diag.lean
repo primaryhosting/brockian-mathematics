@@ -23,13 +23,34 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Halting Undecidable
+Category: Computer Science
+Target: CS.halting_undecidable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Halting Undecidable
+Category: Computer Science
+Target: CS.halting_undecidable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace CS
 
-open Nat.Partrec Nat.Partrec.Code
+open Nat.Partrec Code Denumerable Encodable
 
-/-- The diagonal partial function: on input `n` it halts (returning `0`) exactly when
-`H n n = false`, and diverges otherwise. It is partial recursive whenever `H` is computable. -/
+/-- The diagonal partial function associated to a candidate halting decider `H`:
+on input `n` it diverges exactly when `H` claims that the `n`-th program halts on
+input `n`, and returns `0` otherwise. -/
 
-noncomputable def diag (H : ℕ → ℕ → Bool) : ℕ →. ℕ :=
-  fun n => Nat.rfind fun _ => Part.some (!(H n n))
+noncomputable def diag (H : Code → ℕ → Bool) : ℕ →. ℕ :=
+  fun n => bif H (ofNat Code n) n then Part.none else Part.some 0
 
+/-- If `H` is computable in both arguments, then the diagonal function is partial
+recursive. -/

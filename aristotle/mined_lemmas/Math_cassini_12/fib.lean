@@ -2,11 +2,10 @@ import Mathlib
 import RequestProject.Cassini12
 
 /-!
-# Cassini 12, in Mathlib terms
+# Cassini 12, stated with Mathlib's `Nat.fib`
 
-This file links the self-contained Fibonacci function `Math.fib` of
-`RequestProject.Cassini12` with Mathlib's `Nat.fib`, and restates Cassini's identity
-at `n = 12` for `Nat.fib`. It also proves the general Cassini identity.
+This companion file relates `Math.fib` to Mathlib's `Nat.fib`, proves the general Cassini
+identity, and derives the `n = 12` instance in terms of `Nat.fib`.
 -/
 
 namespace Math

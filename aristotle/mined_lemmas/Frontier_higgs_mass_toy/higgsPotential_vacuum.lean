@@ -1,5 +1,4 @@
-import Mathlib
-/-!
+/-
 # Higgs Mass Toy
 Category: Frontier Physics
 Target: Frontier.higgs_mass_toy
@@ -7,8 +6,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to be the first command in a file, so the header
--- module docstring above is placed immediately after the import.)
+import Mathlib
+
+/-!
+# Higgs Mass Toy
+Category: Frontier Physics
+Target: Frontier.higgs_mass_toy
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -24,13 +30,21 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Frontier
 
-/-- The Mexican-hat scalar potential of the abelian Higgs toy model,
-`V(φ) = lam * (|φ|² - v²)²`, written as a function of the modulus `r = |φ|`. -/
+/-- The "Mexican hat" scalar potential of the abelian Higgs toy model,
+written in terms of the modulus `r = |φ|` of the complex scalar field:
+`V(r) = lam * (r² - v²)²`. -/
 
-theorem higgsPotential_vacuum (lam v : ℝ) : higgsPotential lam v v = 0 := by
+lemma higgsPotential_vacuum : higgsPotential lam v v = 0 := by
   simp [higgsPotential]
 
-/-- The symmetric point `φ = 0` is not a minimum: it has strictly higher energy
-than the broken vacuum. -/

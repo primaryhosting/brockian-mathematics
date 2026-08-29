@@ -1,5 +1,3 @@
-import Brockian.Weyl.WeylLawTarget
-
 import Mathlib
 
 open scoped BigOperators
@@ -25,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Counting Diverges Of Candidate
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Counting Diverges Of Candidate
 Category: Brockian (Open Discharge)
@@ -43,24 +50,20 @@ set_option maxHeartbeats 1000000
 
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- A *candidate spectrum* for a Weyl-law statement: a nondecreasing sequence of real
-eigenvalue candidates `lam 0 ≤ lam 1 ≤ ⋯` which is unbounded above.  This is the
-combinatorial data underlying the eigenvalue counting function of a Weyl law. -/
+open Filter Set
+
+/-- A *candidate spectrum* for a Weyl law: a nondecreasing sequence of real
+"eigenvalues" that tends to `+∞`. -/
 structure Candidate where
-  /-- The candidate eigenvalues, listed with multiplicity in nondecreasing order. -/
+  /-- The eigenvalue sequence. -/
   lam : ℕ → ℝ
-  /-- The listing is nondecreasing. -/
+  /-- The eigenvalues are listed in nondecreasing order. -/
   mono : Monotone lam
-  /-- The listing is unbounded: only finitely many candidates lie below any threshold. -/
-  unbounded : Filter.Tendsto lam Filter.atTop Filter.atTop
+  /-- The eigenvalues tend to `+∞` (discreteness of the spectrum). -/
+  tendsto_atTop : Filter.Tendsto lam Filter.atTop Filter.atTop
 
-namespace Candidate
+/-- The eigenvalue counting function `N(t) = #{n : λ n ≤ t}` of a candidate spectrum. -/
 
-variable (C : Candidate)
+noncomputable def counting (C : Candidate) (t : ℝ) : ℕ := {n : ℕ | C.lam n ≤ t}.ncard
 
-/-- Below any threshold `t` only finitely many candidate eigenvalues occur. -/
-
-noncomputable def counting (t : ℝ) : ℕ := {n : ℕ | C.lam n ≤ t}.ncard
-
-/-- If the `k`-th candidate eigenvalue is at most `t`, then at least `k + 1` candidates
-are counted by `N(t)`. -/
+/-- For a candidate spectrum, each sublevel set of indices is finite. -/

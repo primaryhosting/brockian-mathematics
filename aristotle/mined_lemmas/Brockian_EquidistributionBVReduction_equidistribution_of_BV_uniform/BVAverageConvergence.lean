@@ -1,0 +1,50 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Equidistribution Of BV Uniform
+Category: Brockian (Literature Discharge)
+Target: Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open Filter Set MeasureTheory
+open scoped Topology ENNReal
+
+namespace Brockian.EquidistributionBVReduction
+
+/-- The (right-continuous) step function jumping from `0` to `1` at `c`. -/
+
+def BVAverageConvergence (x : ℕ → ℝ) : Prop :=
+  ∀ f : ℝ → ℝ, BoundedVariationOn f (Set.Icc (0 : ℝ) 1) →
+    IntervalIntegrable f volume 0 1 →
+    Tendsto (fun N : ℕ => (∑ n ∈ Finset.range N, f (Int.fract (x n))) / N)
+      atTop (𝓝 (∫ t in (0 : ℝ)..1, f t))
+
+/-- Variation is subadditive under differences of real-valued functions. -/

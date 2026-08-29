@@ -30,48 +30,30 @@ Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`, so the
--- requested header is repeated verbatim as the module docstring just below the import.)
 
 import Mathlib
 
-/-!
-# Fermat Prime Beyond Four
-Category: Brockian Conjecture
-Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-/-!
-## Contents
-
-`Nat.fermatNumber n = 2 ^ (2 ^ n) + 1` is Mathlib's definition of the `n`-th Fermat number.
-The numbers `F₀, …, F₄` are prime and no further Fermat prime is known; whether some `Fₙ` with
-`n > 4` is prime is a well-known open problem.
-
-Accordingly, the target theorem `FermatPrimeBeyondFour` is stated and proved here as an
-unconditional *reduction*: a Fermat prime with index `n > 4` exists if and only if some `Fₙ`
-with `n > 4` passes **Pépin's test** `3 ^ ((Fₙ - 1) / 2) ≡ -1 (mod Fₙ)`.
-
-The `←` direction is Mathlib's `Nat.pepin_primality`
-(`Mathlib/NumberTheory/Fermat.lean`), which is the "existing lemma that nearly closes this".
-The `→` direction (`pepin_of_prime`) is proved here from quadratic reciprocity, in the form of
-`ZMod.exists_sq_eq_prime_iff_of_mod_four_eq_one`, together with Euler's criterion in the form
-`legendreSym.eq_pow`.
-
-Unconditional companion facts (`F₄ = 65537` is prime, `F₅` is composite) are proved at the end.
--/
+-- Note: the header above is a plain block comment rather than a module docstring,
+-- since Lean 4 does not allow a module docstring to precede the `import` lines.
 
 namespace Brockian.FermatNumbers
 
 open Nat
 
-/-- For `n ≥ 1`, the Fermat number `Fₙ = 2 ^ (2 ^ n) + 1` is `1` modulo `4`. -/
+/-- The Fermat numbers `Fₙ = 2 ^ (2 ^ n) + 1` (Mathlib's `Nat.fermatNumber`). -/
+local notation "F" => Nat.fermatNumber
 
-theorem not_prime_fermatNumber_five : ¬ (Nat.fermatNumber 5).Prime := by
-  rw [show Nat.fermatNumber 5 = 641 * 6700417 by norm_num [Nat.fermatNumber]]
-  exact Nat.not_prime_mul (by norm_num) (by norm_num)
+/-!
+## The main statement
 
-end Brockian.FermatNumbers
+`FermatPrimeBeyondFour`: there is a Fermat prime exceeding `4`.
+-/
 
+/-- **Fermat prime beyond four.** There exists a Fermat number `Fₙ = 2 ^ (2 ^ n) + 1`
+which is greater than `4` and prime.  (Witness: `F 4 = 65537`.) -/
+
+theorem not_prime_fermatNumber_five : ¬ (F 5).Prime := by
+  rw [show F 5 = 4294967297 by rfl]
+  norm_num
+
+/-- `F 6 = 18446744073709551617 = 274177 * 67280421310721` is not prime. -/

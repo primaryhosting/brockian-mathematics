@@ -1,62 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Mordell Finite Generation
 Category: Frontier — Prime Numbers
 Target: Frontier.Mordell_finite_generation
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
-
-/-!
-(The header above is a plain block comment rather than a module docstring, since Lean 4
-does not allow a module docstring to precede the `import` commands.)
-
-# Mordell's theorem: finite generation of `E(ℚ)`
-
-We formalize the statement that the group of rational points of an elliptic curve over `ℚ`
-is finitely generated, and we prove the *descent step* of the classical proof: an abelian
-group equipped with a height function satisfying the standard axioms and whose quotient by
-`2A` is finite is finitely generated.  Specializing to `E(ℚ)` gives
-`Frontier.Mordell_finite_generation`, a Lean-checked reduction of Mordell's theorem to the
-weak Mordell–Weil theorem together with the existence of a height function.
--/
-
-namespace Frontier
-
-universe u
-
-/-- Abstract height data on an abelian group `A`, modelled on the naive/canonical height
-of an elliptic curve over `ℚ`:
-
-* the height is nonnegative;
-* there are only finitely many points of bounded height (Northcott property);
-* translation by a fixed point distorts the height by a bounded factor;
-* duplication multiplies the height by roughly `4`.
--/
-structure HeightFunction (A : Type u) [AddCommGroup A] where
-  /-- The height function itself. -/
-  toFun : A → ℝ
-  /-- Heights are nonnegative. -/
-  nonneg : ∀ P, 0 ≤ toFun P
-  /-- Northcott property: finitely many points of bounded height. -/
-  finite_of_le : ∀ C : ℝ, {P : A | toFun P ≤ C}.Finite
-  /-- Quasi-additivity of the height under translation by a fixed point. -/
-  translate : ∀ Q : A, ∃ c : ℝ, ∀ P : A, toFun (P + Q) ≤ 2 * toFun P + c
-  /-- Quasi-quadraticity of the height under duplication. -/
-  duplication : ∃ c : ℝ, ∀ P : A, 4 * toFun P ≤ toFun (2 • P) + c
-
-/-- The subgroup `2A` of an abelian group `A`. -/
-
-theorem Mordell_finite_generation (E : WeierstrassCurve ℚ) [E.IsElliptic]
-    (height : HeightFunction E.toAffine.Point)
-    (weak : WeakMordellWeil E.toAffine.Point) :
-    AddGroup.FG E.toAffine.Point :=
-  fg_of_heightFunction_of_weakMordellWeil height weak
-
-end Frontier
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -80,4 +30,31 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Frontier
+
+/-- **Descent theorem** (the group-theoretic heart of the Mordell–Weil theorem).
+
+Let `A` be an abelian group equipped with a real-valued "height" function `h` such that
+
+* `hfin`  : every sublevel set `{P | h P ≤ C}` is finite;
+* `htrans`: translation by a fixed element at worst doubles the height, up to a constant;
+* `hdup`  : duplication at least quadruples the height, up to a constant;
+* `hweak` : (weak Mordell–Weil) `A / 2A` is finite, phrased as the existence of a finite set
+            of coset representatives `S` for the subgroup `2A`.
+
+Then `A` is a finitely generated abelian group. -/
+
+theorem Mordell_finite_generation {E : WeierstrassCurve ℚ} [E.IsElliptic]
+    (h : E.toAffine.Point → ℝ)
+    (hfin : ∀ C : ℝ, {P : E.toAffine.Point | h P ≤ C}.Finite)
+    (htrans : ∀ Q : E.toAffine.Point, ∃ C : ℝ,
+      ∀ P : E.toAffine.Point, h (P - Q) ≤ 2 * h P + C)
+    (hdup : ∃ C : ℝ, ∀ P : E.toAffine.Point, 4 * h P ≤ h (2 • P) + C)
+    (hweak : ∃ S : Finset E.toAffine.Point, ∀ P : E.toAffine.Point,
+      ∃ Q ∈ S, ∃ R : E.toAffine.Point, P = Q + 2 • R) :
+    AddGroup.FG E.toAffine.Point :=
+  fg_of_height_descent h hfin htrans hdup hweak
+
+end Frontier
 

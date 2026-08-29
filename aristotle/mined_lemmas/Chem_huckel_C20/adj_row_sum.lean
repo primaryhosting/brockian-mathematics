@@ -4,59 +4,38 @@ Category: Chemistry
 Target: Chem.huckel_C20
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: Lean 4 does not permit a module docstring `/-! ... -/` before the `import`
+line, so the required header appears here as an ordinary block comment.)
 -/
+
 import Mathlib
-
-/-!
-# Huckel C 20
-Category: Chemistry
-Target: Chem.huckel_C20
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
 
 namespace Chem
 
-open Polynomial Matrix
+open Complex Matrix
 
-/-! ### The 20-th root of unity and the characters of `Fin 20` -/
+/-! ### The primitive 20-th root of unity and the associated character -/
 
 /-- The primitive 20-th root of unity `exp (2πi/20)`. -/
 
-lemma adj_row_sum (g : Fin 20 → ℂ) (j : Fin 20) :
-    (∑ m : Fin 20, ((SimpleGraph.cycleGraph 20).adjMatrix ℂ) j m * g m)
-      = g (j - 1) + g (j + 1) := by
-  have hne : j - 1 ≠ j + 1 := by
-    have h : ∀ i : Fin 20, i - 1 ≠ i + 1 := by decide
-    exact h j
-  have hterm : ∀ m : Fin 20,
-      ((SimpleGraph.cycleGraph 20).adjMatrix ℂ) j m * g m
-        = if m ∈ ({j - 1, j + 1} : Finset (Fin 20)) then g m else 0 := by
-    intro m
-    rw [SimpleGraph.adjMatrix_apply]
-    by_cases h : (SimpleGraph.cycleGraph 20).Adj j m
-    · rw [if_pos h, one_mul, if_pos]
-      simpa using (cycle20_adj_iff j m).mp h
-    · rw [if_neg h, zero_mul, if_neg]
-      intro hmem
-      exact h ((cycle20_adj_iff j m).mpr (by simpa using hmem))
-  rw [Finset.sum_congr rfl fun m _ => hterm m, Finset.sum_ite_mem, Finset.univ_inter,
-    Finset.sum_pair hne]
+lemma adj_row_sum (f : ZMod 20 → ℂ) (i : ZMod 20) :
+    ∑ j, adjC20 i j * f j = f (i - 1) + f (i + 1) := by
+  have hne : (i - 1 : ZMod 20) ≠ i + 1 := by
+    intro h
+    have h2 : (2 : ZMod 20) = 0 := by linear_combination -h
+    exact absurd h2 (by decide)
+  have key : ∀ j, adjC20 i j * f j
+      = (if j = i - 1 then f j else 0) + (if j = i + 1 then f j else 0) := by
+    intro j
+    have h1 : (i - j = 1) ↔ j = i - 1 := by
+      constructor <;> intro h <;> linear_combination -h
+    have h2 : (j - i = 1) ↔ j = i + 1 := by
+      constructor <;> intro h <;> linear_combination h
+    simp only [adjC20, Matrix.of_apply, h1, h2]
+    by_cases hA : j = i - 1 <;> by_cases hB : j = i + 1 <;>
+      simp_all
+  simp only [key, Finset.sum_add_distrib]
+  rw [Finset.sum_ite_eq' Finset.univ (i - 1) f, Finset.sum_ite_eq' Finset.univ (i + 1) f]
+  simp
 
-/-- The diagonal matrix of Hückel eigenvalues. -/

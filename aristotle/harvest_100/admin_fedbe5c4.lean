@@ -1,0 +1,190 @@
+import Mathlib
+
+/-!
+# Kochen Specker
+Category: Frontier Physics
+Target: Frontier.kochen_specker
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped RealInnerProductSpace
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+/-- The state space of a single quantum system of (Hilbert space) dimension `4`. -/
+abbrev E4 := EuclideanSpace ℝ (Fin 4)
+
+/-- A *noncontextual hidden-variable assignment* (a Kochen–Specker colouring) is a map that
+assigns to every unit vector (equivalently, to every rank-one orthogonal projection) a
+definite truth value `0`/`1`, in such a way that for every orthonormal basis exactly one
+basis vector receives the value `1`.
+
+Note that in dimension `4` an orthonormal family indexed by `Fin 4` is automatically an
+orthonormal *basis* (see `Frontier.orthonormal_four_spans`), so the quantification below is
+exactly the quantification over all orthonormal bases. -/
+def KSAssignment (f : E4 → Bool) : Prop :=
+  ∀ v : Fin 4 → E4, Orthonormal ℝ v → ∃! i : Fin 4, f (v i) = true
+
+/-- An orthonormal family of four vectors in a four-dimensional space spans, hence is an
+orthonormal basis. -/
+theorem orthonormal_four_spans (v : Fin 4 → E4) (hv : Orthonormal ℝ v) :
+    Submodule.span ℝ (Set.range v) = ⊤ := by
+  have hcard : Fintype.card (Fin 4) = Module.finrank ℝ E4 := by
+    simp
+  have := (basisOfLinearIndependentOfCardEqFinrank hv.linearIndependent hcard).span_eq
+  rwa [coe_basisOfLinearIndependentOfCardEqFinrank] at this
+
+/-- Normalisation of a nonzero vector. -/
+noncomputable def nrm (v : E4) : E4 := ‖v‖⁻¹ • v
+
+/-- The `0`/`1` value that a colouring `f` gives to the line spanned by `v`. -/
+noncomputable def val (f : E4 → Bool) (v : E4) : ℕ := if f (nrm v) = true then 1 else 0
+
+section Basic
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+
+/-- Normalising a family of pairwise orthogonal nonzero vectors yields an orthonormal family. -/
+theorem orthonormal_normalize {ι : Type*} (v : ι → E) (hne : ∀ i, v i ≠ 0)
+    (ho : ∀ i j, i ≠ j → ⟪v i, v j⟫ = 0) :
+    Orthonormal ℝ (fun i => ‖v i‖⁻¹ • v i) := by
+  constructor
+  · intro i
+    simpa using norm_smul_inv_norm (𝕜 := ℝ) (hne i)
+  · intro i j hij
+    simp only [real_inner_smul_left, real_inner_smul_right, ho i j hij]
+    ring
+
+end Basic
+
+/-- The inner product of two explicit vectors of `E4`. -/
+theorem inner_vec (a b c d a' b' c' d' : ℝ) :
+    ⟪(!₂[a, b, c, d] : E4), (!₂[a', b', c', d'] : E4)⟫ = a * a' + b * b' + c * c' + d * d' := by
+  simp [PiLp.inner_apply, Fin.sum_univ_four]
+  ring
+
+/-- An explicit vector of `E4` with nonzero squared length is nonzero. -/
+theorem vec_ne_zero {a b c d : ℝ} (h : a * a + b * b + c * c + d * d ≠ 0) :
+    (!₂[a, b, c, d] : E4) ≠ 0 := by
+  intro hz
+  exact h (by rw [← inner_vec, hz, inner_zero_left])
+
+/-- Key step: for four pairwise orthogonal nonzero vectors, exactly one of the four
+corresponding lines is assigned the value `1`. -/
+theorem val_sum_eq_one {f : E4 → Bool} (hf : KSAssignment f) (a b c d : E4)
+    (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0)
+    (hab : ⟪a, b⟫ = 0) (hac : ⟪a, c⟫ = 0) (had : ⟪a, d⟫ = 0)
+    (hbc : ⟪b, c⟫ = 0) (hbd : ⟪b, d⟫ = 0) (hcd : ⟪c, d⟫ = 0) :
+    val f a + val f b + val f c + val f d = 1 := by
+  have hv : Orthonormal ℝ
+      (fun i => ‖(![a, b, c, d] : Fin 4 → E4) i‖⁻¹ • (![a, b, c, d] : Fin 4 → E4) i) := by
+    refine orthonormal_normalize _ ?_ ?_
+    · intro i; fin_cases i <;> assumption
+    · intro i j hij
+      fin_cases i <;> fin_cases j <;>
+        simp_all [real_inner_comm a b, real_inner_comm a c, real_inner_comm a d,
+          real_inner_comm b c, real_inner_comm b d, real_inner_comm c d]
+  obtain ⟨i, hi, hu⟩ := hf _ hv
+  have ka : f (nrm a) = true → (0 : Fin 4) = i := hu 0
+  have kb : f (nrm b) = true → (1 : Fin 4) = i := hu 1
+  have kc : f (nrm c) = true → (2 : Fin 4) = i := hu 2
+  have kd : f (nrm d) = true → (3 : Fin 4) = i := hu 3
+  show (if f (nrm a) = true then 1 else 0) + (if f (nrm b) = true then 1 else 0)
+      + (if f (nrm c) = true then 1 else 0) + (if f (nrm d) = true then 1 else 0) = 1
+  fin_cases i
+  · have hia : f (nrm a) = true := hi
+    rw [if_pos hia, if_neg (fun h => by simpa using kb h), if_neg (fun h => by simpa using kc h),
+      if_neg (fun h => by simpa using kd h)]
+  · have hib : f (nrm b) = true := hi
+    rw [if_neg (fun h => by simpa using ka h), if_pos hib, if_neg (fun h => by simpa using kc h),
+      if_neg (fun h => by simpa using kd h)]
+  · have hic : f (nrm c) = true := hi
+    rw [if_neg (fun h => by simpa using ka h), if_neg (fun h => by simpa using kb h), if_pos hic,
+      if_neg (fun h => by simpa using kd h)]
+  · have hid : f (nrm d) = true := hi
+    rw [if_neg (fun h => by simpa using ka h), if_neg (fun h => by simpa using kb h),
+      if_neg (fun h => by simpa using kc h), if_pos hid]
+
+/-- Coordinate version of `Frontier.val_sum_eq_one`: all hypotheses are purely numerical. -/
+theorem val_sum_eq_one_coord {f : E4 → Bool} (hf : KSAssignment f)
+    (a1 a2 a3 a4 b1 b2 b3 b4 c1 c2 c3 c4 d1 d2 d3 d4 : ℝ)
+    (h : (a1 * a1 + a2 * a2 + a3 * a3 + a4 * a4 ≠ 0) ∧
+         (b1 * b1 + b2 * b2 + b3 * b3 + b4 * b4 ≠ 0) ∧
+         (c1 * c1 + c2 * c2 + c3 * c3 + c4 * c4 ≠ 0) ∧
+         (d1 * d1 + d2 * d2 + d3 * d3 + d4 * d4 ≠ 0) ∧
+         (a1 * b1 + a2 * b2 + a3 * b3 + a4 * b4 = 0) ∧
+         (a1 * c1 + a2 * c2 + a3 * c3 + a4 * c4 = 0) ∧
+         (a1 * d1 + a2 * d2 + a3 * d3 + a4 * d4 = 0) ∧
+         (b1 * c1 + b2 * c2 + b3 * c3 + b4 * c4 = 0) ∧
+         (b1 * d1 + b2 * d2 + b3 * d3 + b4 * d4 = 0) ∧
+         (c1 * d1 + c2 * d2 + c3 * d3 + c4 * d4 = 0)) :
+    val f (!₂[a1, a2, a3, a4] : E4) + val f (!₂[b1, b2, b3, b4] : E4)
+      + val f (!₂[c1, c2, c3, c4] : E4) + val f (!₂[d1, d2, d3, d4] : E4) = 1 := by
+  obtain ⟨ha, hb, hc, hd, hab, hac, had, hbc, hbd, hcd⟩ := h
+  exact val_sum_eq_one hf _ _ _ _ (vec_ne_zero ha) (vec_ne_zero hb) (vec_ne_zero hc)
+    (vec_ne_zero hd) (by rw [inner_vec]; exact hab) (by rw [inner_vec]; exact hac)
+    (by rw [inner_vec]; exact had) (by rw [inner_vec]; exact hbc) (by rw [inner_vec]; exact hbd)
+    (by rw [inner_vec]; exact hcd)
+
+/-!
+## The Kochen–Specker theorem
+
+We use the 18-vector, 9-basis configuration of Cabello, Estebaranz and García-Alcaine in
+`ℝ⁴`.  Each of the eighteen vectors occurs in exactly two of the nine orthogonal bases.
+Summing "exactly one `1` per basis" over the nine bases gives `9`, but the same sum counts
+each vector twice, hence is even — a contradiction.
+-/
+
+/-- **Kochen–Specker theorem** (dimension four, the base case of the statement in every
+dimension `≥ 3`).
+
+There is no noncontextual hidden-variable assignment for a quantum system of dimension `4`:
+no `{0,1}`-valued function on unit vectors can assign the value `1` to exactly one member of
+every orthonormal basis. -/
+theorem kochen_specker :
+    ¬ ∃ f : EuclideanSpace ℝ (Fin 4) → Bool,
+        ∀ v : Fin 4 → EuclideanSpace ℝ (Fin 4), Orthonormal ℝ v → ∃! i : Fin 4, f (v i) = true := by
+  rintro ⟨f, hf⟩
+  have hf' : KSAssignment f := hf
+  have h1 := val_sum_eq_one_coord hf' 0 0 0 1  0 0 1 0  1 1 0 0  1 (-1) 0 0 (by norm_num)
+  have h2 := val_sum_eq_one_coord hf' 0 0 0 1  0 1 0 0  1 0 1 0  1 0 (-1) 0 (by norm_num)
+  have h3 := val_sum_eq_one_coord hf' 1 (-1) 1 (-1)  1 (-1) (-1) 1  1 1 0 0  0 0 1 1
+    (by norm_num)
+  have h4 := val_sum_eq_one_coord hf' 1 (-1) 1 (-1)  1 1 1 1  1 0 (-1) 0  0 1 0 (-1)
+    (by norm_num)
+  have h5 := val_sum_eq_one_coord hf' 0 0 1 0  0 1 0 0  1 0 0 1  1 0 0 (-1) (by norm_num)
+  have h6 := val_sum_eq_one_coord hf' 1 (-1) (-1) 1  1 1 1 1  1 0 0 (-1)  0 1 (-1) 0
+    (by norm_num)
+  have h7 := val_sum_eq_one_coord hf' 1 1 (-1) 1  1 1 1 (-1)  1 (-1) 0 0  0 0 1 1
+    (by norm_num)
+  have h8 := val_sum_eq_one_coord hf' 1 1 (-1) 1  (-1) 1 1 1  1 0 1 0  0 1 0 (-1)
+    (by norm_num)
+  have h9 := val_sum_eq_one_coord hf' 1 1 1 (-1)  (-1) 1 1 1  1 0 0 1  0 1 (-1) 0
+    (by norm_num)
+  omega
+
+end Frontier
+

@@ -24,20 +24,43 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
+/-!
+## The BBBV lower bound for unstructured quantum search
+
+We formalise the Bennett–Bernstein–Brassard–Vazirani hybrid argument: any quantum
+algorithm that makes `T` queries to a phase oracle marking an unknown element `x`
+of a search space `κ` of size `N`, and that identifies `x` with probability at
+least `2/3`, must satisfy `T ≥ √N / 25`.  In particular `T = Ω(√N)`, so Grover's
+algorithm, which uses `O(√N)` queries, is optimal up to a constant factor.
+
+The computational model:
+
+* the algorithm works on a finite dimensional Hilbert space `EuclideanSpace ℂ ι`,
+  whose basis vectors are indexed by `ι` (query register together with an arbitrary
+  workspace);
+* `Q x ⊆ ι` is the set of basis vectors on which the oracle for the marked element
+  `x` flips the phase; different marked elements flip disjoint sets of basis states
+  (a basis state queries at most one index);
+* the algorithm alternates arbitrary unitaries `U 0, U 1, …` with oracle calls,
+  starting from an arbitrary unit vector `psi0`;
+* the answer is read off by measuring: `Ans x ⊆ ι` is the set of basis states on
+  which the algorithm outputs `x`, and these sets are pairwise disjoint.
+-/
+
 namespace QI
 
-/-- The Hilbert space of a quantum query algorithm searching a database of `N` items:
-the index register `Fin N` together with an arbitrary workspace register `K`. -/
-abbrev HSpace (N : ℕ) (K : Type*) [NormedAddCommGroup K] [InnerProductSpace ℂ K] :=
-  PiLp 2 (fun _ : Fin N => K)
+open Finset
 
-variable {N : ℕ} {K : Type*} [NormedAddCommGroup K] [InnerProductSpace ℂ K]
+noncomputable section
 
-/-- The (phase) query operator for the database whose unique marked item is `x`:
-it flips the sign of the component of the index register at `x`. -/
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
-noncomputable def run (U : ℕ → (HSpace N K ≃ₗᵢ[ℂ] HSpace N K)) (O : HSpace N K → HSpace N K)
-    (psi0 : HSpace N K) : ℕ → HSpace N K
+/-- The state space of the algorithm: amplitudes indexed by the basis `ι`. -/
+abbrev St (ι : Type*) [Fintype ι] := EuclideanSpace ℂ ι
+
+/-- Restriction of a state to the coordinates in `S` (orthogonal projection). -/
+
+def run (U : ℕ → (St ι ≃ₗᵢ[ℂ] St ι)) (S : Finset ι) (psi0 : St ι) : ℕ → St ι
   | 0 => psi0
-  | (t + 1) => U t (O (run U O psi0 t))
+  | (t + 1) => U t (oracle S (run U S psi0 t))
 

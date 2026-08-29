@@ -8,16 +8,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-
-open Matrix Polynomial
+open Complex Real Matrix Finset
 
 namespace Chem
 
-/-! ## A primitive tenth root of unity and the associated additive character -/
+/-- A primitive 10-th root of unity. -/
 
-/-- A primitive `10`-th root of unity. -/
+noncomputable def chi (n : ZMod 10) : ℂ := om ^ n.val
 
-noncomputable def chi : AddChar (ZMod 10) ℂ := AddChar.zmodChar 10 zeta10_pow_ten
-
+/-- Adjacency matrix of the cycle graph `C₁₀`, with vertices indexed by `ZMod 10`:
+vertices `i` and `j` are adjacent exactly when `i - j = ±1`. -/

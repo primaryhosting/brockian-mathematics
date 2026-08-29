@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Ray Indicator Eq Char Sum
 Category: Characters
 Target: Brockian.Characters5.rayIndicator_eq_charSum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -27,8 +27,10 @@ set_option grind.warning false
 namespace Brockian
 namespace Characters5
 
-/-- A primitive fifth root of unity. -/
+/-- The primitive fifth root of unity `ω = exp(2πi/5)`. -/
 
 noncomputable def omega : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
-/-- The standard additive character of `ZMod 5` with values in `ℂ`. -/
+@[inherit_doc] scoped notation "ω" => Brockian.Characters5.omega
+
+/-- The additive character `e : ZMod 5 → ℂ`, `e a = ω ^ a.val`. -/

@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Tent Combination Neg On Band
 Category: Brockian Corpus
 Target: Zeta23Obstruction.tent_combination_neg_on_band
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -22,14 +22,23 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Zeta23Obstruction
 
-/-- The Fourier tent profile `T a = max 0 (1 - |a|)`. -/
+/-- The unit tent profile `T a = max 0 (1 - |a|)`. -/
 
-theorem tent_combination_neg_on_band (a : ℝ) (h1 : 1 < a) (h2 : a < 5 / 2) :
+theorem tent_combination_neg_on_band {a : ℝ} (h1 : 1 < a) (h2 : a < 5 / 2) :
     T a - (1 / 20) * (T (a - 3 / 2) + T (a + 3 / 2)) < 0 := by
-  have ha : |a| = a := abs_of_pos (by linarith)
-  have hTa : T a = 0 := T_eq_zero_of_one_le_abs (by rw [ha]; linarith)
+  have habs : |a| = a := abs_of_pos (by linarith)
+  have hTa : T a = 0 := T_eq_zero_of_one_le_abs (by rw [habs]; linarith)
   have hshift : |a - 3 / 2| < 1 := by
     rw [abs_lt]; constructor <;> linarith
   have hpos : 0 < T (a - 3 / 2) := T_pos_of_abs_lt_one hshift

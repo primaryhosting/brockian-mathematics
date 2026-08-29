@@ -1,3 +1,11 @@
+/-
+# Dft Inversion
+Category: Characters
+Target: Brockian.Characters5.dft_inversion
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -24,13 +32,14 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-namespace Brockian
-namespace Characters5
+namespace Brockian.Characters5
 
 /-- A primitive fifth root of unity. -/
-noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
+lemma omega_pow_five : ω ^ 5 = 1 := by
+  rw [omega, ← Complex.exp_nat_mul]
+  have : (5 : ℂ) * (2 * Real.pi * Complex.I / 5) = 2 * Real.pi * Complex.I := by
+    field_simp
+  push_cast
+  rw [this, Complex.exp_two_pi_mul_I]
 
-lemma omega_pow_five : ω ^ 5 = 1 := omega_isPrimitiveRoot.pow_eq_one
-
-/-- The additive character `e` on `ZMod 5`. -/

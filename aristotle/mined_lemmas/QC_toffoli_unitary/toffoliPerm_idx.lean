@@ -1,11 +1,3 @@
-/-
-# Toffoli Unitary
-Category: Quantum Computing
-Target: QC.toffoli_unitary
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 open scoped BigOperators
@@ -31,16 +23,28 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+import Mathlib
+
+/-!
+# Toffoli Unitary
+Category: Quantum Computing
+Target: QC.toffoli_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option maxHeartbeats 1000000
+set_option maxRecDepth 8000
+
 namespace QC
 
 open Matrix
 
-/-- The Toffoli (CCNOT) gate as an explicit `8 × 8` complex matrix, in the standard
-computational-basis ordering `|000⟩, |001⟩, …, |111⟩`: it is the identity except that the
-last two basis states `|110⟩` and `|111⟩` are exchanged. -/
+/-- The index in `Fin 8` of the three–qubit computational basis state `|a b c⟩`,
+using the standard big-endian binary encoding `4a + 2b + c`. -/
 
 theorem toffoliPerm_idx (a b c : Bool) :
     toffoliPerm (idx a b c) = idx a b (xor c (a && b)) := by
   cases a <;> cases b <;> cases c <;> decide
 
-/-- `toffoli` is the permutation matrix of `toffoliPerm`. -/
+/-- The Toffoli (CCNOT) matrix, as an explicit `8 × 8` complex matrix. -/

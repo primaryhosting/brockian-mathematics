@@ -35,10 +35,9 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.SophieGermain
 
-/-- `p` is a *Sophie Germain prime* if both `p` and `2 * p + 1` are prime. -/
+/-- `p` is a Sophie Germain prime if both `p` and `2 * p + 1` are prime. -/
 
-def sophieGermainSet : Set ℕ := {p | IsSophieGermain p}
+def sophieGermainSet : Set ℕ := {p | IsSophieGermainPrime p}
 
-/-! ## Elementary reformulations -/
-
-/-- The set of Sophie Germain primes is infinite iff there are arbitrarily large ones. -/
+/-- The "Mersenne-type divisibility" reformulation: primes `p` such that `2 * p + 1`
+divides `2 ^ p - 1` or `2 ^ p + 1`. -/

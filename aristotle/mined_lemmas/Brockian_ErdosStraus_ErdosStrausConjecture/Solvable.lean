@@ -24,7 +24,6 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
-
 /-!
 # Erdos Straus Conjecture
 Category: Brockian Conjecture
@@ -33,25 +32,33 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-`ErdosStrausConjecture` is a well-known open problem, so this file does not prove it
-outright.  What is proved here, unconditionally and axiom-cleanly, is:
-
-* `solvable_of_dvd`: solvability passes from a divisor to any positive multiple;
-* explicit parametric solutions for `n` even, `3 ∣ n`, `n ≡ 3 (mod 4)`, `n ≡ 2 (mod 3)`
-  and `n ≡ 5 (mod 8)`;
-* `solvable_of_mod_24_ne_one`: the conjecture holds for every `n ≥ 2` with `n % 24 ≠ 1`;
-* `erdosStrausConjecture_iff_primes`: the conjecture is *equivalent* to its special case
-  for primes `p ≡ 1 (mod 24)`.
--/
-
 namespace Brockian.ErdosStraus
 
-/-- `Solvable n` says that `4 / n` can be written as a sum of three (not necessarily
-distinct) positive unit fractions. -/
+/-- `Solvable n` means that `4 / n` can be written as a sum of three unit fractions
+with positive (natural) denominators. -/
 
-def Solvable (n : ℕ) : Prop :=
-  ∃ x y z : ℕ, 0 < x ∧ 0 < y ∧ 0 < z ∧ (4 : ℚ) / n = 1 / x + 1 / y + 1 / z
+lemma Solvable.of_dvd {d n : ℕ} (hn : 0 < n) (hdvd : d ∣ n) (hd : Solvable d) :
+    Solvable n := by
+  obtain ⟨m, rfl⟩ := hdvd
+  obtain ⟨x, y, z, hx, hy, hz, h⟩ := hd
+  have hm : 0 < m := by
+    rcases Nat.eq_zero_or_pos m with h0 | h0
+    · simp [h0] at hn
+    · exact h0
+  have hd0 : 0 < d := by
+    rcases Nat.eq_zero_or_pos d with h0 | h0
+    · simp [h0] at hn
+    · exact h0
+  refine ⟨x * m, y * m, z * m, by positivity, by positivity, by positivity, ?_⟩
+  have hmq : (m : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hm.ne'
+  have hxq : (x : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hx.ne'
+  have hyq : (y : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hy.ne'
+  have hzq : (z : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hz.ne'
+  have hdq : (d : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hd0.ne'
+  have hsplit : (4 : ℚ) / ((d * m : ℕ) : ℚ) = ((4 : ℚ) / d) / m := by
+    push_cast; field_simp
+  rw [hsplit, h]
+  push_cast
+  field_simp
 
-/-- **The Erdős–Straus conjecture**: for every integer `n ≥ 2` the fraction `4 / n` is a
-sum of three positive unit fractions. -/
+/-- Even case: `4/(2m) = 1/m + 1/m`. -/

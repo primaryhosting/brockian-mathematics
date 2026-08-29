@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Singular Series Gaps 12401250
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesGaps12401250
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,19 +23,42 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+# Singular Series Gaps 12401250
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps12401250
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+This development is deliberately self-contained (no imports beyond Lean's `Init`), so that the
+header comment above can literally begin the file.
+
+We study the Hardy-Littlewood data attached to a prime gap `d`:
+
+* admissibility of the two-element tuple `{0, d}` (no prime obstruction to `n`, `n + d` being
+  simultaneously prime infinitely often), and
+* the singular-series factor `∏_{p ∣ d, p odd prime} (p-1)/(p-2)`, recorded as an explicit
+  positive rational `gapNum d / gapDen d`.
+
+The main result `Brockian.SingularSeriesGaps12401250` verifies both for every even gap `d` in the
+range `1240 ≤ d ≤ 1250`, extending the `SingularSeriesGaps` family to this range.
+-/
+
 namespace Brockian
 
-/-- A finite set of shifts `H` is *admissible* (in the sense of the Hardy–Littlewood
-prime `k`-tuple conjecture) if for every prime `p` the residues of `H` modulo `p`
-do not cover all of `ℤ/pℤ`.  Equivalently, the local factor of the singular series
-attached to `H` is nonzero at every prime. -/
+/-! ## Primes -/
+
+/-- Primality, stated from first principles. -/
 
 theorem SingularSeriesGaps12401250 :
-    (∀ g : ℕ, 1240 ≤ g → g ≤ 1250 → (Admissible ({0, g} : Finset ℕ) ↔ Even g)) ∧
-      (Finset.Icc 1240 1250).filter (fun g => Even g) =
-        ({1240, 1242, 1244, 1246, 1248, 1250} : Finset ℕ) := by
-  refine ⟨fun g _ _ => admissible_pair_iff_even, ?_⟩
-  decide
+    ∀ d : Nat, 1240 ≤ d → d ≤ 1250 → (∃ k : Nat, d = 2 * k) →
+      Admissible [0, (d : Int)] ∧ 0 < gapNum d ∧ 0 < gapDen d := by
+  intro d _ _ hd
+  refine ⟨admissible_pair_of_even (d : Int) ?_, gapNum_pos d, gapDen_pos d⟩
+  obtain ⟨k, hk⟩ := hd
+  exact ⟨(k : Int), by omega⟩
 
 end Brockian
 

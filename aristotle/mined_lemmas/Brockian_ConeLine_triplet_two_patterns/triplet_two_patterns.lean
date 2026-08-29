@@ -1,3 +1,11 @@
+/-
+# Triplet Two Patterns
+Category: Cone Line
+Target: Brockian.ConeLine.triplet_two_patterns
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -23,34 +31,17 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Triplet Two Patterns
-Category: Cone Line
-Target: Brockian.ConeLine.triplet_two_patterns
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import Mathlib
-
-/-!
-# Triplet Two Patterns
-Category: Cone Line
-Target: Brockian.ConeLine.triplet_two_patterns
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Brockian.ConeLine
 
-/-- A prime `q > 5` is not divisible by `5`, i.e. `q % 5 ≠ 0`. -/
+/-- A prime `q > 5` is not divisible by `5`. -/
 
 theorem triplet_two_patterns {p : ℕ} (hp : Nat.Prime p) (hp2 : Nat.Prime (p + 2))
     (hp6 : Nat.Prime (p + 6)) (h5 : 5 < p) :
     (p % 5 = 1 ∧ (p + 2) % 5 = 3 ∧ (p + 6) % 5 = 2) ∨
       (p % 5 = 2 ∧ (p + 2) % 5 = 4 ∧ (p + 6) % 5 = 3) := by
-  have h0 : p % 5 ≠ 0 := mod_five_ne_zero_of_prime hp h5
+  have h1 : p % 5 ≠ 0 := mod_five_ne_zero_of_prime hp h5
   have h2 : (p + 2) % 5 ≠ 0 := mod_five_ne_zero_of_prime hp2 (by omega)
-  have h6 : (p + 6) % 5 ≠ 0 := mod_five_ne_zero_of_prime hp6 (by omega)
+  have h3 : (p + 6) % 5 ≠ 0 := mod_five_ne_zero_of_prime hp6 (by omega)
   omega
 
 end Brockian.ConeLine

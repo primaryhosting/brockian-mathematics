@@ -34,22 +34,13 @@ set_option grind.warning false
 
 namespace Topology
 
-/-- **Baire category theorem** for complete metric spaces: given a countable family
-`f : ι → Set X` of dense open subsets of a complete metric space `X`, the intersection
-`⋂ i, f i` is dense in `X`. -/
-theorem baire_category {X : Type*} [MetricSpace X] [CompleteSpace X]
-    {ι : Sort*} [Countable ι] {f : ι → Set X}
-    (ho : ∀ i, IsOpen (f i)) (hd : ∀ i, Dense (f i)) :
-    Dense (⋂ i, f i) :=
+/-- **Baire category theorem**: in a complete (pseudo)metric space, the intersection of a
+countable family of dense open sets is dense. -/
+theorem baire_category {X : Type*} [PseudoEMetricSpace X] [CompleteSpace X]
+    {ι : Sort*} [Countable ι] {U : ι → Set X}
+    (ho : ∀ i, IsOpen (U i)) (hd : ∀ i, Dense (U i)) :
+    Dense (⋂ i, U i) :=
   dense_iInter_of_isOpen ho hd
-
-/-- Set-indexed form of the Baire category theorem: a countable collection `S` of dense
-open subsets of a complete metric space has dense intersection `⋂₀ S`. -/
-theorem baire_category_sInter {X : Type*} [MetricSpace X] [CompleteSpace X]
-    {S : Set (Set X)} (ho : ∀ s ∈ S, IsOpen s) (hS : S.Countable)
-    (hd : ∀ s ∈ S, Dense s) :
-    Dense (⋂₀ S) :=
-  dense_sInter_of_isOpen ho hS hd
 
 end Topology
 

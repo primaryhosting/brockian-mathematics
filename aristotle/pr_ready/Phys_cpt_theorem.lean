@@ -9,134 +9,22 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-## Overview
-
-We formalise the algebraic core of the CPT theorem in the Wightman framework.
-
-A (scalar) `n`-point Wightman function, analytically continued to complex Minkowski
-space, is a function `W : (Fin n → (Fin 4 → ℂ)) → ℂ`.
-
-* *Lorentz invariance* (together with analyticity of the Wightman functions, which is
-  what allows the real proper orthochronous group to be replaced by the complex Lorentz
-  group) is expressed as invariance of `W` under every complex Lorentz matrix that is
-  connected to the identity by a continuous path inside the complex Lorentz group.
-* *Locality* enters through weak local commutativity: at Jost points the Wightman
-  function is invariant under total reversal of its arguments.
-* *CPT invariance* is the statement `W (x₁, …, x_n) = W (-x_n, …, -x₁)`.
-
-The mathematical content is `Phys.negOne_connectedToOne`: the total space-time inversion
-`-1` lies in the identity component of the complex Lorentz group (this is false for the
-*real* Lorentz group), witnessed by the explicit path
-
-`t ↦ (complex boost by rapidity `i t` in the 01-plane) ⊕ (rotation by `t` in the 23-plane)`
-
-which joins `1` (at `t = 0`) to `-1` (at `t = π`).
+/-
+# Cpt Theorem
+Category: Frontier Phys
+Target: Phys.cpt_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Phys
 
-open Matrix Complex
-
-/-- The Minkowski metric `diag (1, -1, -1, -1)`, as a complex matrix. -/
-def minkowskiEta : Matrix (Fin 4) (Fin 4) ℂ :=
-  !![1, 0, 0, 0;
-     0, -1, 0, 0;
-     0, 0, -1, 0;
-     0, 0, 0, -1]
-
-/-- A complex `4 × 4` matrix is a complex Lorentz transformation if it preserves the
-Minkowski form, `Mᵀ η M = η`. -/
-def IsComplexLorentz (M : Matrix (Fin 4) (Fin 4) ℂ) : Prop :=
-  M.transpose * minkowskiEta * M = minkowskiEta
-
-/-- `M` lies in the identity component of the complex Lorentz group: it is joined to the
-identity by a continuous path of complex Lorentz transformations. -/
-def ConnectedToOne (M : Matrix (Fin 4) (Fin 4) ℂ) : Prop :=
-  ∃ γ : ℝ → Matrix (Fin 4) (Fin 4) ℂ,
-    Continuous γ ∧ (∀ t, IsComplexLorentz (γ t)) ∧ γ 0 = 1 ∧ γ 1 = M
-
-/-- The explicit one-parameter family: a boost with imaginary rapidity `t` in the
-`(0,1)`-plane, together with a rotation by the angle `t` in the `(2,3)`-plane. -/
-noncomputable def cptPath (t : ℝ) : Matrix (Fin 4) (Fin 4) ℂ :=
-  !![(Real.cos t : ℂ), (Real.sin t : ℂ) * I, 0, 0;
-     (Real.sin t : ℂ) * I, (Real.cos t : ℂ), 0, 0;
-     0, 0, (Real.cos t : ℂ), -(Real.sin t : ℂ);
-     0, 0, (Real.sin t : ℂ), (Real.cos t : ℂ)]
-
-lemma cptPath_isComplexLorentz (t : ℝ) : IsComplexLorentz (cptPath t) := by
-  have hpy : (Real.sin t : ℂ) ^ 2 + (Real.cos t : ℂ) ^ 2 = 1 := by
-    have h : (Real.sin t) ^ 2 + (Real.cos t) ^ 2 = 1 := Real.sin_sq_add_cos_sq t
-    exact_mod_cast congrArg (fun r : ℝ => (r : ℂ)) h
-  have hI : (I : ℂ) ^ 2 = -1 := Complex.I_sq
-  show (cptPath t).transpose * minkowskiEta * cptPath t = minkowskiEta
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [Matrix.mul_apply, Fin.sum_univ_succ, cptPath, minkowskiEta, Matrix.transpose_apply,
-      -Complex.ofReal_cos, -Complex.ofReal_sin] <;>
-    · first
-      | linear_combination -hpy
-      | linear_combination hpy - (Real.sin t : ℂ) ^ 2 * hI
-      | linear_combination -hpy + (Real.sin t : ℂ) ^ 2 * hI
-      | ring1
-
-lemma cptPath_zero : cptPath 0 = 1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;> simp [cptPath]
-
-lemma cptPath_pi : cptPath Real.pi = -1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;> simp [cptPath]
-
-lemma continuous_cptPath : Continuous cptPath := by
-  refine continuous_matrix fun i j => ?_
-  fin_cases i <;> fin_cases j <;> simp [cptPath] <;> fun_prop
-
-/-- **The total space-time inversion `-1` lies in the identity component of the complex
-Lorentz group.** This is the group-theoretic heart of the CPT theorem. -/
-theorem negOne_connectedToOne : ConnectedToOne (-1 : Matrix (Fin 4) (Fin 4) ℂ) := by
-  refine ⟨fun t => cptPath (Real.pi * t), ?_, ?_, ?_, ?_⟩
-  · exact continuous_cptPath.comp (by fun_prop)
-  · intro t; exact cptPath_isComplexLorentz _
-  · simpa using cptPath_zero
-  · simpa using cptPath_pi
-
-/-- A (scalar) `n`-point Wightman function on complexified Minkowski space. -/
-def Wightman (n : ℕ) : Type := (Fin n → (Fin 4 → ℂ)) → ℂ
-
-/-- Lorentz invariance: `W` is invariant under all complex Lorentz transformations in the
-identity component (this is the content of real Lorentz invariance combined with the
-analyticity of the Wightman functions). -/
-def LorentzInvariant {n : ℕ} (W : Wightman n) : Prop :=
-  ∀ M : Matrix (Fin 4) (Fin 4) ℂ, ConnectedToOne M →
-    ∀ x : Fin n → (Fin 4 → ℂ), W (fun i => M.mulVec (x i)) = W x
-
-/-- Weak local commutativity, the form in which locality (spacelike commutativity of the
-fields) is used in the CPT theorem: at Jost points the Wightman function is invariant
-under reversing the order of its arguments. -/
-def WeaklyLocal {n : ℕ} (W : Wightman n) : Prop :=
-  ∀ x : Fin n → (Fin 4 → ℂ), W (fun i => x i.rev) = W x
-
-/-- CPT invariance: `W (x₁, …, x_n) = W (-x_n, …, -x₁)`. -/
-def CPTInvariant {n : ℕ} (W : Wightman n) : Prop :=
-  ∀ x : Fin n → (Fin 4 → ℂ), W (fun i => -(x i.rev)) = W x
-
-/-- **CPT theorem.** Any Lorentz-invariant local quantum field theory is CPT invariant:
-if the Wightman functions are invariant under the identity component of the complex
-Lorentz group and satisfy weak local commutativity, then they are invariant under the
-CPT operation `x ↦ -x` combined with reversal of the arguments. -/
-theorem cpt_theorem {n : ℕ} (W : Wightman n) (hL : LorentzInvariant W)
-    (hloc : WeaklyLocal W) : CPTInvariant W := by
-  intro x
-  have h1 : W (fun i => (-1 : Matrix (Fin 4) (Fin 4) ℂ).mulVec (x i.rev))
-      = W (fun i => x i.rev) := hL _ negOne_connectedToOne _
-  have h2 : ∀ v : Fin 4 → ℂ, (-1 : Matrix (Fin 4) (Fin 4) ℂ).mulVec v = -v := by
-    intro v
-    simp [Matrix.neg_mulVec]
-  simpa only [h2] using h1.trans (hloc x)
-
-end Phys
-
+/-!
+# Cpt Theorem
+Category: Frontier Phys
+Target: Phys.cpt_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -152,12 +40,117 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+namespace Phys
+
+/-! ## Complexified Minkowski space and the complex Lorentz group -/
+
+/-- Complexified Minkowski space `ℂ⁴`. -/
+abbrev CVec : Type := Fin 4 → ℂ
+
+/-- The (bilinear, not sesquilinear) Minkowski form of signature `(+,-,-,-)` on complexified
+Minkowski space. -/
+def mform (x y : CVec) : ℂ := x 0 * y 0 - x 1 * y 1 - x 2 * y 2 - x 3 * y 3
+
+/-- A complex `4 × 4` matrix is a complex Lorentz transformation if it preserves the complex
+bilinear Minkowski form. -/
+def IsComplexLorentz (L : Matrix (Fin 4) (Fin 4) ℂ) : Prop :=
+  ∀ x y : CVec, mform (L.mulVec x) (L.mulVec y) = mform x y
+
+/-- Membership in the identity component of the complex Lorentz group: `L` is joined to the
+identity by a continuous path of complex Lorentz transformations. -/
+def ConnectedToId (L : Matrix (Fin 4) (Fin 4) ℂ) : Prop :=
+  ∃ p : ℝ → Matrix (Fin 4) (Fin 4) ℂ,
+    Continuous p ∧ p 0 = 1 ∧ p 1 = L ∧ ∀ t : ℝ, IsComplexLorentz (p t)
+
+/-- The complex Lorentz transformation implementing a complex rotation by angle `θ` in the
+`(0,1)` plane together with a rotation by `θ` in the `(2,3)` plane.  At `θ = 0` it is the
+identity and at `θ = π` it is the total spacetime reflection `-1`, i.e. the `PT`
+transformation. -/
+noncomputable def ptPath (θ : ℝ) : Matrix (Fin 4) (Fin 4) ℂ :=
+  !![Complex.cos θ, Complex.I * Complex.sin θ, 0, 0;
+     Complex.I * Complex.sin θ, Complex.cos θ, 0, 0;
+     0, 0, Complex.cos θ, -Complex.sin θ;
+     0, 0, Complex.sin θ, Complex.cos θ]
+
+/-- Every member of the path `ptPath` preserves the complex Minkowski form. -/
+lemma ptPath_isComplexLorentz (θ : ℝ) : IsComplexLorentz (ptPath θ) := by
+  intro x y
+  have hI : Complex.I * Complex.I = -1 := Complex.I_mul_I
+  have hs : Complex.sin θ ^ 2 + Complex.cos θ ^ 2 = 1 := Complex.sin_sq_add_cos_sq _
+  simp [mform, ptPath, Matrix.mulVec, dotProduct, Fin.sum_univ_four]
+  linear_combination (x 0 * y 0 - x 1 * y 1 - x 2 * y 2 - x 3 * y 3) * hs
+    - Complex.sin (θ : ℂ) ^ 2 * (x 0 * y 0 - x 1 * y 1) * hI
+
+lemma ptPath_zero : ptPath 0 = 1 := by
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp [ptPath]
+
+lemma ptPath_pi : ptPath Real.pi = -1 := by
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp [ptPath]
+
+lemma continuous_ptPath : Continuous ptPath := by
+  refine continuous_matrix fun i j => ?_
+  fin_cases i <;> fin_cases j <;> simp [ptPath] <;> fun_prop
+
+/-- **The total spacetime reflection `PT = -1` lies in the identity component of the complex
+Lorentz group.**  This is the mathematical heart of the CPT theorem: although `-1` is not in
+the identity component of the *real* Lorentz group, complexifying connects it to the
+identity. -/
+theorem neg_one_connectedToId : ConnectedToId (-1 : Matrix (Fin 4) (Fin 4) ℂ) := by
+  refine ⟨fun t => ptPath (Real.pi * t), continuous_ptPath.comp (by fun_prop), ?_, ?_,
+    fun t => ptPath_isComplexLorentz _⟩
+  · simpa using ptPath_zero
+  · simpa using ptPath_pi
+
+/-! ## Lorentz-invariant local quantum field theories -/
+
+/-- Two (complexified) points are spacelike separated when their difference has real and
+negative Minkowski square. -/
+def Spacelike (x y : CVec) : Prop :=
+  (mform (x - y) (x - y)).im = 0 ∧ (mform (x - y) (x - y)).re < 0
+
+/-- A Lorentz-invariant local quantum field theory, presented through its analytically
+continued Wightman functions.
+
+* `W n` is the `n`-point Wightman function on complexified Minkowski space;
+* `lorentz_invariant` records Lorentz invariance: by the standard analytic continuation of
+  the Wightman functions into the extended tube, invariance under the real proper
+  orthochronous Lorentz group upgrades to invariance under the whole identity component of
+  the complex Lorentz group;
+* `local_commutativity` records locality, i.e. Bose symmetry of the Wightman functions under
+  exchange of spacelike separated arguments. -/
+structure QFT where
+  /-- The `n`-point Wightman functions. -/
+  W : (n : ℕ) → (Fin n → CVec) → ℂ
+  /-- Invariance under the identity component of the complex Lorentz group. -/
+  lorentz_invariant : ∀ (n : ℕ) (L : Matrix (Fin 4) (Fin 4) ℂ) (x : Fin n → CVec),
+    ConnectedToId L → W n (fun i => L.mulVec (x i)) = W n x
+  /-- Locality: the Wightman functions are symmetric under exchange of spacelike separated
+  arguments. -/
+  local_commutativity : ∀ (n : ℕ) (x : Fin n → CVec) (i j : Fin n),
+    Spacelike (x i) (x j) → W n (x ∘ Equiv.swap i j) = W n x
+
+/-- The CPT transformation on complexified Minkowski space: total inversion `x ↦ -x` of all
+spacetime coordinates. -/
+def cptMap (x : CVec) : CVec := -x
+
+lemma cptMap_involutive : Function.Involutive cptMap := fun x => by
+  simp [cptMap]
+
+/-- **CPT theorem (statement level).**  Every Lorentz-invariant local quantum field theory is
+CPT invariant: its Wightman functions are unchanged when all spacetime arguments are
+reflected, `x ↦ -x`.  The proof runs through the fact that the total reflection `-1` lies in
+the identity component of the complex Lorentz group, so that CPT invariance is a consequence
+of Lorentz invariance of the analytically continued Wightman functions.  (The locality
+axiom of `QFT` is what makes that analytic continuation, and hence the hypothesis
+`lorentz_invariant`, available; it is not used again in this final step.) -/
+theorem cpt_theorem (Q : QFT) (n : ℕ) (x : Fin n → CVec) :
+    Q.W n (fun i => cptMap (x i)) = Q.W n x := by
+  have h := Q.lorentz_invariant n (-1 : Matrix (Fin 4) (Fin 4) ℂ) x neg_one_connectedToId
+  simpa [cptMap, Matrix.neg_mulVec, Matrix.one_mulVec] using h
+
+end Phys
 

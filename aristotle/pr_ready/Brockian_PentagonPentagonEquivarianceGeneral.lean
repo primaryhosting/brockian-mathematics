@@ -15,6 +15,8 @@ Target: Brockian.PentagonPentagonEquivarianceGeneral
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above uses `/-` rather than `/-!` because Lean 4 does not allow a module
+-- docstring to precede the `import` commands; the text is otherwise verbatim.)
 
 
 open scoped BigOperators
@@ -42,152 +44,100 @@ set_option grind.warning false
 
 namespace Brockian
 
-open Complex DihedralGroup
+open DihedralGroup
 
-/-! ## Vertices of the regular `n`-gon
+/-!
+## The dihedral action on the vertices of the `n`-gon
 
-The vertices of the regular `n`-gon inscribed in the unit circle of `ℂ` are indexed by
-`ZMod n`; the vertex with index `k` is `exp (2 * π * I * k / n)`.  We use Mathlib's additive
-character `ZMod.toCircle : AddChar (ZMod N) Circle`, so that the "rotation" identity
-`vertex (a + b) = vertex a * vertex b` is inherited from `AddChar.map_add_eq_mul`. -/
+We label the vertices of the regular `n`-gon by `ZMod n`.  With Mathlib's multiplication
+convention on `DihedralGroup n` (`r i * sr j = sr (j - i)`), the natural *left* action of the
+symmetry group on the vertex set is given by
 
-/-- The `k`-th vertex of the regular `n`-gon inscribed in the unit circle of `ℂ`,
-namely `exp (2 * π * I * k / n)`. -/
-noncomputable def vertex (n : ℕ) [NeZero n] (k : ZMod n) : ℂ := (ZMod.toCircle k : ℂ)
+* `r i • x = x - i`   (rotation),
+* `sr i • x = i - x`  (reflection).
+-/
 
-variable {n : ℕ} [NeZero n]
+/-- The action of a symmetry of the regular `n`-gon on its vertex set `ZMod n`. -/
+def ngonAct {n : ℕ} : DihedralGroup n → ZMod n → ZMod n
+  | r i, x => x - i
+  | sr i, x => i - x
 
-lemma vertex_apply (k : ZMod n) :
-    vertex n k = Complex.exp (2 * Real.pi * Complex.I * (k.val : ℂ) / (n : ℂ)) := by
-  rw [vertex, ZMod.toCircle_apply]
+/-- The symmetry group of the `n`-gon acts on the vertex set `ZMod n`. -/
+instance ngonMulAction (n : ℕ) : MulAction (DihedralGroup n) (ZMod n) where
+  smul := ngonAct
+  one_smul x := by
+    show ngonAct (r (0 : ZMod n)) x = x
+    simp [ngonAct]
+  mul_smul g h x := by
+    show ngonAct (g * h) x = ngonAct g (ngonAct h x)
+    cases g with
+    | r i => cases h with
+      | r j => simp [ngonAct]; ring
+      | sr j => simp [ngonAct]; ring
+    | sr i => cases h with
+      | r j => simp [ngonAct]; ring
+      | sr j => simp [ngonAct]; ring
 
-@[simp] lemma vertex_zero : vertex n 0 = 1 := by simp [vertex]
+@[simp] lemma r_smul {n : ℕ} (i x : ZMod n) : (r i : DihedralGroup n) • x = x - i := rfl
 
-@[simp] lemma vertex_add (a b : ZMod n) : vertex n (a + b) = vertex n a * vertex n b := by
-  simp [vertex, AddChar.map_add_eq_mul]
+@[simp] lemma sr_smul {n : ℕ} (i x : ZMod n) : (sr i : DihedralGroup n) • x = i - x := rfl
 
-@[simp] lemma vertex_neg (k : ZMod n) : vertex n (-k) = (starRingEnd ℂ) (vertex n k) := by
-  rw [vertex, vertex, AddChar.map_neg_eq_inv, Circle.coe_inv_eq_conj]
+/-- **Pentagon equivariance, general `n`-gon version.**
 
-@[simp] lemma abs_vertex (k : ZMod n) : ‖vertex n k‖ = 1 := by
-  simp [vertex]
+A self-map `f` of the vertex set `ZMod n` of the regular `n`-gon commutes with the whole
+symmetry group `DihedralGroup n` if and only if it is the translation by a `2`-torsion
+element `c` of `ZMod n`.
 
-lemma vertex_ne_zero (k : ZMod n) : vertex n k ≠ 0 := by
-  intro h
-  have := abs_vertex (n := n) k
-  rw [h] at this
-  norm_num at this
-
-/-- The vertices of the regular `n`-gon are pairwise distinct. -/
-lemma vertex_injective : Function.Injective (vertex n) := by
-  intro a b hab
-  exact ZMod.injective_toCircle (Subtype.ext hab)
-
-/-! ## The dihedral group acting on vertex indices and on the plane -/
-
-/-- The action of the dihedral group `DihedralGroup n` on the vertex indices `ZMod n`:
-the rotation `r i` sends the index `k` to `k + i`, and the reflection `sr i` sends `k`
-to `-(k + i)`. -/
-def dihedralAct (g : DihedralGroup n) (k : ZMod n) : ZMod n :=
-  match g with
-  | r i => k + i
-  | sr i => -(k + i)
-
-/-- The geometric representation of `DihedralGroup n` on the plane `ℂ`: the rotation `r i`
-acts as multiplication by the root of unity `exp (2 * π * I * i / n)`, and the reflection
-`sr i` acts as `z ↦ conj (exp (2 * π * I * i / n) * z)`. -/
-noncomputable def dihedralRep (g : DihedralGroup n) (z : ℂ) : ℂ :=
-  match g with
-  | r i => vertex n i * z
-  | sr i => (starRingEnd ℂ) (vertex n i * z)
-
-omit [NeZero n] in
-@[simp] lemma dihedralAct_r (i k : ZMod n) : dihedralAct (r i) k = k + i := rfl
-
-omit [NeZero n] in
-@[simp] lemma dihedralAct_sr (i k : ZMod n) : dihedralAct (sr i) k = -(k + i) := rfl
-
-@[simp] lemma dihedralRep_r (i : ZMod n) (z : ℂ) : dihedralRep (r i) z = vertex n i * z := rfl
-
-@[simp] lemma dihedralRep_sr (i : ZMod n) (z : ℂ) :
-    dihedralRep (sr i) z = (starRingEnd ℂ) (vertex n i * z) := rfl
-
-omit [NeZero n] in
-lemma dihedralAct_one (k : ZMod n) : dihedralAct (1 : DihedralGroup n) k = k := by
-  show k + 0 = k
-  exact add_zero k
-
-omit [NeZero n] in
-lemma dihedralAct_mul (g h : DihedralGroup n) (k : ZMod n) :
-    dihedralAct (g * h) k = dihedralAct g (dihedralAct h k) := by
-  cases g <;> cases h <;> simp only [DihedralGroup.r_mul_r, DihedralGroup.r_mul_sr,
-    DihedralGroup.sr_mul_r, DihedralGroup.sr_mul_sr, dihedralAct] <;> ring
-
-lemma dihedralRep_one (z : ℂ) : dihedralRep (1 : DihedralGroup n) z = z := by
-  show vertex n 0 * z = z
-  rw [vertex_zero, one_mul]
-
-lemma dihedralRep_mul (g h : DihedralGroup n) (z : ℂ) :
-    dihedralRep (g * h) z = dihedralRep g (dihedralRep h z) := by
-  cases g with
-  | r i =>
-    cases h with
-    | r j =>
-      simp only [r_mul_r, dihedralRep_r, vertex_add]
+For `n = 5` (the pentagon) — indeed for any odd `n` — the only such `c` is `0`, so the only
+equivariant self-map is the identity; for even `n` there is exactly one further equivariant map,
+the antipodal map `x ↦ x + n / 2`. -/
+theorem PentagonPentagonEquivarianceGeneral {n : ℕ} (f : ZMod n → ZMod n) :
+    (∀ (g : DihedralGroup n) (x : ZMod n), f (g • x) = g • f x) ↔
+      ∃ c : ZMod n, c + c = 0 ∧ ∀ x, f x = x + c := by
+  constructor
+  · intro h
+    refine ⟨f 0, ?_, ?_⟩
+    · -- reflection through the vertex `0` forces `f 0` to be `2`-torsion
+      have h0 := h (sr 0) 0
+      simp only [sr_smul, zero_sub, neg_zero] at h0
+      -- `f 0 = -f 0`
+      have : f 0 = -f 0 := h0
+      linear_combination (norm := ring_nf) this
+    · intro x
+      -- rotations force `f` to be a translation
+      have hx := h (r (-x)) 0
+      simp only [r_smul, zero_sub, neg_neg] at hx
+      rw [hx]
       ring
-    | sr j =>
-      simp only [r_mul_sr, dihedralRep_sr, dihedralRep_r, map_mul]
-      rw [sub_eq_add_neg, vertex_add, vertex_neg, map_mul, Complex.conj_conj]
-      ring
-  | sr i =>
-    cases h with
-    | r j =>
-      simp only [sr_mul_r, dihedralRep_sr, dihedralRep_r, map_mul, vertex_add]
-      ring
-    | sr j =>
-      simp only [sr_mul_sr, dihedralRep_sr, dihedralRep_r, map_mul,
-        Complex.conj_conj]
-      rw [sub_eq_add_neg, vertex_add, vertex_neg]
-      ring
+  · rintro ⟨c, hc, hf⟩ g x
+    cases g with
+    | r i => simp only [r_smul, hf]; ring
+    | sr i =>
+        simp only [sr_smul, hf]
+        linear_combination (norm := ring_nf) hc
 
-/-- Every element of the dihedral group acts on the plane by an isometry (indeed by a
-norm-preserving map). -/
-lemma norm_dihedralRep (g : DihedralGroup n) (z : ℂ) : ‖dihedralRep g z‖ = ‖z‖ := by
-  cases g <;> simp
+/-- Specialisation to odd `n`: the identity is the only equivariant self-map of the vertex
+set of the regular `n`-gon. -/
+theorem ngon_equivariance_odd {n : ℕ} (hn : Odd n) (f : ZMod n → ZMod n)
+    (h : ∀ (g : DihedralGroup n) (x : ZMod n), f (g • x) = g • f x) :
+    ∀ x, f x = x := by
+  obtain ⟨c, hc, hf⟩ := (PentagonPentagonEquivarianceGeneral f).1 h
+  have hc0 : c = 0 := by
+    have h2 : (2 : ZMod n) * c = 0 := by linear_combination (norm := ring_nf) hc
+    have : IsUnit (2 : ZMod n) := by
+      have hcop : Nat.Coprime 2 n := Nat.coprime_two_left.mpr hn
+      simpa using (ZMod.isUnit_iff_coprime 2 n).2 (by simpa [Nat.Coprime] using hcop)
+    obtain ⟨u, hu⟩ := this
+    have := congrArg (fun z => (↑u⁻¹ : ZMod n) * z) h2
+    simpa [← hu, ← mul_assoc, ← Units.val_mul] using this
+  intro x
+  simp [hf, hc0]
 
-/-- **Pentagon equivariance, in general.**  For every `n ≥ 1`, the geometric representation
-`dihedralRep` of the dihedral group `DihedralGroup n` on the plane `ℂ` and the combinatorial
-action `dihedralAct` on the vertex indices `ZMod n` are intertwined by the vertex map
-`vertex n : ZMod n → ℂ` of the regular `n`-gon.  Precisely:
-
-* `dihedralAct` is a group action on `ZMod n`;
-* `dihedralRep` is a group action on `ℂ` by norm-preserving maps;
-* the vertex map is injective and equivariant: `dihedralRep g (vertex n k) = vertex n (dihedralAct g k)`.
-
-Taking `n = 5` recovers the pentagon (`D₅`) statement. -/
-theorem PentagonPentagonEquivarianceGeneral (n : ℕ) [NeZero n] :
-    (∀ k : ZMod n, dihedralAct (1 : DihedralGroup n) k = k) ∧
-    (∀ (g h : DihedralGroup n) (k : ZMod n),
-        dihedralAct (g * h) k = dihedralAct g (dihedralAct h k)) ∧
-    (∀ z : ℂ, dihedralRep (1 : DihedralGroup n) z = z) ∧
-    (∀ (g h : DihedralGroup n) (z : ℂ),
-        dihedralRep (g * h) z = dihedralRep g (dihedralRep h z)) ∧
-    (∀ (g : DihedralGroup n) (z : ℂ), ‖dihedralRep g z‖ = ‖z‖) ∧
-    Function.Injective (vertex n) ∧
-    (∀ (g : DihedralGroup n) (k : ZMod n),
-        dihedralRep g (vertex n k) = vertex n (dihedralAct g k)) := by
-  refine ⟨dihedralAct_one, dihedralAct_mul, dihedralRep_one, dihedralRep_mul,
-    norm_dihedralRep, vertex_injective, ?_⟩
-  intro g k
-  cases g with
-  | r i => simp [mul_comm]
-  | sr i => simp [add_comm, mul_comm]
-
-/-- The pentagon case `n = 5` of `PentagonPentagonEquivarianceGeneral`. -/
-theorem PentagonEquivariance_D5 :
-    ∀ (g : DihedralGroup 5) (k : ZMod 5),
-      dihedralRep g (vertex 5 k) = vertex 5 (dihedralAct g k) :=
-  (PentagonPentagonEquivarianceGeneral 5).2.2.2.2.2.2
+/-- The pentagon case (`n = 5`), recovering the original `D₅` statement. -/
+theorem PentagonEquivariance (f : ZMod 5 → ZMod 5)
+    (h : ∀ (g : DihedralGroup 5) (x : ZMod 5), f (g • x) = g • f x) :
+    ∀ x, f x = x :=
+  ngon_equivariance_odd (by decide) f h
 
 end Brockian
 

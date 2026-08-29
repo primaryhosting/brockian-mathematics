@@ -17,20 +17,139 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-# Lieb Schultz Mattis
-Category: Frontier Phys
-Target: Phys.lieb_schultz_mattis
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+
+open scoped InnerProductSpace
+
+namespace Phys
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+
+/-- **Momentum selection rule.**  If `T` preserves the inner product (a translation
+operator is unitary) and two states are `T`-eigenvectors with *different* eigenvalues,
+the first one being a unit vector, then the two states are orthogonal.
+
+This is the step of the Lieb–Schultz–Mattis argument which guarantees that the twisted
+state, carrying a different lattice momentum, is orthogonal to the ground state. -/
+theorem inner_eq_zero_of_translation_eigenvalue_ne
+    {T : E →ₗ[ℂ] E} (hT : ∀ x y : E, ⟪T x, T y⟫_ℂ = ⟪x, y⟫_ℂ)
+    {ψ φ : E} {t s : ℂ} (ht : ‖ψ‖ = 1)
+    (hψ : T ψ = t • ψ) (hφ : T φ = s • φ) (hne : s ≠ t) :
+    ⟪ψ, φ⟫_ℂ = 0 := by
+  -- `|t| = 1`, i.e. `conj t * t = 1`
+  have hnorm : (starRingEnd ℂ) t * t = 1 := by
+    have h := hT ψ ψ
+    rw [hψ, inner_smul_left, inner_smul_right, inner_self_eq_norm_sq_to_K (𝕜 := ℂ), ht] at h
+    simpa using h
+  have key : (starRingEnd ℂ) t * s * ⟪ψ, φ⟫_ℂ = ⟪ψ, φ⟫_ℂ := by
+    have h := hT ψ φ
+    rw [hψ, hφ, inner_smul_left, inner_smul_right, ← mul_assoc] at h
+    exact h
+  have key' : ((starRingEnd ℂ) t * s - 1) * ⟪ψ, φ⟫_ℂ = 0 := by linear_combination key
+  rcases mul_eq_zero.1 key' with h | h
+  · -- `conj t * s = 1` together with `conj t * t = 1` forces `s = t`, a contradiction
+    exact absurd (by linear_combination t * h - s * hnorm : s = t) hne
+  · exact h
+
+/-- **Lieb–Schultz–Mattis theorem (operator core).**
+
+A translation-invariant spin chain whose sites carry *half-integer* spin
+`S = twoS / 2` (with `twoS` odd) cannot have a unique ground state separated by a gap
+larger than the twist energy `ε`: it is either degenerate or gapless.
+
+Formal setting.  `E` is the complex Hilbert space of the chain, `H` its Hamiltonian,
+`T` the translation operator (unitary, as encoded by `hT`), and `ψ₀` a normalized
+ground state of energy `E₀` (minimality of the energy is `hmin`, and `hground` says
+that `ψ₀` realizes it) which, by translation invariance, carries a definite momentum
+eigenvalue `t` (`hTψ`).  The Lieb–Schultz–Mattis twist operator `U` produces the
+variational state `U ψ₀`, which is normalized (`hUnorm`), has energy at most `E₀ + ε`
+(`hEnergy`; on a chain of `L` sites the twist estimate gives `ε = O(1/L)`), and whose
+momentum is shifted by the factor `(-1) ^ twoS` relative to the ground state (`hTU`).
+For half-integer spin, `twoS` is odd and this factor is `-1`, i.e. a momentum shift
+by `π`.
+
+Conclusion: there is a normalized state orthogonal to the ground state whose energy
+either equals the ground-state energy (ground-state **degeneracy**) or exceeds it by
+at most `ε` (**gaplessness**: the spectral gap above `ψ₀` is bounded by the twist
+energy, which tends to `0` in the thermodynamic limit). -/
+theorem lieb_schultz_mattis
+    {H T U : E →ₗ[ℂ] E} {ψ₀ : E} {E₀ ε : ℝ} {t : ℂ} {twoS : ℕ}
+    -- half-integer spin per site: the spin is `twoS / 2` with `twoS` odd
+    (hspin : Odd twoS)
+    -- the translation operator is unitary
+    (hT : ∀ x y : E, ⟪T x, T y⟫_ℂ = ⟪x, y⟫_ℂ)
+    -- `ψ₀` is a normalized ground state of energy `E₀`
+    (hψnorm : ‖ψ₀‖ = 1)
+    (hmin : ∀ φ : E, ‖φ‖ = 1 → E₀ ≤ (⟪φ, H φ⟫_ℂ).re)
+    (hground : (⟪ψ₀, H ψ₀⟫_ℂ).re = E₀)
+    -- translation invariance: the ground state has a definite momentum
+    (hTψ : T ψ₀ = t • ψ₀)
+    -- the twisted state is normalized and its momentum is shifted by `(-1) ^ twoS`
+    (hUnorm : ‖U ψ₀‖ = 1)
+    (hTU : T (U ψ₀) = ((-1) ^ twoS * t) • (U ψ₀))
+    -- the twist costs at most the energy `ε`
+    (hEnergy : (⟪U ψ₀, H (U ψ₀)⟫_ℂ).re ≤ E₀ + ε) :
+    (∃ φ : E, ‖φ‖ = 1 ∧ ⟪ψ₀, φ⟫_ℂ = 0 ∧
+      (⟪φ, H φ⟫_ℂ).re = (⟪ψ₀, H ψ₀⟫_ℂ).re) ∨
+    (∃ φ : E, ‖φ‖ = 1 ∧ ⟪ψ₀, φ⟫_ℂ = 0 ∧
+      (⟪ψ₀, H ψ₀⟫_ℂ).re < (⟪φ, H φ⟫_ℂ).re ∧
+      (⟪φ, H φ⟫_ℂ).re ≤ (⟪ψ₀, H ψ₀⟫_ℂ).re + ε) := by
+  rw [hground]
+  -- half-integer spin ⟹ the momentum shift is a genuine sign flip
+  have hsign : ((-1 : ℂ)) ^ twoS = -1 := hspin.neg_one_pow
+  have ht0 : t ≠ 0 := by
+    intro h
+    have h0 : ⟪ψ₀, ψ₀⟫_ℂ = 0 := by
+      rw [← hT ψ₀ ψ₀, hTψ, h, zero_smul, inner_zero_left]
+    rw [inner_self_eq_zero] at h0
+    rw [h0, norm_zero] at hψnorm
+    exact one_ne_zero hψnorm.symm
+  have hne : (-1 : ℂ) ^ twoS * t ≠ t := by
+    rw [hsign]
+    intro h
+    exact ht0 (by linear_combination -h / 2)
+  -- momentum selection rule: the twisted state is orthogonal to the ground state
+  have horth : ⟪ψ₀, U ψ₀⟫_ℂ = 0 :=
+    inner_eq_zero_of_translation_eigenvalue_ne hT hψnorm hTψ hTU hne
+  -- the twisted state is a variational state of energy at most `E₀ + ε`
+  rcases eq_or_lt_of_le (hmin _ hUnorm) with h | h
+  · exact Or.inl ⟨U ψ₀, hUnorm, horth, h.symm⟩
+  · exact Or.inr ⟨U ψ₀, hUnorm, horth, h, hEnergy⟩
+
+/-- **Lieb–Schultz–Mattis theorem, from the twist–translation commutation relation.**
+
+Same conclusion as `Phys.lieb_schultz_mattis`, but the momentum shift of the twisted
+state is now derived from the more primitive algebraic input `hcomm`, the
+commutation relation `T U = (-1) ^ twoS • U T` between the translation operator and
+the Lieb–Schultz–Mattis twist (evaluated on the ground state).  For half-integer spin
+per site (`twoS` odd) the sign is `-1`, so the twist shifts the momentum by `π`. -/
+theorem lieb_schultz_mattis_of_twist_commutation
+    {H T U : E →ₗ[ℂ] E} {ψ₀ : E} {E₀ ε : ℝ} {t : ℂ} {twoS : ℕ}
+    (hspin : Odd twoS)
+    (hT : ∀ x y : E, ⟪T x, T y⟫_ℂ = ⟪x, y⟫_ℂ)
+    (hψnorm : ‖ψ₀‖ = 1)
+    (hmin : ∀ φ : E, ‖φ‖ = 1 → E₀ ≤ (⟪φ, H φ⟫_ℂ).re)
+    (hground : (⟪ψ₀, H ψ₀⟫_ℂ).re = E₀)
+    (hTψ : T ψ₀ = t • ψ₀)
+    (hUnorm : ‖U ψ₀‖ = 1)
+    (hcomm : T (U ψ₀) = ((-1 : ℂ)) ^ twoS • U (T ψ₀))
+    (hEnergy : (⟪U ψ₀, H (U ψ₀)⟫_ℂ).re ≤ E₀ + ε) :
+    (∃ φ : E, ‖φ‖ = 1 ∧ ⟪ψ₀, φ⟫_ℂ = 0 ∧
+      (⟪φ, H φ⟫_ℂ).re = (⟪ψ₀, H ψ₀⟫_ℂ).re) ∨
+    (∃ φ : E, ‖φ‖ = 1 ∧ ⟪ψ₀, φ⟫_ℂ = 0 ∧
+      (⟪ψ₀, H ψ₀⟫_ℂ).re < (⟪φ, H φ⟫_ℂ).re ∧
+      (⟪φ, H φ⟫_ℂ).re ≤ (⟪ψ₀, H ψ₀⟫_ℂ).re + ε) := by
+  have hTU : T (U ψ₀) = ((-1 : ℂ) ^ twoS * t) • (U ψ₀) := by
+    rw [hcomm, hTψ, map_smul, smul_smul]
+  exact lieb_schultz_mattis hspin hT hψnorm hmin hground hTψ hUnorm hTU hEnergy
+
+end Phys
+
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped InnerProductSpace
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -40,231 +159,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
-
-namespace Phys
-
-open ComplexConjugate
-
-section LSM
-
-variable {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℂ V]
-
-/-- **Momentum obstruction (core of the Lieb–Schultz–Mattis argument).**
-
-If the translation operator `T` is an isometry, the twist operator `U` anticommutes with `T`
-(this is the algebraic footprint of a *half-integer* spin per unit cell: the twist shifts the
-momentum by `π`), and `ψ` is a translation eigenvector, then the twisted state `U ψ` is
-orthogonal to `ψ`. -/
-theorem twisted_state_orthogonal
-    (T U : V →ₗ[ℂ] V) (ψ : V) (c : ℂ)
-    (hTiso : ∀ x y : V, ⟪T x, T y⟫_ℂ = ⟪x, y⟫_ℂ)
-    (hTU : ∀ x : V, T (U x) = -(U (T x)))
-    (hTψ : T ψ = c • ψ) (hc : ‖c‖ = 1) :
-    ⟪ψ, U ψ⟫_ℂ = 0 := by
-  have key : ⟪ψ, U ψ⟫_ℂ = -⟪ψ, U ψ⟫_ℂ := by
-    have h1 : ⟪T ψ, T (U ψ)⟫_ℂ = ⟪ψ, U ψ⟫_ℂ := hTiso ψ (U ψ)
-    have h2 : T (U ψ) = -(c • U ψ) := by
-      rw [hTU ψ, hTψ, map_smul]
-    rw [h2, hTψ, inner_smul_left, inner_neg_right, inner_smul_right] at h1
-    have hcc : (starRingEnd ℂ) c * c = 1 := by
-      rw [RCLike.conj_mul (K := ℂ) c, hc]
-      norm_num
-    calc ⟪ψ, U ψ⟫_ℂ = (starRingEnd ℂ) c * -(c * ⟪ψ, U ψ⟫_ℂ) := h1.symm
-      _ = -(((starRingEnd ℂ) c * c) * ⟪ψ, U ψ⟫_ℂ) := by ring
-      _ = -⟪ψ, U ψ⟫_ℂ := by rw [hcc]; ring
-  have : (2 : ℂ) * ⟪ψ, U ψ⟫_ℂ = 0 := by linear_combination key
-  simpa using this
-
-/-- **Lieb–Schultz–Mattis theorem (abstract form): a half-integer-spin translation-invariant
-chain is gapless or degenerate.**
-
-Data:
-* `V` — the (complex) Hilbert space of states of the chain;
-* `H` — the Hamiltonian, translation invariant (`hHT`);
-* `T` — the lattice translation, an isometry (`hTiso`);
-* `U` — the Lieb–Schultz–Mattis twist operator, an isometry (`hUiso`), which *anticommutes*
-  with the translation (`hTU`).  This anticommutation is exactly the statement that the twist
-  shifts the momentum by `π`, which is what a half-odd-integer spin per unit cell produces;
-* `ψ` — a normalized ground state of energy `E₀`;
-* `htwist` — the variational bound saying that the twisted state has energy at most `E₀ + ε`
-  (for the physical chain of length `L`, `ε = O(1/L)`).
-
-Conclusion (the LSM alternative): either the ground state is **degenerate** — there is another
-ground state of the same energy `E₀`, orthogonal to `ψ` — or the system is **gapless** in the
-sense that every candidate gap `Δ` below the excited spectrum obeys `Δ ≤ ε`. -/
-theorem lieb_schultz_mattis
-    (H T U : V →ₗ[ℂ] V) (ψ : V) (E₀ ε Δ : ℝ)
-    (hTiso : ∀ x y : V, ⟪T x, T y⟫_ℂ = ⟪x, y⟫_ℂ)
-    (hUiso : ∀ x y : V, ⟪U x, U y⟫_ℂ = ⟪x, y⟫_ℂ)
-    (hHT : ∀ x : V, H (T x) = T (H x))
-    (hTU : ∀ x : V, T (U x) = -(U (T x)))
-    (hψ : ‖ψ‖ = 1)
-    (hgs : H ψ = (E₀ : ℂ) • ψ)
-    (htwist : (⟪U ψ, H (U ψ)⟫_ℂ).re ≤ E₀ + ε)
-    (hgap : ∀ v : V, ‖v‖ = 1 → ⟪ψ, v⟫_ℂ = 0 → E₀ + Δ ≤ (⟪v, H v⟫_ℂ).re) :
-    (∃ v : V, ‖v‖ = 1 ∧ ⟪ψ, v⟫_ℂ = 0 ∧ H v = (E₀ : ℂ) • v) ∨ Δ ≤ ε := by
-  by_cases hdeg : ∃ v : V, ‖v‖ = 1 ∧ ⟪ψ, v⟫_ℂ = 0 ∧ H v = (E₀ : ℂ) • v
-  · exact Or.inl hdeg
-  refine Or.inr ?_
-  push_neg at hdeg
-  -- Step 1: the ground state is a translation eigenvector.
-  set c : ℂ := ⟪ψ, T ψ⟫_ℂ with hcdef
-  set w : V := T ψ - c • ψ with hwdef
-  have hψψ : ⟪ψ, ψ⟫_ℂ = 1 := by
-    rw [inner_self_eq_norm_sq_to_K, hψ]; norm_num
-  have hwperp : ⟪ψ, w⟫_ℂ = 0 := by
-    rw [hwdef, inner_sub_right, inner_smul_right, hψψ, ← hcdef]
-    ring
-  have hHw : H w = (E₀ : ℂ) • w := by
-    rw [hwdef, map_sub, map_smul, hgs, hHT ψ, hgs, map_smul]
-    module
-  have hw0 : w = 0 := by
-    by_contra hne
-    have hnorm : ‖w‖ ≠ 0 := by simpa using hne
-    refine hdeg (((‖w‖ : ℝ) : ℂ)⁻¹ • w) ?_ ?_ ?_
-    · rw [norm_smul]
-      simp [inv_mul_cancel₀ hnorm]
-    · rw [inner_smul_right, hwperp]; ring
-    · rw [map_smul, hHw]
-      module
-  have hTψ : T ψ = c • ψ := by
-    have := sub_eq_zero.mp (hwdef ▸ hw0)
-    exact this
-  have hcnorm : ‖c‖ = 1 := by
-    have h1 : ‖T ψ‖ = ‖ψ‖ := by
-      have := hTiso ψ ψ
-      have h2 : ‖T ψ‖ ^ 2 = ‖ψ‖ ^ 2 := by
-        rw [← @inner_self_eq_norm_sq ℂ, ← @inner_self_eq_norm_sq ℂ]
-        exact congrArg Complex.re this
-      nlinarith [norm_nonneg (T ψ), norm_nonneg ψ]
-    rw [hTψ, norm_smul, hψ] at h1
-    simpa [hψ] using h1
-  -- Step 2: the twisted state is orthogonal to the ground state.
-  have horth : ⟪ψ, U ψ⟫_ℂ = 0 :=
-    twisted_state_orthogonal T U ψ c hTiso hTU hTψ hcnorm
-  -- Step 3: the twisted state is a normalized trial state, so the gap is at most `ε`.
-  have hUnorm : ‖U ψ‖ = 1 := by
-    have h2 : ‖U ψ‖ ^ 2 = ‖ψ‖ ^ 2 := by
-      rw [← @inner_self_eq_norm_sq ℂ, ← @inner_self_eq_norm_sq ℂ]
-      exact congrArg Complex.re (hUiso ψ ψ)
-    rw [hψ] at h2
-    nlinarith [norm_nonneg (U ψ)]
-  have := hgap (U ψ) hUnorm horth
-  linarith
-
-/-- **Corollary (the LSM dichotomy in contrapositive form).**  Under the LSM hypotheses, a
-translation-invariant half-integer-spin chain cannot simultaneously have a *unique* ground state
-and a spectral gap `Δ` strictly larger than the twist energy `ε`. -/
-theorem lieb_schultz_mattis_no_unique_gapped_ground_state
-    (H T U : V →ₗ[ℂ] V) (ψ : V) (E₀ ε Δ : ℝ)
-    (hTiso : ∀ x y : V, ⟪T x, T y⟫_ℂ = ⟪x, y⟫_ℂ)
-    (hUiso : ∀ x y : V, ⟪U x, U y⟫_ℂ = ⟪x, y⟫_ℂ)
-    (hHT : ∀ x : V, H (T x) = T (H x))
-    (hTU : ∀ x : V, T (U x) = -(U (T x)))
-    (hψ : ‖ψ‖ = 1)
-    (hgs : H ψ = (E₀ : ℂ) • ψ)
-    (htwist : (⟪U ψ, H (U ψ)⟫_ℂ).re ≤ E₀ + ε)
-    (hgap : ∀ v : V, ‖v‖ = 1 → ⟪ψ, v⟫_ℂ = 0 → E₀ + Δ ≤ (⟪v, H v⟫_ℂ).re)
-    (hΔ : ε < Δ)
-    (huniq : ∀ v : V, H v = (E₀ : ℂ) • v → ∃ c : ℂ, v = c • ψ) :
-    False := by
-  rcases lieb_schultz_mattis H T U ψ E₀ ε Δ hTiso hUiso hHT hTU hψ hgs htwist hgap with
-    ⟨v, hv1, hv2, hv3⟩ | hle
-  · obtain ⟨c, rfl⟩ := huniq v hv3
-    have hψψ : ⟪ψ, ψ⟫_ℂ = 1 := by
-      rw [inner_self_eq_norm_sq_to_K, hψ]; norm_num
-    rw [inner_smul_right, hψψ, mul_one] at hv2
-    rw [hv2, zero_smul, norm_zero] at hv1
-    exact zero_ne_one hv1
-  · linarith
-
-end LSM
-
-section Example
-
-/-! ### The hypotheses are not vacuous
-
-A two-level example (a single half-integer spin): the "translation" is the Pauli matrix `σ_z`,
-the twist operator is `σ_x` (these anticommute, which is the half-integer-spin input of LSM),
-and the Hamiltonian is `diag (0, 1)`.  Here the ground state has energy `0`, the gap equals `1`,
-and the twisted state indeed has energy `1 = E₀ + ε` with `ε = 1`. -/
-
-/-- The "translation" operator of the two-level example: the Pauli matrix `σ_z`. -/
-noncomputable def sigmaZ : EuclideanSpace ℂ (Fin 2) →ₗ[ℂ] EuclideanSpace ℂ (Fin 2) :=
-  Matrix.toEuclideanLin !![1, 0; 0, -1]
-
-/-- The twist operator of the two-level example: the Pauli matrix `σ_x`. -/
-noncomputable def sigmaX : EuclideanSpace ℂ (Fin 2) →ₗ[ℂ] EuclideanSpace ℂ (Fin 2) :=
-  Matrix.toEuclideanLin !![0, 1; 1, 0]
-
-/-- The Hamiltonian of the two-level example: `diag (0, 1)`. -/
-noncomputable def twoLevelHam : EuclideanSpace ℂ (Fin 2) →ₗ[ℂ] EuclideanSpace ℂ (Fin 2) :=
-  Matrix.toEuclideanLin !![0, 0; 0, 1]
-
-/-- The ground state of the two-level example. -/
-noncomputable def twoLevelGround : EuclideanSpace ℂ (Fin 2) :=
-  EuclideanSpace.single (0 : Fin 2) (1 : ℂ)
-
-/-- The hypotheses of `Phys.lieb_schultz_mattis` are satisfiable with a strictly positive gap
-parameter `Δ`, so the theorem is not vacuous. -/
-theorem lieb_schultz_mattis_hypotheses_nonvacuous :
-    ∃ (H T U : EuclideanSpace ℂ (Fin 2) →ₗ[ℂ] EuclideanSpace ℂ (Fin 2))
-      (ψ : EuclideanSpace ℂ (Fin 2)) (E₀ ε Δ : ℝ),
-      0 < Δ ∧
-      (∀ x y, ⟪T x, T y⟫_ℂ = ⟪x, y⟫_ℂ) ∧
-      (∀ x y, ⟪U x, U y⟫_ℂ = ⟪x, y⟫_ℂ) ∧
-      (∀ x, H (T x) = T (H x)) ∧
-      (∀ x, T (U x) = -(U (T x))) ∧
-      ‖ψ‖ = 1 ∧
-      H ψ = (E₀ : ℂ) • ψ ∧
-      (⟪U ψ, H (U ψ)⟫_ℂ).re ≤ E₀ + ε ∧
-      (∀ v, ‖v‖ = 1 → ⟪ψ, v⟫_ℂ = 0 → E₀ + Δ ≤ (⟪v, H v⟫_ℂ).re) := by
-  refine ⟨twoLevelHam, sigmaZ, sigmaX, twoLevelGround, 0, 1, 1, one_pos, ?_, ?_, ?_, ?_, ?_, ?_,
-    ?_, ?_⟩
-  · intro x y
-    simp [sigmaZ, Matrix.toLpLin_apply, PiLp.inner_apply, Fin.sum_univ_two, Matrix.vecHead,
-      Matrix.vecTail]
-  · intro x y
-    simp [sigmaX, Matrix.toLpLin_apply, PiLp.inner_apply, Fin.sum_univ_two, Matrix.vecHead,
-      Matrix.vecTail]
-    ring
-  · intro x
-    simp [twoLevelHam, sigmaZ, Matrix.toLpLin_apply, Matrix.vecHead, Matrix.vecTail,
-      PiLp.ext_iff, Fin.forall_fin_two]
-  · intro x
-    simp [sigmaZ, sigmaX, Matrix.toLpLin_apply, Matrix.vecHead, Matrix.vecTail, PiLp.ext_iff,
-      Fin.forall_fin_two]
-  · simp [twoLevelGround]
-  · simp only [twoLevelHam, twoLevelGround, Matrix.toLpLin_apply]
-    ext i
-    fin_cases i <;>
-      simp [Matrix.mulVec]
-  · simp [twoLevelHam, sigmaX, twoLevelGround, Matrix.toLpLin_apply, PiLp.inner_apply,
-      Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_two]
-  · intro v hv hp
-    have h0 : v.ofLp 0 = 0 := by
-      simpa [twoLevelGround, PiLp.inner_apply, Fin.sum_univ_two, EuclideanSpace.single_apply]
-        using hp
-    have h := EuclideanSpace.norm_eq v
-    rw [hv] at h
-    have hn : ∑ i, ‖v.ofLp i‖ ^ 2 = 1 := by
-      have := Real.sqrt_eq_one.mp h.symm
-      simpa using this
-    rw [Fin.sum_univ_two, h0] at hn
-    have hA : (0:ℝ) ≤ (v.ofLp 1).re * (v.ofLp 1).re + (v.ofLp 1).im * (v.ofLp 1).im := by
-      nlinarith [mul_self_nonneg (v.ofLp 1).re, mul_self_nonneg (v.ofLp 1).im]
-    simp only [norm_zero, ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, zero_pow, zero_add,
-      Complex.norm_def, Complex.normSq_apply, Real.sq_sqrt hA] at hn
-    simp [PiLp.inner_apply, Fin.sum_univ_two, h0, twoLevelHam, Matrix.toLpLin_apply,
-      Matrix.vecHead, Matrix.vecTail]
-    linarith
-
-end Example
-
-end Phys
-
-#print axioms Phys.lieb_schultz_mattis
-#print axioms Phys.lieb_schultz_mattis_no_unique_gapped_ground_state
-#print axioms Phys.lieb_schultz_mattis_hypotheses_nonvacuous
 

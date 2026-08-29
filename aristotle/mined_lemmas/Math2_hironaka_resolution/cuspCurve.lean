@@ -1,3 +1,11 @@
+/-
+# Hironaka Resolution
+Category: Frontier Math
+Target: Math2.hironaka_resolution
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -22,20 +30,17 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Math2
 
-/-- The affine cuspidal cubic `{(x, y) | y ^ 2 = x ^ 3}` over a field `k`. -/
+open MvPolynomial
 
-def cuspCurve (k : Type*) [Field k] : Set (k × k) := {p : k × k | p.2 ^ 2 = p.1 ^ 3}
+variable {k : Type*} [Field k]
 
-/-- The resolution (normalization) map of the cuspidal cubic: the affine line, which is
-smooth, mapped onto the cuspidal cubic by `t ↦ (t ^ 2, t ^ 3)`. -/
+/-- The affine plane curve `C_{p,q} : y^p = x^q`, as a polynomial in two variables. -/
+
+noncomputable def cuspCurve (k : Type*) [Field k] (p q : ℕ) : MvPolynomial (Fin 2) k :=
+  X 1 ^ p - X 0 ^ q
+
+/-- The set of `k`-points of the affine plane curve defined by `f`. -/

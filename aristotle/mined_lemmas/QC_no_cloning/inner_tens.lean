@@ -8,24 +8,22 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-
-open scoped ComplexConjugate InnerProductSpace
+open scoped InnerProductSpace
 
 namespace QC
 
-/-- The state space of one qubit, `ℂ²` with the Euclidean (Hilbert) structure. -/
-noncomputable abbrev Qubit := EuclideanSpace ℂ (Fin 2)
+/-- The one-qubit state space `ℂ²`, a finite-dimensional complex Hilbert space. -/
+abbrev H : Type := EuclideanSpace ℂ (Fin 2)
 
-/-- The state space of two qubits, i.e. `Qubit ⊗ Qubit` realized concretely as
-functions on `Fin 2 × Fin 2`. -/
-noncomputable abbrev Qubit2 := EuclideanSpace ℂ (Fin 2 × Fin 2)
+/-- The two-qubit state space `ℂ² ⊗ ℂ²`, realised as `ℂ^(Fin 2 × Fin 2)`. -/
+abbrev HH : Type := EuclideanSpace ℂ (Fin 2 × Fin 2)
 
-/-- The tensor product of two qubit states. -/
+/-- The tensor product `x ⊗ y` of two vectors of `H`, viewed inside `HH`. -/
 
-lemma inner_tens (a b c d : Qubit) :
-    ⟪tens a b, tens c d⟫_ℂ = ⟪a, c⟫_ℂ * ⟪b, d⟫_ℂ := by
-  simp only [tens, PiLp.inner_apply, Fintype.sum_prod_type, RCLike.inner_apply,
-    Finset.sum_mul_sum]
-  simp [map_mul, mul_mul_mul_comm]
+lemma inner_tens (x y z w : H) :
+    ⟪tens x y, tens z w⟫_ℂ = ⟪x, z⟫_ℂ * ⟪y, w⟫_ℂ := by
+  simp only [PiLp.inner_apply, RCLike.inner_apply, tens_apply, Fintype.sum_prod_type,
+    map_mul, Finset.sum_mul_sum]
+  refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by ring
 
-/-- The computational basis state `|0⟩`. -/
+/-- The "blank" state `|0⟩`. -/

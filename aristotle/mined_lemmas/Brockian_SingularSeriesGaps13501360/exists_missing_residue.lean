@@ -1,56 +1,35 @@
+/-
+# Singular Series Gaps 13501360
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps13501360
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
 
 namespace Brockian
 
-/-! # Admissible gap ranges and the Hardy–Littlewood singular series for prime pairs
+open Finset
 
-For a gap `g` we consider the two–element pattern `{0, g}`.  Such a pattern is
-*admissible* when, for every prime `p`, its residues do not cover all of `ZMod p`.
-The Hardy–Littlewood singular series of the pattern `{0, g}` is
-`𝔖(g) = 2 C₂ ∏_{p ∣ g, p odd} (p-1)/(p-2)` for even `g`, and `0` for odd `g`;
-here we work with the arithmetic factor `∏_{p ∣ g, p odd} (p-1)/(p-2)` and with the
-convention that the factor vanishes for odd `g` (matching the vanishing of `𝔖`).
--/
+/-- A finite set of integers is *admissible* if, for every prime `p`, it fails to cover
+all residue classes modulo `p`.  This is exactly the condition under which the
+Hardy–Littlewood singular series of the tuple is nonzero. -/
 
-/-- A finite pattern `H ⊆ ℤ` is *admissible* if for every prime `p` some residue class
-mod `p` is missed by `H`. -/
-
-lemma exists_missing_residue (p : ℕ) (hp : p.Prime) (H : Finset ℤ) (hcard : H.card < p) :
-    ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
-  haveI : Fact p.Prime := ⟨hp⟩
+lemma exists_missing_residue (S : Finset ℤ) (p : ℕ) (hp : p.Prime) (h : S.card < p) :
+    ∃ r : ZMod p, ∀ s ∈ S, (s : ZMod p) ≠ r := by
   classical
-  set S : Finset (ZMod p) := H.image (fun x : ℤ => (x : ZMod p)) with hS
-  have h1 : S.card < Fintype.card (ZMod p) := by
-    have h := Finset.card_image_le (s := H) (f := fun x : ℤ => (x : ZMod p))
-    rw [← hS] at h
-    rw [ZMod.card]
-    omega
-  have h2 : S ≠ Finset.univ := by
-    intro h
-    rw [h, Finset.card_univ] at h1
-    omega
-  obtain ⟨r, hr⟩ : ∃ r : ZMod p, r ∉ S := by
-    by_contra hcon
-    push_neg at hcon
-    exact h2 (Finset.eq_univ_iff_forall.mpr hcon)
-  refine ⟨r, fun h hh hcontra => hr ?_⟩
-  rw [hS, ← hcontra]
-  exact Finset.mem_image_of_mem _ hh
+  haveI : NeZero p := ⟨hp.ne_zero⟩
+  set T := S.image (fun s : ℤ => (s : ZMod p)) with hT
+  have hcard : T.card < Fintype.card (ZMod p) := by
+    have hle : T.card ≤ S.card := Finset.card_image_le
+    simpa [ZMod.card p] using lt_of_le_of_lt hle h
+  obtain ⟨r, hr⟩ : ∃ r : ZMod p, r ∉ T := by
+    by_contra hc
+    push_neg at hc
+    have hu : T = Finset.univ := Finset.eq_univ_iff_forall.mpr hc
+    rw [hu, Finset.card_univ] at hcard
+    exact lt_irrefl _ hcard
+  exact ⟨r, fun s hs hsr => hr (by rw [hT]; exact Finset.mem_image.mpr ⟨s, hs, hsr⟩)⟩
 
-/-- Even gaps give admissible pairs. -/
+/-- A gap `d` is admissible (as the pair `{0, d}`) exactly when `d` is even and nonzero. -/

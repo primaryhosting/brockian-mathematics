@@ -1,39 +1,35 @@
+/-!
+# Infinite Ramsey
+Category: Frontier — Set Theory
+Target: Frontier.infinite_ramsey
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-!
+Mathlib (as of this version) contains no infinite Ramsey theorem — searching for `Ramsey`
+turns up only `Mathlib/Combinatorics/Hindman.lean` and `Mathlib/Combinatorics/HalesJewett.lean`,
+where the word occurs in comments.  So we prove it from scratch, using the classical
+ultrafilter argument based on `Filter.hyperfilter`.
+-/
 
 namespace Frontier
 
-variable (c : ℕ → ℕ → Bool)
+open Filter Set
 
-open Classical in
-/-- The colour chosen at a stage of the Ramsey construction: `true` if the set of elements of
-`S` above `sInf S` that are joined to `sInf S` in colour `true` is infinite, `false` otherwise. -/
+noncomputable section
 
-lemma ramseySeq_antitone {n m : ℕ} (h : n ≤ m) : ramseySeq c m ⊆ ramseySeq c n := by
-  induction m, h using Nat.le_induction with
-  | base => exact subset_rfl
-  | succ m _ ih => exact (ramseyNext_subset c _).trans ih
+/-- A choice of element of a set of naturals (junk value `0` for the empty set). -/
 
-/-- The increasing sequence of "pivot" points of the construction. -/
+private lemma ramseySeq_antitone {i j : ℕ} (h : i ≤ j) :
+    ramseySeq C c0 j ⊆ ramseySeq C c0 i := by
+  induction j with
+  | zero => simpa using (Nat.le_zero.1 h) ▸ subset_rfl
+  | succ n ih =>
+      rcases Nat.lt_or_ge i (n + 1) with hlt | hge
+      · exact (ramseySeq_succ_subset C c0 n).trans (ih (Nat.lt_succ_iff.1 hlt))
+      · have : i = n + 1 := le_antisymm h hge
+        subst this; exact subset_rfl
+

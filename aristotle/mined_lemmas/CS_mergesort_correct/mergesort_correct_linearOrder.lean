@@ -1,42 +1,47 @@
 import Mathlib
+import RequestProject.Main
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Mergesort on a linear order
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+A Mathlib-facing corollary of `CS.mergesort_correct`: on any linear order,
+`CS.mergeSort (· ≤ ·)` produces a `List.Sorted (· ≤ ·)` permutation of its input.
+-/
 
 namespace CS
 
-variable {α : Type*}
+/-- On a linear order, `mergeSort (· ≤ ·) l` is sorted and a permutation of `l`. -/
 
-/-- Merge two lists with respect to a boolean comparison `le`. -/
-
-theorem mergesort_correct_linearOrder [LinearOrder α] (l : List α) :
-    List.Pairwise (· ≤ ·) (msort (fun a b => decide (a ≤ b)) l) ∧
-      (msort (fun a b => decide (a ≤ b)) l).Perm l := by
-  refine ⟨?_, msort_perm _ l⟩
-  have := msort_pairwise (α := α) (fun a b => decide (a ≤ b))
-    (by intro a b c hab hbc; simp only [decide_eq_true_eq] at *; exact le_trans hab hbc)
-    (by intro a b; simp only [decide_eq_true_eq]; exact le_total a b) l
-  simpa using this
+theorem mergesort_correct_linearOrder {α : Type*} [LinearOrder α] (l : List α) :
+    List.Pairwise (· ≤ ·) (CS.mergeSort (· ≤ · : α → α → Prop) l) ∧
+      (CS.mergeSort (· ≤ · : α → α → Prop) l).Perm l :=
+  CS.mergesort_correct _ le_total (fun _ _ _ hab hbc => le_trans hab hbc) l
 
 end CS
 
+/-!
+# Mergesort Correct
+Category: Computer Science
+Target: CS.mergesort_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+Note on file layout: Lean 4 requires `import` commands to be the very first
+commands in a file, and a module doc comment `/-! ... -/` may not precede them.
+Since the header comment above must literally begin the file, this module is
+written to be self-contained (it needs no imports beyond the prelude).
+A Mathlib-facing corollary for linear orders lives in
+`RequestProject/LinearOrderCorollary.lean`.
+-/
+
+set_option autoImplicit false
+
+namespace CS
+
+universe u
+
+variable {α : Type u}
+
+/-- Merge two lists with respect to a decidable relation `r`. -/

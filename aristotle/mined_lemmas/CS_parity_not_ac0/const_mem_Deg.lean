@@ -1,25 +1,29 @@
-import RequestProject.OrApprox
+import Mathlib
 
 /-!
-# Approximating a whole `AC⁰` circuit by a low degree polynomial
-
-Gate by gate (in topological order) we replace each gate by a low degree
-function over `ZMod 3`, accumulating an exceptional set of inputs.  A circuit of
-depth `d` with `s` gates is approximated by a function of degree `(2ℓ)^d`
-outside a set of at most `s · 2^{n-ℓ}` inputs.
+# Parity Not Ac 0
+Category: Frontier Cs
+Target: CS.parity_not_ac0
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+
+open scoped BigOperators
 
 namespace CS
 
-open Finset
+/-- The field with three elements. -/
+abbrev F3 := ZMod 3
 
-variable {n : ℕ}
+/-- The Boolean cube on `n` coordinates. -/
+abbrev Cube (n : ℕ) := Fin n → Bool
 
-/-- The vector of gate values of a circuit on a given input. -/
+/-- `±1` encoding of a Boolean value inside `F3`. -/
 
-lemma const_mem_Deg (a : ZMod 3) (D : ℕ) : (fun _ => a : Cube n → ZMod 3) ∈ Deg n D := by
-  have : (fun _ => a : Cube n → ZMod 3) = a • (1 : Cube n → ZMod 3) := by
+lemma const_mem_Deg {n D : ℕ} (c : F3) : (fun _ => c : Cube n → F3) ∈ Deg n D := by
+  have : (fun _ => c : Cube n → F3) = c • (1 : Cube n → F3) := by
     funext x; simp
   rw [this]
-  exact Submodule.smul_mem _ _ (one_mem_Deg D)
+  exact Submodule.smul_mem _ _ one_mem_Deg
 

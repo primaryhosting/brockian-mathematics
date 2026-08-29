@@ -6,12 +6,7 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- This development needs no Mathlib import: every lemma used
--- (`List.isPrefixOf_iff_prefix`, `List.any_eq_true`, `decidable_of_iff`)
--- is available in the Lean 4 core library, and the required header comment
--- must be the first thing in the file (Lean forbids `import` after a `/-! -/`
--- module docstring).
-
+set_option maxHeartbeats 1000000
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
@@ -19,29 +14,53 @@ namespace PCA.Isolation
 
 /-! ## The isolation model
 
-A *resource* is identified by a hierarchical path (a list of path components).
-A *scope* granted to an application is a path prefix: holding the scope `s`
-authorises access to every resource whose path extends `s.root`.
+A proof-carrying app runs against an *isolation engine*: every resource access it
+performs must be checked against the app's declared *scope*.  We model resources as
+hierarchical paths (lists of name segments), and a scope as a list of positive
+*grants* (a subtree root, together with a flag saying whether writing is permitted
+inside that subtree) plus a list of *denied* subtrees which override every grant.
 
-The isolation engine of a proof-carrying app does not reason with the
-propositional predicate directly; it evaluates a decidable *encoding*
-(a `Bool`-valued function) built from `List.isPrefixOf` / `List.any`.
-The theorems below state that this encoding is sound and complete with
-respect to the intended semantics. -/
+The declarative meaning of "this request is in scope" is the predicate `InScope`.
+The engine, however, cannot evaluate an existential quantifier: it runs a concrete
+boolean decision procedure, `encodeInScope`.  The target theorem states that this
+boolean encoding is *sound and complete* for the declarative predicate. -/
 
-/-- A resource path: a list of hierarchical components. -/
-abbrev Path := List String
+/-- A path segment, i.e. one component of a resource name. -/
+abbrev Seg : Type := String
 
-/-- A capability scope: everything below `root` is authorised. -/
-structure Scope where
+/-- A resource is named by a hierarchical path. -/
+abbrev Path : Type := List Seg
+
+/-- The access mode of a request. -/
+inductive Mode where
+  | read : Mode
+  | write : Mode
+  deriving DecidableEq, Repr
+
+/-- A positive capability: the subtree rooted at `root` may be read, and may also be
+written when `mayWrite = true`. -/
+structure Grant where
   root : Path
-  deriving DecidableEq
+  mayWrite : Bool
+  deriving Repr
 
-/-- Semantics of a single scope: `s` covers `p` when `s.root` is a prefix of `p`. -/
+/-- An app's isolation scope: positive grants, plus denied subtrees which take
+priority over every grant. -/
+structure Scope where
+  grants : List Grant
+  denies : List Path
+  deriving Repr
 
-def Scope.coversB (s : Scope) (p : Path) : Bool := s.root.isPrefixOf p
+/-- A resource access request. -/
+structure Request where
+  path : Path
+  mode : Mode
+  deriving Repr
 
-/-- A policy is the list of scopes granted to an application. -/
-abbrev Policy := List Scope
+/-- `g` covers the request `q`: the request's path lies in the subtree rooted at
+`g.root`, and the grant is strong enough for the request's mode. -/
 
-/-- Semantics: a path is in scope for a policy when some granted scope covers it. -/
+def Scope.blocks (s : Scope) (q : Request) : Bool :=
+  s.denies.any (fun d => d.isPrefixOf q.path)
+
+/-- **The isolation engine's executable encoding** of the in-scope test. -/

@@ -9,52 +9,36 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace Chem
 
-/-- The Gibbs entropy of a probability vector `p`, `-∑ i, p i * log (p i)`. -/
-noncomputable def entropy {ι : Type*} [Fintype ι] (p : ι → ℝ) : ℝ :=
-  ∑ i, Real.negMulLog (p i)
+open Finset
 
-lemma entropy_eq_neg_sum {ι : Type*} [Fintype ι] (p : ι → ℝ) :
-    entropy p = -∑ i, p i * Real.log (p i) := by
-  simp [entropy, Real.negMulLog, Finset.sum_neg_distrib]
+variable {ι : Type*} [Fintype ι]
 
-/-- The Gibbs entropy `-∑ pᵢ log pᵢ` is concave on the probability simplex. -/
-theorem entropy_concave {ι : Type*} [Fintype ι] :
-    ConcaveOn ℝ (stdSimplex ℝ ι) (entropy (ι := ι)) := by
-  refine ⟨convex_stdSimplex ℝ ι, ?_⟩
-  intro p hp q hq a b ha hb hab
-  have hpi : ∀ i, (0:ℝ) ≤ p i := fun i => hp.1 i
-  have hqi : ∀ i, (0:ℝ) ≤ q i := fun i => hq.1 i
-  have key : ∀ i ∈ (Finset.univ : Finset ι),
-      a • Real.negMulLog (p i) + b • Real.negMulLog (q i)
-        ≤ Real.negMulLog (a • p i + b • q i) :=
-    fun i _ => Real.concaveOn_negMulLog.2 (hpi i) (hqi i) ha hb hab
-  have := Finset.sum_le_sum key
-  simpa [entropy, Finset.sum_add_distrib, Finset.mul_sum] using this
+/-- The set of probability vectors indexed by `ι`. -/
+def probSimplex (ι : Type*) [Fintype ι] : Set (ι → ℝ) :=
+  {p | (∀ i, 0 ≤ p i) ∧ ∑ i, p i = 1}
+
+/-- The Gibbs entropy `-∑ i, p i * log (p i)` of a probability vector. -/
+noncomputable def gibbsEntropy (p : ι → ℝ) : ℝ := ∑ i, Real.negMulLog (p i)
+
+lemma convex_probSimplex : Convex ℝ (probSimplex ι) := by
+  intro x hx y hy a b ha hb hab
+  refine ⟨fun i => ?_, ?_⟩
+  · have h1 := hx.1 i
+    have h2 := hy.1 i
+    simpa using add_nonneg (mul_nonneg ha h1) (mul_nonneg hb h2)
+  · simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul, Finset.sum_add_distrib,
+      ← Finset.mul_sum, hx.2, hy.2]
+    linarith
+
+/-- The Gibbs entropy `−∑ pᵢ log pᵢ` is concave on the simplex of probability vectors. -/
+theorem entropy_concave : ConcaveOn ℝ (probSimplex ι) gibbsEntropy := by
+  refine ⟨convex_probSimplex, fun x hx y hy a b ha hb hab => ?_⟩
+  simp only [gibbsEntropy, smul_eq_mul, Finset.mul_sum, ← Finset.sum_add_distrib,
+    Pi.add_apply, Pi.smul_apply]
+  refine Finset.sum_le_sum fun i _ => ?_
+  exact Real.concaveOn_negMulLog.2 (Set.mem_Ici.2 (hx.1 i)) (Set.mem_Ici.2 (hy.1 i)) ha hb hab
 
 end Chem
 

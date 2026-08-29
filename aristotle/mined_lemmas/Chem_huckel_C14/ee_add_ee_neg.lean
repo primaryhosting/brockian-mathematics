@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Huckel C 14
 Category: Chemistry
 Target: Chem.huckel_C14
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,27 +33,16 @@ set_option grind.warning false
 
 namespace Chem
 
-open scoped Matrix
+/-- The standard additive character `ZMod 14 → ℂ`, `j ↦ exp (2πI j / 14)`. -/
 
-/-! ### A primitive 14-th root of unity and the associated character -/
+lemma ee_add_ee_neg (k : ZMod 14) :
+    ee k + ee (-k) = ((2 * Real.cos (2 * Real.pi * k.val / 14) : ℝ) : ℂ) := by
+  have hx : ee k = Complex.exp (((2 * Real.pi * k.val / 14 : ℝ) : ℂ) * Complex.I) := by
+    rw [ee_apply]; push_cast; ring_nf
+  rw [AddChar.map_neg_eq_inv, hx, ← Complex.exp_neg]
+  push_cast
+  rw [Complex.two_cos, neg_mul]
 
-/-- A primitive 14-th root of unity. -/
+/-! ### The eigenvalue equation -/
 
-theorem ee_add_ee_neg (k : Fin 14) :
-    ee ((k : ℕ) : ℤ) + ee (-((k : ℕ) : ℤ)) = (lam k : ℂ) := by
-  set θ : ℝ := 2 * Real.pi * ((k : ℕ) : ℝ) / 14 with hdef
-  have h1 : ee ((k : ℕ) : ℤ) = Complex.exp ((θ : ℂ) * Complex.I) := by
-    rw [ee_eq_exp]
-    norm_num [hdef]
-  have h2 : ee (-((k : ℕ) : ℤ)) = Complex.exp (-((θ : ℂ) * Complex.I)) := by
-    rw [ee_eq_exp]
-    congr 1
-    push_cast [hdef]
-    ring
-  rw [h1, h2, lam, ← hdef, Complex.ofReal_mul, Complex.ofReal_ofNat, Complex.ofReal_cos,
-    Complex.cos, ← neg_mul]
-  ring
-
-/-! ### Diagonalisation -/
-
-/-- The (unnormalised) discrete Fourier transform matrix. -/
+/-- The key computation: applying the adjacency matrix to the character vector. -/

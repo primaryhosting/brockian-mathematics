@@ -1,37 +1,24 @@
 import Mathlib
+import RequestProject.Main
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Mergesort on a linear order
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+A Mathlib-facing corollary of `CS.mergesort_correct`: on any linear order,
+`CS.mergeSort (· ≤ ·)` produces a `List.Sorted (· ≤ ·)` permutation of its input.
+-/
 
 namespace CS
 
-variable {α : Type*} [LinearOrder α]
+/-- On a linear order, `mergeSort (· ≤ ·) l` is sorted and a permutation of `l`. -/
 
-/-- Merge two lists, assumed sorted, into one list. -/
-
-def mergeSort : List α → List α
+def mergeSort (r : α → α → Prop) [DecidableRel r] : List α → List α
   | [] => []
-  | [a] => [a]
-  | a :: b :: t =>
-      let l := a :: b :: t
-      merge (mergeSort (l.take (l.length / 2))) (mergeSort (l.drop (l.length / 2)))
-  termination_by l => l.length
-  decreasing_by
-  · simp only [List.length_take, List.length_cons]
-    omega
-  · simp only [List.length_drop, List.length_cons]
-    omega
+  | [x] => [x]
+  | x :: y :: t =>
+      merge r (mergeSort r (split (x :: y :: t)).1) (mergeSort r (split (x :: y :: t)).2)
+termination_by l => l.length
+decreasing_by
+  · exact split_fst_length_lt x y t
+  · exact split_snd_length_lt x y t
 

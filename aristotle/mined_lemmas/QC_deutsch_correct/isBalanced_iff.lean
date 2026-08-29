@@ -1,0 +1,49 @@
+import Mathlib
+
+/-!
+# Deutsch Correct
+Category: Quantum Computing
+Target: QC.deutsch_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace QC
+
+/-- A two–qubit state is an amplitude vector indexed by `Bool × Bool`. -/
+abbrev State := Bool × Bool → ℂ
+
+/-- `1/√2`, the normalisation constant of the Hadamard gate. -/
+
+lemma isBalanced_iff (f : Bool → Bool) : IsBalanced f ↔ f false ≠ f true := by
+  constructor
+  · intro h; exact h false true (by simp)
+  · intro h x y hxy
+    cases x <;> cases y <;> simp_all [Ne.symm]
+
+/-- **Deutsch's algorithm is correct.**  With a single query to the oracle for
+`f : {0,1} → {0,1}`, measuring the first qubit yields `0` with probability `1`
+exactly when `f` is constant, and with probability `0` exactly when `f` is balanced. -/

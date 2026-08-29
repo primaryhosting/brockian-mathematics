@@ -1,42 +1,44 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
+
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
 
 theorem nash_equilibrium_exists [∀ i, Nonempty (S i)]
-    (hB : BrouwerProperty) (G : FiniteGame ι S) :
-    ∃ x : (i : ι) → S i → ℝ, IsNash G x := by
-  set K : Set ((i : ι) → S i → ℝ) := Set.univ.pi fun i => stdSimplex ℝ (S i) with hK
-  have hmem : ∀ x : (i : ι) → S i → ℝ, x ∈ K ↔ IsMixed x := by
-    intro x
-    simp [hK, IsMixed]
-  have hne : K.Nonempty := by
-    refine ⟨fun i => pureVec (Classical.arbitrary (S i)), ?_⟩
-    rw [hmem]
-    intro i
-    exact pureVec_mem_stdSimplex _
-  have hcomp : IsCompact K := isCompact_univ_pi fun i => isCompact_stdSimplex (S i)
-  have hconv : Convex ℝ K := convex_pi fun i _ => convex_stdSimplex ℝ (S i)
-  obtain ⟨x, hxK, hfix⟩ := hB _ K hne hcomp hconv (nashMap G) (continuous_nashMap G)
-    (fun y hy => (hmem _).2 (nashMap_mapsTo G ((hmem y).1 hy)))
-  exact ⟨x, isNash_of_nashMap_eq G ((hmem x).1 hxK) hfix⟩
+    (hB : BrouwerFixedPoint (∀ i, S i → ℝ)) (u : ι → (∀ j, S j) → ℝ) :
+    ∃ x : ∀ j, S j → ℝ, IsNashEquilibrium u x := by
+  obtain ⟨x, hxK, hfix⟩ := hB (mixedProfiles S) mixedProfiles_nonempty
+    mixedProfiles_isCompact mixedProfiles_convex (nashMap u)
+    (continuous_nashMap u).continuousOn (nashMap_mapsTo u)
+  exact ⟨x, isNashEquilibrium_of_fixed u hxK hfix⟩
 
-/-! ### Unconditional cases -/
+/-! ## Unconditional existence for potential games
 
-/-- A pure strategy profile is a pure Nash equilibrium if no player can improve by
-switching to another pure strategy. -/
+The reduction above needs Brouwer's fixed point theorem. For the special case of
+*potential games* (which includes games of common interest) a pure strategy equilibrium
+exists unconditionally: any maximizer of the potential is one. -/
+
+/-- The mixed profile in which every player `j` plays the pure strategy `p j`. -/

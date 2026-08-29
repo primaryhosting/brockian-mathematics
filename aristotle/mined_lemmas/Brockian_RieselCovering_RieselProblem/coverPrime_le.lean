@@ -33,20 +33,11 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Riesel Problem
-Category: Brockian Conjecture
-Target: Brockian.RieselCovering.RieselProblem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Brockian.RieselCovering
 
-namespace Brockian
-namespace RieselCovering
+/-- The Riesel number under consideration: `509203`. -/
 
-/-- A *Riesel number* is an odd natural number `k` such that `k * 2 ^ n - 1` is
-composite for every `n ≥ 1`. -/
+lemma coverPrime_le (r : ℕ) : coverPrime r ≤ 241 := by
+  rcases coverPrime_mem r with h | h | h | h | h | h <;> rw [h] <;> norm_num
 
-lemma coverPrime_le (r : ℕ) (hr : r < 24) : coverPrime r ≤ 241 := by
-  interval_cases r <;> decide
-
+/-- `2` has multiplicative order dividing `24` modulo each covering prime. -/

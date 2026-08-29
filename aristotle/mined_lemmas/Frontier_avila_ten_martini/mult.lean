@@ -1,11 +1,12 @@
-import Mathlib
-/-!
+/-
 # Avila Ten Martini
 Category: Frontier — Fields Medal Work
 Target: Frontier.avila_ten_martini
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -16,7 +17,7 @@ open scoped ENNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxHeartbeats 400000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
@@ -30,20 +31,11 @@ noncomputable section
 
 /-! ## The Hilbert space `ℓ²(ℤ)` -/
 
-/-- The Hilbert space `ℓ²(ℤ, ℂ)` on which the almost Mathieu operator acts. -/
-abbrev L2Z := lp (fun _ : ℤ => ℂ) 2
+/-- The complex Hilbert space `ℓ²(ℤ)`, on which the almost Mathieu operator acts. -/
+abbrev Hl2 := lp (fun _ : ℤ => ℂ) 2
 
-instance : Nontrivial L2Z := by
-  refine ⟨lp.single 2 (0 : ℤ) (1 : ℂ), 0, ?_⟩
-  intro h
-  have h0 : ‖lp.single (E := fun _ : ℤ => ℂ) 2 (0 : ℤ) (1 : ℂ)‖ = 0 := by rw [h]; simp
-  rw [lp.norm_single (by norm_num)] at h0
-  simp at h0
+/-- Auxiliary: the real exponent attached to `p = 2`. -/
 
-/-! ## Shift operators -/
+def mult (v : ℤ → ℂ) (C : ℝ) (hv : ∀ n, ‖v n‖ ≤ C) : Hl2 →L[ℂ] Hl2 :=
+  (multL v C hv).mkContinuous C (multL_norm v C hv)
 
-
-def mult (v : ℤ → ℝ) (C : ℝ) (hv : ∀ n, |v n| ≤ C) : L2Z →L[ℂ] L2Z :=
-  (multL v C hv).mkContinuous C (norm_multL v C hv)
-
-@[simp]

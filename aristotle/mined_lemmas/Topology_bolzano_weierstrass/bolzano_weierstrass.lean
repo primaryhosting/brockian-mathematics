@@ -5,7 +5,6 @@ Target: Topology.bolzano_weierstrass
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,15 +40,11 @@ set_option grind.warning false
 
 namespace Topology
 
-/-- **Bolzano–Weierstrass theorem.**  In a metric space, any sequence `f : ℕ → X` whose values
-all lie in a compact set `s` admits a strictly monotone reindexing `g : ℕ → ℕ` such that the
-subsequence `f ∘ g` converges to some point `a ∈ s`.
-
-This is a direct instance of Mathlib's `IsCompact.tendsto_subseq` (a metric space is a
-first-countable topological space). -/
+/-- **Bolzano–Weierstrass**: a sequence taking values in a compact subset `s` of a metric
+space has a subsequence converging to a point of `s`. -/
 
 theorem bolzano_weierstrass {X : Type*} [MetricSpace X] {s : Set X} (hs : IsCompact s)
-    (f : ℕ → X) (hf : ∀ n : ℕ, f n ∈ s) :
+    (f : ℕ → X) (hf : ∀ n, f n ∈ s) :
     ∃ a ∈ s, ∃ g : ℕ → ℕ, StrictMono g ∧ Filter.Tendsto (f ∘ g) Filter.atTop (nhds a) :=
   hs.tendsto_subseq hf
 

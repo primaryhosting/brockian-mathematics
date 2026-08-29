@@ -1,12 +1,3 @@
-/-
-# Feit Thompson Odd Order
-Category: Frontier Abel
-Target: Frontier.feit_thompson_odd_order
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean 4 requires `import` to precede any module docstring, so the header above is
--- repeated verbatim as the module docstring immediately after the import.)
 import Mathlib
 
 /-!
@@ -17,77 +8,67 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option autoImplicit false
+namespace Frontier
 
 universe u
 
-namespace Frontier
+/-- Auxiliary strong induction on the order of the group. -/
 
-/-- Every divisor of an odd natural number is odd. -/
-
-private lemma odd_of_dvd {m n : ℕ} (hmn : m ∣ n) (hn : Odd n) : Odd m := by
-  obtain ⟨k, rfl⟩ := hmn
-  exact (Nat.odd_mul.mp hn).1
-
-/-- The statement "every finite simple group of odd order is commutative".
-This is the simple-group form of the Feit–Thompson odd order theorem. -/
-
-def OddOrderSimpleComm : Prop :=
-  ∀ (S : Type u) [Group S] [Finite S],
-    Odd (Nat.card S) → IsSimpleGroup S → ∀ a b : S, a * b = b * a
-
-/-- Auxiliary induction: assuming that all finite simple groups of odd order are
-commutative, every finite group of odd order and cardinality `n` is solvable. -/
-
-private theorem isSolvable_of_card_eq (hsimple : OddOrderSimpleComm.{u}) (n : ℕ) :
-    ∀ (G : Type u) [Group G] [Finite G], Nat.card G = n → Odd (Nat.card G) → IsSolvable G := by
+private theorem solvable_of_odd_card_aux
+    (hsimple : ∀ (S : Type u) [Group S] [Finite S], IsSimpleGroup S → Odd (Nat.card S) →
+      ∀ a b : S, a * b = b * a) :
+    ∀ (n : ℕ) (G : Type u) [Group G] [Finite G], Nat.card G = n → Odd (Nat.card G) →
+      IsSolvable G := by
+  intro n
   induction n using Nat.strong_induction_on with
   | _ n ih =>
     intro G _ _ hcard hodd
-    rcases subsingleton_or_nontrivial G with _ | _
-    · infer_instance
-    by_cases hsimp : IsSimpleGroup G
-    · exact IsSimpleGroup.comm_iff_isSolvable.mp (hsimple G hodd hsimp)
-    · -- `G` is nontrivial and not simple, so it has a proper nontrivial normal subgroup `H`.
-      obtain ⟨H, hHnorm, hbot, htop⟩ : ∃ H : Subgroup G, H.Normal ∧ H ≠ ⊥ ∧ H ≠ ⊤ := by
-        by_contra hcon
-        push_neg at hcon
-        refine hsimp ⟨fun H hH => ?_⟩
-        by_cases hHb : H = ⊥
-        · exact Or.inl hHb
-        · exact Or.inr (hcon H hH hHb)
-      haveI := hHnorm
-      have hmul : H.index * Nat.card H = Nat.card G := H.index_mul_card
-      haveI : Nontrivial H := H.nontrivial_iff_ne_bot.mpr hbot
-      have hHcard : 1 < Nat.card H := Finite.one_lt_card
-      have hHindex : 1 < H.index := Subgroup.one_lt_index_of_ne_top htop
-      have hqcard : Nat.card (G ⧸ H) = H.index := (H.index_eq_card).symm
-      -- both `H` and `G ⧸ H` are strictly smaller and of odd order
-      haveI : IsSolvable H := by
-        refine ih (Nat.card H) ?_ H rfl (odd_of_dvd ⟨H.index, by rw [← hmul, Nat.mul_comm]⟩ hodd)
-        subst hcard
-        nlinarith [hmul]
-      haveI : IsSolvable (G ⧸ H) := by
-        refine ih (Nat.card (G ⧸ H)) ?_ (G ⧸ H) rfl ?_
-        · subst hcard
-          rw [hqcard]
-          nlinarith [hmul]
-        · exact odd_of_dvd ⟨Nat.card H, by rw [hqcard, hmul]⟩ hodd
-      exact solvable_of_ker_le_range H.subtype (QuotientGroup.mk' H)
-        (by rw [QuotientGroup.ker_mk', Subgroup.range_subtype])
+    subst hcard
+    by_cases hnt : Nontrivial G
+    · haveI := hnt
+      by_cases hex : ∃ N : Subgroup G, N.Normal ∧ N ≠ ⊥ ∧ N ≠ ⊤
+      · obtain ⟨N, hN, hbot, htop⟩ := hex
+        haveI := hN
+        have hNcard : Nat.card N < Nat.card G := by
+          have hne : Nat.card N ≠ Nat.card G := fun h => htop (N.eq_top_of_card_eq h)
+          exact lt_of_le_of_ne (Nat.le_of_dvd Nat.card_pos N.card_subgroup_dvd_card) hne
+        have hQcard : Nat.card (G ⧸ N) < Nat.card G := by
+          have h2 : 1 < Nat.card N := (N.one_lt_card_iff_ne_bot).2 hbot
+          have hq : 0 < Nat.card (G ⧸ N) := Nat.card_pos
+          rw [N.card_eq_card_quotient_mul_card_subgroup]
+          exact (Nat.lt_mul_iff_one_lt_right hq).2 h2
+        haveI : IsSolvable N :=
+          ih _ hNcard N rfl (hodd.of_dvd_nat N.card_subgroup_dvd_card)
+        haveI : IsSolvable (G ⧸ N) :=
+          ih _ hQcard (G ⧸ N) rfl (hodd.of_dvd_nat N.card_quotient_dvd_card)
+        exact solvable_of_ker_le_range N.subtype (QuotientGroup.mk' N)
+          (by rw [QuotientGroup.ker_mk', Subgroup.range_subtype])
+      · push_neg at hex
+        have hs : IsSimpleGroup G := by
+          refine ⟨fun H hH => ?_⟩
+          by_cases hb : H = ⊥
+          · exact Or.inl hb
+          · exact Or.inr (hex H hH hb)
+        exact isSolvable_of_comm (hsimple G hs hodd)
+    · rw [not_nontrivial_iff_subsingleton] at hnt
+      exact isSolvable_of_comm fun a b => by
+        simp [Subsingleton.elim (a * b) (b * a)]
 
-/-- **Feit–Thompson odd order theorem, Lean-checked reduction.**
+/-- **Feit–Thompson (odd order theorem), reduced to simple groups.**
 
-Assuming the simple-group form of the theorem — every finite simple group of odd
-order is commutative — every finite group of odd order is solvable.
+Every finite group of odd order is solvable, *given* the simple-group case: namely that
+every finite simple group of odd order is commutative (equivalently, cyclic of prime order).
 
-The reduction is by strong induction on the order: a nontrivial non-simple group of
-odd order has a proper nontrivial normal subgroup `H`, and both `H` and `G ⧸ H`
-again have odd order and smaller cardinality, so the extension is solvable. -/
+This is a Lean-checked reduction of the Feit–Thompson theorem to its content about simple
+groups; the reduction itself is the standard minimal-counterexample argument: in a minimal
+non-solvable group of odd order, no proper nontrivial normal subgroup can exist (otherwise
+the subgroup and the quotient would both be solvable of smaller odd order), so the group is
+simple, contradicting the hypothesis. -/
 
-theorem feit_thompson_odd_order (hsimple : OddOrderSimpleComm.{u})
+theorem feit_thompson_odd_order
+    (hsimple : ∀ (S : Type u) [Group S] [Finite S], IsSimpleGroup S → Odd (Nat.card S) →
+      ∀ a b : S, a * b = b * a)
     (G : Type u) [Group G] [Finite G] (hodd : Odd (Nat.card G)) : IsSolvable G :=
-  isSolvable_of_card_eq hsimple (Nat.card G) G rfl hodd
+  solvable_of_odd_card_aux hsimple _ G rfl hodd
 
-/-- The converse reduction: if every finite group of odd order is solvable, then every
-finite simple group of odd order is commutative. -/
+/-- Unconditional base case: a finite group of odd prime power order is solvable. -/

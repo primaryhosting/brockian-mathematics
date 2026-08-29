@@ -1,42 +1,35 @@
-/-
+/-!
 # Huckel C 15
 Category: Chemistry
 Target: Chem.huckel_C15
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
-
-/-!
-# Huckel C 15
-
-Category: Chemistry.  Target: `Chem.huckel_C15`.
-
-The Hückel (adjacency) eigenvalues of the cycle graph `C₁₅` are `2 cos (2πk/15)`, `k = 0, …, 14`.
-
-The proof diagonalizes the adjacency matrix by the discrete Fourier matrix
-`U i k = ζ ^ (k * i)` with `ζ = exp (2πi/15)`, and then uses
-`spectrum.units_conjugate` together with `spectrum_diagonal`.
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Classical
-
-set_option maxHeartbeats 1000000
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
 
 namespace Chem
 
-open Complex Matrix SimpleGraph Finset
+open Finset
 
 /-- A primitive 15-th root of unity. -/
 
-theorem C15adj_mulVec (v : Fin 15 → ℂ) (i : Fin 15) :
-    C15adj.mulVec v i = v (i + 1) + v (i - 1) := by
-  rw [C15adj, SimpleGraph.adjMatrix_mulVec_apply]
-  have h : (cycleGraph 15).neighborFinset i = {i + 1, i - 1} := by revert i; decide
-  rw [h, Finset.sum_pair (by revert i; decide : i + 1 ≠ i - 1)]
+lemma C15adj_mulVec (v : ZMod 15 → ℂ) (i : ZMod 15) :
+    (C15adj *ᵥ v) i = v (i + 1) + v (i - 1) := by
+  have hsplit : ∀ j : ZMod 15,
+      C15adj i j * v j = (if j = i + 1 then v j else 0) + (if j = i - 1 then v j else 0) := by
+    intro j
+    by_cases h1 : j = i + 1 <;> by_cases h2 : j = i - 1 <;>
+      simp [C15adj, h1, h2]
+    · exfalso
+      have : (i : ZMod 15) + 1 = i - 1 := by rw [← h1, h2]
+      have h3 : (2 : ZMod 15) = 0 := by linear_combination this
+      exact absurd h3 (by decide)
+  rw [Matrix.mulVec, Matrix.dotProduct]
+  rw [Finset.sum_congr rfl (fun j _ => hsplit j), Finset.sum_add_distrib,
+    Finset.sum_ite_eq' Finset.univ (i + 1) v, Finset.sum_ite_eq' Finset.univ (i - 1) v]
+  simp
 
+/-- **Hückel theory for the cycle `C₁₅`**: a complex number `μ` is an eigenvalue of the
+adjacency matrix of the cycle graph on 15 vertices if and only if it is of the form
+`2 cos (2 π k / 15)` for some `k ∈ {0, …, 14}`. -/

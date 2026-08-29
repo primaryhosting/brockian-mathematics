@@ -1,3 +1,11 @@
+/-
+# Huckel C 14
+Category: Chemistry
+Target: Chem.huckel_C14
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -6,20 +14,26 @@ Category: Chemistry
 Target: Chem.huckel_C14
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+The adjacency (Hückel) matrix of the cycle graph `C₁₄` is diagonalised by the discrete Fourier
+transform on `ZMod 14`; its characteristic polynomial is therefore
+`∏_{k=0}^{13} (X - 2 cos (2πk/14))`, i.e. its eigenvalues are `2 cos (2πk/14)` for `k = 0, …, 13`.
 -/
 
-open Matrix Finset Complex
-
-set_option maxHeartbeats 1000000
+open Complex Polynomial Matrix
 
 namespace Chem
 
+noncomputable section
+
 /-- A primitive 14-th root of unity. -/
 
-lemma chi_eq_exp (k : Fin 14) :
-    chi k = Complex.exp (((2 * Real.pi * (k : ℝ) / 14 : ℝ) : ℂ) * Complex.I) := by
-  rw [chi, om, ← Complex.exp_nat_mul]
+theorem chi_eq_exp (a : ZMod 14) : chi a = Complex.exp (theta a.val * Complex.I) := by
+  show zeta14 ^ a.val = _
+  rw [zeta14, ← Complex.exp_nat_mul]
   congr 1
+  unfold theta
   push_cast
   ring
 
+/-- `ζ^k + ζ^{-k} = 2 cos (2πk/14)`. -/

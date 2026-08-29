@@ -1,4 +1,19 @@
+/-
+# Huckel C 15
+Category: Chemistry
+Target: Chem.huckel_C15
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
+
+/-!
+# Huckel C 15
+Category: Chemistry
+Target: Chem.huckel_C15
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -16,20 +31,12 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-/-!
-# Hückel spectrum of the cycle `C₁₅`
-
-The adjacency matrix of the cycle graph `C₁₅` has characteristic polynomial
-`∏_{k=0}^{14} (X - 2cos(2πk/15))`; equivalently its eigenvalues are the numbers
-`2cos(2πk/15)` for `k = 0, …, 14`.
--/
-
 namespace Chem
 
-open Matrix Polynomial Complex
+open Finset SimpleGraph
 
 /-- A primitive 15-th root of unity. -/
 
-noncomputable def w : ℂ := Complex.exp (2 * Real.pi * Complex.I / 15)
+noncomputable def W (m : ℤ) : ℂ := zeta ^ m
 
-/-- The Hückel (adjacency) matrix of the cycle `C₁₅`. -/
+/-- The character of `Fin 15` with frequency `m`. -/

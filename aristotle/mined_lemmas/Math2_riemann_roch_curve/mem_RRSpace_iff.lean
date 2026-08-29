@@ -1,3 +1,10 @@
+/-
+# Riemann Roch Curve
+Category: Frontier Math
+Target: Math2.riemann_roch_curve
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -6,47 +13,53 @@ Category: Frontier Math
 Target: Math2.riemann_roch_curve
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
--/
 
-open scoped BigOperators
-open scoped Classical
+## Contents
 
-set_option maxHeartbeats 1000000
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+This file develops, from scratch, the divisor theory of the smooth projective curve `ℙ¹`
+over an arbitrary field `k`, through its function field `k(X) = RatFunc k`, and proves the
+Riemann–Roch theorem for it:
 
-/-!
-## Scope and setup
+  `ℓ(D) - ℓ(K - D) = deg D + 1 - g`.
 
-We formalise the Riemann–Roch theorem for the projective line `ℙ¹` over an algebraically
-closed field `k`, a smooth projective curve, with everything built from scratch:
+Nothing is assumed: all of the following are defined here and all statements are proved.
 
-* the places of `ℙ¹` are the points `a : k` of the affine line together with the point at
-  infinity, and the associated discrete valuations are `ordAt a` and `ordInf`;
-* a divisor is a finitely supported family of integers on the affine points together with a
-  coefficient at infinity, and `Divisor.deg` is its degree;
-* `RRSpace D` is the Riemann-Roch space `L(D) = {f : div f + D ≥ 0}` and
-  `ell D = ℓ(D) = dim_k L(D)`;
-* `canonicalDivisor k` is the divisor `-2·∞` of the differential `dt`, and the genus is
-  defined intrinsically as `genus k = ℓ(K)`.
+* `Place k`: the closed points of `ℙ¹`, namely the monic irreducible polynomials
+  (finite points) together with the point at infinity.
+* `placeDeg`, `Divisor k`, `degDiv`: degrees of points, divisors and their degrees.
+* `ord v f`: the order of vanishing of a rational function at a closed point, and
+  `divisorOf f` the principal divisor of `f`.
+* `RRSpace D` (`= L(D)`) and `ell D` (`= ℓ(D) = dim_k L(D)`).
+* `canonicalDivisor k = -2·[∞]`, the divisor of the differential `dX`, and
+  `genus k = ℓ(K)`, the dimension of the space of regular differentials.
 
-The main theorem `Math2.riemann_roch_curve` states `ℓ(D) - ℓ(K - D) = deg D + 1 - g`.
-It is deduced from the computation `Math2.ell_eq : ℓ(D) = max (deg D + 1) 0`, which is proved
-by exhibiting an explicit `k`-linear isomorphism between `L(D)` and the space of polynomials
-of degree at most `deg D`.
+The main results are `Math2.riemann_roch_curve`, together with `Math2.ell_eq`
+(`ℓ(D) = max (deg D + 1) 0`), `Math2.genus_eq_zero` (`ℙ¹` has genus `0`),
+`Math2.degDiv_canonical_eq` (`deg K = 2g - 2`) and `Math2.degDiv_divisorOf` (a principal
+divisor has degree `0`).
+
+The scope is the projective line: Mathlib has no theory of divisors, linear systems or
+Serre duality for general curves, so the curve treated here is `ℙ¹`, for which the whole
+theory is built by hand.
 -/
 
 namespace Math2
 
-open Polynomial
+open Polynomial UniqueFactorizationMonoid
 
 variable {k : Type*} [Field k]
 
-/-! ## Orders of vanishing (the discrete valuations of `ℙ¹`) -/
+/-- A finite closed point of the projective line `ℙ¹` over `k`: a monic irreducible
+polynomial in `k[X]`. -/
+abbrev FinPlace (k : Type*) [Field k] : Type _ := {p : k[X] // p.Monic ∧ Irreducible p}
 
-/-- The order of vanishing at the point `a` of the affine line, of a rational function `f`. -/
+/-- The closed points of `ℙ¹` over `k`: the finite places together with the point at
+infinity, represented by `none`. -/
+abbrev Place (k : Type*) [Field k] : Type _ := Option (FinPlace k)
 
-theorem mem_RRSpace_iff {D : Divisor k} {f : RatFunc k} :
-    f ∈ RRSpace D ↔ f = 0 ∨ ((∀ a : k, -(D.1 a) ≤ ordAt a f) ∧ -D.2 ≤ ordInf f) := Iff.rfl
+/-- The degree of a closed point: `1` at infinity, `deg p` at a finite place `p`. -/
 
-/-- `ℓ(D)`, the dimension of the Riemann–Roch space of `D`. -/
+lemma mem_RRSpace_iff {D : Divisor k} {f : RatFunc k} :
+    f ∈ RRSpace D ↔ (f ≠ 0 → ∀ v : Place k, -(D v) ≤ ord v f) := Iff.rfl
+
+/-- `ℓ(D)`, the dimension of the Riemann–Roch space. -/

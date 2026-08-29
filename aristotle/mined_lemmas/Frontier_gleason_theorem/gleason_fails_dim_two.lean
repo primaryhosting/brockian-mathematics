@@ -8,45 +8,12 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
-
-(The `import Mathlib` line must precede this file's module documentation because Lean 4
-requires all `import` commands to come first; the required header comment is otherwise
-reproduced verbatim as the first block of the file.)
-
-Gleason's theorem states that every quantum measure (normalized, finitely additive probability
-assignment on the closed subspaces, i.e. a normalized frame function) on a complex Hilbert
-space of dimension at least `3` is of the form `P ↦ tr (rho P)` for a unique density operator
-`rho`.  Here the space is `EuclideanSpace ℂ (Fin n)` and operators are `n × n` complex matrices.
-
-What is formalized and proved in this file:
-
-* `Frontier.IsQuantumMeasure`, `Frontier.IsDensityOperator`, `Frontier.RepresentedBy`,
-  `Frontier.GleasonProperty` -- the statement of the theorem.
-* `Frontier.gleason_theorem` -- the *reduction*: a quantum measure that extends to a linear
-  functional on operators is given by a density operator (trace-duality plus positivity).
-* `Frontier.gleason_theorem_of_selfAdjoint_linear` -- the same with the more natural hypothesis
-  of a real-linear extension over the self-adjoint operators, via complexification
-  (`Frontier.hasLinearExtension_of_selfAdjoint`, `Frontier.hasSelfAdjointLinearExtension_iff`).
-* `Frontier.hasLinearExtension_iff_gleasonProperty` -- the linearity hypothesis is exactly
-  equivalent to the conclusion, so the reduction is lossless: all that is missing from a full
-  proof of Gleason's theorem is the (deep) fact that in dimension `≥ 3` every quantum measure
-  admits such an extension.
-* `Frontier.isQuantumMeasure_of_isDensityOperator` -- the converse direction.
-* `Frontier.representedBy_unique` -- uniqueness of the density operator.
-* `Frontier.gleason_dim_one` -- the base case `n = 1`, unconditionally.
-* `Frontier.gleason_fails_dim_two` -- sharpness: an explicit quantum measure on a qubit
-  (`Frontier.qubitMeasure`, built from the cubic `3a² - 2a³`) that comes from no density
-  operator, so the hypothesis `3 ≤ n` cannot be removed.
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped ComplexOrder
+open scoped InnerProductSpace
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -67,21 +34,27 @@ set_option grind.warning false
 
 namespace Frontier
 
-open Matrix
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-variable {n : ℕ}
+/-- A *frame function of weight one*, Gleason's formulation of a quantum measure:
+a function on the unit sphere which is nonnegative and whose values sum to `1`
+over every orthonormal basis. -/
+structure IsFrameFunction (f : H → ℝ) : Prop where
+  nonneg : ∀ x : H, ‖x‖ = 1 → 0 ≤ f x
+  sum_eq_one : ∀ b : OrthonormalBasis (Fin (Module.finrank ℂ H)) ℂ H, ∑ i, f (b i) = 1
 
-/-! ## Basic notions
-
-We model a complex Hilbert space of dimension `n` as `EuclideanSpace ℂ (Fin n)`, and the
-bounded operators on it as `Matrix (Fin n) (Fin n) ℂ`.  An *event* (a closed subspace) is
-recorded by its orthogonal projection. -/
-
-/-- An orthogonal projection: a self-adjoint idempotent matrix. -/
+/-- A density operator: a positive (hence self-adjoint) operator of trace one. -/
 
 theorem gleason_fails_dim_two :
-    ∃ mu : Matrix (Fin 2) (Fin 2) ℂ → ℝ, IsQuantumMeasure mu ∧ ¬ GleasonProperty mu :=
-  ⟨qubitMeasure, qubitMeasure_isQuantumMeasure, qubitMeasure_not_gleasonProperty⟩
+    ∃ f : C2 → ℝ, IsFrameFunction f ∧
+      ¬ ∃ T : C2 →L[ℂ] C2, IsDensityOperator T ∧
+        ∀ x : C2, ‖x‖ = 1 → f x = RCLike.re ⟪T x, x⟫_ℂ := by
+  refine ⟨qfTwo, isFrameFunction_qfTwo, ?_⟩
+  rintro ⟨T, hT, hrep⟩
+  refine not_quadratic_qfTwo ⟨T, fun x hx => ?_⟩
+  have hre := ((ContinuousLinearMap.isPositive_iff_complex T).mp hT.1 x).1
+  rw [hrep x hx, hre]
 
-end Frontier
+end DimTwo
 
+/-- The density operator representing a quantum measure is unique. -/

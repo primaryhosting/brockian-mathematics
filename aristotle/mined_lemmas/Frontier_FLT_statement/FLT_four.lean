@@ -1,29 +1,8 @@
+-- (Lean 4 requires `import` lines to precede any module docstring, so the required
+-- header comment appears immediately below the import.)
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-
+/-!
 # FLT Statement
 Category: Frontier — Prime Numbers
 Target: Frontier.FLT_statement
@@ -31,13 +10,20 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+set_option autoImplicit false
 
 namespace Frontier
 
-/-- The statement of Fermat's Last Theorem in explicit positive-integer form:
-`x ^ n + y ^ n = z ^ n` has no solution in positive integers when `n > 2`. -/
+/-- Fermat's Last Theorem for a fixed exponent `n`, stated with *positive* integers:
+there are no `x, y, z > 0` with `x ^ n + y ^ n = z ^ n`. -/
 
-theorem FLT_four : FermatLastTheoremFor 4 := fermatLastTheoremFour
+theorem FLT_four : FLTFor 4 := (FLTFor_iff_fermatLastTheoremFor 4).2 fermatLastTheoremFour
 
-/-- Base case: FLT for the exponent `3` (Mathlib's `fermatLastTheoremThree`). -/
+/-- **Fermat's Last Theorem: statement and reduction to prime exponents `p ≥ 5`.**
+
+The equation `x ^ n + y ^ n = z ^ n` has no solution in positive integers for any `n > 2`,
+provided it has none for prime exponents `p ≥ 5`.
+
+The exponents `n = 3` and `n = 4` (and hence all their multiples) are handled unconditionally
+here, using the classical proofs of those two cases; every remaining exponent `n > 2` is
+divisible by `4` or by an odd prime, and an odd prime other than `3` is at least `5`. -/

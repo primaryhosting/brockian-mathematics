@@ -9,91 +9,58 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Mobius Root Sum 10
-Category: Pure Mathematics
-Target: Math.mobius_root_sum_10
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 open Finset
 
 namespace Math
 
+/-- For a primitive `n`-th root of unity `ζ`, the finset of primitive `n`-th roots of unity is
+the image of the residues coprime to `n` under `i ↦ ζ ^ i`. -/
+lemma primitiveRoots_eq_image_pow {R : Type*} [CommRing R] [IsDomain R] [DecidableEq R]
+    {ζ : R} {n : ℕ} [NeZero n] (h : IsPrimitiveRoot ζ n) :
+    primitiveRoots n R = ((range n).filter (fun i => Nat.Coprime i n)).image (fun i => ζ ^ i) := by
+  ext x
+  rw [mem_primitiveRoots (NeZero.pos n), h.isPrimitiveRoot_iff]
+  simp only [mem_image, mem_filter, mem_range]
+  constructor
+  · rintro ⟨i, hi, hc, rfl⟩; exact ⟨i, ⟨hi, hc⟩, rfl⟩
+  · rintro ⟨i, ⟨hi, hc⟩, rfl⟩; exact ⟨i, hi, hc, rfl⟩
+
 /-- The Möbius function at `10` equals `1`. -/
 lemma moebius_ten : (ArithmeticFunction.moebius 10 : ℤ) = 1 := by
-  have h : (10 : ℕ) = 2 * 5 := by norm_num
-  rw [h, ArithmeticFunction.isMultiplicative_moebius.map_mul_of_coprime (by norm_num),
+  rw [show (10 : ℕ) = 2 * 5 by norm_num,
+    ArithmeticFunction.isMultiplicative_moebius.map_mul_of_coprime (by norm_num),
     ArithmeticFunction.moebius_apply_prime (by norm_num),
     ArithmeticFunction.moebius_apply_prime (by norm_num)]
   norm_num
 
-/-- The index set of exponents giving primitive `10`-th roots of unity. -/
-lemma coprime_filter_ten : (range 10).filter (Nat.Coprime 10) = {1, 3, 7, 9} := by decide
-
-/-- A primitive `10`-th root of unity `ζ` in a domain satisfies `ζ^5 = -1`. -/
-lemma pow_five_eq_neg_one {ζ : ℂ} (h : IsPrimitiveRoot ζ 10) : ζ ^ 5 = -1 := by
-  have h10 : (ζ ^ 5) ^ 2 = 1 := by
-    rw [← pow_mul]; exact_mod_cast h.pow_eq_one
-  have h5 : ζ ^ 5 ≠ 1 := h.pow_ne_one_of_pos_of_lt (by norm_num) (by norm_num)
-  rcases (mul_self_eq_one_iff (a := ζ ^ 5)).mp (by linear_combination h10) with h1 | h1
-  · exact absurd h1 h5
-  · exact h1
-
-/-- The algebraic relation satisfied by a primitive `10`-th root of unity. -/
-lemma cyclotomic_ten_eq_zero {ζ : ℂ} (h : IsPrimitiveRoot ζ 10) :
-    ζ ^ 4 - ζ ^ 3 + ζ ^ 2 - ζ + 1 = 0 := by
-  have h5 : ζ ^ 5 = -1 := pow_five_eq_neg_one h
-  have hne : ζ + 1 ≠ 0 := by
-    intro hz
-    have hζ : ζ = -1 := by linear_combination hz
-    have h2 : ζ ^ 2 = 1 := by rw [hζ]; norm_num
-    exact h.pow_ne_one_of_pos_of_lt (by norm_num) (by norm_num) h2
-  have hprod : (ζ + 1) * (ζ ^ 4 - ζ ^ 3 + ζ ^ 2 - ζ + 1) = 0 := by
-    linear_combination h5
-  rcases mul_eq_zero.mp hprod with h1 | h1
-  · exact absurd h1 hne
-  · exact h1
-
-/-- The sum of the four primitive `10`-th roots of unity, expressed via a fixed primitive root. -/
-lemma sum_pow_eq_one {ζ : ℂ} (h : IsPrimitiveRoot ζ 10) :
-    ζ ^ 1 + ζ ^ 3 + ζ ^ 7 + ζ ^ 9 = 1 := by
-  have h5 : ζ ^ 5 = -1 := pow_five_eq_neg_one h
-  have hc := cyclotomic_ten_eq_zero h
-  have h7 : ζ ^ 7 = -ζ ^ 2 := by
-    have : ζ ^ 7 = ζ ^ 5 * ζ ^ 2 := by ring
-    rw [this, h5]; ring
-  have h9 : ζ ^ 9 = -ζ ^ 4 := by
-    have : ζ ^ 9 = ζ ^ 5 * ζ ^ 4 := by ring
-    rw [this, h5]; ring
-  rw [h7, h9]
-  linear_combination -hc
-
-/-- The sum of the primitive `10`-th roots of unity in `ℂ` equals `μ(10)`. -/
+/-- The sum of the primitive 10-th roots of unity in `ℂ` equals `μ 10`. -/
 theorem mobius_root_sum_10 :
-    ∑ z ∈ primitiveRoots 10 ℂ, z = ((ArithmeticFunction.moebius 10 : ℤ) : ℂ) := by
-  have h : IsPrimitiveRoot (Complex.exp (2 * Real.pi * Complex.I / 10)) 10 :=
-    Complex.isPrimitiveRoot_exp 10 (by norm_num)
-  set ζ := Complex.exp (2 * Real.pi * Complex.I / 10)
-  have key : ∑ i ∈ (range 10).filter (Nat.Coprime 10), ζ ^ i
-      = ∑ z ∈ primitiveRoots 10 ℂ, z := by
-    refine Finset.sum_bij (fun i _ => ζ ^ i) ?_ ?_ ?_ ?_
-    · intro a ha
-      simp only [mem_filter, mem_range] at ha
-      exact (mem_primitiveRoots (by norm_num)).mpr (h.pow_of_coprime a ha.2.symm)
-    · intro a ha b hb hab
-      simp only [mem_filter, mem_range] at ha hb
-      exact h.pow_inj ha.1 hb.1 hab
-    · intro ξ hξ
-      rw [mem_primitiveRoots (by norm_num), h.isPrimitiveRoot_iff] at hξ
-      obtain ⟨i, hin, hi, H⟩ := hξ
-      exact ⟨i, by simp only [mem_filter, mem_range]; exact ⟨hin, hi.symm⟩, H⟩
-    · intro a _; rfl
-  rw [← key, coprime_filter_ten, moebius_ten]
-  norm_num
-  linear_combination sum_pow_eq_one h
+    ∑ z ∈ primitiveRoots 10 ℂ, z = (ArithmeticFunction.moebius 10 : ℂ) := by
+  obtain ⟨ζ, hζ⟩ : ∃ ζ : ℂ, IsPrimitiveRoot ζ 10 :=
+    ⟨_, Complex.isPrimitiveRoot_exp 10 (by norm_num)⟩
+  have hmu : (ArithmeticFunction.moebius 10 : ℂ) = 1 := by
+    exact_mod_cast congrArg (fun m : ℤ => (m : ℂ)) moebius_ten
+  have h10 : ζ ^ 10 = 1 := hζ.pow_eq_one
+  have h5ne : ζ ^ 5 ≠ 1 := hζ.pow_ne_one_of_pos_of_lt (by norm_num) (by norm_num)
+  have h2ne : ζ ^ 2 ≠ 1 := hζ.pow_ne_one_of_pos_of_lt (by norm_num) (by norm_num)
+  have h5 : ζ ^ 5 = -1 := by
+    have hfac : (ζ ^ 5 - 1) * (ζ ^ 5 + 1) = 0 := by linear_combination h10
+    rcases mul_eq_zero.1 hfac with h | h
+    · exact absurd (sub_eq_zero.1 h) h5ne
+    · linear_combination h
+  have hne : ζ + 1 ≠ 0 := by
+    intro h
+    exact h2ne (by linear_combination (ζ - 1) * h)
+  have hq : ζ ^ 4 - ζ ^ 3 + ζ ^ 2 - ζ + 1 = 0 := by
+    have hprod : (ζ + 1) * (ζ ^ 4 - ζ ^ 3 + ζ ^ 2 - ζ + 1) = 0 := by linear_combination h5
+    exact (mul_eq_zero.1 hprod).resolve_left hne
+  have hset : ((range 10).filter (fun i => Nat.Coprime i 10)) = ({1, 3, 7, 9} : Finset ℕ) := by
+    decide
+  rw [hmu, primitiveRoots_eq_image_pow hζ, hset,
+    Finset.sum_image (g := fun i => ζ ^ i)
+      (fun i hi j hj hij => hζ.pow_inj (by simp at hi; omega) (by simp at hj; omega) hij)]
+  norm_num [Finset.sum_insert, Finset.mem_insert]
+  linear_combination (ζ ^ 2 + ζ ^ 4) * h5 - hq
 
 end Math
 

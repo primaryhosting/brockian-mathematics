@@ -33,152 +33,111 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Same Parity Betrothed Exists
-Category: Brockian Conjecture
-Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Brockian.BetrothedNumbers
 
 open ArithmeticFunction Finset
 
-/-- A pair of *betrothed* (quasi-amicable) numbers: two distinct positive integers each of
-whose sum of divisors equals the sum of the two numbers plus one. -/
+/-- `sigmaOne n` is the sum of all divisors of `n`. -/
+
+def sigmaOne (n : ℕ) : ℕ := ∑ d ∈ n.divisors, d
+
+/-- `Betrothed m n` says that `m` and `n` form a *betrothed* (quasi-amicable) pair:
+they are distinct positive integers such that the sum of the proper divisors of each
+one is one more than the other, i.e. `σ(m) = σ(n) = m + n + 1`. -/
 
 def Betrothed (m n : ℕ) : Prop :=
-  0 < m ∧ 0 < n ∧ m ≠ n ∧ sigma 1 m = m + n + 1 ∧ sigma 1 n = m + n + 1
+  0 < m ∧ 0 < n ∧ m ≠ n ∧ sigmaOne m = m + n + 1 ∧ sigmaOne n = m + n + 1
 
-/-- The smallest betrothed pair, `(48, 75)`; it has *opposite* parity. -/
+/-- A number is of *square type* if it is a perfect square or twice a perfect square. -/
 
-def SameParityBetrothedPairExists : Prop :=
-  ∃ m n : ℕ, Betrothed m n ∧ m % 2 = n % 2
+def SquareType (n : ℕ) : Prop := ∃ a, n = a ^ 2 ∨ n = 2 * a ^ 2
 
-/-- For an odd prime `p`, if `σ (p ^ e)` is odd then `e` is even. -/
+section SigmaParity
 
-theorem odd_sigma_prime_pow {p e : ℕ} (hp : p.Prime) (hodd : p % 2 = 1)
-    (h : Odd (sigma 1 (p ^ e))) : Even e := by
-  rw [sigma_one_apply_prime_pow hp] at h
-  have key : ∀ k : ℕ, (∑ j ∈ Finset.range (k + 1), p ^ j) % 2 = (k + 1) % 2 := by
-    intro k
-    induction k with
-    | zero => simp
-    | succ k ih =>
-        rw [Finset.sum_range_succ]
-        have hpk : p ^ (k + 1) % 2 = 1 := Nat.odd_iff.mp ((Nat.odd_iff.mpr hodd).pow)
-        omega
-  rw [Nat.odd_iff, key] at h
-  rw [Nat.even_iff]
+lemma sigmaOne_eq_sigma (n : ℕ) : sigmaOne n = (sigma 1) n := by
+  rw [sigma_one_apply]; rfl
+
+/-- For an odd prime `p`, `σ(p ^ k)` is odd exactly when `k` is even. -/
+
+lemma odd_sigmaOne_prime_pow_iff {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) (k : ℕ) :
+    Odd (sigmaOne (p ^ k)) ↔ Even k := by
+  have key : sigmaOne (p ^ k) % 2 = (k + 1) % 2 := by
+    unfold sigmaOne
+    rw [Nat.sum_divisors_prime_pow hp, Finset.sum_nat_mod]
+    rw [Finset.sum_congr rfl (fun i _ => Nat.odd_iff.mp ((hp.odd_of_ne_two hp2).pow (n := i)))]
+    simp
+  rw [Nat.odd_iff, Nat.even_iff, key]
   omega
 
-/-- If `m` is odd and `σ m` is odd, then `m` is a perfect square. -/
+/-- If `σ(n)` is odd then every odd prime occurs to an even power in `n`. -/
 
-theorem isSquare_of_odd_of_odd_sigma :
-    ∀ m : ℕ, 0 < m → m % 2 = 1 → Odd (sigma 1 m) → IsSquare m := by
-  intro m
-  induction m using Nat.strong_induction_on with
-  | _ m ih =>
-    intro hm hodd hs
-    rcases eq_or_lt_of_le (Nat.one_le_iff_ne_zero.mpr hm.ne') with h1 | h1
-    · exact ⟨1, by omega⟩
-    · set p := m.minFac
-      have hp : p.Prime := Nat.minFac_prime (by omega)
-      have hpdvd : p ∣ m := Nat.minFac_dvd m
-      have hpodd : p % 2 = 1 := by
-        rcases hp.eq_two_or_odd with h2 | h2
-        · exfalso
-          rw [h2] at hpdvd
-          omega
-        · exact h2
-      set e := m.factorization p
-      set m' := ordCompl[p] m
-      have hsplit : p ^ e * m' = m := Nat.ordProj_mul_ordCompl_eq_self m p
-      have hcop : Nat.Coprime (p ^ e) m' :=
-        Nat.Coprime.pow_left _ (Nat.coprime_ordCompl hp (by omega))
-      have hmul : sigma 1 m = sigma 1 (p ^ e) * sigma 1 m' := by
-        rw [← hsplit]
-        exact isMultiplicative_sigma.map_mul_of_coprime hcop
-      rw [hmul] at hs
-      obtain ⟨hs1, hs2⟩ := Nat.odd_mul.mp hs
-      have heven : Even e := odd_sigma_prime_pow hp hpodd hs1
-      have hm'pos : 0 < m' := Nat.ordCompl_pos p (by omega)
-      have hm'odd : m' % 2 = 1 := by
-        have hdvd : m' ∣ m := Nat.ordCompl_dvd m p
-        rcases Nat.even_or_odd m' with h | h
-        · exfalso
-          have : (2 : ℕ) ∣ m := dvd_trans (even_iff_two_dvd.mp h) hdvd
-          omega
-        · exact Nat.odd_iff.mp h
-      have he1 : 1 ≤ e := Nat.Prime.factorization_pos_of_dvd hp (by omega) hpdvd
-      have hplt : 1 < p ^ e := by
-        calc 1 < p := hp.one_lt
-        _ = p ^ 1 := (pow_one p).symm
-        _ ≤ p ^ e := Nat.pow_le_pow_right hp.pos he1
-      have hlt : m' < m := by
-        calc m' = 1 * m' := (one_mul m').symm
-        _ < p ^ e * m' := Nat.mul_lt_mul_of_lt_of_le hplt (le_refl m') hm'pos
-        _ = m := hsplit
-      obtain ⟨c, hc⟩ := ih m' hlt hm'pos hm'odd hs2
-      obtain ⟨k, hk⟩ := heven
-      refine ⟨p ^ k * c, ?_⟩
-      rw [← hsplit, hc, hk]
-      ring
+lemma even_factorization_of_odd_sigmaOne {n : ℕ} (hn : n ≠ 0) (h : Odd (sigmaOne n))
+    {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) : Even (n.factorization p) := by
+  by_cases hmem : p ∈ n.factorization.support
+  · have hprod := (isMultiplicative_sigma (k := 1)).multiplicative_factorization _ hn
+    have hdvd : (sigma 1) (p ^ n.factorization p) ∣ (sigma 1) n := by
+      rw [hprod]
+      exact Finset.dvd_prod_of_mem (fun q => (sigma 1) (q ^ n.factorization q)) hmem
+    rw [← sigmaOne_eq_sigma, ← sigmaOne_eq_sigma] at hdvd
+    refine (odd_sigmaOne_prime_pow_iff hp hp2 _).mp ?_
+    rcases Nat.even_or_odd (sigmaOne (p ^ n.factorization p)) with he | ho
+    · exfalso
+      have h2 : 2 ∣ sigmaOne n := dvd_trans he.two_dvd hdvd
+      have := Nat.odd_iff.mp h
+      omega
+    · exact ho
+  · simp [Finsupp.notMem_support_iff.mp hmem]
 
-/-- If `σ n` is odd (`n > 0`), then `n = 2 ^ a * b ^ 2` for some `a`, `b`. -/
+/-- If `σ(n)` is odd then `n` is a square or twice a square. -/
 
-theorem eq_two_pow_mul_sq_of_odd_sigma {n : ℕ} (hn : 0 < n) (h : Odd (sigma 1 n)) :
-    ∃ a b : ℕ, 0 < b ∧ n = 2 ^ a * b ^ 2 := by
-  set a := n.factorization 2
-  set m := ordCompl[2] n
-  have hsplit : 2 ^ a * m = n := Nat.ordProj_mul_ordCompl_eq_self n 2
-  have hcop : Nat.Coprime (2 ^ a) m :=
-    Nat.Coprime.pow_left _ (Nat.coprime_ordCompl Nat.prime_two (by omega))
-  have hmul : sigma 1 n = sigma 1 (2 ^ a) * sigma 1 m := by
-    rw [← hsplit]
-    exact isMultiplicative_sigma.map_mul_of_coprime hcop
-  rw [hmul] at h
-  have hs2 : Odd (sigma 1 m) := (Nat.odd_mul.mp h).2
-  have hmpos : 0 < m := Nat.ordCompl_pos 2 (by omega)
-  have hmodd : m % 2 = 1 := by
-    have := Nat.not_dvd_ordCompl Nat.prime_two (n := n) (by omega)
+theorem squareType_of_odd_sigmaOne {n : ℕ} (hn : 0 < n) (h : Odd (sigmaOne n)) :
+    SquareType n := by
+  obtain ⟨a, b, ha, hb, hab, hsq⟩ := Nat.sq_mul_squarefree_of_pos hn
+  have ha2 : ∀ {d : ℕ}, d.Prime → d ∣ a → d = 2 := by
+    intro d hd hda
+    by_contra hne
+    have hdn : n.factorization d = 2 * b.factorization d + a.factorization d := by
+      rw [← hab, Nat.factorization_mul (pow_ne_zero 2 hb.ne') ha.ne']
+      simp [Nat.factorization_pow, two_mul]
+    have h1 : a.factorization d = 1 :=
+      le_antisymm (hsq.natFactorization_le_one d) (hd.factorization_pos_of_dvd ha.ne' hda)
+    obtain ⟨c, hc⟩ := even_factorization_of_odd_sigmaOne hn.ne' h hd hne
     omega
-  obtain ⟨c, hc⟩ := isSquare_of_odd_of_odd_sigma m hmpos hmodd hs2
-  refine ⟨a, c, ?_, ?_⟩
-  · rcases Nat.eq_zero_or_pos c with rfl | hcpos
-    · simp at hc; omega
-    · exact hcpos
-  · rw [← hsplit, hc]; ring
+  have hpow : a = 2 ^ a.primeFactorsList.length :=
+    Nat.eq_prime_pow_of_unique_prime_dvd ha.ne' ha2
+  have hL : a.primeFactorsList.length ≤ 1 := by
+    have h2 := hsq.natFactorization_le_one 2
+    rw [hpow] at h2
+    simpa [Nat.Prime.factorization_pow, Nat.prime_two] using h2
+  interval_cases hle : a.primeFactorsList.length
+  · exact ⟨b, Or.inl (by simp [hpow] at *; omega)⟩
+  · refine ⟨b, Or.inr ?_⟩
+    rw [hpow] at hab
+    simp at hab
+    omega
 
-/-- In a same-parity betrothed pair, the common value `σ m = σ n = m + n + 1` is odd. -/
+end SigmaParity
 
-theorem odd_sigma_of_sameParity {m n : ℕ} (h : Betrothed m n) (hpar : m % 2 = n % 2) :
-    Odd (sigma 1 m) ∧ Odd (sigma 1 n) := by
-  obtain ⟨-, -, -, hm, hn⟩ := h
-  refine ⟨?_, ?_⟩
-  · rw [hm, Nat.odd_iff]; omega
-  · rw [hn, Nat.odd_iff]; omega
+/-- Both members of a same-parity betrothed pair are of square type. -/
 
-/-- **Structure of a hypothetical same-parity betrothed pair.**
-Both members of a betrothed pair of equal parity are of the form `2 ^ a * b ^ 2`. -/
+theorem squareType_of_betrothed_sameParity {m n : ℕ} (hb : Betrothed m n)
+    (hpar : m % 2 = n % 2) : SquareType m ∧ SquareType n := by
+  obtain ⟨hm, hn, -, hsm, hsn⟩ := hb
+  have hodd : Odd (m + n + 1) := by rw [Nat.odd_iff]; omega
+  exact ⟨squareType_of_odd_sigmaOne hm (hsm ▸ hodd),
+    squareType_of_odd_sigmaOne hn (hsn ▸ hodd)⟩
 
-theorem sameParity_betrothed_structure {m n : ℕ} (h : Betrothed m n) (hpar : m % 2 = n % 2) :
-    (∃ a b : ℕ, 0 < b ∧ m = 2 ^ a * b ^ 2) ∧ (∃ a b : ℕ, 0 < b ∧ n = 2 ^ a * b ^ 2) := by
-  obtain ⟨hm, hn⟩ := odd_sigma_of_sameParity h hpar
-  exact ⟨eq_two_pow_mul_sq_of_odd_sigma h.1 hm, eq_two_pow_mul_sq_of_odd_sigma h.2.1 hn⟩
-
-/-- A betrothed pair of two odd numbers would consist of two perfect squares. -/
+/-- The classical smallest betrothed pair `(48, 75)`; it has *opposite* parity.
+This witnesses that `Betrothed` is not vacuous. -/
 
 theorem SameParityBetrothedExists :
-    SameParityBetrothedPairExists ↔
-      ∃ m n : ℕ, Betrothed m n ∧ m % 2 = n % 2 ∧
-        (∃ a b : ℕ, 0 < b ∧ m = 2 ^ a * b ^ 2) ∧ (∃ a b : ℕ, 0 < b ∧ n = 2 ^ a * b ^ 2) := by
+    (∃ m n, Betrothed m n ∧ m % 2 = n % 2) ↔
+      (∃ m n, Betrothed m n ∧ m % 2 = n % 2 ∧ SquareType m ∧ SquareType n) := by
   constructor
-  · rintro ⟨m, n, h, hpar⟩
-    obtain ⟨h1, h2⟩ := sameParity_betrothed_structure h hpar
-    exact ⟨m, n, h, hpar, h1, h2⟩
-  · rintro ⟨m, n, h, hpar, -, -⟩
-    exact ⟨m, n, h, hpar⟩
+  · rintro ⟨m, n, hb, hpar⟩
+    exact ⟨m, n, hb, hpar, (squareType_of_betrothed_sameParity hb hpar).1,
+      (squareType_of_betrothed_sameParity hb hpar).2⟩
+  · rintro ⟨m, n, hb, hpar, -, -⟩
+    exact ⟨m, n, hb, hpar⟩
 
-end Brockian.BetrothedNumbers
+/-- If a betrothed pair of two odd numbers exists, both members are (odd) perfect squares. -/

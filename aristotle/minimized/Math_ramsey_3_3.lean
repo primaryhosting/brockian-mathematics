@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Ramsey 3 3
 Category: Pure Mathematics
 Target: Math.ramsey_3_3
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -15,63 +15,58 @@ open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
+set_option maxRecDepth 100000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Math
 
-/-- Pigeonhole: among five Booleans, three are equal. -/
-private lemma pigeon_five (f : Fin 5 → Bool) :
-    ∃ a b d : Fin 5, a ≠ b ∧ a ≠ d ∧ b ≠ d ∧ f a = f b ∧ f a = f d := by
-  revert f
-  decide
+/-- Boolean core of the pigeonhole/case analysis for `R(3,3) ≤ 6`: for any assignment of two
+colours to the fifteen edges of `K₆` (edge `pq` for `p < q` is the variable listed in
+lexicographic order), one of the twenty triangles is monochromatic. -/
+theorem ramsey_bool_core : ∀ a b c d e f g h i j k l m n o : Bool,
+    (((a == b) && (a == f)) || ((a == c) && (a == g)) || ((a == d) && (a == h)) ||
+      ((a == e) && (a == i)) ||
+    ((b == c) && (b == j)) || ((b == d) && (b == k)) || ((b == e) && (b == l)) ||
+    ((c == d) && (c == m)) || ((c == e) && (c == n)) || ((d == e) && (d == o)) ||
+    ((f == g) && (f == j)) || ((f == h) && (f == k)) || ((f == i) && (f == l)) ||
+    ((g == h) && (g == m)) || ((g == i) && (g == n)) || ((h == i) && (h == o)) ||
+    ((j == k) && (j == m)) || ((j == l) && (j == n)) || ((k == l) && (k == o)) ||
+    ((m == n) && (m == o))) = true := by decide
 
-/-- The pentagon colouring of `K₅`: an edge is `true` iff its endpoints are
-consecutive modulo `5`. -/
-private def pentagon (i j : Fin 5) : Bool :=
-  decide ((i.val + 1) % 5 = j.val ∨ (j.val + 1) % 5 = i.val)
+/-- The "pentagon" 2-colouring of the edges of `K₅`: an edge is coloured `true` exactly when its
+endpoints are consecutive modulo `5`. -/
+noncomputable def pentagonColoring : Sym2 (Fin 5) → Bool :=
+  Sym2.lift ⟨fun i j => ((i.val + 1) % 5 == j.val) || ((j.val + 1) % 5 == i.val), by decide⟩
 
-/-- **R(3,3) = 6.**  Every symmetric 2-colouring of the edges of `K₆` contains a
-monochromatic triangle, while `K₅` admits a symmetric 2-colouring with none.
-
-The symmetry hypothesis in the first part is part of the notion of an edge
-colouring, but the proof given here does not actually need it. -/
+/-- **R(3,3) = 6.**  Every 2-colouring of the edges of `K₆` contains a monochromatic triangle,
+while there is a 2-colouring of the edges of `K₅` with no monochromatic triangle. -/
 theorem ramsey_3_3 :
-    (∀ c : Fin 6 → Fin 6 → Bool, (∀ i j, c i j = c j i) →
-      ∃ x y z : Fin 6, x ≠ y ∧ x ≠ z ∧ y ≠ z ∧ c x y = c x z ∧ c x y = c y z) ∧
-    (∃ c : Fin 5 → Fin 5 → Bool, (∀ i j, c i j = c j i) ∧
-      ∀ x y z : Fin 5, x ≠ y → x ≠ z → y ≠ z →
-        ¬ (c x y = c x z ∧ c x y = c y z)) := by
+    (∀ c : Sym2 (Fin 6) → Bool, ∃ i j k : Fin 6, i ≠ j ∧ i ≠ k ∧ j ≠ k ∧
+        c s(i, j) = c s(i, k) ∧ c s(i, j) = c s(j, k)) ∧
+    (∃ c : Sym2 (Fin 5) → Bool, ∀ i j k : Fin 5, i ≠ j → i ≠ k → j ≠ k →
+        ¬(c s(i, j) = c s(i, k) ∧ c s(i, j) = c s(j, k))) := by
   constructor
-  · intro c hsym
-    obtain ⟨a, b, d, hab, had, hbd, h1, h2⟩ := pigeon_five (fun i => c 0 i.succ)
-    have hAB : a.succ ≠ b.succ := fun h => hab (Fin.succ_injective _ h)
-    have hAD : a.succ ≠ d.succ := fun h => had (Fin.succ_injective _ h)
-    have hBD : b.succ ≠ d.succ := fun h => hbd (Fin.succ_injective _ h)
-    have hA0 : (0 : Fin 6) ≠ a.succ := (Fin.succ_ne_zero a).symm
-    have hB0 : (0 : Fin 6) ≠ b.succ := (Fin.succ_ne_zero b).symm
-    have hD0 : (0 : Fin 6) ≠ d.succ := (Fin.succ_ne_zero d).symm
-    by_cases e1 : c a.succ b.succ = c 0 a.succ
-    · exact ⟨0, a.succ, b.succ, hA0, hB0, hAB, h1, e1.symm⟩
-    by_cases e2 : c a.succ d.succ = c 0 a.succ
-    · exact ⟨0, a.succ, d.succ, hA0, hD0, hAD, h2, e2.symm⟩
-    by_cases e3 : c b.succ d.succ = c 0 b.succ
-    · exact ⟨0, b.succ, d.succ, hB0, hD0, hBD, h1.symm.trans h2, e3.symm⟩
-    · refine ⟨a.succ, b.succ, d.succ, hAB, hAD, hBD, ?_, ?_⟩
-      · revert e1 e2
-        cases c a.succ b.succ <;> cases c a.succ d.succ <;> cases c 0 a.succ <;> simp
-      · rw [← h1] at e3
-        revert e1 e3
-        cases c a.succ b.succ <;> cases c b.succ d.succ <;> cases c 0 a.succ <;> simp
-  · refine ⟨pentagon, ?_, ?_⟩
-    · decide
-    · decide
+  · intro c
+    have H := ramsey_bool_core (c s(0, 1)) (c s(0, 2)) (c s(0, 3)) (c s(0, 4)) (c s(0, 5))
+      (c s(1, 2)) (c s(1, 3)) (c s(1, 4)) (c s(1, 5)) (c s(2, 3)) (c s(2, 4)) (c s(2, 5))
+      (c s(3, 4)) (c s(3, 5)) (c s(4, 5))
+    simp only [Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq] at H
+    casesm* _ ∨ _
+    all_goals exact ⟨_, _, _, by decide, by decide, by decide, H.1, H.2⟩
+  · exact ⟨pentagonColoring, by decide⟩
 
 end Math
 

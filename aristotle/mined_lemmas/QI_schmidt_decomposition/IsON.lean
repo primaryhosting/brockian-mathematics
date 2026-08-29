@@ -1,13 +1,3 @@
-/-
-Header (Lean requires `import` to precede any command, including a module docstring,
-so the required header is reproduced verbatim as a module docstring just below the import):
-
-# Schmidt Decomposition
-Category: Frontier Qi
-Target: QI.schmidt_decomposition
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -23,24 +13,26 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped ComplexOrder
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option grind.warning false
+
 namespace QI
 
-open Matrix
+variable {A B ι κ : Type*}
 
-/-- The standard Hermitian inner product on `ℂ^d`, `⟪x, y⟫ = ∑ i, conj (x i) * y i`. -/
+/-- `IsON u` says that the family of vectors `u i : A → ℂ` is orthonormal for the standard
+hermitian inner product `⟪x, y⟫ = ∑ a, conj (x a) * y a` on `A → ℂ`. -/
 
-def IsON {d r : ℕ} (u : Fin r → (Fin d → ℂ)) : Prop :=
-  ∀ k l, cdot (u k) (u l) = if k = l then 1 else 0
+def IsON [Fintype A] (u : ι → A → ℂ) : Prop :=
+  ∀ i j, ∑ a, star (u i a) * u j a = if i = j then 1 else 0
 
-/-- The (unnormalized) reduced density matrix of the bipartite vector `ψ` on the first
-factor: `ρ = ψ ψᴴ`. -/
+end QI
+

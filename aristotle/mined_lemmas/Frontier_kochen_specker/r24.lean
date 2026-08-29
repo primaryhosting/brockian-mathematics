@@ -1,30 +1,21 @@
 import Mathlib
 
-set_option maxHeartbeats 1000000
-
 /-!
-# Common machinery for the Kochen–Specker theorem
+# The rays of a three dimensional Kochen–Specker configuration
 
-A *noncontextual hidden-variable assignment* for a quantum system with Hilbert space `E`
-assigns to every unit vector (equivalently, to every rank-one projection, i.e. to every
-"yes/no question" about the system) a definite truth value, in a way that does not depend on
-the context in which the corresponding measurement is performed, and which respects the
-quantum-mechanical sum rule: in every complete family of mutually orthogonal rank-one
-projections — that is, in every orthonormal basis — exactly one projection is assigned the
-value `true`.
-
-We model such an assignment by a function `f : E → Bool`, the sum rule being the hypothesis
-`∀ b : Fin n → E, Orthonormal ℝ b → ∃! i, f (b i) = true` (in an `n`-dimensional space an
-orthonormal family indexed by `Fin n` is exactly an orthonormal basis).
-
-This file collects the pieces used in dimensions three and four.
+The 33 rays of a Kochen–Specker configuration in `ℝ³` (coordinates in `{0, ±1, ±√2}`),
+together with the auxiliary vectors completing each orthogonal pair to a frame, and the
+boolean bookkeeping lemmas used in the case analysis.
 -/
 
+set_option maxHeartbeats 4000000
+set_option autoImplicit false
+
 namespace Frontier
+namespace KS3
 
-open scoped RealInnerProductSpace
+/-- The three dimensional real Hilbert space. -/
+abbrev V3 := EuclideanSpace ℝ (Fin 3)
 
-/-- "Exactly one `true`" in a triple, expressed as a count. -/
 
-noncomputable def r24 : E3 := !₂[s2, 1, -1]
-/-- Ray 25 of the Peres configuration. -/
+noncomputable def r24 : V3 := !₂[(1 : ℝ), Real.sqrt 2, 1]

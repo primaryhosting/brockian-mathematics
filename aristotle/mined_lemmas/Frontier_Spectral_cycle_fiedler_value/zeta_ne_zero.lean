@@ -1,11 +1,3 @@
-/-
-# Cycle Fiedler Value
-Category: Frontier — Spectral Geometry
-Target: Frontier.Spectral.cycle_fiedler_value
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -19,7 +11,9 @@ Provenance: Aristotle theorem prover (Harmonic)
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
+-- `open scoped Classical` is omitted here: it overrides the graph's own `DecidableRel`
+-- instances and makes `if`-congruence rewriting fail below.
+-- open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -32,13 +26,15 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-open Finset Matrix SimpleGraph
-
 namespace Frontier.Spectral
 
-/-! ## The root of unity `ζ = exp (2 π i / n)` -/
+open SimpleGraph Matrix Finset
 
-/-- The primitive `n`-th root of unity `exp (2 π i / n)`. -/
+section Combinatorics
 
-lemma zeta_ne_zero (n : ℕ) : zeta n ≠ 0 := Complex.exp_ne_zero _
+variable {m : ℕ}
+
+/-- Adjacency in the cycle graph on `Fin (m+1)` (with `m ≥ 2`) in additive form. -/
+
+lemma zeta_ne_zero : zeta n ≠ 0 := Complex.exp_ne_zero _
 

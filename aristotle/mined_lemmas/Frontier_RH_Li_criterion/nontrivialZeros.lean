@@ -6,9 +6,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to precede any module docstring, so the header above is repeated
--- verbatim as the module docstring below.)
-
 import Mathlib
 
 /-!
@@ -27,7 +24,7 @@ open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxHeartbeats 40000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
@@ -37,12 +34,14 @@ namespace Frontier
 
 open Complex Filter
 
-/-!
-## Elementary complex-analytic estimates
--/
+/-! ## Li coefficients of a finite family of zeros -/
 
-/-- Geometric bound: `|1 - r ^ n| ≤ n |1 - r| max(1,r) ^ n` for real `r ≥ 0`. -/
+/-- The `n`-th **Li coefficient** attached to a finite multiset `Z` of (candidate) zeros:
+`λ_n(Z) = ∑_{ρ ∈ Z} Re (1 - (1 - 1/ρ)^n)`.  This is the standard Bombieri–Lagarias
+expression of Li's coefficients as a sum over the zeros. -/
 
 def nontrivialZeros : Set ℂ :=
-  {s | riemannZeta s = 0 ∧ (¬∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}
+  {s : ℂ | riemannZeta s = 0 ∧ (¬ ∃ n : ℕ, s = -2 * (n + 1)) ∧ s ≠ 1}
+
+/-! ## The critical line and the Möbius transformation `ρ ↦ 1 - 1/ρ` -/
 

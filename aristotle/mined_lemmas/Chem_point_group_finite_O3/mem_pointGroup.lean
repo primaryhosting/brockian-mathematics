@@ -1,33 +1,37 @@
 import Mathlib
 
 /-!
-# Molecular point groups are finite subgroups of O(3)
+# Point Group Finite O 3
+Category: Chemistry
+Target: Chem.point_group_finite_O3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-A molecule is modelled by the set `S ⊆ ℝ³` of its nuclear positions, placed so that the
-centre of mass sits at the origin.  Its *point group* is the group of all orthogonal
-transformations of `ℝ³` mapping the molecule onto itself; by construction this is a
-subgroup of `O(3)` (here realised as the group `Matrix.orthogonalGroup (Fin 3) ℝ` of real
-orthogonal `3 × 3` matrices acting on `Fin 3 → ℝ` by `mulVec`).
+/-!
+## Molecular point groups are finite subgroups of `O(3)`
 
-The main theorem `Chem.point_group_finite_O3` shows that this subgroup is finite for every
-molecule with finitely many atoms whose positions span `ℝ³`.  The spanning hypothesis
-cannot be dropped: a linear molecule such as CO₂ has the infinite point group `D∞h`
-(all rotations about the molecular axis are symmetries).
+A molecule is modelled as a finite set `S` of atomic positions in `ℝ³` (for a molecule
+with several atomic species one takes `S` to be the positions of the atoms of one species,
+or one works with the labelled version; the argument is identical).
+
+Its *point group* is the set of orthogonal transformations of `ℝ³` mapping the molecule onto
+itself.  By construction this is a subgroup of `O(3)`; the content of the theorem is that it
+is *finite*, which holds exactly when the molecule is not linear, i.e. when the atomic
+positions span `ℝ³`.  (For a linear molecule the point group is `C∞v` or `D∞h`, which is
+infinite, so the spanning hypothesis cannot be dropped.)
 -/
 
 namespace Chem
 
 open Matrix
 
-/-- The orthogonal group `O(3)`, realised as real orthogonal `3 × 3` matrices. -/
+/-- The orthogonal group `O(3)`, realised as the group of real orthogonal `3 × 3` matrices. -/
 abbrev O3 : Submonoid (Matrix (Fin 3) (Fin 3) ℝ) := Matrix.orthogonalGroup (Fin 3) ℝ
 
-/-- The natural action of `O(3)` on `ℝ³`. -/
+/-- The action of an element of `O(3)` on a point of `ℝ³`. -/
 
-lemma mem_pointGroup {S : Set (Fin 3 → ℝ)} {A : O3} :
-    A ∈ pointGroup S ↔ act A '' S = S := Iff.rfl
+@[simp] theorem mem_pointGroup {S : Finset (Fin 3 → ℝ)} {A : O3} :
+    A ∈ pointGroup S ↔ ∀ x ∈ S, act A x ∈ S := Iff.rfl
 
-/-- **Every molecular point group is a finite subgroup of `O(3)`.**
-
-For a molecule with a finite set `S` of nuclear positions spanning `ℝ³`, the point
-group `Chem.pointGroup S` — a subgroup of `O(3)` by construction — is finite. -/
+/-- Two orthogonal transformations agreeing on a spanning set are equal. -/

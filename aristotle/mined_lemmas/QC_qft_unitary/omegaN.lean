@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Qft Unitary
 Category: Quantum Computing
 Target: QC.qft_unitary
@@ -33,13 +31,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
 namespace QC
 
-open Complex Matrix
+open Complex Finset
 
-/-- The primitive `N`-th root of unity `exp (2πi/N)`. -/
+/-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
 noncomputable def omegaN (N : ℕ) : ℂ := Complex.exp (2 * Real.pi * Complex.I / N)
 
-/-- The `n`-qubit quantum Fourier transform matrix, of size `2^n × 2^n`, with entries
-`ω^(j*k) / √(2^n)` where `ω = exp(2πi/2^n)`. -/
+/-- The `N × N` discrete Fourier transform matrix,
+`F j k = ω^(j k) / √N` with `ω = exp (2 π i / N)`. -/

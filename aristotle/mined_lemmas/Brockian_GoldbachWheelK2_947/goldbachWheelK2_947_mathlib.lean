@@ -2,18 +2,22 @@ import Mathlib
 import RequestProject.GoldbachWheelK2_947
 
 /-!
-Companion file: certifies that the self-contained primality predicate
-`Brockian.IsPrime` used in `RequestProject/GoldbachWheelK2_947.lean` coincides with
-Mathlib's `Nat.Prime`, and restates the main theorem in Mathlib terms.
+# Goldbach Wheel K 2 947 — Mathlib interface
+
+The target theorem `Brockian.GoldbachWheelK2_947` lives in the self-contained file
+`RequestProject/GoldbachWheelK2_947.lean` (which carries no imports, since its header
+comment must be the first thing in the file). Here we identify the primality notion used
+there with Mathlib's `Nat.Prime` and restate the result in Mathlib terms.
 -/
 
 namespace Brockian
 
+/-- The self-contained primality predicate agrees with Mathlib's `Nat.Prime`. -/
 
-theorem goldbachWheelK2_947_mathlib (n : ℕ) (hev : Even n) (h4 : 4 ≤ n) (hle : n ≤ 2 * 947) :
-    ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n := by
-  obtain ⟨p, q, hp, hq, hpq⟩ := GoldbachWheelK2_947 n hev.two_dvd h4 hle
-  exact ⟨p, q, (isPrime_iff_nat_prime p).mp hp, (isPrime_iff_nat_prime q).mp hq, hpq⟩
+theorem goldbachWheelK2_947_mathlib (n : ℕ) (h4 : 4 ≤ n) (hle : n ≤ 2 * 947) (hev : Even n) :
+    ∃ p q : ℕ, p.Prime ∧ q.Prime ∧ p + q = n := by
+  obtain ⟨p, q, hp, hq, hpq⟩ := GoldbachWheelK2_947 n h4 hle (Nat.even_iff.mp hev)
+  exact ⟨p, q, isPrimeNat_iff_prime.mp hp, isPrimeNat_iff_prime.mp hq, hpq⟩
 
 end Brockian
 
@@ -25,15 +29,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-This file is deliberately import-free (core Lean only), because Lean requires
-`import` commands to precede every other command in a file, and the prescribed
-header comment must come first.  Primality is therefore defined here from
-scratch; the companion file `RequestProject/GoldbachWheelK2_947Mathlib.lean`
-checks that `Brockian.IsPrime` agrees with Mathlib's `Nat.Prime`, and restates
-the main theorem in Mathlib terms.
--/
+set_option maxRecDepth 40000
 
 namespace Brockian
 
-/-- `IsPrime n` : `n` is at least `2` and its only proper divisor is `1`. -/
+/-! ## Primality
+
+This file is self-contained (it has no `import`s, since the header comment above must be the
+first thing in the file), so primality is developed from scratch, in the standard way:
+`IsPrimeNat p` says that `p ≥ 2` and the only divisors of `p` are `1` and `p`.
+A companion file identifies this notion with Mathlib's `Nat.Prime`. -/
+
+/-- `p` is prime: `p ≥ 2` and every divisor of `p` is `1` or `p`. -/

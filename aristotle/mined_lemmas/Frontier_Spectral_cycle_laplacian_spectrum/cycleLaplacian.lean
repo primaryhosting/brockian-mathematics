@@ -1,8 +1,17 @@
+/-
+# Cycle Laplacian Spectrum
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.cycle_laplacian_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to be the first command; the module docstring below
+-- repeats the header verbatim.)
 import Mathlib
 
 /-!
 # Cycle Laplacian Spectrum
-Category: Frontier Spectral
+Category: Frontier — Spectral Geometry
 Target: Frontier.Spectral.cycle_laplacian_spectrum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
@@ -10,18 +19,30 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 open scoped BigOperators
 open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Matrix Polynomial
+open Matrix Polynomial
 
-/-- The cyclic shift matrix indexed by `ZMod n`: the circulant matrix whose `(i, j)` entry is `1`
-exactly when `i - j = 1`. -/
+/-- The cyclic shift matrix on `ZMod n`: `shiftM n a i j = 1` exactly when `i - j = a`. -/
 
-noncomputable def cycleLaplacian (n : ℕ) [NeZero n] : Matrix (ZMod n) (ZMod n) ℂ :=
-  Matrix.circulant (fun i => if i = 0 then 2 else if i = 1 ∨ i = -1 then -1 else 0)
+def cycleLaplacian (n : ℕ) [NeZero n] : Matrix (ZMod n) (ZMod n) ℂ :=
+  Matrix.circulant (fun x => if x = 0 then (2 : ℂ) else if x = 1 ∨ x = -1 then -1 else 0)
 
-/-- Circulant matrices of "delta functions" multiply by adding the indices. -/
+section Shift
+
+variable {n : ℕ} [NeZero n]
+

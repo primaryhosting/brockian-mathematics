@@ -1,0 +1,53 @@
+import Mathlib
+
+/-!
+# Prime Power Member Structure
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.primePower_member_structure
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Brockian
+namespace BetrothedNumbers
+
+open Finset
+open scoped ArithmeticFunction.sigma
+
+/-- `m` and `n` form a *betrothed* (quasi-amicable) pair: both are positive, they are distinct,
+and the sum of the divisors of each, other than the number itself and `1`, gives the other;
+equivalently `σ m = σ n = m + n + 1`. -/
+
+lemma partner_even {p a n : ℕ} (hp : p.Prime) (h : IsBetrothedPair (p ^ a) n) : Even n := by
+  have hp2 : Odd p := hp.odd_of_ne_two (prime_ne_two hp h)
+  have hao : Odd a := exponent_odd hp h
+  obtain ⟨k, rfl, rfl⟩ := partner_form hp h
+  have hk : k % 2 = 1 := by
+    rw [Nat.odd_iff] at hao; omega
+  have hB : (∑ i ∈ range (k + 1), p ^ i) % 2 = 0 := by rw [geom_parity hp2]; omega
+  rw [Nat.even_iff, Nat.mul_mod, hB]
+  simp
+

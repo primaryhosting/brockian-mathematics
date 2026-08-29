@@ -23,7 +23,18 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Brocard Conjecture
+Category: Brockian Conjecture
+Target: Brockian.BrocardProblem.BrocardConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the header above is
+-- reproduced verbatim as a module docstring immediately after the import.)
+
 import Mathlib
+import Brockian.BrocardVerification
 
 /-!
 # Brocard Conjecture
@@ -33,21 +44,36 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset Filter UniqueFactorizationMonoid
-open scoped Nat
+/-!
+## Brocard's problem
+
+Brocard's problem asks for all pairs of natural numbers `(n, m)` with
+
+  `n ! + 1 = m ^ 2`.
+
+The known solutions are `n = 4, 5, 7` (with `m = 5, 11, 71`), and **Brocard's conjecture**
+states that there are no others.  This is a well-known open problem, so what is developed
+here is:
+
+* the precise statement, `Brockian.BrocardProblem.BrocardConjecture`;
+* the three known solutions (`brocard_known_solutions`);
+* an unconditional finite verification: the conjecture holds for all `n ≤ 300`
+  (`brocard_holds_below`);
+* a conditional reduction: the full conjecture is *equivalent* to the statement that
+  `n ! + 1` is never a square for `n ≥ 301` (`brocardConjecture_iff_large`);
+* an equivalent reformulation of solvability in terms of pronic numbers
+  (`factorial_succ_sq_iff_pronic`): for `n ≥ 2`, `n ! + 1` is a square iff `n ! = 4 * a * (a+1)`
+  for some `a`.
+-/
 
 namespace Brockian.BrocardProblem
 
-/-- The `abc` conjecture, stated for natural numbers, using the radical
-`UniqueFactorizationMonoid.radical` (the product of the distinct prime factors):
-for every `ε > 0` there is a constant `K > 0` such that whenever `a + b = c` with
-`a, b` positive and coprime, we have `c ≤ K * rad(a * b * c) ^ (1 + ε)`. -/
+open Nat
 
-theorem BrocardConjecture (habc : ABCConjecture) :
-    brocardSet.Finite ∧ ∀ n ≤ 7, (n ∈ brocardSet ↔ (n = 4 ∨ n = 5 ∨ n = 7)) := by
-  refine ⟨?_, brocard_le_seven⟩
-  obtain ⟨C, hC, hle⟩ := factorial_le_of_abc habc
-  exact (finite_of_factorial_le C 4096 hC).subset hle
+/-- **Brocard's conjecture** (open): the only natural numbers `n` for which `n ! + 1` is a
+perfect square are `n = 4`, `n = 5` and `n = 7`. -/
 
-end Brockian.BrocardProblem
+def BrocardConjecture : Prop :=
+  ∀ n m : ℕ, n ! + 1 = m ^ 2 → n = 4 ∨ n = 5 ∨ n = 7
 
+/-- The three known solutions of Brocard's problem. -/

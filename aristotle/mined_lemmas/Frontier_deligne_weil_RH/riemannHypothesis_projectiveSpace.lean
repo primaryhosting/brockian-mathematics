@@ -5,16 +5,7 @@ Target: Frontier.deligne_weil_RH
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
-
-/-!
-# Deligne Weil RH
-Category: Frontier — Fields Medal Work
-Target: Frontier.deligne_weil_RH
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -41,78 +32,55 @@ set_option grind.warning false
 
 namespace Frontier
 
-open Filter Metric
-
-/-!
-## The zeta datum of a variety over a finite field
-
-Mathlib has no étale cohomology, so we formalize the *shape* of the Weil conjectures at
-the level of the numerical data they concern: for a `d`-dimensional variety `X` over `𝔽_q`
-one has Betti numbers `b i`, inverse roots `α i j` of the characteristic polynomials
-`P i` of Frobenius on the `i`-th cohomology group, and point counts
-`N n = #X(𝔽_{q^n})` linked by the Grothendieck–Lefschetz trace formula.
-
-The Riemann hypothesis part of the Weil conjectures (Deligne, 1974) is the assertion that
-every inverse root occurring in degree `i` has archimedean absolute value `q ^ (i / 2)`.
--/
-
-/-- Numerical zeta-function data attached to a `dim`-dimensional variety over `𝔽_q`:
-Betti numbers, the inverse roots of Frobenius in each cohomological degree, the point
-counts over the extensions `𝔽_{q ^ n}`, and the Lefschetz trace formula relating them. -/
-structure WeilDatum where
-  /-- the cardinality of the base field -/
+/-- Cohomological data attached to a variety over a finite field `𝔽_q`:
+the inverse roots (Frobenius eigenvalues) on each cohomology group, together with the
+point counts over the extensions `𝔽_{q^m}`, linked by the Grothendieck–Lefschetz trace
+formula. -/
+structure WeilVariety where
+  /-- Cardinality of the base field. -/
   q : ℕ
-  /-- the base field is a genuine finite field -/
-  hq : 1 < q
-  /-- the dimension of the variety -/
+  /-- The base field has at least two elements. -/
+  hq : 2 ≤ q
+  /-- Dimension of the variety. -/
   dim : ℕ
-  /-- the Betti numbers -/
-  betti : ℕ → ℕ
-  /-- the inverse roots of Frobenius acting on the `i`-th cohomology group -/
-  root : (i : ℕ) → Fin (betti i) → ℂ
-  /-- `pointCount n` is the number of `𝔽_{q ^ n}`-points -/
-  pointCount : ℕ → ℕ
-  /-- cohomology vanishes above degree `2 * dim` -/
-  betti_vanishing : ∀ i, 2 * dim < i → betti i = 0
-  /-- the Grothendieck–Lefschetz trace formula -/
-  lefschetz : ∀ n : ℕ, 1 ≤ n →
-    (pointCount n : ℂ) =
-      ∑ i ∈ Finset.range (2 * dim + 1), (-1 : ℂ) ^ i * ∑ j, (root i j) ^ n
+  /-- Multiset of inverse roots of Frobenius acting on the `i`-th cohomology group. -/
+  frobRoots : ℕ → Multiset ℂ
+  /-- `count m` is the number of `𝔽_{q^m}`-rational points. -/
+  count : ℕ → ℕ
+  /-- Cohomology vanishes above degree `2 * dim`. -/
+  vanishing : ∀ i, 2 * dim < i → frobRoots i = 0
+  /-- Grothendieck–Lefschetz trace formula. -/
+  trace : ∀ m, 1 ≤ m →
+    (count m : ℂ) =
+      ∑ i ∈ Finset.range (2 * dim + 1),
+        (-1) ^ i * (((frobRoots i).map (fun a => a ^ m)).sum)
 
-/-- The Riemann hypothesis for a zeta datum: every inverse root of Frobenius in
-cohomological degree `i` has absolute value `q ^ (i / 2)` (Deligne's theorem, for the
-data coming from a smooth projective variety). -/
+/-- The Riemann hypothesis for a variety over a finite field: every inverse root of
+Frobenius on the `i`-th cohomology group has archimedean absolute value `q ^ (i / 2)`. -/
 
-theorem riemannHypothesis_projectiveSpace (q : ℕ) (hq : 1 < q) (d : ℕ) :
-    (projectiveSpace q hq d).RiemannHypothesis := by
-  intro i hi j
-  by_cases he : Even i
-  · obtain ⟨c, hc⟩ := he
-    have hi2 : i / 2 = c := by omega
-    have hq0 : (0 : ℝ) < q := by positivity
-    show ‖(q : ℂ) ^ (i / 2)‖ = (q : ℝ) ^ ((i : ℝ) / 2)
-    rw [hi2, norm_pow, Complex.norm_natCast]
-    have : ((i : ℝ) / 2) = (c : ℝ) := by
-      have : (i : ℝ) = 2 * c := by exact_mod_cast (by omega : i = 2 * c)
-      rw [this]; ring
-    rw [this, Real.rpow_natCast]
-  · exfalso
-    have hb : (projectiveSpace q hq d).betti i = 0 := by
-      show (if (Even i ∧ i ≤ 2 * d) then 1 else 0) = 0
-      simp [he]
-    have hpos : 0 < (projectiveSpace q hq d).betti i :=
-      lt_of_le_of_lt (Nat.zero_le _) j.isLt
-    rw [hb] at hpos
-    exact absurd hpos (lt_irrefl 0)
+theorem riemannHypothesis_projectiveSpace (q n : ℕ) (hq : 2 ≤ q) :
+    RiemannHypothesis (projectiveSpace q n hq) := by
+  intro i hi a ha
+  simp only [projectiveSpace] at hi ha ⊢
+  by_cases h : i % 2 = 0 ∧ i ≤ 2 * n
+  · rw [if_pos h] at ha
+    have ha' : a = ((q : ℂ)) ^ (i / 2) := by
+      simpa using ha
+    subst ha'
+    have hq0 : (0:ℝ) ≤ (q : ℝ) := by positivity
+    rw [norm_pow, Complex.norm_natCast]
+    have hi2 : ((i : ℝ) / 2) = ((i / 2 : ℕ) : ℝ) := by
+      obtain ⟨k, hk⟩ : ∃ k, i = 2 * k := ⟨i / 2, by omega⟩
+      subst hk
+      have : (2 * k) / 2 = k := by omega
+      rw [this]
+      push_cast
+      ring
+    rw [hi2, Real.rpow_natCast]
+  · rw [if_neg h] at ha
+    simp at ha
 
-/-!
-## Reduction: for curves, the Riemann hypothesis is the Hasse–Weil point count bound
-
-For a smooth projective curve of genus `g` over `𝔽_q` the cohomology is `ℂ` in degree `0`
-(Frobenius acting by `1`), of dimension `2 g` in degree `1` (inverse roots `α j`), and `ℂ`
-in degree `2` (Frobenius acting by `q`); the functional equation pairs the `α j` so that
-`α j * α (σ j) = q`.  We prove, in this situation, that the Riemann hypothesis is
-*equivalent* to the point count estimate `|N n - q ^ n - 1| = O(q ^ (n / 2))`.
--/
-
-/-- Betti numbers of a curve of genus `g`. -/
+/-- **Consequence of the Riemann hypothesis**: the point counts of a `d`-dimensional variety
+whose top cohomology is one-dimensional with Frobenius eigenvalue `q ^ d` satisfy the
+square-root error estimate `|#X(𝔽_{q^m}) - q^{dm}| ≤ B · q^{(2d-1)m/2}`, where `B` is the sum
+of the Betti numbers below the top degree. -/

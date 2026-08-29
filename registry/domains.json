@@ -291,8 +291,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "A1-discharge-literature",
   "statement": null,
-  "proof_file": "aristotle/harvest_100/chris_f4fbf712.lean",
-  "provenance": "Harmonic/Aristotle f4fbf712-e784-46ed-ba61-5645bd55e338 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_0bb7f210.lean",
+  "provenance": "Harmonic/Aristotle 0bb7f210-1de3-41ca-ad7d-0d6c6d488360 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Brockian.EquidistributionBVReduction.total_over_main_tendsto": {
@@ -331,8 +331,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "A1-discharge-literature",
   "statement": null,
-  "proof_file": "aristotle/harvest_100/admin_501bec40.lean",
-  "provenance": "Harmonic/Aristotle 501bec40-3722-4344-9635-e2409844c56b (admin)",
+  "proof_file": "aristotle/harvest_100/chris_19b82c0e.lean",
+  "provenance": "Harmonic/Aristotle 19b82c0e-822e-4fc9-824d-19bc47737c4b (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "PCA.Isolation.in_scope_encoding_sound": {
@@ -483,8 +483,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-cs",
   "statement": "Every regular language satisfies the pumping lemma.",
-  "proof_file": "aristotle/harvest_100/chris_40869346.lean",
-  "provenance": "Harmonic/Aristotle 40869346-972b-4ab8-b07b-de6a9b9ba666 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_94278c0c.lean",
+  "provenance": "Harmonic/Aristotle 94278c0c-949f-4e8b-8df5-dbc5ed3e5fa7 (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "CS.euclid_gcd_correct": {
@@ -568,12 +568,12 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "CS.dijkstra_correct": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "DOMAIN-cs",
   "statement": "Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.",
-  "proof_file": "aristotle/harvest_100/chris_d5d9b994.lean",
-  "provenance": "Harmonic/Aristotle d5d9b994-7c90-4764-ab78-d513f59af422 (chris)",
-  "verification": "sorry-free Aristotle candidate; independent verification pending"
+  "proof_file": "aristotle/harvest_100/admin_f4c0bdb2.lean",
+  "provenance": "Harmonic/Aristotle f4c0bdb2-b2f3-4c3b-8934-45cf6997adf2 (admin)",
+  "verification": "AXLE lean-4.32.2 cloud compile + cloud axiom audit (kernel-clean); local lake-build pending"
  },
  "CS.church_rosser_beta_diamond": {
   "register": "PROVED",
@@ -747,8 +747,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-set",
   "statement": "There exists an Aronszajn tree (a tree of height \u03c9\u2081 with no uncountable branch/level).",
-  "proof_file": "aristotle/harvest_100/chris_db08aaa9.lean",
-  "provenance": "Harmonic/Aristotle db08aaa9-0aa3-49c1-bcba-484be84120a7 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_6708c1ca.lean",
+  "provenance": "Harmonic/Aristotle 6708c1ca-81c4-42a3-b5d9-a7673d6fb8a7 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.infinite_ramsey": {
@@ -827,8 +827,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-math",
   "statement": "Every continuous self-map of the closed 2-disk has a fixed point.",
-  "proof_file": "aristotle/harvest_100/chris_40f981c0.lean",
-  "provenance": "Harmonic/Aristotle 40f981c0-972a-40e4-9426-24da9a321de7 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_255abc69.lean",
+  "provenance": "Harmonic/Aristotle 255abc69-4b3f-4d0b-9ea7-84f4dac1d6f7 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math.baire_category": {
@@ -875,16 +875,16 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-math",
   "statement": "The general quintic is not solvable by radicals (Galois-theoretic).",
-  "proof_file": "aristotle/harvest_100/chris_1c3eb2a1.lean",
-  "provenance": "Harmonic/Aristotle 1c3eb2a1-f7ac-4fd7-8f73-8f4bd5707c37 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_d2b706f6.lean",
+  "provenance": "Harmonic/Aristotle d2b706f6-787d-4eb5-93c3-3b80c21b6812 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math.gauss_bonnet_polygon": {
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-math",
   "statement": "The angle sum of a geodesic triangle on the unit sphere exceeds \u03c0 by its area.",
-  "proof_file": "aristotle/harvest_100/chris_78c03708.lean",
-  "provenance": "Harmonic/Aristotle 78c03708-6dbc-4108-9969-641332a160bc (chris)",
+  "proof_file": "aristotle/harvest_100/chris_f34c6c0a.lean",
+  "provenance": "Harmonic/Aristotle f34c6c0a-5725-41a5-bc45-51f698b2fbe6 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math.two_squares_5": {
@@ -1091,16 +1091,16 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-math",
   "statement": "R(3,4) = 9: the two-color Ramsey number.",
-  "proof_file": "aristotle/harvest_100/chris_f851c0c8.lean",
-  "provenance": "Harmonic/Aristotle f851c0c8-9465-4c49-81e5-77cf31cf1dbd (chris)",
+  "proof_file": "aristotle/harvest_100/chris_7ca8172b.lean",
+  "provenance": "Harmonic/Aristotle 7ca8172b-e572-41cd-b296-d092f4c1a954 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math.ramsey_4_4": {
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-math",
   "statement": "R(4,4) = 18: the two-color Ramsey number.",
-  "proof_file": "aristotle/harvest_100/chris_20b7683a.lean",
-  "provenance": "Harmonic/Aristotle 20b7683a-2af1-4315-9041-bce9ed7ac30a (chris)",
+  "proof_file": "aristotle/harvest_100/chris_82bbd12f.lean",
+  "provenance": "Harmonic/Aristotle 82bbd12f-1be8-4046-b6f2-db0b9e072ef2 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math.cassini_9": {
@@ -1139,8 +1139,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-math",
   "statement": "R(3,5) = 14: the two-color Ramsey number.",
-  "proof_file": "aristotle/harvest_100/chris_f3b8cfaf.lean",
-  "provenance": "Harmonic/Aristotle f3b8cfaf-04f6-448c-bf76-149671b88b1f (chris)",
+  "proof_file": "aristotle/harvest_100/chris_47c648ea.lean",
+  "provenance": "Harmonic/Aristotle 47c648ea-44c3-4502-88a5-d057bd47f6b1 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "CS.sorting_lb_3": {
@@ -1451,8 +1451,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-qphys",
   "statement": "On Schwartz space, [x,p]=i\u210f with p=-i\u210f d/dx.",
-  "proof_file": "aristotle/harvest_100/chris_cf1add04.lean",
-  "provenance": "Harmonic/Aristotle cf1add04-c8e2-46ce-8b36-4bcb54f744eb (chris)",
+  "proof_file": "aristotle/harvest_100/chris_9cae134a.lean",
+  "provenance": "Harmonic/Aristotle 9cae134a-28a2-4594-b4f0-856ac359f524 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "QPhys.hermitian_real_spectrum": {
@@ -1496,35 +1496,35 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "QPhys.ehrenfest": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "DOMAIN-qphys",
   "statement": "d\u27e8A\u27e9/dt = (i/\u210f)\u27e8[H,A]\u27e9 + \u27e8\u2202A/\u2202t\u27e9 (Ehrenfest theorem).",
-  "proof_file": "aristotle/harvest_100/chris_153b99bf.lean",
-  "provenance": "Harmonic/Aristotle 153b99bf-6515-4e67-b4df-e32557cfebac (chris)",
-  "verification": "sorry-free Aristotle candidate; independent verification pending"
+  "proof_file": "aristotle/harvest_100/chris_7d1f2e15.lean",
+  "provenance": "Harmonic/Aristotle 7d1f2e15-fd77-4cca-bd77-b7996d499cfc (chris)",
+  "verification": "AXLE lean-4.32.2 cloud compile + cloud axiom audit (kernel-clean); local lake-build pending"
  },
  "QPhys.stone_generator": {
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-qphys",
   "statement": "A strongly continuous one-parameter unitary group has a self-adjoint generator (Stone).",
-  "proof_file": "aristotle/harvest_100/chris_5700cfd9.lean",
-  "provenance": "Harmonic/Aristotle 5700cfd9-161a-46e4-9165-6d719d0fc80e (chris)",
+  "proof_file": "aristotle/harvest_100/chris_c7c70701.lean",
+  "provenance": "Harmonic/Aristotle c7c70701-a30a-4245-b3d4-284172b4032c (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "QPhys.spectral_theorem_finite": {
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-qphys",
   "statement": "Every Hermitian matrix is unitarily diagonalizable with real eigenvalues.",
-  "proof_file": "aristotle/harvest_100/chris_1ee2c20e.lean",
-  "provenance": "Harmonic/Aristotle 1ee2c20e-7cf7-4414-8150-f764c2903b10 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_5b05da9e.lean",
+  "provenance": "Harmonic/Aristotle 5b05da9e-1131-4280-a03f-cdd7558bc397 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "QPhys.bcH_special": {
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-qphys",
   "statement": "For [A,B] central, e^A e^B = e^{A+B+\u00bd[A,B]} (BCH special case).",
-  "proof_file": "aristotle/harvest_100/chris_a03f275c.lean",
-  "provenance": "Harmonic/Aristotle a03f275c-083b-47a7-9e13-5b5f7b68b4d2 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_df97dc22.lean",
+  "provenance": "Harmonic/Aristotle df97dc22-34ea-4091-9847-95e24174985b (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "QPhys.variational_bound": {
@@ -1547,8 +1547,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-chem",
   "statement": "The adjacency eigenvalues of the cycle graph C_n are 2cos(2\u03c0k/n), k=0..n-1 (H\u00fcckel \u03c0-energies).",
-  "proof_file": "aristotle/harvest_100/chris_f2c191b3.lean",
-  "provenance": "Harmonic/Aristotle f2c191b3-1402-4b11-88ec-a9340b958de8 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_f00cfe82.lean",
+  "provenance": "Harmonic/Aristotle f00cfe82-3b96-47be-952a-18aad664ef33 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "QPhys.parseval_fourier": {
@@ -1707,8 +1707,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-chem",
   "statement": "The adjacency eigenvalues of the cycle graph C_11 are 2\u00b7cos(2\u03c0k/11) for k=0..10.",
-  "proof_file": "aristotle/harvest_100/chris_3ed5216a.lean",
-  "provenance": "Harmonic/Aristotle 3ed5216a-2817-4f34-beb3-ae1f443fce5e (chris)",
+  "proof_file": "aristotle/harvest_100/chris_8edf8695.lean",
+  "provenance": "Harmonic/Aristotle 8edf8695-2a67-4ac9-b64e-a50d419863b9 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Chem.huckel_C12": {
@@ -1731,8 +1731,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-chem",
   "statement": "The adjacency eigenvalues of the cycle graph C_14 are 2\u00b7cos(2\u03c0k/14) for k=0..13.",
-  "proof_file": "aristotle/harvest_100/chris_6feade0a.lean",
-  "provenance": "Harmonic/Aristotle 6feade0a-25e1-45e7-8868-7e550b2f3d49 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_5ff7d61a.lean",
+  "provenance": "Harmonic/Aristotle 5ff7d61a-2f99-41b6-84a7-226e791b0870 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Chem.fullerene_pentagons": {
@@ -1795,8 +1795,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "DOMAIN-chem",
   "statement": "The adjacency eigenvalues of the cycle graph C_16 are 2\u00b7cos(2\u03c0k/16) for k=0..15.",
-  "proof_file": "aristotle/harvest_100/chris_c8f0bef4.lean",
-  "provenance": "Harmonic/Aristotle c8f0bef4-ff77-4a92-b4e3-fab694069ce6 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_7c5c1a07.lean",
+  "provenance": "Harmonic/Aristotle 7c5c1a07-e2d3-47dc-9f77-c50e16c91580 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Chem.huckel_C17": {
@@ -1859,8 +1859,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-physics",
   "statement": "Any n finite measures in \u211d\u207f can be simultaneously bisected by one hyperplane (Ham\u2013Sandwich).",
-  "proof_file": "aristotle/harvest_100/admin_77f4eb72.lean",
-  "provenance": "Harmonic/Aristotle 77f4eb72-a97e-45f2-9a9c-b5eb84e17d84 (admin)",
+  "proof_file": "aristotle/harvest_100/chris_058a14d3.lean",
+  "provenance": "Harmonic/Aristotle 058a14d3-595f-4371-ae76-7972c00ae582 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.five_color_theorem": {
@@ -1875,8 +1875,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-fields",
   "statement": "If every two people have exactly one common friend, someone is everyone's friend (Erd\u0151s\u2013Ko\u2013R\u00e9nyi).",
-  "proof_file": "aristotle/harvest_100/chris_55519b8c.lean",
-  "provenance": "Harmonic/Aristotle 55519b8c-a435-42d4-8e17-575e9eb09210 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_87574951.lean",
+  "provenance": "Harmonic/Aristotle 87574951-5c96-4e6a-ac40-bb3a8ff275ee (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.arrow_impossibility": {
@@ -1928,12 +1928,12 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Frontier.aumann_agreement": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-mind",
   "statement": "Agents with common priors and common knowledge of posteriors cannot agree to disagree (Aumann).",
-  "proof_file": "aristotle/harvest_100/chris_010f0642.lean",
-  "provenance": "Harmonic/Aristotle 010f0642-a4a4-4ea1-951f-b526875a20dc (chris)",
-  "verification": "sorry-free Aristotle candidate; independent verification pending"
+  "proof_file": "aristotle/harvest_100/admin_08d4ee81.lean",
+  "provenance": "Harmonic/Aristotle 08d4ee81-4455-4f94-9495-bf3b043493a1 (admin)",
+  "verification": "AXLE lean-4.32.2 cloud compile + cloud axiom audit (kernel-clean); local lake-build pending"
  },
  "Frontier.noether_conservation": {
   "register": "PROVED",
@@ -1947,8 +1947,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-physics",
   "statement": "Lieb\u2013Robinson bound: an effective light cone for local spin dynamics.",
-  "proof_file": "aristotle/harvest_100/chris_a7526bce.lean",
-  "provenance": "Harmonic/Aristotle a7526bce-198a-4f24-b8be-4f51f8b498db (chris)",
+  "proof_file": "aristotle/harvest_100/chris_8508a0c7.lean",
+  "provenance": "Harmonic/Aristotle 8508a0c7-f1ef-457f-9859-9242b12b1dbd (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.asymptotic_freedom_sign": {
@@ -1979,16 +1979,16 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-physics",
   "statement": "A charged particle in a uniform magnetic field has spectrum \u210f\u03c9_c(n+\u00bd).",
-  "proof_file": "aristotle/harvest_100/chris_06b5e5ac.lean",
-  "provenance": "Harmonic/Aristotle 06b5e5ac-ec08-4632-8aaf-d2bd7e27f48e (chris)",
+  "proof_file": "aristotle/harvest_100/chris_8c23aa12.lean",
+  "provenance": "Harmonic/Aristotle 8c23aa12-53fd-4d28-8f24-9593a03c9e62 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.berry_phase_quantized": {
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-physics",
   "statement": "The Berry phase around a closed loop is the integral of the Berry curvature.",
-  "proof_file": "aristotle/harvest_100/chris_a47c30a5.lean",
-  "provenance": "Harmonic/Aristotle a47c30a5-4ad5-433a-b2b2-55e4d17f5180 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_e2f7c782.lean",
+  "provenance": "Harmonic/Aristotle e2f7c782-1bea-4539-bc36-b4ef7addb4f7 (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.ssh_winding_invariant": {
@@ -2043,8 +2043,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-abel",
   "statement": "The chromatic number of the Kneser graph KG_{n,k} is n \u2212 2k + 2 (Lov\u00e1sz, via Borsuk\u2013Ulam).",
-  "proof_file": "aristotle/harvest_100/chris_b260bfcf.lean",
-  "provenance": "Harmonic/Aristotle b260bfcf-82a3-4d98-ad83-ae4e0339efe2 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_28add6a8.lean",
+  "provenance": "Harmonic/Aristotle 28add6a8-2748-4dbf-bce7-daca527c8423 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.huh_matroid_log_concave": {
@@ -2283,8 +2283,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-fields",
   "statement": "Boolean sensitivity and degree are polynomially related (Huang's sensitivity theorem, 2019).",
-  "proof_file": "aristotle/harvest_100/chris_11ca3d73.lean",
-  "provenance": "Harmonic/Aristotle 11ca3d73-3b3f-46f9-ab67-a0afba8c0739 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_e11030cc.lean",
+  "provenance": "Harmonic/Aristotle e11030cc-c784-4803-b770-e3abb16f52d4 (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.bell_theorem": {
@@ -2443,8 +2443,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-phys",
   "statement": "The FDT relates linear response to equilibrium correlations.",
-  "proof_file": "aristotle/harvest_100/chris_7a688dc8.lean",
-  "provenance": "Harmonic/Aristotle 7a688dc8-3e3a-449a-a2da-90bcb2f5486c (chris)",
+  "proof_file": "aristotle/harvest_100/chris_ae79bdd0.lean",
+  "provenance": "Harmonic/Aristotle ae79bdd0-4a2d-48da-a718-3436cb9c004f (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Phys.bekenstein_bound": {
@@ -2699,8 +2699,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-spectral",
   "statement": "Prove: the hypercube graph Q_k on 2^k vertices has smallest nonzero Laplacian eigenvalue equal to 2 for every k \u2265 1. Hence the family (Q_k) has a uniform spectral gap (\u2265 2) independent of k. This shows uniform-gap graph families EXIST \u2014 the property a parity-breaking constellation family would need.",
-  "proof_file": "aristotle/harvest_100/chris_b009cd24.lean",
-  "provenance": "Harmonic/Aristotle b009cd24-2c18-4b05-80dd-e72c52863f3a (chris)",
+  "proof_file": "aristotle/harvest_100/chris_343994d2.lean",
+  "provenance": "Harmonic/Aristotle 343994d2-a305-4685-9228-1cd1c97d0294 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.Spectral.gap_to_cancellation_conditional": {
@@ -2859,8 +2859,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "B-conjecture",
   "statement": null,
-  "proof_file": "aristotle/harvest_100/chris_cd657a29.lean",
-  "provenance": "Harmonic/Aristotle cd657a29-8740-467f-bfb9-f93992462783 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_17b1b65a.lean",
+  "provenance": "Harmonic/Aristotle 17b1b65a-00f2-428c-a79a-ad4ef26d2daf (chris)",
   "verification": "AXLE cloud compile OK; independent axiom audit pending"
  },
  "Brockian.MersennePerfect.EvenPerfectInfinitude": {
@@ -2875,8 +2875,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "B-conjecture",
   "statement": null,
-  "proof_file": "aristotle/harvest_100/chris_ba5566b2.lean",
-  "provenance": "Harmonic/Aristotle ba5566b2-7885-4d56-b764-5039ff62aedd (chris)",
+  "proof_file": "aristotle/harvest_100/chris_44e82374.lean",
+  "provenance": "Harmonic/Aristotle 44e82374-bff2-4d6d-813f-4bfe4363fac6 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Brockian.OppermannConjecture.OppermannConjecture": {
@@ -2979,8 +2979,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "B-conjecture",
   "statement": null,
-  "proof_file": "aristotle/harvest_100/admin_11222042.lean",
-  "provenance": "Harmonic/Aristotle 11222042-da30-49ba-9ff2-ed8d52228eb3 (admin)",
+  "proof_file": "aristotle/harvest_100/admin_fb941a5b.lean",
+  "provenance": "Harmonic/Aristotle fb941a5b-b821-43ab-961f-ba08af7d63ff (admin)",
   "verification": "AXLE cloud compile OK; independent axiom audit pending"
  },
  "Brockian.TwinPrimes.TwinPrimeConjecture": {
@@ -3019,8 +3019,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "B-conjecture",
   "statement": null,
-  "proof_file": "aristotle/harvest_100/chris_5d5795bc.lean",
-  "provenance": "Harmonic/Aristotle 5d5795bc-f2b5-4f31-b216-265223de9134 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_ddc91cf0.lean",
+  "provenance": "Harmonic/Aristotle ddc91cf0-4c2f-453f-ac1f-dd5580a5d3fb (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure": {
@@ -3059,8 +3059,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-set",
   "statement": "The unit ball in \u211d\u00b3 admits a paradoxical decomposition (Banach\u2013Tarski).",
-  "proof_file": "aristotle/harvest_100/admin_4ada71fb.lean",
-  "provenance": "Harmonic/Aristotle 4ada71fb-7c84-4c9f-8a15-ca842314fd9e (admin)",
+  "proof_file": "aristotle/harvest_100/chris_4269c750.lean",
+  "provenance": "Harmonic/Aristotle 4269c750-9571-41e4-b590-a1b4a61cec55 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.Paris_Harrington": {
@@ -3315,8 +3315,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "C-integral",
   "statement": "integral over R of (sin x / x)^2 dx = pi -- normalization integral of the sine kernel; equivalently integral of S(u)^2 = 1 for S(u) = sin(pi u)/(pi u). Input to the m_2(1) = 4/3 cross-check of the sine-kernel moment values (preprint SS7.5(f)).",
-  "proof_file": "aristotle/harvest_100/chris_a48857ac.lean",
-  "provenance": "Harmonic/Aristotle a48857ac-6637-46fe-9536-daa12c1bca98 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_261d45f8.lean",
+  "provenance": "Harmonic/Aristotle 261d45f8-40e7-4f74-936f-ea6c8c3f7d10 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Zeta23Scaffold.psiCubic_le_one": {
@@ -3347,8 +3347,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "C-integral",
   "statement": "integral over R of (sin x / x)^4 dx = 2*pi/3 -- equivalently integral of S(u)^4 = 2/3; the nontrivial input to m_2(1) = 1 + (1 - 2/3) = 4/3 (preprint SS7.5(f) cross-check).",
-  "proof_file": "aristotle/harvest_100/chris_4ef321da.lean",
-  "provenance": "Harmonic/Aristotle 4ef321da-14c0-42ad-804d-3ebb2324f8fb (chris)",
+  "proof_file": "aristotle/harvest_100/chris_9b31a3af.lean",
+  "provenance": "Harmonic/Aristotle 9b31a3af-36ea-4bb9-991d-399c5d416435 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Zeta23Redux.LinAlg.eigenvalue_cauchy_schwarz_count": {
@@ -4163,8 +4163,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-fields",
   "statement": "The KPZ equation is well-posed via regularity structures (Hairer).",
-  "proof_file": "aristotle/harvest_100/chris_96d0636e.lean",
-  "provenance": "Harmonic/Aristotle 96d0636e-236f-4eda-96c1-b0a57c6901a3 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_47151a4c.lean",
+  "provenance": "Harmonic/Aristotle 47151a4c-23c9-4901-818d-4b02ab0400db (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.mirzakhani_WP_volume": {
@@ -4187,8 +4187,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-fields",
   "statement": "The Milnor conjecture: mod-2 Galois cohomology \u2245 Milnor K-theory / 2 (Voevodsky).",
-  "proof_file": "aristotle/harvest_100/admin_4740532b.lean",
-  "provenance": "Harmonic/Aristotle 4740532b-dbc3-4f00-a19d-3094e53d46d8 (admin)",
+  "proof_file": "aristotle/harvest_100/admin_e4dc4aa1.lean",
+  "provenance": "Harmonic/Aristotle e4dc4aa1-8217-479a-99f4-1f3fd4c79add (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.lindenstrauss_QUE": {
@@ -4243,8 +4243,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-abel",
   "statement": "State the Langlands reciprocity conjecture linking Galois and automorphic representations.",
-  "proof_file": "aristotle/harvest_100/chris_882d254d.lean",
-  "provenance": "Harmonic/Aristotle 882d254d-3d45-4083-a1e2-d4dac3cdf13d (chris)",
+  "proof_file": "aristotle/harvest_100/chris_e3f0e7ea.lean",
+  "provenance": "Harmonic/Aristotle e3f0e7ea-3305-4ccd-8160-518462654def (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.gleason_theorem": {
@@ -4256,12 +4256,12 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Frontier.penrose_singularity": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-physics",
   "statement": "A spacetime with a trapped surface and the null energy condition is geodesically incomplete (Penrose).",
-  "proof_file": "aristotle/harvest_100/chris_cb29b315.lean",
-  "provenance": "Harmonic/Aristotle cb29b315-62df-440f-bd2d-62dffa32ab9d (chris)",
-  "verification": "sorry-free Aristotle candidate; independent verification pending"
+  "proof_file": "aristotle/harvest_100/admin_66e808c7.lean",
+  "provenance": "Harmonic/Aristotle 66e808c7-1676-478d-949b-0e10ba4d3c54 (admin)",
+  "verification": "AXLE lean-4.32.2 cloud compile + cloud axiom audit (kernel-clean); local lake-build pending"
  },
  "NumberTheory.fermat_little": {
   "register": "PROVED",
@@ -4459,8 +4459,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-mind",
   "statement": "Every finite game has a mixed-strategy Nash equilibrium (Nash; via Brouwer/Kakutani).",
-  "proof_file": "aristotle/harvest_100/admin_e9cbee12.lean",
-  "provenance": "Harmonic/Aristotle e9cbee12-cea5-4d11-b648-f8dcd7935646 (admin)",
+  "proof_file": "aristotle/harvest_100/chris_859193e5.lean",
+  "provenance": "Harmonic/Aristotle 859193e5-382c-454d-8629-91597f3f14bf (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.four_color_statement": {
@@ -4499,8 +4499,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-qi",
   "statement": "Von Neumann entropy is strongly subadditive: S(ABC)+S(B) \u2264 S(AB)+S(BC) (Lieb\u2013Ruskai).",
-  "proof_file": "aristotle/harvest_100/admin_3bcafce9.lean",
-  "provenance": "Harmonic/Aristotle 3bcafce9-48d5-4336-b1a2-c2049aa02935 (admin)",
+  "proof_file": "aristotle/harvest_100/chris_32cc018b.lean",
+  "provenance": "Harmonic/Aristotle 32cc018b-63eb-4e7b-b780-01f279472ce2 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "QI.monogamy_ckw": {
@@ -4555,16 +4555,16 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-phys",
   "statement": "A slowly varying Hamiltonian keeps a nondegenerate eigenstate in its instantaneous eigenspace.",
-  "proof_file": "aristotle/harvest_100/chris_e834a57b.lean",
-  "provenance": "Harmonic/Aristotle e834a57b-1f87-495b-934f-c490a58ba047 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_fc29c52a.lean",
+  "provenance": "Harmonic/Aristotle fc29c52a-0457-43bf-9049-fd44f574664a (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Phys.mermin_wagner": {
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-phys",
   "statement": "No spontaneous breaking of a continuous symmetry in dimensions \u2264 2 at T>0 (Mermin\u2013Wagner).",
-  "proof_file": "aristotle/harvest_100/chris_47c3d5ed.lean",
-  "provenance": "Harmonic/Aristotle 47c3d5ed-95db-4c40-9a40-8c400b0d0b04 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_501c4588.lean",
+  "provenance": "Harmonic/Aristotle 501c4588-2a92-41d7-84ce-6bf26c6065bf (chris)",
   "verification": "AXLE cloud compile OK; independent axiom audit pending"
  },
  "Phys.goldstone": {
@@ -4611,8 +4611,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-cs",
   "statement": "NL = coNL (nondeterministic space is closed under complement).",
-  "proof_file": "aristotle/harvest_100/chris_c0d0c9e0.lean",
-  "provenance": "Harmonic/Aristotle c0d0c9e0-7f19-4e6e-a94d-ce2a47223992 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_ef8db87a.lean",
+  "provenance": "Harmonic/Aristotle ef8db87a-8f76-4dc1-9692-c9dbe50756da (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "CS.ladner": {
@@ -4715,9 +4715,9 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-cs",
   "statement": "PARITY \u2209 AC\u2070 (H\u00e5stad switching lemma).",
-  "proof_file": "aristotle/harvest_100/admin_779fd4fd.lean",
-  "provenance": "Harmonic/Aristotle 779fd4fd-e1a7-44d3-876e-b9b76f4de8a6 (admin)",
-  "verification": "sorry-free Aristotle candidate; independent verification pending"
+  "proof_file": "aristotle/harvest_100/chris_610c9f40.lean",
+  "provenance": "Harmonic/Aristotle 610c9f40-05d9-47f0-bec4-43de51590b05 (chris)",
+  "verification": "AXLE cloud compile OK; independent axiom audit pending"
  },
  "CS.barrington": {
   "register": "PROVED",
@@ -4755,16 +4755,16 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-cs",
   "statement": "Undirected s-t connectivity is in L (SL = L; Reingold).",
-  "proof_file": "aristotle/harvest_100/chris_cba4b454.lean",
-  "provenance": "Harmonic/Aristotle cba4b454-c54e-466f-92b8-80bb9096490a (chris)",
+  "proof_file": "aristotle/harvest_100/chris_6035cc7f.lean",
+  "provenance": "Harmonic/Aristotle 6035cc7f-3a4e-40ff-8734-e85962597930 (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "CS.aks_primes_in_p": {
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-cs",
   "statement": "PRIMES \u2208 P (Agrawal\u2013Kayal\u2013Saxena).",
-  "proof_file": "aristotle/harvest_100/chris_3db2f55e.lean",
-  "provenance": "Harmonic/Aristotle 3db2f55e-a2a7-4326-adee-2194eea0de88 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_5970a661.lean",
+  "provenance": "Harmonic/Aristotle 5970a661-c781-4fcd-9d1b-d998362da7b8 (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "CS.blum_speedup": {
@@ -4779,8 +4779,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-cs",
   "statement": "MOD_p \u2209 AC\u2070[q] for distinct primes p,q (Razborov\u2013Smolensky).",
-  "proof_file": "aristotle/harvest_100/admin_b4bccfc0.lean",
-  "provenance": "Harmonic/Aristotle b4bccfc0-c0af-424c-b135-19c397e613ee (admin)",
+  "proof_file": "aristotle/harvest_100/admin_1a7bafa5.lean",
+  "provenance": "Harmonic/Aristotle 1a7bafa5-b04a-48ed-829e-8c33a31bfbfb (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "CS.hilbert10_undecidable": {
@@ -8003,8 +8003,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "gate1-operator",
   "statement": "The Berry\u2013Keating dilation generator A f = i\u00b7((1/2)\u00b7f + x\u00b7f') is symmetric on the C_c^\u221e(0,\u221e) core: \u222b (A f)\u00b7conj g = \u222b f\u00b7conj (A g) (integration by parts; boundary terms vanish by compact support).",
-  "proof_file": "aristotle/harvest_100/chris_4b8d42df.lean",
-  "provenance": "Harmonic/Aristotle 4b8d42df-aa0e-4b1a-b71a-a9864346d176 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_ea9bcbdb.lean",
+  "provenance": "Harmonic/Aristotle ea9bcbdb-e4c1-4d7c-a2aa-395648e58c0c (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Brockian.DilationGenerator.boundary_term_vanishes": {
@@ -8019,24 +8019,24 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-math",
   "statement": "Chebotarev density theorem for Frobenius conjugacy classes.",
-  "proof_file": "aristotle/harvest_100/chris_ade0d1ee.lean",
-  "provenance": "Harmonic/Aristotle ade0d1ee-e41a-4e7b-b4c5-8cbc283ce394 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_aeef2f75.lean",
+  "provenance": "Harmonic/Aristotle aeef2f75-e823-4598-890b-6e9f98cab69c (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math2.nash_embedding": {
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-math",
   "statement": "Every Riemannian manifold embeds isometrically in some \u211d^N (Nash).",
-  "proof_file": "aristotle/harvest_100/chris_523a3934.lean",
-  "provenance": "Harmonic/Aristotle 523a3934-626d-4b07-94c7-e5bd9eeb8456 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_3f0fde31.lean",
+  "provenance": "Harmonic/Aristotle 3f0fde31-acae-4590-9e83-973cd5992b58 (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math2.robertson_seymour": {
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-math",
   "statement": "Graphs are well-quasi-ordered by the minor relation (Robertson\u2013Seymour).",
-  "proof_file": "aristotle/harvest_100/chris_f5210278.lean",
-  "provenance": "Harmonic/Aristotle f5210278-789f-4776-a4b6-7e6053b4b123 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_f5e63324.lean",
+  "provenance": "Harmonic/Aristotle f5e63324-01c4-41d5-9ff7-571503972bfb (admin)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Math2.hales_jewett": {
@@ -8051,8 +8051,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-math",
   "statement": "The cap-set bound: subsets of \ud835\udd3d\u2083\u207f with no 3-term AP have size o(3\u207f) (Croot\u2013Lev\u2013Pach / Ellenberg\u2013Gijswijt).",
-  "proof_file": "aristotle/harvest_100/chris_a51247d8.lean",
-  "provenance": "Harmonic/Aristotle a51247d8-d6db-47d7-aa83-31d780b574b8 (chris)",
+  "proof_file": "aristotle/harvest_100/chris_4bfeb7e9.lean",
+  "provenance": "Harmonic/Aristotle 4bfeb7e9-5da9-4d53-a9bc-bc02407522a5 (chris)",
   "verification": "AXLE cloud compile OK; independent axiom audit pending"
  },
  "Math2.kahn_kalai": {
@@ -8083,8 +8083,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-math",
   "statement": "Riemann\u2013Roch for a smooth projective curve: \u2113(D)\u2212\u2113(K\u2212D)=deg D+1\u2212g.",
-  "proof_file": "aristotle/harvest_100/chris_4bf36c0f.lean",
-  "provenance": "Harmonic/Aristotle 4bf36c0f-d4f4-4f13-b35d-6e29accb320e (chris)",
+  "proof_file": "aristotle/harvest_100/chris_0d850489.lean",
+  "provenance": "Harmonic/Aristotle 0d850489-ad81-42c8-b53b-6823cf4118aa (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.szemeredi_regularity": {
@@ -8115,8 +8115,8 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "gate1-operator",
   "statement": "Under the log substitution, the dilation generator transports to the momentum operator: for smooth compactly-supported f on (0,\u221e), U(i((1/2)f + x f')) = i\u00b7(U f)' \u2014 i.e. A = U\u207b\u00b9 \u2218 (i\u00b7d/dt) \u2218 U on the core (the route to essential self-adjointness that mirrors the proven freeLaplacian-via-Plancherel pattern).",
-  "proof_file": "aristotle/harvest_100/chris_f6450ba1.lean",
-  "provenance": "Harmonic/Aristotle f6450ba1-f55b-440d-a987-24b16847eacb (chris)",
+  "proof_file": "aristotle/harvest_100/chris_703d5a90.lean",
+  "provenance": "Harmonic/Aristotle 703d5a90-156e-44c4-b4ae-6d3e4ba33f1c (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Brockian.ConeLine.square_mod5_mem": {
@@ -8155,17 +8155,17 @@
   "register": "PROVED_UNVERIFIED",
   "domain": "characters",
   "statement": "Bounded partial sums of the zero-mean twist: \u2016\u03a3_{n < N} e(n mod 5)\u2016 \u2264 2 for every N (the true maximum is the golden ratio 1.618..., so 2 is a safe honest bound) \u2014 the Dirichlet-test seed for convergence of the Brockian zeta twist \u03a3 e(n mod 5)/n^s beyond Re s > 1.",
-  "proof_file": "aristotle/harvest_100/admin_55ffdb76.lean",
-  "provenance": "Harmonic/Aristotle 55ffdb76-e21b-4ae8-b3f3-f298e71215fe (admin)",
+  "proof_file": "aristotle/harvest_100/chris_0ca6dca0.lean",
+  "provenance": "Harmonic/Aristotle 0ca6dca0-884a-4bf1-82f7-1edeb0bfa88c (chris)",
   "verification": "sorry-free Aristotle candidate; independent verification pending"
  },
  "Frontier.hadwiger_nelson_5": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-moonshot",
   "statement": "The chromatic number of the plane is \u2265 5 (de Grey's unit-distance graph).",
-  "proof_file": "aristotle/harvest_100/chris_819a3451.lean",
-  "provenance": "Harmonic/Aristotle 819a3451-e741-49bb-9e28-bf7cf581ed16 (chris)",
-  "verification": "sorry-free Aristotle candidate; independent verification pending"
+  "proof_file": "aristotle/harvest_100/admin_db0702a7.lean",
+  "provenance": "Harmonic/Aristotle db0702a7-6190-41c3-bf64-193426f8a973 (admin)",
+  "verification": "AXLE lean-4.32.2 cloud compile + cloud axiom audit (kernel-clean); local lake-build pending"
  },
  "CS.toda_theorem": {
   "register": "PROVED",

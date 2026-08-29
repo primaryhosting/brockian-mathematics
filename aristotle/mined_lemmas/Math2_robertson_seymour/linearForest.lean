@@ -5,35 +5,8 @@ Target: Math2.robertson_seymour
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
-
-/-!
-# Robertson Seymour
-Category: Frontier Math
-Target: Math2.robertson_seymour
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-(The header above is repeated as the first lines of the file as a plain block comment,
-since Lean does not allow a module docstring `/-! ... -/` to precede the `import` line.)
-
-## What is formalised here
-
-* `Math2.IsMinor H G` : the standard *minor model* definition of "`H` is a minor of `G`".
-* `Math2.robertson_seymour` : well-quasi-ordering by the minor relation for families of
-  finite graphs whose orders are bounded by a fixed `k`.
-* `Math2.robertson_seymour_linearForest` : well-quasi-ordering by the minor relation of the
-  (infinite, unbounded) class of linear forests, i.e. disjoint unions of paths.  This is
-  deduced from Higman's lemma.
-* `Math2.robertson_seymour_cycleGraph` : well-quasi-ordering by the minor relation of the
-  (infinite, unbounded) class of cycles; here the minors genuinely involve edge
-  contractions.
-* `Math2.isMinor_refl` and `Math2.IsMinor.trans` : the minor relation is a quasi-order.
-* `Math2.RobertsonSeymourWQO` : the statement of the unrestricted Robertson–Seymour theorem,
-  recorded as a `Prop`.  It is **not** proved here; the full graph minor theorem is the
-  conclusion of the twenty-paper Graph Minors series and is far beyond what is formalised
-  in this file.
--/
 
 open scoped BigOperators
 open scoped Real
@@ -49,24 +22,58 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+/-!
+### Scope of this file
+
+The Robertson–Seymour graph minor theorem states that the class of *all* finite simple graphs is
+well-quasi-ordered by the minor relation.  Its published proof runs to some twenty papers and
+several hundred pages, and it is not formalised here.
+
+What is developed and fully proved below is:
+
+* `Math2.MinorModel` / `Math2.IsMinor`: the minor relation between simple graphs, defined via
+  branch sets (`H` is a minor of `G` iff `H` is obtained from a subgraph of `G` by contracting
+  disjoint connected subgraphs);
+* `Math2.isMinor_refl` and `Math2.isMinor_trans`: the minor relation is a quasi-order;
+* `Math2.robertson_seymour`: the graph minor theorem for every class of finite graphs of
+  bounded edge number;
+* `Math2.robertson_seymour_linearForest`: the graph minor theorem for the class of linear
+  forests (disjoint unions of paths), which contains graphs with arbitrarily many edges; this
+  case is deduced from Higman's lemma.
+
+Both of the last two statements are genuine special cases of the Robertson–Seymour theorem, and
+neither is the full theorem.
+-/
 
 namespace Math2
 
-/-! ## The minor relation -/
+/-! ### The minor relation -/
 
-/-- `IsMinor H G` says that `H` is a minor of `G`, expressed through a *minor model*:
-each vertex `v` of `H` is assigned a branch set `B v ⊆ G`, the branch sets are nonempty,
-induce connected subgraphs of `G`, are pairwise disjoint, and whenever `v` and `w` are
-adjacent in `H` there is an edge of `G` joining `B v` to `B w`. -/
+/-- A *minor model* of `H` in `G`: an assignment of pairwise disjoint, nonempty,
+connected *branch sets* of `G` to the vertices of `H`, such that adjacent vertices of `H`
+get branch sets joined by an edge of `G`. -/
+structure MinorModel {V W : Type*} (H : SimpleGraph V) (G : SimpleGraph W) where
+  /-- The branch set attached to a vertex of `H`. -/
+  branch : V → Set W
+  branch_nonempty : ∀ v : V, (branch v).Nonempty
+  branch_connected : ∀ v : V, (G.induce (branch v)).Connected
+  branch_disjoint : ∀ ⦃u v : V⦄, u ≠ v → Disjoint (branch u) (branch v)
+  branch_adj : ∀ ⦃u v : V⦄, H.Adj u v → ∃ a ∈ branch u, ∃ b ∈ branch v, G.Adj a b
 
-def linearForest (l : List ℕ) : SimpleGraph (LFVertex l) where
+/-- `H` is a *minor* of `G` if there is a minor model of `H` in `G`, i.e. `H` can be obtained
+from a subgraph of `G` by contracting connected subgraphs. -/
+
+def linearForest (L : List ℕ) : SimpleGraph (ForestVertex L) where
   Adj p q := p.1.1 = q.1.1 ∧ (p.1.2 + 1 = q.1.2 ∨ q.1.2 + 1 = p.1.2)
-  symm := by
-    rintro p q ⟨h1, h2⟩
-    exact ⟨h1.symm, h2.symm⟩
-  loopless := by
-    constructor
-    rintro p ⟨-, h | h⟩ <;> omega
+  symm := by rintro p q ⟨h1, h2⟩; exact ⟨h1.symm, h2.symm⟩
+  loopless := ⟨by rintro p ⟨-, h | h⟩ <;> omega⟩
 
-/-- In a one-path linear forest all vertices lie on the path of index `0`. -/

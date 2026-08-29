@@ -23,6 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Repunit Prime Infinitude
+Category: Brockian Conjecture
+Target: Brockian.RepunitPrimes.RepunitPrimeInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 /-!
 # Repunit Prime Infinitude
 Category: Brockian Conjecture
@@ -34,17 +44,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 namespace Brockian
 namespace RepunitPrimes
 
-/-- The `n`-th base-ten repunit `R n = 1 + 10 + ⋯ + 10 ^ (n - 1)`, i.e. the natural number
-whose decimal expansion consists of `n` ones. -/
+open Finset
 
-theorem repunit_dvd_repunit_of_dvd {d n : Nat} (h : d ∣ n) : repunit d ∣ repunit n := by
+/-- The `n`-th repunit: the number written with `n` copies of the digit `1` in base ten,
+i.e. `repunit n = (10 ^ n - 1) / 9 = ∑_{i < n} 10 ^ i`. -/
+
+lemma repunit_dvd_repunit_of_dvd {m n : ℕ} (h : m ∣ n) : repunit m ∣ repunit n := by
   obtain ⟨k, rfl⟩ := h
   induction k with
   | zero => simp
   | succ k ih =>
-      obtain ⟨a, ha⟩ := ih
-      have hmul : d * (k + 1) = d * k + d := Nat.mul_succ d k
-      refine ⟨a + 10 ^ (d * k), ?_⟩
-      rw [hmul, repunit_add, ha, Nat.mul_add, Nat.mul_comm (repunit d) (10 ^ (d * k))]
+      rw [Nat.mul_succ, repunit_add]
+      exact Nat.dvd_add ih (Dvd.dvd.mul_left dvd_rfl _)
 
-/-- If a repunit `R n` is prime, then its index `n` is prime. -/
+/-- A repunit can only be prime if its index is prime. -/

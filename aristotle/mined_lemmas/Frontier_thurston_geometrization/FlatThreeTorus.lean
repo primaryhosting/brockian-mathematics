@@ -1,3 +1,11 @@
+/-
+# Thurston Geometrization
+Category: Frontier — Fields Medal Work
+Target: Frontier.thurston_geometrization
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -16,7 +24,7 @@ open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxHeartbeats 400000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
@@ -26,57 +34,54 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## The eight Thurston geometries -/
+/-!
+## The eight Thurston geometries
 
-/-- The eight three-dimensional Thurston model geometries. -/
+We formalize a *model geometry* as a topological space `X` together with a group `G`
+acting on `X` by homeomorphisms, transitively.  A closed 3-manifold `M` is *geometric*,
+modelled on `(X, G)`, when `M` is homeomorphic to a quotient `X / Γ` for a subgroup
+`Γ ≤ G` acting freely and properly discontinuously.
+
+The eight Thurston geometries are realized below by concrete model spaces:
+
+* `E³`      : `ℝ³` acted on by translations;
+* `S³`      : the unit sphere in `ℝ⁴` acted on by linear isometries;
+* `H³`      : the solvable Lie group `ℝ² ⋊ ℝ` (`t` acting by `e^t` on both factors),
+              which carries a left invariant metric of constant curvature `-1`;
+* `S² × ℝ`  : the unit sphere in `ℝ³` times `ℝ`;
+* `H² × ℝ`  : the group `(ℝ ⋊ ℝ) × ℝ`, the affine group of the line (a model of `H²`)
+              times `ℝ`;
+* `SL(2,ℝ)~`: the universal cover of `PSL(2,ℝ)`, realized as the group of lifts to `ℝ`
+              of the projective action of `SL(2,ℝ)` on directions of `ℝ²`;
+* `Nil`     : the Heisenberg group;
+* `Sol`     : the solvable group `ℝ² ⋊ ℝ` (`t` acting by `e^t`, `e^{-t}`).
+
+In each case the group of the geometry is taken to be a transitive group of isometries
+of the model space (for the Lie group models: the group acting on itself by left
+translations); we do not verify maximality of these groups, which is what singles out
+the eight geometries among all homogeneous 3-dimensional spaces.
+-/
+
+/-- Labels for the eight Thurston geometries. -/
 inductive ThurstonGeometry
-  /-- Euclidean space `E³`. -/
   | euclidean
-  /-- The round sphere `S³`. -/
   | spherical
-  /-- Hyperbolic space `H³`. -/
   | hyperbolic
-  /-- The product geometry `S² × ℝ`. -/
-  | sphereTimesLine
-  /-- The product geometry `H² × ℝ`. -/
-  | hyperbolicPlaneTimesLine
-  /-- The universal cover of `SL(2,ℝ)`. -/
+  | sphereProdLine
+  | hyperbolicProdLine
   | slTwoTilde
-  /-- Nil geometry (the Heisenberg group). -/
   | nil
-  /-- Sol geometry. -/
   | sol
   deriving DecidableEq, Fintype, Repr
 
-/-- There are exactly eight Thurston geometries. -/
+/-! ### Euclidean 3-space as a group -/
 
-noncomputable def FlatThreeTorus : Type := GeometricQuotient euclideanModel flatTorusAction
+/-- Euclidean 3-space, viewed as the group of its own translations. -/
 
-noncomputable instance : TopologicalSpace FlatThreeTorus :=
-  inferInstanceAs (TopologicalSpace (GeometricQuotient euclideanModel flatTorusAction))
+def FlatThreeTorus : Type := euclideanModel.quotient latticeSubgroup
 
-instance : CompactSpace FlatThreeTorus :=
-  inferInstanceAs (CompactSpace (GeometricQuotient euclideanModel flatTorusAction))
+instance : TopologicalSpace FlatThreeTorus :=
+  inferInstanceAs (TopologicalSpace (euclideanModel.quotient latticeSubgroup))
 
-instance : ConnectedSpace FlatThreeTorus :=
-  inferInstanceAs (ConnectedSpace (GeometricQuotient euclideanModel flatTorusAction))
-
-/-- The flat 3-torus is not a point: the classes of `0` and of the half-lattice vector differ. -/
-instance : Nontrivial FlatThreeTorus := by
-  refine ⟨⟨Quotient.mk (orbitSetoid euclideanModel flatTorusAction.group)
-      (0 : EuclideanThreeSpace),
-    Quotient.mk (orbitSetoid euclideanModel flatTorusAction.group)
-      (WithLp.toLp 2 (fun i : Fin 3 => if i = 0 then (1 / 2 : ℝ) else 0)), ?_⟩⟩
-  intro hcontra
-  obtain ⟨g, hg, hgx⟩ := Quotient.exact hcontra
-  obtain ⟨v, rfl⟩ := hg
-  have h0 : (transl (intVec v) (0 : EuclideanThreeSpace)) 0 =
-      (WithLp.toLp 2 (fun i : Fin 3 => if i = 0 then (1 / 2 : ℝ) else 0)) 0 := by
-    exact congrArg (fun y : EuclideanThreeSpace => y 0) hgx
-  simp only [transl_apply, zero_add, intVec_apply] at h0
-  norm_num at h0
-  have h1 : (2 * v 0 : ℤ) = 1 := by exact_mod_cast (by linarith : (2 * (v 0 : ℝ)) = 1)
-  omega
-
-/-- **Base case of geometrization.** The flat 3-torus is a closed manifold carrying the
-Euclidean geometry `E³`. -/
+/-- **Base case.** The flat 3-torus `ℝ³/ℤ³` is a Euclidean manifold: it carries a
+geometric structure modelled on `E³`, with deck group the integer lattice. -/

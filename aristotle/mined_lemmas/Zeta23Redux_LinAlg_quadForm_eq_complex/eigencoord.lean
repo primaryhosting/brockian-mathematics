@@ -1,11 +1,3 @@
-/-
-# Quad Form Eq Complex
-Category: Linalg
-Target: Zeta23Redux.LinAlg.quadForm_eq_complex
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,18 +8,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Matrix
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Zeta23Redux.LinAlg
 
-variable {n : Type*} [Fintype n] [DecidableEq n] {A : Matrix n n ℂ}
+open Matrix
 
-/-- The coordinates of a vector `x` in the orthonormal eigenbasis of a Hermitian matrix `A`,
-obtained by applying the adjoint of the eigenvector unitary of `A` to `x`. -/
+/-- The coordinates of a vector `x` in the eigenbasis of a Hermitian matrix `A`, i.e.
+`x` expressed via the unitary matrix of eigenvectors of `A`. -/
 
-noncomputable def eigenCoord (hA : A.IsHermitian) (x : n → ℂ) : n → ℂ :=
-  star (hA.eigenvectorUnitary : Matrix n n ℂ) *ᵥ x
+noncomputable def eigencoord {n : Type*} [Fintype n] [DecidableEq n] {A : Matrix n n ℂ}
+    (hA : A.IsHermitian) (x : n → ℂ) : n → ℂ :=
+  (star (hA.eigenvectorUnitary : Matrix n n ℂ)) *ᵥ x
 
-/-- **Hermitian quadratic form in eigencoordinates**: for a Hermitian complex matrix `A`,
-the quadratic form `star x ⬝ᵥ A *ᵥ x` equals `∑ i, λ i * ‖(eigenCoord x) i‖ ^ 2`,
-where the `λ i` are the eigenvalues of `A` (viewed as complex numbers). -/
+/-- Spectral decomposition of a Hermitian matrix, in the explicit
+`U * diagonal (eigenvalues) * star U` form. -/

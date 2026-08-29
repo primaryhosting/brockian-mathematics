@@ -1,0 +1,51 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Odd Giuga Exists
+Category: Brockian Conjecture
+Target: Brockian.GiugaNumbers.OddGiugaExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Brockian.GiugaNumbers
+
+open Finset
+
+/-- A *Giuga number* is a composite number `n > 1` such that every prime `p` dividing `n`
+satisfies `p ∣ n / p - 1`. -/
+
+lemma antitone_inv_coprimeSixEnum : Antitone (fun i => (1 : ℚ) / coprimeSixEnum i) := by
+  intro a b hab
+  have hmono := coprimeSixEnum_mono hab
+  have ha : (0 : ℚ) < coprimeSixEnum a := by exact_mod_cast coprimeSixEnum_pos a
+  have hb : (coprimeSixEnum a : ℚ) ≤ coprimeSixEnum b := by exact_mod_cast hmono
+  exact one_div_le_one_div_of_le ha hb
+
+/-- The sum of reciprocals over a finite set of numbers `≥ 5` coprime to `6` is bounded by the
+sum of the reciprocals of the first `|S|` such numbers. -/

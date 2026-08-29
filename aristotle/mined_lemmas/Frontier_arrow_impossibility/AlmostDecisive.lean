@@ -1,28 +1,3 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-
 # Arrow Impossibility
 Category: Frontier Mind
@@ -31,41 +6,37 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+-- (The header above is a plain block comment rather than a `/-!` module docstring, since Lean 4
+-- requires `import` commands to precede every command, including module docstrings.)
+
 import Mathlib
 
-/-!
-# Arrow Impossibility
-Category: Frontier Mind
-Target: Frontier.arrow_impossibility
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+set_option maxHeartbeats 1000000
 
 namespace Frontier
 
-/-! ## Rankings (strict total orders) -/
+/-! ## Preferences
 
-/-- A *ranking* of the alternatives `A` is a strict total order: an irreflexive,
-transitive and total (trichotomous) relation.  `r x y` means "`x` is strictly
-preferred to `y`". -/
-structure IsRanking {A : Type*} (r : A → A → Prop) : Prop where
-  irrefl : ∀ x, ¬ r x x
-  trans : ∀ {x y z}, r x y → r y z → r x z
-  total : ∀ x y, x ≠ y → r x y ∨ r y x
+A *preference* on a type of alternatives `A` is a linear (total) order on `A`, presented as a
+bundled relation.  This is the classical "ranked ballot" of social choice theory.
+-/
 
-namespace IsRanking
+/-- A ranking of the alternatives `A`: a total, transitive, antisymmetric relation. -/
+structure Pref (A : Type*) where
+  /-- The weak preference relation: `rel a b` means `a` is ranked at least as high as `b`. -/
+  rel : A → A → Prop
+  total' : ∀ a b, rel a b ∨ rel b a
+  trans' : ∀ {a b c}, rel a b → rel b c → rel a c
+  antisymm' : ∀ {a b}, rel a b → rel b a → a = b
 
-variable {A : Type*} {r : A → A → Prop}
+namespace Pref
 
+variable {A : Type*}
 
-theorem AlmostDecisive.of_decisive {F : (V → A → A → Prop) → (A → A → Prop)}
-    {S : Finset V} {x y : A} (h : Decisive F S x y) : AlmostDecisive F S x y :=
-  fun p hp hS _ => h p hp hS
+/-- Strict preference: `a` is ranked strictly above `b`. -/
 
-/-! ## Field expansion -/
+def AlmostDecisive (S : Finset V) (a b : A) : Prop :=
+  ∀ P : V → Pref A, (∀ i ∈ S, (P i).lt a b) → (∀ i ∉ S, (P i).lt b a) → (F P).lt a b
 
-section FieldExpansion
-
-variable {F : (V → A → A → Prop) → (A → A → Prop)}
-
-/-- From almost-decisiveness over `(x, y)` we get full decisiveness over `(x, z)`. -/
+/-- The coalition `S` is *decisive*: whenever its members prefer `x` to `y`, so does society,
+no matter what the other voters think. -/

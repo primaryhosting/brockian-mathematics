@@ -6,56 +6,51 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Self-contained development: no external imports are needed, and Lean does not
--- permit `import` after the required module header comment above.
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+set_option relaxedAutoImplicit false
 
 namespace PCA.Isolation
 
-/-- An access mode requested by (or granted to) a component of a proof-carrying app. -/
-inductive Mode
-  | read
-  | write
+/-! ## The abstract model
+
+An *isolation engine* mediates every access an application makes to a resource.
+Resources are addressed by hierarchical paths (`List String`), and every access
+is performed in one of two modes.  A *policy* is a list of capabilities, each of
+which grants one mode on a whole subtree of the resource hierarchy.
+
+The engine does not scan the policy list at access time; instead the policy is
+*encoded* once into a prefix tree (`Trie`) which the engine then walks.  The
+results below relate the declarative notion `InScope` with the operational
+notion `engineAccepts` computed on the encoded policy. -/
+
+/-- Access modes mediated by the isolation engine. -/
+inductive Mode where
+  | read : Mode
+  | write : Mode
   deriving DecidableEq, Repr
 
-/-- A resource of the isolation engine, identified by a hierarchical path
-(e.g. `["home", "user", "data.txt"]`). -/
-structure Resource where
-  path : List String
-  deriving DecidableEq, Repr
-
-/-- A capability grant: every resource sitting under `prefixPath` may be accessed
-with mode `mode` (a `write` grant subsumes `read`). -/
-structure Grant where
-  prefixPath : List String
+/-- A capability grants `mode` on every resource at or below the path `root`. -/
+structure Capability where
+  root : List String
   mode : Mode
   deriving DecidableEq, Repr
 
-/-- The declarative (specification-level) meaning of a grant: it covers the request
-`(m, r)` when its path prefix is a prefix of the resource path and the granted mode
-is strong enough for the requested mode. -/
+/-- An access request: a resource path together with the mode of access. -/
+structure Request where
+  path : List String
+  mode : Mode
+  deriving DecidableEq, Repr
 
-def Grant.Covers (g : Grant) (m : Mode) (r : Resource) : Prop :=
-  g.prefixPath <+: r.path ∧ (m = Mode.read ∨ g.mode = Mode.write)
+/-- A policy is a list of capabilities. -/
+abbrev Policy := List Capability
 
-/-- An isolation policy is a list of capability grants. -/
-abbrev Policy := List Grant
+/-- The declarative (model-level) notion of being in scope: some capability of
+the policy grants the requested mode on a prefix of the requested path. -/
 
-/-- Specification-level scope check: the request `(m, r)` is in scope for the policy `P`
-when some grant of `P` covers it. -/
+def grant : List String → Mode → Trie → Trie
+  | [], m, .node g ch => .node (fun m' => if m' = m then true else g m') ch
+  | s :: rest, m, .node g ch =>
+      .node g (fun s' => if s' = s then some (grant rest m ((ch s).getD empty)) else ch s')
+
+/-- `permits path m t` is the engine's access check: walk `path` from the root
+of `t`, accepting as soon as a visited node grants the mode `m`. -/

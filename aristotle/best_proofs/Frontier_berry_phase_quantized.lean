@@ -65,8 +65,9 @@ theorem berry_phase_quantized (A : ℝ × ℝ → ℝ × ℝ) (hA : ContDiff ℝ
     have h1 : Continuous fun p : ℝ × ℝ => fderiv ℝ (fun q : ℝ × ℝ => (A q).2) p (1, 0) :=
       (hc2.continuous_fderiv (by norm_num)).clm_apply continuous_const
     have h2 : Continuous fun p : ℝ × ℝ => (-fderiv ℝ (fun q : ℝ × ℝ => (A q).1) p) (0, 1) := by
-      simp only [ContinuousLinearMap.neg_apply]
-      exact ((hc1.continuous_fderiv (by norm_num)).clm_apply continuous_const).neg
+      simpa using
+        (((hc1.continuous_fderiv (by norm_num)).clm_apply continuous_const).neg :
+          Continuous fun p : ℝ × ℝ => -(fderiv ℝ (fun q : ℝ × ℝ => (A q).1) p (0, 1)))
     exact h1.add h2
   have Hi : IntegrableOn (fun p : ℝ × ℝ =>
       fderiv ℝ (fun q : ℝ × ℝ => (A q).2) p (1, 0) +

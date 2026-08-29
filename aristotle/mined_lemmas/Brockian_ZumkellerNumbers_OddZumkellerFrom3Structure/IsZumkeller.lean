@@ -35,26 +35,21 @@ import Mathlib
 
 /-!
 # Odd Zumkeller From 3 Structure
-
-A *Zumkeller number* is a positive integer whose divisors can be split into two sets with
-equal sums.  Here we prove that an odd Zumkeller number must have at least three distinct
-prime factors.
-
-The argument: a Zumkeller number is perfect or abundant (`σ(n) ≥ 2n`), while an odd number
-with at most two distinct prime factors `p < q` satisfies
-`σ(n)/n < p/(p-1) · q/(q-1) ≤ (3/2)(5/4) < 2`, hence is deficient.
+Category: Brockian Conjecture
+Target: Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
 
-set_option maxRecDepth 40000
-
 namespace Brockian.ZumkellerNumbers
 
-/-- `n` is a *Zumkeller number* if it is positive and its set of divisors can be split into
-two parts having the same sum. -/
+/-- A positive integer `n` is a *Zumkeller number* if its set of divisors can be split into
+two parts with equal sums, i.e. there is a set `A` of divisors of `n` whose sum is exactly
+half of `σ(n)`. -/
 
 def IsZumkeller (n : ℕ) : Prop :=
-  0 < n ∧ ∃ S ⊆ n.divisors, ∑ d ∈ S, d = ∑ d ∈ n.divisors \ S, d
+  0 < n ∧ ∃ A ⊆ n.divisors, 2 * ∑ d ∈ A, d = ∑ d ∈ n.divisors, d
 
-/-- A Zumkeller number is perfect or abundant: `σ(n) ≥ 2n`. -/
+/-- Multiplying a Zumkeller number by a coprime factor yields a Zumkeller number. -/

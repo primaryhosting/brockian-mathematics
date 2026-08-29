@@ -23,6 +23,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Brocard Gap Conjecture
+Category: Brockian Conjecture
+Target: Brockian.BrocardGap.BrocardGapConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -31,40 +39,42 @@ Category: Brockian Conjecture
 Target: Brockian.BrocardGap.BrocardGapConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+## Setting
+
+Brocard's problem asks for the solutions of `n ! + 1 = m ^ 2`; the only known ones are
+`n = 4, 5, 7`, and it is an open problem whether there are others.
+
+The *Brocard gap* statement formalised here is the quantitative "sparseness of squares just
+above `n !`" phenomenon underlying the conjecture:
+
+* consecutive squares just above `n !` are more than `Nat.sqrt (n !)` apart, so the window
+  `(n !, n ! + Nat.sqrt (n !)]` contains **at most one** perfect square;
+* for `n ≥ 8` this window has length at least `n ^ 2`, because `n ^ 4 ≤ n !` (proved by
+  induction on `n`);
+* consequently any Brocard solution `n ! + 1 = m ^ 2` with `n ≥ 8` has `m > n ^ 2` and yields
+  the factorisation `n ! = (m - 1) * (m + 1)` of `n !` into two factors differing by `2`.
 -/
 
-/-!
-## Overview
+open scoped Nat
 
-Brocard's problem asks for the solutions of `n ! + 1 = m ^ 2`.  The only known
-solutions are `n = 4, 5, 7` (with `m = 5, 11, 71`), and it is conjectured that
-there are no others; in *gap* form the conjecture states that the distance from
-`n ! + 1` to the nearest perfect square is positive (indeed large) for all
-`n ≥ 8`.  This is an open problem.
+namespace Brockian
+namespace BrocardGap
 
-This file contains:
-
-* `Brockian.BrocardGap.brocardGap`, the distance from `n ! + 1` to the nearest
-  perfect square, and the characterisation `brocardGap_pos_iff`;
-* `Brockian.BrocardGap.ABC`, the `abc` conjecture (in radical form);
-* `Brockian.BrocardGap.BrocardGapConjecture`, a Lean-checked **conditional
-  reduction**: the `abc` conjecture implies that the Brocard gap is positive for
-  all sufficiently large `n` (this is Overholt's argument);
-* `Brockian.BrocardGap.brocardGap_pos_of_mem_Icc`, an unconditional verification
-  of the gap positivity for `8 ≤ n ≤ 200`;
-* `Brockian.BrocardGap.brocard_iff_pronic`, the elementary reformulation of
-  Brocard's equation as `n ! = 4 * a * (a + 1)`.
--/
-
-namespace Brockian.BrocardGap
-
-open Nat Finset
-
-/-- The radical of a natural number: the product of its distinct prime factors. -/
+/-- The Brocard gap window at `n`: the integers strictly above `n !` and at most
+`n ! + Nat.sqrt (n !)`. -/
 
 theorem brocard_known_solutions :
-    4 ! + 1 = 5 ^ 2 ∧ 5 ! + 1 = 11 ^ 2 ∧ 7 ! + 1 = 71 ^ 2 := by
-  refine ⟨by decide, by decide, by decide⟩
+    4 ! + 1 = 5 ^ 2 ∧ 5 ! + 1 = 11 ^ 2 ∧ 7 ! + 1 = 71 ^ 2 :=
+  ⟨by decide, by decide, by decide⟩
 
-/-- Elementary reformulation: for `n ≥ 4`, Brocard's equation is equivalent to `n !` being
-four times a pronic number. -/
+/-- **Brocard Gap Conjecture.**
+
+For every `n ≥ 8`:
+
+* the window `(n !, n ! + Nat.sqrt (n !)]` contains at most one perfect square, and this
+  window has length at least `n ^ 2`;
+* consecutive squares just above `n !` are more than `n ^ 2` apart;
+* every Brocard solution `n ! + 1 = m ^ 2` satisfies `m > n ^ 2` and yields the factorisation
+  `n ! = (m - 1) * (m + 1)` into two factors differing by `2`.
+-/

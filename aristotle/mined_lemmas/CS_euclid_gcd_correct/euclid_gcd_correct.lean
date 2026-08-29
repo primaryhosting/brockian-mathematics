@@ -6,49 +6,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option autoImplicit false
+
 namespace CS
 
-/-- Euclid's algorithm, by repeated remainder.
-
-The recursion terminates because the second argument strictly decreases at every
-recursive call (`Nat.mod_lt`); this is exactly what the `termination_by` /
-`decreasing_by` clauses certify, so `euclid` is a total function. -/
+/-- **Euclid's algorithm.**  On input `(a, b)` it returns `b` when `a = 0`, and otherwise
+recurses on `(b % a, a)`.  The recursion is well founded: the first argument strictly
+decreases at every step (`b % (a+1) < a+1`), which is exactly the termination argument
+discharged by `decreasing_by` below.  Consequently `euclid` is a total function, i.e. the
+algorithm terminates on every input. -/
 
 theorem euclid_gcd_correct (a b : Nat) :
     euclid a b = Nat.gcd a b ∧
-      euclid a b ∣ a ∧ euclid a b ∣ b ∧
-      ∀ c : Nat, c ∣ a → c ∣ b → c ∣ euclid a b := by
-  refine ⟨euclid_eq_gcd a b, ?_, ?_, ?_⟩
+    (euclid a b ∣ a ∧ euclid a b ∣ b) ∧
+    (∀ d : Nat, d ∣ a → d ∣ b → d ∣ euclid a b) := by
+  refine ⟨euclid_eq_gcd a b, ⟨?_, ?_⟩, ?_⟩
   · rw [euclid_eq_gcd]; exact Nat.gcd_dvd_left a b
   · rw [euclid_eq_gcd]; exact Nat.gcd_dvd_right a b
-  · intro c hca hcb
+  · intro d hda hdb
     rw [euclid_eq_gcd]
-    exact Nat.dvd_gcd hca hcb
+    exact Nat.dvd_gcd hda hdb
 
-end CS
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-- Greatest also in the sense of the order: any common divisor of `a` and `b` is at most
+`euclid a b`, provided `a` and `b` are not both zero. -/

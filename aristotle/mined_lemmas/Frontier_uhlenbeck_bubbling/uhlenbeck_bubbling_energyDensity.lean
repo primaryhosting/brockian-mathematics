@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Uhlenbeck Bubbling
 Category: Frontier Abel
 Target: Frontier.uhlenbeck_bubbling
@@ -6,14 +8,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
 open scoped ENNReal
+open scoped Topology
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -32,69 +33,61 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Uhlenbeck Bubbling
-
-This file formalizes the *bubbling* (energy concentration) part of Uhlenbeck compactness for
-Yang–Mills connections, in the measure-theoretic form in which it is used.
-
-A sequence of connections `A n` on a bundle over a Riemannian manifold `X` gives rise to the
-sequence of *energy measures* `mu n = |F_{A n}|² dvol`, and a uniform energy bound
-`mu n X ≤ E < ∞` is the standing hypothesis of Uhlenbeck's theorem.  The analytic heart of the
-theorem (ε-regularity) provides a threshold `eps > 0` below which the connections converge
-smoothly, so that failure of compactness is confined to the *bubble set*: those points where
-every ball eventually carries at least `eps` of energy.
-
-The results proved here are the quantization/counting half of the statement, which is the part
-that is purely about the energy measures:
-
-* `Frontier.uhlenbeck_bubbling` : the bubble set is **finite** and
-  `eps * (number of bubbles) ≤ E`;
-* `Frontier.uhlenbeck_bubbling_ncard_le` : hence at most `E / eps` bubbles;
-* `Frontier.bubbleSet_eq_empty_of_energy_lt` : **base case / removable singularity**, if the
-  total energy stays below the ε-regularity threshold, no bubbling occurs at all;
-* `Frontier.bubbleSet_const` : for a single limiting energy measure, bubble points are exactly
-  the atoms of mass at least `eps` — bubbling is concentration of energy in atoms;
-* `Frontier.bubbleSet_const_eq_empty_of_noAtoms` : a non-atomic limiting energy measure has no
-  bubbles (removable singularity for the limit);
-* `Frontier.uhlenbeck_bubbling_energyDensity` : the same statement phrased directly for
-  curvature energy densities `|F_{A n}|²` integrated against the volume measure.
--/
+open MeasureTheory Metric Set Filter
 
 namespace Frontier
 
-open MeasureTheory Filter Metric Set
+/-!
+## Setting
 
-section Separation
+For a sequence of Yang–Mills connections `A i` on a bundle over a Riemannian manifold `X`
+with uniformly bounded energy, the energy densities `|F_{A i}|² dvol` form a sequence of
+Borel measures on `X` with uniformly bounded total mass.  Uhlenbeck's theory says:
 
-variable {X : Type*} [MetricSpace X]
+* (ε-regularity)  there is an energy quantum `ε₀ > 0` such that if the energy in some ball
+  around `x` is `< ε₀`, then the convergence is smooth up to gauge near `x` and the
+  singularity there is removable;
+* (bubbling)  consequently the set of points at which the convergence fails is contained in
+  the *concentration set*, which is a finite set with at most `(total energy)/ε₀` points:
+  energy concentrates ("bubbles off") at finitely many points only.
 
-/-- A finite set of points in a metric space can be surrounded by pairwise disjoint balls
-of a common positive radius. -/
+The development below formalizes and proves the measure-theoretic core of this picture, in
+two forms.
 
-theorem uhlenbeck_bubbling_energyDensity (vol : Measure X) (F : ℕ → X → ℝ≥0∞) {E eps : ℝ≥0∞} (heps : eps ≠ 0) (hE : E ≠ ⊤)
-    (hbdd : ∀ n, ∫⁻ x, F n x ∂vol ≤ E) :
-    let S : Set X := {x : X | ∀ r : ℝ, 0 < r →
-      ∀ᶠ n in atTop, eps ≤ ∫⁻ y in Metric.ball x r, F n y ∂vol}
-    S.Finite ∧ eps * S.ncard ≤ E ∧ (S.ncard : ℝ≥0∞) ≤ E / eps := by
-  intro S
-  set mu : ℕ → Measure X := fun n => vol.withDensity (F n) with hmu
-  have hball : ∀ (n : ℕ) (x : X) (r : ℝ),
-      mu n (Metric.ball x r) = ∫⁻ y in Metric.ball x r, F n y ∂vol := by
-    intro n x r
-    rw [hmu, withDensity_apply _ measurableSet_ball]
-  have hSeq : S = bubbleSet mu eps := by
-    ext x
-    simp only [S, bubbleSet, Set.mem_setOf_eq, hball]
-  have hbdd' : ∀ n, mu n Set.univ ≤ E := by
-    intro n
-    rw [hmu, withDensity_apply _ MeasurableSet.univ, Measure.restrict_univ]
-    exact hbdd n
-  rw [hSeq]
-  exact ⟨(uhlenbeck_bubbling heps hE hbdd').1, (uhlenbeck_bubbling heps hE hbdd').2,
-    uhlenbeck_bubbling_ncard_le heps hE hbdd'⟩
+* `Frontier.uhlenbeck_bubbling`: for the limiting energy measure `μ` (of finite total
+  energy) and a positive energy quantum `ε₀`, the bubbling set is closed and finite, the
+  number of bubble points satisfies `#(bubble points) · ε₀ ≤ total energy`, and — given
+  ε-regularity as a hypothesis — every point off the bubbling set is a regular point.
+  This is exactly the reduction of Uhlenbeck bubbling to the local ε-regularity theorem.
 
-end YangMillsEnergy
+* `Frontier.uhlenbeck_bubbling_sequence`: the same conclusions directly along a *sequence*
+  of energy measures with uniformly bounded total energy `E`, where the bubbling set is
+  defined through the lower limit of the energy in small balls; no weak limit of measures
+  needs to be extracted.  (The lower limit is the correct notion here: with the upper limit
+  the statement is false, since energy may oscillate between two points along a sequence.)
+
+The two remaining analytic inputs of Uhlenbeck's theorem — the local ε-regularity /
+removable singularity theorem and Uhlenbeck's gauge fixing — enter as the hypothesis `hreg`.
+-/
+
+/-! ## Auxiliary arithmetic and disjointness lemmas -/
+
+/-- For a finite bound `E` and a positive quantum `ε₀`, some multiple `n • ε₀` exceeds `E`. -/
+
+theorem uhlenbeck_bubbling_energyDensity {d : ℕ} (f : EuclideanSpace ℝ (Fin d) → ℝ≥0∞)
+    (hfin : ∫⁻ x : EuclideanSpace ℝ (Fin d), f x ≠ ⊤) {ε₀ : ℝ≥0∞}
+    (hε₀ : 0 < ε₀) :
+    IsClosed (bubbleSet (volume.withDensity f) ε₀) ∧
+      (bubbleSet (volume.withDensity f) ε₀).Finite ∧
+      ((bubbleSet (volume.withDensity f) ε₀).ncard : ℝ≥0∞) * ε₀
+        ≤ ∫⁻ x : EuclideanSpace ℝ (Fin d), f x := by
+  have hmass : (volume.withDensity f) Set.univ = ∫⁻ x : EuclideanSpace ℝ (Fin d), f x := by
+    rw [withDensity_apply f MeasurableSet.univ, Measure.restrict_univ]
+  have : IsFiniteMeasure (volume.withDensity f) :=
+    ⟨by rw [hmass]; exact lt_top_iff_ne_top.mpr hfin⟩
+  refine ⟨bubbleSet_isClosed _ ε₀, bubbleSet_finite _ hε₀, ?_⟩
+  rw [← hmass]
+  exact bubbleSet_ncard_mul_le _ hε₀
 
 end Frontier
 

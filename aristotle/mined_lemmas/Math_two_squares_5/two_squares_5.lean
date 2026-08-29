@@ -2,23 +2,29 @@ import Mathlib
 import RequestProject.TwoSquares5
 
 /-!
-# Two Squares 5 — via Mathlib's two-squares theorem
+# Two Squares 5 — Mathlib phrasing
 
-The target theorem `Math.two_squares_5` lives in `RequestProject/TwoSquares5.lean`, which
-(because the required file header must be the very first thing in that file, before any
-`import`) is import-free and proves the statement by direct computation.
-
-Here we record the same fact as an instance of Mathlib's Fermat two-squares theorem
-`Nat.Prime.sq_add_sq`: every prime `p` with `p % 4 ≠ 3` is a sum of two squares.
+The statement of `Math.two_squares_5` phrased with Mathlib's `Nat.Prime`, together with the
+derivation of the Mathlib phrasing from the elementary one.
 -/
 
 namespace Math
 
-/-- `5` is a sum of two squares, obtained from `Nat.Prime.sq_add_sq` since `5` is prime
-and `5 % 4 = 1 ≠ 3`. -/
+/-- The prime `5` is a sum of two squares, phrased with Mathlib's `Nat.Prime`. -/
 
-theorem two_squares_5 : ∃ a b : Nat, 5 = a ^ 2 + b ^ 2 :=
-  ⟨1, 2, rfl⟩
+theorem two_squares_5 :
+    (1 < 5 ∧ ∀ d : Nat, d ∣ 5 → d = 1 ∨ d = 5) ∧ ∃ a b : Nat, 5 = a ^ 2 + b ^ 2 := by
+  refine ⟨⟨by omega, ?_⟩, 1, 2, by decide⟩
+  intro d hd
+  have h1 := Nat.le_of_dvd (by omega) hd
+  match d, h1, hd with
+  | 0, _, h => exact absurd h (by decide)
+  | 1, _, _ => exact Or.inl rfl
+  | 2, _, h => exact absurd h (by decide)
+  | 3, _, h => exact absurd h (by decide)
+  | 4, _, h => exact absurd h (by decide)
+  | 5, _, _ => exact Or.inr rfl
+  | (n + 6), h, _ => omega
 
 end Math
 

@@ -2,31 +2,37 @@
 # Bekenstein Bound
 Category: Frontier Phys
 Target: Phys.bekenstein_bound
-Statement: State the Bekenstein bound S ≤ 2πkRE/ℏc.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
 
-/-!
-# Bekenstein Bound
-Category: Frontier Phys
-Target: Phys.bekenstein_bound
-Statement: State the Bekenstein bound S ≤ 2πkRE/ℏc.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Phys
 
-open Real
+/-- The Bekenstein bound expression `2 π k R E / (ℏ c)`: the maximal thermodynamic
+entropy of a system of total energy `E` that fits inside a sphere of radius `R`,
+where `k` is Boltzmann's constant, `hbar` the reduced Planck constant and `c` the
+speed of light. -/
 
-/-- The Bekenstein bound value `2 π k R E / (ℏ c)`: the maximal entropy of a physical
-system of radius `R` and total energy `E`, expressed with Boltzmann's constant `k`,
-the reduced Planck constant `ℏ` and the speed of light `c`. -/
+noncomputable def bekensteinBoundValue (k R E hbar c : ℝ) : ℝ :=
+  2 * Real.pi * k * R * E / (hbar * c)
 
-noncomputable def bekensteinBoundValue (k hbar c R E : ℝ) : ℝ :=
-  2 * π * k * R * E / (hbar * c)
-
-/-- The Bekenstein–Hawking entropy `k c³ A / (4 ℏ G)` of a black-hole horizon of area `A`. -/
+/-- The Bekenstein–Hawking entropy `k c³ A / (4 G ℏ)` of a black hole of horizon
+area `A`. -/

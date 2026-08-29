@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Counting Diverges Of Discrete And Rvm
 Category: Brockian (Open Discharge)
 Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm
@@ -33,15 +31,31 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Set
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 800000
 
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- The eigenvalue counting function of a spectrum `S ⊆ ℝ`:
-`counting S T` is the number of spectral points that are `≤ T`. -/
+variable {ι : Type*}
 
-def DiscreteSpectrum (S : Set ℝ) : Prop := ∀ T : ℝ, (S ∩ Set.Iic T).Finite
+/-- The eigenvalue counting function of a spectrum.
 
-/-- The conclusion supplied by the Rayleigh–Ritz variational min–max ("RVM") principle:
-the variational characterisation produces an *infinite* family of eigenvalues, i.e. the
-spectrum `S` is an infinite set. -/
+`lam : ι → ℝ` is the eigenvalue list, indexed by `ι` and repeated according to
+multiplicity, and `counting lam Λ` is the number of eigenvalues that are `≤ Λ`,
+counted with multiplicity.  (This is the function `N(Λ)` appearing in Weyl's law.) -/
+
+def DiscreteSpectrum (lam : ι → ℝ) : Prop := ∀ Λ : ℝ, {i | lam i ≤ Λ}.Finite
+
+/-- **RVM** (Rayleigh Variational Minimax): the spectrum admits a min–max enumeration.
+
+That is, the Rayleigh–Ritz min–max principle over an infinite-dimensional form domain
+produces an injective enumeration `e : ℕ → ι` of (part of) the eigenvalue list along
+which the eigenvalues `k ↦ lam (e k)` are nondecreasing.  In particular the spectrum
+contains infinitely many eigenvalues, counted with multiplicity. -/

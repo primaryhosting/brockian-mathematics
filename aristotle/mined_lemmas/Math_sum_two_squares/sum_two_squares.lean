@@ -1,3 +1,37 @@
+/-
+# Sum Two Squares
+Category: Pure Mathematics
+Target: Math.sum_two_squares
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+set_option autoImplicit false
+
+namespace Math
+
+/-- Squares are `0` or `1` mod `4`. -/
+
+theorem sum_two_squares {p : ℕ} (hp : p.Prime) :
+    (∃ a b : ℕ, p = a ^ 2 + b ^ 2) ↔ (p = 2 ∨ p % 4 = 1) := by
+  haveI : Fact p.Prime := ⟨hp⟩
+  constructor
+  · rintro ⟨a, b, rfl⟩
+    have h4 : (a ^ 2 + b ^ 2) % 4 ≠ 3 := by
+      have := sq_mod_four a
+      have := sq_mod_four b
+      omega
+    have := hp.eq_two_or_odd
+    omega
+  · intro h
+    have h4 : p % 4 ≠ 3 := by omega
+    obtain ⟨a, b, hab⟩ := Nat.Prime.sq_add_sq h4
+    exact ⟨a, b, hab.symm⟩
+
+end Math
+
 import Mathlib
 
 open scoped BigOperators
@@ -22,25 +56,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Math
-
-/-- No sum of two squares is congruent to `3` mod `4`. -/
-
-theorem sum_two_squares {p : ℕ} (hp : Nat.Prime p) :
-    (∃ a b : ℕ, a ^ 2 + b ^ 2 = p) ↔ (p = 2 ∨ p % 4 = 1) := by
-  constructor
-  · rintro ⟨a, b, rfl⟩
-    rcases hp.eq_two_or_odd with h | h
-    · exact Or.inl h
-    · have := sq_add_sq_mod_four_ne_three a b
-      omega
-  · rintro (rfl | h)
-    · exact ⟨1, 1, by norm_num⟩
-    · haveI : Fact (Nat.Prime p) := ⟨hp⟩
-      exact Nat.Prime.sq_add_sq (by omega)
-
-end Math
-
-#print axioms Math.sum_two_squares
 

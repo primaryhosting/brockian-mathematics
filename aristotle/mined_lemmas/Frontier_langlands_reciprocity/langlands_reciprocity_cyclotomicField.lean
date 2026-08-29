@@ -1,11 +1,3 @@
-/-
-# Langlands Reciprocity
-Category: Frontier Abel
-Target: Frontier.langlands_reciprocity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -24,56 +16,62 @@ open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Frontier
 
-/-!
-## The shape of the conjecture
+open Complex IsCyclotomicExtension
 
-Langlands reciprocity predicts that every `d`-dimensional (continuous, complex) representation
-`ρ` of the absolute Galois group of a number field is *automorphic*: there is an automorphic
-representation `π` of `GL_d` over that field whose local data (Satake parameters / Hecke
-eigenvalues) match the Frobenius data of `ρ`, so that `L(s, ρ) = L(s, π)`.
+/-! ## Setting
 
-For `d = 1` over `ℚ` the automorphic representations of `GL_1` of finite order are exactly the
-Dirichlet characters, and the predicted matching is provided by the Artin reciprocity map.  This
-degree-one case is the classical base case of the conjecture (abelian class field theory), and it
-is the case formalized and proved here.
+Langlands reciprocity predicts a bijection between `n`-dimensional complex representations of
+the absolute Galois group of a number field and automorphic representations of `GLₙ`, matching
+Artin `L`-functions with automorphic `L`-functions, and matching, at each unramified place, the
+Frobenius conjugacy class with the Satake parameter of the local component.
 
-`IsArtinReciprocity art` below is the precise degree-one reciprocity statement relative to a
-reciprocity ("Artin") map `art : G →* (ZMod n)ˣ`: *every* one-dimensional Galois representation of
-`G` is matched by a *unique* Dirichlet character modulo `n`, the matching being
-`χ (art g) = ρ g`.
+We formalise and *prove* the abelian base case `n = 1` over `ℚ`, in its cyclotomic incarnation:
+one-dimensional complex representations of `Gal(ℚ(ζ_N)/ℚ)` correspond bijectively to automorphic
+representations of `GL₁/ℚ` of conductor dividing `N`, i.e. to Dirichlet characters mod `N`,
+in a way which is compatible with Frobenius elements at all unramified primes and which
+identifies the Artin `L`-function with the automorphic (Dirichlet) `L`-function.
 -/
 
-/-- A degree-one Galois representation of a group `G`: a character `G →* ℂˣ`.
-(For a finite Galois group every homomorphism to `ℂˣ` is automatically continuous with finite
-image, so this is exactly the notion of an Artin character of degree one.) -/
-abbrev GaloisChar (G : Type*) [Group G] := G →* ℂˣ
+section
 
-/-- **Degree-one Langlands reciprocity relative to a reciprocity map `art`.**
+variable (N : ℕ) [NeZero N] (K : Type*) [Field K] [NumberField K]
+  [IsCyclotomicExtension {N} ℚ K]
 
-Every one-dimensional Galois representation `ρ : G →* ℂˣ` is automorphic: there is a *unique*
-Dirichlet character `χ` modulo `n` (i.e. a unique automorphic representation of `GL₁` of
-conductor dividing `n`) whose value at `art g` is `ρ g` for all `g`. -/
+/-- A one-dimensional complex representation of the Galois group `Gal(ℚ(ζ_N)/ℚ)`
+(the "Galois side" of the correspondence in the abelian case). -/
+abbrev GaloisChar : Type _ := (K ≃ₐ[ℚ] K) →* ℂˣ
 
-theorem langlands_reciprocity_cyclotomicField (m : ℕ) [NeZero m]
-    (ρ : GaloisChar (CyclotomicField m ℚ ≃ₐ[ℚ] CyclotomicField m ℚ)) :
-    ∃! χ : DirichletCharacter ℂ m,
-      ∀ (σ : CyclotomicField m ℚ ≃ₐ[ℚ] CyclotomicField m ℚ) (a : ℕ),
-        σ (IsCyclotomicExtension.zeta m ℚ (CyclotomicField m ℚ))
-          = (IsCyclotomicExtension.zeta m ℚ (CyclotomicField m ℚ)) ^ a → χ (a : ZMod m) = (ρ σ : ℂ) :=
-  langlands_reciprocity m (CyclotomicField m ℚ) _
-    (IsCyclotomicExtension.zeta_spec m ℚ (CyclotomicField m ℚ)) ρ
+/-- The (arithmetic) Frobenius at an unramified prime `p`, i.e. a prime not dividing `N`:
+it is the unique element of `Gal(ℚ(ζ_N)/ℚ)` acting on `N`-th roots of unity by `ζ ↦ ζ ^ p`. -/
+
+theorem langlands_reciprocity_cyclotomicField (N : ℕ) [NeZero N] :
+    ∃ recip : GaloisChar (CyclotomicField N ℚ) ≃ DirichletCharacter ℂ N,
+      (∀ (ρ : GaloisChar (CyclotomicField N ℚ)) (p : ℕ), p.Prime → ∀ hp : Nat.Coprime p N,
+          (ρ (frob N (CyclotomicField N ℚ) hp) : ℂ) = recip ρ (p : ZMod N)) ∧
+      (∀ (ρ : GaloisChar (CyclotomicField N ℚ)) (s : ℂ), 1 < s.re →
+          HasProd (fun p : Nat.Primes ↦ artinEulerFactor N (CyclotomicField N ℚ) ρ p s)
+            (LSeries (fun m : ℕ ↦ (recip ρ) (m : ZMod N)) s)) :=
+  langlands_reciprocity N (CyclotomicField N ℚ)
 
 end Frontier
 
 #print axioms Frontier.langlands_reciprocity
 #print axioms Frontier.langlands_reciprocity_cyclotomicField
-#print axioms Frontier.langlands_reciprocity_converse
 

@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Borel Determinacy
 Category: Frontier — Set Theory
@@ -7,20 +8,51 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-universe u
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-variable {X : Type u}
+/-!
+## Infinite two-person games of perfect information
 
-/-- A strategy assigns a move to every finite position of the game. -/
-abbrev Strategy (X : Type u) := List X → X
+Fix a nonempty set `X` of moves.  A *play* is an element of `ℕ → X` (for `X = ℕ` this is
+Baire space); a *position* is a finite list of moves.  Players I and II alternate moves,
+producing an infinite play, and player I wins iff the play belongs to the payoff set `A`.
 
-/-- The move played at position `q`: player I (resp. II) moves at positions of
-even (resp. odd) length. -/
+The parameter `s : Bool` records which player moves first: for `s = false` player I moves
+at positions of even length (the usual convention), for `s = true` the roles are
+interchanged.  Carrying this parameter lets a single Gale–Stewart argument serve both
+players.
+-/
 
-def nextMove (σ τ : Strategy X) (q : List X) : X :=
-  if Even q.length then σ q else τ q
+variable {X : Type*} [Inhabited X]
 
-/-- The position reached after `n` further moves, starting from position `p`,
-when player I follows `σ` and player II follows `τ`. -/
+/-- `moverIsI s h` is `true` exactly when player I is to move at the position `h`. -/
+
+def nextMove (s : Bool) (σ τ : List X → X) (h : List X) : X :=
+  if moverIsI s h then σ h else τ h
+
+/-- The sequence of positions reached from the position `p` when the players follow the
+strategies `σ` (player I) and `τ` (player II); `hist s p σ τ n` is the position after `n`
+further moves. -/

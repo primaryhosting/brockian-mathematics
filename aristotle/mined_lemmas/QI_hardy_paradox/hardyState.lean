@@ -1,37 +1,54 @@
-/-
-# Hardy Paradox
-Category: Frontier Qi
-Target: QI.hardy_paradox
-Statement: Hardy's nonlocality argument: a fraction of runs violate local realism without inequalities.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Hardy Paradox
 Category: Frontier Qi
 Target: QI.hardy_paradox
-Statement: Hardy's nonlocality argument: a fraction of runs violate local realism without inequalities.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open MeasureTheory Finset
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace QI
 
-universe u
+open MeasureTheory
 
-/-! ## Two-qubit kinematics
+/-! ## The local hidden variable (local realism) side
 
-A two-qubit pure state is an array of amplitudes `psi : Fin 2 → Fin 2 → ℂ`, and a local
-measurement outcome on each side is described by a unit vector in `ℂ²`.  The Born rule gives
-the joint probability of the pair of outcomes `(u, v)` as `|⟪u ⊗ v, psi⟫|²`.
--/
+In a local hidden variable model every run of the experiment is described by a hidden
+variable `ω`, and the outcome of each of the two possible measurements on each side is a
+definite function of `ω`: `A₁, A₂ : Ω → Bool` for Alice and `B₁, B₂ : Ω → Bool` for Bob
+(locality: Alice's outcomes do not depend on Bob's setting and vice versa). -/
 
-/-- The amplitude `⟪u ⊗ v, psi⟫` of the product vector `u ⊗ v` in the two-qubit state `psi`. -/
+/-- **Hardy's no-go for local realism.**  If the three "Hardy constraints" hold with
+probability one, namely `P(A₁ = 1, B₂ = 1) = 0`, `P(A₂ = 1, B₁ = 1) = 0` and
+`P(A₂ = 0, B₂ = 0) = 0`, then the Hardy event `A₁ = 1, B₁ = 1` must have probability
+zero.  (The pointwise argument: if `A₁ ω = 1` and `B₁ ω = 1`, then `B₂ ω = 0` by the
+first constraint and `A₂ ω = 0` by the second, contradicting the third.) -/
 
-noncomputable def hardyState : Fin 2 → Fin 2 → ℂ := ![![c12, c12], ![c12, -3 * c12]]
+noncomputable def hardyState : Fin 2 → Fin 2 → ℂ :=
+  ![![((Real.sqrt 3)⁻¹ : ℝ), ((Real.sqrt 3)⁻¹ : ℝ)], ![((Real.sqrt 3)⁻¹ : ℝ), 0]]
 
+/-- Outcome `1` vector of the first measurement setting, `(|1⟩ - |0⟩)/√2`
+(the same setting is used by Alice and by Bob). -/

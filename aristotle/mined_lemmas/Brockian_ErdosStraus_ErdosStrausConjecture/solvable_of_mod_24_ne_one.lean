@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Erdos Straus Conjecture
 Category: Brockian Conjecture
 Target: Brockian.ErdosStraus.ErdosStrausConjecture
@@ -33,32 +31,23 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-`ErdosStrausConjecture` is a well-known open problem, so this file does not prove it
-outright.  What is proved here, unconditionally and axiom-cleanly, is:
-
-* `solvable_of_dvd`: solvability passes from a divisor to any positive multiple;
-* explicit parametric solutions for `n` even, `3 ∣ n`, `n ≡ 3 (mod 4)`, `n ≡ 2 (mod 3)`
-  and `n ≡ 5 (mod 8)`;
-* `solvable_of_mod_24_ne_one`: the conjecture holds for every `n ≥ 2` with `n % 24 ≠ 1`;
-* `erdosStrausConjecture_iff_primes`: the conjecture is *equivalent* to its special case
-  for primes `p ≡ 1 (mod 24)`.
--/
+import Mathlib
 
 namespace Brockian.ErdosStraus
 
-/-- `Solvable n` says that `4 / n` can be written as a sum of three (not necessarily
-distinct) positive unit fractions. -/
+/-- `ErdosStrausSolvable n` says that `4 / n` is a sum of three unit fractions with
+positive natural denominators. -/
 
-theorem solvable_of_mod_24_ne_one {n : ℕ} (hn : 2 ≤ n) (h : n % 24 ≠ 1) : Solvable n := by
+theorem solvable_of_mod_24_ne_one {n : ℕ} (hn : 2 ≤ n) (h : n % 24 ≠ 1) :
+    ErdosStrausSolvable n := by
   have hn0 : 0 < n := by omega
-  have hcases : n % 2 = 0 ∨ n % 3 = 0 ∨ n % 4 = 3 ∨ n % 3 = 2 ∨ n % 8 = 5 := by omega
-  rcases hcases with h' | h' | h' | h' | h'
+  have key : n % 2 = 0 ∨ n % 3 = 0 ∨ n % 4 = 3 ∨ n % 3 = 2 ∨ n % 8 = 5 := by omega
+  rcases key with h' | h' | h' | h' | h'
   · exact solvable_of_even hn0 h'
   · exact solvable_of_three_dvd hn0 h'
   · exact solvable_of_mod_four_eq_three h'
   · exact solvable_of_mod_three_eq_two h'
   · exact solvable_of_mod_eight_eq_five h'
 
-/-- **Reduction to primes `≡ 1 (mod 24)`**: the full conjecture is equivalent to its
-special case for primes congruent to `1` modulo `24`. -/
+/-- **Reduction to primes.** The full Erdős–Straus conjecture is equivalent to its restriction
+to primes congruent to `1` modulo `24`. -/

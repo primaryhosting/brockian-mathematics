@@ -23,7 +23,15 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+-- # Sophie Germain Infinitude
+-- Category: Brockian Conjecture
+-- Target: Brockian.SophieGermain.SophieGermainInfinitude
+-- Verification: pending
+-- Provenance: Aristotle theorem prover (Harmonic)
+
+import Mathlib
+
+/-!
 # Sophie Germain Infinitude
 Category: Brockian Conjecture
 Target: Brockian.SophieGermain.SophieGermainInfinitude
@@ -31,12 +39,11 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+set_option maxRecDepth 40000
 
 namespace Brockian.SophieGermain
 
-/-- `p` is a *Sophie Germain prime* if both `p` and `2 * p + 1` are prime. -/
+/-- A *Sophie Germain prime* is a prime `p` such that `2 * p + 1` is also prime. -/
 
-theorem isSophieGermain_two : IsSophieGermain 2 := by
-  constructor <;> norm_num
+theorem isSophieGermain_two : IsSophieGermain 2 := by decide
 

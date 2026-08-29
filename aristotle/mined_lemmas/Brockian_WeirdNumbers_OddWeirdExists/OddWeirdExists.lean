@@ -34,65 +34,49 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 /-!
-# Odd Weird Exists
-Category: Brockian Conjecture
-Target: Brockian.WeirdNumbers.OddWeirdExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-/-!
 ## Overview
 
-A natural number `n` is *weird* (`Nat.Weird`) if it is abundant (the sum of its proper
-divisors exceeds `n`) but not pseudoperfect (no subset of its proper divisors sums to `n`).
+A natural number `n` is *weird* when it is abundant (the sum of its proper divisors exceeds
+`n`) but not semiperfect (no set of distinct proper divisors of `n` sums to `n`).  The smallest
+weird number is `70`.
 
-Whether an **odd** weird number exists is a well-known open problem; no odd weird number is
-known.  Consequently the file below does not claim an unconditional existence proof.
-Instead it provides a Lean-checked *reduction*:
+Whether an **odd** weird number exists is a well-known open problem; none is known, and none
+exists below very large search bounds.  Accordingly, the target statement
+`Brockian.WeirdNumbers.OddWeirdExists` is formalised here as a *conditional reduction*: it derives
+the existence of an odd weird number from the existence of an odd abundant number whose
+*abundance* `σ(n) - 2n` is not a subset sum of the proper divisors of `n`.
 
-* `Brockian.WeirdNumbers.weird_mul_prime` : if `n` is weird and `p` is a prime exceeding the
-  sum of the divisors of `n`, then `n * p` is weird.
-* `Brockian.WeirdNumbers.OddWeirdExists` : an odd weird number exists **iff** there are
-  arbitrarily large odd weird numbers.  In other words, a single odd weird number would
-  immediately yield infinitely many.
+The reduction is not a weakening: `weird_iff_abundance_not_representable` shows that the
+hypothesis is in fact equivalent to the conclusion's content, and it is the numerically more
+convenient criterion (the abundance is usually far smaller than `n`).
 
-Unconditionally we also record:
+Besides that, this file contains:
 
-* `Brockian.WeirdNumbers.even_weird_exists` : `70` is an (even) weird number;
-* `Brockian.WeirdNumbers.odd_weird_ge_1000` : every odd weird number is at least `1000`
-  (the only odd abundant number below `1000` is `945`, and `945` is pseudoperfect).
+* `isWeird_70` — a machine-checked verification that `70` is weird (a sanity check on the
+  definitions);
+* `no_odd_weird_below_1000` — no odd weird number is smaller than `1000`;
+* `isWeird_mul_prime` — if `n` is weird and `p` is a prime larger than `σ n`, then `n * p` is
+  weird; hence (`infinite_odd_weird_of_odd_weird`) a single odd weird number would produce
+  infinitely many.
 -/
 
 namespace Brockian.WeirdNumbers
 
 open Finset
 
-/-- The sum of all divisors of `n`. -/
-abbrev sigmaOne (n : ℕ) : ℕ := ∑ d ∈ n.divisors, d
+/-- `n` is *semiperfect* (pseudoperfect) if some set of distinct proper divisors of `n`
+sums to `n`. -/
 
-/-- For a prime `p` not dividing `n`, `σ (n * p) = σ n * (p + 1)`. -/
+theorem OddWeirdExists
+    (h : ∃ n, Odd n ∧ Nat.Abundant n ∧
+      ¬ ∃ T ∈ n.properDivisors.powerset, ∑ d ∈ T, d = abundance n) :
+    ∃ n, Odd n ∧ IsWeird n := by
+  obtain ⟨n, hodd, hab, hrep⟩ := h
+  exact ⟨n, hodd, (weird_iff_abundance_not_representable n).mpr ⟨hab, hrep⟩⟩
 
-theorem OddWeirdExists :
-    (∃ n : ℕ, Odd n ∧ n.Weird) ↔ ∀ N : ℕ, ∃ n : ℕ, N < n ∧ Odd n ∧ n.Weird := by
-  constructor
-  · rintro ⟨n, hodd, hw⟩ N
-    obtain ⟨p, hpge, hp⟩ := Nat.exists_infinite_primes (max (sigmaOne n + 1) (N + 1))
-    have hlt : sigmaOne n < p :=
-      lt_of_lt_of_le (Nat.lt_succ_self _) (le_trans (le_max_left _ _) hpge)
-    have hNp : N < p := lt_of_lt_of_le (Nat.lt_succ_self _) (le_trans (le_max_right _ _) hpge)
-    have hnpos : 0 < n := Weird.pos hw
-    have hp2 : p ≠ 2 := by
-      have h2 : 2 * n < sigmaOne n := two_mul_lt_sigmaOne hw
-      omega
-    refine ⟨n * p, ?_, ?_, weird_mul_prime hw hp hlt⟩
-    · calc N < p := hNp
-        _ = 1 * p := (one_mul p).symm
-        _ ≤ n * p := Nat.mul_le_mul_right p hnpos
-    · exact hodd.mul (hp.odd_of_ne_two hp2)
-  · intro h
-    obtain ⟨n, _, hodd, hw⟩ := h 0
-    exact ⟨n, hodd, hw⟩
+/-!
+## Sanity checks and a small-range verification
+-/
 
-end Brockian.WeirdNumbers
-
+set_option maxRecDepth 40000 in
+/-- `70` is weird: it is abundant, and no set of distinct proper divisors of `70` sums to `70`. -/

@@ -1,21 +1,24 @@
-import Mathlib
-
-/-!
-# Hall's marriage theorem
-
-A bipartite graph has a matching saturating one side iff Hall's condition holds,
-and (when the two sides have the same size) a perfect matching iff Hall's condition holds.
+/-
+# Halls Marriage
+Category: Pure Mathematics
+Target: Math.halls_marriage
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Math
+import Mathlib
 
 open Finset
 
-variable {L R : Type*} [Fintype L] [Fintype R] [DecidableEq R]
-  (r : L → R → Prop) [∀ a, DecidablePred (r a)]
+namespace Math
 
-/-- The set of neighbours of a left vertex `a` in the bipartite graph given by `r`. -/
+variable {α β : Type*}
 
-def neighbors (a : L) : Finset R := Finset.univ.filter (fun b => r a b)
+/-- The neighbourhood of a left vertex `a` in the bipartite graph with adjacency
+relation `Adj : α → β → Prop`: the finset of right vertices adjacent to `a`. -/
 
-omit [Fintype L] [DecidableEq R] in
+def neighbors [Fintype β] [DecidableEq β] (Adj : α → β → Prop)
+    [∀ a, DecidablePred (Adj a)] (a : α) : Finset β :=
+  univ.filter (fun b => Adj a b)
+
+@[simp]

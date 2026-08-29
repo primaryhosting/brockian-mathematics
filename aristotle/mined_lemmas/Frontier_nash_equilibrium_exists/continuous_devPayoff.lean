@@ -1,27 +1,35 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-theorem continuous_devPayoff (G : FiniteGame ι S) (i : ι) (s : S i) :
-    Continuous fun x : (i : ι) → S i → ℝ => devPayoff G i s x :=
-  (continuous_expectedPayoff G i).comp (continuous_update i (pureVec s))
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
-/-! ### Nash's map -/
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
 
-/-- The "regret" of player `i` for the pure strategy `s` at the profile `x`. -/
+lemma continuous_devPayoff (u : ι → (∀ j, S j) → ℝ) (i : ι) (s : S i) :
+    Continuous (devPayoff u i s) := by
+  refine continuous_finset_sum _ fun p _ => ?_
+  exact continuous_const.mul
+    ((continuous_finset_prod _ fun j _ => continuous_coord j (p j)).mul continuous_const)
+

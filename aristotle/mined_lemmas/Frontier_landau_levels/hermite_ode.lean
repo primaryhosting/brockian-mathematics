@@ -1,4 +1,22 @@
+/-
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment; the same text is repeated below as the module docstring.)
+
 import Mathlib
+
+/-!
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -19,49 +37,33 @@ set_option pp.structureInstances true
 set_option pp.coercions.types true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-/-!
-# Landau levels
-
-A charged particle of mass `m` and charge `q` moving in the plane in a uniform magnetic field `B`
-perpendicular to the plane has energy spectrum `ℏ ω_c (n + 1/2)`, where `ω_c = q B / m` is the
-cyclotron frequency.
-
-We work in the Landau gauge `A = (0, B x)`, so that the Hamiltonian is
-
-  `H = (1/(2m)) ( (-iℏ ∂ₓ)² + (-iℏ ∂_y - q B x)² )`
-    `= (1/(2m)) ( -ℏ² ∂ₓ² - ℏ² ∂_y² + 2iℏ q B x ∂_y + q²B²x² )`,
-
-which is `Frontier.landauH` below.
-
-The eigenfunctions are `exp (i k y)` times a shifted Hermite function of `x`
-(`Frontier.landauState`), and `Frontier.landau_levels` states that these are eigenfunctions of
-`landauH` with eigenvalue `ℏ (qB/m) (n + 1/2)`.
--/
 
 namespace Frontier
 
 open Polynomial
 
-/-! ### Hermite polynomial preliminaries -/
+/-! ### Hermite polynomials: the Hermite differential equation
 
-/-- The derivative of the (probabilists') Hermite polynomial: `He_{n+1}' = (n+1) He_n`. -/
+Mathlib provides `Polynomial.hermite : ℕ → ℤ[X]` (the *probabilists'* Hermite polynomials)
+together with `Polynomial.hermite_succ`, but not the Hermite ODE, which we derive here. -/
+
+/-- The Hermite differential equation `He_n'' = X * He_n' - n * He_n`. -/
 
 theorem hermite_ode (n : ℕ) :
-    derivative (derivative (hermite n)) - X * derivative (hermite n) + (n : ℤ[X]) * hermite n
-      = 0 := by
-  cases n with
-  | zero => simp
-  | succ m =>
-    have h2 : derivative ((m + 1 : ℤ[X]) * hermite m) = (m + 1 : ℤ[X]) * derivative (hermite m) := by
-      simp [derivative_mul]
-    have hx : X * hermite m = hermite (m + 1) + derivative (hermite m) := by
-      rw [hermite_succ m]; ring
-    have hxx : X * ((m + 1 : ℤ[X]) * hermite m) = (m + 1 : ℤ[X]) * (X * hermite m) := by ring
-    rw [derivative_hermite m, h2, hxx, hx]
-    push_cast
-    ring
+    derivative (derivative (hermite n)) = X * derivative (hermite n) - (n : ℤ[X]) * hermite n := by
+  induction n with
+  | zero => simp [hermite_zero]
+  | succ n ih =>
+      have hd : derivative (hermite (n + 1)) = ((n : ℤ[X]) + 1) * hermite n := by
+        rw [hermite_succ n]
+        simp only [derivative_sub, derivative_mul, derivative_X, one_mul]
+        rw [ih]; ring
+      rw [hd, hermite_succ n]
+      simp only [derivative_mul, derivative_natCast, derivative_one, derivative_add]
+      push_cast
+      ring_nf
 
-/-- The `n`-th probabilists' Hermite polynomial as a real function. -/
+/-- The `n`-th (probabilists') Hermite polynomial with real coefficients. -/

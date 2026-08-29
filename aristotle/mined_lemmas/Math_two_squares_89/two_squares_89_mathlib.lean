@@ -8,12 +8,10 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Math
 
-/-- **Two squares for 89.** The prime `89` is a sum of two squares: `89 = 5 ^ 2 + 8 ^ 2`.
-
-Since Lean does not permit an `import` after the required header comment, this file is
-self-contained: primality of `89` is spelled out directly as "`2 ≤ 89` and every divisor of `89`
-is `1` or `89`", which is exactly `Nat.Prime 89` (see `Math.two_squares_89_mathlib` in
-`RequestProject/TwoSquares89Mathlib.lean` for the Mathlib-phrased version). -/
+/-- Primality of a natural number, spelled out: `n` is at least `2` and its only
+divisors are `1` and `n`.  (This is definitionally the same notion as
+`Nat.Prime`; it is stated here directly because the required file header must be
+the very first thing in the file, which precludes an `import` command.) -/
 
 theorem two_squares_89_mathlib : Nat.Prime 89 ∧ ∃ a b : ℕ, 89 = a ^ 2 + b ^ 2 :=
   ⟨by norm_num, 5, 8, by norm_num⟩

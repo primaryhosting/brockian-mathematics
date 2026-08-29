@@ -6,20 +6,23 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-This file must literally *begin* with the header comment above, so it cannot contain any
-`import` command (Lean requires imports to be the very first commands of a file).  It is
-therefore written against the Lean core prelude only, with the numeric parameters taken in
-`Rat`.  The companion file `RequestProject/Main.lean` develops the same statement over `ℝ`
-with `Real.pi` and the reduced Planck constant (`QPhys.box_level_5_real`).
--/
-
 namespace QPhys
 
-/-! ### Small arithmetic helpers (core `Rat` only) -/
+/-!
+This file must literally begin with the header comment above, which Lean parses as a
+module docstring; module docstrings have to precede every `import` command, so this
+module is written using only Lean's core library (no `Mathlib` import) and works over
+the rationals `Rat`.  The companion file `RequestProject/BoxLevel5Real.lean` states and
+proves the same result over the real numbers `ℝ`, with `Real.pi` for `π`.
+-/
 
+/-- Energy of the `n`-th level of a particle of mass `m` in a one-dimensional infinite
+potential well ("particle in a box") of width `L`, with reduced Planck constant `hbar`
+and circle constant `pi`:  `E n = n² π² ħ² / (2 m L²)`. -/
 
 noncomputable def boxEnergyReal (hbar m L : ℝ) (n : ℕ) : ℝ :=
   (n : ℝ) ^ 2 * Real.pi ^ 2 * hbar ^ 2 / (2 * m * L ^ 2)
 
-/-- The ground-state energy of the real infinite well is nonzero when `ħ`, `m` and `L` are. -/
+/-- **Box, level 5, over `ℝ`.**  For a particle in a one-dimensional infinite potential
+well with nonzero mass, width and `hbar`, the ratio of the fifth energy level to the
+ground state is `5² = 25`. -/

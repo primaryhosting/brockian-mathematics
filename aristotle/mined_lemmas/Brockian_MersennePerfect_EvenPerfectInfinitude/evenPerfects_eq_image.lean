@@ -29,14 +29,9 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Note: Lean 4 does not permit a module doc-comment before the import lines, so the
-required header appears here as an ordinary block comment; the same text is repeated
-as the module docstring immediately after the imports.)
 -/
 
 import Mathlib
-import Archive.Wiedijk100Theorems.PerfectNumbers
 
 /-!
 # Even Perfect Infinitude
@@ -44,35 +39,36 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-The statement "there are infinitely many even perfect numbers" is open, since it is
-equivalent to the (open) conjecture that there are infinitely many Mersenne primes.
-
-What is proved here is exactly that equivalence: a Lean-checked *conditional reduction*
-of the infinitude of even perfect numbers to the infinitude of Mersenne primes.
-
-The key input is the Euclid–Euler theorem, already available in Mathlib's Archive as
-`Theorems100.Nat.even_and_perfect_iff`
-(`Archive/Wiedijk100Theorems/PerfectNumbers.lean`), which states
-`Even n ∧ n.Perfect ↔ ∃ k, (mersenne (k + 1)).Prime ∧ n = 2 ^ k * mersenne (k + 1)`.
 -/
 
-namespace Brockian
-namespace MersennePerfect
+/-!
+The infinitude of even perfect numbers is equivalent to the infinitude of Mersenne primes,
+which is a well-known open problem.  What is proved here is therefore the (unconditional)
+*reduction*: the set of even perfect numbers is infinite **iff** the set of exponents `p`
+with `2 ^ p - 1` prime is infinite.
 
-open Nat
-
-/-- The set of even perfect numbers. -/
-
-theorem evenPerfects_eq_image : evenPerfects = euclid '' mersenneExponents :=
-  Set.Subset.antisymm evenPerfects_subset_image image_subset_evenPerfects
-
-/--
-**Even Perfect Infinitude (conditional reduction).**
-
-There are infinitely many even perfect numbers if and only if there are infinitely many
-Mersenne primes, i.e. infinitely many `k` with `2 ^ (k + 1) - 1` prime.
-
-Both sides are open problems; the content of the theorem is the equivalence, which is the
-Euclid–Euler theorem together with injectivity of `k ↦ 2 ^ k * (2 ^ (k + 1) - 1)`.
+The Euclid–Euler development below (`sigma_two_pow_eq_mersenne_succ`,
+`perfect_two_pow_mul_mersenne_of_prime`, `eq_two_pow_mul_prime_mersenne_of_even_perfect`,
+`even_and_perfect_iff`) follows the proof of Theorem 70 of the 100 theorems list as
+developed by Aaron Anderson in the Mathlib `Archive` (Apache 2.0); it is reproduced here
+because the `Archive` is not part of the importable `Mathlib` library.
 -/
+
+namespace Brockian.MersennePerfect
+
+open Nat ArithmeticFunction Finset
+
+open scoped sigma
+
+/-! ## The Euclid–Euler theorem -/
+
+
+theorem evenPerfects_eq_image :
+    EvenPerfects = euclidMap '' {k : ℕ | Nat.Prime (mersenne (k + 1))} := by
+  ext n
+  simp only [EvenPerfects, Set.mem_setOf_eq, Set.mem_image, euclidMap]
+  rw [even_and_perfect_iff]
+  constructor
+  · rintro ⟨k, pr, rfl⟩; exact ⟨k, pr, rfl⟩
+  · rintro ⟨k, pr, rfl⟩; exact ⟨k, pr, rfl⟩
+

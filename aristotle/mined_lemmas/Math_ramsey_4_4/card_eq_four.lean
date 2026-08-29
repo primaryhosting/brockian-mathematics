@@ -13,24 +13,44 @@ Category: Pure Mathematics
 Target: Math.ramsey_4_4
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+The two-colour Ramsey number `R(4,4)` equals `18`.
+
+Mathlib (at the pinned revision) contains no theory of Ramsey numbers, so the whole
+argument is developed here:
+
+* the classical upper bound `R(p+1,q+1) ≤ R(p,q+1) + R(p+1,q)` (`Math.arrow_step`),
+* `R(3,3) ≤ 6` and, via the parity/degree argument, `R(3,4) ≤ 9`
+  (`Math.arrow_three_three`, `Math.arrow_three_four`), giving `R(4,4) ≤ 18`,
+* the Paley graph on 17 vertices, which has neither a 4-clique nor a 4-element
+  independent set, giving `R(4,4) > 17`.
 -/
 
-set_option maxHeartbeats 4000000
-set_option maxRecDepth 10000
+open scoped BigOperators
+open scoped Nat
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 100000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Math
 
 open Finset
 
-/-- `RamseyProp N p q` says: for every red/blue colouring of the edges of a complete graph
-(the red edges being the edges of a simple graph `G`), every set `t` of at least `N` vertices
-contains a red clique of size `p` or a blue clique of size `q`.
-Here "blue" means an edge of the complement `Gᶜ`. -/
+/-! ## A relation-theoretic formulation of Ramsey's theorem for two colours -/
 
-theorem card_eq_four {V : Type} [DecidableEq V] {s : Finset V} (hs : s.card = 4) :
-    ∃ a b c d : V, a ≠ b ∧ a ≠ c ∧ a ≠ d ∧ b ≠ c ∧ b ≠ d ∧ c ≠ d ∧ s = {a, b, c, d} := by
-  obtain ⟨a, s1, ha, rfl, hs1⟩ := Finset.card_eq_succ.mp hs
-  obtain ⟨b, c, d, hbc, hbd, hcd, rfl⟩ := Finset.card_eq_three.mp hs1
-  simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at ha
-  exact ⟨a, b, c, d, ha.1, ha.2.1, ha.2.2, hbc, hbd, hcd, rfl⟩
+variable {V : Type*}
 
+/-- A finite set `t` is homogeneous for the relation `r` if all distinct pairs of elements
+of `t` are related by `r`. -/
+
+lemma card_eq_four {α : Type*} [DecidableEq α] {t : Finset α} (h : t.card = 4) :
+    ∃ a b c d : α, a ≠ b ∧ a ≠ c ∧ a ≠ d ∧ b ≠ c ∧ b ≠ d ∧ c ≠ d ∧ t = {a, b, c, d} := by
+  obtain ⟨a, s, has, rfl, hs⟩ := Finset.card_eq_succ.mp h
+  obtain ⟨b, c, d, hbc, hbd, hcd, rfl⟩ := Finset.card_eq_three.mp hs
+  simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at has
+  exact ⟨a, b, c, d, has.1, has.2.1, has.2.2, hbc, hbd, hcd, rfl⟩
+
+/-- The Paley graph on 17 vertices contains no monochromatic 4-set. -/

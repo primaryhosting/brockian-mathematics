@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Polignac Conjecture
-Category: Brockian Conjecture
-Target: Brockian.PolignacPrimes.PolignacConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,199 +33,186 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-Polignac's conjecture ("for every even `n > 0` there are infinitely many pairs of
-*consecutive* primes whose difference is `n`") is a well-known open problem, and it is
-not available in Mathlib.  What is proved here is a *conditional reduction*: Polignac's
-conjecture follows from the two-linear-form case of Dickson's conjecture.
-
-The reduction itself is unconditional Lean-checked mathematics:
-
-* pick `n - 1` distinct primes `q 0, …, q (n-2)`, all larger than `n`;
-* by the Chinese Remainder Theorem choose `a` with `a ≡ -(i+1) [MOD q i]`;
-* with `M = ∏ q i`, every number of the form `M * x + a + (i+1)` is divisible by `q i`,
-  hence composite once it exceeds `q i`;
-* the pair of linear forms `M * x + a`, `M * x + (a + n)` is admissible, so Dickson's
-  conjecture supplies arbitrarily large `x` making both values prime.  Those two primes
-  are then *consecutive* primes differing by exactly `n`.
--/
+-- (Lean 4 requires `import` lines to precede any module docstring, so the header
+-- comment above appears directly after the import.)
 
 namespace Brockian.PolignacPrimes
 
-/-- `n` is a Polignac gap: there are arbitrarily large primes `p` such that `p + n` is
-prime and no number strictly between `p` and `p + n` is prime, i.e. `p` and `p + n` are
-consecutive primes at distance `n`. -/
+open Finset
 
-def IsPolignacGap (n : ℕ) : Prop :=
-  ∀ N : ℕ, ∃ p : ℕ, N < p ∧ Nat.Prime p ∧ Nat.Prime (p + n) ∧
-    ∀ r : ℕ, p < r → r < p + n → ¬ Nat.Prime r
+/-- `ConsecutivePrimeGap n p` says that `p` and `p + n` are primes and that there is no
+prime strictly between them, i.e. `p` and `p + n` are *consecutive* primes with gap `n`. -/
+def ConsecutivePrimeGap (n p : ℕ) : Prop :=
+  Nat.Prime p ∧ Nat.Prime (p + n) ∧ ∀ q, p < q → q < p + n → ¬ Nat.Prime q
 
-/-- Polignac's conjecture: every positive even number is a Polignac gap. -/
-
-def PolignacStatement : Prop := ∀ n : ℕ, 0 < n → Even n → IsPolignacGap n
-
-/-- The two-linear-form case of Dickson's conjecture: if the product of the two linear
-forms `m * x + b` and `m * x + c` (with `m > 0`) is not divisible by a fixed prime for
-all `x` — i.e. the pair is *admissible* — then both forms are simultaneously prime for
-arbitrarily large `x`. -/
-
+/-- The two-form Dickson (prime-tuples) hypothesis: for an arithmetic progression `a * x + b`
+with `a > 0`, if the pair of linear forms `a * x + b`, `a * x + b + c` is admissible — i.e. for
+every prime `Q` there is some `x` for which `Q` divides neither value — then both forms are
+simultaneously prime for infinitely many `x`. -/
 def DicksonPairHypothesis : Prop :=
-  ∀ m b c : ℕ, 0 < m →
-    (∀ Q : ℕ, Nat.Prime Q → ∃ x : ℕ, ¬ Q ∣ (m * x + b) ∧ ¬ Q ∣ (m * x + c)) →
-    ∀ N : ℕ, ∃ x : ℕ, N < x ∧ Nat.Prime (m * x + b) ∧ Nat.Prime (m * x + c)
+  ∀ a b c : ℕ, 0 < a → 0 < c →
+    (∀ Q : ℕ, Nat.Prime Q → ∃ x : ℕ, ¬ Q ∣ (a * x + b) ∧ ¬ Q ∣ (a * x + b + c)) →
+    {x : ℕ | Nat.Prime (a * x + b) ∧ Nat.Prime (a * x + b + c)}.Infinite
 
-/-- Divisibility only depends on the residue class. -/
+/-- An auxiliary family of large primes: `bigPrime n j` is the `(n + j)`-th prime,
+so it is always larger than `n` as soon as `j ≥ 1`. -/
+noncomputable def bigPrime (n j : ℕ) : ℕ := Nat.nth Nat.Prime (n + j)
 
-private lemma dvd_iff_of_modEq {m a r : ℕ} (h : a ≡ r [MOD m]) : m ∣ a ↔ m ∣ r := by
-  constructor <;> intro hd
-  · exact Nat.modEq_zero_iff_dvd.1 (h.symm.trans (Nat.modEq_zero_iff_dvd.2 hd))
-  · exact Nat.modEq_zero_iff_dvd.1 (h.trans (Nat.modEq_zero_iff_dvd.2 hd))
+lemma bigPrime_prime (n j : ℕ) : Nat.Prime (bigPrime n j) := Nat.prime_nth_prime _
 
-/-- Local admissibility at a prime `Q` not dividing the common difference `M`:
-one can choose `x` so that neither `M * x + a` nor `M * x + a + n` is divisible by `Q`
-(here `n` is even, which is what rules out the obstruction at `Q = 2`). -/
+lemma lt_bigPrime {n j : ℕ} (hj : 1 ≤ j) : n < bigPrime n j := by
+  have h := (Nat.nth_strictMono Nat.infinite_setOf_prime).le_apply (x := n + j)
+  simp only [bigPrime]
+  omega
 
-private lemma exists_x_not_dvd {Q M a n : ℕ} (hQ : Nat.Prime Q) (hM : ¬ Q ∣ M)
-    (hn : Even n) : ∃ x : ℕ, ¬ Q ∣ (M * x + a) ∧ ¬ Q ∣ (M * x + a + n) := by
-  haveI : Fact (Nat.Prime Q) := ⟨hQ⟩
-  haveI : NeZero Q := ⟨hQ.ne_zero⟩
-  have hv : ∃ v : ZMod Q, v ≠ 0 ∧ v + (n : ZMod Q) ≠ 0 := by
-    by_cases h1 : (1 : ZMod Q) + (n : ZMod Q) = 0
-    · refine ⟨2, ?_, ?_⟩
-      · by_cases hQ2 : Q = 2
-        · subst hQ2
-          have hn2 : ((n : ℕ) : ZMod 2) = 0 := by
-            refine (ZMod.natCast_eq_zero_iff n 2).2 ?_
-            obtain ⟨k, hk⟩ := hn
-            omega
-          rw [hn2, add_zero] at h1
-          exact absurd h1 one_ne_zero
-        · have h2 : (2 : ZMod Q) = ((2 : ℕ) : ZMod Q) := by push_cast; ring
-          rw [h2]
-          intro hc
-          exact hQ2 ((Nat.prime_dvd_prime_iff_eq hQ Nat.prime_two).1
-            ((ZMod.natCast_eq_zero_iff 2 Q).1 hc))
-      · have h2 : (2 : ZMod Q) + (n : ZMod Q) = ((1 : ZMod Q) + (n : ZMod Q)) + 1 := by ring
-        rw [h2, h1, zero_add]
-        exact one_ne_zero
-    · exact ⟨1, one_ne_zero, h1⟩
-  obtain ⟨v, hv0, hvn⟩ := hv
-  have hMne : (M : ZMod Q) ≠ 0 := fun h => hM ((ZMod.natCast_eq_zero_iff M Q).1 h)
-  set x : ℕ := ((v - (a : ZMod Q)) * (M : ZMod Q)⁻¹).val with hxdef
-  have hcast : ((M * x + a : ℕ) : ZMod Q) = v := by
-    push_cast
-    rw [hxdef, ZMod.natCast_val, ZMod.cast_id]
-    field_simp
-    exact sub_add_cancel v (a : ZMod Q)
-  refine ⟨x, ?_, ?_⟩
-  · intro hd
-    rw [← ZMod.natCast_eq_zero_iff, hcast] at hd
-    exact hv0 hd
-  · intro hd
-    rw [← ZMod.natCast_eq_zero_iff] at hd
-    push_cast at hd
-    rw [show ((M : ZMod Q) * (x : ZMod Q) + (a : ZMod Q)) = ((M * x + a : ℕ) : ZMod Q) by
-      push_cast; ring, hcast] at hd
-    exact hvn hd
+lemma bigPrime_inj (n : ℕ) : Function.Injective (bigPrime n) := by
+  intro i j h
+  have := (Nat.nth_strictMono Nat.infinite_setOf_prime).injective h
+  omega
 
-/-- **Polignac's conjecture, conditionally on the two-form case of Dickson's
-conjecture.**  Assuming `DicksonPairHypothesis`, for every positive even `n` there are
-arbitrarily large pairs of consecutive primes `p < p + n`. -/
+/-- The modulus of the arithmetic progression used to prove Polignac's conjecture from
+Dickson's hypothesis: the product of the auxiliary primes `bigPrime n j`, `1 ≤ j < n`. -/
+noncomputable def modulus (n : ℕ) : ℕ := ∏ j ∈ Finset.Ico 1 n, bigPrime n j
 
-theorem PolignacConjecture (H : DicksonPairHypothesis) : PolignacStatement := by
-  intro n hn0 hneven N
-  have hn2 : 2 ≤ n := by
-    obtain ⟨k, hk⟩ := hneven
-    omega
-  -- a supply of distinct primes larger than `n`
-  set q : ℕ → ℕ := fun i => Nat.nth Nat.Prime (n + 1 + i) with hqdef
-  have hqp : ∀ i, Nat.Prime (q i) := fun i => Nat.prime_nth_prime _
-  have hqgt : ∀ i, n < q i := by
-    intro i
-    have h : StrictMono (Nat.nth Nat.Prime) := Nat.nth_strictMono Nat.infinite_setOf_prime
-    have := h.le_apply (x := n + 1 + i)
-    simp only [hqdef]
-    omega
-  have hqinj : Function.Injective q := by
-    intro i j hij
-    have := Nat.nth_injective Nat.infinite_setOf_prime hij
-    omega
-  -- Chinese remainder: `a ≡ -(i+1) [MOD q i]`
-  obtain ⟨a, ha⟩ := Nat.chineseRemainderOfFinset (fun i => q i - (i + 1)) q
-    (Finset.range (n - 1)) (fun i _ => (hqp i).ne_zero)
-    (by
+lemma modulus_pos (n : ℕ) : 0 < modulus n :=
+  Finset.prod_pos fun j _ => (bigPrime_prime n j).pos
+
+lemma bigPrime_dvd_modulus {n j : ℕ} (hj : j ∈ Finset.Ico 1 n) : bigPrime n j ∣ modulus n :=
+  Finset.dvd_prod_of_mem _ hj
+
+/-- The chosen residue class, via the Chinese remainder theorem: a natural number `k` with
+`k ≡ -j (mod bigPrime n j)` for every `1 ≤ j < n`. -/
+noncomputable def shiftSub (n : ℕ) :
+    {k : ℕ // ∀ j ∈ Finset.Ico 1 n, k ≡ bigPrime n j - j [MOD bigPrime n j]} :=
+  Nat.chineseRemainderOfFinset (fun j => bigPrime n j - j) (bigPrime n) (Finset.Ico 1 n)
+    (fun j _ => (bigPrime_prime n j).pos.ne') (by
       intro i _ j _ hij
-      exact (Nat.coprime_primes (hqp i) (hqp j)).2 (fun h => hij (hqinj h)))
-  set M : ℕ := ∏ i ∈ Finset.range (n - 1), q i with hMdef
-  have hM0 : 0 < M := Finset.prod_pos (fun i _ => (hqp i).pos)
-  have hqdvdM : ∀ i ∈ Finset.range (n - 1), q i ∣ M := fun i hi =>
-    Finset.dvd_prod_of_mem _ hi
-  have hqleM : ∀ i ∈ Finset.range (n - 1), q i ≤ M := fun i hi =>
-    Nat.le_of_dvd hM0 (hqdvdM i hi)
-  -- key divisibility facts about `a`
-  have hkey : ∀ i ∈ Finset.range (n - 1), q i ∣ (a + (i + 1)) := by
-    intro i hi
-    have hlt : i + 1 < q i := by
-      simp only [Finset.mem_range] at hi
-      have := hqgt i
-      omega
-    have h1 : a + (i + 1) ≡ (q i - (i + 1)) + (i + 1) [MOD q i] :=
-      Nat.ModEq.add_right _ (ha i hi)
-    have h2 : (q i - (i + 1)) + (i + 1) = q i := by omega
-    rw [h2] at h1
-    exact (dvd_iff_of_modEq h1).2 dvd_rfl
-  have hnda : ∀ i ∈ Finset.range (n - 1), ¬ q i ∣ a := by
-    intro i hi hd
-    have hlt : i + 1 < q i := by
-      simp only [Finset.mem_range] at hi
-      have := hqgt i
-      omega
-    have hdvd : q i ∣ (i + 1) := (Nat.dvd_add_right hd).1 (hkey i hi)
-    have := Nat.le_of_dvd (by omega) hdvd
-    omega
-  have hndan : ∀ i ∈ Finset.range (n - 1), ¬ q i ∣ (a + n) := by
-    intro i hi hd
-    have hi' : i < n - 1 := Finset.mem_range.1 hi
-    have hqn := hqgt i
-    have h1 : q i ∣ (a + n) - (a + (i + 1)) := Nat.dvd_sub hd (hkey i hi)
-    have h2 : (a + n) - (a + (i + 1)) = n - (i + 1) := by omega
-    rw [h2] at h1
-    have := Nat.le_of_dvd (by omega) h1
-    omega
-  -- admissibility of the pair of forms
-  have hadm : ∀ Q : ℕ, Nat.Prime Q →
-      ∃ x : ℕ, ¬ Q ∣ (M * x + a) ∧ ¬ Q ∣ (M * x + (a + n)) := by
-    intro Q hQ
-    by_cases hdvd : Q ∣ M
-    · obtain ⟨i, hi, hQi⟩ := (Nat.prime_iff.1 hQ).exists_mem_finset_dvd hdvd
-      have hQeq : Q = q i := (Nat.prime_dvd_prime_iff_eq hQ (hqp i)).1 hQi
-      refine ⟨0, ?_, ?_⟩
-      · simpa [hQeq] using hnda i hi
-      · simpa [hQeq] using hndan i hi
-    · obtain ⟨x, h1, h2⟩ := exists_x_not_dvd (Q := Q) (M := M) (a := a) (n := n) hQ hdvd hneven
-      exact ⟨x, h1, by rwa [← add_assoc]⟩
-  obtain ⟨x, hxgt, hp1, hp2⟩ := H M a (a + n) hM0 hadm (N + M)
-  have hMx : M ≤ M * x := Nat.le_mul_of_pos_right M (by omega)
-  have hxMx : x ≤ M * x := Nat.le_mul_of_pos_left x hM0
-  refine ⟨M * x + a, by omega, hp1, ?_, ?_⟩
-  · rw [add_assoc]; exact hp2
-  · intro r hr1 hr2 hrp
-    -- `r = M * x + a + j` with `1 ≤ j ≤ n - 1`
-    set j : ℕ := r - (M * x + a) with hjdef
-    have hmem : j - 1 ∈ Finset.range (n - 1) := by
-      simp only [Finset.mem_range]
-      omega
-    have hr : r = M * x + (a + ((j - 1) + 1)) := by omega
-    have hdvdr : q (j - 1) ∣ r := by
-      rw [hr]
-      exact Nat.dvd_add (Dvd.dvd.mul_right (hqdvdM _ hmem) x) (hkey _ hmem)
-    have hlt : q (j - 1) < r := by
-      have h1 : q (j - 1) ≤ M := hqleM _ hmem
-      omega
-    rcases hrp.eq_one_or_self_of_dvd _ hdvdr with h | h
-    · exact (hqp (j - 1)).ne_one h
-    · omega
+      exact (Nat.coprime_primes (bigPrime_prime n i) (bigPrime_prime n j)).2
+        (fun h => hij (bigPrime_inj n h)))
 
-/-- An unconditional complement: the evenness assumption in Polignac's conjecture is
-necessary, since no odd number is a Polignac gap (for odd `n` and `p > 2` prime, `p + n`
-is even and larger than `2`, hence composite). -/
+/-- The residue class used in the construction. -/
+noncomputable def shift (n : ℕ) : ℕ := (shiftSub n : ℕ)
+
+lemma bigPrime_dvd_shift_add {n j : ℕ} (hj : j ∈ Finset.Ico 1 n) :
+    bigPrime n j ∣ (shift n + j) := by
+  have h := (shiftSub n).prop j hj
+  have hj1 : 1 ≤ j := by simp at hj; omega
+  have hjn : j < n := by simp at hj; omega
+  have hle : j ≤ bigPrime n j := le_of_lt (lt_of_lt_of_le (lt_of_lt_of_le hjn (le_refl n))
+    (le_of_lt (lt_bigPrime (n := n) (j := j) hj1)))
+  have h2 : shift n + j ≡ (bigPrime n j - j) + j [MOD bigPrime n j] := h.add_right j
+  rw [Nat.sub_add_cancel hle] at h2
+  have h3 : shift n + j ≡ 0 [MOD bigPrime n j] := h2.trans (Nat.modEq_zero_iff_dvd.2 dvd_rfl)
+  exact Nat.modEq_zero_iff_dvd.1 h3
+
+/-- Admissibility of the pair of forms `modulus n * x + shift n`, `modulus n * x + shift n + n`. -/
+lemma admissible {n : ℕ} (hn : Even n) (hn2 : 2 ≤ n) (Q : ℕ) (hQ : Nat.Prime Q) :
+    ∃ x : ℕ, ¬ Q ∣ (modulus n * x + shift n) ∧ ¬ Q ∣ (modulus n * x + shift n + n) := by
+  set M := modulus n with hMdef
+  set r := shift n with hrdef
+  by_cases hQM : Q ∣ M
+  · -- `Q` is one of the auxiliary primes `bigPrime n j`
+    obtain ⟨j, hj, hjd⟩ := (Prime.dvd_finset_prod_iff hQ.prime _).1 (hMdef ▸ hQM)
+    have hQj : Q = bigPrime n j := ((Nat.prime_dvd_prime_iff_eq hQ (bigPrime_prime n j)).1 hjd)
+    have hj1 : 1 ≤ j := by simp at hj; omega
+    have hjn : j < n := by simp at hj; omega
+    have hdvd : Q ∣ (r + j) := hQj ▸ bigPrime_dvd_shift_add hj
+    have hQn : n < Q := hQj ▸ lt_bigPrime (n := n) (j := j) hj1
+    refine ⟨0, ?_, ?_⟩
+    · intro h
+      have hdj : Q ∣ j := (Nat.dvd_sub' hdvd (by simpa using h))
+      have := Nat.le_of_dvd (by omega) hdj
+      omega
+    · intro h
+      have h' : Q ∣ (r + n) := by simpa using h
+      have hdn : Q ∣ (n - j) := by
+        have := Nat.dvd_sub' h' hdvd
+        simpa [Nat.add_sub_add_left] using this
+      have := Nat.le_of_dvd (by omega) hdn
+      omega
+  · -- `Q` does not divide the modulus
+    rcases eq_or_lt_of_le hQ.two_le with hQ2 | hQ3
+    · -- `Q = 2`
+      have hQ2' : Q = 2 := hQ2.symm
+      subst hQ2'
+      have hMo : M % 2 = 1 := by
+        rcases Nat.even_or_odd M with h | h
+        · exact absurd h.two_dvd hQM
+        · omega
+      have hne : n % 2 = 0 := by
+        rcases hn with ⟨k, hk⟩; omega
+      rcases Nat.even_or_odd r with h | h
+      · refine ⟨1, ?_, ?_⟩ <;> rw [Nat.dvd_iff_mod_eq_zero] <;> rcases h with ⟨k, hk⟩ <;> omega
+      · refine ⟨0, ?_, ?_⟩ <;> rw [Nat.dvd_iff_mod_eq_zero] <;> rcases h with ⟨k, hk⟩ <;> omega
+    · -- `Q ≥ 3`
+      by_contra hcon
+      push_neg at hcon
+      have step : ∀ (c x y : ℕ), x < y → y ≤ x + 2 →
+          Q ∣ (M * x + r + c) → Q ∣ (M * y + r + c) → False := by
+        intro c x y hxy hy h1 h2
+        obtain ⟨d, rfl⟩ : ∃ d, y = x + d := ⟨y - x, by omega⟩
+        have he : M * (x + d) + r + c = (M * x + r + c) + M * d := by ring
+        rw [he] at h2
+        have hd : Q ∣ M * d := (Nat.dvd_add_right h1).1 h2
+        rcases (Nat.Prime.dvd_mul hQ).1 hd with h | h
+        · exact hQM h
+        · have := Nat.le_of_dvd (by omega) h
+          omega
+      have h0 := hcon 0
+      have h1 := hcon 1
+      have h2 := hcon 2
+      rcases Classical.em (Q ∣ (M * 0 + r)) with a0 | a0 <;>
+        rcases Classical.em (Q ∣ (M * 1 + r)) with a1 | a1 <;>
+          rcases Classical.em (Q ∣ (M * 2 + r)) with a2 | a2 <;>
+      first
+        | exact step 0 0 1 (by omega) (by omega) (by simpa using a0) (by simpa using a1)
+        | exact step 0 0 2 (by omega) (by omega) (by simpa using a0) (by simpa using a2)
+        | exact step 0 1 2 (by omega) (by omega) (by simpa using a1) (by simpa using a2)
+        | exact step n 0 1 (by omega) (by omega) (h0 a0) (h1 a1)
+        | exact step n 0 2 (by omega) (by omega) (h0 a0) (h2 a2)
+        | exact step n 1 2 (by omega) (by omega) (h1 a1) (h2 a2)
+
+/-- **Polignac's conjecture, conditional on the two-form Dickson hypothesis.**
+For every positive even `n` there are infinitely many primes `p` such that `p` and `p + n`
+are consecutive primes. -/
+theorem PolignacConjecture (H : DicksonPairHypothesis) (n : ℕ) (hn : Even n) (hpos : 0 < n) :
+    {p : ℕ | ConsecutivePrimeGap n p}.Infinite := by
+  have hn2 : 2 ≤ n := by rcases hn with ⟨k, hk⟩; omega
+  set M := modulus n with hMdef
+  set r := shift n with hrdef
+  have hM0 : 0 < M := modulus_pos n
+  have hinf := H M r n hM0 hpos (admissible hn hn2)
+  have hinf' : ({x : ℕ | Nat.Prime (M * x + r) ∧ Nat.Prime (M * x + r + n)} \ {0}).Infinite :=
+    hinf.diff (Set.finite_singleton 0)
+  have hinj : Set.InjOn (fun x => M * x + r)
+      ({x : ℕ | Nat.Prime (M * x + r) ∧ Nat.Prime (M * x + r + n)} \ {0}) := by
+    intro x _ y _ hxy
+    simp only at hxy
+    have : M * x = M * y := by omega
+    exact Nat.eq_of_mul_eq_mul_left hM0 this
+  refine Set.Infinite.mono ?_ (hinf'.image hinj)
+  rintro p ⟨x, ⟨⟨hp1, hp2⟩, hx0⟩, rfl⟩
+  have hx1 : 1 ≤ x := by
+    simp only [Set.mem_singleton_iff] at hx0
+    omega
+  refine ⟨hp1, hp2, ?_⟩
+  intro q hq1 hq2 hqp
+  set j := q - (M * x + r) with hjdef
+  have hj : j ∈ Finset.Ico 1 n := by simp [hjdef]; omega
+  have hqj : q = M * x + r + j := by omega
+  have hdvd : bigPrime n j ∣ q := by
+    rw [hqj]
+    have h1 : bigPrime n j ∣ M * x := Dvd.dvd.mul_right (bigPrime_dvd_modulus hj) x
+    have h2 : bigPrime n j ∣ (r + j) := bigPrime_dvd_shift_add hj
+    have hrw : M * x + r + j = M * x + (r + j) := by ring
+    rw [hrw]
+    exact Nat.dvd_add h1 h2
+  have hle : bigPrime n j ≤ M := Nat.le_of_dvd hM0 (bigPrime_dvd_modulus hj)
+  have hMx : M ≤ M * x := Nat.le_mul_of_pos_right M hx1
+  have hlt : bigPrime n j < q := by omega
+  rcases (Nat.Prime.eq_one_or_self_of_dvd hqp _ hdvd) with h | h
+  · exact (bigPrime_prime n j).one_lt.ne' h
+  · omega
+
+end Brockian.PolignacPrimes
+

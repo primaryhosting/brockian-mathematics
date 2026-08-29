@@ -1,42 +1,20 @@
-/-
-# Cap Set
-Category: Frontier Math
-Target: Math2.cap_set
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import Mathlib
+import RequestProject.CapExpand
 
 /-!
-# Cap Set
-Category: Frontier Math
-Target: Math2.cap_set
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# The Ellenberg–Gijswijt bound
 
-The cap-set bound: subsets of `𝔽₃ⁿ` with no three-term arithmetic progression have size
-`o(3ⁿ)`.  This is the Croot–Lev–Pach / Ellenberg–Gijswijt theorem, proved here by the
-polynomial method.
+Combining the slice-rank bound with the polynomial expansion gives
+`|A| ≤ 3 · #{exponent vectors of degree ≤ 2n/3}` for every 3AP-free `A ⊆ 𝔽₃ⁿ`.
 -/
 
+open scoped BigOperators
 open Finset
 
-namespace Math2
-namespace CapSet
+namespace CapSetAux
 
-instance factThree : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+/-- In `𝔽₃ⁿ`, a 3AP-free set contains no nontrivial triple summing to zero. -/
 
-/-- The field `𝔽₃`. -/
-abbrev F := ZMod 3
+def capSetMax (n : ℕ) : ℕ := (capSets n).sup Finset.card
 
-/-- The vector space `𝔽₃ⁿ`. -/
-abbrev V (n : ℕ) := Fin n → F
-
-/-- Exponent vectors of reduced monomials: each exponent is `0`, `1` or `2`. -/
-abbrev E (n : ℕ) := Fin n → Fin 3
-
-/-- Total degree of a reduced monomial. -/
-
-noncomputable def capSetMax (n : ℕ) : ℕ :=
-  sSup {k | ∃ A : Finset (V n), ThreeAPFree (A : Set (V n)) ∧ A.card = k}
-
+/-- The cap-set theorem in asymptotic form: the maximal size of a 3AP-free subset of
+`𝔽₃ⁿ` is `o(3ⁿ)`. -/

@@ -33,20 +33,52 @@ set_option grind.warning false
 
 namespace Frontier
 
-variable {Ω : Type*} [DecidableEq Ω]
+/-- The conditional probability of the event `E` given the (information) cell `C`,
+computed from the weight function `p`. -/
 
-/-- The prior probability of a (finite) event `S`, computed from the point masses `p`. -/
-
-theorem aumann_agreement_example : (1 : ℝ)/2 = 1/2 :=
-  aumann_agreement exPrior (fun _ => by norm_num [exPrior])
-    (by norm_num [exPrior]) exI₁ exI₂ exI₁_isInfoPartition exI₂_isInfoPartition
-    exE univ 0 (mem_univ 0) (fun ω _ => ⟨subset_univ _, subset_univ _⟩)
-    (1/2) (1/2) exPosterior₁ exPosterior₂
-
-end Example
+theorem aumann_agreement_example :
+    (∀ x, x ∈ exI₁ x) ∧ (∀ x y, y ∈ exI₁ x → exI₁ y = exI₁ x) ∧
+    (∀ x, x ∈ exI₂ x) ∧ (∀ x y, y ∈ exI₂ x → exI₂ y = exI₂ x) ∧
+    exI₁ 0 ≠ exI₂ 0 ∧
+    (∀ x ∈ (Finset.univ : Finset (Fin 4)), 0 < ∑ y ∈ exI₁ x, exPrior y) ∧
+    (∀ x ∈ (Finset.univ : Finset (Fin 4)), 0 < ∑ y ∈ exI₂ x, exPrior y) ∧
+    (∀ x ∈ (Finset.univ : Finset (Fin 4)),
+      condProb exPrior ({0, 2} : Finset (Fin 4)) (exI₁ x) = 1 / 2) ∧
+    (∀ x ∈ (Finset.univ : Finset (Fin 4)),
+      condProb exPrior ({0, 2} : Finset (Fin 4)) (exI₂ x) = 1 / 2) := by
+  have h01 : (0 : Fin 4) ≠ 1 := by decide
+  have h23 : (2 : Fin 4) ≠ 3 := by decide
+  have h03 : (0 : Fin 4) ≠ 3 := by decide
+  have h12 : (1 : Fin 4) ≠ 2 := by decide
+  have e1 : ({0, 1} ∩ {0, 2} : Finset (Fin 4)) = {0} := by decide
+  have e2 : ({2, 3} ∩ {0, 2} : Finset (Fin 4)) = {2} := by decide
+  have e3 : ({0, 3} ∩ {0, 2} : Finset (Fin 4)) = {0} := by decide
+  have e4 : ({1, 2} ∩ {0, 2} : Finset (Fin 4)) = {2} := by decide
+  refine ⟨by decide, by decide, by decide, by decide, by decide, ?_, ?_, ?_, ?_⟩
+  · intro x _
+    fin_cases x
+    · exact exPair_sum_pos h01
+    · exact exPair_sum_pos h01
+    · exact exPair_sum_pos h23
+    · exact exPair_sum_pos h23
+  · intro x _
+    fin_cases x
+    · exact exPair_sum_pos h03
+    · exact exPair_sum_pos h12
+    · exact exPair_sum_pos h12
+    · exact exPair_sum_pos h03
+  · intro x _
+    fin_cases x
+    · exact exPair_condProb h01 e1
+    · exact exPair_condProb h01 e1
+    · exact exPair_condProb h23 e2
+    · exact exPair_condProb h23 e2
+  · intro x _
+    fin_cases x
+    · exact exPair_condProb h03 e3
+    · exact exPair_condProb h12 e4
+    · exact exPair_condProb h12 e4
+    · exact exPair_condProb h03 e3
 
 end Frontier
-
-#print axioms Frontier.aumann_agreement
-#print axioms Frontier.not_agree_to_disagree
 

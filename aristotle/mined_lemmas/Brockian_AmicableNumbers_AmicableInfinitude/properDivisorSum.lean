@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Amicable Infinitude
-Category: Brockian Conjecture
-Target: Brockian.AmicableNumbers.AmicableInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,22 +31,15 @@ Category: Brockian Conjecture
 Target: Brockian.AmicableNumbers.AmicableInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many amicable numbers is an open problem.  What is proved here
-is an unconditional formalisation of Thabit ibn Qurra's rule together with the resulting
-*conditional reduction*: if there are infinitely many Thabit indices `k` (i.e. indices for
-which `3·2^(k-1) - 1`, `3·2^k - 1` and `9·2^(2k-1) - 1` are all prime), then there are
-infinitely many amicable numbers.
 -/
+
+open Finset ArithmeticFunction
 
 namespace Brockian.AmicableNumbers
 
-open Finset ArithmeticFunction
-open scoped ArithmeticFunction.sigma
-
-/-- The sum of the proper divisors of `n` (the classical `s`-function). -/
+/-- The sum of the proper divisors of `n` (the divisors of `n` other than `n` itself). -/
 
 def properDivisorSum (n : ℕ) : ℕ := ∑ i ∈ n.properDivisors, i
 
-/-- `m` and `n` form an *amicable pair*: two distinct positive integers, each of which is
-the sum of the proper divisors of the other. -/
+/-- Two natural numbers are *amicable* if they are distinct and each is the sum of the
+proper divisors of the other. -/

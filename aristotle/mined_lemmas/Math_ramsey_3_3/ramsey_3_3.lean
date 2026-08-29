@@ -1,12 +1,3 @@
-/-
-# Ramsey 3 3
-Category: Pure Mathematics
-Target: Math.ramsey_3_3
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import Mathlib
-
 /-!
 # Ramsey 3 3
 Category: Pure Mathematics
@@ -14,6 +5,22 @@ Target: Math.ramsey_3_3
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+namespace Math
+
+/-- An auxiliary "vector" of five booleans, read off as a function on `Fin 6` (the value at
+the index `0` is irrelevant and set to `false`). -/
+
+theorem ramsey_3_3 :
+    (∀ c : Fin 6 → Fin 6 → Bool, (∀ i j, c i j = c j i) →
+        ∃ a b d : Fin 6, a ≠ b ∧ a ≠ d ∧ b ≠ d ∧ c a b = c a d ∧ c a b = c b d) ∧
+    (∃ c : Fin 5 → Fin 5 → Bool, (∀ i j, c i j = c j i) ∧
+        ∀ a b d : Fin 5, a ≠ b → a ≠ d → b ≠ d → ¬(c a b = c a d ∧ c a b = c b d)) := by
+  refine ⟨fun c _ => mono_triangle_of_six c, pentagon, by decide, by decide⟩
+
+end Math
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -29,18 +36,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
-
-namespace Math
-
-/-- Pigeonhole: among five booleans, three are equal. -/
-
-theorem ramsey_3_3 :
-    (∀ f : Fin 6 → Fin 6 → Bool,
-        ∃ a b c : Fin 6, a < b ∧ b < c ∧ f a b = f a c ∧ f a c = f b c) ∧
-      (∃ g : Fin 5 → Fin 5 → Bool,
-        ∀ a b c : Fin 5, a < b → b < c → ¬(g a b = g a c ∧ g a c = g b c)) :=
-  ⟨exists_mono_triangle_six, ⟨pentagon, pentagon_no_mono_triangle⟩⟩
-
-end Math
 

@@ -8,21 +8,23 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Math
 
-/-- **Two squares for 89.**  The number `89` is prime (stated elementarily: it is at least `2`
-and its only divisors are `1` and itself) and it is a sum of two squares, namely
-`89 = 5 ^ 2 + 8 ^ 2`.
+/-- **Two squares for 89.**  The number `89` is prime — it is at least `2` and its only
+divisors are `1` and `89` — and it is a sum of two squares, namely `89 = 8 ^ 2 + 5 ^ 2`.
 
-This file is deliberately import-free (the required header comment above is a module docstring,
-which must precede any `import`), so primality is phrased directly rather than via
-`Nat.Prime`; the file `RequestProject/TwoSquares89Mathlib.lean` derives the `Nat.Prime`
-version from this theorem. -/
+(The required header comment must be the first thing in the file, which rules out any
+`import` line here, so primality is spelled out directly rather than via `Nat.Prime`.
+The file `TwoSquares89Mathlib.lean` derives the Mathlib-flavoured statement, with
+`Nat.Prime 89`, from this one.) -/
 
 theorem two_squares_89 :
-    2 ≤ 89 ∧ (∀ m : Nat, m ∣ 89 → m = 1 ∨ m = 89) ∧ ∃ a b : Nat, 89 = a ^ 2 + b ^ 2 := by
-  refine ⟨by decide, fun m hm => ?_, 5, 8, by decide⟩
-  have h : m ≤ 89 := Nat.le_of_dvd (by decide) hm
-  have key : ∀ k < 90, k ∣ 89 → k = 1 ∨ k = 89 := by decide
-  exact key m (by omega) hm
+    (2 ≤ 89 ∧ ∀ d : Nat, d ∣ 89 → d = 1 ∨ d = 89) ∧ ∃ a b : Nat, 89 = a ^ 2 + b ^ 2 := by
+  refine ⟨⟨by decide, ?_⟩, 8, 5, by decide⟩
+  intro d hd
+  have h1 : d ≤ 89 := Nat.le_of_dvd (by decide) hd
+  revert hd
+  revert h1
+  revert d
+  decide
 
 end Math
 
@@ -32,9 +34,9 @@ import RequestProject.TwoSquares89
 /-!
 # Two Squares 89 — Mathlib phrasing
 
-`Nat.Prime`-flavoured restatement of `Math.two_squares_89`.
+Restatement of `Math.two_squares_89` using Mathlib's `Nat.Prime`.
 -/
 
 namespace Math
 
-/-- The prime `89` is a sum of two squares: `89 = 5 ^ 2 + 8 ^ 2`. -/
+/-- The prime `89` is a sum of two squares, phrased with Mathlib's `Nat.Prime`. -/

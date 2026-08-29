@@ -1,11 +1,3 @@
-/-
-# Furstenberg Szemeredi
-Category: Frontier Abel
-Target: Frontier.furstenberg_szemeredi
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -33,18 +25,23 @@ set_option autoImplicit false
 set_option pp.fullNames true
 set_option pp.structureInstances true
 set_option pp.coercions.types true
+set_option pp.piBinderTypes true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
 namespace Frontier
 
-/-- The counting function of a set of naturals: the number of elements of `A` below `n`. -/
+open Finset
 
-def HasAPOfLength (A : Set ℕ) (k : ℕ) : Prop :=
-  ∃ a d : ℕ, 0 < d ∧ ∀ i < k, a + i * d ∈ A
+/-- The trace of a set `A ⊆ ℕ` on the initial segment `{0, 1, ..., N - 1}`. -/
 
-/-- **Szemerédi's theorem**, in its density form: every set of naturals of positive upper
-density contains arithmetic progressions of every (hence arbitrarily large) length. -/
+lemma HasAPOfLength.mono {A : Set ℕ} {k l : ℕ} (h : HasAPOfLength A k) (hl : l ≤ k) :
+    HasAPOfLength A l := by
+  obtain ⟨a, d, hd, ha⟩ := h
+  exact ⟨a, d, hd, fun i hi => ha i (lt_of_lt_of_le hi hl)⟩
+
+/-- **Base case (length three).**  Every set of natural numbers of positive upper density contains
+a genuine three-term arithmetic progression.  This is Roth's theorem, i.e. the first nontrivial
+case of Szemerédi's theorem. -/

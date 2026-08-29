@@ -1,58 +1,36 @@
-/-
-# Knill Laflamme
-Category: Frontier Qi
-Target: QI.knill_laflamme
-Statement: A code corrects an error set iff it satisfies the Knill–Laflamme conditions.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
+import Mathlib.Analysis.Matrix.Spectrum
+import Mathlib.Analysis.Matrix.PosDef
+import Mathlib.Tactic
 
 /-!
 # Knill Laflamme
 Category: Frontier Qi
 Target: QI.knill_laflamme
-Statement: A code corrects an error set iff it satisfies the Knill–Laflamme conditions.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-open scoped ComplexOrder
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+open scoped ComplexConjugate
+open Matrix
 
 namespace QI
 
-open Matrix
+section Frobenius
 
-variable {n A : Type*} [Fintype n] [DecidableEq n] [Fintype A] [DecidableEq A]
+variable {m n : Type} [Fintype m] [Fintype n]
 
-/-- A *code* is given by the orthogonal projection `P` onto the code subspace: `P` is
-self-adjoint, idempotent, and nonzero (the code subspace is nontrivial). -/
-structure IsCodeProjector (P : Matrix n n ℂ) : Prop where
-  herm : Pᴴ = P
-  idem : P * P = P
-  nontrivial : P ≠ 0
+/-- The squared Frobenius norm of a complex matrix, as a real number. -/
 
-/-- The error set `E` is the Kraus family of a quantum channel (trace preserving). -/
+def Corrects (P : Matrix m m ℂ) (E : ι → Matrix m m ℂ) : Prop :=
+  ∃ (κ : Type) (_ : Fintype κ) (R : κ → Matrix m m ℂ),
+    (∑ k, (R k)ᴴ * R k = 1) ∧
+      ∀ ρ : Matrix m m ℂ, P * ρ * P = ρ → ∑ k, ∑ a, (R k * E a) * ρ * (R k * E a)ᴴ = ρ
 
-def Corrects (P : Matrix n n ℂ) (E : A → Matrix n n ℂ) : Prop :=
-  ∃ (m : ℕ) (R : Fin m → Matrix n n ℂ), IsRecovery P E R
+end Defs
 
-/-! ### Elementary lemmas -/
+section Columns
 
-omit [Fintype n] [DecidableEq n] in
+variable {m : Type} [Fintype m] [DecidableEq m]
+
+/-- Multiplication of a column vector by a `1 × 1` matrix is scalar multiplication. -/

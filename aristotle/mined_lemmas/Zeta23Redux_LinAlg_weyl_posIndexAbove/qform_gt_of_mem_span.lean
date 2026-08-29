@@ -5,6 +5,7 @@ Target: Zeta23Redux.LinAlg.weyl_posIndexAbove
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
@@ -16,7 +17,18 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
+open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Zeta23Redux.LinAlg
 
@@ -24,41 +36,36 @@ open Matrix
 
 variable {d : ℕ}
 
-/-- The real quadratic form `x ↦ ⟪x, M x⟫` attached to a matrix `M`. -/
+/-- The number of strictly positive eigenvalues of a Hermitian matrix. -/
 
-lemma qform_gt_of_mem_span {M : Matrix (Fin d) (Fin d) ℂ} (hM : M.IsHermitian) {theta : ℝ}
+lemma qform_gt_of_mem_span {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.IsHermitian) {θ : ℝ}
+    {s : Finset (Fin d)} (hs : ∀ i ∈ s, θ < hA.eigenvalues i)
     {x : EuclideanSpace ℂ (Fin d)}
-    (hx : x ∈ Submodule.span ℂ
-      (hM.eigenvectorBasis '' ((Finset.univ.filter fun i => theta < hM.eigenvalues i) :
-        Set (Fin d))))
-    (hx0 : x ≠ 0) : theta * ‖x‖ ^ 2 < qform M x := by
-  classical
-  set s : Finset (Fin d) := Finset.univ.filter fun i => theta < hM.eigenvalues i with hs
-  set w : Fin d → ℝ := fun i => ‖(inner ℂ (hM.eigenvectorBasis i) x : ℂ)‖ ^ 2 with hw
-  have hwnonneg : ∀ i, 0 ≤ w i := fun i => by positivity
-  have hzero : ∀ i ∉ s, w i = 0 := by
+    (hx : x ∈ Submodule.span ℂ (hA.eigenvectorBasis '' (s : Set (Fin d)))) (hx0 : x ≠ 0) :
+    θ * ‖x‖ ^ 2 < qform A x := by
+  have hzero : ∀ i ∉ s, ‖inner ℂ (hA.eigenvectorBasis i) x‖ ^ 2 = 0 := by
     intro i hi
-    simp [hw, inner_eq_zero_of_mem_span hM hx hi]
-  have hnorm : ‖x‖ ^ 2 = ∑ i, w i := norm_sq_eq_sum hM.eigenvectorBasis x
-  have hpos : 0 < ∑ i, w i := by
-    rw [← hnorm]
-    have : 0 < ‖x‖ := norm_pos_iff.2 hx0
-    positivity
-  obtain ⟨i0, -, hi0⟩ : ∃ i ∈ Finset.univ, 0 < w i := by
+    simp [inner_eq_zero_of_mem_span hA.eigenvectorBasis s hx hi]
+  have hsum : ‖x‖ ^ 2 = ∑ i ∈ s, ‖inner ℂ (hA.eigenvectorBasis i) x‖ ^ 2 := by
+    rw [norm_sq_eq_sum hA]
+    exact (Finset.sum_subset (Finset.subset_univ s) fun i _ hi => hzero i hi).symm
+  have hq : qform A x
+      = ∑ i ∈ s, hA.eigenvalues i * ‖inner ℂ (hA.eigenvectorBasis i) x‖ ^ 2 := by
+    rw [qform_eq hA]
+    refine (Finset.sum_subset (Finset.subset_univ s) fun i _ hi => ?_).symm
+    rw [hzero i hi, mul_zero]
+  have hpos : 0 < ∑ i ∈ s, ‖inner ℂ (hA.eigenvectorBasis i) x‖ ^ 2 := by
+    rw [← hsum]
+    exact pow_pos (norm_pos_iff.mpr hx0) 2
+  obtain ⟨i₀, hi₀s, hi₀⟩ : ∃ i ∈ s, 0 < ‖inner ℂ (hA.eigenvectorBasis i) x‖ ^ 2 := by
     by_contra hcon
     push_neg at hcon
-    exact absurd (Finset.sum_nonpos fun i hi => hcon i hi) (not_le.2 hpos)
-  have hi0s : i0 ∈ s := by
-    by_contra hmem
-    exact absurd (hzero i0 hmem) (ne_of_gt hi0)
-  rw [qform_eq_sum hM, hnorm, Finset.mul_sum]
-  refine Finset.sum_lt_sum (fun i _ => ?_) ⟨i0, Finset.mem_univ _, ?_⟩
-  · by_cases hi : i ∈ s
-    · have : theta < hM.eigenvalues i := by
-        rw [hs] at hi; simpa using hi
-      exact mul_le_mul_of_nonneg_right this.le (hwnonneg i)
-    · rw [hzero i hi, inner_eq_zero_of_mem_span hM hx hi]; simp
-  · have h1 : theta < hM.eigenvalues i0 := by rw [hs] at hi0s; simpa using hi0s
-    exact mul_lt_mul_of_pos_right h1 hi0
+    have hle : ∑ i ∈ s, ‖inner ℂ (hA.eigenvectorBasis i) x‖ ^ 2 ≤ 0 :=
+      Finset.sum_nonpos fun i hi => hcon i hi
+    linarith
+  rw [hq, hsum, Finset.mul_sum]
+  refine Finset.sum_lt_sum (fun i hi => ?_) ⟨i₀, hi₀s, ?_⟩
+  · exact mul_le_mul_of_nonneg_right (le_of_lt (hs i hi)) (sq_nonneg _)
+  · exact mul_lt_mul_of_pos_right (hs i₀ hi₀s) hi₀
 
-/-- On the span of eigenvectors with eigenvalue `≤ 0`, the form is `≤ 0`. -/
+/-- If all coefficients along positive eigenvectors vanish, the quadratic form is nonpositive. -/

@@ -39,37 +39,24 @@ Category: Brockian Conjecture
 Target: Brockian.OppermannConjecture.OppermannConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+Oppermann's conjecture is open, so the main result here is a Lean-checked *conditional
+reduction*: Oppermann's conjecture follows from a Legendre-type prime gap hypothesis
+(`SqrtPrimeGap`), together with an unconditional verification of the small cases
+`2 ≤ n ≤ 40`.
 -/
 
 namespace Brockian.OppermannConjecture
 
-/-- **Oppermann's conjecture**: for every `n > 1` there is a prime strictly between
+/-- **Oppermann's conjecture**: for every `n ≥ 2` there is a prime strictly between
 `n(n-1)` and `n²`, and a prime strictly between `n²` and `n(n+1)`. -/
 
-lemma oppermann_small (n : ℕ) (h2 : 1 < n) (h11 : n ≤ 11) :
-    (∃ p : ℕ, p.Prime ∧ n * (n - 1) < p ∧ p < n * n) ∧
-    (∃ p : ℕ, p.Prime ∧ n * n < p ∧ p < n * (n + 1)) := by
-  interval_cases n
-  · exact ⟨⟨3, by norm_num, by norm_num, by norm_num⟩,
-           ⟨5, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨7, by norm_num, by norm_num, by norm_num⟩,
-           ⟨11, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨13, by norm_num, by norm_num, by norm_num⟩,
-           ⟨17, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨23, by norm_num, by norm_num, by norm_num⟩,
-           ⟨29, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨31, by norm_num, by norm_num, by norm_num⟩,
-           ⟨37, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨43, by norm_num, by norm_num, by norm_num⟩,
-           ⟨53, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨59, by norm_num, by norm_num, by norm_num⟩,
-           ⟨67, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨73, by norm_num, by norm_num, by norm_num⟩,
-           ⟨83, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨97, by norm_num, by norm_num, by norm_num⟩,
-           ⟨101, by norm_num, by norm_num, by norm_num⟩⟩
-  · exact ⟨⟨113, by norm_num, by norm_num, by norm_num⟩,
-           ⟨127, by norm_num, by norm_num, by norm_num⟩⟩
+theorem oppermann_small (n : ℕ) (h2 : 2 ≤ n) (h40 : n ≤ 40) :
+    (∃ p : ℕ, Nat.Prime p ∧ n * (n - 1) < p ∧ p < n * n) ∧
+    (∃ p : ℕ, Nat.Prime p ∧ n * n < p ∧ p < n * (n + 1)) := by
+  have h := oppermann_decide n (Finset.mem_Icc.mpr ⟨h2, h40⟩)
+  simp only [Finset.mem_Ioo] at h
+  obtain ⟨⟨p, ⟨hp1, hp2⟩, hp⟩, ⟨q, ⟨hq1, hq2⟩, hq⟩⟩ := h
+  exact ⟨⟨p, hp, hp1, hp2⟩, ⟨q, hq, hq1, hq2⟩⟩
 
-/-- Under the square-root prime gap hypothesis, there is a prime in `(n(n-1), n²)`
-for every `n ≥ 12`. -/
+/-- For `n ≥ 11` the lower Oppermann interval `(n(n-1), n²)` follows from `SqrtPrimeGap`. -/

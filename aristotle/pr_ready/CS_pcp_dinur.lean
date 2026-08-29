@@ -32,186 +32,151 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Pcp Dinur
-Category: Frontier Cs
-Target: CS.pcp_dinur
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 namespace CS
 
-/-- A constraint graph: a finite multiset-free set of (directed) edges over `Fin numVerts`,
-together with a Boolean binary constraint attached to every edge, over the alphabet
-`Fin alphSize`. -/
-structure ConstraintGraph where
-  numVerts : ℕ
-  alphSize : ℕ
-  alph_pos : 0 < alphSize
-  edges : Finset (Fin numVerts × Fin numVerts)
-  edges_nonempty : edges.Nonempty
-  sat : Fin numVerts × Fin numVerts → Fin alphSize → Fin alphSize → Bool
+variable {Inst : Type*}
 
-namespace ConstraintGraph
-
-variable (G : ConstraintGraph)
-
-/-- The number of edges (constraints) of `G`; the natural size measure. -/
-def size : ℕ := G.edges.card
-
-/-- The number of constraints violated by an assignment `f`. -/
-def violated (f : Fin G.numVerts → Fin G.alphSize) : ℕ :=
-  (G.edges.filter (fun e => ¬ (G.sat e (f e.1) (f e.2) = true))).card
-
-theorem assignments_nonempty :
-    (Finset.univ : Finset (Fin G.numVerts → Fin G.alphSize)).Nonempty :=
-  ⟨fun _ => ⟨0, G.alph_pos⟩, Finset.mem_univ _⟩
-
-/-- The least number of constraints violated by any assignment. -/
-def minViolated : ℕ :=
-  (Finset.univ : Finset (Fin G.numVerts → Fin G.alphSize)).inf'
-    G.assignments_nonempty G.violated
-
-/-- The `UNSAT` value of `G`: the least possible fraction of violated constraints. -/
-noncomputable def unsat : ℝ := (G.minViolated : ℝ) / (G.size : ℝ)
-
-/-- `G` is satisfiable if some assignment violates no constraint. -/
-def Satisfiable : Prop := ∃ f, G.violated f = 0
-
-theorem size_pos : 0 < G.size :=
-  Finset.card_pos.2 G.edges_nonempty
-
-theorem violated_le_size (f : Fin G.numVerts → Fin G.alphSize) : G.violated f ≤ G.size :=
-  Finset.card_filter_le _ _
-
-theorem minViolated_le_size : G.minViolated ≤ G.size := by
-  obtain ⟨f, -⟩ := G.assignments_nonempty
-  exact le_trans (Finset.inf'_le _ (Finset.mem_univ f)) (G.violated_le_size f)
-
-theorem minViolated_eq_zero_iff : G.minViolated = 0 ↔ G.Satisfiable := by
-  constructor
-  · intro h
-    obtain ⟨f, -, hf⟩ := Finset.exists_mem_eq_inf' G.assignments_nonempty G.violated
-    exact ⟨f, by rw [← hf]; exact h⟩
-  · rintro ⟨f, hf⟩
-    exact Nat.le_zero.1 (hf ▸ Finset.inf'_le _ (Finset.mem_univ f))
-
-theorem unsat_nonneg : 0 ≤ G.unsat :=
-  div_nonneg (Nat.cast_nonneg _) (Nat.cast_nonneg _)
-
-theorem unsat_le_one : G.unsat ≤ 1 := by
-  rw [unsat, div_le_one (by exact_mod_cast G.size_pos)]
-  exact_mod_cast G.minViolated_le_size
-
-theorem unsat_eq_zero_iff : G.unsat = 0 ↔ G.Satisfiable := by
-  rw [← G.minViolated_eq_zero_iff, unsat, div_eq_zero_iff]
-  have hs : (G.size : ℝ) ≠ 0 := by exact_mod_cast G.size_pos.ne'
-  simp [hs]
-
-/-- If `G` is unsatisfiable, at least one of its `size` constraints is violated by every
-assignment, so `UNSAT(G) ≥ 1 / size(G)`. -/
-theorem one_div_size_le_unsat (h : ¬ G.Satisfiable) : 1 / (G.size : ℝ) ≤ G.unsat := by
-  have h1 : 1 ≤ G.minViolated := Nat.one_le_iff_ne_zero.2 fun hz =>
-    h (G.minViolated_eq_zero_iff.1 hz)
-  have hs : (0 : ℝ) < (G.size : ℝ) := by exact_mod_cast G.size_pos
-  rw [unsat, div_le_div_iff_of_pos_right hs]
-  exact_mod_cast h1
-
-end ConstraintGraph
-
-/-- A single-edge constraint graph whose only constraint is never satisfied; it witnesses that
-the definitions above are not vacuous. -/
-def badGraph : ConstraintGraph where
-  numVerts := 1
-  alphSize := 1
-  alph_pos := one_pos
-  edges := {(0, 0)}
-  edges_nonempty := ⟨(0, 0), by simp⟩
-  sat := fun _ _ _ => false
-
-theorem badGraph_unsatisfiable : ¬ badGraph.Satisfiable ∧ badGraph.unsat = 1 := by
-  have hv : ∀ f, badGraph.violated f = 1 := by
-    intro f; simp [ConstraintGraph.violated, badGraph]
-  have hm : badGraph.minViolated = 1 := by
-    simp [ConstraintGraph.minViolated, hv]
-  have hs : badGraph.size = 1 := by simp [ConstraintGraph.size, badGraph]
-  refine ⟨?_, ?_⟩
-  · rintro ⟨f, hf⟩; rw [hv f] at hf; exact one_ne_zero hf
-  · rw [ConstraintGraph.unsat, hm, hs]; norm_num
-
-open ConstraintGraph
-
-/-- Iterating Dinur's gap-amplification step `k` times: the size grows by at most a factor
-`C ^ k`, the `UNSAT` value at least doubles each time (until it reaches the constant `α`),
-and satisfiability is preserved in both directions. -/
-theorem iterate_amplification
-    (C : ℕ) (α : ℝ) (hα0 : 0 < α)
-    (amp : ∀ G : ConstraintGraph, ∃ G' : ConstraintGraph,
-      G'.size ≤ C * G.size ∧ min (2 * G.unsat) α ≤ G'.unsat ∧ (G.Satisfiable ↔ G'.Satisfiable))
-    (G : ConstraintGraph) (k : ℕ) :
-    ∃ G' : ConstraintGraph, G'.size ≤ C ^ k * G.size ∧
-      min (2 ^ k * G.unsat) α ≤ G'.unsat ∧ (G.Satisfiable ↔ G'.Satisfiable) := by
+/-- **Amplification along iterations.**  If one application of the transformation `T`
+doubles the unsatisfiability value (until it reaches the target `gap`), then `k`
+applications multiply it by `2 ^ k` (until it reaches `gap`). -/
+theorem unsat_iterate_ge (unsat : Inst → ℝ) (T : Inst → Inst) (gap : ℝ)
+    (hgap : 0 ≤ gap)
+    (hamp : ∀ G : Inst, min (2 * unsat G) gap ≤ unsat (T G)) :
+    ∀ (k : ℕ) (G : Inst), min (2 ^ k * unsat G) gap ≤ unsat (T^[k] G) := by
+  intro k
   induction k with
-  | zero => exact ⟨G, by simp, by simp, Iff.rfl⟩
+  | zero => intro G; simp
   | succ k ih =>
-      obtain ⟨Gk, hsize, hgap, hsat⟩ := ih
-      obtain ⟨G', hsize', hgap', hsat'⟩ := amp Gk
-      refine ⟨G', ?_, ?_, hsat.trans hsat'⟩
-      · calc G'.size ≤ C * Gk.size := hsize'
-          _ ≤ C * (C ^ k * G.size) := Nat.mul_le_mul_left _ hsize
-          _ = C ^ (k + 1) * G.size := by ring
-      · refine le_trans ?_ hgap'
-        refine le_min ?_ (min_le_right _ _)
-        have hnn := Gk.unsat_nonneg
-        have hleft : min (2 ^ (k + 1) * G.unsat) α ≤ 2 ^ (k + 1) * G.unsat := min_le_left _ _
-        have hright : min (2 ^ (k + 1) * G.unsat) α ≤ α := min_le_right _ _
-        have hpow : (2 : ℝ) ^ (k + 1) * G.unsat = 2 * (2 ^ k * G.unsat) := by ring
-        rcases le_total (2 ^ k * G.unsat) α with h | h
-        · rw [min_eq_left h] at hgap; linarith
-        · rw [min_eq_right h] at hgap; linarith
+    intro G
+    have h1 : min (2 ^ k * unsat G) gap ≤ unsat (T^[k] G) := ih G
+    have h2 : min (2 * unsat (T^[k] G)) gap ≤ unsat (T (T^[k] G)) := hamp _
+    rw [Function.iterate_succ_apply']
+    refine le_trans (le_min ?_ (min_le_right _ _)) h2
+    rcases le_total (2 ^ k * unsat G) gap with h | h
+    · have : min (2 ^ k * unsat G) gap = 2 ^ k * unsat G := min_eq_left h
+      rw [this] at h1
+      have hk : (2 : ℝ) ^ (k + 1) * unsat G = 2 * (2 ^ k * unsat G) := by ring
+      calc min ((2 : ℝ) ^ (k + 1) * unsat G) gap ≤ 2 ^ (k + 1) * unsat G := min_le_left _ _
+        _ = 2 * (2 ^ k * unsat G) := hk
+        _ ≤ 2 * unsat (T^[k] G) := by linarith
+    · have : min (2 ^ k * unsat G) gap = gap := min_eq_right h
+      rw [this] at h1
+      calc min ((2 : ℝ) ^ (k + 1) * unsat G) gap ≤ gap := min_le_right _ _
+        _ ≤ 2 * unsat (T^[k] G) := by linarith
 
-/-- **Dinur's gap amplification proof of the PCP theorem** (the reduction from the Main
-Theorem to the Main Lemma).
+/-- Perfect satisfiability (`unsat = 0`) is preserved by iterating `T`. -/
+theorem unsat_iterate_eq_zero (unsat : Inst → ℝ) (T : Inst → Inst)
+    (hcomplete : ∀ G : Inst, unsat G = 0 → unsat (T G) = 0) :
+    ∀ (k : ℕ) (G : Inst), unsat G = 0 → unsat (T^[k] G) = 0 := by
+  intro k
+  induction k with
+  | zero => intro G hG; simpa using hG
+  | succ k ih =>
+    intro G hG
+    rw [Function.iterate_succ_apply']
+    exact hcomplete _ (ih G hG)
 
-Hypothesis `amp` is Dinur's Main Lemma: there are constants `C ≥ 1` and `α ∈ (0,1]` and a
-transformation of constraint graphs `G ↦ G'` which blows up the size by at most a factor `C`,
-preserves satisfiability (in both directions), and at least doubles the `UNSAT` value as long
-as it is below `α`.
+/-- The size blow-up of `k` iterations of `T` is at most `C ^ k`. -/
+theorem size_iterate_le (size : Inst → ℕ) (T : Inst → Inst) (C : ℕ)
+    (hsize : ∀ G : Inst, size (T G) ≤ C * size G) :
+    ∀ (k : ℕ) (G : Inst), size (T^[k] G) ≤ C ^ k * size G := by
+  intro k
+  induction k with
+  | zero => intro G; simp
+  | succ k ih =>
+    intro G
+    rw [Function.iterate_succ_apply']
+    calc size (T (T^[k] G)) ≤ C * size (T^[k] G) := hsize _
+      _ ≤ C * (C ^ k * size G) := by
+          exact Nat.mul_le_mul_left C (ih G)
+      _ = C ^ (k + 1) * size G := by ring
 
-Conclusion (the PCP theorem in the constraint-graph formulation): applying the transformation
-`O(log (size G))` times yields a graph `G'` of size polynomial in `size G` such that
-satisfiable instances stay satisfiable, while unsatisfiable instances acquire a constant gap:
-`UNSAT(G') ≥ α`. -/
-theorem pcp_dinur
-    (C : ℕ) (α : ℝ) (hα0 : 0 < α) (hα1 : α ≤ 1)
-    (amp : ∀ G : ConstraintGraph, ∃ G' : ConstraintGraph,
-      G'.size ≤ C * G.size ∧ min (2 * G.unsat) α ≤ G'.unsat ∧ (G.Satisfiable ↔ G'.Satisfiable))
-    (G : ConstraintGraph) :
-    ∃ G' : ConstraintGraph,
-      G'.size ≤ C ^ (Nat.log 2 G.size + 1) * G.size ∧
-      (G.Satisfiable → G'.Satisfiable) ∧
-      (¬ G.Satisfiable → α ≤ G'.unsat) := by
-  set k := Nat.log 2 G.size + 1 with hk
-  obtain ⟨G', hsize, hgap, hsat⟩ := iterate_amplification C α hα0 amp G k
-  refine ⟨G', hsize, hsat.1, fun hns => ?_⟩
-  -- Since `G` is unsatisfiable, `UNSAT(G) ≥ 1 / size G`, and `2 ^ k > size G`.
-  have hs : (0 : ℝ) < (G.size : ℝ) := by exact_mod_cast G.size_pos
-  have hlow : 1 / (G.size : ℝ) ≤ G.unsat := G.one_div_size_le_unsat hns
-  have hpow : (G.size : ℝ) < 2 ^ k := by
-    have := Nat.lt_pow_succ_log_self (b := 2) (by norm_num) G.size
-    exact_mod_cast this
-  have hbig : α ≤ 2 ^ k * G.unsat := by
-    have h1 : (1 : ℝ) ≤ 2 ^ k * (1 / (G.size : ℝ)) := by
-      rw [mul_one_div, le_div_iff₀ hs, one_mul]
-      exact hpow.le
-    have h2 : (2 : ℝ) ^ k * (1 / (G.size : ℝ)) ≤ 2 ^ k * G.unsat := by
-      have : (0 : ℝ) < 2 ^ k := by positivity
+/-- **Dinur's gap amplification (statement), iterated form.**
+
+This is the combinatorial core of Dinur's proof of the PCP theorem, phrased over an
+abstract type `Inst` of constraint-satisfaction instances equipped with
+
+* a size function `size : Inst → ℕ` (the number of constraints), and
+* an unsatisfiability value `unsat : Inst → ℝ` (the least fraction of constraints
+  violated by any assignment),
+
+together with a *gap-amplification step* `T : Inst → Inst` satisfying Dinur's three
+requirements:
+
+* `hsize`  : linear size blow-up, `size (T G) ≤ C * size G`;
+* `hcomplete` : completeness, satisfiable instances are mapped to satisfiable instances;
+* `hamp`   : soundness/amplification, `min (2 * unsat G) gap ≤ unsat (T G)`;
+
+and the normalisation `hfrac`: a nonzero unsatisfiability value is at least one over
+the number of constraints.
+
+The conclusion is the PCP-style gap reduction obtained by iterating `T`: there are
+`k = O(log (size G))` rounds producing an instance `H` of size at most
+`C ^ k * size G` (hence polynomial in `size G`) which is satisfiable if `G` is, and
+otherwise has unsatisfiability value at least the absolute constant `gap`. -/
+theorem pcp_dinur (size : Inst → ℕ) (unsat : Inst → ℝ) (T : Inst → Inst)
+    (C : ℕ) (gap : ℝ) (hgap0 : 0 < gap)
+    (hsize : ∀ G : Inst, size (T G) ≤ C * size G)
+    (hcomplete : ∀ G : Inst, unsat G = 0 → unsat (T G) = 0)
+    (hamp : ∀ G : Inst, min (2 * unsat G) gap ≤ unsat (T G))
+    (hfrac : ∀ G : Inst, 0 < size G → 0 < unsat G → 1 / (size G : ℝ) ≤ unsat G)
+    (G : Inst) (hG : 0 < size G) :
+    ∃ (k : ℕ) (H : Inst),
+      (2 : ℝ) ^ k ≤ 2 * (gap + 1) * (size G : ℝ) ∧
+      size H ≤ C ^ k * size G ∧
+      (unsat G = 0 → unsat H = 0) ∧
+      (0 < unsat G → gap ≤ unsat H) := by
+  set n : ℕ := size G with hn
+  have hn1 : (1 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hG
+  set m : ℕ := ⌈gap * (n : ℝ)⌉₊ with hm
+  set k : ℕ := Nat.clog 2 m with hk
+  refine ⟨k, T^[k] G, ?_, size_iterate_le size T C hsize k G, ?_, ?_⟩
+  · -- the number of rounds is logarithmic
+    rcases le_or_gt m 1 with hm1 | hm1
+    · have : k = 0 := by
+        rw [hk]
+        exact Nat.clog_of_right_le_one hm1 2
+      rw [this]
+      have : (0 : ℝ) < gap + 1 := by linarith
       nlinarith
-    linarith
-  calc α = min (2 ^ k * G.unsat) α := (min_eq_right hbig).symm
-    _ ≤ G'.unsat := hgap
+    · have hlt : 2 ^ (k - 1) < m := Nat.pow_pred_clog_lt_self (by norm_num) hm1
+      have hk1 : 1 ≤ k := by
+        rw [hk]
+        exact Nat.clog_pos (by norm_num) hm1
+      have hpow : (2 : ℕ) ^ k = 2 * 2 ^ (k - 1) := by
+        conv_lhs => rw [show k = (k - 1) + 1 by omega]
+        ring
+      have h1 : (2 : ℕ) ^ k ≤ 2 * m := by omega
+      have h2 : (2 : ℝ) ^ k ≤ 2 * (m : ℝ) := by exact_mod_cast h1
+      have h3 : (m : ℝ) ≤ gap * (n : ℝ) + 1 := by
+        have := Nat.ceil_lt_add_one (a := gap * (n : ℝ)) (by positivity)
+        linarith
+      nlinarith
+  · exact unsat_iterate_eq_zero unsat T hcomplete k G
+  · intro hpos
+    have hmain : min (2 ^ k * unsat G) gap ≤ unsat (T^[k] G) :=
+      unsat_iterate_ge unsat T gap hgap0.le hamp k G
+    have hlow : 1 / (n : ℝ) ≤ unsat G := hfrac G hG hpos
+    have hpk : gap * (n : ℝ) ≤ (2 : ℝ) ^ k := by
+      have h1 : m ≤ 2 ^ k := by
+        rw [hk]
+        exact Nat.le_pow_clog (by norm_num) m
+      have h2 : (m : ℝ) ≤ (2 : ℝ) ^ k := by exact_mod_cast h1
+      exact le_trans (Nat.le_ceil _) h2
+    have hge : gap ≤ 2 ^ k * unsat G := by
+      have hnpos : (0 : ℝ) < (n : ℝ) := by linarith
+      have : (2 : ℝ) ^ k * (1 / (n : ℝ)) ≤ 2 ^ k * unsat G := by
+        have : (0 : ℝ) ≤ (2 : ℝ) ^ k := by positivity
+        nlinarith
+      have hgn : gap ≤ (2 : ℝ) ^ k * (1 / (n : ℝ)) := by
+        rw [mul_one_div, le_div_iff₀ hnpos]
+        exact hpk
+      linarith
+    have : min ((2 : ℝ) ^ k * unsat G) gap = gap := min_eq_right hge
+    rw [this] at hmain
+    exact hmain
 
 end CS
+
+#print axioms CS.pcp_dinur
 

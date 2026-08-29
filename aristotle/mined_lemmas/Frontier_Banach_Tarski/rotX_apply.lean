@@ -1,20 +1,50 @@
-import RequestProject.BT.Ball
+import Mathlib
 
-/-!
-# Banach Tarski
-Category: Frontier — Set Theory
-Target: Frontier.Banach_Tarski
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open Metric Set
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
-namespace Frontier
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-/-- The vector by which the second copy of the ball is translated. -/
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-@[simp] theorem rotX_apply (c s : ℝ) (h : c ^ 2 + s ^ 2 = 1) (x : E) :
-    rotX c s h x = !₂[x 0, c * x 1 - s * x 2, s * x 1 + c * x 2] := rfl
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
+set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Rotations of three dimensional Euclidean space
+
+Explicit rotations about the `z`- and `x`-axes, the cross product, and the fact that a
+nontrivial rotation fixes at most two points of the unit sphere.
+-/
+
+open scoped RealInnerProductSpace
+
+namespace BT
+
+/-- Three dimensional Euclidean space. -/
+abbrev E3 := EuclideanSpace ℝ (Fin 3)
+
+/-- A vector of `E3` given by its three coordinates. -/
+
+@[simp] lemma rotX_apply (w : Circle) (v : E3) :
+    rotX w v = vec3 (v 0) ((w : ℂ).re * v 1 - (w : ℂ).im * v 2)
+      ((w : ℂ).im * v 1 + (w : ℂ).re * v 2) := rfl
+
+/-! ### Preservation of the cross product -/
+
+/-- The subgroup of linear isometries preserving the cross product. -/

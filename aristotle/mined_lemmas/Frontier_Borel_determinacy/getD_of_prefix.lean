@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Borel Determinacy
 Category: Frontier — Set Theory
@@ -7,21 +8,50 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-universe u
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-variable {X : Type u}
+/-!
+## Infinite two-person games of perfect information
 
-/-- A strategy assigns a move to every finite position of the game. -/
-abbrev Strategy (X : Type u) := List X → X
+Fix a nonempty set `X` of moves.  A *play* is an element of `ℕ → X` (for `X = ℕ` this is
+Baire space); a *position* is a finite list of moves.  Players I and II alternate moves,
+producing an infinite play, and player I wins iff the play belongs to the payoff set `A`.
 
-/-- The move played at position `q`: player I (resp. II) moves at positions of
-even (resp. odd) length. -/
+The parameter `s : Bool` records which player moves first: for `s = false` player I moves
+at positions of even length (the usual convention), for `s = true` the roles are
+interchanged.  Carrying this parameter lets a single Gale–Stewart argument serve both
+players.
+-/
 
-theorem getD_of_prefix {l₁ l₂ : List X} (h : l₁ <+: l₂) {k : ℕ} (hk : k < l₁.length)
-    (d : X) : l₁.getD k d = l₂.getD k d := by
-  rw [List.getD_eq_getElem _ _ hk, List.getD_eq_getElem _ _ (hk.trans_le h.length_le),
-    h.getElem hk]
+variable {X : Type*} [Inhabited X]
 
-omit [Nonempty X] in
+/-- `moverIsI s h` is `true` exactly when player I is to move at the position `h`. -/
+
+lemma getD_of_prefix {l₁ l₂ : List X} (h : l₁ <+: l₂) {k : ℕ} (hk : k < l₁.length) :
+    l₂.getD k default = l₁.getD k default := by
+  obtain ⟨t, rfl⟩ := h
+  exact List.getD_append _ _ _ _ hk
+

@@ -1,11 +1,3 @@
-/-
-# Spin Statistics
-Category: Frontier Physics
-Target: Frontier.spin_statistics
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,72 +8,111 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped ComplexConjugate
-open scoped InnerProductSpace
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Minkowski geometry -/
+/-!
+## Overview
 
-/-- The Minkowski bilinear form on `ℝ⁴` with signature `(+,-,-,-)`. -/
+We formalize the *spin–statistics connection* in the algebraic form in which it is proved in
+the Wightman framework (Streater–Wightman, Theorem 4-10): a relativistic quantum field which
+obeys the *wrong* connection between spin and statistics annihilates the vacuum, hence is
+trivial.  Equivalently, for a nontrivial field the statistics sign `ε` (`+1` for Bose,
+`-1` for Fermi commutation relations at spacelike separation) must equal `(-1) ^ (2j)`,
+where `j` is the spin: integer spin forces Bose statistics and half-integer spin forces
+Fermi statistics.
 
-theorem Statistics.eq_of_sign_eq {a b : Statistics} (h : a.sign = b.sign) : a = b := by
-  cases a <;> cases b <;> first
-    | rfl
-    | (exfalso; simp [Statistics.sign] at h; norm_num at h)
+The structure `Frontier.WightmanTheory` bundles the inputs of the argument:
 
-/-! ## Wightman-type field data
+* the fields `phi f` are operators on a complex inner product space, indexed by (smeared)
+  test functions `f`, with `conj f` the test function implementing the adjoint;
+* `hermitian`: `phi (conj f)` is the adjoint of `phi f`;
+* `locality`: at spacelike separation the fields commute (`ε = 1`) or anticommute (`ε = -1`),
+  according to the assumed statistics;
+* `wlc`: *weak local commutativity* at Jost points, `W(f,g) = (-1)^(2j) W(g,f)`.  This is the
+  standard consequence of Lorentz covariance of a spin-`j` field together with the analyticity
+  of the Wightman functions;
+* `analyticContinuation`: the edge-of-the-wedge/analytic-continuation input, namely that a
+  two-point Wightman function vanishing for all spacelike-separated arguments vanishes
+  identically.
 
-A `WightmanField` packages the structural input of the spin–statistics theorem in the
-Wightman framework: a Hilbert space of states with a vacuum vector, a family of smeared
-field operators indexed by test functions together with their adjoints and (spacetime)
-supports, a spin and a statistics, and the following properties.
+The theorem `Frontier.spin_statistics` is then a fully Lean-checked reduction: from these
+axioms and nontriviality of the field, the spin–statistics relation `ε = (-1)^(2j)` follows.
 
-* `locality` : at spacelike separation the fields obey the (anti)commutation relation
-  dictated by their statistics.
-* `jost` : *weak local commutativity*. At spacelike separation (Jost points) the analytic
-  continuation of the two-point function relates the two orderings by the factor
-  `(-1)^{2s}`.  This is the consequence of Lorentz covariance (equivalently PCT) and of
-  the analyticity of the Wightman functions in the extended tube.
-* `analytic` : *uniqueness of analytic continuation*. If the two-point function
-  `⟪Ω, φ(g)^* φ(f) Ω⟫` vanishes for all spacelike separated configurations, then it
-  vanishes identically, in particular at coincident arguments.
-* `separating` : *Reeh–Schlieder*. The vacuum is separating for the field operators.
+Two concrete toy models (`Frontier.boseModel`, `Frontier.fermiModel`) are constructed at the
+end of the file, showing that the axiom system is consistent and that both the Bose case
+(`2j` even) and the Fermi case (`2j` odd) really occur.
 -/
-structure WightmanField (H : Type*) [NormedAddCommGroup H] [InnerProductSpace ℂ H]
-    (TF : Type*) where
-  /-- The spacetime support of a smeared field. -/
-  supp : TF → Set (Fin 4 → ℝ)
-  /-- The smeared field operator. -/
-  field : TF → (H →L[ℂ] H)
-  /-- The adjoint of the smeared field operator. -/
-  fieldAdj : TF → (H →L[ℂ] H)
-  /-- `fieldAdj f` is the adjoint of `field f`. -/
-  adj_spec : ∀ f x y, ⟪fieldAdj f x, y⟫_ℂ = ⟪x, field f y⟫_ℂ
-  /-- The vacuum vector. -/
+
+/-- The two possible statistics of a field: commuting (Bose) or anticommuting (Fermi)
+at spacelike separation. -/
+inductive Statistics where
+  | bose
+  | fermi
+deriving DecidableEq, Repr
+
+/-- The sign `ε` occurring in the (anti)commutation relations: `+1` for Bose, `-1` for Fermi. -/
+
+def Statistics.sign : Statistics → ℂ
+  | .bose => 1
+  | .fermi => -1
+
+/-- A Wightman-type quantum field theory of a field of spin `j` (recorded through
+`twoSpin = 2j : ℕ`) with a prescribed statistics, given by its smeared field operators on a
+complex inner product space `H` of states, together with the structural axioms used in the
+proof of the spin–statistics theorem. -/
+structure WightmanTheory (T : Type*) (H : Type*)
+    [NormedAddCommGroup H] [InnerProductSpace ℂ H] where
+  /-- The smeared field operator `phi f` associated with a test function `f`. -/
+  phi : T → H →ₗ[ℂ] H
+  /-- The vacuum state. -/
   vacuum : H
+  /-- Complex conjugation of test functions; `phi (conj f)` is the adjoint of `phi f`. -/
+  conj : T → T
+  /-- Spacelike separation of the supports of two test functions. -/
+  Spacelike : T → T → Prop
   /-- Twice the spin of the field. -/
-  twiceSpin : ℕ
-  /-- The statistics with which the field is quantized. -/
-  stat : Statistics
-  /-- Locality: the fields (anti)commute at spacelike separation according to `stat`. -/
-  locality : ∀ f g, SpacelikeSeparated (supp f) (supp g) →
-      (field f) ∘L (fieldAdj g) = stat.sign • ((fieldAdj g) ∘L (field f))
-  /-- Weak local commutativity at Jost points, from Lorentz covariance. -/
-  jost : ∀ f g, SpacelikeSeparated (supp f) (supp g) →
-      ⟪vacuum, (field f) (fieldAdj g vacuum)⟫_ℂ
-        = (-1 : ℂ) ^ twiceSpin * ⟪vacuum, (fieldAdj g) (field f vacuum)⟫_ℂ
-  /-- Uniqueness of analytic continuation for the two-point function. -/
-  analytic : (∀ f g, SpacelikeSeparated (supp f) (supp g) →
-        ⟪vacuum, (fieldAdj g) (field f vacuum)⟫_ℂ = 0) →
-      ∀ f, ⟪vacuum, (fieldAdj f) (field f vacuum)⟫_ℂ = 0
-  /-- Reeh–Schlieder: the vacuum is separating. -/
-  separating : ∀ f, field f vacuum = 0 → field f = 0
+  twoSpin : ℕ
+  /-- The statistics obeyed by the field. -/
+  statistics : Statistics
+  /-- Hermiticity: `phi (conj f)` is the adjoint of `phi f`. -/
+  hermitian : ∀ (f : T) (x y : H), inner ℂ (phi f x) y = inner ℂ x (phi (conj f) y)
+  /-- Locality: at spacelike separation the fields commute or anticommute according to the
+  assumed statistics. -/
+  locality : ∀ f g, Spacelike f g → ∀ x, phi f (phi g x) = statistics.sign • phi g (phi f x)
+  /-- Weak local commutativity at Jost points, the consequence of Lorentz covariance of a
+  spin-`j` field and of the analyticity of the Wightman functions. -/
+  wlc : ∀ f g, Spacelike f g →
+      (inner ℂ vacuum (phi f (phi g vacuum)) : ℂ)
+        = (-1 : ℂ) ^ twoSpin * inner ℂ vacuum (phi g (phi f vacuum))
+  /-- Analytic continuation (edge of the wedge): a two-point function vanishing at all
+  spacelike separations vanishes identically. -/
+  analyticContinuation :
+      (∀ f g, Spacelike f g → (inner ℂ vacuum (phi f (phi g vacuum)) : ℂ) = 0) →
+      ∀ f g, (inner ℂ vacuum (phi f (phi g vacuum)) : ℂ) = 0
 
-namespace WightmanField
+variable {T H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] {TF : Type*}
-  (Φ : WightmanField H TF)
-
-/-- Positivity: the vacuum expectation value `⟪Ω, φ(f)^* φ(f) Ω⟫` is the squared norm of
-`φ(f) Ω`. -/
+/-- The two-point Wightman function of the vacuum, `W(f,g) = ⟪Ω, φ(f) φ(g) Ω⟫`. -/

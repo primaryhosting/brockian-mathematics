@@ -1,19 +1,28 @@
-import Mathlib
-import RequestProject.GoldbachWheelK2_727
-
-/-!
-# Goldbach Wheel K 2 727 — Mathlib restatement
-
-The target theorem `Brockian.GoldbachWheelK2_727` is stated in a self-contained way (its own
-primality predicate `Brockian.IsPrime`), because the required file header must be the very first
-thing in that file and Lean does not accept `import` after it.  Here we bridge that predicate to
-`Nat.Prime` and restate the result in Mathlib terms.
+/-
+# Goldbach Wheel K 2 727
+Category: Brockian Corpus
+Target: Brockian.GoldbachWheelK2_727
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
+/-!
+# Goldbach Wheel K 2 727
+Category: Brockian Corpus
+Target: Brockian.GoldbachWheelK2_727
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option maxHeartbeats 4000000
 
 namespace Brockian
 
+/-- `GoldbachK2 n` says that `n` is a sum of two primes (the `K = 2` Goldbach property). -/
 
-def GoldbachK2 (n : Nat) : Prop :=
-  ∃ p q : Nat, IsPrime p ∧ IsPrime q ∧ p + q = n
+def GoldbachK2 (n : ℕ) : Prop := ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ n = p + q
 
-/-- `noDivIn p k` is `true` when no `m` with `2 ≤ m ≤ k` divides `p`. -/
+/-- **Goldbach wheel, K = 2, modulus 727.**
+Every even natural number `n` with `4 ≤ n ≤ 727` is a sum of two primes.
+(The odd endpoint 727 is the wheel modulus; the largest even number covered is 726.) -/

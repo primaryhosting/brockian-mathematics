@@ -1,93 +1,53 @@
-/-
-# Aks Primes In P
-Category: Frontier Cs
-Target: CS.aks_primes_in_p
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
-import RequestProject.AKS.Algorithm
-import RequestProject.AKS.Cost
 
-/-!
-# Aks Primes In P
-Category: Frontier Cs
-Target: CS.aks_primes_in_p
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
 set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-namespace CS
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-/-- **PRIMES is in P** (Agrawal–Kayal–Saxena).
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-`AKS.aksBool : ℕ → Bool` is an explicit, fully computable implementation of the AKS primality
-test.  On input `n` it checks that `n ≥ 2`, that `n` is not a perfect power, that no `a ≤ r`
-shares a nontrivial factor with `n`, and — unless `n ≤ r` — that the congruences
-`(X + a)^n = X^n + a` hold in `(ZMod n)[X]/(X^r - 1)` for all `1 ≤ a ≤ ℓ`, where `r = AKS.rAlg n`
-is the least modulus for which the multiplicative order of `n` exceeds `(bit length)^4` and
-`ℓ = AKS.ellAlg n`.  The congruences are evaluated by repeated squaring in a computable
-coefficient-vector model of the quotient ring.
+set_option grind.warning false
 
-`AKS.aksI : ℕ → Bool × ℕ` is the same algorithm instrumented with a counter: it is a structural
-copy of every function involved, threading a count of the primitive operations performed
-(see `RequestProject/AKS/Cost.lean` for the cost assigned to each leaf primitive: `r * r`
-coefficient multiplications for one cyclic convolution, `bits n` for one `Nat.gcd`, and so on).
-Costs are therefore measured in arithmetic operations on numbers of `O(log n)` bits, not in
-bit operations.
+import RequestProject.AKS.Defs
 
-The statement below records:
+/-!
+# Introspective exponents
 
-* **the instrumented algorithm computes the same answer** as the plain one;
-* **correctness**: `AKS.aksBool` decides primality exactly;
-* **polynomial running time**: on every input `n ≥ 2` the algorithm performs at most
-  `(bit length of n) ^ 45` primitive operations;
-* **polynomial size of the parameters**: `r ≤ 2 · (bit length)^12` and `ℓ ≤ 4 · (bit length)^7 + 2`.
+Fix a prime `p` and let `F = AlgebraicClosure (ZMod p)`.  A natural number `m` is
+*introspective* for a polynomial `f ∈ 𝔽ₚ[X]` (relative to `r`) if `f(z)^m = f(z^m)` for every
+`r`-th root of unity `z ∈ F`.  This is the key notion in the AKS correctness proof.
 -/
-
-theorem Intro.aeval {F : Type*} [CommRing F] [Algebra (ZMod p) F] {ζ : F} (hζ : ζ ^ r = 1)
-    {m : ℕ} {f : (ZMod p)[X]} (h : Intro p r m f) :
-    (Polynomial.aeval ζ f) ^ m = Polynomial.aeval (ζ ^ m) f := by
-  obtain ⟨c, hc⟩ := h
-  have h0 : Polynomial.aeval ζ ((X : (ZMod p)[X]) ^ r - 1) = 0 := by
-    simp [hζ]
-  have hexp : Polynomial.aeval ζ (expand (ZMod p) m f) = Polynomial.aeval (ζ ^ m) f := by
-    simp only [Polynomial.aeval_def, Polynomial.eval₂_eq_eval_map, Polynomial.map_expand,
-      Polynomial.expand_eval]
-  have := congrArg (Polynomial.aeval ζ) hc
-  simp only [map_sub, map_mul, map_pow, h0, zero_mul, hexp] at this
-  linear_combination this
-
-end AKS
-
-/-
-An instrumented (step-counting) version of the AKS algorithm.
-
-Every function below returns, besides its value, a count of the primitive operations performed.
-The counting is *derived*: each instrumented function is a structural copy of the corresponding
-function of `RequestProject.AKS.Algorithm`, carrying an extra counter, and we prove that its value
-component is literally the value computed by the original function.  Only the *leaf* primitives
-are assigned a cost by fiat (a primitive cannot have its cost derived):
-
-* a cyclic convolution `cmul` of two coefficient vectors of length `r` costs `r * r`
-  (one coefficient multiplication in `ZMod n` per pair of coefficients);
-* an addition `cadd` of two such vectors, and a test of equality between two such vectors,
-  cost `r` each;
-* one step of the search for `r` (computing `ordMod n r`) costs `r`;
-* one `Nat.gcd a n` costs `bits n`;
-* the perfect-power test costs `(bits n) ^ 4`;
-* every iteration of a loop costs one extra unit of bookkeeping.
-
-All costs are therefore measured in arithmetic operations on numbers of `O(log n)` bits.
--/
-import Mathlib
-import RequestProject.AKS.Algorithm
 
 open Polynomial
 
+namespace CS
 namespace AKS
 
-/-! ### Bit lengths -/
+/-- The algebraic closure of `𝔽ₚ`, the field in which the AKS argument takes place. -/
+abbrev AC (p : ℕ) [Fact p.Prime] := AlgebraicClosure (ZMod p)
+
+variable {p : ℕ} [Fact p.Prime]
+
+/-- `m` is introspective for `f`: `f(z)^m = f(z^m)` for all `r`-th roots of unity `z`. -/
+
+lemma Intro.pow {r m : ℕ} {f : (ZMod p)[X]} (h : Intro p r m f) (i : ℕ) :
+    Intro p r (m ^ i) f := by
+  induction i with
+  | zero => simpa using intro_one r f
+  | succ k ih => rw [pow_succ]; exact ih.mul_exp h
 

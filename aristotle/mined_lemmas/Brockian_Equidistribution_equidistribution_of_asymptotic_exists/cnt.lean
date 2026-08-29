@@ -30,7 +30,6 @@ Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -39,14 +38,22 @@ Category: Brockian (Open Discharge)
 Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+This file constructs an explicit sequence in `[0, 1)` whose empirical distribution is
+asymptotically the uniform one: for every subinterval `[a, b) ⊆ [0, 1)` the proportion of
+the first `N` terms lying in `[a, b)` converges to `b - a`.
+
+The construction is the "triangular block" sequence
+`0/1 ; 0/2, 1/2 ; 0/3, 1/3, 2/3 ; 0/4, …` .
 -/
 
-open Filter Finset
+open Filter Topology
 
 namespace Brockian.Equidistribution
 
-/-- Triangular numbers: `T m = 1 + 2 + ⋯ + m = m (m+1) / 2`. -/
+/-- Triangular numbers: `tri k = 0 + 1 + ⋯ + k`. -/
 
-noncomputable def Cnt (a b : ℝ) (N : ℕ) : ℕ :=
-  ((Finset.range N).filter (fun n => u n ∈ Set.Ico a b)).card
+noncomputable def cnt (N : ℕ) : ℕ :=
+  ((Finset.range N).filter (fun n => seq n ∈ Set.Ico a b)).card
 
+/-- The number of `j < m` with `j / m ∈ [a, b)`. -/

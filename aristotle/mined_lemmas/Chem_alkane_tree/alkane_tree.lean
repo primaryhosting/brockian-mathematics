@@ -16,6 +16,31 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace Chem
+
+open Finset SimpleGraph
+
+/-- Auxiliary counting step: if every carbon has at most `4` bonds and the total number of
+hydrogens `∑ v, (4 - degree v)` equals `2n + 2`, then the number of C–C bonds is `n - 1`. -/
+
+theorem alkane_tree {V : Type*} [Fintype V] (G : SimpleGraph V) [DecidableRel G.Adj]
+    {n : ℕ} (hn : Fintype.card V = n)
+    (hconn : G.Connected)
+    (hval : ∀ v, G.degree v ≤ 4)
+    (hH : ∑ v, (4 - G.degree v) = 2 * n + 2) :
+    G.IsTree ∧ G.edgeFinset.card = n - 1 := by
+  have hcard : G.edgeFinset.card + 1 = n := card_edges_of_hydrogen_count G hn hval hH
+  refine ⟨?_, by omega⟩
+  rw [isTree_iff_connected_and_card]
+  refine ⟨hconn, ?_⟩
+  have h1 : Nat.card G.edgeSet = G.edgeFinset.card := by
+    rw [Nat.card_eq_fintype_card, ← Set.toFinset_card, SimpleGraph.edgeFinset]
+  rw [h1, Nat.card_eq_fintype_card, hn, hcard]
+
+end Chem
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -38,26 +63,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Chem
-
-/-- The number of hydrogen atoms attached to a carbon skeleton `G`: every carbon is
-tetravalent, so a carbon `v` carries `4 - deg(v)` hydrogens. -/
-
-theorem alkane_tree {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel G.Adj]
-    (hconn : G.Connected) (hdeg : ∀ v, G.degree v ≤ 4) :
-    hydrogenCount G = 2 * n + 2 ↔ (G.IsTree ∧ G.edgeFinset.card = n - 1) := by
-  have hcount := hydrogenCount_add_twice_bonds G hdeg
-  have htree : G.IsTree ↔ G.edgeFinset.card + 1 = n := by
-    rw [SimpleGraph.isTree_iff_connected_and_card, natCard_edgeSet]
-    simp [hconn]
-  rw [htree]
-  omega
-
-/-- Sanity check (methane, `CH₄`): the one-carbon skeleton has no C–C bonds, is a tree,
-and carries `4 = 2·1 + 2` hydrogens. -/
-example : hydrogenCount (⊥ : SimpleGraph (Fin 1)) = 2 * 1 + 2 := by
-  decide
-
-end Chem
 

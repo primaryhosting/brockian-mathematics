@@ -4,49 +4,45 @@ Category: Frontier Phys
 Target: Phys.area_law_1d
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` to precede any module docstring, so the header above is a plain
-comment and is repeated verbatim as the module docstring below.)
 -/
 
 import Mathlib
 
 /-!
-# Area Law 1 D
-Category: Frontier Phys
-Target: Phys.area_law_1d
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+## Overview
+
+A pure state of a bipartite quantum system `A ⊗ B` is described, in a product basis, by its
+amplitude matrix `M : Matrix A B ℂ`, normalised so that `∑ a b, ‖M a b‖ ^ 2 = 1`.  The reduced
+density matrix of the left half is `ρ_A = M * Mᴴ`, and the *entanglement entropy* across the cut
+is the von Neumann entropy `-Tr ρ_A log ρ_A = ∑ᵢ negMulLog λᵢ` of its eigenvalues.
+
+The entanglement *area law* in one dimension says that for a gapped local Hamiltonian the ground
+state's entanglement entropy across a cut of the chain is bounded by a constant that does not grow
+with the length of the chain (the "area" of a cut of a 1D chain being a single point).  The
+mechanism, which is the content of Hastings' theorem, is that the gap forces the Schmidt rank
+(equivalently, the matrix–product bond dimension) across the cut to be bounded by a constant `D`
+independent of the system size.
+
+Here we formalise the area law given that input: from a uniform bound `D` on the Schmidt rank
+across the cut we derive the uniform entropy bound `log D`, valid for every chain length.  The
+final theorem `Phys.area_law_1d` is stated for a family of chain states indexed by the number of
+sites, and its conclusion is a bound that is *independent of the number of sites*.
+
+Note on the file header: it is written as a plain block comment `/- ... -/` rather than a module
+docstring `/-! ... -/`, because Lean requires all `import` commands to come before any module
+docstring, so a `/-! ... -/` header on line 1 would make the file fail to compile.
 -/
+
+open scoped BigOperators ComplexOrder
+open Finset Matrix
 
 namespace Phys
 
-open Real Finset
+/-- The entanglement entropy across a cut, computed from the amplitude matrix `M` of the state:
+the von Neumann entropy `∑ᵢ -λᵢ log λᵢ` of the reduced density matrix `ρ = M * Mᴴ`. -/
 
-/-- A **Schmidt spectrum** across a cut of a one–dimensional chain: the (squared) Schmidt
-coefficients `p i` of a pure state with respect to a bipartition `A ∣ B`.  Equivalently, the
-eigenvalue distribution of the reduced density matrix `ρ_A`.  Only finitely many coefficients
-are non-zero; `support` is a finite set carrying them, and its cardinality bounds the
-Schmidt rank (= the bond dimension needed to cut the state at this position). -/
-structure SchmidtSpectrum (ι : Type*) where
-  /-- The squared Schmidt coefficients, i.e. the eigenvalues of the reduced density matrix. -/
-  p : ι → ℝ
-  /-- A finite set containing all indices with non-zero weight. -/
-  support : Finset ι
-  /-- Eigenvalues of a density matrix are non-negative. -/
-  nonneg : ∀ i, 0 ≤ p i
-  /-- Outside the support the weights vanish. -/
-  vanish : ∀ i ∉ support, p i = 0
-  /-- The reduced density matrix has unit trace. -/
-  total : ∑ i ∈ support, p i = 1
+noncomputable def schmidtRank {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B]
+    (M : Matrix A B ℂ) : ℕ := M.rank
 
-namespace SchmidtSpectrum
-
-variable {ι : Type*} (σ : SchmidtSpectrum ι)
-
-/-- The **entanglement entropy** (von Neumann entropy of the reduced density matrix)
-`S(ρ_A) = -∑ᵢ pᵢ log pᵢ`. -/
-
-def schmidtRank : ℕ := σ.support.card
-
-/-- The support of a normalised spectrum is non-empty. -/
+/-- **Maximal entropy bound.**  A probability vector supported on at most `D` points has entropy
+at most `log D`. -/

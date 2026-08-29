@@ -1,12 +1,3 @@
-/-
-# Cos Trace Norm 1279
-Category: Brockian Corpus
-Target: Brockian.CosTraceNorm1279
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import Mathlib
-
 /-!
 # Cos Trace Norm 1279
 Category: Brockian Corpus
@@ -15,31 +6,39 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
 
 namespace Brockian
 
-open Finset
+/-- The planar rotation matrix by angle `θ`. -/
 
-/-- **Cos trace norm bound.** For a diagonal matrix whose entries are cosines of
-arbitrary real phases, the absolute value of the trace (equivalently, the trace norm
-of the matrix, which for a diagonal matrix is the sum of the absolute values of its
-entries) is bounded by the dimension.
-
-We record both bounds: the trace-norm bound `∑ i, |cos (θ i)| ≤ n` and the
-consequent bound `|trace| ≤ n`. -/
-
-theorem CosTraceNorm1279 (n : ℕ) (θ : Fin n → ℝ) :
-    ∑ i, |Real.cos (θ i)| ≤ (n : ℝ) ∧
-      |(Matrix.diagonal fun i => Real.cos (θ i)).trace| ≤ (n : ℝ) := by
-  have hnorm : ∑ i, |Real.cos (θ i)| ≤ (n : ℝ) := by
-    calc ∑ i : Fin n, |Real.cos (θ i)| ≤ ∑ _i : Fin n, (1 : ℝ) :=
-          Finset.sum_le_sum fun i _ => Real.abs_cos_le_one (θ i)
-      _ = (n : ℝ) := by simp
-  refine ⟨hnorm, ?_⟩
-  have htr : (Matrix.diagonal fun i => Real.cos (θ i)).trace = ∑ i, Real.cos (θ i) := by
-    simp [Matrix.trace_diagonal]
-  rw [htr]
-  exact (Finset.abs_sum_le_sum_abs _ _).trans hnorm
+theorem CosTraceNorm1279 (θ : ℝ) (n : ℕ) :
+    Matrix.trace ((rot θ) ^ n) = 2 * Real.cos (n * θ) ∧
+    |Matrix.trace ((rot θ) ^ n)| ≤ 2 ∧
+    (|Matrix.trace ((rot θ) ^ n)| = 2 ↔ Real.sin (n * θ) = 0) ∧
+    (Real.sin (n * θ) ≠ 0 → |Matrix.trace ((rot θ) ^ n)| < 2) := by
+  have htr : Matrix.trace ((rot θ) ^ n) = 2 * Real.cos (n * θ) := trace_rot_pow θ n
+  have habs : |Matrix.trace ((rot θ) ^ n)| = 2 * |Real.cos (n * θ)| := by
+    rw [htr, abs_mul]
+    norm_num
+  have hle : |Real.cos ((n : ℝ) * θ)| ≤ 1 := Real.abs_cos_le_one _
+  refine ⟨htr, ?_, ?_, ?_⟩
+  · rw [habs]; linarith
+  · rw [habs]
+    constructor
+    · intro h
+      exact (abs_cos_eq_one_iff _).mp (by linarith)
+    · intro h
+      rw [(abs_cos_eq_one_iff _).mpr h]
+      norm_num
+  · intro h
+    rw [habs]
+    rcases lt_or_eq_of_le hle with hlt | heq
+    · linarith
+    · exact absurd ((abs_cos_eq_one_iff _).mp heq) h
 
 end Brockian
 

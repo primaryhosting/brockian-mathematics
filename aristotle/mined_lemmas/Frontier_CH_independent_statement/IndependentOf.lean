@@ -1,11 +1,3 @@
-/-
-# CH Independent Statement
-Category: Frontier — Set Theory
-Target: Frontier.CH_independent_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,24 +8,44 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Cardinal FirstOrder
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Part 1: the Continuum Hypothesis as a statement about cardinals
+/-!
+## Part 1: the Continuum Hypothesis inside Lean's own set theory
+-/
 
-We first record the "external" form of CH — the statement, about the actual real
-numbers, that every uncountable set of reals has the cardinality of the continuum —
-and prove that it is equivalent to the usual cardinal arithmetic form `ℵ₁ = 𝔠`.
-This is a genuine (and fully proved) Lean theorem; it is the base case of the
-formalization. -/
+open Cardinal
 
-/-- The Continuum Hypothesis, in the form: every uncountable set of real numbers has
-cardinality the continuum. -/
+/-- The Continuum Hypothesis, phrased about sets of real numbers:
+every infinite set of reals is either countable or of the cardinality of the continuum. -/
 
-def IndependentOf {L : FirstOrder.Language} (T : L.Theory) (φ : L.Sentence) : Prop :=
-  ¬ T ⊨ᵇ φ ∧ ¬ T ⊨ᵇ φ.not
+def IndependentOf {L : Language} (T : L.Theory) (σ : L.Sentence) : Prop :=
+  ¬ T ⊨ᵇ σ ∧ ¬ T ⊨ᵇ σ.not
 
-/-- Independence is *exactly* the existence of two models of `T`, one satisfying `φ`
-and one refuting it. This is the general form of the Gödel/Cohen reduction: to prove
-independence it suffices to construct the two models. -/
+section Independence
+
+variable {L : Language} {T : L.Theory} {σ : L.Sentence}
+
+/-- Adding a doubly negated sentence to a theory is, for satisfiability purposes, the same as
+adding the sentence itself. -/

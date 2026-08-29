@@ -1,13 +1,4 @@
-/-
-# Expander Uniform Gap Witness
-Category: Frontier — Spectral Geometry
-Target: Frontier.Spectral.expander_uniform_gap_witness
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Expander Uniform Gap Witness
 Category: Frontier — Spectral Geometry
@@ -41,14 +32,10 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Finset Matrix
+/-- The vertex set of the `k`-dimensional hypercube: bit strings of length `k`
+(there are `2 ^ k` of them). -/
+abbrev Cube (k : ℕ) : Type := Fin k → ZMod 2
 
-/-- The vertex set of the `k`-dimensional hypercube: bit strings of length `k`. -/
-abbrev Cube (k : ℕ) := Fin k → ZMod 2
 
-/-- The hypercube `Q_k` has `2 ^ k` vertices. -/
+def chi {k : ℕ} (S : Finset (Fin k)) (x : Cube k) : ℝ := ∏ i ∈ S, eps (x i)
 
-def chi {k : ℕ} (y x : Cube k) : ℝ := ∏ i : Fin k, sgn (y i * x i)
-
-/-- The Laplacian eigenvalue attached to the character `chi y`, namely twice the
-Hamming weight of `y`. -/

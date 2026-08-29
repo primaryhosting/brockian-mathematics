@@ -41,16 +41,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.RepunitPrimes
+namespace Brockian
+namespace RepunitPrimes
 
-/-- The `n`-th base-ten repunit: the number `11…1` with `n` digits equal to `1`. -/
+/-- The `n`-th repunit: the base-ten number consisting of `n` digits `1`,
+i.e. `repunit n = (10 ^ n - 1) / 9`. -/
 
 theorem repunitPrimes_infinite_iff :
     repunitPrimes.Infinite ↔ ∀ N : ℕ, ∃ n, N < n ∧ Nat.Prime (repunit n) := by
-  refine ⟨fun hinf N => ?_, RepunitPrimeInfinitude⟩
-  obtain ⟨p, hp, hgt⟩ := hinf.exists_gt (repunit N)
-  obtain ⟨hprime, n, rfl⟩ := hp
-  exact ⟨n, repunit_strictMono.lt_iff_lt.mp hgt, hprime⟩
+  constructor
+  · intro hinf N
+    obtain ⟨p, ⟨hp, n, rfl⟩, hlt⟩ := hinf.exists_gt (repunit N)
+    exact ⟨n, repunit_strictMono.lt_iff_lt.mp hlt, hp⟩
+  · exact RepunitPrimeInfinitude
 
-end Brockian.RepunitPrimes
-
+/-- **Partial result (unconditional).** The index set of repunit primes consists of primes,
+so the conjecture reduces to a statement about prime indices only. -/

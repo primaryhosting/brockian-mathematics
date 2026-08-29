@@ -8,31 +8,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace Riemann.Redheffer
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
-
-namespace Riemann
-namespace Redheffer
-
-/-- The 3×3 Redheffer matrix (0-indexed): entry `(i, j)` is `1` when `j = 0`
-or when `i + 1` divides `j + 1`, and `0` otherwise. -/
+/-- The 3×3 Redheffer matrix: `R i j = 1` when `j = 0` or `(i+1) ∣ (j+1)`
+(with `0`-indexed `Fin 3` indices), and `0` otherwise. -/
 
 theorem det_eq_mertens_3 : R.det = -1 := by
   rw [Matrix.det_fin_three]
-  simp [R]
+  norm_num [R, Fin.ext_iff]
 
-/-- The determinant of the 3×3 Redheffer matrix equals the Mertens function `M 3`. -/
+/-- The Mertens function at `3`: `M 3 = μ 1 + μ 2 + μ 3 = -1`. -/

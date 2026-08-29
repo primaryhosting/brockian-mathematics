@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Cycle Laplacian Spectrum
 Category: Frontier — Spectral Geometry
@@ -25,21 +26,35 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Matrix ZMod AddChar Finset
+open Matrix
 
-/-- The generating vector of the cycle Laplacian: `2` at `0`, `-1` at `±1`, `0` elsewhere. -/
+/-- The graph Laplacian of the cycle graph `C n`: the `n × n` circulant matrix with `2` on the
+diagonal and `-1` on the two cyclic off-diagonals. -/
 
-lemma fourier_mul_inv : fourierMat n * fourierMatInv n = 1 := by
+lemma fourier_mul_inv {n : ℕ} (hn : n ≠ 0) : fourierMat n * fourierMatInv n = 1 := by
+  have hw := cycleRoot_pow_n hn
+  have hpow : ∀ m : ℕ, (cycleRoot n ^ m) ^ n = 1 := by
+    intro m; rw [← pow_mul, mul_comm, pow_mul, hw, one_pow]
+  have hne : ∀ m : ℕ, cycleRoot n ^ m ≠ 0 := fun m => pow_ne_zero _ (cycleRoot_ne_zero n)
+  have hnC : (n : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hn
   ext i j
-  simp only [Matrix.mul_apply, fourierMat, fourierMatInv, Matrix.of_apply]
-  have key : ∀ k : ZMod n, ZMod.stdAddChar (i * k) * ((n : ℂ)⁻¹ * ZMod.stdAddChar (-(k * j)))
-      = (n : ℂ)⁻¹ * ZMod.stdAddChar ((i - j) * k) := by
-    intro k
-    rw [show (i - j) * k = i * k + -(k * j) by ring, AddChar.map_add_eq_mul]
+  rw [Matrix.mul_apply, Matrix.one_apply]
+  set z : ℂ := cycleRoot n ^ i.val * (cycleRoot n ^ j.val)⁻¹ with hzdef
+  have hzn : z ^ n = 1 := by
+    rw [hzdef, mul_pow, hpow, inv_pow, hpow, inv_one, mul_one]
+  have hterm : ∀ p : Fin n, (fourierMat n i p) * (fourierMatInv n p j) = (n:ℂ)⁻¹ * z ^ (p : ℕ) := by
+    intro p
+    simp only [fourierMat, fourierMatInv, Matrix.of_apply, hzdef, mul_pow]
+    rw [pow_mul, mul_comm p.val j.val, pow_mul, ← inv_pow]
     ring
-  rw [Finset.sum_congr rfl (fun k _ => key k), ← Finset.mul_sum, sum_stdAddChar_mul]
-  have hn : (n : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne n)
-  by_cases h : i = j
-  · simp [h, Matrix.one_apply, hn]
-  · simp [h, sub_eq_zero]
+  rw [Finset.sum_congr rfl (fun p _ => hterm p), ← Finset.mul_sum, sum_pow_eq hzn]
+  by_cases hij : i = j
+  · have hz1 : z = 1 := by rw [hzdef, hij, mul_inv_cancel₀ (hne _)]
+    rw [if_pos hz1, if_pos hij, inv_mul_cancel₀ hnC]
+  · have hz1 : z ≠ 1 := by
+      intro h
+      rw [hzdef, mul_inv_eq_one₀ (hne _)] at h
+      exact hij (Fin.ext ((cycleRoot_isPrimitiveRoot hn).pow_inj i.isLt j.isLt h))
+    rw [if_neg hz1, if_neg hij, mul_zero]
 
+/-- The columns of the discrete Fourier matrix diagonalise the cycle Laplacian. -/

@@ -4,29 +4,21 @@ import Mathlib
 # Dijkstra Correct
 Category: Computer Science
 Target: CS.dijkstra_correct
-Statement: Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace CS
 
 open scoped ENNReal
 
-namespace CS
+variable {V : Type*} [Fintype V] [DecidableEq V]
 
-variable {V : Type*}
-
-/-! ## Walks, their costs, and shortest-path distances
-
-A weighted directed graph on the vertex type `V` is given by a weight function
-`w : V → V → ℝ≥0∞`.  Values in `ℝ≥0∞` are automatically nonnegative (this is the
-"nonnegative weights" hypothesis), and `w u v = ⊤` encodes the absence of an edge
-from `u` to `v`.
-
-A walk starting at `s` is described by the list `l` of the vertices it visits after `s`. -/
-
-/-- The endpoint of the walk that starts at `s` and visits the vertices of `l` in order. -/
+/-- `wcost w u l` is the total weight of the walk that starts at `u` and visits the
+vertices of `l` in order. -/
 
 lemma gdist_le_edge (w : V → V → ℝ≥0∞) (s t : V) : gdist w s t ≤ w s t := by
-  simpa using gdist_le_cost (w := w) (l := [t]) rfl
+  simpa [endpt, wcost] using gdist_le_of_walk w s [t]
 
+omit [Fintype V] [DecidableEq V] in
+/-- Sanity check: if there are no edges at all, distinct vertices are at distance `⊤`. -/

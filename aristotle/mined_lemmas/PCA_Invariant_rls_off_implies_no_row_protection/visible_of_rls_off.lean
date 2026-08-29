@@ -1,4 +1,4 @@
-/-
+/-!
 # Rls Off Implies No Row Protection
 Category: Proof-Carrying Apps
 Target: PCA.Invariant.rls_off_implies_no_row_protection
@@ -6,54 +6,35 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+namespace PCA.Invariant
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+universe u v
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-namespace PCA
-
-/-- A row-level security policy: it says which principals are permitted to see which rows. -/
-structure Policy (Principal Row : Type*) where
-  /-- `permits p r` holds when the policy grants principal `p` access to row `r`. -/
+/-- A row-level security policy for a table: it names, for each principal,
+the set of rows that principal is permitted to see. -/
+structure Policy (Principal : Type u) (Row : Type v) where
+  /-- `permits p r` holds when this policy lets principal `p` see row `r`. -/
   permits : Principal → Row → Prop
 
-/-- A table of the isolation engine's model: a row-level-security (RLS) switch together with
-the list of policies that are consulted when the switch is on. -/
-structure Table (Principal Row : Type*) where
-  /-- Whether row-level security is enabled for this table. -/
+/-- A table of the isolation engine's model: a row-level-security switch
+together with the list of policies attached to the table. -/
+structure Table (Principal : Type u) (Row : Type v) where
+  /-- Whether row-level security is switched on for this table. -/
   rlsEnabled : Bool
-  /-- The policies attached to the table (only consulted when `rlsEnabled = true`). -/
+  /-- The row-level security policies attached to the table. -/
   policies : List (Policy Principal Row)
 
-variable {Principal Row : Type*}
+variable {Principal : Type u} {Row : Type v}
 
-/-- Access semantics of the engine: when RLS is off every row is visible to every principal;
-when RLS is on a row is visible only if some attached policy permits it. -/
+/-- Semantics of the engine: when row-level security is off the table is read
+wholesale, so every row is visible to every principal; when it is on a row is
+visible only if some attached policy permits it. -/
 
 theorem visible_of_rls_off
     (t : Table Principal Row) (h : t.rlsEnabled = false) (p : Principal) (r : Row) :
-    t.Visible p r :=
-  Or.inl h
+    Visible t p r := by
+  simp [Visible, h]
 
-/-- Converse (completeness of the invariant): if some row is protected, RLS must be on. -/
+/-- Non-vacuity / completeness direction: protection is genuinely available
+when row-level security is on. With the switch on and no policy attached,
+every row is protected from every principal. -/

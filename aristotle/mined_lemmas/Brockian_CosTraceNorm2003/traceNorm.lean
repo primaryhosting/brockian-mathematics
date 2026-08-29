@@ -1,27 +1,25 @@
 import Mathlib
 
 /-!
-# Trace-norm bounds for the matrix cosine and sine (`CosTraceNorm` family)
-
-This file develops, from scratch, the Schatten 1-norm (trace norm) of a complex square matrix,
-the Hermitian functional calculus `Brockian.hermFun`, and proves a family of trace-norm bounds
-for the matrix cosine and sine of a Hermitian matrix.
+# Cos Trace Norm 2003
+Category: Brockian Corpus
+Target: Brockian.CosTraceNorm2003
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxRecDepth 8000
-
 open scoped BigOperators
-open Matrix Polynomial
+open scoped Real
+open scoped MatrixOrder
 
 namespace Brockian
 
-variable {n : Type*} [Fintype n] [DecidableEq n]
+open Matrix
 
-/-- The trace norm (Schatten 1-norm) of a complex square matrix: the sum of its singular
-values, i.e. the sum of the square roots of the eigenvalues of `Aᴴ * A`. -/
+/-- The *cosine Gram matrix* of a family of phases `θ : Fin n → ℝ`:
+its `(i, j)` entry is `cos (θ i - θ j)`. -/
 
-noncomputable def traceNorm (A : Matrix n n ℂ) : ℝ :=
-  ∑ i, Real.sqrt ((Matrix.isHermitian_conjTranspose_mul_self A).eigenvalues i)
+noncomputable def traceNorm {n : ℕ} (A : Matrix (Fin n) (Fin n) ℝ) : ℝ :=
+  (CFC.abs A).trace
 
-/-- The Hermitian functional calculus: `hermFun hA f` is `f` applied to the Hermitian matrix `A`
-through its spectral decomposition. -/
+/-- For a positive semidefinite matrix the trace norm coincides with the trace. -/

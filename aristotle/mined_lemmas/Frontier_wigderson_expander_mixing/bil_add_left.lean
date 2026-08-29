@@ -1,4 +1,20 @@
+/-
+# Wigderson Expander Mixing
+Category: Frontier Abel
+Target: Frontier.wigderson_expander_mixing
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Wigderson Expander Mixing
+Category: Frontier Abel
+Target: Frontier.wigderson_expander_mixing
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -25,18 +41,13 @@ set_option grind.warning false
 
 namespace Frontier
 
-section Mixing
+/-- The bilinear form `u ↦ v ↦ ∑ᵢ ∑ⱼ uᵢ Mᵢⱼ vⱼ` attached to a matrix `M`. -/
 
-variable {V : Type*} [Fintype V]
-
-/-- The bilinear form associated with a weight matrix `A : V → V → ℝ`. -/
-
-lemma bil_add_left (A : V → V → ℝ) (f g h : V → ℝ) :
-    bil A (fun x => f x + g x) h = bil A f h + bil A g h := by
+lemma bil_add_left (u u' v : V → ℝ) :
+    bil M (fun i => u i + u' i) v = bil M u v + bil M u' v := by
   unfold bil
   rw [← Finset.sum_add_distrib]
-  refine Finset.sum_congr rfl (fun u _ => ?_)
+  refine Finset.sum_congr rfl (fun i _ => ?_)
   rw [← Finset.sum_add_distrib]
-  refine Finset.sum_congr rfl (fun v _ => ?_)
-  ring
+  exact Finset.sum_congr rfl (fun j _ => by ring)
 

@@ -8,14 +8,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Berry Phase Quantized
-Category: Frontier Physics
-Target: Frontier.berry_phase_quantized
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -41,13 +33,15 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- The Berry curvature of a Berry connection one-form `A = A₁ dx + A₂ dy` on the
-(two–dimensional) parameter space `ℝ × ℝ`: it is the exterior derivative
-`F = ∂₁A₂ - ∂₂A₁`. -/
+open MeasureTheory Set intervalIntegral
+open scoped Interval
 
-noncomputable def berryCurvature (A₁ A₂ : ℝ × ℝ → ℝ) (p : ℝ × ℝ) : ℝ :=
-  fderiv ℝ A₂ p (1, 0) - fderiv ℝ A₁ p (0, 1)
+/-- The Berry curvature `F = ∂₁A₂ - ∂₂A₁` of a Berry connection with components
+`A₁, A₂ : ℝ × ℝ → ℝ` on a two-dimensional parameter space. -/
 
-/-- The Berry phase accumulated along the (counterclockwise) closed rectangular loop with
-corners `(a₁, a₂)`, `(b₁, a₂)`, `(b₁, b₂)`, `(a₁, b₂)`, i.e. the line integral
-`∮ A₁ dx + A₂ dy` of the Berry connection along that loop. -/
+noncomputable def berryCurvature (A₁ A₂ : ℝ × ℝ → ℝ) (x : ℝ × ℝ) : ℝ :=
+  fderiv ℝ A₂ x (1, 0) - fderiv ℝ A₁ x (0, 1)
+
+/-- The Berry phase accumulated along the closed rectangular loop with corners
+`(a₁, a₂)`, `(b₁, a₂)`, `(b₁, b₂)`, `(a₁, b₂)`, traversed counterclockwise:
+`∮ A · dl`. -/

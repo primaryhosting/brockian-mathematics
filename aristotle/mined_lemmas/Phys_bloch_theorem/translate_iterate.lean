@@ -8,32 +8,24 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Bloch Theorem
-Category: Frontier Phys
-Target: Phys.bloch_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-set_option autoImplicit false
-
 namespace Phys
 
 open Complex
 
-/-- Translation of a wavefunction by `a`: `(translate a ψ) x = ψ (x + a)`. -/
+/-- The translation operator by `a` acting on wave functions. -/
 
-theorem translate_iterate {a : ℝ} {ψ : ℝ → ℂ} {lam : ℂ}
-    (hT : ∀ x : ℝ, ψ (x + a) = lam * ψ x) (n : ℕ) (x : ℝ) :
-    ψ (x + n * a) = lam ^ n * ψ x := by
-  induction n generalizing x with
+theorem translate_iterate (a : ℝ) (ψ : ℝ → ℂ) (c : ℂ)
+    (hψ : ∀ x, translate a ψ x = c * ψ x) (x : ℝ) :
+    ∀ n : ℕ, ψ (x + n * a) = c ^ n * ψ x := by
+  intro n
+  induction n with
   | zero => simp
   | succ n ih =>
-      have hx : x + ((n + 1 : ℕ) : ℝ) * a = (x + n * a) + a := by push_cast; ring
-      rw [hx, hT, ih]
+      have : ψ (x + n * a + a) = c * ψ (x + n * a) := hψ _
+      have hx : x + (n + 1 : ℕ) * a = x + n * a + a := by push_cast; ring
+      rw [hx, this, ih]
       ring
 
-/-- The translation eigenvalue of a bounded, not identically vanishing eigenstate has modulus
-one.  (Physically this is unitarity of the translation operator; here it is derived from
-boundedness of `ψ`.) -/
+/-- A bounded, not identically vanishing eigenfunction of the translation operator has an
+eigenvalue of unit modulus.  This is the physical input that turns the eigenvalue into a
+phase `e ^ (i k a)`. -/

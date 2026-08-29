@@ -1,5 +1,16 @@
 import Mathlib
 
+/-!
+# Goldbach Wheel K 2 1327
+Category: Brockian Corpus
+Target: Brockian.GoldbachWheelK2_1327
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- Note: Lean 4 requires all `import` commands to come before any other command,
+-- including module docstrings, so `import Mathlib` precedes the header above.
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -7,35 +18,30 @@ open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+set_option maxRecDepth 40000
 
 namespace Brockian
 
-/-- The new wheel modulus `1327` is prime. -/
+/-- A kernel-friendly primality certificate: `n` has no divisor `d` with
+`2 ≤ d ≤ 52` and `d * d ≤ n`.  For `n < 53 ^ 2 = 2809` this is equivalent to
+primality of `n` (given `2 ≤ n`). -/
 
-theorem GoldbachWheelK2_1327 (r : ZMod 1327) (N : ℕ) :
-    ∃ p q : ℕ, N < p ∧ N < q ∧ Nat.Prime p ∧ Nat.Prime q ∧
-      (p : ZMod 1327) + (q : ZMod 1327) = r := by
-  obtain ⟨a, b, ha, hb, hab⟩ := exists_add_eq_of_ne_zero_1327 r
-  obtain ⟨p, hpN, hp, hpa⟩ :=
-    Nat.forall_exists_prime_gt_and_eq_mod (q := 1327) (isUnit_iff_ne_zero.mpr ha) N
-  obtain ⟨q, hqN, hq, hqb⟩ :=
-    Nat.forall_exists_prime_gt_and_eq_mod (q := 1327) (isUnit_iff_ne_zero.mpr hb) N
-  exact ⟨p, q, hpN, hqN, hp, hq, by rw [hpa, hqb, hab]⟩
+theorem GoldbachWheelK2_1327 :
+    ∀ n : ℕ, Even n → 4 ≤ n → n ≤ 2 * 1327 →
+      ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ p ≤ q ∧ p + q = n := by
+  intro n hev h4 hub
+  have hmem : n ∈ List.range' 4 1326 2 := by
+    rw [List.mem_range']
+    obtain ⟨k, hk⟩ := hev
+    exact ⟨(n - 4) / 2, by omega, by omega⟩
+  rw [← goldbachWitnesses_keys, List.mem_map] at hmem
+  obtain ⟨x, hx, hxn⟩ := hmem
+  have h := (List.all_eq_true.mp goldbachWitnesses_valid) x hx
+  simp only [Bool.and_eq_true, decide_eq_true_eq] at h
+  obtain ⟨⟨⟨⟨h2, hle⟩, hub'⟩, hp⟩, hq⟩ := h
+  subst hxn
+  refine ⟨x.2, x.1 - x.2, prime_of_primeCert h2 (by omega) hp,
+    prime_of_primeCert (by omega) (by omega) hq, by omega, by omega⟩
 
-/-- Natural-number form of the Goldbach wheel for the modulus `1327`: every residue
-`r < 1327` is the residue of a sum of two primes. -/
+end Brockian
+

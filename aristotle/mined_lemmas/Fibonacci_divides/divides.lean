@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Divides
+Category: Fibonacci
+Target: Fibonacci.divides
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,34 +31,12 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Divides
-Category: Fibonacci
-Target: Fibonacci.divides
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Divides
-Category: Fibonacci
-Target: Fibonacci.divides
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Fibonacci
 
-/-- For all `m n : ℕ`, `Nat.fib m ∣ Nat.fib (m * n)`.
-Immediate from `Nat.fib_dvd : m ∣ n → Nat.fib m ∣ Nat.fib n`
-(Mathlib, `Mathlib/Data/Nat/Fib/Basic.lean`). -/
+/-- For all `m n : ℕ`, `Nat.fib m` divides `Nat.fib (m * n)`. -/
 
 theorem divides (m n : ℕ) : Nat.fib m ∣ Nat.fib (m * n) :=
   Nat.fib_dvd m (m * n) (Dvd.intro n rfl)
 
 end Fibonacci
-
-#print axioms Fibonacci.divides
 

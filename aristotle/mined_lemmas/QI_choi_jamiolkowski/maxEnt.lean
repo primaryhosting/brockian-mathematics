@@ -1,11 +1,3 @@
-/-
-# Choi Jamiolkowski
-Category: Frontier Qi
-Target: QI.choi_jamiolkowski
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,19 +8,17 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Matrix
-open scoped ComplexOrder
+open scoped MatrixOrder ComplexOrder
 
 namespace QI
 
+open Matrix
+
 variable {n m : Type} [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m]
 
-/-- The Choi matrix of a linear map `Φ` between matrix algebras:
-`C (i,a) (j,b) = (Φ Eᵢⱼ) a b`, where `Eᵢⱼ` is the matrix unit. -/
+/-- The ampliation `id_d ⊗ Φ` of a linear map `Φ` between matrix algebras, described
+blockwise: the `(a, b)` block of the output is `Φ` applied to the `(a, b)` block of the input. -/
 
 def maxEnt (n : Type) [Fintype n] [DecidableEq n] : Matrix (n × n) (n × n) ℂ :=
-  Matrix.of fun x y => if x.1 = x.2 ∧ y.1 = y.2 then 1 else 0
+  Matrix.of fun p q => (if p.1 = p.2 then 1 else 0) * (if q.1 = q.2 then 1 else 0)
 
-omit [Fintype m] [DecidableEq m] in
-/-- **Key lemma**: a linear map between matrix algebras is completely determined by its
-Choi matrix, via `Φ X a b = ∑ i j, X i j * C (i,a) (j,b)`. -/

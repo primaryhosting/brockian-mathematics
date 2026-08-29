@@ -8,39 +8,40 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-NOTE ON THE HEADER: Lean 4 requires `import` to be the first command of a file, so the
-module docstring above is placed directly after `import Mathlib` (a `/-! ... -/` block
-before the import is a parse error).
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
 set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Math2
 
-universe u v w
+/-- A finite simple graph, presented as a simple graph on the vertex set `Fin n`. -/
+structure FinGraph where
+  /-- The number of vertices. -/
+  n : ℕ
+  /-- The adjacency structure. -/
+  adj : SimpleGraph (Fin n)
 
-open SimpleGraph
+namespace FinGraph
 
-/-! ## The minor relation -/
+/-- The graph obtained from `H` by contracting the edge `{a, b}`: the vertex `b` is deleted and
+its neighbourhood is added to that of `a`. -/
 
-/-- `IsMinor H G` says that `H` is a minor of `G`: there is a family of pairwise disjoint,
-nonempty, connected *branch sets* `B w ⊆ V(G)`, indexed by the vertices `w` of `H`, such
-that adjacent vertices of `H` have an edge of `G` between their branch sets. -/
+theorem IsMinor.edgeless {G H : FinGraph} (h : IsMinor G H) (hH : Edgeless H) : Edgeless G := by
+  induction h using Relation.ReflTransGen.head_induction_on with
+  | refl => exact hH
+  | head h1 _ ih => exact h1.edgeless ih
 
-theorem IsMinor.congr {V : Type u} {W : Type v} {V' : Type w} {W' : Type*}
-    {H : SimpleGraph W} {G : SimpleGraph V} {H' : SimpleGraph W'} {G' : SimpleGraph V'}
-    (eH : H ≃g H') (eG : G' ≃g G) (h : IsMinor H' G') : IsMinor H G :=
-  (Iso.embeds eH).isMinor.trans (h.trans (Iso.embeds eG).isMinor)
-
-/-! ## Components: paths and cycles -/
-
-/-- A connected graph of maximum degree at most two: either a path with `n` vertices or a
-cycle with `n + 3` vertices. -/
-inductive Comp where
-  | path (n : ℕ) : Comp
-  | cycle (n : ℕ) : Comp
-  deriving DecidableEq
-
-/-- The number of vertices of a component. -/
+/-- Sanity check that the minor relation defined above is not degenerate: a single edge is not a
+minor of an edgeless graph, however large. -/

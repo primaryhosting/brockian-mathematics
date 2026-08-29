@@ -1,24 +1,33 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-noncomputable def gain (G : FiniteGame ι S) (i : ι) (s : S i) (x : (i : ι) → S i → ℝ) : ℝ :=
-  max 0 (devPayoff G i s x - expectedPayoff G i x)
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
-/-- Nash's map: add the regrets and renormalize. -/
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+noncomputable def gain (u : ι → (∀ j, S j) → ℝ) (i : ι) (s : S i) (x : ∀ j, S j → ℝ) : ℝ :=
+  max 0 (devPayoff u i s x - payoff u i x)
+
+/-- Nash's map: reweight each player's strategy by its gain, then renormalize. -/

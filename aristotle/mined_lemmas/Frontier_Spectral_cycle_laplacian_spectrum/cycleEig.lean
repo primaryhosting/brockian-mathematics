@@ -1,16 +1,8 @@
-/-
-# Cycle Laplacian Spectrum
-Category: Frontier Spectral
-Target: Frontier.Spectral.cycle_laplacian_spectrum
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
 # Cycle Laplacian Spectrum
-Category: Frontier Spectral
+Category: Frontier — Spectral Geometry
 Target: Frontier.Spectral.cycle_laplacian_spectrum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
@@ -34,14 +26,12 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Finset Matrix
+open Matrix
 
-/-! ## Definitions -/
+/-- The graph Laplacian of the cycle graph `C n`: the `n × n` circulant matrix with `2` on the
+diagonal and `-1` on the two cyclic off-diagonals. -/
 
-/-- The `n`-th root of unity `exp (2πI/n)`. -/
+noncomputable def cycleEig (n k : ℕ) : ℂ := 2 - cycleRoot n ^ k - (cycleRoot n ^ k)⁻¹
 
-noncomputable def cycleEig (n : ℕ) : Fin n → ℂ :=
-  fun k => ((2 - 2 * Real.cos (2 * Real.pi * (k : ℕ) / n) : ℝ) : ℂ)
-
-/-- The discrete Fourier matrix, whose `k`-th column is the eigenvector
-`v k j = exp (2πI k j / n)`. -/
+/-- The discrete Fourier matrix; its `k`-th column is the eigenvector
+`v_k (j) = exp (2 π I k j / n)`. -/

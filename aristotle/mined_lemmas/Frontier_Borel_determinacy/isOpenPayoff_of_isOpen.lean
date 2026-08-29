@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Borel Determinacy
 Category: Frontier — Set Theory
@@ -7,27 +8,60 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-universe u
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-variable {X : Type u}
+/-!
+## Infinite two-person games of perfect information
 
-/-- A strategy assigns a move to every finite position of the game. -/
-abbrev Strategy (X : Type u) := List X → X
+Fix a nonempty set `X` of moves.  A *play* is an element of `ℕ → X` (for `X = ℕ` this is
+Baire space); a *position* is a finite list of moves.  Players I and II alternate moves,
+producing an infinite play, and player I wins iff the play belongs to the payoff set `A`.
 
-/-- The move played at position `q`: player I (resp. II) moves at positions of
-even (resp. odd) length. -/
+The parameter `s : Bool` records which player moves first: for `s = false` player I moves
+at positions of even length (the usual convention), for `s = true` the roles are
+interchanged.  Carrying this parameter lets a single Gale–Stewart argument serve both
+players.
+-/
 
-theorem isOpenPayoff_of_isOpen {A : Set (ℕ → X)} (hA : IsOpen A) : IsOpenPayoff A := by
+variable {X : Type*} [Inhabited X]
+
+/-- `moverIsI s h` is `true` exactly when player I is to move at the position `h`. -/
+
+lemma isOpenPayoff_of_isOpen [TopologicalSpace X] {A : Set (ℕ → X)} (hA : IsOpen A) :
+    IsOpenPayoff A := by
   intro x hx
-  obtain ⟨I, u, hu, hsub⟩ := isOpen_pi_iff.mp hA x hx
-  refine ⟨(I.sup id) + 1, fun y hy => ?_⟩
-  refine hsub (fun i hi => ?_)
-  have hlt : i < (I.sup id) + 1 := lt_of_le_of_lt (Finset.le_sup (f := id) hi) (by omega)
-  rw [hy i hlt]
-  exact (hu i hi).2
+  obtain ⟨I, u, hu, hsub⟩ := isOpen_pi_iff.1 hA x hx
+  refine ⟨(I.sup id) + 1, fun y hy => hsub ?_⟩
+  intro a ha
+  have hle : a ≤ I.sup id := Finset.le_sup (f := id) ha
+  have hya : y a = x a := hy a (by omega)
+  rw [hya]
+  exact (hu a ha).2
 
-/-- **Gale–Stewart theorem, topological form**: a game whose payoff set is open in the
-product topology on `ℕ → X` is determined. (In the intended descriptive-set-theoretic
-setting `X` carries the discrete topology, so that `ℕ → X` is a Baire space.) -/
+/-! ## The Gale–Stewart theorem -/
+
+/-- If player I is to move at `q` and has a winning strategy after moving `a`, then he has
+a winning strategy at `q`. -/

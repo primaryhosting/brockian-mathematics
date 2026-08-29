@@ -1,70 +1,61 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-!
+# Qft Unitary
+Category: Quantum Computing
+Target: QC.qft_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace QC
 
-open Complex
+open Complex Finset Matrix
 
-/-- The `N × N` discrete Fourier transform matrix:
-`(dftMatrix N) j k = (1/√N) * exp (2πi jk / N)`. -/
+/-- The primitive `N`-th root of unity `exp(2πi/N)`. -/
 
-theorem dftMatrix_unitary {N : ℕ} (hN : 0 < N) :
+theorem dftMatrix_unitary {N : ℕ} (hN : N ≠ 0) :
     dftMatrix N ∈ Matrix.unitaryGroup (Fin N) ℂ := by
-  rw [Matrix.mem_unitaryGroup_iff]
-  ext j l
-  have hNr : (0:ℝ) ≤ (N : ℝ) := Nat.cast_nonneg N
-  have hsq : (Real.sqrt N : ℂ) * (Real.sqrt N : ℂ) = (N : ℂ) := by
-    rw [← Complex.ofReal_mul, Real.mul_self_sqrt hNr]
-    simp
-  have hconj : ∀ k : Fin N,
-      (star (dftMatrix N)) k l = (Real.sqrt N : ℂ)⁻¹ * ((zetaN N) ^ ((l : ℕ) * (k : ℕ)))⁻¹ := by
-    intro k
-    have habs : ‖zetaN N‖ = 1 := by
-      have hre : (2 * (Real.pi : ℂ) * Complex.I / (N : ℂ)).re = 0 := by
-        simp [Complex.div_re, Complex.mul_re, Complex.mul_im]
-      simp [zetaN, Complex.norm_exp, hre]
-    have hstar : (starRingEnd ℂ) (zetaN N) = (zetaN N)⁻¹ := (Complex.inv_eq_conj habs).symm
-    have hs1 : star ((Real.sqrt N : ℂ)⁻¹) = (Real.sqrt N : ℂ)⁻¹ := by
-      simp [Complex.conj_ofReal]
-    have hs2 : star ((zetaN N) ^ ((l : ℕ) * (k : ℕ))) = ((zetaN N) ^ ((l : ℕ) * (k : ℕ)))⁻¹ := by
-      rw [show (star : ℂ → ℂ) = (starRingEnd ℂ) from rfl, map_pow, hstar, inv_pow]
-    show star (dftMatrix N l k) = _
-    rw [dftMatrix_apply, star_mul', hs1, hs2]
-  rw [Matrix.mul_apply]
-  simp only [hconj, dftMatrix_apply]
-  have : ∀ k : Fin N,
-      ((Real.sqrt N : ℂ)⁻¹ * (zetaN N) ^ ((j : ℕ) * (k : ℕ))) *
-        ((Real.sqrt N : ℂ)⁻¹ * ((zetaN N) ^ ((l : ℕ) * (k : ℕ)))⁻¹)
-      = (N : ℂ)⁻¹ * ((zetaN N) ^ ((j : ℕ) * (k : ℕ)) * ((zetaN N) ^ ((l : ℕ) * (k : ℕ)))⁻¹) := by
-    intro k
-    have h2 : (Real.sqrt N : ℂ)⁻¹ * (Real.sqrt N : ℂ)⁻¹ = (N : ℂ)⁻¹ := by
-      rw [← mul_inv, hsq]
-    rw [← h2]
+  have hNpos : (0 : ℝ) < N := by exact_mod_cast Nat.pos_of_ne_zero hN
+  have hNC : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hN
+  have hc : ((1 / Real.sqrt N : ℝ) : ℂ) * ((1 / Real.sqrt N : ℝ) : ℂ) = 1 / (N : ℂ) := by
+    have hsq : Real.sqrt N * Real.sqrt N = (N : ℝ) := Real.mul_self_sqrt hNpos.le
+    have h1 : (1 / Real.sqrt N : ℝ) * (1 / Real.sqrt N : ℝ) = 1 / (N : ℝ) := by
+      rw [div_mul_div_comm, one_mul, hsq]
+    rw [← Complex.ofReal_mul, h1]
+    push_cast
     ring
-  rw [Finset.sum_congr rfl (fun k _ => this k), ← Finset.mul_sum, sum_zetaN_pow hN]
-  have hNne : (N : ℂ) ≠ 0 := by exact_mod_cast hN.ne'
-  by_cases hjl : j = l <;> simp [hjl, Matrix.one_apply, hNne]
+  rw [Matrix.mem_unitaryGroup_iff']
+  ext j k
+  rw [Matrix.mul_apply, Matrix.one_apply]
+  have hstarc : star ((1 / Real.sqrt N : ℝ) : ℂ) = ((1 / Real.sqrt N : ℝ) : ℂ) := by
+    rw [Complex.star_def, Complex.conj_ofReal]
+  have hterm : ∀ i : Fin N,
+      (star (dftMatrix N) j i) * dftMatrix N i k
+        = (1 / (N : ℂ)) * omegaRoot N ^ ((((k : ℕ) : ℤ) - ((j : ℕ) : ℤ)) * ((i : ℕ) : ℤ)) := by
+    intro i
+    rw [Matrix.star_apply, dft_entry, dft_entry, star_mul', star_omegaRoot_zpow, hstarc,
+      mul_mul_mul_comm, hc, ← zpow_add₀ (omegaRoot_ne_zero N)]
+    rw [show -(((i : ℕ) : ℤ) * ((j : ℕ) : ℤ)) + ((i : ℕ) : ℤ) * ((k : ℕ) : ℤ)
+        = (((k : ℕ) : ℤ) - ((j : ℕ) : ℤ)) * ((i : ℕ) : ℤ) by ring]
+  simp only [hterm, ← Finset.mul_sum]
+  by_cases h : j = k
+  · subst h
+    simp only [sub_self, zero_mul, zpow_zero, Finset.sum_const, Finset.card_univ,
+      Fintype.card_fin, nsmul_eq_mul, mul_one, if_true]
+    field_simp
+  · rw [if_neg h]
+    have hd : ¬ ((N : ℤ) ∣ (((k : ℕ) : ℤ) - ((j : ℕ) : ℤ))) := by
+      intro hdvd
+      have hj : ((j : ℕ) : ℤ) < N := by exact_mod_cast j.isLt
+      have hk : ((k : ℕ) : ℤ) < N := by exact_mod_cast k.isLt
+      have hj0 : (0 : ℤ) ≤ ((j : ℕ) : ℤ) := Int.natCast_nonneg _
+      have hk0 : (0 : ℤ) ≤ ((k : ℕ) : ℤ) := Int.natCast_nonneg _
+      have habs : |((k : ℕ) : ℤ) - ((j : ℕ) : ℤ)| < (N : ℤ) := by
+        rw [abs_sub_lt_iff]
+        omega
+      have hzero := Int.eq_zero_of_abs_lt_dvd hdvd habs
+      exact h (Fin.ext (by omega))
+    rw [sum_omega_zpow_eq_zero hN _ hd, mul_zero]
 
-/-- The `n`-qubit quantum Fourier transform matrix is unitary. -/
+/-- **The n-qubit quantum Fourier transform matrix is unitary.** -/

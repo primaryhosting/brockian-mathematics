@@ -30,30 +30,37 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 namespace DilationGenerator
 
-/-- If `f` has its closed support inside `(0, ∞)`, then `f` vanishes on a
-neighbourhood of `0`. -/
+/-- A function with compact support contained in `(0, ∞)` vanishes on a
+neighbourhood of `0` on the right: there is `a > 0` with `f x = 0` for all `x < a`. -/
 
-theorem boundary_term_vanishes (f g : ℝ → ℂ)
+theorem boundary_term_vanishes {f g : ℝ → ℂ}
     (hf : HasCompactSupport f) (hg : HasCompactSupport g)
-    (hf0 : tsupport f ⊆ Set.Ioi 0) (hg0 : tsupport g ⊆ Set.Ioi 0) :
+    (hfs : tsupport f ⊆ Set.Ioi (0 : ℝ)) (hgs : tsupport g ⊆ Set.Ioi (0 : ℝ)) :
     Filter.Tendsto (fun x : ℝ => (x : ℂ) * f x * (starRingEnd ℂ) (g x))
-        (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds 0) ∧
-    Filter.Tendsto (fun x : ℝ => (x : ℂ) * f x * (starRingEnd ℂ) (g x))
+        (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) ∧
+      Filter.Tendsto (fun x : ℝ => (x : ℂ) * f x * (starRingEnd ℂ) (g x))
         Filter.atTop (nhds 0) := by
+  obtain ⟨a, ha, hfa⟩ := exists_pos_eq_zero_of_lt hf hfs
+  obtain ⟨b, hfb⟩ := exists_gt_eq_zero hf
   constructor
   · refine Filter.Tendsto.congr' ?_ tendsto_const_nhds
-    have h : ∀ᶠ x in nhdsWithin (0 : ℝ) (Set.Ioi 0), f x = 0 :=
-      Filter.Eventually.filter_mono nhdsWithin_le_nhds (eventually_eq_zero_nhds_zero hf0)
-    filter_upwards [h] with x hx
-    simp [hx]
+    filter_upwards [Ioo_mem_nhdsGT ha] with x hx
+    simp [hfa x hx.2]
   · refine Filter.Tendsto.congr' ?_ tendsto_const_nhds
-    filter_upwards [eventually_eq_zero_atTop hf] with x hx
-    simp [hx]
+    filter_upwards [Filter.eventually_gt_atTop b] with x hx
+    simp [hfb x hx]
 
 end DilationGenerator
 end Brockian

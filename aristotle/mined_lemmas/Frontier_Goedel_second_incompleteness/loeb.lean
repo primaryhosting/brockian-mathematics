@@ -1,3 +1,13 @@
+/-
+# Goedel Second Incompleteness
+Category: Frontier — Set Theory
+Target: Frontier.Goedel_second_incompleteness
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 /-!
 # Goedel Second Incompleteness
 Category: Frontier — Set Theory
@@ -6,88 +16,107 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-We formalize Gödel's second incompleteness theorem in its standard abstract
-(Hilbert–Bernays–Löb) form: *no consistent theory `T` whose provability predicate
-satisfies the derivability conditions proves its own consistency*.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-The arithmetization of syntax is packaged in the usual way.  For a recursively
-axiomatized theory `T` extending `PA`, Gödel numbering yields a provability
-formula `Pr_T(⌜·⌝)` in the language of `T`, and the Hilbert–Bernays–Löb
-derivability conditions hold:
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-* `D1` : `T ⊢ φ  ⟹  T ⊢ Pr_T(⌜φ⌝)`               (formalized soundness of proofs)
-* `D2` : `T ⊢ Pr_T(⌜φ → ψ⌝) → (Pr_T(⌜φ⌝) → Pr_T(⌜ψ⌝))`   (internal modus ponens)
-* `D3` : `T ⊢ Pr_T(⌜φ⌝) → Pr_T(⌜Pr_T(⌜φ⌝)⌝)`     (formalized `D1`)
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-together with closure of `T ⊢ ·` under propositional logic, and the diagonal
-lemma, which produces a Gödel sentence `G` with `T ⊢ G ↔ ¬Pr_T(⌜G⌝)`.
-
-`ProvabilitySystem` below is exactly this data: a language of formulas built from
-`⊥`, `→` and the unary provability operator `box` (`box φ` denotes
-`Pr_T(⌜φ⌝)`), a deducibility predicate `Thm` closed under propositional
-tautologies and modus ponens, and the three derivability conditions.  The
-consistency statement of `T` is the formula `Con := ¬ box ⊥`, i.e.
-`¬Pr_T(⌜0=1⌝)`.
-
-The main theorem `Frontier.Goedel_second_incompleteness` states: if `T` is
-consistent and `G` is a Gödel fixed point, then `T ⊬ Con`.  We also record the
-first incompleteness theorem `Frontier.Goedel_first_incompleteness`
-(`T ⊬ G`) and Löb's theorem, from which the second incompleteness theorem
-follows as well.
--/
+set_option grind.warning false
 
 namespace Frontier
 
-/-- Formulas of the language of a theory, presented in the modal (provability
-logic) signature: propositional atoms, falsity, implication, and the unary
-provability operator `box p`, which stands for the arithmetized statement
-"`p` is provable in `T`". -/
-inductive Formula : Type
-  | atom : Nat → Formula
-  | bot : Formula
-  | imp : Formula → Formula → Formula
-  | box : Formula → Formula
-  deriving DecidableEq
-
-namespace Formula
-
-/-- Negation, `¬p := p → ⊥`. -/
-
-theorem Loeb (T : ProvabilitySystem)
-    (hdiag : ∀ p : Formula, ∃ L : Formula,
-      T.Thm (imp L (imp (box L) p)) ∧ T.Thm (imp (imp (box L) p) L))
-    {p : Formula} (hp : T.Thm (imp (box p) p)) : T.Thm p := by
-  obtain ⟨L, hL1, hL2⟩ := hdiag p
-  have h1 : T.Thm (imp (box L) (box (imp (box L) p))) :=
-    T.mp (T.D2 L (imp (box L) p)) (T.D1 hL1)
-  have h2 : T.Thm (imp (box (imp (box L) p)) (imp (box (box L)) (box p))) :=
-    T.D2 (box L) p
-  have h3 : T.Thm (imp (box L) (box (box L))) := T.D3 L
-  have h4 : T.Thm (imp (box L) (box p)) := by
-    refine T.mp (T.mp (T.mp (T.taut (p := imp (imp (box L) (box (imp (box L) p)))
-      (imp (imp (box (imp (box L) p)) (imp (box (box L)) (box p)))
-        (imp (imp (box L) (box (box L))) (imp (box L) (box p))))) ?_) h1) h2) h3
-    intro v
-    simp only [eval]
-    intro k1 k2 k3 hbL
-    exact k2 (k1 hbL) (k3 hbL)
-  have h5 : T.Thm (imp (box L) p) := Thm.trans h4 hp
-  have h6 : T.Thm L := T.mp hL2 h5
-  exact T.mp h5 (T.D1 h6)
-
 /-!
-## Non-vacuity
+## Setting
 
-The hypotheses of the main theorem are satisfiable: the "everything is provable
-according to `box`" system, in which `Thm p` means that `p` is true under the
-valuation sending every atom and every boxed formula to `True`, is a consistent
-provability system possessing a Gödel fixed point.  (This is the one-world
-Kripke model with no accessible worlds.)  Hence the theorem below is not
-vacuously true.
+Gödel's second incompleteness theorem says: *no consistent, recursively axiomatized
+theory `T` extending `PA` proves its own consistency*.
+
+The content of the hypothesis "recursively axiomatized extension of `PA`" is used in
+exactly two places in the classical proof:
+
+* the *Hilbert–Bernays–Löb derivability conditions* for the arithmetized provability
+  predicate `Pr_T`, namely
+  - **D1** `T ⊢ σ  ⟹  T ⊢ Pr_T(⌜σ⌝)` (necessitation),
+  - **D2** `T ⊢ Pr_T(⌜σ → τ⌝) → (Pr_T(⌜σ⌝) → Pr_T(⌜τ⌝))` (distribution),
+  - **D3** `T ⊢ Pr_T(⌜σ⌝) → Pr_T(⌜Pr_T(⌜σ⌝)⌝)`;
+* the *diagonal (fixed point) lemma*: for every sentence `A` there is a sentence `γ`
+  with `T ⊢ γ ↔ (Pr_T(⌜γ⌝) → A)`.
+
+We therefore formalize the theorem in exactly this shape.  The language of sentences is
+the modal language with `⊥`, `→` and a unary provability operator `□` (the operator
+`□σ` stands for the arithmetical sentence `Pr_T(⌜σ⌝)`), and `Prv T` is the smallest
+relation containing the axioms of `T`, closed under classical propositional logic and
+satisfying **D1**, **D2**, **D3**.  The consistency statement `Con_T` is `¬ □⊥`.
+
+The main theorem `Frontier.Goedel_second_incompleteness` states that a consistent such
+theory that admits fixed points does not prove `Con_T`.  It is obtained from Löb's
+theorem, proved here from scratch inside the Hilbert calculus.
+
+`Frontier.Goedel_second_incompleteness_nonvacuous` shows that the hypotheses of the
+main theorem are satisfiable, so the statement is not vacuously true.
 -/
 
-/-- A consistent provability system: truth under the valuation making every
-atomic and boxed formula true. -/
+/-- Sentences of the language of provability: `⊥`, implication, and the provability
+operator `□` (read `□ p` as `Pr_T(⌜p⌝)`). -/
+inductive Form : Type
+  | bot : Form
+  | imp : Form → Form → Form
+  | box : Form → Form
+  deriving DecidableEq
+
+namespace Form
+
+/-- Negation, `¬ p := p → ⊥`. -/
+
+theorem loeb (T : Form → Prop) (A : Form)
+    (hfix : ∃ g : Form,
+      Prv T (Form.imp g (Form.imp (Form.box g) A)) ∧
+      Prv T (Form.imp (Form.imp (Form.box g) A) g))
+    (hA : Prv T (Form.imp (Form.box A) A)) :
+    Prv T A := by
+  obtain ⟨g, hg₁, hg₂⟩ := hfix
+  -- `⊢ □(g → (□g → A))`
+  have h1 : Prv T (Form.box (Form.imp g (Form.imp (Form.box g) A))) := Prv.nec hg₁
+  -- `⊢ □g → □(□g → A)`
+  have h2 : Prv T (Form.imp (Form.box g) (Form.box (Form.imp (Form.box g) A))) :=
+    Prv.mp (Prv.distr g (Form.imp (Form.box g) A)) h1
+  -- `⊢ □(□g → A) → (□□g → □A)`
+  have h3 : Prv T (Form.imp (Form.box (Form.imp (Form.box g) A))
+      (Form.imp (Form.box (Form.box g)) (Form.box A))) := Prv.distr (Form.box g) A
+  -- `⊢ □g → (□□g → □A)`
+  have h4 : Prv T (Form.imp (Form.box g)
+      (Form.imp (Form.box (Form.box g)) (Form.box A))) := Prv.imp_trans h2 h3
+  -- `⊢ □g → □□g`  (derivability condition D3)
+  have h5 : Prv T (Form.imp (Form.box g) (Form.box (Form.box g))) := Prv.four g
+  -- `⊢ □g → □A`
+  have h6 : Prv T (Form.imp (Form.box g) (Form.box A)) := Prv.imp_mp h4 h5
+  -- `⊢ □g → A`
+  have h7 : Prv T (Form.imp (Form.box g) A) := Prv.imp_trans h6 hA
+  -- hence `⊢ g`, and so `⊢ □g`, and finally `⊢ A`
+  have h8 : Prv T g := Prv.mp hg₂ h7
+  exact Prv.mp h7 (Prv.nec h8)
+
+/-- **Gödel's second incompleteness theorem.**
+
+No consistent theory `T` that satisfies the Hilbert–Bernays–Löb derivability
+conditions for its own provability predicate `□` (built into `Frontier.Prv`) and the
+diagonal lemma `hfix` proves its own consistency statement `Con_T = ¬ □⊥`.
+
+Every recursively axiomatized theory extending `PA` satisfies `hfix` and the
+derivability conditions, so this is exactly the classical statement. -/

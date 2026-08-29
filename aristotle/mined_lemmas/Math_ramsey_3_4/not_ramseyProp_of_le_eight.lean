@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Ramsey 3 4
 Category: Pure Mathematics
 Target: Math.ramsey_3_4
@@ -6,33 +8,48 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 40000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Math
 
-open Finset
+open SimpleGraph Finset
 
-/-- `RamseyProp n` says that every simple graph on `n` vertices contains either a triangle
-(a 3-clique) or an independent set of size 4 (a 4-clique in the complement). -/
+/-- `RamseyProp n k l` says that every simple graph on `n` vertices contains either a clique
+of size `k` or an independent set (a clique of its complement) of size `l`. -/
 
-theorem not_ramseyProp_of_le_eight {n : ℕ} (hn : n ≤ 8) : ¬ RamseyProp n := by
+theorem not_ramseyProp_of_le_eight {n : ℕ} (hn : n ≤ 8) : ¬ RamseyProp n 3 4 := by
+  classical
   intro h
   set f : Fin n ↪ Fin 8 := Fin.castLEEmb hn with hf
-  set H : SimpleGraph (Fin n) := SimpleGraph.comap f G8 with hH
+  set G : SimpleGraph (Fin n) := wagner.comap f with hG
   have hinj : Function.Injective f := f.injective
-  have e1 : H ↪g G8 := SimpleGraph.Embedding.comap f G8
-  have e2 : Hᶜ ↪g G8ᶜ := by
-    refine ⟨f, ?_⟩
-    intro a b
-    simp only [SimpleGraph.compl_adj, hH, SimpleGraph.comap_adj]
+  have hcompl : Gᶜ = wagnerᶜ.comap f := by
+    ext a b
+    simp only [hG, SimpleGraph.compl_adj, SimpleGraph.comap_adj]
     constructor
-    · rintro ⟨hne, hadj⟩
-      exact ⟨fun hab => hne (by rw [hab]), hadj⟩
-    · rintro ⟨hne, hadj⟩
-      exact ⟨fun hab => hne (hinj hab), hadj⟩
-  rcases h H with hc | hc
-  · exact hc (G8_cliqueFree_three.comap e1)
-  · exact hc (G8_compl_cliqueFree_four.comap e2)
+    · rintro ⟨hab, hnadj⟩
+      exact ⟨fun hc => hab (hinj hc), hnadj⟩
+    · rintro ⟨hab, hnadj⟩
+      exact ⟨fun hc => hab (congrArg f hc), hnadj⟩
+  have h3 : G.CliqueFree 3 :=
+    wagner_cliqueFree_three.comap (SimpleGraph.Embedding.comap f wagner)
+  have h4 : Gᶜ.CliqueFree 4 := by
+    rw [hcompl]
+    exact wagner_compl_cliqueFree_four.comap (SimpleGraph.Embedding.comap f wagnerᶜ)
+  rcases h G with ⟨s, hs⟩ | ⟨s, hs⟩
+  · exact h3 s hs
+  · exact h4 s hs
 
-/-- **R(3,4) = 9**: nine is the least number of vertices forcing a triangle or an
-independent set of size four. -/
+/-- **The Ramsey number `R(3,4)` equals `9`**: nine is the least number of vertices `n` such
+that every graph on `n` vertices contains a triangle or an independent set of size `4`. -/

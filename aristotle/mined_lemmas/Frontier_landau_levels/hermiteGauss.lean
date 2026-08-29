@@ -6,8 +6,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to precede any module doc-comment, so the header above is
--- reproduced verbatim as a module doc-comment immediately after the import.)
 import Mathlib
 
 /-!
@@ -43,12 +41,14 @@ set_option grind.warning false
 
 namespace Frontier
 
+noncomputable section
+
 open Polynomial
 
-/-! ## Hermite polynomials over `ℝ` -/
+/-! ## Probabilists' Hermite polynomials over `ℝ` -/
 
-/-- The (probabilists') Hermite polynomials, with real coefficients. -/
+/-- The `n`-th probabilists' Hermite polynomial, with real coefficients. -/
 
-noncomputable def hermiteGauss (n : ℕ) (t : ℝ) : ℝ :=
-  eval t (hermiteR n) * Real.exp (-(t ^ 2 / 4))
+def hermiteGauss (n : ℕ) (s u : ℝ) : ℝ := He n (u / s) * Real.exp (-(u / s) ^ 2 / 4)
 
+/-- The derivative of `hermiteGauss n s`. -/

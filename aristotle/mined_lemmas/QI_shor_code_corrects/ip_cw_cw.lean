@@ -1,90 +1,52 @@
+/-
+# Shor Code Corrects
+Category: Frontier Qi
+Target: QI.shor_code_corrects
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
 # Shor Code Corrects
 Category: Frontier Qi
 Target: QI.shor_code_corrects
-Statement: The 9-qubit Shor code corrects an arbitrary single-qubit error.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
 
-We work with the state space of nine qubits, realized concretely as the space of
-complex-valued functions on the set `Bs` of computational basis states, where a basis
-state is an assignment of a bit to each of the nine qubits.  Qubits are indexed by
-`Qb = Fin 3 × Fin 3`: the first component is the index of one of the three blocks of the
-Shor code, the second is the position inside that block.
+open scoped BigOperators
 
-An *arbitrary single-qubit error* acting on qubit `q` is the operator `qop q M` attached to
-an arbitrary `2 × 2` complex matrix `M : Bool → Bool → ℂ` acting on qubit `q` and acting as
-the identity on all other qubits.  Every completely arbitrary (not necessarily unitary)
-one-qubit operation is of this form.
-
-The Shor codewords are
-
-  `cw false = (1/(2√2)) (|000⟩+|111⟩) ⊗ (|000⟩+|111⟩) ⊗ (|000⟩+|111⟩)`
-  `cw true  = (1/(2√2)) (|000⟩-|111⟩) ⊗ (|000⟩-|111⟩) ⊗ (|000⟩-|111⟩)`
-
-and the code space is their complex span.
-
-The theorem `QI.shor_code_corrects` states that
-
-* the two codewords are orthonormal, so the code space is a genuine two-dimensional
-  (one logical qubit) subspace; and
-* for **any** pair of single-qubit errors `E = qop q₁ M₁` and `F = qop q₂ M₂` there is a
-  scalar `c` with `⟪E x, F y⟫ = c ⟪x, y⟫` for all code vectors `x, y`.
-
-The second item is exactly the Knill–Laflamme error-correction condition
-`P E† F P = c_{EF} P` for the set of all single-qubit errors, i.e. the statement that the
-Shor code corrects an arbitrary single-qubit error.
--/
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 100000
 
 namespace QI
 
-open Finset
+/-! ## Basic types
 
-/-- Qubit labels: `(block, position in block)`. -/
-abbrev Qb := Fin 3 × Fin 3
+A computational basis state of one *block* of three qubits is a function `Fin 3 → Bool`;
+a computational basis state of the nine qubits of the Shor code is a function
+`Fin 3 → Blk`, i.e. three blocks of three qubits.  A qubit is addressed by a pair
+`q : Q = Fin 3 × Fin 3` (block index, position inside the block). -/
+
+/-- Computational basis states of one three-qubit block. -/
+abbrev Blk := Fin 3 → Bool
 
 /-- Computational basis states of the nine qubits. -/
-abbrev Bs := Qb → Bool
+abbrev Bas := Fin 3 → Blk
 
-/-- Labels for the eight basis states that occur in the Shor codewords: a bit per block. -/
-abbrev Sg := Fin 3 → Bool
+/-- Addresses of the nine qubits. -/
+abbrev Q := Fin 3 × Fin 3
 
-/-- The basis state in which all three qubits of block `i` carry the bit `s i`. -/
+/-- Bitwise `xor` on a block. -/
 
-theorem ip_cw_cw (κ lam : Bool) : ip (cw κ) (cw lam) = if κ = lam then 1 else 0 := by
-  have h : ip (cw κ) (cw lam)
-      = ∑ s : Sg, ∑ t : Sg, (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg lam t) *
-          (if rep s = rep t then 1 else 0) := by
-    rw [cw_eq κ, cw_eq lam, ip_of_spread]
-  rw [h]
-  simp only [rep_inj, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
-  by_cases hk : κ = lam
-  · subst hk
-    have : ∀ s : Sg, (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg κ s) = 1 / 8 := by
-      intro s
-      have := sg_mul_self κ s
-      calc (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg κ s)
-          = (sg κ s * sg κ s) * (nrm * nrm) := by
-            simp only [map_mul, conj_nrm, conj_sg]; ring
-        _ = 1 / 8 := by rw [this, one_mul, nrm_mul_nrm]
-    simp only [this]
-    rw [sum_Sg]
-    simp
-  · have : ∀ s : Sg, (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg lam s)
-        = sg true s * ((nrm * nrm) * (fun _ _ : Bool => (1:ℂ)) (s 0) (s 0)) := by
-      intro s
-      calc (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg lam s)
-          = (sg κ s * sg lam s) * (nrm * nrm) := by
-            simp only [map_mul, conj_nrm, conj_sg]; ring
-        _ = sg true s * ((nrm * nrm) * 1) := by rw [sg_mul_sg_of_ne hk s]; ring
-    simp only [this, if_neg hk]
-    exact sum_sg_true_zero (fun _ _ => (nrm * nrm) * 1) 0 0
-
-/-! ### The Knill–Laflamme computation -/
+lemma ip_cw_cw (s t : Bool) : ip (cw s) (cw t) = if s = t then 8 else 0 := by
+  have h : PauliOp zeroBas zeroBas (cw t) = cw t := by
+    funext b; simp [PauliOp]
+  rw [← h, ip_cw_pauli]
+  have hj : ∀ j : Fin 3, gBlk s t (zeroBas j) (zeroBas j) = gBlk s t zeroB zeroB := fun _ => rfl
+  simp only [hj, Finset.prod_const, Finset.card_univ, Fintype.card_fin, gBlk_zz]
+  cases s <;> cases t <;> norm_num
 

@@ -32,31 +32,19 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-
-This file is deliberately self-contained (no `import` lines), so that the header comment
-above can literally be the first thing in the file: Lean requires `import` commands to
-precede every other command, including module documentation.  Consequently the few
-standard facts about function iteration that are used below are proved from scratch.
-
-The Collatz conjecture is a famous open problem.  What is established here is:
-
-* an unconditional reduction of the conjecture to a *descent* hypothesis
-  (`reaches1_of_descends`);
-* unconditional proofs of descent for every residue class modulo `32` except
-  `7`, `15`, `27` and `31`, which sharpen the reduction so that only those four
-  classes remain (`CollatzConjecture`);
-* unconditional verification of the conjecture for all powers of two and for all
-  positive integers below `1000`.
+This file is deliberately self-contained (it uses only the Lean 4 core library),
+so that the header comment above can appear at the very top of the file:
+Lean does not permit a module docstring to precede `import` commands.
 -/
 
-namespace Brockian.CollatzPartial
+namespace Brockian
+namespace CollatzPartial
 
-/-! ## Iteration -/
+/-- The Collatz step: `n ↦ n / 2` if `n` is even, `n ↦ 3 * n + 1` if `n` is odd. -/
 
-/-- `iterate f k n` is the `k`-fold application of `f` to `n`. -/
-
-theorem descends_of_even {n : Nat} (hn : 1 < n) (h : n % 2 = 0) : Descends n := by
-  refine ⟨1, Nat.one_pos, ?_⟩
-  show iterate collatz 1 n < n
-  rw [iterate_succ_apply, iterate_zero, collatz_even h]
+theorem descends_of_even {n : Nat} (h1 : 1 < n) (h2 : n % 2 = 0) : iter collatz 1 n < n := by
+  show collatz n < n
+  rw [collatz, if_pos h2]
   omega
 
+/-- A number `n > 1` with `n % 4 = 1` descends in exactly three steps. -/

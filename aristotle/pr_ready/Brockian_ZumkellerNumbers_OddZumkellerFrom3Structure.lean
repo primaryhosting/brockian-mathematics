@@ -31,14 +31,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Odd Zumkeller From 3 Structure
-Category: Brockian Conjecture
-Target: Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 
 /-!
 # Odd Zumkeller From 3 Structure
@@ -48,149 +40,95 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset
-
 namespace Brockian.ZumkellerNumbers
 
-/-- A natural number `n` is *Zumkeller* if it is positive and its set of divisors can be
-split into two parts with equal sums. -/
+open Finset
+
+/-- A natural number `n` is a *Zumkeller number* if it is positive and its set of divisors
+can be split into two parts of equal sum; equivalently, some set `S` of divisors of `n`
+satisfies `2 * ∑ S = σ₁ n`. -/
 def Zumkeller (n : ℕ) : Prop :=
-  0 < n ∧ ∃ S ⊆ n.divisors, ∑ d ∈ S, d = ∑ d ∈ n.divisors \ S, d
+  0 < n ∧ ∃ S ⊆ n.divisors, 2 * ∑ d ∈ S, d = ∑ d ∈ n.divisors, d
 
-/-- Sanity check: `6` is a Zumkeller number, via the split `{1, 2, 3} ∪ {6}`. -/
-example : Zumkeller 6 := ⟨by norm_num, {1, 2, 3}, by decide, by decide⟩
+/-- The map `(a, b) ↦ a * b` is injective on pairs of divisors of two coprime numbers. -/
+lemma injOn_mul_divisors {m n : ℕ} (hcop : m.Coprime n) (S : Finset ℕ) (hS : S ⊆ m.divisors) :
+    Set.InjOn (fun p : ℕ × ℕ => p.1 * p.2) ((S ×ˢ n.divisors : Finset (ℕ × ℕ)) : Set (ℕ × ℕ)) := by
+  rintro ⟨a, b⟩ hab ⟨c, d⟩ hcd h
+  simp only [Finset.mem_coe, Finset.mem_product] at hab hcd
+  obtain ⟨ha, hb⟩ := hab
+  obtain ⟨hc, hd⟩ := hcd
+  have ham : a ∣ m := (Nat.mem_divisors.1 (hS ha)).1
+  have hcm : c ∣ m := (Nat.mem_divisors.1 (hS hc)).1
+  have hbn : b ∣ n := (Nat.mem_divisors.1 hb).1
+  have hdn : d ∣ n := (Nat.mem_divisors.1 hd).1
+  have hapos : 0 < a := Nat.pos_of_mem_divisors (hS ha)
+  have had : a.Coprime d :=
+    Nat.Coprime.coprime_dvd_left ham (Nat.Coprime.coprime_dvd_right hdn hcop)
+  have hcb : c.Coprime b :=
+    Nat.Coprime.coprime_dvd_left hcm (Nat.Coprime.coprime_dvd_right hbn hcop)
+  simp only at h
+  have h1 : a ∣ c := had.dvd_of_dvd_mul_right (h ▸ Dvd.intro b rfl)
+  have h2 : c ∣ a := hcb.dvd_of_dvd_mul_right (h ▸ Dvd.intro d rfl)
+  have hac : a = c := Nat.dvd_antisymm h1 h2
+  subst hac
+  have hbd : b = d := Nat.eq_of_mul_eq_mul_left hapos h
+  simp [hbd]
 
-/-- Sanity check: `945`, the smallest odd Zumkeller number, is Zumkeller,
-via the split `{15, 945} ∪ (rest)`. -/
-example : Zumkeller 945 := ⟨by norm_num, {15, 945}, by decide +kernel, by decide +kernel⟩
+/-- If `m` is Zumkeller and `n` is a positive number coprime to `m`, then `m * n` is Zumkeller. -/
+theorem Zumkeller.mul_coprime {m n : ℕ} (hm : Zumkeller m) (hn : 0 < n) (hcop : m.Coprime n) :
+    Zumkeller (m * n) := by
+  obtain ⟨hmpos, S, hS, hsum⟩ := hm
+  classical
+  refine ⟨Nat.mul_pos hmpos hn, (S ×ˢ n.divisors).image (fun p : ℕ × ℕ => p.1 * p.2), ?_, ?_⟩
+  · intro x hx
+    simp only [Finset.mem_image, Finset.mem_product] at hx
+    obtain ⟨⟨a, b⟩, ⟨ha, hb⟩, rfl⟩ := hx
+    have ham : a ∣ m := (Nat.mem_divisors.1 (hS ha)).1
+    have hbn : b ∣ n := (Nat.mem_divisors.1 hb).1
+    exact Nat.mem_divisors.2 ⟨mul_dvd_mul ham hbn, Nat.mul_ne_zero hmpos.ne' hn.ne'⟩
+  · rw [Finset.sum_image (injOn_mul_divisors hcop S hS), Finset.sum_product]
+    have hprod : ∑ a ∈ S, ∑ b ∈ n.divisors, a * b
+        = (∑ a ∈ S, a) * (∑ b ∈ n.divisors, b) := by
+      rw [Finset.sum_mul]
+      exact Finset.sum_congr rfl fun a _ => (Finset.mul_sum _ _ _).symm
+    rw [hprod, ← mul_assoc, hsum, hcop.sum_divisors_mul]
 
-/-- A Zumkeller number is perfect or abundant: `2 * n ≤ σ n`. -/
-theorem two_mul_le_sum_divisors_of_zumkeller {n : ℕ} (h : Zumkeller n) :
-    2 * n ≤ ∑ d ∈ n.divisors, d := by
-  obtain ⟨hn, S, hS, hsum⟩ := h
-  have hsplit : ∑ d ∈ n.divisors \ S, d + ∑ d ∈ S, d = ∑ d ∈ n.divisors, d :=
-    Finset.sum_sdiff hS
-  have hmem : n ∈ n.divisors := Nat.mem_divisors_self n hn.ne'
-  by_cases hnS : n ∈ S
-  · have : n ≤ ∑ d ∈ S, d := Finset.single_le_sum (fun i _ => Nat.zero_le i) hnS
+set_option maxRecDepth 100000 in
+/-- The sum of the divisors of `945 = 3^3 · 5 · 7` is `1920`. -/
+lemma sum_divisors_945 : ∑ d ∈ (945 : ℕ).divisors, d = 1920 := by rfl
+
+/-- `945 = 3^3 · 5 · 7`, the smallest odd Zumkeller number, is indeed Zumkeller:
+the divisors `{15, 945}` sum to `960 = 1920 / 2`. -/
+theorem zumkeller_945 : Zumkeller 945 := by
+  refine ⟨by norm_num, {15, 945}, ?_, ?_⟩
+  · intro x hx
+    fin_cases hx <;> exact Nat.mem_divisors.2 (by norm_num)
+  · rw [sum_divisors_945]
+    norm_num
+
+/-- **Odd Zumkeller numbers from the `3`-structure of `945`.**
+
+For every odd `n` coprime to `945 = 3^3 · 5 · 7`, the number `945 * n` is an odd
+Zumkeller number divisible by `27 = 3^3`. -/
+theorem OddZumkellerFrom3Structure (n : ℕ) (hodd : Odd n) (hcop : Nat.Coprime 945 n) :
+    Odd (945 * n) ∧ 27 ∣ (945 * n) ∧ Zumkeller (945 * n) :=
+  ⟨(by norm_num : Odd (945 : ℕ)).mul hodd,
+   Dvd.dvd.mul_right (by norm_num) n,
+   zumkeller_945.mul_coprime hodd.pos hcop⟩
+
+/-- Consequently there are infinitely many odd Zumkeller numbers divisible by `27`. -/
+theorem infinite_odd_zumkeller :
+    {n : ℕ | Odd n ∧ 27 ∣ n ∧ Zumkeller n}.Infinite := by
+  apply Set.infinite_of_forall_exists_gt
+  intro a
+  obtain ⟨p, hp, hpp⟩ := Nat.exists_infinite_primes (a + 946)
+  have hp945 : ¬ (p ∣ 945) := fun h => by
+    have := Nat.le_of_dvd (by norm_num) h
     omega
-  · have hmem' : n ∈ n.divisors \ S := Finset.mem_sdiff.mpr ⟨hmem, hnS⟩
-    have : n ≤ ∑ d ∈ n.divisors \ S, d :=
-      Finset.single_le_sum (fun i _ => Nat.zero_le i) hmem'
-    omega
-
-/-- Key bound: `(∏ (p-1)) * σ n < (∏ p) * n`, the products being over the prime factors of `n`. -/
-theorem prod_sub_one_mul_sum_divisors_lt {n : ℕ} (hn : n ≠ 0) (hne : n.primeFactors.Nonempty) :
-    (∏ p ∈ n.primeFactors, (p - 1)) * (∑ d ∈ n.divisors, d)
-      < (∏ p ∈ n.primeFactors, p) * n := by
-  have hdiv : ∑ d ∈ n.divisors, d
-      = ∏ p ∈ n.primeFactors, ∑ k ∈ Finset.range (n.factorization p + 1), p ^ k :=
-    Nat.sum_divisors hn
-  have hnprod : ∏ p ∈ n.primeFactors, p ^ n.factorization p = n :=
-    Nat.factorization_prod_pow_eq_self hn
-  have key : ∀ p ∈ n.primeFactors,
-      (p - 1) * (∑ k ∈ Finset.range (n.factorization p + 1), p ^ k)
-        < p * p ^ n.factorization p := by
-    intro p hp
-    have hp2 : 2 ≤ p := (Nat.prime_of_mem_primeFactors hp).two_le
-    have hgeom : ∀ m : ℕ, (p - 1) * (∑ k ∈ Finset.range (m + 1), p ^ k) = p ^ (m + 1) - 1 := by
-      intro m
-      induction m with
-      | zero => simp
-      | succ m ih =>
-          rw [Finset.sum_range_succ, Nat.mul_add, ih]
-          have hpm : 1 ≤ p ^ (m + 1) := Nat.one_le_pow _ _ (by omega)
-          have hmul : (p - 1) * p ^ (m + 1) = p ^ (m + 1 + 1) - p ^ (m + 1) := by
-            rw [Nat.sub_mul, one_mul, ← pow_succ']
-          have hmono : p ^ (m + 1) ≤ p ^ (m + 1 + 1) :=
-            Nat.pow_le_pow_right (by omega) (by omega)
-          rw [hmul]
-          omega
-    rw [hgeom, ← pow_succ']
-    have : 1 ≤ p ^ (n.factorization p + 1) := Nat.one_le_pow _ _ (by omega)
-    omega
-  calc (∏ p ∈ n.primeFactors, (p - 1)) * (∑ d ∈ n.divisors, d)
-      = ∏ p ∈ n.primeFactors,
-          ((p - 1) * ∑ k ∈ Finset.range (n.factorization p + 1), p ^ k) := by
-        rw [hdiv, ← Finset.prod_mul_distrib]
-    _ < ∏ p ∈ n.primeFactors, (p * p ^ n.factorization p) :=
-        Finset.prod_lt_prod_of_nonempty
-          (fun p hp => by
-            have hp2 : 2 ≤ p := (Nat.prime_of_mem_primeFactors hp).two_le
-            have hs : 0 < ∑ k ∈ Finset.range (n.factorization p + 1), p ^ k := by
-              refine Finset.sum_pos (fun k _ => pow_pos (show 0 < p by omega) k) ⟨0, ?_⟩
-              exact Finset.mem_range.mpr (by omega)
-            have : 0 < p - 1 := by omega
-            positivity)
-          key hne
-    _ = (∏ p ∈ n.primeFactors, p) * n := by
-        rw [Finset.prod_mul_distrib, hnprod]
-
-/-- For odd `n` with at most two prime factors, `∏ p ≤ 2 * ∏ (p - 1)`. -/
-theorem prod_primeFactors_le {n : ℕ} (hodd : Odd n) (hcard : n.primeFactors.card ≤ 2) :
-    (∏ p ∈ n.primeFactors, p) ≤ 2 * ∏ p ∈ n.primeFactors, (p - 1) := by
-  have hodd' : ∀ p ∈ n.primeFactors, 3 ≤ p := by
-    intro p hp
-    have hprime := Nat.prime_of_mem_primeFactors hp
-    have hdvd : p ∣ n := Nat.dvd_of_mem_primeFactors hp
-    have hp2 : p ≠ 2 := by
-      rintro rfl
-      obtain ⟨k, rfl⟩ := hdvd
-      rw [Nat.odd_iff] at hodd
-      omega
-    have := hprime.two_le
-    omega
-  interval_cases hc : n.primeFactors.card
-  · rw [Finset.card_eq_zero] at hc
-    simp [hc]
-  · obtain ⟨p, hp⟩ := Finset.card_eq_one.mp hc
-    have hp3 : 3 ≤ p := hodd' p (by simp [hp])
-    simp only [hp, Finset.prod_singleton]
-    omega
-  · obtain ⟨p, q, hpq, hset⟩ := Finset.card_eq_two.mp hc
-    have hp3 : 3 ≤ p := hodd' p (by simp [hset])
-    have hq3 : 3 ≤ q := hodd' q (by simp [hset])
-    have hpprime := Nat.prime_of_mem_primeFactors (show p ∈ n.primeFactors by simp [hset])
-    have hqprime := Nat.prime_of_mem_primeFactors (show q ∈ n.primeFactors by simp [hset])
-    have hp4 : p ≠ 4 := by rintro rfl; norm_num at hpprime
-    have hq4 : q ≠ 4 := by rintro rfl; norm_num at hqprime
-    -- distinct odd primes, so one of them is `≥ 5`
-    have hp5 : 5 ≤ p ∨ 5 ≤ q := by omega
-    rw [hset, Finset.prod_pair hpq, Finset.prod_pair hpq]
-    rcases hp5 with h5 | h5
-    · nlinarith [Nat.sub_add_cancel (show 1 ≤ p by omega),
-        Nat.sub_add_cancel (show 1 ≤ q by omega)]
-    · nlinarith [Nat.sub_add_cancel (show 1 ≤ p by omega),
-        Nat.sub_add_cancel (show 1 ≤ q by omega)]
-
-/-- An odd number with at most two distinct prime factors is deficient: `σ n < 2 * n`. -/
-theorem sum_divisors_lt_of_card_le_two {n : ℕ} (hn : n ≠ 0) (hodd : Odd n)
-    (hcard : n.primeFactors.card ≤ 2) : ∑ d ∈ n.divisors, d < 2 * n := by
-  rcases Finset.eq_empty_or_nonempty n.primeFactors with hemp | hne
-  · have hone : n = 1 := by
-      rcases Nat.primeFactors_eq_empty.mp hemp with h | h <;> omega
-    subst hone
-    simp
-  · have h1 := prod_sub_one_mul_sum_divisors_lt hn hne
-    have h2 := prod_primeFactors_le hodd hcard
-    have key : (∏ p ∈ n.primeFactors, (p - 1)) * (∑ d ∈ n.divisors, d)
-        < (∏ p ∈ n.primeFactors, (p - 1)) * (2 * n) := by
-      calc (∏ p ∈ n.primeFactors, (p - 1)) * (∑ d ∈ n.divisors, d)
-          < (∏ p ∈ n.primeFactors, p) * n := h1
-        _ ≤ (2 * ∏ p ∈ n.primeFactors, (p - 1)) * n := Nat.mul_le_mul_right _ h2
-        _ = (∏ p ∈ n.primeFactors, (p - 1)) * (2 * n) := by ring
-    exact lt_of_mul_lt_mul_left key (Nat.zero_le _)
-
-/-- **Odd Zumkeller From 3 Structure.** Every odd Zumkeller number has at least three
-distinct prime factors. -/
-theorem OddZumkellerFrom3Structure {n : ℕ} (hodd : Odd n) (h : Zumkeller n) :
-    3 ≤ n.primeFactors.card := by
-  by_contra hcon
-  push_neg at hcon
-  have hn : n ≠ 0 := h.1.ne'
-  have h1 := two_mul_le_sum_divisors_of_zumkeller h
-  have h2 := sum_divisors_lt_of_card_le_two hn hodd (by omega)
-  omega
+  have hcop : Nat.Coprime 945 p := (Nat.Prime.coprime_iff_not_dvd hpp |>.2 hp945).symm
+  have hodd : Odd p := hpp.odd_of_ne_two (by omega)
+  refine ⟨945 * p, OddZumkellerFrom3Structure p hodd hcop, ?_⟩
+  nlinarith [hp]
 
 end Brockian.ZumkellerNumbers
 

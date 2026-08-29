@@ -30,9 +30,6 @@ Target: Brockian.BetrothedNumbers.BetrothedInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above is a plain block comment rather than a `/-!` module docstring:
--- Lean 4 requires `import` commands to precede every other command, including module
--- docstrings.  The same text is repeated as the module docstring after the import.)
 
 import Mathlib
 
@@ -44,16 +41,11 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxRecDepth 40000
-
-set_option maxHeartbeats 2000000
-
 namespace Brockian.BetrothedNumbers
 
-open Finset
+/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d` (with the convention `σ₁ 0 = 0`). -/
 
-/-- The classical divisor sum `σ₁ n = ∑_{d ∣ n} d`. -/
+theorem betrothed_140_195 : Betrothed 140 195 := by
+  refine ⟨by decide, ?_, ?_⟩ <;> · unfold sigmaOne; decide
 
-theorem betrothed_140_195 : IsBetrothedPair 140 195 := by
-  refine ⟨by norm_num, by norm_num, by norm_num, ?_, ?_⟩ <;> (unfold sigmaOne; decide)
-
+/-- Being betrothed is a symmetric relation. -/

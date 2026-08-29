@@ -33,18 +33,46 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open Filter Set
+/-!
+# Counting Diverges Of Discrete And Rvm
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-namespace Brockian.Weyl
+The Weyl-law style statement proved here: for a linear operator `T` on an infinite
+dimensional real vector space (in particular on a real inner product space) whose spectrum is
+*discrete* — every spectral subspace below a level is finite dimensional — and whose
+eigensystem is *complete*, as furnished by the Rayleigh variational method (RVM), the
+eigenvalue counting function `lam ↦ dim (span of eigenvectors with eigenvalue ≤ lam)`
+diverges to `+∞`.
 
-/-- The (Weyl) eigenvalue counting function of a spectrum `S ⊆ ℝ`:
-`counting S T` is the number of spectral points that are `≤ T`. -/
+The final section exhibits an explicit model (the diagonal operator `f ↦ (n ↦ n * f n)` on
+finitely supported real sequences) satisfying all the hypotheses, so the theorem is not
+vacuous.
+-/
 
-theorem counting_mono {S : Set ℝ} (hS : DiscreteSpectrum S) : Monotone (counting S) := by
-  intro T₁ T₂ hT
-  refine Set.ncard_le_ncard ?_ (hS T₂)
-  rintro x ⟨hxS, hxT⟩
-  exact ⟨hxS, hxT.trans hT⟩
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
 
-/-- If `S` is infinite, then for every `n` there is a threshold beyond which the
-counting function is at least `n`. -/
+set_option maxHeartbeats 1000000
+
+namespace Brockian.Weyl.WeylLawTarget
+
+section General
+
+variable {H : Type*} [AddCommGroup H] [Module ℝ H]
+
+/-- The low-lying spectral subspace: the span of all eigenvectors of `T` whose
+eigenvalue is at most `lam`. -/
+
+theorem counting_mono (T : Module.End ℝ H) (hdisc : HasDiscreteSpectrum T) :
+    Monotone (counting T) := by
+  intro a b hab
+  have : FiniteDimensional ℝ (lowSpectrumSpan T b) := hdisc b
+  exact Submodule.finrank_mono (lowSpectrumSpan_mono T hab)
+
+/-- If the eigenvectors of `T` span an infinite dimensional space and the spectrum is
+discrete, then every prescribed multiplicity is exceeded at some spectral level. -/

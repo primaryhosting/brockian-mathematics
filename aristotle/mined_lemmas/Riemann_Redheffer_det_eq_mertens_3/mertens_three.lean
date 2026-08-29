@@ -8,33 +8,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace Riemann.Redheffer
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-- The 3×3 Redheffer matrix: `R i j = 1` when `j = 0` or `(i+1) ∣ (j+1)`
+(with `0`-indexed `Fin 3` indices), and `0` otherwise. -/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+theorem mertens_three : (∑ n ∈ Finset.Icc 1 3, ArithmeticFunction.moebius n) = -1 := by
+  have h2 : ArithmeticFunction.moebius 2 = -1 :=
+    ArithmeticFunction.moebius_apply_prime Nat.prime_two
+  have h3 : ArithmeticFunction.moebius 3 = -1 :=
+    ArithmeticFunction.moebius_apply_prime Nat.prime_three
+  simp [Finset.sum_Icc_succ_top, h2, h3]
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
-
-namespace Riemann
-namespace Redheffer
-
-/-- The 3×3 Redheffer matrix (0-indexed): entry `(i, j)` is `1` when `j = 0`
-or when `i + 1` divides `j + 1`, and `0` otherwise. -/
-
-theorem mertens_three : ∑ n ∈ Finset.Icc 1 3, (ArithmeticFunction.moebius n : ℤ) = -1 := by
-  have h : Finset.Icc 1 3 = ({1, 2, 3} : Finset ℕ) := rfl
-  rw [h]
-  norm_num [ArithmeticFunction.moebius_apply_prime Nat.prime_two,
-    ArithmeticFunction.moebius_apply_prime Nat.prime_three]
-
-/-- `det R = -1 = M 3`, the Redheffer determinant identity at `n = 3`. -/
+/-- `det R₃ = M 3`, the base case of the Redheffer determinant identity. -/

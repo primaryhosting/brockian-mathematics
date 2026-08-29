@@ -1,27 +1,45 @@
+/-
+# Mirzakhani WP Volume
+Category: Frontier — Fields Medal Work
+Target: Frontier.mirzakhani_WP_volume
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
-import RequestProject.Kernel
-import RequestProject.TwoDim
 
 /-!
-# Weil–Petersson volume polynomials in low complexity
-
-We record the Weil–Petersson volume polynomials `V_{0,3}`, `V_{0,4}` and `V_{0,5}`, the
-right-hand sides of Mirzakhani's recursion in the cases `(g,n) = (0,4)` and `(0,5)`, and
-verify the recursion in both cases, together with the fact that the recursion determines
-the volume polynomial.
+# Mirzakhani WP Volume
+Category: Frontier — Fields Medal Work
+Target: Frontier.mirzakhani_WP_volume
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators Real
-open MeasureTheory Set Real
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+open MeasureTheory Set Real Asymptotics
 
 namespace Frontier
 
-set_option maxHeartbeats 1000000
+/-! ## Mirzakhani's integration kernel -/
 
-/-! ## The volume polynomials -/
+/-- The basic "logistic" profile appearing in Mirzakhani's kernels:
+`logistic u = 1 / (1 + exp (u / 2))`. -/
 
-/-- `V_{0,3} ≡ 1`: the moduli space of pairs of pants is a point. -/
+noncomputable def mirzKernel (x y : ℝ) : ℝ :=
+  1 / (1 + Real.exp ((x + y) / 2)) + 1 / (1 + Real.exp ((x - y) / 2))
 
-noncomputable def mirzKernel (x t : ℝ) : ℝ := fd (x + t) + fd (x - t)
-
-/-- The first Mirzakhani transform `F₁(t) = ∫₀^∞ x H(x,t) dx`. -/

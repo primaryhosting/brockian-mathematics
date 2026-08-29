@@ -6,62 +6,46 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+namespace PCA.Fix
 
-namespace PCA
-
-/-- A role held by a principal in the isolation engine's model. -/
+/-- A role name granted to a principal by the isolation engine. -/
 abbrev Role := String
 
-/-- A command that a proof-carrying app may attempt to run. -/
+/-- A command that a principal may attempt to run. -/
 abbrev Cmd := String
 
-/-- A policy of the isolation engine: which `(cmd, role)` pairs are permitted. -/
+/-- A policy of the isolation engine: which role may run which command. -/
 structure Policy where
-  /-- `allowed c r` says the policy lets role `r` execute command `c`. -/
-  allowed : Cmd → Role → Bool
+  grants : Role → Cmd → Bool
 
-/-- A capability request handled by the isolation engine: a command, the roles
-carried by the requesting principal, and the policy in force. -/
-structure Capability where
-  /-- The command being requested. -/
-  cmd : Cmd
-  /-- The roles carried by the requesting principal. -/
+/-- A configuration of the isolation engine: the roles held by the current
+principal, the command under consideration, the active policy, and an audit log. -/
+structure Config where
   roles : List Role
-  /-- The policy currently in force. -/
+  cmd : Cmd
   policy : Policy
+  log : List String
 
-/-- The engine's decision procedure: the request is granted iff some carried
-role is permitted to run the command by the policy in force. -/
+/-- The command of a configuration is authorized when some held role grants it. -/
 
-def Capability.granted (c : Capability) : Bool :=
-  c.roles.any fun r => c.policy.allowed c.cmd r
+def Config.authorized (c : Config) : Bool :=
+  c.roles.any (fun r => c.policy.grants r c.cmd)
 
-namespace Fix
+/-- Altering the policy: the engine installs the new policy and appends a fresh
+audit entry recording the new decision, leaving roles and command untouched. -/
 
-/-- The "alter policy" repair action of the isolation engine: swap in a new
-policy, leaving the request's command and roles untouched. -/
+def alterPolicy (f : Policy → Policy) (c : Config) : Config :=
+  let p' := f c.policy
+  { roles := c.roles
+    cmd := c.cmd
+    policy := p'
+    log := (if c.roles.any (fun r => p'.grants r c.cmd) then "allow" else "deny") :: c.log }
 
-def alterPolicy (c : Capability) (p : Policy) : Capability :=
-  { c with policy := p }
+/-- **Main result.** Altering the policy preserves both the roles held by the
+principal and the command under consideration. -/
 
-/-- **Target.** Altering the policy in force preserves both the roles carried by
-the request and the command being requested, while installing exactly the
-supplied policy.
+theorem alter_policy_preserves_roles_and_cmd (f : Policy → Policy) (c : Config) :
+    (alterPolicy f c).roles = c.roles ∧ (alterPolicy f c).cmd = c.cmd :=
+  ⟨rfl, rfl⟩
 
-Concerning the hint to look for an existing Mathlib lemma: none is needed here.
-Structure eta makes each projection of `{ c with policy := p }` definitionally
-equal to the corresponding projection of `c` (resp. to `p`), so the goal is
-closed by `rfl` on each conjunct (`exact?` likewise reports `⟨rfl, rfl, rfl⟩`,
-i.e. `And.intro` applied to `rfl`). -/
-
-theorem alter_policy_preserves_roles_and_cmd (c : Capability) (p : Policy) :
-    (alterPolicy c p).roles = c.roles ∧
-      (alterPolicy c p).cmd = c.cmd ∧
-      (alterPolicy c p).policy = p :=
-  ⟨rfl, rfl, rfl⟩
-
-/-- Consequence for the engine's decision procedure: after altering the policy,
-the grant decision is obtained by evaluating the *new* policy against the
-*unchanged* command and roles. -/
+/-- The altered configuration carries exactly the new policy. -/

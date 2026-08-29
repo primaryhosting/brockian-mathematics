@@ -6,70 +6,70 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+/-
+The statement "no consistent recursively axiomatized theory extending `PA` proves its own
+consistency" is formalized here in the standard abstract (Hilbert–Bernays–Löb) way.
 
-We formalize Gödel's second incompleteness theorem in its standard abstract
-(Hilbert–Bernays–Löb) form: *no consistent theory `T` whose provability predicate
-satisfies the derivability conditions proves its own consistency*.
+For a recursively axiomatized theory `T ⊇ PA` one has an arithmetized provability predicate
+`Pr_T(⌜·⌝)`, written here as the modality `□`.  The two ingredients supplied by the
+arithmetization are:
 
-The arithmetization of syntax is packaged in the usual way.  For a recursively
-axiomatized theory `T` extending `PA`, Gödel numbering yields a provability
-formula `Pr_T(⌜·⌝)` in the language of `T`, and the Hilbert–Bernays–Löb
-derivability conditions hold:
+* the *derivability conditions*: `T ⊢ a → T ⊢ □a` (necessitation), `T ⊢ □(a → b) → (□a → □b)`
+  (distribution) and `T ⊢ □a → □□a` (provable Σ₁-completeness);
+* the *diagonal lemma*: there is a sentence `G` with `T ⊢ G ↔ ¬□G`.
 
-* `D1` : `T ⊢ φ  ⟹  T ⊢ Pr_T(⌜φ⌝)`               (formalized soundness of proofs)
-* `D2` : `T ⊢ Pr_T(⌜φ → ψ⌝) → (Pr_T(⌜φ⌝) → Pr_T(⌜ψ⌝))`   (internal modus ponens)
-* `D3` : `T ⊢ Pr_T(⌜φ⌝) → Pr_T(⌜Pr_T(⌜φ⌝)⌝)`     (formalized `D1`)
+Both are packaged below: the derivability conditions as the inference system `Prov`, and the
+diagonal lemma as an explicit hypothesis `hdiag` of the main theorem.  Everything else — the
+implication from consistency of `T` to the unprovability of the consistency statement
+`Con_T = ¬□⊥` — is proved here from scratch inside the calculus.
 
-together with closure of `T ⊢ ·` under propositional logic, and the diagonal
-lemma, which produces a Gödel sentence `G` with `T ⊢ G ↔ ¬Pr_T(⌜G⌝)`.
-
-`ProvabilitySystem` below is exactly this data: a language of formulas built from
-`⊥`, `→` and the unary provability operator `box` (`box φ` denotes
-`Pr_T(⌜φ⌝)`), a deducibility predicate `Thm` closed under propositional
-tautologies and modus ponens, and the three derivability conditions.  The
-consistency statement of `T` is the formula `Con := ¬ box ⊥`, i.e.
-`¬Pr_T(⌜0=1⌝)`.
-
-The main theorem `Frontier.Goedel_second_incompleteness` states: if `T` is
-consistent and `G` is a Gödel fixed point, then `T ⊬ Con`.  We also record the
-first incompleteness theorem `Frontier.Goedel_first_incompleteness`
-(`T ⊬ G`) and Löb's theorem, from which the second incompleteness theorem
-follows as well.
+`Prov A` is a *sublogic* of provability in any classical theory `T` whose axiom set is `A`
+(all of its axioms and rules are correct for `T ⊢ ·` and `Pr_T`), so the unprovability
+conclusion transfers to such theories.
 -/
 
 namespace Frontier
 
-/-- Formulas of the language of a theory, presented in the modal (provability
-logic) signature: propositional atoms, falsity, implication, and the unary
-provability operator `box p`, which stands for the arithmetized statement
-"`p` is provable in `T`". -/
-inductive Formula : Type
-  | atom : Nat → Formula
-  | bot : Formula
-  | imp : Formula → Formula → Formula
-  | box : Formula → Formula
+/-- Sentences of the language: falsity, implication, and the provability modality `□`. -/
+inductive Fml : Type
+  | bot : Fml
+  | imp : Fml → Fml → Fml
+  | box : Fml → Fml
   deriving DecidableEq
 
-namespace Formula
+namespace Fml
 
-/-- Negation, `¬p := p → ⊥`. -/
+/-- Negation, `¬a := a → ⊥`. -/
 
-theorem Goedel_second_incompleteness (T : ProvabilitySystem) (hcon : T.Consistent)
-    (G : Formula) (hG1 : T.Thm (imp G (neg (box G)))) (hG2 : T.Thm (imp (neg (box G)) G)) :
-    ¬ T.Thm Con := by
-  intro hC
-  have key : T.Thm (imp (box G) (box bot)) := box_goedel_imp_box_bot hG1
-  have h4 : T.Thm (neg (box G)) := by
-    refine T.mp (T.mp (T.taut (p := imp (imp (box G) (box bot))
-      (imp (neg (box bot)) (neg (box G)))) ?_) key) hC
-    intro v
-    simp only [eval, neg]
-    intro hbb hnb hbG
-    exact hnb (hbb hbG)
-  exact Goedel_first_incompleteness hcon hG1 (T.mp hG2 h4)
+theorem Goedel_second_incompleteness (A : Fml → Prop)
+    (hdiag : ∃ G : Fml, Prov A (imp G (Fml.neg (box G))) ∧ Prov A (imp (Fml.neg (box G)) G))
+    (hcon : Consistent A) : ¬ Prov A Con := by
+  intro hCon
+  obtain ⟨G, hG1, hG2⟩ := hdiag
+  -- `□G → □(□G → ⊥)`, by necessitating `G → (□G → ⊥)` and distributing.
+  have h1 : Prov A (imp (box G) (box (imp (box G) bot))) :=
+    (Prov.distrib G (imp (box G) bot)).mp hG1.nec
+  -- `□(□G → ⊥) → (□□G → □⊥)`.
+  have h2 : Prov A (imp (box (imp (box G) bot)) (imp (box (box G)) (box bot))) :=
+    Prov.distrib (box G) bot
+  -- Hence `□G → (□□G → □⊥)`.
+  have h3 : Prov A (imp (box G) (imp (box (box G)) (box bot))) := Prov.trans_imp h1 h2
+  -- With `□G → □□G` this gives `□G → □⊥`.
+  have h4 : Prov A (imp (box G) (box bot)) := Prov.mp_under h3 (Prov.four G)
+  -- Consistency `□⊥ → ⊥` then yields `¬□G`.
+  have h5 : Prov A (Fml.neg (box G)) := Prov.trans_imp h4 hCon
+  -- The Gödel sentence is derivable, hence so is `□G`, contradicting `¬□G`.
+  have h6 : Prov A G := hG2.mp h5
+  exact hcon (h5.mp h6.nec)
 
-/-- The second incompleteness theorem, stated with the diagonal lemma as an
-existential hypothesis: if the theory is consistent and admits a Gödel fixed
-point, it does not prove its own consistency. -/
+
+/-!
+### Non-vacuity
+
+The hypotheses of `Goedel_second_incompleteness` are satisfiable: below we exhibit a consistent
+axiom set possessing a fixed point of `¬□·`.  Consistency is checked by the trivial
+interpretation in which `□` is read as "true".
+-/
+
+/-- The interpretation of formulas in which `□a` is always true.  It validates all axioms and
+rules of `Prov`, and is used to certify consistency of concrete axiom sets. -/

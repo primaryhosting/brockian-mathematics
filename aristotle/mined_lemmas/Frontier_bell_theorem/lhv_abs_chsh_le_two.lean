@@ -1,0 +1,95 @@
+import Mathlib
+
+/-!
+# Bell Theorem
+Category: Frontier Physics
+Target: Frontier.bell_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+open MeasureTheory
+
+/-! ## Local hidden-variable models
+
+A local hidden-variable (LHV) model for a bipartite experiment with two measurement
+settings per side consists of:
+
+* a probability space `(Λ, μ)` of hidden variables;
+* for each of Alice's two settings `i : Bool`, a response function `A i : Λ → ℝ`
+  taking values in `[-1, 1]`, depending only on Alice's setting and the hidden variable
+  (this is the locality/no-signalling assumption: `A i λ` does not depend on Bob's
+  setting `j`, and symmetrically for `B`);
+* likewise for Bob, `B j : Λ → ℝ` with values in `[-1, 1]`.
+
+The measured correlation for settings `(i, j)` is `∫ λ, A i λ * B j λ ∂μ`.
+-/
+
+/-- `IsLHV μ A B` says that `(μ, A, B)` is a local hidden-variable model:
+`μ` is a probability measure on the hidden variables, the response functions are
+measurable, and they take values in `[-1, 1]`. -/
+structure IsLHV {Λ : Type*} [MeasurableSpace Λ] (μ : Measure Λ)
+    (A B : Bool → Λ → ℝ) : Prop where
+  isProbabilityMeasure : IsProbabilityMeasure μ
+  measA : ∀ i : Bool, AEStronglyMeasurable (A i) μ
+  measB : ∀ j : Bool, AEStronglyMeasurable (B j) μ
+  boundA : ∀ (i : Bool) (l : Λ), |A i l| ≤ 1
+  boundB : ∀ (j : Bool) (l : Λ), |B j l| ≤ 1
+
+/-- The correlation predicted by a local hidden-variable model for settings `(i, j)`. -/
+
+theorem lhv_abs_chsh_le_two {Λ : Type*} [MeasurableSpace Λ] {μ : Measure Λ}
+    {A B : Bool → Λ → ℝ} (h : IsLHV μ A B) :
+    |lhvCHSH μ A B| ≤ 2 := by
+  haveI := h.isProbabilityMeasure
+  have i1 : Integrable (fun l => A false l * B false l) μ := h.integrable_mul false false
+  have i2 : Integrable (fun l => A false l * B true l) μ := h.integrable_mul false true
+  have i3 : Integrable (fun l => A true l * B false l) μ := h.integrable_mul true false
+  have i4 : Integrable (fun l => A true l * B true l) μ := h.integrable_mul true true
+  have i12 : Integrable (fun l => A false l * B false l + A false l * B true l) μ := i1.add i2
+  have i123 : Integrable
+      (fun l => A false l * B false l + A false l * B true l + A true l * B false l) μ :=
+    i12.add i3
+  have hsum : lhvCHSH μ A B
+      = ∫ l, (A false l * B false l + A false l * B true l
+          + A true l * B false l - A true l * B true l) ∂μ := by
+    rw [integral_sub i123 i4, integral_add i12 i3, integral_add i1 i2]
+    rfl
+  rw [hsum]
+  have hbound : ‖∫ l, (A false l * B false l + A false l * B true l
+      + A true l * B false l - A true l * B true l) ∂μ‖ ≤ 2 * μ.real Set.univ := by
+    refine norm_integral_le_of_norm_le_const ?_
+    filter_upwards with l
+    rw [Real.norm_eq_abs]
+    exact abs_chsh_pointwise_le_two (h.boundA false l) (h.boundA true l)
+      (h.boundB false l) (h.boundB true l)
+  simpa [Real.norm_eq_abs, probReal_univ] using hbound
+
+/-- Sanity check: local hidden-variable models exist (so the notion is not vacuous).
+The trivial model on a one-point space with all responses equal to `1` is one. -/

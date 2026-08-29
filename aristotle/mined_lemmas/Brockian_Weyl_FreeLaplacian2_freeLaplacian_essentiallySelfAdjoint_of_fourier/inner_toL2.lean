@@ -30,7 +30,6 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,30 +40,20 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open MeasureTheory SchwartzMap FourierTransform Laplacian LineDeriv
+namespace Brockian.Weyl.FreeLaplacian2
+
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-  [MeasurableSpace E] [BorelSpace E]
-
-/-- The complex Hilbert space `L²(E)` of square integrable functions on a finite-dimensional
-real inner product space `E`, with respect to the Lebesgue (Haar) measure. -/
-abbrev L2Space (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-    [MeasurableSpace E] [BorelSpace E] : Type _ := ↥(Lp (α := E) ℂ 2 volume)
-
-/-- Schwartz functions viewed as elements of `L²(E)`. -/
-
-theorem inner_toL2 (u : L2Space E) (g : 𝓢(E, ℂ)) :
-    inner ℂ u (toL2 g) = ∫ ξ, (starRingEnd ℂ) (u ξ) * g ξ := by
+lemma inner_toL2 (u : L2Space V) (φ : 𝓢(V, ℂ)) :
+    inner ℂ u (toL2 V φ) = ∫ ξ, (starRingEnd ℂ) ((u : V → ℂ) ξ) * φ ξ := by
   rw [MeasureTheory.L2.inner_def]
   refine integral_congr_ae ?_
-  filter_upwards [SchwartzMap.coeFn_toLp (F := ℂ) g 2 volume] with x hx
-  rw [show ((toL2 g : L2Space E) : E → ℂ) x = g x from hx]
-  simp [RCLike.inner_apply]
-  ring
+  filter_upwards [SchwartzMap.coeFn_toLp φ 2 (volume : Measure V)] with x hx
+  simp [RCLike.inner_apply, toL2, hx, mul_comm]
 
-/-- Pairing an `L²` function with a Schwartz function, computed on the Fourier side. -/

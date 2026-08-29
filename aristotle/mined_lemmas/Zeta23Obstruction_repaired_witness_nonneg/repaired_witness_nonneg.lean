@@ -33,20 +33,17 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- The repaired obstruction witness kernel
-`(sin (π x) / (π x))^2 * (1 - (1/10) * cos (3 π x))` is nonnegative on all of `ℝ`:
-the first factor is a square, and the second is at least `9/10` since `cos ≤ 1`. -/
+/-- The second factor of the repaired witness kernel is at least `9/10`, since
+`Real.cos ≤ 1`. -/
 
 theorem repaired_witness_nonneg (x : ℝ) :
     0 ≤ (Real.sin (Real.pi * x) / (Real.pi * x)) ^ 2 *
       (1 - (1 / 10) * Real.cos (3 * Real.pi * x)) := by
-  have h1 : (0 : ℝ) ≤ (Real.sin (Real.pi * x) / (Real.pi * x)) ^ 2 := sq_nonneg _
-  have h2 : (0 : ℝ) ≤ 1 - (1 / 10) * Real.cos (3 * Real.pi * x) := by
-    have hc : Real.cos (3 * Real.pi * x) ≤ 1 := Real.cos_le_one (3 * Real.pi * x)
+  have h1 : 0 ≤ (Real.sin (Real.pi * x) / (Real.pi * x)) ^ 2 := sq_nonneg _
+  have h2 : 0 ≤ 1 - (1 / 10) * Real.cos (3 * Real.pi * x) := by
+    have := repaired_witness_second_factor_ge x
     linarith
   exact mul_nonneg h1 h2
 
 end Zeta23Obstruction
-
-#print axioms Zeta23Obstruction.repaired_witness_nonneg
 

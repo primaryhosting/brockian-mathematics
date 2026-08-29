@@ -1,11 +1,3 @@
-/-
-# Singular Series Gaps 14501460
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesGaps14501460
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -30,26 +22,34 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 
-/-- A finite set of natural numbers `H` is *admissible* if for every prime `p` it misses at
-least one residue class modulo `p`.  Equivalently (see `admissible_iff_localFactor_pos`), all
-local factors of the associated singular series are strictly positive. -/
+/-- A finite set of integer offsets `H` is *admissible* (in the sense of the
+Hardy–Littlewood prime `k`-tuples conjecture) if for every prime `p` the reductions
+of the elements of `H` modulo `p` miss at least one residue class.  This is exactly
+the condition under which the singular series `𝔖(H)` is nonzero. -/
 
-lemma exists_missed_residue_of_card_lt {H : Finset ℕ} {p : ℕ} (h : H.card < p) :
-    ∃ r < p, ∀ h' ∈ H, h' % p ≠ r := by
-  by_contra hcon
-  push_neg at hcon
-  have hsub : Finset.range p ⊆ H.image (fun x => x % p) := by
-    intro r hr
-    simp only [Finset.mem_range] at hr
-    obtain ⟨h', hh', he⟩ := hcon r hr
-    exact Finset.mem_image.2 ⟨h', hh', he⟩
-  have h1 : p ≤ (H.image (fun x => x % p)).card := by
-    simpa using Finset.card_le_card hsub
-  have h2 : (H.image (fun x => x % p)).card ≤ H.card := Finset.card_image_le
+theorem exists_missed_residue_of_card_lt {H : Finset ℤ} {p : ℕ} [NeZero p]
+    (h : H.card < p) : ∃ r : ZMod p, ∀ x ∈ H, (x : ZMod p) ≠ r := by
+  classical
+  by_contra hc
+  push_neg at hc
+  have hsub : (Finset.univ : Finset (ZMod p)) ⊆ H.image (fun x : ℤ => (x : ZMod p)) := by
+    intro r _
+    obtain ⟨x, hx, hxr⟩ := hc r
+    exact Finset.mem_image.mpr ⟨x, hx, hxr⟩
+  have hcard : (Finset.univ : Finset (ZMod p)).card ≤ H.card :=
+    le_trans (Finset.card_le_card hsub) (Finset.card_image_le)
+  rw [Finset.card_univ, ZMod.card p] at hcard
   omega
 
-/-- Admissibility is exactly the positivity of all local factors of the singular series. -/
+/-- A pair `{0, g}` with `g` even is admissible. -/

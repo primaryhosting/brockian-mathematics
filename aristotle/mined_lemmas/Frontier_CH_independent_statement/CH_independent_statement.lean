@@ -1,11 +1,3 @@
-/-
-# CH Independent Statement
-Category: Frontier — Set Theory
-Target: Frontier.CH_independent_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,32 +7,6 @@ Target: Frontier.CH_independent_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open Cardinal FirstOrder
-
-namespace Frontier
-
-/-! ## Part 1: the Continuum Hypothesis as a statement about cardinals
-
-We first record the "external" form of CH — the statement, about the actual real
-numbers, that every uncountable set of reals has the cardinality of the continuum —
-and prove that it is equivalent to the usual cardinal arithmetic form `ℵ₁ = 𝔠`.
-This is a genuine (and fully proved) Lean theorem; it is the base case of the
-formalization. -/
-
-/-- The Continuum Hypothesis, in the form: every uncountable set of real numbers has
-cardinality the continuum. -/
-
-theorem CH_independent_statement
-    (zfc : setTheoryLang.Theory) (ch : setTheoryLang.Sentence)
-    (goedel : Language.Theory.ModelType.{0, 0, 0} zfc) (hgoedel : goedel ⊨ ch)
-    (cohen : Language.Theory.ModelType.{0, 0, 0} zfc) (hcohen : ¬ cohen ⊨ ch) :
-    IndependentOf zfc ch :=
-  independentOf_of_models goedel hgoedel cohen hcohen
-
-end Frontier
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -59,9 +25,25 @@ set_option autoImplicit false
 set_option pp.fullNames true
 set_option pp.structureInstances true
 set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+namespace Frontier
+
+/-!
+## Part 1: the Continuum Hypothesis inside Lean's own set theory
+-/
+
+open Cardinal
+
+/-- The Continuum Hypothesis, phrased about sets of real numbers:
+every infinite set of reals is either countable or of the cardinality of the continuum. -/
+
+theorem CH_independent_statement (ZFC : setLang.Theory) (CH : setLang.Sentence) :
+    IndependentOf ZFC CH ↔
+      ((ZFC ∪ {CH}).IsSatisfiable ∧ (ZFC ∪ {CH.not}).IsSatisfiable) :=
+  independentOf_iff_isSatisfiable
+
+/-- The independence of `CH` from `ZFC` in implication form: given Gödel's relative consistency
+result and Cohen's relative consistency result, `ZFC` entails neither `CH` nor its negation. -/

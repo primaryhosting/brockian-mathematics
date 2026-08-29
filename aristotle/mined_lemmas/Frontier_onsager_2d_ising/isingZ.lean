@@ -1,11 +1,3 @@
-/-
-# Onsager 2 D Ising
-Category: Frontier Physics
-Target: Frontier.onsager_2d_ising
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,15 +8,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open Real
+open scoped BigOperators Real
 
 namespace Frontier
 
-/-- A Boolean spin variable read as a real number `±1`. -/
+/-! ## The finite-volume 2D Ising model on an `L × L` torus -/
 
-noncomputable def isingZ (n : ℕ) (K : ℝ) : ℝ :=
-  ∑ σ : ZMod (n + 1) × ZMod (n + 1) → Bool, Real.exp (K * isingEnergy n σ)
+/-- Shift a periodic (torus) index by one site. -/
 
-/-- The argument of the logarithm in Onsager's exact solution:
-`cosh²(2K) - sinh(2K)(cos θ₁ + cos θ₂)`. -/
+noncomputable def isingZ (L : ℕ) (K : ℝ) : ℝ := ∑ σ : Config L, Real.exp (K * bondSum σ)
+
+/-- The finite-volume free-energy density `(1/L²) log Z_L(K)`
+(i.e. `-β f_L`, the reduced free energy per site). -/

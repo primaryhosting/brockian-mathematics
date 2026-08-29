@@ -1,17 +1,18 @@
 # Proof-fleet observatory
 
-- **submitted**: 3097
-- **targets**: 652
-- **by_account**: {'admin': 1548, 'chris': 1549}
-- **by_domain**: {'literature': 45, 'qc': 199, 'meta': 87, 'cs': 215, 'math': 515, 'set': 108, 'primes': 114, 'moonshot': 47, 'fields': 107, 'lean': 59, 'extension': 157, 'qphys': 108, 'chem': 154, 'abel': 42, 'physics': 83, 'mind': 33, 'qi': 90, 'phys': 84, 'open': 48, 'conjecture': 168, 'spectral': 27, 'betrothed': 38, 'linalg': 56, 'assembly': 28, 'christoffel': 10, 'integral': 14, 'riemann': 97, 'fib': 41, 'wave2': 196, 'operator': 21, 'line': 52, 'characters': 54}
-- **harvested**: 3881
-- **proved**: 3693
-- **stopped**: 188
-- **axle_verified**: 929
+- **submitted**: 7322
+- **targets**: 654
+- **by_account**: {'admin': 3669, 'chris': 3653}
+- **by_domain**: {'literature': 93, 'qc': 402, 'meta': 177, 'cs': 484, 'math': 1156, 'set': 261, 'primes': 263, 'moonshot': 119, 'fields': 272, 'lean': 115, 'extension': 395, 'qphys': 258, 'chem': 391, 'abel': 106, 'physics': 209, 'mind': 93, 'qi': 246, 'phys': 221, 'open': 121, 'conjecture': 419, 'spectral': 58, 'betrothed': 87, 'linalg': 124, 'assembly': 69, 'christoffel': 23, 'integral': 33, 'riemann': 233, 'fib': 92, 'wave2': 502, 'operator': 47, 'line': 115, 'characters': 132, 'frontier': 6}
+- **harvested**: 8336
+- **proved**: 7736
+- **stopped**: 600
+- **axle_verified**: 1038
+- **kernel_trusted**: 1037
 - **lake_verified**: 0
-- **kernel_trusted**: 0
-- **best_proofs**: 1151
-- **domains**: 1022
-- **reductions**: 78
-- **mined_lemmas**: 15185
-- **pr_eligible**: 0
+- **local_kernel_trusted**: 0
+- **best_proofs**: 1291
+- **domains**: 1025
+- **reductions**: 195
+- **mined_lemmas**: 16189
+- **pr_eligible**: 783

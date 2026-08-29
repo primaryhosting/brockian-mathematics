@@ -1,40 +1,35 @@
+/-
+# Ghz 4 Normalized
+Category: Quantum Computing
+Target: QC.ghz4_normalized
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-!
+# Ghz 4 Normalized
+Category: Quantum Computing
+Target: QC.ghz4_normalized
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace QC
 
-/-- The 4-qubit GHZ state `(|0000⟩ + |1111⟩)/√2`, as a vector of the Hilbert space
-`EuclideanSpace ℂ (Fin 2 × Fin 2 × Fin 2 × Fin 2)`: its amplitude is `1/√2` at the
-all-zeros and all-ones basis states and `0` elsewhere. -/
+/-- The all-zeros computational basis label `|0000⟩` for four qubits. -/
 
-theorem ghz4_eq_smul_add_single :
-    ghz4 = ((Real.sqrt 2)⁻¹ : ℂ) •
-      (EuclideanSpace.single ((0 : Fin 2), (0 : Fin 2), (0 : Fin 2), (0 : Fin 2)) (1 : ℂ)
-        + EuclideanSpace.single ((1 : Fin 2), (1 : Fin 2), (1 : Fin 2), (1 : Fin 2)) (1 : ℂ)) := by
-  ext v
-  simp [ghz4, EuclideanSpace.single_apply]
-  split <;> split <;> simp_all
+lemma ghz4_eq_smul_add_single :
+    ghz4 = (((Real.sqrt 2)⁻¹ : ℝ) : ℂ) •
+      (EuclideanSpace.single allZeros (1 : ℂ) + EuclideanSpace.single allOnes (1 : ℂ)) := by
+  ext x
+  by_cases h0 : x = allZeros
+  · subst h0
+    simp [ghz4, EuclideanSpace.single_apply, allZeros_ne_allOnes]
+  · by_cases h1 : x = allOnes
+    · subst h1
+      simp [ghz4, EuclideanSpace.single_apply, h0]
+    · simp [ghz4, EuclideanSpace.single_apply, h0, h1]
 
-/-- The 4-qubit GHZ state is a unit vector. -/
+/-- The 4-qubit GHZ state `(|0000⟩ + |1111⟩)/√2` is a unit vector. -/

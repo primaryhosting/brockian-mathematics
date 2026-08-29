@@ -1,29 +1,27 @@
-/-
+/- (Lean requires `import` to precede any module docstring, so this required header is
+   reproduced verbatim as a plain block comment.)
+/-!
 # Ghz Nonlocal
 Category: Quantum Computing
 Target: QC.ghz_nonlocal
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-/
 
 import Mathlib
 
-open scoped Matrix
-
 namespace QC
 
-/-! ## The quantum side: the GHZ state and its Pauli eigenvalue relations -/
+/-- Index type for the computational basis of three qubits. -/
+abbrev Q3 := Fin 2 × Fin 2 × Fin 2
 
-/-- Index type for a three-qubit computational basis. -/
-abbrev Idx := Fin 2 × Fin 2 × Fin 2
+/-- The Pauli `X` matrix. -/
 
-/-- The Pauli `X` observable. -/
+lemma ghz_eigen_YYX : Matrix.mulVec (op3 pauliY pauliY pauliX) ghz = -ghz := by
+  funext p
+  obtain ⟨a, b, c⟩ := p
+  rw [mulVec_ghz]
+  fin_cases a <;> fin_cases b <;> fin_cases c <;> simp [op3, ghz, pauliX, pauliY]
 
-theorem ghz_eigen_YYX : tensor3 pauliY pauliY pauliX *ᵥ ghz = ghz := by
-  funext i
-  obtain ⟨a, b, c⟩ := i
-  fin_cases a <;> fin_cases b <;> fin_cases c <;>
-    simp [Matrix.mulVec, dotProduct, Fintype.sum_prod_type, Fin.sum_univ_succ,
-      tensor3, pauliX, pauliY, ghz]
-
-/-- Quantum prediction: `X ⊗ X ⊗ X` has the GHZ state as a `-1` eigenvector. -/
+/-- `X ⊗ X ⊗ X` has the GHZ state as an eigenvector with eigenvalue `+1`. -/

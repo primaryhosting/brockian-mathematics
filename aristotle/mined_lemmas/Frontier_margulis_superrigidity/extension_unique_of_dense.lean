@@ -5,9 +5,8 @@ Target: Frontier.margulis_superrigidity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
--- (Lean 4 requires `import` to precede every command, including module docstrings, so the
--- header above is written as an ordinary comment and repeated as a module docstring below.)
+-- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the header
+-- above is a plain block comment; it is repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -44,33 +43,45 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## The shape of the superrigidity conclusion -/
+/-!
+## Setting
+
+Margulis superrigidity states: if `G` is a semisimple Lie group of real rank at least `2`
+(with finite centre and no compact factors), `Γ ≤ G` an irreducible lattice, and
+`rho : Γ → H` a homomorphism into a simple Lie group whose image is Zariski dense and
+unbounded, then `rho` is the restriction of a *continuous* homomorphism `G → H`.
+
+The conclusion of the theorem is the statement `ExtendsToContinuousHom` below.
+
+Margulis' proof proceeds through the **graph closure**: one forms the closure `Λ` of the
+graph `{(γ, rho γ) : γ ∈ Γ}` inside `G × H`, which is a closed subgroup, and the whole
+analytic work (boundary maps, higher rank, Zariski density) goes into proving that `Λ`
+projects *bijectively* onto `G`, i.e. that `Λ` is the graph of a map. The results below
+formalise this reduction: once the graph closure is a graph, superrigidity follows, and
+the resulting extension is automatically continuous. We also prove the degenerate base
+cases unconditionally.
+-/
 
 section Defs
 
 variable {G H : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
 
-/-- The conclusion of a superrigidity theorem: the *abstract* group homomorphism
-`rho : Γ →* H`, defined on a subgroup `Γ` of a topological group `G`, is the restriction of a
-*continuous* homomorphism defined on all of `G`. -/
+/-- `rho : Γ →* H` is the restriction of a continuous homomorphism defined on all of `G`. -/
 
-theorem extension_unique_of_dense [T2Space H] {Γ : Subgroup G} (hΓ : Dense (Γ : Set G))
-    {F₁ F₂ : G →* H} (h₁ : Continuous F₁) (h₂ : Continuous F₂)
-    (h : ∀ γ : Γ, F₁ (γ : G) = F₂ (γ : G)) : F₁ = F₂ :=
-  DFunLike.coe_injective (Continuous.ext_on hΓ h₁ h₂ fun x hx => h ⟨x, hx⟩)
+theorem extension_unique_of_dense [T2Space H]
+    (Γ : Subgroup G) (hΓ : Dense (Γ : Set G)) (σ τ : G →* H)
+    (hσ : Continuous σ) (hτ : Continuous τ) (h : ∀ γ : Γ, σ (γ : G) = τ (γ : G)) :
+    σ = τ := by
+  ext g
+  refine congrFun (Continuous.ext_on hΓ hσ hτ ?_) g
+  rintro x hx
+  exact h ⟨x, hx⟩
 
-end Basic
+end Reduction
 
-/-! ## A Lean-checked reduction: extension from a dense subgroup -/
+section BaseCases
 
-section DenseExtension
+variable {G H : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
 
-variable {G H : Type*} [UniformSpace G] [Group G] [IsUniformGroup G]
-  [UniformSpace H] [Group H] [IsUniformGroup H] [CompleteSpace H] [T2Space H]
-
-/-- **Reduction of the superrigidity conclusion to a uniform-continuity estimate.**
-
-If `Γ ≤ G` is a *dense* subgroup and the abstract homomorphism `rho : Γ →* H` is uniformly
-continuous for the uniformity induced from `G`, then `rho` does extend to a continuous homomorphism
-`G →* H` (the target being a complete Hausdorff group).  This is the standard "soft" half of a
-superrigidity argument: all the work is in producing the uniform continuity estimate. -/
+/-- Base case: over a discrete group every homomorphism defined on the whole group
+extends (continuously, since every map out of a discrete space is continuous). -/

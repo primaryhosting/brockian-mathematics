@@ -1,3 +1,11 @@
+/-
+# Barrington
+Category: Frontier Cs
+Target: CS.barrington
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -8,42 +16,43 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Barrington's theorem: the Boolean functions computed by fan-in-two Boolean circuits of
-depth `d` are exactly the ones computed by width-5 permutation branching programs of
-length `4 ^ d` (up to a constant factor in the exponent / a logarithm in the length).
+/-!
+## Barrington's theorem
 
-We formalise the two quantitative directions:
+We formalise Barrington's theorem, which identifies `NC¹` (log-depth boolean formulas)
+with width-`5` permutation branching programs:
 
-* `CS.exists_bprog`  : a circuit of depth `d` is simulated by a width-5 permutation
-  branching program of length at most `4 ^ d`  (the hard direction of Barrington's theorem);
-* `CS.exists_circuit`: a width-5 permutation branching program of length `L` is simulated
-  by a circuit of depth at most `4 * ⌈log₂ L⌉ + 6` (the easy direction).
+* **Forward direction.** Every boolean formula of depth `d` is computed by a width-`5`
+  permutation branching program of length at most `4 ^ d` (in the strong sense of
+  `σ`-computation, for an arbitrary `5`-cycle `σ`).
+* **Converse direction.** Every width-`5` permutation branching program of length at
+  most `2 ^ k` is computed by a boolean formula of depth `O(k)` (explicitly `6 * k + 4`).
 
-Together (`CS.barrington`) these say `NC¹ = width-5 permutation branching programs`:
-logarithmic depth corresponds to polynomial length.
+Together these say: depth-`d` formulas ↔ length-`4^d` width-`5` programs, i.e.
+`NC¹` = width-`5` permutation branching programs.
 -/
 
 namespace CS
 
-open Equiv
+open Equiv Equiv.Perm
 
-/-! ## Boolean circuits -/
+/-! ### Boolean formulas -/
 
-/-- Boolean circuits with fan-in two `∧`/`∨` gates and `¬` gates, over the variables
-`x 0, x 1, …`. -/
-inductive Circuit where
-  | const : Bool → Circuit
-  | var : ℕ → Circuit
-  | not : Circuit → Circuit
-  | and : Circuit → Circuit → Circuit
-  | or : Circuit → Circuit → Circuit
-  deriving Inhabited
+/-- Boolean formulas in `n` variables, over the complete basis `{¬, ∧}` together with
+constants.  Depth-`O(log n)` formulas are exactly `NC¹`. -/
+inductive Formula (n : ℕ) where
+  | const : Bool → Formula n
+  | var : Fin n → Formula n
+  | not : Formula n → Formula n
+  | and : Formula n → Formula n → Formula n
+  deriving DecidableEq
 
-/-- The Boolean function computed by a circuit. -/
+variable {n : ℕ}
 
-theorem exists_fin5 (p : Fin 5 → Prop) : (∃ i, p i) ↔ p 0 ∨ p 1 ∨ p 2 ∨ p 3 ∨ p 4 := by
+/-- The boolean function computed by a formula. -/
+
+theorem exists_fin5 (p : Fin 5 → Prop) : (∃ m, p m) ↔ p 0 ∨ p 1 ∨ p 2 ∨ p 3 ∨ p 4 := by
   constructor
-  · rintro ⟨i, hi⟩; fin_cases i <;> tauto
+  · rintro ⟨m, hm⟩; fin_cases m <;> tauto
   · rintro (h | h | h | h | h) <;> exact ⟨_, h⟩
 

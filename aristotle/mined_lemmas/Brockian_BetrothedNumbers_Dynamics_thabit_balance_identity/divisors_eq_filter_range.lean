@@ -1,0 +1,29 @@
+import Mathlib
+import RequestProject.ThabitBalance
+
+/-!
+# Bridge to Mathlib's `σ₁`
+
+The target file `ThabitBalance.lean` is import-free (its header comment must be the very first
+thing in the file, which precludes an `import` command), so it uses its own elementary
+sum-of-divisors function `sigmaOne`.  Here we prove that `sigmaOne` agrees with Mathlib's
+`ArithmeticFunction.sigma 1`, and restate the balance identity together with the
+deficient/perfect/abundant comparisons in Mathlib's language.
+-/
+
+open scoped ArithmeticFunction.sigma
+
+namespace Brockian.BetrothedNumbers.Dynamics
+
+
+theorem divisors_eq_filter_range {m : Nat} (hm : m ≠ 0) :
+    m.divisors = (Finset.range (m + 1)).filter (· ∣ m) := by
+  ext d
+  simp only [Nat.mem_divisors, Finset.mem_filter, Finset.mem_range]
+  constructor
+  · rintro ⟨hd, -⟩
+    exact ⟨Nat.lt_succ_of_le (Nat.le_of_dvd (Nat.pos_of_ne_zero hm) hd), hd⟩
+  · rintro ⟨-, hd⟩
+    exact ⟨hd, hm⟩
+
+/-- The elementary `sigmaOne` of the target file agrees with Mathlib's `σ₁`. -/

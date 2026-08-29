@@ -1,45 +1,31 @@
+-- (Lean requires `import` to be the first command of a file, so the header comment
+-- follows it.)
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-open scoped ENNReal
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+/-!
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 /-!
-# Dijkstra's algorithm
-
-We formalize Dijkstra's algorithm on a finite directed graph with nonnegative edge weights,
-and prove that it computes the shortest-path distances.
-
-Weights take values in `ℝ≥0∞` (the nonnegative extended reals): this encodes both the
-nonnegativity of the weights and the absence of an edge (weight `⊤`).
-
-* `CS.walkWeight` : the weight of a walk, given as the list of vertices visited after the source.
-* `CS.graphDist w src v` : the shortest-path distance, i.e. the infimum of the weights of
-  all walks from `src` to `v`.
-* `CS.dijkstra w src` : the output of Dijkstra's algorithm.
-* `CS.dijkstra_correct` : `CS.dijkstra w src v = CS.graphDist w src v` for every `v`.
+We formalise Dijkstra's algorithm on a finite directed graph whose edge weights are
+nonnegative (encoded by taking values in `ℝ≥0∞`, where `⊤` means "no edge"), and prove
+that it computes the true shortest-path distances from a fixed source.
 -/
 
 namespace CS
 
+open scoped ENNReal
+
 variable {V : Type*}
 
-/-- A walk starting at `src` is represented by the list `p` of the vertices visited after
-`src`; its endpoint is the last element of `p`, or `src` if `p` is empty. -/
+/-! ## Walks, their weights, and the shortest-path distance -/
 
-lemma pick_mem (T : Finset V) (hT : T.Nonempty) (d : V → ℝ≥0∞) : pick T hT d ∈ T :=
-  (T.exists_min_image d hT).choose_spec.1
+/-- The endpoint of the walk that starts at `s` and visits the vertices of `l` in order. -/
+
+lemma pick_mem (D : V → ℝ≥0∞) (T : Finset V) (h : T.Nonempty) : pick D T h ∈ T :=
+  (T.exists_min_image D h).choose_spec.1
 

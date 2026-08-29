@@ -23,7 +23,8 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+/-!
 # Weyl Pos Index Above
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
 Target: Zeta23Redux.LinAlg.weyl_posIndexAbove
@@ -31,9 +32,8 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-open Matrix Finset
+open scoped InnerProductSpace
+open Matrix
 
 namespace Zeta23Redux.LinAlg
 
@@ -45,3 +45,4 @@ lemma qform_add (M N : Matrix (Fin d) (Fin d) ℂ) (x : EuclideanSpace ℂ (Fin 
     qform (M + N) x = qform M x + qform N x := by
   simp [qform, Complex.add_re]
 
+/-- If all eigenvalues of `M` are at most `θ`, the quadratic form is bounded by `θ‖x‖²`. -/

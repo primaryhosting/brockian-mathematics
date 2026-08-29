@@ -30,9 +30,6 @@ Target: Math.mobius_root_sum_9
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above uses a plain block comment rather than a module docstring `/-!`,
--- since Lean 4 requires `import` to precede any module docstring.)
-
 import Mathlib
 
 /-!
@@ -43,13 +40,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset Complex
+open scoped BigOperators
 
 namespace Math
 
 /-- A fixed primitive 9-th root of unity in `ℂ`. -/
 
-theorem isPrimitiveRoot_zeta9 : IsPrimitiveRoot zeta9 9 :=
+lemma isPrimitiveRoot_zeta9 : IsPrimitiveRoot zeta9 9 :=
   Complex.isPrimitiveRoot_exp 9 (by norm_num)
 
-/-- The primitive 9-th roots of unity are exactly the powers `ζ ^ i` with `i` coprime to `9`. -/
+/-- The set of primitive 9-th roots of unity in `ℂ` consists of the powers `ζ ^ k`
+for `k ∈ {1, 2, 4, 5, 7, 8}`, where `ζ = exp (2 π i / 9)`. -/

@@ -1,20 +1,38 @@
 import Mathlib
 
 /-!
-# Orbits of a permutation
-
-Minimal theory of orbits of a permutation of a finite type, as needed for face counting in a
-combinatorial embedding of a graph: a permutation all of whose orbits have at least `n` elements
-has at most `#α / n` orbits.
+# Five Color Theorem
+Category: Frontier — Fields Medal Work
+Target: Frontier.five_color_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped Classical
 
 namespace Frontier
 
-variable {α : Type*}
+universe u
 
-/-- The setoid on `α` whose equivalence classes are the orbits of the permutation `f`. -/
+variable {V : Type u}
 
-def IsDegenerate (G : SimpleGraph V) [DecidableRel G.Adj] (k : ℕ) : Prop :=
-  ∀ s : Finset V, s.Nonempty → ∃ v ∈ s, ((s.erase v).filter (fun w => G.Adj v w)).card ≤ k
+/-! ## Plane straight-line drawings
 
-/-- **Greedy colouring**: a `k`-degenerate graph is `(k+1)`-colourable. -/
+Mathlib (at the pinned commit) contains no theory of planar graphs at all, so we
+first have to say what "planar" means.
+
+We use the *straight-line* (Fáry) formulation: a finite simple graph is planar
+exactly when it can be drawn in the plane with vertices at distinct points and
+edges drawn as straight segments which meet only at shared endpoints.  By
+Fáry's theorem this is equivalent to the usual topological definition for
+finite simple graphs, and it has the advantage of being completely elementary
+to state. -/
+
+/-- The open straight segment in `ℝ²` drawn for an (unordered) edge `e`, when the
+vertices are placed by `p`. -/
+
+def IsDegenerate [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] (k : ℕ) : Prop :=
+  ∀ s : Finset V, s.Nonempty → ∃ v ∈ s, ((s.erase v).filter (fun u => G.Adj v u)).card ≤ k
+
+/-- Greedy colouring on a `k`-degenerate graph: every finite subset of the vertices
+can be properly coloured with `k+1` colours. -/

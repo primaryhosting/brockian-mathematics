@@ -2,32 +2,33 @@ import Mathlib
 import RequestProject.Main
 
 /-!
-# Binary search correctness, stated with Mathlib's `LinearOrder`
+# Binary search correctness, specialised to a Mathlib `LinearOrder`
 
-`CS.binary_search_correct` in `RequestProject/Main.lean` is stated using the Lean core
-order classes `Std.IsLinearOrder` / `Std.LawfulOrderLT`. Mathlib's `LinearOrder`
-provides both, so the statement specializes immediately, as recorded here.
+`CS.binary_search_correct` (in `RequestProject.Main`) is stated for an arbitrary decidable
+strict order satisfying antisymmetry.  Here we record the corollary for any Mathlib
+`LinearOrder`, where the antisymmetry hypothesis is automatic, and we phrase sortedness
+using `≤`.
 -/
-
-set_option autoImplicit false
 
 namespace CS
 
-universe u
+variable {α : Type*} [LinearOrder α] [Inhabited α]
 
-/-- Binary search on a sorted array over a Mathlib `LinearOrder` returns an index
-if and only if the key occurs in the array. -/
+/-- Sortedness stated with `≤` agrees with `CS.Sorted`. -/
 
-theorem binary_search_correct_linearOrder {α : Type u} [LinearOrder α] (a : Array α)
-    (h : a.toList.Pairwise (· ≤ ·)) (k : α) :
-    (binarySearch a k).isSome ↔ k ∈ a :=
-  binary_search_correct a h k
+theorem binary_search_correct_linearOrder (a : Array α)
+    (hs : ∀ i j : Nat, i ≤ j → j < a.size → a[i]! ≤ a[j]!) (key : α) :
+    (∀ i : Nat, binarySearch a key = some i → i < a.size ∧ a[i]! = key) ∧
+      ((∃ i : Nat, binarySearch a key = some i) ↔ ∃ i : Nat, i < a.size ∧ a[i]! = key) :=
+  binary_search_correct (fun _ _ h1 h2 => le_antisymm (not_lt.mp h2) (not_lt.mp h1)) a
+    ((sorted_iff_le a).mpr hs) key
 
-/-- A sanity check: searching a sorted array of naturals. -/
-example : binarySearch #[1, 3, 5, 7, 9] 7 = some 3 := by simp [binarySearch, bsearchAux]
+/-- A concrete sanity check. -/
+example : binarySearch #[1, 3, 5, 7, 9] 7 = some 3 := by
+  simp [binarySearch, bsearchAux]
 
-/-- A sanity check: an absent key is not found. -/
-example : binarySearch #[1, 3, 5, 7, 9] 4 = none := by simp [binarySearch, bsearchAux]
+example : binarySearch #[1, 3, 5, 7, 9] 4 = none := by
+  simp [binarySearch, bsearchAux]
 
 end CS
 
@@ -39,25 +40,21 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on the file layout: Lean does not allow a module docstring (`/-! ... -/`) to
-precede `import` commands, so this module is written against the Lean core
-prelude only (no `import` line at all).  Consequently the order-theoretic
-typeclasses used below are the core ones (`Std.IsLinearOrder`,
-`Std.LawfulOrderLT`), which Mathlib's `LinearOrder` instances provide
-automatically; `RequestProject/LinearOrder.lean` records the Mathlib-flavoured
-restatement `CS.binary_search_correct_linearOrder`.
--/
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
 namespace CS
 
-universe u
+/-!
+## Setup
 
-variable {α : Type u} [LE α] [LT α] [DecidableEq α] [DecidableLT α]
-  [Std.IsLinearOrder α] [Std.LawfulOrderLT α]
+We work with an arbitrary type `α` carrying a decidable strict order `<`.  The only order
+property that binary search needs is antisymmetry in the form
 
-/-- Binary search for `k` inside the slice `[lo, hi)` of the array `a`.
-Returns `some i` when the key was found at index `i`, and `none` otherwise. -/
+`∀ x y, ¬ x < y → ¬ y < x → x = y`,
+
+which holds in any linear order; it is supplied as an explicit hypothesis so that the
+development is independent of any particular order-class hierarchy.
+-/
+
+variable {α : Type u} [LT α] [DecidableLT α] [Inhabited α]
+
+/-- An array is sorted when its entries are non-decreasing, i.e. `a[i]! ≤ a[j]!` for `i ≤ j`,
+expressed with the strict order as `¬ a[j]! < a[i]!`. -/

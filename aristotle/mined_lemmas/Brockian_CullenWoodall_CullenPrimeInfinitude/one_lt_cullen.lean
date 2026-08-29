@@ -24,35 +24,29 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
+
 /-!
 # Cullen Prime Infinitude
 Category: Brockian Conjecture
 Target: Brockian.CullenWoodall.CullenPrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(The header comment is placed immediately after `import Mathlib` because Lean 4
+requires `import` commands to precede every other command, including module
+docstrings; the header text itself is verbatim.)
 -/
 
-/-
-The infinitude of Cullen primes (i.e. primes of the form `C n = n * 2 ^ n + 1`) is an
-open problem, so what is proved here is a *Lean-checked conditional reduction*
-together with unconditional partial results:
-
-* `prime_cullen_of_proth_witness` : a Proth-type primality criterion for Cullen numbers
-  (sufficiency, proved from scratch via orders in `ZMod q`);
-* `exists_proth_witness_of_prime_cullen` : the converse (necessity);
-* `CullenPrimeInfinitude` : if for arbitrarily large `n` the Cullen number `C n` has a
-  Proth witness, then infinitely many Cullen numbers are prime;
-* `cullen_prime_infinitude_iff` : the reduction is in fact an equivalence;
-* `dvd_cullen_of_prime_mod_eight`, `infinite_composite_cullen` : unconditionally,
-  infinitely many Cullen numbers are composite.
--/
+set_option maxHeartbeats 1000000
 
 namespace Brockian.CullenWoodall
 
 /-- The `n`-th Cullen number `C n = n * 2 ^ n + 1`. -/
 
 lemma one_lt_cullen {n : ℕ} (hn : 1 ≤ n) : 1 < cullen n := by
-  have : 1 ≤ 2 ^ n := Nat.one_le_two_pow
+  have : 1 * 2 ^ 1 ≤ n * 2 ^ n :=
+    Nat.mul_le_mul hn (Nat.pow_le_pow_right (by norm_num) hn)
   simp only [cullen_def]
-  nlinarith
+  omega
 
+/-- A number bigger than `1` with no prime factor `p` satisfying `p * p ≤ m` is prime. -/

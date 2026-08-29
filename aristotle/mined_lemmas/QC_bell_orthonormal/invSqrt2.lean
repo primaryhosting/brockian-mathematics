@@ -8,19 +8,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped TensorProduct
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace QC
 
-/-- A single qubit space `ℂ²`, with its Hermitian (Euclidean) inner product. -/
+open scoped TensorProduct
+
+/-- A single qubit space: `ℂ²` with its standard Hermitian inner product. -/
 abbrev Qubit : Type := EuclideanSpace ℂ (Fin 2)
 
-/-- The two-qubit space `ℂ² ⊗ ℂ²`. Mathlib's inner product on a tensor product of inner
-product spaces is determined by `⟪a ⊗ b, c ⊗ d⟫ = ⟪a, c⟫ * ⟪b, d⟫`
-(`TensorProduct.instInnerProductSpace`). -/
+/-- The two-qubit space `ℂ² ⊗ ℂ²`. Mathlib equips a tensor product of inner product spaces
+with the inner product determined by `⟪a ⊗ b, c ⊗ d⟫ = ⟪a, c⟫ * ⟪b, d⟫`. -/
 abbrev TwoQubit : Type := Qubit ⊗[ℂ] Qubit
 
-/-- The computational basis kets `|0⟩`, `|1⟩` of a single qubit. -/
+/-- The computational basis vectors `|0⟩`, `|1⟩` of a single qubit. -/
 
-noncomputable def invSqrt2 : ℂ := ((Real.sqrt 2)⁻¹ : ℝ)
+noncomputable def invSqrt2 : ℂ := ((Real.sqrt 2 : ℝ) : ℂ)⁻¹
 

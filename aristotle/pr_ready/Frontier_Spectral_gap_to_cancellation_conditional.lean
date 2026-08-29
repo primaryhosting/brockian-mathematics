@@ -9,17 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-/-!
-# Gap To Cancellation Conditional
-Category: Frontier Spectral
-Target: Frontier.Spectral.gap_to_cancellation_conditional
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--/
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -43,41 +32,41 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Frontier
-namespace Spectral
+namespace Frontier.Spectral
 
-/-- **Conditional bridge: spectral gap ⟹ cancellation.**
+/-- **Gap to cancellation, conditional form.**
 
 Setting: a real inner-product space `V`, a self-adjoint projection `P` (the gap projection),
 a unit vector `u`, and a real number `S` (the Liouville partial sum).
 
-Hypotheses (both left open, neither is discharged here):
-* `H1` : the gap `delta` is positive and `S = ⟪u, P u⟫`;
-* `H2` : the contraction bound `‖P u‖ ≤ 1 - delta`.
+Hypotheses (both kept open, neither is discharged):
 
-Conclusion: `|S| ≤ 1 - delta`.
+* `H1` : a spectral gap `δ > 0` together with the identity `S = ⟪u, P u⟫_ℝ`;
+* `H2` : the contraction bound `‖P u‖ ≤ 1 - δ`.
 
-The proof is Cauchy–Schwarz: `|⟪u, P u⟫| ≤ ‖u‖ * ‖P u‖ = ‖P u‖ ≤ 1 - delta`.
+Conclusion: `|S| ≤ 1 - δ`.
 
-The structural hypotheses `hP_idem` (idempotence) and `hP_sa` (self-adjointness) are part of the
-stated setting; they turn out not to be needed for this implication and are kept only for
-faithfulness to the statement. -/
+The proof is Cauchy–Schwarz: `|⟪u, P u⟫| ≤ ‖u‖ * ‖P u‖ = ‖P u‖ ≤ 1 - δ`.
+
+The structural hypotheses on `P` (self-adjointness `hsa` and idempotence `hidem`) and the
+positivity `hδ` of the gap are part of the requested statement; they are retained even though
+the Cauchy–Schwarz argument does not need them. -/
 theorem gap_to_cancellation_conditional
     {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
-    (P : V →L[ℝ] V) (u : V) (S delta : ℝ)
-    (hP_idem : ∀ x : V, P (P x) = P x)
-    (hP_sa : ∀ x y : V, (inner ℝ (P x) y : ℝ) = (inner ℝ x (P y) : ℝ))
-    (hu : ‖u‖ = 1)
-    (H1 : 0 < delta ∧ S = (inner ℝ u (P u) : ℝ))
-    (H2 : ‖P u‖ ≤ 1 - delta) :
-    |S| ≤ 1 - delta := by
-  obtain ⟨-, hS⟩ := H1
-  have hcs : |(inner ℝ u (P u) : ℝ)| ≤ ‖u‖ * ‖P u‖ := abs_real_inner_le_norm u (P u)
+    (P : V →ₗ[ℝ] V)
+    (hsa : ∀ x y : V, (inner ℝ (P x) y : ℝ) = (inner ℝ x (P y) : ℝ))
+    (hidem : ∀ x : V, P (P x) = P x)
+    (u : V) (hu : ‖u‖ = 1)
+    (S δ : ℝ) (hδ : 0 < δ)
+    (hS : S = (inner ℝ u (P u) : ℝ))
+    (hcontr : ‖P u‖ ≤ 1 - δ) :
+    |S| ≤ 1 - δ := by
   rw [hS]
-  calc |(inner ℝ u (P u) : ℝ)| ≤ ‖u‖ * ‖P u‖ := hcs
+  calc |(inner ℝ u (P u) : ℝ)| ≤ ‖u‖ * ‖P u‖ := abs_real_inner_le_norm u (P u)
     _ = ‖P u‖ := by rw [hu, one_mul]
-    _ ≤ 1 - delta := H2
+    _ ≤ 1 - δ := hcontr
 
-end Spectral
-end Frontier
+end Frontier.Spectral
+
+#print axioms Frontier.Spectral.gap_to_cancellation_conditional
 

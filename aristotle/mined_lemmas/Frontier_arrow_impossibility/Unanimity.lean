@@ -1,43 +1,39 @@
+/-
+# Arrow Impossibility
+Category: Frontier Mind
+Target: Frontier.arrow_impossibility
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
-# Preference relations for Arrow's impossibility theorem
-
-`Pref A` is a weak preference relation on the set of alternatives `A`: a total preorder,
-where `r.le a b` means "`b` is at least as good as `a`" (higher is better).
-
-`LinPref A` is a *ranking*: a weak preference with no ties (an antisymmetric total preorder,
-i.e. a linear order).
-
-This file develops the basic API together with the constructions of rankings that are used
-in the proof of Arrow's theorem.
+# Arrow Impossibility
+Category: Frontier Mind
+Target: Frontier.arrow_impossibility
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped Classical
 
 namespace Frontier
 
-/-- A weak preference relation on `A`: a total preorder.
-`r.le a b` means "`b` is at least as good as `a`". -/
-structure Pref (A : Type*) where
-  /-- `le a b` means "`b` is at least as good as `a`". -/
-  le : A → A → Prop
-  le_refl : ∀ a, le a a
-  le_trans : ∀ {a b c : A}, le a b → le b c → le a c
-  le_total : ∀ a b, le a b ∨ le b a
+open scoped Classical
 
-/-- A ranking of the alternatives: a weak preference with no ties. -/
-structure LinPref (A : Type*) extends Pref A where
-  le_antisymm : ∀ {a b : A}, le a b → le b a → a = b
+/-- A strict preference relation on the set of alternatives `A`: a strict linear order,
+given by a transitive, trichotomous, irreflexive relation. -/
+structure StrictPref (A : Type*) where
+  lt : A → A → Prop
+  trans' : ∀ {x y z : A}, lt x y → lt y z → lt x z
+  trichotomous' : ∀ x y : A, lt x y ∨ x = y ∨ lt y x
+  irrefl' : ∀ x : A, ¬ lt x x
 
-namespace Pref
+namespace StrictPref
 
-variable {A : Type*} (r : Pref A)
+variable {A : Type*}
 
-/-- Strict preference: `r.lt a b` means "`b` is strictly better than `a`". -/
 
-def Unanimity (F : SWF V A) : Prop :=
-  ∀ (P : V → LinPref A) (a b : A), (∀ i, (P i).lt a b) → (F P).lt a b
+def Unanimity (f : (ι → StrictPref A) → StrictPref A) : Prop :=
+  ∀ (P : ι → StrictPref A) (x y : A), (∀ i, (P i).lt x y) → (f P).lt x y
 
-/-- Independence of irrelevant alternatives: the social preference between `a` and `b` depends
-only on the individual preferences between `a` and `b`. -/
+/-- Independence of irrelevant alternatives: the social ranking of the pair `x, y` depends
+only on the voters' rankings of the pair `x, y`. -/

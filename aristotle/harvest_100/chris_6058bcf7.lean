@@ -1,0 +1,63 @@
+import Mathlib
+
+/-!
+# Box Level 2
+Category: Quantum Physics
+Target: QPhys.box_level_2
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace QPhys
+
+/-- Energy levels of a particle of mass `m` in a one-dimensional infinite square well
+(a "box") of width `L`, with reduced Planck constant `hbar`:
+`E n = n² π² ħ² / (2 m L²)`. -/
+noncomputable def boxEnergy (hbar m L : ℝ) (n : ℕ) : ℝ :=
+  (n : ℝ) ^ 2 * Real.pi ^ 2 * hbar ^ 2 / (2 * m * L ^ 2)
+
+/-- The ground-state energy of a box is nonzero whenever `ħ`, `m` and `L` are nonzero. -/
+theorem boxEnergy_one_ne_zero {hbar m L : ℝ} (hh : hbar ≠ 0) (hm : m ≠ 0) (hL : L ≠ 0) :
+    boxEnergy hbar m L 1 ≠ 0 := by
+  have hpi : Real.pi ≠ 0 := Real.pi_ne_zero
+  unfold boxEnergy
+  have hden : 2 * m * L ^ 2 ≠ 0 := by positivity
+  simp only [ne_eq, div_eq_zero_iff, hden, or_false]
+  positivity
+
+/-- **Box, level 2.** For a particle in a one-dimensional infinite square well, the ratio of
+the first excited-state energy to the ground-state energy is `2² = 4`. -/
+theorem box_level_2 {hbar m L : ℝ} (hh : hbar ≠ 0) (hm : m ≠ 0) (hL : L ≠ 0) :
+    boxEnergy hbar m L 2 / boxEnergy hbar m L 1 = 2 ^ 2 := by
+  have h1 : boxEnergy hbar m L 1 ≠ 0 := boxEnergy_one_ne_zero hh hm hL
+  have h2 : boxEnergy hbar m L 2 = 2 ^ 2 * boxEnergy hbar m L 1 := by
+    unfold boxEnergy
+    push_cast
+    ring
+  rw [h2, mul_div_assoc, div_self h1, mul_one]
+
+end QPhys
+

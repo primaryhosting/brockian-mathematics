@@ -1,11 +1,3 @@
-/-
-# Uhlenbeck Bubbling
-Category: Frontier Abel
-Target: Frontier.uhlenbeck_bubbling
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,104 +33,126 @@ set_option grind.warning false
 
 namespace Frontier
 
-open MeasureTheory Filter Metric Set
-open scoped ENNReal Topology
+open Filter MeasureTheory Metric
 
-/-- The *bubbling set* (concentration set) of a sequence of energy measures `mu n` at
-concentration threshold `eps`: those points where, at every scale `r > 0`, at least `eps`
-of the energy is asymptotically present. -/
+/-! ## Auxiliary lemmas -/
 
-def BubbleSet {X : Type*} [MetricSpace X] [MeasurableSpace X]
-    (mu : ℕ → Measure X) (eps : ℝ≥0∞) : Set X :=
-  {x : X | ∀ r : ℝ, 0 < r → eps ≤ Filter.liminf (fun n : ℕ => mu n (Metric.ball x r)) atTop}
+/-- Superadditivity of `liminf` for two `ℝ≥0∞`-valued sequences. -/
+theorem liminf_add_le_liminf_add_nat (u v : ℕ → ENNReal) :
+    liminf u atTop + liminf v atTop ≤ liminf (fun n => u n + v n) atTop := by
+  simp only [Filter.liminf_eq_iSup_iInf_of_nat]
+  refine ENNReal.iSup_add_iSup_le ?_
+  intro i j
+  refine le_trans ?_ (le_iSup _ (max i j))
+  refine le_iInf₂ (fun m hm => add_le_add ?_ ?_)
+  · exact iInf₂_le m (le_trans (le_max_left i j) hm)
+  · exact iInf₂_le m (le_trans (le_max_right i j) hm)
 
-/-- Around the points of a finite set one can center pairwise disjoint balls. -/
+/-- Superadditivity of `liminf` for a finite sum of `ℝ≥0∞`-valued sequences. -/
+theorem sum_liminf_le_liminf_sum {ι : Type*} (t : Finset ι) (f : ι → ℕ → ENNReal) :
+    ∑ i ∈ t, liminf (fun n => f i n) atTop ≤ liminf (fun n => ∑ i ∈ t, f i n) atTop := by
+  classical
+  induction t using Finset.induction_on with
+  | empty => simp
+  | insert a t ha ih =>
+      rw [Finset.sum_insert ha]
+      refine le_trans (add_le_add_left ih _) ?_
+      refine le_trans (liminf_add_le_liminf_add_nat _ _) ?_
+      refine liminf_le_liminf ?_
+      filter_upwards with n
+      rw [Finset.sum_insert ha]
 
-private lemma exists_pos_pairwise_disjoint_ball {X : Type*} [MetricSpace X] (t : Finset X) :
-    ∃ r : ℝ, 0 < r ∧
-      (t : Set X).Pairwise (fun x y => Disjoint (Metric.ball x r) (Metric.ball y r)) := by
-  rcases Set.subsingleton_or_nontrivial (t : Set X) with h | h
-  · exact ⟨1, one_pos, h.pairwise _⟩
-  · refine ⟨(t : Set X).infsep / 2, by
-      have := (t.finite_toSet.infsep_pos_iff_nontrivial).2 h
-      linarith, ?_⟩
-    intro x hx y hy hxy
-    refine Metric.ball_disjoint_ball ?_
-    have := Set.infsep_le_dist_of_mem hx hy hxy
-    linarith
+/-- A finite set in a metric space can be surrounded by pairwise disjoint balls of a common
+positive radius. -/
+theorem exists_radius_pairwise_disjoint_ball {X : Type*} [MetricSpace X] {s : Set X}
+    (hs : s.Finite) :
+    ∃ r > 0, ∀ x ∈ s, ∀ y ∈ s, x ≠ y → Disjoint (ball x r) (ball y r) := by
+  obtain ⟨C, hC, hC2⟩ := hs.relatively_discrete
+  set c : ENNReal := min C 1 with hc
+  have hcpos : 0 < c := lt_min hC (by norm_num)
+  have hcne : c ≠ ⊤ := ne_top_of_le_ne_top (by norm_num) (min_le_right _ _)
+  have hcr : 0 < c.toReal := ENNReal.toReal_pos hcpos.ne' hcne
+  refine ⟨c.toReal / 2, by linarith, ?_⟩
+  intro x hx y hy hxy
+  refine Metric.ball_disjoint_ball ?_
+  have h1 : c ≤ edist x y := le_trans (min_le_left _ _) (hC2 x hx y hy hxy)
+  have h2 : c.toReal ≤ (edist x y).toReal := ENNReal.toReal_mono (edist_ne_top x y) h1
+  rw [← dist_edist] at h2
+  linarith
 
-/-- Key quantitative step: any finite family of bubbling points carries `eps` of energy each,
-inside pairwise disjoint balls, hence its cardinality times `eps` is bounded by the total
-energy bound `E`. -/
+/-- **Energy count at concentration points.** If each measure `μ n` has total mass at most `E`
+and `t` is a finite set of points at which the energy persistently concentrates with quantum `ε`
+(i.e. every ball around such a point carries asymptotic mass at least `ε`), then
+`(#t) * ε ≤ E`. -/
+theorem card_mul_le_of_concentration {X : Type*} [MetricSpace X] [MeasurableSpace X]
+    [BorelSpace X] (μ : ℕ → Measure X) (E ε : ENNReal) (hE : ∀ n, μ n Set.univ ≤ E)
+    (t : Finset X)
+    (ht : ∀ x ∈ t, ∀ r > (0 : ℝ), ε ≤ liminf (fun n => μ n (ball x r)) atTop) :
+    (t.card : ENNReal) * ε ≤ E := by
+  classical
+  obtain ⟨r, hr, hdisj⟩ := exists_radius_pairwise_disjoint_ball (s := (t : Set X)) t.finite_toSet
+  -- for every `n`, the disjoint balls carry total mass at most `E`
+  have hsum : ∀ n, ∑ x ∈ t, μ n (ball x r) ≤ E := by
+    intro n
+    have hbi : μ n (⋃ x ∈ t, ball x r) = ∑ x ∈ t, μ n (ball x r) :=
+      measure_biUnion_finset (fun x hx y hy hxy => hdisj x hx y hy hxy)
+        (fun x _ => measurableSet_ball)
+    calc ∑ x ∈ t, μ n (ball x r) = μ n (⋃ x ∈ t, ball x r) := hbi.symm
+      _ ≤ μ n Set.univ := measure_mono (Set.subset_univ _)
+      _ ≤ E := hE n
+  calc (t.card : ENNReal) * ε = ∑ _x ∈ t, ε := by
+          rw [Finset.sum_const, nsmul_eq_mul]
+    _ ≤ ∑ x ∈ t, liminf (fun n => μ n (ball x r)) atTop :=
+          Finset.sum_le_sum (fun x hx => ht x hx r hr)
+    _ ≤ liminf (fun n => ∑ x ∈ t, μ n (ball x r)) atTop :=
+          sum_liminf_le_liminf_sum t (fun x n => μ n (ball x r))
+    _ ≤ liminf (fun _ : ℕ => E) atTop := liminf_le_liminf (by filter_upwards with n using hsum n)
+    _ = E := liminf_const E
 
-private lemma finset_card_mul_le_of_subset_bubbleSet {X : Type*} [MetricSpace X]
-    [MeasurableSpace X] [OpensMeasurableSpace X] (mu : ℕ → Measure X) (E eps : ℝ≥0∞)
-    (hbound : ∀ n, mu n Set.univ ≤ E) (t : Finset X) (ht : (t : Set X) ⊆ BubbleSet mu eps) :
-    (t.card : ℝ≥0∞) * eps ≤ E := by
-  obtain ⟨r, hr, hdisj⟩ := exists_pos_pairwise_disjoint_ball t
-  -- For every `b < eps`, all balls eventually have measure `> b` simultaneously.
-  have key : ∀ b : ℝ≥0∞, b < eps → (t.card : ℝ≥0∞) * b ≤ E := by
-    intro b hb
-    have hev : ∀ᶠ n : ℕ in atTop, ∀ x ∈ t, b < mu n (Metric.ball x r) := by
-      rw [Filter.eventually_all_finset]
-      intro x hx
-      exact Filter.eventually_lt_of_lt_liminf (lt_of_lt_of_le hb (ht hx r hr))
-    obtain ⟨n, hn⟩ := hev.exists
-    calc (t.card : ℝ≥0∞) * b = ∑ _x ∈ t, b := by
-            rw [Finset.sum_const, nsmul_eq_mul]
-      _ ≤ ∑ x ∈ t, mu n (Metric.ball x r) :=
-            Finset.sum_le_sum (fun x hx => (hn x hx).le)
-      _ = mu n (⋃ x ∈ t, Metric.ball x r) := by
-            rw [measure_biUnion_finset hdisj (fun x _ => measurableSet_ball)]
-      _ ≤ mu n Set.univ := measure_mono (Set.subset_univ _)
-      _ ≤ E := hbound n
-  rcases Nat.eq_zero_or_pos t.card with h0 | h0
-  · simp [h0]
-  -- Pass to the supremum over `b < eps` using density of the order on `ℝ≥0∞`.
-  have hcard0 : (t.card : ℝ≥0∞) ≠ 0 := by
-    simpa using h0.ne'
-  have hcardtop : (t.card : ℝ≥0∞) ≠ ⊤ := ENNReal.natCast_ne_top _
-  have hle : eps ≤ E / (t.card : ℝ≥0∞) := by
-    by_contra hcon
-    push_neg at hcon
-    obtain ⟨c, hc1, hc2⟩ := exists_between hcon
-    have hkey := key c hc2
-    have : c ≤ E / (t.card : ℝ≥0∞) :=
-      (ENNReal.le_div_iff_mul_le (Or.inl hcard0) (Or.inl hcardtop)).2
-        (by rwa [mul_comm] at hkey)
-    exact absurd this (not_le.2 hc1)
-  calc (t.card : ℝ≥0∞) * eps ≤ (t.card : ℝ≥0∞) * (E / (t.card : ℝ≥0∞)) := by
-        gcongr
-    _ ≤ E := ENNReal.mul_div_le
+/-! ## Main result -/
 
-/-- Sanity check (non-vacuity): a sequence of unit point masses at `x` does concentrate at `x`,
-i.e. `x` really is a bubbling point at threshold `1`. -/
+/-- **Uhlenbeck bubbling: finiteness and counting of the blow-up set.**
 
-theorem uhlenbeck_bubbling {X : Type*} [MetricSpace X] [MeasurableSpace X]
-    [OpensMeasurableSpace X] (mu : ℕ → Measure X) (E eps : ℝ≥0∞) (hE : E ≠ ⊤) (heps : eps ≠ 0)
-    (hbound : ∀ n, mu n Set.univ ≤ E) :
-    (BubbleSet mu eps).Finite ∧
-      ((BubbleSet mu eps).ncard : ℝ≥0∞) * eps ≤ E := by
-  -- Choose `k` with `E < k * eps`; no `k` points can all be bubbling points.
-  obtain ⟨k, hk⟩ : ∃ k : ℕ, E < (k : ℝ≥0∞) * eps := by
-    rcases eq_or_ne eps ⊤ with rfl | -
-    · exact ⟨1, by simpa using hE.lt_top⟩
-    · obtain ⟨k, hk⟩ := ENNReal.exists_nat_gt (r := E / eps) (ENNReal.div_lt_top hE heps).ne
-      exact ⟨k, by rwa [ENNReal.div_lt_iff (Or.inl heps) (Or.inr hE)] at hk⟩
-  have hfin : (BubbleSet mu eps).Finite := by
+Let `μ n` be the Yang–Mills energy densities (`|F(A n)|²` measures) of a sequence of connections
+on a metric measure space `X`, with uniformly bounded total energy `E < ∞`.  Let `ε > 0` be the
+energy quantum (given, e.g., by the `ε`-regularity theorem) and let `S` be the *blow-up set*:
+the set of points at which every ball retains asymptotic energy at least `ε`.
+
+Then `S` is finite, and the number of bubbling points is controlled by the energy:
+`(#S) * ε ≤ E`.  In particular at most `E / ε` bubbles can form, which is the counting statement
+underlying Uhlenbeck's compactness theorem (convergence away from finitely many points). -/
+theorem uhlenbeck_bubbling {X : Type*} [MetricSpace X] [MeasurableSpace X] [BorelSpace X]
+    (μ : ℕ → Measure X) (E ε : ENNReal) (hE : ∀ n, μ n Set.univ ≤ E) (hEtop : E ≠ ⊤)
+    (hε : ε ≠ 0) (S : Set X)
+    (hS : ∀ x ∈ S, ∀ r > (0 : ℝ), ε ≤ liminf (fun n => μ n (ball x r)) atTop) :
+    S.Finite ∧ (S.ncard : ENNReal) * ε ≤ E := by
+  classical
+  have key : ∀ t : Finset X, (↑t : Set X) ⊆ S → (t.card : ENNReal) * ε ≤ E := by
+    intro t ht
+    exact card_mul_le_of_concentration μ E ε hE t (fun x hx => hS x (ht hx))
+  have hfin : S.Finite := by
     by_contra hinf
     rw [Set.not_finite] at hinf
-    obtain ⟨t, hts, htc⟩ := hinf.exists_subset_card_eq k
-    have := finset_card_mul_le_of_subset_bubbleSet mu E eps hbound t hts
-    rw [htc] at this
-    exact absurd this (not_le.2 hk)
+    -- the singleton case shows `ε ≤ E`, so `ε ≠ ⊤`
+    obtain ⟨t1, ht1sub, ht1card⟩ := hinf.exists_subset_card_eq 1
+    have hεE : ε ≤ E := by
+      have := key t1 ht1sub
+      rwa [ht1card, Nat.cast_one, one_mul] at this
+    have hεtop : ε ≠ ⊤ := fun h => hEtop (top_le_iff.mp (h ▸ hεE))
+    have hdiv : E / ε ≠ ⊤ := (ENNReal.div_lt_top hEtop hε).ne
+    obtain ⟨N, hN⟩ := ENNReal.exists_nat_gt hdiv
+    obtain ⟨t, htsub, htcard⟩ := hinf.exists_subset_card_eq N
+    have h1 : (N : ENNReal) * ε ≤ E := by
+      have := key t htsub
+      rwa [htcard] at this
+    have h2 : (N : ENNReal) ≤ E / ε := (ENNReal.le_div_iff_mul_le (Or.inl hε)
+      (Or.inl hεtop)).mpr h1
+    exact absurd h2 (not_le.mpr hN)
   refine ⟨hfin, ?_⟩
-  have hsub : ((hfin.toFinset : Finset X) : Set X) ⊆ BubbleSet mu eps := by
-    simp [Set.Finite.coe_toFinset]
-  have := finset_card_mul_le_of_subset_bubbleSet mu E eps hbound hfin.toFinset hsub
-  rwa [Set.ncard_eq_toFinset_card _ hfin]
+  have hsub : (↑hfin.toFinset : Set X) ⊆ S := by simp
+  have := key hfin.toFinset hsub
+  rwa [Set.Finite.card_toFinset, ← Set.Nat.card_coe_set_eq, Set.Nat.card_coe_set_eq,
+    Set.ncard_eq_toFinset_card' ] at this
 
-/-- Energy-density form of the bubbling theorem.  If `F n : X → V` are curvature fields
-(for instance the curvatures `F_{A_n}` of a sequence of connections) whose energies
-`∫ ‖F n‖²` are bounded by `E`, then the set of points where at least `eps` of the energy
-concentrates at all scales is finite, with at most `E / eps` points. -/
+end Frontier
+

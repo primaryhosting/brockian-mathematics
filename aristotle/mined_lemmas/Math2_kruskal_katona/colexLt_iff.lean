@@ -1,19 +1,9 @@
-/-
-# Kruskal Katona
-Category: Frontier Math
-Target: Math2.kruskal_katona
-Statement: The Kruskal–Katona theorem on shadows of set systems.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
 # Kruskal Katona
 Category: Frontier Math
 Target: Math2.kruskal_katona
-Statement: The Kruskal–Katona theorem on shadows of set systems.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
@@ -37,15 +27,20 @@ set_option grind.warning false
 namespace Math2
 
 open Finset
-open Finset.Colex
 
 variable {n : ℕ}
 
-/-- The (lower) shadow of a family of finite sets: all sets obtained from a member of the
-family by deleting a single element. -/
+/-- The shadow of a family `𝒜` of finite sets: all the sets obtained from a member of `𝒜` by
+deleting one element. -/
 
-lemma colexLt_iff {A B : Finset (Fin n)} :
-    ColexLt A B ↔ _root_.toColex A < _root_.toColex B :=
+lemma colexLt_iff {s t : Finset (Fin n)} :
+    ColexLt s t ↔ toColex s < toColex t :=
   Finset.Colex.toColex_lt_toColex_iff_exists_forall_lt.symm
 
-/-- Our notion of colex initial segment agrees with Mathlib's `Finset.Colex.IsInitSeg`. -/
+/-- **The Kruskal–Katona theorem.**
+
+Let `𝒜` be a family of `r`-element subsets of `Fin n`, and let `𝒞` be an initial segment of the
+colexicographic order on `r`-element sets (that is, `𝒞` consists of `r`-sets and is downwards
+closed in colex among `r`-sets) with `#𝒞 ≤ #𝒜`. Then the shadow of `𝒞` is no larger than the
+shadow of `𝒜`; in other words, among families of `r`-sets of a given size, the initial segments
+of colex minimise the size of the shadow. -/

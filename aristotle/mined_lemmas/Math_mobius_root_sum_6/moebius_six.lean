@@ -16,18 +16,17 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset
+open Complex Finset
 
 namespace Math
 
-/-- The Möbius function at `6` equals `1` (since `6 = 2 * 3` is squarefree with two prime
-factors). -/
+/-- A primitive 6-th root of unity `ζ` satisfies `ζ ^ 3 = -1`. -/
 
-theorem moebius_six : ArithmeticFunction.moebius 6 = 1 := by
-  rw [ArithmeticFunction.moebius_apply_of_squarefree (by decide +kernel),
-    ArithmeticFunction.cardFactors_apply,
-    show Nat.primeFactorsList 6 = [2, 3] from by decide +kernel]
+lemma moebius_six : (ArithmeticFunction.moebius 6 : ℤ) = 1 := by
+  have h : (6 : ℕ) = 2 * 3 := by norm_num
+  rw [h, ArithmeticFunction.isMultiplicative_moebius.map_mul_of_coprime (by norm_num),
+    ArithmeticFunction.moebius_apply_prime (by norm_num),
+    ArithmeticFunction.moebius_apply_prime (by norm_num)]
   norm_num
 
-/-- A primitive `6`-th root of unity in `ℂ` is a root of the sixth cyclotomic polynomial
-`X ^ 2 - X + 1`. -/
+/-- The sum of the primitive 6-th roots of unity in `ℂ` equals `μ(6)`. -/

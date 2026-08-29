@@ -1,247 +1,157 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-!
+# Gale Stewart Open
+Category: Frontier — Set Theory
+Target: Frontier.Gale_Stewart_open
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Frontier
 
-section GaleStewart
-
 variable {A : Type*}
 
-/-- In a two–player game on the move set `A`, the players alternate moves, player I moving at
-positions of even length and player II at positions of odd length.  Given strategies `σ` for
-player I and `τ` for player II, `nextMove σ τ p` is the move played at the position `p`. -/
-def nextMove (σ τ : List A → A) (p : List A) : A :=
-  if Even p.length then σ p else τ p
+/-- The list of the first `n` moves of the play `f`. -/
 
-/-- `run σ τ p n` is the position reached after `n` further moves, starting from the position `p`,
-when the players follow the strategies `σ` and `τ`. -/
-def run (σ τ : List A → A) (p : List A) : ℕ → List A
-  | 0 => p
-  | n + 1 => run σ τ p n ++ [nextMove σ τ (run σ τ p n)]
+def takeF (f : ℕ → A) (n : ℕ) : List A := (List.range n).map f
 
-/-- `play a₀ σ τ p` is the infinite play obtained by starting from the position `p` and letting
-the players follow the strategies `σ` and `τ`.  Its first `p.length` moves are those of `p`. -/
-def play (a₀ : A) (σ τ : List A → A) (p : List A) (i : ℕ) : A :=
-  if i < p.length then p.getD i a₀ else nextMove σ τ (run σ τ p (i - p.length))
+@[simp] lemma takeF_length (f : ℕ → A) (n : ℕ) : (takeF f n).length = n := by
+  simp [takeF]
 
-/-- Player I wins the game with payoff set `W` from the position `p` if he has a strategy from `p`
-beating every strategy of player II. -/
-def WinsFrom (a₀ : A) (W : Set (ℕ → A)) (p : List A) : Prop :=
-  ∃ σ : List A → A, ∀ τ : List A → A, play a₀ σ τ p ∈ W
+lemma takeF_succ (f : ℕ → A) (n : ℕ) : takeF f (n + 1) = takeF f n ++ [f n] := by
+  simp [takeF, List.range_succ]
 
-lemma run_length (σ τ : List A → A) (p : List A) (n : ℕ) :
-    (run σ τ p n).length = p.length + n := by
-  induction n with
-  | zero => simp [run]
-  | succ n ih => simp [run, ih]; omega
+lemma takeF_getElem (f : ℕ → A) {n i : ℕ} (h : i < n) :
+    (takeF f n)[i]'(by simpa using h) = f i := by
+  simp [takeF]
 
-lemma run_eq_append (σ τ : List A → A) (p : List A) (n : ℕ) :
-    ∃ t : List A, run σ τ p n = p ++ t := by
-  induction n with
-  | zero => exact ⟨[], by simp [run]⟩
-  | succ n ih =>
-      obtain ⟨t, ht⟩ := ih
-      exact ⟨t ++ [nextMove σ τ (run σ τ p n)], by simp [run, ht]⟩
+lemma takeF_getD [Inhabited A] (f : ℕ → A) {n i : ℕ} (h : i < n) :
+    (takeF f n).getD i default = f i := by
+  rw [List.getD_eq_getElem _ _ (by simpa using h), takeF_getElem f h]
 
-lemma run_getD_of_lt (a₀ : A) (σ τ : List A → A) (p : List A) (n i : ℕ) (hi : i < p.length) :
-    (run σ τ p n).getD i a₀ = p.getD i a₀ := by
-  obtain ⟨t, ht⟩ := run_eq_append σ τ p n
-  rw [ht, List.getD_append _ _ _ _ hi]
+lemma takeF_prefix (f : ℕ → A) {m n : ℕ} (h : m ≤ n) : takeF f m <+: takeF f n := by
+  induction n, h using Nat.le_induction with
+  | base => exact List.prefix_rfl
+  | succ n hn ih => exact ih.trans (by rw [takeF_succ]; exact List.prefix_append _ _)
 
-lemma play_of_lt (a₀ : A) (σ τ : List A → A) (p : List A) (i : ℕ) (hi : i < p.length) :
-    play a₀ σ τ p i = p.getD i a₀ := by
-  simp [play, hi]
-
-lemma play_length_add (a₀ : A) (σ τ : List A → A) (p : List A) (k : ℕ) :
-    play a₀ σ τ p (p.length + k) = nextMove σ τ (run σ τ p k) := by
-  simp [play]
-
-/-- The `n`-th position of a run determines the first `p.length + n` moves of the play. -/
-lemma run_getD_eq_play (a₀ : A) (σ τ : List A → A) (p : List A) (n i : ℕ)
-    (hi : i < p.length + n) : (run σ τ p n).getD i a₀ = play a₀ σ τ p i := by
-  induction n with
-  | zero =>
-      have : i < p.length := by simpa using hi
-      simp [run, play, this]
-  | succ n ih =>
-      rcases lt_or_ge i (p.length + n) with h | h
-      · have hlen : i < (run σ τ p n).length := by rw [run_length]; exact h
-        rw [show run σ τ p (n + 1)
-              = run σ τ p n ++ [nextMove σ τ (run σ τ p n)] from rfl,
-          List.getD_append _ _ _ _ hlen]
-        exact ih h
-      · have hi' : i = p.length + n := by omega
-        subst hi'
-        rw [show run σ τ p (n + 1)
-              = run σ τ p n ++ [nextMove σ τ (run σ τ p n)] from rfl]
-        rw [List.getD_append_right _ _ _ _ (by rw [run_length]), run_length]
-        simp [play_length_add]
-
-/-- Two plays that agree on the first `n` moves. -/
-lemma play_ext_of_run_eq {a₀ : A} {σ τ σ' τ' : List A → A} {p q : List A} {m k : ℕ}
-    (h : ∀ n : ℕ, run σ τ p (n + m) = run σ' τ' q (n + k)) :
-    play a₀ σ τ p = play a₀ σ' τ' q := by
-  funext i
-  have h1 : i < p.length + (i + 1 + m) := by omega
-  have h2 : i < q.length + (i + 1 + k) := by omega
-  rw [← run_getD_eq_play a₀ σ τ p (i + 1 + m) i h1,
-    ← run_getD_eq_play a₀ σ' τ' q (i + 1 + k) i h2, h (i + 1)]
-
-/-- If player I can win from `p ++ [a]`, then he can win from `p`, provided it is his turn at `p`
-(so that he can play `a`). -/
-lemma winsFrom_of_winsFrom_append (a₀ : A) (W : Set (ℕ → A)) (p : List A)
-    (hp : Even p.length) (a : A) (h : WinsFrom a₀ W (p ++ [a])) : WinsFrom a₀ W p := by
-  obtain ⟨σ, hσ⟩ := h
-  classical
-  refine ⟨fun q => if q = p then a else σ q, fun τ => ?_⟩
-  set σ' : List A → A := fun q => if q = p then a else σ q with hσ'
-  have key : ∀ n : ℕ, run σ' τ p (n + 1) = run σ τ (p ++ [a]) (n + 0) := by
-    intro n
-    induction n with
-    | zero =>
-        show run σ' τ p 0 ++ [nextMove σ' τ (run σ' τ p 0)] = _
-        simp [run, nextMove, hp, hσ']
-    | succ n ih =>
-        show run σ' τ p (n + 1) ++ [nextMove σ' τ (run σ' τ p (n + 1))] = _
-        simp only [Nat.add_zero] at ih ⊢
-        rw [ih]
-        have hlen : p.length < (run σ τ (p ++ [a]) n).length := by
-          rw [run_length]; simp; omega
-        have hne : run σ τ (p ++ [a]) n ≠ p := by
-          intro hcon
-          rw [hcon] at hlen
-          exact lt_irrefl _ hlen
-        show _ = run σ τ (p ++ [a]) n ++ [nextMove σ τ (run σ τ (p ++ [a]) n)]
-        simp [nextMove, hσ', hne]
-  have := play_ext_of_run_eq (a₀ := a₀) (σ := σ') (τ := τ) (σ' := σ) (τ' := τ)
-    (p := p) (q := p ++ [a]) (m := 1) (k := 0) key
-  rw [this]
-  exact hσ τ
-
-/-- If it is player II's turn at `p` and player I can win from `p ++ [a]` for every move `a`,
-then player I can win from `p`. -/
-lemma winsFrom_of_forall_winsFrom_append (a₀ : A) (W : Set (ℕ → A)) (p : List A)
-    (hp : ¬ Even p.length) (h : ∀ a : A, WinsFrom a₀ W (p ++ [a])) : WinsFrom a₀ W p := by
-  classical
-  choose f hf using h
-  refine ⟨fun q => f (q.getD p.length a₀) q, fun τ => ?_⟩
-  set σ : List A → A := fun q => f (q.getD p.length a₀) q with hσdef
-  set b : A := τ p with hb
-  have hpb : (p ++ [b]).length = p.length + 1 := by simp
-  have hgetb : ∀ n : ℕ, (run (f b) τ (p ++ [b]) n).getD p.length a₀ = b := by
-    intro n
-    rw [run_getD_of_lt a₀ (f b) τ (p ++ [b]) n p.length (by rw [hpb]; omega)]
-    simp
-  have key : ∀ n : ℕ, run σ τ p (n + 1) = run (f b) τ (p ++ [b]) (n + 0) := by
-    intro n
-    induction n with
-    | zero =>
-        show run σ τ p 0 ++ [nextMove σ τ (run σ τ p 0)] = _
-        simp [run, nextMove, hp, hb]
-    | succ n ih =>
-        show run σ τ p (n + 1) ++ [nextMove σ τ (run σ τ p (n + 1))] = _
-        simp only [Nat.add_zero] at ih ⊢
-        rw [ih]
-        show _ = run (f b) τ (p ++ [b]) n ++ [nextMove (f b) τ (run (f b) τ (p ++ [b]) n)]
-        simp only [nextMove, hσdef, hgetb n]
-  have := play_ext_of_run_eq (a₀ := a₀) (σ := σ) (τ := τ) (σ' := f b) (τ' := τ)
-    (p := p) (q := p ++ [b]) (m := 1) (k := 0) key
-  rw [this]
-  exact hf b τ
-
-/-- A defensive strategy for player II: at a position from which player I has no winning
-strategy, play a move preserving that fact. -/
-noncomputable def defensive (a₀ : A) (W : Set (ℕ → A)) (p : List A) : A := by
-  classical
-  exact if h : ∃ a : A, ¬ WinsFrom a₀ W (p ++ [a]) then h.choose else a₀
-
-lemma defensive_spec (a₀ : A) (W : Set (ℕ → A)) (p : List A)
-    (h : ∃ a : A, ¬ WinsFrom a₀ W (p ++ [a])) :
-    ¬ WinsFrom a₀ W (p ++ [defensive a₀ W p]) := by
-  classical
-  have : defensive a₀ W p = h.choose := by
-    simp only [defensive]
-    rw [dif_pos h]
-  rw [this]
-  exact h.choose_spec
-
-/-- Every point of an open subset of the Baire-type space `ℕ → A` (with `A` discrete) has a
-basic cylinder neighbourhood contained in the set. -/
-lemma exists_prefix_subset [TopologicalSpace A] [DiscreteTopology A] {W : Set (ℕ → A)}
-    (hW : IsOpen W) {x : ℕ → A} (hx : x ∈ W) :
-    ∃ n : ℕ, ∀ y : ℕ → A, (∀ i < n, y i = x i) → y ∈ W := by
-  obtain ⟨v, ⟨x', n, rfl⟩, hxv, hvW⟩ :=
-    (PiNat.isTopologicalBasis_cylinders (fun _ : ℕ => A)).exists_subset_of_mem_open hx hW
-  refine ⟨n, fun y hy => ?_⟩
-  apply hvW
-  have hxx' : PiNat.cylinder x n = PiNat.cylinder x' n := PiNat.mem_cylinder_iff_eq.1 hxv
-  rw [← hxx']
-  exact PiNat.mem_cylinder_iff.2 hy
-
-/-- **Gale–Stewart theorem**: every open game is determined.  Here a game is given by a move set
-`A` (discrete, nonempty) and a payoff set `W ⊆ (ℕ → A)` for player I; the players alternately
-choose elements of `A`, player I starting, and player I wins the resulting play `x : ℕ → A`
-iff `x ∈ W`.  If `W` is open, then either player I has a winning strategy, or player II has one. -/
-theorem Gale_Stewart_open [TopologicalSpace A] [DiscreteTopology A] (a₀ : A)
-    (W : Set (ℕ → A)) (hW : IsOpen W) :
-    (∃ σ : List A → A, ∀ τ : List A → A, play a₀ σ τ [] ∈ W) ∨
-      (∃ τ : List A → A, ∀ σ : List A → A, play a₀ σ τ [] ∉ W) := by
-  classical
-  by_cases hI : WinsFrom a₀ W []
-  · exact Or.inl hI
-  refine Or.inr ⟨defensive a₀ W, fun σ hmem => ?_⟩
-  set τ : List A → A := defensive a₀ W with hτ
-  -- along the play, player I never has a winning strategy
-  have hrun : ∀ n : ℕ, ¬ WinsFrom a₀ W (run σ τ [] n) := by
-    intro n
-    induction n with
-    | zero => simpa [run] using hI
-    | succ n ih =>
-        show ¬ WinsFrom a₀ W (run σ τ [] n ++ [nextMove σ τ (run σ τ [] n)])
-        set q : List A := run σ τ [] n with hq
-        by_cases hpar : Even q.length
-        · intro hwin
-          exact ih (winsFrom_of_winsFrom_append a₀ W q hpar _
-            (by simpa [nextMove, hpar] using hwin))
-        · have hex : ∃ a : A, ¬ WinsFrom a₀ W (q ++ [a]) := by
-            by_contra hcon
-            push_neg at hcon
-            exact ih (winsFrom_of_forall_winsFrom_append a₀ W q hpar hcon)
-          have := defensive_spec a₀ W q hex
-          simpa [nextMove, hpar, hτ] using this
-  -- but the play is in the open set `W`, so some finite position already secures a win
-  obtain ⟨n, hn⟩ := exists_prefix_subset hW hmem
-  refine hrun n ⟨fun _ => a₀, fun τ' => ?_⟩
-  apply hn
+lemma eq_of_takeF_eq {f g : ℕ → A} {n : ℕ} (h : takeF f n = takeF g n) :
+    ∀ i < n, f i = g i := by
   intro i hi
-  have hlen : (run σ τ [] n).length = n := by rw [run_length]; simp
-  have hi' : i < (run σ τ [] n).length := by omega
-  rw [play_of_lt a₀ _ τ' _ i hi']
-  rw [run_getD_eq_play a₀ σ τ [] n i (by simpa using hi)]
+  have := congrArg (fun l => l[i]?) h
+  simpa [takeF, List.getElem?_map, List.getElem?_range, hi] using this
 
-end GaleStewart
+/-- A strategy assigns a move to every position (finite sequence of moves played so far). -/
+abbrev Strategy (A : Type*) := List A → A
 
-end Frontier
+/-- The play `f` follows strategy `σ` for player I (who moves at the even-numbered turns). -/
 
+def FollowsI (f : ℕ → A) (σ : Strategy A) : Prop := ∀ n, Even n → f n = σ (takeF f n)
+
+/-- The play `f` follows strategy `τ` for player II (who moves at the odd-numbered turns). -/
+
+def FollowsII (f : ℕ → A) (τ : Strategy A) : Prop := ∀ n, Odd n → f n = τ (takeF f n)
+
+/-- Player I has a winning strategy in the subgame of `W` starting from the position `p`
+(where it is player I's turn, i.e. `p` has even length). -/
+
+def IWinsFrom (W : Set (ℕ → A)) (p : List A) : Prop :=
+  ∃ σ : Strategy A, ∀ f : ℕ → A, takeF f p.length = p →
+    (∀ n, p.length ≤ n → Even n → f n = σ (takeF f n)) → f ∈ W
+
+/-- Openness in the product topology: every play in `W` has a finite initial segment
+all of whose extensions lie in `W`. -/
+
+lemma exists_basic_nbhd [TopologicalSpace A] {W : Set (ℕ → A)} (hW : IsOpen W)
+    {f : ℕ → A} (hf : f ∈ W) : ∃ n, ∀ g : ℕ → A, (∀ i < n, g i = f i) → g ∈ W := by
+  rw [isOpen_pi_iff] at hW
+  obtain ⟨I, u, hu, hsub⟩ := hW f hf
+  refine ⟨(I.sup id) + 1, fun g hg => hsub ?_⟩
+  intro i hi
+  have h1 : i ≤ I.sup id := by simpa using Finset.le_sup (f := id) hi
+  rw [hg i (by omega)]
+  exact (hu i hi).2
+
+/-- If player I wins the subgame after every reply `b` to the move `a`, then I wins from `p`. -/
+
+lemma IWinsFrom_of_forall [Inhabited A] {W : Set (ℕ → A)} {p : List A}
+    (hp : Even p.length) (a : A) (h : ∀ b, IWinsFrom W (p ++ [a, b])) : IWinsFrom W p := by
+  classical
+  choose S hS using h
+  refine ⟨fun q => if (p ++ [a]) <+: q then S (q.getD (p.length + 1) default) q else a, ?_⟩
+  intro f hfp hfσ
+  have hnp : ¬ (p ++ [a] <+: p) := by
+    intro hc
+    have := hc.length_le
+    simp at this
+  have hfa : f p.length = a := by
+    have h0 := hfσ p.length le_rfl hp
+    rw [hfp] at h0
+    simpa [hnp] using h0
+  obtain ⟨b, hb⟩ : ∃ b, f (p.length + 1) = b := ⟨_, rfl⟩
+  have hq : takeF f (p.length + 2) = p ++ [a, b] := by
+    rw [show p.length + 2 = (p.length + 1) + 1 from rfl, takeF_succ, takeF_succ, hfp, hfa, hb]
+    simp
+  refine hS b f (by rw [show (p ++ [a, b]).length = p.length + 2 by simp]; exact hq) ?_
+  intro n hn hev
+  have hn2 : p.length + 2 ≤ n := by simpa using hn
+  have h1 := hfσ n (by omega) hev
+  have hpre : p ++ [a] <+: takeF f n := by
+    have h2 : takeF f (p.length + 2) <+: takeF f n := takeF_prefix f hn2
+    rw [hq] at h2
+    exact List.IsPrefix.trans (by simp) h2
+  rw [h1]
+  simp only [if_pos hpre, takeF_getD f (show p.length + 1 < n by omega), hb]
+
+/-- From a position that is not winning for player I, every move of player I admits
+a reply keeping the position not winning for player I. -/
+
+lemma exists_bad_move [Inhabited A] {W : Set (ℕ → A)} {p : List A}
+    (hp : Even p.length) (h : ¬ IWinsFrom W p) (a : A) :
+    ∃ b, ¬ IWinsFrom W (p ++ [a, b]) := by
+  by_contra hc
+  push_neg at hc
+  exact h (IWinsFrom_of_forall hp a hc)
+
+/-- **Gale–Stewart theorem**: every open game is determined.
+
+The game is played on a (nonempty, discrete) set of moves `A`; players I and II alternately
+choose elements of `A`, player I moving at the even-numbered turns, producing a play
+`f : ℕ → A`. Player I wins if the play belongs to the payoff set `W`, which is assumed open
+in the product topology. The conclusion is that one of the two players has a winning strategy.
+(The proof only uses that `W` is open, so it holds for any topology on `A`; the discreteness
+assumption is the standard setting in which "open game" is meant.) -/
+
+theorem Gale_Stewart_open {A : Type*} [Inhabited A] [TopologicalSpace A] [DiscreteTopology A]
+    (W : Set (ℕ → A)) (hW : IsOpen W) :
+    (∃ σ : Strategy A, ∀ f : ℕ → A, FollowsI f σ → f ∈ W) ∨
+    (∃ τ : Strategy A, ∀ f : ℕ → A, FollowsII f τ → f ∉ W) := by
+  classical
+  by_cases hI : IWinsFrom W []
+  · obtain ⟨σ, hσ⟩ := hI
+    exact Or.inl ⟨σ, fun f hf => hσ f (by simp) (fun n _ hn => hf n hn)⟩
+  · refine Or.inr ⟨fun q => if h : ∃ b, ¬ IWinsFrom W (q ++ [b]) then h.choose else default,
+      fun f hf hfW => ?_⟩
+    have claim : ∀ k, ¬ IWinsFrom W (takeF f (2 * k)) := by
+      intro k
+      induction k with
+      | zero => simpa using hI
+      | succ k ih =>
+        have hp : Even (takeF f (2 * k)).length := by simp
+        obtain ⟨b, hb⟩ := exists_bad_move hp ih (f (2 * k))
+        have hq : takeF f (2 * k + 1) = takeF f (2 * k) ++ [f (2 * k)] := takeF_succ f (2 * k)
+        have hex : ∃ b, ¬ IWinsFrom W (takeF f (2 * k + 1) ++ [b]) := by
+          refine ⟨b, ?_⟩
+          rw [hq]
+          simpa using hb
+        have hval := hf (2 * k + 1) ⟨k, by ring⟩
+        have hstep : takeF f (2 * (k + 1)) = takeF f (2 * k + 1) ++ [f (2 * k + 1)] := by
+          rw [show 2 * (k + 1) = (2 * k + 1) + 1 by ring]; exact takeF_succ f _
+        rw [hstep, hval]
+        simpa only [dif_pos hex] using hex.choose_spec
+    obtain ⟨n, hn⟩ := exists_basic_nbhd hW hfW
+    refine claim n ⟨fun _ => default, fun g hg _ => hn g ?_⟩
+    rw [takeF_length] at hg
+    exact fun i hi => eq_of_takeF_eq hg i (by omega)
+
+/-- The position reached after `n` moves when player I follows `σ` and player II follows `τ`. -/

@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Qft Unitary
 Category: Quantum Computing
 Target: QC.qft_unitary
@@ -33,17 +31,17 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
 namespace QC
 
-open Complex Matrix
+open Complex Finset
 
-/-- The primitive `N`-th root of unity `exp (2πi/N)`. -/
+/-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
 lemma conj_omegaN (N : ℕ) : (starRingEnd ℂ) (omegaN N) = (omegaN N)⁻¹ := by
   rw [omegaN, ← Complex.exp_conj, ← Complex.exp_neg]
   congr 1
-  simp only [map_div₀, map_mul, Complex.conj_ofReal, Complex.conj_I, map_ofNat,
-    Complex.conj_natCast]
+  simp [Complex.ext_iff]
   ring
 
-/-- The key orthogonality relation between the columns of the Fourier matrix. -/

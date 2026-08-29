@@ -16,58 +16,51 @@ Target: Frontier.noether_conservation
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` to precede any module docstring `/-! ... -/`, so the
--- header above is written as a plain block comment with identical content.)
 
+
+/-!
+# Noether Conservation
+Category: Frontier Physics
+Target: Frontier.noether_conservation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Frontier
 
-/--
-**Noether's theorem, one-dimensional case.**
+/-- **Noether's theorem, one-dimensional case.**
 
-Setting: a Lagrangian `L : ℝ → ℝ → ℝ`, written `L q v`, described through its two partial
-derivatives `Lq` (derivative in the position slot) and `Lv` (derivative in the velocity slot).
+Setting: a mechanical system with one degree of freedom, described by a Lagrangian
+`L : ℝ → ℝ → ℝ`, `L q v`, whose partial derivatives are `Lq` (with respect to the position `q`)
+and `Lv` (with respect to the velocity `v`).
 
-* `q : ℝ → ℝ` is a trajectory with velocity `q'`.
-* `X : ℝ → ℝ` is the infinitesimal generator of a smooth one-parameter symmetry
-  `q ↦ q + s • X q`, with derivative `Xd`.
-* `hEL` is the Euler–Lagrange equation `d/dt (∂L/∂v) = ∂L/∂q` along the trajectory.
-* `hsym` is infinitesimal invariance of the Lagrangian under the symmetry: the first
-  variation `(∂L/∂q) · X + (∂L/∂v) · (X' · v)` vanishes identically.
+* `q : ℝ → ℝ` is a (differentiable) trajectory with velocity `deriv q`.
+* `X : ℝ → ℝ` is the infinitesimal generator of a one-parameter group of symmetries, i.e. the
+  variation of the position is `δq = X (q t)`, and the induced variation of the velocity is
+  `δv = deriv X (q t) * deriv q t`.
+* `hEL` is the Euler–Lagrange equation `d/dt (Lv (q t) (q' t)) = Lq (q t) (q' t)` along the
+  trajectory.
+* `hsym` is the infinitesimal invariance of the Lagrangian under the symmetry:
+  `Lq u v * X u + Lv u v * (deriv X u * v) = 0` for all `(u, v)` in phase space.
 
-Conclusion: the Noether current `J t = (∂L/∂v)(q t, q' t) · X (q t)` is conserved,
-i.e. it takes the same value at any two times.
--/
+Conclusion: the Noether current `J t = Lv (q t) (q' t) * X (q t)`, the momentum conjugate to the
+symmetry direction, is conserved: it takes the same value at all times. -/
 theorem noether_conservation
-    (Lq Lv : ℝ → ℝ → ℝ) (X Xd q q' : ℝ → ℝ)
-    (hq : ∀ t, HasDerivAt q (q' t) t)
-    (hX : ∀ x, HasDerivAt X (Xd x) x)
-    (hEL : ∀ t, HasDerivAt (fun s => Lv (q s) (q' s)) (Lq (q t) (q' t)) t)
-    (hsym : ∀ x v, Lq x v * X x + Lv x v * (Xd x * v) = 0) :
-    ∀ t₁ t₂, Lv (q t₁) (q' t₁) * X (q t₁) = Lv (q t₂) (q' t₂) * X (q t₂) := by
-  -- The Noether current has vanishing derivative: differentiate the product, use the
-  -- Euler–Lagrange equation on the first factor and the chain rule on the second,
-  -- then invoke infinitesimal invariance.
-  have hJ : ∀ t, HasDerivAt (fun s => Lv (q s) (q' s) * X (q s)) 0 t := by
+    (Lq Lv : ℝ → ℝ → ℝ) (q X : ℝ → ℝ)
+    (hq : Differentiable ℝ q) (hX : Differentiable ℝ X)
+    (hEL : ∀ t : ℝ, HasDerivAt (fun s => Lv (q s) (deriv q s)) (Lq (q t) (deriv q t)) t)
+    (hsym : ∀ u v : ℝ, Lq u v * X u + Lv u v * (deriv X u * v) = 0) :
+    ∀ t s : ℝ, Lv (q t) (deriv q t) * X (q t) = Lv (q s) (deriv q s) * X (q s) := by
+  -- The Noether current has derivative zero everywhere.
+  have hJ : ∀ t : ℝ, HasDerivAt (fun s => Lv (q s) (deriv q s) * X (q s)) 0 t := by
     intro t
-    have h := (hEL t).mul ((hX (q t)).comp t (hq t))
-    simp only [Pi.mul_def, Function.comp_apply, Function.comp_def] at h
-    rwa [hsym (q t) (q' t)] at h
-  -- A function on `ℝ` with everywhere vanishing derivative is constant.
-  exact fun t₁ t₂ =>
-    is_const_of_deriv_eq_zero (fun t => (hJ t).differentiableAt) (fun t => (hJ t).deriv) t₁ t₂
-
-/--
-Special case (cyclic coordinate): if the Lagrangian does not depend on the position,
-the Euler–Lagrange equation says that the conjugate momentum `p = ∂L/∂v` has vanishing
-time derivative, hence is conserved.
--/
-theorem noether_momentum_conservation
-    (Lv : ℝ → ℝ → ℝ) (q q' : ℝ → ℝ)
-    (hEL : ∀ t, HasDerivAt (fun s => Lv (q s) (q' s)) 0 t) :
-    ∀ t₁ t₂, Lv (q t₁) (q' t₁) = Lv (q t₂) (q' t₂) :=
-  fun t₁ t₂ =>
-    is_const_of_deriv_eq_zero (fun t => (hEL t).differentiableAt) (fun t => (hEL t).deriv) t₁ t₂
+    have hXq : HasDerivAt (fun s => X (q s)) (deriv X (q t) * deriv q t) t :=
+      (hX (q t)).hasDerivAt.comp t (hq t).hasDerivAt
+    have h := (hEL t).mul hXq
+    rwa [hsym (q t) (deriv q t)] at h
+  have hdiff : Differentiable ℝ fun s => Lv (q s) (deriv q s) * X (q s) := fun t =>
+    (hJ t).differentiableAt
+  exact is_const_of_deriv_eq_zero hdiff fun t => (hJ t).deriv
 
 end Frontier
 

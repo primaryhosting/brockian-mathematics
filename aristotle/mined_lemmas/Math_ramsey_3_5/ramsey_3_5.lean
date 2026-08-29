@@ -41,22 +41,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Math
+open Finset SimpleGraph
 
-/-! ## Relative (Finset-localized) triangles and independent sets -/
+namespace Ramsey35
 
-section Rel
+variable {V : Type*} [DecidableEq V]
 
-variable {V : Type*} [LinearOrder V]
+/-! ### Basic clique helpers -/
 
-/-- `t` is an independent set of `G`. -/
+omit [DecidableEq V] in
+/-- A finset all of whose distinct pairs are non-adjacent is a clique in the complement. -/
 
-theorem ramsey_3_5 : IsLeast {n : ℕ | RamseyProp n} 14 := by
-  refine ⟨ramseyProp_14, ?_⟩
-  intro n hn
-  by_contra hlt
-  push_neg at hlt
-  exact not_ramseyProp_13 (ramseyProp_mono (by omega) hn)
+theorem ramsey_3_5 :
+    IsLeast {N : ℕ | ∀ G : SimpleGraph (Fin N),
+      (∃ s : Finset (Fin N), G.IsNClique 3 s) ∨
+        (∃ t : Finset (Fin N), Gᶜ.IsNClique 5 t)} 14 := by
+  constructor
+  · intro G
+    rcases Ramsey35.ramsey_3_5_finset G Finset.univ (by simp) with ⟨s, _, hs⟩ | ⟨t, _, ht⟩
+    · exact Or.inl ⟨s, hs⟩
+    · exact Or.inr ⟨t, ht⟩
+  · intro N hN
+    by_contra hlt
+    push_neg at hlt
+    have h13 : (13 : ℕ) ∈ Ramsey35.RamseySet :=
+      Ramsey35.RamseySet_upward (by omega) hN
+    rcases h13 Ramsey35.G13 with h | h
+    · exact Ramsey35.G13_triangle_free h
+    · exact Ramsey35.G13_no_indep_five h
 
 end Math
 

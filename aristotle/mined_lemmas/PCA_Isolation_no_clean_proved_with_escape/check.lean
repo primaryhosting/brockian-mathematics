@@ -1,107 +1,60 @@
-import Mathlib
-import RequestProject.NoCleanProvedWithEscape
-
 /-!
-# A structured isolation engine with control flow
-
-`RequestProject.NoCleanProvedWithEscape` models straight-line applications. Here the
-application language has real control flow, so the static verifier is a genuine
-*must-hold* capability analysis rather than a single pass over a list:
-
-* `Cmd` : commands built from `use`, `grant`, `revoke`, sequencing, nondeterministic
-  branching (an `if` whose guard the verifier cannot predict) and loops (`loop`, executed
-  any number of times);
-* `Ok policy c g g'` : an execution of `c` from capability set `g` that stays inside the
-  sandbox and ends holding `g'`;
-* `Fail policy c g` : an execution of `c` from `g` that crosses the sandbox boundary — this
-  is what `EscapesS` means;
-* `analyze` : the static verifier. It computes a *lower bound* on the capabilities that are
-  certainly held: branches are merged by intersection, and a loop is admitted only when its
-  body preserves the capabilities held on entry;
-* `DerivS` : the certificate logic; `ProvedS` means a certificate exists.
-
-Main results:
-
-* `analyze_eq_some_iff_derivS` : the verifier decides the certificate logic (`cleanS_iff_provedS`);
-* `analyze_sound_ok` : whatever an accepted command actually produces contains the analyzed
-  lower bound (the analysis is a correct must-analysis);
-* `soundS` : an accepted command can never fail, i.e. never escapes;
-* `no_clean_proved_with_escapeS` : the target statement for this richer engine;
-* `ok_subset_union_policy` : confinement / least privilege — a sandboxed execution never holds
-  more than its initial capabilities together with the policy;
-* `analyze_policy_mono`, `cleanS_of_policy_subset` : widening the policy never invalidates a
-  certificate;
-* `cleanS_iff_no_escapeS_det` : on the deterministic fragment the verifier is exact.
-
-Note the verifier is *not* complete here, and that is a feature of the model rather than a
-defect: `analyze_incomplete` exhibits a command that can never escape yet is rejected,
-because the analysis must be conservative about unpredictable branching.
+# No Clean Proved With Escape
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.no_clean_proved_with_escape
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace PCA
-namespace Isolation
-namespace Structured
+/-!
+## Overview
 
-/-- Applications with control flow. -/
-inductive Cmd : Type
-  /-- Perform an effect requiring capability `c`. -/
-  | use (c : Cap) : Cmd
-  /-- Acquire capability `c` from the sandbox. -/
-  | grant (c : Cap) : Cmd
-  /-- Voluntarily drop capability `c`. -/
-  | revoke (c : Cap) : Cmd
-  /-- Sequential composition. -/
-  | seq (a b : Cmd) : Cmd
-  /-- Branch on a guard the verifier cannot predict. -/
-  | choice (a b : Cmd) : Cmd
-  /-- Repeat a body any number of times. -/
-  | loop (a : Cmd) : Cmd
-  deriving DecidableEq, Repr
+This module formalises the model of a capability-based *isolation engine* for
+proof-carrying applications, together with its soundness **and** completeness.
 
-/-- `Ok policy c g g'` : running `c` from capabilities `g` can stay inside the sandbox and
-finish holding `g'`. -/
-inductive Ok (policy : Finset Cap) : Cmd → Finset Cap → Finset Cap → Prop
-  | use {g : Finset Cap} {c : Cap} : c ∈ g → Ok policy (Cmd.use c) g g
-  | grant {g : Finset Cap} {c : Cap} : c ∈ policy → Ok policy (Cmd.grant c) g (insert c g)
-  | revoke {g : Finset Cap} {c : Cap} : Ok policy (Cmd.revoke c) g (g.erase c)
-  | seq {a b : Cmd} {g g₁ g₂ : Finset Cap} :
-      Ok policy a g g₁ → Ok policy b g₁ g₂ → Ok policy (Cmd.seq a b) g g₂
-  | choiceL {a b : Cmd} {g g' : Finset Cap} : Ok policy a g g' → Ok policy (Cmd.choice a b) g g'
-  | choiceR {a b : Cmd} {g g' : Finset Cap} : Ok policy b g g' → Ok policy (Cmd.choice a b) g g'
-  | loopDone {a : Cmd} {g : Finset Cap} : Ok policy (Cmd.loop a) g g
-  | loopStep {a : Cmd} {g g₁ g₂ : Finset Cap} :
-      Ok policy a g g₁ → Ok policy (Cmd.loop a) g₁ g₂ → Ok policy (Cmd.loop a) g g₂
+* A region (`Region`) is an abstract resource name; a capability set (`CapSet`)
+  is a decidable set of regions, represented by its characteristic function.
+* An application's code is a program (`Prog`) of a small nondeterministic
+  language with capability acquisition/release and resource accesses.
+* `Exec` is the operational semantics of the isolation engine at run time: a
+  resource access only produces an observable effect when the corresponding
+  capability is currently held; otherwise the engine *denies* it silently.
+* `App.Escapes` says that some run of the application observably touches a
+  resource outside its policy (its sandbox boundary).
+* `Cert` is the proof system for capability certificates that a proof-carrying
+  app ships with its code, and `check` is the engine's decidable checker.
 
-/-- `Fail policy c g` : running `c` from capabilities `g` can cross the sandbox boundary. -/
-inductive Fail (policy : Finset Cap) : Cmd → Finset Cap → Prop
-  | use {g : Finset Cap} {c : Cap} : c ∉ g → Fail policy (Cmd.use c) g
-  | grant {g : Finset Cap} {c : Cap} : c ∉ policy → Fail policy (Cmd.grant c) g
-  | seqL {a b : Cmd} {g : Finset Cap} : Fail policy a g → Fail policy (Cmd.seq a b) g
-  | seqR {a b : Cmd} {g g₁ : Finset Cap} :
-      Ok policy a g g₁ → Fail policy b g₁ → Fail policy (Cmd.seq a b) g
-  | choiceL {a b : Cmd} {g : Finset Cap} : Fail policy a g → Fail policy (Cmd.choice a b) g
-  | choiceR {a b : Cmd} {g : Finset Cap} : Fail policy b g → Fail policy (Cmd.choice a b) g
-  | loopHere {a : Cmd} {g : Finset Cap} : Fail policy a g → Fail policy (Cmd.loop a) g
-  | loopStep {a : Cmd} {g g₁ : Finset Cap} :
-      Ok policy a g g₁ → Fail policy (Cmd.loop a) g₁ → Fail policy (Cmd.loop a) g
+The main results are:
 
-/-- The static verifier: a must-analysis returning a lower bound on the capabilities held
-after the command, or `none` if the command may breach the sandbox. -/
+* `cert_sound`  : a valid certificate forbids any escape;
+* `check_cert`  : the checker synthesises a certificate (so `Clean → Proved`);
+* `check_complete` : if the checker rejects, an escaping run really exists;
+* `no_clean_proved_with_escape` : the target theorem;
+* `clean_proved_iff_no_escape` : soundness *and* completeness of the engine.
 
-def check (policy : List Cap) : List Cap → Prog → Bool
-  | _, [] => true
-  | g, Instr.use c :: p => if c ∈ g then check policy g p else false
-  | g, Instr.grant c :: p => if c ∈ policy then check policy (c :: g) p else false
+The development is deliberately self-contained (no imports), so that the header
+comment above is literally the first thing in the file.
+-/
 
-/-- The certificate logic carried by a proof-carrying app. -/
-inductive Derivation (policy : List Cap) : List Cap → Prog → Prop
-  /-- The empty program is trivially safe. -/
-  | nil {g : List Cap} : Derivation policy g []
-  /-- A use of a granted capability is safe if the continuation is. -/
-  | use {g : List Cap} {c : Cap} {p : Prog} :
-      c ∈ g → Derivation policy g p → Derivation policy g (Instr.use c :: p)
-  /-- Acquiring a policy-permitted capability is safe if the continuation is. -/
-  | grant {g : List Cap} {c : Cap} {p : Prog} :
-      c ∈ policy → Derivation policy (c :: g) p → Derivation policy g (Instr.grant c :: p)
+namespace PCA.Isolation
 
-/-- An application *escapes* when the runtime monitor reports an escape. -/
+/-! ## Capability sets -/
+
+/-- Abstract resource names. -/
+abbrev Region := Nat
+
+/-- A capability set, represented by its characteristic function. -/
+abbrev CapSet := Region → Bool
+
+/-- Add a capability. -/
+
+def check (P : CapSet) : Prog → CapSet → Bool
+  | .nop, _ => true
+  | .acquire _, _ => true
+  | .release _, _ => true
+  | .access r, H => !(H r) || P r
+  | .seq p q, H => check P p H && check P q (analyze p H)
+  | .choice p q, H => check P p H && check P q H
+
+/-- **Certificate synthesis.** If the checker accepts, the engine can build a
+certificate for the app: `Clean → Proved`. -/

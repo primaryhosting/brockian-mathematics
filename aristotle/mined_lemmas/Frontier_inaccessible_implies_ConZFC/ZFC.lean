@@ -1,29 +1,33 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
+noncomputable def ZFC : setLang.{u}.Theory :=
+  {extAx, foundAx, pairAx, unionAx, powerAx, infAx, choiceAx} ∪
+  {σ | ∃ (k : ℕ) (φ : setLang.{u}.Formula (Fin k ⊕ Fin 1)), σ = sepAx k φ} ∪
+  {σ | ∃ (k : ℕ) (φ : setLang.{u}.Formula (Fin k ⊕ Fin 2)), σ = replAx k φ}
 
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-def ZFC : LSet.Theory :=
-  {extAx, emptyAx, pairAx, unionAx, powerAx, infinityAx, foundationAx, choiceAx}
-    ∪ (Set.range fun p : (k : ℕ) × LSet.Formula (Fin k ⊕ Fin 1) => sepAx p.1 p.2)
-    ∪ (Set.range fun p : (k : ℕ) × LSet.Formula (Fin k ⊕ Fin 2) => repAx p.1 p.2)
-
-/-! ## Auxiliary simplification lemmas for realization -/
+/-! ### Unfolding satisfaction of the axioms -/
 

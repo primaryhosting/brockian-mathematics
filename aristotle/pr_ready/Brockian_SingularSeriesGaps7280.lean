@@ -8,6 +8,10 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+-- Note: Lean 4 requires `import` commands to precede every other piece of syntax,
+-- including module doc comments, so the required header appears immediately after
+-- the single `import Mathlib` line.
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -33,86 +37,67 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- A finite set `H` of integers is *admissible* when, for every prime `p`, the
-reductions of the elements of `H` modulo `p` omit at least one residue class.
-This is exactly the condition under which the singular series
-`𝔖(H) = ∏_p (1 - ν_H(p)/p)(1 - 1/p)^{-|H|}` is non-zero, i.e. the Hardy–Littlewood
-prime `k`-tuples conjecture predicts infinitely many translates of `H` consisting
-entirely of primes. -/
-def Admissible (H : Finset ℤ) : Prop :=
+/-- A finite set of natural numbers `H` is *admissible* (in the sense of the
+Hardy–Littlewood prime `k`-tuples conjecture) if for every prime `p` the residues of the
+elements of `H` do not cover all of `ZMod p`.  Equivalently, the local factor of the
+singular series attached to `H` at `p` is nonzero for every prime `p`. -/
+def Admissible (H : Finset ℕ) : Prop :=
   ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r
 
-/-- Small primes never obstruct a set of primes all larger than its own size:
-residue class `0` is missed. -/
-theorem admissible_of_primes_small_case {H : Finset ℤ} {p : ℕ} (hp : p.Prime)
-    (hple : p ≤ H.card)
-    (hH : ∀ h ∈ H, ∃ q : ℕ, q.Prime ∧ (q : ℤ) = h ∧ (H.card : ℤ) < h) :
-    ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
-  refine ⟨0, ?_⟩
-  intro h hh hzero
-  obtain ⟨q, hq, hqh, hlt⟩ := hH h hh
-  rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at hzero
-  subst hqh
-  have hdvd : p ∣ q := by exact_mod_cast hzero
-  have hpq : p = q := ((Nat.prime_dvd_prime_iff_eq hp hq).mp hdvd)
-  have : (H.card : ℤ) < (p : ℤ) := by rw [hpq]; exact hlt
-  have : (H.card : ℤ) < (H.card : ℤ) := lt_of_lt_of_le this (by exact_mod_cast hple)
-  exact absurd this (lt_irrefl _)
+/-- If the number of elements of `H` is smaller than the prime `p`, then the residues of `H`
+cannot cover `ZMod p`. -/
+theorem exists_residue_not_mem_of_card_lt {H : Finset ℕ} {p : ℕ} (hp : p.Prime)
+    (hcard : H.card < p) : ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
+  haveI : Fact p.Prime := ⟨hp⟩
+  by_contra hcon
+  push_neg at hcon
+  have hsub : (Finset.univ : Finset (ZMod p)) ⊆ H.image (fun h : ℕ => (h : ZMod p)) := by
+    intro r _
+    obtain ⟨h, hh, hr⟩ := hcon r
+    exact Finset.mem_image.2 ⟨h, hh, hr⟩
+  have h1 : (Finset.univ : Finset (ZMod p)).card ≤ H.card :=
+    le_trans (Finset.card_le_card hsub) Finset.card_image_le
+  rw [Finset.card_univ, ZMod.card] at h1
+  omega
 
-/-- Large primes never obstruct a set with fewer elements than the modulus:
-by cardinality, some residue class is missed. -/
-theorem admissible_of_card_lt {H : Finset ℤ} {p : ℕ} (hp : p.Prime)
-    (hlt : H.card < p) :
-    ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
-  haveI : NeZero p := ⟨hp.ne_zero⟩
-  have hcard : (H.image (fun h : ℤ => (h : ZMod p))).card < Fintype.card (ZMod p) := by
-    calc (H.image (fun h : ℤ => (h : ZMod p))).card ≤ H.card := Finset.card_image_le
-      _ < p := hlt
-      _ = Fintype.card (ZMod p) := (ZMod.card p).symm
-  have hne : H.image (fun h : ℤ => (h : ZMod p)) ≠ Finset.univ := by
-    intro hEq
-    rw [hEq, Finset.card_univ] at hcard
-    exact lt_irrefl _ hcard
-  obtain ⟨r, -, hr⟩ :=
-    Finset.exists_mem_notMem_of_card_lt_card
-      (by simpa [Finset.card_univ] using hcard :
-        (H.image (fun h : ℤ => (h : ZMod p))).card < (Finset.univ : Finset (ZMod p)).card)
-  exact ⟨r, fun h hh hEq => hr (Finset.mem_image.mpr ⟨h, hh, hEq⟩)⟩
-
-/-- **Singular Series Gaps 7280.**
-
-Any finite set of (distinct) primes each of which exceeds the size of the set is an
-admissible tuple; consequently one obtains admissible gap ranges of every shape
-realised by such prime sets — in particular the five-element tuple
-`{7, 11, 13, 17, 19}`, which lies inside the range `[0, 7280]`.
-
-The two obstruction cases are closed by existing Mathlib lemmas:
-`ZMod.intCast_zmod_eq_zero_iff_dvd` (small primes) and
-`Finset.exists_mem_notMem_of_card_lt_card` together with `ZMod.card` (large primes). -/
-theorem SingularSeriesGaps7280 :
-    (∀ H : Finset ℤ,
-        (∀ h ∈ H, ∃ q : ℕ, q.Prime ∧ (q : ℤ) = h ∧ (H.card : ℤ) < h) → Admissible H) ∧
-      ∃ H : Finset ℤ, Admissible H ∧ H ⊆ Finset.Icc (0 : ℤ) 7280 ∧ H.card = 5 := by
-  have general : ∀ H : Finset ℤ,
-      (∀ h ∈ H, ∃ q : ℕ, q.Prime ∧ (q : ℤ) = h ∧ (H.card : ℤ) < h) → Admissible H := by
-    intro H hH p hp
-    rcases lt_or_ge H.card p with h | h
-    · exact admissible_of_card_lt hp h
-    · exact admissible_of_primes_small_case hp h hH
-  refine ⟨general, ⟨({7, 11, 13, 17, 19} : Finset ℤ), ?_, ?_, ?_⟩⟩
-  · have hcard : ({7, 11, 13, 17, 19} : Finset ℤ).card = 5 := by decide
-    refine general _ ?_
-    rw [hcard]
+/-- **Admissibility of prime gap ranges.**  For any window length `L` and any starting point
+`N > L`, the set of primes lying in the interval `[N, N + L)` is an admissible tuple. -/
+theorem admissible_primes_Ico (L N : ℕ) (hN : L < N) :
+    Admissible ((Finset.Ico N (N + L)).filter Nat.Prime) := by
+  intro p hp
+  haveI : Fact p.Prime := ⟨hp⟩
+  by_cases hpL : p ≤ L
+  · -- Small primes: no element of the window is divisible by `p`, so the class `0` is missed.
+    refine ⟨0, ?_⟩
     intro h hh
-    fin_cases hh
-    · exact ⟨7, by norm_num, by norm_num, by norm_num⟩
-    · exact ⟨11, by norm_num, by norm_num, by norm_num⟩
-    · exact ⟨13, by norm_num, by norm_num, by norm_num⟩
-    · exact ⟨17, by norm_num, by norm_num, by norm_num⟩
-    · exact ⟨19, by norm_num, by norm_num, by norm_num⟩
-  · intro h hh
-    fin_cases hh <;> simp [Finset.mem_Icc]
-  · decide
+    rw [Finset.mem_filter, Finset.mem_Ico] at hh
+    obtain ⟨⟨hNh, _⟩, hhp⟩ := hh
+    rw [Ne, ZMod.natCast_eq_zero_iff]
+    intro hdvd
+    have hph : p = h := (Nat.prime_dvd_prime_iff_eq hp hhp).1 hdvd
+    omega
+  · -- Large primes: the window is too short to cover all residue classes.
+    push_neg at hpL
+    refine exists_residue_not_mem_of_card_lt hp ?_
+    have hle : ((Finset.Ico N (N + L)).filter Nat.Prime).card ≤ (Finset.Ico N (N + L)).card :=
+      Finset.card_filter_le _ _
+    rw [Nat.card_Ico] at hle
+    omega
+
+/-- **Singular Series Gaps 7280.**  Every window of length `7280` starting beyond `7280`
+yields a new admissible tuple: the primes in `[N, N + 7280)` never occupy all residue classes
+modulo any prime, so every local factor of the associated singular series is nonzero. -/
+theorem SingularSeriesGaps7280 (N : ℕ) (hN : 7280 < N) :
+    Admissible ((Finset.Ico N (N + 7280)).filter Nat.Prime) :=
+  admissible_primes_Ico 7280 N hN
+
+/-- The tuples produced by `SingularSeriesGaps7280` are not vacuously admissible: for
+`N = 7281` the corresponding set of primes is nonempty. -/
+theorem SingularSeriesGaps7280_nonempty :
+    ((Finset.Ico 7281 (7281 + 7280)).filter Nat.Prime).Nonempty := by
+  refine ⟨7283, ?_⟩
+  rw [Finset.mem_filter, Finset.mem_Ico]
+  exact ⟨⟨by norm_num, by norm_num⟩, by norm_num⟩
 
 end Brockian
 

@@ -1,57 +1,71 @@
-import RequestProject.BT.Ball
+import RequestProject.Equidecomp
 
 /-!
-# Banach Tarski
-Category: Frontier — Set Theory
-Target: Frontier.Banach_Tarski
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Rotations of `ℝ³`
+
+Set-up for the Banach–Tarski paradox: the group `SO(3)` of rotations acting on
+`E = EuclideanSpace ℝ (Fin 3)`, the group of isometries of `E`, and the fact that a
+non-identity rotation fixes at most two points of the unit sphere.
 -/
 
-open Metric Set
-open scoped Pointwise
+open Matrix
 
-namespace Frontier
+namespace BanachTarski
 
-/-- The vector by which the second copy of the ball is translated. -/
+/-- Three dimensional Euclidean space. -/
+abbrev E := EuclideanSpace ℝ (Fin 3)
 
-theorem union (hA : Disjoint A₁ A₂) (hB : Disjoint B₁ B₂)
-    (h₁ : Equidec G A₁ B₁) (h₂ : Equidec G A₂ B₂) : Equidec G (A₁ ∪ A₂) (B₁ ∪ B₂) := by
+/-- The group of rotations of `ℝ³`. -/
+abbrev SO3 := Matrix.specialOrthogonalGroup (Fin 3) ℝ
+
+noncomputable instance : SMul ↥SO3 E :=
+  ⟨fun M x => WithLp.toLp 2 ((M : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ WithLp.ofLp x)⟩
+
+
+theorem union {A₁ A₂ B₁ B₂ : Set X} (h₁ : Equidecomp G A₁ B₁) (h₂ : Equidecomp G A₂ B₂)
+    (hA : Disjoint A₁ A₂) (hB : Disjoint B₁ B₂) :
+    Equidecomp G (A₁ ∪ A₂) (B₁ ∪ B₂) := by
   classical
-  obtain ⟨f, S, hbij, hdec⟩ := h₁
-  obtain ⟨f', S', hbij', hdec'⟩ := h₂
-  have hval : ∀ z ∈ A₁ ∪ A₂, (z ∈ A₁ ∧ Set.piecewise A₁ f f' z = f z) ∨
-      (z ∈ A₂ ∧ z ∉ A₁ ∧ Set.piecewise A₁ f f' z = f' z) := by
-    rintro z (hz | hz)
-    · exact Or.inl ⟨hz, by simp [Set.piecewise, hz]⟩
-    · have hz' : z ∉ A₁ := fun h => (hA.le_bot ⟨h, hz⟩).elim
-      exact Or.inr ⟨hz, hz', by simp [Set.piecewise, hz']⟩
-  refine ⟨Set.piecewise A₁ f f', S ∪ S', ⟨?_, ?_, ?_⟩, ?_⟩
-  · intro x hx
-    rcases hval x hx with ⟨hx1, hxe⟩ | ⟨hx2, _, hxe⟩
-    · exact Or.inl (hxe ▸ hbij.mapsTo hx1)
-    · exact Or.inr (hxe ▸ hbij'.mapsTo hx2)
-  · intro x hx y hy hxy
-    rcases hval x hx with ⟨hx1, hxe⟩ | ⟨hx2, _, hxe⟩ <;>
-      rcases hval y hy with ⟨hy1, hye⟩ | ⟨hy2, _, hye⟩
-    · exact hbij.injOn hx1 hy1 (by rw [← hxe, ← hye]; exact hxy)
-    · refine ((Set.disjoint_left.mp hB (hbij.mapsTo hx1) ?_)).elim
-      exact (by rw [← hxe, hxy, hye] : f x = f' y) ▸ hbij'.mapsTo hy2
-    · refine ((Set.disjoint_left.mp hB (hbij.mapsTo hy1) ?_)).elim
-      exact (by rw [← hye, ← hxy, hxe] : f y = f' x) ▸ hbij'.mapsTo hx2
-    · exact hbij'.injOn hx2 hy2 (by rw [← hxe, ← hye]; exact hxy)
+  obtain ⟨f₁, S₁, hS₁, hb₁, hs₁⟩ := h₁
+  obtain ⟨f₂, S₂, hS₂, hb₂, hs₂⟩ := h₂
+  refine ⟨fun x => if x ∈ A₁ then f₁ x else f₂ x, S₁ ∪ S₂, hS₁.union hS₂, ⟨?_, ?_, ?_⟩, ?_⟩
+  · rintro x (hx | hx)
+    · simp only [if_pos hx]; exact Or.inl (hb₁.mapsTo hx)
+    · have hx1 : x ∉ A₁ := fun h => Set.disjoint_left.mp hA h hx
+      simp only [if_neg hx1]; exact Or.inr (hb₂.mapsTo hx)
+  · rintro x hx y hy hxy
+    have hx' : x ∈ A₁ ∨ (x ∉ A₁ ∧ x ∈ A₂) := by
+      rcases hx with h | h
+      · exact Or.inl h
+      · by_cases h1 : x ∈ A₁
+        · exact Or.inl h1
+        · exact Or.inr ⟨h1, h⟩
+    have hy' : y ∈ A₁ ∨ (y ∉ A₁ ∧ y ∈ A₂) := by
+      rcases hy with h | h
+      · exact Or.inl h
+      · by_cases h1 : y ∈ A₁
+        · exact Or.inl h1
+        · exact Or.inr ⟨h1, h⟩
+    rcases hx' with hx1 | ⟨hx1, hx2⟩ <;> rcases hy' with hy1 | ⟨hy1, hy2⟩
+    · simp only [if_pos hx1, if_pos hy1] at hxy; exact hb₁.injOn hx1 hy1 hxy
+    · simp only [if_pos hx1, if_neg hy1] at hxy
+      exact absurd (by rw [hxy]; exact hb₂.mapsTo hy2 : f₁ x ∈ B₂)
+        (Set.disjoint_left.mp hB (hb₁.mapsTo hx1))
+    · simp only [if_neg hx1, if_pos hy1] at hxy
+      exact absurd (by rw [hxy]; exact hb₁.mapsTo hy1 : f₂ x ∈ B₁)
+        (Set.disjoint_right.mp hB (hb₂.mapsTo hx2))
+    · simp only [if_neg hx1, if_neg hy1] at hxy; exact hb₂.injOn hx2 hy2 hxy
   · rintro y (hy | hy)
-    · obtain ⟨x, hx, rfl⟩ := hbij.surjOn hy
-      exact ⟨x, Or.inl hx, by simp [Set.piecewise, hx]⟩
-    · obtain ⟨x, hx, rfl⟩ := hbij'.surjOn hy
-      have hx' : x ∉ A₁ := fun h => (hA.le_bot ⟨h, hx⟩).elim
-      exact ⟨x, Or.inr hx, by simp [Set.piecewise, hx']⟩
-  · rintro a (ha | ha)
-    · obtain ⟨g, hg, hga⟩ := hdec a ha
-      exact ⟨g, Finset.mem_union_left _ hg, by simpa [Set.piecewise, ha] using hga⟩
-    · have ha' : a ∉ A₁ := fun h => (hA.le_bot ⟨h, ha⟩).elim
-      obtain ⟨g, hg, hga⟩ := hdec' a ha
-      exact ⟨g, Finset.mem_union_right _ hg, by simpa [Set.piecewise, ha'] using hga⟩
+    · obtain ⟨x, hx, rfl⟩ := hb₁.surjOn hy
+      exact ⟨x, Or.inl hx, by simp [if_pos hx]⟩
+    · obtain ⟨x, hx, rfl⟩ := hb₂.surjOn hy
+      have hx1 : x ∉ A₁ := fun h => Set.disjoint_left.mp hA h hx
+      exact ⟨x, Or.inr hx, by simp [if_neg hx1]⟩
+  · rintro x (hx | hx)
+    · obtain ⟨g, hg, hgx⟩ := hs₁ x hx
+      exact ⟨g, Or.inl hg, by simpa [if_pos hx] using hgx⟩
+    · have hx1 : x ∉ A₁ := fun h => Set.disjoint_left.mp hA h hx
+      obtain ⟨g, hg, hgx⟩ := hs₂ x hx
+      exact ⟨g, Or.inr hg, by simpa [if_neg hx1] using hgx⟩
 
-/-- An equidecomposition, presented as an explicit finite partition of `A` into pieces which
-are moved by single group elements to give a partition of `B`. -/
+/-- A set is equidecomposable with any translate of itself. -/

@@ -26,16 +26,22 @@ set_option grind.warning false
 
 namespace CS
 
-/-- The finite set of all boolean lists of a given length. -/
+/-- The finset of all binary strings (lists of booleans) of length `n`. -/
 
-lemma mem_boolLists {k : ℕ} {l : List Bool} : l ∈ boolLists k ↔ l.length = k := by
-  constructor
-  · rintro h
-    simp only [boolLists, Finset.mem_image, Finset.mem_univ, true_and] at h
-    obtain ⟨v, hv⟩ := h
-    rw [← hv]
-    exact v.2
-  · intro h
-    simp only [boolLists, Finset.mem_image, Finset.mem_univ, true_and]
-    exact ⟨⟨l, h⟩, rfl⟩
+lemma mem_boolLists {l : List Bool} {n : ℕ} : l ∈ boolLists n ↔ l.length = n := by
+  induction n generalizing l with
+  | zero => simp [boolLists, List.length_eq_zero_iff]
+  | succ n ih =>
+    cases l with
+    | nil => simp [boolLists]
+    | cons b t =>
+      have hlen : (b :: t).length = n + 1 ↔ t.length = n := by simp
+      rw [hlen]
+      simp only [boolLists, Finset.mem_biUnion, Finset.mem_univ, Finset.mem_image, true_and,
+        List.cons.injEq]
+      constructor
+      · rintro ⟨b', l, hl, -, rfl⟩
+        exact ih.1 hl
+      · intro hl
+        exact ⟨b, t, ih.2 hl, rfl, rfl⟩
 

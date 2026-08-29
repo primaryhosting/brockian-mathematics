@@ -1,23 +1,22 @@
 import Mathlib
-import RequestProject.ThabitBalanceIdentity
+import RequestProject.ThabitBalance
 
 /-!
-# Thabit Balance Identity — Mathlib interface
+# Bridge to Mathlib's `σ₁`
 
-This file connects the self-contained divisor-sum `sigmaOne` used in
-`RequestProject.ThabitBalanceIdentity` with Mathlib's `ArithmeticFunction.sigma 1`, and restates
-the Thabit balance identity and the deficient/perfect/abundant comparisons in Mathlib terms.
+The target file `ThabitBalance.lean` is import-free (its header comment must be the very first
+thing in the file, which precludes an `import` command), so it uses its own elementary
+sum-of-divisors function `sigmaOne`.  Here we prove that `sigmaOne` agrees with Mathlib's
+`ArithmeticFunction.sigma 1`, and restate the balance identity together with the
+deficient/perfect/abundant comparisons in Mathlib's language.
 -/
+
+open scoped ArithmeticFunction.sigma
 
 namespace Brockian.BetrothedNumbers.Dynamics
 
-open ArithmeticFunction
 
-/-- `sigmaOne` is Mathlib's sum-of-divisors function `σ₁`. -/
+def sigmaOne (m : Nat) : Nat := sigmaAux m m
 
-def sigmaOne (n : Nat) : Nat :=
-  ((List.range (n + 1)).filter (fun d => d != 0 && n % d == 0)).sum
-
-/-- The **Thabit sigma criterion** for a Thabit-type betrothed (quasi-amicable) configuration:
-`m` has the Thabit shape `(2 ^ k - 1) * (p + 2)` and satisfies the betrothed relation
-`σ(m) = m + n + 1` with partner `n = 2 ^ k * p`. -/
+/-- The Thabit-style shape criterion, written subtraction-free:
+`m + (p + 2) = 2 ^ k * (p + 2)`, i.e. `m = (2 ^ k - 1) * (p + 2)`. -/

@@ -23,20 +23,37 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Qft Unitary
+Category: Quantum Computing
+Target: QC.qft_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Qft Unitary
+Category: Quantum Computing
+Target: QC.qft_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace QC
 
-open Complex
+open Complex Finset
 
-/-- The `N × N` discrete Fourier transform matrix:
-`(dftMatrix N) j k = (1/√N) * exp (2πi jk / N)`. -/
+/-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
-lemma dftMatrix_apply {N : ℕ} (j k : Fin N) :
-    dftMatrix N j k = (Real.sqrt N : ℂ)⁻¹ * (zetaN N) ^ ((j : ℕ) * (k : ℕ)) := by
-  rcases Nat.eq_zero_or_pos N with hN | hN
-  · exact absurd j.isLt (by simp [hN])
-  · have : (zetaN N) ^ ((j : ℕ) * (k : ℕ))
-        = Complex.exp (2 * (Real.pi : ℂ) * Complex.I * ((j : ℕ) * (k : ℕ) : ℕ) / (N : ℂ)) := by
-      rw [zetaN, ← Complex.exp_nat_mul]
-      ring_nf
-    rw [dftMatrix, Matrix.of_apply, this]
+lemma dftMatrix_apply (N : ℕ) (j k : Fin N) :
+    dftMatrix N j k = zeta N ^ (j.val * k.val) / Real.sqrt N := by
+  unfold dftMatrix zeta
+  simp only [Matrix.of_apply]
+  rw [← Complex.exp_nat_mul]
+  congr 2
+  push_cast
+  ring
 
+/-- `exp (2 π i / N)` has modulus one, so conjugation inverts it. -/

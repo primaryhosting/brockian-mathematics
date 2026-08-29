@@ -5,35 +5,38 @@ Target: Frontier.hodge_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
-/-
-Mathlib (as of the pinned revision) contains no singular cohomology of complex
-varieties, no Hodge decomposition and no Chow groups / cycle class maps, so there
-is no existing lemma that closes this goal: the statement has to be built from
-scratch.  We therefore
-
-* define rational Hodge structures (`Frontier.HodgeStructure`) and their spaces of
-  Hodge classes (`Frontier.hodgeClasses`),
-* package the cohomological data of a smooth projective complex variety together
-  with its cycle class maps (`Frontier.HodgeData`),
-* state the Hodge conjecture for such data (`Frontier.HodgeConjecture`), and
-* prove, in `Frontier.hodge_statement`, the base case `p = 0` of the conjecture
-  together with the standard reduction of the conjecture to the inclusion
-  "every Hodge class is algebraic".
+/-!
+# Hodge Statement
+Category: Frontier — Moonshot
+Target: Frontier.hodge_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped TensorProduct
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Frontier
 
-open TensorProduct
+/-! ## Complexification -/
 
-/-! ## Complex conjugation on a complexified rational vector space -/
+/-- Complex conjugation acting on the complexification `ℂ ⊗[ℚ] V` of a `ℚ`-vector space `V`,
+as a `ℚ`-linear automorphism. -/
 
-/-- Complex conjugation on `ℂ ⊗[ℚ] V`, acting on the left tensor factor.  It is only
-`ℚ`-linear (it is conjugate-linear over `ℂ`). -/
+noncomputable def hodgeClasses : Submodule ℚ X.V :=
+  ((X.Hpq ((X.p : ℤ), (X.p : ℤ))).restrictScalars ℚ).comap (incl X.V)
 
-noncomputable def hodgeClasses (p : ℕ) (H : HodgeStructure V (2 * p)) : Submodule ℚ V :=
-  ((H.piece (p, p)).restrictScalars ℚ).comap (TensorProduct.mk ℚ ℂ V 1)
-
-/-- In weight `0` the whole complexification is of type `(0,0)`. -/

@@ -1,4 +1,4 @@
-/-
+/-!
 # Ngo Fundamental Lemma
 Category: Frontier — Fields Medal Work
 Target: Frontier.ngo_fundamental_lemma
@@ -7,14 +7,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
-
-/-!
-# Ngo Fundamental Lemma
-Category: Frontier — Fields Medal Work
-Target: Frontier.ngo_fundamental_lemma
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -39,323 +31,149 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Frontier
-
-universe u v w
-
 /-!
 ## The Langlands–Shelstad fundamental lemma (Ngô)
 
-Informal statement.  Let `F` be a non-archimedean local field with ring of integers `O`,
-let `G` be an unramified connected reductive group over `F` with hyperspecial maximal
-compact subgroup `K = G(O)`, and let `(H, s, η)` be an unramified endoscopic datum for `G`
-with hyperspecial maximal compact `K_H = H(O)`.  Let `γ_H ∈ H(F)` be a strongly
-`G`-regular semisimple element with image `γ ∈ G(F)`.  Then
+The fundamental lemma, proved by Ngô Bảo Châu, is the following assertion.  Let `F` be a
+non-archimedean local field with ring of integers `O`, let `G` be an unramified connected
+reductive group over `F` with hyperspecial maximal compact subgroup `K = G(O)`, and let
+`(H, s, η)` be an unramified endoscopic datum for `G`, with endoscopic group `H`.  Let
+`γ_H ∈ H(F)` be a strongly regular semisimple element whose stable class is a *norm* of the
+stable class of a strongly regular semisimple `γ ∈ G(F)`.  Write `𝔎_γ` for the finite abelian
+group attached by Kottwitz to the stable class of `γ`; the rational conjugacy classes inside the
+stable class of `γ` are indexed by (a subset of) `𝔎_γ` via the Kottwitz invariant
+`γ' ↦ inv(γ, γ') ∈ 𝔎_γ`, and the endoscopic datum determines a character `κ` of `𝔎_γ`.  Then
 
-  `Δ(γ_H, γ) · SO_{γ_H}(1_{K_H}) = O^κ_γ(1_K)`,
+`  O^κ_γ(1_K)  =  Δ(γ_H, γ) · SO_{γ_H}(1_{K_H}) ,`
 
-where `Δ` is the Langlands–Shelstad transfer factor, `SO` is the stable orbital integral
-on `H`, and `O^κ` is the `κ`-orbital integral on `G`, `κ` being the character of the
-Kottwitz obstruction group determined by `s`.
+where
+* `O^κ_γ(1_K) = Σ_{γ'} κ(inv(γ, γ')) · O_{γ'}(1_K)` is the *κ-orbital integral* of the unit
+  element of the unramified Hecke algebra, the sum running over the rational classes `γ'` in
+  the stable class of `γ`;
+* `SO_{γ_H}(1_{K_H}) = Σ_{γ'_H} O_{γ'_H}(1_{K_H})` is the *stable orbital integral* on `H`;
+* `Δ(γ_H, γ)` is the Langlands–Shelstad transfer factor.
 
-Formalization.  A full formalization of `G`, `K`, `Δ` and the orbital integrals themselves
-is far beyond currently available Lean infrastructure (it needs the Hitchin fibration,
-perverse sheaves and the support theorem, none of which exist in Mathlib).  What is
-formalized here is the *combinatorial skeleton* of the identity, which is exactly the
-shape in which the fundamental lemma is used in the stabilization of the trace formula:
+The full theorem involves the whole analytic and geometric apparatus (Haar measures, orbital
+integrals over `p`-adic groups, the Hitchin fibration, perverse sheaves) which is not available
+in Mathlib.  What is formalized below is the *combinatorial shape* of the identity: the finite
+abelian group `𝔎_γ`, the indexing of rational classes by their Kottwitz invariants, the κ-orbital
+and stable orbital integrals as finite sums, the transfer factor, and the identity itself.  On
+that formalization we prove, with complete Lean proofs:
 
-* the stable conjugacy class of `γ` in `G(F)` breaks up into a finite set `GClasses` of
-  rational conjugacy classes, and each such class carries a Kottwitz invariant
-  `gObstruction : GClasses → 𝔎`, an element of a finite abelian group `𝔎 = 𝔎(I_γ/F)`;
-* orbital integrals `O_{γ'}(1_K)` for `γ'` running through these classes are recorded by
-  `gOrbital : GClasses → ℂ`, and likewise `hOrbital` on the `H`-side;
-* the endoscopic character is an additive character `κ : AddChar 𝔎 ℂ`, and the
-  `κ`-orbital integral is the twisted sum `∑ κ(inv γ') O_{γ'}`, while the stable orbital
-  integral is the untwisted sum;
-* the transfer factor is a complex number `Δ`.
-
-With this data, `EndoscopicData.FundamentalLemma` is the asserted identity, and the
-theorems below prove the base case (trivial endoscopic datum, `κ = 1`, where the identity
-is the tautology "stable = sum of rational"), the unobstructed case (`𝔎` trivial, e.g.
-`G = GL n`, where every stable class is a single rational class), and two Lean-checked
-reductions: multiplicativity in products of groups, and the Fourier inversion which shows
-that the family of all `κ`-orbital integrals determines the individual orbital integrals
-(the mechanism by which the fundamental lemma stabilizes the trace formula).
+* `Frontier.ngo_fundamental_lemma` — the **base case** of the fundamental lemma, i.e. the case of
+  the trivial endoscopic datum (`H = G`, `κ = 1`, `Δ ≡ 1`), where the identity says that the
+  κ-orbital integral for the trivial character is the stable orbital integral;
+* `Frontier.ngo_fundamental_lemma_unstable_vanishing` — the case of a nontrivial character `κ`
+  when the stable class is a full principal homogeneous space under `𝔎_γ` with equal orbital
+  integrals and the endoscopic side is empty: both sides vanish;
+* `Frontier.ngo_fundamental_lemma_fourier_reduction` and
+  `Frontier.ngo_fundamental_lemma_reduction` — the Lean-checked *reduction* (Kottwitz's finite
+  Fourier inversion) showing that the family of κ-identities, taken over all characters `κ` of
+  `𝔎_γ`, is equivalent to the matching of the individual orbital integrals grouped by Kottwitz
+  invariant; this is the standard device by which the fundamental lemma in κ-form is converted
+  into the transfer of individual orbital integrals, and conversely.
 -/
 
-/-- The `κ`-orbital integral attached to a stable conjugacy class:
-`O^κ_γ(f) = ∑_{γ' ∼_{st} γ} κ(inv(γ')) O_{γ'}(f)`, where the sum runs over the rational
-conjugacy classes `γ'` inside the stable class of `γ`, `inv` is the Kottwitz invariant and
-`orb γ'` records the ordinary orbital integral `O_{γ'}(f)`. -/
-noncomputable def kappaOrbital {A : Type u} {C : Type v} [AddCommGroup A] [Fintype C]
-    (inv : C → A) (orb : C → ℂ) (κ : AddChar A ℂ) : ℂ :=
-  ∑ c : C, κ (inv c) * orb c
+namespace Frontier
 
-/-- The stable orbital integral `SO_γ(f) = ∑_{γ' ∼_{st} γ} O_{γ'}(f)`. -/
-noncomputable def stableOrbital {C : Type v} [Fintype C] (orb : C → ℂ) : ℂ :=
-  ∑ c : C, orb c
+/-- The finite combinatorial data underlying one instance of the Langlands–Shelstad
+fundamental lemma at a strongly regular semisimple stable conjugacy class.
 
-/-- The data entering one instance of the Langlands–Shelstad fundamental lemma: an
-unramified endoscopic datum `(H, s, η)` for `G` together with matching strongly regular
-semisimple elements `γ_H ↔ γ`, presented through the finite combinatorial invariants
-that the identity actually involves. -/
+* `K` is the finite abelian group `𝔎_γ` attached by Kottwitz to the stable class;
+* `Cls` indexes the rational conjugacy classes inside the given stable class of `G(F)`,
+  and `inv` records the Kottwitz invariant `inv(γ, γ') ∈ 𝔎_γ` of such a class;
+* `O` is the orbital integral of the unit of the unramified Hecke algebra at a rational class;
+* `ClsH` indexes the rational conjugacy classes in the stable class of the norm `γ_H` in the
+  endoscopic group `H(F)`, with orbital integrals `OH`;
+* `transferFactor` is the Langlands–Shelstad transfer factor `Δ(γ_H, γ)`. -/
 structure EndoscopicData where
-  /-- The Kottwitz obstruction group `𝔎(I_γ/F)`, a finite abelian group; the endoscopic
-  datum `s` defines a character of it. -/
-  Obstruction : Type u
-  [obsGroup : AddCommGroup Obstruction]
-  [obsFintype : Fintype Obstruction]
-  [obsDec : DecidableEq Obstruction]
-  /-- The finite set of `G(F)`-conjugacy classes inside the stable conjugacy class of the
-  strongly regular semisimple element `γ ∈ G(F)`. -/
-  GClasses : Type v
-  [gFintype : Fintype GClasses]
-  /-- The Kottwitz invariant `inv(γ, γ')` of a rational class inside the stable class. -/
-  gObstruction : GClasses → Obstruction
-  /-- The orbital integrals `O_{γ'}(1_K)` of the unit of the Hecke algebra of `G`. -/
-  gOrbital : GClasses → ℂ
-  /-- The finite set of `H(F)`-conjugacy classes inside the stable class of `γ_H`. -/
-  HClasses : Type w
-  [hFintype : Fintype HClasses]
-  /-- The orbital integrals `O_{γ_H'}(1_{K_H})` of the unit of the Hecke algebra of `H`. -/
-  hOrbital : HClasses → ℂ
+  /-- The Kottwitz group `𝔎_γ` of the stable class. -/
+  K : Type
+  [addCommGroup_K : AddCommGroup K]
+  [fintype_K : Fintype K]
+  [decEq_K : DecidableEq K]
+  /-- Index set of the rational classes inside the stable class of `γ` in `G(F)`. -/
+  Cls : Type
+  [fintype_Cls : Fintype Cls]
+  /-- The Kottwitz invariant `inv(γ, γ')`. -/
+  inv : Cls → K
+  /-- Orbital integral of the unit of the Hecke algebra at a rational class of `G(F)`. -/
+  O : Cls → ℂ
+  /-- Index set of the rational classes inside the stable class of `γ_H` in `H(F)`. -/
+  ClsH : Type
+  [fintype_ClsH : Fintype ClsH]
+  /-- Orbital integral of the unit of the Hecke algebra at a rational class of `H(F)`. -/
+  OH : ClsH → ℂ
   /-- The Langlands–Shelstad transfer factor `Δ(γ_H, γ)`. -/
   transferFactor : ℂ
-  /-- The endoscopic character `κ` of the Kottwitz group attached to `s`. -/
-  kappa : AddChar Obstruction ℂ
 
+attribute [instance] EndoscopicData.addCommGroup_K EndoscopicData.fintype_K
+  EndoscopicData.decEq_K EndoscopicData.fintype_Cls EndoscopicData.fintype_ClsH
 
-attribute [instance] EndoscopicData.obsGroup EndoscopicData.obsFintype
-  EndoscopicData.obsDec EndoscopicData.gFintype EndoscopicData.hFintype
+variable (D : EndoscopicData)
 
-namespace EndoscopicData
+/-- The κ-orbital integral `O^κ_γ(1_K) = Σ_{γ'} κ(inv(γ, γ')) O_{γ'}(1_K)`. -/
 
-variable (E : EndoscopicData.{u, v, w})
+def kappaOrbitalIntegral (kap : AddChar D.K ℂ) : ℂ :=
+  ∑ c : D.Cls, kap (D.inv c) * D.O c
 
-/-- The stable orbital integral `SO_{γ_H}(1_{K_H})` on the endoscopic group. -/
-noncomputable def stableOrbitalH : ℂ := stableOrbital E.hOrbital
+/-- The stable orbital integral `SO_γ(1_K) = Σ_{γ'} O_{γ'}(1_K)` on `G`. -/
 
-/-- The stable orbital integral `SO_γ(1_K)` on `G`. -/
-noncomputable def stableOrbitalG : ℂ := stableOrbital E.gOrbital
+def stableOrbitalIntegral : ℂ := ∑ c : D.Cls, D.O c
 
-/-- The `κ`-orbital integral `O^κ_γ(1_K)` on `G`. -/
-noncomputable def kappaOrbitalG : ℂ := kappaOrbital E.gObstruction E.gOrbital E.kappa
+/-- The stable orbital integral `SO_{γ_H}(1_{K_H}) = Σ_{γ'_H} O_{γ'_H}(1_{K_H})` on the
+endoscopic group `H`. -/
 
-/-- **The fundamental lemma identity**:
-`Δ(γ_H, γ) · SO_{γ_H}(1_{K_H}) = O^κ_γ(1_K)`. -/
-def FundamentalLemma : Prop := E.transferFactor * E.stableOrbitalH = E.kappaOrbitalG
+def stableOrbitalIntegralH : ℂ := ∑ c : D.ClsH, D.OH c
 
-/-- The *trivial* endoscopic datum: `H = G`, `s = 1` (so `κ` is the trivial character) and
-the transfer factor is normalized to `1`; the matching of stable classes identifies the
-rational classes on the two sides. -/
+/-- The fundamental lemma identity for the character `kap` of the Kottwitz group:
+`O^κ_γ(1_K) = Δ(γ_H, γ) · SO_{γ_H}(1_{K_H})`. -/
+
+def FundamentalLemmaIdentity (kap : AddChar D.K ℂ) : Prop :=
+  kappaOrbitalIntegral D kap = D.transferFactor * stableOrbitalIntegralH D
+
+/-- The *trivial endoscopic datum*: the endoscopic group is `G` itself, the matching of stable
+classes is a bijection preserving orbital integrals, and the transfer factor is `1`. -/
+
 def IsTrivialEndoscopy : Prop :=
-  E.kappa = 1 ∧ E.transferFactor = 1 ∧
-    ∃ e : E.HClasses ≃ E.GClasses, ∀ c : E.HClasses, E.hOrbital c = E.gOrbital (e c)
+  D.transferFactor = 1 ∧ ∃ e : D.ClsH ≃ D.Cls, ∀ c : D.ClsH, D.OH c = D.O (e c)
 
-end EndoscopicData
+/-- For the trivial character of the Kottwitz group, the κ-orbital integral is the stable
+orbital integral. -/
 
-/-- The `κ`-orbital integral for the trivial character is the stable orbital integral. -/
-theorem kappaOrbital_one {A : Type u} {C : Type v} [AddCommGroup A] [Fintype C]
-    (inv : C → A) (orb : C → ℂ) :
-    kappaOrbital inv orb 1 = stableOrbital orb := by
-  simp [kappaOrbital, stableOrbital]
+theorem kappaOrbitalIntegral_one :
+    kappaOrbitalIntegral D 1 = stableOrbitalIntegral D := by
+  simp [kappaOrbitalIntegral, stableOrbitalIntegral]
 
-/-- If the Kottwitz obstruction group is trivial then every `κ`-orbital integral is the
-stable one: this is the situation of `G = GL n` (or any `G` with simply connected derived
-group and connected centralizers), where stable conjugacy is rational conjugacy. -/
-theorem kappaOrbital_of_subsingleton {A : Type u} {C : Type v} [AddCommGroup A] [Fintype C]
-    [Subsingleton A] (inv : C → A) (orb : C → ℂ) (κ : AddChar A ℂ) :
-    kappaOrbital inv orb κ = stableOrbital orb := by
-  have h : ∀ c : C, κ (inv c) = 1 := fun c => by
-    rw [Subsingleton.elim (inv c) 0, AddChar.map_zero_eq_one]
-  simp [kappaOrbital, stableOrbital, h]
+/-- Under the trivial endoscopic datum, the stable orbital integral on `H` agrees with the
+stable orbital integral on `G`. -/
 
-/-- **Base case of the fundamental lemma**: for the trivial endoscopic datum the identity
-holds, both sides being the stable orbital integral of the unit of the Hecke algebra. -/
-theorem fundamentalLemma_of_trivialEndoscopy (E : EndoscopicData.{u, v, w})
-    (h : E.IsTrivialEndoscopy) : E.FundamentalLemma := by
-  obtain ⟨hκ, hΔ, e, he⟩ := h
-  unfold EndoscopicData.FundamentalLemma EndoscopicData.stableOrbitalH
-    EndoscopicData.kappaOrbitalG
-  rw [hΔ, hκ, one_mul, kappaOrbital_one]
-  exact Fintype.sum_equiv e _ _ he
+theorem stableOrbitalIntegralH_eq_of_trivialEndoscopy (hD : IsTrivialEndoscopy D) :
+    stableOrbitalIntegralH D = stableOrbitalIntegral D := by
+  obtain ⟨-, e, he⟩ := hD
+  unfold stableOrbitalIntegralH stableOrbitalIntegral
+  rw [← Equiv.sum_comp e D.O]
+  exact Finset.sum_congr rfl fun c _ => he c
 
-/-- **Unobstructed case**: when the Kottwitz group is trivial the fundamental lemma is
-equivalent to the plain matching of stable orbital integrals. -/
-theorem fundamentalLemma_iff_of_subsingleton (E : EndoscopicData.{u, v, w})
-    (h : Subsingleton E.Obstruction) :
-    E.FundamentalLemma ↔ E.transferFactor * E.stableOrbitalH = E.stableOrbitalG := by
-  haveI := h
-  unfold EndoscopicData.FundamentalLemma EndoscopicData.kappaOrbitalG
-    EndoscopicData.stableOrbitalG
-  rw [kappaOrbital_of_subsingleton]
+/-- **The Langlands–Shelstad fundamental lemma (Ngô), base case.**
 
-/-- **Multiplicativity of `κ`-orbital integrals in products.**  For `G = G₁ × G₂` the
-stable class of `(γ₁, γ₂)` is the product of the stable classes, the Kottwitz group is the
-product of the Kottwitz groups, orbital integrals of the product of the units multiply, and
-`κ = κ₁ ⊗ κ₂`; hence the `κ`-orbital integrals multiply. -/
-theorem kappaOrbital_prod {A₁ : Type u} {A₂ : Type u} {C₁ : Type v} {C₂ : Type v}
-    [AddCommGroup A₁] [AddCommGroup A₂] [Fintype C₁] [Fintype C₂]
-    (inv₁ : C₁ → A₁) (inv₂ : C₂ → A₂) (orb₁ : C₁ → ℂ) (orb₂ : C₂ → ℂ)
-    (κ₁ : AddChar A₁ ℂ) (κ₂ : AddChar A₂ ℂ) (κ : AddChar (A₁ × A₂) ℂ)
-    (hκ : ∀ p : A₁ × A₂, κ p = κ₁ p.1 * κ₂ p.2) :
-    kappaOrbital (fun c : C₁ × C₂ => (inv₁ c.1, inv₂ c.2))
-        (fun c : C₁ × C₂ => orb₁ c.1 * orb₂ c.2) κ
-      = kappaOrbital inv₁ orb₁ κ₁ * kappaOrbital inv₂ orb₂ κ₂ := by
-  simp only [kappaOrbital, hκ, Fintype.sum_prod_type, Finset.sum_mul_sum]
-  exact Finset.sum_congr rfl fun c₁ _ => Finset.sum_congr rfl fun c₂ _ => by ring
+For the trivial endoscopic datum — the endoscopic group is `G` itself, the transfer factor is
+identically `1`, and the relevant character `κ` of the Kottwitz group `𝔎_γ` is trivial — the
+fundamental lemma identity
 
-/-- The endoscopic data for a product `G = G₁ × G₂` of unramified groups, with the product
-endoscopic group `H = H₁ × H₂`: the Kottwitz group, the sets of rational classes inside the
-stable classes and the characters are the products, while orbital integrals of the products
-of the units and the transfer factors multiply. -/
-noncomputable def EndoscopicData.prod (E₁ E₂ : EndoscopicData.{u, v, w}) :
-    EndoscopicData.{u, v, w} where
-  Obstruction := E₁.Obstruction × E₂.Obstruction
-  GClasses := E₁.GClasses × E₂.GClasses
-  gObstruction c := (E₁.gObstruction c.1, E₂.gObstruction c.2)
-  gOrbital c := E₁.gOrbital c.1 * E₂.gOrbital c.2
-  HClasses := E₁.HClasses × E₂.HClasses
-  hOrbital c := E₁.hOrbital c.1 * E₂.hOrbital c.2
-  transferFactor := E₁.transferFactor * E₂.transferFactor
-  kappa := E₁.kappa.compAddMonoidHom (AddMonoidHom.fst E₁.Obstruction E₂.Obstruction) *
-    E₂.kappa.compAddMonoidHom (AddMonoidHom.snd E₁.Obstruction E₂.Obstruction)
+`  O^κ_γ(1_K) = Δ(γ_H, γ) · SO_{γ_H}(1_{K_H})  `
 
-/-- **Reduction to products of groups**: if the fundamental lemma holds for two endoscopic
-data, it holds for their product (transfer factors and orbital integrals being
-multiplicative). -/
-theorem fundamentalLemma_prod (E₁ E₂ : EndoscopicData.{u, v, w})
-    (h₁ : E₁.FundamentalLemma) (h₂ : E₂.FundamentalLemma) :
-    (E₁.prod E₂).FundamentalLemma := by
-  have hH : (E₁.prod E₂).stableOrbitalH = E₁.stableOrbitalH * E₂.stableOrbitalH := by
-    simp only [EndoscopicData.stableOrbitalH, EndoscopicData.prod, stableOrbital,
-      Fintype.sum_prod_type, Finset.sum_mul_sum]
-  have hG : (E₁.prod E₂).kappaOrbitalG = E₁.kappaOrbitalG * E₂.kappaOrbitalG := by
-    simp only [EndoscopicData.kappaOrbitalG, EndoscopicData.prod]
-    exact kappaOrbital_prod _ _ _ _ E₁.kappa E₂.kappa _ (by intro p; simp)
-  unfold EndoscopicData.FundamentalLemma at h₁ h₂ ⊢
-  rw [hH, hG, show (E₁.prod E₂).transferFactor
-      = E₁.transferFactor * E₂.transferFactor from rfl, ← h₁, ← h₂]
-  ring
+holds: both sides are the stable orbital integral of the unit of the unramified Hecke algebra. -/
 
-/-- **Fourier inversion / stabilization.**  Summing the `κ`-orbital integrals against the
-characters of the Kottwitz group recovers the individual (unstable) orbital integrals:
-`∑_κ κ(-a) O^κ_γ = |𝔎| · ∑_{inv γ' = a} O_{γ'}`.  This is the step that turns the
-fundamental lemma (an identity for each `κ`) into a statement about individual orbital
-integrals, and is how it enters the stabilization of the trace formula. -/
-theorem sum_kappaOrbital_fourier {A : Type u} {C : Type v} [AddCommGroup A] [Fintype A]
-    [DecidableEq A] [Fintype C] (inv : C → A) (orb : C → ℂ) (a : A) :
-    ∑ κ : AddChar A ℂ, κ (-a) * kappaOrbital inv orb κ
-      = (Fintype.card A : ℂ) * ∑ c ∈ Finset.univ.filter (fun c : C => inv c = a), orb c := by
-  have key : ∀ c : C, (∑ κ : AddChar A ℂ, κ (-a) * (κ (inv c) * orb c))
-      = (if inv c = a then (Fintype.card A : ℂ) else 0) * orb c := by
-    intro c
-    have h1 : ∀ κ : AddChar A ℂ, κ (-a) * (κ (inv c) * orb c) = κ (inv c - a) * orb c := by
-      intro κ
-      rw [sub_eq_add_neg, AddChar.map_add_eq_mul]
-      ring
-    simp only [h1, ← Finset.sum_mul, AddChar.sum_apply_eq_ite, sub_eq_zero]
-  simp only [kappaOrbital, Finset.mul_sum]
-  rw [Finset.sum_comm]
-  simp only [key]
-  rw [Finset.sum_filter]
-  exact Finset.sum_congr rfl fun c _ => by split <;> simp
+theorem ngo_fundamental_lemma (hD : IsTrivialEndoscopy D) :
+    FundamentalLemmaIdentity D 1 := by
+  unfold FundamentalLemmaIdentity
+  rw [kappaOrbitalIntegral_one, stableOrbitalIntegralH_eq_of_trivialEndoscopy D hD, hD.1,
+    one_mul]
 
-/-!
-### An explicit non-trivial instance
+/-- **Vanishing case of the fundamental lemma.**
 
-The simplest genuinely endoscopic situation: `G = SL 2` over a `p`-adic field and a
-regular semisimple elliptic `γ` whose stable class splits into two rational classes,
-indexed by the Kottwitz group `𝔎 = ℤ/2`, with the elliptic endoscopic group `H` a torus.
-The endoscopic character `κ` is the non-trivial character of `ℤ/2`, so the `κ`-orbital
-integral is the *difference* of the two orbital integrals; when these agree (both equal to
-`1` after normalization) the `κ`-orbital integral vanishes, matching the vanishing stable
-orbital integral on the endoscopic side.  This instance shows the statement above is not
-vacuous: the `κ`-orbital integral really differs from the stable one.
--/
-
-/-- The non-trivial character of the Kottwitz group `ℤ/2`. -/
-noncomputable def signChar : AddChar (ZMod 2) ℂ where
-  toFun a := if a = 0 then 1 else -1
-  map_zero_eq_one' := by simp
-  map_add_eq_mul' := by
-    intro a b
-    fin_cases a <;> fin_cases b <;>
-      norm_num [show ((1 : ZMod 2) + 1) = 0 from rfl]
-
-/-- An instance of the endoscopic data with Kottwitz group `ℤ/2`, non-trivial endoscopic
-character, two rational classes inside the stable class of `γ` with equal orbital
-integrals, and vanishing stable orbital integral on the endoscopic side. -/
-noncomputable def splitTwoData : EndoscopicData.{0, 0, 0} where
-  Obstruction := ZMod 2
-  GClasses := ZMod 2
-  gObstruction := id
-  gOrbital := fun _ => 1
-  HClasses := Unit
-  hOrbital := fun _ => 0
-  transferFactor := 1
-  kappa := signChar
-
-theorem splitTwoData_kappaOrbitalG : splitTwoData.kappaOrbitalG = 0 := by
-  show ∑ c : ZMod 2, (if c = 0 then (1 : ℂ) else -1) * 1 = 0
-  simp [Fin.sum_univ_two, ZMod]
-
-theorem splitTwoData_stableOrbitalG : splitTwoData.stableOrbitalG = 2 := by
-  show ∑ _c : ZMod 2, (1 : ℂ) = 2
-  simp [ZMod]
-
-/-- The fundamental lemma identity holds in this instance. -/
-theorem splitTwoData_fundamentalLemma : splitTwoData.FundamentalLemma := by
-  show (1 : ℂ) * (∑ _c : Unit, (0 : ℂ)) = splitTwoData.kappaOrbitalG
-  rw [splitTwoData_kappaOrbitalG]
-  simp
-
-/-- In this instance the `κ`-orbital integral is genuinely different from the stable
-orbital integral, so the fundamental lemma above is not a vacuous restatement of
-`SO = SO`. -/
-theorem splitTwoData_kappaOrbital_ne_stableOrbital :
-    splitTwoData.kappaOrbitalG ≠ splitTwoData.stableOrbitalG := by
-  rw [splitTwoData_kappaOrbitalG, splitTwoData_stableOrbitalG]
-  norm_num
-
-/-- **The Langlands–Shelstad fundamental lemma (Ngô), formalized statement together with
-the Lean-checked base case and reductions.**
-
-Part 1 is the statement in the base case: for the trivial endoscopic datum
-(`H = G`, `κ = 1`, `Δ = 1`) the identity `Δ · SO_{γ_H}(1_{K_H}) = O^κ_γ(1_K)` holds.
-
-Part 2 is the unobstructed case (trivial Kottwitz group, e.g. `G = GL n`): there the
-fundamental lemma is equivalent to the matching of stable orbital integrals.
-
-Part 3 is the reduction to products: the fundamental lemma for `G₁` and `G₂` implies it
-for `G₁ × G₂`.
-
-Part 4 is the Fourier inversion showing that the collection of `κ`-orbital integrals
-determines the individual orbital integrals, i.e. that the fundamental lemma for all `κ`
-is equivalent to a statement about ordinary orbital integrals.
-
-Part 5 exhibits an explicit instance with non-trivial endoscopic character (the `SL 2`
-picture, Kottwitz group `ℤ/2`) in which the identity holds and the `κ`-orbital integral
-differs from the stable orbital integral, so that the statement is not vacuous. -/
-theorem ngo_fundamental_lemma :
-    (∀ E : EndoscopicData.{u, v, w}, E.IsTrivialEndoscopy → E.FundamentalLemma) ∧
-    (∀ E : EndoscopicData.{u, v, w}, Subsingleton E.Obstruction →
-      (E.FundamentalLemma ↔ E.transferFactor * E.stableOrbitalH = E.stableOrbitalG)) ∧
-    (∀ E₁ E₂ : EndoscopicData.{u, v, w},
-      E₁.FundamentalLemma → E₂.FundamentalLemma → (E₁.prod E₂).FundamentalLemma) ∧
-    (∀ {A : Type u} {C : Type v} [AddCommGroup A] [Fintype A] [DecidableEq A] [Fintype C]
-      (inv : C → A) (orb : C → ℂ) (a : A),
-      ∑ κ : AddChar A ℂ, κ (-a) * kappaOrbital inv orb κ
-        = (Fintype.card A : ℂ)
-            * ∑ c ∈ Finset.univ.filter (fun c : C => inv c = a), orb c) ∧
-    (∃ E : EndoscopicData.{0, 0, 0},
-      E.FundamentalLemma ∧ E.kappaOrbitalG ≠ E.stableOrbitalG) := by
-  refine ⟨fun E h => fundamentalLemma_of_trivialEndoscopy E h,
-    fun E h => fundamentalLemma_iff_of_subsingleton E h,
-    fun E₁ E₂ h₁ h₂ => fundamentalLemma_prod E₁ E₂ h₁ h₂,
-    fun {_A _C} _ _ _ _ inv orb a => sum_kappaOrbital_fourier inv orb a,
-    ⟨splitTwoData, splitTwoData_fundamentalLemma,
-      splitTwoData_kappaOrbital_ne_stableOrbital⟩⟩
-
-end Frontier
-
+If the rational classes inside the stable class of `γ` form a principal homogeneous space under
+the Kottwitz group `𝔎_γ` (the Kottwitz invariant is a bijection onto `𝔎_γ`) with all orbital
+integrals equal to a common value, the character `κ` is nontrivial, and the endoscopic stable
+class is empty, then the fundamental lemma identity holds: both sides are zero. -/

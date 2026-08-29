@@ -1,15 +1,4 @@
-/-
-# Goodstein Terminates
-Category: Frontier — Set Theory
-Target: Frontier.Goodstein_terminates
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean requires `import` lines to precede any module docstring, so the header above is
--- written as a plain block comment; it is repeated as a module docstring below.)
-
 import Mathlib
-
 /-!
 # Goodstein Terminates
 Category: Frontier — Set Theory
@@ -17,295 +6,6 @@ Target: Frontier.Goodstein_terminates
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Frontier
-
-open Ordinal
-
-/-! ## Hereditary base representations
-
-For a base `b ≥ 2`, every positive natural number `n` can be written as
-`n = b ^ e * c + r` with `e = Nat.log b n`, `1 ≤ c < b` and `r < b ^ e`, and iterating this
-inside the exponent yields the *hereditary base-`b` representation* of `n`.
-
-Two operations are defined by this recursion:
-
-* `ordOf b n` : the ordinal obtained by replacing the base `b` by `ω` in the hereditary
-  base-`b` representation of `n` (a "Goodstein ordinal", an ordinal `< ε₀`);
-* `shiftBase b n` : the natural number obtained by replacing the base `b` by `b + 1`
-  in the hereditary base-`b` representation of `n`.
--/
-
-private lemma pow_log_pos (b n : ℕ) : 0 < b ^ Nat.log b n := by
-  rcases Nat.eq_zero_or_pos b with hb | hb
-  · subst hb
-    simp
-  · exact pow_pos hb _
-
-private lemma mod_pow_log_lt (b n : ℕ) (h : n ≠ 0) : n % b ^ Nat.log b n < n :=
-  lt_of_lt_of_le (Nat.mod_lt _ (pow_log_pos b n)) (Nat.pow_log_le_self b h)
-
-/-- The ordinal attached to `n` by replacing the base `b` by `ω` in the hereditary base-`b`
-representation of `n`. -/
-
-noncomputable def ordOf (b n : ℕ) : Ordinal.{0} :=
-  if h : n = 0 then 0
-  else
-    ω ^ ordOf b (Nat.log b n) * ((n / b ^ Nat.log b n : ℕ) : Ordinal)
-      + ordOf b (n % b ^ Nat.log b n)
-  termination_by n
-  decreasing_by
-  · exact Nat.log_lt_self b h
-  · exact mod_pow_log_lt b n h
-
-/-- The natural number obtained by replacing the base `b` by `b + 1` in the hereditary base-`b`
-representation of `n`. -/
-
-def shiftBase (b n : ℕ) : ℕ :=
-  if h : n = 0 then 0
-  else
-    (b + 1) ^ shiftBase b (Nat.log b n) * (n / b ^ Nat.log b n)
-      + shiftBase b (n % b ^ Nat.log b n)
-  termination_by n
-  decreasing_by
-  · exact Nat.log_lt_self b h
-  · exact mod_pow_log_lt b n h
-
-/-- The Goodstein sequence starting at `n`: `goodstein n 0 = n` (read in base `2`), and each
-step rewrites the current value in hereditary base `k + 2`, bumps the base to `k + 3`, and
-subtracts one. -/
-
-def goodstein (n : ℕ) : ℕ → ℕ
-  | 0 => n
-  | k + 1 => shiftBase (k + 2) (goodstein n k) - 1
-
-/-! ## Basic unfolding lemmas -/
-
-@[simp] lemma ordOf_zero (b : ℕ) : ordOf b 0 = 0 := by rw [ordOf]; simp
-
-lemma ordOf_eq_of_ne_zero {b n : ℕ} (h : n ≠ 0) :
-    ordOf b n =
-      ω ^ ordOf b (Nat.log b n) * ((n / b ^ Nat.log b n : ℕ) : Ordinal)
-      + ordOf b (n % b ^ Nat.log b n) := by
-  rw [ordOf]; simp [h]
-
-lemma shiftBase_eq_of_ne_zero {b n : ℕ} (h : n ≠ 0) :
-    shiftBase b n =
-      (b + 1) ^ shiftBase b (Nat.log b n) * (n / b ^ Nat.log b n)
-        + shiftBase b (n % b ^ Nat.log b n) := by
-  rw [shiftBase]; simp [h]
-
-/-! ## Arithmetic of the base-`b` decomposition -/
-
-lemma div_pow_log_pos {b n : ℕ} (h : n ≠ 0) : 0 < n / b ^ Nat.log b n :=
-  Nat.div_pos (Nat.pow_log_le_self b h) (pow_log_pos b n)
-
-lemma div_pow_log_lt {b n : ℕ} (hb : 2 ≤ b) : n / b ^ Nat.log b n < b := by
-  have hlt : n < b ^ (Nat.log b n + 1) := Nat.lt_pow_succ_log_self hb n
-  have := Nat.div_lt_of_lt_mul (by simpa [pow_succ] using hlt)
-  simpa using this
-
-/-! ## Ordinal estimates -/
-
-/-- A "carry" estimate: if `X < ω ^ A` and `A < B` then `ω ^ A * c + X < ω ^ B`. -/
-
-lemma opow_mul_add_lt_opow {A B X : Ordinal} {c : ℕ} (hAB : A < B) (hX : X < ω ^ A) :
-    ω ^ A * (c : Ordinal) + X < ω ^ B := by
-  calc ω ^ A * (c : Ordinal) + X < ω ^ A * (c : Ordinal) + ω ^ A := add_lt_add_right hX _
-    _ = ω ^ A * ((c : Ordinal) + 1) := by rw [mul_add, mul_one]
-    _ ≤ ω ^ A * ω := by
-        refine mul_le_mul_right ?_ _
-        rw [show ((c : Ordinal) + 1) = ((c + 1 : ℕ) : Ordinal) by push_cast; rfl]
-        exact le_of_lt (Ordinal.nat_lt_omega0 _)
-    _ = ω ^ (A + 1) := by rw [Ordinal.add_one_eq_succ, Ordinal.opow_succ]
-    _ ≤ ω ^ B := by
-        refine Ordinal.opow_le_opow_right Ordinal.omega0_pos ?_
-        rwa [Ordinal.add_one_eq_succ, Order.succ_le_iff]
-
-/-- A "digit" estimate: if `X < ω ^ A` and `c < d` then `ω ^ A * c + X < ω ^ A * d`. -/
-
-lemma opow_mul_add_lt_opow_mul {A X : Ordinal} {c d : ℕ} (hcd : c < d) (hX : X < ω ^ A) :
-    ω ^ A * (c : Ordinal) + X < ω ^ A * (d : Ordinal) := by
-  calc ω ^ A * (c : Ordinal) + X < ω ^ A * (c : Ordinal) + ω ^ A := add_lt_add_right hX _
-    _ = ω ^ A * ((c : Ordinal) + 1) := by rw [mul_add, mul_one]
-    _ ≤ ω ^ A * (d : Ordinal) := by
-        refine mul_le_mul_right ?_ _
-        rw [show ((c : Ordinal) + 1) = ((c + 1 : ℕ) : Ordinal) by push_cast; rfl]
-        exact_mod_cast hcd
-
-/-- Main induction: `ordOf b` is strictly monotone, and `n < b ^ e` implies
-`ordOf b n < ω ^ ordOf b e`. -/
-
-lemma ordOf_key {b : ℕ} (hb : 2 ≤ b) (N : ℕ) :
-    (∀ m, m < N → ordOf b m < ordOf b N) ∧ (∀ x, x < b ^ N → ordOf b x < ω ^ ordOf b N) := by
-  induction N using Nat.strong_induction_on with
-  | _ N IH =>
-  have part1 : ∀ m, m < N → ordOf b m < ordOf b N := by
-    intro m hm
-    have hN : N ≠ 0 := by omega
-    have hNeq : ordOf b N =
-        ω ^ ordOf b (Nat.log b N) * ((N / b ^ Nat.log b N : ℕ) : Ordinal)
-          + ordOf b (N % b ^ Nat.log b N) := ordOf_eq_of_ne_zero hN
-    have heN : Nat.log b N < N := Nat.log_lt_self b hN
-    have hrlt : N % b ^ Nat.log b N < b ^ Nat.log b N := Nat.mod_lt _ (pow_log_pos b N)
-    have hcpos : 0 < N / b ^ Nat.log b N := div_pow_log_pos hN
-    have hpos : (0 : Ordinal) <
-        ω ^ ordOf b (Nat.log b N) * ((N / b ^ Nat.log b N : ℕ) : Ordinal) := by
-      refine mul_pos (Ordinal.opow_pos _ Ordinal.omega0_pos) ?_
-      exact_mod_cast hcpos
-    rcases Nat.eq_zero_or_pos m with rfl | hmpos
-    · rw [ordOf_zero, hNeq]
-      exact lt_of_lt_of_le hpos (le_self_add)
-    · have hm0 : m ≠ 0 := by omega
-      have hmeq : ordOf b m =
-          ω ^ ordOf b (Nat.log b m) * ((m / b ^ Nat.log b m : ℕ) : Ordinal)
-            + ordOf b (m % b ^ Nat.log b m) := ordOf_eq_of_ne_zero hm0
-      have hr'lt : m % b ^ Nat.log b m < b ^ Nat.log b m := Nat.mod_lt _ (pow_log_pos b m)
-      have hee : Nat.log b m ≤ Nat.log b N := Nat.log_mono_right (le_of_lt hm)
-      rcases lt_or_eq_of_le hee with hlt | heq
-      · have h1 : ordOf b (Nat.log b m) < ordOf b (Nat.log b N) := (IH _ heN).1 _ hlt
-        have h2 : ordOf b (m % b ^ Nat.log b m) < ω ^ ordOf b (Nat.log b m) :=
-          (IH _ (lt_trans hlt heN)).2 _ hr'lt
-        have h3 : ordOf b m < ω ^ ordOf b (Nat.log b N) := by
-          rw [hmeq]; exact opow_mul_add_lt_opow h1 h2
-        refine lt_of_lt_of_le h3 ?_
-        rw [hNeq]
-        refine le_trans ?_ (le_self_add)
-        calc ω ^ ordOf b (Nat.log b N) = ω ^ ordOf b (Nat.log b N) * 1 := by rw [mul_one]
-          _ ≤ ω ^ ordOf b (Nat.log b N) * ((N / b ^ Nat.log b N : ℕ) : Ordinal) := by
-              refine mul_le_mul_right ?_ _
-              exact_mod_cast hcpos
-      · rw [heq] at hmeq hr'lt
-        have h2 : ordOf b (m % b ^ Nat.log b N) < ω ^ ordOf b (Nat.log b N) :=
-          (IH _ heN).2 _ hr'lt
-        have hcle : m / b ^ Nat.log b N ≤ N / b ^ Nat.log b N :=
-          Nat.div_le_div_right (le_of_lt hm)
-        rcases lt_or_eq_of_le hcle with hclt | hceq
-        · rw [hNeq, hmeq]
-          exact lt_of_lt_of_le (opow_mul_add_lt_opow_mul hclt h2) le_self_add
-        · have hmd : b ^ Nat.log b N * (m / b ^ Nat.log b N) + m % b ^ Nat.log b N = m :=
-            Nat.div_add_mod m (b ^ Nat.log b N)
-          have hNd : b ^ Nat.log b N * (N / b ^ Nat.log b N) + N % b ^ Nat.log b N = N :=
-            Nat.div_add_mod N (b ^ Nat.log b N)
-          have hrr : m % b ^ Nat.log b N < N % b ^ Nat.log b N := by
-            rw [hceq] at hmd
-            omega
-          have h3 : ordOf b (m % b ^ Nat.log b N) < ordOf b (N % b ^ Nat.log b N) :=
-            (IH _ (lt_of_lt_of_le hrlt (Nat.pow_log_le_self b hN))).1 _ hrr
-          rw [hmeq, hNeq, hceq]
-          exact add_lt_add_right h3 _
-  refine ⟨part1, ?_⟩
-  intro x hx
-  rcases Nat.eq_zero_or_pos x with rfl | hxpos
-  · simpa using Ordinal.opow_pos (ordOf b N) Ordinal.omega0_pos
-  · have hx0 : x ≠ 0 := by omega
-    have hbe : b ^ Nat.log b x ≤ x := Nat.pow_log_le_self b hx0
-    have heN : Nat.log b x < N := by
-      by_contra hcon
-      push_neg at hcon
-      have : b ^ N ≤ b ^ Nat.log b x := Nat.pow_le_pow_right (by omega) hcon
-      omega
-    have h1 : ordOf b (Nat.log b x) < ordOf b N := part1 _ heN
-    have h2 : ordOf b (x % b ^ Nat.log b x) < ω ^ ordOf b (Nat.log b x) :=
-      (IH _ heN).2 _ (Nat.mod_lt _ (pow_log_pos b x))
-    rw [ordOf_eq_of_ne_zero hx0]
-    exact opow_mul_add_lt_opow h1 h2
-
-lemma ordOf_strictMono {b : ℕ} (hb : 2 ≤ b) : StrictMono (ordOf b) :=
-  fun _ _ h => (ordOf_key hb _).1 _ h
-
-lemma ordOf_lt_opow {b : ℕ} (hb : 2 ≤ b) {x e : ℕ} (h : x < b ^ e) :
-    ordOf b x < ω ^ ordOf b e :=
-  (ordOf_key hb e).2 x h
-
-lemma ordOf_pow {b : ℕ} (hb : 2 ≤ b) (k : ℕ) : ordOf b (b ^ k) = ω ^ ordOf b k := by
-  have hbpos : 0 < b := by omega
-  have hne : b ^ k ≠ 0 := Nat.ne_of_gt (pow_pos hbpos k)
-  rw [ordOf_eq_of_ne_zero hne, Nat.log_pow hb (b := b) k, Nat.div_self (pow_pos hbpos k),
-    Nat.mod_self, ordOf_zero, Nat.cast_one, mul_one, add_zero]
-
-/-! ## The shift preserves the associated ordinal -/
-
-lemma shiftBase_ne_zero {b n : ℕ} (h : n ≠ 0) : shiftBase b n ≠ 0 := by
-  rw [shiftBase_eq_of_ne_zero h]
-  have h1 : 0 < (b + 1) ^ shiftBase b (Nat.log b n) := pow_pos (Nat.succ_pos b) _
-  have h2 : 0 < n / b ^ Nat.log b n := div_pow_log_pos h
-  have := Nat.mul_pos h1 h2
-  omega
-
-lemma ordOf_shiftBase {b : ℕ} (hb : 2 ≤ b) (n : ℕ) :
-    ordOf (b + 1) (shiftBase b n) = ordOf b n := by
-  induction n using Nat.strong_induction_on with
-  | _ n IH =>
-  rcases Nat.eq_zero_or_pos n with rfl | hpos
-  · simp
-  · have hn : n ≠ 0 := by omega
-    have hb1 : 2 ≤ b + 1 := by omega
-    set e := Nat.log b n with he
-    set c := n / b ^ e with hc
-    set r := n % b ^ e with hr
-    have heN : e < n := Nat.log_lt_self b hn
-    have hrlt : r < b ^ e := Nat.mod_lt _ (pow_log_pos b n)
-    have hrn : r < n := mod_pow_log_lt b n hn
-    have hcpos : 0 < c := div_pow_log_pos hn
-    have hcb : c < b := div_pow_log_lt hb
-    set E := shiftBase b e with hE
-    set R := shiftBase b r with hR
-    have hSE : ordOf (b + 1) E = ordOf b e := IH e heN
-    have hSR : ordOf (b + 1) R = ordOf b r := IH r hrn
-    have hRlt : R < (b + 1) ^ E := by
-      have h1 : ordOf (b + 1) R < ordOf (b + 1) ((b + 1) ^ E) := by
-        rw [hSR, ordOf_pow hb1 E, hSE]
-        exact ordOf_lt_opow hb hrlt
-      exact (ordOf_strictMono hb1).lt_iff_lt.mp h1
-    have hS : shiftBase b n = (b + 1) ^ E * c + R := shiftBase_eq_of_ne_zero hn
-    have hSne : shiftBase b n ≠ 0 := shiftBase_ne_zero hn
-    have hlog : Nat.log (b + 1) (shiftBase b n) = E := by
-      refine Nat.log_eq_of_pow_le_of_lt_pow ?_ ?_
-      · rw [hS]
-        have : (b + 1) ^ E ≤ (b + 1) ^ E * c := Nat.le_mul_of_pos_right _ hcpos
-        omega
-      · rw [hS, pow_succ]
-        have h2 : (b + 1) ^ E * c + (b + 1) ^ E = (b + 1) ^ E * (c + 1) := by ring
-        have h3 : (b + 1) ^ E * (c + 1) ≤ (b + 1) ^ E * (b + 1) :=
-          Nat.mul_le_mul_left _ (by omega)
-        omega
-    have hdiv : shiftBase b n / (b + 1) ^ E = c := by
-      rw [hS, Nat.mul_add_div (pow_pos (Nat.succ_pos b) _), Nat.div_eq_of_lt hRlt, Nat.add_zero]
-    have hmod : shiftBase b n % (b + 1) ^ E = R := by
-      rw [hS, Nat.mul_add_mod, Nat.mod_eq_of_lt hRlt]
-    rw [ordOf_eq_of_ne_zero hSne, hlog, hdiv, hmod, hSE, hSR, ordOf_eq_of_ne_zero hn]
-
-/-! ## The Goodstein ordinals lie below `ε₀`
-
-The ordinals `ordOf b n` used as the termination measure are exactly the ordinals `< ε₀`
-occurring in the usual proof of Goodstein's theorem; this is the point where the
-(unprovable in `PA`) well-foundedness of `ε₀` is used. -/
-
-lemma goodstein_descent (n k : ℕ) (h : goodstein n k ≠ 0) :
-    ordOf (k + 3) (goodstein n (k + 1)) < ordOf (k + 2) (goodstein n k) := by
-  have hb : 2 ≤ k + 2 := by omega
-  have hSne : shiftBase (k + 2) (goodstein n k) ≠ 0 := shiftBase_ne_zero h
-  have hlt : goodstein n (k + 1) < shiftBase (k + 2) (goodstein n k) := by
-    rw [goodstein]
-    omega
-  have hmono := ordOf_strictMono (show 2 ≤ k + 2 + 1 by omega) hlt
-  rw [ordOf_shiftBase hb] at hmono
-  simpa using hmono
-
-/-- **Goodstein's theorem**: every Goodstein sequence eventually reaches `0`. -/
-
-theorem Goodstein_terminates (n : ℕ) : ∃ k, goodstein n k = 0 := by
-  by_contra hcon
-  push_neg at hcon
-  have hdesc : ∀ k, ordOf (k + 1 + 2) (goodstein n (k + 1)) < ordOf (k + 2) (goodstein n k) :=
-    fun k => by simpa using goodstein_descent n k (hcon k)
-  exact not_strictAnti_of_wellFoundedLT (fun k => ordOf (k + 2) (goodstein n k))
-    (strictAnti_nat_of_succ_lt hdesc)
-
-end Frontier
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -321,11 +21,308 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+namespace Frontier
+
+open Ordinal
+
+/-! ### Arithmetic preliminaries -/
+
+theorem nat_pow_log_pos (b n : ℕ) : 0 < b ^ Nat.log b n := by
+  rcases Nat.eq_zero_or_pos b with hb | hb
+  · subst hb; simp [Nat.log_of_left_le_one]
+  · exact Nat.pow_pos hb
+
+theorem nat_mod_pow_log_lt (b n : ℕ) (hn : n ≠ 0) : n % b ^ Nat.log b n < n :=
+  lt_of_lt_of_le (Nat.mod_lt _ (nat_pow_log_pos b n)) (Nat.pow_log_le_self b hn)
+
+/-- The leading digit of `n` in base `b` is positive. -/
+
+theorem nat_div_pow_log_pos (b n : ℕ) (hn : n ≠ 0) : 0 < n / b ^ Nat.log b n :=
+  Nat.div_pos (Nat.pow_log_le_self b hn) (nat_pow_log_pos b n)
+
+/-- The leading digit of `n` in base `b` is less than `b`. -/
+
+theorem nat_div_pow_log_lt (b n : ℕ) (hb : 2 ≤ b) : n / b ^ Nat.log b n < b := by
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · simpa using lt_of_lt_of_le Nat.zero_lt_two hb
+  · have h := Nat.lt_pow_succ_log_self (b := b) hb n
+    rw [Nat.div_lt_iff_lt_mul (nat_pow_log_pos b n)]
+    simpa [pow_succ, Nat.mul_comm] using h
+
+/-- Uniqueness of the base-`c` decomposition, in the form we need. -/
+
+theorem nat_decomp (c e q s : ℕ) (hc : 2 ≤ c) (hq0 : 0 < q) (hqc : q < c) (hs : s < c ^ e) :
+    Nat.log c (c ^ e * q + s) = e ∧ (c ^ e * q + s) / c ^ e = q ∧ (c ^ e * q + s) % c ^ e = s := by
+  have hce : 0 < c ^ e := Nat.pow_pos (lt_of_lt_of_le Nat.zero_lt_two hc)
+  have hdiv : (c ^ e * q + s) / c ^ e = q := by
+    rw [Nat.mul_add_div hce, Nat.div_eq_of_lt hs, Nat.add_zero]
+  have hmod : (c ^ e * q + s) % c ^ e = s := by
+    rw [Nat.mul_add_mod, Nat.mod_eq_of_lt hs]
+  refine ⟨?_, hdiv, hmod⟩
+  have hlow : c ^ e ≤ c ^ e * q + s := le_trans (Nat.le_mul_of_pos_right _ hq0) (Nat.le_add_right _ _)
+  have hhigh : c ^ e * q + s < c ^ (e + 1) := by
+    have : c ^ e * q + s < c ^ e * q + c ^ e := by omega
+    calc c ^ e * q + s < c ^ e * q + c ^ e := this
+      _ = c ^ e * (q + 1) := by ring
+      _ ≤ c ^ e * c := Nat.mul_le_mul_left _ hqc
+      _ = c ^ (e + 1) := by ring
+  exact Nat.log_eq_of_pow_le_of_lt_pow hlow hhigh
+
+/-- Casting a natural power into the ordinals. -/
+
+theorem natCast_pow_ord (m k : ℕ) : ((m ^ k : ℕ) : Ordinal) = (m : Ordinal) ^ (k : Ordinal) := by
+  induction k with
+  | zero => simp
+  | succ j ih =>
+      have h : ((j + 1 : ℕ) : Ordinal) = (j : Ordinal) + 1 := by push_cast; rfl
+      rw [pow_succ, Ordinal.natCast_mul, ih, h, opow_add, opow_one]
+
+/-! ### The ordinal (and natural) evaluation of hereditary base-`b` representations -/
+
+/-- `Gv b w n` is the value of the hereditary base-`b` representation of `n`,
+with the base `b` replaced by the ordinal `w`. -/
+
+noncomputable def Gv (b : ℕ) (w : Ordinal.{0}) : ℕ → Ordinal.{0}
+  | 0 => 0
+  | (n + 1) =>
+      w ^ (Gv b w (Nat.log b (n + 1))) * ((n + 1) / b ^ Nat.log b (n + 1) : ℕ)
+        + Gv b w ((n + 1) % b ^ Nat.log b (n + 1))
+  decreasing_by
+    · exact Nat.log_lt_self b (Nat.succ_ne_zero n)
+    · exact nat_mod_pow_log_lt b (n + 1) (Nat.succ_ne_zero n)
+
+theorem Gv_def (b : ℕ) (w : Ordinal) (n : ℕ) (hn : n ≠ 0) :
+    Gv b w n = w ^ (Gv b w (Nat.log b n)) * ((n / b ^ Nat.log b n : ℕ))
+      + Gv b w (n % b ^ Nat.log b n) := by
+  obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hn
+  rw [Gv]
+
+theorem Gv_pos (b : ℕ) (w : Ordinal) (hw : 0 < w) (n : ℕ) (hn : n ≠ 0) : 0 < Gv b w n := by
+  rw [Gv_def b w n hn]
+  have h1 : (0 : Ordinal) < w ^ (Gv b w (Nat.log b n)) * ((n / b ^ Nat.log b n : ℕ)) := by
+    apply mul_pos (opow_pos _ hw)
+    exact_mod_cast nat_div_pow_log_pos b n hn
+  exact lt_of_lt_of_le h1 le_self_add
+
+/-- The main structural lemma: `Gv b w` is strictly monotone, and sends numbers below `b ^ k`
+to ordinals below `w ^ (Gv b w k)`. -/
+
+theorem Gv_key_and_mono (b : ℕ) (w : Ordinal) (hb : 2 ≤ b) (hw : (b : Ordinal) ≤ w) (n : ℕ) :
+    (∀ k : ℕ, n < b ^ k → Gv b w n < w ^ (Gv b w k)) ∧
+      (∀ m : ℕ, n < m → Gv b w n < Gv b w m) := by
+  have hb0 : 0 < b := by omega
+  have hwpos : (0 : Ordinal) < w := lt_of_lt_of_le (by exact_mod_cast hb0) hw
+  induction n using Nat.strong_induction_on with
+  | _ n IH =>
+    have key : ∀ k : ℕ, n < b ^ k → Gv b w n < w ^ (Gv b w k) := by
+      intro k hk
+      rcases eq_or_ne n 0 with rfl | hn
+      · simpa using opow_pos (Gv b w k) hwpos
+      · have hLn : Nat.log b n < n := Nat.log_lt_self b hn
+        have hrn : n % b ^ Nat.log b n < n := nat_mod_pow_log_lt b n hn
+        have hrb : n % b ^ Nat.log b n < b ^ Nat.log b n := Nat.mod_lt _ (nat_pow_log_pos b n)
+        have hqb : n / b ^ Nat.log b n < b := nat_div_pow_log_lt b n hb
+        have hLk : Nat.log b n < k := by
+          have h1 : b ^ Nat.log b n ≤ n := Nat.pow_log_le_self b hn
+          exact (Nat.pow_lt_pow_iff_right hb).mp (lt_of_le_of_lt h1 hk)
+        have hGLk : Gv b w (Nat.log b n) < Gv b w k := (IH _ hLn).2 k hLk
+        have hGr : Gv b w (n % b ^ Nat.log b n) < w ^ (Gv b w (Nat.log b n)) :=
+          (IH _ hrn).1 (Nat.log b n) hrb
+        calc Gv b w n
+            = w ^ (Gv b w (Nat.log b n)) * ((n / b ^ Nat.log b n : ℕ))
+                + Gv b w (n % b ^ Nat.log b n) := Gv_def b w n hn
+          _ < w ^ (Gv b w (Nat.log b n)) * ((n / b ^ Nat.log b n : ℕ))
+                + w ^ (Gv b w (Nat.log b n)) := add_lt_add_right hGr _
+          _ = w ^ (Gv b w (Nat.log b n)) * (((n / b ^ Nat.log b n : ℕ) : Ordinal) + 1) := by
+                rw [mul_add, mul_one]
+          _ ≤ w ^ (Gv b w (Nat.log b n)) * w := by
+                apply mul_le_mul_right
+                have h2 : ((n / b ^ Nat.log b n : ℕ) + 1 : ℕ) ≤ b := hqb
+                calc ((n / b ^ Nat.log b n : ℕ) : Ordinal) + 1
+                    = (((n / b ^ Nat.log b n : ℕ) + 1 : ℕ) : Ordinal) := by push_cast; rfl
+                  _ ≤ (b : Ordinal) := by exact_mod_cast h2
+                  _ ≤ w := hw
+          _ = w ^ (Gv b w (Nat.log b n) + 1) := by rw [opow_add, opow_one]
+          _ ≤ w ^ (Gv b w k) := opow_le_opow_right hwpos (Order.add_one_le_of_lt hGLk)
+    refine ⟨key, ?_⟩
+    intro m hnm
+    have hm : m ≠ 0 := by omega
+    have hGm : Gv b w m = w ^ (Gv b w (Nat.log b m)) * ((m / b ^ Nat.log b m : ℕ))
+        + Gv b w (m % b ^ Nat.log b m) := Gv_def b w m hm
+    have hqm0 : 0 < m / b ^ Nat.log b m := nat_div_pow_log_pos b m hm
+    have hbase : w ^ (Gv b w (Nat.log b m)) ≤ Gv b w m := by
+      rw [hGm]
+      calc w ^ (Gv b w (Nat.log b m)) = w ^ (Gv b w (Nat.log b m)) * 1 := (mul_one _).symm
+        _ ≤ w ^ (Gv b w (Nat.log b m)) * ((m / b ^ Nat.log b m : ℕ)) := by
+              apply mul_le_mul_right
+              exact_mod_cast hqm0
+        _ ≤ _ := le_self_add
+    rcases eq_or_ne n 0 with rfl | hn
+    · simpa using Gv_pos b w hwpos m hm
+    · have hLM : Nat.log b n ≤ Nat.log b m := Nat.log_mono_right (le_of_lt hnm)
+      rcases lt_or_eq_of_le hLM with hlt | heq
+      · have hnlt : n < b ^ Nat.log b m :=
+          lt_of_lt_of_le (Nat.lt_pow_succ_log_self hb n) (Nat.pow_le_pow_right hb0 hlt)
+        exact lt_of_lt_of_le (key _ hnlt) hbase
+      · have hrn : n % b ^ Nat.log b n < n := nat_mod_pow_log_lt b n hn
+        have hrb : n % b ^ Nat.log b n < b ^ Nat.log b n := Nat.mod_lt _ (nat_pow_log_pos b n)
+        have hGr : Gv b w (n % b ^ Nat.log b n) < w ^ (Gv b w (Nat.log b n)) :=
+          (IH _ hrn).1 (Nat.log b n) hrb
+        have hGn : Gv b w n = w ^ (Gv b w (Nat.log b n)) * ((n / b ^ Nat.log b n : ℕ))
+            + Gv b w (n % b ^ Nat.log b n) := Gv_def b w n hn
+        have hdn := Nat.div_add_mod n (b ^ Nat.log b n)
+        rw [heq] at hrn hrb hGr hGn hdn
+        have hdm := Nat.div_add_mod m (b ^ Nat.log b m)
+        have hqle : n / b ^ Nat.log b m ≤ m / b ^ Nat.log b m :=
+          Nat.div_le_div_right (le_of_lt hnm)
+        rcases lt_or_eq_of_le hqle with hq | hq
+        · calc Gv b w n
+              = w ^ (Gv b w (Nat.log b m)) * ((n / b ^ Nat.log b m : ℕ))
+                  + Gv b w (n % b ^ Nat.log b m) := hGn
+            _ < w ^ (Gv b w (Nat.log b m)) * ((n / b ^ Nat.log b m : ℕ))
+                  + w ^ (Gv b w (Nat.log b m)) := add_lt_add_right hGr _
+            _ = w ^ (Gv b w (Nat.log b m)) * (((n / b ^ Nat.log b m : ℕ) : Ordinal) + 1) := by
+                  rw [mul_add, mul_one]
+            _ ≤ w ^ (Gv b w (Nat.log b m)) * ((m / b ^ Nat.log b m : ℕ)) := by
+                  apply mul_le_mul_right
+                  have h3 : ((n / b ^ Nat.log b m : ℕ) + 1 : ℕ) ≤ m / b ^ Nat.log b m := hq
+                  calc ((n / b ^ Nat.log b m : ℕ) : Ordinal) + 1
+                      = (((n / b ^ Nat.log b m : ℕ) + 1 : ℕ) : Ordinal) := by push_cast; rfl
+                    _ ≤ _ := by exact_mod_cast h3
+            _ ≤ Gv b w m := by rw [hGm]; exact le_self_add
+        · have hrlt : n % b ^ Nat.log b m < m % b ^ Nat.log b m := by
+            refine lt_of_add_lt_add_left (a := b ^ Nat.log b m * (m / b ^ Nat.log b m)) ?_
+            rw [hdm, ← hq, hdn]
+            exact hnm
+          have hGrr : Gv b w (n % b ^ Nat.log b m) < Gv b w (m % b ^ Nat.log b m) :=
+            (IH _ hrn).2 _ hrlt
+          calc Gv b w n
+              = w ^ (Gv b w (Nat.log b m)) * ((n / b ^ Nat.log b m : ℕ))
+                  + Gv b w (n % b ^ Nat.log b m) := hGn
+            _ < w ^ (Gv b w (Nat.log b m)) * ((m / b ^ Nat.log b m : ℕ))
+                  + Gv b w (m % b ^ Nat.log b m) := by
+                  rw [hq]; exact add_lt_add_right hGrr _
+            _ = Gv b w m := hGm.symm
+
+theorem Gv_lt_opow (b : ℕ) (w : Ordinal) (hb : 2 ≤ b) (hw : (b : Ordinal) ≤ w) (n k : ℕ)
+    (h : n < b ^ k) : Gv b w n < w ^ (Gv b w k) :=
+  (Gv_key_and_mono b w hb hw n).1 k h
+
+theorem Gv_strictMono (b : ℕ) (w : Ordinal) (hb : 2 ≤ b) (hw : (b : Ordinal) ≤ w) {n m : ℕ}
+    (h : n < m) : Gv b w n < Gv b w m :=
+  (Gv_key_and_mono b w hb hw n).2 m h
+
+/-! ### The base-bumping operation -/
+
+/-- `bump b c n` rewrites `n` in hereditary base `b` and replaces every occurrence of `b`
+by `c`. -/
+
+def bump (b c : ℕ) : ℕ → ℕ
+  | 0 => 0
+  | (n + 1) =>
+      c ^ (bump b c (Nat.log b (n + 1))) * ((n + 1) / b ^ Nat.log b (n + 1))
+        + bump b c ((n + 1) % b ^ Nat.log b (n + 1))
+  decreasing_by
+    · exact Nat.log_lt_self b (Nat.succ_ne_zero n)
+    · exact nat_mod_pow_log_lt b (n + 1) (Nat.succ_ne_zero n)
+
+theorem bump_def (b c n : ℕ) (hn : n ≠ 0) :
+    bump b c n = c ^ (bump b c (Nat.log b n)) * (n / b ^ Nat.log b n)
+      + bump b c (n % b ^ Nat.log b n) := by
+  obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hn
+  rw [bump]
+
+theorem natCast_bump (b c n : ℕ) : ((bump b c n : ℕ) : Ordinal) = Gv b (c : Ordinal) n := by
+  induction n using Nat.strong_induction_on with
+  | _ n IH =>
+    rcases eq_or_ne n 0 with rfl | hn
+    · simp
+    · rw [bump_def b c n hn, Gv_def b (c : Ordinal) n hn, ← IH _ (Nat.log_lt_self b hn),
+        ← IH _ (nat_mod_pow_log_lt b n hn), Nat.cast_add, Ordinal.natCast_mul,
+        natCast_pow_ord]
+
+theorem bump_ne_zero (b c n : ℕ) (hc : 0 < c) (hn : n ≠ 0) : bump b c n ≠ 0 := by
+  have h : (0 : Ordinal) < Gv b (c : Ordinal) n := Gv_pos b _ (by exact_mod_cast hc) n hn
+  rw [← natCast_bump] at h
+  exact_mod_cast h.ne'
+
+/-- Bumping the base does not change the ordinal value. -/
+
+theorem Gv_bump (b c : ℕ) (w : Ordinal) (hb : 2 ≤ b) (hbc : b ≤ c)
+    (n : ℕ) : Gv c w (bump b c n) = Gv b w n := by
+  have hc : 2 ≤ c := le_trans hb hbc
+  induction n using Nat.strong_induction_on with
+  | _ n IH =>
+    rcases eq_or_ne n 0 with rfl | hn
+    · simp
+    · have hLn : Nat.log b n < n := Nat.log_lt_self b hn
+      have hrn : n % b ^ Nat.log b n < n := nat_mod_pow_log_lt b n hn
+      have hrb : n % b ^ Nat.log b n < b ^ Nat.log b n := Nat.mod_lt _ (nat_pow_log_pos b n)
+      have hq0 : 0 < n / b ^ Nat.log b n := nat_div_pow_log_pos b n hn
+      have hqc : n / b ^ Nat.log b n < c := lt_of_lt_of_le (nat_div_pow_log_lt b n hb) hbc
+      have hkey : bump b c (n % b ^ Nat.log b n) < c ^ bump b c (Nat.log b n) := by
+        have h1 : Gv b (c : Ordinal) (n % b ^ Nat.log b n)
+            < (c : Ordinal) ^ (Gv b (c : Ordinal) (Nat.log b n)) :=
+          Gv_lt_opow b (c : Ordinal) hb (by exact_mod_cast hbc) _ _ hrb
+        rw [← natCast_bump, ← natCast_bump, ← natCast_pow_ord] at h1
+        exact_mod_cast h1
+      have hx : bump b c n
+          = c ^ (bump b c (Nat.log b n)) * (n / b ^ Nat.log b n)
+            + bump b c (n % b ^ Nat.log b n) := bump_def b c n hn
+      obtain ⟨h1, h2, h3⟩ := nat_decomp c (bump b c (Nat.log b n)) (n / b ^ Nat.log b n)
+        (bump b c (n % b ^ Nat.log b n)) hc hq0 hqc hkey
+      have hxne : bump b c n ≠ 0 := bump_ne_zero b c n (by omega) hn
+      rw [Gv_def c w _ hxne, hx, h1, h2, h3, IH _ hLn, IH _ hrn, Gv_def b w n hn]
+
+/-! ### The Goodstein sequence -/
+
+/-- `goodstein n k` is the `k`-th term of the Goodstein sequence started at `n`
+(with initial base `2`): at each step, write the current value in hereditary base `k + 2`,
+replace the base by `k + 3`, and subtract one. -/
+
+def goodstein (n : ℕ) : ℕ → ℕ
+  | 0 => n
+  | (k + 1) => bump (k + 2) (k + 3) (goodstein n k) - 1
+
+/-- **Goodstein's theorem**: every Goodstein sequence eventually reaches `0`. -/
+
+theorem Goodstein_terminates (n : ℕ) : ∃ k : ℕ, goodstein n k = 0 := by
+  by_contra hcon
+  push_neg at hcon
+  set f : ℕ → Ordinal := fun k => Gv (k + 2) Ordinal.omega0 (goodstein n k) with hf
+  have step : ∀ k : ℕ, f (k + 1) < f k := by
+    intro k
+    have hgk : goodstein n k ≠ 0 := hcon k
+    have hxne : bump (k + 2) (k + 3) (goodstein n k) ≠ 0 :=
+      bump_ne_zero _ _ _ (by omega) hgk
+    have hlt : bump (k + 2) (k + 3) (goodstein n k) - 1
+        < bump (k + 2) (k + 3) (goodstein n k) := by omega
+    have hwk : ((k + 3 : ℕ) : Ordinal) ≤ Ordinal.omega0 := le_of_lt (Ordinal.nat_lt_omega0 _)
+    calc f (k + 1)
+        = Gv (k + 3) Ordinal.omega0 (bump (k + 2) (k + 3) (goodstein n k) - 1) := rfl
+      _ < Gv (k + 3) Ordinal.omega0 (bump (k + 2) (k + 3) (goodstein n k)) :=
+          Gv_strictMono (k + 3) Ordinal.omega0 (by omega) hwk hlt
+      _ = Gv (k + 2) Ordinal.omega0 (goodstein n k) :=
+          Gv_bump (k + 2) (k + 3) Ordinal.omega0 (by omega) (by omega) _
+      _ = f k := rfl
+  obtain ⟨a, ha, hmin⟩ := Ordinal.lt_wf.has_min (Set.range f) ⟨f 0, 0, rfl⟩
+  obtain ⟨k, rfl⟩ := ha
+  exact hmin (f (k + 1)) ⟨k + 1, rfl⟩ (step k)
+
+/-! ### Sanity checks
+
+These confirm that the definitions really implement the Goodstein process:
+bumping the base of `4 = 2 ^ 2` from `2` to `3` gives `27 = 3 ^ 3`, the Goodstein
+sequence starting at `3` is `3, 3, 3, 2, 1, 0`, and the one starting at `4` begins
+`4, 26, 41, 60, ...`.
+-/
+
+example : bump 2 3 4 = 27 := by norm_num [bump_def]
+
+example : goodstein 3 5 = 0 := by norm_num [goodstein, bump_def]
+
+example : goodstein 4 3 = 60 := by norm_num [goodstein, bump_def]
+
+end Frontier

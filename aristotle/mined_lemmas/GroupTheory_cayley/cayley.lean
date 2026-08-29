@@ -1,3 +1,26 @@
+/-!
+# Cayley
+Category: Frontier Wave 2 (deeper machinery)
+Target: GroupTheory.cayley
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+namespace GroupTheory
+
+/-- **Cayley's theorem**: every group embeds into the symmetric group on its
+underlying set.  The embedding is the left-regular representation
+`g ↦ (x ↦ g * x)`, which is the permutation action of `G` on itself. -/
+
+theorem cayley (G : Type*) [Group G] :
+    ∃ f : G →* Equiv.Perm G, Function.Injective f :=
+  ⟨MulAction.toPermHom G G, fun _ _ h =>
+    MulAction.toPerm_injective (M := G) (α := G) h⟩
+
+end GroupTheory
+
 import Mathlib
 
 open scoped BigOperators
@@ -22,33 +45,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-/-
-# Cayley
-Category: Frontier Wave 2 (deeper machinery)
-Target: GroupTheory.cayley
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Cayley
-Category: Frontier Wave 2 (deeper machinery)
-Target: GroupTheory.cayley
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-namespace GroupTheory
-
-/-- **Cayley's theorem**: every group embeds into the symmetric group on its
-underlying set, i.e. there is an injective group homomorphism `G →* Equiv.Perm G`. -/
-
-theorem cayley (G : Type*) [Group G] :
-    ∃ f : G →* Equiv.Perm G, Function.Injective f :=
-  ⟨MulAction.toPermHom G G, MulAction.toPerm_injective⟩
-
-end GroupTheory
 

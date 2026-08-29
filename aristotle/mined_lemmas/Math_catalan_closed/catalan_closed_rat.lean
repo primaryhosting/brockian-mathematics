@@ -1,27 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Catalan Closed
 Category: Pure Mathematics
 Target: Math.catalan_closed
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
-
-namespace Math
-
-/-- The `n`th Catalan number equals `C(2n, n) / (n+1)` (exact natural division,
-since `n + 1` divides the central binomial coefficient). -/
-
-theorem catalan_closed_rat (n : ℕ) :
-    (catalan n : ℚ) = ((2 * n).choose n : ℚ) / (n + 1) := by
-  have h : ((n : ℚ) + 1) * (catalan n : ℚ) = ((2 * n).choose n : ℚ) := by
-    exact_mod_cast congrArg (fun m : ℕ => (m : ℚ)) (succ_mul_catalan_eq_centralBinom n)
-  field_simp
-  linarith [h]
-
-end Math
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -45,4 +30,18 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Math
+
+/-- Division-free form of the closed formula: `(n + 1) * C_n = binom(2n, n)`. -/
+
+theorem catalan_closed_rat (n : ℕ) :
+    (catalan n : ℚ) = (Nat.choose (2 * n) n : ℚ) / (n + 1) := by
+  have h : ((n : ℚ) + 1) * (catalan n : ℚ) = (Nat.choose (2 * n) n : ℚ) := by
+    exact_mod_cast catalan_closed_mul n
+  have hne : ((n : ℚ) + 1) ≠ 0 := by positivity
+  field_simp
+  linarith [h]
+
+end Math
 

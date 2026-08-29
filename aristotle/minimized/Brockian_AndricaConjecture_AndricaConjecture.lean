@@ -39,62 +39,58 @@ Category: Brockian Conjecture
 Target: Brockian.AndricaConjecture.AndricaConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-Lean requires `import` commands to precede every other command, including module
-docstrings, so the mandated header appears at the top of the file as a plain block
-comment and is repeated here as the module docstring.
 -/
 
 namespace Brockian.AndricaConjecture
 
 open Real
 
-/-- `prime n` is the `n`-th prime number (`prime 0 = 2`). -/
+/-- `primeSeq n` is the `n`-th prime number (`primeSeq 0 = 2`). -/
 
-noncomputable def prime (n : ℕ) : ℕ := Nat.nth Nat.Prime n
+noncomputable def primeSeq (n : ℕ) : ℕ := Nat.nth Nat.Prime n
+
+/-- Andrica's conjecture: `√p_{n+1} - √p_n < 1` for every `n`. -/
 
 def AndricaStatement : Prop :=
-  ∀ n : ℕ, Real.sqrt (prime (n + 1)) - Real.sqrt (prime n) < 1
+  ∀ n : ℕ, Real.sqrt (primeSeq (n + 1)) - Real.sqrt (primeSeq n) < 1
 
-/-- The equivalent gap formulation: `p_{n+1} - p_n < 2√(p_n) + 1`. -/
+/-- The prime-gap reformulation of Andrica's conjecture:
+`p_{n+1} - p_n < 2√p_n + 1` for every `n`. -/
 
-def AndricaGapStatement : Prop :=
-  ∀ n : ℕ, (prime (n + 1) : ℝ) - prime n < 2 * Real.sqrt (prime n) + 1
+def GapStatement : Prop :=
+  ∀ n : ℕ, (primeSeq (n + 1) : ℝ) - primeSeq n < 2 * Real.sqrt (primeSeq n) + 1
 
-/-- Elementary equivalence: for a nonnegative real `a` and any real `b`,
-`√b - √a < 1` iff `b - a < 2√a + 1`. -/
+/-- Elementary equivalence: for nonnegative reals, `√b - √a < 1` iff `b - a < 2√a + 1`. -/
 
-lemma sqrt_sub_sqrt_lt_one_iff {a b : ℝ} (ha : 0 ≤ a) :
+theorem sqrt_sub_sqrt_lt_one_iff {a b : ℝ} (ha : 0 ≤ a) :
     Real.sqrt b - Real.sqrt a < 1 ↔ b - a < 2 * Real.sqrt a + 1 := by
-  have hsa : 0 ≤ Real.sqrt a := Real.sqrt_nonneg a
-  have hpos : (0:ℝ) < 1 + Real.sqrt a := by linarith
+  have hpos : 0 < Real.sqrt a + 1 := by positivity
   have hsq : Real.sqrt a ^ 2 = a := Real.sq_sqrt ha
   constructor
   · intro h
-    have h1 : Real.sqrt b < 1 + Real.sqrt a := by linarith
-    have hb : b < (1 + Real.sqrt a) ^ 2 := (Real.sqrt_lt' hpos).mp h1
-    nlinarith [hsq]
+    have h' : Real.sqrt b < Real.sqrt a + 1 := by linarith
+    have := (Real.sqrt_lt' hpos).1 h'
+    nlinarith [this, hsq]
   · intro h
-    have hb : b < (1 + Real.sqrt a) ^ 2 := by nlinarith [hsq]
-    have := (Real.sqrt_lt' hpos).mpr hb
+    have hb : b < (Real.sqrt a + 1) ^ 2 := by nlinarith [hsq]
+    have := (Real.sqrt_lt' hpos).2 hb
     linarith
 
-/-- The two formulations of the Andrica conjecture are equivalent. -/
+/-- **Reduction of the Andrica conjecture to a prime-gap bound.**
 
-theorem andrica_iff_gap : AndricaStatement ↔ AndricaGapStatement := by
+Andrica's conjecture (`√p_{n+1} - √p_n < 1` for all `n`) is equivalent to the
+statement that the `n`-th prime gap satisfies `p_{n+1} - p_n < 2√p_n + 1`.
+
+Andrica's conjecture is an open problem, so this is a Lean-checked equivalent
+reformulation rather than an unconditional proof. -/
+
+theorem AndricaConjecture : AndricaStatement ↔ GapStatement := by
   constructor
   · intro h n
-    exact (sqrt_sub_sqrt_lt_one_iff (by positivity)).mp (h n)
+    exact (sqrt_sub_sqrt_lt_one_iff (a := (primeSeq n : ℝ)) (b := (primeSeq (n + 1) : ℝ))
+      (Nat.cast_nonneg _)).1 (h n)
   · intro h n
-    exact (sqrt_sub_sqrt_lt_one_iff (by positivity)).mpr (h n)
+    exact (sqrt_sub_sqrt_lt_one_iff (a := (primeSeq n : ℝ)) (b := (primeSeq (n + 1) : ℝ))
+      (Nat.cast_nonneg _)).2 (h n)
 
-/-- **Conditional reduction of the Andrica conjecture.** Andrica's conjecture (still open)
-follows from the prime-gap bound `p_{n+1} - p_n < 2√(p_n) + 1`; in fact the two statements
-are equivalent (see `andrica_iff_gap`). -/
-
-theorem AndricaConjecture (h : AndricaGapStatement) :
-    ∀ n : ℕ, Real.sqrt (prime (n + 1)) - Real.sqrt (prime n) < 1 :=
-  andrica_iff_gap.mpr h
-
-/-- Unconditional partial result: whenever the gap `p_{n+1} - p_n` is at most `2`
-(e.g. for twin primes), the Andrica inequality holds at `n`. -/
+/-- Every prime in the sequence is at least `2`. -/

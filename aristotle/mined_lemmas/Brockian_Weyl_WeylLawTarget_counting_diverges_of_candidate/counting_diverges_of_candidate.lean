@@ -23,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Counting Diverges Of Candidate
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Counting Diverges Of Candidate
 Category: Brockian (Open Discharge)
@@ -32,38 +41,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Note: Lean 4 requires `import` lines to precede every other token in a file
--- (a module doc comment before an `import` is a syntax error), so the required
--- header comment is placed immediately after the single `import Mathlib` line.
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
 
-open Filter Set
-open scoped Topology
+set_option maxHeartbeats 1000000
 
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- A *candidate spectrum* for a Weyl law: a nondecreasing sequence of real
-"eigenvalues" `mu 0 ≤ mu 1 ≤ ⋯` diverging to `+∞`.  This is the standard shape
-of the spectrum of an operator with compact resolvent. -/
-structure Candidate where
-  /-- The candidate eigenvalue sequence, listed with multiplicity. -/
-  mu : ℕ → ℝ
-  /-- The eigenvalues are listed in nondecreasing order. -/
-  mono : Monotone mu
-  /-- The eigenvalues tend to `+∞`; equivalently, the spectrum is discrete. -/
-  diverges : Tendsto mu atTop atTop
+open Filter Set
 
-/-- The eigenvalue counting function `N(λ) = #{n | mu n ≤ λ}` of a candidate
-spectrum. -/
+/-- A *candidate spectrum* for a Weyl law: a nondecreasing sequence of real
+"eigenvalues" that tends to `+∞`. -/
+structure Candidate where
+  /-- The eigenvalue sequence. -/
+  lam : ℕ → ℝ
+  /-- The eigenvalues are listed in nondecreasing order. -/
+  mono : Monotone lam
+  /-- The eigenvalues tend to `+∞` (discreteness of the spectrum). -/
+  tendsto_atTop : Filter.Tendsto lam Filter.atTop Filter.atTop
+
+/-- The eigenvalue counting function `N(t) = #{n : λ n ≤ t}` of a candidate spectrum. -/
 
 theorem counting_diverges_of_candidate (C : Candidate) :
-    Tendsto (countingFn C) atTop atTop := by
-  refine tendsto_atTop.2 fun k => ?_
-  filter_upwards [eventually_ge_atTop (C.mu k)] with lam hlam
-  have hsub : Set.Iio k ⊆ {n : ℕ | C.mu n ≤ lam} := fun n hn =>
-    le_trans (C.mono (le_of_lt hn)) hlam
-  calc k = (Set.Iio k).ncard := (Set.ncard_Iio_nat k).symm
-    _ ≤ ({n : ℕ | C.mu n ≤ lam}).ncard :=
-        Set.ncard_le_ncard hsub (finite_sublevel C lam)
+    Filter.Tendsto (fun t : ℝ => counting C t) Filter.atTop Filter.atTop := by
+  refine Filter.tendsto_atTop.2 fun m => ?_
+  filter_upwards [Filter.eventually_ge_atTop (C.lam m)] with t ht
+  exact le_trans (Nat.le_succ m) (le_counting C m ht)
 
 end Brockian.Weyl.WeylLawTarget
 

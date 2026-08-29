@@ -22,20 +22,13 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Brockian.ConeLine
 
-/-- Perfect squares land only on rays `0`, `1`, `4` modulo `5`. -/
+/-- Perfect squares land only on rays `0`, `1`, `4` in `ZMod 5`. -/
 
 theorem square_mod5_mem : ∀ n : ZMod 5, n ^ 2 = 0 ∨ n ^ 2 = 1 ∨ n ^ 2 = 4 := by
   decide
 
-/-- Integer form: for every integer `n`, `n²` reduces mod `5` to `0`, `1` or `4`. -/
+/-- The integer form: for every `n : ℤ`, the class of `n ^ 2` in `ZMod 5` is `0`, `1` or `4`. -/

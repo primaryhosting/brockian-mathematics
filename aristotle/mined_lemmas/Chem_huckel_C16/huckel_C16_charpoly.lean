@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Huckel C 16
+Category: Chemistry
+Target: Chem.huckel_C16
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -18,15 +26,17 @@ set_option grind.warning false
 
 namespace Chem
 
-/-- A primitive 16-th root of unity. -/
+open Polynomial Matrix SimpleGraph
+
+/-- The Hückel (adjacency) matrix of the cycle graph `C₁₆`, over `ℝ`. -/
 
 theorem huckel_C16_charpoly :
-    ((SimpleGraph.cycleGraph 16).adjMatrix ℂ).charpoly
-      = ∏ k : Fin 16, (Polynomial.X
-          - Polynomial.C ((2 * Real.cos (2 * Real.pi * k / 16) : ℝ) : ℂ)) := by
-  obtain ⟨u, hconj⟩ := exists_unit_conj_diagonal
-  rw [hconj, Matrix.charpoly_units_conj, Matrix.charpoly_diagonal]
-  rfl
+    huckelMatrix.charpoly = ∏ k : Fin 16, (X - C (huckelEigenvalue k)) := by
+  apply Polynomial.map_injective (Complex.ofRealHom : ℝ →+* ℂ) Complex.ofReal_injective
+  rw [← Matrix.charpoly_map, adjMatrix_map, charpoly_complex, Polynomial.map_prod]
+  simp
 
-end Chem
-
+/-- **Hückel theory for the C₁₆ annulene.**  The characteristic polynomial of the adjacency
+(Hückel) matrix of the cycle graph `C₁₆` factors completely as `∏_{k=0}^{15} (X - 2cos(2πk/16))`;
+consequently the set of adjacency eigenvalues of `C₁₆` is exactly
+`{2 cos (2πk/16) : k = 0, …, 15}`. -/

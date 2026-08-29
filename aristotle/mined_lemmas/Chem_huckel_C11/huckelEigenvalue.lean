@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Huckel C 11
 Category: Chemistry
 Target: Chem.huckel_C11
@@ -8,13 +6,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Complex Matrix Polynomial Finset
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open Complex Polynomial
 
 namespace Chem
 
-/-- A primitive 11th root of unity. -/
+/-- A primitive 11-th root of unity. -/
 
 noncomputable def huckelEigenvalue (k : Fin 11) : ℂ :=
-  2 * ((Real.cos (2 * Real.pi * (k : ℕ) / 11) : ℝ) : ℂ)
+  (2 * Real.cos (2 * Real.pi * (k : ℕ) / 11) : ℝ)
 
-/-- The discrete Fourier transform matrix, whose columns are the eigenvectors. -/

@@ -1,82 +1,104 @@
 /-
-/-!
 # Purification Exists
 Category: Frontier Qi
 Target: QI.purification_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean requires `import` to be the first command, so the mandated header above is kept as a
--- plain comment and repeated as the module docstring below.)
 -/
 
 import Mathlib
 
-/-!
-# Purification Exists
-Category: Frontier Qi
-Target: QI.purification_exists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+set_option maxHeartbeats 1000000
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-open scoped ComplexOrder
-open scoped MatrixOrder
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+open scoped MatrixOrder ComplexOrder Kronecker InnerProductSpace
+open Matrix
 
 namespace QI
 
-open Matrix
+variable {n m : ℕ}
 
-section Defs
+/-- The coefficient matrix of a vector `psi` of the tensor product `ℂ^n ⊗ ℂ^m`, whose
+coordinates are indexed by `Fin n × Fin m`. -/
 
-variable {n m : Type*}
-
-/-- The matrix `n × m` representation of a vector `ψ` of the tensor product `H ⊗ K`,
-where `H` has orthonormal basis indexed by `n` and `K` has orthonormal basis indexed by `m`. -/
-
-theorem exists_isometry_comp_of_norm_eq {E F : Type*} [NormedAddCommGroup E]
-    [InnerProductSpace ℂ E] [NormedAddCommGroup F] [InnerProductSpace ℂ F]
-    [FiniteDimensional ℂ F] (f g : E →ₗ[ℂ] F) (h : ∀ x, ‖f x‖ = ‖g x‖) :
-    ∃ u : F →ₗᵢ[ℂ] F, ∀ x, u (f x) = g x := by
-  have hker : LinearMap.ker f ≤ LinearMap.ker g := by
+theorem exists_unitary_of_mul_conjTranspose_eq (A B : Matrix (Fin n) (Fin m) ℂ)
+    (h : A * Aᴴ = B * Bᴴ) :
+    ∃ U : Matrix (Fin m) (Fin m) ℂ, U ∈ Matrix.unitaryGroup (Fin m) ℂ ∧ B = A * U := by
+  classical
+  set f : EuclideanSpace ℂ (Fin n) →ₗ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    Matrix.toEuclideanLin Aᴴ with hf
+  set g : EuclideanSpace ℂ (Fin n) →ₗ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    Matrix.toEuclideanLin Bᴴ with hg
+  -- The Gram matrix computes the inner products of the images.
+  have hgram : ∀ (C : Matrix (Fin n) (Fin m) ℂ) (x y : EuclideanSpace ℂ (Fin n)),
+      ⟪Matrix.toEuclideanLin Cᴴ x, Matrix.toEuclideanLin Cᴴ y⟫_ℂ
+        = ⟪x, Matrix.toEuclideanLin (C * Cᴴ) y⟫_ℂ := by
+    intro C x y
+    rw [Matrix.toLpLin_mul_same, Matrix.toEuclideanLin_conjTranspose_eq_adjoint,
+      LinearMap.adjoint_inner_left]
+    rfl
+  have hnorm : ∀ x, ‖f x‖ = ‖g x‖ := by
+    intro x
+    have hx : ⟪f x, f x⟫_ℂ = ⟪g x, g x⟫_ℂ := by rw [hf, hg, hgram, hgram, h]
+    rw [norm_eq_sqrt_re_inner (𝕜 := ℂ), norm_eq_sqrt_re_inner (𝕜 := ℂ), hx]
+  -- Hence `f x ↦ g x` is a well-defined isometry from the range of `f`.
+  have hkerle : LinearMap.ker f ≤ LinearMap.ker g := by
     intro x hx
-    have hx0 : f x = 0 := LinearMap.mem_ker.mp hx
-    have : ‖g x‖ = 0 := by rw [← h x, hx0, norm_zero]
-    exact LinearMap.mem_ker.mpr (norm_eq_zero.mp this)
-  set q : (E ⧸ LinearMap.ker f) →ₗ[ℂ] F := (LinearMap.ker f).liftQ g hker with hq
-  set e : (E ⧸ LinearMap.ker f) ≃ₗ[ℂ] (LinearMap.range f) := f.quotKerEquivRange with he
-  have hsymm : ∀ x : E, e.symm ⟨f x, LinearMap.mem_range_self f x⟩
-      = Submodule.Quotient.mk x := by
+    have hfx : f x = 0 := hx
+    have hgx : ‖g x‖ = 0 := by rw [← hnorm, hfx, norm_zero]
+    simpa [LinearMap.mem_ker] using norm_eq_zero.mp hgx
+  set L0 : (LinearMap.range f) →ₗ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    ((LinearMap.ker f).liftQ g hkerle) ∘ₗ
+      (f.quotKerEquivRange.symm : LinearMap.range f →ₗ[ℂ] _) with hL0def
+  have hL0 : ∀ x, L0 ⟨f x, LinearMap.mem_range_self f x⟩ = g x := by
     intro x
-    apply e.injective
-    rw [LinearEquiv.apply_symm_apply, he]
-    exact Subtype.ext (LinearMap.quotKerEquivRange_apply_mk f x).symm
-  set L₀ : (LinearMap.range f) →ₗ[ℂ] F := q ∘ₗ (e.symm : (LinearMap.range f) →ₗ[ℂ] _) with hL₀
-  have hval : ∀ x : E, L₀ ⟨f x, LinearMap.mem_range_self f x⟩ = g x := by
+    rw [hL0def]
+    simp only [LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_coe,
+      LinearMap.quotKerEquivRange_symm_apply_image, Submodule.mkQ_apply,
+      Submodule.liftQ_apply]
+  have hL0norm : ∀ y : LinearMap.range f, ‖L0 y‖ = ‖y‖ := by
+    rintro ⟨y, hy⟩
+    obtain ⟨x, rfl⟩ := hy
+    rw [hL0, ← hnorm]
+    rfl
+  set L : (LinearMap.range f) →ₗᵢ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    { toLinearMap := L0, norm_map' := hL0norm } with hLdef
+  -- Extend it to an isometry of the whole ancilla space.
+  set W := L.extend with hWdef
+  have hW : ∀ x, W (f x) = g x := by
     intro x
-    simp only [hL₀, LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_coe, hsymm x, hq]
-    exact (LinearMap.ker f).liftQ_apply g x
-  have hnorm : ∀ y : (LinearMap.range f), ‖L₀ y‖ = ‖(y : F)‖ := by
-    rintro ⟨y, x, rfl⟩
-    rw [hval x, ← h x]
-  refine ⟨(⟨L₀, hnorm⟩ : (LinearMap.range f) →ₗᵢ[ℂ] F).extend, fun x => ?_⟩
-  rw [(⟨L₀, hnorm⟩ : (LinearMap.range f) →ₗᵢ[ℂ] F).extend_apply
-      ⟨f x, LinearMap.mem_range_self f x⟩]
-  exact hval x
+    have hx := L.extend_apply ⟨f x, LinearMap.mem_range_self f x⟩
+    rw [hWdef]
+    rw [show ((⟨f x, LinearMap.mem_range_self f x⟩ : LinearMap.range f) :
+      EuclideanSpace ℂ (Fin m)) = f x from rfl] at hx
+    rw [hx, hLdef]
+    exact hL0 x
+  -- The matrix of that isometry is unitary and conjugates `Aᴴ` into `Bᴴ`.
+  set U0 : Matrix (Fin m) (Fin m) ℂ := Matrix.toEuclideanLin.symm W.toLinearMap with hU0def
+  have hU0 : Matrix.toEuclideanLin U0 = W.toLinearMap := by
+    rw [hU0def, LinearEquiv.apply_symm_apply]
+  have hU0mem : U0 ∈ Matrix.unitaryGroup (Fin m) ℂ := by
+    rw [Matrix.mem_unitaryGroup_iff']
+    apply Matrix.toEuclideanLin.injective
+    rw [Matrix.toLpLin_mul_same, Matrix.toLpLin_one]
+    have hstar : (star U0 : Matrix (Fin m) (Fin m) ℂ) = U0ᴴ := rfl
+    rw [hstar, Matrix.toEuclideanLin_conjTranspose_eq_adjoint, hU0]
+    refine LinearMap.ext fun x => ?_
+    apply ext_inner_left ℂ
+    intro y
+    rw [LinearMap.comp_apply, LinearMap.adjoint_inner_right, LinearMap.id_apply]
+    exact W.inner_map_map y x
+  have hmat : U0 * Aᴴ = Bᴴ := by
+    apply Matrix.toEuclideanLin.injective
+    rw [Matrix.toLpLin_mul_same, hU0]
+    exact LinearMap.ext fun x => hW x
+  refine ⟨U0ᴴ, Unitary.star_mem hU0mem, ?_⟩
+  have hcT := congrArg Matrix.conjTranspose hmat
+  rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose,
+    Matrix.conjTranspose_conjTranspose] at hcT
+  exact hcT.symm
 
-/-- A linear isometry of `EuclideanSpace ℂ m` is given by multiplication by a unitary matrix. -/
+/-- **Purification.**  Every mixed state `rho` on `ℂ^n` (a positive semidefinite matrix of
+trace one) admits a purification: a unit vector `psi` of `ℂ^n ⊗ ℂ^n` whose reduced state on
+the first factor is `rho`.  Moreover a purification is unique up to a unitary acting on the
+ancilla: any two vectors of `ℂ^n ⊗ ℂ^m` whose reduced state is `rho` are related by
+`1 ⊗ U` for some unitary `U` of the ancilla `ℂ^m`. -/

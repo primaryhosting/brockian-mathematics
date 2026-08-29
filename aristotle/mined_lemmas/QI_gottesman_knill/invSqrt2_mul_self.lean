@@ -6,9 +6,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` lines to precede any module docstring `/-! ... -/`,
--- so the header above is a plain comment and is repeated as a docstring below.)
-
 import Mathlib
 
 /-!
@@ -20,20 +17,24 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
-open Matrix
+open scoped Matrix
 
 namespace QI
 
-/-! ## Phases and signs -/
+/-! ## Bit vectors -/
 
 /-- Computational basis labels for `n` qubits: bit strings of length `n`. -/
-abbrev Bits (n : ℕ) : Type := Fin n → ZMod 2
+abbrev Bits (n : ℕ) := Fin n → Bool
 
-/-- The fourth root of unity `i ^ s` attached to `s : ZMod 4`. -/
+variable {n : ℕ}
+
+/-- Bitwise `xor` of two bit strings. -/
 
 lemma invSqrt2_mul_self : invSqrt2 * invSqrt2 = 1 / 2 := by
-  have h : (Real.sqrt 2)⁻¹ * (Real.sqrt 2)⁻¹ = 1 / 2 := by
-    rw [← mul_inv, Real.mul_self_sqrt (by norm_num)]; norm_num
-  rw [invSqrt2, ← Complex.ofReal_inv, ← Complex.ofReal_mul, h]
+  have h : ((Real.sqrt 2 : ℝ) : ℂ) * ((Real.sqrt 2 : ℝ) : ℂ) = 2 := by
+    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by norm_num : (0:ℝ) ≤ 2)]
+    norm_num
+  unfold invSqrt2
+  rw [← mul_inv, h]
   norm_num
 

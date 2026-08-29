@@ -1,19 +1,19 @@
-import RequestProject.Mertens
+import RequestProject.Defs
 
 /-!
-# The main term: `∏_{3 ≤ p ≤ z} (1 - 2/p) ≤ 16 / (log z)^2`
+# The Bonferroni / Brun truncation inequality
 
-This is proved by the elementary Euler-type argument: expanding `∏ (1 + 1/(p-1))` over
-subsets dominates `∑_{a ≤ z squarefree} 1/a`, which in turn is at least half the harmonic
-sum, hence at least `(log z)/2`.
+Truncating the inclusion–exclusion sum at an even level `t` gives an upper bound for the
+sifted count.
 -/
 
 namespace Brun
 
 open Finset
 
+/-- Partial alternating sums of binomial coefficients. -/
 
-def sifted (N z : ℕ) : ℕ :=
-  ((range N).filter (fun n => ¬ 2 ∣ n ∧ ∀ p ∈ oddPrimes z, ¬ p ∣ n * (n + 2))).card
+def sifted (N z : ℕ) : Finset ℕ :=
+  (Icc 1 N).filter (fun n => ∀ p ∈ sievePrimes z, ¬ p ∣ n * (n + 2))
 
-/-- The number of twin primes `p < N` (i.e. `p` and `p + 2` both prime). -/
+/-- The number of `1 ≤ n ≤ N` such that every `p ∈ S` divides `n * (n + 2)`. -/

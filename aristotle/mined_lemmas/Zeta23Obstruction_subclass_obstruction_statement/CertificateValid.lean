@@ -40,52 +40,30 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-!
-## Abstract finite-dimensional model
+/-- A **configuration** of deep points: finitely many species, each carrying a real
+"deep point" `pt i` and a strictly positive weight `wt i`. -/
+structure DeepConfig where
+  /-- number of species -/
+  n : ℕ
+  /-- the deep point attached to each species -/
+  pt : Fin n → ℝ
+  /-- the (strictly positive) weight attached to each species -/
+  wt : Fin n → ℝ
+  /-- positivity of the weights -/
+  wt_pos : ∀ i : Fin n, 0 < wt i
 
-We model the "fixed-kernel pointwise-discard linear certificate" chain abstractly.
+/-- The **linear charge** of a configuration relative to a fixed kernel `R`:
+the linear functional `c ↦ ∑ᵢ wᵢ · R(zᵢ)` obtained by per-species linear charging. -/
 
-* A *configuration* is a finite collection of *species*, each carrying a nonnegative
-  *weight* and sitting at a *deep point* of the real line.
-* A *certificate* fixes once and for all a kernel `R : ℝ → ℝ`, together with a
-  *shallow region* `shallow ⊆ ℝ` on which the kernel is known to be nonnegative
-  (`h_pos`).  This is the only positivity input the certificate has.
-* The certificate's chain evaluates the *linear charge functional*
-  `charge R c = ∑ i, weight i * R (deep i)` and then performs a **pointwise discard**:
-  each individual species contribution is thrown away as nonnegative.  This step is
-  legitimate exactly when the *termwise bound* `0 ≤ weight i * R (deep i)` holds.
-* *Validity* of the certificate is its ability to run this discard against every
-  **deep-pair configuration**: two species with strictly positive weights placed at
-  arbitrary (deep) points.
+def CertificateValid (R σ : ℝ → ℝ) : Prop :=
+  ∀ (z a b : ℝ) (ha : 0 < a) (hb : 0 < b), TermwiseNonneg R (deepPair σ z a b ha hb)
 
-The content of the obstruction is purely about the quantifier structure: the kernel is
-fixed *before* the configuration is chosen, and the discard is pointwise, so a single
-deep point `z` with `R z < 0` — the repaired witness — already destroys validity, no
-matter how large the shallow region on which `h_pos` holds.
--/
+/-- **Abstract subclass obstruction.**
 
-/-- Configuration data for `n` species: a nonnegative weight and a deep point for each. -/
-structure Config (n : ℕ) where
-  /-- The weight ("charge multiplicity") carried by each species. -/
-  weight : Fin n → ℝ
-  /-- The deep point at which each species is evaluated. -/
-  deep : Fin n → ℝ
-  /-- Weights are nonnegative. -/
-  weight_nonneg : ∀ i, 0 ≤ weight i
-
-/-- A fixed-kernel certificate: a kernel `R`, fixed in advance, known to be nonnegative
-on some shallow region. -/
-structure Certificate where
-  /-- The fixed kernel. -/
-  R : ℝ → ℝ
-  /-- The region on which nonnegativity of the kernel is known. -/
-  shallow : Set ℝ
-  /-- Nonnegativity of the kernel on the shallow region. -/
-  h_pos : ∀ x ∈ shallow, 0 ≤ R x
-
-/-- The linear charge functional attached to a kernel: the total charge of a configuration. -/
-
-def CertificateValid (C : Certificate) : Prop :=
-  ∀ c : Config 2, (∀ i, 0 < c.weight i) → TermwiseBound C.R c
-
-/-- The charge functional is linear in the weights: rescaling all weights rescales the charge. -/
+A certificate in this subclass is determined by a *fixed* kernel `R : ℝ → ℝ`, symmetric
+under the reflection `σ` pairing deep points, and it is used only through pointwise
+discard plus per-species linear charging.  If the (analytically continued) kernel takes a
+single negative value `R z < 0` at some deep point `z` — the repaired witness — then the
+deep-pair configuration at `z` defeats the certificate: for *every* choice of positive
+species weights the termwise bound fails and the linear charge is strictly negative.
+Consequently no such certificate is valid. -/

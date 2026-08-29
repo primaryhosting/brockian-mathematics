@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Ray Indicator Eq Char Sum
 Category: Characters
@@ -21,16 +22,14 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option grind.warning false
+
 namespace Brockian
 namespace Characters5
 
 /-- A primitive fifth root of unity. -/
-noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
-/-- The additive character of `ZMod 5` sending `a` to `ω ^ a`. -/
-
-lemma omega_isPrimitiveRoot : IsPrimitiveRoot ω 5 := by
+theorem omega_isPrimitiveRoot : IsPrimitiveRoot omega 5 := by
   have h := Complex.isPrimitiveRoot_exp 5 (by norm_num)
-  simpa [ω] using h
+  simpa [omega, mul_comm, mul_assoc, mul_left_comm] using h
 
-/-- The full character sum vanishes. -/

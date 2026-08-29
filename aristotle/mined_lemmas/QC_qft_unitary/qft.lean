@@ -14,17 +14,30 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Qft Unitary
+Category: Quantum Computing
+Target: QC.qft_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 namespace QC
 
 open Complex Finset
 
-/-- The `n`-qubit quantum Fourier transform matrix, of size `2 ^ n × 2 ^ n`:
-`(QFT)_{j,k} = (1 / √(2^n)) * exp (2 π i j k / 2^n)`. -/
+/-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
-noncomputable def qft (n : ℕ) : Matrix (Fin (2 ^ n)) (Fin (2 ^ n)) ℂ :=
-  fun j k =>
-    (Real.sqrt ((2 ^ n : ℕ) : ℝ) : ℂ)⁻¹ *
-      Complex.exp (2 * (Real.pi : ℂ) * Complex.I * ((j : ℕ) : ℂ) * ((k : ℕ) : ℂ) /
-        ((2 ^ n : ℕ) : ℂ))
+noncomputable def qft (n : ℕ) : Matrix (Fin (2 ^ n)) (Fin (2 ^ n)) ℂ := dftMatrix (2 ^ n)
 
-/-- If `ζ` is an `N`-th root of unity different from `1`, the sum of its powers vanishes. -/

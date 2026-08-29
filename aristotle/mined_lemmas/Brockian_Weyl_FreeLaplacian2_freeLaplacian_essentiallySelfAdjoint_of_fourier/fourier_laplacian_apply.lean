@@ -30,7 +30,6 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,43 +40,50 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open MeasureTheory SchwartzMap FourierTransform Laplacian LineDeriv
+namespace Brockian.Weyl.FreeLaplacian2
+
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-  [MeasurableSpace E] [BorelSpace E]
-
-/-- The complex Hilbert space `L²(E)` of square integrable functions on a finite-dimensional
-real inner product space `E`, with respect to the Lebesgue (Haar) measure. -/
-abbrev L2Space (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-    [MeasurableSpace E] [BorelSpace E] : Type _ := ↥(Lp (α := E) ℂ 2 volume)
-
-/-- Schwartz functions viewed as elements of `L²(E)`. -/
-
-theorem fourier_laplacian_apply (f : 𝓢(E, ℂ)) (ξ : E) :
-    𝓕 (Δ f) ξ = -(multiplier ξ : ℂ) * 𝓕 f ξ := by
+lemma fourier_laplacian_apply (f : 𝓢(V, ℂ)) (ξ : V) :
+    𝓕 (Δ f : 𝓢(V, ℂ)) ξ = (-(multiplier ξ) : ℝ) * 𝓕 f ξ := by
   classical
-  set b := stdOrthonormalBasis ℝ E with hb
-  rw [SchwartzMap.laplacian_eq_sum b f, fourier_sum, SchwartzMap.sum_apply]
-  have key : ∀ i, 𝓕 (∂_{b i} (∂_{b i} f)) ξ
-      = (-((inner ℝ ξ (b i) : ℝ)) ^ 2 : ℝ) * ((4 * π ^ 2 : ℝ) * 𝓕 f ξ) := by
+  set b := stdOrthonormalBasis ℝ V with hb
+  have hstep : ∀ (g : 𝓢(V, ℂ)) (m : V) (x : V),
+      𝓕 (∂_{m} g) x = (2 * π * Complex.I * (inner ℝ x m)) * 𝓕 g x := by
+    intro g m x
+    rw [SchwartzMap.fourier_lineDerivOp_eq]
+    have hm : (fun y : V => (inner ℝ y m : ℝ)).HasTemperateGrowth := by fun_prop
+    simp [hm]
+    ring
+  rw [SchwartzMap.laplacian_eq_sum b]
+  have hsum : 𝓕 (∑ i, ∂_{b i} (∂_{b i} f) : 𝓢(V, ℂ))
+      = ∑ i, 𝓕 (∂_{b i} (∂_{b i} f) : 𝓢(V, ℂ)) := by
+    change (fourierTransformCLM ℂ) _ = _
+    rw [map_sum]
+    rfl
+  rw [hsum, SchwartzMap.sum_apply]
+  have key : ∀ i, 𝓕 (∂_{b i} (∂_{b i} f) : 𝓢(V, ℂ)) ξ
+      = (-((2 * π) ^ 2 * (inner ℝ ξ (b i) : ℝ) ^ 2 : ℝ) : ℂ) * 𝓕 f ξ := by
     intro i
-    rw [fourier_lineDeriv_apply, fourier_lineDeriv_apply]
+    rw [hstep, hstep]
     push_cast
     ring_nf
     simp [Complex.I_sq]
+  have hnorm : ∑ i, (inner ℝ ξ (b i) : ℝ) ^ 2 = ‖ξ‖ ^ 2 := b.sum_sq_inner_left ξ
   simp_rw [key]
   rw [← Finset.sum_mul]
-  have hsum : ∑ i, ((-((inner ℝ ξ (b i) : ℝ)) ^ 2 : ℝ) : ℂ) = ((-‖ξ‖ ^ 2 : ℝ) : ℂ) := by
-    rw [← Complex.ofReal_sum]
-    congr 1
-    rw [← b.sum_sq_inner_left ξ, ← Finset.sum_neg_distrib]
-  rw [hsum]
+  congr 1
   simp only [multiplier]
   push_cast
-  ring
+  rw [Finset.sum_neg_distrib, ← Finset.mul_sum]
+  norm_cast
+  rw [hnorm]
 
+/-- The Fourier transform diagonalizes the free Laplacian: the Fourier transform of `-Δ f`
+is the pointwise product of the multiplier `(2π)²‖ξ‖²` with the Fourier transform of `f`. -/

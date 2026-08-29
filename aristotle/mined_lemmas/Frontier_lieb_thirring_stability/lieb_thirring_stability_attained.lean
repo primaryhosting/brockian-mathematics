@@ -1,0 +1,88 @@
+/-
+# Lieb Thirring Stability
+Category: Frontier Physics
+Target: Frontier.lieb_thirring_stability
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Lieb Thirring Stability
+Category: Frontier Physics
+Target: Frontier.lieb_thirring_stability
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-!
+## Lieb–Thirring and stability of matter
+
+The Lieb–Thirring kinetic energy inequality states that, for an antisymmetric `N`-particle
+wave function in three dimensions with one-particle density `ρ`, the kinetic energy obeys
+
+  `T ≥ K ∫ ρ(x) ^ (5/3) dx`
+
+with a constant `K > 0` that is *independent of the particle number* `N`.  Stability of
+matter is deduced from this by combining it with the electrostatic (one-body) energy
+`- ∫ V ρ` via the Thomas–Fermi bound: the resulting energy functional is bounded below by
+`- C(K) ∫ V ^ (5/2)`, again uniformly in `N`.
+
+This file formalizes that deduction — the Lieb–Thirring ⇒ stability reduction — in a
+discretized (quadrature) form, in which integrals are replaced by finite weighted sums
+`∑ i ∈ s, w i * f i` with nonnegative weights `w`.  The Lieb–Thirring kinetic bound is a
+hypothesis (`Frontier.LiebThirringKinetic`), and everything else is proved:
+
+* `Frontier.thomas_fermi_pointwise`  : the pointwise Young/Thomas–Fermi inequality
+  `V * t ≤ K * t ^ (5/3) + tfConst K * V ^ (5/2)`;
+* `Frontier.thomas_fermi_pointwise_sharp` : the constant `tfConst K` in it is optimal;
+* `Frontier.lieb_thirring_stability` : the resulting lower bound on the energy;
+* `Frontier.lieb_thirring_stability_uniform_in_particle_number` : the same bound, stated
+  for a density normalized to `N` particles, with a right-hand side that does not depend
+  on `N` — this uniformity is the content of stability of matter.
+-/
+
+namespace Frontier
+
+/-- The Thomas–Fermi constant associated with a Lieb–Thirring constant `K`:
+`tfConst K = (2/5) * (3/5) ^ (3/2) * K ^ (-3/2)`.  It is the sharp constant in
+`V * t ≤ K * t ^ (5/3) + tfConst K * V ^ (5/2)` (see `thomas_fermi_pointwise`), i.e.
+
+  `min_{t ≥ 0} (K * t ^ (5/3) - V * t) = - tfConst K * V ^ (5/2)`. -/
+
+theorem lieb_thirring_stability_attained (K : ℝ) (hK : 0 < K) :
+    ∃ (ρ : Unit → ℝ) (T : ℝ), (∀ i ∈ ({()} : Finset Unit), 0 ≤ ρ i) ∧
+      LiebThirringKinetic K {()} (fun _ => 1) ρ T ∧
+      energy T {()} (fun _ => 1) (fun _ => 1) ρ
+        = - tfConst K * ∑ _i ∈ ({()} : Finset Unit), (1 : ℝ) * (1 : ℝ) ^ (5 / 2 : ℝ) := by
+  obtain ⟨t, ht0, ht⟩ := thomas_fermi_pointwise_sharp K 1 hK zero_le_one
+  refine ⟨fun _ => t, K * t ^ (5 / 3 : ℝ), fun _ _ => ht0, ?_, ?_⟩
+  · simp [LiebThirringKinetic]
+  · simp only [energy, Finset.sum_singleton, Real.one_rpow, one_mul, mul_one] at *
+    linarith
+
+end Frontier
+

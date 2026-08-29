@@ -1,47 +1,58 @@
 import Mathlib
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
-# A formal model of a privilege-isolation engine
-
-We model an *isolation policy* on a finite set of compartments `C` as a boolean
-edge relation `edge : C → C → Bool`, where `edge a b = true` means that a
-principal running in compartment `a` is permitted to influence / reach
-compartment `b` (a channel that is *not* isolated).
-
-The *ground truth* semantics of privilege escape is reachability
-(`PCA.Isolation.Policy.Reach`, the reflexive transitive closure of `edge`).
-
-The *engine* is a concrete computation: iterate a one-step expansion
-`Policy.step` starting from `{s}`, `Fintype.card C` times
-(`Policy.escape`).  We prove:
-
-* `Policy.escape_sound`    – the engine never over-approximates,
-* `Policy.escape_complete` – the engine never under-approximates,
-* `Policy.mem_escape_iff`  – hence the engine decides reachability exactly,
-* `PCA.Isolation.priv_escape_monotone` – weakening the isolation (adding
-  permitted edges) can only increase the set of privileges reachable from a
-  compartment.
+# Priv Escape Monotone
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.priv_escape_monotone
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+set_option autoImplicit false
 
 namespace PCA.Isolation
 
-open Finset
+universe u v
 
-/-- An isolation policy on a set of compartments `C`: `edge a b` says that
-compartment `a` may influence compartment `b`. -/
-structure Policy (C : Type*) where
-  /-- `edge a b = true` means the channel from `a` to `b` is *not* isolated. -/
-  edge : C → C → Bool
+/-- A configuration of the isolation engine: `c d p` says that domain `d` currently
+holds privilege `p`. -/
+abbrev Config (Dom : Type u) (Priv : Type v) : Type max u v := Dom → Priv → Prop
 
-variable {C A : Type*} [Fintype C] [DecidableEq C]
+/-- The configuration obtained from `c` by granting privilege `p` to domain `d`. -/
 
-/-- Privilege escape, semantically: `Reach P s d` iff `d` is reachable from `s`
-along permitted channels. -/
+def Policy.Le {Dom : Type u} {Priv : Type v} (P Q : Policy Dom Priv) : Prop :=
+  ∀ c d p, P.grant c d p → Q.grant c d p
 
-theorem Policy.reach_mono {P Q : Policy C} (h : ∀ a b, P.edge a b = true → Q.edge a b = true)
-    {s d : C} (hr : P.Reach s d) : Q.Reach s d :=
-  Relation.ReflTransGen.mono (fun a b hab => h a b hab) hr
+/-- Reachability of configurations under a policy: the reflexive-transitive closure
+of the permitted single-step grants. -/
+inductive Reach {Dom : Type u} {Priv : Type v} (P : Policy Dom Priv) :
+    Config Dom Priv → Config Dom Priv → Prop
+  | refl (c : Config Dom Priv) : Reach P c c
+  | step {c c' : Config Dom Priv} {d : Dom} {p : Priv} :
+      Reach P c c' → P.grant c' d p → Reach P c (grantAt c' d p)
 
-/-- **Privilege escape is monotone in the policy**: if every channel permitted by
-`P` is also permitted by `Q` (i.e. `Q` isolates no more than `P` does), then every
-privilege escapable from `s` under `P` is escapable from `s` under `Q`. -/
+/-- A privilege escape: starting from `c`, the engine can reach a configuration in
+which domain `d` holds privilege `p`, even though it did not hold it initially. -/

@@ -30,24 +30,36 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 namespace DilationGenerator
 
-/-- A function with compact support contained in `(0, ∞)` vanishes on a whole
-neighbourhood `(-∞, ε)` of the origin, for some `ε > 0`. -/
+/-- A function with compact support contained in `(0, ∞)` vanishes on a
+neighbourhood of `0` on the right: there is `a > 0` with `f x = 0` for all `x < a`. -/
 
 theorem exists_pos_eq_zero_of_lt {f : ℝ → ℂ} (hf : HasCompactSupport f)
-    (hf0 : tsupport f ⊆ Set.Ioi 0) : ∃ ε > 0, ∀ x < ε, f x = 0 := by
+    (hsupp : tsupport f ⊆ Set.Ioi (0 : ℝ)) :
+    ∃ a : ℝ, 0 < a ∧ ∀ x : ℝ, x < a → f x = 0 := by
   rcases Set.eq_empty_or_nonempty (tsupport f) with h | h
-  · refine ⟨1, one_pos, fun x _ => image_eq_zero_of_notMem_tsupport ?_⟩
+  · refine ⟨1, one_pos, fun x _ => ?_⟩
+    apply image_eq_zero_of_notMem_tsupport
     rw [h]
     exact Set.notMem_empty x
-  · have hmem : sInf (tsupport f) ∈ tsupport f := hf.sInf_mem h
-    have hpos : 0 < sInf (tsupport f) := hf0 hmem
-    refine ⟨sInf (tsupport f), hpos, fun x hx => image_eq_zero_of_notMem_tsupport ?_⟩
+  · have hK : IsCompact (tsupport f) := hf
+    have hmem : sInf (tsupport f) ∈ tsupport f := hK.sInf_mem h
+    have hpos : 0 < sInf (tsupport f) := hsupp hmem
+    refine ⟨sInf (tsupport f), hpos, fun x hx => ?_⟩
+    apply image_eq_zero_of_notMem_tsupport
     intro hxmem
-    exact absurd (csInf_le hf.isCompact.bddBelow hxmem) (not_le.mpr hx)
+    exact absurd (csInf_le hK.bddBelow hxmem) (not_le.2 hx)
 
-/-- A function with compact support vanishes outside a bounded region. -/
+/-- A function with compact support vanishes far out to the right: there is `b`
+with `f x = 0` for all `x > b`. -/

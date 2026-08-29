@@ -1,4 +1,20 @@
+/-
+# Ssh Winding Invariant
+Category: Frontier Physics
+Target: Frontier.ssh_winding_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Ssh Winding Invariant
+Category: Frontier Physics
+Target: Frontier.ssh_winding_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -25,20 +41,22 @@ set_option grind.warning false
 
 namespace Frontier
 
-open Complex Metric
+open Complex Metric intervalIntegral
 
-/-- The off-diagonal entry of the Bloch Hamiltonian of the Su–Schrieffer–Heeger (SSH) chain
-with intracell hopping `v` and intercell hopping `w`:
-`h(k) = v + w e^{i k}`.  The full Bloch Hamiltonian is `H(k) = Re h(k) • σₓ + Im h(k) • σ_y`,
-so the spectral gap is open exactly when `h(k) ≠ 0` for all `k`. -/
+/-- The off-diagonal entry of the Bloch Hamiltonian of the SSH (Su–Schrieffer–Heeger)
+model with intracell hopping `v` and intercell hopping `w`:
+`h v w k = v + w * exp (i k)`.  Chiral symmetry forces the Bloch Hamiltonian to have the
+form `![![0, h k], ![conj (h k), 0]]`, so the spectral gap is open exactly when `h k ≠ 0`
+for all `k`. -/
 
-theorem sshWinding_of_abs_lt (v w : ℝ) (h : |v| < w) : sshWinding v w = 1 := by
-  have hmem : (0 : ℂ) ∈ ball ((v : ℂ)) w := by
-    simp only [mem_ball, dist_eq, zero_sub, norm_neg]
-    simpa using h
-  have := circleIntegral.integral_sub_inv_of_mem_ball hmem
-  simp only [sub_zero] at this
-  rw [sshWinding_eq_circleIntegral, this]
-  field_simp
+lemma sshWinding_of_abs_lt (v w : ℝ) (h : |v| < w) : sshWinding v w = 1 := by
+  have hmem : (0 : ℂ) ∈ Metric.ball ((v : ℂ)) w := by
+    simpa [Complex.dist_eq, Complex.norm_real] using h
+  have hint : (∮ z in C((v : ℂ), w), z⁻¹) = 2 * (Real.pi : ℂ) * Complex.I := by
+    simpa using circleIntegral.integral_sub_inv_of_mem_ball hmem
+  have hne : (2 * (Real.pi : ℂ) * Complex.I) ≠ 0 := by
+    simp [Real.pi_ne_zero, Complex.I_ne_zero, Complex.ofReal_eq_zero]
+  rw [sshWinding_eq_circleIntegral, hint, inv_mul_cancel₀ hne]
 
-/-- **Trivial phase** (`w < |v|`): the SSH winding number equals `0`. -/
+/-- Trivial phase: if `w < |v|` the origin lies outside the circle and the winding
+number is `0`. -/

@@ -1,0 +1,83 @@
+import Mathlib
+
+/-!
+# Hardy Paradox
+Category: Frontier Qi
+Target: QI.hardy_paradox
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace QI
+
+open MeasureTheory
+
+/-! ## Hardy's paradox for local hidden-variable models
+
+A local hidden-variable model for a bipartite experiment with two binary settings and two
+binary outcomes per party consists of a probability space `Ω` (the hidden variables) together
+with outcome functions `A x ω` for Alice and `B y ω` for Bob.  *Locality* is encoded in the
+types: Alice's outcome depends only on her own setting `x` and the hidden variable `ω`, never
+on Bob's setting `y`, and symmetrically for Bob.
+
+Hardy's argument shows that no such model can satisfy the four *Hardy conditions*:
+
+* `A₁ = 1` implies `B₂ = 1` (almost surely),
+* `B₁ = 1` implies `A₂ = 1` (almost surely),
+* `A₂ = 1` and `B₂ = 1` never happen together (almost surely),
+* yet `A₁ = 1` and `B₁ = 1` happen with nonzero probability.
+
+Here the setting `false` stands for the first measurement and `true` for the second one, and
+the outcome `true` stands for the outcome "1".
+-/
+
+/-- **Hardy's paradox.**  There is no local hidden-variable model satisfying the four Hardy
+conditions.  Locality is built into the statement: Alice's outcome `A x ω` does not depend on
+Bob's setting and Bob's outcome `B y ω` does not depend on Alice's setting.
+
+The three "impossible" events have probability zero, while the event `A₁ = 1 ∧ B₁ = 1` has
+nonzero probability; but that event is contained in the union of the three null events, a
+contradiction.  No measurability assumptions are needed. -/
+
+theorem qprob_normalized (x y : Bool) :
+    qprob x y false false + qprob x y false true + qprob x y true false + qprob x y true true
+      = 1 := by
+  have h2 : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+  have h3 : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have h2' : Real.sqrt 2 ≠ 0 := by positivity
+  have h3' : Real.sqrt 3 ≠ 0 := by positivity
+  have h4 : Real.sqrt 2 ^ 4 = 4 := by
+    rw [show Real.sqrt 2 ^ 4 = (Real.sqrt 2 ^ 2) ^ 2 by ring, h2]; norm_num
+  have h9 : Real.sqrt 3 ^ 4 = 9 := by
+    rw [show Real.sqrt 3 ^ 4 = (Real.sqrt 3 ^ 2) ^ 2 by ring, h3]; norm_num
+  cases x <;> cases y <;>
+    simp [qprob, psi, qvec, Fin.sum_univ_two, Complex.normSq_apply] <;>
+    field_simp <;> ring_nf <;>
+    nlinarith [h2, h3, h4, h9, Real.sqrt_nonneg 2, Real.sqrt_nonneg 3]
+
+/-- **No local hidden-variable model reproduces the quantum Hardy probabilities.**
+If a local model assigns to the four relevant events the probabilities predicted by quantum
+mechanics for the Hardy state, we get a contradiction. -/

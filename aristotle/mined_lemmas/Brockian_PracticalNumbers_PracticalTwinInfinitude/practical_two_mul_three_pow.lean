@@ -30,41 +30,25 @@ Target: Brockian.PracticalNumbers.PracticalTwinInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any doc-comment command, so the header above is written as a
--- plain block comment; its text is verbatim as requested.)
 
 import Mathlib
 
-/-!
-The main result of this file is `Brockian.PracticalNumbers.PracticalTwinInfinitude`:
-there are infinitely many `n` such that both `n` and `n + 2` are practical numbers.
-
-The proof is completely explicit. We show that for every `t`, the pair
-`(2 * (3 ^ 2 ^ t - 1), 2 * 3 ^ 2 ^ t)` is a pair of practical numbers differing by `2`
-(e.g. `(4, 6)`, `(16, 18)`, `(160, 162)`, `(13120, 13122)`, ...).
-
-The engine is the classical closure property `IsPractical.mul`: if `n` is practical and
-`0 < m ≤ σ n + 1`, then `n * m` is practical. Iterating it along the factorisation
-`3 ^ 2 ^ t - 1 = 2 * (3 ^ 2 ^ 0 + 1) * (3 ^ 2 ^ 1 + 1) * ⋯ * (3 ^ 2 ^ (t-1) + 1)`
-(realised here as a simple induction on `t`) yields practicality of `2 * (3 ^ 2 ^ t - 1)`,
-while practicality of `2 * 3 ^ a` is an even simpler induction.
--/
+open Finset
 
 namespace Brockian.PracticalNumbers
 
-open Finset
+/-- A positive natural number `n` is *practical* when every `m ≤ n` can be written as a sum
+of distinct divisors of `n`. -/
 
-/-- `n` is a *practical number* if it is positive and every `k ≤ n` can be written as a sum of
-distinct divisors of `n`. -/
+lemma practical_two_mul_three_pow (b : ℕ) : Practical (2 * 3 ^ b) := by
+  induction b with
+  | zero =>
+    have h := practical_mul practical_one (d := 2) (by norm_num) (by simp)
+    simpa using h
+  | succ b ih =>
+    have h1 : (1 : ℕ) ≤ 3 ^ b := Nat.one_le_pow _ _ (by norm_num)
+    have h2 : 2 * 3 ^ b ≤ ∑ y ∈ (2 * 3 ^ b : ℕ).divisors, y := self_le_sum_divisors (by positivity)
+    have h := practical_mul ih (d := 3) (by norm_num) (by omega)
+    rwa [show 2 * 3 ^ b * 3 = 2 * 3 ^ (b + 1) by ring] at h
 
-theorem practical_two_mul_three_pow (a : ℕ) : IsPractical (2 * 3 ^ a) := by
-  induction a with
-  | zero => simpa using practical_two
-  | succ a ih =>
-      have h3 : (3:ℕ) ≤ 2 * 3 ^ a + 1 := by
-        have : (1:ℕ) ≤ 3 ^ a := Nat.one_le_pow _ _ (by norm_num)
-        omega
-      have hres := ih.mul' (m := 3) (by norm_num) h3
-      have he : 2 * 3 ^ a * 3 = 2 * 3 ^ (a + 1) := by ring
-      rwa [he] at hres
-
+/-- Between `2 ^ a / 4` and `2 ^ a` there is always a power of `3`. -/

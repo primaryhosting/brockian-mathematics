@@ -1,56 +1,60 @@
-import RequestProject.Main
+/-
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
 
 /-!
-# Log-concavity of the characteristic polynomial of a uniform matroid
-
-This file constructs the uniform matroid `U_{r,E}` on a finite ground set `E` and proves that
-the coefficients of its characteristic polynomial form a log-concave sequence, i.e. the
-Adiprasito–Huh–Katz theorem for uniform matroids.
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.piBinderTypes true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-open Finset Polynomial
+open Polynomial Finset
 
-variable {α : Type*}
+/-- The characteristic polynomial of a matroid `M` with finite ground set `E`, given by
+Whitney's rank generating formula
+`χ_M(X) = ∑_{S ⊆ E} (-1)^{|S|} X^{r(E) - r(S)}`,
+where `r` is the (natural-number valued) rank function of `M`. -/
 
-/-- The uniform matroid `U_{r,E}`: the independent sets are the subsets of `E` of size at most
-`r`. -/
+theorem huh_matroid_log_concave {ι : Type*} (E : Finset ι) (k : ℕ) :
+    ((matroidCharPoly (Matroid.freeOn (E : Set ι)) E).coeff k).natAbs *
+        ((matroidCharPoly (Matroid.freeOn (E : Set ι)) E).coeff (k + 2)).natAbs
+      ≤ (((matroidCharPoly (Matroid.freeOn (E : Set ι)) E).coeff (k + 1)).natAbs) ^ 2 := by
+  rw [matroidCharPoly_freeOn, natAbs_coeff_X_sub_one_pow, natAbs_coeff_X_sub_one_pow,
+    natAbs_coeff_X_sub_one_pow]
+  exact choose_log_concave E.card k
 
-theorem huh_matroid_log_concave (E : Finset α) (r : ℕ) (hr : r ≤ E.card) (hr0 : 1 ≤ r)
-    (i : ℕ) :
-    whitneyAbs (unifOn E r) E i * whitneyAbs (unifOn E r) E (i + 2)
-      ≤ whitneyAbs (unifOn E r) E (i + 1) ^ 2 := by
-  rcases Nat.eq_zero_or_pos i with rfl | hi
-  · rw [whitneyAbs_unifOn_zero E r hr hr0, whitneyAbs_unifOn_pos E r 1 hr le_rfl,
-      whitneyAbs_unifOn_pos E r 2 hr (by omega)]
-    rcases lt_or_ge r 2 with h2 | h2
-    · rw [if_neg (by omega), mul_zero]
-      exact Nat.zero_le _
-    · rw [if_pos (by omega), if_pos (by omega)]
-      obtain ⟨k, rfl⟩ : ∃ k, r = k + 2 := ⟨r - 2, by omega⟩
-      obtain ⟨m, hm⟩ : ∃ m, E.card = m + 1 := ⟨E.card - 1, by omega⟩
-      have hle : (E.card - 1).choose (k + 1) ≤ E.card.choose (k + 2) := by
-        rw [hm, Nat.add_sub_cancel, Nat.choose_succ_succ' m (k + 1)]
-        omega
-      have s1 : k + 2 - 1 = k + 1 := by omega
-      have s2 : k + 2 - 2 = k := by omega
-      rw [s1, s2]
-      calc (E.card - 1).choose (k + 1) * E.card.choose k
-          ≤ E.card.choose (k + 2) * E.card.choose k := Nat.mul_le_mul_right _ hle
-        _ = E.card.choose k * E.card.choose (k + 2) := Nat.mul_comm _ _
-        _ ≤ E.card.choose (k + 1) ^ 2 := by
-            rw [pow_two]; exact choose_log_concave E.card k
-  · rw [whitneyAbs_unifOn_pos E r i hr hi, whitneyAbs_unifOn_pos E r (i + 1) hr (by omega),
-      whitneyAbs_unifOn_pos E r (i + 2) hr (by omega)]
-    rcases le_or_gt (i + 2) r with h | h
-    · rw [if_pos h, if_pos (by omega), if_pos (by omega)]
-      obtain ⟨k, hk⟩ : ∃ k, r - i = k + 2 := ⟨r - i - 2, by omega⟩
-      have e1 : r - (i + 1) = k + 1 := by omega
-      have e2 : r - (i + 2) = k := by omega
-      rw [hk, e1, e2, pow_two, Nat.mul_comm]
-      exact choose_log_concave E.card k
-    · rw [if_neg (show ¬ (i + 2 ≤ r) by omega), mul_zero]
-      exact Nat.zero_le _
+end Frontier
 
-/-- The free matroid on `E` is the uniform matroid of rank `|E|` on `E`. -/

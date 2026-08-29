@@ -36,23 +36,19 @@ import Mathlib
 /-!
 # Perfect Totient Infinitude
 
-Category: Brockian Conjecture
-
-A *perfect totient number* is a positive integer `n` equal to the sum of its iterated
-totients `φ n + φ (φ n) + ⋯ + 1`.  We show that the set of such numbers is infinite,
-by proving that every power `3 ^ (k+1)` is a perfect totient number.
+Infinitely many perfect totient numbers: every power `3 ^ (k+1)` is one.
 -/
 
 namespace Brockian.PerfectTotient
 
-/-- `totientSum n` is the sum of the iterated totients of `n`:
-`φ n + φ (φ n) + ⋯ + 1`, the iteration stopping once the value reaches `1`. -/
+/-- `totientIterSum n` is the sum of the iterated totients of `n`, i.e.
+`φ(n) + φ(φ(n)) + φ(φ(φ(n))) + ⋯`, the iteration stopping once the value `1` is reached
+(the terminal `1` is included in the sum, as is standard). -/
 
 lemma totient_two_mul_three_pow (k : ℕ) :
     Nat.totient (2 * 3 ^ (k + 1)) = 2 * 3 ^ k := by
-  rw [Nat.totient_mul (Nat.Coprime.pow_right _ (show Nat.Coprime 2 3 by decide)),
-    Nat.totient_prime_pow (by norm_num) (Nat.succ_pos k)]
-  simp only [Nat.totient_two, one_mul, Nat.succ_sub_one]
-  ring
+  rw [Nat.totient_mul (by
+      simp [Nat.Coprime, Nat.coprime_pow_right_iff (Nat.succ_pos k)])]
+  rw [totient_three_pow k, Nat.totient_two, one_mul]
 
 /-- The iterated totient sum of `2 * 3 ^ k` is `3 ^ k`. -/

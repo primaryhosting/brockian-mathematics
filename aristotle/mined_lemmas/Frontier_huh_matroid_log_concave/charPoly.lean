@@ -1,12 +1,43 @@
-import RequestProject.Main
+/-
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
 
 /-!
-# Log-concavity of the characteristic polynomial of a uniform matroid
-
-This file constructs the uniform matroid `U_{r,E}` on a finite ground set `E` and proves that
-the coefficients of its characteristic polynomial form a log-concave sequence, i.e. the
-Adiprasito–Huh–Katz theorem for uniform matroids.
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
@@ -14,11 +45,12 @@ open Finset Polynomial
 
 variable {α : Type*}
 
-/-- The uniform matroid `U_{r,E}`: the independent sets are the subsets of `E` of size at most
-`r`. -/
+/-- The characteristic polynomial of a matroid `M` with finite ground set `E`, in its
+Whitney rank-generating form
+`χ_M(t) = ∑_{S ⊆ E} (-1)^{|S|} t^{r(E) - r(S)}`. -/
 
 noncomputable def charPoly (M : Matroid α) (E : Finset α) : Polynomial ℤ :=
-  ∑ S ∈ E.powerset, (-1) ^ S.card * X ^ (matroidRank M E - matroidRank M (S : Set α))
+  ∑ S ∈ E.powerset, (-1 : Polynomial ℤ) ^ S.card * X ^ ((M.eRk ↑E).toNat - (M.eRk ↑S).toNat)
 
-/-- The absolute values of the coefficients of the characteristic polynomial (the Whitney numbers
-of the first kind, up to sign). -/
+/-- The (unsigned) Whitney numbers of the first kind: the absolute values of the
+coefficients of the characteristic polynomial. -/

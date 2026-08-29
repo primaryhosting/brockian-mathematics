@@ -1,0 +1,106 @@
+/-
+# Thurston Geometrization
+Category: Frontier — Fields Medal Work
+Target: Frontier.thurston_geometrization
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Thurston Geometrization
+Category: Frontier — Fields Medal Work
+Target: Frontier.thurston_geometrization
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Frontier
+
+/-!
+## The eight Thurston geometries
+
+We formalize a *model geometry* as a topological space `X` together with a group `G`
+acting on `X` by homeomorphisms, transitively.  A closed 3-manifold `M` is *geometric*,
+modelled on `(X, G)`, when `M` is homeomorphic to a quotient `X / Γ` for a subgroup
+`Γ ≤ G` acting freely and properly discontinuously.
+
+The eight Thurston geometries are realized below by concrete model spaces:
+
+* `E³`      : `ℝ³` acted on by translations;
+* `S³`      : the unit sphere in `ℝ⁴` acted on by linear isometries;
+* `H³`      : the solvable Lie group `ℝ² ⋊ ℝ` (`t` acting by `e^t` on both factors),
+              which carries a left invariant metric of constant curvature `-1`;
+* `S² × ℝ`  : the unit sphere in `ℝ³` times `ℝ`;
+* `H² × ℝ`  : the group `(ℝ ⋊ ℝ) × ℝ`, the affine group of the line (a model of `H²`)
+              times `ℝ`;
+* `SL(2,ℝ)~`: the universal cover of `PSL(2,ℝ)`, realized as the group of lifts to `ℝ`
+              of the projective action of `SL(2,ℝ)` on directions of `ℝ²`;
+* `Nil`     : the Heisenberg group;
+* `Sol`     : the solvable group `ℝ² ⋊ ℝ` (`t` acting by `e^t`, `e^{-t}`).
+
+In each case the group of the geometry is taken to be a transitive group of isometries
+of the model space (for the Lie group models: the group acting on itself by left
+translations); we do not verify maximality of these groups, which is what singles out
+the eight geometries among all homogeneous 3-dimensional spaces.
+-/
+
+/-- Labels for the eight Thurston geometries. -/
+inductive ThurstonGeometry
+  | euclidean
+  | spherical
+  | hyperbolic
+  | sphereProdLine
+  | hyperbolicProdLine
+  | slTwoTilde
+  | nil
+  | sol
+  deriving DecidableEq, Fintype, Repr
+
+/-! ### Euclidean 3-space as a group -/
+
+/-- Euclidean 3-space, viewed as the group of its own translations. -/
+
+noncomputable def sphereProdLineModel : ModelGeometry where
+  X := Sph 3 × ℝ
+  G := (EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) × Multiplicative ℝ
+  act := fun g p => (Sph.act 3 g.1 p.1, Multiplicative.toAdd g.2 + p.2)
+  act_one := fun p => by
+    refine Prod.ext ?_ ?_
+    · exact Sph.act_one 3 p.1
+    · show (0 : ℝ) + p.2 = p.2
+      ring
+  act_mul := fun a b p => by
+    refine Prod.ext ?_ ?_
+    · exact Sph.act_mul 3 a.1 b.1 p.1
+    · show Multiplicative.toAdd a.2 + Multiplicative.toAdd b.2 + p.2
+        = Multiplicative.toAdd a.2 + (Multiplicative.toAdd b.2 + p.2)
+      ring
+  act_continuous := fun g =>
+    Continuous.prodMk ((Sph.continuous_act 3 g.1).comp continuous_fst)
+      (Continuous.add continuous_const continuous_snd)
+  act_transitive := fun p q => by
+    obtain ⟨g, hg⟩ := Sph.transitive 3 p.1 q.1
+    refine ⟨(g, Multiplicative.ofAdd (q.2 - p.2)), Prod.ext hg ?_⟩
+    show q.2 - p.2 + p.2 = q.2
+    ring
+  nonempty := ⟨(Classical.arbitrary (Sph 3), 0)⟩
+
+/-- The eight Thurston model geometries. -/

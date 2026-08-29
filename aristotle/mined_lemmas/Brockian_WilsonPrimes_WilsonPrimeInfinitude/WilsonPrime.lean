@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Wilson Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.WilsonPrimes.WilsonPrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,17 +33,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Nat
-
 namespace Brockian.WilsonPrimes
 
-/-- A *Wilson prime* is a prime `p` such that `p ^ 2 ∣ (p - 1)! + 1`, i.e. the congruence
-of Wilson's theorem holds modulo `p ^ 2` and not merely modulo `p`. -/
+open Nat
 
-def WilsonPrime (p : ℕ) : Prop := p.Prime ∧ p ^ 2 ∣ (p - 1)! + 1
+/-- A *Wilson prime* is a prime `p` such that `p ^ 2` divides `(p - 1)! + 1`.
+By Wilson's theorem, every prime `p` satisfies `p ∣ (p - 1)! + 1`; a Wilson prime
+is one for which the stronger, squared divisibility holds. -/
 
-instance decidableWilsonPrime (p : ℕ) : Decidable (WilsonPrime p) := by
-  unfold WilsonPrime; infer_instance
+lemma WilsonPrime.sq_dvd {p : ℕ} (h : WilsonPrime p) : p ^ 2 ∣ (p - 1)! + 1 := h.2
 
-/-- The *Wilson quotient* of `p`, namely `((p - 1)! + 1) / p`. For a prime `p` this is an
-exact division by Wilson's theorem. -/
+/-- Wilson's theorem, in divisibility form: every prime `p` divides `(p - 1)! + 1`. -/

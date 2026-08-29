@@ -1,31 +1,10 @@
-import Mathlib
-
-/-!
+/-
 # Le Chatelier Sign
 Category: Chemistry
 Target: Chem.leChatelier_sign
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-
-namespace Chem
-
-/-- The van 't Hoff equilibrium constant as a function of absolute temperature `T`:
-`K T = A * exp (-ΔH / (R * T))`, obtained by integrating the van 't Hoff equation
-`d (log K) / dT = ΔH / (R * T ^ 2)` with `ΔH` and `R` constant. -/
-
-theorem leChatelier_sign {A R dH : ℝ} (hA : 0 < A) (hR : 0 < R) (hdH : dH < 0) :
-    StrictAntiOn (K A R dH) (Set.Ioi (0 : ℝ)) := by
-  intro T₁ hT₁ T₂ hT₂ h12
-  have hT₁' : (0:ℝ) < T₁ := Set.mem_Ioi.mp hT₁
-  have hT₂' : (0:ℝ) < T₂ := Set.mem_Ioi.mp hT₂
-  have hexp : -dH / (R * T₂) < -dH / (R * T₁) :=
-    div_lt_div_of_pos_left (by linarith) (by positivity) (by nlinarith)
-  have := Real.exp_lt_exp.mpr hexp
-  simpa [K] using (mul_lt_mul_of_pos_left this hA)
-
-end Chem
 
 import Mathlib
 
@@ -51,4 +30,37 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+/-!
+# Le Chatelier Sign
+Category: Chemistry
+Target: Chem.leChatelier_sign
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Chem
+
+/-- **van 't Hoff sign lemma.**  If the equilibrium "constant" `K` is positive and
+differentiable on the positive temperatures and satisfies the van 't Hoff equation
+`d(log K)/dT = ΔH / (R T ^ 2)`, then for an exothermic reaction (`ΔH < 0`, with gas
+constant `R > 0`) the derivative of `K` is strictly negative at every positive
+temperature. -/
+
+theorem leChatelier_sign
+    (K : ℝ → ℝ) (R dH : ℝ) (hR : 0 < R) (hdH : dH < 0)
+    (hKpos : ∀ T : ℝ, 0 < T → 0 < K T)
+    (hKdiff : ∀ T : ℝ, 0 < T → DifferentiableAt ℝ K T)
+    (hvantHoff : ∀ T : ℝ, 0 < T → deriv (fun t : ℝ => Real.log (K t)) T = dH / (R * T ^ 2)) :
+    StrictAntiOn K (Set.Ioi (0 : ℝ)) := by
+  have hcont : ContinuousOn K (Set.Ioi (0 : ℝ)) := fun T hT =>
+    ((hKdiff T hT).continuousAt).continuousWithinAt
+  refine strictAntiOn_of_deriv_neg (convex_Ioi (0 : ℝ)) hcont ?_
+  intro T hT
+  rw [interior_Ioi] at hT
+  exact deriv_neg_of_vantHoff K R dH hR hdH hKpos hKdiff hvantHoff T hT
+
+end Chem
+
+#print axioms Chem.leChatelier_sign
 

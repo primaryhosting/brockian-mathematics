@@ -23,23 +23,35 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-import Brockian.SierpinskiCovering
-
 /-!
-# Sierpiński numbers: Mathlib-flavoured restatement
-
-`Brockian/SierpinskiCovering.lean` must be import-free (its mandated header comment has to
-precede everything, and Lean requires `import` to come first), so it develops the covering
-argument using only the core `Nat` API.  Here we restate its conclusions with the usual
-Mathlib vocabulary: `Nat.Prime`, `Odd`, and `Set.Infinite`.
+# Sierpinski Problem
+Category: Brockian Conjecture
+Target: Brockian.SierpinskiCovering.SierpinskiProblem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.SierpinskiCovering
+/-
+NOTE ON IMPORTS.  Lean 4 requires every `import` line to precede all other commands, and a
+module docstring `/-! ... -/` counts as a command.  Since the header comment above must be the
+very first thing in this file, this module is deliberately written using only Lean 4 core
+(no `import` lines at all).  The Mathlib-phrased corollary
+`¬ Nat.Prime (78557 * 2 ^ n + 1)` is proved in `Brockian/SierpinskiPrime.lean`, which imports
+both Mathlib and this file.
 
-/-- A composite number is not prime. -/
+MATHEMATICAL CONTENT.  The *Sierpiński problem* concerns odd `k` such that `k * 2 ^ n + 1` is
+composite for every `n`; such `k` are called Sierpiński numbers, and `78557` is the conjectured
+smallest one.  That `78557` really is a Sierpiński number is Sierpiński's classical *covering*
+argument, formalised below: the covering set `{3, 5, 7, 13, 19, 37, 73}` consists of primes whose
+multiplicative order for `2` divides `36`, and for each residue `r < 36` one of them divides
+`78557 * 2 ^ r + 1`.
+-/
 
-def IsSierpinskiNumber (k : Nat) : Prop :=
-  k % 2 = 1 ∧ 0 < k ∧ ∀ n : Nat, 1 ≤ n → IsComposite (k * 2 ^ n + 1)
+namespace Brockian
+namespace SierpinskiCovering
 
-/-- The product `3 * 5 * 7 * 13 * 19 * 37 * 73` of the primes of the covering set. -/
+/-- The Sierpiński candidate. -/
+
+def IsSierpinskiNumber (k : ℕ) : Prop := ∀ n : ℕ, ¬ Nat.Prime (k * 2 ^ n + 1)
+
+/-- `78557 * 2 ^ n + 1` is never prime. -/

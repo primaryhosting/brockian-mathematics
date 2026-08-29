@@ -1,26 +1,57 @@
-import RequestProject.ISMachine
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
 
 /-!
-# Completeness of the counting machine
-
-If `t` is not reachable from `s`, then the counting machine has an accepting computation:
-all the guesses it has to make are correct guesses, and all the certificates it has to
-produce do exist.
+# Immerman Szelepcsenyi
+Category: Frontier Cs
+Target: CS.immerman_szelepcsenyi
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxRecDepth 8000
-set_option autoImplicit false
+set_option maxHeartbeats 1000000
 
 namespace CS
 
+/-! ## Reachability in a finite directed graph
 
-def enc : St m →
-    Fin 6 × Fin (m+2) × Fin (m+2) × Fin (m+2) × Fin (m+2) × Fin (m+2) × Fin (m+2) ×
-      Fin (m+2) × Fin (m+2) × Fin (m+2)
-  | .lvl i c => (0, i, c, 0, 0, 0, 0, 0, 0, 0)
-  | .outer i c j c' => (1, i, c, j, c', 0, 0, 0, 0, 0)
-  | .walkY i c j c' w k => (2, i, c, j, c', vtx w, k, 0, 0, 0)
-  | .no i c j c' v jj d => (3, i, c, j, c', vtx v, jj, d, 0, 0)
-  | .walkN i c j c' v jj d w k => (4, i, c, j, c', vtx v, jj, d, vtx w, k)
-  | .acc => (5, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+We work with a directed graph on the vertex set `{0, 1, ..., n-1}` given by a Boolean
+adjacency function `g`.  `reachB n g s i v` says that `v` is reachable from `s` by a walk of
+length *at most* `i` (we allow "staying put" at each step, so walks of length exactly `i`
+with lazy steps are the same thing as walks of length at most `i`). -/
 
+section Graph
+
+variable (n : ℕ) (g : ℕ → ℕ → Bool) (s : ℕ)
+
+/-- `reachB n g s i v = true` iff `v` is reachable from `s` in at most `i` steps
+(inside the vertex set `{0,…,n-1}`). -/
+
+noncomputable def enc (v : V) : ℕ := ((Fintype.equivFin V) v : ℕ)
+
+/-- The transition relation of a finite configuration graph, transported to
+`{0, …, Fintype.card V - 1}`. -/

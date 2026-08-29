@@ -1,3 +1,11 @@
+/-
+# Hawking Temperature
+Category: Frontier Phys
+Target: Phys.hawking_temperature
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -10,10 +18,9 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Phys
 
-open Real
+/-- The Schwarzschild radius `r_s = 2GM/c²` of a mass `M`. -/
 
-/-- Schwarzschild radius of a body of mass `M`: `r_s = 2 G M / c ^ 2`. -/
+noncomputable def surfaceGravity (G M c : ℝ) : ℝ :=
+  c ^ 2 / (2 * schwarzschildRadius G M c)
 
-noncomputable def surfaceGravity (G M c : ℝ) : ℝ := c ^ 4 / (4 * G * M)
-
-/-- The surface gravity expressed through the Schwarzschild radius: `κ = c ^ 2 / (2 r_s)`. -/
+/-- The Hawking temperature `T = ℏ κ / (2π c k)` associated with a surface gravity `κ`. -/

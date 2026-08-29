@@ -1,26 +1,25 @@
-import RequestProject.Main
-
-/-!
-# A concrete model: the Fock space of finitely supported sequences
-
-This file constructs an explicit `QPhys.LadderSystem`, showing that the hypotheses of
-`QPhys.oscillator_spectrum` are consistent (non-vacuous).
-
-The state space is `ℕ →₀ ℂ`, the space of finitely supported complex sequences,
-with the usual `ℓ²` inner product `⟪f, g⟫ = ∑ conj (f i) * g i`.  The basis vector
-`|n⟩ = single n 1` plays the role of the `n`-th excited state, and the ladder operators
-act by `a |n⟩ = √n |n-1⟩`, `a† |n⟩ = √(n+1) |n+1⟩`.
+/-
+# Oscillator Spectrum
+Category: Quantum Physics
+Target: QPhys.oscillator_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
-open scoped InnerProductSpace
+set_option autoImplicit false
 
 namespace QPhys
 
-namespace Fock
+open Polynomial
 
-/-- The `ℓ²` inner product on finitely supported complex sequences. -/
+section Oscillator
 
-noncomputable def raise : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) :=
-  Finsupp.lsum ℂ fun n =>
-    LinearMap.toSpanSingleton ℂ (ℕ →₀ ℂ) (Finsupp.single (n + 1) (wt (n + 1)))
+variable (m ω hbar : ℝ)
 
+/-- The Gaussian ground-state profile `exp (-m ω x² / (2ℏ))`. -/
+
+noncomputable def raise (f : ℝ → ℝ) : ℝ → ℝ :=
+  fun x => (m * ω * x * f x - hbar * deriv f x) / Real.sqrt (2 * m * hbar * ω)
+
+/-- The annihilation (lowering) ladder operator `a = (mωx + ℏ d/dx)/√(2mℏω)`. -/

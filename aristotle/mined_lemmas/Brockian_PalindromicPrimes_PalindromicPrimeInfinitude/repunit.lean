@@ -23,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Palindromic Prime Infinitude
+Category: Brockian Conjecture
+Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Palindromic Prime Infinitude
 Category: Brockian Conjecture
@@ -32,32 +41,12 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on file layout: Lean 4 requires `import` commands to be the very first commands
-in a module, so the module header above is placed immediately after `import Mathlib`;
-putting it before the import is rejected by the Lean parser.
-
-Status of the mathematics.
-
-Whether there are infinitely many base-10 palindromic primes is an open problem: no
-unconditional proof is known.  This file therefore contains
-
-* the exact definitions (`IsPalindrome`, `PalindromicPrime`, `palindromicPrimes`);
-* unconditional results: there are infinitely many palindromes, concrete palindromic
-  primes exist, and every palindromic prime other than `11` has an odd number of
-  decimal digits (an even-length decimal palindrome is always divisible by `11`);
-* the target theorem `PalindromicPrimeInfinitude` as a Lean-checked *conditional
-  reduction*: infinitude of palindromic primes follows from the hypothesis that
-  palindromic primes with arbitrarily many decimal digits exist.  The reverse
-  implication is proved as well, so the reduction is an equivalence.
--/
-
 namespace Brockian.PalindromicPrimes
 
 open Nat
 
-/-- A natural number is a (base-10) palindrome if its list of decimal digits
+/-- A natural number is a (base-10) palindrome when its list of decimal digits
 reads the same forwards and backwards. -/
 
-def repunit (k : ℕ) : ℕ := Nat.ofDigits 10 (List.replicate k 1)
+def repunit (k : ℕ) : ℕ := Nat.ofDigits 10 (List.replicate (k + 1) 1)
 

@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Density Zero Reduction
-Category: Frontier — Betrothed Numbers
-Target: Brockian.BetrothedNumbers.density_zero_reduction
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,57 +14,61 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames false
+set_option pp.fullNames true
 set_option pp.structureInstances true
-set_option pp.coercions.types false
+set_option pp.coercions.types true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Density Zero Reduction
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.density_zero_reduction
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import RequestProject.Brockian.BetrothedNumbers.Basic
+
 /-!
-## Overview
+# Density Zero Reduction
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.density_zero_reduction
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-Betrothed (quasi-amicable) numbers are the members of pairs `(m, n)` with `m ≠ n` and
-`σ(m) = σ(n) = m + n + 1`.  Pollack proved that the set of betrothed numbers has asymptotic
-density zero.  This file decomposes that theorem into reusable pieces and proves everything
-except one clearly isolated analytic input, which concerns only pairs of bounded ratio.
+## Elementary analytic input: numbers of large abundancy are rare
 
-Dependency graph (every node is proved in this file, except the node marked `HYP`, which is
-the hypothesis of the final reduction theorem):
+This file proves, unconditionally, the analytic-number-theory ingredients of the
+reduction:
 
-```
-   sum_inv_sq_le                     (∑_{d ≤ x} 1/d² ≤ 2)
-        │
-        ├──────────────► sum_sigmaOne_div_le      (∑_{m ≤ x} σ(m)/m ≤ 2x)
-   sigmaOne_div_self ────►      │
-   (σ(m)/m = ∑_{d ∣ m} 1/d)     │
-                                ▼
-                     count_highly_abundant_le     (#{m ≤ x : σ(m) ≥ K·m} ≤ 2x/K)
-                                │
-   partner_eq                   │
-        │                       │
-        ▼                       │
-   count_larger_le_count_smaller │        (the partner map is injective)
-        │                       │
-        ▼                       ▼
-   count_betrothed_le_two_mul   count_smaller_le_add
-        │                       │
-        └───────────┬───────────┘
-                    ▼
-          density_zero_reduction  ◄── HYP: for every K, the smaller members of betrothed
-                                          pairs of bounded ratio (n < K·m) have density 0
-```
+* `Brockian.BetrothedNumbers.sum_divisors_swap`: Dirichlet's hyperbola-style
+  interchange `∑_{n ≤ x} ∑_{d ∣ n} f d = ∑_{d ≤ x} ⌊x/d⌋ f d`;
+* `Brockian.BetrothedNumbers.sum_sigma_div_self_le`: the mean value bound
+  `∑_{n ≤ x} σ(n)/n ≤ 2x`;
+* `Brockian.BetrothedNumbers.abundant_count_le`: the Markov/Chebyshev bound
+  `#{n ≤ x : σ(n) > K n} ≤ 2x/K`;
+* `Brockian.BetrothedNumbers.hasDensityZero_of_forall_le`: a convenient
+  criterion for asymptotic density zero.
+-/
 
-Also proved here, as independent reusable infrastructure for the remaining bounded-ratio step:
-`count_multiples_le` (`#{n ≤ x : d ∣ n} ≤ x/d`) and the sieve criterion
-`hasDensityZero_of_covered_by_multiples`.
+namespace Brockian
+namespace BetrothedNumbers
 
-The remaining hypothesis is strictly weaker than Pollack's theorem: it only concerns betrothed
-pairs whose two members have bounded ratio.  The unbounded-ratio part is handled here
-unconditionally, via the average order bound `∑_{m ≤ x} σ(m)/m ≤ 2x`.  Accordingly, the density
+open ArithmeticFunction Finset
 
-def IsBetrothed (n : ℕ) : Prop := ∃ m, IsBetrothedPair m n
+/-- The set of integers of abundancy larger than `K`, i.e. `σ(n) > K n`. -/
 
-/-- `n` is the smaller member of some betrothed pair. -/
+lemma IsBetrothed.sigma_partner_eq {n : ℕ} (h : IsBetrothed n) :
+    sigma 1 (partner n) = n + partner n + 1 := by
+  have := h.pair.2.2.1
+  omega
+
+/-!
+### Counting and density
+-/
+
+/-- The number of elements of `S` in `[0, x]`. -/

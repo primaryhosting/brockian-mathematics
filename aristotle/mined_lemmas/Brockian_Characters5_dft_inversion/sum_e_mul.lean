@@ -1,3 +1,11 @@
+/-
+# Dft Inversion
+Category: Characters
+Target: Brockian.Characters5.dft_inversion
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -24,20 +32,18 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-namespace Brockian
-namespace Characters5
+namespace Brockian.Characters5
 
 /-- A primitive fifth root of unity. -/
-noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
-
 
 lemma sum_e_mul (k : ZMod 5) : ∑ a : ZMod 5, e (a * k) = if k = 0 then 5 else 0 := by
   by_cases hk : k = 0
   · subst hk
-    simp [e_zero, ZMod.card]
-  · haveI : Fact (Nat.Prime 5) := ⟨by norm_num⟩
-    rw [if_neg hk]
-    have := Equiv.sum_comp (Equiv.mulRight₀ k hk) e
-    simpa [Equiv.mulRight₀, sum_e] using this
+    simp
+  · rw [if_neg hk]
+    haveI : Fact (Nat.Prime 5) := ⟨by norm_num⟩
+    have : ∑ a : ZMod 5, e (a * k) = ∑ b : ZMod 5, e b :=
+      Fintype.sum_equiv (Equiv.mulRight₀ k hk) _ _ (fun a => rfl)
+    rw [this, sum_e]
 
 /-- The discrete Fourier transform on `ZMod 5`. -/

@@ -1,37 +1,33 @@
-import RequestProject.ChurchRosser
-import Mathlib.Logic.Relation
-
 /-!
-# Confluence of β-reduction
-
-Building on the diamond property of one-step parallel β-reduction
-(`CS.church_rosser_beta_diamond`), we derive the Church–Rosser theorem for ordinary
-β-reduction: the reflexive transitive closure of the one-step β-reduction relation is
-confluent.
-
-The abstract step from a diamond-like property to confluence of the transitive closure is
-Mathlib's `Relation.church_rosser`.
+# Church Rosser Beta Diamond
+Category: Computer Science
+Target: CS.church_rosser_beta_diamond
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (This development is self-contained: it needs nothing beyond Lean 4 core.
+--  A module docstring header must precede any `import`, so no imports are used.)
+
+set_option autoImplicit false
 
 namespace CS
-namespace Tm
 
-open Relation
+/-- Untyped λ-terms in de Bruijn representation. -/
+inductive Term : Type
+  | var : Nat → Term
+  | app : Term → Term → Term
+  | lam : Term → Term
+  deriving DecidableEq, Repr
 
-/-- Ordinary one-step β-reduction: contract a single β-redex anywhere in the term. -/
-inductive Beta : Tm → Tm → Prop
-  | beta (a b : Tm) : Beta (app (lam a) b) (subst a 0 b)
-  | appl {a a' b : Tm} : Beta a a' → Beta (app a b) (app a' b)
-  | appr {a b b' : Tm} : Beta b b' → Beta (app a b) (app a b')
-  | lam {a a' : Tm} : Beta a a' → Beta (lam a) (lam a')
+namespace Term
 
-/-- Many-step β-reduction. -/
-abbrev Betas : Tm → Tm → Prop := ReflTransGen Beta
+/-- Lift a renaming under a binder. -/
 
+def cd : Term → Term
+  | .var n => .var n
+  | .lam t => .lam (cd t)
+  | .app (.lam u) t => Term.beta (cd u) (cd t)
+  | .app s t => .app (cd s) (cd t)
 
-def cd : Tm → Tm
-  | var k => var k
-  | lam a => lam (cd a)
-  | app (lam a) b => subst (cd a) 0 (cd b)
-  | app a b => app (cd a) (cd b)
-
+/-- Takahashi's triangle property: every parallel reduct of `s` parallel-reduces to
+the complete development of `s`. -/

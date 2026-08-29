@@ -7,65 +7,55 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-The Willmore conjecture (proved by Marques and Neves) states that every immersed torus
-`Σ ⊆ ℝ³` satisfies `∫_Σ H² dA ≥ 2π²`, with equality (up to conformal transformations of
-`ℝ³`) exactly for the Clifford torus, i.e. the torus of revolution whose radii satisfy
-`R = √2 · r`.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-This file formalizes and proves the *base case* of the conjecture: the case of tori of
-revolution, which is Willmore's original computation and the case that fixes the constant
-`2π²`.  Everything is done from first principles:
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-* for an arbitrary parametrized surface `X : ℝ → ℝ → ℝ³`, the tangent vectors
-  `Frontier.surfDu`, `Frontier.surfDv` and the second derivatives are literally `deriv`s
-  of `X`; `Frontier.surfMeanCurvature` is the mean curvature computed from the first and
-  second fundamental forms, `Frontier.surfAreaElement` is the area element
-  `‖X_u × X_v‖`, and `Frontier.willmoreEnergyOf` is the iterated integral `∫∫ H² dA`
-  over a fundamental domain `[0, 2π] × [0, 2π]`;
-* `Frontier.torusParam` is the usual parametrization of the torus of revolution with
-  radii `R > r > 0`, and `Frontier.willmoreEnergy R r` its Willmore energy;
-* `Frontier.IsImmersedTorus` and `Frontier.WillmoreConjectureStatement` record the
-  statement of the conjecture in full generality.
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-The main results are
-
-* `Frontier.torusMeanCurvature_eq` and `Frontier.torusAreaElement_eq`: the classical
-  formulas `H = (R + 2r cos u) / (2r(R + r cos u))` and `dA = r (R + r cos u)`;
-* `Frontier.integral_inv_add_cos` : `∫₀^{2π} du / (R + r cos u) = 2π / √(R² - r²)`;
-* `Frontier.willmoreEnergy_eq` : `W(R, r) = π² R² / (r √(R² - r²))`;
-* `Frontier.willmore_conjecture` : `2π²` is the least Willmore energy of a torus of
-  revolution, and it is attained exactly by the Clifford torus `R = √2 · r`;
-* `Frontier.willmore_bound_sharp` : the constant `2π²` in the general conjecture is
-  attained by an immersed torus, so it cannot be improved.
--/
-
-open Real Matrix
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ### Differential geometry of a parametrized surface in `ℝ³`
+/-!
+## Setting
 
-For a map `X : ℝ → ℝ → ℝ³` we define the tangent vectors, the first and second fundamental
-forms, the area element and the mean curvature by the classical formulas.  All derivatives
-are honest `deriv`s of `X`. -/
+The Willmore conjecture, proved by Marques and Neves (2014, Fields Medal work of
+A. Neves' collaborator F. C. Marques / awarded context), asserts that every immersed
+torus in `ℝ³` has Willmore energy `∫ H² dA ≥ 2π²`, with equality exactly for the
+Clifford torus (and its images under conformal transformations of `S³`).
 
-/-- The tangent vector `X_u`. -/
+The file below formalizes and *proves* the classical base case, due to T. J. Willmore
+(1965): the conjecture holds for tori of revolution, i.e. for the surfaces obtained by
+revolving a circle of radius `r` about an axis at distance `R > r` in its plane.  For
+these surfaces everything (mean curvature, area element, hence the Willmore energy) is
+completely explicit, and we compute the energy in closed form, minimize it, and identify
+the unique minimizer as the ratio `R = √2 · r` — the "Clifford" torus of revolution.
+-/
 
-lemma hasDerivAt_torusParam_u (R r u v : ℝ) :
-    HasDerivAt (fun t => torusParam R r t v)
-      ![-(r * Real.sin u) * Real.cos v, -(r * Real.sin u) * Real.sin v, r * Real.cos u] u := by
-  rw [hasDerivAt_pi]
-  intro i
-  fin_cases i
-  · show HasDerivAt (fun x => (R + r * Real.cos x) * Real.cos v) (-(r * Real.sin u) * Real.cos v) u
-    convert (((Real.hasDerivAt_cos u).const_mul r).const_add R).mul_const (Real.cos v) using 1
-    ring
-  · show HasDerivAt (fun x => (R + r * Real.cos x) * Real.sin v) (-(r * Real.sin u) * Real.sin v) u
-    convert (((Real.hasDerivAt_cos u).const_mul r).const_add R).mul_const (Real.sin v) using 1
-    ring
-  · show HasDerivAt (fun x => r * Real.sin x) (r * Real.cos u) u
-    exact (Real.hasDerivAt_sin u).const_mul r
+/-- The mean curvature `H = (k₁ + k₂)/2` of the torus of revolution with tube radius `r`
+and center-circle radius `R`, at the tube-angle `u`.  Here `k₁ = 1/r` and
+`k₂ = cos u / (R + r cos u)`. -/
+
+theorem hasDerivAt_torusParam_u (R r u v : ℝ) (i : Fin 3) :
+    HasDerivAt (fun t : ℝ => torusParam R r t v i) (torusXu r u v i) u := by
+  fin_cases i <;> simp only [torusParam, torusXu]
+  · simpa using ((((Real.hasDerivAt_cos u).const_mul r).const_add R).mul_const (Real.cos v))
+  · simpa using ((((Real.hasDerivAt_cos u).const_mul r).const_add R).mul_const (Real.sin v))
+  · simpa using ((Real.hasDerivAt_sin u).const_mul r)
 

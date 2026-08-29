@@ -8,10 +8,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Dilworth
+Category: Pure Mathematics
+Target: Math.dilworth
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -26,13 +33,17 @@ set_option grind.warning false
 
 namespace Math
 
-variable {α : Type*} [Fintype α] [PartialOrder α]
+variable {α : Type*} [PartialOrder α]
 
-/-- A colouring of the poset by `{0, …, n-1}` whose colour classes are antichains. -/
+/-- The finset of all chains (as finsets) contained in a given finset `t`. -/
 
-lemma exists_chain_card_eq : ∃ C : Finset α, IsChain (· ≤ ·) (C : Set α) ∧
-    C.card = longestChain α := by
-  have hne : (chains α).Nonempty := ⟨∅, by simp [mem_chains]⟩
-  obtain ⟨C, hC, hcard⟩ := Finset.exists_mem_eq_sup (chains α) hne Finset.card
-  exact ⟨C, mem_chains.mp hC, hcard.symm⟩
+lemma exists_chain_card_eq (t : Finset α) :
+    ∃ s : Finset α, s ⊆ t ∧ IsChain (· ≤ ·) (s : Set α) ∧ s.card = maxChainCardIn t := by
+  have hne : (chainsIn t).Nonempty := ⟨∅, mem_chainsIn.2 ⟨Finset.empty_subset _, by simp⟩⟩
+  obtain ⟨s, hs, hsup⟩ := Finset.exists_mem_eq_sup (chainsIn t) hne Finset.card
+  obtain ⟨h1, h2⟩ := mem_chainsIn.1 hs
+  exact ⟨s, h1, h2, (hsup).symm⟩
 
+variable [Fintype α]
+
+/-- The length of a longest chain in the (finite) poset `α`. -/

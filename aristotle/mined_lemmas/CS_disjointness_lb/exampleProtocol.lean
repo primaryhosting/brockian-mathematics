@@ -27,39 +27,52 @@ set_option grind.warning false
 # Disjointness Lb
 Category: Frontier Cs
 Target: CS.disjointness_lb
-Statement: Set-disjointness has Ω(n) randomized communication complexity.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
+
+/-!
+## Set disjointness has `Ω(n)` randomized communication complexity
+
+We formalise two-party communication protocols as decision trees (`CS.Protocol`), where
+`CS.Protocol.cost` is the depth of the tree, i.e. the worst-case number of bits exchanged.
+
+A *public-coin randomized protocol* is modelled as a finite family `P : Fin m → Protocol X Y`
+of deterministic protocols, run under the uniform distribution on `Fin m` (allowing repetitions
+in the family, this captures every distribution with rational probabilities).
+
+The main theorem `CS.disjointness_lb` states the `Ω(n)` lower bound for randomized protocols
+with *one-sided error* (false-biased protocols): if every protocol in the family is sound
+(it never accepts a pair of intersecting sets) and, for every disjoint pair, at least half of
+the protocols accept, then some protocol in the family has cost at least `n - 1`.
+
+The engine is the classical fooling-set bound `CS.Protocol.fooling_card_le`, proved by
+induction on the protocol tree, together with a double counting argument over the fooling set
+`{ (x, xᶜ) : x ∈ {0,1}ⁿ }` of size `2ⁿ`.
+-/
 
 namespace CS
 
-universe u v
+variable {X Y : Type*}
 
-/-- A deterministic two-party communication protocol tree over inputs `X` (Alice) and `Y` (Bob).
-`alice m k` means Alice sends the bit `m x` and the protocol continues with `k (m x)`;
-`bob m k` means Bob sends the bit `m y`. -/
-inductive Protocol (X : Type u) (Y : Type v) : Type (max u v)
+/-- A deterministic two-party communication protocol, as a decision tree.
+`nodeA g t0 t1` means Alice sends the bit `g x` and the protocol continues in `t1` (if the bit
+is `true`) or `t0` (if it is `false`); `nodeB` is the same with Bob speaking. -/
+inductive Protocol (X Y : Type*) : Type _
   | leaf : Bool → Protocol X Y
-  | alice : (X → Bool) → (Bool → Protocol X Y) → Protocol X Y
-  | bob : (Y → Bool) → (Bool → Protocol X Y) → Protocol X Y
+  | nodeA : (X → Bool) → Protocol X Y → Protocol X Y → Protocol X Y
+  | nodeB : (Y → Bool) → Protocol X Y → Protocol X Y → Protocol X Y
 
 namespace Protocol
 
-variable {X : Type u} {Y : Type v}
+/-- The communication cost of a protocol: the depth of the tree, i.e. the worst-case number of
+bits exchanged. -/
 
-/-- The output of the protocol on a given pair of inputs. -/
-
-def exampleProtocol : Protocol (Finset (Fin 1) × Unit) (Finset (Fin 1) × Unit) :=
-  .alice (fun x => decide ((0 : Fin 1) ∈ x.1)) (fun ba =>
-    .bob (fun y => decide ((0 : Fin 1) ∈ y.1)) (fun bb => .leaf (!(ba && bb))))
-
-example : ∀ (a b : Finset (Fin 1)) (ra rb : Unit),
-    run exampleProtocol (a, ra) (b, rb) = decide (Disjoint a b) := by decide
-
-example : (1 : ℕ) ≤ depth exampleProtocol :=
-  disjointness_lb_deterministic exampleProtocol (by decide)
-
-end CS
+def exampleProtocol : Protocol (Fin 2 → Bool) (Fin 2 → Bool) :=
+  let Q : Protocol (Fin 2 → Bool) (Fin 2 → Bool) :=
+    Protocol.nodeA (fun x => x 1) (Protocol.leaf true)
+      (Protocol.nodeB (fun y => y 1) (Protocol.leaf true) (Protocol.leaf false))
+  Protocol.nodeA (fun x => x 0) Q (Protocol.nodeB (fun y => y 0) Q (Protocol.leaf false))
 

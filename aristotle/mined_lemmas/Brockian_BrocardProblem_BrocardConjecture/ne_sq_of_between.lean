@@ -23,70 +23,41 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+# Brocard Conjecture
+Category: Brockian Conjecture
+Target: Brockian.BrocardProblem.BrocardConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 /-
-# Brocard Conjecture
-Category: Brockian Conjecture
-Target: Brockian.BrocardProblem.BrocardConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean does not allow a module docstring `/-! ... -/` before `import`, so the
--- required header appears above as a block comment and is repeated verbatim as
--- the module docstring immediately after the imports.)
+This development is deliberately self-contained: it uses only the Lean 4 core library
+(no `import` is possible before the required header comment above), so the factorial
+function is defined here from scratch.
 
-import Mathlib
-import Brockian.BrocardData
+Brocard's problem asks for all solutions of `n ! + 1 = m ^ 2`; the conjecture (open) is that
+`(n, m) = (4, 5), (5, 11), (7, 71)` are the only ones.  What is proved below is:
 
-/-!
-# Brocard Conjecture
-Category: Brockian Conjecture
-Target: Brockian.BrocardProblem.BrocardConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-/-!
-## What is proved here
-
-Brocard's problem asks for all solutions in natural numbers of
-
-$$ n! + 1 = m^2 . $$
-
-The known solutions are `(n, m) = (4, 5), (5, 11), (7, 71)`, and *Brocard's
-conjecture* asserts that there are no others.  This is an open problem; a search
-of Mathlib turns up no result about the equation `n! + 1 = m²`, so nothing in the
-library closes or nearly closes it.  The main library input used below is
-`primorial_le_4_pow` (`n# ≤ 4 ^ n`).
-
-Accordingly this file contains:
-
-* `brocard_no_solution_below` : an **unconditional**, kernel-verified check that
-  the only solutions with `n ≤ 1000` are the three known ones;
-* `BrocardConjecture` : the **conditional reduction** — the full conjecture (as
-  an exact classification of all solutions) follows from the statement that
-  there is no solution with `n > 1000`;
-* `brocard_finitely_many_of_abc` : a second, independent conditional result —
-  the `abc` conjecture (in the explicit `ε = 1/2`, `ℕ`-valued form
-  `c ^ 2 ≤ K * rad (a * b * c) ^ 3`) implies that Brocard's equation has only
-  finitely many solutions, i.e. there is a bound beyond which there is none;
-* `BrocardConjecture_of_abc_of_bound` : combining the two.
+* `brocard_iff_pronic` : for `n ≥ 2`, `n ! + 1` is a square iff `n ! = 4 * a * (a + 1)`
+  for some `a` (an unconditional reduction of the equation to a pronic form);
+* `brocard_le_hundred` : an unconditional verification of the conjecture for all `n ≤ 100`;
+* `BrocardConjecture` : the full conjecture, conditional on the reduced (pronic) equation
+  having no solutions for `n ≥ 101`.
 -/
 
 namespace Brockian.BrocardProblem
 
-open Finset
+/-- The factorial function, `fact n = n !`. -/
 
-/-! ### Elementary square lemmas -/
+theorem ne_sq_of_between (N s m : Nat) (h1 : s ^ 2 < N) (h2 : N < (s + 1) ^ 2) : N ≠ m ^ 2 := by
+  intro h
+  subst h
+  rcases Nat.lt_or_ge s m with hms | hms
+  · have : (s + 1) ^ 2 ≤ m ^ 2 := Nat.pow_le_pow_left hms 2
+    omega
+  · have : m ^ 2 ≤ s ^ 2 := Nat.pow_le_pow_left hms 2
+    omega
 
-/-- A number strictly between two consecutive squares is not a square. -/
-
-theorem ne_sq_of_between {A k m : ℕ} (h1 : k ^ 2 < A) (h2 : A < (k + 1) ^ 2) :
-    A ≠ m ^ 2 := by
-  rintro rfl
-  have hk : k < m := by
-    by_contra hcon
-    push_neg at hcon
-    exact absurd h1 (not_lt.2 (Nat.pow_le_pow_left hcon 2))
-  exact absurd (Nat.pow_le_pow_left hk 2) (not_le.2 h2)
-
-/-- Natural-number square roots are unique. -/
+/-- Certificate form of `ne_sq_of_between` for Brocard's equation: if `s ^ 2 < n ! + 1 < (s+1) ^ 2`
+then `n ! + 1` is not a perfect square. -/

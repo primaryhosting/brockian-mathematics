@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Odd Superperfect Exists
-Category: Brockian Conjecture
-Target: Brockian.SuperperfectNumbers.OddSuperperfectExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,19 +31,10 @@ Category: Brockian Conjecture
 Target: Brockian.SuperperfectNumbers.OddSuperperfectExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-A natural number `n` is *superperfect* when `σ (σ n) = 2 n`.  Suryanarayana and Kanold
-showed that the even superperfect numbers are exactly the powers `2 ^ k` with
-`2 ^ (k + 1) - 1` prime; whether an *odd* superperfect number exists is an open problem.
-
-This file contains a Lean-checked reduction of that open problem, together with the
-(easy half of the) even classification and two unconditional constraints on a
-hypothetical odd superperfect number.
 -/
 
+open ArithmeticFunction
 open scoped ArithmeticFunction.sigma
-
-open ArithmeticFunction Finset
 
 namespace Brockian.SuperperfectNumbers
 
@@ -60,17 +43,18 @@ sum-of-divisors function. -/
 
 theorem OddSuperperfectExists :
     (∃ n, Odd n ∧ Superperfect n) ↔
-      ∃ n, 1000 < n ∧ Odd n ∧ Superperfect n ∧
-        ∃ p, p.Prime ∧ p ≠ 2 ∧ Odd ((σ 1 n).factorization p) := by
+      ∃ n, 1000 < n ∧ Odd n ∧ Superperfect n ∧ σ 1 n < 2 * n ∧
+        (∀ a : ℕ, σ 1 n ≠ 2 ^ a) ∧ (3 ∣ n → IsSquare n) := by
   constructor
-  · rintro ⟨n, hn, h⟩
-    rcases lt_or_ge 1000 n with h1 | h1
-    · exact ⟨n, h1, hn, h, exists_odd_prime_odd_exponent hn h⟩
-    · have hlt : n < 1000 :=
-        lt_of_le_of_ne h1 (by rintro rfl; exact (Nat.not_odd_iff_even.2 (by decide)) hn)
-      exact absurd h (not_superperfect_of_lt hn hlt)
-  · rintro ⟨n, _, hn, h, _⟩
-    exact ⟨n, hn, h⟩
+  · rintro ⟨n, hodd, hsp⟩
+    have hn1000 : 1000 < n := by
+      by_contra hle
+      exact no_odd_superperfect_le_1000 n (by omega) hodd hsp
+    exact ⟨n, hn1000, hodd, hsp, sigma_lt_two_mul_of_superperfect (by omega) hsp,
+      sigma_ne_two_pow_of_superperfect hsp,
+      fun h3 => isSquare_of_three_dvd hodd hsp h3⟩
+  · rintro ⟨n, -, hodd, hsp, -⟩
+    exact ⟨n, hodd, hsp⟩
 
 end Brockian.SuperperfectNumbers
 

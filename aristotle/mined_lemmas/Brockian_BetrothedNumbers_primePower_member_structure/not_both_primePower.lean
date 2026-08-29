@@ -1,10 +1,3 @@
-/-
-# Prime Power Member Structure
-Category: Frontier — Betrothed Numbers
-Target: Brockian.BetrothedNumbers.primePower_member_structure
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -15,30 +8,25 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 1000000
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
 open ArithmeticFunction Finset
-open scoped ArithmeticFunction.sigma
 
-namespace Brockian.BetrothedNumbers
+namespace Brockian
+namespace BetrothedNumbers
 
-/-- `m` and `n` form a *betrothed* (quasi-amicable) pair: both are positive, distinct, and the
-sum of the divisors of each equals `m + n + 1` (equivalently, the sum of the *proper* divisors of
-each one is the other one plus one). -/
+/-- `IsBetrothedPair m n` says that `(m, n)` is a betrothed (quasi-amicable) pair: two distinct
+positive integers, each of whose sum of divisors equals `m + n + 1`. -/
 
-theorem not_both_primePower {p q a b : ℕ} (hp : p.Prime) (hq : q.Prime)
-    (h : IsBetrothedPair (p ^ a) (q ^ b)) : False := by
-  obtain ⟨-, -, -, hEven⟩ := primePower_member_structure hp h
-  obtain ⟨hqodd, -, -, -⟩ := primePower_member_structure hq h.symm
-  exact (Nat.not_even_iff_odd.mpr hqodd.pow) hEven
+theorem not_both_primePower {p a q b : ℕ} (hp : p.Prime) (hq : q.Prime)
+    (ha : 0 < a) (hb : 0 < b) (h : IsBetrothedPair (p ^ a) (q ^ b)) : False := by
+  obtain ⟨-, -, -, hqb⟩ := primePower_member_structure hp ha h
+  obtain ⟨hqodd, -, -, -⟩ := primePower_member_structure hq hb h.symm
+  rw [Nat.even_pow] at hqb
+  have h1 : q % 2 = 0 := Nat.even_iff.mp hqb.1
+  have h2 : q % 2 = 1 := Nat.odd_iff.mp hqodd
+  omega
 
-#print axioms primePower_member_structure
-#print axioms not_both_primePower
-#print axioms isBetrothedPair_48_75
-
-end Brockian.BetrothedNumbers
+end BetrothedNumbers
+end Brockian
 
 import Mathlib
 

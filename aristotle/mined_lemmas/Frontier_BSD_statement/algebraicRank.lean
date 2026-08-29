@@ -1,11 +1,13 @@
 import Mathlib
-
 /-!
 # BSD Statement
 Category: Frontier — Moonshot
 Target: Frontier.BSD_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: in Lean 4.28 the `import` command must be the very first command in a file, so the
+required header docstring appears immediately after it.)
 -/
 
 open scoped BigOperators
@@ -13,6 +15,7 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped Topology
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -22,42 +25,41 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Frontier
 
-open Filter Topology WeierstrassCurve
-
 /-!
 ## Setup
 
-An elliptic curve over `ℚ` is presented by an integral Weierstrass model `W : WeierstrassCurve ℤ`
-with nonvanishing discriminant.  We formalize:
+We work with an elliptic curve over `ℚ` presented by an integral Weierstrass model
+`W : WeierstrassCurve ℤ` (any elliptic curve over `ℚ` admits such a model).
 
-* the *algebraic rank* of `W`, i.e. the rank of the Mordell–Weil group `E(ℚ)`;
-* the local data (`a_p`, `ε_p`) and the Euler factors of the Hasse–Weil `L`-function of `W`;
-* the predicate `IsHasseWeilLFunction W L` saying that the entire function `L` is the analytic
-  continuation of the Hasse–Weil `L`-series of `W`;
-* the Birch–Swinnerton-Dyer equality `ord_{s=1} L(E, s) = rank E(ℚ)`.
+* The *algebraic rank* is the rank of the Mordell–Weil group `E(ℚ)`, defined as the
+  dimension of `ℚ ⊗_ℤ E(ℚ)` over `ℚ`.
+* The *analytic rank* is the order of vanishing at `s = 1` of the Hasse–Weil `L`-function,
+  where the `L`-function is specified by its Euler product on the half-plane of absolute
+  convergence together with analytic continuation to `ℂ`.
+
+Birch–Swinnerton-Dyer asserts that these two numbers agree.
 -/
 
-/-- The Mordell–Weil group `E(ℚ)` of the Weierstrass model `W` over `ℤ`, namely the group of
-nonsingular rational points of the base change of `W` to `ℚ`. -/
-abbrev MordellWeil (W : WeierstrassCurve ℤ) : Type := (W.baseChange ℚ).toAffine.Point
+section Rank
 
-/-- The *algebraic rank* of `W`, i.e. the rank of the Mordell–Weil group `E(ℚ)`, defined as the
-dimension of the `ℚ`-vector space `ℚ ⊗_ℤ E(ℚ)`. -/
+/-- The Mordell–Weil group `E(ℚ)` of the elliptic curve given by the integral Weierstrass
+model `W`, i.e. the group of rational points of the base change of `W` to `ℚ`. -/
+abbrev MordellWeil (W : WeierstrassCurve ℤ) : Type :=
+  (W.map (Int.castRingHom ℚ)).toAffine.Point
+
+/-- The *algebraic rank* of `W`: the rank of the Mordell–Weil group `E(ℚ)`, defined as
+`dim_ℚ (ℚ ⊗_ℤ E(ℚ))`. -/
 
 noncomputable def algebraicRank (W : WeierstrassCurve ℤ) : ℕ :=
   Module.finrank ℚ (TensorProduct ℤ ℚ (MordellWeil W))
 
-/-- The number of nonsingular `𝔽_p`-points (including the point at infinity) of the reduction of
-`W` modulo `p`.  For a prime `p` of good reduction this is `#E(𝔽_p)`, and for a prime of bad
-reduction it is `#E^{ns}(𝔽_p)`. -/
+end Rank
+
+section LFunction
+
+/-- The number of affine points of the reduction of `W` modulo `p`, i.e. of solutions
+`(x, y) ∈ 𝔽_p²` of the Weierstrass equation of `W` read modulo `p`. -/

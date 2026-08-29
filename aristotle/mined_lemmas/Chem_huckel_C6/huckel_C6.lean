@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Huckel C 6
+Category: Chemistry
+Target: Chem.huckel_C6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -14,39 +22,19 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-
-# Huckel C 6
-Category: Chemistry
-Target: Chem.huckel_C6
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-open scoped Real
-
-set_option maxHeartbeats 2000000
-set_option maxRecDepth 4000
 
 namespace Chem
 
-/-- Adjacency matrix of the cycle graph `C₆` (the Hückel connectivity matrix of benzene):
-vertex `i` is adjacent to `i ± 1 mod 6`. -/
+open Matrix Polynomial
+
+/-- The adjacency matrix of the cycle graph `C₆`, written out explicitly. -/
 
 theorem huckel_C6 :
-    {μ : ℂ | Module.End.HasEigenvalue (Matrix.toLin' ((SimpleGraph.cycleGraph 6).adjMatrix ℂ)) μ} =
-      {μ : ℂ | ∃ k : Fin 6, μ = 2 * Complex.cos (2 * (Real.pi : ℂ) * (k : ℕ) / 6)} := by
-  rw [← C6adj_eq_adjMatrix, spectrum_C6adj, cos_values]
+    ((SimpleGraph.cycleGraph 6).adjMatrix ℝ).charpoly =
+      ∏ k : Fin 6, (X - C (2 * Real.cos (2 * Real.pi * (k : ℕ) / 6))) := by
+  rw [adjMatrix_cycleGraph_six, charpoly_A6]
+  exact Finset.prod_congr rfl fun k _ => by rw [eig6_eq_cos k]
 
-end Chem
-
+/-- The spectrum of the adjacency matrix of `C₆` is exactly the set of numbers
+`2 cos (2πk/6)`, `k = 0, …, 5`. -/

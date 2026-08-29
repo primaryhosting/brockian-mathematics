@@ -1,0 +1,61 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Total Over Main Tendsto
+Category: Brockian (Literature Discharge)
+Target: Brockian.EquidistributionBVReduction.total_over_main_tendsto
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Filter Topology Asymptotics
+open scoped BigOperators
+
+namespace Brockian
+namespace EquidistributionBVReduction
+
+/-- **Total over main tendsto.**
+
+In the bounded-variation reduction step of an equidistribution argument one writes a
+total quantity as `main + err`, where the error term is asymptotically negligible
+compared with the main term.  Under exactly these hypotheses — the main term is
+eventually nonzero, and `err = o(main)` — the ratio of the total to the main term
+tends to `1`. -/
+
+theorem sum_div_mul_mean_tendsto {f : ℕ → ℝ} {I : ℝ} (hI : I ≠ 0)
+    (h : Tendsto (fun N => (∑ n ∈ Finset.range N, f n) / (N : ℝ)) atTop (𝓝 I)) :
+    Tendsto (fun N => (∑ n ∈ Finset.range N, f n) / ((N : ℝ) * I)) atTop (𝓝 1) := by
+  have h' : Tendsto (fun N => ((∑ n ∈ Finset.range N, f n) / (N : ℝ)) / I) atTop (𝓝 (I / I)) :=
+    h.div_const I
+  rw [div_self hI] at h'
+  refine h'.congr fun N => ?_
+  rw [div_div]
+
+end EquidistributionBVReduction
+end Brockian
+

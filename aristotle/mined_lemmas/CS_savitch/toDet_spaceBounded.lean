@@ -1,0 +1,92 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+import RequestProject.Savitch.Reach
+
+/-!
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+## The deterministic simulator
+
+This file defines the deterministic machine used in Savitch's theorem: an explicit
+iterative (stack based) implementation of the recursive procedure
+
+```
+REACH d u v  =  if d = 0 then (u = v ∨ u → v)
+                else ∃ m, REACH (d-1) u m ∧ REACH (d-1) m v
+```
+
+together with its encoding into bit strings and the space accounting: a well-formed
+state occupies `O((f n)²)` bits, because the stack holds at most `f n + 2` frames of
+`O(f n)` bits each.
+-/
+
+namespace CS
+namespace Savitch
+
+/-- Classical truth value of a proposition. -/
+
+lemma toDet_spaceBounded (f : ℕ → ℕ)
+    (h : ∀ x t, (A.enc (A.run x t)).length ≤ f x.length) : A.toDet.SpaceBounded f := by
+  intro x t
+  rw [toDet_run]
+  exact h x t
+
+end AbsMachine
+
+end CS
+
+import Mathlib
+
+/-!
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+## Self-delimiting binary encodings
+
+This file provides the elementary encoding machinery used to store structured data
+(natural numbers, lists of bit strings) inside a single bit string, together with the
+length estimates needed for the space accounting in Savitch's theorem.
+-/
+
+namespace CS
+
+/-- A word is a finite bit string. -/
+abbrev Word := List Bool
+
+/-- Binary representation of a natural number, least significant bit first,
+with no leading zeros. -/

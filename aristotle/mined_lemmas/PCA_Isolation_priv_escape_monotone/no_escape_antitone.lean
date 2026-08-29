@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
 # Priv Escape Monotone
 Category: Proof-Carrying Apps
@@ -6,38 +31,27 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on imports: Lean 4 does not permit any command (including a module docstring) to precede
-the `import` block, so in order for this file to *begin* with the header comment above it is
-kept import-free.  Everything below is therefore developed from scratch on top of core Lean 4
-(the file compiles unchanged inside this Mathlib project, and uses no axioms beyond
-`propext`, `Classical.choice`, `Quot.sound`).
--/
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA
-namespace Isolation
+namespace PCA.Isolation
 
-/-! ## The isolation engine's model
+universe u v
 
-Privilege levels are natural numbers, higher meaning more privileged.  An app runs inside an
-isolation boundary `bound : Nat` and holds a set `avail` of capabilities.  Exercising a
-capability requires a privilege level and confers one. -/
+/-- A configuration of the isolation engine: `c d p` says that domain `d` currently
+holds privilege `p`. -/
+abbrev Config (Dom : Type u) (Priv : Type v) : Type max u v := Dom → Priv → Prop
 
-/-- A set of capabilities, represented as a predicate on capability names. -/
+/-- The configuration obtained from `c` by granting privilege `p` to domain `d`. -/
 
-theorem no_escape_antitone {pol : Policy} {avail avail' : Caps} {bound bound' p p' : Nat}
-    (hav : avail ⊆ avail') (hb : bound' ≤ bound) (hp : p ≤ p')
-    (h : ¬ Escapes pol avail' bound' p') : ¬ Escapes pol avail bound p :=
-  fun hesc => h (priv_escape_monotone hav hb hp hesc)
+theorem no_escape_antitone {Dom : Type u} {Priv : Type v} {P Q : Policy Dom Priv}
+    (hPQ : P.Le Q) {c : Config Dom Priv} {d : Dom} {p : Priv} (h : ¬ Escapes Q c d p) :
+    ¬ Escapes P c d p :=
+  fun hP => h (priv_escape_monotone hPQ hP)
 
-/-! ## Non-vacuity checks
+/-! ## A concrete instance: the implication is strict
 
-The model really does exhibit escapes, so the theorems above are not vacuous. -/
+The following witnesses show that the model is inhabited in a non-degenerate way:
+privilege escapes really do occur under a permissive policy, and the converse of
+`priv_escape_monotone` fails. -/
 
-/-- A policy with one freely usable capability that confers privilege `5`. -/
+/-- The empty configuration on one domain and one privilege. -/

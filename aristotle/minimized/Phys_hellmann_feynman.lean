@@ -1,82 +1,70 @@
-import Mathlib
-
-/-!
+/-
 # Hellmann Feynman
 Category: Frontier Phys
 Target: Phys.hellmann_feynman
-Statement: dE_n/dλ = ⟨ψ_n|∂H/∂λ|ψ_n⟩ (Hellmann–Feynman).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+import Mathlib
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+open scoped InnerProductSpace
 
 namespace Phys
 
 /-- **Hellmann–Feynman theorem.**
 
-Let `V` be a complex inner product space and let `Hm : ℝ → V →L[ℂ] V` be a family of
-operators depending on a parameter `λ`, with `psi λ` a normalized eigenvector of `Hm λ`
-with real eigenvalue `en λ`.  If `Hm`, `psi` and `en` are differentiable at `lam`
-(with derivatives `dH`, `dpsi`, `den`) and `Hm lam` is symmetric, then
+Let `H : ℝ → (E →L[ℂ] E)` be a family of (bounded) Hamiltonians on a complex inner product
+space `E`, depending on a parameter, and suppose that for every parameter value `t` the vector
+`psi t` is a normalized eigenvector of `H t` with (real) eigenvalue `en t`:
+`H t (psi t) = en t • psi t` and `⟪psi t, psi t⟫ = 1`.
 
-`dE_n/dλ = ⟪ψ_n, (∂H/∂λ) ψ_n⟫`,
+If, at the parameter value `l`, the family `H`, the eigenvector `psi` and the eigenvalue `en`
+are differentiable (with derivatives `dH`, `psi'`, `en'`) and `H l` is Hermitian, then
 
-i.e. `den = ⟪psi lam, dH (psi lam)⟫`. -/
+`dEₙ/dλ = ⟪ψₙ | ∂H/∂λ | ψₙ⟫`,
 
+i.e. `en' = ⟪psi l, dH (psi l)⟫`. -/
 theorem hellmann_feynman
-    {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℂ V]
-    {Hm : ℝ → V →L[ℂ] V} {dH : V →L[ℂ] V} {psi : ℝ → V} {dpsi : V}
-    {en : ℝ → ℝ} {den lam : ℝ}
-    (hH : HasDerivAt Hm dH lam)
-    (hpsi : HasDerivAt psi dpsi lam)
-    (hen : HasDerivAt en den lam)
-    (hnorm : inner ℂ (psi lam) (psi lam) = (1 : ℂ))
-    (hsymm : ∀ y z : V, inner ℂ (Hm lam y) z = inner ℂ y (Hm lam z))
-    (heig : ∀ x, Hm x (psi x) = (en x : ℂ) • psi x) :
-    (den : ℂ) = inner ℂ (psi lam) (dH (psi lam)) := by
-  set p := psi lam with hp
-  -- The family of operators, viewed as `ℝ`-linear maps, is differentiable at `lam`.
-  have hR : HasDerivAt (fun x => (Hm x).restrictScalars ℝ) (dH.restrictScalars ℝ) lam :=
-    (ContinuousLinearMap.restrictScalarsL ℂ V V ℝ ℝ).hasFDerivAt.comp_hasDerivAt lam hH
-  have happ : HasDerivAt (fun x => Hm x (psi x)) (dH p + Hm lam dpsi) lam := hR.clm_apply hpsi
-  -- Differentiate `x ↦ ⟪ψ(lam), H(x) ψ(x)⟫` in two ways.
-  have h1 : HasDerivAt (fun x => inner ℂ p (Hm x (psi x)))
-      (inner ℂ p (dH p + Hm lam dpsi) + inner ℂ (0 : V) (Hm lam (psi lam))) lam :=
-    (hasDerivAt_const lam p).inner ℂ happ
-  have hinner : HasDerivAt (fun x => inner ℂ p (psi x)) (inner ℂ p dpsi) lam := by
-    have := (hasDerivAt_const lam p).inner ℂ hpsi
-    simpa using this
-  have h2 : HasDerivAt (fun x => (en x : ℂ) * inner ℂ p (psi x))
-      ((den : ℂ) * inner ℂ p p + (en lam : ℂ) * inner ℂ p dpsi) lam := by
-    have := (hen.ofReal_comp (z := lam)).mul hinner
-    simpa only [Pi.mul_apply] using this
-  have hfun : (fun x => inner ℂ p (Hm x (psi x))) = fun x => (en x : ℂ) * inner ℂ p (psi x) := by
-    funext x
-    rw [heig x, inner_smul_right]
-  rw [hfun] at h1
-  have key := h2.unique h1
-  -- Symmetry of `H(lam)` kills the term involving `dpsi`.
-  have heigp : Hm lam p = (en lam : ℂ) • p := heig lam
-  have hsym2 : inner ℂ p (Hm lam dpsi) = (en lam : ℂ) * inner ℂ p dpsi := by
-    rw [← hsymm p dpsi, heigp, inner_smul_left]
+    {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+    (H : ℝ → (E →L[ℂ] E)) (dH : E →L[ℂ] E) (psi : ℝ → E) (psi' : E)
+    (en : ℝ → ℝ) (en' l : ℝ)
+    (hH : HasDerivAt H dH l) (hpsi : HasDerivAt psi psi' l) (hen : HasDerivAt en en' l)
+    (hsym : ∀ x y : E, ⟪H l x, y⟫_ℂ = ⟪x, H l y⟫_ℂ)
+    (heig : ∀ t, H t (psi t) = (en t : ℂ) • psi t)
+    (hnorm : ∀ t, ⟪psi t, psi t⟫_ℂ = 1) :
+    (en' : ℂ) = ⟪psi l, dH (psi l)⟫_ℂ := by
+  -- Differentiate the map `t ↦ H t (psi t)` (product rule for the application map).
+  have h1 : HasDerivAt (fun t => (H t).restrictScalars ℝ) (dH.restrictScalars ℝ) l :=
+    (ContinuousLinearMap.restrictScalarsL ℂ E E ℝ ℝ).hasFDerivAt.comp_hasDerivAt l hH
+  have hHpsi : HasDerivAt (fun t => H t (psi t)) (dH (psi l) + H l psi') l := h1.clm_apply hpsi
+  -- Differentiate the expectation value `t ↦ ⟪psi t, H t (psi t)⟫`.
+  have hE : HasDerivAt (fun t => ⟪psi t, H t (psi t)⟫_ℂ)
+      (⟪psi l, dH (psi l) + H l psi'⟫_ℂ + ⟪psi', H l (psi l)⟫_ℂ) l := hpsi.inner ℂ hHpsi
+  -- The expectation value is exactly the eigenvalue.
+  have hfun : (fun t => ⟪psi t, H t (psi t)⟫_ℂ) = fun t => ((en t : ℂ)) := by
+    funext t
+    rw [heig t, inner_smul_right, hnorm t, mul_one]
+  rw [hfun] at hE
+  have hderiv := hE.unique hen.ofReal_comp
+  -- Normalization kills the terms involving `psi'`.
+  have hN : HasDerivAt (fun t => ⟪psi t, psi t⟫_ℂ) (⟪psi l, psi'⟫_ℂ + ⟪psi', psi l⟫_ℂ) l :=
+    hpsi.inner ℂ hpsi
+  have hN0 : (⟪psi l, psi'⟫_ℂ + ⟪psi', psi l⟫_ℂ) = 0 := by
+    refine hN.unique ?_
+    have hconst : (fun t => ⟪psi t, psi t⟫_ℂ) = fun _ : ℝ => (1 : ℂ) := funext hnorm
+    rw [hconst]
+    exact hasDerivAt_const _ _
+  have e1 : ⟪psi l, H l psi'⟫_ℂ = (en l : ℂ) * ⟪psi l, psi'⟫_ℂ := by
+    rw [← hsym, heig l, inner_smul_left]
     simp
-  rw [inner_add_right, hsym2, hnorm, inner_zero_left, mul_one, add_zero] at key
-  linear_combination key
+  have e2 : ⟪psi', H l (psi l)⟫_ℂ = (en l : ℂ) * ⟪psi', psi l⟫_ℂ := by
+    rw [heig l, inner_smul_right]
+  rw [inner_add_right, e1, e2] at hderiv
+  have hz : (en l : ℂ) * ⟪psi l, psi'⟫_ℂ + (en l : ℂ) * ⟪psi', psi l⟫_ℂ = 0 := by
+    rw [← mul_add, hN0, mul_zero]
+  linear_combination -hderiv + hz
 
-/-- **Hellmann–Feynman theorem**, stated with the normalization `‖ψ_n‖ = 1` and with the
-real-valued conclusion `dE_n/dλ = re ⟪ψ_n, (∂H/∂λ) ψ_n⟫`. -/
+end Phys
+

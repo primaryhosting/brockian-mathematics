@@ -41,25 +41,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open ArithmeticFunction
-open scoped ArithmeticFunction.sigma
-
 namespace Brockian.BetrothedNumbers
 
-/-- Two positive integers `m ≠ n` form a *betrothed* (or *quasi-amicable*) pair when the sum of
-the divisors of each, excluding `1` and the number itself, equals the other number; equivalently
-`σ m = σ n = m + n + 1`. -/
+/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d` (with the convention `σ₁ 0 = 0`). -/
 
-theorem betrothedNumbers_infinite_iff :
-    betrothedNumbers.Infinite ↔ ∀ N : ℕ, ∃ m ∈ betrothedNumbers, N < m := by
-  constructor
-  · intro h N
-    obtain ⟨m, hm, hmN⟩ := h.exists_gt N
-    exact ⟨m, hm, hmN⟩
-  · exact Set.infinite_of_forall_exists_gt
+theorem betrothedNumbers_infinite_iff : betrothedNumbers.Infinite ↔ betrothedPairs.Infinite := by
+  rw [betrothedNumbers_eq_image]
+  exact ⟨fun h => h.of_image _, fun h => h.image injOn_fst_betrothedPairs⟩
 
-/-- **Betrothed infinitude (conditional).**  Whether there are infinitely many betrothed
-(quasi-amicable) pairs is an open problem.  The following is a Lean-checked reduction: if the
-Thabit-style criterion `σ ((2 ^ k - 1) * (p + 2)) = (2 ^ (k + 1) - 1) * (p + 1)` has solutions
-with `k ≥ 1`, `p` an odd prime and `(2 ^ k - 1) * (p + 2)` arbitrarily large, then there are
-infinitely many betrothed numbers, hence infinitely many betrothed pairs. -/
+/-- Restatement of the target theorem in terms of betrothed *numbers*: the betrothed numbers
+are infinite in number exactly when they are unbounded, exactly when there are infinitely
+many betrothed pairs. -/

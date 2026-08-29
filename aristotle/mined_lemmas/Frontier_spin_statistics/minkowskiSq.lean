@@ -1,46 +1,65 @@
-import Mathlib
-/-!
+/-
 # Spin Statistics
 Category: Frontier Physics
 Target: Frontier.spin_statistics
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Spin Statistics
+Category: Frontier Physics
+Target: Frontier.spin_statistics
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+This file formalises the spin–statistics connection for a relativistic quantum field in the
+Wightman framework, at the level of the two–point function, and proves it from the standard
+axiomatic inputs.
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+## Setup
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+* `Frontier.Minkowski` is `ℝ^{1,3}` with quadratic form `Frontier.minkowskiSq` of signature
+  `(+,-,-,-)`; two events are spacelike separated when the interval between them is negative.
+* Test functions are complex valued functions on Minkowski space; two of them are *causally
+  disjoint* (`Frontier.SpacelikeSupported`) when every point of the support of the first is
+  spacelike separated from every point of the support of the second.
+* A `Frontier.WightmanField` packages a Hilbert space with a vacuum vector, smeared field
+  operators `op f`, a spin (recorded through `twoSpin`, twice the spin, so that integer spin
+  means `twoSpin` even) and a choice of statistics (`fermionic`), together with three of the
+  Wightman axioms that are used here:
+  - hermiticity of the smeared field,
+  - the (graded) local commutation relation at spacelike separation, with the sign dictated by
+    the chosen statistics,
+  - *weak locality*: at spacelike separation the two point function is symmetric up to the sign
+    `(-1)^{2j}` dictated by the spin.  This is the Bargmann–Hall–Wightman consequence of Lorentz
+    covariance, the spectral condition and the existence of Jost points.
 
-set_option grind.warning false
+## Results
+
+* `Frontier.twoPoint_eq_zero_of_wrong_statistics`: if the statistics sign disagrees with the
+  spin sign, the two point function vanishes for all causally disjoint test functions.
+* `Frontier.op_vac_eq_zero_of_wrong_statistics`: adding the Reeh–Schlieder / edge–of–the–wedge
+  input (a two point function vanishing on an open set of spacelike configurations vanishes
+  identically) the field annihilates the vacuum, i.e. the theory is trivial.
+* `Frontier.spin_statistics`: the spin–statistics connection.  A field that does not annihilate
+  the vacuum must have statistics matching its spin: Bose statistics for integer spin, Fermi
+  statistics for half–integer spin.
+-/
 
 namespace Frontier
 
-/-! ## Minkowski spacetime -/
+open scoped InnerProductSpace
 
-/-- Four dimensional Minkowski spacetime, as coordinate tuples `(x⁰, x¹, x², x³)`. -/
-abbrev Spacetime : Type := Fin 4 → ℝ
+/-! ## Minkowski space and causal disjointness -/
 
-/-- The Minkowski quadratic form `x·x = (x⁰)² - (x¹)² - (x²)² - (x³)²`
-(mostly-minus signature). -/
+/-- Minkowski spacetime `ℝ^{1,3}`, coordinates indexed by `Fin 4` with `0` the time coordinate. -/
+abbrev Minkowski := Fin 4 → ℝ
 
-def minkowskiSq (x : Spacetime) : ℝ := (x 0) ^ 2 - (x 1) ^ 2 - (x 2) ^ 2 - (x 3) ^ 2
+/-- The Minkowski quadratic form, in signature `(+,-,-,-)`. -/
 
-/-- A vector is *spacelike* when its Minkowski square is negative.  Two events
-separated by a spacelike vector cannot influence each other. -/
+def minkowskiSq (x : Minkowski) : ℝ := x 0 ^ 2 - x 1 ^ 2 - x 2 ^ 2 - x 3 ^ 2
+
+/-- Two events of Minkowski space are spacelike separated when the interval between them is
+negative. -/

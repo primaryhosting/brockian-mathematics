@@ -32,14 +32,11 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-
-universe u v
-
 namespace Infinity
 
 /-- **König's theorem** (strict sum-vs-product form): if `a i < b i` for every index `i`,
-then `Cardinal.sum a < Cardinal.prod b`. This is `Cardinal.sum_lt_prod` in Mathlib. -/
-theorem konig_lt {ι : Type u} (a b : ι → Cardinal.{v}) (h : ∀ i, a i < b i) :
+then the cardinal sum of `a` is strictly less than the cardinal product of `b`. -/
+theorem konig_lt.{u, v} {ι : Type u} (a b : ι → Cardinal.{v}) (h : ∀ i, a i < b i) :
     Cardinal.sum a < Cardinal.prod b :=
   Cardinal.sum_lt_prod a b h
 

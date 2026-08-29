@@ -1,20 +1,27 @@
-import RequestProject.BT.Ball
+import RequestProject.Equidecomp
 
 /-!
-# Banach Tarski
-Category: Frontier — Set Theory
-Target: Frontier.Banach_Tarski
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Rotations of `ℝ³`
+
+Set-up for the Banach–Tarski paradox: the group `SO(3)` of rotations acting on
+`E = EuclideanSpace ℝ (Fin 3)`, the group of isometries of `E`, and the fact that a
+non-identity rotation fixes at most two points of the unit sphere.
 -/
 
-open Metric Set
-open scoped Pointwise
+open Matrix
 
-namespace Frontier
+namespace BanachTarski
 
-/-- The vector by which the second copy of the ball is translated. -/
+/-- Three dimensional Euclidean space. -/
+abbrev E := EuclideanSpace ℝ (Fin 3)
 
-theorem refl (A : Set X) : Equidec G A A :=
-  ⟨id, {1}, Set.bijOn_id A, fun a _ => ⟨1, by simp⟩⟩
+/-- The group of rotations of `ℝ³`. -/
+abbrev SO3 := Matrix.specialOrthogonalGroup (Fin 3) ℝ
+
+noncomputable instance : SMul ↥SO3 E :=
+  ⟨fun M x => WithLp.toLp 2 ((M : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ WithLp.ofLp x)⟩
+
+
+theorem refl (A : Set X) : Equidecomp G A A :=
+  ⟨id, {1}, Set.finite_singleton _, Set.bijOn_id _, fun x _ => ⟨1, rfl, by simp⟩⟩
 

@@ -1,14 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Hawking Temperature
 Category: Frontier Phys
 Target: Phys.hawking_temperature
-Statement: State the Hawking temperature T = ℏc³/(8πGMk) of a Schwarzschild black hole.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -35,16 +33,9 @@ set_option grind.warning false
 
 namespace Phys
 
-/-- The Schwarzschild radius (event-horizon radius) of a black hole of mass `M`,
-`r_s = 2 G M / c²`. -/
+/-- The Schwarzschild radius `r_s = 2 G M / c²` of a body of mass `M`. -/
 
-noncomputable def hawkingTemperatureOfSurfaceGravity (hbar kappa c k : ℝ) : ℝ :=
+noncomputable def hawkingTemperatureOfSurfaceGravity (hbar c k kappa : ℝ) : ℝ :=
   hbar * kappa / (2 * Real.pi * c * k)
 
-/-- **Hawking temperature of a Schwarzschild black hole.**
-
-For any reduced Planck constant `ℏ` and positive values of the speed of light `c`, Newton's
-constant `G`, the black-hole mass `M` and Boltzmann's constant `k`, the Hawking–Unruh
-temperature `T = ℏ κ / (2 π c k)` associated with the Schwarzschild surface gravity
-`κ = c⁴ / (4 G M)` is
-`T = ℏ c³ / (8 π G M k)`. -/
+/-- The Hawking temperature of a Schwarzschild black hole of mass `M`. -/

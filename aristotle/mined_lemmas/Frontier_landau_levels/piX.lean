@@ -1,4 +1,20 @@
+/-
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,19 +30,25 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Frontier
 
 open Polynomial
 
-/-! ## Physicists' Hermite polynomials -/
+/-! ## Hermite polynomials over `ℝ` -/
 
-/-- The physicists' Hermite polynomials, defined by `H₀ = 1` and
-`H_{n+1} = 2X H_n - H_n'`. -/
+/-- The (probabilists') Hermite polynomials, with real coefficients. -/
 
-noncomputable def piX (hbar : ℝ) (psi : ℝ → ℝ → ℂ) : ℝ → ℝ → ℂ :=
-  fun x y => -Complex.I * hbar * deriv (fun s => psi s y) x
+noncomputable def piX (hbar : ℝ) (f : ℝ → ℝ → ℂ) : ℝ → ℝ → ℂ :=
+  fun x y => -Complex.I * (hbar : ℂ) * deriv (fun t => f t y) x
 
-/-- Kinetic momentum operator in the `y` direction in the Landau gauge `A = (0, Bx, 0)`,
+/-- Kinetic momentum in the `y`-direction in Landau gauge `A = (0, Bx, 0)`:
 `π_y = -iℏ ∂_y - qBx`. -/

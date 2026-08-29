@@ -23,6 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Sophie Germain Infinitude
+Category: Brockian Conjecture
+Target: Brockian.SophieGermain.SophieGermainInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean 4 requires `import` lines to precede any module docstring `/-!`, so the header above
+-- is reproduced verbatim as the module docstring immediately after the import.)
+
 import Mathlib
 
 /-!
@@ -35,16 +45,27 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.SophieGermain
 
-/-- `p` is a Sophie Germain prime: both `p` and `2 * p + 1` are prime. -/
+/-- A *Sophie Germain prime* is a prime `p` such that `2 * p + 1` is also prime. -/
 
-theorem sophieGermain_admissible (q : ℕ) (hq : q.Prime) :
-    ∃ n : ℤ, ¬ ((q : ℤ) ∣ ∏ i, ((![0, 1] : Fin 2 → ℤ) i + (![1, 2] : Fin 2 → ℤ) i * n)) := by
-  refine ⟨-1, ?_⟩
-  rw [Fin.prod_univ_two]
-  norm_num
-  intro h
-  have : q ∣ 1 := by exact_mod_cast h
-  exact hq.one_lt.ne' (Nat.dvd_one.mp this)
+theorem sophieGermain_admissible :
+    ∀ q : ℕ, q.Prime → ∃ n : ℕ, ¬ q ∣ (1 * n + 0) * (2 * n + 1) := by
+  intro q hq
+  by_cases h3 : q = 3
+  · refine ⟨2, ?_⟩
+    subst h3
+    decide
+  · refine ⟨1, ?_⟩
+    norm_num
+    intro hdvd
+    exact h3 ((Nat.prime_dvd_prime_iff_eq hq (by norm_num)).1 hdvd)
 
-/-- **Conditional reduction.** Dickson's conjecture implies that there are infinitely many
-Sophie Germain primes. -/
+/-! ## Main conditional theorem -/
+
+/-- **Sophie Germain infinitude, conditional on Dickson's conjecture for two linear forms.**
+
+Assuming `DicksonTwoForms` (the case of Dickson's conjecture / Schinzel's Hypothesis H for the
+admissible pair of linear forms `n` and `2n + 1`), there are infinitely many Sophie Germain
+primes, i.e. infinitely many primes `p` with `2 * p + 1` also prime.
+
+The unconditional statement is a well-known open problem; this is a formally checked reduction
+of it to the stated instance of Dickson's conjecture. -/

@@ -1,17 +1,22 @@
+import Mathlib
+import RequestProject.TwoSquares29
+
 /-!
-# Two Squares 29
-Category: Pure Mathematics
-Target: Math.two_squares_29
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Two Squares 29 (Mathlib restatement)
+
+A restatement of `Math.two_squares_29` using Mathlib's `Nat.Prime`.
 -/
 
 namespace Math
 
-/-- `n` is a sum of two squares. -/
+/-- The prime `29` is a sum of two squares: `29 = 2 ^ 2 + 5 ^ 2`. -/
 
-theorem two_squares_29 : IsPrimeNat 29 ∧ IsSumOfTwoSquares 29 :=
-  ⟨twenty_nine_prime, 2, 5, twenty_nine_eq_sq_add_sq⟩
+theorem two_squares_29 :
+    (1 < 29 ∧ ∀ m : Nat, m ∣ 29 → m = 1 ∨ m = 29) ∧ ∃ a b : Nat, 29 = a ^ 2 + b ^ 2 := by
+  refine ⟨⟨by decide, ?_⟩, 2, 5, by decide⟩
+  have key : ∀ m < 30, m ∣ 29 → m = 1 ∨ m = 29 := by decide
+  intro m hm
+  exact key m (Nat.lt_succ_of_le (Nat.le_of_dvd (by decide) hm)) hm
 
 end Math
 

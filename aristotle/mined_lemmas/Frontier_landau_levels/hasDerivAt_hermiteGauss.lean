@@ -6,8 +6,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to precede any module doc-comment, so the header above is
--- reproduced verbatim as a module doc-comment immediately after the import.)
 import Mathlib
 
 /-!
@@ -43,13 +41,27 @@ set_option grind.warning false
 
 namespace Frontier
 
+noncomputable section
+
 open Polynomial
 
-/-! ## Hermite polynomials over `ℝ` -/
+/-! ## Probabilists' Hermite polynomials over `ℝ` -/
 
-/-- The (probabilists') Hermite polynomials, with real coefficients. -/
+/-- The `n`-th probabilists' Hermite polynomial, with real coefficients. -/
 
-lemma hasDerivAt_hermiteGauss (n : ℕ) (t : ℝ) :
-    HasDerivAt (hermiteGauss n) (eval t (gDeriv (hermiteR n)) * Real.exp (-(t ^ 2 / 4))) t :=
-  hasDerivAt_polyGauss (hermiteR n) t
+theorem hasDerivAt_hermiteGauss (n : ℕ) {s : ℝ} (hs : s ≠ 0) (u : ℝ) :
+    HasDerivAt (hermiteGauss n s) (hermiteGaussD n s u) u := by
+  have hv : HasDerivAt (fun t : ℝ => t / s) (1 / s) u := by
+    simpa using (hasDerivAt_id u).div_const s
+  have hHe : HasDerivAt (fun t : ℝ => He n (t / s)) (He' n (u / s) * (1 / s)) u := by
+    simpa only [Function.comp_def] using (hasDerivAt_He n (u / s)).comp u hv
+  have hq : HasDerivAt (fun t : ℝ => -(t / s) ^ 2 / 4) (-(2 * (u / s) ^ 1 * (1 / s)) / 4) u :=
+    ((hv.pow 2).neg).div_const 4
+  have hE : HasDerivAt (fun t : ℝ => Real.exp (-(t / s) ^ 2 / 4))
+      (Real.exp (-(u / s) ^ 2 / 4) * (-(2 * (u / s) ^ 1 * (1 / s)) / 4)) u := hq.exp
+  have hmul := hHe.mul hE
+  unfold hermiteGauss hermiteGaussD
+  convert hmul using 1
+  field_simp
+  ring
 

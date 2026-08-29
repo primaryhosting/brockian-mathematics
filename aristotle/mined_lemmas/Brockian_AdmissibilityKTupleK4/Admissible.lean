@@ -1,4 +1,21 @@
+/-
+# Admissibility Ktuple K 4
+Category: Brockian Corpus
+Target: Brockian.AdmissibilityKTupleK4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Admissibility Ktuple K 4
+Category: Brockian Corpus
+Target: Brockian.AdmissibilityKTupleK4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 
 open scoped BigOperators
 open scoped Real
@@ -25,11 +42,13 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- A `k`-tuple of integers `h : Fin k → ℤ` is *admissible* (in the sense of the
-Hardy–Littlewood prime `k`-tuple conjecture) if for every prime `p` the values
-`h 0, …, h (k-1)` do not cover every residue class modulo `p`. -/
+/-- A finite set of integers `H` (thought of as a tuple of shifts `h₁ < ⋯ < h_k`) is
+*admissible* if for every prime `p` the elements of `H` do not cover all residue classes
+modulo `p`; equivalently, some residue class mod `p` is missed by `H`.  This is the
+classical admissibility condition from the Hardy–Littlewood prime `k`-tuple conjecture. -/
 
-def Admissible {k : ℕ} (h : Fin k → ℤ) : Prop :=
-  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ i, (h i : ZMod p) ≠ r
+def Admissible (H : Finset ℤ) : Prop :=
+  ∀ p : ℕ, p.Prime → ∃ a : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ a
 
-/-- A tuple of length `k` can never cover all residues modulo a prime `p > k`. -/
+/-- If a prime `p` exceeds the size of `H`, then `H` automatically misses a residue class
+modulo `p`. -/

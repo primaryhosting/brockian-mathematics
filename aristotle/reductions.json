@@ -5,6 +5,18 @@
    "hypothesis": "\u00ac TwinPrimeConjecture \u2194 \u2203 M : \u2115, \u2200 p : \u2115, IsTwinPrimePair p \u2192 p \u2264 M ",
    "source": "admin_0bd1e8cb.lean",
    "account": "admin"
+  },
+  {
+   "lemma": "not_twinPrimeConjecture_iff",
+   "hypothesis": "\u00ac TwinPrimeConjecture \u2194 \u2203 N : \u2115, \u2200 n : \u2115, N \u2264 n \u2192 Odd n \u2192 \u00ac ClementCondition n ",
+   "source": "chris_6008ed6b.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "not_twinPrimeConjecture_iff",
+   "hypothesis": "\u00ac TwinPrimeConjecture \u2194 \u2203 N : \u2115, \u2200 p : \u2115, N < p \u2192 \u00ac (p.Prime \u2227 (p + 2).Prime) ",
+   "source": "admin_99d9c9dc.lean",
+   "account": "admin"
   }
  ],
  "Brockian.FortunateNumbers.FortuneConjecture": [
@@ -13,6 +25,30 @@
    "hypothesis": "(h",
    "source": "admin_7ff1d3ec.lean",
    "account": "admin"
+  },
+  {
+   "lemma": "FortuneConjecture",
+   "hypothesis": "(H",
+   "source": "admin_af4997d3.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "prime_of_prime_primorial_add_of_lt_sq",
+   "hypothesis": "{n m r",
+   "source": "chris_cbf57e91.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "FortuneConjecture",
+   "hypothesis": "(hgap",
+   "source": "chris_cbf57e91.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "fortuneConjecture_of_lt_next_prime_sq",
+   "hypothesis": "(hgap",
+   "source": "chris_cbf57e91.lean",
+   "account": "chris"
   },
   {
    "lemma": "fortunate_eq",
@@ -31,6 +67,106 @@
    "hypothesis": "(h",
    "source": "chris_fd7ef253.lean",
    "account": "chris"
+  }
+ ],
+ "Brockian.BrocardGap.BrocardGapConjecture": [
+  {
+   "lemma": "BrocardGapConjecture",
+   "hypothesis": "(hred",
+   "source": "chris_a5b0c366.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardGapConjecture",
+   "hypothesis": "(\u2200 n : \u2115, BrocardFree n \u2194 \u00ac HasGapTwoFactorization n) \u2227\n    (\u2200 n : \u2115, n < 8 \u2192 (\u00ac BrocardFree n \u2194 (n = 4 \u2228 n = 5 \u2228 n = 7)",
+   "source": "admin_52d73154.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "BrocardGapConjecture",
+   "hypothesis": "(H",
+   "source": "admin_490eb9c5.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "factorial_le_of_abc",
+   "hypothesis": "(habc",
+   "source": "chris_4c051662.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardGapConjecture",
+   "hypothesis": "(habc",
+   "source": "chris_4c051662.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardGapConjecture",
+   "hypothesis": "(n",
+   "source": "chris_ae701d51.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.GoldbachComb.GoldbachCovarianceTransfer": [
+  {
+   "lemma": "GoldbachCovarianceTransfer",
+   "hypothesis": "(S",
+   "source": "chris_416e6075.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "cov_goldbach_eq",
+   "hypothesis": "{S",
+   "source": "chris_cb8d6a34.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "GoldbachCovarianceTransfer",
+   "hypothesis": "{S",
+   "source": "chris_cb8d6a34.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "cov_goldbach_eq_zero",
+   "hypothesis": "{S",
+   "source": "chris_cb8d6a34.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "eq_zero_of_lsum_eq_zero",
+   "hypothesis": "{S",
+   "source": "admin_406eb271.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "GoldbachCovarianceTransfer",
+   "hypothesis": "(n",
+   "source": "chris_98ab1fe3.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "GoldbachCovarianceTransfer",
+   "hypothesis": "(n",
+   "source": "admin_5edaaaa8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "GoldbachPartnerAnticovariance",
+   "hypothesis": "(n",
+   "source": "admin_5edaaaa8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "sum_goldbachParts_reflect",
+   "hypothesis": "{M",
+   "source": "admin_62a0a119.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "GoldbachCovarianceTransfer",
+   "hypothesis": "(n",
+   "source": "admin_62a0a119.lean",
+   "account": "admin"
   }
  ],
  "Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure": [
@@ -93,6 +229,24 @@
    "account": "chris"
   },
   {
+   "lemma": "reaches1_of_reachesIn",
+   "hypothesis": "\u2200 (f n : \u2115), reachesIn f n = true \u2192 Reaches1 n ",
+   "source": "chris_63487a18.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "CollatzConjecture",
+   "hypothesis": "(hdesc",
+   "source": "chris_63487a18.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "descentHypothesis_of_collatz",
+   "hypothesis": "(h",
+   "source": "chris_63487a18.lean",
+   "account": "chris"
+  },
+  {
    "lemma": "reachesOne_of_check",
    "hypothesis": "\u2200 (f n : \u2115), reachesOneCheck f n = true \u2192 ReachesOne n ",
    "source": "chris_e428a548.lean",
@@ -115,6 +269,90 @@
    "hypothesis": "(h",
    "source": "chris_e428a548.lean",
    "account": "chris"
+  },
+  {
+   "lemma": "reaches_one_of_le",
+   "hypothesis": "(hdesc",
+   "source": "admin_e1ca79cf.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "CollatzConjecture",
+   "hypothesis": "(hdesc",
+   "source": "admin_e1ca79cf.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "reaches_one_of_lt_201",
+   "hypothesis": "\u2200 n < 201, 0 < n \u2192 \u2203 k < 250, iter k n = 1 ",
+   "source": "admin_e1ca79cf.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "CollatzConjecture",
+   "hypothesis": "(h",
+   "source": "admin_7b298b2b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "descentProperty_of_reaches1",
+   "hypothesis": "(h",
+   "source": "admin_7b298b2b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "collatz_iff_descent",
+   "hypothesis": "(\u2200 n : \u2115, 0 < n \u2192 Reaches1 n) \u2194 DescentProperty ",
+   "source": "admin_7b298b2b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "reaches1_of_reaches1B",
+   "hypothesis": "\u2200 (f n : \u2115), reaches1B f n = true \u2192 Reaches1 n ",
+   "source": "admin_7b298b2b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "collatzConjecture_iff_mod_four",
+   "hypothesis": "CollatzConjecture \u2194 \u2200 n : Nat, 0 < n \u2192 n % 4 = 3 \u2192 Reaches1 n ",
+   "source": "admin_cf9d23a8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "collatzConjecture_iff_hardResidue",
+   "hypothesis": "CollatzConjecture \u2194 \u2200 n : Nat, 0 < n \u2192 HardResidue n \u2192 Reaches1 n ",
+   "source": "admin_cf9d23a8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "collatzConjecture_iff_eventual_descent",
+   "hypothesis": "CollatzConjecture \u2194 \u2200 n : Nat, 1 < n \u2192 \u2203 k : Nat, 0 < k \u2227 iter k n < n ",
+   "source": "admin_cf9d23a8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "reaches1_of_reachesWithin",
+   "hypothesis": "\u2200 (f n : Nat), reachesWithin f n = true \u2192 Reaches1 n ",
+   "source": "admin_cf9d23a8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "CollatzConjecture",
+   "hypothesis": "(h",
+   "source": "admin_029b2bb5.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "collatz_conjecture_iff_eventualDescent",
+   "hypothesis": "EventualDescent \u2194 \u2200 n : Nat, 0 < n \u2192 Reaches1 n ",
+   "source": "admin_029b2bb5.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "reaches1_of_reach1B",
+   "hypothesis": "\u2200 (fuel n : Nat), reach1B fuel n = true \u2192 Reaches1 n ",
+   "source": "admin_029b2bb5.lean",
+   "account": "admin"
   },
   {
    "lemma": "reaches1_of_descends",
@@ -153,97 +391,89 @@
    "account": "admin"
   },
   {
+   "lemma": "CollatzConjecture",
+   "hypothesis": "(h",
+   "source": "chris_ae403015.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "descends_of_mod_four_eq_three",
+   "hypothesis": "(h",
+   "source": "chris_ae403015.lean",
+   "account": "chris"
+  },
+  {
    "lemma": "collatzIter_180_below_1024",
    "hypothesis": "\u2200 n, n < 1024 \u2192 0 < n \u2192\n      collatzIter 180 n = 1 \u2228 collatzIter 180 n = 2 \u2228 collatzIter 180 n = 4 ",
    "source": "admin_2e82257e.lean",
    "account": "admin"
   }
  ],
- "Zeta23Obstruction.subclass_obstruction_statement": [
+ "Brockian.HyperperfectNumbers.HyperperfectAllK": [
   {
-   "lemma": "charge_nonneg_of_termwiseBound",
-   "hypothesis": "{\u03b9",
-   "source": "admin_3b28da9b.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "subclass_obstruction_statement",
-   "hypothesis": "(R",
-   "source": "admin_3b28da9b.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "certificate_sound_of_kernel_nonneg",
-   "hypothesis": "(R",
-   "source": "admin_2a78b74c.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "subclass_obstruction_statement",
-   "hypothesis": "(R",
-   "source": "admin_2a78b74c.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.BrocardProblem.BrocardConjecture": [
-  {
-   "lemma": "BrocardConjecture",
-   "hypothesis": "(H",
-   "source": "admin_13a85a8b.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "factorial_lt_of_abc",
-   "hypothesis": "{K",
-   "source": "admin_13a85a8b.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "brocard_finitely_many_of_abc",
-   "hypothesis": "(habc",
-   "source": "admin_13a85a8b.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "BrocardConjecture_of_abc_of_bound",
-   "hypothesis": "(habc",
-   "source": "admin_13a85a8b.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "BrocardConjecture",
-   "hypothesis": "(h",
-   "source": "chris_d36da5d8.lean",
+   "lemma": "HyperperfectAllK",
+   "hypothesis": "\u2200 k : \u2115, 0 < k \u2192\n      ((\u2203 d e : \u2115, d * e = k * k + 1 \u2227 Nat.Prime (d + k) \u2227 Nat.Prime (e + k) \u2227 d \u2260 e) \u2228\n        (\u2203 p q ",
+   "source": "chris_ff05a765.lean",
    "account": "chris"
   },
   {
-   "lemma": "brocardConjecture_iff_ge_301",
-   "hypothesis": "BrocardConjecture \u2194 \u2200 n, 301 \u2264 n \u2192 \u2200 m : \u2115, n ! + 1 \u2260 m ^ 2 ",
-   "source": "admin_2c4a8941.lean",
+   "lemma": "HyperperfectAllK",
+   "hypothesis": "(H",
+   "source": "admin_983440e4.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "isHyperperfect_of_certificate",
+   "hypothesis": "{k",
+   "source": "admin_43b8b19c.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "HyperperfectAllK",
+   "hypothesis": "(\u2200 k : \u2115, 0 < k \u2192 \u2203 S : Finset \u2115, \u2203 e : \u2115 \u2192 \u2115, IsHyperperfectCertificate k S e) \u2194\n      (\u2200 k : \u2115, 0 < k \u2192 \u2203 n : \u2115, IsHyp",
+   "source": "admin_43b8b19c.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "HyperperfectAllK",
+   "hypothesis": "(hBrock",
+   "source": "admin_ab333b0b.lean",
    "account": "admin"
   }
  ],
- "Brockian.SierpinskiCovering.SierpinskiProblem": [
+ "Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude": [
   {
-   "lemma": "isSierpinskiNumber_iff",
-   "hypothesis": "(k",
-   "source": "admin_f57f5f8c.lean",
-   "account": "admin"
+   "lemma": "dvd_of_squarefree_of_forall_prime_dvd",
+   "hypothesis": "{n m",
+   "source": "chris_2c8e18a3.lean",
+   "account": "chris"
   },
   {
-   "lemma": "SierpinskiProblem",
-   "hypothesis": "\u2200 n : Nat, 1 \u2264 n \u2192 \u00ac IsPrimeNat (78557 * 2 ^ n + 1) ",
-   "source": "admin_6b7aa4eb.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "sierpinski_78557",
-   "hypothesis": "Odd 78557 \u2227 \u2200 n : \u2115, 1 \u2264 n \u2192 \u00ac Nat.Prime (78557 * 2 ^ n + 1) ",
-   "source": "admin_6b7aa4eb.lean",
-   "account": "admin"
+   "lemma": "isCarmichael_of_korselt",
+   "hypothesis": "{n",
+   "source": "chris_2c8e18a3.lean",
+   "account": "chris"
   }
  ],
  "Brockian.GilbreathConjecture.GilbreathConjecture": [
+  {
+   "lemma": "head_of_cleanWindow",
+   "hypothesis": "{k N",
+   "source": "admin_a585c18b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "gilbreath_holds_below_61",
+   "hypothesis": "\u2200 k, 1 \u2264 k \u2192 k \u2264 60 \u2192 gRow k 0 = 1 ",
+   "source": "admin_a585c18b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "gilbreath_parity",
+   "hypothesis": "(n",
+   "source": "admin_35857797.lean",
+   "account": "admin"
+  },
   {
    "lemma": "GilbreathConjecture",
    "hypothesis": "(h",
@@ -261,6 +491,18 @@
    "hypothesis": "(h",
    "source": "admin_e7a43f3c.lean",
    "account": "admin"
+  },
+  {
+   "lemma": "GilbreathConjecture",
+   "hypothesis": "(N",
+   "source": "admin_e64c9338.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "gil_head_eq_one_of_goodRow",
+   "hypothesis": "(m",
+   "source": "chris_e257bddf.lean",
+   "account": "chris"
   },
   {
    "lemma": "gilbreathRow_add",
@@ -299,29 +541,25 @@
    "account": "chris"
   }
  ],
- "Brockian.QuasiperfectNumbers.QuasiperfectExists": [
+ "Brockian.CullenWoodall.CullenPrimeInfinitude": [
   {
-   "lemma": "QuasiperfectExists",
-   "hypothesis": "(\u2203 n, Quasiperfect n) \u2194\n      \u2203 n, 100 < n \u2227 Quasiperfect n \u2227 \u00ac IsPrimePow n \u2227 \u00ac Squarefree n \u2227\n        (\u2203 a m, n = 2 ^ ",
-   "source": "admin_1dd77631.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.LegendreConjecture.LegendreConjecture": [
-  {
-   "lemma": "legendre_lt_thirty",
-   "hypothesis": "\u2200 n < 30, 1 \u2264 n \u2192 \u2203 p < (n + 1) ^ 2, Nat.Prime p \u2227 n ^ 2 < p ",
-   "source": "admin_e59deb61.lean",
+   "lemma": "not_cullenPrimeConjecture_iff",
+   "hypothesis": "\u00ac CullenPrimeConjecture \u2194 \u2203 N : \u2115, \u2200 n : \u2115, N \u2264 n \u2192 \u00ac Nat.Prime (cullen n) ",
+   "source": "admin_5b407a9f.lean",
    "account": "admin"
   },
   {
-   "lemma": "legendreStatement_iff",
-   "hypothesis": "LegendreStatement \u2194\n      \u2200 n : \u2115, 1 \u2264 n \u2192 \u2203 p : \u2115, Nat.Prime p \u2227 n ^ 2 < p \u2227 p < (n + 1) ^ 2 ",
-   "source": "chris_a00f25cf.lean",
-   "account": "chris"
-  }
- ],
- "Brockian.CullenWoodall.CullenPrimeInfinitude": [
+   "lemma": "prime_of_no_small_prime_factor",
+   "hypothesis": "{m",
+   "source": "admin_5b407a9f.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "CullenPrimeInfinitude",
+   "hypothesis": "(H",
+   "source": "admin_5b407a9f.lean",
+   "account": "admin"
+  },
   {
    "lemma": "prime_cullen_of_no_small_prime_factor",
    "hypothesis": "{n",
@@ -333,17 +571,287 @@
    "hypothesis": "(h",
    "source": "admin_3f4189d9.lean",
    "account": "admin"
+  },
+  {
+   "lemma": "prime_of_no_small_prime_factor",
+   "hypothesis": "{m",
+   "source": "chris_e342dfcc.lean",
+   "account": "chris"
   }
  ],
- "Brockian.SophieGermain.SophieGermainInfinitude": [
+ "Zeta23Obstruction.subclass_obstruction_statement": [
   {
-   "lemma": "sophieGermain_admissible",
-   "hypothesis": "(q",
-   "source": "chris_33279e47.lean",
+   "lemma": "charge_nonneg_of_termwiseBound",
+   "hypothesis": "{\u03b9",
+   "source": "admin_3b28da9b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "subclass_obstruction_statement",
+   "hypothesis": "(R",
+   "source": "admin_3b28da9b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "subclass_obstruction_statement",
+   "hypothesis": "[Fintype \u03b9] (h\u03b9",
+   "source": "chris_a870ffdd.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "charge_unbounded_below_of_neg_deep_value",
+   "hypothesis": "[Fintype \u03b9] (h\u03b9",
+   "source": "chris_a870ffdd.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "kernel_nonneg_of_valid",
+   "hypothesis": "[Fintype \u03b9] (h\u03b9",
+   "source": "chris_a870ffdd.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "subclass_obstruction_statement",
+   "hypothesis": "(C",
+   "source": "admin_1551111e.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "certificate_sound_of_kernel_nonneg",
+   "hypothesis": "(R",
+   "source": "admin_2a78b74c.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "subclass_obstruction_statement",
+   "hypothesis": "(R",
+   "source": "admin_2a78b74c.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "charge_nonneg_of_termwiseNonneg",
+   "hypothesis": "(R",
+   "source": "chris_c99ae50b.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "subclass_obstruction_statement",
+   "hypothesis": "(R \u03c3",
+   "source": "chris_c99ae50b.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "termwiseNonneg_fails_of_negative_point",
+   "hypothesis": "(R",
+   "source": "chris_c99ae50b.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.WilsonPrimes.WilsonPrimeInfinitude": [
+  {
+   "lemma": "wilsonPrime_lt_hundred",
+   "hypothesis": "\u2200 p < 100, WilsonPrime p \u2192 p = 5 \u2228 p = 13 ",
+   "source": "chris_ddc91cf0.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "wilsonPrimes_finite_iff_bounded",
+   "hypothesis": "{p : \u2115 | IsWilsonPrime p}.Finite \u2194 \u2203 N : \u2115, \u2200 p : \u2115, IsWilsonPrime p \u2192 p \u2264 N ",
+   "source": "admin_fde56b6e.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "not_infinite_isWilsonPrime_iff",
+   "hypothesis": "\u00ac {p : \u2115 | IsWilsonPrime p}.Infinite \u2194\n      \u2203 N : \u2115, \u2200 p > N, p.Prime \u2192 \u00ac p \u2223 wilsonQuotient p ",
+   "source": "chris_5d5795bc.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "isWilsonPrime_lt_800",
+   "hypothesis": "\u2200 p < 800, IsWilsonPrime p \u2192 p = 5 \u2228 p = 13 \u2228 p = 563 ",
+   "source": "admin_67e33d3f.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.CullenWoodall.WoodallPrimeInfinitude": [
+  {
+   "lemma": "woodallPrimes_finite_iff",
+   "hypothesis": "\u00ac woodallPrimes.Infinite \u2194 \u2203 N : \u2115, \u2200 n, N < n \u2192 \u00ac IsWoodallPrime n ",
+   "source": "chris_665ac530.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.PracticalNumbers.PracticalTwinInfinitude": [
+  {
+   "lemma": "sigma1_ge_of_covers_prime",
+   "hypothesis": "{n p",
+   "source": "chris_869df1ca.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "exists_subset_sum_of_chain",
+   "hypothesis": "\u2200 D : Finset \u2115, (\u2200 x \u2208 D, x \u2264 1 + \u2211 y \u2208 D.filter (fun y => y < x), y) \u2192\n      \u2200 m \u2264 \u2211 x \u2208 D, x, \u2203 S \u2286 D, \u2211 d \u2208 S, d = m ",
+   "source": "admin_6e00142c.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "practical_pow_two_mul",
+   "hypothesis": "\u2200 s : \u2115, 0 < s \u2192 \u2200 a : \u2115, s \u2264 2 ^ (a + 1) \u2192\n    Practical (2 ^ a * s) ",
+   "source": "admin_0a0d4dd1.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.OreHarmonicNumbers.OddHarmonicExists": [
+  {
+   "lemma": "eq_one_of_odd_of_isOreHarmonic_lt_200",
+   "hypothesis": "\u2200 n < 200, n % 2 = 1 \u2192 IsOreHarmonic n \u2192 n = 1 ",
+   "source": "admin_8837d476.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.BrocardProblem.BrocardConjecture": [
+  {
+   "lemma": "brocard_factorial_conjecture",
+   "hypothesis": "(H",
+   "source": "chris_689b1d24.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardConjecture",
+   "hypothesis": "(H",
+   "source": "chris_689b1d24.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardConjecture",
+   "hypothesis": "(H",
+   "source": "admin_13a85a8b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "factorial_lt_of_abc",
+   "hypothesis": "{K",
+   "source": "admin_13a85a8b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "brocard_finitely_many_of_abc",
+   "hypothesis": "(habc",
+   "source": "admin_13a85a8b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "BrocardConjecture_of_abc_of_bound",
+   "hypothesis": "(habc",
+   "source": "admin_13a85a8b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "BrocardConjecture",
+   "hypothesis": "(h",
+   "source": "chris_d36da5d8.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardConjecture",
+   "hypothesis": "(H",
+   "source": "admin_a6593abf.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "BrocardConjecture",
+   "hypothesis": "(hlarge",
+   "source": "chris_161a0aea.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardConjecture_of_no_consecutive",
+   "hypothesis": "(hlarge",
+   "source": "chris_161a0aea.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "BrocardConjecture",
+   "hypothesis": "(H",
+   "source": "chris_2c8dbda6.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "brocardConjecture_iff_ge_301",
+   "hypothesis": "BrocardConjecture \u2194 \u2200 n, 301 \u2264 n \u2192 \u2200 m : \u2115, n ! + 1 \u2260 m ^ 2 ",
+   "source": "admin_2c4a8941.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "brocardConjecture_iff_large",
+   "hypothesis": "BrocardConjecture \u2194 \u2200 n : \u2115, 301 \u2264 n \u2192 \u2200 m : \u2115, n ! + 1 \u2260 m ^ 2 ",
+   "source": "admin_0084bb2f.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "brocardConjecture_of_large",
+   "hypothesis": "(h",
+   "source": "admin_0084bb2f.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.RepunitPrimes.RepunitPrimeInfinitude": [
+  {
+   "lemma": "RepunitPrimeInfinitude",
+   "hypothesis": "(H",
+   "source": "chris_3d4c8e3f.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "repunitPrimeInfinitude_iff",
+   "hypothesis": "{n : \u2115 | Nat.Prime (repunit n)}.Infinite \u2194\n      \u2200 N : \u2115, \u2203 p : \u2115, N < p \u2227 p.Prime \u2227\n        \u2200 q : \u2115, q.Prime \u2192 q % (2 *",
+   "source": "chris_3d4c8e3f.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "prime_repunit_of_no_small_factor",
+   "hypothesis": "{p",
+   "source": "admin_68007e47.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "RepunitPrimeInfinitude",
+   "hypothesis": "(h",
+   "source": "admin_68007e47.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "repunitPrimes_infinite_iff",
+   "hypothesis": "{n : \u2115 | Nat.Prime (repunit n)}.Infinite \u2194\n      (\u2200 N : \u2115, \u2203 p : \u2115, N < p \u2227 p.Prime \u2227\n        \u2200 q : \u2115, q.Prime \u2192 q \u2223 rep",
+   "source": "admin_68007e47.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "RepunitPrimeInfinitude_index_prime",
+   "hypothesis": "\u2200 n, Nat.Prime (repunit n) \u2192 Nat.Prime n ",
+   "source": "chris_c2f1f25c.lean",
    "account": "chris"
   }
  ],
  "Brockian.ErdosStraus.ErdosStrausConjecture": [
+  {
+   "lemma": "ErdosStrausConjecture",
+   "hypothesis": "(h",
+   "source": "chris_2c63b4be.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "erdosStraus_iff_primes_one_mod_24",
+   "hypothesis": "(\u2200 n : \u2115, 2 \u2264 n \u2192 ErdosStrausSolvable n) \u2194\n      (\u2200 p : \u2115, p.Prime \u2192 p % 24 = 1 \u2192 ErdosStrausSolvable p) ",
+   "source": "chris_2c63b4be.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "ErdosStrausConjecture",
+   "hypothesis": "(hprime",
+   "source": "chris_00a7d175.lean",
+   "account": "chris"
+  },
   {
    "lemma": "ErdosStrausConjecture",
    "hypothesis": "(hprime",
@@ -369,113 +877,61 @@
    "account": "admin"
   },
   {
+   "lemma": "erdosStrausConjecture_of_primes",
+   "hypothesis": "(H",
+   "source": "admin_f605cbe6.lean",
+   "account": "admin"
+  },
+  {
    "lemma": "erdosStrausConjecture_iff_prime_one_mod_twentyFour",
    "hypothesis": "ErdosStrausConjecture \u2194 \u2200 p : \u2115, p.Prime \u2192 p % 24 = 1 \u2192 ErdosStrausRep p ",
    "source": "chris_21950785.lean",
    "account": "chris"
-  }
- ],
- "Brockian.SuperperfectNumbers.OddSuperperfectExists": [
+  },
   {
-   "lemma": "OddSuperperfectExists",
-   "hypothesis": "(\u2203 n : \u2115, Odd n \u2227 Superperfect n) \u2194\n      \u2203 n : \u2115, Odd n \u2227 1000 \u2264 n \u2227 Superperfect n \u2227 n < sigma n \u2227 sigma n < 2 * n \u2227\n ",
-   "source": "admin_d25a357b.lean",
+   "lemma": "erdosStraus_of_primes_one_mod_24",
+   "hypothesis": "(H",
+   "source": "admin_5739a2c5.lean",
    "account": "admin"
   },
   {
-   "lemma": "odd_sigma_of_even_factorization",
-   "hypothesis": "{m",
-   "source": "admin_be332263.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.GoldbachComb.GoldbachCovarianceTransfer": [
-  {
-   "lemma": "GoldbachCovarianceTransfer",
-   "hypothesis": "(n",
-   "source": "admin_5edaaaa8.lean",
+   "lemma": "ErdosStrausConjecture",
+   "hypothesis": "(hprimes",
+   "source": "admin_7ebdaa20.lean",
    "account": "admin"
   },
   {
-   "lemma": "GoldbachPartnerAnticovariance",
-   "hypothesis": "(n",
-   "source": "admin_5edaaaa8.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "sum_goldbachParts_reflect",
-   "hypothesis": "{M",
-   "source": "admin_62a0a119.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "GoldbachCovarianceTransfer",
-   "hypothesis": "(n",
-   "source": "admin_62a0a119.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture": [
-  {
-   "lemma": "prime_sq_add_one_of_no_small_prime_factor",
-   "hypothesis": "{n",
-   "source": "admin_2691e4bb.lean",
-   "account": "admin"
-  },
-  {
-   "lemma": "landauSet_infinite_iff_infinite_no_small_prime_factor",
-   "hypothesis": "LandauSet.Infinite \u2194\n      {n : \u2115 | 1 \u2264 n \u2227 \u2200 p : \u2115, p.Prime \u2192 p \u2223 n ^ 2 + 1 \u2192 n < p}.Infinite ",
-   "source": "admin_2691e4bb.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.BrocardGap.BrocardGapConjecture": [
-  {
-   "lemma": "factorial_le_of_abc",
-   "hypothesis": "(habc",
-   "source": "chris_4c051662.lean",
+   "lemma": "erdosStrausConjecture_iff_primes",
+   "hypothesis": "ErdosStrausConjecture \u2194 \u2200 p : \u2115, p.Prime \u2192 p % 24 = 1 \u2192 ErdosStrausSolvable p ",
+   "source": "chris_1a8398c5.lean",
    "account": "chris"
-  },
-  {
-   "lemma": "BrocardGapConjecture",
-   "hypothesis": "(habc",
-   "source": "chris_4c051662.lean",
-   "account": "chris"
-  }
- ],
- "Brockian.HyperperfectNumbers.HyperperfectAllK": [
-  {
-   "lemma": "HyperperfectAllK",
-   "hypothesis": "(hBrock",
-   "source": "admin_ab333b0b.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.RuthAaronPairs.RuthAaronInfinitude": [
-  {
-   "lemma": "ruthAaronSet_infinite_of_strictMono",
-   "hypothesis": "{f",
-   "source": "admin_ad35b830.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.PalindromicPrimes.PalindromicPrimeInfinitude": [
-  {
-   "lemma": "alternatingSum_eq_zero_of_palindrome_of_even_length",
-   "hypothesis": "\u2200 {l : List \u2124}, l.Palindrome \u2192 Even l.length \u2192 l.alternatingSum = 0 ",
-   "source": "admin_d9d0f433.lean",
-   "account": "admin"
-  }
- ],
- "Brockian.WilsonPrimes.WilsonPrimeInfinitude": [
-  {
-   "lemma": "isWilsonPrime_lt_800",
-   "hypothesis": "\u2200 p < 800, IsWilsonPrime p \u2192 p = 5 \u2228 p = 13 \u2228 p = 563 ",
-   "source": "admin_67e33d3f.lean",
-   "account": "admin"
   }
  ],
  "Brockian.BetrothedNumbers.SameParityBetrothedExists": [
+  {
+   "lemma": "SameParityBetrothedExists",
+   "hypothesis": "(\u2203 m n : \u2115, Betrothed m n \u2227 m % 2 = n % 2) \u2192\n    (\u2203 m n : \u2115, Betrothed m n \u2227 m % 2 = n % 2 \u2227\n      (\u2203 a, m = a ^ 2 \u2228 m =",
+   "source": "chris_7d1eb878.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "isSquare_of_odd_of_odd_sigmaOne",
+   "hypothesis": "\u2200 m : \u2115, Odd m \u2192 Odd (sigmaOne m) \u2192 \u2203 t, m = t ^ 2 ",
+   "source": "admin_d38e747a.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "eq_one_or_two_of_squarefree",
+   "hypothesis": "{a",
+   "source": "chris_1fbe5e13.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "eq_sq_or_two_mul_sq_of_even_odd_factorization",
+   "hypothesis": "{n",
+   "source": "chris_1fbe5e13.lean",
+   "account": "chris"
+  },
   {
    "lemma": "isSquare_of_odd_of_odd_sigma",
    "hypothesis": "\u2200 m : \u2115, 0 < m \u2192 m % 2 = 1 \u2192 Odd (sigma 1 m) \u2192 IsSquare m ",
@@ -489,7 +945,53 @@
    "account": "chris"
   }
  ],
+ "Brockian.SierpinskiCovering.SierpinskiProblem": [
+  {
+   "lemma": "isSierpinskiNumber_iff",
+   "hypothesis": "(k",
+   "source": "admin_f57f5f8c.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "SierpinskiProblem",
+   "hypothesis": "\u2200 n : Nat, 1 \u2264 n \u2192 \u00ac IsPrimeNat (78557 * 2 ^ n + 1) ",
+   "source": "admin_6b7aa4eb.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "sierpinski_78557",
+   "hypothesis": "Odd 78557 \u2227 \u2200 n : \u2115, 1 \u2264 n \u2192 \u00ac Nat.Prime (78557 * 2 ^ n + 1) ",
+   "source": "admin_6b7aa4eb.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.QuasiperfectNumbers.QuasiperfectExists": [
+  {
+   "lemma": "QuasiperfectExists",
+   "hypothesis": "(\u2203 n, Quasiperfect n) \u2194\n      \u2203 n, 100 < n \u2227 Quasiperfect n \u2227 \u00ac IsPrimePow n \u2227 \u00ac Squarefree n \u2227\n        (\u2203 a m, n = 2 ^ ",
+   "source": "admin_1dd77631.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "QuasiperfectExists",
+   "hypothesis": "(\u2203 n, Quasiperfect n) \u2192 \u2203 k, Odd k \u2227 1 < k \u2227 Quasiperfect (k ^ 2) ",
+   "source": "chris_21cbcc47.lean",
+   "account": "chris"
+  }
+ ],
  "Brockian.GiugaNumbers.OddGiugaExists": [
+  {
+   "lemma": "sum_le_sum_range_of_antitone",
+   "hypothesis": "{f",
+   "source": "admin_3dcf097a.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "OddGiugaExists",
+   "hypothesis": "(\u2203 n : \u2115, Odd n \u2227 IsGiuga n) \u2192\n      \u2203 n : \u2115, Odd n \u2227 IsGiuga n \u2227 Squarefree n \u2227 9 \u2264 n.primeFactors.card ",
+   "source": "admin_3dcf097a.lean",
+   "account": "admin"
+  },
   {
    "lemma": "sum_recip_le_of_card_le_eight",
    "hypothesis": "\u2200 (m : \u2115) (S : Finset \u2115), (S \\ smallOddPrimes).card = m \u2192 (\u2200 p \u2208 S, p.Prime) \u2192\n      (\u2200 p \u2208 S, Odd p) \u2192 S.card \u2264 8 \u2192\n   ",
@@ -509,11 +1011,229 @@
    "account": "admin"
   }
  ],
- "Brockian.PracticalNumbers.PracticalTwinInfinitude": [
+ "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture": [
   {
-   "lemma": "practical_pow_two_mul",
-   "hypothesis": "\u2200 s : \u2115, 0 < s \u2192 \u2200 a : \u2115, s \u2264 2 ^ (a + 1) \u2192\n    Practical (2 ^ a * s) ",
-   "source": "admin_0a0d4dd1.lean",
+   "lemma": "prime_of_no_small_prime_factor",
+   "hypothesis": "{n",
+   "source": "chris_564f8a70.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "no_small_prime_factor_of_prime",
+   "hypothesis": "{n",
+   "source": "chris_564f8a70.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "prime_of_no_small_prime_factor",
+   "hypothesis": "{n",
+   "source": "chris_94771f76.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "no_small_prime_factor_of_prime",
+   "hypothesis": "{n",
+   "source": "chris_94771f76.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "not_landau_iff",
+   "hypothesis": "\u00ac LandauSet.Infinite \u2194\n      \u2203 N : \u2115, \u2200 n : \u2115, N < n \u2192 \u2203 p : \u2115, p.Prime \u2227 p \u2264 n \u2227 p \u2223 n ^ 2 + 1 ",
+   "source": "chris_94771f76.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "prime_sq_add_one_of_no_small_prime_factor",
+   "hypothesis": "{n",
+   "source": "admin_2691e4bb.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "landauSet_infinite_iff_infinite_no_small_prime_factor",
+   "hypothesis": "LandauSet.Infinite \u2194\n      {n : \u2115 | 1 \u2264 n \u2227 \u2200 p : \u2115, p.Prime \u2192 p \u2223 n ^ 2 + 1 \u2192 n < p}.Infinite ",
+   "source": "admin_2691e4bb.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.LegendreConjecture.LegendreConjecture": [
+  {
+   "lemma": "legendreWitnesses_spec",
+   "hypothesis": "\u2200 i \u2208 Finset.range 500,\n      (2 \u2264 legendreWitnesses.getD i 0 \u2227\n        \u2200 m \u2208 Finset.Icc 2 501, m * m \u2264 legendreWitnesse",
+   "source": "chris_17b1b65a.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "legendre_lt_thirty",
+   "hypothesis": "\u2200 n < 30, 1 \u2264 n \u2192 \u2203 p < (n + 1) ^ 2, Nat.Prime p \u2227 n ^ 2 < p ",
+   "source": "admin_e59deb61.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "legendre_iff_no_prime_free_interval",
+   "hypothesis": "LegendreStatement \u2194 \u00ac \u2203 n : \u2115, 0 < n \u2227 \u2200 p : \u2115, p.Prime \u2192 \u00ac (n ^ 2 < p \u2227 p < (n + 1) ^ 2) ",
+   "source": "admin_c22868c8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "legendre_iff_card_pos",
+   "hypothesis": "LegendreStatement \u2194\n      \u2200 n : \u2115, 0 < n \u2192 0 < #{p \u2208 Finset.Ioo (n ^ 2) ((n + 1) ^ 2) | p.Prime} ",
+   "source": "admin_c22868c8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "legendre_iff_primeCounting",
+   "hypothesis": "LegendreStatement \u2194 \u2200 n : \u2115, 0 < n \u2192 Nat.primeCounting (n ^ 2) < Nat.primeCounting ((n + 1) ^ 2) ",
+   "source": "admin_c22868c8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "legendre_iff_large",
+   "hypothesis": "LegendreStatement \u2194\n      \u2200 n : \u2115, 101 \u2264 n \u2192 \u2203 p : \u2115, p.Prime \u2227 n ^ 2 < p \u2227 p < (n + 1) ^ 2 ",
+   "source": "admin_c22868c8.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "legendreStatement_iff",
+   "hypothesis": "LegendreStatement \u2194\n      \u2200 n : \u2115, 1 \u2264 n \u2192 \u2203 p : \u2115, Nat.Prime p \u2227 n ^ 2 < p \u2227 p < (n + 1) ^ 2 ",
+   "source": "chris_a00f25cf.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "legendre_iff_nextPrime",
+   "hypothesis": "LegendreStatement \u2194 \u2200 n : \u2115, 1 \u2264 n \u2192 nextPrime (n ^ 2) < (n + 1) ^ 2 ",
+   "source": "chris_cd657a29.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "legendre_iff_no_prime_free_interval",
+   "hypothesis": "LegendreStatement \u2194\n      \u00ac \u2203 n : \u2115, 1 \u2264 n \u2227 \u2200 p : \u2115, Nat.Prime p \u2192 p \u2264 n ^ 2 \u2228 (n + 1) ^ 2 \u2264 p ",
+   "source": "chris_cd657a29.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "legendre_iff_primeCounting",
+   "hypothesis": "LegendreStatement \u2194\n      \u2200 n : \u2115, 1 \u2264 n \u2192 Nat.primeCounting (n ^ 2) < Nat.primeCounting' ((n + 1) ^ 2) ",
+   "source": "chris_cd657a29.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "legendreWitness_spec",
+   "hypothesis": "\u2200 n, n < 41 \u2192 1 \u2264 n \u2192\n    n ^ 2 < legendreWitness n \u2227 legendreWitness n < (n + 1) ^ 2 \u2227\n      IsPrimeNat (legendreWitnes",
+   "source": "chris_b8c92def.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "legendreStatement_iff",
+   "hypothesis": "LegendreStatement \u2194 \u2200 n : \u2115, 0 < n \u2192 \u2203 p : \u2115, p.Prime \u2227 n ^ 2 < p \u2227 p < (n + 1) ^ 2 ",
+   "source": "chris_b8c92def.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "legendre_of_shortInterval",
+   "hypothesis": "(H",
+   "source": "chris_b8c92def.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.BetrothedNumbers.BetrothedInfinitude": [
+  {
+   "lemma": "le_sum_of_mem",
+   "hypothesis": "\u2200 {l : List Nat} {x : Nat}, x \u2208 l \u2192 x \u2264 l.sum ",
+   "source": "admin_79efa838.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "sq_or_two_mul_sq_of_odd_sigma",
+   "hypothesis": "\u2200 m : \u2115, 0 < m \u2192 Odd (sigma 1 m) \u2192 \u2203 k, m = k ^ 2 \u2228 m = 2 * k ^ 2 ",
+   "source": "chris_cd13cb28.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.WeirdNumbers.OddWeirdExists": [
+  {
+   "lemma": "oddWeirdExists_iff",
+   "hypothesis": "OddWeirdExists \u2194\n      \u2203 n : \u2115, Odd n \u2227 Weird n \u2227 947 \u2264 n \u2227 \u00ac (945 \u2223 n) \u2227 \u2200 d, d \u2223 n \u2192 \u00ac Semiperfect d ",
+   "source": "admin_d44c8dc3.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.SophieGermain.SophieGermainInfinitude": [
+  {
+   "lemma": "sophieGermain_admissible",
+   "hypothesis": "(q",
+   "source": "chris_33279e47.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "sophieGermain_admissible",
+   "hypothesis": "\u2200 q : \u2115, q.Prime \u2192 \u2203 n : \u2115, \u00ac q \u2223 (1 * n + 0) * (2 * n + 1) ",
+   "source": "chris_26f3e449.lean",
+   "account": "chris"
+  },
+  {
+   "lemma": "SophieGermainInfinitude",
+   "hypothesis": "(\u2203 p, IsSophieGermain p) \u2227\n    ((\u2200 N : \u2115, \u2203 p, N < p \u2227 IsSophieGermain p) \u2192 sophieGermainSet.Infinite) \u2227\n    (safePrimeS",
+   "source": "chris_4c31d8be.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.SuperperfectNumbers.OddSuperperfectExists": [
+  {
+   "lemma": "OddSuperperfectExists",
+   "hypothesis": "(\u2203 n : \u2115, Odd n \u2227 Superperfect n) \u2194\n      \u2203 n : \u2115, Odd n \u2227 1000 \u2264 n \u2227 Superperfect n \u2227 n < sigma n \u2227 sigma n < 2 * n \u2227\n ",
+   "source": "admin_d25a357b.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "odd_sigma_of_even_factorization",
+   "hypothesis": "{m",
+   "source": "admin_be332263.lean",
+   "account": "admin"
+  },
+  {
+   "lemma": "OddSuperperfectExists",
+   "hypothesis": "(\u2203 n, Odd n \u2227 Superperfect n) \u2194\n      \u2203 n, 1000 < n \u2227 Odd n \u2227 Superperfect n \u2227 \u03c3 1 n < 2 * n \u2227\n        (\u2200 a : \u2115, \u03c3 1 n \u2260",
+   "source": "admin_fb941a5b.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.FermatNumbers.FermatPrimeBeyondFour": [
+  {
+   "lemma": "fermatPrimeBeyondIndexFour_iff_not_all_composite",
+   "hypothesis": "FermatPrimeBeyondIndexFour \u2194 \u00ac \u2200 n : \u2115, 4 < n \u2192 \u00ac (F n).Prime ",
+   "source": "chris_d08ef64e.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.RuthAaronPairs.RuthAaronInfinitude": [
+  {
+   "lemma": "ruthAaronSet_infinite_of_strictMono",
+   "hypothesis": "{f",
+   "source": "admin_ad35b830.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.PalindromicPrimes.PalindromicPrimeInfinitude": [
+  {
+   "lemma": "alternatingSum_eq_zero_of_palindrome_of_even_length",
+   "hypothesis": "\u2200 {l : List \u2124}, l.Palindrome \u2192 Even l.length \u2192 l.alternatingSum = 0 ",
+   "source": "admin_d9d0f433.lean",
+   "account": "admin"
+  }
+ ],
+ "Brockian.OppermannConjecture.OppermannConjecture": [
+  {
+   "lemma": "OppermannConjecture",
+   "hypothesis": "(H",
+   "source": "chris_68752be9.lean",
+   "account": "chris"
+  }
+ ],
+ "Brockian.PolignacPrimes.PolignacConjecture": [
+  {
+   "lemma": "PolignacConjecture",
+   "hypothesis": "(hD",
+   "source": "admin_824e57d8.lean",
    "account": "admin"
   }
  ]

@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
 # Null Escape Iff Unowned Reachable
 Category: Proof-Carrying Apps
@@ -6,49 +31,58 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on imports: the required header above is a module docstring, which Lean parses as a
-command, so no `import` line may follow it.  The development below is therefore fully
-self-contained in core Lean 4: it builds the small amount of graph theory it needs
-(reflexive-transitive closure, and reference traces through the object graph) from scratch.
-The two transfer lemmas `PCA.Isolation.reaches_of_chainFrom` and
-`PCA.Isolation.exists_chainFrom_of_reaches` below play the role of Mathlib's
-`List.relationReflTransGen_of_exists_isChain` and
-`List.exists_isChain_ne_nil_of_relationReflTransGen`, which are the Mathlib lemmas that would
-close these steps if Mathlib were available in this file.
+/-!
+## The isolation model
+
+The state of a proof-carrying app's isolation engine is modelled as an
+*ownership graph*:
+
+* `Node` — the abstract locations (objects, cells, capabilities) of the heap;
+* `edge` — the may-point-to relation computed by the engine;
+* `roots` — the locations directly exposed to the (untrusted) outside world;
+* `owner` — the ownership labelling; `owner n = none` means the location is
+  *unowned* (a "null" owner), i.e. it belongs to no isolation domain.
+
+The engine's operational notion of failure is a **null escape**: the forward
+taint analysis `Flows`, propagated from the roots along `edge`, marks a location
+whose owner is null.  The model-level notion of failure is `UnownedReachable`:
+some unowned location is reachable from a root.
+
+The main theorem `null_escape_iff_unowned_reachable` states that the two
+coincide; its two directions are exactly completeness
+(`unownedReachable_of_nullEscape`) and soundness
+(`not_unownedReachable_of_not_nullEscape`) of the engine's model.  A third,
+witness-based characterisation via explicit escape traces
+(`null_escape_iff_hasEscapeTrace`) is also proved equivalent, so that a failing
+analysis always yields a concrete counterexample trace, and conversely any such
+trace is a real escape.
+
+The development is deliberately self-contained (no imports), so that the header
+comment above is literally the first thing in the file.
 -/
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-universe u
+universe u v
 
-/-- An abstract model of an isolation engine's object graph.
+variable {Node : Type u} {Owner : Type v}
 
-* `root` marks the entry points (the capability roots the engine scans from);
-* `edge a b` means object `a` holds a reference to object `b`;
-* `owned v` means object `v` belongs to the isolation domain (it is *owned*).
--/
-structure Model (V : Type u) where
-  /-- The entry points of the object graph. -/
-  root : V → Prop
-  /-- `edge a b` holds when object `a` references object `b`. -/
-  edge : V → V → Prop
-  /-- `owned v` holds when `v` lies inside the isolation domain. -/
-  owned : V → Prop
+/-- Reachability along `edge`: the reflexive–transitive closure. -/
+inductive Reach (edge : Node → Node → Prop) (a : Node) : Node → Prop
+  | refl : Reach edge a a
+  | tail {b c : Node} (hb : Reach edge a b) (h : edge b c) : Reach edge a c
 
-variable {V : Type u}
+/-- Forward taint propagation performed by the isolation engine: the locations
+the engine considers exposed to the outside world. -/
+inductive Flows (roots : Node → Prop) (edge : Node → Node → Prop) : Node → Prop
+  | root {n : Node} (hn : roots n) : Flows roots edge n
+  | step {n m : Node} (hn : Flows roots edge n) (h : edge n m) : Flows roots edge m
 
-/-- Reflexive-transitive closure of a relation: `Reaches e a b` means `b` can be obtained
-from `a` by following finitely many `e`-edges. -/
-inductive Reaches (e : V → V → Prop) : V → V → Prop
-  /-- Every object reaches itself. -/
-  | refl (a : V) : Reaches e a a
-  /-- Reachability extends along an edge. -/
-  | tail {a b c : V} : Reaches e a b → e b c → Reaches e a c
+/-- The engine reports a **null escape**: some exposed location is unowned. -/
 
-/-- `v` is reachable in the model when some root reaches it along finitely many edges. -/
+def EscapeTrace (roots : Node → Prop) (edge : Node → Node → Prop)
+    (owner : Node → Option Owner) (a : Node) (l : List Node) : Prop :=
+  roots a ∧ IsPath edge a l ∧ owner (lastNode a l) = none
 
-def EscapeTrace (p : List V) : Prop :=
-  ∃ h : p ≠ [], List.IsChain M.edge p ∧ M.root (p.head h) ∧ ¬ M.owned (p.getLast h)
-
-/-- Some reference trace leaks out of the isolation domain. -/
+/-- The engine's counterexample output: some concrete escape trace exists. -/

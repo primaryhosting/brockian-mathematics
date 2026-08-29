@@ -45,9 +45,8 @@ namespace Brockian.BetrothedNumbers
 
 open Finset
 
-/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d`. -/
+/-- The sum-of-divisors function `σ₁`. -/
 
-theorem isBetrothedPair_2024_2295 : IsBetrothedPair 2024 2295 :=
-  ⟨by norm_num, by norm_num, by norm_num, by decide, by decide⟩
+theorem isBetrothedPair_2024_2295 : IsBetrothedPair 2024 2295 := by decide
 
-/-- Betrothedness is symmetric. -/
+/-- If the smaller members of betrothed pairs are unbounded, there are infinitely many of them. -/

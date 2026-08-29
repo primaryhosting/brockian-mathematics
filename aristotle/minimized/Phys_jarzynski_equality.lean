@@ -4,67 +4,9 @@ import Mathlib
 # Jarzynski Equality
 Category: Frontier Phys
 Target: Phys.jarzynski_equality
-Statement: ⟨e^{−βW}⟩ = e^{−βΔF} for nonequilibrium work (Jarzynski).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Phys
-
-open Finset
-
-variable {X : Type*} [Fintype X] [Nonempty X]
-
-/-- The canonical partition function `Z(β, H) = ∑ₓ e^{−β H(x)}` of a Hamiltonian `H`
-on a finite phase space `X` at inverse temperature `β`. -/
-noncomputable def partitionFunction (beta : ℝ) (H : X → ℝ) : ℝ :=
-  ∑ x : X, Real.exp (-beta * H x)
-
-/-- The Helmholtz free energy `F = −(1/β) log Z`. -/
-noncomputable def freeEnergy (beta : ℝ) (H : X → ℝ) : ℝ :=
-  -(1 / beta) * Real.log (partitionFunction beta H)
-
-/-- The equilibrium (Boltzmann–Gibbs) probability of the state `x`. -/
-noncomputable def gibbs (beta : ℝ) (H : X → ℝ) (x : X) : ℝ :=
-  Real.exp (-beta * H x) / partitionFunction beta H
-
-/-- The work performed along the trajectory starting at `x`, where the (Liouville,
-i.e. measure preserving) protocol carries `x` to `T x` while the Hamiltonian is
-switched from `H₀` to `H₁`. -/
-def work (H0 H1 : X → ℝ) (T : Equiv.Perm X) (x : X) : ℝ := H1 (T x) - H0 x
-
-lemma partitionFunction_pos (beta : ℝ) (H : X → ℝ) : 0 < partitionFunction beta H := by
-  refine Finset.sum_pos (fun x _ => Real.exp_pos _) ?_
-  exact Finset.univ_nonempty
-
-/-- **Jarzynski equality.**  For a finite phase space, a system started in the Boltzmann
-distribution of `H₀` and driven by an arbitrary phase-space bijection `T` (Liouville's
-theorem) while the Hamiltonian is switched from `H₀` to `H₁`, the exponential average of
-the work equals `e^{−β ΔF}`, where `ΔF = F(H₁) − F(H₀)` is the equilibrium free energy
-difference. -/
-theorem jarzynski_equality (beta : ℝ) (hbeta : beta ≠ 0) (H0 H1 : X → ℝ) (T : Equiv.Perm X) :
-    ∑ x : X, gibbs beta H0 x * Real.exp (-beta * work H0 H1 T x)
-      = Real.exp (-beta * (freeEnergy beta H1 - freeEnergy beta H0)) := by
-  have h0 : (0:ℝ) < partitionFunction beta H0 := partitionFunction_pos beta H0
-  have h1 : (0:ℝ) < partitionFunction beta H1 := partitionFunction_pos beta H1
-  have hlhs : ∑ x : X, gibbs beta H0 x * Real.exp (-beta * work H0 H1 T x)
-      = partitionFunction beta H1 / partitionFunction beta H0 := by
-    rw [partitionFunction, Finset.sum_div]
-    rw [← Equiv.sum_comp T (fun y => Real.exp (-beta * H1 y) / partitionFunction beta H0)]
-    refine Finset.sum_congr rfl (fun x _ => ?_)
-    unfold gibbs work
-    rw [div_mul_eq_mul_div, ← Real.exp_add]
-    ring_nf
-  rw [hlhs, freeEnergy, freeEnergy]
-  have : -beta * (-(1 / beta) * Real.log (partitionFunction beta H1)
-      - -(1 / beta) * Real.log (partitionFunction beta H0))
-      = Real.log (partitionFunction beta H1) - Real.log (partitionFunction beta H0) := by
-    field_simp
-    ring
-  rw [this, Real.exp_sub, Real.exp_log h1, Real.exp_log h0]
-
-end Phys
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -88,4 +30,56 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Phys
+
+/-- **Jarzynski equality** (finite / classical deterministic setting).
+
+Setting: a finite state space `X`, inverse temperature `β > 0`, an initial Hamiltonian `H₀`
+and a final Hamiltonian `H₁`.  The driving protocol is a deterministic, phase-space
+volume preserving (here: bijective, i.e. counting-measure preserving) evolution
+`evol : X ≃ X`, and the work performed along the trajectory starting at `x` is
+`W x = H₁ (evol x) - H₀ x`.
+
+The system starts in the canonical (Gibbs) equilibrium distribution
+`p x = exp (-β * H₀ x) / Z₀`, where `Z₀`, `Z₁` are the partition functions of the
+initial and final Hamiltonians and `Fᵢ = -(log Zᵢ)/β` the corresponding free energies.
+
+Conclusion: the exponential average of the work equals the exponential of the
+free-energy difference,
+`⟨exp (-β W)⟩ = exp (-β ΔF)` with `ΔF = F₁ - F₀`. -/
+theorem jarzynski_equality
+    {X : Type*} [Fintype X] [Nonempty X]
+    (β : ℝ) (hβ : 0 < β)
+    (H₀ H₁ : X → ℝ) (evol : X ≃ X)
+    (W : X → ℝ) (hW : ∀ x, W x = H₁ (evol x) - H₀ x)
+    (Z₀ Z₁ : ℝ)
+    (hZ₀ : Z₀ = ∑ x, Real.exp (-β * H₀ x))
+    (hZ₁ : Z₁ = ∑ x, Real.exp (-β * H₁ x))
+    (F₀ F₁ : ℝ) (hF₀ : F₀ = -(Real.log Z₀) / β) (hF₁ : F₁ = -(Real.log Z₁) / β) :
+    ∑ x, (Real.exp (-β * H₀ x) / Z₀) * Real.exp (-β * W x)
+      = Real.exp (-β * (F₁ - F₀)) := by
+  have hβ' : β ≠ 0 := ne_of_gt hβ
+  have hZ₀pos : 0 < Z₀ := by
+    rw [hZ₀]
+    exact Finset.sum_pos (fun i _ => Real.exp_pos _) Finset.univ_nonempty
+  have hZ₁pos : 0 < Z₁ := by
+    rw [hZ₁]
+    exact Finset.sum_pos (fun i _ => Real.exp_pos _) Finset.univ_nonempty
+  have hlhs : ∑ x, (Real.exp (-β * H₀ x) / Z₀) * Real.exp (-β * W x)
+      = (∑ x, Real.exp (-β * H₁ (evol x))) / Z₀ := by
+    rw [Finset.sum_div]
+    refine Finset.sum_congr rfl fun x _ => ?_
+    rw [hW x, div_mul_eq_mul_div, ← Real.exp_add]
+    ring_nf
+  have hperm : (∑ x, Real.exp (-β * H₁ (evol x))) = Z₁ := by
+    rw [hZ₁]
+    exact Equiv.sum_comp evol (fun y => Real.exp (-β * H₁ y))
+  rw [hlhs, hperm, hF₀, hF₁]
+  have hexp : -β * (-(Real.log Z₁) / β - -(Real.log Z₀) / β)
+      = Real.log Z₁ - Real.log Z₀ := by
+    field_simp; ring
+  rw [hexp, Real.exp_sub, Real.exp_log hZ₁pos, Real.exp_log hZ₀pos]
+
+end Phys
 

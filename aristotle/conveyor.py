@@ -104,7 +104,14 @@ LOVABLE_PROJECT = "spectral"  # dd8308ac — owner-confirmed canonical
 
 DIGEST_KIND = "solver_completion_digest"
 HISTORY_KEEP = 20
-PENDING_LOVABLE_KEEP = 50
+LOVABLE_MAX_ATTEMPTS = 6
+LOVABLE_RETRY_DELAYS_SEC = (
+    15 * 60,
+    60 * 60,
+    6 * 60 * 60,
+    24 * 60 * 60,
+    72 * 60 * 60,
+)
 
 # One CANDIDATE line in a digest body, followed by an indented project uuid:
 #   🧪 CANDIDATE [admin] arsub_cb6e_e_s
@@ -430,28 +437,118 @@ def post_lovable_queue(prompt, url=None, opener=None):
         return False
 
 
-def flush_pending_lovable(state, poster=None):
-    """Try to deliver queued events; keep the ones that still fail."""
+def _lovable_event_fingerprint(prompt):
+    return hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+
+
+def _parse_lovable_time(value):
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        parsed = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=datetime.UTC)
+    return parsed.astimezone(datetime.UTC)
+
+
+def _lovable_retry_at(now, attempts):
+    delay_index = min(max(0, attempts - 1),
+                      len(LOVABLE_RETRY_DELAYS_SEC) - 1)
+    return (now + datetime.timedelta(
+        seconds=LOVABLE_RETRY_DELAYS_SEC[delay_index])).isoformat()
+
+
+def _persist_lovable_state(state, state_path):
+    if state_path:
+        _atomic_json_dump(state, state_path)
+
+
+def flush_pending_lovable(state, poster=None, now=None, state_path=None):
+    """Deliver due Lovable events with bounded retry and durable dead-lettering.
+
+    One connector failure opens a circuit for the rest of this cycle, avoiding
+    the former N-events x 15-second outage amplification. No queue entry is
+    truncated: exhausted events remain inspectable in lovable_dead_letter_events.
+    """
     poster = poster or post_lovable_queue
-    pending = state.get("pending_lovable_events") or []
+    pending = list(state.get("pending_lovable_events") or [])
+    now = now or datetime.datetime.now(datetime.UTC)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=datetime.UTC)
+    else:
+        now = now.astimezone(datetime.UTC)
     still = []
-    for ev in pending:
-        if poster(ev.get("prompt", "")):
-            log(f"delivered queued lovable event from {ev.get('queued_at')}")
-        else:
+    delivered = 0
+    for index, original in enumerate(pending):
+        ev = dict(original)
+        prompt = ev.get("prompt", "")
+        ev.setdefault("project", LOVABLE_PROJECT)
+        ev.setdefault("queued_at", now.isoformat())
+        ev.setdefault("fingerprint", _lovable_event_fingerprint(prompt))
+        ev.setdefault("attempts", 0)
+        retry_at = _parse_lovable_time(ev.get("next_attempt_at"))
+        if retry_at and retry_at > now:
             still.append(ev)
-    state["pending_lovable_events"] = still[-PENDING_LOVABLE_KEEP:]
-    return len(pending) - len(still)
+            continue
+        if poster(prompt):
+            log(f"delivered queued lovable event from {ev.get('queued_at')}")
+            delivered += 1
+        else:
+            attempts = int(ev.get("attempts") or 0) + 1
+            ev.update({
+                "attempts": attempts,
+                "last_attempt_at": now.isoformat(),
+                "last_error": "Lovable queue-submit unavailable",
+            })
+            if attempts >= LOVABLE_MAX_ATTEMPTS:
+                ev.update({
+                    "dead_lettered_at": now.isoformat(),
+                    "dead_letter_reason": "retry_exhausted",
+                })
+                state.setdefault("lovable_dead_letter_events", []).append(ev)
+                log("dead-lettered Lovable event after "
+                    f"{attempts} attempts ({ev.get('queued_at')})")
+            else:
+                ev["next_attempt_at"] = _lovable_retry_at(now, attempts)
+                still.append(ev)
+            # The connector is down. Preserve every unattempted event and stop
+            # multiplying the same outage across the full queue this cycle.
+            still.extend(pending[index + 1:])
+            state["pending_lovable_events"] = still
+            _persist_lovable_state(state, state_path)
+            return delivered
+        state["pending_lovable_events"] = still + pending[index + 1:]
+        _persist_lovable_state(state, state_path)
+    state["pending_lovable_events"] = still
+    _persist_lovable_state(state, state_path)
+    return delivered
 
 
-def queue_or_send_lovable(state, prompt, poster=None):
+def queue_or_send_lovable(state, prompt, poster=None, state_path=None, now=None):
     poster = poster or post_lovable_queue
     if not poster(prompt):
-        state.setdefault("pending_lovable_events", []).append(
-            {"queued_at": _now(), "project": LOVABLE_PROJECT, "prompt": prompt}
-        )
-        state["pending_lovable_events"] = \
-            state["pending_lovable_events"][-PENDING_LOVABLE_KEEP:]
+        now = now or datetime.datetime.now(datetime.UTC)
+        if now.tzinfo is None:
+            now = now.replace(tzinfo=datetime.UTC)
+        fingerprint = _lovable_event_fingerprint(prompt)
+        pending = state.setdefault("pending_lovable_events", [])
+        if not any(ev.get("fingerprint") == fingerprint or
+                   (not ev.get("fingerprint") and
+                    ev.get("prompt") == prompt) for ev in pending):
+            queued_at = now.astimezone(datetime.UTC).isoformat()
+            pending.append({
+                "queued_at": queued_at,
+                "project": LOVABLE_PROJECT,
+                "prompt": prompt,
+                "fingerprint": fingerprint,
+                "attempts": 1,
+                "last_attempt_at": queued_at,
+                "last_error": "Lovable queue-submit unavailable",
+                "next_attempt_at": _lovable_retry_at(now, 1),
+            })
+        _persist_lovable_state(state, state_path)
         return False
     return True
 
@@ -821,7 +918,7 @@ def run_cycle():
              "approval_cards_posted": 0}
 
     # 0. retry lovable events queued while :18793 was down (cheap; every cycle)
-    flushed = flush_pending_lovable(state)
+    flushed = flush_pending_lovable(state, state_path=STATE)
     if flushed:
         cycle["lovable_flushed"] = flushed
         # Persist the drained pending list NOW: the heavy chain below can run
@@ -937,7 +1034,8 @@ def run_cycle():
     did_work = (bool(digests) and chain_ok) or cycle["registry_hop"].get("ran")
     key = notify_key(digests, fp, chain_ok)
     if did_work and not first_run and state.get("last_notified") != key:
-        queue_or_send_lovable(state, build_lovable_prompt(cycle))
+        queue_or_send_lovable(
+            state, build_lovable_prompt(cycle), state_path=STATE)
         state["last_notified"] = key
 
     # 4b. attest-failure Today card (one per distinct failure signature) +

@@ -8,129 +8,69 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+import RequestProject.Main
 
 namespace CS
 
-variable {α : Type*} [LinearOrder α]
+/-- **Mergesort is correct.**
 
-/-- Merge two lists, assumed sorted, into one list. -/
-def merge : List α → List α → List α
-  | [], l => l
-  | l, [] => l
-  | a :: as, b :: bs => if a ≤ b then a :: merge as (b :: bs) else b :: merge (a :: as) bs
-  termination_by l₁ l₂ => l₁.length + l₂.length
+For any boolean comparison `le` that is transitive and total, `List.mergeSort le l`
+is sorted with respect to `le` (expressed by `List.Pairwise`, the sortedness predicate
+used by Mathlib) and is a permutation of `l`.
 
-/-- Merge sort: split the list in half, sort both halves, merge them. -/
-def mergeSort : List α → List α
-  | [] => []
-  | [a] => [a]
-  | a :: b :: t =>
-      let l := a :: b :: t
-      merge (mergeSort (l.take (l.length / 2))) (mergeSort (l.drop (l.length / 2)))
-  termination_by l => l.length
-  decreasing_by
-  · simp only [List.length_take, List.length_cons]
-    omega
-  · simp only [List.length_drop, List.length_cons]
-    omega
+Both halves are supplied by existing library lemmas:
+* `List.pairwise_mergeSort` (sortedness of the output),
+* `List.mergeSort_perm` (the output is a permutation of the input).
 
-@[simp] theorem merge_nil_left (l : List α) : merge [] l = l := by
-  cases l <;> simp [merge]
+Note that this file needs no `import`: `List.mergeSort` and both lemmas live in the
+Lean core library, which is available automatically; the statement and proof are
+unchanged in a Mathlib context (see `RequestProject/MergesortMathlib.lean`, where the
+Mathlib-flavoured corollaries `CS.mergesort_correct'` and `CS.mergesort_le_correct` are
+derived from this theorem). -/
+theorem mergesort_correct {α : Type _} (le : α → α → Bool)
+    (htrans : ∀ a b c, le a b → le b c → le a c)
+    (htotal : ∀ a b, le a b || le b a)
+    (l : List α) :
+    List.Pairwise (fun a b => le a b = true) (l.mergeSort le) ∧
+      (l.mergeSort le).Perm l :=
+  ⟨List.pairwise_mergeSort htrans htotal l, List.mergeSort_perm l le⟩
 
-@[simp] theorem merge_nil_right (l : List α) : merge l [] = l := by
-  cases l <;> simp [merge]
+end CS
 
-theorem merge_cons_cons (a b : α) (as bs : List α) :
-    merge (a :: as) (b :: bs) =
-      if a ≤ b then a :: merge as (b :: bs) else b :: merge (a :: as) bs := by
-  simp [merge]
 
-theorem merge_perm : ∀ l₁ l₂ : List α, (merge l₁ l₂).Perm (l₁ ++ l₂)
-  | [], l => by simp
-  | a :: as, [] => by simp
-  | a :: as, b :: bs => by
-      rw [merge_cons_cons]
-      split
-      · exact ((merge_perm as (b :: bs)).cons a)
-      · exact ((merge_perm (a :: as) bs).cons b).trans List.perm_middle.symm
-  termination_by l₁ l₂ => l₁.length + l₂.length
+/-!
+# Mergesort correctness, Mathlib phrasing
 
-theorem mem_merge {x : α} {l₁ l₂ : List α} : x ∈ merge l₁ l₂ ↔ x ∈ l₁ ∨ x ∈ l₂ := by
-  rw [(merge_perm l₁ l₂).mem_iff, List.mem_append]
+`CS.mergesort_correct` (in `RequestProject/Main.lean`) is stated with `List.Pairwise`,
+the sortedness predicate used by Mathlib. Here we record the corollaries phrased for a
+decidable, total, transitive `Prop`-valued relation, and the special case of `≤` on a
+linear order.
+-/
 
-theorem sorted_merge : ∀ l₁ l₂ : List α, l₁.Pairwise (· ≤ ·) → l₂.Pairwise (· ≤ ·) →
-    (merge l₁ l₂).Pairwise (· ≤ ·)
-  | [], l, _, h => by simpa using h
-  | a :: as, [], h, _ => by simpa using h
-  | a :: as, b :: bs, h₁, h₂ => by
-      rw [List.pairwise_cons] at h₁ h₂
-      rw [merge_cons_cons]
-      split
-      · rename_i hab
-        rw [List.pairwise_cons]
-        refine ⟨?_, sorted_merge as (b :: bs) h₁.2 (List.pairwise_cons.2 h₂)⟩
-        intro x hx
-        rcases mem_merge.1 hx with hx | hx
-        · exact h₁.1 x hx
-        · rcases List.mem_cons.1 hx with rfl | hx
-          · exact hab
-          · exact le_trans hab (h₂.1 x hx)
-      · rename_i hab
-        have hba : b ≤ a := le_of_not_ge hab
-        rw [List.pairwise_cons]
-        refine ⟨?_, sorted_merge (a :: as) bs (List.pairwise_cons.2 h₁) h₂.2⟩
-        intro x hx
-        rcases mem_merge.1 hx with hx | hx
-        · rcases List.mem_cons.1 hx with rfl | hx
-          · exact hba
-          · exact le_trans hba (h₁.1 x hx)
-        · exact h₂.1 x hx
-  termination_by l₁ l₂ => l₁.length + l₂.length
+namespace CS
 
-theorem mergeSort_perm : ∀ l : List α, (mergeSort l).Perm l
-  | [] => by simp [mergeSort]
-  | [a] => by simp [mergeSort]
-  | a :: b :: t => by
-      rw [mergeSort]
-      refine (merge_perm _ _).trans ?_
-      refine ((mergeSort_perm _).append (mergeSort_perm _)).trans ?_
-      rw [List.take_append_drop]
-  termination_by l => l.length
-  decreasing_by
-  · simp only [List.length_take, List.length_cons]; omega
-  · simp only [List.length_drop, List.length_cons]; omega
+/-- Mergesort with a decidable total transitive relation `r` produces a `r`-sorted list
+which is a permutation of the input. -/
+theorem mergesort_correct' {α : Type*} (r : α → α → Prop) [DecidableRel r]
+    [Std.Total r] [IsTrans α r] (l : List α) :
+    (l.mergeSort (fun a b => decide (r a b))).Pairwise r ∧
+      (l.mergeSort (fun a b => decide (r a b))).Perm l := by
+  refine ⟨?_, ?_⟩
+  · have h := (mergesort_correct (fun a b => decide (r a b))
+      (fun a b c hab hbc => by
+        simp only [decide_eq_true_eq] at hab hbc ⊢
+        exact _root_.trans hab hbc)
+      (fun a b => by
+        rcases Std.Total.total (r := r) a b with h | h <;> simp [h])
+      l).1
+    simpa [List.Pairwise] using h
+  · exact List.mergeSort_perm l _
 
-theorem sorted_mergeSort : ∀ l : List α, (mergeSort l).Pairwise (· ≤ ·)
-  | [] => by simp [mergeSort]
-  | [a] => by simp [mergeSort]
-  | a :: b :: t => by
-      rw [mergeSort]
-      exact sorted_merge _ _ (sorted_mergeSort _) (sorted_mergeSort _)
-  termination_by l => l.length
-  decreasing_by
-  · simp only [List.length_take, List.length_cons]; omega
-  · simp only [List.length_drop, List.length_cons]; omega
-
-/-- `mergeSort` returns a sorted permutation of its input. -/
-theorem mergesort_correct (l : List α) :
-    (mergeSort l).Pairwise (· ≤ ·) ∧ (mergeSort l).Perm l :=
-  ⟨sorted_mergeSort l, mergeSort_perm l⟩
+/-- Mergesort on a linear order, using `≤`. -/
+theorem mergesort_le_correct {α : Type*} [LinearOrder α] (l : List α) :
+    (l.mergeSort (fun a b => decide (a ≤ b))).Pairwise (· ≤ ·) ∧
+      (l.mergeSort (fun a b => decide (a ≤ b))).Perm l :=
+  mergesort_correct' (· ≤ ·) l
 
 end CS
 

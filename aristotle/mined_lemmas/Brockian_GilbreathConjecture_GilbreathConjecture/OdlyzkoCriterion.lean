@@ -30,37 +30,42 @@ Target: Brockian.GilbreathConjecture.GilbreathConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 requires `import` to precede any module docstring `/-! ... -/`, so the
+-- required header above is written as an ordinary block comment.)
 
 import Mathlib
 
--- The header block above is a plain comment rather than a module docstring `/-! ... -/`
--- because Lean 4 does not allow any command (including a module docstring) before `import`.
+/-!
+## Overview
+
+Gilbreath's conjecture concerns the *Gilbreath array* built from the primes: the
+zeroth row is the sequence of primes `2, 3, 5, 7, 11, ...` and each subsequent row is
+the sequence of absolute differences of consecutive entries of the previous row.  The
+conjecture asserts that every row after the zeroth one begins with `1`.
+
+The conjecture is open.  This file develops the standard finite-certificate reduction
+(the argument underlying Odlyzko's numerical verification):
+
+* `GoodRow k m` says that row `k` begins with `1` and its next `m` entries all lie in
+  `{0, 2}`.  This is a *finite* condition.
+* `gil_head_eq_one_of_goodRow`: a single certificate `GoodRow k m` proves that each of
+  the `m + 1` rows `k, k+1, …, k+m` begins with `1`.
+* `GilbreathConjecture`: if such certificates exist covering every row
+  (`OdlyzkoCriterion`), then the Gilbreath conjecture holds.
+* `odlyzkoCriterion_iff_gilbreathProperty`: the criterion is in fact equivalent to the
+  conjecture, so this is a genuine reduction and not a strengthening.
+* Finally we verify the certificate `GoodRow 5 24` unconditionally, which yields the
+  unconditional partial result that rows `1` through `29` all begin with `1`.
+-/
 
 namespace Brockian.GilbreathConjecture
 
-/-!
-## The Gilbreath triangle
-
-Row `0` of the triangle is the sequence of primes `2, 3, 5, 7, 11, …`, and each
-subsequent row is obtained by taking absolute values of consecutive differences.
-Gilbreath's conjecture asserts that every row of index `≥ 1` begins with `1`.
-
-The conjecture is open.  What is proved below is:
-
-* `gilbreath_head_odd` – an unconditional parity result: the leading entry of every
-  row of index `≥ 1` is odd (in particular nonzero);
-* `gilbreath_head_eq_one_of_le` – an unconditional verification of the leading `1`
-  for the first `25` rows;
-* `GilbreathConjecture` – the full conjecture, derived from the Odlyzko-style
-  criterion `OdlyzkoCriterion` (see below).
--/
-
-/-- `G k n` is the `n`-th entry (0-indexed) of the `k`-th row of the Gilbreath
-triangle: row `0` is the sequence of primes and each later row consists of the
-absolute differences of consecutive entries of the previous row. -/
+/-- `gil k n` is the `n`-th entry (`0`-indexed) of the `k`-th row of the Gilbreath
+array: row `0` is the sequence of primes, and each later row consists of the absolute
+differences of consecutive entries of the previous row. -/
 
 def OdlyzkoCriterion : Prop :=
-  ∀ N : ℕ, 1 ≤ N → ∃ k : ℕ, 1 ≤ k ∧ k ≤ N ∧ GoodRow k (N - k)
+  ∀ k, 1 ≤ k → ∃ j, 1 ≤ j ∧ j ≤ k ∧ GoodRow j (k - j)
 
-/-- The criterion is not vacuous: each of its instances with `N ≤ 25` is a theorem
-(witnessed, crudely, by the row `N` itself, whose leading entry we verified above). -/
+section Basic
+

@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Sixth Unitary Perfect Exists
-Category: Brockian Conjecture
-Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,34 +31,28 @@ Category: Brockian Conjecture
 Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(The header block above is repeated as a plain comment on the very first line of the
-file; Lean requires `import` commands to precede any module docstring.)
-
-## Contents
-
-A *unitary divisor* of `n` is a divisor `d` with `gcd d (n / d) = 1`, and `n` is
-*unitary perfect* when the sum `σ*(n)` of its unitary divisors equals `2 n`.
-Exactly five unitary perfect numbers are known
-(`6`, `60`, `90`, `87360`, `146361946186458562560000`), and whether a sixth one
-exists is an open problem; consequently the target statement here is a
-*conditional reduction* rather than an unconditional existence proof.
-
-We develop:
-
-* `sigmaStar_mul_of_coprime`: `σ*` is multiplicative on coprime arguments;
-* `sigmaStar_prime_pow`: `σ*(p ^ a) = p ^ a + 1`;
-* verification that each of the five known numbers is unitary perfect;
-* `not_isUnitaryPerfect_of_odd`: there is no odd unitary perfect number;
-* `SixthUnitaryPerfectExists`: if some unitary perfect number exceeds the largest
-  known one, then a unitary perfect number outside the known five exists.
 -/
 
-namespace Brockian.UnitaryPerfect
+/-!
+## Overview
+
+A *unitary divisor* of `n` is a divisor `d` with `gcd d (n / d) = 1`, and `n` is *unitary
+perfect* when the sum `σ*(n)` of its unitary divisors equals `2 * n`.  Exactly five unitary
+perfect numbers are known:
+
+`6`, `60`, `90`, `87360`, `146361946186458562560000`,
+
+and whether a sixth one exists is an open problem.  This file develops the basic theory
+(`σ*` is multiplicative, `σ*(p^a) = 1 + p^a`, the factorization formula), verifies the five
+known examples, proves that every unitary perfect number is even, and reduces the existence
+of a sixth unitary perfect number to an explicit arithmetic criterion on the odd part.
+-/
 
 open Finset
 
+namespace Brockian.UnitaryPerfect
+
 /-- The unitary divisors of `n`: divisors `d` of `n` with `gcd d (n / d) = 1`. -/
 
-theorem isUnitaryPerfect_ninety : IsUnitaryPerfect 90 := ⟨by norm_num, sigmaStar_ninety⟩
+theorem isUnitaryPerfect_ninety : IsUnitaryPerfect 90 := ⟨by norm_num, by rw [usigma_ninety]⟩
 

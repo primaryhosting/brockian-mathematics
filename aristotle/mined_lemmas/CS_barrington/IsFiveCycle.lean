@@ -1,29 +1,55 @@
+/-
+# Barrington
+Category: Frontier Cs
+Target: CS.barrington
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
-# Basic definitions for Barrington's theorem
+# Barrington
+Category: Frontier Cs
+Target: CS.barrington
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-* Boolean formulas over the basis `{¬, ∧, ∨}` (with constants), together with their
-  depth and semantics.  Non-uniform `NC¹` is the class of families of boolean functions
-  computed by formulas of logarithmic depth.
-* Width-5 permutation branching programs: a program is a list of instructions, each of
-  which reads one input bit and outputs one of two permutations of `Fin 5` (or is a
-  constant instruction).  The value of the program is the product of the permutations
-  produced by its instructions, and the program accepts iff this product lies in a
-  designated set of accepting permutations.
+/-!
+## Barrington's theorem
+
+We formalise Barrington's theorem, which identifies `NC¹` (log-depth boolean formulas)
+with width-`5` permutation branching programs:
+
+* **Forward direction.** Every boolean formula of depth `d` is computed by a width-`5`
+  permutation branching program of length at most `4 ^ d` (in the strong sense of
+  `σ`-computation, for an arbitrary `5`-cycle `σ`).
+* **Converse direction.** Every width-`5` permutation branching program of length at
+  most `2 ^ k` is computed by a boolean formula of depth `O(k)` (explicitly `6 * k + 4`).
+
+Together these say: depth-`d` formulas ↔ length-`4^d` width-`5` programs, i.e.
+`NC¹` = width-`5` permutation branching programs.
 -/
 
 namespace CS
 
 open Equiv Equiv.Perm
 
-/-- Permutations of a five element set. -/
-abbrev Perm5 := Equiv.Perm (Fin 5)
+/-! ### Boolean formulas -/
 
-/-- A permutation of `Fin 5` is a five-cycle if it is a cycle whose support is everything. -/
+/-- Boolean formulas in `n` variables, over the complete basis `{¬, ∧}` together with
+constants.  Depth-`O(log n)` formulas are exactly `NC¹`. -/
+inductive Formula (n : ℕ) where
+  | const : Bool → Formula n
+  | var : Fin n → Formula n
+  | not : Formula n → Formula n
+  | and : Formula n → Formula n → Formula n
+  deriving DecidableEq
 
-theorem IsFiveCycle.exists_conj {σ τ : Perm5} (hσ : IsFiveCycle σ) (hτ : IsFiveCycle τ) :
-    ∃ ρ : Perm5, ρ * σ * ρ⁻¹ = τ := by
-  have h : IsConj σ τ := Equiv.Perm.isConj_iff_cycleType_eq.2 (by rw [hσ.cycleType, hτ.cycleType])
-  exact isConj_iff.1 h
+variable {n : ℕ}
+
+/-- The boolean function computed by a formula. -/
+
+def IsFiveCycle (σ : Perm (Fin 5)) : Prop := σ.cycleType = {5}
 

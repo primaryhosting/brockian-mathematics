@@ -5,9 +5,9 @@ Target: Frontier.landau_levels
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment; the same text is repeated below as the module docstring.)
 
--- (Lean requires `import` to precede any module doc-comment, so the header above is
--- reproduced verbatim as a module doc-comment immediately after the import.)
 import Mathlib
 
 /-!
@@ -45,20 +45,19 @@ namespace Frontier
 
 open Polynomial
 
-/-! ## Hermite polynomials over `ℝ` -/
+/-! ### Hermite polynomials: the Hermite differential equation
 
-/-- The (probabilists') Hermite polynomials, with real coefficients. -/
+Mathlib provides `Polynomial.hermite : ℕ → ℤ[X]` (the *probabilists'* Hermite polynomials)
+together with `Polynomial.hermite_succ`, but not the Hermite ODE, which we derive here. -/
 
-lemma hermiteR_ode (n : ℕ) :
-    derivative (derivative (hermiteR n)) - X * derivative (hermiteR n)
-      + C (n : ℝ) * hermiteR n = 0 := by
-  have h1 : derivative (hermiteR (n + 1)) = C ((n : ℝ) + 1) * hermiteR n := derivative_hermiteR n
-  have h2 : hermiteR (n + 1) = X * hermiteR n - derivative (hermiteR n) := hermiteR_succ n
-  rw [h2, derivative_sub, derivative_mul, derivative_X] at h1
-  have hC : C ((n : ℝ) + 1) = C (n : ℝ) + 1 := by push_cast; ring
-  rw [hC] at h1
-  linear_combination -h1
+/-- The Hermite differential equation `He_n'' = X * He_n' - n * He_n`. -/
 
-/-! ## Gaussian-weighted derivative -/
+theorem hermiteR_ode (n : ℕ) :
+    derivative (derivative (hermiteR n)) = X * derivative (hermiteR n) - C (n : ℝ) * hermiteR n := by
+  unfold hermiteR
+  rw [derivative_map, derivative_map, hermite_ode n]
+  simp [Polynomial.map_sub, Polynomial.map_mul]
 
-/-- The polynomial factor obtained by differentiating `p(t) e^{-t²/4}`. -/
+/-! ### Polynomial times Gaussian: derivatives -/
+
+/-- A polynomial in `a * (s - x₀)` multiplied by the Gaussian `exp (-(b * (s - x₀)^2))`. -/

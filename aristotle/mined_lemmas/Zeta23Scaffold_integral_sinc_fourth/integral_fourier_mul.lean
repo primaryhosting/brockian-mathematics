@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Integral Sinc Fourth
 Category: C Integral
@@ -7,31 +8,37 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-The proof follows the classical Fourier-analytic route.  Writing `Λ` for the tent function
-`Λ x = max (1 - |x|) 0`, an elementary computation gives `𝓕 Λ ξ = (sin (π ξ) / (π ξ))²`.
-Fourier inversion then gives `𝓕 ((sin (π ·) / (π ·))²) = Λ`, and the multiplication formula
-`∫ 𝓕 f · g = ∫ f · 𝓕 g` yields
-`∫ (sin (π ξ) / (π ξ))⁴ dξ = ∫ Λ² = 2/3`.
-Rescaling `x = π ξ` produces `∫ (sin x / x)⁴ dx = 2 π / 3`.
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-open MeasureTheory Real Complex intervalIntegral
-open scoped FourierTransform
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Scaffold
 
-/-! ### The tent function and the squared sinc -/
+open MeasureTheory Real FourierTransform intervalIntegral
 
-/-- The tent (triangle) function `x ↦ max (1 - |x|) 0`. -/
+/-! ## The tent function and its Fourier transform -/
 
-lemma integral_fourier_mul (f g : ℝ → ℂ) (hf : Integrable f) (hg : Integrable g) :
-    ∫ ξ : ℝ, 𝓕 f ξ * g ξ = ∫ x : ℝ, f x * 𝓕 g x := by
-  have hflip : (innerₗ ℝ).flip = innerₗ ℝ := by
-    apply LinearMap.ext; intro x; apply LinearMap.ext; intro y
-    exact real_inner_comm x y
-  have h := VectorFourier.integral_fourierIntegral_smul_eq_flip (L := innerₗ ℝ) (μ := volume)
-    (ν := volume) Real.continuous_fourierChar continuous_inner hf hg
+/-- The tent (triangle) function, supported on `[-1, 1]`. -/
+
+lemma integral_fourier_mul {f g : ℝ → ℂ} (hf : Integrable f) (hg : Integrable g) :
+    ∫ ξ : ℝ, (𝓕 f ξ) * (g ξ) = ∫ x : ℝ, f x * 𝓕 g x := by
+  have hflip : (innerₗ ℝ).flip = (innerₗ ℝ) := by ext; simp
+  have h := VectorFourier.integral_fourierIntegral_smul_eq_flip (μ := (volume : Measure ℝ))
+    (ν := (volume : Measure ℝ)) (L := innerₗ ℝ) (e := 𝐞) (f := f) (g := g)
+    Real.continuous_fourierChar (by fun_prop) hf hg
   rw [hflip] at h
   simpa [smul_eq_mul] using h
 
+/-- Fourier inversion, in the form `𝓕 (𝓕 f) x = f (-x)`. -/

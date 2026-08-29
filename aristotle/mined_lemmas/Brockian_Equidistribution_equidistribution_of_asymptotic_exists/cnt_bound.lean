@@ -30,7 +30,6 @@ Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -39,60 +38,49 @@ Category: Brockian (Open Discharge)
 Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+This file constructs an explicit sequence in `[0, 1)` whose empirical distribution is
+asymptotically the uniform one: for every subinterval `[a, b) ⊆ [0, 1)` the proportion of
+the first `N` terms lying in `[a, b)` converges to `b - a`.
+
+The construction is the "triangular block" sequence
+`0/1 ; 0/2, 1/2 ; 0/3, 1/3, 2/3 ; 0/4, …` .
 -/
 
-/-!
-## Overview
-
-The named hypothesis is discharged unconditionally by exhibiting an explicit equidistributed
-sequence: the base-`2` van der Corput sequence `vdc`, defined by `vdc n = ((n % 2) + vdc (n / 2))/2`.
-Writing `bitRev k n` for the reversal of the lowest `k` binary digits of `n`, one has
-`vdc n = (bitRev k n + vdc (n / 2 ^ k)) / 2 ^ k`, so `vdc n` lies in the dyadic interval
-`[bitRev k n / 2 ^ k, (bitRev k n + 1) / 2 ^ k)`. Since `bitRev k` is a bijection of
-`{0, …, 2 ^ k - 1}` depending only on `n % 2 ^ k`, counting the visits to a dyadic interval
-reduces to counting an arithmetic progression, which is handled by the Mathlib lemma
-`Nat.count_modEq_card_eq_ceil`. Sandwiching an arbitrary interval between dyadic ones then gives
-the discrepancy bound `|#{n < N : vdc n < x} - x * N| ≤ N / 2 ^ k + 2 ^ k`, whence equidistribution.
--/
-
-open Filter Finset
-open scoped Topology
+open Filter Topology
 
 namespace Brockian.Equidistribution
 
-/-- A sequence `u : ℕ → ℝ` is equidistributed modulo `1` when, for every subinterval
-`[a, b) ⊆ [0, 1)`, the asymptotic frequency with which the fractional parts `Int.fract (u n)`
-land in `[a, b)` exists and equals the length `b - a` of the interval. -/
+/-- Triangular numbers: `tri k = 0 + 1 + ⋯ + k`. -/
 
-lemma cnt_bound (x : ℝ) (hx0 : 0 ≤ x) (hx1 : x < 1) (k N : ℕ) :
-    |(cnt x N : ℝ) - x * N| ≤ N / 2 ^ k + 2 ^ k := by
-  have hpow : (0 : ℝ) < 2 ^ k := by positivity
-  set t : ℕ := ⌊x * 2 ^ k⌋₊ with htdef
-  have h1 : (t : ℝ) ≤ x * 2 ^ k := Nat.floor_le (by positivity)
-  have h2 : x * 2 ^ k < (t : ℝ) + 1 := Nat.lt_floor_add_one _
-  have ht : t < 2 ^ k := by
-    have : (t : ℝ) < 2 ^ k := lt_of_le_of_lt h1 (by nlinarith)
-    exact_mod_cast this
-  have hle1 : (t : ℝ) / 2 ^ k ≤ x := by rw [div_le_iff₀ hpow]; linarith
-  have hle2 : x ≤ ((t : ℝ) + 1) / 2 ^ k := by rw [le_div_iff₀ hpow]; linarith
-  have hN : (0 : ℝ) ≤ N := Nat.cast_nonneg N
-  have hm1 : (cnt ((t : ℝ) / 2 ^ k) N : ℝ) ≤ (cnt x N : ℝ) := by
-    exact_mod_cast cnt_mono hle1 N
-  have hm2 : (cnt x N : ℝ) ≤ (cnt (((t : ℝ) + 1) / 2 ^ k) N : ℝ) := by
-    have h := cnt_mono hle2 N
-    exact_mod_cast h
-  have b1 := abs_le.mp (cnt_dyadic_bound k t N (le_of_lt ht))
-  have b2 := abs_le.mp (cnt_dyadic_bound k (t + 1) N ht)
-  push_cast at b2
-  have key1 : x * N ≤ ((t : ℝ) + 1) * N / 2 ^ k := by
-    have hmul := mul_le_mul_of_nonneg_right hle2 hN
-    calc x * N ≤ (((t : ℝ) + 1) / 2 ^ k) * N := hmul
-      _ = ((t : ℝ) + 1) * N / 2 ^ k := by ring
-  have key2 : (t : ℝ) * N / 2 ^ k ≤ x * N := by
-    have hmul := mul_le_mul_of_nonneg_right hle1 hN
-    calc (t : ℝ) * N / 2 ^ k = ((t : ℝ) / 2 ^ k) * N := by ring
-      _ ≤ x * N := hmul
-  have hring : ((t : ℝ) + 1) * N / 2 ^ k = (t : ℝ) * N / 2 ^ k + N / 2 ^ k := by ring
-  rw [abs_le]
-  constructor <;> linarith [b1.1, b2.2]
+lemma cnt_bound (ha : 0 ≤ a) (hab : a ≤ b) (hb : b ≤ 1) (N K : ℕ)
+    (h1 : tri K ≤ N) (h2 : N ≤ tri (K + 1)) :
+    |((cnt a b N : ℕ) : ℝ) - (N : ℝ) * (b - a)| ≤ 3 * (K : ℝ) + 3 := by
+  have hlow : cnt a b (tri K) ≤ cnt a b N := cnt_mono a b h1
+  have hhigh : cnt a b N ≤ cnt a b (tri (K + 1)) := cnt_mono a b h2
+  have hstep : cnt a b (tri (K + 1)) = cnt a b (tri K) + blockCnt a b (K + 1) :=
+    cnt_succ_block a b K
+  have hba0 : 0 ≤ b - a := by linarith
+  have hba1 : b - a ≤ 1 := by linarith
+  have hK0 : (0 : ℝ) ≤ (K : ℝ) := Nat.cast_nonneg K
+  have hblock : (blockCnt a b (K + 1) : ℝ) ≤ (K : ℝ) + 2 := by
+    have hbb := blockCnt_bound a b (K + 1) (Nat.succ_pos K) ha hab hb
+    rw [abs_le] at hbb
+    have h := hbb.2
+    push_cast at h
+    nlinarith
+  have htri : (tri K : ℝ) ≤ (N : ℝ) := by exact_mod_cast h1
+  have htri2 : (N : ℝ) ≤ (tri K : ℝ) + ((K : ℝ) + 1) := by
+    have hn : N ≤ tri K + (K + 1) := by rw [tri_succ] at h2; omega
+    exact_mod_cast hn
+  have hIH := cnt_tri_bound a b ha hab hb K
+  rw [abs_le] at hIH ⊢
+  have hlowR : ((cnt a b (tri K) : ℕ) : ℝ) ≤ ((cnt a b N : ℕ) : ℝ) := by exact_mod_cast hlow
+  have hhighR : ((cnt a b N : ℕ) : ℝ)
+      ≤ ((cnt a b (tri K) : ℕ) : ℝ) + (blockCnt a b (K + 1) : ℝ) := by
+    have hle : cnt a b N ≤ cnt a b (tri K) + blockCnt a b (K + 1) := by omega
+    exact_mod_cast hle
+  constructor <;> nlinarith [hIH.1, hIH.2]
+
+end Counting
 

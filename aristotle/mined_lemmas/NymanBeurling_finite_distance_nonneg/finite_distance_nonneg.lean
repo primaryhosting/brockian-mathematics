@@ -1,3 +1,11 @@
+/-
+# Finite Distance Nonneg
+Category: Frontier Wave 2 (deeper machinery)
+Target: NymanBeurling.finite_distance_nonneg
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -23,23 +31,23 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Finite Distance Nonneg
-Category: Frontier Wave 2 (deeper machinery)
-Target: NymanBeurling.finite_distance_nonneg
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace NymanBeurling
 
-/-- Scalar core of the Nyman–Beurling finite-shape estimate: if `p ^ 2 ≤ u ^ 2`
-then the residual `u ^ 2 - p ^ 2` is nonnegative.  (Closed by `sub_nonneg`.)
-The hypothesis `0 ≤ u`, requested in the statement, turns out to be unnecessary. -/
+/-- **Nyman–Beurling finite shape, scalar core.**
 
-theorem finite_distance_nonneg (u p : ℝ) (hp : p ^ 2 ≤ u ^ 2) (_hu : 0 ≤ u) :
-    0 ≤ u ^ 2 - p ^ 2 :=
-  sub_nonneg.mpr hp
+In a real inner product space, the squared distance from a unit vector `x` to a
+finite-dimensional subspace equals `1 - ‖p‖ ^ 2`, where `p` is the orthogonal
+projection of `x`; the Pythagorean identity `‖p‖ ^ 2 ≤ ‖x‖ ^ 2` then makes the
+residual distance nonnegative.  This is the self-contained scalar core of that
+statement: for reals `u`, `p` with `p ^ 2 ≤ u ^ 2` (and `0 ≤ u`), we have
+`0 ≤ u ^ 2 - p ^ 2`.
+
+The hypothesis `0 ≤ u` was requested in the statement; it turns out to be
+unnecessary for the conclusion, but it is kept for faithfulness. -/
+
+theorem finite_distance_nonneg (u p : ℝ) (hp : p ^ 2 ≤ u ^ 2) (hu : 0 ≤ u) :
+    0 ≤ u ^ 2 - p ^ 2 := by
+  rcases eq_or_lt_of_le hu with _ | _ <;> exact sub_nonneg.mpr hp
 
 end NymanBeurling
 

@@ -23,31 +23,41 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Mersenne Prime Infinitude
 Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.MersennePrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`,
--- so the header above is written as a plain block comment.)
-
-import Archive.Wiedijk100Theorems.PerfectNumbers
 
 /-!
-# Mersenne Prime Infinitude
+## Overview
 
-The infinitude of Mersenne primes is a well-known open problem, so what is proved here is a
-Lean-checked *reduction*: the set of Mersenne primes is infinite if and only if the set of even
-perfect numbers is infinite.  The reduction is powered by the Euclid–Euler theorem, available in
-Mathlib's archive as `Theorems100.Nat.even_and_perfect_iff`.
+Whether there are infinitely many Mersenne primes is a well-known open problem, so no
+unconditional proof is attempted here.  What is proved is an *unconditional equivalence*:
+
+  there are infinitely many Mersenne primes  ↔  there are infinitely many even perfect numbers.
+
+The equivalence rests on the Euclid–Euler theorem, which is developed from scratch below
+(`Brockian.MersennePerfect.even_and_perfect_iff`), together with an explicit size estimate
+translating "unboundedly large even perfect numbers" into "unboundedly large Mersenne
+exponents".
+
+The main statement `Brockian.MersennePerfect.MersennePrimeInfinitude` is this equivalence.
+Two conditional corollaries are also recorded.
 -/
 
 namespace Brockian.MersennePerfect
 
-/-- The set of Mersenne primes, i.e. primes of the form `2 ^ k - 1`. -/
+open ArithmeticFunction Finset
 
-def mersennePrimes : Set ℕ := {p | p.Prime ∧ ∃ k, p = mersenne k}
+open scoped sigma
+
+/-- The set of exponents `p` for which `mersenne p = 2 ^ p - 1` is prime. -/
+
+def MersennePrimes : Set ℕ := {q : ℕ | ∃ p : ℕ, q = mersenne p ∧ (mersenne p).Prime}
 
 /-- The set of even perfect numbers. -/

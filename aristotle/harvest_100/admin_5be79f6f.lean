@@ -1,0 +1,46 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+/-!
+# Bertrand
+Category: Frontier — Prime Numbers
+Target: Primes.bertrand
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Primes
+
+/-- **Bertrand's postulate**: for every natural `n` with `0 < n` there exists a prime `p`
+with `n < p` and `p ≤ 2 * n`.
+
+This is Mathlib's `Nat.exists_prime_lt_and_le_two_mul` (whose proof is `Nat.bertrand`). -/
+theorem bertrand (n : ℕ) (hn : 0 < n) : ∃ p : ℕ, p.Prime ∧ n < p ∧ p ≤ 2 * n :=
+  let ⟨p, hp, hlt, hle⟩ := Nat.exists_prime_lt_and_le_two_mul n hn.ne'
+  ⟨p, hp, hlt, hle⟩
+
+end Primes
+

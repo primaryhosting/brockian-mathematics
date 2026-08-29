@@ -23,32 +23,33 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+import Mathlib
 /-!
-# The SWAP test
-
-We model the SWAP test circuit explicitly.  A pure state of a finite-dimensional
-system with basis indexed by `ι` is a vector `psi : ι → ℂ` with `∑ i, ‖psi i‖ ^ 2 = 1`.
-
-The circuit acts on one ancilla qubit together with two copies of the system,
-i.e. on vectors indexed by `Fin 2 × ι × ι`:
-
-* the input is `|0⟩ ⊗ |psi⟩ ⊗ |phi⟩`;
-* a Hadamard gate is applied to the ancilla;
-* a controlled-SWAP exchanges the two system registers when the ancilla is `1`;
-* a Hadamard gate is applied to the ancilla again;
-* the ancilla is measured, and the test *accepts* when the outcome is `0`.
-
-The main result `QC.swap_test_overlap` states that the acceptance probability is
-`(1 + |⟨psi|phi⟩| ^ 2) / 2`.
+# Swap Test Overlap
+Category: Quantum Computing
+Target: QC.swap_test_overlap
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open ComplexConjugate Finset
 
 namespace QC
 
-variable {ι : Type*} [Fintype ι]
+variable {n : ℕ}
 
-/-- The Hermitian inner product `⟨psi|phi⟩ = ∑ i, conj (psi i) * phi i`. -/
+/-- A pure state of an `n`-level quantum register. -/
+abbrev Reg (n : ℕ) := EuclideanSpace ℂ (Fin n)
 
-noncomputable def hadAncilla (v : Fin 2 × ι × ι → ℂ) : Fin 2 × ι × ι → ℂ :=
-  fun p => (v (0, p.2) + (if p.1 = 0 then 1 else -1) * v (1, p.2)) / (Real.sqrt 2 : ℝ)
+/-- A state of the full swap-test system: one ancilla qubit together with two
+`n`-level registers.  We record it as its amplitude function. -/
+abbrev SysState (n : ℕ) := Fin 2 × (Fin n × Fin n) → ℂ
 
-/-- Controlled-SWAP: swaps the two system registers exactly when the ancilla is `1`. -/
+/-- The Hadamard gate acting on the ancilla qubit. -/
+
+noncomputable def hadAncilla (v : SysState n) : SysState n := fun p =>
+  if p.1 = 0 then (v (0, p.2) + v (1, p.2)) / (Real.sqrt 2 : ℂ)
+  else (v (0, p.2) - v (1, p.2)) / (Real.sqrt 2 : ℂ)
+
+/-- The controlled-SWAP (Fredkin) gate: it swaps the two registers exactly when the
+ancilla is in state `|1⟩`. -/

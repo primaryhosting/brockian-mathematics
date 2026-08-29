@@ -9,15 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Pigeonhole
-Category: Frontier Wave 2 (deeper machinery)
-Target: Combinatorics.pigeonhole
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -43,22 +34,14 @@ set_option grind.warning false
 
 namespace Combinatorics
 
-/-- **The pigeonhole principle.** If `f : s → t` maps a finite type `s` into a finite type `t`
-with `Fintype.card t < Fintype.card s`, then `f` is not injective: there are `a b : s` with
-`a ≠ b` and `f a = f b`. -/
-theorem pigeonhole {s t : Type*} [Fintype s] [Fintype t] (f : s → t)
-    (h : Fintype.card t < Fintype.card s) :
-    ∃ a b : s, a ≠ b ∧ f a = f b := by
+/-- **Pigeonhole principle**: if `f : α → β` maps a finite type `α` into a finite type `β`
+with `Fintype.card β < Fintype.card α`, then `f` is not injective: there are `a ≠ b`
+with `f a = f b`. -/
+theorem pigeonhole {α β : Type*} [Fintype α] [Fintype β] (f : α → β)
+    (h : Fintype.card β < Fintype.card α) :
+    ∃ a b : α, a ≠ b ∧ f a = f b := by
   obtain ⟨a, b, hab, hfab⟩ := Fintype.exists_ne_map_eq_of_card_lt f h
   exact ⟨a, b, hab, hfab⟩
-
-/-- Equivalent phrasing: under the same cardinality hypothesis, `f` is not injective. -/
-theorem pigeonhole_not_injective {s t : Type*} [Fintype s] [Fintype t] (f : s → t)
-    (h : Fintype.card t < Fintype.card s) :
-    ¬ Function.Injective f := by
-  intro hinj
-  obtain ⟨a, b, hab, hfab⟩ := pigeonhole f h
-  exact hab (hinj hfab)
 
 end Combinatorics
 

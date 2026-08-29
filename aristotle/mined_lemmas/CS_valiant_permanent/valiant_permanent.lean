@@ -6,50 +6,50 @@ Category: Frontier Cs
 Target: CS.valiant_permanent
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(The header comment is placed directly after the `import` line: Lean 4 requires `import`
-commands to come first in a file.)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+## Scope of this formalization
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 400000
-set_option synthInstance.maxSize 128
+Valiant's theorem states that the 0/1 permanent is `#P`-complete. This file develops:
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+* Boolean circuits with evaluation and size, and a definition of `#P` in its nonuniform
+  circuit-verifier form (`CS.InSharpP`), of parsimonious reductions computed by
+  polynomial-size circuits (`CS.ParsimoniousReduction`), and of `#P`-completeness
+  (`CS.IsSharpPComplete`).
+* The 0/1 permanent as a counting problem (`CS.permProblem`), its identification with
+  `Matrix.permanent` of the encoded 0/1 matrix, and its identification with the problem of
+  counting perfect matchings of a bipartite graph (`CS.matchingProblem`).
+* A proof that the 0/1 permanent problem lies in `#P` (`CS.permProblem_inSharpP`), by an
+  explicit polynomial-size verifier circuit family checking that the witness is a permutation
+  matrix supported on the `1`-entries of the instance.
+* `CS.valiant_permanent`: `#P`-completeness of the 0/1 permanent, given the `#P`-hardness of
+  counting bipartite perfect matchings. That hardness — the combinatorial core of Valiant's
+  original argument, proved there by an intricate gadget construction — is taken as an explicit
+  hypothesis and is *not* formalized here.
+-/
 
 namespace CS
 
-open Matrix
+/-! ## Boolean circuits -/
 
-/-! ## Permanents as counting problems -/
+/-- Boolean circuits (formulas) over `N` input variables. -/
+inductive BoolCircuit (N : ℕ) : Type
+  | const : Bool → BoolCircuit N
+  | var : Fin N → BoolCircuit N
+  | neg : BoolCircuit N → BoolCircuit N
+  | conj : BoolCircuit N → BoolCircuit N → BoolCircuit N
+  | disj : BoolCircuit N → BoolCircuit N → BoolCircuit N
 
-/-- The permanent, written as a sum over permutations of the products `∏ i, M i (σ i)`
-(Mathlib's definition uses `∏ i, M (σ i) i`; the two agree). -/
+namespace BoolCircuit
 
-theorem valiant_permanent :
-    (∀ (V : Type) [Fintype V] [DecidableEq V] (M : Matrix V V ℕ), (∀ i j, M i j ≤ 1) →
-        M.permanent = Nat.card {σ : Equiv.Perm V // ∀ i, M i (σ i) = 1}) ∧
-    (∀ (n : ℕ) (W : Matrix (Fin n) (Fin n) ℕ),
-        ∃ (N : ℕ) (B : Matrix (Fin N) (Fin N) ℕ),
-          N = n + ∑ i, ∑ j, W i j ∧ (∀ i j, B i j ≤ 1) ∧ B.permanent = W.permanent) := by
-  classical
-  refine ⟨fun V _ _ M h => permanent_eq_card_witnesses M h, fun n W => ?_⟩
-  obtain ⟨e⟩ := Fintype.truncEquivFin (Vtx W)
-  refine ⟨Fintype.card (Vtx W), (gadget W).submatrix e.symm e.symm, card_Vtx W, ?_, ?_⟩
-  · intro i j
-    exact gadget_zeroOne W _ _
-  · rw [permanent_submatrix_equiv e.symm (gadget W)]
-    exact permanent_gadget W
+variable {N : ℕ}
 
-/-- Every natural number occurs as the permanent of a 0/1 matrix: the permanent of 0/1 matrices,
-as a counting function, is onto `ℕ`. -/
+/-- Evaluation of a circuit on an input assignment. -/
+
+theorem valiant_permanent (hmatch : SharpPHard matchingProblem) : IsSharpPComplete permProblem :=
+  ⟨permProblem_inSharpP, matchingProblem_eq_permProblem ▸ hmatch⟩
+
+/-- Unconditional companion of `CS.valiant_permanent`: since the 0/1 permanent problem *is* the
+problem of counting bipartite perfect matchings, and since it belongs to `#P`, it is
+`#P`-complete precisely when counting bipartite perfect matchings is `#P`-hard. -/

@@ -1,15 +1,16 @@
 {
-  "count": 16,
+  "count": 17,
   "by_register": {
-    "SCAFFOLD": 5,
     "OPEN": 4,
+    "SCAFFOLD": 4,
     "PARTIAL": 3,
     "CONDITIONAL": 2,
+    "PROVED": 2,
     "COMPUTATION": 1,
     "LITERATURE": 1
   },
   "by_domain": {
-    "math": 5,
+    "math": 6,
     "erdos": 4,
     "cs": 2,
     "distillation": 2,
@@ -34,7 +35,15 @@
         "equational",
         "sair",
         "llm"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "math-gate1-lp-continuous-bounded",
@@ -52,7 +61,43 @@
         "analysis",
         "weyl",
         "gate1"
-      ]
+      ],
+      "verification": {
+        "source": "registry",
+        "axle_verified": false,
+        "axioms_clean": false,
+        "registry_ref_count": 3,
+        "missing_registry_refs": [
+          "Brockian.Weyl.LimitPointContinuous"
+        ],
+        "unverified_registry_refs": []
+      }
+    },
+    {
+      "id": "math-aristotle-harvest-2026-08-03",
+      "domain": "math",
+      "title": "Aristotle return harvest: structural number theory and finite selection",
+      "status": "proved",
+      "register": "PROVED",
+      "difficulty": 3,
+      "priority": 82,
+      "risk_tier": 1,
+      "backend": "lean_axle",
+      "attempts": 1,
+      "tags": [
+        "number-theory",
+        "sieve",
+        "formal-verification",
+        "dual-prover"
+      ],
+      "verification": {
+        "source": "registry",
+        "axle_verified": true,
+        "axioms_clean": true,
+        "registry_ref_count": 5,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "math-goldbach-local-wheels",
@@ -70,7 +115,15 @@
         "sieve",
         "finite",
         "number-theory"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "math-physlean-import",
@@ -91,7 +144,18 @@
         "import",
         "spectral",
         "harvest"
-      ]
+      ],
+      "verification": {
+        "source": "registry",
+        "axle_verified": false,
+        "axioms_clean": false,
+        "registry_ref_count": 2,
+        "missing_registry_refs": [
+          "Brockian.Weyl.KatoResolventConstruction",
+          "Brockian.WeylWeakPrimitiveLocal"
+        ],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "distill-etp-stage2",
@@ -109,7 +173,15 @@
         "equational",
         "lean",
         "sair"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "cs-settle-factory",
@@ -127,24 +199,40 @@
         "certificates",
         "axle",
         "pipeline"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "quantum-free-laplacian-plancherel",
       "domain": "quantum",
-      "title": "Free Laplacian Plancherel / Fourier multiplier scaffold",
-      "status": "scaffolded",
-      "register": "SCAFFOLD",
+      "title": "Fourier-defined free Laplacian essential self-adjointness",
+      "status": "proved",
+      "register": "PROVED",
       "difficulty": 4,
       "priority": 72,
       "risk_tier": 1,
       "backend": "lean_axle",
-      "attempts": 0,
+      "attempts": 1,
       "tags": [
         "quantum",
         "spectral",
         "fourier"
-      ]
+      ],
+      "verification": {
+        "source": "registry",
+        "axle_verified": true,
+        "axioms_clean": true,
+        "registry_ref_count": 2,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "erdos-28",
@@ -162,7 +250,15 @@
         "geometry",
         "combinatorics",
         "finite"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "physics-schrodinger-esa-bridge",
@@ -179,7 +275,15 @@
         "spectral",
         "schrodinger",
         "operator-theory"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "math-torus-honesty",
@@ -197,7 +301,15 @@
         "finite",
         "honesty",
         "number-theory"
-      ]
+      ],
+      "verification": {
+        "source": "registry",
+        "axle_verified": true,
+        "axioms_clean": true,
+        "registry_ref_count": 2,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "cs-sieve-count-parity",
@@ -214,7 +326,15 @@
         "sieve",
         "implementation",
         "testing"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "sair-program-tracker",
@@ -230,7 +350,15 @@
       "tags": [
         "sair",
         "meta"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "erdos-52",
@@ -246,7 +374,15 @@
       "tags": [
         "erdos",
         "additive-combinatorics"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "erdos-1",
@@ -262,7 +398,15 @@
       "tags": [
         "erdos",
         "number-theory"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "math-rh-schema",
@@ -279,7 +423,15 @@
         "rh",
         "number-theory",
         "spectral"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     },
     {
       "id": "erdos-90",
@@ -296,7 +448,15 @@
         "erdos",
         "geometry",
         "combinatorics"
-      ]
+      ],
+      "verification": {
+        "source": null,
+        "axle_verified": null,
+        "axioms_clean": false,
+        "registry_ref_count": 0,
+        "missing_registry_refs": [],
+        "unverified_registry_refs": []
+      }
     }
   ]
 }

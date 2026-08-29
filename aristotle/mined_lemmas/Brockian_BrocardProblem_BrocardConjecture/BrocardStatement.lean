@@ -30,20 +30,20 @@ Target: Brockian.BrocardProblem.BrocardConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 requires `import` to be the first command in a file, so the header above is a
+-- plain block comment rather than a module docstring.)
 
 import Mathlib
+
+set_option maxRecDepth 40000
 
 namespace Brockian.BrocardProblem
 
 open Nat
 
-set_option maxRecDepth 100000
-
-/-- The statement of Brocard's conjecture: the only natural numbers `n` for which
-`n! + 1` is a perfect square are `n = 4`, `n = 5` and `n = 7`
-(with `4! + 1 = 5²`, `5! + 1 = 11²`, `7! + 1 = 71²`). -/
+/-- `IsBrocardSolution n m` says that `(n, m)` solves Brocard's equation `n! + 1 = m²`. -/
 
 def BrocardStatement : Prop :=
-  ∀ n m : ℕ, n ! + 1 = m ^ 2 → n = 4 ∨ n = 5 ∨ n = 7
+  ∀ n m : ℕ, IsBrocardSolution n m → n = 4 ∨ n = 5 ∨ n = 7
 
-/-- If `N` lies strictly between two consecutive squares, it is not a square. -/
+/-- The three known solutions of Brocard's equation. -/

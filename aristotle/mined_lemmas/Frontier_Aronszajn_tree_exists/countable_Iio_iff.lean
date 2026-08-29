@@ -1,6 +1,4 @@
 import Mathlib
--- (Lean 4 requires `import` commands to precede any module docstring, so the required
--- header comment is reproduced verbatim immediately below.)
 
 /-!
 # Aronszajn Tree Exists
@@ -8,22 +6,22 @@ Category: Frontier — Set Theory
 Target: Frontier.Aronszajn_tree_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
--/
 
-open Ordinal Set Cardinal
-open scoped Ordinal
+This file contains auxiliary material used in the construction of an Aronszajn tree:
+basic facts about countable ordinals, a dependent-choice helper, and the key
+"extension" lemma for almost-disjoint modifications of injections into `ℕ`.
+-/
 
 namespace Aronszajn
 
-/-! ## Countable ordinals -/
+open Set Cardinal Ordinal
+open scoped Ordinal
 
-/-- An ordinal is countable (i.e. its set of predecessors is countable) iff it is `< ω₁`. -/
+/-! ### Countability of initial segments -/
 
-lemma countable_Iio_iff (o : Ordinal.{0}) : (Set.Iio o).Countable ↔ o < ω₁ := by
+/-- An initial segment of the ordinals is countable iff it lies below `ω₁`. -/
+
+theorem countable_Iio_iff (a : Ordinal.{0}) : (Set.Iio a).Countable ↔ a < ω₁ := by
   rw [Cardinal.countable_iff_lt_aleph_one, Ordinal.mk_Iio_ordinal, Cardinal.lift_lt_aleph_one,
-    ← Cardinal.ord_aleph, Cardinal.lt_ord]
+    ← Cardinal.ord_aleph 1, Cardinal.lt_ord]
 
-/-! ## A coherent sequence of finite-to-one functions -/
-
-/-- For `α < ω₁`, a sequence of ordinals `< α` which is cofinal in `α` in the weak sense that
-every `ξ < α` satisfies `ξ ≤ cs α n` for some `n`.  Junk value otherwise. -/

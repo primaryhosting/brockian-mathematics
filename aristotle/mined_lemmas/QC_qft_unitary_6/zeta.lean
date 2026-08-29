@@ -1,23 +1,22 @@
+/-
+# Qft Unitary 6
+Category: Quantum Computing
+Target: QC.qft_unitary_6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
-/-!
-# Unitarity of the 6-qubit Quantum Fourier Transform
-
-The quantum Fourier transform on `n = 6` qubits acts on the `2^6 = 64` dimensional
-state space.  Its matrix has entries
-
-`F j k = (1 / √64) * exp (2πi * j * k / 64) = (1/8) * exp (2πi * j * k / 64)`.
-
-We prove that this matrix is unitary, i.e. it belongs to `Matrix.unitaryGroup (Fin 64) ℂ`.
--/
+open scoped BigOperators
+open scoped Real
 
 namespace QC
 
-open Complex Finset
+open Complex Matrix Finset
 
-/-- The `6`-qubit quantum Fourier transform matrix, acting on the `2 ^ 6 = 64`
-dimensional space of computational basis states.  The normalisation factor is
-`1 / √64 = 1 / 8`. -/
+/-- The primitive `n`-th root of unity `exp (2πi/n)`. -/
 
-noncomputable def zeta (d : ℂ) : ℂ := Complex.exp (2 * Real.pi * Complex.I * d / 64)
+noncomputable def zeta (n : ℕ) : ℂ := Complex.exp (2 * Real.pi * Complex.I / n)
 
+/-- The `n × n` quantum Fourier transform matrix,
+`Q j k = (1/√n) · exp (2πi·j·k/n)`. -/

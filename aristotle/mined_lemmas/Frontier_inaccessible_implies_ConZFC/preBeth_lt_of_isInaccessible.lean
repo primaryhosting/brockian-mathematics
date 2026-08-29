@@ -1,41 +1,42 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
-
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem preBeth_lt_of_isInaccessible (hκ : κ.IsInaccessible) :
-    ∀ o : Ordinal.{u}, o < κ.ord → preBeth o < κ := by
+theorem preBeth_lt_of_isInaccessible {κ : Cardinal.{u}} (hκ : κ.IsInaccessible) :
+    ∀ o : Ordinal.{u}, o < κ.ord → Cardinal.preBeth o < κ := by
   intro o
   induction o using Ordinal.induction with
   | _ o IH =>
     intro ho
-    rw [Cardinal.preBeth]
-    have he : (⨆ a : Iio o, (2 : Cardinal.{u}) ^ preBeth a)
-        = ⨆ i : o.ToType, (2 : Cardinal.{u}) ^ preBeth ((Ordinal.ToType.mk (o := o)).symm i) :=
-      (Equiv.iSup_comp (g := fun a : Iio o => (2 : Cardinal.{u}) ^ preBeth a)
-        (Ordinal.ToType.mk (o := o)).symm.toEquiv).symm
-    rw [he]
-    refine Ordinal.iSup_lt ?_ fun i => ?_
-    · rw [mk_toType, hκ.isRegular.cof_eq]
-      exact Cardinal.lt_ord.mp ho
-    · exact hκ.isStrongLimit.two_power_lt (IH _ ((Ordinal.ToType.mk (o := o)).symm i).2
-        (((Ordinal.ToType.mk (o := o)).symm i).2.trans ho))
+    rw [Cardinal.preBeth, iSup_reindex (Ordinal.ToType.mk (o := o)).symm.toEquiv]
+    refine Cardinal.iSup_lt_of_isRegular hκ.isRegular ?_ ?_
+    · rw [mk_toType]
+      exact Cardinal.lt_ord.1 ho
+    · intro i
+      exact hκ.isStrongLimit.two_power_lt
+        (IH _ ((Ordinal.ToType.mk (o := o)).symm i).2
+          (((Ordinal.ToType.mk (o := o)).symm i).2.trans ho))
 
-/-- Every set in `V_κ` has cardinality less than `κ`, for `κ` inaccessible. -/
+/-- Every set of rank below an inaccessible `κ` has cardinality below `κ`. -/

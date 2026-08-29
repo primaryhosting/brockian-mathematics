@@ -1,0 +1,46 @@
+/-
+# Ham Sandwich
+Category: Frontier Physics
+Target: Frontier.ham_sandwich
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+open MeasureTheory Set Filter Topology
+
+/-! ## A median for a finite measure on the real line -/
+
+/-- Every finite Borel measure on `ℝ` admits a median: a point `c` such that both open
+half-lines determined by `c` carry at most half of the total mass. -/
+
+def posHalf {n : ℕ} (a : Fin n → ℝ) (c : ℝ) : Set (Fin n → ℝ) :=
+  {x | c < ∑ i, a i * x i}
+
+/-- The open half-space `{x | ⟪a, x⟫ < c}` of `ℝ^n`. -/

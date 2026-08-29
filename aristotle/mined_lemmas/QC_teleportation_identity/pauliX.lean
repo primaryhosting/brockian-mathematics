@@ -1,4 +1,22 @@
+/-
+# Teleportation Identity
+Category: Quantum Computing
+Target: QC.teleportation_identity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean 4 requires `import` to be the first command of a file, so the header above is a
+-- plain block comment; the identical text is repeated below as the module docstring.)
+
 import Mathlib
+
+/-!
+# Teleportation Identity
+Category: Quantum Computing
+Target: QC.teleportation_identity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,22 +32,28 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace QC
 
-/-- A qubit state: a vector of amplitudes indexed by the computational basis `{0,1}`. -/
-abbrev Qubit := Fin 2 → ℂ
+/-! ## Basic notions
 
-/-- The Pauli `X` (bit flip) gate. -/
+A qubit state is an amplitude vector indexed by `Fin 2`; a three-qubit register state is
+an amplitude array indexed by `Fin 2 × Fin 2 × Fin 2` (written in curried form).
+Addition on `Fin 2` is exactly the XOR of classical bits.
 
-def pauliX (v : Qubit) : Qubit := fun c => v (c + 1)
+Mathlib has no development of the quantum teleportation protocol (there is no lemma that
+`exact?`/`rw?` can apply here), so the protocol is set up from scratch below; the proof
+itself only uses `Real.mul_self_sqrt` from Mathlib together with ring normalisation. -/
 
-/-- The Pauli `Z` (phase flip) gate. -/
+/-- Amplitude vector of a single qubit. -/
+abbrev Qubit : Type := Fin 2 → ℂ
+
+/-- Amplitude array of a three-qubit register. -/
+abbrev State3 : Type := Fin 2 → Fin 2 → Fin 2 → ℂ
+
+/-- The normalisation constant `1/√2`. -/
+
+def pauliX (q : Qubit) : Qubit := fun c => q (c + 1)
+
+/-- Pauli `Z` (phase flip): `Z|c⟩ = (-1)^c |c⟩`. -/

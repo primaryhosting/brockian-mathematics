@@ -5,32 +5,42 @@ Target: Brockian.SingularSeriesConvergenceRate
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the header
--- above is written as an ordinary block comment and repeated as a module docstring below.)
 
 import Mathlib
 
-/-!
-# Singular Series Convergence Rate
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesConvergenceRate
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Brockian
 
-open Finset
+/-- The local (Euler) factor of the twin-prime singular series at `p`:
+`1 - 1/(p-1)^2` at odd primes, and `1` at all other natural numbers. -/
 
-/-- The `p`-th term of the (twin-prime) singular series: `1/(p-1)^2` for odd primes `p`,
-and `0` otherwise. -/
-
-lemma singularTerm_le_quarter (n : ℕ) : singularTerm n ≤ 1 / 4 := by
+lemma singularTerm_le_quarter {p : ℕ} (hp : 3 ≤ p) : singularTerm p ≤ 1 / 4 := by
+  have h : (2 : ℝ) ≤ (p : ℝ) - 1 := by
+    have : (3 : ℝ) ≤ (p : ℝ) := by exact_mod_cast hp
+    linarith
   unfold singularTerm
-  split
-  · rename_i h
-    have h3 : (3 : ℝ) ≤ (n : ℝ) := by exact_mod_cast h.2
-    rw [div_le_div_iff₀ (by nlinarith) (by norm_num)]
-    nlinarith
-  · norm_num
+  rw [div_le_div_iff₀ (by nlinarith) (by norm_num)]
+  nlinarith
 

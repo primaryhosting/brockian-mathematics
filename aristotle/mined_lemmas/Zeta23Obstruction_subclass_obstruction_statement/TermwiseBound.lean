@@ -1,3 +1,11 @@
+/-
+# Subclass Obstruction Statement
+Category: Brockian Conjecture
+Target: Zeta23Obstruction.subclass_obstruction_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -7,7 +15,6 @@ Target: Zeta23Obstruction.subclass_obstruction_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 
 open scoped BigOperators
 open scoped Real
@@ -34,22 +41,29 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- A *deep-pair configuration*: two distinct "deep points" carrying strictly positive
-species weights.  This is the abstract finite-dimensional model of the configuration data
-a fixed-kernel certificate is tested against. -/
-structure DeepPairConfig where
-  /-- The (strictly positive) per-species weights. -/
-  weight : Fin 2 → ℝ
-  /-- The deep points at which the fixed kernel is evaluated. -/
-  deep : Fin 2 → ℝ
-  weight_pos : ∀ i, 0 < weight i
-  deep_distinct : deep 0 ≠ deep 1
+/-- An abstract *fixed-kernel, pointwise-discard, linear* certificate.
 
-/-- The *pointwise discard* step of the certificate chain: each species' contribution is
-discarded separately, so the chain's bound requires each term `weight i * R (deep i)` to be
-nonnegative. -/
+`R` is the fixed kernel (the analytic object whose nonnegativity the certificate silently
+assumes when it discards terms pointwise), and `weight` is the per-species linear charge. -/
+structure Certificate (ι : Type*) where
+  /-- The fixed kernel of the certificate. -/
+  R : ℝ → ℝ
+  /-- The per-species linear charge weights. -/
+  weight : ι → ℝ
+  /-- The charging is nonnegative (weights are a charge, not a signed measure). -/
+  weight_nonneg : ∀ i : ι, 0 ≤ weight i
 
-def TermwiseBound (R : ℝ → ℝ) (c : DeepPairConfig) : Prop :=
-  ∀ i : Fin 2, 0 ≤ c.weight i * R (c.deep i)
+/-- Configuration data: each species is placed at a *deep point* of the kernel. -/
+structure Configuration (ι : Type*) where
+  /-- The deep point at which a given species sits. -/
+  deepPoint : ι → ℝ
 
-/-- The linear charge functional attached to a configuration by a fixed kernel `R`. -/
+variable {ι : Type*}
+
+/-- The linear functional the certificate evaluates on configuration data. -/
+
+def TermwiseBound (C : Certificate ι) (cfg : Configuration ι) : Prop :=
+  ∀ i : ι, 0 ≤ C.weight i * C.R (cfg.deepPoint i)
+
+/-- A *deep-pair configuration at `z`*: at least two distinct species are pinned at the same
+deep point `z` (the abstract shadow of a conjugate pair of deep zeros). -/

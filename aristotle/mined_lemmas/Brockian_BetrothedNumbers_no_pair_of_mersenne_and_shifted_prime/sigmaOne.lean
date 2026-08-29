@@ -1,3 +1,10 @@
+/-
+# No Pair Of Mersenne And Shifted Prime
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.no_pair_of_mersenne_and_shifted_prime
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -22,14 +29,21 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian.BetrothedNumbers
-
-open Finset ArithmeticFunction
-open scoped ArithmeticFunction.sigma
 
 /-- The sum-of-divisors function `σ₁`. -/
 
 def sigmaOne (n : ℕ) : ℕ := ∑ d ∈ n.divisors, d
 
+/-- `n` and `m` form a *betrothed* (quasi-amicable) pair: the sum of the divisors of each of
+them, excluding `1` and the number itself, equals the other number.  Equivalently
+`σ₁ n = σ₁ m = n + m + 1`. -/

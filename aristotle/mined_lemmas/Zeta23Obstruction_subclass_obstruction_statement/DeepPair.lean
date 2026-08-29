@@ -40,55 +40,29 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-!
-## Abstract finite-dimensional model
+/-- A **configuration** of deep points: finitely many species, each carrying a real
+"deep point" `pt i` and a strictly positive weight `wt i`. -/
+structure DeepConfig where
+  /-- number of species -/
+  n : ℕ
+  /-- the deep point attached to each species -/
+  pt : Fin n → ℝ
+  /-- the (strictly positive) weight attached to each species -/
+  wt : Fin n → ℝ
+  /-- positivity of the weights -/
+  wt_pos : ∀ i : Fin n, 0 < wt i
 
-We model the "fixed-kernel pointwise-discard linear certificate" chain abstractly.
+/-- The **linear charge** of a configuration relative to a fixed kernel `R`:
+the linear functional `c ↦ ∑ᵢ wᵢ · R(zᵢ)` obtained by per-species linear charging. -/
 
-* A *configuration* is a finite collection of *species*, each carrying a nonnegative
-  *weight* and sitting at a *deep point* of the real line.
-* A *certificate* fixes once and for all a kernel `R : ℝ → ℝ`, together with a
-  *shallow region* `shallow ⊆ ℝ` on which the kernel is known to be nonnegative
-  (`h_pos`).  This is the only positivity input the certificate has.
-* The certificate's chain evaluates the *linear charge functional*
-  `charge R c = ∑ i, weight i * R (deep i)` and then performs a **pointwise discard**:
-  each individual species contribution is thrown away as nonnegative.  This step is
-  legitimate exactly when the *termwise bound* `0 ≤ weight i * R (deep i)` holds.
-* *Validity* of the certificate is its ability to run this discard against every
-  **deep-pair configuration**: two species with strictly positive weights placed at
-  arbitrary (deep) points.
+def deepPair (σ : ℝ → ℝ) (z a b : ℝ) (ha : 0 < a) (hb : 0 < b) : DeepConfig where
+  n := 2
+  pt := ![z, σ z]
+  wt := ![a, b]
+  wt_pos := by
+    intro i
+    fin_cases i <;> simpa using ‹_›
 
-The content of the obstruction is purely about the quantifier structure: the kernel is
-fixed *before* the configuration is chosen, and the discard is pointwise, so a single
-deep point `z` with `R z < 0` — the repaired witness — already destroys validity, no
-matter how large the shallow region on which `h_pos` holds.
--/
-
-/-- Configuration data for `n` species: a nonnegative weight and a deep point for each. -/
-structure Config (n : ℕ) where
-  /-- The weight ("charge multiplicity") carried by each species. -/
-  weight : Fin n → ℝ
-  /-- The deep point at which each species is evaluated. -/
-  deep : Fin n → ℝ
-  /-- Weights are nonnegative. -/
-  weight_nonneg : ∀ i, 0 ≤ weight i
-
-/-- A fixed-kernel certificate: a kernel `R`, fixed in advance, known to be nonnegative
-on some shallow region. -/
-structure Certificate where
-  /-- The fixed kernel. -/
-  R : ℝ → ℝ
-  /-- The region on which nonnegativity of the kernel is known. -/
-  shallow : Set ℝ
-  /-- Nonnegativity of the kernel on the shallow region. -/
-  h_pos : ∀ x ∈ shallow, 0 ≤ R x
-
-/-- The linear charge functional attached to a kernel: the total charge of a configuration. -/
-
-noncomputable def deepPair (a b z w : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) : Config 2 where
-  weight := ![a, b]
-  deep := ![z, w]
-  weight_nonneg i := by fin_cases i <;> simpa using ‹_›
-
-/-- A certificate is *valid* when its pointwise discard is legitimate against every
-deep-pair configuration (two species, strictly positive weights, arbitrary deep points). -/
+/-- **Validity of a fixed-kernel pointwise-discard certificate**: the certificate claims
+that on *every* deep-pair configuration the termwise bound (and hence, by pointwise
+discard, nonnegativity of the linear charge) holds. -/

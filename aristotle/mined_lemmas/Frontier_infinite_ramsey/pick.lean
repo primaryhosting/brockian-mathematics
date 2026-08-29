@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Infinite Ramsey
 Category: Frontier — Set Theory
@@ -8,29 +6,22 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+import Mathlib
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+/-!
+Mathlib (as of this version) contains no infinite Ramsey theorem — searching for `Ramsey`
+turns up only `Mathlib/Combinatorics/Hindman.lean` and `Mathlib/Combinatorics/HalesJewett.lean`,
+where the word occurs in comments.  So we prove it from scratch, using the classical
+ultrafilter argument based on `Filter.hyperfilter`.
+-/
 
 namespace Frontier
 
-open Filter
+open Filter Set
 
-section RamseyConstruction
+noncomputable section
 
-/-- Pick an element of a set of naturals (junk value `0` if the set is empty). -/
+/-- A choice of element of a set of naturals (junk value `0` for the empty set). -/
 
-noncomputable def pick (S : Set ℕ) : ℕ := if h : S.Nonempty then h.choose else 0
+private def pick (B : Set ℕ) : ℕ := if h : B.Nonempty then h.choose else 0
 

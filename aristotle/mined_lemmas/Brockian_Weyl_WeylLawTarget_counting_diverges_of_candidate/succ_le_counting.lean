@@ -1,5 +1,3 @@
-import Brockian.Weyl.WeylLawTarget
-
 import Mathlib
 
 open scoped BigOperators
@@ -26,6 +24,7 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
+
 /-!
 # Counting Diverges Of Candidate
 Category: Brockian (Open Discharge)
@@ -34,41 +33,33 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-
-set_option maxHeartbeats 1000000
+open Filter Topology
 
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- A *candidate spectrum* for a Weyl-law statement: a nondecreasing sequence of real
-eigenvalue candidates `lam 0 ≤ lam 1 ≤ ⋯` which is unbounded above.  This is the
-combinatorial data underlying the eigenvalue counting function of a Weyl law. -/
-structure Candidate where
+/-- A *spectral candidate* is a candidate eigenvalue list for a Weyl-law problem:
+a nondecreasing sequence of real eigenvalues (listed with multiplicity) that
+diverges to `+∞`. -/
+structure SpectralCandidate where
   /-- The candidate eigenvalues, listed with multiplicity in nondecreasing order. -/
   lam : ℕ → ℝ
-  /-- The listing is nondecreasing. -/
+  /-- The eigenvalue list is nondecreasing. -/
   mono : Monotone lam
-  /-- The listing is unbounded: only finitely many candidates lie below any threshold. -/
-  unbounded : Filter.Tendsto lam Filter.atTop Filter.atTop
+  /-- The eigenvalue list diverges to `+∞`. -/
+  diverges : Filter.Tendsto lam Filter.atTop Filter.atTop
 
-namespace Candidate
+variable (C : SpectralCandidate)
 
-variable (C : Candidate)
+/-- The set of indices whose candidate eigenvalue is at most `t`. -/
 
-/-- Below any threshold `t` only finitely many candidate eigenvalues occur. -/
+theorem succ_le_counting (K : ℕ) (t : ℝ) (h : C.lam K ≤ t) :
+    K + 1 ≤ counting C t := by
+  have hsub : (↑(Finset.range (K + 1)) : Set ℕ) ⊆ countingSet C t := by
+    intro n hn
+    simp only [Finset.coe_range, Set.mem_Iio] at hn
+    exact le_trans (C.mono (Nat.lt_succ_iff.mp hn)) h
+  have := Set.ncard_le_ncard hsub (countingSet_finite C t)
+  simpa [Set.ncard_coe_Finset, counting] using this
 
-theorem succ_le_counting {k : ℕ} {t : ℝ} (hk : C.lam k ≤ t) : k + 1 ≤ C.counting t := by
-  have hsub : Set.Iic k ⊆ {n : ℕ | C.lam n ≤ t} := fun n hn =>
-    le_trans (C.mono (Set.mem_Iic.1 hn)) hk
-  have := Set.ncard_le_ncard hsub (C.finite_below t)
-  simpa [counting, Nat.card_Iic] using this
-
-end Candidate
-
-/-- **Divergence of the counting function of a candidate spectrum.**
-For any candidate spectrum, the eigenvalue counting function
-`N(t) = #{n : lam n ≤ t}` tends to infinity as `t → ∞`.  This discharges the
-hypothesis that the Weyl counting function of a candidate is unbounded. -/
+/-- **Discharged hypothesis.** For any spectral candidate, the Weyl counting
+function diverges to `+∞`. -/

@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Pentagon Pentagon Equivariance General
 Category: Brockian Corpus
 Target: Brockian.PentagonPentagonEquivarianceGeneral
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,17 +33,8 @@ set_option grind.warning false
 
 namespace Brockian
 
-open Complex DihedralGroup
+/-- The planar rotation matrix by an angle `t`. -/
 
-/-! ## Vertices of the regular `n`-gon
-
-The vertices of the regular `n`-gon inscribed in the unit circle of `ℂ` are indexed by
-`ZMod n`; the vertex with index `k` is `exp (2 * π * I * k / n)`.  We use Mathlib's additive
-character `ZMod.toCircle : AddChar (ZMod N) Circle`, so that the "rotation" identity
-`vertex (a + b) = vertex a * vertex b` is inherited from `AddChar.map_add_eq_mul`. -/
-
-/-- The `k`-th vertex of the regular `n`-gon inscribed in the unit circle of `ℂ`,
-namely `exp (2 * π * I * k / n)`. -/
-
-@[simp] lemma dihedralRep_r (i : ZMod n) (z : ℂ) : dihedralRep (r i) z = vertex n i * z := rfl
+@[simp] lemma dihedralRep_r (n : ℕ) (i : ZMod n) :
+    dihedralRep n (DihedralGroup.r i) = rot (ang n i) := rfl
 

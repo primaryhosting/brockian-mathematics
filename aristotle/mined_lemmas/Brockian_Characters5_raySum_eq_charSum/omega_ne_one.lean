@@ -10,32 +10,21 @@ import Mathlib
 
 open scoped BigOperators
 open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
-
-namespace Brockian.Characters5
+namespace Brockian
+namespace Characters5
 
 /-- A primitive fifth root of unity. -/
 noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
-/-- The additive character `e` of `ZMod 5` with values in `ℂ`, `e x = ω ^ x.val`. -/
+/-- The additive character of `ZMod 5` sending `x` to `ω ^ x`. -/
 
-lemma omega_ne_one : ω ≠ 1 := by
-  have h := Complex.isPrimitiveRoot_exp 5 (by norm_num)
-  intro hc
-  have h1 : IsPrimitiveRoot (1 : ℂ) 5 := by
-    rw [← hc]; exact (by simpa [ω] using h)
-  have := h1.unique IsPrimitiveRoot.one
-  norm_num at this
+theorem omega_ne_one : ω ≠ 1 := by
+  rw [ω, Ne, Complex.exp_eq_one_iff]
+  rintro ⟨n, hn⟩
+  have h2 : (Real.pi : ℂ) ≠ 0 := by exact_mod_cast Real.pi_ne_zero
+  field_simp at hn
+  have : (1 : ℤ) = 5 * n := by exact_mod_cast hn
+  omega
 
+/-- The character sum of `e` over all of `ZMod 5` vanishes. -/

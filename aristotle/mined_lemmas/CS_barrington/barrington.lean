@@ -19,42 +19,45 @@ Provenance: Aristotle theorem prover (Harmonic)
 /-!
 ## Barrington's theorem
 
-We formalise Barrington's theorem: the class of Boolean function families computed by
-logarithmic-depth fan-in-two Boolean circuits (`NC¹`) coincides with the class of families
-computed by polynomial-length width-`5` permutation branching programs.
+We formalise Barrington's theorem, which identifies `NC¹` (log-depth boolean formulas)
+with width-`5` permutation branching programs:
 
-* `CS.Barrington.Circuit` : fan-in two Boolean circuits over `{¬, ∧, ∨}` and constants.
-* `CS.Barrington.Instr`, `CS.Barrington.run` : width-5 permutation branching programs,
-  i.e. lists of instructions, each of which multiplies the running value in `S₅` by a
-  permutation depending on (at most) one input bit.
-* `CS.Barrington.NC1` and `CS.Barrington.W5BP` : the two classes.
-* `CS.barrington` : the two classes are equal.
+* **Forward direction.** Every boolean formula of depth `d` is computed by a width-`5`
+  permutation branching program of length at most `4 ^ d` (in the strong sense of
+  `σ`-computation, for an arbitrary `5`-cycle `σ`).
+* **Converse direction.** Every width-`5` permutation branching program of length at
+  most `2 ^ k` is computed by a boolean formula of depth `O(k)` (explicitly `6 * k + 4`).
+
+Together these say: depth-`d` formulas ↔ length-`4^d` width-`5` programs, i.e.
+`NC¹` = width-`5` permutation branching programs.
 -/
 
 namespace CS
-namespace Barrington
 
-open Equiv
+open Equiv Equiv.Perm
 
-/-- The symmetric group on five points. -/
-abbrev Perm5 := Equiv.Perm (Fin 5)
+/-! ### Boolean formulas -/
 
-/-! ### Boolean circuits -/
+/-- Boolean formulas in `n` variables, over the complete basis `{¬, ∧}` together with
+constants.  Depth-`O(log n)` formulas are exactly `NC¹`. -/
+inductive Formula (n : ℕ) where
+  | const : Bool → Formula n
+  | var : Fin n → Formula n
+  | not : Formula n → Formula n
+  | and : Formula n → Formula n → Formula n
+  deriving DecidableEq
 
-/-- Fan-in two Boolean circuits (formulas) on `n` inputs. -/
-inductive Circuit (n : ℕ) where
-  | var : Fin n → Circuit n
-  | const : Bool → Circuit n
-  | not : Circuit n → Circuit n
-  | and : Circuit n → Circuit n → Circuit n
-  | or : Circuit n → Circuit n → Circuit n
+variable {n : ℕ}
 
-/-- The Boolean function computed by a circuit. -/
+/-- The boolean function computed by a formula. -/
 
 theorem barrington :
-    {f : (n : ℕ) → (Fin n → Bool) → Bool | Barrington.NC1 f} =
-      {f : (n : ℕ) → (Fin n → Bool) → Bool | Barrington.W5BP f} :=
-  Set.ext fun f => Barrington.nc1_iff_w5bp f
+    (∀ (n : ℕ) (_i₀ : Fin n) (f : Formula n) (σ : Perm (Fin 5)), IsFiveCycle σ →
+        ∃ P : Program n, P.length ≤ 4 ^ f.depth ∧ P.Computes σ f.eval)
+    ∧ (∀ (n k : ℕ) (P : Program n) (σ : Perm (Fin 5)), P.length ≤ 2 ^ k →
+        ∃ ψ : Formula n, ψ.depth ≤ 6 * k + 4 ∧ ∀ x, ((ψ.eval x = true) ↔ P.eval x = σ)) :=
+  ⟨fun _ i₀ f σ hσ => barrington_forward i₀ f σ hσ,
+   fun _ k P σ hP => barrington_converse k P σ hP⟩
 
 end CS
 

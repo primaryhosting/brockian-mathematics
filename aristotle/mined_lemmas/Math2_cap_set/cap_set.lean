@@ -1,3 +1,11 @@
+/-
+# Cap Set
+Category: Frontier Math
+Target: Math2.cap_set
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -11,30 +19,41 @@ Provenance: Aristotle theorem prover (Harmonic)
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Math2
 
-open Filter Finset
+open Finset Filter Asymptotics
 
-/-- The *cap set number* `capSetNumber n` is the largest size of a subset of `𝔽₃ⁿ`
-containing no non-trivial three-term arithmetic progression (a *cap set*).
-
-Here `𝔽₃ⁿ` is modelled as `Fin n → ZMod 3`, and `ThreeAPFree` is Mathlib's predicate saying
-that `a + c = b + b` with `a, b, c` in the set forces `a = b` (hence `a = b = c`). -/
+/-- The number of points of `𝔽₃ⁿ`, where `𝔽₃ⁿ` is modelled as `Fin n → ZMod 3`. -/
 
 theorem cap_set :
-    (fun n : ℕ ↦ (capSetNumber n : ℝ)) =o[atTop] (fun n : ℕ ↦ (3 : ℝ) ^ n) := by
-  rw [Asymptotics.isLittleO_iff]
+    (fun n : ℕ => (capSetNumber n : ℝ)) =o[atTop] fun n : ℕ => (3 : ℝ) ^ n := by
+  rw [isLittleO_iff]
   intro ε hε
-  filter_upwards [eventually_ge_atTop (cornersTheoremBound ε)] with n hn
-  have hpow : cornersTheoremBound ε ≤ 3 ^ n :=
-    hn.trans (Nat.le_of_lt (Nat.lt_pow_self (by norm_num)))
-  have h := capSetNumber_le_of_le hε hpow
-  rw [Real.norm_natCast, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
-  exact h
+  obtain ⟨N, hN⟩ := cap_set_density ε hε
+  rw [eventually_atTop]
+  refine ⟨N, fun n hn => ?_⟩
+  obtain ⟨A, -, hAcard, hA⟩ :=
+    addRothNumber_spec (Finset.univ : Finset (Fin n → ZMod 3))
+  have h := hN n hn A hA
+  rw [hAcard] at h
+  calc ‖(capSetNumber n : ℝ)‖ = (capSetNumber n : ℝ) := by
+        rw [Real.norm_eq_abs, abs_of_nonneg (Nat.cast_nonneg _)]
+    _ ≤ ε * 3 ^ n := h
+    _ = ε * ‖(3 : ℝ) ^ n‖ := by
+        rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)]
 
 end Math2
 

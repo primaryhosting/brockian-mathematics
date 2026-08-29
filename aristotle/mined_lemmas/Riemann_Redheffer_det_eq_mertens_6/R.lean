@@ -1,11 +1,4 @@
 import Mathlib
-/-!
-# Det Eq Mertens 6
-Category: Frontier Wave 2 (deeper machinery)
-Target: Riemann.Redheffer.det_eq_mertens_6
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -21,15 +14,31 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
-namespace Riemann
-namespace Redheffer
+/-!
+# Det Eq Mertens 6
+Category: Frontier Wave 2 (deeper machinery)
+Target: Riemann.Redheffer.det_eq_mertens_6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-- The `6 × 6` Redheffer matrix: `R i j = 1` if `j = 0` or `(i+1) ∣ (j+1)`,
-and `R i j = 0` otherwise. -/
+import Mathlib
+
+namespace Riemann.Redheffer
+
+/-- The 6×6 Redheffer matrix over `ℤ`:
+`R i j = 1` if `j = 0` or `(i+1) ∣ (j+1)`, and `0` otherwise. -/
 
 def R : Matrix (Fin 6) (Fin 6) ℤ :=
-  fun i j => if (j : ℕ) = 0 ∨ ((i : ℕ) + 1) ∣ ((j : ℕ) + 1) then 1 else 0
+  fun i j => if j = 0 ∨ (i.val + 1) ∣ (j.val + 1) then 1 else 0
 
-/-- Explicit description of the `6 × 6` Redheffer matrix. -/
+/-- The determinant of the 6×6 Redheffer matrix equals the Mertens function `M(6) = -1`. -/

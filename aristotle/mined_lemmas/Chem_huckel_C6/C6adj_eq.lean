@@ -23,23 +23,31 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+import Mathlib
+
+/-!
+# Huckel C 6
+Category: Chemistry
+Target: Chem.huckel_C6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace Chem
 
-open Polynomial
+open Polynomial Matrix
 
-/-- The Hückel matrix of benzene (in units where the Coulomb integral `α` is `0` and the
-resonance integral `β` is `1`): the adjacency matrix of the cycle graph `C₆`. -/
+/-- The Hückel (adjacency) matrix of the cycle graph `C₆` (the benzene ring), over `ℂ`. -/
 
-theorem C6adj_eq :
-    C6adj = !![0, 1, 0, 0, 0, 1;
-                1, 0, 1, 0, 0, 0;
-                0, 1, 0, 1, 0, 0;
-                0, 0, 1, 0, 1, 0;
-                0, 0, 0, 1, 0, 1;
-                1, 0, 0, 0, 1, 0] := by
-  unfold C6adj
+lemma C6adj_eq :
+    C6adj = !![0,1,0,0,0,1;
+               1,0,1,0,0,0;
+               0,1,0,1,0,0;
+               0,0,1,0,1,0;
+               0,0,0,1,0,1;
+               1,0,0,0,1,0] := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [SimpleGraph.adjMatrix_apply, Matrix.cons_val] <;> decide
+    simp [C6adj, SimpleGraph.adjMatrix_apply, SimpleGraph.cycleGraph_adj] <;> decide
 
-/-- The characteristic polynomial of the adjacency matrix of `C₆`. -/
+/-- Matrix whose columns are eigenvectors of the `C₆` adjacency matrix. -/

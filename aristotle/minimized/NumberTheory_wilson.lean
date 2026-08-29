@@ -8,16 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace NumberTheory
-
-/-- **Wilson's theorem**: for a prime `p`, `(p - 1)!` is congruent to `-1` modulo `p`. -/
-theorem wilson (p : ℕ) [Fact (Nat.Prime p)] : ((Nat.factorial (p - 1) : ℕ) : ZMod p) = -1 :=
-  ZMod.wilsons_lemma p
-
-end NumberTheory
-
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -40,4 +30,12 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace NumberTheory
+
+/-- **Wilson's theorem**: for a prime `p`, `(p - 1)!` is congruent to `-1` modulo `p`. -/
+theorem wilson (p : ℕ) [Fact (Nat.Prime p)] : (((p - 1)! : ℕ) : ZMod p) = -1 :=
+  ZMod.wilsons_lemma p
+
+end NumberTheory
 

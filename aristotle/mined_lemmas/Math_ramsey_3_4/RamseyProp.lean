@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Ramsey 3 4
 Category: Pure Mathematics
 Target: Math.ramsey_3_4
@@ -6,25 +8,29 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 40000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Math
 
-open Finset
+open SimpleGraph Finset
 
-/-- `RamseyProp n` says that every simple graph on `n` vertices contains either a triangle
-(a 3-clique) or an independent set of size 4 (a 4-clique in the complement). -/
+/-- `RamseyProp n k l` says that every simple graph on `n` vertices contains either a clique
+of size `k` or an independent set (a clique of its complement) of size `l`. -/
 
-def RamseyProp (n : ℕ) : Prop :=
-  ∀ G : SimpleGraph (Fin n), ¬ G.CliqueFree 3 ∨ ¬ Gᶜ.CliqueFree 4
+def RamseyProp (n k l : ℕ) : Prop :=
+  ∀ G : SimpleGraph (Fin n), (∃ s, G.IsNClique k s) ∨ (∃ s, Gᶜ.IsNClique l s)
 
-/-! ### Upper bound : every graph on 9 vertices has a triangle or an independent 4-set -/
+/-! ### The lower bound: a graph on 8 vertices with no triangle and no independent 4-set -/
 
-section Upper
-
-variable {G : SimpleGraph (Fin 9)} [DecidableRel G.Adj]
-  (h3 : G.CliqueFree 3) (h4 : Gᶜ.CliqueFree 4)
-
-omit [DecidableRel G.Adj] in
-include h3 in
-/-- Triangle-freeness in element form. -/
+/-- The circulant relation with connection set `{1, 4}` on `Fin 8`. -/

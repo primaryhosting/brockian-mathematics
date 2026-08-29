@@ -8,10 +8,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Dilworth
+Category: Pure Mathematics
+Target: Math.dilworth
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -26,11 +33,11 @@ set_option grind.warning false
 
 namespace Math
 
-variable {α : Type*} [Fintype α] [PartialOrder α]
+variable {α : Type*} [PartialOrder α]
 
-/-- A colouring of the poset by `{0, …, n-1}` whose colour classes are antichains. -/
+/-- The finset of all chains (as finsets) contained in a given finset `t`. -/
 
-noncomputable def minAntichainCover (α : Type*) [Fintype α] [PartialOrder α] : ℕ :=
-  sInf {n : ℕ | ∃ f : α → ℕ, IsAntichainColoring n f}
+noncomputable def minAntichainCover (α : Type*) [PartialOrder α] [Fintype α] : ℕ :=
+  sInf {n : ℕ | ∃ F : Finset (Finset α), IsAntichainCover F ∧ F.card = n}
 
-/-- The finset of all chains of the poset. -/
+/-- Every element has positive height. -/

@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Odd Superperfect Exists
-Category: Brockian Conjecture
-Target: Brockian.SuperperfectNumbers.OddSuperperfectExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,19 +31,10 @@ Category: Brockian Conjecture
 Target: Brockian.SuperperfectNumbers.OddSuperperfectExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-A natural number `n` is *superperfect* when `σ (σ n) = 2 n`.  Suryanarayana and Kanold
-showed that the even superperfect numbers are exactly the powers `2 ^ k` with
-`2 ^ (k + 1) - 1` prime; whether an *odd* superperfect number exists is an open problem.
-
-This file contains a Lean-checked reduction of that open problem, together with the
-(easy half of the) even classification and two unconditional constraints on a
-hypothetical odd superperfect number.
 -/
 
+open ArithmeticFunction
 open scoped ArithmeticFunction.sigma
-
-open ArithmeticFunction Finset
 
 namespace Brockian.SuperperfectNumbers
 
@@ -60,3 +43,10 @@ sum-of-divisors function. -/
 
 def Superperfect (n : ℕ) : Prop := σ 1 (σ 1 n) = 2 * n
 
+instance decidableSuperperfect (n : ℕ) : Decidable (Superperfect n) :=
+  inferInstanceAs (Decidable (σ 1 (σ 1 n) = 2 * n))
+
+/-! ### Basic divisor-sum estimates -/
+
+/-- If `a` is a divisor of `N` with `1 < a < N`, then `1`, `a` and `N` are three distinct
+divisors of `N`, so `σ N ≥ N + a + 1`. -/

@@ -5,7 +5,6 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -30,9 +29,9 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
+set_option pp.fullNames false
 set_option pp.structureInstances true
-set_option pp.coercions.types true
+set_option pp.coercions.types false
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
@@ -41,23 +40,26 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Basic vector algebra in `ℝ³` -/
+open Real
 
-/-- Euclidean three-space, as a triple of reals. -/
-abbrev R3 := ℝ × ℝ × ℝ
+/-! ## Partial derivatives of functions of two real variables -/
 
-/-- The standard inner product on `ℝ³`. -/
+/-- Partial derivative with respect to the first variable. -/
 
-lemma torus_integrand {R r : ℝ} (hr : 0 < r) (hR : r < R) (u v : ℝ) :
-    (meanCurvature (torusParam R r) u v) ^ 2 * areaElement (torusParam R r) u v =
-      (R + 2 * r * Real.cos u) ^ 2 / (4 * r * (R + r * Real.cos u)) := by
-  have hp := torus_radius_pos hr hR u
-  have hr' : r ≠ 0 := ne_of_gt hr
-  have hp' : R + r * Real.cos u ≠ 0 := ne_of_gt hp
-  rw [torus_meanCurvature hr hR, torus_areaElement hr hR]
-  field_simp
+lemma torus_integrand (hr : 0 < r) (hR : r < R) (u v : ℝ) :
+    (torusOfRevolution R r).meanCurvature u v ^ 2 * (torusOfRevolution R r).areaElement u v
+      = (R + 2 * r * cos u) ^ 2 / (4 * r * (R + r * cos u)) := by
+  have hw : 0 < R + r * cos u := by nlinarith [Real.neg_one_le_cos u, Real.cos_le_one u]
+  rw [torus_meanCurvature hr hR, torus_areaElement hr hR, div_pow, div_mul_eq_mul_div,
+    div_eq_div_iff (by positivity) (by positivity)]
   ring
 
-/-! ### The key integral -/
+end TorusForms
 
-/-- A globally smooth antiderivative of `u ↦ (R + 2r cos u)² / (R + r cos u)`. -/
+/-! ## The Willmore energy of the torus of revolution -/
+
+section TorusIntegral
+
+variable {R r : ℝ}
+
+/-- An explicit primitive of the Willmore integrand of the torus of revolution. -/

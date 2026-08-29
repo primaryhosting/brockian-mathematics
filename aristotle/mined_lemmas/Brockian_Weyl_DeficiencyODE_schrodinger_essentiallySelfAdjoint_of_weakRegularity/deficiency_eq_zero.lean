@@ -1,5 +1,3 @@
-import Brockian.Weyl.DeficiencyODE
-
 import Mathlib
 
 open scoped BigOperators
@@ -28,61 +26,70 @@ set_option grind.warning false
 import Mathlib
 
 /-!
-# Essential self-adjointness of Schrödinger operators via deficiency indices
-
-This file develops, from scratch:
-
-* a minimal framework for (possibly unbounded) operators on a complex Hilbert space,
-  given as a linear map `T : D →ₗ[ℂ] H` out of a submodule `D` of `H`, together with
-  their graphs, adjoint graphs, symmetry and essential self-adjointness;
-* the *basic criterion* of essential self-adjointness: a densely defined symmetric
-  operator whose deficiency spaces `ker (T* ∓ i)` are trivial is essentially
-  self-adjoint;
-* the deficiency ("Weyl limit point") analysis of the second order difference
-  equation attached to a discrete Schrödinger operator, and the resulting
-  essential self-adjointness of the discrete Schrödinger operator
-  `(T u) n = u (n-1) + u (n+1) + V n * u n` on `ℓ²(ℤ, ℂ)`, defined on the
-  (dense) span of the standard basis vectors, for an **arbitrary** real potential
-  `V : ℤ → ℝ`.
-
-The main theorem
-`schrodinger_essentiallySelfAdjoint_of_weakRegularity` is unconditional: no regularity
-(or boundedness) hypothesis on the potential is needed, so the classical weak regularity
-assumption is discharged. Everything is proved from first principles on top of Mathlib;
-in particular the framework for unbounded operators, their adjoints and essential
-self-adjointness is built here.
+# Schrodinger Essentially Self Adjoint Of Weak Regularity
+Category: Brockian (Literature Discharge)
+Target: Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped InnerProductSpace ComplexConjugate
+/-!
+## Overview
+
+We work with unbounded operators on a complex inner product space `H`, presented as linear maps
+`T : D →ₗ[ℂ] H` out of a submodule `D` (the operator domain).
+
+For a densely defined symmetric operator `T`, essential self-adjointness is equivalent to the
+symmetry of the adjoint `T†` (equivalently: `T† = T††`, i.e. the closure `T̄ = T††` is
+self-adjoint).  Since the adjoint of an unbounded operator is only defined on the set of vectors
+`y` for which a representing vector `z` exists, we encode `z = T† y` through the relation
+`IsAdjointPair T y z`, and encode symmetry of `T†` as `AdjointIsSymmetric T`.  This avoids any
+use of choice and is exactly the classical criterion.
+
+The main result is the (bounded) Kato–Rellich theorem in the concrete Schrödinger setting: on
+`L²(ℝ)`, if the kinetic part `T` (e.g. `-d²/dx²` on a core such as `Cc^∞` or the Schwartz space)
+is essentially self-adjoint, then adding a potential `V` of *weak regularity* — merely a.e. measurable
+and essentially bounded, with no continuity or differentiability assumed — preserves essential
+self-adjointness. In particular the deficiency spaces of the Schrödinger operator `-Δ + V` are
+trivial, i.e. its deficiency indices vanish (Weyl's deficiency-index criterion).
+-/
+
+open MeasureTheory
+
+noncomputable section
 
 namespace Brockian.Weyl.DeficiencyODE
-
-/-! ## An abstract framework for unbounded operators -/
 
 section Abstract
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-/-- The graph of an operator `T` defined on the submodule `D` of `H`. -/
+/-- `IsAdjointPair T y z` says that `z` represents the adjoint `T† y`, i.e.
+`⟪T x, y⟫ = ⟪x, z⟫` for all `x` in the domain of `T`. -/
 
-lemma deficiency_eq_zero (V : ℤ → ℝ) (b : HilbertBasis ℤ ℂ H) {z : ℂ} (hz : z.im ≠ 0) {v : H}
-    (hv : (v, z • v) ∈ adjGraph (finiteSpan b) (schrodingerOp V b)) : v = 0 := by
-  have hcof := tendsto_inner_basis_cofinite b v
-  have hTop : Tendsto (fun n : ℤ => ⟪b n, v⟫_ℂ) atTop (𝓝 0) := by
-    refine hcof.mono_left ?_
-    rw [Int.cofinite_eq]
-    exact le_sup_right
-  have hBot : Tendsto (fun n : ℤ => ⟪b n, v⟫_ℂ) atBot (𝓝 0) := by
-    refine hcof.mono_left ?_
-    rw [Int.cofinite_eq]
-    exact le_sup_left
-  have hzero := eq_zero_of_l2_solution (V := V) hz hTop hBot
-    (deficiency_difference_equation V b hv)
-  have hrepr : b.repr v = 0 := by
-    ext n
-    simp [HilbertBasis.repr_apply_apply, hzero n]
-  have := congrArg b.repr.symm hrepr
-  simpa using this
+theorem deficiency_eq_zero {D : Submodule ℂ H} {T : D →ₗ[ℂ] H}
+    (hT : EssentiallySelfAdjoint T) {c : ℂ} (hc : c.im ≠ 0) {v : H}
+    (hv : ∀ x : D, inner ℂ (T x - c • (x : H)) v = 0) : v = 0 := by
+  have hpair : IsAdjointPair T v ((starRingEnd ℂ) c • v) := by
+    intro x
+    have hx := hv x
+    rw [inner_sub_left, inner_smul_left, sub_eq_zero] at hx
+    rw [hx, inner_smul_right]
+  have hsym := hT.adjointSymmetric v ((starRingEnd ℂ) c • v) v ((starRingEnd ℂ) c • v)
+    hpair hpair
+  rw [inner_smul_left, inner_smul_right, RingHomCompTriple.comp_apply, RingHom.id_apply] at hsym
+  have hcc : c - (starRingEnd ℂ) c ≠ 0 := by
+    intro h
+    apply hc
+    have : (c - (starRingEnd ℂ) c).im = 0 := by rw [h]; simp
+    simp [Complex.sub_im, Complex.conj_im] at this
+    linarith
+  have hzero : (inner ℂ v v : ℂ) = 0 := by
+    have : (c - (starRingEnd ℂ) c) * (inner ℂ v v : ℂ) = 0 := by linear_combination hsym
+    rcases mul_eq_zero.mp this with h | h
+    · exact absurd h hcc
+    · exact h
+  simpa using inner_self_eq_zero.mp hzero
 
-/-- **Essential self-adjointness of the discrete Schrödinger operator**, for an arbitrary
-real potential. -/
+/-- Weyl's deficiency criterion in the form we get here: for an essentially self-adjoint operator
+`T` and non-real `c`, the range of `T - c` is dense. -/

@@ -41,26 +41,25 @@ set_option grind.warning false
 
 namespace CS
 
-/-- An *input* to a comparison sort of three elements is described by the permutation
-`σ : Equiv.Perm (Fin 3)` sending each position `i` to the rank of the element stored there. -/
-abbrev Input : Type := Equiv.Perm (Fin 3)
+/-- A comparison-based sorting algorithm on `n` elements, modelled as a binary decision
+tree.  A `node i j l r` compares the input values at positions `i` and `j` and branches
+accordingly; a `leaf σ` outputs the permutation `σ`. -/
+inductive DecTree (n : ℕ) : Type
+  | leaf : Equiv.Perm (Fin n) → DecTree n
+  | node : Fin n → Fin n → DecTree n → DecTree n → DecTree n
 
-/-- The outcome of comparing the elements stored at positions `i` and `j`
-of the input described by `σ`: `true` means "the element at `i` is at most the one at `j`". -/
+namespace DecTree
 
-def sorter3 : DTree :=
+variable {n : ℕ}
+
+/-- The worst-case number of comparisons performed by the algorithm, i.e. the height of the
+decision tree. -/
+
+def sorter3 : DecTree 3 :=
   .node 0 1
-    (.node 1 2
-      (.leaf 1)
-      (.node 0 2
-        (.leaf (Equiv.swap 1 2))
-        (.leaf (Equiv.swap 0 1 * Equiv.swap 1 2))))
-    (.node 0 2
-      (.leaf (Equiv.swap 0 1))
-      (.node 1 2
-        (.leaf (Equiv.swap 1 2 * Equiv.swap 0 1))
-        (.leaf (Equiv.swap 0 2))))
+    (.node 1 2 (.leaf 1) (.node 0 2 (.leaf (Equiv.swap 1 2)) (.leaf (finRotate 3))))
+    (.node 0 2 (.leaf (Equiv.swap 0 1))
+      (.node 1 2 (.leaf (finRotate 3)⁻¹) (.leaf (Equiv.swap 0 2))))
 
-/-- The lower bound of `⌈log₂ (3!)⌉ = 3` comparisons is attained: `sorter3` is a correct
-comparison sort of three elements never using more than `⌈log₂ (3!)⌉` comparisons.
-In particular the hypothesis of `CS.sorting_lb_3` is satisfiable. -/
+/-- The bound of `CS.sorting_lb_3` is attained: there is a correct comparison sort on
+3 elements of worst-case cost exactly `⌈log₂ (3!)⌉ = 3`. -/

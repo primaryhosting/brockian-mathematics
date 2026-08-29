@@ -1,0 +1,32 @@
+import RequestProject.Main
+/-!
+# Gleason's theorem fails in dimension two
+
+This file complements `RequestProject/Main.lean`.  It constructs an explicit quantum measure on
+the projection lattice of `ℂ²` which does not come from any density operator, showing that the
+dimension hypothesis `3 ≤ N` in Gleason's theorem cannot be dropped.
+
+The measure is the two-valued "lexicographic sign" measure: in dimension two the only nontrivial
+orthogonality relation between projections is `Q = 1 - P` for a rank-one projection `P`, so any
+function on rank-one projections satisfying `f P + f (1 - P) = 1` is finitely additive.
+-/
+
+open scoped Classical
+open scoped ComplexOrder
+
+namespace Frontier
+
+open Matrix
+
+/-! ## Structure of projections in dimension two -/
+
+/-- The Cayley–Hamilton identity for `2 × 2` matrices. -/
+
+lemma orthonormalBasis_dotProduct (b : OrthonormalBasis (Fin N) ℂ (EuclideanSpace ℂ (Fin N)))
+    (i j : Fin N) : star (⇑(b i)) ⬝ᵥ (⇑(b j)) = if i = j then 1 else 0 := by
+  have h := (orthonormal_iff_ite.mp b.orthonormal) i j
+  rw [EuclideanSpace.inner_eq_star_dotProduct] at h
+  rw [dotProduct_comm]
+  exact h
+
+/-- The eigenvectors of a Hermitian matrix form an orthonormal family. -/

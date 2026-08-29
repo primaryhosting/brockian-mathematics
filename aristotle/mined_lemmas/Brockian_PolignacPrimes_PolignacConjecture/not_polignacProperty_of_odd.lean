@@ -29,6 +29,9 @@ Category: Brockian Conjecture
 Target: Brockian.PolignacPrimes.PolignacConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Lean 4 requires every `import` to precede any module docstring, so the required header is
+reproduced verbatim as the module docstring immediately after the import below.)
 -/
 
 import Mathlib
@@ -39,35 +42,50 @@ Category: Brockian Conjecture
 Target: Brockian.PolignacPrimes.PolignacConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-(The header above is repeated as a module docstring because Lean 4 requires `import`
-commands to precede every other command, including module docstrings.)
+/-!
+## Overview
 
-## Contents
+De Polignac's conjecture states that for every positive even number `n` there are infinitely
+many pairs of *consecutive* primes whose difference is `n`.  This is an open problem (it contains
+the twin prime conjecture as the case `n = 2`), so what is proved here is a *conditional
+reduction*: the full conjecture is derived from a two-form special case of Dickson's conjecture
+on prime values of linear forms (`DicksonPairHypothesis`).
 
-* `PolignacProperty n` : there are infinitely many pairs of consecutive primes `(p, p+n)`.
-* `DicksonTwoForms` : Dickson's conjecture for two linear forms with equal leading
-  coefficients.
-* `PolignacConjecture` : Dickson's conjecture implies Polignac's conjecture for every
-  positive even gap. This is a Lean-checked conditional reduction of Polignac's
-  conjecture (which is open) to a standard prime-tuple hypothesis.
-* `not_polignacProperty_of_odd` : unconditionally, Polignac's property fails for odd gaps.
-* `polignacProperty_two_iff_twinPrimes` : for gap `2` Polignac's property is exactly the
-  twin prime conjecture.
+The reduction is the classical sieve-free argument: given an even `n ≥ 2`, one uses the Chinese
+remainder theorem to build an arithmetic progression `r + M ℕ` such that
+
+* every `p ≡ r [MOD M]` has `p + k` divisible by a fixed prime `< p` for each `0 < k < n`
+  (so all the numbers strictly between `p` and `p + n` are composite), and
+* the pair of linear forms `r + M m`, `r + n + M m` is admissible, i.e. no prime divides
+  the product for all `m`.
+
+Dickson's conjecture applied to this pair then produces infinitely many consecutive prime pairs
+with gap exactly `n`.
+
+Unconditional results proved here as well:
+
+* `Brockian.PolignacPrimes.eq_two_of_odd_gap` – for odd `n` at most one prime `p` has `p + n`
+  prime, so the evenness hypothesis in the conjecture is necessary;
+* `Brockian.PolignacPrimes.not_polignacProperty_of_odd`;
+* `Brockian.PolignacPrimes.polignacProperty_iff` – reformulation of the "infinitely many"
+  clause as an unboundedness statement.
 -/
 
 namespace Brockian.PolignacPrimes
 
-/-- `p` and `q` are consecutive primes: both are prime, `p < q`, and no prime lies
-strictly between them. -/
+/-- `p` and `p + n` are consecutive primes: both are prime and no number strictly between
+them is prime. -/
 
 theorem not_polignacProperty_of_odd {n : ℕ} (hn : Odd n) : ¬ PolignacProperty n := by
   intro h
-  obtain ⟨p, hp2, hpp, hqq, hlt, -⟩ := h 2
-  have hpodd : Odd p := hpp.odd_of_ne_two (by omega)
-  have hev : Even (p + n) := hpodd.add_odd hn
-  have h2 := (Nat.Prime.even_iff hqq).mp hev
-  obtain ⟨m, hm⟩ := hn
-  omega
+  have hsub : {p : ℕ | IsPrimeGap n p} ⊆ {2} := by
+    rintro p ⟨hp, hpn, -⟩
+    exact eq_two_of_odd_gap hn hp hpn
+  exact h ((Set.finite_singleton 2).subset hsub)
 
-/-- For the gap `2`, Polignac's property is equivalent to the twin prime conjecture. -/
+/-! ### The Chinese remainder construction -/
+
+/-- The `k`-th modulus used in the construction for gap `n`: the prime `2` for `k = 0`, and
+the `(n+k)`-th prime (which exceeds `n`) otherwise. -/

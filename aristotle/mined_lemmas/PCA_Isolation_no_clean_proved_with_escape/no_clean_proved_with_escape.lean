@@ -6,36 +6,51 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option autoImplicit false
+/-!
+## Overview
+
+This module formalises the model of a capability-based *isolation engine* for
+proof-carrying applications, together with its soundness **and** completeness.
+
+* A region (`Region`) is an abstract resource name; a capability set (`CapSet`)
+  is a decidable set of regions, represented by its characteristic function.
+* An application's code is a program (`Prog`) of a small nondeterministic
+  language with capability acquisition/release and resource accesses.
+* `Exec` is the operational semantics of the isolation engine at run time: a
+  resource access only produces an observable effect when the corresponding
+  capability is currently held; otherwise the engine *denies* it silently.
+* `App.Escapes` says that some run of the application observably touches a
+  resource outside its policy (its sandbox boundary).
+* `Cert` is the proof system for capability certificates that a proof-carrying
+  app ships with its code, and `check` is the engine's decidable checker.
+
+The main results are:
+
+* `cert_sound`  : a valid certificate forbids any escape;
+* `check_cert`  : the checker synthesises a certificate (so `Clean → Proved`);
+* `check_complete` : if the checker rejects, an escaping run really exists;
+* `no_clean_proved_with_escape` : the target theorem;
+* `clean_proved_iff_no_escape` : soundness *and* completeness of the engine.
+
+The development is deliberately self-contained (no imports), so that the header
+comment above is literally the first thing in the file.
+-/
 
 namespace PCA.Isolation
 
-/-- Capabilities an app may exercise (e.g. file handles, sockets, syscalls). -/
-abbrev Cap : Type := Nat
+/-! ## Capability sets -/
 
-/-- A sandbox policy is the predicate describing which capabilities the
-isolation engine permits. -/
-abbrev Policy : Type := Cap → Prop
+/-- Abstract resource names. -/
+abbrev Region := Nat
 
-/-- A minimal app language for the isolation engine: capability uses, sequencing,
-resolved conditionals, and bounded loops. -/
-inductive Prog : Type
-  | skip : Prog
-  | use : Cap → Prog
-  | seq : Prog → Prog → Prog
-  | ite : Bool → Prog → Prog → Prog
-  | loop : Nat → Prog → Prog
-  deriving DecidableEq
+/-- A capability set, represented by its characteristic function. -/
+abbrev CapSet := Region → Bool
 
-namespace Prog
+/-- Add a capability. -/
 
-/-- `rep n t` is `t` repeated `n` times, the trace of a bounded loop body. -/
+theorem no_clean_proved_with_escape : ¬ ∃ a : App, a.CleanProved ∧ a.Escapes := by
+  rintro ⟨a, ⟨_, hproved⟩, hesc⟩
+  exact proved_no_escape a hproved hesc
 
-theorem no_clean_proved_with_escape (pol : Policy) (p : Prog) :
-    ¬ (ProvedClean pol p ∧ Escapes pol p) := by
-  rintro ⟨hsafe, hesc⟩
-  exact (safe_iff_not_escapes.mp hsafe) hesc
-
-/-! ### Non-vacuity: both sides of the dichotomy are inhabited. -/
-
-/-- The policy permitting exactly capabilities `0` and `1`. -/
+/-- **Soundness and completeness of the isolation engine's model.** An app is
+accepted-and-certified exactly when it has no escaping run. -/

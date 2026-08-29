@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Huckel C 6
+Category: Chemistry
+Target: Chem.huckel_C6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -18,16 +26,17 @@ set_option grind.warning false
 
 namespace Chem
 
-open Matrix
+open Matrix Polynomial
 
 /-- The adjacency matrix of the cycle graph `C₆`, written out explicitly. -/
 
 def A6 : Matrix (Fin 6) (Fin 6) ℝ :=
-  !![0,1,0,0,0,1;
-     1,0,1,0,0,0;
-     0,1,0,1,0,0;
-     0,0,1,0,1,0;
-     0,0,0,1,0,1;
-     1,0,0,0,1,0]
+  !![0, 1, 0, 0, 0, 1;
+     1, 0, 1, 0, 0, 0;
+     0, 1, 0, 1, 0, 0;
+     0, 0, 1, 0, 1, 0;
+     0, 0, 0, 1, 0, 1;
+     1, 0, 0, 0, 1, 0]
 
-/-- The square of the adjacency matrix of `C₆`, written out explicitly. -/
+/-- The Hückel energies (adjacency eigenvalues) of `C₆`, in the order `k = 0,…,5`,
+i.e. `2 cos (2πk/6)`. -/

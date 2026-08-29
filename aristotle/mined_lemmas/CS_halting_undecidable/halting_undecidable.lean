@@ -1,14 +1,3 @@
-/-
-# Halting Undecidable
-Category: Computer Science
-Target: CS.halting_undecidable
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (The header above is a plain block comment because Lean requires `import` to come first;
--- the same text is repeated below as a module docstring.)
-
 import Mathlib
 
 /-!
@@ -18,6 +7,7 @@ Target: CS.halting_undecidable
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 
 open scoped BigOperators
 open scoped Real
@@ -44,30 +34,33 @@ set_option grind.warning false
 
 namespace CS
 
-open Nat.Partrec (Code)
-open Nat.Partrec.Code
+open Nat.Partrec Nat.Partrec.Code Encodable Denumerable
 
-/-- **The halting problem is undecidable.**
-
-There is no total computable function `H : Code → ℕ → Bool` which, given (a code for)
-a program `p` and an input `x`, decides whether `p` halts on `x`
-(i.e. whether the partial function `eval p` is defined at `x`).
-
-The proof reduces to Mathlib's `ComputablePred.halting_problem`, which states that for each
-fixed input `n` the predicate `fun c => (eval c n).Dom` is not computable; that result in turn
-is obtained from Rice's theorem, whose proof is the usual diagonalization / fixed-point
-(Kleene recursion theorem) argument. -/
+/-- The diagonal partial function associated with a candidate halting decider `H`:
+on input `n`, it diverges when `H` claims that the `n`-th program halts on input `n`,
+and returns `0` otherwise. -/
 
 theorem halting_undecidable :
-    ¬ ∃ H : Code → ℕ → Bool,
-        Computable₂ H ∧ ∀ (p : Code) (x : ℕ), H p x = true ↔ (eval p x).Dom := by
+    ¬ ∃ H : Nat.Partrec.Code → ℕ → Bool,
+        Computable₂ H ∧ ∀ (p : Nat.Partrec.Code) (x : ℕ), H p x = true ↔ (eval p x).Dom := by
   rintro ⟨H, hH, hspec⟩
-  refine ComputablePred.halting_problem 0 ?_
-  refine ComputablePred.computable_iff.2 ⟨fun c => H c 0, ?_, ?_⟩
-  · exact hH.comp Computable.id (Computable.const 0)
-  · funext c
-    simpa using (hspec c 0).symm
+  obtain ⟨e, he⟩ := exists_code.mp (partrec_diagFun hH)
+  set n : ℕ := encode e with hn
+  have hoe : ofNat Nat.Partrec.Code n = e := by
+    simp [hn, Denumerable.ofNat_encode]
+  have hval : eval e n = bif H e n then Part.none else Part.some 0 := by
+    rw [he]
+    simp [diagFun, hoe]
+  by_cases hb : H e n = true
+  · have hdom : (eval e n).Dom := (hspec e n).mp hb
+    rw [hval, hb] at hdom
+    exact hdom
+  · have hb' : H e n = false := by simpa using hb
+    have hdom : (eval e n).Dom := by
+      rw [hval, hb']
+      trivial
+    exact hb ((hspec e n).mpr hdom)
 
-/-- A variant phrased with a `ℕ`-valued decider, using the standard numbering of partial
-recursive functions: there is no total computable `H : ℕ → ℕ → ℕ` with
-`H p x = 1` exactly when the program with code number `p` halts on input `x`. -/
+/-- The same statement phrased with programs encoded as natural numbers: there is no
+total computable `H : ℕ → ℕ → ℕ` such that `H p x = 1` exactly when the program with
+index `p` halts on input `x`. -/

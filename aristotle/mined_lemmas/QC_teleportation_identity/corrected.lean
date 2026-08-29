@@ -5,8 +5,18 @@ Target: QC.teleportation_identity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 requires `import` to be the first command of a file, so the header above is a
+-- plain block comment; the identical text is repeated below as the module docstring.)
 
 import Mathlib
+
+/-!
+# Teleportation Identity
+Category: Quantum Computing
+Target: QC.teleportation_identity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -26,21 +36,27 @@ set_option grind.warning false
 
 namespace QC
 
-/-- A one-qubit state is a vector of amplitudes indexed by `Fin 2`. -/
-abbrev Qubit := Fin 2 → ℂ
+/-! ## Basic notions
 
-/-- A three-qubit state is an amplitude for each triple of bit values. -/
-abbrev Qubit3 := Fin 2 → Fin 2 → Fin 2 → ℂ
+A qubit state is an amplitude vector indexed by `Fin 2`; a three-qubit register state is
+an amplitude array indexed by `Fin 2 × Fin 2 × Fin 2` (written in curried form).
+Addition on `Fin 2` is exactly the XOR of classical bits.
 
-/-- `(-1)^(i*k)`, the phase produced by the Pauli-`Z` gate on basis state `k`
-raised to the power `i`. -/
+Mathlib has no development of the quantum teleportation protocol (there is no lemma that
+`exact?`/`rw?` can apply here), so the protocol is set up from scratch below; the proof
+itself only uses `Real.mul_self_sqrt` from Mathlib together with ring normalisation. -/
 
-noncomputable def corrected (psi : Qubit) (m₁ m₂ : Fin 2) : Qubit :=
-  applyZ m₁ (applyX m₂ (residual psi m₁ m₂))
+/-- Amplitude vector of a single qubit. -/
+abbrev Qubit : Type := Fin 2 → ℂ
+
+/-- Amplitude array of a three-qubit register. -/
+abbrev State3 : Type := Fin 2 → Fin 2 → Fin 2 → ℂ
+
+/-- The normalisation constant `1/√2`. -/
+
+noncomputable def corrected (psi : Qubit) (m1 m2 : Fin 2) : Qubit :=
+  pauliZpow m1 (pauliXpow m2 ((2 : ℂ) • branch psi m1 m2))
 
 /-- **Teleportation identity.**  For every input qubit state `|ψ⟩` and every pair of
-classical measurement outcomes `(m₁, m₂)` obtained by Alice, the state of Bob's qubit
-after applying the corresponding Pauli correction `Z^{m₁} X^{m₂}` is exactly `|ψ⟩`,
-up to the amplitude factor `1/2` (whose squared modulus `1/4` is the probability of
-that measurement outcome).  In particular the teleported state, once renormalized,
-equals the input state. -/
+classical measurement outcomes `(m₁, m₂)` obtained by Alice, the post-correction state of
+Bob's qubit, obtained by applying `Z^{m₁} X^{m₂}`, is exactly the input state `|ψ⟩`. -/

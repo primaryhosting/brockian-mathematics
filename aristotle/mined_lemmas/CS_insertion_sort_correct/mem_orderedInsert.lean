@@ -6,15 +6,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace CS
+set_option autoImplicit false
 
 universe u
 
-variable {α : Type u} (r : α → α → Prop) [DecidableRel r]
+namespace CS
 
-/-- Insert `a` into the list `l`, in front of the first element `b` of `l` with `r a b`. -/
+/-- `orderedInsert r a l` inserts `a` into `l` in front of the first element
+`b` of `l` with `r a b`. -/
 
 theorem mem_orderedInsert {a b : α} {l : List α} :
-    b ∈ orderedInsert r a l ↔ b = a ∨ b ∈ l :=
-  (perm_orderedInsert r a l).mem_iff.trans List.mem_cons
+    b ∈ orderedInsert r a l ↔ b = a ∨ b ∈ l := by
+  have h := (orderedInsert_perm r a l).mem_iff (a := b)
+  simpa using h
 
+/-- Inserting into a sorted list keeps it sorted, provided `r` is total and transitive. -/

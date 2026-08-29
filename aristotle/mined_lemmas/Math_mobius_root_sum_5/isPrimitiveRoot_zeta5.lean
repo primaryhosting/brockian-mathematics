@@ -23,12 +23,33 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-open Finset
+/-
+# Mobius Root Sum 5
+Category: Pure Mathematics
+Target: Math.mobius_root_sum_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Mobius Root Sum 5
+Category: Pure Mathematics
+Target: Math.mobius_root_sum_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Finset Polynomial
 
 namespace Math
 
-/-- A fixed primitive 5-th root of unity in `ℂ`. -/
+open scoped ArithmeticFunction
 
-lemma isPrimitiveRoot_zeta5 : IsPrimitiveRoot Math.zeta5 5 := by
-  simpa [Math.zeta5] using Complex.isPrimitiveRoot_exp 5 (by norm_num)
+/-- The Möbius function at `5` is `-1`. -/
 
+lemma isPrimitiveRoot_zeta5 : IsPrimitiveRoot zeta5 5 :=
+  Complex.isPrimitiveRoot_exp 5 (by norm_num)
+
+/-- The primitive 5-th roots of unity are exactly the powers `ζ^i` with `1 ≤ i < 5`. -/

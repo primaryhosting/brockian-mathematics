@@ -1,4 +1,14 @@
+/-
+# Cycle Laplacian Spectrum
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.cycle_laplacian_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to be the first command; the module docstring below
+-- repeats the header verbatim.)
 import Mathlib
+
 /-!
 # Cycle Laplacian Spectrum
 Category: Frontier — Spectral Geometry
@@ -25,16 +35,15 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Matrix ZMod AddChar Finset
+open Matrix Polynomial
 
-/-- The generating vector of the cycle Laplacian: `2` at `0`, `-1` at `±1`, `0` elsewhere. -/
+/-- The cyclic shift matrix on `ZMod n`: `shiftM n a i j = 1` exactly when `i - j = a`. -/
 
 lemma one_ne_neg_one_zmod (hn : 3 ≤ n) : (1 : ZMod n) ≠ -1 := by
   intro h
-  have h2 : ((2 : ℕ) : ZMod n) = 0 := by push_cast; linear_combination h
-  rw [ZMod.natCast_eq_zero_iff] at h2
-  have := Nat.le_of_dvd (by norm_num) h2
-  omega
+  have h3 : ((2 : ℕ) : ZMod n) = 0 := by push_cast; linear_combination h
+  have h4 : (((2 : ℕ) : ZMod n)).val = 2 := ZMod.val_cast_of_lt (by omega)
+  rw [h3, ZMod.val_zero] at h4
+  exact absurd h4 (by norm_num)
 
-omit [NeZero n] in
-/-- Rewriting of the generating vector as a combination of indicator functions. -/
+/-- The entrywise identity behind `cycleLaplacian = 2·1 - S - S⁻¹`. -/

@@ -30,7 +30,6 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,29 +40,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open MeasureTheory SchwartzMap FourierTransform Laplacian LineDeriv
+namespace Brockian.Weyl.FreeLaplacian2
+
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-  [MeasurableSpace E] [BorelSpace E]
+lemma locallyIntegrable_multiplier_mul (u : L2Space V) :
+    LocallyIntegrable (fun ξ => (multiplier ξ : ℂ) * (u : V → ℂ) ξ) volume := by
+  have h : LocallyIntegrableOn (fun ξ : V => (u : V → ℂ) ξ * (multiplier ξ : ℂ)) Set.univ
+      volume := by
+    refine LocallyIntegrableOn.mul_continuousOn ?_ ?_ ?_
+    · exact (locallyIntegrable_of_L2 V u).locallyIntegrableOn _
+    · exact continuous_multiplier.continuousOn
+    · exact isClosed_univ.isLocallyClosed
+  rw [locallyIntegrableOn_univ] at h
+  simpa [mul_comm] using h
 
-/-- The complex Hilbert space `L²(E)` of square integrable functions on a finite-dimensional
-real inner product space `E`, with respect to the Lebesgue (Haar) measure. -/
-abbrev L2Space (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-    [MeasurableSpace E] [BorelSpace E] : Type _ := ↥(Lp (α := E) ℂ 2 volume)
-
-/-- Schwartz functions viewed as elements of `L²(E)`. -/
-
-theorem locallyIntegrable_multiplier_mul {u : E → ℂ} (hu : LocallyIntegrable u volume) :
-    LocallyIntegrable (fun ξ => (multiplier ξ : ℂ) * u ξ) volume := by
-  rw [locallyIntegrable_iff] at hu ⊢
-  intro k hk
-  refine MeasureTheory.IntegrableOn.continuousOn_mul ?_ (hu k hk) hk
-  refine Continuous.continuousOn ?_
-  unfold multiplier
-  fun_prop
-
+/-- Key duality step: if `W` pairs against Schwartz functions like the multiplier multiple of
+`G` does, then `W = multiplier • G` almost everywhere. -/

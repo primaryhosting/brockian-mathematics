@@ -7,6 +7,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 import Mathlib
 
+/-!
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -25,18 +33,34 @@ set_option grind.warning false
 
 namespace Frontier
 
-variable {V : Type*} [Fintype V] [DecidableEq V]
+/-! ## Systems
 
-/-- The restriction of a global state `x` to the part `A` of the system. -/
+A (discrete, finite) system consists of a finite set `ι` of elements, each of which can be
+in one of finitely many states `Q`; a global state of the system is a function `ι → Q`.
+The dynamics are given by a transition probability matrix (TPM): for every current global
+state `s`, a probability distribution `prob s` over next global states. -/
 
-def splitEquiv (A : Finset V) : ((↥A → Bool) × (↥Aᶜ → Bool)) ≃ (V → Bool) where
-  toFun uv := joinState A uv.1 uv.2
-  invFun x := (restr A x, restr Aᶜ x)
-  left_inv uv := by ext <;> simp
-  right_inv x := by
-    funext i
-    by_cases h : i ∈ A <;> simp [joinState, restr, h]
+/-- A transition probability matrix on the global state space `ι → Q`. -/
+structure TPM (ι Q : Type) [Fintype ι] [DecidableEq ι] [Fintype Q] where
+  /-- `prob s u` is the probability that the system moves from state `s` to state `u`. -/
+  prob : (ι → Q) → (ι → Q) → ℝ
+  /-- Probabilities are nonnegative. -/
+  nonneg : ∀ s u, 0 ≤ prob s u
+  /-- For each current state, the next-state probabilities sum to one. -/
+  normalized : ∀ s, ∑ u, prob s u = 1
 
-/-- The probability, under a uniform ("maximum-entropy") perturbation of the current state,
-that the next state of the system restricted to `A` is `a` and restricted to `Aᶜ` is `b`.
-This is the *effect repertoire* of the deterministic transition function `f`. -/
+variable {ι Q : Type} [Fintype ι] [DecidableEq ι] [Fintype Q]
+
+/-- The elements on one side of the bipartition determined by `S`. -/
+abbrev Part (S : Finset ι) : Type := {i : ι // i ∈ S}
+
+/-- The elements on the other side of the bipartition determined by `S`. -/
+abbrev CoPart (S : Finset ι) : Type := {i : ι // i ∉ S}
+
+/-- Restriction of a global state to the `S`-part of the system. -/
+
+def splitEquiv (S : Finset ι) : (ι → Q) ≃ ((Part S → Q) × (CoPart S → Q)) :=
+  Equiv.piEquivPiSubtypeProd (fun i => i ∈ S) (fun _ => Q)
+
+/-- The next-state distribution, read as a distribution on pairs
+`(state of the S-part, state of the complementary part)`. -/

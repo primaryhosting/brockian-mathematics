@@ -1,4 +1,19 @@
+/-
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
+
+/-!
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,35 +29,50 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Gibbs' inequality (nonnegativity of relative entropy) -/
+/-! ## Systems
 
-/-- Gibbs' inequality on a finite index type: the relative entropy (Kullback–Leibler
-divergence) of two probability distributions is nonnegative, provided `p` is absolutely
-continuous with respect to `q`. -/
+A (discrete, finite) system consists of a finite set `ι` of elements, each of which can be
+in one of finitely many states `Q`; a global state of the system is a function `ι → Q`.
+The dynamics are given by a transition probability matrix (TPM): for every current global
+state `s`, a probability distribution `prob s` over next global states. -/
 
-theorem iit_phi_partition {V S : Type*} [Fintype V] [DecidableEq V] [Fintype S] [Nonempty S]
-    (M : System V S) {A : Finset V} (hA : A ∈ System.Bipartitions V)
-    (hdis : M.Disconnected A) (s : V → S) :
-    M.Phi s = 0 := by
-  have hlb : ∀ x ∈ {x : ℝ | ∃ A ∈ System.Bipartitions V, x = M.EI A s}, 0 ≤ x := by
-    rintro x ⟨B, -, rfl⟩
-    exact M.EI_nonneg B s
-  have hmem : (0 : ℝ) ∈ {x : ℝ | ∃ A ∈ System.Bipartitions V, x = M.EI A s} :=
-    ⟨A, hA, (M.EI_eq_zero_of_disconnected hdis s).symm⟩
-  refine le_antisymm ?_ ?_
-  · exact csInf_le ⟨0, fun x hx => hlb x hx⟩ hmem
-  · exact le_csInf ⟨0, hmem⟩ hlb
+/-- A transition probability matrix on the global state space `ι → Q`. -/
+structure TPM (ι Q : Type) [Fintype ι] [DecidableEq ι] [Fintype Q] where
+  /-- `prob s u` is the probability that the system moves from state `s` to state `u`. -/
+  prob : (ι → Q) → (ι → Q) → ℝ
+  /-- Probabilities are nonnegative. -/
+  nonneg : ∀ s u, 0 ≤ prob s u
+  /-- For each current state, the next-state probabilities sum to one. -/
+  normalized : ∀ s, ∑ u, prob s u = 1
 
-/-- The hypotheses of `Frontier.iit_phi_partition` are satisfiable: there is a genuine
-two-element system together with a bipartition along which it is disconnected. -/
+variable {ι Q : Type} [Fintype ι] [DecidableEq ι] [Fintype Q]
+
+/-- The elements on one side of the bipartition determined by `S`. -/
+abbrev Part (S : Finset ι) : Type := {i : ι // i ∈ S}
+
+/-- The elements on the other side of the bipartition determined by `S`. -/
+abbrev CoPart (S : Finset ι) : Type := {i : ι // i ∉ S}
+
+/-- Restriction of a global state to the `S`-part of the system. -/
+
+theorem iit_phi_partition (T : TPM ι Q) (S : Finset ι)
+    (hS : S.Nonempty) (hSne : S ≠ Finset.univ) (hdis : Disconnected T S) :
+    Phi T = 0 := by
+  have hmem : (0 : ℝ) ∈ (fun S => EI T S) '' Bipartitions ι :=
+    ⟨S, ⟨hS, hSne⟩, EI_eq_zero_of_disconnected T S hdis⟩
+  have hbdd : BddBelow ((fun S => EI T S) '' Bipartitions ι) := by
+    refine ⟨0, ?_⟩
+    rintro x ⟨S', -, rfl⟩
+    exact EI_nonneg T S'
+  refine le_antisymm (csInf_le hbdd hmem) ?_
+  refine le_csInf ⟨0, hmem⟩ ?_
+  rintro x ⟨S', -, rfl⟩
+  exact EI_nonneg T S'
+
+/-! ## Strict positivity: `Φ` detects genuine integration -/
+
+/-- Strict pointwise Gibbs inequality. -/

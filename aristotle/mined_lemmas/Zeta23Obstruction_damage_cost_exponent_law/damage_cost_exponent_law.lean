@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Damage Cost Exponent Law
 Category: Brockian Corpus
 Target: Zeta23Obstruction.damage_cost_exponent_law
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,24 +33,28 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- The exponential coefficient `4π(A-1)` is positive when the bandwidth `A` exceeds `1`. -/
+/-- The exponential coefficient `4 * π * (A - 1)` is strictly positive when `A > 1`. -/
 
-theorem damage_cost_exponent_law {A : ℝ} (hA : 1 < A) :
-    StrictMono (fun y : ℝ => Real.exp (4 * Real.pi * (A - 1) * y)) ∧
+theorem damage_cost_exponent_law :
+    ∀ A : ℝ, 1 < A →
+      StrictMono (fun y : ℝ => Real.exp (4 * Real.pi * (A - 1) * y)) ∧
       ∀ C : ℝ, 0 < C → ∃ y : ℝ, 0 < y ∧ C < Real.exp (4 * Real.pi * (A - 1) * y) := by
+  intro A hA
   have hk : 0 < 4 * Real.pi * (A - 1) := coeff_pos hA
-  refine ⟨Real.exp_strictMono.comp (strictMono_mul_left_of_pos hk), ?_⟩
-  intro C hC
-  refine ⟨(|Real.log C| + 1) / (4 * Real.pi * (A - 1)), by positivity, ?_⟩
-  have hy : 4 * Real.pi * (A - 1) * ((|Real.log C| + 1) / (4 * Real.pi * (A - 1)))
-      = |Real.log C| + 1 := by
-    rw [mul_comm, div_mul_cancel₀ _ (ne_of_gt hk)]
-  rw [hy]
-  calc C = Real.exp (Real.log C) := (Real.exp_log hC).symm
-    _ < Real.exp (|Real.log C| + 1) := by
-        apply Real.exp_lt_exp.mpr
-        have := le_abs_self (Real.log C)
-        linarith
+  refine ⟨?_, ?_⟩
+  · intro a b hab
+    exact Real.exp_lt_exp.mpr (by nlinarith)
+  · intro C hC
+    refine ⟨(|Real.log C| + 1) / (4 * Real.pi * (A - 1)), by positivity, ?_⟩
+    have hy : 4 * Real.pi * (A - 1) * ((|Real.log C| + 1) / (4 * Real.pi * (A - 1)))
+        = |Real.log C| + 1 := by
+      field_simp
+      rw [div_self (sub_ne_zero_of_ne hA.ne')]
+    rw [hy]
+    calc C = Real.exp (Real.log C) := (Real.exp_log hC).symm
+      _ < Real.exp (|Real.log C| + 1) := by
+          have := le_abs_self (Real.log C)
+          exact Real.exp_lt_exp.mpr (by linarith)
 
 end Zeta23Obstruction
 

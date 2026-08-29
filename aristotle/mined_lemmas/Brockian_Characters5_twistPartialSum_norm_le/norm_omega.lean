@@ -22,14 +22,21 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 namespace Characters5
 
-/-- A primitive fifth root of unity, `ω = exp(2πi/5)`. -/
+/-- The primitive fifth root of unity `ω = e^{2πi/5}`. -/
 
 lemma norm_omega : ‖omega‖ = 1 := by
   rw [omega, Complex.norm_exp]
-  norm_num [Complex.div_re, Complex.mul_re]
+  norm_num
 

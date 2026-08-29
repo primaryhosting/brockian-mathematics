@@ -1,3 +1,13 @@
+/-
+# Hironaka Resolution
+Category: Frontier Math
+Target: Math2.hironaka_resolution
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+(Lean does not allow a module docstring before the `import` line, so the required header is
+repeated verbatim as a module docstring immediately after the imports below.)
+-/
 import Mathlib
 
 /-!
@@ -31,106 +41,74 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+open scoped Polynomial
+
 namespace Math2
 
-/-- The affine cuspidal cubic `{(x, y) | y ^ 2 = x ^ 3}` over a field `k`. -/
+attribute [local instance] FractionRing.liftAlgebra
 
-def cuspCurve (k : Type*) [Field k] : Set (k × k) := {p : k × k | p.2 ^ 2 = p.1 ^ 3}
+set_option synthInstance.maxHeartbeats 400000 in
+/--
+**Resolution of singularities in characteristic zero, for curves (Hironaka; curve case).**
 
-/-- The resolution (normalization) map of the cuspidal cubic: the affine line, which is
-smooth, mapped onto the cuspidal cubic by `t ↦ (t ^ 2, t ^ 3)`. -/
+Setting: `k` is a field of characteristic zero and `A` is an integral domain which is
+module-finite over a polynomial ring `k[X]` via an injective ring map.  By the Noether
+normalization lemma this is exactly the algebraic description of (the coordinate ring of)
+an integral affine curve over `k`: a finitely generated `k`-algebra domain of Krull
+dimension one.  No smoothness whatsoever is assumed — `A` may be as singular as the
+cuspidal ring `k[x,y]/(y² - x³)`.
 
-def cuspRes (k : Type*) [Field k] : k → k × k := fun t => (t ^ 2, t ^ 3)
+Conclusion: the normalization `B = integralClosure A (Frac A)` of `A` inside its function
+field resolves the singularities of `A`:
 
-/-- The rational inverse of `cuspRes`, regular away from the singular point. -/
+* `B` is a Dedekind domain;
+* `B` has the *same* function field as `A` (`IsFractionRing B (Frac A)`), i.e. the induced
+  morphism `Spec B → Spec A` is birational;
+* `B` is a finite `A`-module, i.e. the morphism `Spec B → Spec A` is finite (in particular
+  proper and surjective);
+* every local ring of `B` at a nonzero prime is a discrete valuation ring, i.e. `Spec B` is
+  a *regular* (nonsingular) curve.
 
-def cuspRes.inv (k : Type*) [Field k] : k × k → k := fun p => p.2 / p.1
-
-variable {k : Type*} [Field k]
-
-lemma cuspRes_mem (t : k) : cuspRes k t ∈ cuspCurve k := by
-  simp [cuspRes, cuspCurve]
-  ring
-
-lemma cuspRes_inv_cuspRes (t : k) : cuspRes.inv k (cuspRes k t) = t := by
-  rcases eq_or_ne t 0 with rfl | ht
-  · simp [cuspRes, cuspRes.inv]
-  · simp only [cuspRes, cuspRes.inv]
-    rw [div_eq_iff (pow_ne_zero 2 ht)]
-    ring
-
-lemma cuspRes_injective : Function.Injective (cuspRes k) :=
-  Function.LeftInverse.injective cuspRes_inv_cuspRes
-
-/-- Key lemma: every point of the cuspidal cubic is in the image of the resolution map,
-with the explicit preimage `y / x` (and `0` at the singular point). -/
-
-lemma cuspRes_cuspRes_inv {p : k × k} (hp : p ∈ cuspCurve k) :
-    cuspRes k (cuspRes.inv k p) = p := by
-  obtain ⟨x, y⟩ := p
-  simp only [cuspCurve, Set.mem_setOf_eq] at hp
-  rcases eq_or_ne x 0 with rfl | hx
-  · have hy : y = 0 := by
-      have : y ^ 2 = 0 := by simpa using hp
-      exact pow_eq_zero_iff (n := 2) (by norm_num) |>.mp this
-    simp [cuspRes, cuspRes.inv, hy]
-  · have hx2 : x ^ 2 ≠ 0 := pow_ne_zero _ hx
-    have hx3 : x ^ 3 ≠ 0 := pow_ne_zero _ hx
-    refine Prod.ext ?_ ?_ <;> simp only [cuspRes, cuspRes.inv] <;> field_simp
-    · exact hp
-    · calc y ^ 3 = y * y ^ 2 := by ring
-        _ = y * x ^ 3 := by rw [hp]
-
-lemma cuspRes_surjOn : Set.SurjOn (cuspRes k) Set.univ (cuspCurve k) := by
-  intro p hp
-  exact ⟨cuspRes.inv k p, Set.mem_univ _, cuspRes_cuspRes_inv hp⟩
-
-lemma cuspRes_bijOn : Set.BijOn (cuspRes k) Set.univ (cuspCurve k) :=
-  ⟨fun t _ => cuspRes_mem t, Set.injOn_of_injective cuspRes_injective, cuspRes_surjOn⟩
-
-/-- The singular locus of the cuspidal cubic (in characteristic `0`) is exactly the origin:
-the gradient `(-3 x ^ 2, 2 y)` of `y ^ 2 - x ^ 3` vanishes at a point of the curve iff that
-point is the origin. -/
-
-lemma cusp_singular_locus [CharZero k] {p : k × k} (hp : p ∈ cuspCurve k) :
-    (3 * p.1 ^ 2 = 0 ∧ 2 * p.2 = 0) ↔ p = (0, 0) := by
-  obtain ⟨x, y⟩ := p
-  simp only [cuspCurve, Set.mem_setOf_eq] at hp
-  constructor
-  · rintro ⟨h1, h2⟩
-    have hx : x = 0 := by
-      have : x ^ 2 = 0 := by
-        rcases mul_eq_zero.mp h1 with h | h
-        · norm_num at h
-        · exact h
-      exact pow_eq_zero_iff (n := 2) (by norm_num) |>.mp this
-    have hy : y = 0 := by
-      rcases mul_eq_zero.mp h2 with h | h
-      · norm_num at h
-      · exact h
-    simp [hx, hy]
-  · rintro h
-    obtain ⟨hx, hy⟩ := Prod.mk.injEq .. ▸ h
-    simp_all
-
-/-- **Resolution of singularities (Hironaka), an instance in characteristic 0.**
-
-Over any field of characteristic zero, the singular cuspidal cubic `C : y ^ 2 = x ^ 3`
-admits a resolution by the smooth affine line: the morphism `t ↦ (t ^ 2, t ^ 3)`
-
-* is a bijection from the (smooth) affine line onto `C`;
-* is an isomorphism over the smooth locus `C \ {(0,0)}`, with regular inverse `(x, y) ↦ y / x`;
-* and `C` is genuinely singular exactly at the origin (the gradient of the defining
-  equation vanishes there and nowhere else on `C`).
+Caveat on the formalization: this is the one-dimensional case of Hironaka's theorem, which
+is the case that can be obtained by normalization; the statement proved here is not the
+general higher-dimensional resolution theorem.
 -/
+theorem hironaka_resolution
+    {k : Type*} [Field k] [CharZero k]
+    {A : Type*} [CommRing A] [IsDomain A]
+    [Algebra k[X] A] [Module.Finite k[X] A]
+    (hinj : Function.Injective (algebraMap k[X] A)) :
+    IsDedekindDomain (integralClosure A (FractionRing A)) ∧
+    IsFractionRing (integralClosure A (FractionRing A)) (FractionRing A) ∧
+    Module.Finite A (integralClosure A (FractionRing A)) ∧
+    ∀ (P : Ideal (integralClosure A (FractionRing A))) [P.IsPrime], P ≠ ⊥ →
+      IsDiscreteValuationRing (Localization.AtPrime P) := by
+  haveI : FaithfulSMul k[X] A := (faithfulSMul_iff_algebraMap_injective ..).mpr hinj
+  set K := FractionRing A with hK
+  set C := integralClosure A K with hC
+  -- `C` is also the integral closure of the polynomial subring `k[X]` in `K`.
+  haveI hst : IsScalarTower k[X] ↥C K :=
+    IsScalarTower.of_algebraMap_eq (fun x => by
+      rw [IsScalarTower.algebraMap_apply k[X] A K]; rfl)
+  haveI hic : IsIntegralClosure ↥C k[X] K := by
+    constructor
+    · exact Subtype.val_injective
+    · intro x
+      refine ⟨fun hx => ⟨⟨x, hx.tower_top⟩, rfl⟩, ?_⟩
+      rintro ⟨y, rfl⟩
+      exact isIntegral_trans _ y.2
+  -- `K` is a finite separable extension of `k(X) = Frac k[X]` (characteristic zero),
+  -- and `k[X]` is a Dedekind domain, so the integral closure `C` is a Dedekind domain.
+  haveI hdd : IsDedekindDomain ↥C :=
+    IsIntegralClosure.isDedekindDomain k[X] (FractionRing k[X]) K ↥C
+  haveI hfr : IsFractionRing ↥C K :=
+    IsIntegralClosure.isFractionRing_of_finite_extension k[X] (FractionRing k[X]) K ↥C
+  haveI hnoeth : IsNoetherian k[X] ↥C :=
+    IsIntegralClosure.isNoetherian k[X] (FractionRing k[X]) K ↥C
+  haveI : Module.Finite A ↥C := Module.Finite.of_restrictScalars_finite k[X] A ↥C
+  refine ⟨hdd, hfr, inferInstance, ?_⟩
+  intro P _ hP0
+  exact IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain ↥C hP0 _
 
-theorem hironaka_resolution (k : Type*) [Field k] [CharZero k] :
-    Set.BijOn (cuspRes k) Set.univ (cuspCurve k) ∧
-      (∀ p ∈ cuspCurve k, cuspRes k (cuspRes.inv k p) = p) ∧
-      (∀ t : k, cuspRes.inv k (cuspRes k t) = t) ∧
-      (∀ p ∈ cuspCurve k, ((3 * p.1 ^ 2 = 0 ∧ 2 * p.2 = 0) ↔ p = (0, 0))) := by
-  refine ⟨cuspRes_bijOn, fun p hp => cuspRes_cuspRes_inv hp, fun t => cuspRes_inv_cuspRes t,
-    fun p hp => cusp_singular_locus hp⟩
+end Math2
 
-/-- Over the reals the resolution map is in addition proper (indeed a closed embedding),
-so it is a proper birational morphism, as in Hironaka's theorem. -/

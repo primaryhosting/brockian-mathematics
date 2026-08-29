@@ -1,13 +1,4 @@
-/-
-# Expander Uniform Gap Witness
-Category: Frontier — Spectral Geometry
-Target: Frontier.Spectral.expander_uniform_gap_witness
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Expander Uniform Gap Witness
 Category: Frontier — Spectral Geometry
@@ -41,30 +32,33 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Finset Matrix
+/-- The vertex set of the `k`-dimensional hypercube: bit strings of length `k`
+(there are `2 ^ k` of them). -/
+abbrev Cube (k : ℕ) : Type := Fin k → ZMod 2
 
-/-- The vertex set of the `k`-dimensional hypercube: bit strings of length `k`. -/
-abbrev Cube (k : ℕ) := Fin k → ZMod 2
 
-/-- The hypercube `Q_k` has `2 ^ k` vertices. -/
-
-lemma sum_chi {k : ℕ} (y : Cube k) :
-    ∑ x : Cube k, chi y x = if y = 0 then (2 : ℝ) ^ k else 0 := by
-  have h : ∑ x : Cube k, chi y x = ∏ i : Fin k, (if y i = 0 then (2 : ℝ) else 0) :=
-    calc ∑ x : Cube k, chi y x = ∑ x : Cube k, ∏ i : Fin k, sgn (y i * x i) := rfl
-      _ = ∏ i : Fin k, ∑ t : ZMod 2, sgn (y i * t) :=
-          (Fintype.prod_sum (fun (i : Fin k) (t : ZMod 2) => sgn (y i * t))).symm
-      _ = ∏ i : Fin k, (if y i = 0 then (2 : ℝ) else 0) :=
-          Finset.prod_congr rfl (fun i _ => sum_sgn_mul (y i))
-  rw [h]
-  by_cases hy : y = 0
-  · subst hy
-    simp
-  · rw [if_neg hy]
-    obtain ⟨i, hi⟩ : ∃ i, y i ≠ 0 := by
+theorem sum_chi {k : ℕ} (z : Cube k) :
+    ∑ S ∈ (Finset.univ : Finset (Fin k)).powerset, chi S z = if z = 0 then (2 ^ k : ℝ) else 0 := by
+  have key : ∏ i : Fin k, (eps (z i) + 1)
+      = ∑ S ∈ (Finset.univ : Finset (Fin k)).powerset, chi S z := by
+    rw [Finset.prod_add]
+    exact Finset.sum_congr rfl fun S _ => by simp [chi]
+  rw [← key]
+  by_cases hz : z = 0
+  · subst hz
+    simp only [Pi.zero_apply, eps_zero]
+    norm_num
+  · rw [if_neg hz]
+    obtain ⟨i, hi⟩ : ∃ i : Fin k, z i ≠ 0 := by
       by_contra hc
       push_neg at hc
-      exact hy (funext hc)
-    exact Finset.prod_eq_zero (Finset.mem_univ i) (if_neg hi)
+      exact hz (funext hc)
+    refine Finset.prod_eq_zero (Finset.mem_univ i) ?_
+    have hzi : z i = 1 := by
+      have h : ∀ c : ZMod 2, c = 0 ∨ c = 1 := by decide
+      rcases h (z i) with h' | h'
+      · exact absurd h' hi
+      · exact h'
+    rw [hzi, eps_one]; ring
 
-/-- Completeness of the character system: a vector orthogonal to every character is zero. -/
+/-- The Laplacian is symmetric for the standard inner product. -/

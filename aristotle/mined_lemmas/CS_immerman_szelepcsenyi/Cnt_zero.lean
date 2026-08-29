@@ -1,27 +1,60 @@
-import RequestProject.Machine
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
 
 /-!
-# The inductive counting construction
-
-Given a nondeterministic branching program we build, by Immerman and Szelepcsényi's
-inductive counting method, a nondeterministic branching program of polynomially larger
-size accepting exactly the complementary language.
+# Immerman Szelepcsenyi
+Category: Frontier Cs
+Target: CS.immerman_szelepcsenyi
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+set_option maxHeartbeats 1000000
 
 namespace CS
 
-namespace Compl
+/-! ## Reachability in a finite directed graph
 
-variable {n : ℕ} (P : Setup n)
+We work with a directed graph on the vertex set `{0, 1, ..., n-1}` given by a Boolean
+adjacency function `g`.  `reachB n g s i v` says that `v` is reachable from `s` by a walk of
+length *at most* `i` (we allow "staying put" at each step, so walks of length exactly `i`
+with lazy steps are the same thing as walks of length at most `i`). -/
 
-/-! ### The invariant -/
+section Graph
 
-variable (x : Fin n → Bool)
+variable (n : ℕ) (g : ℕ → ℕ → Bool) (s : ℕ)
 
-/-- The set of configurations of the original machine reachable in at most `i` steps. -/
+/-- `reachB n g s i v = true` iff `v` is reachable from `s` in at most `i` steps
+(inside the vertex set `{0,…,n-1}`). -/
 
-lemma Cnt_zero (i : ℕ) : Cnt P x i 0 = 0 := by
-  have hs : {y ∈ RS P x i | P.idx y < 0} = (∅ : Set P.V) := by
-    ext y; simp
-  rw [Cnt, hs, Set.ncard_empty]
+lemma cnt_zero (hs : s < n) : cnt (n := n) (g := g) (s := s) 0 = 1 := by
+  have : Rset (n := n) (g := g) (s := s) 0 = {s} := by
+    ext v; simp [mem_Rset]
+    intro hv; omega
+  simp [cnt, this]
 
+/-- The reachability sets stabilise by step `n`. -/

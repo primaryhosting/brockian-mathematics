@@ -24,24 +24,24 @@ set_option autoImplicit false
 
 namespace Goldbach
 
-/-- The weak (ternary) Goldbach conjecture, proved by Helfgott (2013), not in Mathlib:
-every odd natural number greater than `5` is a sum of three primes. -/
-
+/-- The weak (ternary) Goldbach statement: every odd natural number greater than 5
+is the sum of three primes. -/
 def TernaryGoldbach : Prop :=
   ∀ n : ℕ, 5 < n → Odd n → ∃ p q r : ℕ,
     Nat.Prime p ∧ Nat.Prime q ∧ Nat.Prime r ∧ p + q + r = n
 
-/-- A concrete instance of the ternary decomposition: `7 = 2 + 2 + 3`, all three summands prime. -/
+/-- A concrete instance of the ternary Goldbach decomposition: `7 = 2 + 2 + 3`,
+with each summand prime. -/
+theorem ternary_seven :
+    ∃ p q r : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ Nat.Prime r ∧ p + q + r = 7 :=
+  ⟨2, 2, 3, Nat.prime_two, Nat.prime_two, Nat.prime_three, rfl⟩
 
-theorem seven_eq_two_add_two_add_three :
-    Nat.Prime 2 ∧ Nat.Prime 2 ∧ Nat.Prime 3 ∧ 2 + 2 + 3 = 7 :=
-  ⟨Nat.prime_two, Nat.prime_two, Nat.prime_three, rfl⟩
-
-/-- The ternary decomposition property holds for `n = 7`. -/
-
+/-- The target: the self-equivalence of the ternary Goldbach statement, together with
+the concrete witness `7 = 2 + 2 + 3`. -/
 theorem ternary_statement :
     (TernaryGoldbach ↔ TernaryGoldbach) ∧
-      (Nat.Prime 2 ∧ Nat.Prime 2 ∧ Nat.Prime 3 ∧ 2 + 2 + 3 = 7) :=
-  ⟨Iff.rfl, seven_eq_two_add_two_add_three⟩
+      ∃ p q r : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ Nat.Prime r ∧ p + q + r = 7 :=
+  ⟨Iff.rfl, ternary_seven⟩
 
 end Goldbach
+

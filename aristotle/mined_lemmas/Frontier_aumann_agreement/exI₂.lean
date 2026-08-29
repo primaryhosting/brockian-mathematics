@@ -33,10 +33,9 @@ set_option grind.warning false
 
 namespace Frontier
 
-variable {Ω : Type*} [DecidableEq Ω]
+/-- The conditional probability of the event `E` given the (information) cell `C`,
+computed from the weight function `p`. -/
 
-/-- The prior probability of a (finite) event `S`, computed from the point masses `p`. -/
+def exI₂ : Fin 4 → Finset (Fin 4) := ![{0, 3}, {1, 2}, {1, 2}, {0, 3}]
 
-def exI₂ : Fin 4 → Finset (Fin 4) := fun ω => if ω.val % 2 = 0 then {0,2} else {1,3}
-
-/-- The event `{0,3}`; both agents assign it posterior probability `1/2` at every state. -/
+/-- The uniform prior on the four-state space. -/

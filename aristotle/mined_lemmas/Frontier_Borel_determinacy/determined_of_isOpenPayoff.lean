@@ -8,73 +8,48 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-We develop, from scratch (there is no game-determinacy material in Mathlib), the theory of
-two-player infinite games of perfect information with moves in an arbitrary nonempty set `A`:
-plays are sequences `ℕ → A`, player `0` moves at the even stages, player `1` at the odd ones,
-strategies are functions from finite positions (`List A`) to moves, and a payoff set
-`S ⊆ (ℕ → A)` is *determined* (`Frontier.Determined`) when one of the players has a winning
-strategy.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-What is proved unconditionally:
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-* `Frontier.not_winsFor_both`: the two players never both have a winning strategy
-  (non-degeneracy of the framework).
-* `Frontier.exists_winsFrom_of_not_losing` and `Frontier.exists_winning_of_isClosedPayoff`:
-  the combinatorial heart of the **Gale–Stewart theorem** — in a game whose payoff is closed
-  for the player to be favoured, if the opponent cannot win from a position, that player can.
-* `Frontier.determined_of_isClosedPayoff`, `Frontier.determined_of_isOpenPayoff`,
-  `Frontier.determined_of_isClopenPayoff`: closed, open and clopen games are determined.
-  This is the base case of Martin's induction.
-* `Frontier.determined_of_inter_open_closed`, `Frontier.determined_of_union_closed_open`:
-  one level beyond the base case, games whose payoff is the intersection of an open and a
-  closed set (a difference of open sets), or the union of a closed and an open set, are
-  determined.
-* `Frontier.determined_of_unravelable`: determinacy transfers along a covering
-  (`Frontier.Cover`); hence every payoff set unraveled by a clopen game is determined.
-* `Frontier.unravelable_of_isClopenPayoff`, `Frontier.unravelable_compl`: clopen sets are
-  unravelable, and the unravelable sets are closed under complements.
-* `Frontier.UnravelingScheme.mem_of_isBorelPayoff`: the σ-algebra induction which propagates
-  membership in an unraveling scheme from the open sets to all Borel sets.
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-The final statement `Frontier.Borel_determinacy` is Martin's theorem in the form of a
-Lean-checked reduction: every Borel game is determined as soon as an *unraveling scheme*
-exists, i.e. a class of payoff sets containing the closed sets, closed under complements and
-countable unions, and consisting of determined sets.  Martin's construction produces such a
-class; supplying it is the combinatorial core of his proof and is not carried out here.
-Everything else — the base case, the transfer of determinacy along coverings, stability under
-complements, and the σ-algebra induction — is proved.
-
-`Frontier.Borel_determinacy_of_unravelings` specialises the reduction to the concrete class
-of payoff sets admitting a clopen covering in the sense of `Frontier.Cover`, for which the
-determinacy and complement fields of the scheme are proved here, leaving only the two
-unraveling lemmas as hypotheses.  Note that `Frontier.Cover` is a simplified, "full tree"
-rendering of Martin's notion of covering (games here have no legality constraints on moves);
-no claim is made that Martin's coverings satisfy it verbatim, which is why the abstract
-scheme, rather than this concrete class, is used in the headline statement.
--/
-
-universe u v
+set_option grind.warning false
 
 namespace Frontier
 
-open Classical
+/-!
+## Infinite two-person games of perfect information
 
-variable {A : Type u}
+Fix a nonempty set `X` of moves.  A *play* is an element of `ℕ → X` (for `X = ℕ` this is
+Baire space); a *position* is a finite list of moves.  Players I and II alternate moves,
+producing an infinite play, and player I wins iff the play belongs to the payoff set `A`.
 
-/-! ### Games on a set of moves -/
+The parameter `s : Bool` records which player moves first: for `s = false` player I moves
+at positions of even length (the usual convention), for `s = true` the roles are
+interchanged.  Carrying this parameter lets a single Gale–Stewart argument serve both
+players.
+-/
 
-/-- The list of the first `n` moves of the play `x`. -/
+variable {X : Type*} [Inhabited X]
 
-theorem determined_of_isOpenPayoff [Nonempty A] {S : Set (ℕ → A)} (hS : IsOpenPayoff S) :
-    Determined S := by
-  by_cases h : ∃ σ : Strategy A, WinsFor 0 σ S
-  · exact Or.inl h
-  · have hSc : IsClosedPayoff Sᶜ := by simpa [IsClosedPayoff, compl_compl] using hS
-    have h' : ¬ ∃ σ : Strategy A, WinsFor 0 σ (Sᶜ)ᶜ := by simpa [compl_compl] using h
-    exact Or.inr (exists_winning_of_isClosedPayoff (by norm_num) (by norm_num) (by norm_num)
-      hSc h')
+/-- `moverIsI s h` is `true` exactly when player I is to move at the position `h`. -/
 
-/-- Clopen games are determined. -/
+theorem determined_of_isOpenPayoff {A : Set (ℕ → X)} (hA : IsOpenPayoff A) : Determined A :=
+  gale_stewart false hA []
+

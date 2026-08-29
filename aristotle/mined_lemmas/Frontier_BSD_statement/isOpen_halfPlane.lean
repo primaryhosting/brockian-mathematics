@@ -22,28 +22,52 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+/-!
+## Overview
+
+We formalise the statement of the Birch–Swinnerton-Dyer conjecture (rank part) for an
+elliptic curve over `ℚ`, given by a minimal integral Weierstrass model `E`:
+
+  `ord_{s=1} L(E, s) = rank E(ℚ)`.
+
+* The *analytic* side is the order of vanishing at `s = 1` of any entire function `L`
+  which agrees with the Dirichlet series `∑ a_n n^{-s}` on the half plane `Re s > 3/2`
+  (where that series converges); the coefficients `a_n` are built from the point counts
+  of the reductions `E mod p` in the usual way.
+* The *algebraic* side is the Mordell–Weil rank, i.e. the `ℚ`-dimension of
+  `ℚ ⊗_ℤ E(ℚ)`.
+
+The statement is well posed: by the identity theorem, an entire continuation of the
+Dirichlet series is unique (`Frontier.LFunction_unique`), so the analytic order of
+vanishing does not depend on the choice of `L`
+(`Frontier.analyticOrder_eq_of_isLFunction`).
+
+The target theorem `Frontier.BSD_statement` is a Lean-checked reduction: assuming the
+conjecture, we derive the classical rank-zero criterion
+`L(E, 1) ≠ 0 ↔ rank E(ℚ) = 0`.
+-/
 
 namespace Frontier
 
-/-!
-## The arithmetic side: the Mordell–Weil rank
+open WeierstrassCurve
 
-We work with an integral Weierstrass model `W : WeierstrassCurve ℤ` with nonzero
-discriminant; the associated elliptic curve over `ℚ` is the base change
-`W.map (Int.castRingHom ℚ)`, whose group of rational points is
-`(W.map (Int.castRingHom ℚ)).toAffine.Point` (affine nonsingular points together with
-the point at infinity).
--/
-
-/-- The Mordell–Weil group `E(ℚ)` of the integral Weierstrass model `W`. -/
-abbrev MordellWeil (W : WeierstrassCurve ℤ) : Type :=
-  (W.map (Int.castRingHom ℚ)).toAffine.Point
-
-/-- The Mordell–Weil rank of `E(ℚ)`, defined as the `ℚ`-dimension of `ℚ ⊗_ℤ E(ℚ)`
-(equivalently, the rank of the free part of the finitely generated abelian group `E(ℚ)`). -/
+/-- The trace of Frobenius at `p` for the integral Weierstrass model `E`, defined as
+`a_p = p + 1 - #E_ns(𝔽_p)`, where `E_ns(𝔽_p)` is the group of nonsingular points of the
+reduction of `E` modulo `p` (this is the usual `a_p` for good primes, and gives
+`1`, `-1`, `0` at primes of split multiplicative, nonsplit multiplicative and additive
+reduction respectively, provided the model is minimal). -/
 
 lemma isOpen_halfPlane : IsOpen {s : ℂ | 3 / 2 < s.re} :=
   isOpen_lt continuous_const Complex.continuous_re
 
-/-- Two `L`-functions of the same curve agree on the half plane `Re s > 3/2`. -/
+/-- **Well-posedness.** The `L`-function of `E` is unique: two entire functions agreeing
+with the Dirichlet series of `E` on `Re s > 3/2` are equal, by the identity theorem. -/

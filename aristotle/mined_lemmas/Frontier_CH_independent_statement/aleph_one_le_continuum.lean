@@ -1,3 +1,11 @@
+/-
+# CH Independent Statement
+Category: Frontier — Set Theory
+Target: Frontier.CH_independent_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -8,43 +16,24 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Classical
-open Cardinal
+set_option autoImplicit false
 
 namespace Frontier
 
-/-!
-## What is (and is not) formalized here
+open Cardinal FirstOrder Language
 
-The Continuum Hypothesis (CH) asserts `ℵ₁ = 𝔠`.  Gödel (1938, constructible universe `L`)
-and Cohen (1963, forcing) showed that CH is *independent* of ZFC: neither CH nor its
-negation is a theorem of ZFC.  That is a **metamathematical** statement about the
-first-order theory ZFC and its provability predicate; it cannot be stated, let alone
-proved, as a theorem about Lean's own set-theoretic vocabulary — indeed, inside Lean
-`Frontier.ContinuumHypothesis` is a perfectly ordinary proposition, and neither it nor
-its negation is provable in Mathlib's foundation either.
+/-! ## Part 1: the statement of the Continuum Hypothesis
 
-What we do here is:
+We state CH in two equivalent ways and prove the equivalence inside Lean:
 
-* give the formal statement `ContinuumHypothesis` of CH (Lean's `Cardinal` API is the
-  ZFC-style cardinal arithmetic, so this is a faithful rendering);
-* give a schematic definition `IsIndependentOf` of "independence from a theory", where
-  the theory is presented abstractly by a provability predicate on propositions;
-* prove, fully in Lean, everything ZFC *does* settle about the pair `ℵ₁`, `𝔠`, namely
-  the base case `ℵ₁ ≤ 𝔠` (`Cardinal.aleph_one_le_continuum` in Mathlib), together with
-  a Lean-checked reduction of CH to two equivalent formulations: "there is no cardinal
-  strictly between `ℵ₀` and `𝔠`", and "every set of reals is countable or has the
-  cardinality of the continuum".
-
-The last item is the mathematical content that an independence proof has to straddle:
-`ℵ₁ ≤ 𝔠` is a theorem, and the only remaining question — whether the inequality is
-strict — is exactly what Gödel's and Cohen's models decide in opposite ways.
+* the *cardinal-arithmetic* form `2 ^ ℵ₀ = ℵ₁` (equivalently `𝔠 = ℵ₁`), and
+* the *no intermediate cardinality* form: every set of reals which is uncountable
+  has the cardinality of the continuum.
 -/
 
-/-- The Continuum Hypothesis: the first uncountable cardinal is the cardinality of the
-continuum, `ℵ₁ = 𝔠`. -/
+/-- The Continuum Hypothesis, in cardinal-arithmetic form: `𝔠 = ℵ₁`. -/
 
-theorem aleph_one_le_continuum : (ℵ_ 1 : Cardinal.{0}) ≤ 𝔠 :=
+theorem aleph_one_le_continuum : (ℵ₁ : Cardinal.{0}) ≤ 𝔠 :=
   Cardinal.aleph_one_le_continuum
 
-/-- Failure of CH is exactly the strict inequality `ℵ₁ < 𝔠`. -/
+/-- Cantor's theorem in the relevant instance: `ℵ₀ < 2 ^ ℵ₀ = 𝔠`. -/

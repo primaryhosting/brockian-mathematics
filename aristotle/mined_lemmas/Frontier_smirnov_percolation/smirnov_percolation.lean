@@ -1,11 +1,3 @@
-/-
-# Smirnov Percolation
-Category: Frontier — Fields Medal Work
-Target: Frontier.smirnov_percolation
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -30,55 +22,46 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-
 set_option grind.warning false
 
 namespace Frontier
 
-/-!
-## Setting
+open Filter Topology
 
-Cardy's formula, as proved by Smirnov for critical site percolation on the triangular
-lattice, says the following.  Take a Jordan domain `Ω` with four marked boundary points
-`a, b, c, d` in cyclic order, and let `Π(Ω; a, b, c, d)` be the scaling limit of the
-probability that the arc `ab` is joined to the arc `cd` by an open cluster.  Then `Π`
-depends only on the conformal class of the configuration `(Ω; a, b, c, d)`; concretely,
-after uniformizing `Ω` onto the upper half plane `ℍ` (so that the marked points sit on
-the real line), `Π` is a fixed function `F` of the *cross-ratio* of the four marked
-points.
+/-! ## Part 1: the discrete model (critical site percolation, `p = 1/2`)
 
-The two ingredients are therefore:
+Site percolation on a finite site set `V` (a finite piece of the triangular lattice) is
+modelled as a uniformly random colouring `ω : V → Bool`, with `true` meaning *open*.  On
+the triangular lattice the critical parameter is `p_c = 1/2`, so the uniform measure on
+colourings is exactly the critical percolation measure. -/
 
-* **Cardy's formula** (`cardy` below): in the half-plane normalization the crossing
-  probability is a function of the cross ratio alone;
-* **conformal invariance**: the conformal automorphisms of `ℍ` are the real Möbius maps
-  with positive determinant, and the crossing probability is unchanged by them.
+section Discrete
 
-What is formalized here is the *reduction* of conformal invariance to Cardy's formula:
-granted that the limiting crossing probability has the Cardy form, it is invariant under
-every Möbius change of coordinates of the half-plane (`Frontier.smirnov_percolation`), and
-it automatically satisfies the self-duality relation
-`Π(a,b,c,d) + Π(a,c,b,d) = 1` (`Frontier.crossing_duality`).  The analytic heart of the
-reduction is the Möbius invariance of the cross ratio, proved below from scratch.
--/
+variable {V : Type*} [Fintype V]
 
-/-- The cross ratio `(a, b ; c, d) = ((a - c)(b - d)) / ((a - d)(b - c))` of four points of
-the real line, thought of as marked boundary points of the upper half plane. -/
+/-- The probability of an event `E` of percolation configurations under critical
+(`p = 1/2`) site percolation on the finite site set `V`. -/
 
 theorem smirnov_percolation
-    (crossingProb : ℝ → ℝ → ℝ → ℝ → ℝ) (hCardy : IsCardy crossingProb)
-    (p q r s : ℝ) (hdet : p * s - q * r ≠ 0) (a b c d : ℝ)
-    (ha : r * a + s ≠ 0) (hb : r * b + s ≠ 0) (hc : r * c + s ≠ 0) (hd : r * d + s ≠ 0) :
-    crossingProb (mobius p q r s a) (mobius p q r s b) (mobius p q r s c) (mobius p q r s d)
-      = crossingProb a b c d := by
-  obtain ⟨F, hF⟩ := hCardy
-  rw [hF, hF, crossRatio_mobius p q r s hdet a b c d ha hb hc hd]
+    (P : ℕ → ℝ → ℝ → ℝ → ℝ → ℝ) (cardy : ℝ → ℝ)
+    (hSmirnov : SmirnovConvergence P cardy)
+    (α β γ δ : ℝ) (hdet : 0 < α * δ - β * γ)
+    (a b c d : ℝ) (hab : a < b) (hbc : b < c) (hcd : c < d)
+    (hpole : ∀ x ∈ Set.Icc a d, 0 < γ * x + δ) :
+    Tendsto (fun n => P n (mobius α β γ δ a) (mobius α β γ δ b)
+        (mobius α β γ δ c) (mobius α β γ δ d)) atTop
+      (𝓝 (cardy (crossRatio a b c d))) := by
+  have hda : a < d := lt_trans hab (lt_trans hbc hcd)
+  have hA : 0 < γ * a + δ := hpole a ⟨le_refl a, hda.le⟩
+  have hB : 0 < γ * b + δ := hpole b ⟨hab.le, (lt_trans hbc hcd).le⟩
+  have hC : 0 < γ * c + δ := hpole c ⟨(lt_trans hab hbc).le, hcd.le⟩
+  have hD : 0 < γ * d + δ := hpole d ⟨hda.le, le_refl d⟩
+  have h1 := mobius_lt_mobius (α := α) (β := β) hdet hA hB hab
+  have h2 := mobius_lt_mobius (α := α) (β := β) hdet hB hC hbc
+  have h3 := mobius_lt_mobius (α := α) (β := β) hdet hC hD hcd
+  have hlim := hSmirnov _ _ _ _ h1 h2 h3
+  rwa [crossRatio_mobius hdet.ne' hA.ne' hB.ne' hC.ne' hD.ne'
+    (by linarith : c ≠ a) (by linarith : d ≠ b)] at hlim
 
-/-- Specialization of `Frontier.smirnov_percolation` to the conformal automorphisms of the
-upper half plane, normalized by `p s - q r > 0`, acting on marked boundary points on which
-the map has no pole. -/
+/-- Consistency of the limit with Part 1: since each `P n a b c d` is a probability (as in
+`probHalf_nonneg` / `probHalf_le_one`), the Cardy–Smirnov limit is itself a probability. -/

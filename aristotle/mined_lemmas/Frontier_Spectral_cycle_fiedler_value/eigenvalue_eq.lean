@@ -1,13 +1,4 @@
-/-
-# Cycle Fiedler Value
-Category: Frontier — Spectral Geometry
-Target: Frontier.Spectral.cycle_fiedler_value
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Cycle Fiedler Value
 Category: Frontier — Spectral Geometry
@@ -30,54 +21,64 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option grind.warning false
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-open Finset Matrix SimpleGraph
+set_option grind.warning false
 
 namespace Frontier.Spectral
 
-/-! ## The root of unity `ζ = exp (2 π i / n)` -/
+open Finset Matrix SimpleGraph
 
-/-- The primitive `n`-th root of unity `exp (2 π i / n)`. -/
+/-- The angle `2π/n` for the cycle `C_n` with `n = m + 3`. -/
 
-lemma eigenvalue_eq (N : ℕ) (mu : ℝ) (x : Fin (N + 3) → ℝ) (hx : x ≠ 0)
-    (hL : (cycleGraph (N + 3)).lapMatrix ℝ *ᵥ x = mu • x) :
-    ∃ k : Fin (N + 3), mu = 2 - 2 * Real.cos (2 * Real.pi * (k : ℕ) / ((N + 3 : ℕ) : ℝ)) ∧
-      ((∑ j, x j) = 0 → (k : ℕ) ≠ 0) := by
-  haveI : NeZero (N + 3) := ⟨by omega⟩
-  have hn : (N + 3 : ℕ) ≠ 0 := by omega
-  have hyne : (fun j => ((x j : ℂ))) ≠ (0 : Fin (N + 3) → ℂ) := by
-    intro h
-    apply hx
+lemma eigenvalue_eq (μ : ℝ) (x : Fin (m + 3) → ℝ) (hx : x ≠ 0)
+    (heig : (cycleGraph (m + 3)).lapMatrix ℝ *ᵥ x = μ • x) :
+    ∃ k : Fin (m + 3), μ = cycEigen m k := by
+  classical
+  set M : Matrix (Fin (m + 3)) (Fin (m + 3)) ℝ :=
+    (cycleGraph (m + 3)).lapMatrix ℝ - Matrix.diagonal (fun _ => μ) with hM
+  have hMx : M *ᵥ x = 0 := by
     funext i
-    have h1 := congrFun h i
-    simp only [Pi.zero_apply] at h1
-    exact_mod_cast h1
-  have hpoint : ∀ v : Fin (N + 3),
-      2 * ((x v : ℂ)) - ((x (v - 1) : ℂ)) - ((x (v + 1) : ℂ)) = (mu : ℂ) * ((x v : ℂ)) := by
-    intro v
-    have h1 := congrFun hL v
-    rw [lap_mulVec] at h1
-    have h2 : 2 * x v - x (v - 1) - x (v + 1) = mu * x v := by
-      simpa [Pi.smul_apply, smul_eq_mul] using h1
-    exact_mod_cast congrArg (fun t : ℝ => (t : ℂ)) h2
-  obtain ⟨k, hk⟩ := exists_dft_ne_zero hn (fun j => ((x j : ℂ))) hyne
-  have heq := dft_eigen (fun j => ((x j : ℂ))) (mu : ℂ) ((k : ℕ) : ℤ) hpoint
-  have hmu : (2 - zeta (N + 3) ^ ((k : ℕ) : ℤ) - zeta (N + 3) ^ (-((k : ℕ) : ℤ))) = (mu : ℂ) :=
-    mul_right_cancel₀ hk heq
-  have hcos : (mu : ℂ)
-      = ((2 - 2 * Real.cos (2 * Real.pi * (k : ℕ) / ((N + 3 : ℕ) : ℝ)) : ℝ) : ℂ) := by
-    rw [← hmu]
-    have h3 := zeta_zpow_add_neg (n := N + 3) ((k : ℕ) : ℤ)
-    push_cast
-    push_cast at h3
-    linear_combination -h3
-  refine ⟨k, by exact_mod_cast hcos, ?_⟩
-  intro hsum h0
-  apply hk
-  rw [h0]
-  simp only [Nat.cast_zero, dft, zero_mul, neg_zero, zpow_zero, mul_one]
-  have : ∑ j : Fin (N + 3), ((x j : ℂ)) = ((∑ j : Fin (N + 3), x j : ℝ) : ℂ) := by push_cast; rfl
-  rw [this, hsum]
-  simp
+    have hi := congrFun heig i
+    simp [hM, Matrix.sub_mulVec, hi]
+  have hdet : M.det = 0 := Matrix.exists_mulVec_eq_zero_iff.mp ⟨x, hx, hMx⟩
+  set Mc : Matrix (Fin (m + 3)) (Fin (m + 3)) ℂ :=
+    (cycleGraph (m + 3)).lapMatrix ℂ - Matrix.diagonal (fun _ => (μ : ℂ)) with hMc
+  have hmap : Mc = M.map Complex.ofRealHom := by
+    have hentry : ∀ i j, (((cycleGraph (m + 3)).lapMatrix ℝ i j : ℝ) : ℂ)
+        = (cycleGraph (m + 3)).lapMatrix ℂ i j := by
+      intro i j
+      have h := congrFun (congrFun (lapMatrix_map_ofReal (m := m)) i) j
+      simpa [Matrix.map_apply] using h
+    ext i j
+    simp [hMc, hM, Matrix.map_apply, Matrix.sub_apply, Matrix.diagonal_apply, ← hentry]
+    split_ifs <;> simp
+  have hdetC : Mc.det = 0 := by
+    have hd := RingHom.map_det Complex.ofRealHom M
+    simp [RingHom.mapMatrix_apply] at hd
+    rw [hmap, ← hd, hdet]
+    simp
+  have hprod : Mc * fourierMat m
+      = fourierMat m * Matrix.diagonal (fun k => ((cycEigen m k : ℝ) : ℂ) - (μ : ℂ)) := by
+    rw [hMc, Matrix.sub_mul, lapMatrix_mul_fourierMat]
+    ext j k
+    simp [Matrix.mul_diagonal, Matrix.diagonal_mul, Matrix.sub_apply]
+    ring
+  have hdet2 : Mc.det * (fourierMat m).det
+      = (fourierMat m).det * ∏ k : Fin (m + 3), (((cycEigen m k : ℝ) : ℂ) - (μ : ℂ)) := by
+    rw [← Matrix.det_mul, hprod, Matrix.det_mul, Matrix.det_diagonal]
+  rw [hdetC, zero_mul] at hdet2
+  have hz : ∏ k : Fin (m + 3), (((cycEigen m k : ℝ) : ℂ) - (μ : ℂ)) = 0 := by
+    rcases mul_eq_zero.mp hdet2.symm with h | h
+    · exact absurd h det_fourierMat_ne_zero
+    · exact h
+  obtain ⟨k, -, hk⟩ := Finset.prod_eq_zero_iff.mp hz
+  refine ⟨k, ?_⟩
+  have hkc : ((cycEigen m k : ℝ) : ℂ) = (μ : ℂ) := by linear_combination hk
+  exact_mod_cast hkc.symm
 

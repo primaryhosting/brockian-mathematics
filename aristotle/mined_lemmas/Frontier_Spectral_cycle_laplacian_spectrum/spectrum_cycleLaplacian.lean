@@ -25,24 +25,18 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Matrix ZMod AddChar Finset
+open Complex Matrix
 
-/-- The generating vector of the cycle Laplacian: `2` at `0`, `-1` at `±1`, `0` elsewhere. -/
+/-- The graph Laplacian of the cycle graph `C n`, as the `n × n` circulant matrix with
+diagonal `2` and `-1` on the two cyclic off-diagonals (indices are taken in `ZMod n`). -/
 
-lemma spectrum_cycleLaplacian (hn : 3 ≤ n) :
-    spectrum ℂ (cycleLaplacian n) = Set.range (cycleEigen n) := by
-  set u : (Matrix (ZMod n) (ZMod n) ℂ)ˣ :=
-    ⟨fourierMat n, fourierMatInv n, fourier_mul_inv, inv_mul_fourier⟩ with hu
-  have hconj : cycleLaplacian n
-      = (u : Matrix (ZMod n) (ZMod n) ℂ) * Matrix.diagonal (cycleEigen n)
-        * ((u⁻¹ : (Matrix (ZMod n) (ZMod n) ℂ)ˣ) : Matrix (ZMod n) (ZMod n) ℂ) :=
-    laplacian_eq_conj hn
-  rw [hconj, spectrum.units_conjugate, _root_.spectrum_diagonal]
+theorem spectrum_cycleLaplacian (n : ℕ) [NeZero n] (hn : 3 ≤ n) :
+    spectrum ℂ (cycleLaplacian n)
+      = {μ : ℂ | ∃ k ∈ Finset.range n,
+          μ = ((2 - 2 * Real.cos (2 * Real.pi * k / n) : ℝ) : ℂ)} := by
+  rw [← cycle_laplacian_spectrum n hn]
+  ext μ
+  exact mem_spectrum_iff_exists_eigenvector _ μ
 
-end
+end Frontier.Spectral
 
-/-- **Spectrum of the cycle Laplacian.** For `n ≥ 3`, the eigenvalues of the graph Laplacian
-of the cycle graph `C n` (modelled as the `n × n` circulant matrix with diagonal `2` and `-1`
-on the two cyclic off-diagonals, diagonalized by the discrete Fourier eigenvectors
-`v k j = exp (2 π I k j / n)`) are exactly the numbers `2 - 2 cos (2 π k / n)` for
-`k = 0, …, n - 1`. -/

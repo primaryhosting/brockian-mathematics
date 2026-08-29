@@ -23,15 +23,12 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Legendre Conjecture
-Category: Brockian Conjecture
-Target: Brockian.LegendreConjecture.LegendreConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
+import Brockian.LegendreConjectureExtras
+#print axioms Brockian.LegendreConjecture.LegendreConjecture
+#print axioms Brockian.LegendreConjecture.legendre_of_le_forty
+#print axioms Brockian.LegendreConjecture.IsPrimeNat_iff_prime
+#print axioms Brockian.LegendreConjecture.exists_prime_between_sq_and_two_sq
+#print axioms Brockian.LegendreConjecture.legendre_of_shortInterval
 
 /-!
 # Legendre Conjecture
@@ -41,16 +38,28 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+/-
+This file is deliberately self-contained (no `import` lines), so that the header
+comment above can literally be the first thing in the file: Lean 4 requires all
+`import` commands to precede every other piece of syntax except plain comments,
+and a module doc comment `/-! ... -/` counts as syntax.
+
+Mathlib-based companion results (in particular the identification of the
+primality predicate used here with `Nat.Prime`, and Bertrand's postulate as an
+unconditional partial result) live in `Brockian/LegendreConjectureExtras.lean`,
+which imports this module.
+-/
+
 namespace Brockian.LegendreConjecture
 
-/-- **Legendre's conjecture** (open): for every `n ≥ 1` there is a prime strictly
-between `n ^ 2` and `(n + 1) ^ 2`. -/
+/-- Primality of a natural number, spelled out by trial division:
+`p` is prime iff `2 ≤ p` and no `d` with `2 ≤ d < p` divides `p`.
+This is proved equivalent to Mathlib's `Nat.Prime` in
+`Brockian/LegendreConjectureExtras.lean`. -/
 
-theorem exists_prime_between_sq_and_two_sq (n : ℕ) (hn : 1 ≤ n) :
-    ∃ p : ℕ, p.Prime ∧ n ^ 2 < p ∧ p ≤ 2 * n ^ 2 := by
-  have hne : n ^ 2 ≠ 0 := by positivity
-  obtain ⟨p, hp, hlt, hle⟩ := Nat.exists_prime_lt_and_le_two_mul (n ^ 2) hne
-  exact ⟨p, hp, hlt, hle⟩
+theorem exists_prime_between_sq_and_two_sq (n : ℕ) (hn : 0 < n) :
+    ∃ p : ℕ, p.Prime ∧ n ^ 2 < p ∧ p ≤ 2 * n ^ 2 :=
+  Nat.exists_prime_lt_and_le_two_mul (n ^ 2) (by positivity)
 
 end Brockian.LegendreConjecture
 

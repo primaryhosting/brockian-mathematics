@@ -23,37 +23,46 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-import Brockian.LegendreConjecture
+import Brockian.LegendreConjectureExtras
+#print axioms Brockian.LegendreConjecture.LegendreConjecture
+#print axioms Brockian.LegendreConjecture.legendre_of_le_forty
+#print axioms Brockian.LegendreConjecture.IsPrimeNat_iff_prime
+#print axioms Brockian.LegendreConjecture.exists_prime_between_sq_and_two_sq
+#print axioms Brockian.LegendreConjecture.legendre_of_shortInterval
 
 /-!
-# Legendre Conjecture — Mathlib companion
+# Legendre Conjecture
+Category: Brockian Conjecture
+Target: Brockian.LegendreConjecture.LegendreConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-This module connects the self-contained statements of `Brockian.LegendreConjecture`
-(which, by design, imports nothing so that the required header comment can sit at the
-very top of that file) with Mathlib's `Nat.Prime`, and records some unconditional
-partial results towards Legendre's conjecture.
+/-
+This file is deliberately self-contained (no `import` lines), so that the header
+comment above can literally be the first thing in the file: Lean 4 requires all
+`import` commands to precede every other piece of syntax except plain comments,
+and a module doc comment `/-! ... -/` counts as syntax.
+
+Mathlib-based companion results (in particular the identification of the
+primality predicate used here with `Nat.Prime`, and Bertrand's postulate as an
+unconditional partial result) live in `Brockian/LegendreConjectureExtras.lean`,
+which imports this module.
 -/
 
 namespace Brockian.LegendreConjecture
 
-/-- The self-contained primality predicate used in `Brockian.LegendreConjecture`
-agrees with Mathlib's `Nat.Prime`. -/
+/-- Primality of a natural number, spelled out by trial division:
+`p` is prime iff `2 ≤ p` and no `d` with `2 ≤ d < p` divides `p`.
+This is proved equivalent to Mathlib's `Nat.Prime` in
+`Brockian/LegendreConjectureExtras.lean`. -/
 
-theorem LegendreConjecture (hgap : ShortGapHypothesis) : LegendreStatement := by
+theorem LegendreConjecture (H : ShortIntervalPrimeHypothesis) : LegendreStatement := by
   intro n hn
-  have hx : 1 ≤ n ^ 2 := by
-    have := Nat.pow_le_pow_left hn 2
-    simpa using this
-  have hmm : n * n ≤ n ^ 2 := by rw [sq_eq_mul_self]; exact Nat.le_refl _
-  obtain ⟨p, hp, hlt, hle⟩ := hgap (n ^ 2) n hx hmm
+  obtain ⟨p, hp, hlt, hle⟩ := H (n ^ 2) n hn (Nat.le_refl _)
   refine ⟨p, hp, hlt, ?_⟩
-  have hkey : n ^ 2 + n < n ^ 2 + 2 * n + 1 := by
-    have : n < 2 * n + 1 := by omega
-    have := Nat.add_lt_add_left this (n ^ 2)
-    omega
-  rw [succ_sq]
-  exact Nat.lt_of_le_of_lt hle hkey
+  have hexp : (n + 1) ^ 2 = n ^ 2 + 2 * n + 1 := by
+    simp [Nat.pow_two, Nat.mul_add, Nat.add_mul]; omega
+  omega
 
-end Brockian.LegendreConjecture
-
+/-- An explicit prime witness in the interval `(n ^ 2, (n + 1) ^ 2)` for `1 ≤ n ≤ 40`. -/

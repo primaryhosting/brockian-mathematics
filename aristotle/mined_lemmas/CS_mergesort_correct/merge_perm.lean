@@ -1,43 +1,27 @@
 import Mathlib
+import RequestProject.Main
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Mergesort on a linear order
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+A Mathlib-facing corollary of `CS.mergesort_correct`: on any linear order,
+`CS.mergeSort (· ≤ ·)` produces a `List.Sorted (· ≤ ·)` permutation of its input.
+-/
 
 namespace CS
 
-variable {α : Type*}
+/-- On a linear order, `mergeSort (· ≤ ·) l` is sorted and a permutation of `l`. -/
 
-/-- Merge two lists with respect to a boolean comparison `le`. -/
-
-theorem merge_perm (le : α → α → Bool) (xs ys : List α) :
-    (merge le xs ys).Perm (xs ++ ys) := by
-  induction xs, ys using CS.merge.induct (le := le) with
-  | case1 ys => simp [merge]
-  | case2 xs h => simp [merge]
-  | case3 x xs y ys h ih =>
-      rw [merge]; simp only [h, if_true]
-      exact (ih.cons x).trans (by simp)
-  | case4 x xs y ys h ih =>
-      rw [merge]; simp only [h, if_false, Bool.false_eq_true]
-      exact (ih.cons y).trans List.perm_middle.symm
+theorem merge_perm (r : α → α → Prop) [DecidableRel r] :
+    ∀ xs ys : List α, (merge r xs ys).Perm (xs ++ ys)
+  | [], ys => by rw [merge]; simp
+  | x :: xs, [] => by rw [merge] <;> simp
+  | x :: xs, y :: ys => by
+      by_cases h : r x y
+      · rw [merge, if_pos h]
+        exact (merge_perm r xs (y :: ys)).cons x
+      · rw [merge, if_neg h]
+        refine ((merge_perm r (x :: xs) ys).cons y).trans ?_
+        exact (List.perm_middle (a := y) (l₁ := x :: xs) (l₂ := ys)).symm
+termination_by xs ys => xs.length + ys.length
 

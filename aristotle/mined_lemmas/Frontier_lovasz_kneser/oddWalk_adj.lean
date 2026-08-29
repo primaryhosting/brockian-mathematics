@@ -1,16 +1,4 @@
-/-
-# Lovasz Kneser
-Category: Frontier Abel
-Target: Frontier.lovasz_kneser
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean requires `import` to precede any module docstring, so the header above is
--- repeated as the module docstring immediately after the import.)
-
 import Mathlib
-
 /-!
 # Lovasz Kneser
 Category: Frontier Abel
@@ -19,30 +7,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option maxHeartbeats 1000000
+
 namespace Frontier
 
-open Finset SimpleGraph
+open SimpleGraph Finset
 
 /-- The vertex type of the Kneser graph `KG_{n,k}`: the `k`-element subsets of `Fin n`. -/
-abbrev KneserVertex (n k : ℕ) : Type := {s : Finset (Fin n) // s.card = k}
+abbrev KneserVertex (n k : ℕ) : Type := {A : Finset (Fin n) // A.card = k}
 
-/-- The Kneser graph `KG_{n,k}`: vertices are the `k`-element subsets of an `n`-element set,
-two of them being adjacent when they are disjoint.  (For `k ≥ 1` disjointness already forces
-the two vertices to be distinct; the explicit `s ≠ t` only serves to make the relation
-irreflexive in the degenerate case `k = 0`.) -/
+/-- The Kneser graph `KG_{n,k}`: vertices are the `k`-element subsets of `Fin n`, and two
+distinct such subsets are adjacent when they are disjoint. -/
 
-theorem oddWalk_adj (k j : ℕ) (hk : 1 ≤ k) :
+lemma oddWalk_adj (k : ℕ) (hk : 1 ≤ k) (j : ℕ) :
     (kneserGraph (2 * k + 1) k).Adj (oddWalk k j) (oddWalk k (j + 1)) := by
-  have hd : Disjoint (cyclicInterval k (j * k)) (cyclicInterval k ((j + 1) * k)) := by
-    have h := disjoint_cyclicInterval k (j * k)
-    rwa [show (j + 1) * k = j * k + k by ring]
-  refine ⟨?_, hd⟩
-  intro h
-  have h' : cyclicInterval k (j * k) = cyclicInterval k ((j + 1) * k) := congrArg Subtype.val h
-  rw [← h'] at hd
-  have he := disjoint_self.1 hd
-  have hc := card_cyclicInterval k (j * k)
-  rw [he] at hc
-  simp at hc
-  omega
+  have hstep : ((((j + 1) * k : ℕ)) : Fin (2 * k + 1))
+      = (((j * k : ℕ)) : Fin (2 * k + 1)) + ((k : ℕ) : Fin (2 * k + 1)) := by
+    rw [show (j + 1) * k = j * k + k by ring, Nat.cast_add]
+  have hdisj : Disjoint (oddWalk k j).1 (oddWalk k (j + 1)).1 := by
+    show Disjoint (cycInt k _) (cycInt k _)
+    rw [hstep]
+    exact cycInt_disjoint k _
+  refine ⟨?_, hdisj⟩
+  intro hEq
+  obtain ⟨x, hx⟩ := kneser_vertex_nonempty hk (oddWalk k j)
+  have hx' : x ∈ (oddWalk k (j + 1)).1 := by rw [← hEq]; exact hx
+  exact (Finset.disjoint_left.mp hdisj hx) hx'
 

@@ -23,7 +23,9 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Palindromic Prime Infinitude
 Category: Brockian Conjecture
 Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
@@ -31,22 +33,21 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 namespace Brockian.PalindromicPrimes
 
-/-- A natural number is *palindromic* (in base 10) when its list of base-10 digits
-is equal to its own reversal. -/
+/-- `IsPalindrome b n` says that the base-`b` digit expansion of `n` reads the same
+forwards and backwards. -/
 
-theorem eleven_dvd_of_palindrome_even_length {n : ℕ} (hp : IsPalindrome n)
+theorem eleven_dvd_of_palindrome_even_length {n : ℕ} (hp : IsPalindrome 10 n)
     (hlen : Even (Nat.digits 10 n).length) : 11 ∣ n := by
   rw [Nat.eleven_dvd_iff]
-  have hrev : (List.map (fun m : ℕ => (m : ℤ)) (Nat.digits 10 n)).reverse
-      = List.map (fun m : ℕ => (m : ℤ)) (Nat.digits 10 n) := by
+  have hrev : ((Nat.digits 10 n).map (fun d : ℕ => (d : ℤ))).reverse
+      = (Nat.digits 10 n).map (fun d : ℕ => (d : ℤ)) := by
     rw [← List.map_reverse, hp]
-  have hlen' : Even (List.map (fun m : ℕ => (m : ℤ)) (Nat.digits 10 n)).length := by
+  have hlen' : Even ((Nat.digits 10 n).map (fun d : ℕ => (d : ℤ))).length := by
     simpa using hlen
   rw [alternatingSum_eq_zero_of_palindrome_even _ hrev hlen']
-  simp
+  exact dvd_zero 11
 
-/-- The only palindromic prime with an even number of base-10 digits is `11`. -/
+/-- The only base-10 palindromic prime with an even number of digits is `11`.
+Hence, apart from `11`, every palindromic prime has an odd number of digits. -/

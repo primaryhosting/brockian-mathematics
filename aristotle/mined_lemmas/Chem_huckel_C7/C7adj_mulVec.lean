@@ -8,18 +8,27 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Huckel C 7
+Category: Chemistry
+Target: Chem.huckel_C7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace Chem
 
-open Complex Matrix
+open Complex
 
-/-- The adjacency matrix of the cycle graph `C₇` (the Hückel matrix of a 7-membered
-ring, in units where α = 0 and β = 1): the vertices are `Fin 7` and `i` is adjacent to
-`i + 1` and `i - 1`, the arithmetic being modulo 7. -/
+/-- The adjacency matrix of the cycle graph `C₇`, indexed by `ZMod 7`:
+vertices `i` and `j` are adjacent iff they differ by `1` modulo `7`. -/
 
-lemma C7adj_mulVec (v : Fin 7 → ℂ) (i : Fin 7) :
-    (C7adj *ᵥ v) i = v (i + 1) + v (i - 1) := by
-  have hn : (-1 : Fin 7) = 6 := by decide
-  fin_cases i <;>
-    simp [C7adj, Matrix.mulVec, dotProduct, Fin.sum_univ_seven, hn] <;> ring
+theorem C7adj_mulVec (v : ZMod 7 → ℂ) (i : ZMod 7) :
+    C7adj.mulVec v i = v (i - 1) + v (i + 1) := by
+  simp only [Matrix.mulVec, dotProduct, C7adj_apply, add_mul, Finset.sum_add_distrib, ite_mul,
+    one_mul, zero_mul, Finset.sum_ite_eq' Finset.univ]
+  simp
 
-/-- Going once around the cycle multiplies a geometric function by `c ^ 7`. -/
+/-! ### The primitive 7-th root of unity -/
+
+/-- The primitive `7`-th root of unity `exp(2πi/7)`. -/

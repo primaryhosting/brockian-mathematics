@@ -1,13 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Deutsch Jozsa
 Category: Frontier Qi
 Target: QI.deutsch_jozsa
-Statement: Deutsch–Jozsa decides constant-vs-balanced with one query.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -23,37 +22,14 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace QI
 
-/-! ## Setup
+variable {n : ℕ}
 
-We model the Deutsch–Jozsa algorithm on `n` qubits with real amplitudes (the algorithm
-never leaves the real subspace of the state space).
+/-- The sign `(-1)^b` attached to a Boolean value. -/
 
-* Computational basis states of the query register are bit strings `x : Fin n → Bool`.
-* `sgn b = (-1)^b` is the phase produced by the phase-kickback oracle.
-* `chi x y = (-1)^(x ⬝ y)` is the Walsh character, i.e. the matrix entry of the
-  `n`-fold Hadamard transform (up to the global normalisation `2^(n/2)`).
+def chi (x y : Fin n → Bool) : ℂ := ∏ i, sign (x i && y i)
 
-The algorithm is: prepare the uniform superposition `2^(-n/2) ∑ x, |x⟩`, apply the
-oracle **once** (this is the only place where `f` is used), obtaining
-`2^(-n/2) ∑ x, (-1)^(f x) |x⟩`, apply the Hadamard transform again, and measure.
-The resulting amplitude on the basis state `y` is `djAmp f y`, and the probability of
-observing `y` is `djProb f y`.
--/
-
-/-- The phase `(-1)^b`. -/
-
-def chi {n : ℕ} (x y : Fin n → Bool) : ℝ := ∏ i, sgn (x i && y i)
-
-/-- The amplitude of the basis state `y` at the end of the Deutsch–Jozsa algorithm:
-Hadamard, one oracle query, Hadamard. -/
+/-- The all-zeros bit string of length `n`. -/

@@ -8,6 +8,7 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -27,8 +28,8 @@ namespace Zeta23Obstruction
 /-- The tent profile `T a = max 0 (1 - |a|)`. -/
 
 lemma T_eq_zero_of_one_lt {a : ℝ} (ha : 1 < a) : T a = 0 := by
-  have h : |a| = a := abs_of_pos (lt_trans one_pos ha)
+  have h : |a| = a := abs_of_pos (lt_trans zero_lt_one ha)
   simp only [T, h]
   exact max_eq_left (by linarith)
 
-/-- On the band `(1, 5/2)`, the shifted tent `T (a - 3/2)` is strictly positive. -/
+/-- For `|a| < 1`, the tent is strictly positive. -/

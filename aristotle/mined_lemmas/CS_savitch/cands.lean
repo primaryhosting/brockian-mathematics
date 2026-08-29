@@ -1,43 +1,59 @@
-/-
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+import RequestProject.Savitch.Reach
+
+/-!
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` commands to precede every declaration, including module
-docstrings, so the header above is a plain block comment.)
 -/
-import Mathlib
-import RequestProject.Savitch.Model
-import RequestProject.Savitch.Walk
-import RequestProject.Savitch.Sim
-import RequestProject.Savitch.Semantics
-import RequestProject.Savitch.Space
 
 /-!
-The space-bounded machine model, the classes `CS.NSPACE`, `CS.DSPACE`,
-`CS.PSPACE` and `CS.NPSPACE`, and the simulator used in the proof are defined in
-the files `RequestProject/Savitch/*.lean`.
+## The deterministic simulator
 
-A machine reads its input through a head whose position is determined by its
-memory value, and it works in space `g` if on inputs of length `n` all reachable
-memory values lie in a set of at most `2 ^ g n` values depending only on `n`
-(the standard correspondence between `s` tape cells and `2 ^ O(s)`
-configurations).  The classes `NSPACE g` and `DSPACE g` are closed under
-constant factors by definition, as usual for space classes.
+This file defines the deterministic machine used in Savitch's theorem: an explicit
+iterative (stack based) implementation of the recursive procedure
 
-Savitch's theorem is proved for space bounds `f` with `n + 1 ≤ 2 ^ f n`
-(i.e. `f n ≥ log₂ (n+1)`), the standard hypothesis `f (n) ≥ log n`.
+```
+REACH d u v  =  if d = 0 then (u = v ∨ u → v)
+                else ∃ m, REACH (d-1) u m ∧ REACH (d-1) m v
+```
+
+together with its encoding into bit strings and the space accounting: a well-formed
+state occupies `O((f n)²)` bits, because the stack holds at most `f n + 2` frames of
+`O(f n)` bits each.
 -/
 
 namespace CS
+namespace Savitch
 
-/-- **Savitch's theorem**: a language recognized by a nondeterministic machine in
-space `f` (with `f n ≥ log₂ (n + 1)`) is recognized by a deterministic machine in
-space `O(f²)`, i.e. `NSPACE f ⊆ DSPACE (f²)`. -/
+/-- Classical truth value of a proposition. -/
 
-def cands (n : ℕ) : List N.Mem := (S n).toList
+def cands (s : ℕ) : List Word := (List.range (s + 1)).flatMap wordsOfLen
 
-/-- The transition function of the simulator. -/

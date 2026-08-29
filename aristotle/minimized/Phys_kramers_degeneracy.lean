@@ -1,91 +1,76 @@
 import Mathlib
-
 /-!
 # Kramers Degeneracy
 Category: Frontier Phys
 Target: Phys.kramers_degeneracy
-Statement: A time-reversal-invariant half-integer-spin system has doubly degenerate levels (Kramers).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+-- Note: Lean 4 requires `import` lines to precede every other command in a file
+-- (a module doc comment before `import Mathlib` is a hard parse error), so the
+-- requested header comment is placed immediately after the single import.
+
 namespace Phys
 
-/-- A vector and its image under an antiunitary time-reversal operator squaring to `-1`
-are linearly independent (the algebraic heart of Kramers' theorem). -/
+/-- **Kramers degeneracy.**
 
-theorem kramers_pair_independent {V : Type*} [AddCommGroup V] [Module ℂ V]
-    (T : V →ₗ⋆[ℂ] V) (hT : ∀ v, T (T v) = -v) (v : V) (hv : v ≠ 0) :
-    LinearIndependent ℂ ![v, T v] := by
-  have hsmul : ∀ (a b : ℂ), a • v = b • v → a = b := by
-    intro a b hab
-    by_contra hne
-    have h0 : (a - b) • v = 0 := by
-      rw [sub_smul, hab, sub_self]
-    have : v = 0 := by
-      have := congrArg (fun w => (a - b)⁻¹ • w) h0
-      simpa [smul_smul, inv_mul_cancel₀ (sub_ne_zero.mpr hne)] using this
-    exact hv this
-  rw [LinearIndependent.pair_iff]
-  intro s t hst
-  by_cases ht : t = 0
-  · subst ht
-    simp only [zero_smul, add_zero] at hst
-    rcases smul_eq_zero.mp hst with h | h
-    · exact ⟨h, rfl⟩
-    · exact absurd h hv
-  · -- `T v = c • v` with `c = -s/t`, then `T (T v) = |c|^2 • v = -v` forces `|c|^2 = -1`
-    have hTv : T v = (-(s / t)) • v := by
-      have : t • T v = (-s) • v := by
-        rw [neg_smul, eq_comm, neg_eq_iff_add_eq_zero]
-        exact hst
-      have := congrArg (fun w => t⁻¹ • w) this
-      simpa [smul_smul, inv_mul_cancel₀ ht, div_eq_inv_mul, mul_comm] using this
-    have h2 : T (T v) = (starRingEnd ℂ (-(s / t)) * (-(s / t))) • v := by
-      rw [hTv, map_smulₛₗ, hTv, smul_smul]
-    rw [hT v] at h2
-    have h3 : (-1 : ℂ) = starRingEnd ℂ (-(s / t)) * (-(s / t)) := by
-      apply hsmul
-      rw [← h2]
-      simp
-    set c : ℂ := -(s / t) with hc
-    have h4 : (Complex.normSq c : ℂ) = -1 := by
-      rw [h3, Complex.normSq_eq_conj_mul_self]
-    have h5 : Complex.normSq c = -1 := by exact_mod_cast h4
-    have := Complex.normSq_nonneg c
-    linarith [h5 ▸ this]
+Let `V` be a complex vector space (the state space of a quantum system), let
+`T : V →ₛₗ[starRingEnd ℂ] V` be the (conjugate-linear) time-reversal operator of a
+half-integer-spin system, so that `T ∘ T = -1`, and let `H` be a linear operator
+(the Hamiltonian) commuting with `T` (time-reversal invariance).
 
-/-- **Kramers degeneracy.**  Let `V` be a complex vector space carrying an antilinear
-time-reversal operator `T` with `T² = -1` (a half-integer-spin system), and let `H` be a
-Hamiltonian commuting with `T`.  Then for every eigenvector `v` of `H` with real eigenvalue `e`,
-the vector `T v` is an eigenvector with the *same* eigenvalue, linearly independent from `v`;
-consequently every energy level has degeneracy at least two. -/
+Then every eigenvector `v ≠ 0` of `H` with real eigenvalue `lam` gives rise to a second
+eigenvector `T v` for the same eigenvalue, and `v`, `T v` are linearly independent:
+the level `lam` is (at least) doubly degenerate. -/
 
-theorem kramers_degeneracy {V : Type*} [AddCommGroup V] [Module ℂ V]
-    (T : V →ₗ⋆[ℂ] V) (hT : ∀ v, T (T v) = -v)
-    (H : V →ₗ[ℂ] V) (hcomm : ∀ v, T (H v) = H (T v))
-    (e : ℝ) (v : V) (hv : v ≠ 0) (hHv : H v = (e : ℂ) • v) :
-    H (T v) = (e : ℂ) • T v ∧ LinearIndependent ℂ ![v, T v] ∧
-      2 ≤ Module.rank ℂ (LinearMap.ker (H - (e : ℂ) • LinearMap.id)) := by
-  have heig : H (T v) = (e : ℂ) • T v := by
-    rw [← hcomm v, hHv, map_smulₛₗ]
+theorem kramers_degeneracy
+    {V : Type*} [AddCommGroup V] [Module ℂ V]
+    (T : V →ₛₗ[starRingEnd ℂ] V) (hT2 : ∀ v, T (T v) = -v)
+    (H : V →ₗ[ℂ] V) (hcomm : ∀ v, H (T v) = T (H v))
+    (lam : ℝ) (v : V) (hv : v ≠ 0) (hHv : H v = (lam : ℂ) • v) :
+    H (T v) = (lam : ℂ) • T v ∧ LinearIndependent ℂ ![v, T v] := by
+  constructor
+  · rw [hcomm, hHv, map_smulₛₗ]
     simp
-  have hind : LinearIndependent ℂ ![v, T v] := kramers_pair_independent T hT v hv
-  refine ⟨heig, hind, ?_⟩
-  -- both `v` and `T v` lie in the eigenspace
-  have hmemv : v ∈ LinearMap.ker (H - (e : ℂ) • LinearMap.id) := by
-    simp [LinearMap.mem_ker, hHv]
-  have hmemTv : T v ∈ LinearMap.ker (H - (e : ℂ) • LinearMap.id) := by
-    simp [LinearMap.mem_ker, heig]
-  set W := LinearMap.ker (H - (e : ℂ) • LinearMap.id)
-  set f : Fin 2 → W := ![⟨v, hmemv⟩, ⟨T v, hmemTv⟩] with hf
-  have hcomp : (W.subtype) ∘ f = ![v, T v] := by
-    funext i
-    fin_cases i <;> simp [hf]
-  have hfi : LinearIndependent ℂ f := by
-    apply LinearIndependent.of_comp W.subtype
-    rw [hcomp]
-    exact hind
-  have := hfi.cardinal_lift_le_rank
-  simpa using this
+  · rw [LinearIndependent.pair_iff]
+    intro s t hst
+    -- Apply `T` to the relation `s • v + t • T v = 0`.
+    have hT : (starRingEnd ℂ) s • T v - (starRingEnd ℂ) t • v = 0 := by
+      have h := congrArg T hst
+      rw [map_add, map_smulₛₗ, map_smulₛₗ, hT2, map_zero] at h
+      rw [← h]; module
+    by_cases ht : t = 0
+    · subst ht
+      simp only [zero_smul, add_zero] at hst
+      exact ⟨by simpa [hv] using smul_eq_zero.1 hst, rfl⟩
+    · exfalso
+      -- From the original relation, `T v = -(s / t) • v`.
+      have h1 : t • T v = (-s) • v := by
+        rw [neg_smul, eq_neg_iff_add_eq_zero, add_comm]; exact hst
+      have hTv : T v = (-(s / t)) • v :=
+        calc T v = (t⁻¹ * t) • T v := by rw [inv_mul_cancel₀ ht, one_smul]
+          _ = t⁻¹ • (t • T v) := by rw [mul_smul]
+          _ = t⁻¹ • ((-s) • v) := by rw [h1]
+          _ = (-(s / t)) • v := by rw [smul_smul]; congr 1; field_simp
+      rw [hTv, smul_smul, ← sub_smul] at hT
+      have hcoef : (starRingEnd ℂ) s * -(s / t) - (starRingEnd ℂ) t = 0 := by
+        rcases smul_eq_zero.1 hT with h | h
+        · exact h
+        · exact absurd h hv
+      have hst2 : (starRingEnd ℂ) s * s + (starRingEnd ℂ) t * t = 0 := by
+        field_simp at hcoef
+        linear_combination -hcoef
+      have habs : s.re * s.re + s.im * s.im + (t.re * t.re + t.im * t.im) = 0 := by
+        simpa using congrArg Complex.re hst2
+      have htre : t.re = 0 := by
+        nlinarith [mul_self_nonneg s.re, mul_self_nonneg s.im, mul_self_nonneg t.re,
+          mul_self_nonneg t.im]
+      have htim : t.im = 0 := by
+        nlinarith [mul_self_nonneg s.re, mul_self_nonneg s.im, mul_self_nonneg t.re,
+          mul_self_nonneg t.im]
+      exact ht (Complex.ext (by simpa using htre) (by simpa using htim))
 
-/-- The spin-1/2 time-reversal operator `T = i σ_y K` on `ℂ × ℂ`, as a conjugate-linear map. -/
+/-- **Kramers degeneracy, dimension form.** Under time-reversal invariance with `T ∘ T = -1`
+(half-integer spin), every occupied energy level `lam` of the Hamiltonian `H` has an
+eigenspace of dimension at least two. -/

@@ -1,60 +1,65 @@
-import RequestProject.Basic
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+import RequestProject.PolySpace
 
 /-!
-# Unbounded fan-in Boolean circuits, the class `AC⁰`, and `PARITY`
+# Parity Not Ac 0
+Category: Frontier Cs
+Target: CS.parity_not_ac0
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-A `Circuit n` is a Boolean circuit on `n` inputs built from constants, input
-variables, negations, and *unbounded fan-in* `AND`/`OR` gates.
+/-!
+## Unbounded fan-in Boolean circuits and their low-degree approximation
 
-* `Circuit.depth` counts the maximal number of `AND`/`OR` gates on a root-to-leaf
-  path (negations are free, as is standard for `AC⁰`).
-* `Circuit.size` counts the number of `AND`/`OR` gates.
-
-`InAC0 f` says that the family `f` is computed by circuits of some fixed depth and
-polynomial size.  Making negations free and not counting them in the size only
-makes the class larger, hence the lower bound proved later stronger.
+We define constant-depth, unbounded fan-in Boolean circuits over the basis
+`{¬, ∨, ∧}` and prove Razborov's approximation lemma: a circuit of size `s`
+and depth `d` is computed by a function of `F₃`-degree at most `(2ℓ)^d`
+on all but a `s·2^{-ℓ}` fraction of the inputs.
 -/
 
 namespace CS
 
-/-- Boolean circuits with unbounded fan-in `AND`/`OR` gates. -/
-inductive Circuit (n : ℕ) where
-  | const : Bool → Circuit n
-  | var : Fin n → Circuit n
-  | neg : Circuit n → Circuit n
-  | or : (m : ℕ) → (Fin m → Circuit n) → Circuit n
-  | and : (m : ℕ) → (Fin m → Circuit n) → Circuit n
+open Finset
 
-namespace Circuit
+/-- Unbounded fan-in Boolean circuits on `n` inputs. -/
+inductive Circ (n : ℕ) where
+  | var : Fin n → Circ n
+  | cst : Bool → Circ n
+  | neg : Circ n → Circ n
+  | orG : (k : ℕ) → (Fin k → Circ n) → Circ n
+  | andG : (k : ℕ) → (Fin k → Circ n) → Circ n
 
 /-- The Boolean function computed by a circuit. -/
 
-lemma mon_mul {n : ℕ} (T U : Finset (Fin n)) : mon T * mon U = mon (symmDiff T U) := by
+lemma mon_mul {n : ℕ} (S T : Finset (Fin n)) : mon S * mon T = mon (S ∪ T) := by
   funext x
-  set a : Fin n → ZMod 3 := fun i => sgn (x i) with ha
-  have d1 : Disjoint (T \ U) (T ∩ U) := by
-    simp [Finset.disjoint_left]; tauto
-  have d2 : Disjoint (U \ T) (T ∩ U) := by
-    simp [Finset.disjoint_left]; tauto
-  have d3 : Disjoint (T \ U) (U \ T) := by
-    simp [Finset.disjoint_left]; tauto
-  have e1 : (∏ i ∈ T, a i) = (∏ i ∈ T \ U, a i) * ∏ i ∈ T ∩ U, a i := by
-    rw [← Finset.prod_union d1]
-    congr 1
-    ext i; by_cases h : i ∈ U <;> simp [h]
-  have e2 : (∏ i ∈ U, a i) = (∏ i ∈ U \ T, a i) * ∏ i ∈ T ∩ U, a i := by
-    rw [← Finset.prod_union d2]
-    congr 1
-    ext i; by_cases h : i ∈ T <;> simp [h]
-  have e3 : (∏ i ∈ symmDiff T U, a i) = (∏ i ∈ T \ U, a i) * ∏ i ∈ U \ T, a i := by
-    rw [← Finset.prod_union d3]; rfl
-  have hsq : (∏ i ∈ T ∩ U, a i) * (∏ i ∈ T ∩ U, a i) = 1 := by
-    rw [← Finset.prod_mul_distrib]
-    exact Finset.prod_eq_one (fun i _ => sgn_sq (x i))
-  show (∏ i ∈ T, a i) * (∏ i ∈ U, a i) = ∏ i ∈ symmDiff T U, a i
-  rw [e1, e2, e3]
-  calc (∏ i ∈ T \ U, a i) * (∏ i ∈ T ∩ U, a i) * ((∏ i ∈ U \ T, a i) * ∏ i ∈ T ∩ U, a i)
-      = ((∏ i ∈ T \ U, a i) * (∏ i ∈ U \ T, a i)) *
-        ((∏ i ∈ T ∩ U, a i) * (∏ i ∈ T ∩ U, a i)) := by ring
-    _ = (∏ i ∈ T \ U, a i) * ∏ i ∈ U \ T, a i := by rw [hsq]; ring
+  show (∏ i ∈ S, bf (x i)) * (∏ i ∈ T, bf (x i)) = ∏ i ∈ S ∪ T, bf (x i)
+  rw [prod_split, prod_union_eq, ← Finset.prod_mul_distrib]
+  simp [bf_mul_self]
 

@@ -1,3 +1,11 @@
+/-
+# Dft Inversion
+Category: Characters
+Target: Brockian.Characters5.dft_inversion
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -22,10 +30,13 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option grind.warning false
+
 namespace Brockian.Characters5
 
 /-- A primitive fifth root of unity. -/
 
-lemma omega_pow_mod (m : ℕ) : omega ^ (m % 5) = omega ^ m := by
-  conv_rhs => rw [← Nat.div_add_mod m 5, pow_add, pow_mul, omega_pow_five, one_pow, one_mul]
+lemma omega_pow_mod (n : ℕ) : ω ^ (n % 5) = ω ^ n := by
+  conv_rhs => rw [← Nat.div_add_mod n 5]
+  rw [pow_add, pow_mul, omega_pow_five, one_pow, one_mul]
 

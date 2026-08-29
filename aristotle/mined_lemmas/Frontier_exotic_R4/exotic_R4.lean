@@ -16,41 +16,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Manifold ContDiff Topology
-
-namespace Frontier
-
-/-- The standard model space `ℝ⁴` (as a Euclidean space). -/
-abbrev EuclideanR4 : Type := EuclideanSpace ℝ (Fin 4)
-
-/-- A smooth (`C^∞`) `4`-manifold: a topological space with an atlas of charts modelled on
-`ℝ⁴` whose transition maps are smooth. -/
-structure SmoothManifold4 where
-  /-- The underlying set of points. -/
-  carrier : Type
-  [topology : TopologicalSpace carrier]
-  [charts : ChartedSpace EuclideanR4 carrier]
-  [smooth : IsManifold (𝓡 4) ∞ carrier]
-
-attribute [instance] SmoothManifold4.topology SmoothManifold4.charts SmoothManifold4.smooth
-
-/-- `M` is an *exotic* `ℝ⁴`: it is homeomorphic to `ℝ⁴`, but there is no diffeomorphism
-between `M` and `ℝ⁴` with its standard smooth structure. -/
-
-theorem exotic_R4 (h : ExistsExoticOpenSubsetOfR4) :
-    ∃ M : SmoothManifold4, IsExoticR4 M := by
-  obtain ⟨U, hhomeo, hdiff⟩ := h
-  exact ⟨⟨U⟩, hhomeo, hdiff⟩
-
-end Frontier
-
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped Manifold
+open scoped ContDiff
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -68,4 +40,31 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Frontier
+
+/-- The standard topological/smooth model `ℝ⁴`. -/
+abbrev R4 : Type := EuclideanSpace ℝ (Fin 4)
+
+/-- The standard model with corners on `ℝ⁴` (no boundary). -/
+noncomputable abbrev I4 : ModelWithCorners ℝ R4 R4 := 𝓘(ℝ, R4)
+
+/-- A smooth (`C^∞`) manifold modelled on `ℝ⁴`, together with a homeomorphism onto `ℝ⁴`.
+This packages "a smooth manifold homeomorphic to `ℝ⁴`". -/
+structure SmoothStructureHomeoR4 where
+  /-- The underlying type. -/
+  carrier : Type
+  [top : TopologicalSpace carrier]
+  [charted : ChartedSpace R4 carrier]
+  [manifold : IsManifold I4 ∞ carrier]
+  /-- The witnessing homeomorphism with the standard `ℝ⁴`. -/
+  homeo : carrier ≃ₜ R4
+
+/-- Such a smooth manifold is *exotic* if it admits no diffeomorphism onto the standard `ℝ⁴`. -/
+
+theorem exotic_R4 (h : SmallExoticR4Exists) : ExoticR4Exists := by
+  obtain ⟨U, ⟨e⟩, hne⟩ := h
+  exact ⟨{ carrier := (U : Type), homeo := e }, hne⟩
+
+end Frontier
 

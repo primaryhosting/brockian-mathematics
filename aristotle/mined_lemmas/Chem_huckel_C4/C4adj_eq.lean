@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Huckel C 4
 Category: Chemistry
 Target: Chem.huckel_C4
@@ -6,35 +8,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+open Real Matrix
 
 namespace Chem
 
-open Polynomial
+/-- The adjacency matrix of the cycle graph `C₄` (the Hückel matrix of cyclobutadiene,
+with `α = 0`, `β = 1`): vertices are `Fin 4` arranged in a cycle, and `i ~ j` iff
+`j = i + 1` or `i = j + 1` (addition modulo `4`). -/
 
-/-- The Hückel matrix of the carbon skeleton of cyclobutadiene, in units where the Coulomb
-integral `α` is `0` and the resonance integral `β` is `1`: the adjacency matrix of the cycle
-graph `C₄`. -/
-
-lemma C4adj_eq : C4adj = !![0, 1, 0, 1; 1, 0, 1, 0; 0, 1, 0, 1; 1, 0, 1, 0] := by
+theorem C4adj_eq : C4adj = !![0, 1, 0, 1; 1, 0, 1, 0; 0, 1, 0, 1; 1, 0, 1, 0] := by
   ext i j
-  fin_cases i <;> fin_cases j <;> simp [C4adj, SimpleGraph.adjMatrix] <;> decide
+  fin_cases i <;> fin_cases j <;> simp [C4adj]
 
-/-- The characteristic polynomial of the `C₄` adjacency matrix is `X⁴ - 4X²`, presented in
-factored form. -/
+/-- The characteristic determinant of `C4adj`. -/

@@ -1,56 +1,58 @@
-import Mathlib
-
 /-!
-# The P vs NP statement
-
-This file gives a self-contained formalization of the statement `P ≠ NP`, built from
-scratch on top of a concrete Turing machine model:
-
-* `Frontier.DTM`   : deterministic single-tape Turing machines over the alphabet `Option Bool`
-                     (`none` is the blank symbol), with a finite state set;
-* `Frontier.NTM`   : the nondeterministic variant;
-* `Frontier.P`     : languages decided by a deterministic machine in polynomial time;
-* `Frontier.NP`    : languages accepted by a nondeterministic machine in polynomial time;
-* `Frontier.PolyTimeComputable`, `Frontier.PolyReducible` (`≤p`) : polynomial-time computable
-  functions and polynomial-time many-one reducibility, together with `Frontier.NPHard` and
-  `Frontier.NPComplete`;
-* `Frontier.P_vs_NP_statement` : the proposition `P ≠ NP`.
-
-`P_vs_NP_statement` is the famous open problem, so it is *stated*, not proved here.  What is
-proved here are the basic structural facts that make the statement meaningful: `P ⊆ NP`,
-the fact that `P ≠ NP` is equivalent to the existence of a language in `NP \ P`,
-reflexivity of `≤p`, and the fact that the trivial languages are in `P` (so the definitions
-are not vacuous).
+# P Vs NP Statement
+Category: Frontier — Moonshot
+Target: Frontier.P_vs_NP_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+/-
+This development is deliberately self-contained (it uses only the Lean 4 core library),
+so that the formal statement of the P vs NP problem depends on as little as possible.
+
+We define:
+* single-tape deterministic Turing machines and their step-by-step semantics;
+* single-tape nondeterministic Turing machines and their reachability semantics;
+* the classes `Frontier.P` and `Frontier.NP` of languages decidable in polynomial time by
+  deterministic resp. nondeterministic machines;
+* polynomial-time computable functions, polynomial-time many-one reducibility `≤p`,
+  NP-hardness and NP-completeness;
+* the proposition `Frontier.PNeqNP`, i.e. `P ≠ NP`.
+
+The main theorem `Frontier.P_vs_NP_statement` records the precise statement together with
+its standard reformulation: `P ≠ NP` holds if and only if some language is decidable in
+nondeterministic polynomial time but not in deterministic polynomial time.
+-/
+
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 
 namespace Frontier
 
-/-! ## Words, languages, tapes -/
+/-! ## Words and languages -/
 
-/-- Words are finite binary strings. -/
-abbrev Word := List Bool
+/-- Inputs are finite binary strings. -/
+abbrev Word : Type := List Bool
 
-/-- A language is a set of words. -/
-abbrev Language := Set Word
+/-- The tape alphabet: `none` is the blank symbol, `some b` a binary symbol. -/
+abbrev Sym : Type := Option Bool
 
-/-- The tape alphabet: `none` is the blank symbol. -/
-abbrev Alphabet := Option Bool
+/-- A language is a set of binary strings, represented by its characteristic predicate. -/
+abbrev Language : Type := Word → Prop
 
-/-- A tape is a bi-infinite sequence of tape symbols. -/
-abbrev Tape := ℤ → Alphabet
+/-- Head movement directions. -/
+inductive Dir : Type
+  | left : Dir
+  | right : Dir
+  | stay : Dir
+  deriving DecidableEq
 
-/-- Directions the head can move in one step. -/
-inductive Dir
-  | left
-  | right
-  | stay
-  deriving DecidableEq, Fintype
+/-- Moving the head position according to a direction. -/
 
-/-- Moving a head position in a given direction. -/
+def Dir.apply : Dir → Int → Int
+  | Dir.left, p => p - 1
+  | Dir.right, p => p + 1
+  | Dir.stay, p => p
 
-def Dir.move : Dir → ℤ → ℤ
-  | .left, i => i - 1
-  | .right, i => i + 1
-  | .stay, i => i
-
-/-- The tape holding the word `x` in cells `0, 1, …, x.length - 1`, blank everywhere else. -/
+/-- The two-way infinite tape holding the input `w`: cell `i` contains the `i`-th bit of
+`w` for `0 ≤ i < |w|`, and is blank everywhere else. -/

@@ -6,23 +6,22 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
 namespace PCA
 
-section PCA
-
+section
 variable {P R : Type}
 
-/-- Access is granted when the capability is in scope for the resource, or the
-capability is privileged, or the resource is unowned. -/
+/-- Access is granted when the capability is in scope for the resource,
+or the principal is privileged, or the resource is unowned. -/
 def canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)
     (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r
 
-/-- With no privileged capabilities and no unowned resources, any granted access
-is in-scope. -/
-theorem no_escape_no_leak {isPriv : P → Prop} {isUnowned : R → Prop}
-    (inScope : P → R → Prop) (c : P) (r : R)
+/-- With no privileged principals and no unowned resources, any granted access is in-scope. -/
+theorem no_escape_no_leak (inScope : P → R → Prop) (isPriv : P → Prop)
+    (isUnowned : R → Prop) (c : P) (r : R)
     (hpriv : ∀ c, ¬ isPriv c) (hunowned : ∀ r, ¬ isUnowned r)
     (h : canAccess inScope isPriv isUnowned c r) : inScope c r := by
   rcases h with h | h | h
@@ -30,9 +29,7 @@ theorem no_escape_no_leak {isPriv : P → Prop} {isUnowned : R → Prop}
   · exact absurd h (hpriv c)
   · exact absurd h (hunowned r)
 
-end PCA
+end
 
 end PCA
-
-#print axioms PCA.no_escape_no_leak
 

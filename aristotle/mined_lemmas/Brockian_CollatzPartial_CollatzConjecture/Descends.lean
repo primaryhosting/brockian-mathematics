@@ -32,27 +32,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-
-This file is deliberately self-contained (no `import` lines), so that the header comment
-above can literally be the first thing in the file: Lean requires `import` commands to
-precede every other command, including module documentation.  Consequently the few
-standard facts about function iteration that are used below are proved from scratch.
-
-The Collatz conjecture is a famous open problem.  What is established here is:
-
-* an unconditional reduction of the conjecture to a *descent* hypothesis
-  (`reaches1_of_descends`);
-* unconditional proofs of descent for every residue class modulo `32` except
-  `7`, `15`, `27` and `31`, which sharpen the reduction so that only those four
-  classes remain (`CollatzConjecture`);
-* unconditional verification of the conjecture for all powers of two and for all
-  positive integers below `1000`.
+This file is deliberately self-contained (it uses only the Lean 4 core library),
+so that the header comment above can appear at the very top of the file:
+Lean does not permit a module docstring to precede `import` commands.
 -/
 
-namespace Brockian.CollatzPartial
+namespace Brockian
+namespace CollatzPartial
 
-/-! ## Iteration -/
+/-- The Collatz step: `n ↦ n / 2` if `n` is even, `n ↦ 3 * n + 1` if `n` is odd. -/
 
-/-- `iterate f k n` is the `k`-fold application of `f` to `n`. -/
-
-def Descends (n : Nat) : Prop := ∃ k : Nat, 0 < k ∧ iterate collatz k n < n
+def Descends : Prop := ∀ n : Nat, 1 < n → ∃ k : Nat, 0 < k ∧ iter collatz k n < n
 

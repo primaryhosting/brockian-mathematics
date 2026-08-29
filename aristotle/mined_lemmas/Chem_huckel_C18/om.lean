@@ -16,11 +16,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open Complex
+
 namespace Chem
 
-open Matrix SimpleGraph Complex
-
-/-- The primitive 18-th root of unity `exp(2πi/18)`. -/
+/-- A primitive 18-th root of unity. -/
 
 noncomputable def om : ℂ := Complex.exp (2 * Real.pi * Complex.I / 18)
 
+/-- The additive character `x ↦ ω ^ x` on `Fin 18`. -/

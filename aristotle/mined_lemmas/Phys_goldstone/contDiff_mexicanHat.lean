@@ -1,4 +1,13 @@
+/-
+# Goldstone
+Category: Frontier Phys
+Target: Phys.goldstone
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Goldstone
 Category: Frontier Phys
@@ -7,29 +16,40 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Phys
 
-/-- **Goldstone's theorem** (classical field-theory / mechanical form).
+section Goldstone
 
-Setting: `V : E → ℝ` is a potential on a real normed space `E`, invariant under a
-one-parameter family `g : ℝ → (E ≃L[ℝ] E)` of continuous linear symmetries
-(`hinv : ∀ t x, V (g t x) = V x`).  The vacuum `v` minimises `V` (`hmin`).
-The symmetry is *spontaneously broken*: the orbit `t ↦ g t v` of the vacuum moves,
-i.e. it has a nonzero velocity `w ≠ 0` at `t = 0`.
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
-Conclusion: the mass matrix, i.e. the Hessian `fderiv ℝ (fderiv ℝ V) v` of the potential
-at the vacuum, annihilates the nonzero vector `w`.  Thus there is a massless mode
-(a Goldstone boson): a nonzero fluctuation direction with vanishing mass term. -/
+/-- **Noether / infinitesimal invariance.**  If the potential `V` is invariant under a
+one-parameter family of field transformations `Φ t` whose infinitesimal generator at `t = 0`
+is the continuous linear map `A`, then the gradient of `V` is everywhere orthogonal to the
+direction of the symmetry flow: `dV_x (A x) = 0`. -/
 
-lemma contDiff_mexicanHat : ContDiff ℝ 2 mexicanHat := by
-  have h : ContDiff ℝ 2 (fun z : ℂ => ‖z‖ ^ 2) := by
-    have : (fun z : ℂ => ‖z‖ ^ 2) = fun z : ℂ => z.re ^ 2 + z.im ^ 2 := by
-      funext z
-      rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]
-      ring
-    rw [this]
-    exact (Complex.reCLM.contDiff.pow 2).add (Complex.imCLM.contDiff.pow 2)
-  exact (h.sub contDiff_const).pow 2
+theorem contDiff_mexicanHat : ContDiff ℝ 2 mexicanHat := by
+  unfold mexicanHat; fun_prop
 
-/-- Goldstone's theorem applied to the Mexican-hat potential: the mass matrix at the
-vacuum `v = 1` has a nonzero null vector, i.e. there is a massless mode. -/

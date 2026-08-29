@@ -1,0 +1,93 @@
+/-
+# Mcmullen Renormalization
+Category: Frontier — Fields Medal Work
+Target: Frontier.mcmullen_renormalization
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (The header above uses `/- -/` rather than `/-! -/` because Lean 4 does not allow a module
+-- docstring before the `import` line; the same text is reproduced as the module docstring below.)
+
+import Mathlib
+
+/-!
+# Mcmullen Renormalization
+Category: Frontier — Fields Medal Work
+Target: Frontier.mcmullen_renormalization
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+/-! ## Quadratic-like maps (Douady–Hubbard) -/
+
+/-- A *quadratic-like map* in the sense of Douady–Hubbard: a proper degree-two
+holomorphic branched covering `f : V → U` between two bounded, connected open subsets of `ℂ`
+with `closure V ⊆ U`.
+
+Degree two is encoded concretely: there is a (unique) critical point `c ∈ V` whose fibre is the
+singleton `{c}`, and every other fibre over `U` consists of exactly two points. -/
+structure QuadraticLike : Type where
+  /-- The larger domain. -/
+  U : Set ℂ
+  /-- The smaller domain, compactly contained in `U`. -/
+  V : Set ℂ
+  /-- The map (defined on all of `ℂ`, but only its restriction to `V` matters). -/
+  f : ℂ → ℂ
+  /-- The critical point. -/
+  c : ℂ
+  isOpen_U : IsOpen U
+  isOpen_V : IsOpen V
+  closure_V_subset : closure V ⊆ U
+  isBounded_V : Bornology.IsBounded V
+  isPreconnected_U : IsPreconnected U
+  isPreconnected_V : IsPreconnected V
+  analyticOn : AnalyticOnNhd ℂ f V
+  mapsTo : Set.MapsTo f V U
+  surjOn : Set.SurjOn f V U
+  /-- Properness of `f : V → U`. -/
+  proper : ∀ L ⊆ U, IsCompact L → IsCompact (V ∩ f ⁻¹' L)
+  crit_mem : c ∈ V
+  /-- The critical fibre is a single point. -/
+  crit_fiber : V ∩ f ⁻¹' {f c} = {c}
+  /-- Every non-critical fibre has exactly two points: `f : V → U` has degree two. -/
+  deg_two : ∀ w ∈ U, w ≠ f c → (V ∩ f ⁻¹' {w}).ncard = 2
+
+namespace QuadraticLike
+
+variable (F : QuadraticLike)
+
+/-- The filled Julia set of a quadratic-like map: the points of `V` whose whole forward
+orbit stays in `V`. -/
+
+theorem nonempty_filledJulia : F.filledJulia.Nonempty := by
+  rw [F.filledJulia_eq_iInter]
+  refine IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed _
+    (fun i => F.preimTower_antitone (i + 1)) (fun i => F.nonempty_preimTower (i + 1))
+    (F.isCompact_preimTower 1) (fun i => (F.isCompact_preimTower (i + 1)).isClosed)
+
+/-- The filled Julia set is completely invariant inside `V`. -/

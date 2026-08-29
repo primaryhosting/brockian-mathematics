@@ -1,29 +1,27 @@
-/-
-# Insertion Sort Correct
-Category: Computer Science
-Target: CS.insertion_sort_correct
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+import Mathlib
+import RequestProject.Main
+
+/-!
+# Insertion sort correctness, stated with Mathlib's `List.Sorted`
+
+`RequestProject/Main.lean` contains the target theorem `CS.insertion_sort_correct`
+(it cannot contain an `import` line, since the mandated header comment must be the
+first command of the file).  Here we restate it in Mathlib vocabulary, for a
+`LinearOrder`, using `List.Pairwise (· ≤ ·)` (which is Mathlib's `List.Sorted (· ≤ ·)`).
 -/
 
-import Mathlib
-
-set_option maxHeartbeats 400000
 set_option autoImplicit false
 
 namespace CS
 
-/-- **Insertion sort is correct**: for a decidable, total, transitive relation `r`,
-`List.insertionSort r l` is sorted with respect to `r` (i.e. its elements are pairwise
-related by `r`) and is a permutation of the input list `l`.
+variable {α : Type*} [LinearOrder α]
 
-The two components follow from Mathlib's `List.pairwise_insertionSort` and
-`List.perm_insertionSort`. -/
+/-- **Insertion sort is correct** (Mathlib phrasing): over a linear order,
+`CS.insertionSort (· ≤ ·) l` is sorted (pairwise `≤`) and is a permutation of `l`. -/
 
-theorem insertion_sort_correct_le {α : Type*} [LinearOrder α] (l : List α) :
-    List.Pairwise (· ≤ ·) (List.insertionSort (· ≤ ·) l) ∧
-      (List.insertionSort (· ≤ ·) l).Perm l :=
-  insertion_sort_correct (· ≤ ·) l
+theorem insertion_sort_correct_le (l : List α) :
+    (insertionSort (· ≤ ·) l).Pairwise (· ≤ ·) ∧ (insertionSort (· ≤ ·) l).Perm l :=
+  insertion_sort_correct (· ≤ ·) (fun a b => le_total a b)
+    (fun _ _ _ h₁ h₂ => le_trans h₁ h₂) l
 
-end CS
-
+/-- Our insertion sort agrees with Mathlib's `List.insertionSort`. -/

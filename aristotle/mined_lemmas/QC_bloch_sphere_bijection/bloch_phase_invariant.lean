@@ -23,7 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+/-!
 # Bloch Sphere Bijection
 Category: Quantum Computing
 Target: QC.bloch_sphere_bijection
@@ -33,34 +33,21 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Bloch Sphere Bijection
-Category: Quantum Computing
-Target: QC.bloch_sphere_bijection
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace QC
 
 open Complex
 
-/-- A pure qubit state: a unit vector in `ℂ²`, recorded as a pair of amplitudes
-`(a, b)` with `|a|² + |b|² = 1`. -/
+/-- A pure qubit state: a unit vector in `ℂ²`. -/
 
-theorem bloch_phase_invariant {p q : PureState} (h : PhaseRel p q) : bloch p = bloch q := by
-  obtain ⟨z, hz, ha, hb⟩ := h
-  have hzz : normSq z = 1 := by
-    rw [Complex.normSq_eq_norm_sq, hz]; norm_num
-  have h0 : ((starRingEnd ℂ) q.a * q.b) = ((starRingEnd ℂ) p.a * p.b) := by
-    rw [ha, hb, map_mul]
-    have : (starRingEnd ℂ) z * z = 1 := by
-      rw [← Complex.normSq_eq_conj_mul_self, hzz]; norm_num
-    calc (starRingEnd ℂ) z * (starRingEnd ℂ) p.a * (z * p.b)
-        = ((starRingEnd ℂ) z * z) * ((starRingEnd ℂ) p.a * p.b) := by ring
-      _ = (starRingEnd ℂ) p.a * p.b := by rw [this, one_mul]
-  have h1 : normSq q.a = normSq p.a := by rw [ha, map_mul, hzz, one_mul]
-  have h2 : normSq q.b = normSq p.b := by rw [hb, map_mul, hzz, one_mul]
-  simp only [bloch, blochVec, h0, h1, h2]
+theorem bloch_phase_invariant {v w : Qubit} (h : v ≈ w) : bloch v = bloch w := by
+  obtain ⟨c, hc, h1, h2⟩ := h
+  have hcn : normSq c = 1 := by
+    rw [Complex.normSq_eq_norm_sq, hc]; norm_num
+  have hcn' : c.re ^ 2 + c.im ^ 2 = 1 := by
+    simpa [Complex.normSq_apply, sq] using hcn
+  simp only [bloch, Subtype.mk.injEq, Prod.mk.injEq, h1, h2]
+  refine ⟨?_, ?_, ?_⟩ <;>
+    simp only [Complex.mul_re, Complex.mul_im, Complex.conj_re, Complex.conj_im,
+      Complex.normSq_apply] <;> nlinarith [hcn']
 
-/-- The Bloch map descends to the quotient by global phase. -/
+/-- The Bloch map descended to states modulo global phase. -/

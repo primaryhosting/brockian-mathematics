@@ -99,7 +99,7 @@ lemma dxx_log (Z : ℝ × ℝ → ℝ) (hZ : IsHeatSolution Z) (p : ℝ × ℝ) 
   have hne : Z (p.1, p.2) ≠ 0 := ne_of_gt (hZ.pos (p.1, p.2))
   have hdiv := hu.div hv hne
   rw [dx, hfun]
-  simpa [Pi.div_def] using hdiv.deriv
+  simpa using hdiv.deriv
 
 /-- **Cole–Hopf reduction for the KPZ equation.**
 

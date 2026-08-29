@@ -1,30 +1,37 @@
-import RequestProject.Degree
+/-
+# Huang Sensitivity
+Category: Frontier — Fields Medal Work
+Target: Frontier.huang_sensitivity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-open Finset
+import Mathlib
+
+/-!
+# Huang Sensitivity
+Category: Frontier — Fields Medal Work
+Target: Frontier.huang_sensitivity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 8000
 
 namespace Frontier
 
-/-! # Huang's sensitivity theorem: `s(f) ≥ √(deg f)`
+/-! ## Basic definitions for Boolean functions on the hypercube -/
 
-Using the full-degree case `Frontier.huang_sensitivity` together with a restriction argument
-to a subcube, we obtain the general statement: the sensitivity of a Boolean function is at
-least the square root of its degree.
--/
+/-- The character `χ_S(x) = ∏_{i ∈ S} (-1)^{x i}`, valued in `ℤ`. -/
 
-section Coeff
-
-variable {n : ℕ}
-
-/-- Uniqueness of the multilinear representation. -/
-
-lemma flipAt_comm (x : Q n) (i j : Fin n) :
+lemma flipAt_comm {n : ℕ} (x : Fin n → Bool) (i j : Fin n) :
     flipAt (flipAt x i) j = flipAt (flipAt x j) i := by
   funext k
-  rcases eq_or_ne k i with rfl | hki
-  · rcases eq_or_ne k j with rfl | hkj
-    · rfl
-    · simp [flipAt_apply_of_ne _ hkj]
-  · rcases eq_or_ne k j with rfl | hkj
-    · simp [flipAt_apply_of_ne _ hki]
-    · simp [flipAt_apply_of_ne _ hki, flipAt_apply_of_ne _ hkj]
+  by_cases hki : k = i <;> by_cases hkj : k = j <;>
+    simp_all [flipAt_self, flipAt_ne]
 
+/-- Connectivity of the hypercube: a predicate preserved by all flips in a set `S` of
+coordinates propagates between any two points differing only inside `S`. -/

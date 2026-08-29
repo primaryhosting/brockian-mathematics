@@ -33,23 +33,17 @@ set_option grind.warning false
 
 namespace NumberTheory
 
-/-- For an odd prime `p`, `(p - 1) / 2 = p / 2` (natural number division). -/
-theorem sub_one_div_two_eq_div_two_of_odd_prime {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) :
-    (p - 1) / 2 = p / 2 := by
-  have hodd : Odd p := hp.odd_of_ne_two hp2
-  obtain ⟨k, hk⟩ := hodd
-  subst hk
-  omega
-
 /-- **Gauss's law of quadratic reciprocity**: for distinct odd primes `p` and `q`,
-`legendreSym p q * legendreSym q p = (-1) ^ ((p - 1) / 2 * ((q - 1) / 2))`. -/
+`(p/q) * (q/p) = (-1) ^ ((p-1)/2 * (q-1)/2)`. -/
 theorem quadratic_reciprocity {p q : ℕ} [Fact p.Prime] [Fact q.Prime]
     (hp : p ≠ 2) (hq : q ≠ 2) (hpq : p ≠ q) :
     legendreSym p q * legendreSym q p = (-1) ^ ((p - 1) / 2 * ((q - 1) / 2)) := by
-  have h := legendreSym.quadratic_reciprocity hq hp (Ne.symm hpq)
-  rw [sub_one_div_two_eq_div_two_of_odd_prime (Fact.out) hp,
-    sub_one_div_two_eq_div_two_of_odd_prime (Fact.out) hq]
-  rw [h, Nat.mul_comm]
+  have hp₁ : p % 2 = 1 := (Nat.Prime.eq_two_or_odd (Fact.out : p.Prime)).resolve_left hp
+  have hq₁ : q % 2 = 1 := (Nat.Prime.eq_two_or_odd (Fact.out : q.Prime)).resolve_left hq
+  have hpe : (p - 1) / 2 = p / 2 := by omega
+  have hqe : (q - 1) / 2 = q / 2 := by omega
+  rw [hpe, hqe, mul_comm]
+  exact legendreSym.quadratic_reciprocity hp hq hpq
 
 end NumberTheory
 

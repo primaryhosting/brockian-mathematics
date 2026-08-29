@@ -1,43 +1,23 @@
+import Mathlib
+import RequestProject.Math
+
 /-!
-# Cassini 5
-Category: Pure Mathematics
-Target: Math.cassini_5
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Cassini 5 — Mathlib companion file
+
+This file connects the self-contained development in `RequestProject/Math.lean` with
+Mathlib: it shows `Math.fib = Nat.fib`, restates `Math.cassini_5` in terms of `Nat.fib`,
+and re-derives it from Mathlib's general Cassini identity
+`Int.fib_succ_mul_fib_pred_sub_fib_sq`.
 -/
 
 namespace Math
 
-/-- The Fibonacci sequence, with `fib 0 = 0` and `fib 1 = 1`. -/
+/-- The locally defined Fibonacci sequence agrees with Mathlib's `Nat.fib`. -/
 
 theorem cassini_5_nat_fib :
-    (Nat.fib 4 : ℤ) * (Nat.fib 6 : ℤ) - (Nat.fib 5 : ℤ) ^ 2 = (-1 : ℤ) ^ 5 := by
+    (Nat.fib 4 : ℤ) * (Nat.fib 6 : ℤ) - (Nat.fib 5 : ℤ) ^ 2 = (-1) ^ 5 := by
   simpa [fib_eq_nat_fib] using cassini_5
 
-end Math
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-- Cassini's identity at `n = 5`, derived from Mathlib's general Cassini identity
+`Int.fib_succ_mul_fib_pred_sub_fib_sq : ∀ n : ℤ,
+  Int.fib (n + 1) * Int.fib (n - 1) - Int.fib n ^ 2 = (-1) ^ n.natAbs`. -/

@@ -23,27 +23,32 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Goldbach Covariance Transfer
 Category: Brockian Conjecture
 Target: Brockian.GoldbachComb.GoldbachCovarianceTransfer
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: Lean 4 requires `import` lines to precede every other command, including module
+docstrings, so the requested header comment appears immediately after the import.)
 -/
 
-import Mathlib
+open scoped BigOperators
 
 namespace Brockian.GoldbachComb
 
-/-- The set of Goldbach parts of `n`: primes `p ≤ n` such that `n - p` is also prime.
-Thus `p ∈ goldbachParts n` exactly when `p + (n - p) = n` is a Goldbach decomposition. -/
+/-- The Goldbach representation count of `n`: the number of ordered pairs `(a, n - a)`
+with `a ≤ n` such that both `a` and `n - a` are prime. -/
 
-theorem GoldbachCovarianceTransfer (n : ℕ) (f g : ℕ → ℝ) :
-    cov (goldbachParts n) (fun p => f (n - p)) (fun p => g (n - p))
-      = cov (goldbachParts n) f g := by
-  unfold cov
-  rw [sum_goldbachParts_reflect n f, sum_goldbachParts_reflect n g,
-    sum_goldbachParts_reflect n (fun p => f p * g p)]
+theorem GoldbachCovarianceTransfer (N : ℕ) :
+    ∑ n ∈ Finset.range (N + 1), (goldbachCount n : ℝ)
+      = ∑ p ∈ Finset.range (N + 1), ∑ q ∈ Finset.range (N + 1),
+          (if p + q ≤ N then primeIndicator p * primeIndicator q else 0) := by
+  rw [← sum_convolution_eq_bilinear primeIndicator N]
+  exact Finset.sum_congr rfl fun n _ => goldbachCount_eq_sum n
 
 end Brockian.GoldbachComb
 

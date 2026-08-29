@@ -1,27 +1,41 @@
-/-
+import Mathlib
+/-!
 # Von Neumann Trace Ineq
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
 Target: Zeta23Redux.LinAlg.vonNeumann_trace_ineq
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
 
 open scoped BigOperators
-open Finset
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Redux.LinAlg
 
-/-- Abel summation / Hardy–Littlewood–Pólya: if `m` is decreasing on `range d` and the partial
-sums of `f` are dominated by those of `g`, with equal total sums, then `∑ m f ≤ ∑ m g`. -/
+open Matrix Finset
 
-lemma exists_antitone_reindex {d : ℕ} (f : Fin d → ℝ) :
-    ∃ s : Equiv.Perm (Fin d), Antitone (fun i => f (s i)) := by
-  refine ⟨Tuple.sort (fun i => -f i), ?_⟩
+variable {d : ℕ}
+
+/-- Two antitone functions monovary. -/
+
+lemma exists_antitone_reindex (f : Fin d → ℝ) : ∃ p : Equiv.Perm (Fin d), Antitone (f ∘ p) := by
+  refine ⟨Tuple.sort fun i => -f i, ?_⟩
+  have h := Tuple.monotone_sort fun i => -f i
   intro i j hij
-  have h := Tuple.monotone_sort (fun i => -f i) hij
-  simp only [Function.comp_apply] at h
+  have hij' := h hij
+  simp only [Function.comp_apply] at hij' ⊢
   linarith
 
-/-- Existence form of von Neumann's trace inequality: the decreasing eigenvalue listings always
-exist, so the hypotheses of `vonNeumann_trace_ineq` are never vacuous. -/
+end Zeta23Redux.LinAlg
+

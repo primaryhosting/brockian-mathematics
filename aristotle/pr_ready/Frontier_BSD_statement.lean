@@ -9,158 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-Note on the header: Lean 4 requires `import` to be the very first command of a file, so the
-required header block is placed immediately after `import Mathlib`.
-
-This file formalises the statement of the Birch--Swinnerton-Dyer conjecture
-
-  ord_{s = 1} L(E, s) = rank E(ℚ)
-
-for elliptic curves over `ℚ` given by a global minimal integral Weierstrass model, and proves
-the rank-zero base case together with a Lean-checked reduction of the rank-zero case of the
-conjecture to the equivalence `L(E, 1) ≠ 0 ↔ E(ℚ) finite`.
--/
-
-namespace Frontier
-
-open WeierstrassCurve
-
-/-! ## The Mordell–Weil group and its rank -/
-
-/-- The group `E(ℚ)` of rational points of the elliptic curve given by the integral
-Weierstrass model `W` over `ℤ`. -/
-abbrev RatPoints (W : WeierstrassCurve ℤ) : Type := (W.baseChange ℚ).toAffine.Point
-
-/-- The algebraic rank of `E(ℚ)`: the rank of the Mordell–Weil group as a `ℤ`-module. -/
-noncomputable def mordellWeilRank (W : WeierstrassCurve ℤ) : ℕ :=
-  (Module.rank ℤ (RatPoints W)).toNat
-
-/-! ## The `L`-function -/
-
-/-- The number of nonsingular points, including the point at infinity, of the reduction
-modulo `p` of the integral Weierstrass model `W`. -/
-noncomputable def reductionCard (W : WeierstrassCurve ℤ) (p : ℕ) : ℕ :=
-  Nat.card ((W.map (Int.castRingHom (ZMod p))).toAffine.Point)
-
-/-- The trace of Frobenius `a_p` of the integral Weierstrass model `W` at a prime `p`.
-
-At a prime of good reduction (`p ∤ Δ`) the reduction is an elliptic curve over `𝔽_p` with
-`p + 1 - a_p` points, while at a prime of bad reduction the group of nonsingular points of the
-reduction has `p - a_p` elements (so `a_p = 1, -1, 0` for split multiplicative, nonsplit
-multiplicative and additive reduction respectively). -/
-noncomputable def apCoeff (W : WeierstrassCurve ℤ) (p : ℕ) : ℤ :=
-  if (p : ℤ) ∣ W.Δ then (p : ℤ) - (reductionCard W p : ℤ)
-  else (p : ℤ) + 1 - (reductionCard W p : ℤ)
-
-/-- `W` is a global minimal Weierstrass model: its discriminant is minimal in absolute value
-among all integral Weierstrass models of the same elliptic curve over `ℚ`. -/
-def IsGlobalMinimalModel (W : WeierstrassCurve ℤ) : Prop :=
-  ∀ (W' : WeierstrassCurve ℤ) (C : VariableChange ℚ),
-    W'.baseChange ℚ = C • W.baseChange ℚ → W.Δ.natAbs ≤ W'.Δ.natAbs
-
-/-- `a : ℕ → ℂ` is the sequence of Dirichlet coefficients of the Hasse–Weil `L`-series of the
-global minimal Weierstrass model `W`, i.e.
-
-  `L(E, s) = ∑ n, a n / n ^ s = ∏_{p good} (1 - a_p p^{-s} + p^{1 - 2s})⁻¹
-                                 ∏_{p bad}  (1 - a_p p^{-s})⁻¹`.
-
-This is expressed through the multiplicativity of `a`, the value of `a` at primes, and the
-Euler-factor recursions at prime powers. -/
-def IsLSeriesCoeff (W : WeierstrassCurve ℤ) (a : ℕ → ℂ) : Prop :=
-  a 0 = 0 ∧ a 1 = 1 ∧
-  (∀ m n : ℕ, Nat.Coprime m n → a (m * n) = a m * a n) ∧
-  (∀ p : ℕ, p.Prime → a p = (apCoeff W p : ℂ)) ∧
-  (∀ p k : ℕ, p.Prime → ¬ (p : ℤ) ∣ W.Δ →
-      a (p ^ (k + 2)) = a p * a (p ^ (k + 1)) - (p : ℂ) * a (p ^ k)) ∧
-  (∀ p k : ℕ, p.Prime → (p : ℤ) ∣ W.Δ → a (p ^ k) = a p ^ k)
-
-/-- `L` is *the* `L`-function of the elliptic curve given by the global minimal Weierstrass
-model `W`: it is entire (this is the analytic continuation provided by modularity) and it agrees
-with the Hasse–Weil Dirichlet series in the half plane of absolute convergence `Re s > 3/2`. -/
-def IsLFunction (W : WeierstrassCurve ℤ) (L : ℂ → ℂ) : Prop :=
-  ∃ a : ℕ → ℂ, IsLSeriesCoeff W a ∧ Differentiable ℂ L ∧
-    ∀ s : ℂ, 3 / 2 < s.re → L s = LSeries a s
-
-/-! ## The conjecture -/
-
-/-- **The Birch and Swinnerton-Dyer conjecture** (rank part): for every elliptic curve `E / ℚ`,
-given by a global minimal integral Weierstrass model `W` with nonzero discriminant, the order of
-vanishing at `s = 1` of the `L`-function of `E` equals the rank of the Mordell–Weil group
-`E(ℚ)`. -/
-def BSD : Prop :=
-  ∀ (W : WeierstrassCurve ℤ) (L : ℂ → ℂ), W.Δ ≠ 0 → IsGlobalMinimalModel W → IsLFunction W L →
-    analyticOrderAt L 1 = (mordellWeilRank W : ℕ∞)
-
-/-! ## Basic facts about the two sides -/
-
-theorem IsLFunction.analyticAt {W : WeierstrassCurve ℤ} {L : ℂ → ℂ} (hL : IsLFunction W L)
-    (s : ℂ) : AnalyticAt ℂ L s :=
-  hL.choose_spec.2.1.analyticAt s
-
-/-- The analytic side: the order of vanishing at `s = 1` is zero exactly when `L(E, 1) ≠ 0`. -/
-theorem analyticOrder_eq_zero_iff {W : WeierstrassCurve ℤ} {L : ℂ → ℂ} (hL : IsLFunction W L) :
-    analyticOrderAt L 1 = 0 ↔ L 1 ≠ 0 :=
-  (hL.analyticAt 1).analyticOrderAt_eq_zero
-
-/-- A finite Mordell–Weil group is a torsion group. -/
-theorem isTorsion_of_finite {W : WeierstrassCurve ℤ} (h : Finite (RatPoints W)) :
-    Module.IsTorsion ℤ (RatPoints W) := by
-  refine rank_eq_zero_iff_isTorsion.mp ?_
-  rw [rank_eq_zero_iff]
-  refine fun x => ⟨(Nat.card (RatPoints W) : ℤ), by exact_mod_cast Nat.card_pos.ne', ?_⟩
-  simp
-
-/-- The algebraic side: if `E(ℚ)` is a torsion group then its rank is zero. -/
-theorem mordellWeilRank_eq_zero_of_isTorsion {W : WeierstrassCurve ℤ}
-    (h : Module.IsTorsion ℤ (RatPoints W)) : mordellWeilRank W = 0 := by
-  simp [mordellWeilRank, rank_eq_zero_iff_isTorsion.mpr h]
-
-/-- The algebraic side, assuming the Mordell–Weil theorem for `E`: the rank of `E(ℚ)` vanishes
-if and only if `E(ℚ)` is finite. -/
-theorem mordellWeilRank_eq_zero_iff {W : WeierstrassCurve ℤ}
-    (hfg : Module.Finite ℤ (RatPoints W)) :
-    mordellWeilRank W = 0 ↔ Finite (RatPoints W) := by
-  constructor
-  · intro h
-    have hlt : Module.rank ℤ (RatPoints W) < Cardinal.aleph0 := Module.rank_lt_aleph0 ℤ _
-    have hzero : Module.rank ℤ (RatPoints W) = 0 := by
-      rcases Cardinal.toNat_eq_zero.mp h with h0 | h0
-      · exact h0
-      · exact absurd (lt_of_le_of_lt h0 hlt) (lt_irrefl _)
-    exact Module.finite_of_fg_torsion _ (rank_eq_zero_iff_isTorsion.mp hzero)
-  · exact fun h => mordellWeilRank_eq_zero_of_isTorsion (isTorsion_of_finite h)
-
-/-! ## The base case and the reduction -/
-
-/-- **Base case of the Birch and Swinnerton-Dyer conjecture.** If the Mordell–Weil group `E(ℚ)`
-is a torsion group and the `L`-function of `E` does not vanish at `s = 1`, then the BSD equality
-`ord_{s = 1} L(E, s) = rank E(ℚ)` holds (both sides are `0`). -/
-theorem BSD_statement {W : WeierstrassCurve ℤ} {L : ℂ → ℂ} (hL : IsLFunction W L)
-    (hL1 : L 1 ≠ 0) (htors : Module.IsTorsion ℤ (RatPoints W)) :
-    analyticOrderAt L 1 = (mordellWeilRank W : ℕ∞) := by
-  rw [mordellWeilRank_eq_zero_of_isTorsion htors, (analyticOrder_eq_zero_iff hL).mpr hL1]
-  rfl
-
-/-- **A Lean-checked reduction of the rank-zero case of BSD.** Assuming the Mordell–Weil theorem
-for `E` (finite generation of `E(ℚ)`), the BSD equality in the rank-zero case is equivalent to
-the statement that `L(E, 1) ≠ 0` if and only if `E(ℚ)` is finite. -/
-theorem BSD_rank_zero_reduction {W : WeierstrassCurve ℤ} {L : ℂ → ℂ} (hL : IsLFunction W L)
-    (hfg : Module.Finite ℤ (RatPoints W)) :
-    ((analyticOrderAt L 1 = (mordellWeilRank W : ℕ∞)) ∧ mordellWeilRank W = 0) ↔
-      (L 1 ≠ 0 ∧ Finite (RatPoints W)) := by
-  constructor
-  · rintro ⟨hord, hrank⟩
-    rw [hrank] at hord
-    refine ⟨(analyticOrder_eq_zero_iff hL).mp ?_, (mordellWeilRank_eq_zero_iff hfg).mp hrank⟩
-    simpa using hord
-  · rintro ⟨hL1, hfin⟩
-    exact ⟨BSD_statement hL hL1 (isTorsion_of_finite hfin),
-      (mordellWeilRank_eq_zero_iff hfg).mpr hfin⟩
-
-end Frontier
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -183,4 +31,136 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+/-!
+## Overview
+
+We formalise the statement of the Birch–Swinnerton-Dyer conjecture (rank part) for an
+elliptic curve over `ℚ`, given by a minimal integral Weierstrass model `E`:
+
+  `ord_{s=1} L(E, s) = rank E(ℚ)`.
+
+* The *analytic* side is the order of vanishing at `s = 1` of any entire function `L`
+  which agrees with the Dirichlet series `∑ a_n n^{-s}` on the half plane `Re s > 3/2`
+  (where that series converges); the coefficients `a_n` are built from the point counts
+  of the reductions `E mod p` in the usual way.
+* The *algebraic* side is the Mordell–Weil rank, i.e. the `ℚ`-dimension of
+  `ℚ ⊗_ℤ E(ℚ)`.
+
+The statement is well posed: by the identity theorem, an entire continuation of the
+Dirichlet series is unique (`Frontier.LFunction_unique`), so the analytic order of
+vanishing does not depend on the choice of `L`
+(`Frontier.analyticOrder_eq_of_isLFunction`).
+
+The target theorem `Frontier.BSD_statement` is a Lean-checked reduction: assuming the
+conjecture, we derive the classical rank-zero criterion
+`L(E, 1) ≠ 0 ↔ rank E(ℚ) = 0`.
+-/
+
+namespace Frontier
+
+open WeierstrassCurve
+
+/-- The trace of Frobenius at `p` for the integral Weierstrass model `E`, defined as
+`a_p = p + 1 - #E_ns(𝔽_p)`, where `E_ns(𝔽_p)` is the group of nonsingular points of the
+reduction of `E` modulo `p` (this is the usual `a_p` for good primes, and gives
+`1`, `-1`, `0` at primes of split multiplicative, nonsplit multiplicative and additive
+reduction respectively, provided the model is minimal). -/
+noncomputable def apCoeff (E : WeierstrassCurve ℤ) (p : ℕ) : ℤ :=
+  (p : ℤ) + 1 - (Nat.card ((E.map (Int.castRingHom (ZMod p))).toAffine.Point) : ℤ)
+
+/-- The coefficient `a_{p^k}` of the `L`-series of `E`, given by the usual recursion
+`a_{p^{k+2}} = a_p a_{p^{k+1}} - p·a_{p^k}` at primes of good reduction (`p ∤ Δ`), and by
+`a_{p^{k+1}} = a_p a_{p^k}` at primes of bad reduction (`p ∣ Δ`). -/
+noncomputable def aPrimePow (E : WeierstrassCurve ℤ) (p : ℕ) : ℕ → ℤ
+  | 0 => 1
+  | 1 => apCoeff E p
+  | (k + 2) =>
+      apCoeff E p * aPrimePow E p (k + 1)
+        - (if (p : ℤ) ∣ E.Δ then 0 else (p : ℤ)) * aPrimePow E p k
+
+/-- The `n`-th coefficient of the `L`-series of `E`, the multiplicative extension of the
+coefficients `a_{p^k}`. -/
+noncomputable def anCoeff (E : WeierstrassCurve ℤ) (n : ℕ) : ℤ :=
+  if n = 0 then 0 else ∏ p ∈ n.primeFactors, aPrimePow E p (n.factorization p)
+
+/-- The Dirichlet series `∑ a_n n^{-s}` attached to `E`; it converges for `Re s > 3/2`
+and the `L`-function of `E` is its analytic continuation. -/
+noncomputable def LSeriesOf (E : WeierstrassCurve ℤ) : ℂ → ℂ :=
+  LSeries (fun n : ℕ => (anCoeff E n : ℂ))
+
+/-- `L` is *the* `L`-function of `E`: it is entire, and on the half plane of absolute
+convergence `Re s > 3/2` it is given by the Dirichlet series `∑ a_n n^{-s}`. -/
+def IsLFunction (E : WeierstrassCurve ℤ) (L : ℂ → ℂ) : Prop :=
+  AnalyticOnNhd ℂ L Set.univ ∧ ∀ s : ℂ, 3 / 2 < s.re → L s = LSeriesOf E s
+
+/-- `E` is a minimal integral Weierstrass model: among all integral models of the same
+elliptic curve over `ℚ` (i.e. those becoming isomorphic to `E` over `ℚ` after a change of
+variables) it has discriminant of smallest absolute value. -/
+def IsMinimalModel (E : WeierstrassCurve ℤ) : Prop :=
+  ∀ E' : WeierstrassCurve ℤ,
+    (∃ u : WeierstrassCurve.VariableChange ℚ,
+      u • (E'.map (Int.castRingHom ℚ)) = E.map (Int.castRingHom ℚ)) →
+    E.Δ.natAbs ≤ E'.Δ.natAbs
+
+/-- The Mordell–Weil rank of `E(ℚ)`: the `ℚ`-dimension of `ℚ ⊗_ℤ E(ℚ)`. -/
+noncomputable def mordellWeilRank (E : WeierstrassCurve ℤ) : ℕ :=
+  Module.finrank ℚ (TensorProduct ℤ ℚ ((E.map (Int.castRingHom ℚ)).toAffine.Point))
+
+/-- **The Birch and Swinnerton-Dyer conjecture (rank part).** For every elliptic curve
+over `ℚ`, given by a minimal integral Weierstrass model `E` with nonzero discriminant, the
+order of vanishing at `s = 1` of the `L`-function of `E` equals the Mordell–Weil rank of
+`E(ℚ)`. -/
+def BSD_conjecture : Prop :=
+  ∀ E : WeierstrassCurve ℤ, E.Δ ≠ 0 → IsMinimalModel E →
+    ∀ L : ℂ → ℂ, IsLFunction E L → analyticOrderAt L 1 = (mordellWeilRank E : ℕ∞)
+
+/-- The half plane of absolute convergence is open. -/
+lemma isOpen_halfPlane : IsOpen {s : ℂ | 3 / 2 < s.re} :=
+  isOpen_lt continuous_const Complex.continuous_re
+
+/-- **Well-posedness.** The `L`-function of `E` is unique: two entire functions agreeing
+with the Dirichlet series of `E` on `Re s > 3/2` are equal, by the identity theorem. -/
+theorem LFunction_unique (E : WeierstrassCurve ℤ) (L₁ L₂ : ℂ → ℂ)
+    (h₁ : IsLFunction E L₁) (h₂ : IsLFunction E L₂) : L₁ = L₂ := by
+  have hmem : (2 : ℂ) ∈ {s : ℂ | 3 / 2 < s.re} := by
+    simp only [Set.mem_setOf_eq]
+    norm_num
+  have hev : L₁ =ᶠ[nhds (2 : ℂ)] L₂ := by
+    filter_upwards [isOpen_halfPlane.mem_nhds hmem] with s hs
+    rw [h₁.2 s hs, h₂.2 s hs]
+  have := h₁.1.eqOn_of_preconnected_of_eventuallyEq h₂.1 isPreconnected_univ
+    (Set.mem_univ (2 : ℂ)) hev
+  funext s
+  exact this (Set.mem_univ s)
+
+/-- Consequently the analytic order of vanishing at `s = 1` does not depend on the choice
+of the analytic continuation. -/
+theorem analyticOrder_eq_of_isLFunction (E : WeierstrassCurve ℤ) (L₁ L₂ : ℂ → ℂ)
+    (h₁ : IsLFunction E L₁) (h₂ : IsLFunction E L₂) :
+    analyticOrderAt L₁ 1 = analyticOrderAt L₂ 1 := by
+  rw [LFunction_unique E L₁ L₂ h₁ h₂]
+
+/-- **Target: a Lean-checked reduction of BSD.** Assuming the Birch–Swinnerton-Dyer
+conjecture, for a minimal integral model `E` of an elliptic curve over `ℚ` and its
+`L`-function `L`, the Mordell–Weil rank of `E(ℚ)` vanishes exactly when `L(E, 1) ≠ 0`
+(the rank-zero, i.e. "base", case of the conjecture). -/
+theorem BSD_statement (hBSD : BSD_conjecture) (E : WeierstrassCurve ℤ) (hΔ : E.Δ ≠ 0)
+    (hmin : IsMinimalModel E) (L : ℂ → ℂ) (hL : IsLFunction E L) :
+    L 1 ≠ 0 ↔ mordellWeilRank E = 0 := by
+  have hord : analyticOrderAt L 1 = (mordellWeilRank E : ℕ∞) := hBSD E hΔ hmin L hL
+  have hana : AnalyticAt ℂ L 1 := hL.1 (1 : ℂ) (Set.mem_univ _)
+  constructor
+  · intro hne
+    have : analyticOrderAt L 1 = 0 := analyticOrderAt_eq_zero.2 (Or.inr hne)
+    rw [hord] at this
+    exact_mod_cast this
+  · intro hrank
+    rw [hrank] at hord
+    have : ¬ AnalyticAt ℂ L 1 ∨ L 1 ≠ 0 := analyticOrderAt_eq_zero.1 (by exact_mod_cast hord)
+    rcases this with h | h
+    · exact absurd hana h
+    · exact h
+
+end Frontier
 

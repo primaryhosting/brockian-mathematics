@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Ghz 3 Normalized
+Category: Quantum Computing
+Target: QC.ghz3_normalized
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,24 +31,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# The 3-qubit GHZ state is a unit vector
-
-We model the state space of three qubits as the finite-dimensional complex Hilbert
-space `EuclideanSpace ℂ (Fin 2 × Fin 2 × Fin 2)`, whose standard basis vectors
-`ket (b₀, b₁, b₂)` are the computational basis states `|b₀ b₁ b₂⟩`.
-
-The GHZ state is `(|000⟩ + |111⟩) / √2`, and we show that it has norm `1`.
--/
 
 namespace QC
 
-/-- The Hilbert space of three qubits, with the computational basis indexed by
-bit-triples. -/
-abbrev Q3 : Type := EuclideanSpace ℂ (Fin 2 × Fin 2 × Fin 2)
+/-- The state space of three qubits: `ℂ^(2×2×2)` with the Euclidean (Hermitian) norm. -/
+abbrev Qubits3 := EuclideanSpace ℂ (Fin 2 × Fin 2 × Fin 2)
 
-/-- The computational basis state `|b₀ b₁ b₂⟩`. -/
+/-- The computational basis ket `|v⟩` for a bit-triple `v`. -/
 
-noncomputable def ket (b : Fin 2 × Fin 2 × Fin 2) : Q3 := EuclideanSpace.single b (1 : ℂ)
+noncomputable def ket (v : Fin 2 × Fin 2 × Fin 2) : Qubits3 := EuclideanSpace.single v 1
 
-/-- The 3-qubit GHZ state `(|000⟩ + |111⟩) / √2`. -/
+/-- The 3-qubit GHZ state `(|000⟩ + |111⟩)/√2`. -/

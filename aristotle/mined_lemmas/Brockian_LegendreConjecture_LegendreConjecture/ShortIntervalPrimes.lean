@@ -31,6 +31,9 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+-- (Lean requires `import` lines to precede any module docstring, so the header above is a
+-- plain block comment and is repeated below as the module docstring.)
+
 import Mathlib
 
 /-!
@@ -43,15 +46,10 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.LegendreConjecture
 
-/-- **Legendre's conjecture** (open): for every `n ≥ 1` there is a prime strictly
-between `n ^ 2` and `(n + 1) ^ 2`. -/
+/-- **Legendre's conjecture** (statement): for every `n ≥ 1` there is a prime strictly
+between `n ^ 2` and `(n + 1) ^ 2`.  This is a famous open problem. -/
 
 def ShortIntervalPrimes : Prop :=
-  ∀ m : ℕ, 1 ≤ m → ∃ p : ℕ, p.Prime ∧ m < p ∧ p ≤ m + Nat.sqrt m
+  ∀ m : ℕ, 100 ≤ m → ∃ p : ℕ, Nat.Prime p ∧ m < p ∧ p ≤ m + Nat.sqrt m
 
-/-- **Conditional reduction of Legendre's conjecture.**
-
-Legendre's conjecture is open, so we prove a Lean-checked reduction: it follows from the
-short-interval prime hypothesis `ShortIntervalPrimes`, i.e. from the existence of a prime in
-`(m, m + √m]` for every `m ≥ 1`. Applying the hypothesis at `m = n ^ 2` (where `√m = n`)
-produces a prime `p` with `n ^ 2 < p ≤ n ^ 2 + n < (n + 1) ^ 2`. -/
+/-- Unconditional verification of Legendre's conjecture for `1 ≤ n ≤ 9`. -/

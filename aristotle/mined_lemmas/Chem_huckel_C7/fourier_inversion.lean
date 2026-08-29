@@ -1,4 +1,13 @@
+/-
+# Huckel C 7
+Category: Chemistry
+Target: Chem.huckel_C7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Huckel C 7
 Category: Chemistry
@@ -7,36 +16,43 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators Real
+open scoped BigOperators
+open scoped Real
+open scoped Classical
+
+set_option maxHeartbeats 1000000
 
 namespace Chem
 
-open Complex Finset Matrix
+open Finset Complex
+
+instance : Fact (Nat.Prime 7) := ⟨by norm_num⟩
 
 /-- A primitive 7-th root of unity. -/
 
-lemma fourier_inversion (v : Fin 7 → ℂ) (j : Fin 7) :
-    ∑ k : Fin 7, ee (j * k) * (∑ i : Fin 7, ee (-(i * k)) * v i) = 7 * v j := by
-  have step : ∀ k : Fin 7, ee (j * k) * (∑ i : Fin 7, ee (-(i * k)) * v i)
-      = ∑ i : Fin 7, ee (k * (j - i)) * v i := by
+lemma fourier_inversion (v : ZMod 7 → ℂ) (j : ZMod 7) :
+    ∑ k : ZMod 7, fcoef v k * chi7 (j * k) = 7 * v j := by
+  have hstep : ∀ k : ZMod 7, fcoef v k * chi7 (j * k)
+      = ∑ l : ZMod 7, v l * chi7 ((j - l) * k) := by
     intro k
-    rw [Finset.mul_sum]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    have h : k * (j - i) = j * k + -(i * k) := by decide +revert
-    rw [h, ee_add]
+    rw [fcoef, Finset.sum_mul]
+    refine Finset.sum_congr rfl (fun l _ => ?_)
+    have hjl : (j - l) * k = -(l * k) + j * k := by ring
+    rw [hjl, chi7_add]
     ring
-  simp only [step]
-  rw [Finset.sum_comm]
-  have hrow : ∀ i : Fin 7, ∑ k : Fin 7, ee (k * (j - i)) * v i
-      = (if j - i = 0 then (7 : ℂ) else 0) * v i := by
-    intro i
-    rw [← Finset.sum_mul, sum_ee]
-  simp only [hrow]
-  rw [Finset.sum_eq_single j]
-  · simp
-  · intro i _ hij
-    have h : j - i ≠ 0 := sub_ne_zero_of_ne (Ne.symm hij)
-    simp [h]
-  · intro h
-    exact absurd (Finset.mem_univ j) h
+  rw [Finset.sum_congr rfl (fun k _ => hstep k), Finset.sum_comm]
+  have hinner : ∀ l : ZMod 7, ∑ k : ZMod 7, v l * chi7 ((j - l) * k)
+      = if l = j then 7 * v l else 0 := by
+    intro l
+    rw [← Finset.mul_sum, sum_chi7_mul]
+    by_cases h : l = j
+    · subst h
+      rw [if_pos (by ring), if_pos rfl]
+      ring
+    · rw [if_neg (by intro hc; exact h (by linear_combination -hc)), if_neg h]
+      ring
+  rw [Finset.sum_congr rfl (fun l _ => hinner l)]
+  simp
 
+/-- If `v` is an eigenvector for `μ`, each Fourier coefficient satisfies
+`(μ - λₖ) cₖ = 0`. -/

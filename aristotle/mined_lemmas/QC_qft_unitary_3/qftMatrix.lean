@@ -1,3 +1,11 @@
+/-!
+# Qft Unitary 3
+Category: Quantum Computing
+Target: QC.qft_unitary_3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -25,12 +33,11 @@ set_option grind.warning false
 
 namespace QC
 
-/-- The `N × N` discrete Fourier transform (QFT) matrix:
-`(QFT)_{j,k} = (1/√N) · exp(2πi·j·k/N)`. -/
+open Complex
+
+/-- The `N`-th root of unity `exp (2 π i / N)`. -/
 
 noncomputable def qftMatrix (N : ℕ) : Matrix (Fin N) (Fin N) ℂ :=
-  Matrix.of fun j k =>
-    ((Real.sqrt N : ℝ) : ℂ)⁻¹ *
-      Complex.exp (2 * (Real.pi : ℂ) * Complex.I * ((j : ℕ) * (k : ℕ)) / (N : ℂ))
+  fun j k => (Real.sqrt N : ℂ)⁻¹ *
+    Complex.exp (2 * Real.pi * Complex.I * ((j : ℕ) * (k : ℕ)) / N)
 
-/-- The 3-qubit quantum Fourier transform matrix, of size `2^3 = 8`. -/
