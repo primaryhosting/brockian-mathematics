@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "program": "game-theory",
+  "register": "CANDIDATE_ONLY",
+  "toolchain": {
+    "lean": "4.32.0",
+    "mathlib": "4.32.0"
+  },
+  "activation": {
+    "default_night_queue": false,
+    "note": "Generate a reviewable solver queue with gen_game_theory_queue.py. Do not add it to night_submit.py without a separate human approval."
+  },
+  "promotion_gates": [
+    "exact target signature reviewed",
+    "lake env lean passes at the repository pin",
+    "AXLE compile passes at the same pin",
+    "raw #print axioms output recorded and reviewed",
+    "source and proof hashes recorded",
+    "firewall dependency classification is accurate",
+    "human review approves promotion"
+  ],
+  "evidence": {
+    "current_candidate": "aristotle/best_proofs/Frontier_nash_equilibrium_exists.lean",
+    "selection_manifest": "aristotle/best_proofs/manifest.json",
+    "verification_report": "aristotle/axle_verify.json",
+    "current_assessment": "The general finite-game result is a reduction to a Brouwer fixed-point hypothesis; independent compilation is not yet green."
+  },
+  "targets": [
+    {
+      "target": "Frontier.nash_equilibrium_exists_of_brouwer",
+      "track": "foundation",
+      "phase": 0,
+      "rank": 0,
+      "difficulty": "HARD",
+      "solver_status": "HOLD",
+      "firewall": "BROUWER_REDUCTION",
+      "depends_on": [],
+      "statement": "For every finite normal-form game, if the mixed-strategy profile space has the fixed-point property required by the Nash map, then a mixed-strategy Nash equilibrium exists.",
+      "goal": "Repair and rename the existing candidate so the theorem signature exposes the Brouwer hypothesis, compiles at Lean/Mathlib 4.32.0, and preserves the raw axiom audit."
+    },
+    {
+      "target": "GameTheory.nashMap_fixedPoint_iff_equilibrium",
+      "track": "foundation",
+      "phase": 0,
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "For the finite-game Nash map formed by adding positive deviation gains and renormalizing, a mixed profile is a fixed point if and only if it is a Nash equilibrium.",
+      "goal": "Extract the algebraic core from the current Nash candidate into a small axiom-clean Lean module, without invoking a fixed-point existence theorem."
+    },
+    {
+      "target": "GameTheory.circulantSkew_uniformNash",
+      "track": "foundation",
+      "phase": 0,
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "In a finite two-player zero-sum game whose payoff matrix is circulant and skew-symmetric, the uniform mixed profile is a Nash equilibrium.",
+      "goal": "Formalize the finite matrix game and prove the uniform-equilibrium result by row/column symmetry and zero-sum inequalities."
+    },
+    {
+      "target": "GameTheory.pureNash_is_correlated",
+      "track": "correlated-equilibrium",
+      "phase": 1,
+      "rank": 1,
+      "difficulty": "EASY",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "The point-mass distribution on any pure Nash equilibrium of a finite game is a correlated equilibrium.",
+      "goal": "Define finite correlated equilibrium incentive constraints and prove the point-mass embedding."
+    },
+    {
+      "target": "GameTheory.mixedNash_product_is_correlated",
+      "track": "correlated-equilibrium",
+      "phase": 1,
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [
+        "GameTheory.pureNash_is_correlated"
+      ],
+      "statement": "The product joint distribution induced by any mixed-strategy Nash equilibrium of a finite game is a correlated equilibrium.",
+      "goal": "Prove the implication for a supplied mixed Nash equilibrium; do not claim existence of the Nash premise."
+    },
+    {
+      "target": "GameTheory.correlatedEquilibrium_convex",
+      "track": "correlated-equilibrium",
+      "phase": 1,
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [
+        "GameTheory.pureNash_is_correlated"
+      ],
+      "statement": "The set of correlated equilibria of a finite game is convex: every convex combination of two correlated equilibria is a correlated equilibrium.",
+      "goal": "Prove convexity directly from the linear incentive inequalities."
+    },
+    {
+      "target": "GameTheory.correlatedEquilibrium_exists_of_nash",
+      "track": "correlated-equilibrium",
+      "phase": 1,
+      "rank": 3,
+      "difficulty": "EASY",
+      "solver_status": "HOLD",
+      "firewall": "BROUWER_REDUCTION",
+      "depends_on": [
+        "Frontier.nash_equilibrium_exists_of_brouwer",
+        "GameTheory.mixedNash_product_is_correlated"
+      ],
+      "statement": "Every finite game has a correlated equilibrium, conditional on the finite mixed-Nash existence theorem used as its premise.",
+      "goal": "Compose the reviewed Nash existence result with the product-distribution embedding, keeping any fixed-point premise explicit."
+    },
+    {
+      "target": "GameTheory.backwardInduction_subgamePerfect",
+      "track": "extensive-form",
+      "phase": 2,
+      "rank": 2,
+      "difficulty": "HARD",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "Every finite perfect-information extensive-form game with deterministic terminal payoffs has a pure-strategy subgame-perfect equilibrium obtained by backward induction.",
+      "goal": "Use well-founded recursion on a finite game tree and prove optimality in every subgame."
+    },
+    {
+      "target": "GameTheory.finiteBayesian_to_normalForm",
+      "track": "bayesian-games",
+      "phase": 2,
+      "rank": 3,
+      "difficulty": "HARD",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "A finite Bayesian game with a common prior induces a finite normal-form game on contingent plans, and Bayesian Nash equilibria correspond to Nash equilibria of the induced game.",
+      "goal": "Formalize the finite type/action/prior data and prove the equilibrium-preserving normal-form reduction."
+    },
+    {
+      "target": "GameTheory.bayesianNash_exists_of_finiteNash",
+      "track": "bayesian-games",
+      "phase": 2,
+      "rank": 4,
+      "difficulty": "MEDIUM",
+      "solver_status": "HOLD",
+      "firewall": "BROUWER_REDUCTION",
+      "depends_on": [
+        "Frontier.nash_equilibrium_exists_of_brouwer",
+        "GameTheory.finiteBayesian_to_normalForm"
+      ],
+      "statement": "Every finite Bayesian game has a Bayesian Nash equilibrium, conditional on the finite normal-form Nash existence theorem used after the contingent-plan reduction.",
+      "goal": "Keep the normal-form Nash premise and any Brouwer dependency explicit in the final theorem signature."
+    },
+    {
+      "target": "GameTheory.strictNash_is_tremblingHandPerfect",
+      "track": "refinements",
+      "phase": 3,
+      "rank": 4,
+      "difficulty": "HARD",
+      "solver_status": "FUTURE",
+      "firewall": "LIMIT_ARGUMENT",
+      "depends_on": [
+        "GameTheory.nashMap_fixedPoint_iff_equilibrium"
+      ],
+      "statement": "Every strict Nash equilibrium of a finite normal-form game is trembling-hand perfect.",
+      "goal": "Formalize completely mixed trembles and the limiting definition, then prove robustness of strict best responses."
+    },
+    {
+      "target": "GameTheory.kuhn_behavioral_realization",
+      "track": "refinements",
+      "phase": 3,
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "solver_status": "FUTURE",
+      "firewall": "PERFECT_RECALL",
+      "depends_on": [
+        "GameTheory.backwardInduction_subgamePerfect"
+      ],
+      "statement": "In every finite extensive-form game with perfect recall, each mixed strategy has an outcome-equivalent behavioral strategy and conversely.",
+      "goal": "Treat this as a later theorem after information sets, realization probabilities, and perfect recall have independent verified definitions."
+    },
+    {
+      "target": "GameTheory.noRegret_implies_coarseCorrelated",
+      "track": "learning-dynamics",
+      "phase": 4,
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "For a finite repeated game, if every player's external regret after T rounds is at most epsilon times T, then the empirical distribution of joint play is an epsilon-coarse-correlated equilibrium.",
+      "goal": "Prove the finite-time averaging identity directly from the external-regret inequalities."
+    },
+    {
+      "target": "GameTheory.hedge_externalRegret_bound",
+      "track": "learning-dynamics",
+      "phase": 4,
+      "rank": 4,
+      "difficulty": "HARD",
+      "solver_status": "FUTURE",
+      "firewall": "EXPONENTIAL_WEIGHTS_BOUND",
+      "depends_on": [
+        "GameTheory.noRegret_implies_coarseCorrelated"
+      ],
+      "statement": "For losses in [0,1], the Hedge exponential-weights algorithm with learning rate eta > 0 has external regret at most log(n)/eta + eta*T/8.",
+      "goal": "Pin the precise update and finite-horizon bound before composing it with the coarse-correlated-equilibrium theorem."
+    },
+    {
+      "target": "GameTheory.replicator_simplex_invariant",
+      "track": "learning-dynamics",
+      "phase": 4,
+      "rank": 6,
+      "difficulty": "HARD",
+      "solver_status": "FUTURE",
+      "firewall": "ODE_EXISTENCE",
+      "depends_on": [],
+      "statement": "Every solution of finite-population replicator dynamics that starts in the probability simplex remains in the simplex throughout its interval of existence.",
+      "goal": "Separate the tangency/nonnegativity argument from the ODE existence dependency."
+    },
+    {
+      "target": "GameTheory.rationalNashVerification_decidable",
+      "track": "computation",
+      "phase": 5,
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "For a finite game with rational payoffs and a rational mixed profile, whether the profile is a Nash equilibrium is decidable by finitely many exact payoff inequalities.",
+      "goal": "Give an executable decision procedure and prove it equivalent to the finite best-response definition."
+    },
+    {
+      "target": "GameTheory.supportEnumeration_sound",
+      "track": "computation",
+      "phase": 5,
+      "rank": 4,
+      "difficulty": "HARD",
+      "solver_status": "FUTURE",
+      "firewall": "NONE",
+      "depends_on": [
+        "GameTheory.rationalNashVerification_decidable"
+      ],
+      "statement": "Every rational bimatrix profile returned by a support-enumeration solver satisfies the Nash equilibrium inequalities.",
+      "goal": "Formalize soundness before completeness or complexity claims."
+    },
+    {
+      "target": "GameTheory.bimatrixNash_PPAD_statement",
+      "track": "computation",
+      "phase": 5,
+      "rank": 7,
+      "difficulty": "MOONSHOT",
+      "solver_status": "FUTURE",
+      "firewall": "PPAD_REDUCTION",
+      "depends_on": [
+        "GameTheory.supportEnumeration_sound"
+      ],
+      "statement": "Computing a Nash equilibrium of a finite two-player bimatrix game is PPAD-complete under a precisely specified finite encoding and reduction notion.",
+      "goal": "Start with a statement-level formalization; do not claim the hardness reduction until the encoding and total-search framework are independently verified."
+    },
+    {
+      "target": "GameTheory.secondPrice_truthful",
+      "track": "mechanism-design",
+      "phase": 6,
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "solver_status": "READY",
+      "firewall": "NONE",
+      "depends_on": [],
+      "statement": "In a finite single-item second-price auction with deterministic tie-breaking and quasilinear utilities, bidding one's true value is a weakly dominant strategy.",
+      "goal": "Pin tie-breaking and utility conventions, then prove truthfulness by cases on the highest competing bid."
+    },
+    {
+      "target": "GameTheory.vcg_dominantStrategy",
+      "track": "mechanism-design",
+      "phase": 6,
+      "rank": 5,
+      "difficulty": "HARD",
+      "solver_status": "FUTURE",
+      "firewall": "FINITE_ARGMAX",
+      "depends_on": [
+        "GameTheory.secondPrice_truthful"
+      ],
+      "statement": "For a finite outcome space and quasilinear agents, the VCG allocation rule with Clarke-pivot payments is dominant-strategy incentive compatible.",
+      "goal": "Generalize only after the second-price special case and finite argmax lemmas verify."
+    },
+    {
+      "target": "GameTheory.continuousNash_exists_of_kakutani",
+      "track": "continuous-games",
+      "phase": 7,
+      "rank": 7,
+      "difficulty": "MOONSHOT",
+      "solver_status": "HOLD",
+      "firewall": "KAKUTANI_REDUCTION",
+      "depends_on": [],
+      "statement": "A game with nonempty compact convex strategy sets and continuous payoffs that are quasiconcave in each player's own strategy has a Nash equilibrium, assuming the required Kakutani fixed-point theorem.",
+      "goal": "Formalize the best-response correspondence and prove the reduction while leaving the Kakutani premise explicit."
+    },
+    {
+      "target": "GameTheory.glicksberg_statement",
+      "track": "continuous-games",
+      "phase": 7,
+      "rank": 8,
+      "difficulty": "MOONSHOT",
+      "solver_status": "FUTURE",
+      "firewall": "KAKUTANI_REDUCTION",
+      "depends_on": [
+        "GameTheory.continuousNash_exists_of_kakutani"
+      ],
+      "statement": "State Glicksberg's equilibrium-existence theorem for compact strategy spaces and continuous payoffs with all topological and measurability hypotheses explicit.",
+      "goal": "Statement-level target only until the finite-dimensional continuous-game layer and fixed-point firewall are verified."
+    }
+  ]
+}

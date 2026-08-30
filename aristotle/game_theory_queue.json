@@ -1,0 +1,129 @@
+{
+ "count": 10,
+ "queue": [
+  {
+   "target": "GameTheory.circulantSkew_uniformNash",
+   "tier": "GT-foundation",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "Formalize the finite matrix game and prove the uniform-equilibrium result by row/column symmetry and zero-sum inequalities.",
+   "statement": "In a finite two-player zero-sum game whose payoff matrix is circulant and skew-symmetric, the uniform mixed profile is a Nash equilibrium.",
+   "program_phase": 0,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.nashMap_fixedPoint_iff_equilibrium",
+   "tier": "GT-foundation",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "Extract the algebraic core from the current Nash candidate into a small axiom-clean Lean module, without invoking a fixed-point existence theorem.",
+   "statement": "For the finite-game Nash map formed by adding positive deviation gains and renormalizing, a mixed profile is a fixed point if and only if it is a Nash equilibrium.",
+   "program_phase": 0,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.pureNash_is_correlated",
+   "tier": "GT-correlated-equilibrium",
+   "rank": 1,
+   "difficulty": "EASY",
+   "goal": "Define finite correlated equilibrium incentive constraints and prove the point-mass embedding.",
+   "statement": "The point-mass distribution on any pure Nash equilibrium of a finite game is a correlated equilibrium.",
+   "program_phase": 1,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.correlatedEquilibrium_convex",
+   "tier": "GT-correlated-equilibrium",
+   "rank": 2,
+   "difficulty": "MEDIUM",
+   "goal": "Prove convexity directly from the linear incentive inequalities.",
+   "statement": "The set of correlated equilibria of a finite game is convex: every convex combination of two correlated equilibria is a correlated equilibrium.",
+   "program_phase": 1,
+   "firewall": "NONE",
+   "depends_on": [
+    "GameTheory.pureNash_is_correlated"
+   ],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.mixedNash_product_is_correlated",
+   "tier": "GT-correlated-equilibrium",
+   "rank": 2,
+   "difficulty": "MEDIUM",
+   "goal": "Prove the implication for a supplied mixed Nash equilibrium; do not claim existence of the Nash premise.",
+   "statement": "The product joint distribution induced by any mixed-strategy Nash equilibrium of a finite game is a correlated equilibrium.",
+   "program_phase": 1,
+   "firewall": "NONE",
+   "depends_on": [
+    "GameTheory.pureNash_is_correlated"
+   ],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.backwardInduction_subgamePerfect",
+   "tier": "GT-extensive-form",
+   "rank": 2,
+   "difficulty": "HARD",
+   "goal": "Use well-founded recursion on a finite game tree and prove optimality in every subgame.",
+   "statement": "Every finite perfect-information extensive-form game with deterministic terminal payoffs has a pure-strategy subgame-perfect equilibrium obtained by backward induction.",
+   "program_phase": 2,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.finiteBayesian_to_normalForm",
+   "tier": "GT-bayesian-games",
+   "rank": 3,
+   "difficulty": "HARD",
+   "goal": "Formalize the finite type/action/prior data and prove the equilibrium-preserving normal-form reduction.",
+   "statement": "A finite Bayesian game with a common prior induces a finite normal-form game on contingent plans, and Bayesian Nash equilibria correspond to Nash equilibria of the induced game.",
+   "program_phase": 2,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.noRegret_implies_coarseCorrelated",
+   "tier": "GT-learning-dynamics",
+   "rank": 2,
+   "difficulty": "MEDIUM",
+   "goal": "Prove the finite-time averaging identity directly from the external-regret inequalities.",
+   "statement": "For a finite repeated game, if every player's external regret after T rounds is at most epsilon times T, then the empirical distribution of joint play is an epsilon-coarse-correlated equilibrium.",
+   "program_phase": 4,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.rationalNashVerification_decidable",
+   "tier": "GT-computation",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "Give an executable decision procedure and prove it equivalent to the finite best-response definition.",
+   "statement": "For a finite game with rational payoffs and a rational mixed profile, whether the profile is a Nash equilibrium is decidable by finitely many exact payoff inequalities.",
+   "program_phase": 5,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  },
+  {
+   "target": "GameTheory.secondPrice_truthful",
+   "tier": "GT-mechanism-design",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "Pin tie-breaking and utility conventions, then prove truthfulness by cases on the highest competing bid.",
+   "statement": "In a finite single-item second-price auction with deterministic tie-breaking and quasilinear utilities, bidding one's true value is a weakly dominant strategy.",
+   "program_phase": 6,
+   "firewall": "NONE",
+   "depends_on": [],
+   "register": "CANDIDATE_ONLY"
+  }
+ ]
+}
