@@ -1,23 +1,28 @@
-import Mathlib
-/-!
-# Schroeder Bernstein
+/-
+# Aleph 0 Add Aleph 0
 Category: Frontier — Set Theory
-Target: Infinity.schroeder_bernstein
+Target: Infinity.aleph0_add_aleph0
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
+set_option autoImplicit false
+
 namespace Infinity
 
-/-- **Cantor–Schröder–Bernstein**: for types `X` and `Y`, if there is an injection `f : X → Y`
-and an injection `g : Y → X`, then there is a bijection `X ≃ Y`.
+/-- Cardinal arithmetic: `ℵ₀ + ℵ₀ = ℵ₀`.
+Closed by Mathlib's `Cardinal.aleph0_add_aleph0`. -/
+theorem aleph0_add_aleph0 :
+    Cardinal.aleph0 + Cardinal.aleph0 = Cardinal.aleph0 :=
+  Cardinal.aleph0_add_aleph0
 
-The proof is Mathlib's `Function.Embedding.schroeder_bernstein`
-(equivalently, `Function.Embedding.antisymm`). -/
-
-noncomputable def schroederBernsteinEquiv {X : Type u} {Y : Type v} {f : X → Y} {g : Y → X}
-    (hf : Function.Injective f) (hg : Function.Injective g) : X ≃ Y :=
-  (schroeder_bernstein hf hg).some
+/-- Cardinal arithmetic: `ℵ₀ * ℵ₀ = ℵ₀`.
+Closed by Mathlib's `Cardinal.aleph0_mul_aleph0`. -/
+theorem aleph0_mul_aleph0 :
+    Cardinal.aleph0 * Cardinal.aleph0 = Cardinal.aleph0 :=
+  Cardinal.aleph0_mul_aleph0
 
 end Infinity
 

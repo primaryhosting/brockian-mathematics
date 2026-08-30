@@ -14,7 +14,18 @@ and an injection `g : Y → X`, then there is a bijection `X ≃ Y`.
 
 The proof is Mathlib's `Function.Embedding.schroeder_bernstein`
 (equivalently, `Function.Embedding.antisymm`). -/
+theorem schroeder_bernstein {X : Type u} {Y : Type v} {f : X → Y} {g : Y → X}
+    (hf : Function.Injective f) (hg : Function.Injective g) :
+    Nonempty (X ≃ Y) :=
+  Function.Embedding.antisymm ⟨f, hf⟩ ⟨g, hg⟩
 
+/-- The bijective-function form of Cantor–Schröder–Bernstein. -/
+theorem schroeder_bernstein_bijective {X : Type u} {Y : Type v} {f : X → Y} {g : Y → X}
+    (hf : Function.Injective f) (hg : Function.Injective g) :
+    ∃ h : X → Y, Function.Bijective h :=
+  Function.Embedding.schroeder_bernstein hf hg
+
+/-- A chosen bijection `X ≃ Y` produced from injections in both directions. -/
 noncomputable def schroederBernsteinEquiv {X : Type u} {Y : Type v} {f : X → Y} {g : Y → X}
     (hf : Function.Injective f) (hg : Function.Injective g) : X ≃ Y :=
   (schroeder_bernstein hf hg).some

@@ -1,7 +1,7 @@
-# Aristotle harvest — 8340/7322 resolved
-- Proof candidates (legacy internal verdict `PROVED`; queued for independent verification): 7740
+# Aristotle harvest — 8351/7335 resolved
+- Proof candidates (legacy internal verdict `PROVED`; queued for independent verification): 7751
 - STOPPED: 600
-- still proving: -1018
+- still proving: -1016
 
 ## Proof candidates
 - [FRONTIER-wave2] AdditiveComb.cauchy_davenport_Z5 (admin)
@@ -2706,6 +2706,7 @@
 - [External] Fibonacci.divides (admin)
 - [FRONTIER-fib] Fibonacci.divides (admin)
 - [FRONTIER-fib] Fibonacci.divides (chris)
+- [FRONTIER-fib] Fibonacci.divides (chris)
 - [FRONTIER-fib] Fibonacci.gcd (admin)
 - [FRONTIER-fib] Fibonacci.gcd (chris)
 - [FRONTIER-fib] Fibonacci.gcd (admin)
@@ -3922,6 +3923,8 @@
 - [FRONTIER-set] Infinity.aleph0_add_aleph0 (admin)
 - [FRONTIER-set] Infinity.aleph0_add_aleph0 (admin)
 - [FRONTIER-set] Infinity.aleph0_add_aleph0 (chris)
+- [FRONTIER-set] Infinity.aleph0_add_aleph0 (admin)
+- [FRONTIER-set] Infinity.aleph0_add_aleph0 (chris)
 - [FRONTIER-set] Infinity.cantor_no_injection_from_powerset (admin)
 - [FRONTIER-set] Infinity.cantor_no_injection_from_powerset (chris)
 - [External] Infinity.cantor_no_injection_from_powerset (admin)
@@ -4002,10 +4005,14 @@
 - [FRONTIER-set] Infinity.reals_uncountable (admin)
 - [FRONTIER-set] Infinity.reals_uncountable (admin)
 - [FRONTIER-set] Infinity.reals_uncountable (chris)
+- [FRONTIER-set] Infinity.reals_uncountable (admin)
+- [FRONTIER-set] Infinity.reals_uncountable (chris)
 - [FRONTIER-set] Infinity.schroeder_bernstein (chris)
 - [FRONTIER-set] Infinity.schroeder_bernstein (admin)
 - [FRONTIER-set] Infinity.schroeder_bernstein (chris)
 - [FRONTIER-set] Infinity.schroeder_bernstein (admin)
+- [FRONTIER-set] Infinity.schroeder_bernstein (admin)
+- [FRONTIER-set] Infinity.schroeder_bernstein (chris)
 - [FRONTIER-set] Infinity.schroeder_bernstein (admin)
 - [FRONTIER-set] Infinity.schroeder_bernstein (chris)
 - [FRONTIER-set] Infinity.schroeder_bernstein (admin)
@@ -5648,6 +5655,8 @@
 - [FRONTIER-set] Phenomenology.mereology_partialorder (chris)
 - [FRONTIER-set] Phenomenology.mereology_partialorder (admin)
 - [FRONTIER-set] Phenomenology.mereology_partialorder (chris)
+- [FRONTIER-set] Phenomenology.mereology_partialorder (admin)
+- [FRONTIER-set] Phenomenology.mereology_partialorder (chris)
 - [FRONTIER-phys] Phys.adiabatic_theorem (admin)
 - [FRONTIER-phys] Phys.adiabatic_theorem (chris)
 - [FRONTIER-phys] Phys.adiabatic_theorem (chris)
@@ -6983,6 +6992,8 @@
 - [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_3 (chris)
 - [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_3 (admin)
 - [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_3 (chris)
+- [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_3 (chris)
+- [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_3 (admin)
 - [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_3 (chris)
 - [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_4 (admin)
 - [FRONTIER-wave2] Riemann.Redheffer.det_eq_mertens_4 (chris)

@@ -23,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Det Eq Mertens 3
+Category: Frontier Wave 2 (deeper machinery)
+Target: Riemann.Redheffer.det_eq_mertens_3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Det Eq Mertens 3
 Category: Frontier Wave 2 (deeper machinery)
@@ -34,10 +43,12 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Riemann.Redheffer
 
-/-- The `3 × 3` Redheffer matrix (0-indexed): `R i j = 1` when `j = 0` or
-`(i+1) ∣ (j+1)`, and `0` otherwise. -/
+/-- The 3×3 Redheffer matrix (0-indexed): `R i j = 1` when `j = 0` or `(i+1) ∣ (j+1)`,
+and `0` otherwise. -/
 
-def R : Matrix (Fin 3) (Fin 3) ℤ :=
-  Matrix.of fun i j => if (j : ℕ) = 0 ∨ ((i : ℕ) + 1) ∣ ((j : ℕ) + 1) then 1 else 0
+theorem det_eq_mertens_sum :
+    R.det = ∑ k ∈ Finset.Icc 1 3, (ArithmeticFunction.moebius k : ℤ) := by
+  rw [det_eq_mertens_3, mertens_three]
 
-/-- `det R = -1 = M(3)`, the Mertens function at `3`. -/
+end Riemann.Redheffer
+

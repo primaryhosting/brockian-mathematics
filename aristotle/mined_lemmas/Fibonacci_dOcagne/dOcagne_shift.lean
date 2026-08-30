@@ -5,7 +5,6 @@ Target: Fibonacci.dOcagne
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 open scoped BigOperators
@@ -33,28 +32,23 @@ set_option grind.warning false
 
 namespace Fibonacci
 
-/-- **d'Ocagne's identity**, stated in the subtraction-free additive form:
-`F_{m+n+1} = F_{m+1} F_{n+1} + F_m F_n` for all natural numbers `m, n`. -/
+/-- **d'Ocagne's identity**, stated in addition form to avoid natural subtraction:
+`fib (m + n + 1) = fib (m + 1) * fib (n + 1) + fib m * fib n`.
+This is `Nat.fib_add` up to commutativity of addition and multiplication. -/
 
 theorem dOcagne_shift (n k : ℕ) :
-    (Nat.fib (n + k) : ℤ) * (Nat.fib (n + 1) : ℤ)
-        - (Nat.fib (n + k + 1) : ℤ) * (Nat.fib n : ℤ)
-      = (-1 : ℤ) ^ n * (Nat.fib k : ℤ) := by
-  induction n generalizing k with
+    (Nat.fib (n + k) : ℤ) * Nat.fib (n + 1) - (Nat.fib (n + k + 1) : ℤ) * Nat.fib n
+      = (-1) ^ n * Nat.fib k := by
+  induction n with
   | zero => simp
   | succ n ih =>
-      have h1 : Nat.fib (n + 2) = Nat.fib n + Nat.fib (n + 1) := Nat.fib_add_two
-      have h2 : Nat.fib (n + k + 2) = Nat.fib (n + k) + Nat.fib (n + k + 1) := Nat.fib_add_two
-      have e1 : n + 1 + k = n + k + 1 := by omega
-      have e2 : n + k + 1 + 1 = n + k + 2 := by omega
-      have e3 : n + 1 + 1 = n + 2 := by omega
-      rw [e1, e2, e3, h1, h2]
-      have hk := ih k
+      have h1 : Nat.fib (n + 1 + 1) = Nat.fib n + Nat.fib (n + 1) := Nat.fib_add_two
+      have h2 : Nat.fib (n + k + 1 + 1) = Nat.fib (n + k) + Nat.fib (n + k + 1) :=
+        Nat.fib_add_two
+      have e1 : n + 1 + k = n + k + 1 := by ring
+      rw [e1, h1, h2, show ((-1 : ℤ)) ^ (n + 1) = -(-1) ^ n by ring]
       push_cast
-      push_cast at hk
-      ring_nf
-      ring_nf at hk
-      linarith
+      nlinarith [ih]
 
-/-- **d'Ocagne's identity** in its classical signed form: for `n ≤ m`,
-`F_m F_{n+1} - F_{m+1} F_n = (-1)^n F_{m-n}`. -/
+/-- **d'Ocagne's identity** in its classical subtractive form: for `m ≥ n`,
+`fib m * fib (n + 1) - fib (m + 1) * fib n = (-1)^n * fib (m - n)`. -/

@@ -1,23 +1,25 @@
-import Mathlib
-/-!
+/-
 # Schroeder Bernstein
 Category: Frontier — Set Theory
 Target: Infinity.schroeder_bernstein
-Verification: pending
+Verification: verified (axioms: propext, Classical.choice, Quot.sound)
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 requires `import` lines to precede any doc comment `/-! ... -/`,
+-- so the header above is written as a plain block comment.)
+
+import Mathlib
 
 namespace Infinity
 
-/-- **Cantor–Schröder–Bernstein**: for types `X` and `Y`, if there is an injection `f : X → Y`
-and an injection `g : Y → X`, then there is a bijection `X ≃ Y`.
+/-- **Cantor–Schröder–Bernstein**: if there are injections `f : X → Y` and `g : Y → X`,
+then there is a bijection between `X` and `Y`.
 
-The proof is Mathlib's `Function.Embedding.schroeder_bernstein`
-(equivalently, `Function.Embedding.antisymm`). -/
+The proof invokes Mathlib's `Function.Embedding.schroeder_bernstein`. -/
 
-noncomputable def schroederBernsteinEquiv {X : Type u} {Y : Type v} {f : X → Y} {g : Y → X}
-    (hf : Function.Injective f) (hg : Function.Injective g) : X ≃ Y :=
-  (schroeder_bernstein hf hg).some
+theorem schroeder_bernstein_embedding {X Y : Type*} (e₁ : X ↪ Y) (e₂ : Y ↪ X) :
+    Nonempty (X ≃ Y) :=
+  schroeder_bernstein e₁.injective e₂.injective
 
 end Infinity
 

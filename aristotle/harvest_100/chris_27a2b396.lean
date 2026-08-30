@@ -1,23 +1,24 @@
 import Mathlib
+
 /-!
-# Schroeder Bernstein
+# Reals Uncountable
 Category: Frontier — Set Theory
-Target: Infinity.schroeder_bernstein
+Target: Infinity.reals_uncountable
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 namespace Infinity
 
-/-- **Cantor–Schröder–Bernstein**: for types `X` and `Y`, if there is an injection `f : X → Y`
-and an injection `g : Y → X`, then there is a bijection `X ≃ Y`.
+/-- The real numbers are uncountable: there is no surjection from `ℕ` onto `ℝ`.
+This follows from Mathlib's `Cardinal.not_countable_real`. -/
+theorem reals_uncountable : ¬ ∃ f : ℕ → ℝ, Function.Surjective f := by
+  rintro ⟨f, hf⟩
+  exact Cardinal.not_countable_real (Set.countable_univ_iff.mpr hf.countable)
 
-The proof is Mathlib's `Function.Embedding.schroeder_bernstein`
-(equivalently, `Function.Embedding.antisymm`). -/
-
-noncomputable def schroederBernsteinEquiv {X : Type u} {Y : Type v} {f : X → Y} {g : Y → X}
-    (hf : Function.Injective f) (hg : Function.Injective g) : X ≃ Y :=
-  (schroeder_bernstein hf hg).some
+/-- Equivalent formulation: `ℝ` is not a countable type. -/
+theorem real_not_countable : ¬ Countable ℝ := fun h =>
+  Cardinal.not_countable_real (Set.countable_univ_iff.mpr h)
 
 end Infinity
 

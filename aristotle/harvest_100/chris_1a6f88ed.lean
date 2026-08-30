@@ -1,25 +1,28 @@
+/-
+# Divides
+Category: Fibonacci
+Target: Fibonacci.divides
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
+
 /-!
-# Schroeder Bernstein
-Category: Frontier — Set Theory
-Target: Infinity.schroeder_bernstein
+# Divides
+Category: Fibonacci
+Target: Fibonacci.divides
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Infinity
+namespace Fibonacci
 
-/-- **Cantor–Schröder–Bernstein**: for types `X` and `Y`, if there is an injection `f : X → Y`
-and an injection `g : Y → X`, then there is a bijection `X ≃ Y`.
+/-- For all `m n : ℕ`, `Nat.fib m` divides `Nat.fib (m * n)`.
+Immediate from Mathlib's `Nat.fib_dvd : m ∣ n → Nat.fib m ∣ Nat.fib n`. -/
+theorem divides (m n : ℕ) : Nat.fib m ∣ Nat.fib (m * n) :=
+  Nat.fib_dvd m (m * n) ⟨n, rfl⟩
 
-The proof is Mathlib's `Function.Embedding.schroeder_bernstein`
-(equivalently, `Function.Embedding.antisymm`). -/
-
-noncomputable def schroederBernsteinEquiv {X : Type u} {Y : Type v} {f : X → Y} {g : Y → X}
-    (hf : Function.Injective f) (hg : Function.Injective g) : X ≃ Y :=
-  (schroeder_bernstein hf hg).some
-
-end Infinity
+end Fibonacci
 
 import Mathlib
 

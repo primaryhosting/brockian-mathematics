@@ -2497,6 +2497,11 @@
    "issue_id": "a45506f6-cc14-4996-9649-6864e46a6ca4",
    "identifier": "RIE-775",
    "created_at": "2026-08-29T23:14:40.677411+00:00"
+  },
+  "aristotle_notice_1022910c4c19f3407eb5bafa": {
+   "issue_id": "20f57f73-b7ff-4c46-88d0-e3e0af64635b",
+   "identifier": "RIE-776",
+   "created_at": "2026-08-30T00:04:01.375844+00:00"
   }
  },
  "proof_attempt_requests": {
@@ -2511,25 +2516,20 @@
    "created_at": "2026-08-24T12:30:13.757816+00:00"
   }
  },
- "updated_at": "2026-08-29T23:26:24.963378+00:00",
+ "updated_at": "2026-08-30T00:15:25.545372+00:00",
  "last_cycle": {
-  "started_at": "2026-08-29T23:14:40.374877+00:00",
-  "new_receipts": 2,
+  "started_at": "2026-08-30T00:04:01.249669+00:00",
+  "new_receipts": 1,
   "candidates": [
    {
-    "account": "chris",
-    "name": "arsub_w2d6opkj",
-    "uuid": "d30964fe-1f0b-426c-b837-ae645b334f3f"
-   },
-   {
     "account": "admin",
-    "name": "arsub_cfuc52zv",
-    "uuid": "990b1053-6194-4fc3-a5be-2eb317c75a82"
+    "name": "arsub_bc2ezc2_",
+    "uuid": "66a889af-6cd9-452b-8059-1c15d358427d"
    },
    {
     "account": "chris",
-    "name": "arsub_r_vu8_gm",
-    "uuid": "51e3db88-a971-4b89-9687-44f3d4767261"
+    "name": "arsub_nbxcrwh5",
+    "uuid": "2522861f-5e66-4bad-8e9c-9e43a0b6c0d7"
    }
   ],
   "stages": [
@@ -2537,85 +2537,85 @@
     "name": "harvest_proofs",
     "status": "ok",
     "rc": 0,
-    "seconds": 10.1,
-    "tail": "harvested 4 this run | cumulative 8336/7318 (7736 PROVED)"
+    "seconds": 29.5,
+    "tail": "harvested 11 this run | cumulative 8351/7335 (7751 PROVED)"
    },
    {
     "name": "harvest_all",
     "status": "ok",
     "rc": 0,
-    "seconds": 40.7,
-    "tail": "admin: 2000 IDLE listed, 0 not yet harvested\nchris: 2000 IDLE listed, 0 not yet harvested\n\ndownloaded 0 new | +0 PROVED | ledger now 8336 (7736 PROVED)"
+    "seconds": 69.7,
+    "tail": "admin: 2000 IDLE listed, 0 not yet harvested\nchris: 2000 IDLE listed, 0 not yet harvested\n\ndownloaded 0 new | +0 PROVED | ledger now 8351 (7751 PROVED)"
    },
    {
     "name": "select_best",
     "status": "ok",
     "rc": 0,
-    "seconds": 9.5,
-    "tail": "selected best proof for 1291 targets (from 7736 candidates)"
+    "seconds": 15.0,
+    "tail": "selected best proof for 1291 targets (from 7751 candidates)"
    },
    {
     "name": "axle_verify",
     "status": "ok",
     "rc": 0,
-    "seconds": 246.0,
+    "seconds": 245.0,
     "tail": "1291 best proofs; AXLE-verifying 2 (cloud lean-4.32.2)\n  ..  Brockian_GoldbachWheelK2_1051.lean  The read operation timed out\n  ..  problem_normal_0001.lean  The read operation timed out\n\nAXLE-verified 1038 | failed 264 | checked 1304/1291"
    },
    {
     "name": "axle_axiom_audit",
     "status": "ok",
     "rc": 0,
-    "seconds": 50.9,
+    "seconds": 51.3,
     "tail": "ommand\\n\"]\n  .. Math2_cap_set.lean  compile error: ['-:84:14-84:23: error(lean.unknownIdentifier): Unknown constant `Math2.for`\\n']\n  .. Phys_mermin_wagner.lean  no theorem/lemma found\n  .. Phys_unruh_effect.lean  no theorem/lemma found\n  .. QC_ghz3_normalized.lean  no theorem/lemma found\n  .. QI_holevo_bound.lean  no theorem/lemma found\n  .. QI_schmidt_decomposition.lean  no theorem/lemma found\n\ncloud axiom-audited 1076 | kernel-trusted 1037 | FLAGGED 1: ['Brock_Core_Mod_modEq_iff_exists.lean']"
    },
    {
     "name": "catalogue_domains",
     "status": "ok",
     "rc": 0,
-    "seconds": 2.8,
+    "seconds": 3.5,
     "tail": "VERIFIED': 165}\n  by domain: {'qc': 34, 'literature': 8, 'meta': 15, 'cs': 43, 'math': 100, 'set': 24, 'primes': 24, 'moonshot': 11, 'fields': 26, 'lean': 10, 'extension': 34, 'qphys': 22, 'chem': 33, 'qi': 22, 'physics': 19, 'mind': 8, 'abel': 10, 'phys': 20, 'open': 12, 'conjecture': 41, 'spectral': 5, 'betrothed': 8, 'linalg': 11, 'assembly': 6, 'christoffel': 2, 'integral': 3, 'riemann': 20, 'fib': 8, 'wave2': 47, 'reconciled': 371, 'characters': 12, 'line': 10, 'operator': 4, 'frontier': 2}"
    },
    {
     "name": "lemma_mine",
     "status": "ok",
     "rc": 0,
-    "seconds": 258.2,
-    "tail": "mined 83482 complete lemmas from 1286 files (0 of them from STOPPED/failed jobs \u2014 salvaged value)"
+    "seconds": 121.1,
+    "tail": "mined 83517 complete lemmas from 1286 files (0 of them from STOPPED/failed jobs \u2014 salvaged value)"
    },
    {
     "name": "reduction_tracker",
     "status": "ok",
     "rc": 0,
-    "seconds": 0.9,
+    "seconds": 1.0,
     "tail": "collatz_conjecture_iff_eventualDescent', 'reaches1_of_reach1B', 'reaches1_of_descends', 'reaches1_of_descends_three_mod_four', 'reaches1_of_descends_mod_sixteen', 'reaches1_of_descends_mod_thirtytwo', 'CollatzConjecture', 'reaches1_of_reachesOneWithin', 'CollatzConjecture', 'descends_of_mod_four_eq_three', 'collatzIter_180_below_1024']\n  Brockian.HyperperfectNumbers.HyperperfectAllK: ['HyperperfectAllK', 'HyperperfectAllK', 'isHyperperfect_of_certificate', 'HyperperfectAllK', 'HyperperfectAllK']"
    },
    {
     "name": "minimize_proofs",
     "status": "ok",
     "rc": 0,
-    "seconds": 34.9,
-    "tail": "minimized 1291 proofs: dropped 7546 dead decls; lines 204631->105909 (48% smaller)"
+    "seconds": 32.7,
+    "tail": "minimized 1291 proofs: dropped 7546 dead decls; lines 204629->105910 (48% smaller)"
    },
    {
     "name": "annotate_headers",
     "status": "ok",
     "rc": 0,
-    "seconds": 1.0,
+    "seconds": 3.6,
     "tail": "annotated + normalized 1038 AXLE-verified proofs -> /Users/acutis/Projects/brockian-mathematics/aristotle/pr_ready/"
    },
    {
     "name": "auto_pr",
     "status": "ok",
     "rc": 0,
-    "seconds": 0.9,
+    "seconds": 3.9,
     "tail": "jkstra_correct (DOMAIN-cs)\n  - CS.church_rosser_beta_diamond (DOMAIN-cs)\n  - Math.halls_marriage (DOMAIN-math)\n  - Frontier.Loeb_theorem (FRONTIER-set)\n  - Frontier.Brun_twin_reciprocal (FRONTIER-primes)\n  - Frontier.cook_levin (FRONTIER-moonshot)\n  - Frontier.jones_polynomial_invariant (FRONTIER-fields)\n  - Math.sperner_lemma (DOMAIN-math)\n  - CS.sorting_lb_4 (DOMAIN-cs)\n  - Brockian.CosTraceNorm3001 (C-corpus-extension)\n\nDRY-RUN: 616 new proofs would be PR'd. Set AUTO_PR_LIVE=1 to push + open."
    },
    {
     "name": "observatory",
     "status": "ok",
     "rc": 0,
-    "seconds": 0.2,
-    "tail": "thed\": 87,\n  \"linalg\": 124,\n  \"assembly\": 69,\n  \"christoffel\": 23,\n  \"integral\": 33,\n  \"riemann\": 233,\n  \"fib\": 92,\n  \"wave2\": 502,\n  \"operator\": 47,\n  \"line\": 115,\n  \"characters\": 132,\n  \"frontier\": 6\n },\n \"harvested\": 8336,\n \"proved\": 7736,\n \"stopped\": 600,\n \"axle_verified\": 1038,\n \"kernel_trusted\": 1037,\n \"lake_verified\": 0,\n \"local_kernel_trusted\": 0,\n \"best_proofs\": 1291,\n \"domains\": 1025,\n \"reductions\": 195,\n \"mined_lemmas\": 16189,\n \"pr_eligible\": 783\n}\nwrote observatory.json / .md / .html"
+    "seconds": 0.5,
+    "tail": "thed\": 87,\n  \"linalg\": 124,\n  \"assembly\": 69,\n  \"christoffel\": 23,\n  \"integral\": 33,\n  \"riemann\": 233,\n  \"fib\": 93,\n  \"wave2\": 508,\n  \"operator\": 47,\n  \"line\": 115,\n  \"characters\": 132,\n  \"frontier\": 6\n },\n \"harvested\": 8351,\n \"proved\": 7751,\n \"stopped\": 600,\n \"axle_verified\": 1038,\n \"kernel_trusted\": 1037,\n \"lake_verified\": 0,\n \"local_kernel_trusted\": 0,\n \"best_proofs\": 1291,\n \"domains\": 1025,\n \"reductions\": 195,\n \"mined_lemmas\": 16188,\n \"pr_eligible\": 783\n}\nwrote observatory.json / .md / .html"
    }
   ],
   "registry_hop": {
@@ -2627,14 +2627,14 @@
      "name": "gen_registry",
      "status": "ok",
      "rc": 0,
-     "seconds": 7.8,
+     "seconds": 12.1,
      "tail": "registry: {'PROVED': 12373, 'DEFINITION': 651, 'CONJECTURE': 40, 'CONDITIONAL': 33, 'DISCHARGED': 7} -> registry/theorems.json + REGISTRY.md"
     },
     {
      "name": "audit_strict",
      "status": "failed",
      "rc": 1,
-     "seconds": 39.1,
+     "seconds": 92.9,
      "tail": "[PASS] registry-consistency\n[PASS] overclaim-firewall\n[PASS] no-theater-lint\n[FAIL] attestation-integrity\n  [ERROR] ArithmeticFunction_liouville_apply.json: 'liouville_apply' not declared in Brockian/ArithmeticFunction_liouville_apply.lean (attestation-name-missing)\n  \n  attestation integrity: 1656 attestations checked | 1 errors\n\nengine.audit: 3/4 surfaces pass; FAILED: ['attestation-integrity']"
     }
    ]
@@ -2642,16 +2642,10 @@
   "stopped_reason": "engine.audit --strict failed",
   "lovable_drafts_queued": 0,
   "approval_cards_posted": 0,
-  "paperclip_issues_filed": 2,
-  "finished_at": "2026-08-29T23:26:24.753834+00:00"
+  "paperclip_issues_filed": 1,
+  "finished_at": "2026-08-30T00:15:24.313959+00:00"
  },
  "history": [
-  {
-   "started_at": "2026-08-29T17:17:46.963000+00:00",
-   "finished_at": "2026-08-29T17:18:15.880188+00:00",
-   "new_receipts": 0,
-   "stopped_reason": "engine.audit --strict failed"
-  },
   {
    "started_at": "2026-08-29T17:33:16.449651+00:00",
    "finished_at": "2026-08-29T17:33:50.716377+00:00",
@@ -2764,6 +2758,12 @@
    "started_at": "2026-08-29T23:14:40.374877+00:00",
    "finished_at": "2026-08-29T23:26:24.753834+00:00",
    "new_receipts": 2,
+   "stopped_reason": "engine.audit --strict failed"
+  },
+  {
+   "started_at": "2026-08-30T00:04:01.249669+00:00",
+   "finished_at": "2026-08-30T00:15:24.313959+00:00",
+   "new_receipts": 1,
    "stopped_reason": "engine.audit --strict failed"
   }
  ],
@@ -2931,10 +2931,10 @@
    "proved_last": 12356
   },
   "2026-08-29": {
-   "cycles": 65,
-   "receipts": 22,
-   "candidates": 44,
-   "chain_failures": 42,
+   "cycles": 66,
+   "receipts": 23,
+   "candidates": 46,
+   "chain_failures": 43,
    "failure_reasons": [
     "engine.audit --strict failed",
     "engine.audit --strict failed",
@@ -2948,15 +2948,15 @@
     "engine.audit --strict failed"
    ],
    "registry_hops_ok": 0,
-   "registry_hops_stopped": 42,
-   "paperclip_issues": 22,
+   "registry_hops_stopped": 43,
+   "paperclip_issues": 23,
    "lovable_drafts": 0,
    "approval_cards": 1,
    "proved_first": 12356,
    "proved_last": 12373
   }
  },
- "last_notified": "6876ef314f51090ab244451aeba10d6c0af7ca75929bdd25b44eab3334114b2d",
+ "last_notified": "c085326f76c074eb7357c9e5f0232b311e3d63d947e61dd8d192c849f8d04b5d",
  "proved_drafts": {
   "conveyor_draft_aa74cb2c076fd032134ba6d8": {
    "at": "2026-08-20T20:36:24.665409+00:00",
