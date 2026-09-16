@@ -68,32 +68,19 @@ theorem channel_product (p a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
 theorem plus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
     (hplus : 1 + x ≠ 0) (htransformed : 1 + 1 / (p * x) ≠ 0) :
     plusFactor p (1 / (p * x)) * plusFactor p x = 1 := by
-  have hpx : 1 + p * x ≠ 0 := by
-    intro h
-    apply htransformed
-    have heq : 1 + 1 / (p * x) = (1 + p * x) / (p * x) := by
-      field_simp
-      <;> ring
-    rw [heq, h, zero_div]
-  have hxp : 1 + x * p ≠ 0 := by simpa [mul_comm] using hpx
   dsimp [plusFactor]
-  field_simp
-  <;> field_simp [hpx, hxp]
+  rw [div_mul_div_comm]
+  apply (div_eq_one_iff_eq (mul_ne_zero htransformed hplus)).2
+  field_simp [hp, hx]
   <;> ring
 
 theorem minus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
     (hminus : 1 - x ≠ 0) (htransformed : 1 - 1 / (p * x) ≠ 0) :
     minusFactor p (1 / (p * x)) * minusFactor p x = 1 := by
-  have hpx : -1 + p * x ≠ 0 := by
-    intro h
-    apply htransformed
-    have heq : 1 - 1 / (p * x) = (-1 + p * x) / (p * x) := by
-      field_simp
-      <;> ring
-    rw [heq, h, zero_div]
   dsimp [minusFactor]
-  field_simp
-  <;> field_simp [hpx]
+  rw [div_mul_div_comm]
+  apply (div_eq_one_iff_eq (mul_ne_zero htransformed hminus)).2
+  field_simp [hp, hx]
   <;> ring
 
 theorem projector_resolution :

@@ -49,8 +49,11 @@ conflated: a determinant observation is richer than the residue marginal.
 
 For m=8, reduction modulo 4 identifies h=1 and h=5 but separates h=1 and
 h=3. All three are coprime to 8 and have the same cycle determinant. The
-modulo-4 observer is less informative than labelled depth, yet adds information
-that the determinant alone cannot supply. This refutes the earlier dichotomy.
+modulo-4 observer adds information that the determinant alone cannot supply,
+but by itself does not refine gcd globally (0 and 4 illustrate the issue).
+The combined observer O(h)=(gcd(h,8),h mod 4) is strictly more informative than
+gcd and strictly less informative than labelled h. This is the precise
+counterexample to the earlier dichotomy.
 
 `Brockian.HolonomyObservers` formalizes the general quotient-observer theorem,
 translations through arbitrarily many loops, and the order m/gcd(m,h).

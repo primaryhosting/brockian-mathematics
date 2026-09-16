@@ -28,7 +28,9 @@ TARGETS = [
     "Brockian/CyclicFourierStructure.lean",
     "Brockian/D5FourierBridge.lean",
     "Brockian/CyclePolynomialCertificates.lean",
+    "Brockian/CycleOperatorPolynomials.lean",
     "Brockian/HolonomyObservers.lean",
+    "Brockian/HolonomySeam.lean",
     "Brockian/HodgeGramAlgebra.lean",
     "Brockian/QCQFTUnitary.lean",
     "Brockian/OddPerfectThreePrimes.lean",
@@ -38,8 +40,9 @@ TARGETS = [
 ]
 STRUCTURAL = {"Brockian/FrickeChannelAlgebra.lean", "Brockian/CyclicFourierStructure.lean",
               "Brockian/QCQFTUnitary.lean", "Brockian/HolonomyObservers.lean",
+              "Brockian/HolonomySeam.lean",
               "Brockian/HodgeGramAlgebra.lean", "Brockian/D5FourierBridge.lean",
-              "Brockian/CyclePolynomialCertificates.lean"}
+              "Brockian/CyclePolynomialCertificates.lean", "Brockian/CycleOperatorPolynomials.lean"}
 WEYL = ["Brockian/ConfiningSpectralShape.lean", "Brockian/WeylWeakRegularityClosed.lean",
         "Brockian/WeylWeakRegularityDischarge.lean", "Brockian/WeylKatoRellichTransfer.lean"]
 

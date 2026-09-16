@@ -57,7 +57,7 @@ of basis. In `channels_of_constant_term` it remains the named hypothesis
 | "Eigenvalues are the zeta zeros" | The identification used here concerns scattering poles at half the zero parameter |
 | "Fricke symmetry supplies D₅ on Y₀(5)" | The two-cusp swap supplies C₂; a different group action would need an explicit construction |
 | "Golden ratio is a unit length" | It is an algebraic unit and a finite-cycle spectral quantity; a metric length needs its own definition |
-| "The observer recovers gcd or h, with nothing between" | Different quotient observers recover different images of h; modulo 4 on Z/8 is a strict intermediate example |
+| "The observer recovers gcd or h, with nothing between" | The combined observer (gcd(h,8), h mod 4) is strictly between gcd alone and labelled h |
 | "Exact pilots are formal theorems" | Finite examples and uncompiled skeletons are separate evidence levels |
 | "A positive cutoff trace proves Weil positivity" | The required global primitive sign and limiting identity need independent theorems |
 | "All second-order operators fail the counting test" | The Weyl law must be stated for a specified operator, domain and spectral parameter |

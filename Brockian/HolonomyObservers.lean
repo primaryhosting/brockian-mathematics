@@ -71,6 +71,20 @@ theorem intermediate_observer :
     modFour 1 = modFour 5 ∧ modFour 1 ≠ modFour 3 ∧ (1 : ZMod 8) ≠ 5 := by
   decide
 
+def combinedObserver (h : ZMod 8) : ℕ × ZMod 4 := (8.gcd h.val, modFour h)
+
+/-- Combining the determinant invariant and a quotient gives a strict
+intermediate observer between gcd alone and the fully labelled holonomy. -/
+theorem combined_observer_strict :
+    (8.gcd (1 : ZMod 8).val = 8.gcd (3 : ZMod 8).val) ∧
+    combinedObserver 1 ≠ combinedObserver 3 ∧
+    combinedObserver 1 = combinedObserver 5 ∧ (1 : ZMod 8) ≠ 5 := by
+  decide
+
+theorem combined_observer_refines_gcd (h k : ZMod 8)
+    (heq : combinedObserver h = combinedObserver k) : 8.gcd h.val = 8.gcd k.val :=
+  congrArg Prod.fst heq
+
 def seamStep (q m : ℕ) [NeZero q] (h : ZMod m)
     (x : ZMod q × ZMod m) : ZMod q × ZMod m :=
   (x.1 + 1, x.2 + if x.1 = -1 then h else 0)
@@ -79,14 +93,15 @@ theorem residue_observer_independent (q m : ℕ) [NeZero q]
     (h k : ZMod m) (x : ZMod q × ZMod m) :
     (seamStep q m h x).1 = (seamStep q m k x).1 := rfl
 
+def seamMatrix (q m : ℕ) [NeZero q] [NeZero m] (h : ZMod m) :
+    Matrix (ZMod q × ZMod m) (ZMod q × ZMod m) ℚ :=
+  Matrix.of fun i j => if seamStep q m h j = i then 1 else 0
+
 /-- Target of the remaining cycle-decomposition formalization. Merely defining
 this proposition does not prove it. The written proof is in the review notes. -/
 def SeamDeterminantStatement (q m h : ℕ) [NeZero q] [NeZero m] : Prop :=
   ∀ z : ℚ,
-    Matrix.det ((1 : Matrix (ZMod q × ZMod m) (ZMod q × ZMod m) ℚ) -
-      z • (fun i j : ZMod q × ZMod m =>
-      if seamStep q m (h : ZMod m) j = i then (1 : ℚ) else 0 :
-        Matrix (ZMod q × ZMod m) (ZMod q × ZMod m) ℚ)) =
+    Matrix.det (1 - z • seamMatrix q m (h : ZMod m)) =
     (1 - z ^ (q * (m / m.gcd h))) ^ m.gcd h
 
 end Brockian.HolonomyObservers
