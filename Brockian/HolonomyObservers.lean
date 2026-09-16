@@ -71,18 +71,18 @@ theorem intermediate_observer :
     modFour 1 = modFour 5 ∧ modFour 1 ≠ modFour 3 ∧ (1 : ZMod 8) ≠ 5 := by
   decide
 
-def combinedObserver (h : ZMod 8) : ℕ × ZMod 4 := (8.gcd h.val, modFour h)
+def combinedObserver (h : ZMod 8) : ℕ × ZMod 4 := (Nat.gcd 8 h.val, modFour h)
 
 /-- Combining the determinant invariant and a quotient gives a strict
 intermediate observer between gcd alone and the fully labelled holonomy. -/
 theorem combined_observer_strict :
-    (8.gcd (1 : ZMod 8).val = 8.gcd (3 : ZMod 8).val) ∧
+    (Nat.gcd 8 (1 : ZMod 8).val = Nat.gcd 8 (3 : ZMod 8).val) ∧
     combinedObserver 1 ≠ combinedObserver 3 ∧
     combinedObserver 1 = combinedObserver 5 ∧ (1 : ZMod 8) ≠ 5 := by
   decide
 
 theorem combined_observer_refines_gcd (h k : ZMod 8)
-    (heq : combinedObserver h = combinedObserver k) : 8.gcd h.val = 8.gcd k.val :=
+    (heq : combinedObserver h = combinedObserver k) : Nat.gcd 8 h.val = Nat.gcd 8 k.val :=
   congrArg Prod.fst heq
 
 def seamStep (q m : ℕ) [NeZero q] (h : ZMod m)

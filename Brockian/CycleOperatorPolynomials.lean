@@ -25,7 +25,8 @@ def adjacency : Module.End ℂ (ZMod N → ℂ) where
 theorem adjacency_mode (k : ZMod N) :
     adjacency N (mode k) =
       (ZMod.stdAddChar k + ZMod.stdAddChar (-k)) • mode k := by
-  simpa [adjacency, huckel, shift, shiftInv] using huckel_mode 0 1 k
+  simpa [adjacency, huckel, Brockian.CyclicFourierStructure.shift,
+    Brockian.CyclicFourierStructure.shiftInv, Pi.add_def] using huckel_mode 0 1 k
 
 theorem annihilator_of_eigenvalues (p : ℂ[X])
     (hp : ∀ k : ZMod N, p.eval (ZMod.stdAddChar k + ZMod.stdAddChar (-k)) = 0) :
@@ -41,8 +42,8 @@ theorem annihilator_of_eigenvalues (p : ℂ[X])
   rw [Module.End.aeval_apply_of_mem_apply_eq_smul (adjacency_mode N k), hp k]
   simp
 
-def fivePolynomial : ℂ[X] := (X - C 2) * (X ^ 2 + X - C 1)
-def thirteenPolynomial : ℂ[X] :=
+noncomputable def fivePolynomial : ℂ[X] := (X - C 2) * (X ^ 2 + X - C 1)
+noncomputable def thirteenPolynomial : ℂ[X] :=
   (X - C 2) * (X ^ 6 + X ^ 5 - C 5 * X ^ 4 - C 4 * X ^ 3 +
     C 6 * X ^ 2 + C 3 * X - C 1)
 
@@ -58,13 +59,13 @@ theorem thirteen_annihilator : aeval (adjacency 13) thirteenPolynomial = 0 := by
 
 theorem five_operator_identity :
     (adjacency 5 - 2) * (adjacency 5 ^ 2 + adjacency 5 - 1) = 0 := by
-  simpa [fivePolynomial] using five_annihilator
+  simpa [fivePolynomial, map_ofNat] using five_annihilator
 
 theorem thirteen_operator_identity :
     (adjacency 13 - 2) * (adjacency 13 ^ 6 + adjacency 13 ^ 5 -
       5 * adjacency 13 ^ 4 - 4 * adjacency 13 ^ 3 + 6 * adjacency 13 ^ 2 +
       3 * adjacency 13 - 1) = 0 := by
-  simpa [thirteenPolynomial] using thirteen_annihilator
+  simpa [thirteenPolynomial, map_ofNat] using thirteen_annihilator
 
 noncomputable def adjacencyMatrix : Matrix (ZMod N) (ZMod N) ℂ :=
   LinearMap.toMatrixAlgEquiv' (adjacency N)

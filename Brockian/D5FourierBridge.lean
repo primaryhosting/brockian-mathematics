@@ -19,11 +19,17 @@ theorem omegaPow_eq_character (a : ZMod 5) :
   have hgen : ZMod.stdAddChar (N := 5) (1 : ZMod 5) = omega := by
     simpa [omega] using (ZMod.stdAddChar_coe (N := 5) (1 : ℤ))
   have ha : (a : ZMod 5) = a.val • (1 : ZMod 5) := by simp
-  rw [ha, AddChar.map_nsmul_eq_pow, hgen]
-  rfl
+  calc
+    omegaPow a = omega ^ a.val := rfl
+    _ = (ZMod.stdAddChar (N := 5) 1) ^ a.val := by rw [hgen]
+    _ = ZMod.stdAddChar (N := 5) (a.val • 1) :=
+      (AddChar.map_nsmul_eq_pow _ _ _).symm
+    _ = ZMod.stdAddChar (N := 5) a := by rw [← ha]
 
 theorem eigenmode_eq_mode (k : ZMod 5) : eigenmode k = mode (N := 5) k := by
-  ext j
+  apply funext
+  change ∀ j : ZMod 5, omegaPow (k * j) = ZMod.stdAddChar (N := 5) (k * j)
+  intro j
   exact omegaPow_eq_character (k * j)
 
 theorem isotypicProjector_eq_projector (k : ZMod 5) (f : ZMod 5 → ℂ) :

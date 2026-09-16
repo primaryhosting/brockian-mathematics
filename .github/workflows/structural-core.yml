@@ -36,10 +36,6 @@ jobs:
         run: lake exe cache get
       - name: Compile structural targets and repaired modules, then report axioms
         run: python3 scripts/check_structural_core.py --output /tmp/structural-receipts/core
-      - name: Diagnose the existing Weyl dependency closure
-        if: success() || failure()
-        continue-on-error: true
-        run: python3 scripts/check_structural_core.py --group weyl --output /tmp/structural-receipts/weyl
       - name: Preserve source-bound receipts
         if: always()
         uses: actions/upload-artifact@v4
