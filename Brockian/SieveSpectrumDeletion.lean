@@ -1,3 +1,6 @@
+import Mathlib
+import Brockian.SieveSpectrumBlocks
+
 /-!
 # Twin-unit deletion masks on the canonical sieve blocks
 
@@ -8,8 +11,6 @@ equivalence between surviving wheel sites and surviving block coordinates,
 and defines the corresponding deletion mask on each potential path.
 -/
 
-import Mathlib
-import Brockian.SieveSpectrumBlocks
 
 set_option autoImplicit false
 

@@ -1,0 +1,46 @@
+name: structural-core-kernel
+
+on:
+  pull_request:
+    paths:
+      - 'Brockian/**'
+      - 'scripts/check_structural_core.py'
+      - '.github/workflows/structural-core.yml'
+      - 'lean-toolchain'
+      - 'lake-manifest.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: structural-core-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the repository's pinned Lean toolchain
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          bash /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib artifacts
+        uses: actions/cache@v4
+        with:
+          path: .lake/packages
+          key: structural-mathlib-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+      - name: Compile structural targets and repaired modules, then report axioms
+        run: python3 scripts/check_structural_core.py --output /tmp/structural-receipts
+      - name: Preserve source-bound receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: structural-receipts-${{ github.event.pull_request.head.sha }}
+          path: /tmp/structural-receipts
+          if-no-files-found: warn
+

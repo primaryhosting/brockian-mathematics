@@ -1,3 +1,6 @@
+import Mathlib
+import Brockian.SieveSpectrumCounts
+
 /-!
 # Canonical three-site blocks for the twin-sieve wheel
 
@@ -11,8 +14,6 @@ inside one three-site block. It does not yet identify a deletion mask with the
 actual twin-admissible unit predicate or define the compressed Hamiltonian.
 -/
 
-import Mathlib
-import Brockian.SieveSpectrumCounts
 
 set_option autoImplicit false
 

@@ -1,3 +1,7 @@
+import Mathlib
+import Brockian.AdmissibilityKTuple
+import Brockian.AdmissibilityCRTGeneral
+
 /-!
 # Exact counts for the twin-sieve spectral campaign
 
@@ -19,9 +23,6 @@ The subtraction-safe consequence is `n1 + 2*E = V + T`.  For wheel products
 it evaluates to one even though the correct count is zero.
 -/
 
-import Mathlib
-import Brockian.AdmissibilityKTuple
-import Brockian.AdmissibilityCRTGeneral
 
 set_option autoImplicit false
 
