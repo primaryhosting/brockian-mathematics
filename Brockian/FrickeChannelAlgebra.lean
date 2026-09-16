@@ -68,15 +68,29 @@ theorem channel_product (p a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
 theorem plus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
     (hplus : 1 + x ≠ 0) (htransformed : 1 + 1 / (p * x) ≠ 0) :
     plusFactor p (1 / (p * x)) * plusFactor p x = 1 := by
+  have hpx : 1 + p * x ≠ 0 := by
+    intro h
+    apply htransformed
+    have heq : 1 + 1 / (p * x) = (1 + p * x) / (p * x) := by
+      field_simp
+      <;> ring
+    rw [heq, h, zero_div]
   dsimp [plusFactor]
-  field_simp
+  field_simp [hpx, mul_comm p x]
   <;> ring
 
 theorem minus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
     (hminus : 1 - x ≠ 0) (htransformed : 1 - 1 / (p * x) ≠ 0) :
     minusFactor p (1 / (p * x)) * minusFactor p x = 1 := by
+  have hpx : -1 + p * x ≠ 0 := by
+    intro h
+    apply htransformed
+    have heq : 1 - 1 / (p * x) = (-1 + p * x) / (p * x) := by
+      field_simp
+      <;> ring
+    rw [heq, h, zero_div]
   dsimp [minusFactor]
-  field_simp
+  field_simp [hpx]
   <;> ring
 
 theorem projector_resolution :

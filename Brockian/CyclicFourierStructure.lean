@@ -86,7 +86,7 @@ theorem projector_resolution (f : ZMod N → ℂ) : ∑ k, projector k f = f := 
   ext j
   have hinv := congrFun (ZMod.dft.symm_apply_apply f) j
   rw [ZMod.invDFT_apply] at hinv
-  simp only [sum_apply, projector, Pi.smul_apply, coefficient, mode, smul_eq_mul]
+  simp only [Finset.sum_apply, projector, Pi.smul_apply, coefficient, mode, smul_eq_mul]
   calc
     ∑ k : ZMod N, ((N : ℂ)⁻¹ * ZMod.dft f k) * ZMod.stdAddChar (k * j)
         = (N : ℂ)⁻¹ * ∑ k : ZMod N, ZMod.stdAddChar (k * j) * ZMod.dft f k := by
@@ -118,7 +118,7 @@ theorem reflect_mode (k : ZMod N) : reflect (mode k) = mode (-k) := by
 theorem reflect_shift_reflect (f : ZMod N → ℂ) :
     reflect (shift (reflect f)) = shiftInv f := by
   ext j
-  simp [reflect, shift, shiftInv, sub_eq_add_neg]
+  simp [reflect, shift, shiftInv, sub_eq_add_neg, add_comm]
 
 theorem huckel_mode (α β : ℂ) (k : ZMod N) :
     huckel α β (mode k) =

@@ -26,6 +26,8 @@ from engine.verify import ALLOWED_AXIOMS, axioms_in_line, qualified_decls
 TARGETS = [
     "Brockian/FrickeChannelAlgebra.lean",
     "Brockian/CyclicFourierStructure.lean",
+    "Brockian/HolonomyObservers.lean",
+    "Brockian/HodgeGramAlgebra.lean",
     "Brockian/QCQFTUnitary.lean",
     "Brockian/OddPerfectThreePrimes.lean",
     "Brockian/SieveSpectrumCounts.lean",
@@ -33,7 +35,10 @@ TARGETS = [
     "Brockian/SieveSpectrumDeletion.lean",
 ]
 STRUCTURAL = {"Brockian/FrickeChannelAlgebra.lean", "Brockian/CyclicFourierStructure.lean",
-              "Brockian/QCQFTUnitary.lean"}
+              "Brockian/QCQFTUnitary.lean", "Brockian/HolonomyObservers.lean",
+              "Brockian/HodgeGramAlgebra.lean"}
+WEYL = ["Brockian/ConfiningSpectralShape.lean", "Brockian/WeylWeakRegularityClosed.lean",
+        "Brockian/WeylWeakRegularityDischarge.lean", "Brockian/WeylKatoRellichTransfer.lean"]
 
 
 def run(command: list[str]) -> subprocess.CompletedProcess[str]:
@@ -44,6 +49,7 @@ def run(command: list[str]) -> subprocess.CompletedProcess[str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--group", choices=["structural", "weyl"], default="structural")
     args = parser.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
@@ -51,6 +57,7 @@ def main() -> int:
     commit = run(["git", "rev-parse", "HEAD"])
     receipt = {
         "schema_version": 1,
+        "group": args.group,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "source_commit": commit.stdout.strip(),
         "lean_version": version.stdout.strip(),
@@ -61,7 +68,8 @@ def main() -> int:
         "modules": [],
     }
     failed = version.returncode != 0
-    for source in dependency_order([ROOT / p for p in TARGETS], ROOT):
+    targets = TARGETS if args.group == "structural" else WEYL
+    for source in dependency_order([ROOT / p for p in targets], ROOT):
         rel = source.relative_to(ROOT).as_posix()
         mod = rel.removesuffix(".lean").replace("/", ".")
         dest = ROOT / ".lake/build/lib/lean" / Path(rel).with_suffix(".olean")
@@ -77,13 +85,14 @@ def main() -> int:
         if rel in STRUCTURAL and not bad:
             names = qualified_decls(source.read_text())
             probe = out / f"{mod}.axioms.lean"
-            probe.write_text(f"import {mod}\nset_option pp.width 100000\n" +
+            probe.write_text(f"import {mod}\n" +
                              "\n".join(f"#print axioms {n}" for n in names) + "\n")
             checked = run(["lake", "env", "lean", str(probe)])
             (out / f"{mod}.axioms.log").write_text(checked.stdout)
             bad |= checked.returncode != 0 or not names
             for name in names:
-                matches = [line for line in checked.stdout.splitlines() if f"'{name}'" in line and "axiom" in line]
+                pattern = rf"'{re.escape(name)}' (?:does not depend on any axioms|depends on axioms:\s*\[[^\]]*\])"
+                matches = re.findall(pattern, checked.stdout, flags=re.DOTALL)
                 ax = axioms_in_line(matches[0]) if len(matches) == 1 else None
                 okay = ax is not None and set(ax).issubset(ALLOWED_AXIOMS)
                 record["theorems"].append({"name": name, "axioms": ax, "axioms_ok": okay})
