@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "group": "weyl",
+  "created_at": "2026-09-16T22:52:44.160105+00:00",
+  "source_commit": "a5f0c54a45ddf066adba8612ecc218a51a62a513",
+  "lean_version": "Lean (version 4.32.0, x86_64-unknown-linux-gnu, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+  "toolchain": "leanprover/lean4:v4.32.0",
+  "manifest_sha256": "85b8e655d5bfc5543ee8ce162e564a1dc5bf6152f7fd9d748df2288d926cdb4f",
+  "verification_scope": "Lean kernel compilation and complete per-module theorem axiom probes",
+  "external_attestation": "not_performed",
+  "modules": [
+    {
+      "path": "Brockian/SpectralGate1.lean",
+      "source_sha256": "c2e9fcccae17f8d520961751adc7bb9b8f9adc331a192dfc7b0da67510233176",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/SpectralGate1.olean",
+        "Brockian/SpectralGate1.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/RiemannScaffold.lean",
+      "source_sha256": "d6ac9105d0847b69fd2f547faa22536ea54e0270408a6e4ba9a0f13538768047",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/RiemannScaffold.olean",
+        "Brockian/RiemannScaffold.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylOperatorChoice.lean",
+      "source_sha256": "079fde2811d02ad033aa576a32bb19511f4149a6df1dc70b8a56385018f67eee",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylOperatorChoice.olean",
+        "Brockian/WeylOperatorChoice.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylConfining.lean",
+      "source_sha256": "8fa59ddc3a53b5c0409b2789b289e5dcb6143ff5abc581f8aa0ccc7e1b1fbf3e",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylConfining.olean",
+        "Brockian/WeylConfining.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/ConfiningSpectralShape.lean",
+      "source_sha256": "5a84e3c6d80c49d2f5ba402247d7c990626765aac7fb61a5de39dabf4571c52c",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/ConfiningSpectralShape.olean",
+        "Brockian/ConfiningSpectralShape.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylOperator.lean",
+      "source_sha256": "9d3dc8dcce56ee37adbdd5b7214eafbb4563856c81fb72ebc3e977228b309e7c",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylOperator.olean",
+        "Brockian/WeylOperator.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylBridge.lean",
+      "source_sha256": "9e4500f37f693931a60e2f8b72164604641f4fe829e895163ac282d0e827665e",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylBridge.olean",
+        "Brockian/WeylBridge.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylCayley.lean",
+      "source_sha256": "79038b576b7324e5ee05ac035f58be01af53388754311c3a934754695f176704",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylCayley.olean",
+        "Brockian/WeylCayley.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylChain.lean",
+      "source_sha256": "30addab79e7c072cba017d383103b3ec5990d4213c7d53d1448b19af1eae01d1",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylChain.olean",
+        "Brockian/WeylChain.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylEssSelfAdjoint.lean",
+      "source_sha256": "c3604d21aec0dd1b4670d49111f08ad15c20ca364d1adc0c1ce27109ec583bf1",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylEssSelfAdjoint.olean",
+        "Brockian/WeylEssSelfAdjoint.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylKato.lean",
+      "source_sha256": "b6ca153ae7be81a4f3c337fb1f5cd8315a15248c5aeb82bdfafa1036e7f7acb5",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylKato.olean",
+        "Brockian/WeylKato.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylGate1Bounded.lean",
+      "source_sha256": "d02146da5a54448cd3caed1bcad57f1c26dc35851d9772f7f6f62a3c8ece9ed2",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylGate1Bounded.olean",
+        "Brockian/WeylGate1Bounded.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylSchrodingerESA.lean",
+      "source_sha256": "f522eb4d5a563270e36047cd02efe26f8dcdca9c9647ca8682a5762396595b30",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylSchrodingerESA.olean",
+        "Brockian/WeylSchrodingerESA.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylSchrodingerMinimal.lean",
+      "source_sha256": "2184d3d9510f3df24e3a768258e0b08b5681680d33fec1ecc531497bcfe863c6",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylSchrodingerMinimal.olean",
+        "Brockian/WeylSchrodingerMinimal.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylDeficiencyRegularity.lean",
+      "source_sha256": "2b8498bdc0acefd04f21fb7c5e797da9104ee5d817671bdf8bd94d600ef47702",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylDeficiencyRegularity.olean",
+        "Brockian/WeylDeficiencyRegularity.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylWeakRegularityScaffold.lean",
+      "source_sha256": "19194eaca05d7c3fa7cb8e22d5bc246a196e62ea2db0aee72637389c065352df",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylWeakRegularityScaffold.olean",
+        "Brockian/WeylWeakRegularityScaffold.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylWeakRegularityClosed.lean",
+      "source_sha256": "60aa0de58f3cfd2c6b49553f64eeebb738c9c1c224a6705314c9d70ecbcdd1ba",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylWeakRegularityClosed.olean",
+        "Brockian/WeylWeakRegularityClosed.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylWeakRegularityCore.lean",
+      "source_sha256": "c74d953892f01295b584fbcd1e0a7b158218838913bdcf550ebf408a7dd145d3",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylWeakRegularityCore.olean",
+        "Brockian/WeylWeakRegularityCore.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylWeakRegularityDischarge.lean",
+      "source_sha256": "03ec903766fde8d78e4d8c043a97f53b1695eabe910f943685dc2ec31b7b0511",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylWeakRegularityDischarge.olean",
+        "Brockian/WeylWeakRegularityDischarge.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylFreeLaplacian.lean",
+      "source_sha256": "2578e6fd4ffc8f36205b1d4793a5851108d5c38e041b7cec5dde8a8b3de25296",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylFreeLaplacian.olean",
+        "Brockian/WeylFreeLaplacian.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylKatoUnbounded.lean",
+      "source_sha256": "f354fdb4d890db5f09b6900d1b1e5695af282407b551dea7def8f98135260e76",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylKatoUnbounded.olean",
+        "Brockian/WeylKatoUnbounded.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylClosedRange.lean",
+      "source_sha256": "1c0218b17c87ef010e1592db68995747c53f2610f6e045c46b510069573c69ab",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylClosedRange.olean",
+        "Brockian/WeylClosedRange.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylKatoRangeDensity.lean",
+      "source_sha256": "2eed9f77c1b5c6fe27e309e70045efb16378a745d2141803763dfa977c35437e",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylKatoRangeDensity.olean",
+        "Brockian/WeylKatoRangeDensity.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylKatoRellichScaffold.lean",
+      "source_sha256": "13bfeea7f680a74717f11ec429ea5343e487e1695859047d15fd20e53c143141",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylKatoRellichScaffold.olean",
+        "Brockian/WeylKatoRellichScaffold.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylKatoNeumann.lean",
+      "source_sha256": "36fe1a10b0a49716ae61a2b973ba1bf0869aebd0c04bb8ffade4696c6931da6a",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylKatoNeumann.olean",
+        "Brockian/WeylKatoNeumann.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylKatoNeumannEstimates.lean",
+      "source_sha256": "81117977bc0041d0b042874be393ae07ac9f1c6749eb9a0304d6c053703e849c",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylKatoNeumannEstimates.olean",
+        "Brockian/WeylKatoNeumannEstimates.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/WeylKatoRellichTransfer.lean",
+      "source_sha256": "105b7647ea9b4f10bb06b23f52bd803f3c2edd29a61ac81cb3fdfe6e76d13891",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/WeylKatoRellichTransfer.olean",
+        "Brockian/WeylKatoRellichTransfer.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    }
+  ],
+  "passed": true
+}

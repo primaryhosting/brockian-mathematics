@@ -33,6 +33,8 @@ surface, the frequency parameter t with λ=1/4+t² has a quadratic leading Weyl
 term. N_ζ(T) instead has leading term T log T/(2π). Thus a direct ordered
 identification of that entire spectrum with the zero heights fails this
 counting test. The scattering poles are a different spectral object.
+For the congruence-surface Weyl law, see [Müller, equation (1.9)](https://arxiv.org/pdf/2302.02207),
+which states the quadratic main term and the lower-order cusp contribution.
 
 This is not a theorem against every second-order differential operator,
 against an explicitly constructed subsector with its own counting law, or

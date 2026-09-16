@@ -57,8 +57,12 @@ counterexample to the earlier dichotomy.
 
 `Brockian.HolonomyObservers` formalizes the general quotient-observer theorem,
 translations through arbitrarily many loops, and the order m/gcd(m,h).
+`Brockian.HolonomySeam` connects the actual one-step map to the translations:
+`one_loop` gives the q-step shift, `completed_loops` gives all multiples of q,
+and `seam_return_iff` gives the exact divisibility criterion for a return.
+The final kernel receipt is indexed in REVIEW.md.
 `SeamDeterminantStatement` records the full one-step determinant target as a
-Prop. Its proof still requires a Lean seam-iteration/cycle decomposition and
-a cycle-block determinant lemma. Neither the definition nor the finite
+Prop. Its proof still requires the uniform cycle decomposition and a
+cycle-block determinant lemma in Lean. Neither the definition nor the finite
 (5,6), (3,8), (4,12) pilots closes that formalization gap. The proof above is
 the written mathematical result; it has no claim of novelty.

@@ -1,0 +1,13 @@
+import Brockian.HolonomyObservers
+#print axioms Brockian.HolonomyObservers.loop_iterate
+#print axioms Brockian.HolonomyObservers.observe_loop
+#print axioms Brockian.HolonomyObservers.observer_equivalence
+#print axioms Brockian.HolonomyObservers.observer_kernel
+#print axioms Brockian.HolonomyObservers.labelled_observer
+#print axioms Brockian.HolonomyObservers.coarsening_preserves_indistinguishability
+#print axioms Brockian.HolonomyObservers.observe_loops
+#print axioms Brockian.HolonomyObservers.loop_return_iff
+#print axioms Brockian.HolonomyObservers.intermediate_observer
+#print axioms Brockian.HolonomyObservers.combined_observer_strict
+#print axioms Brockian.HolonomyObservers.combined_observer_refines_gcd
+#print axioms Brockian.HolonomyObservers.residue_observer_independent

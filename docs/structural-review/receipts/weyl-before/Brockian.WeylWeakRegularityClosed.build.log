@@ -1,0 +1,13 @@
+Brockian/WeylWeakRegularityClosed.lean:30:11: error(lean.unknownIdentifier): Unknown identifier `conj`
+Brockian/WeylWeakRegularityClosed.lean:37:2: error: Tactic `rfl` failed: The left-hand side
+  star (↑↑g) x
+is not definitionally equal to the right-hand side
+  conjugateRepresentative g x
+
+g : ↥L2R
+x : ℝ
+⊢ star (↑↑g) x = conjugateRepresentative g x
+Brockian/WeylWeakRegularityClosed.lean:42:30: error(lean.unknownIdentifier): Unknown identifier `conj`
+Brockian/WeylWeakRegularityClosed.lean:61:34: error(lean.unknownIdentifier): Unknown identifier `conj`
+Brockian/WeylWeakRegularityClosed.lean:63:39: error(lean.unknownIdentifier): Unknown identifier `conj`
+Brockian/WeylWeakRegularityClosed.lean:161:9: error(lean.unknownIdentifier): Unknown identifier `conj`

@@ -43,13 +43,16 @@ detects no h. A quotient observer detects π(h). Proof: HOLONOMY_PROOF.md.
 
 **Lean:** `HolonomyObservers.lean` proves general observer equivalence,
 kernel classification, coarsening, iterated loop translations, and loop return
-order m/g. The explicit finite witness at m=8 is computational evidence.
+order m/g. The explicit finite witness at m=8 is proved by kernel-checked
+finite computation. `HolonomySeam.lean` connects these loop translations to
+the actual one-step map and proves the general return-time equivalence:
+P_h^n(x)=x iff q(m/g) divides n.
 The compound observer (gcd(h,8),h mod 4) strictly refines gcd and is weaker
 than labelled h. Quotient h mod 4 alone is not a refinement of gcd globally.
 
 **Open formalization:** `SeamDeterminantStatement` is a Prop container, not
-a theorem. It needs the general one-step seam iteration formula, the uniform
-cycle decomposition and the cycle-block determinant proof in Lean. Checking
+a theorem. The remaining bridge after the seam return-time theorem is the
+uniform cycle decomposition and the cycle-block determinant proof in Lean. Checking
 three parameter pairs does not fill this gap.
 
 **Explanation earned:** the former "nothing in between" assertion is withdrawn.
@@ -84,13 +87,16 @@ its complex coordinate matrix.
 where Ψ(t)=t⁶+t⁵−5t⁴−4t³+6t²+3t−1. These certificates give annihilators.
 For N=5, the five complex modes group over R as 1+2+2; the two nonconstant
 eigenvalues are (−1±√5)/2. The quadratic factor of the integer adjacency
-matrix is the all-ones matrix, which has rank one. This rank conclusion and
-the irreducibility/minimality of Ψ require their own formal statements; a
-scalar annihilating identity alone is not a proof of either.
+matrix is proved to be the all-ones matrix, with rank exactly one: a
+one-column factorization gives the upper bound and a nonzero 1×1 minor gives
+the lower bound. Irreducibility/minimality of Ψ and the real irreducible
+decomposition still require their own formal statements.
 
-**Scope:** the current operator identities are over C. The reported v5 checks
-over Z remain reported finite witnesses until the archive is available or a
-separate integral statement is compiled. No modular-surface D₅ action follows.
+**Scope:** the operator identities are proved over C and transferred to
+integer adjacency matrices through the injective coefficient map Z→C. The
+five-cycle quadratic-factor identity is also checked directly in the kernel.
+This supplies separate repository proofs of the integer identities; it does
+not reproduce the unavailable v5 test suite. No modular-surface D₅ action follows.
 
 ## E21 — The finite-field template locates the sign theorem
 

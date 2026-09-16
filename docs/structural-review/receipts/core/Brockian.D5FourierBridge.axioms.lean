@@ -1,0 +1,6 @@
+import Brockian.D5FourierBridge
+#print axioms Brockian.D5FourierBridge.omegaPow_eq_character
+#print axioms Brockian.D5FourierBridge.eigenmode_eq_mode
+#print axioms Brockian.D5FourierBridge.isotypicProjector_eq_projector
+#print axioms Brockian.D5FourierBridge.full_projector_resolution
+#print axioms Brockian.D5FourierBridge.full_projector_composition

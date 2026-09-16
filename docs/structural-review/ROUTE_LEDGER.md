@@ -5,9 +5,9 @@ review branch. Reported v5 pilots are not substituted for missing build evidence
 
 | Route | Status | What survives | Gate for additional RH-directed work |
 |---|---|---|---|
-| E18: prime-level Fricke channels | Algebra under kernel review; analytic transfer conditional | Exact rational factors, determinant, C₂ projectors, regular-domain functional equations | Pin analytic input and prove any claimed pole order, including cancellations |
-| E19: holonomy and observers | General observer proof under kernel review; full determinant formalization open | Quotient observer invariant, loop return order, written cycle classification | Compile the one-step cycle decomposition and determinant theorem |
-| E20/E01: shared finite Fourier structure | Generic theorem under kernel review | Orthogonality, complete cyclic projectors, dihedral relation, Hückel eigenmodes for all N>0 | Add bridges into existing D₅ consumers and certify polynomial/rank corollaries |
+| E18: prime-level Fricke channels | Algebra kernel-checked; analytic transfer conditional | Exact rational factors, determinant, C₂ projectors, regular-domain functional equations | Pin analytic input and prove any claimed pole order, including cancellations |
+| E19: holonomy and observers | General observer theorem kernel-checked; full determinant formalization open | Quotient observer invariant, loop return order, written cycle classification | Compile the uniform cycle decomposition and determinant theorem |
+| E20/E01: shared finite Fourier structure | Generic theorem and D₅ bridge kernel-checked | Orthogonality, complete cyclic projectors, dihedral relation, Hückel eigenmodes for all N>0 | Formalize real irreducible decomposition and polynomial minimality separately from annihilation |
 | E21: finite-field template | Complete written conditional-on-classical-input proof | Exact location of the geometric sign and full Gram calculation | Arithmetic candidate must fill all six roles in FINITE_FIELD_TEMPLATE.md |
 | Spec Z / Picard monoid | SIGN_GATE_UNMET | Concrete arithmetic moduli and semilocal trace geometry | Independent primitive pairing and index/sign theorem, with the global limiting bridge |
 | Li / Laguerre discrepancy | PARKED | Generating-function identity, exact rate dictionary, verification-height bound, E16/E17 tools | A new independent structural input, or a demonstrated error in the stated dictionary or its hypotheses |

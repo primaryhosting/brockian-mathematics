@@ -1,0 +1,8 @@
+import Brockian.CyclePolynomialCertificates
+#print axioms Brockian.CyclePolynomialCertificates.five_factor_identity
+#print axioms Brockian.CyclePolynomialCertificates.thirteen_factor_identity
+#print axioms Brockian.CyclePolynomialCertificates.five_root_annihilator
+#print axioms Brockian.CyclePolynomialCertificates.thirteen_root_annihilator
+#print axioms Brockian.CyclePolynomialCertificates.character_power
+#print axioms Brockian.CyclePolynomialCertificates.five_fourier_eigenvalue
+#print axioms Brockian.CyclePolynomialCertificates.thirteen_fourier_eigenvalue

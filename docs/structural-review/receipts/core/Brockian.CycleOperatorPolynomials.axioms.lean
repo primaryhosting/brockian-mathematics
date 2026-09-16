@@ -1,0 +1,15 @@
+import Brockian.CycleOperatorPolynomials
+#print axioms Brockian.CycleOperatorPolynomials.adjacency_mode
+#print axioms Brockian.CycleOperatorPolynomials.annihilator_of_eigenvalues
+#print axioms Brockian.CycleOperatorPolynomials.five_annihilator
+#print axioms Brockian.CycleOperatorPolynomials.thirteen_annihilator
+#print axioms Brockian.CycleOperatorPolynomials.five_operator_identity
+#print axioms Brockian.CycleOperatorPolynomials.thirteen_operator_identity
+#print axioms Brockian.CycleOperatorPolynomials.adjacencyMatrix_apply
+#print axioms Brockian.CycleOperatorPolynomials.five_matrix_identity
+#print axioms Brockian.CycleOperatorPolynomials.thirteen_matrix_identity
+#print axioms Brockian.CycleOperatorPolynomials.integralAdjacencyMatrix_cast
+#print axioms Brockian.CycleOperatorPolynomials.five_integral_matrix_identity
+#print axioms Brockian.CycleOperatorPolynomials.thirteen_integral_matrix_identity
+#print axioms Brockian.CycleOperatorPolynomials.five_quadratic_factor
+#print axioms Brockian.CycleOperatorPolynomials.five_quadratic_factor_rank

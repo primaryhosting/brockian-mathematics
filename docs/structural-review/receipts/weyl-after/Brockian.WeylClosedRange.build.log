@@ -1,0 +1,13 @@
+Brockian/WeylClosedRange.lean:24:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.ClosedRange.eq_univ_of_dense_isClosed`:
+  [InnerProductSpace ℂ H]
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℂ H] [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Brockian/WeylClosedRange.lean:42:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.ClosedRange.smulPMap_isClosed`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

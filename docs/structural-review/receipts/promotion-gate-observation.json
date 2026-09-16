@@ -1,0 +1,16 @@
+{
+  "kind": "observed_ci_result_summary",
+  "run_url": "https://github.com/primaryhosting/brockian-mathematics/actions/runs/35161582060",
+  "job_id": 105013314852,
+  "source": "GitHub Actions job log",
+  "control_plane_tests": {
+    "passed": 191,
+    "failed": 1,
+    "failed_test": "tests/test_attestation_integrity.py::test_committed_registry_is_clean",
+    "reason": "ConfiningSpectralShape content_hash mismatch",
+    "recorded_hash": "e10ed93595a27b24",
+    "repaired_flattened_source_hash": "dd3c0b9642e9e841"
+  },
+  "later_strict_attestation_step": "skipped",
+  "merge_ready": false
+}

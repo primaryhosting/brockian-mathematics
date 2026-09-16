@@ -1,0 +1,22 @@
+Brockian/ConfiningSpectralShape.lean:78:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.ConfiningShape.spectrum_real_of_symm`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Brockian/ConfiningSpectralShape.lean:87:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.ConfiningShape.brockian_eigenvalue_real_of_candidate`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Brockian/ConfiningSpectralShape.lean:170:38: error(lean.unknownIdentifier): Unknown identifier `abs_primeGaussian_le_two`
+Brockian/ConfiningSpectralShape.lean:212:4: error: Function expected at
+  primeGaussianMulCLM
+but this term has type
+  ?m.4
+
+Note: Expected a function because this term is being applied to the argument
+  v
+
+Hint: The identifier `primeGaussianMulCLM` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.

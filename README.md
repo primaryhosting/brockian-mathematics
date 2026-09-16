@@ -10,10 +10,12 @@ half the zero parameter. The two-cusp Fricke symmetry is C₂. The golden ratio
 is explained by five-cycle Fourier algebra and Q(√5) = Q(ζ₅)⁺; no D₅ action on
 Y₀(5) is claimed. See [precise public claims](docs/structural-review/PUBLIC_CLAIMS.md)
 and the [finite-field sign template](docs/structural-review/FINITE_FIELD_TEMPLATE.md).
+The [structural review](docs/structural-review/REVIEW.md) records the kernel
+receipts, remaining formalization gaps, and promotion blockers.
 
-**What makes this different from most AI-assisted math: every "PROVED" result is
-independently machine-verified, and the repository refuses to claim anything the build
-does not earn.**
+Verification status is tied to recorded evidence. This structural review has
+kernel compilation receipts; modified legacy modules still need refreshed AXLE
+attestations before promotion. The derived registry is not promoted by this review.
 
 ## Multi-domain problem attack pipeline
 
