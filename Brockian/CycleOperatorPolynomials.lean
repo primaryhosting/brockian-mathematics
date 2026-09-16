@@ -106,7 +106,7 @@ theorem integralAdjacencyMatrix_cast :
 theorem five_integral_matrix_identity :
     (integralAdjacencyMatrix 5 - 2) *
       (integralAdjacencyMatrix 5 ^ 2 + integralAdjacencyMatrix 5 - 1) = 0 := by
-  apply Matrix.map_injective (Int.cast_injective (R := ℂ))
+  apply Matrix.map_injective (Int.cast_injective (α := ℂ))
   change (Int.castRingHom ℂ).mapMatrix _ = (Int.castRingHom ℂ).mapMatrix _
   simpa only [map_mul, map_sub, map_add, map_pow, map_ofNat, map_one, map_zero,
     integralAdjacencyMatrix_cast] using five_matrix_identity
@@ -116,7 +116,7 @@ theorem thirteen_integral_matrix_identity :
       integralAdjacencyMatrix 13 ^ 5 - 5 * integralAdjacencyMatrix 13 ^ 4 -
       4 * integralAdjacencyMatrix 13 ^ 3 + 6 * integralAdjacencyMatrix 13 ^ 2 +
       3 * integralAdjacencyMatrix 13 - 1) = 0 := by
-  apply Matrix.map_injective (Int.cast_injective (R := ℂ))
+  apply Matrix.map_injective (Int.cast_injective (α := ℂ))
   change (Int.castRingHom ℂ).mapMatrix _ = (Int.castRingHom ℂ).mapMatrix _
   simpa only [map_mul, map_sub, map_add, map_pow, map_ofNat, map_one, map_zero,
     integralAdjacencyMatrix_cast] using thirteen_matrix_identity
