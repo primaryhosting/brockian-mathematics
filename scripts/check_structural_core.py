@@ -25,13 +25,15 @@ from engine.verify import ALLOWED_AXIOMS, axioms_in_line, qualified_decls
 
 TARGETS = [
     "Brockian/FrickeChannelAlgebra.lean",
+    "Brockian/CyclicFourierStructure.lean",
     "Brockian/QCQFTUnitary.lean",
     "Brockian/OddPerfectThreePrimes.lean",
     "Brockian/SieveSpectrumCounts.lean",
     "Brockian/SieveSpectrumBlocks.lean",
     "Brockian/SieveSpectrumDeletion.lean",
 ]
-STRUCTURAL = {"Brockian/FrickeChannelAlgebra.lean", "Brockian/QCQFTUnitary.lean"}
+STRUCTURAL = {"Brockian/FrickeChannelAlgebra.lean", "Brockian/CyclicFourierStructure.lean",
+              "Brockian/QCQFTUnitary.lean"}
 
 
 def run(command: list[str]) -> subprocess.CompletedProcess[str]:
@@ -75,7 +77,8 @@ def main() -> int:
         if rel in STRUCTURAL and not bad:
             names = qualified_decls(source.read_text())
             probe = out / f"{mod}.axioms.lean"
-            probe.write_text(f"import {mod}\n" + "\n".join(f"#print axioms {n}" for n in names) + "\n")
+            probe.write_text(f"import {mod}\nset_option pp.width 100000\n" +
+                             "\n".join(f"#print axioms {n}" for n in names) + "\n")
             checked = run(["lake", "env", "lean", str(probe)])
             (out / f"{mod}.axioms.log").write_text(checked.stdout)
             bad |= checked.returncode != 0 or not names

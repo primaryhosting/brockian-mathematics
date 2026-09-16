@@ -38,21 +38,21 @@ theorem denominator_ne_zero {x : K} (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
 theorem channel_sum (p a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
     scattering p a x 0 0 + scattering p a x 0 1 = a * plusFactor p x := by
   have hd := denominator_ne_zero hm hp
-  simp only [scattering, Matrix.cons_val_zero, Matrix.cons_val_one, plusFactor]
+  simp [scattering, plusFactor]
   field_simp
   <;> ring
 
 theorem channel_difference (p a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
     scattering p a x 0 0 - scattering p a x 0 1 = a * minusFactor p x := by
   have hd := denominator_ne_zero hm hp
-  simp only [scattering, Matrix.cons_val_zero, Matrix.cons_val_one, minusFactor]
+  simp [scattering, minusFactor]
   field_simp
   <;> ring
 
 theorem determinant (p a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
     (scattering p a x).det = a ^ 2 * x ^ 2 * (p ^ 2 * x ^ 2 - 1) / (1 - x ^ 2) := by
   have hd := denominator_ne_zero hm hp
-  simp only [scattering, Matrix.det_fin_two, Matrix.cons_val_zero, Matrix.cons_val_one]
+  simp [scattering, Matrix.det_fin_two]
   field_simp
   <;> ring
 
@@ -61,6 +61,21 @@ theorem channel_product (p a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
   rw [determinant p a x hm hp]
   have hd := denominator_ne_zero hm hp
   dsimp [plusFactor, minusFactor]
+  field_simp
+  <;> ring
+
+/-- The local factor of the functional equation, on its regular domain. -/
+theorem plus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
+    (hplus : 1 + x ≠ 0) (htransformed : 1 + 1 / (p * x) ≠ 0) :
+    plusFactor p (1 / (p * x)) * plusFactor p x = 1 := by
+  dsimp [plusFactor]
+  field_simp
+  <;> ring
+
+theorem minus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
+    (hminus : 1 - x ≠ 0) (htransformed : 1 - 1 / (p * x) ≠ 0) :
+    minusFactor p (1 / (p * x)) * minusFactor p x = 1 := by
+  dsimp [minusFactor]
   field_simp
   <;> ring
 
@@ -94,7 +109,8 @@ theorem channel_decomposition (p a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) 
 /-- The level-five determinant, in the coordinate `x = 5 ^ (-s)`. -/
 theorem determinant_five (a x : K) (hm : 1 - x ≠ 0) (hp : 1 + x ≠ 0) :
     (scattering 5 a x).det = a ^ 2 * x ^ 2 * (25 * x ^ 2 - 1) / (1 - x ^ 2) := by
-  simpa using determinant (5 : K) a x hm hp
+  rw [determinant (5 : K) a x hm hp]
+  norm_num
 
 /-- At the two local boundary points only one channel denominator vanishes,
 and that channel's numerator equals four. No analytic pole is asserted here. -/
@@ -102,6 +118,18 @@ theorem local_channel_parity_five :
     ((1 + (1 : K)) = 2 ∧ (1 - (1 : K)) = 0 ∧ (1 : K) * (5 * 1 - 1) = 4) ∧
     ((1 + (-1 : K)) = 0 ∧ (1 - (-1 : K)) = 2 ∧ (-1 : K) * (1 + 5 * (-1)) = 4) := by
   norm_num
+
+theorem even_channel_denominator_parity (k : ℕ) :
+    1 + (-1 : K) ^ k = 0 ↔ Odd k := by
+  have h : 1 + (-1 : K) ^ k = 0 ↔ (-1 : K) ^ k = -1 := by
+    constructor <;> intro h <;> linear_combination h
+  rw [h]
+  exact neg_one_pow_eq_neg_one_iff_odd (by norm_num)
+
+theorem odd_channel_denominator_parity (k : ℕ) :
+    1 - (-1 : K) ^ k = 0 ↔ Even k := by
+  rw [sub_eq_zero, eq_comm]
+  exact neg_one_pow_eq_one_iff_even (by norm_num)
 
 /-- Analytic input is supplied explicitly, without adding an axiom. -/
 theorem channels_of_constant_term {S : Type*}
