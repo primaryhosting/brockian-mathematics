@@ -26,7 +26,7 @@ theorem before_seam (h d : ZMod m) (n : ℕ) (hn : n < q) :
           push_cast
           rw [heq]
           ring
-        have hd : q ∣ n + 1 := (ZMod.natCast_zmod_eq_zero_iff_dvd _ _).mp hz
+        have hd : q ∣ n + 1 := (ZMod.natCast_eq_zero_iff _ _).mp hz
         have hle := Nat.le_of_dvd (show 0 < n + 1 by omega) hd
         omega
       simp [seamStep, hlast, Nat.cast_add, Nat.cast_one]
@@ -39,9 +39,12 @@ theorem one_loop_at_zero (h d : ZMod m) :
     have hz : ((q - 1 : ℕ) : ZMod q) + 1 = 0 := by
       rw [← Nat.cast_add_one, hsum, ZMod.natCast_self]
     linear_combination hz
-  conv_lhs => rw [← hsum]
-  rw [Function.iterate_succ_apply', before_seam q m h d (q - 1) (by omega)]
-  simp [seamStep, hlast]
+  calc
+    (seamStep q m h)^[q] (0, d) =
+        (seamStep q m h)^[q - 1 + 1] (0, d) := by rw [hsum]
+    _ = (0, d + h) := by
+      rw [Function.iterate_succ_apply', before_seam q m h d (q - 1) (by omega)]
+      simp [seamStep, hlast]
 
 theorem one_loop (h : ZMod m) (x : ZMod q × ZMod m) :
     (seamStep q m h)^[q] x = (x.1, x.2 + h) := by
@@ -62,7 +65,8 @@ theorem completed_loops (h : ZMod m) (x : ZMod q × ZMod m) (r : ℕ) :
   | zero => simp
   | succ r ih =>
       rw [Nat.mul_succ, Function.iterate_add_apply, one_loop, ih]
-      simp [succ_nsmul, add_assoc, add_comm, add_left_comm]
+      simp [succ_nsmul, nsmul_eq_mul]
+      <;> ring
 
 theorem residue_after_steps (h : ZMod m) (x : ZMod q × ZMod m) (n : ℕ) :
     ((seamStep q m h)^[n] x).1 = x.1 + (n : ZMod q) := by
@@ -80,7 +84,7 @@ theorem return_forces_whole_loops (h : ZMod m) (x : ZMod q × ZMod m) (n : ℕ)
   have hres := congrArg Prod.fst hreturn
   rw [residue_after_steps] at hres
   have hz : (n : ZMod q) = 0 := add_eq_left.mp hres
-  exact (ZMod.natCast_zmod_eq_zero_iff_dvd n q).mp hz
+  exact (ZMod.natCast_eq_zero_iff n q).mp hz
 
 theorem seam_return_iff (h n : ℕ) (x : ZMod q × ZMod m) :
     (seamStep q m (h : ZMod m))^[n] x = x ↔ q * (m / m.gcd h) ∣ n := by

@@ -69,7 +69,8 @@ def main() -> int:
         "lean_version": version.stdout.strip(),
         "toolchain": (ROOT / "lean-toolchain").read_text().strip(),
         "manifest_sha256": hashlib.sha256((ROOT / "lake-manifest.json").read_bytes()).hexdigest(),
-        "verification_scope": "Lean kernel compilation and complete per-module theorem axiom probes",
+        "verification_scope": "Lean kernel compilation; theorem axiom probes only for listed structural modules",
+        "axiom_probe_modules": sorted(STRUCTURAL) if args.group == "structural" else [],
         "external_attestation": "not_performed",
         "modules": [],
     }

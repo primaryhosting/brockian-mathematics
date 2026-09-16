@@ -93,4 +93,51 @@ theorem thirteen_matrix_identity :
   simpa only [map_mul, map_sub, map_add, map_pow, map_ofNat, map_one, map_zero,
     adjacencyMatrix] using h
 
+/-- The same adjacency matrix with integer coefficients. -/
+def integralAdjacencyMatrix : Matrix (ZMod N) (ZMod N) ℤ :=
+  Matrix.of fun i j => (if i + 1 = j then 1 else 0) +
+    (if i - 1 = j then 1 else 0)
+
+theorem integralAdjacencyMatrix_cast :
+    (Int.castRingHom ℂ).mapMatrix (integralAdjacencyMatrix N) = adjacencyMatrix N := by
+  ext i j
+  simp [integralAdjacencyMatrix, adjacencyMatrix_apply, Matrix.of_apply]
+
+theorem five_integral_matrix_identity :
+    (integralAdjacencyMatrix 5 - 2) *
+      (integralAdjacencyMatrix 5 ^ 2 + integralAdjacencyMatrix 5 - 1) = 0 := by
+  apply Matrix.map_injective (Int.cast_injective (R := ℂ))
+  change (Int.castRingHom ℂ).mapMatrix _ = (Int.castRingHom ℂ).mapMatrix _
+  simpa only [map_mul, map_sub, map_add, map_pow, map_ofNat, map_one, map_zero,
+    integralAdjacencyMatrix_cast] using five_matrix_identity
+
+theorem thirteen_integral_matrix_identity :
+    (integralAdjacencyMatrix 13 - 2) * (integralAdjacencyMatrix 13 ^ 6 +
+      integralAdjacencyMatrix 13 ^ 5 - 5 * integralAdjacencyMatrix 13 ^ 4 -
+      4 * integralAdjacencyMatrix 13 ^ 3 + 6 * integralAdjacencyMatrix 13 ^ 2 +
+      3 * integralAdjacencyMatrix 13 - 1) = 0 := by
+  apply Matrix.map_injective (Int.cast_injective (R := ℂ))
+  change (Int.castRingHom ℂ).mapMatrix _ = (Int.castRingHom ℂ).mapMatrix _
+  simpa only [map_mul, map_sub, map_add, map_pow, map_ofNat, map_one, map_zero,
+    integralAdjacencyMatrix_cast] using thirteen_matrix_identity
+
+/-- The quadratic factor is exactly the all-ones matrix, an exact finite identity. -/
+theorem five_quadratic_factor :
+    integralAdjacencyMatrix 5 ^ 2 + integralAdjacencyMatrix 5 - 1 =
+      Matrix.of (fun _ _ : ZMod 5 => (1 : ℤ)) := by
+  decide
+
+/-- A one-column factorization and a nonzero 1×1 minor give rank exactly one. -/
+theorem five_quadratic_factor_rank :
+    (integralAdjacencyMatrix 5 ^ 2 + integralAdjacencyMatrix 5 - 1).rank = 1 := by
+  rw [five_quadratic_factor]
+  apply le_antisymm
+  · simpa [Matrix.vecMulVec] using
+      Matrix.rank_vecMulVec_le (fun _ : ZMod 5 => (1 : ℤ)) (fun _ : ZMod 5 => (1 : ℤ))
+  · have hminor : (Matrix.of (fun _ _ : ZMod 5 => (1 : ℤ))).submatrix
+        (fun _ : Fin 1 => 0) (fun _ : Fin 1 => 0) = 1 := by decide
+    have hle := Matrix.rank_submatrix_le (Matrix.of (fun _ _ : ZMod 5 => (1 : ℤ)))
+      (fun _ : Fin 1 => 0) (fun _ : Fin 1 => 0)
+    simpa only [hminor, Matrix.rank_one, Fintype.card_fin] using hle
+
 end Brockian.CycleOperatorPolynomials
