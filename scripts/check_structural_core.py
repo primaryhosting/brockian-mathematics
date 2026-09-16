@@ -26,6 +26,8 @@ from engine.verify import ALLOWED_AXIOMS, axioms_in_line, qualified_decls
 TARGETS = [
     "Brockian/FrickeChannelAlgebra.lean",
     "Brockian/CyclicFourierStructure.lean",
+    "Brockian/D5FourierBridge.lean",
+    "Brockian/CyclePolynomialCertificates.lean",
     "Brockian/HolonomyObservers.lean",
     "Brockian/HodgeGramAlgebra.lean",
     "Brockian/QCQFTUnitary.lean",
@@ -36,7 +38,8 @@ TARGETS = [
 ]
 STRUCTURAL = {"Brockian/FrickeChannelAlgebra.lean", "Brockian/CyclicFourierStructure.lean",
               "Brockian/QCQFTUnitary.lean", "Brockian/HolonomyObservers.lean",
-              "Brockian/HodgeGramAlgebra.lean"}
+              "Brockian/HodgeGramAlgebra.lean", "Brockian/D5FourierBridge.lean",
+              "Brockian/CyclePolynomialCertificates.lean"}
 WEYL = ["Brockian/ConfiningSpectralShape.lean", "Brockian/WeylWeakRegularityClosed.lean",
         "Brockian/WeylWeakRegularityDischarge.lean", "Brockian/WeylKatoRellichTransfer.lean"]
 
@@ -74,7 +77,7 @@ def main() -> int:
         mod = rel.removesuffix(".lean").replace("/", ".")
         dest = ROOT / ".lake/build/lib/lean" / Path(rel).with_suffix(".olean")
         dest.parent.mkdir(parents=True, exist_ok=True)
-        command = ["lake", "env", "lean", "-o", str(dest), rel]
+        command = ["lake", "env", "lean", "-DautoImplicit=false", "-o", str(dest), rel]
         print(f"Compiling {rel}", flush=True)
         result = run(command)
         (out / f"{mod}.build.log").write_text(result.stdout)
@@ -87,7 +90,7 @@ def main() -> int:
             probe = out / f"{mod}.axioms.lean"
             probe.write_text(f"import {mod}\n" +
                              "\n".join(f"#print axioms {n}" for n in names) + "\n")
-            checked = run(["lake", "env", "lean", str(probe)])
+            checked = run(["lake", "env", "lean", "-DautoImplicit=false", str(probe)])
             (out / f"{mod}.axioms.log").write_text(checked.stdout)
             bad |= checked.returncode != 0 or not names
             for name in names:

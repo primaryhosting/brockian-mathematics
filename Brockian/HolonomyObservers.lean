@@ -83,9 +83,10 @@ theorem residue_observer_independent (q m : ℕ) [NeZero q]
 this proposition does not prove it. The written proof is in the review notes. -/
 def SeamDeterminantStatement (q m h : ℕ) [NeZero q] [NeZero m] : Prop :=
   ∀ z : ℚ,
-    (1 - z • (fun i j : ZMod q × ZMod m =>
+    Matrix.det ((1 : Matrix (ZMod q × ZMod m) (ZMod q × ZMod m) ℚ) -
+      z • (fun i j : ZMod q × ZMod m =>
       if seamStep q m (h : ZMod m) j = i then (1 : ℚ) else 0 :
-        Matrix (ZMod q × ZMod m) (ZMod q × ZMod m) ℚ)).det =
+        Matrix (ZMod q × ZMod m) (ZMod q × ZMod m) ℚ)) =
     (1 - z ^ (q * (m / m.gcd h))) ^ m.gcd h
 
 end Brockian.HolonomyObservers

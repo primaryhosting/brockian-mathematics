@@ -16,7 +16,7 @@ theorem gram_minor_nonnegative (a b c : ℝ) (ha : 0 < a)
     0 ≤ a * c - b ^ 2 := by
   have h := hGramSign b (-a)
   have hm : 0 ≤ a * (a * c - b ^ 2) := by nlinarith [h]
-  exact nonneg_of_mul_nonneg_left hm ha
+  exact nonneg_of_mul_nonneg_right hm ha
 
 /-- Once the geometric sign and the intersection numbers are supplied,
 the squared Weil inequality is elementary real algebra. -/

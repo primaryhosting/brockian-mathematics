@@ -75,8 +75,10 @@ theorem plus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
       field_simp
       <;> ring
     rw [heq, h, zero_div]
+  have hxp : 1 + x * p ≠ 0 := by simpa [mul_comm] using hpx
   dsimp [plusFactor]
-  field_simp [hpx, mul_comm p x]
+  field_simp
+  <;> field_simp [hpx, hxp]
   <;> ring
 
 theorem minus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
@@ -90,7 +92,8 @@ theorem minus_functional_equation (p x : K) (hp : p ≠ 0) (hx : x ≠ 0)
       <;> ring
     rw [heq, h, zero_div]
   dsimp [minusFactor]
-  field_simp [hpx]
+  field_simp
+  <;> field_simp [hpx]
   <;> ring
 
 theorem projector_resolution :

@@ -1,8 +1,15 @@
 # Brockian Mathematics — Verified Core
 
-A Lean 4 formalization of the "Curved Number Line" / Brockian program: the pentagonal,
-golden-ratio structure of prime residues and constellations, its dihedral symmetry, and
-the honest scaffolding of a Hilbert–Pólya-style attack on the Riemann Hypothesis.
+A Lean 4 formalization of finite residue symmetries, cyclic Fourier analysis,
+observer-dependent holonomy, and explicitly conditional arithmetic spectral models.
+
+The associated function is ζ_B(s) = (1 − 5^(−s))ζ(s). Its RH statement on the
+open critical strip restates ordinary RH. Under the standard Eisenstein
+constant-term formula, strip zeros give scattering resonances of Y₀(5) at
+half the zero parameter. The two-cusp Fricke symmetry is C₂. The golden ratio
+is explained by five-cycle Fourier algebra and Q(√5) = Q(ζ₅)⁺; no D₅ action on
+Y₀(5) is claimed. See [precise public claims](docs/structural-review/PUBLIC_CLAIMS.md)
+and the [finite-field sign template](docs/structural-review/FINITE_FIELD_TEMPLATE.md).
 
 **What makes this different from most AI-assisted math: every "PROVED" result is
 independently machine-verified, and the repository refuses to claim anything the build

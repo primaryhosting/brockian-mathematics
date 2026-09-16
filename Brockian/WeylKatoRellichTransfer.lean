@@ -26,6 +26,7 @@ import Brockian.WeylKatoNeumannEstimates
 namespace Brockian.Weyl.KatoRellichTransfer
 
 open scoped InnerProductSpace
+open Brockian.Weyl.Operator
 open Brockian.Weyl.Cayley
 open Brockian.Weyl.KatoRellichScaffold
 open Brockian.Weyl.KatoUnbounded
