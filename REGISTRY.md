@@ -8,7 +8,7 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 38
-- **DEFINITION**: 644
+- **DEFINITION**: 642
 - **DISCHARGED**: 7
 - **PROVED**: 11242
 - **UNVERIFIED**: 12
@@ -4394,11 +4394,9 @@
 | PROVED | `Brockian.RepunitPrimes.repunit_dvd_of_dvd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.RepunitPrimes.repunit_mul_nine_add_one` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.RepunitPrimes.repunit_strictMono` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
-| DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.RiemannHypothesis_of_forall_xi_zero` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
-| DEFINITION | `Brockian.RiemannScaffold.riemannXi` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.symmetric_eigenvalue_im_zero` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannXiFunctionalEquation.completedRiemannZeta_functional_equation` | ✓ | verified | lean-4.32.2 |  |
