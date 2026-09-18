@@ -1,0 +1,12 @@
+{
+  "receipt": "rh-slice-leg1-reproduce",
+  "env": "lean-4.32.0",
+  "note": "Leg-1 from-source `lake build` of the RH obligation slice on the repo's pinned toolchain. Verified by CI job rh-slice-reproduce, which rebuilds these modules and fails closed if the build breaks or this env/module set does not match what it built. The same declarations are independently AXLE-verified at lean-4.32.2 (leg 3) — two independent environments.",
+  "built": [
+    "Brockian.XiFunctionalEquation",
+    "Brockian.RiemannScaffold",
+    "Brockian.RiemannXiSymmetry",
+    "Brockian.RiemannXiFunctionalEquation"
+  ],
+  "status": "ok"
+}

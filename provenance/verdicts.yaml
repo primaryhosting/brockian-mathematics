@@ -414,6 +414,7 @@ runs:
 
   "xi-functional-equation":
     module: Brockian.XiFunctionalEquation
+    lake_build: reproduced
     verdict: admit
     quarantine: true
     ledger_run: "roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32"
@@ -1845,6 +1846,7 @@ runs:
   # Riemann scaffolding — unconditional ξ-bridge + honest OPEN Hilbert-Pólya conditional.
   "rh-scaffold":
     module: Brockian.RiemannScaffold
+    lake_build: reproduced
     verdict: admit
     quarantine: true
     ledger_run: "swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN)"
@@ -2088,3 +2090,11 @@ runs:
     quarantine: true
     ledger_run: "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit"
     provenance_note: "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+  rh-slice-repro-riemannxisymmetry:
+    module: Brockian.RiemannXiSymmetry
+    lake_build: reproduced
+    provenance_note: "leg-1 from-source lake build reproduced by CI job rh-slice-reproduce; independently AXLE-verified at lean-4.32.2."
+  rh-slice-repro-riemannxifunctionaleq:
+    module: Brockian.RiemannXiFunctionalEquation
+    lake_build: reproduced
+    provenance_note: "leg-1 from-source lake build reproduced by CI job rh-slice-reproduce; independently AXLE-verified at lean-4.32.2."
