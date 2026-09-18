@@ -2,7 +2,7 @@
   "generated_from": "AXLE attestations",
   "summary": {
     "PROVED": 11242,
-    "DEFINITION": 644,
+    "DEFINITION": 642,
     "UNVERIFIED": 12,
     "CONJECTURE": 38,
     "CONDITIONAL": 20,
@@ -135869,35 +135869,6 @@
       "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
     },
     {
-      "name": "Brockian.RiemannScaffold.BrockianSystem",
-      "kind": "def",
-      "module": "Brockian.RiemannScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/RiemannScaffold.lean"
-      },
-      "register": "DEFINITION",
-      "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.2"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
-      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
-    },
-    {
       "name": "Brockian.RiemannScaffold.Gamma\u211d_ne_zero_of_nontrivial",
       "kind": "theorem",
       "module": "Brockian.RiemannScaffold",
@@ -135972,36 +135943,11 @@
         "file": "Brockian/RiemannScaffold.lean"
       },
       "register": "PROVED",
-      "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.2"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
-      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
-    },
-    {
-      "name": "Brockian.RiemannScaffold.riemannXi",
-      "kind": "def",
-      "module": "Brockian.RiemannScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/RiemannScaffold.lean"
-      },
-      "register": "DEFINITION",
-      "axioms": [],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -136030,7 +135976,11 @@
         "file": "Brockian/RiemannScaffold.lean"
       },
       "register": "PROVED",
-      "axioms": [],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -136092,7 +136042,11 @@
         "file": "Brockian/RiemannXiFunctionalEquation.lean"
       },
       "register": "PROVED",
-      "axioms": [],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -136154,7 +136108,11 @@
         "file": "Brockian/RiemannXiFunctionalEquation.lean"
       },
       "register": "PROVED",
-      "axioms": [],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -136183,7 +136141,11 @@
         "file": "Brockian/RiemannXiFunctionalEquation.lean"
       },
       "register": "PROVED",
-      "axioms": [],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
