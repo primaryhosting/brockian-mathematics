@@ -1,0 +1,39 @@
+{
+  "title": "Multi-prover cross-verification (Z3 SMT \u00d7 Lean/AXLE)",
+  "z3_version": "4.16.0",
+  "lean_env": "lean-4.32.2",
+  "note": "Each property is discharged independently by Z3 (SMT) and by Lean 4/Mathlib (AXLE-verified). CROSS-VERIFIED requires BOTH verdicts to agree.",
+  "properties": [
+    {
+      "property": "xor_otp_involution",
+      "english": "(m XOR k) XOR k = m \u2014 one-time-pad / stream-cipher decryption inverts encryption",
+      "theory": "bitvector",
+      "z3": "PROVED",
+      "z3_detail": "negation UNSAT",
+      "lean_theorem": "Brockian.HighAssurance.SMTMirror.xor_otp_involution",
+      "lean_axle": "PROVED",
+      "cross_verified": true
+    },
+    {
+      "property": "default_deny",
+      "english": "access is denied when none of {in-scope, privileged, unowned} holds",
+      "theory": "boolean",
+      "z3": "PROVED",
+      "z3_detail": "negation UNSAT",
+      "lean_theorem": "Brockian.HighAssurance.SMTMirror.default_deny_denies",
+      "lean_axle": "PROVED",
+      "cross_verified": true
+    },
+    {
+      "property": "unauth_write_frame",
+      "english": "an unauthorized write leaves every memory address unchanged",
+      "theory": "array",
+      "z3": "PROVED",
+      "z3_detail": "negation UNSAT",
+      "lean_theorem": "Brockian.HighAssurance.SMTMirror.unauth_write_frame",
+      "lean_axle": "PROVED",
+      "cross_verified": true
+    }
+  ],
+  "all_cross_verified": true
+}
