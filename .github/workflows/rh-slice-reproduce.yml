@@ -1,0 +1,77 @@
+name: rh-slice-reproduce
+
+# Leg-1 reproducibility for the RH obligation slice: a real from-source `lake build`
+# of ONLY the RH-slice modules + their transitive deps, on the repo's pinned toolchain.
+# This is the proof behind `lake_build: reproduced` for those modules in provenance/verdicts.yaml.
+# It does NOT build the full corpus (which has unrelated build breaks) and does not touch
+# the promotion-gate. If this job is red, the `reproduced` claim must not be merged.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    paths:
+      - 'Brockian/XiFunctionalEquation.lean'
+      - 'Brockian/RiemannScaffold.lean'
+      - 'Brockian/RiemannXiSymmetry.lean'
+      - 'Brockian/RiemannXiFunctionalEquation.lean'
+      - 'provenance/verdicts.yaml'
+      - 'provenance/lake-build-receipts/**'
+      - '.github/workflows/rh-slice-reproduce.yml'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rh-slice-reproduce-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rh-slice-reproduce:
+    name: rh-slice-reproduce
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Lean toolchain (from lean-toolchain)
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          bash /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build ONLY the RH slice (+ transitive deps)
+        run: |
+          set -euo pipefail
+          lake build \
+            Brockian.XiFunctionalEquation \
+            Brockian.RiemannScaffold \
+            Brockian.RiemannXiSymmetry \
+            Brockian.RiemannXiFunctionalEquation
+
+      - name: Record the build environment + receipt
+        run: |
+          set -euo pipefail
+          ENV_LINE="$(lake env lean --version)"
+          echo "Reproduced RH slice on: $ENV_LINE"
+          # Normalise 'Lean (version 4.32.0, ...)' -> 'lean-4.32.0'
+          VER="$(echo "$ENV_LINE" | sed -nE 's/.*version ([0-9]+\.[0-9]+\.[0-9]+).*/lean-\1/p')"
+          RECEIPT=provenance/lake-build-receipts/rh-slice.json
+          python3 - "$VER" "$RECEIPT" <<'PY'
+          import json, sys, subprocess
+          ver, receipt = sys.argv[1], sys.argv[2]
+          sha = subprocess.check_output(["git","rev-parse","HEAD"]).decode().strip()
+          existing = json.load(open(receipt))
+          # Fail closed: the committed receipt must match the environment we actually built in.
+          assert existing.get("env") == ver, \
+              f"receipt env {existing.get('env')!r} != built env {ver!r}"
+          expected = {"Brockian.XiFunctionalEquation","Brockian.RiemannScaffold",
+                      "Brockian.RiemannXiSymmetry","Brockian.RiemannXiFunctionalEquation"}
+          assert set(existing.get("built", [])) == expected, "receipt module set mismatch"
+          print(f"OK: receipt matches build (env={ver}, commit={sha[:12]})")
+          PY

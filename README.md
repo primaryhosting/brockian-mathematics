@@ -33,7 +33,7 @@ Each declaration carries exactly one *register*, derived mechanically — never 
 
 | Register | Meaning | Gate |
 |----------|---------|------|
-| **PROVED** | sorry-free, axiom footprint ⊆ {propext, Classical.choice, Quot.sound} and no native_decide (as reported by AXLE), and independently re-checked by AXLE at lean-4.32.2 including statement fidelity | AXLE re-check passes; local from-source `lake build` NOT yet reproduced (registry lake_build: 'pending') |
+| **PROVED** | sorry-free, axiom footprint ⊆ {propext, Classical.choice, Quot.sound} and no native_decide (as reported by AXLE), and independently re-checked by AXLE at lean-4.32.2 including statement fidelity | AXLE re-check passes; local from-source `lake build` reproduced for the RH slice (`lake_build: 'reproduced'`), still `'pending'` elsewhere |
 | **COMPUTATION** | finite `decide` / `native_decide` checks | recorded as computation, never PROVED |
 | **CONDITIONAL** | depends on a named hypothesis; records its rung (classical / literature / open) | never counted as unconditional evidence |
 | **CONJECTURE** | a named `def` / Prop container | never typed as a theorem |
@@ -53,24 +53,32 @@ A **PROVED** theorem is *intended* to pass three independent legs:
    Lean 4 + Mathlib prover that re-checks the proof at a named environment (`lean-4.32.2`),
    including statement fidelity.
 
-Of these three legs, only the AXLE cloud re-check has actually run across the corpus. That
-re-check also reports the axiom footprint (leg 2 — only the three standard axioms, no
-`native_decide`) and statement fidelity, so legs 2 and 3 are covered by AXLE. **Leg 1 — a
-local from-source `lake build` on the pinned toolchain — is pending for every entry**: the
-registry marks `lake_build: 'pending'` for every declaration (see the live `summary`
-block in `registry/theorems.json`), pending CI/local compute
-with a reachable Mathlib cache.
+Of these three legs, the AXLE cloud re-check has run across the corpus (legs 2 and 3), and
+leg 1 (a local from-source `lake build`) has now been **reproduced for the RH obligation
+slice** — see below. That re-check also reports the axiom footprint (leg 2 — only the three
+standard axioms, no `native_decide`) and statement fidelity, so legs 2 and 3 are covered by
+AXLE.
 
-An independent third-party cloud re-check (AXLE, at the `lean-4.32.2` environment) has
-run across the corpus; a local from-source `lake build` has still not been reproduced and is
-tracked as pending in the registry. Per-declaration attestations live in
-`registry/attestations/` — all root-imported modules represented by the registry are
-attested at `lean-4.32.2`.
+**Leg 1 — local from-source `lake build`.** Reproduced for the RH slice
+(`Brockian.XiFunctionalEquation`, `RiemannScaffold`, `RiemannXiSymmetry`,
+`RiemannXiFunctionalEquation` — 58 declarations) by the CI job
+[`rh-slice-reproduce`](.github/workflows/rh-slice-reproduce.yml), which does a real
+`lake build` of exactly those modules on the pinned toolchain and fails closed if the build
+breaks; the receipt is `provenance/lake-build-receipts/rh-slice.json` and the registry marks
+those entries `lake_build: 'reproduced'`. **Every other declaration remains
+`lake_build: 'pending'`** — a full-corpus local build has unrelated breaks
+(`ConfiningSpectralShape`, `Weyl*`) and is tracked separately.
 
-> **Environment note.** The AXLE re-check env was migrated `lean-4.32.0 → lean-4.32.2` on
-> 2026-08-20 (the older env is deprecated server-side); all attestations are now at 4.32.2.
-> The local source `lean-toolchain` is still pinned at `v4.32.0` — leg 1 (local build) is
-> pending either way, so the two are not yet reconciled. See
+Per-declaration attestations live in `registry/attestations/` — all root-imported modules are
+independently AXLE-attested at `lean-4.32.2`.
+
+> **Environment note (two independent environments).** AXLE independently verifies at
+> `lean-4.32.2` (leg 3); the local `lake build` reproduction (leg 1) runs on the repo's pinned
+> `lean-toolchain` (`v4.32.0`) with its Mathlib cache. For the RH slice, the proofs are thus
+> reproduced from source in one environment **and** independently re-checked in another — the
+> two are disclosed explicitly rather than conflated. Aligning both to a single pinned 4.32.2
+> environment corpus-wide is a separate, tracked effort
+> (`docs/superpowers/specs/2026-09-18-reproducibility-rh-slice-design.md`). See
 > [`docs/attestation-gap-exposition.md`](docs/attestation-gap-exposition.md) for why a
 > toolchain move can flip an *attestation* without touching a *proof*.
 

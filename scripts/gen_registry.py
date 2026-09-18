@@ -86,7 +86,8 @@ def _provenance_for(module: str, name: str, verdicts: dict[str, Any]) -> dict[st
         prov = {k: run.get(k) for k in ("module", "quarantine",
                                         "verification_quarantine", "ledger_run",
                                         "provenance_note", "conditional_rung",
-                                        "kind_override", "discharged_by")}
+                                        "kind_override", "discharged_by",
+                                        "lake_build")}
         for ov in (run.get("overrides") or []):
             if ov.get("name") == short:
                 prov.update({k: v for k, v in ov.items() if k != "name"})
