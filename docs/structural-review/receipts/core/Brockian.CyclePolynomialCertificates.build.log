@@ -1,0 +1,13 @@
+Brockian/CyclePolynomialCertificates.lean:22:2: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Brockian/CyclePolynomialCertificates.lean:29:2: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Brockian/CyclePolynomialCertificates.lean:50:22: warning: This simp argument is unused:
+  ZMod.natCast_self
+
+Hint: Omit it from the simp argument list.
+  simp [nsmul_eq_mul, Z̵M̵o̵d̵.̵n̵a̵t̵C̵a̵s̵t̵_̵s̵e̵l̵f̵,̵ ̵AddChar.map_zero_eq_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

@@ -1,0 +1,14 @@
+Brockian/SpectralGate1.lean:33:29: warning: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [Pi.add_apply, P̵i̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵Pi.mul_apply, smul_eq_mul] at e0 e1 e2 esum ein ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Brockian/SpectralGate1.lean:98:50: warning: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [ContinuousLinearMap.coe_coe, e1, e2, P̵i̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵Pi.mul_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

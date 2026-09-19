@@ -1,3 +1,5 @@
+import Mathlib
+
 /-!
 # Odd perfect numbers have at least three prime factors
 
@@ -7,7 +9,6 @@ obsolete simplification after `geom_sum_mul` and uses the current name
 `Nat.prod_factorization_pow_eq_self`.
 -/
 
-import Mathlib
 
 namespace Brockian.OddPerfectThreePrimes
 

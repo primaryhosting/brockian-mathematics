@@ -1,0 +1,18 @@
+import Brockian.FrickeChannelAlgebra
+#print axioms Brockian.FrickeChannelAlgebra.denominator_factorization
+#print axioms Brockian.FrickeChannelAlgebra.denominator_ne_zero
+#print axioms Brockian.FrickeChannelAlgebra.channel_sum
+#print axioms Brockian.FrickeChannelAlgebra.channel_difference
+#print axioms Brockian.FrickeChannelAlgebra.determinant
+#print axioms Brockian.FrickeChannelAlgebra.channel_product
+#print axioms Brockian.FrickeChannelAlgebra.plus_functional_equation
+#print axioms Brockian.FrickeChannelAlgebra.minus_functional_equation
+#print axioms Brockian.FrickeChannelAlgebra.projector_resolution
+#print axioms Brockian.FrickeChannelAlgebra.projector_algebra
+#print axioms Brockian.FrickeChannelAlgebra.fricke_parity
+#print axioms Brockian.FrickeChannelAlgebra.channel_decomposition
+#print axioms Brockian.FrickeChannelAlgebra.determinant_five
+#print axioms Brockian.FrickeChannelAlgebra.local_channel_parity_five
+#print axioms Brockian.FrickeChannelAlgebra.even_channel_denominator_parity
+#print axioms Brockian.FrickeChannelAlgebra.odd_channel_denominator_parity
+#print axioms Brockian.FrickeChannelAlgebra.channels_of_constant_term

@@ -1,0 +1,6 @@
+Brockian/WeylKatoRellichTransfer.lean:42:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.KatoRellichTransfer.boundedPerturbationTransfer_of_ranges_eq_univ`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

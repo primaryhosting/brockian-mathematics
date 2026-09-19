@@ -1,0 +1,27 @@
+Brockian/WeylKatoRangeDensity.lean:37:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_iff_dense_ranges`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Brockian/WeylKatoRangeDensity.lean:46:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.KatoRangeDensity.dense_rangeAddI_perturb_of_transfer`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Brockian/WeylKatoRangeDensity.lean:54:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.KatoRangeDensity.dense_rangeSubI_perturb_of_transfer`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Brockian/WeylKatoRangeDensity.lean:123:15: warning: `ContinuousLinearMap.zero_apply` has been deprecated: Use `zero_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.zero_apply` to `zero_apply x`).
+Brockian/WeylKatoRangeDensity.lean:115:0: warning: automatically included section variable(s) unused in theorem `Brockian.Weyl.KatoRangeDensity.perturb_zero_eq`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

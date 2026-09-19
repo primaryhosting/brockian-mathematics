@@ -1,0 +1,10 @@
+Brockian/WeylDeficiencyRegularity.lean:115:27: warning: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [Pi.mul_apply, P̵i̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵smul_eq_mul] at hmul
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Brockian/WeylDeficiencyRegularity.lean:224:0: warning: Definition `reduced_gate1_status` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`

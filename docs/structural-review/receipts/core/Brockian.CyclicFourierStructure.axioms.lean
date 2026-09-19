@@ -1,0 +1,17 @@
+import Brockian.CyclicFourierStructure
+#print axioms Brockian.CyclicFourierStructure.character_sum
+#print axioms Brockian.CyclicFourierStructure.dft_mode
+#print axioms Brockian.CyclicFourierStructure.coefficient_mode
+#print axioms Brockian.CyclicFourierStructure.coefficient_smul
+#print axioms Brockian.CyclicFourierStructure.projector_mode
+#print axioms Brockian.CyclicFourierStructure.projector_composition
+#print axioms Brockian.CyclicFourierStructure.projector_idempotent
+#print axioms Brockian.CyclicFourierStructure.projector_resolution
+#print axioms Brockian.CyclicFourierStructure.shift_mode
+#print axioms Brockian.CyclicFourierStructure.shiftInv_mode
+#print axioms Brockian.CyclicFourierStructure.reflect_mode
+#print axioms Brockian.CyclicFourierStructure.reflect_shift_reflect
+#print axioms Brockian.CyclicFourierStructure.huckel_mode
+#print axioms Brockian.CyclicFourierStructure.five_cycle_resolution
+#print axioms Brockian.CyclicFourierStructure.five_cycle_dihedral
+#print axioms Brockian.CyclicFourierStructure.thirteen_cycle_huckel

@@ -1,0 +1,22 @@
+Brockian/HolonomySeam.lean:17:0: warning: automatically included section variable(s) unused in theorem `Brockian.HolonomySeam.before_seam`:
+  [NeZero m]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NeZero m] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Brockian/HolonomySeam.lean:68:12: warning: This simp argument is unused:
+  succ_nsmul
+
+Hint: Omit it from the simp argument list.
+  simp [̵s̵u̵c̵c̵_̵n̵s̵m̵u̵l̵,̵ ̵n̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲n̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Brockian/HolonomySeam.lean:69:6: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Brockian/HolonomySeam.lean:71:0: warning: automatically included section variable(s) unused in theorem `Brockian.HolonomySeam.residue_after_steps`:
+  [NeZero m]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NeZero m] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

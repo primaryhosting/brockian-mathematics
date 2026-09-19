@@ -1,0 +1,7 @@
+Brockian/Admissibility.lean:42:32: warning: This simp argument is unused:
+  Finset.univ_inter
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.inter_univ, F̵i̵n̵s̵e̵t̵.̵u̵n̵i̵v̵_̵i̵n̵t̵e̵r̵,̵ ̵hcard, hpair]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

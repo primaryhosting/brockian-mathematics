@@ -1,0 +1,1110 @@
+{
+  "schema_version": 1,
+  "group": "structural",
+  "created_at": "2026-09-16T23:23:55.058231+00:00",
+  "source_commit": "713efb02adb1d5e0d085b540dbf42de6d030b94d",
+  "lean_version": "Lean (version 4.32.0, x86_64-unknown-linux-gnu, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+  "toolchain": "leanprover/lean4:v4.32.0",
+  "manifest_sha256": "85b8e655d5bfc5543ee8ce162e564a1dc5bf6152f7fd9d748df2288d926cdb4f",
+  "verification_scope": "Lean kernel compilation; theorem axiom probes only for listed structural modules",
+  "axiom_probe_modules": [
+    "Brockian/CycleOperatorPolynomials.lean",
+    "Brockian/CyclePolynomialCertificates.lean",
+    "Brockian/CyclicFourierStructure.lean",
+    "Brockian/D5FourierBridge.lean",
+    "Brockian/FrickeChannelAlgebra.lean",
+    "Brockian/HodgeGramAlgebra.lean",
+    "Brockian/HolonomyObservers.lean",
+    "Brockian/HolonomySeam.lean",
+    "Brockian/QCQFTUnitary.lean"
+  ],
+  "external_attestation": "not_performed",
+  "modules": [
+    {
+      "path": "Brockian/FrickeChannelAlgebra.lean",
+      "source_sha256": "2ae1750f4b75a0dbfd5fa1f16c8e9a0a63d52f5e264b850f6677be780fac0956",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/FrickeChannelAlgebra.olean",
+        "Brockian/FrickeChannelAlgebra.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.FrickeChannelAlgebra.denominator_factorization",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.denominator_ne_zero",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.channel_sum",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.channel_difference",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.determinant",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.channel_product",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.plus_functional_equation",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.minus_functional_equation",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.projector_resolution",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.projector_algebra",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.fricke_parity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.channel_decomposition",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.determinant_five",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.local_channel_parity_five",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.even_channel_denominator_parity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.odd_channel_denominator_parity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.FrickeChannelAlgebra.channels_of_constant_term",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/CyclicFourierStructure.lean",
+      "source_sha256": "920d68312294120171e7914659a3a07a2a247c8e61bdca537bf8ebc49266a0f8",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/CyclicFourierStructure.olean",
+        "Brockian/CyclicFourierStructure.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.CyclicFourierStructure.character_sum",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.dft_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.coefficient_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.coefficient_smul",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.projector_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.projector_composition",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.projector_idempotent",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.projector_resolution",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.shift_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.shiftInv_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.reflect_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.reflect_shift_reflect",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.huckel_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.five_cycle_resolution",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.five_cycle_dihedral",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclicFourierStructure.thirteen_cycle_huckel",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/Automorphism.lean",
+      "source_sha256": "ace4092a2a32464e946d06ffbe42594f32ab653daa70151170294f1f850a04fa",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/Automorphism.olean",
+        "Brockian/Automorphism.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/AutomorphismFull.lean",
+      "source_sha256": "bc53dddad1485edb62fdcb1fb6889a54fa644fea08559037d02b5658646d90d8",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/AutomorphismFull.olean",
+        "Brockian/AutomorphismFull.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/D5Representation.lean",
+      "source_sha256": "528df70f5a98dab250a7084a94737379db9559d31250ea0ecc5139d9316fec74",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/D5Representation.olean",
+        "Brockian/D5Representation.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/D5Isotypic.lean",
+      "source_sha256": "c2506f5b255afc9fc903d215ab0066febd07aedf7035a2aa083755fe121d5a0d",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/D5Isotypic.olean",
+        "Brockian/D5Isotypic.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/D5FourierBridge.lean",
+      "source_sha256": "2aa92d5af1816614a9207902e18a885c293a834c827dd77840fdbc3af986908a",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/D5FourierBridge.olean",
+        "Brockian/D5FourierBridge.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.D5FourierBridge.omegaPow_eq_character",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.D5FourierBridge.eigenmode_eq_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.D5FourierBridge.isotypicProjector_eq_projector",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.D5FourierBridge.full_projector_resolution",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.D5FourierBridge.full_projector_composition",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/CyclePolynomialCertificates.lean",
+      "source_sha256": "f7d2ba427d19303de2f7532c219cc8dd87f3c5aeffe3d1897f858812e42e2f7e",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/CyclePolynomialCertificates.olean",
+        "Brockian/CyclePolynomialCertificates.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.CyclePolynomialCertificates.five_factor_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclePolynomialCertificates.thirteen_factor_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclePolynomialCertificates.five_root_annihilator",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclePolynomialCertificates.thirteen_root_annihilator",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclePolynomialCertificates.character_power",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclePolynomialCertificates.five_fourier_eigenvalue",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CyclePolynomialCertificates.thirteen_fourier_eigenvalue",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/CycleOperatorPolynomials.lean",
+      "source_sha256": "067179371c0cfa93025557c682f8ebac5dc33aca06f778d7d61b4c5954a618b2",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/CycleOperatorPolynomials.olean",
+        "Brockian/CycleOperatorPolynomials.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.CycleOperatorPolynomials.adjacency_mode",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.annihilator_of_eigenvalues",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.five_annihilator",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.thirteen_annihilator",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.five_operator_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.thirteen_operator_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.adjacencyMatrix_apply",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.five_matrix_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.thirteen_matrix_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.integralAdjacencyMatrix_cast",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.five_integral_matrix_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.thirteen_integral_matrix_identity",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.five_quadratic_factor",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.CycleOperatorPolynomials.five_quadratic_factor_rank",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/HolonomyObservers.lean",
+      "source_sha256": "8d3ff816e5d7b8614d786b411bf97decc6032c44f13f2f32cf855739b0f0d377",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/HolonomyObservers.olean",
+        "Brockian/HolonomyObservers.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.HolonomyObservers.loop_iterate",
+          "axioms": [
+            "propext"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.observe_loop",
+          "axioms": [],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.observer_equivalence",
+          "axioms": [
+            "propext"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.observer_kernel",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.labelled_observer",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.coarsening_preserves_indistinguishability",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.observe_loops",
+          "axioms": [
+            "propext"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.loop_return_iff",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.intermediate_observer",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.combined_observer_strict",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.combined_observer_refines_gcd",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomyObservers.residue_observer_independent",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/HolonomySeam.lean",
+      "source_sha256": "44db28674d6cd8ebdae51b233ba1e1d859fe4253637e8960858fe30b4473bb04",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/HolonomySeam.olean",
+        "Brockian/HolonomySeam.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.HolonomySeam.before_seam",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomySeam.one_loop_at_zero",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomySeam.one_loop",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomySeam.completed_loops",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomySeam.residue_after_steps",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomySeam.return_forces_whole_loops",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HolonomySeam.seam_return_iff",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/HodgeGramAlgebra.lean",
+      "source_sha256": "8203c1f49f035736ddc2529af78f55ff999bff3a444ac71c382f3e008d99639c",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/HodgeGramAlgebra.olean",
+        "Brockian/HodgeGramAlgebra.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.HodgeGramAlgebra.gram_minor_nonnegative",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HodgeGramAlgebra.weil_squared_of_gram_sign",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        },
+        {
+          "name": "Brockian.HodgeGramAlgebra.gram_diagonal",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/QCQFTUnitary.lean",
+      "source_sha256": "d8c8640c1d0c2ee474379427d1daf09aac915e0724032e529b8e8b77d8edc653",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/QCQFTUnitary.olean",
+        "Brockian/QCQFTUnitary.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [
+        {
+          "name": "Brockian.QCQFTUnitary.qft_mul_conjTranspose",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "axioms_ok": true
+        }
+      ],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/OddPerfectThreePrimes.lean",
+      "source_sha256": "867c4f8751475405a7271ce5d7fbf791a9e96da3dc1b9173fb3f8e7b1c465e0d",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/OddPerfectThreePrimes.olean",
+        "Brockian/OddPerfectThreePrimes.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/Admissibility.lean",
+      "source_sha256": "9bfe92b128cde8b1db214604ab431a21bd6120e5ae552e8773c6b1e9050e4bfd",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/Admissibility.olean",
+        "Brockian/Admissibility.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/AdmissibilityCRT.lean",
+      "source_sha256": "faf200a9408e76ee4495f866a064247effdd9c3bdc4c5c96c6708237d95d37ab",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/AdmissibilityCRT.olean",
+        "Brockian/AdmissibilityCRT.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/AdmissibilityKTuple.lean",
+      "source_sha256": "41d695b332761d7a621e916896a12a5c1455d1966b82e81b68e61514e059509f",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/AdmissibilityKTuple.olean",
+        "Brockian/AdmissibilityKTuple.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/AdmissibilityCRTGeneral.lean",
+      "source_sha256": "1db92e20e0427caf0c475486e76b7dda373a116512aa8b0508f6ea15efc4bd73",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/AdmissibilityCRTGeneral.olean",
+        "Brockian/AdmissibilityCRTGeneral.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/SieveSpectrumCounts.lean",
+      "source_sha256": "334f161c5ac050108ad11f3ce5953a5678a3ec7a11f4e3755781865b7c67a498",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/SieveSpectrumCounts.olean",
+        "Brockian/SieveSpectrumCounts.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/SieveSpectrumBlocks.lean",
+      "source_sha256": "3fe541c012319d8f6a5fc8cd3c23fcd321072e9e468e0667574713b7def60d5b",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/SieveSpectrumBlocks.olean",
+        "Brockian/SieveSpectrumBlocks.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    },
+    {
+      "path": "Brockian/SieveSpectrumDeletion.lean",
+      "source_sha256": "15d783fcc809b54befdfd37dc0888b673550fa06a2c580e3ba1fe420c15b16b9",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "-o",
+        "/home/runner/work/brockian-mathematics/brockian-mathematics/.lake/build/lib/lean/Brockian/SieveSpectrumDeletion.olean",
+        "Brockian/SieveSpectrumDeletion.lean"
+      ],
+      "exit_code": 0,
+      "compiled": true,
+      "theorems": [],
+      "audit_passed": true
+    }
+  ],
+  "passed": true
+}

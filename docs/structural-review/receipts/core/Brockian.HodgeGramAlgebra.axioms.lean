@@ -1,0 +1,4 @@
+import Brockian.HodgeGramAlgebra
+#print axioms Brockian.HodgeGramAlgebra.gram_minor_nonnegative
+#print axioms Brockian.HodgeGramAlgebra.weil_squared_of_gram_sign
+#print axioms Brockian.HodgeGramAlgebra.gram_diagonal
