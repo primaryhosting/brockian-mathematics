@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Sorting Lb 5
 Category: Computer Science
 Target: CS.sorting_lb_5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -22,25 +22,30 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace CS
 
-/-- A comparison-based sorting algorithm on `n` elements, modelled as a binary
-decision tree.  A `leaf p` reports that the input order is described by the
-permutation `p`; a `node i j l r` compares the `i`-th and `j`-th input entries
-and continues in the left subtree if `aᵢ < a_j`, in the right subtree otherwise. -/
-inductive DTree (n : ℕ) : Type
-  | leaf : Equiv.Perm (Fin n) → DTree n
-  | node : Fin n → Fin n → DTree n → DTree n → DTree n
+/-- A comparison-sorting algorithm on `5` elements, modelled as a (binary) decision tree.
+A `leaf p` outputs the permutation `p`; a `node i j l r` compares the keys at positions `i`
+and `j` and continues in `l` if `key i ≤ key j`, and in `r` otherwise.  This is the standard
+decision-tree model: the algorithm's only access to the input is through comparisons. -/
+inductive DTree : Type
+  | leaf : Equiv.Perm (Fin 5) → DTree
+  | node : Fin 5 → Fin 5 → DTree → DTree → DTree
+  deriving Inhabited
 
 namespace DTree
 
-variable {n : ℕ}
+/-- The worst-case number of comparisons performed by the algorithm, i.e. the depth of the
+decision tree. -/
 
-/-- The number of comparisons performed in the worst case, i.e. the height of the tree. -/
+def Correct (t : DTree) : Prop :=
+  ∀ σ : Equiv.Perm (Fin 5), t.run (fun i => (σ i : ℕ)) = σ
 
-def Correct (t : DTree n) : Prop := ∀ σ : Equiv.Perm (Fin n), t.run σ = σ
-
-/-- A correct comparison sort must be able to output all `n!` permutations, hence
-`n ! ≤ 2 ^ depth`. -/
+/-- A correct comparison sort must be able to produce all `5! = 120` permutations. -/

@@ -8,9 +8,9 @@ from pathlib import Path
 _REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO))
 
-from pipeline.core.schema import ProblemCard, load_catalog, save_card, validate_card  # noqa: E402
+from pipeline.core.ledger import registry_evidence_for_cards  # noqa: E402
+from pipeline.core.schema import load_catalog, save_card, validate_card  # noqa: E402
 from pipeline.distill.score import MAX_CHEATSHEET_BYTES, check_cheatsheet  # noqa: E402
-from pipeline.scripts import pipeline_cli  # noqa: E402
 from pipeline.scripts.seed_catalog import seeds  # noqa: E402
 
 
@@ -40,6 +40,43 @@ def test_validate_bad_domain():
         }
     )
     assert any("domain" in e for e in errs)
+
+
+def test_validate_harvest_and_repair_modes():
+    errs = validate_card(
+        {
+            "id": "math-harvest",
+            "domain": "math",
+            "title": "t",
+            "statement": "s",
+            "status": "open",
+            "attack_modes": ["harvest", "repair"],
+            "verification": {"backend": "lean_axle"},
+        }
+    )
+    assert errs == []
+
+
+def test_catalog_cards_pass_runtime_schema_validation():
+    catalog_root = _REPO / "pipeline" / "catalog"
+    for path in sorted(catalog_root.glob("*/*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        assert validate_card(data) == [], path
+
+
+def test_proved_cards_have_complete_theorem_registry_evidence():
+    cards = load_catalog()
+    registry_path = _REPO / "registry" / "theorems.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    evidence = registry_evidence_for_cards(cards, registry)
+    proved_cards = [card for card in cards if card.status == "proved"]
+    assert proved_cards
+    for card in proved_cards:
+        assert card.id in evidence
+        assert evidence[card.id].axle_verified is True
+        assert evidence[card.id].axioms_clean is True
+        assert evidence[card.id].missing_refs == ()
+        assert evidence[card.id].unverified_refs == ()
 
 
 def test_seeds_validate(tmp_path):

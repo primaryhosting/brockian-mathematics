@@ -1,27 +1,24 @@
 import Mathlib
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# The cumulative hierarchy and inaccessible cardinals
+
+This file defines the von Neumann cumulative hierarchy `Frontier.cumul o` inside `ZFSet`,
+characterizes its members by rank, and proves the two facts about an inaccessible cardinal `κ`
+that are needed to see that `V_κ` is a model of ZFC:
+
+* `Frontier.card_lt_of_rank_lt`: a set of rank `< κ.ord` has cardinality `< κ`;
+* `Frontier.rank_range_lt`: `V_κ` is closed under images of small families (replacement).
 -/
 
-universe u
+open Ordinal Cardinal
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+/-- The von Neumann cumulative hierarchy `V_o`, as a `ZFSet`. -/
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+theorem isSuccLimit_ord (hκ : κ.IsInaccessible) : Order.IsSuccLimit κ.ord :=
+  Cardinal.isSuccLimit_ord hκ.isRegular.aleph0_le
 
-variable {κ : Cardinal.{u}}
-
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem isSuccLimit_ord (hκ : κ.IsInaccessible) : IsSuccLimit κ.ord :=
-  Cardinal.isSuccLimit_ord hκ.aleph0_lt.le
-
-/-! ## Closure properties of `V_κ` for `κ` inaccessible -/
-
+/-- Replacement: the range of a family of sets of rank `< κ.ord` indexed by a type of size
+`< κ` again has rank `< κ.ord`. -/

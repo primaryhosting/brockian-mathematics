@@ -9,15 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Fermat Little
-Category: Frontier Wave 2 (deeper machinery)
-Target: NumberTheory.fermat_little
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat

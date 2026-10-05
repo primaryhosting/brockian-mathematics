@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Bloch Sphere Bijection
-Category: Quantum Computing
-Target: QC.bloch_sphere_bijection
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,11 +14,39 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+import Mathlib
+/-!
+# Bloch Sphere Bijection
+Category: Quantum Computing
+Target: QC.bloch_sphere_bijection
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Complex
 
 namespace QC
 
-/-- A pure qubit state: a unit vector in `ℂ²`. -/
+/-- A pure state of a qubit: a unit vector `(a, b)` in `ℂ²`. -/
+structure Qubit where
+  a : ℂ
+  b : ℂ
+  unit : normSq a + normSq b = 1
 
-noncomputable def bloch : PureState → Sphere2 := Quotient.lift blochRaw blochRaw_respects
+/-- Two pure qubit states are equivalent when they differ by a global phase. -/
 
+def bloch : PureState → Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 :=
+  Quotient.lift (fun v => (⟨blochVec v, by simpa using blochVec_norm v⟩ :
+      Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1))
+    (fun _ _ h => Subtype.ext (blochVec_phaseEq h))
+
+/-- Two unit vectors of `ℂ²` with the same Bloch vector differ by a global phase. -/

@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Hyperperfect Infinitude
-Category: Brockian Conjecture
-Target: Brockian.HyperperfectNumbers.HyperperfectInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,73 +33,65 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open ArithmeticFunction
-open scoped ArithmeticFunction.sigma
-
 namespace Brockian.HyperperfectNumbers
 
-/-- `n` is `k`-hyperperfect when `k ≥ 1`, `n > 1` and `n = 1 + k * (σ n - n - 1)`, i.e. `k`
-times the sum of the divisors of `n` other than `1` and `n` equals `n - 1`.
-The equation is written without truncated subtraction as `n + k * (n + 1) = 1 + k * σ n`. -/
+open Finset
+
+/-- The sum-of-divisors function `σ₁`. -/
+
+def sigmaOne (n : ℕ) : ℕ := ∑ d ∈ n.divisors, d
+
+/-- `n` is `k`-hyperperfect when `k > 0`, `n > 1` and `n = 1 + k * (σ(n) - n - 1)`.
+The defining equation is written in subtraction-free form. -/
 
 def IsHyperperfect (k n : ℕ) : Prop :=
-  1 ≤ k ∧ 1 < n ∧ n + k * (n + 1) = 1 + k * (σ 1 n)
+  0 < k ∧ 1 < n ∧ n + k * (n + 1) = 1 + k * sigmaOne n
 
-/-- The set of hyperperfect numbers (`k`-hyperperfect for some `k ≥ 1`). -/
+/-- `n` is hyperperfect if it is `k`-hyperperfect for some `k ≥ 1`. -/
 
-def Hyperperfect : Set ℕ := {n | ∃ k, IsHyperperfect k n}
+def IsHyperperfectNumber (n : ℕ) : Prop := ∃ k, IsHyperperfect k n
 
-/-- The classical perfect number `6` is `1`-hyperperfect. -/
+lemma sigmaOne_prime {p : ℕ} (hp : p.Prime) : sigmaOne p = p + 1 := by
+  simp [sigmaOne, hp.divisors, Finset.sum_pair hp.one_lt.ne, Nat.add_comm]
 
-theorem sigma_one_mul_of_primes {p q : ℕ} (hp : p.Prime) (hq : q.Prime) (hpq : p ≠ q) :
-    σ 1 (p * q) = (p + 1) * (q + 1) := by
-  have hmul := (isMultiplicative_sigma (k := 1) :
-      ArithmeticFunction.IsMultiplicative (σ 1 : ArithmeticFunction ℕ)).map_mul_of_coprime
-      ((Nat.coprime_primes hp hq).mpr hpq)
-  rw [hmul, sigma_one_apply, sigma_one_apply, hp.sum_divisors, hq.sum_divisors]
+lemma sigmaOne_mul_of_coprime {m n : ℕ} (h : m.Coprime n) :
+    sigmaOne (m * n) = sigmaOne m * sigmaOne n :=
+  h.sum_divisors_mul
 
-/-- **Key lemma.** If `p` and `q = p² - p + 1` are both prime, then `n = p * q` is
-`(p-1)`-hyperperfect. (For `p = 2` this gives the perfect number `6`, for `p = 3` the
-`2`-hyperperfect number `21`, for `p = 7` the `6`-hyperperfect number `301`.) -/
+/-- Sanity check: `6` is `1`-hyperperfect (i.e. perfect). -/
 
-theorem isHyperperfect_mul_of_prime {p : ℕ} (hp : p.Prime) (hq : (p ^ 2 - p + 1).Prime) :
-    IsHyperperfect (p - 1) (p * (p ^ 2 - p + 1)) := by
-  obtain ⟨a, rfl⟩ : ∃ a, p = a + 2 := ⟨p - 2, by have := hp.two_le; omega⟩
-  have hsq : (a + 2) ^ 2 = a ^ 2 + 4 * a + 4 := by ring
-  have hq' : (a + 2) ^ 2 - (a + 2) + 1 = a ^ 2 + 3 * a + 3 := by omega
-  rw [hq'] at hq ⊢
-  have hlt : a + 2 < a ^ 2 + 3 * a + 3 := by nlinarith [sq_nonneg a]
-  have hne : a + 2 ≠ a ^ 2 + 3 * a + 3 := by omega
+lemma isHyperperfect_mul_of_prime_pair {p q : ℕ} (hp : p.Prime) (hq : q.Prime)
+    (hqe : q + p = p * p + 1) : IsHyperperfect (p - 1) (p * q) := by
+  obtain ⟨k, rfl⟩ : ∃ k, p = k + 1 := ⟨p - 1, by have := hp.two_le; omega⟩
+  have hk : 0 < k := by have := hp.two_le; omega
+  have hqk : q = k * k + k + 1 := by nlinarith [hqe]
+  have hne : k + 1 ≠ q := by
+    subst hqk; nlinarith
+  have hcop : (k + 1).Coprime q := (Nat.coprime_primes hp hq).mpr hne
   refine ⟨by omega, ?_, ?_⟩
-  · nlinarith [sq_nonneg a]
-  · rw [sigma_one_mul_of_primes hp hq hne]
-    have hk : a + 2 - 1 = a + 1 := by omega
-    rw [hk]
+  · have h1 := hp.two_le
+    have h2 := hq.two_le
+    nlinarith
+  · rw [sigmaOne_mul_of_coprime hcop, sigmaOne_prime hp, sigmaOne_prime hq, hqk]
+    simp only [Nat.add_sub_cancel]
     ring
 
-/-- Each such `p * q` is at least `p`, so the family is unbounded. -/
+/-- An instance of the construction: `301 = 7 * 43` is `6`-hyperperfect. -/
 
-theorem le_mul_of_prime {p : ℕ} (hp : p.Prime) : p ≤ p * (p ^ 2 - p + 1) := by
-  have h2 := hp.two_le
-  have h1 : 1 ≤ p ^ 2 - p + 1 := by omega
-  nlinarith
+def InfinitelyManyPrimePairs : Prop :=
+  ∀ N : ℕ, ∃ p q : ℕ, N < p ∧ p.Prime ∧ q.Prime ∧ q + p = p * p + 1
 
-/-- **Conditional reduction for the Brockian hyperperfect infinitude conjecture.**
+/-- **Conditional reduction of the Hyperperfect Infinitude conjecture.**
+If there are infinitely many primes `p` such that `p² - p + 1` is prime, then there are
+infinitely many hyperperfect numbers. -/
 
-If there are infinitely many primes `p` for which `p² - p + 1` is also prime, then there are
-infinitely many hyperperfect numbers: indeed each such `p` produces the `(p-1)`-hyperperfect
-number `p * (p² - p + 1)`. -/
-
-theorem HyperperfectInfinitude
-    (h : {p : ℕ | p.Prime ∧ (p ^ 2 - p + 1).Prime}.Infinite) :
-    Hyperperfect.Infinite := by
-  apply Set.infinite_of_not_bddAbove
-  rintro ⟨N, hN⟩
-  obtain ⟨p, ⟨hp, hq⟩, hpN⟩ := h.exists_gt N
-  have hmem : p * (p ^ 2 - p + 1) ∈ Hyperperfect :=
-    ⟨p - 1, isHyperperfect_mul_of_prime hp hq⟩
-  have h1 := hN hmem
-  have h2 := le_mul_of_prime hp
-  omega
+theorem HyperperfectInfinitude (h : InfinitelyManyPrimePairs) :
+    {n : ℕ | IsHyperperfectNumber n}.Infinite := by
+  apply Set.infinite_of_forall_exists_gt
+  intro N
+  obtain ⟨p, q, hNp, hp, hq, hqe⟩ := h N
+  refine ⟨p * q, ⟨p - 1, isHyperperfect_mul_of_prime_pair hp hq hqe⟩, ?_⟩
+  have h2 := hq.two_le
+  nlinarith [hp.two_le]
 
 end Brockian.HyperperfectNumbers

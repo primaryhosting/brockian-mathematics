@@ -31,6 +31,9 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+-- (Lean requires `import` lines to precede any module docstring, so the header above is a
+-- plain block comment and is repeated below as the module docstring.)
+
 import Mathlib
 
 /-!
@@ -43,25 +46,21 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.LegendreConjecture
 
-/-- **Legendre's conjecture** (open): for every `n ≥ 1` there is a prime strictly
-between `n ^ 2` and `(n + 1) ^ 2`. -/
+/-- **Legendre's conjecture** (statement): for every `n ≥ 1` there is a prime strictly
+between `n ^ 2` and `(n + 1) ^ 2`.  This is a famous open problem. -/
 
-theorem legendre_small (n : ℕ) (hn : 1 ≤ n) (hn' : n ≤ 12) :
-    ∃ p : ℕ, p.Prime ∧ n ^ 2 < p ∧ p < (n + 1) ^ 2 := by
+theorem legendre_small (n : ℕ) (hn : 0 < n) (hn' : n < 10) :
+    ∃ p : ℕ, Nat.Prime p ∧ n ^ 2 < p ∧ p < (n + 1) ^ 2 := by
   interval_cases n
-  · exact ⟨2, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨5, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨11, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨17, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨29, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨37, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨53, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨67, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨83, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨101, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨127, by norm_num, by norm_num, by norm_num⟩
-  · exact ⟨149, by norm_num, by norm_num, by norm_num⟩
+  · exact ⟨2, by norm_num⟩
+  · exact ⟨5, by norm_num⟩
+  · exact ⟨11, by norm_num⟩
+  · exact ⟨17, by norm_num⟩
+  · exact ⟨29, by norm_num⟩
+  · exact ⟨37, by norm_num⟩
+  · exact ⟨53, by norm_num⟩
+  · exact ⟨67, by norm_num⟩
+  · exact ⟨83, by norm_num⟩
 
-/-- A weaker unconditional statement that *is* provable from Mathlib: by Bertrand's postulate
-(`Nat.exists_prime_lt_and_le_two_mul`) there is a prime `p` with `n ^ 2 < p ≤ 2 * n ^ 2`
-for every `n ≥ 1`. Narrowing `2 * n ^ 2` to `(n + 1) ^ 2` is exactly Legendre's conjecture. -/
+/-- The reduction step: for `n ≥ 10` the short-interval hypothesis produces a prime in
+`(n ^ 2, n ^ 2 + n]`, which lies strictly below `(n + 1) ^ 2`. -/

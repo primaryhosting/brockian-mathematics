@@ -41,14 +41,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.RepunitPrimes
+namespace Brockian
+namespace RepunitPrimes
 
-open Finset
+/-- The `n`-th repunit: the base-ten number consisting of `n` digits `1`,
+i.e. `repunit n = (10 ^ n - 1) / 9`. -/
 
-/-- The `n`-th base-ten repunit `1, 11, 111, ...` (with `repunit 0 = 0`). -/
-
-lemma repunit_add (m n : ℕ) : repunit (m + n) = repunit m + 10 ^ m * repunit n := by
-  rw [repunit, repunit, repunit, Finset.sum_range_add, Finset.mul_sum]
+lemma repunit_add (a b : ℕ) : repunit (a + b) = repunit a + 10 ^ a * repunit b := by
+  unfold repunit
+  rw [Finset.sum_range_add, Finset.mul_sum]
   simp [pow_add]
 
-/-- The closed form: `9 * Rₙ + 1 = 10 ^ n`. -/
+/-- If `m ∣ n` then `repunit m ∣ repunit n`. -/

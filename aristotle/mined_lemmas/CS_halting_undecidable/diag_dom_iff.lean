@@ -23,25 +23,39 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Halting Undecidable
+Category: Computer Science
+Target: CS.halting_undecidable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Halting Undecidable
+Category: Computer Science
+Target: CS.halting_undecidable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace CS
 
-open Nat.Partrec Nat.Partrec.Code
+open Nat.Partrec Code Denumerable Encodable
 
-/-- The diagonal partial function: on input `n` it halts (returning `0`) exactly when
-`H n n = false`, and diverges otherwise. It is partial recursive whenever `H` is computable. -/
+/-- The diagonal partial function associated to a candidate halting decider `H`:
+on input `n` it diverges exactly when `H` claims that the `n`-th program halts on
+input `n`, and returns `0` otherwise. -/
 
-theorem diag_dom_iff (H : ℕ → ℕ → Bool) (n : ℕ) : (diag H n).Dom ↔ H n n = false := by
-  constructor
-  · intro h
-    have := Nat.rfind_spec (Part.get_mem h)
-    simpa using this
-  · intro h
-    have : (0 : ℕ) ∈ diag H n := by
-      rw [diag, Nat.mem_rfind]
-      simp [h]
-    exact this.fst
+theorem diag_dom_iff (H : Code → ℕ → Bool) (n : ℕ) :
+    (diag H n).Dom ↔ H (ofNat Code n) n = false := by
+  unfold diag
+  cases h : H (ofNat Code n) n <;> simp
 
-/-- **Undecidability of the halting problem** (by diagonalization).
-
-There is no total computable function `H` which, given (a code for) a program `c` and an
-input `x`, decides whether the program `c` halts on input `x`. -/
+/-- **The halting problem is undecidable.**
+There is no total computable function `H` which, given (a code for) a program `p`
+and an input `x`, decides whether `p` halts on `x`.  The proof is by
+diagonalization: from such an `H` one builds a program that halts on its own code
+exactly when `H` says it does not. -/

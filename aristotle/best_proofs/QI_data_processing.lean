@@ -1,4 +1,298 @@
 import Mathlib
+import RequestProject.Classical
+
+/-!
+# Quantum relative entropy
+
+Definitions of the matrix logarithm (via the continuous functional calculus), the Umegaki
+relative entropy of two density matrices, and quantum channels in Kraus form.
+-/
+
+open Matrix Unitary
+open scoped BigOperators ComplexOrder
+
+namespace QI
+
+variable {m n ι : Type*} [Fintype m] [DecidableEq m] [Fintype n] [DecidableEq n] [Fintype ι]
+
+/-- The matrix logarithm of a Hermitian matrix, defined through the continuous functional
+calculus (with the convention `log 0 = 0`, so that vanishing eigenvalues contribute nothing). -/
+noncomputable def matLog (A : Matrix n n ℂ) : Matrix n n ℂ := cfc Real.log A
+
+/-- The Umegaki relative entropy `D(ρ‖σ) = Tr ρ (log ρ - log σ)` of two density matrices. -/
+noncomputable def relEntropy (ρ σ : Matrix n n ℂ) : ℝ :=
+  (Matrix.trace (ρ * (matLog ρ - matLog σ))).re
+
+/-- A density matrix: a positive semidefinite matrix of unit trace. -/
+structure IsState (ρ : Matrix n n ℂ) : Prop where
+  posSemidef : ρ.PosSemidef
+  trace_one : ρ.trace = 1
+
+/-- Two matrices are *simultaneously diagonalizable* when a single unitary diagonalizes both
+of them (equivalently, for Hermitian matrices, when they commute). -/
+def SimulDiag (A B : Matrix n n ℂ) : Prop :=
+  ∃ (U : unitary (Matrix n n ℂ)) (a b : n → ℝ),
+    A = (U : Matrix n n ℂ) * diagonal (fun i => (a i : ℂ)) * star (U : Matrix n n ℂ) ∧
+    B = (U : Matrix n n ℂ) * diagonal (fun i => (b i : ℂ)) * star (U : Matrix n n ℂ)
+
+/-- A quantum channel in Kraus form: `X ↦ ∑ i, K i * X * (K i)ᴴ`. Together with the
+condition `∑ i, (K i)ᴴ * K i = 1` this is precisely a CPTP map. -/
+noncomputable def krausMap (K : ι → Matrix n m ℂ) (X : Matrix m m ℂ) : Matrix n n ℂ :=
+  ∑ i, K i * X * (K i)ᴴ
+
+/-! ### Functional calculus lemmas -/
+
+theorem isSelfAdjoint_diagonal (d : n → ℝ) :
+    IsSelfAdjoint (diagonal fun i => (d i : ℂ)) := by
+  show (diagonal fun i => (d i : ℂ)).IsHermitian
+  rw [Matrix.IsHermitian]
+  simp [Matrix.diagonal_conjTranspose]
+
+theorem spectrum_real_diagonal (d : n → ℝ) :
+    spectrum ℝ (diagonal fun i => (d i : ℂ)) ⊆ Set.range d := by
+  intro r hr
+  by_contra hrange
+  rw [spectrum.mem_iff] at hr
+  apply hr
+  have hdiag : algebraMap ℝ (Matrix n n ℂ) r - (diagonal fun i => (d i : ℂ))
+      = diagonal (fun i => ((r : ℂ) - (d i : ℂ))) := by
+    rw [Matrix.algebraMap_eq_diagonal, ← Matrix.diagonal_sub]
+    rfl
+  rw [hdiag, Matrix.isUnit_diagonal, Pi.isUnit_iff]
+  intro i
+  rw [isUnit_iff_ne_zero]
+  simp only [sub_ne_zero]
+  intro h
+  exact hrange ⟨i, by exact_mod_cast h.symm⟩
+
+theorem aeval_diagonal (d : n → ℝ) (P : Polynomial ℝ) :
+    (Polynomial.aeval (diagonal fun i => (d i : ℂ))) P
+      = diagonal (fun i => ((P.eval (d i) : ℝ) : ℂ)) := by
+  have h1 : (diagonal fun i => (d i : ℂ)) = Matrix.diagonalAlgHom ℝ (fun i => (d i : ℂ)) := rfl
+  rw [h1, Polynomial.aeval_algHom_apply]
+  have h3 : (Polynomial.aeval (fun i => (d i : ℂ))) P = fun i => ((P.eval (d i) : ℝ) : ℂ) := by
+    funext i
+    have hpi := Polynomial.aeval_algHom_apply (Pi.evalAlgHom ℝ (fun _ : n => ℂ) i)
+      (fun j => (d j : ℂ)) P
+    simp only [Pi.evalAlgHom_apply] at hpi
+    rw [← hpi]
+    have h2 := Polynomial.aeval_algHom_apply (Algebra.ofId ℝ ℂ) (d i) P
+    simp only [Algebra.ofId_apply] at h2
+    simpa using h2
+  rw [h3]
+  rfl
+
+/-- The continuous functional calculus of a real diagonal matrix acts entrywise. -/
+theorem cfc_diagonal (d : n → ℝ) (f : ℝ → ℝ) :
+    cfc f (diagonal fun i => (d i : ℂ)) = diagonal (fun i => ((f (d i) : ℝ) : ℂ)) := by
+  classical
+  have hA : IsSelfAdjoint (diagonal fun i => (d i : ℂ)) := isSelfAdjoint_diagonal d
+  set s : Finset ℝ := Finset.image d Finset.univ with hs
+  set P : Polynomial ℝ := Lagrange.interpolate s id f with hP
+  have hnode : ∀ i : n, P.eval (d i) = f (d i) := by
+    intro i
+    have hmem : d i ∈ s := by simp [hs]
+    have := Lagrange.eval_interpolate_at_node (F := ℝ) (ι := ℝ) (s := s) (v := id) f
+      (Set.injOn_id _) hmem
+    simpa [hP] using this
+  have h1 : cfc f (diagonal fun i => (d i : ℂ))
+      = cfc (fun x => P.eval x) (diagonal fun i => (d i : ℂ)) := by
+    refine cfc_congr ?_
+    intro r hr
+    obtain ⟨i, rfl⟩ := spectrum_real_diagonal d hr
+    exact (hnode i).symm
+  rw [h1, cfc_polynomial P _ hA, aeval_diagonal d P]
+  simp only [hnode]
+
+/-- The continuous functional calculus commutes with conjugation by a unitary. -/
+theorem cfc_unitary_conj (U : unitary (Matrix n n ℂ)) (f : ℝ → ℝ) (A : Matrix n n ℂ)
+    (hA : IsSelfAdjoint A) :
+    cfc f ((U : Matrix n n ℂ) * A * star (U : Matrix n n ℂ))
+      = (U : Matrix n n ℂ) * cfc f A * star (U : Matrix n n ℂ) := by
+  have hfun : ((conjStarAlgAut ℝ (Matrix n n ℂ) U) : Matrix n n ℂ → Matrix n n ℂ)
+      = fun x => (U : Matrix n n ℂ) * x * star (U : Matrix n n ℂ) := rfl
+  have hcont : Continuous ((conjStarAlgAut ℝ (Matrix n n ℂ) U) : Matrix n n ℂ → Matrix n n ℂ) := by
+    rw [hfun]
+    exact (continuous_const.mul continuous_id).mul continuous_const
+  have := StarAlgHomClass.map_cfc (R := ℝ) (S := ℝ) (conjStarAlgAut ℝ (Matrix n n ℂ) U) f A
+    (by rw [continuousOn_iff_continuous_restrict]; fun_prop) hcont hA
+  simpa using this.symm
+
+/-- `matLog` of a diagonalized matrix. -/
+theorem matLog_conj_diagonal (U : unitary (Matrix n n ℂ)) (d : n → ℝ) :
+    matLog ((U : Matrix n n ℂ) * diagonal (fun i => (d i : ℂ)) * star (U : Matrix n n ℂ))
+      = (U : Matrix n n ℂ) * diagonal (fun i => ((Real.log (d i) : ℝ) : ℂ))
+          * star (U : Matrix n n ℂ) := by
+  rw [matLog, cfc_unitary_conj U Real.log _ (isSelfAdjoint_diagonal d), cfc_diagonal]
+
+/-! ### Relative entropy of a simultaneously diagonalized pair -/
+
+theorem relEntropy_conj_diagonal (U : unitary (Matrix n n ℂ)) (p q : n → ℝ) :
+    relEntropy ((U : Matrix n n ℂ) * diagonal (fun i => (p i : ℂ)) * star (U : Matrix n n ℂ))
+        ((U : Matrix n n ℂ) * diagonal (fun i => (q i : ℂ)) * star (U : Matrix n n ℂ))
+      = klDiv p q := by
+  have hU1 : star (U : Matrix n n ℂ) * (U : Matrix n n ℂ) = 1 := U.2.1
+  rw [relEntropy, matLog_conj_diagonal, matLog_conj_diagonal]
+  have hprod : ((U : Matrix n n ℂ) * diagonal (fun i => (p i : ℂ)) * star (U : Matrix n n ℂ)) *
+      ((U : Matrix n n ℂ) * diagonal (fun i => ((Real.log (p i) : ℝ) : ℂ))
+          * star (U : Matrix n n ℂ)
+        - (U : Matrix n n ℂ) * diagonal (fun i => ((Real.log (q i) : ℝ) : ℂ))
+          * star (U : Matrix n n ℂ))
+      = (U : Matrix n n ℂ) * (diagonal (fun i => (p i : ℂ)) *
+          (diagonal (fun i => ((Real.log (p i) : ℝ) : ℂ))
+            - diagonal (fun i => ((Real.log (q i) : ℝ) : ℂ)))) * star (U : Matrix n n ℂ) := by
+    have : ∀ X Y : Matrix n n ℂ,
+        ((U : Matrix n n ℂ) * X * star (U : Matrix n n ℂ)) *
+          ((U : Matrix n n ℂ) * Y * star (U : Matrix n n ℂ))
+          = (U : Matrix n n ℂ) * (X * Y) * star (U : Matrix n n ℂ) := by
+      intro X Y
+      calc ((U : Matrix n n ℂ) * X * star (U : Matrix n n ℂ)) *
+          ((U : Matrix n n ℂ) * Y * star (U : Matrix n n ℂ))
+          = (U : Matrix n n ℂ) * X * (star (U : Matrix n n ℂ) * (U : Matrix n n ℂ))
+            * Y * star (U : Matrix n n ℂ) := by noncomm_ring
+        _ = (U : Matrix n n ℂ) * (X * Y) * star (U : Matrix n n ℂ) := by
+            rw [hU1]; noncomm_ring
+    have hsub : (U : Matrix n n ℂ) * diagonal (fun i => ((Real.log (p i) : ℝ) : ℂ))
+          * star (U : Matrix n n ℂ)
+        - (U : Matrix n n ℂ) * diagonal (fun i => ((Real.log (q i) : ℝ) : ℂ))
+          * star (U : Matrix n n ℂ)
+        = (U : Matrix n n ℂ) * (diagonal (fun i => ((Real.log (p i) : ℝ) : ℂ))
+            - diagonal (fun i => ((Real.log (q i) : ℝ) : ℂ))) * star (U : Matrix n n ℂ) := by
+      rw [Matrix.mul_sub, Matrix.sub_mul]
+    rw [hsub, this]
+  rw [hprod]
+  rw [Matrix.trace_mul_cycle, ← Matrix.mul_assoc, hU1, Matrix.one_mul]
+  have hdd : (diagonal fun i => (p i : ℂ)) *
+      ((diagonal fun i => ((Real.log (p i) : ℝ) : ℂ))
+        - diagonal fun i => ((Real.log (q i) : ℝ) : ℂ))
+      = diagonal (fun i => (p i : ℂ) *
+          (((Real.log (p i) : ℝ) : ℂ) - ((Real.log (q i) : ℝ) : ℂ))) := by
+    rw [Matrix.mul_sub, Matrix.diagonal_mul_diagonal, Matrix.diagonal_mul_diagonal]
+    ext i j
+    by_cases h : i = j <;> simp [Matrix.diagonal_apply, h, mul_sub]
+  rw [hdd, Matrix.trace_diagonal, klDiv]
+  push_cast
+  simp [Complex.re_sum]
+
+end QI
+
+import Mathlib
+
+/-!
+# Classical relative entropy and the classical data-processing inequality
+
+This file develops the classical (commutative) part of the data-processing inequality:
+the Kullback–Leibler divergence of two probability vectors does not increase when both
+are pushed through a stochastic map.
+-/
+
+open scoped BigOperators
+
+namespace QI
+
+variable {ι κ : Type*}
+
+/-- Kullback–Leibler divergence of two nonnegative vectors, with the usual conventions
+`0 * log 0 = 0` (implemented through `Real.log 0 = 0`). -/
+noncomputable def klDiv [Fintype ι] (p q : ι → ℝ) : ℝ :=
+  ∑ i, p i * (Real.log (p i) - Real.log (q i))
+
+/-- The log-sum inequality. -/
+theorem log_sum_le [Fintype ι] (a b : ι → ℝ) (ha : ∀ i, 0 ≤ a i) (hb : ∀ i, 0 ≤ b i)
+    (hab : ∀ i, b i = 0 → a i = 0) :
+    (∑ i, a i) * (Real.log (∑ i, a i) - Real.log (∑ i, b i))
+      ≤ ∑ i, a i * (Real.log (a i) - Real.log (b i)) := by
+  set A := ∑ i, a i with hA
+  set B := ∑ i, b i with hB
+  have hA0 : 0 ≤ A := Finset.sum_nonneg fun i _ => ha i
+  rcases eq_or_lt_of_le hA0 with hA0' | hApos
+  · have hs : ∑ i, a i = 0 := by rw [← hA]; exact hA0'.symm
+    have hzero : ∀ i, a i = 0 := fun i =>
+      (Finset.sum_eq_zero_iff_of_nonneg (fun i _ => ha i)).1 hs i (Finset.mem_univ i)
+    simp [hzero, ← hA0']
+  · have hBpos : 0 < B := by
+      rcases eq_or_lt_of_le (show (0:ℝ) ≤ B from Finset.sum_nonneg fun i _ => hb i) with h | h
+      · exfalso
+        have hs : ∑ i, b i = 0 := by rw [← hB]; exact h.symm
+        have hb0 : ∀ i, b i = 0 := fun i =>
+          (Finset.sum_eq_zero_iff_of_nonneg (fun i _ => hb i)).1 hs i (Finset.mem_univ i)
+        have hz : ∀ i, a i = 0 := fun i => hab i (hb0 i)
+        rw [hA] at hApos
+        simp [hz] at hApos
+      · exact h
+    have key : ∀ i, a i * (Real.log A - Real.log B) + (a i - b i * (A / B))
+        ≤ a i * (Real.log (a i) - Real.log (b i)) := by
+      intro i
+      rcases eq_or_lt_of_le (ha i) with hai | hai
+      · have hbi : 0 ≤ b i * (A / B) := mul_nonneg (hb i) (by positivity)
+        rw [← hai]
+        simp
+        linarith
+      · have hbi : 0 < b i := by
+          rcases eq_or_lt_of_le (hb i) with h | h
+          · exact absurd (hab i h.symm) (by linarith)
+          · exact h
+        have ht : 0 < b i * A / (a i * B) := by positivity
+        have hlog := Real.log_le_sub_one_of_pos ht
+        have hlogeq : Real.log (b i * A / (a i * B))
+            = Real.log (b i) + Real.log A - Real.log (a i) - Real.log B := by
+          rw [Real.log_div (by positivity) (by positivity), Real.log_mul (by positivity)
+            (by positivity), Real.log_mul (by positivity) (by positivity)]
+          ring
+        rw [hlogeq] at hlog
+        have hkey : a i * (Real.log (a i) - Real.log (b i) - (Real.log A - Real.log B))
+            ≥ a i * (1 - b i * A / (a i * B)) := by
+          apply mul_le_mul_of_nonneg_left _ (le_of_lt hai)
+          linarith
+        have h2 : a i * (1 - b i * A / (a i * B)) = a i - b i * (A / B) := by
+          field_simp
+        rw [h2] at hkey
+        nlinarith [hkey]
+    have hsum : ∑ i, (a i * (Real.log A - Real.log B) + (a i - b i * (A / B)))
+        = A * (Real.log A - Real.log B) := by
+      simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib, ← Finset.sum_mul, ← hA, ← hB]
+      field_simp
+      ring
+    calc A * (Real.log A - Real.log B)
+        = ∑ i, (a i * (Real.log A - Real.log B) + (a i - b i * (A / B))) := hsum.symm
+      _ ≤ ∑ i, a i * (Real.log (a i) - Real.log (b i)) := Finset.sum_le_sum fun i _ => key i
+
+/-- **Classical data-processing inequality**: the Kullback–Leibler divergence is monotone
+under (column-)stochastic maps. -/
+theorem klDiv_stochastic_le [Fintype ι] [Fintype κ] (S : κ → ι → ℝ)
+    (hS : ∀ k i, 0 ≤ S k i) (hcol : ∀ i, ∑ k, S k i = 1)
+    (p q : ι → ℝ) (hp : ∀ i, 0 ≤ p i) (hq : ∀ i, 0 < q i) :
+    klDiv (fun k => ∑ i, S k i * p i) (fun k => ∑ i, S k i * q i) ≤ klDiv p q := by
+  have step : ∀ k : κ,
+      (∑ i, S k i * p i) * (Real.log (∑ i, S k i * p i) - Real.log (∑ i, S k i * q i))
+        ≤ ∑ i, S k i * (p i * (Real.log (p i) - Real.log (q i))) := by
+    intro k
+    have h := log_sum_le (fun i => S k i * p i) (fun i => S k i * q i)
+      (fun i => mul_nonneg (hS k i) (hp i)) (fun i => mul_nonneg (hS k i) (le_of_lt (hq i)))
+      (fun i hi => by
+        rcases mul_eq_zero.1 hi with h0 | h0
+        · simp [h0]
+        · exact absurd h0 (ne_of_gt (hq i)))
+    refine h.trans (le_of_eq ?_)
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rcases eq_or_lt_of_le (hS k i) with h0 | h0
+    · simp [← h0]
+    · rcases eq_or_lt_of_le (hp i) with hp0 | hp0
+      · simp [← hp0]
+      · rw [Real.log_mul (ne_of_gt h0) (ne_of_gt hp0),
+          Real.log_mul (ne_of_gt h0) (ne_of_gt (hq i))]
+        ring
+  calc klDiv (fun k => ∑ i, S k i * p i) (fun k => ∑ i, S k i * q i)
+      ≤ ∑ k, ∑ i, S k i * (p i * (Real.log (p i) - Real.log (q i))) :=
+        Finset.sum_le_sum fun k _ => step k
+    _ = klDiv p q := by
+        rw [Finset.sum_comm]
+        refine Finset.sum_congr rfl fun i _ => ?_
+        rw [← Finset.sum_mul, hcol i, one_mul]
+
+end QI
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -22,447 +316,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-/-
-# Data Processing
-Category: Frontier Qi
-Target: QI.data_processing
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Data Processing
-
-Category: Frontier Qi.  Target: `QI.data_processing`.
-
-(The header above is repeated as a plain comment at the top of the file, since Lean does not
-allow a module docstring to precede the `import` commands.)
-
-## Quantum relative entropy and the data-processing inequality
-
-We work with finite-dimensional quantum systems, i.e. complex matrices indexed by a finite
-type `n`, and we use the Umegaki relative entropy
-`D(ρ‖σ) = Tr[ρ (log ρ - log σ)]`,
-where the matrix logarithm is the one provided by the continuous functional calculus.
--/
-
-namespace QI
-
-open Matrix Unitary
-open scoped ComplexOrder
-
-variable {n : Type*} [Fintype n] [DecidableEq n]
-
-/-- The matrix logarithm, defined through the continuous functional calculus. -/
-noncomputable def logm (A : Matrix n n ℂ) : Matrix n n ℂ := cfc Real.log A
-
-/-- The Umegaki quantum relative entropy `D(ρ‖σ) = Tr[ρ (log ρ - log σ)]`. -/
-noncomputable def relEntropy (ρ σ : Matrix n n ℂ) : ℝ := (ρ * (logm ρ - logm σ)).trace.re
-
-/-- The dephasing (von Neumann measurement) channel associated with the standard basis:
-it keeps the diagonal of a matrix and erases all off-diagonal entries. -/
-def dephase (ρ : Matrix n n ℂ) : Matrix n n ℂ := diagonal (fun i => ρ i i)
-
-section Basic
-
-lemma logm_eq_conj (A : Matrix n n ℂ) (hA : A.IsHermitian) :
-    logm A = (hA.eigenvectorUnitary : Matrix n n ℂ) *
-      diagonal (fun i => ((Real.log (hA.eigenvalues i) : ℝ) : ℂ)) *
-      star (hA.eigenvectorUnitary : Matrix n n ℂ) := by
-  rw [logm, hA.cfc_eq, Matrix.IsHermitian.cfc, Unitary.conjStarAlgAut_apply]
-  rfl
-
-lemma spectral_eq_conj (A : Matrix n n ℂ) (hA : A.IsHermitian) :
-    A = (hA.eigenvectorUnitary : Matrix n n ℂ) *
-      diagonal (fun i => ((hA.eigenvalues i : ℝ) : ℂ)) *
-      star (hA.eigenvectorUnitary : Matrix n n ℂ) := by
-  conv_lhs => rw [hA.spectral_theorem]
-  rw [Unitary.conjStarAlgAut_apply]
-  rfl
-
-lemma trace_diag_mul_diag (a b : n → ℝ) (W : Matrix n n ℂ) :
-    (diagonal (fun i => (a i : ℂ)) * W * diagonal (fun i => (b i : ℂ)) * Wᴴ).trace
-      = ((∑ j, ∑ k, a j * b k * ‖W j k‖ ^ 2 : ℝ) : ℂ) := by
-  have h1 : diagonal (fun i => (a i : ℂ)) * W * diagonal (fun i => (b i : ℂ))
-      = Matrix.of (fun i j => (a i : ℂ) * W i j * (b j : ℂ)) := by
-    ext i j
-    simp [Matrix.mul_apply, Matrix.diagonal_apply, Finset.sum_ite_eq, mul_comm, mul_left_comm]
-  rw [h1, Matrix.trace]
-  push_cast
-  refine Finset.sum_congr rfl fun j _ => ?_
-  simp only [Matrix.diag_apply, Matrix.mul_apply, Matrix.of_apply, Matrix.conjTranspose_apply,
-    RCLike.star_def]
-  refine Finset.sum_congr rfl fun k _ => ?_
-  rw [show (a j : ℂ) * W j k * (b k : ℂ) * (starRingEnd ℂ) (W j k)
-      = (a j : ℂ) * (b k : ℂ) * (W j k * (starRingEnd ℂ) (W j k)) by ring, Complex.mul_conj']
-
-lemma trace_conj_mul_conj (u v : unitary (Matrix n n ℂ)) (A B : Matrix n n ℂ) :
-    ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ) *
-      ((v : Matrix n n ℂ) * B * star (v : Matrix n n ℂ))).trace
-      = (A * (star (u : Matrix n n ℂ) * v) * B *
-          star (star (u : Matrix n n ℂ) * (v : Matrix n n ℂ))).trace := by
-  rw [Matrix.star_mul, star_star]
-  simp only [mul_assoc]
-  rw [Matrix.trace_mul_comm]
-  simp only [mul_assoc]
-
-lemma sum_normSq_row (W : Matrix n n ℂ) (h : W * star W = 1) (j : n) :
-    ∑ k, ‖W j k‖ ^ 2 = 1 := by
-  have h1 := congrArg (fun M => M j j) h
-  simp only [Matrix.mul_apply, Matrix.star_apply, Matrix.one_apply_eq, RCLike.star_def,
-    Complex.mul_conj'] at h1
-  exact_mod_cast h1
-
-lemma sum_normSq_col (W : Matrix n n ℂ) (h : star W * W = 1) (k : n) :
-    ∑ j, ‖W j k‖ ^ 2 = 1 := by
-  have h1 := congrArg (fun M => M k k) h
-  simp only [Matrix.mul_apply, Matrix.star_apply, Matrix.one_apply_eq, RCLike.star_def] at h1
-  rw [show (∑ x, (starRingEnd ℂ) (W x k) * W x k) = ∑ x, W x k * (starRingEnd ℂ) (W x k) from
-    Finset.sum_congr rfl fun x _ => mul_comm _ _] at h1
-  simp only [Complex.mul_conj'] at h1
-  exact_mod_cast h1
-
-end Basic
-
-section Klein
-
-variable {ρ σ : Matrix n n ℂ}
-
-/-- The doubly stochastic matrix of transition probabilities between the eigenbases of
-`ρ` and `σ`. -/
-noncomputable def transition (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) (j k : n) : ℝ :=
-  ‖(star (hρ.eigenvectorUnitary : Matrix n n ℂ) *
-      (hσ.eigenvectorUnitary : Matrix n n ℂ)) j k‖ ^ 2
-
-lemma transition_nonneg (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) (j k : n) :
-    0 ≤ transition hρ hσ j k := by
-  unfold transition; positivity
-
-/-- The matrix of overlaps between the two eigenbases is unitary. -/
-lemma transitionMatrix_unitary (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) :
-    (star (hρ.eigenvectorUnitary : Matrix n n ℂ) * (hσ.eigenvectorUnitary : Matrix n n ℂ))
-      ∈ unitary (Matrix n n ℂ) :=
-  Submonoid.mul_mem _ (Unitary.star_mem hρ.eigenvectorUnitary.2) hσ.eigenvectorUnitary.2
-
-lemma sum_transition_right (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) (j : n) :
-    ∑ k, transition hρ hσ j k = 1 :=
-  sum_normSq_row _ (Unitary.mul_star_self_of_mem (transitionMatrix_unitary hρ hσ)) j
-
-lemma sum_transition_left (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) (k : n) :
-    ∑ j, transition hρ hσ j k = 1 :=
-  sum_normSq_col _ (Unitary.star_mul_self_of_mem (transitionMatrix_unitary hρ hσ)) k
-
-lemma trace_mul_logm (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) :
-    (ρ * logm σ).trace
-      = ((∑ j, ∑ k, hρ.eigenvalues j * Real.log (hσ.eigenvalues k) *
-            transition hρ hσ j k : ℝ) : ℂ) := by
-  conv_lhs => rw [spectral_eq_conj ρ hρ, logm_eq_conj σ hσ]
-  rw [trace_conj_mul_conj]
-  simp only [Matrix.star_eq_conjTranspose]
-  rw [trace_diag_mul_diag]
-  rfl
-
-lemma trace_eq_sum_eigenvalues (hρ : ρ.IsHermitian) :
-    ρ.trace = ((∑ j, hρ.eigenvalues j : ℝ) : ℂ) := by
-  rw [hρ.trace_eq_sum_eigenvalues]
-  push_cast
-  rfl
-
-lemma transition_self (hρ : ρ.IsHermitian) (j k : n) :
-    transition hρ hρ j k = if j = k then 1 else 0 := by
-  rw [transition, Unitary.star_mul_self_of_mem hρ.eigenvectorUnitary.2]
-  rcases eq_or_ne j k with h | h
-  · subst h; simp
-  · simp [Matrix.one_apply_ne h, h]
-
-lemma trace_mul_logm_self (hρ : ρ.IsHermitian) :
-    (ρ * logm ρ).trace = ((∑ j, hρ.eigenvalues j * Real.log (hρ.eigenvalues j) : ℝ) : ℂ) := by
-  rw [trace_mul_logm hρ hρ]
-  norm_cast
-  refine Finset.sum_congr rfl fun j _ => ?_
-  simp [transition_self hρ, Finset.sum_ite_eq]
-
-/-- The relative entropy written out in terms of eigenvalues and eigenbasis overlaps. -/
-lemma relEntropy_eq_sum (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) :
-    relEntropy ρ σ = ∑ j, ∑ k, transition hρ hσ j k *
-      (hρ.eigenvalues j * Real.log (hρ.eigenvalues j) -
-        hρ.eigenvalues j * Real.log (hσ.eigenvalues k)) := by
-  have hsplit : (ρ * (logm ρ - logm σ)).trace = (ρ * logm ρ).trace - (ρ * logm σ).trace := by
-    rw [mul_sub, Matrix.trace_sub]
-  rw [relEntropy, hsplit, trace_mul_logm_self hρ, trace_mul_logm hρ hσ]
-  rw [← Complex.ofReal_sub, Complex.ofReal_re]
-  rw [← Finset.sum_sub_distrib]
-  refine Finset.sum_congr rfl fun j _ => ?_
-  have h1 : ∑ k, transition hρ hσ j k * (hρ.eigenvalues j * Real.log (hρ.eigenvalues j) -
-        hρ.eigenvalues j * Real.log (hσ.eigenvalues k))
-      = (∑ k, transition hρ hσ j k) * (hρ.eigenvalues j * Real.log (hρ.eigenvalues j))
-        - ∑ k, hρ.eigenvalues j * Real.log (hσ.eigenvalues k) * transition hρ hσ j k := by
-    rw [Finset.sum_mul, ← Finset.sum_sub_distrib]
-    exact Finset.sum_congr rfl fun k _ => by ring
-  rw [h1, sum_transition_right hρ hσ, one_mul]
-
-/-- Klein's inequality: `D(ρ‖σ) ≥ Tr ρ - Tr σ` for positive definite `ρ`, `σ`. -/
-theorem relEntropy_ge_trace_sub (hρ : ρ.PosDef) (hσ : σ.PosDef) :
-    ρ.trace.re - σ.trace.re ≤ relEntropy ρ σ := by
-  have hρh := hρ.isHermitian
-  have hσh := hσ.isHermitian
-  have hl : ∀ j, 0 < hρh.eigenvalues j := fun j => hρ.eigenvalues_pos j
-  have hm : ∀ k, 0 < hσh.eigenvalues k := fun k => hσ.eigenvalues_pos k
-  rw [relEntropy_eq_sum hρh hσh]
-  have key : ∀ j k, transition hρh hσh j k * (hρh.eigenvalues j - hσh.eigenvalues k)
-      ≤ transition hρh hσh j k * (hρh.eigenvalues j * Real.log (hρh.eigenvalues j) -
-          hρh.eigenvalues j * Real.log (hσh.eigenvalues k)) := by
-    intro j k
-    refine mul_le_mul_of_nonneg_left ?_ (transition_nonneg hρh hσh j k)
-    have hlog := Real.log_le_sub_one_of_pos (div_pos (hm k) (hl j))
-    rw [Real.log_div (hm k).ne' (hl j).ne'] at hlog
-    have h2 := mul_le_mul_of_nonneg_left hlog (le_of_lt (hl j))
-    have h3 : hρh.eigenvalues j * (hσh.eigenvalues k / hρh.eigenvalues j - 1)
-        = hσh.eigenvalues k - hρh.eigenvalues j := by
-      have hne : hρh.eigenvalues j ≠ 0 := (hl j).ne'
-      field_simp
-    have h4 : hρh.eigenvalues j *
-          (Real.log (hσh.eigenvalues k) - Real.log (hρh.eigenvalues j))
-        = hρh.eigenvalues j * Real.log (hσh.eigenvalues k)
-          - hρh.eigenvalues j * Real.log (hρh.eigenvalues j) := by ring
-    linarith
-  calc ρ.trace.re - σ.trace.re
-      = ∑ j, ∑ k, transition hρh hσh j k * (hρh.eigenvalues j - hσh.eigenvalues k) := by
-        have e1 : ∑ j, ∑ k, transition hρh hσh j k * hρh.eigenvalues j
-            = ∑ j, hρh.eigenvalues j := by
-          refine Finset.sum_congr rfl fun j _ => ?_
-          rw [← Finset.sum_mul, sum_transition_right hρh hσh, one_mul]
-        have e2 : ∑ j, ∑ k, transition hρh hσh j k * hσh.eigenvalues k
-            = ∑ k, hσh.eigenvalues k := by
-          rw [Finset.sum_comm]
-          refine Finset.sum_congr rfl fun k _ => ?_
-          rw [← Finset.sum_mul, sum_transition_left hρh hσh, one_mul]
-        rw [trace_eq_sum_eigenvalues hρh, trace_eq_sum_eigenvalues hσh, Complex.ofReal_re,
-          Complex.ofReal_re, ← e1, ← e2, ← Finset.sum_sub_distrib]
-        refine Finset.sum_congr rfl fun j _ => ?_
-        rw [← Finset.sum_sub_distrib]
-        refine Finset.sum_congr rfl fun k _ => ?_
-        ring
-    _ ≤ _ := Finset.sum_le_sum fun j _ => Finset.sum_le_sum fun k _ => key j k
-
-/-- Klein's inequality: the relative entropy of two states with the same trace is
-nonnegative. -/
-theorem relEntropy_nonneg (hρ : ρ.PosDef) (hσ : σ.PosDef) (h : ρ.trace = σ.trace) :
-    0 ≤ relEntropy ρ σ := by
-  have := relEntropy_ge_trace_sub hρ hσ
-  rw [h] at this
-  simpa using this
-
-end Klein
-
-section Dephasing
-
-variable {ρ σ : Matrix n n ℂ}
-
-lemma dephase_isDiag (ρ : Matrix n n ℂ) : (dephase ρ).IsDiag := Matrix.isDiag_diagonal _
-
-lemma dephase_posDef (hρ : ρ.PosDef) : (dephase ρ).PosDef :=
-  Matrix.posDef_diagonal_iff.mpr fun _ => hρ.diag_pos
-
-lemma trace_dephase (ρ : Matrix n n ℂ) : (dephase ρ).trace = ρ.trace := by
-  simp [dephase, Matrix.trace, Matrix.diag_apply]
-
-lemma dephase_of_isDiag (hσ : σ.IsDiag) : dephase σ = σ := by
-  ext i j
-  rcases eq_or_ne i j with h | h
-  · subst h; simp [dephase]
-  · simp [dephase, Matrix.diagonal_apply_ne _ h, hσ h]
-
-/-- A matrix commuting with every diagonal matrix is itself diagonal. -/
-lemma isDiag_of_commute_diagonal {M : Matrix n n ℂ}
-    (h : ∀ d : n → ℂ, Commute M (diagonal d)) : M.IsDiag := by
-  intro i j hij
-  have := congrArg (fun N => N i j) (h (Pi.single j 1))
-  simpa [Matrix.mul_apply, Matrix.diagonal_apply, Pi.single_apply, hij, Ne.symm hij] using this
-
-/-- The logarithm of a diagonal positive definite matrix is diagonal. -/
-lemma logm_isDiag (hd : σ.IsDiag) : (logm σ).IsDiag := by
-  refine isDiag_of_commute_diagonal fun d => ?_
-  have hcomm : Commute σ (diagonal d) := by
-    have hσ' : σ = diagonal (fun i => σ i i) := (dephase_of_isDiag hd).symm
-    rw [Commute, SemiconjBy, hσ', Matrix.diagonal_mul_diagonal, Matrix.diagonal_mul_diagonal]
-    exact congrArg _ (funext fun i => mul_comm _ _)
-  exact (hcomm.cfc_real Real.log).symm.symm
-
-/-- Only the diagonal of `ρ` matters when tracing against a diagonal matrix. -/
-lemma trace_mul_of_isDiag (ρ X : Matrix n n ℂ) (hX : X.IsDiag) :
-    (ρ * X).trace = (dephase ρ * X).trace := by
-  simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, dephase, Matrix.diagonal_apply]
-  refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
-  rcases eq_or_ne i j with h | h
-  · subst h; simp
-  · rw [hX (Ne.symm h)]
-    simp [h]
-
-lemma relEntropy_eq_sub (ρ σ : Matrix n n ℂ) :
-    relEntropy ρ σ = (ρ * logm ρ).trace.re - (ρ * logm σ).trace.re := by
-  rw [relEntropy, mul_sub, Matrix.trace_sub, Complex.sub_re]
-
-/-- The Pythagorean identity: for a diagonal reference state `σ`, the relative entropy
-splits as the sum of the entropy lost by dephasing and the relative entropy of the
-dephased state. -/
-theorem relEntropy_pythagoras (hd : σ.IsDiag) :
-    relEntropy ρ σ = relEntropy ρ (dephase ρ) + relEntropy (dephase ρ) σ := by
-  have h1 : (ρ * logm (dephase ρ)).trace = (dephase ρ * logm (dephase ρ)).trace :=
-    trace_mul_of_isDiag _ _ (logm_isDiag (dephase_isDiag ρ))
-  have h2 : (ρ * logm σ).trace = (dephase ρ * logm σ).trace :=
-    trace_mul_of_isDiag _ _ (logm_isDiag hd)
-  rw [relEntropy_eq_sub, relEntropy_eq_sub, relEntropy_eq_sub, h1, h2]
-  ring
-
-end Dephasing
-
-/-- **Data-processing inequality** for the dephasing channel `dephase` (the von Neumann
-measurement channel in the standard basis) and a reference state `σ` that is invariant
-under it (i.e. is diagonal):
-
-`D(Φ ρ ‖ Φ σ) ≤ D(ρ ‖ σ)`.
--/
-theorem data_processing_dephase {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hd : σ.IsDiag) :
-    relEntropy (dephase ρ) (dephase σ) ≤ relEntropy ρ σ := by
-  rw [dephase_of_isDiag hd, relEntropy_pythagoras (ρ := ρ) hd]
-  have h0 : 0 ≤ relEntropy ρ (dephase ρ) :=
-    relEntropy_nonneg hρ (dephase_posDef hρ) (trace_dephase ρ).symm
-  linarith
-
-section Measurement
-
-variable {ρ σ : Matrix n n ℂ}
-
-/-- Conjugation by a unitary commutes with the matrix logarithm. -/
-lemma logm_conj (u : unitary (Matrix n n ℂ)) (A : Matrix n n ℂ) (hA : A.IsHermitian) :
-    logm ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ))
-      = (u : Matrix n n ℂ) * logm A * star (u : Matrix n n ℂ) := by
-  have hcont : ContinuousOn Real.log (spectrum ℝ A) := by
-    rw [continuousOn_iff_continuous_restrict]; fun_prop
-  have hcoe : ⇑(Unitary.conjStarAlgAut ℂ (Matrix n n ℂ) u)
-      = fun X => (u : Matrix n n ℂ) * X * star (u : Matrix n n ℂ) :=
-    funext fun X => Unitary.conjStarAlgAut_apply u X
-  have hphi : Continuous (Unitary.conjStarAlgAut ℂ (Matrix n n ℂ) u) := by
-    rw [hcoe]
-    exact (continuous_const.mul continuous_id).mul continuous_const
-  have hAh : IsSelfAdjoint A := hA
-  have hAh' : IsSelfAdjoint ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ)) := by
-    show star _ = _
-    rw [Matrix.star_mul, Matrix.star_mul, star_star, hAh.star_eq, mul_assoc]
-  unfold logm
-  rw [← Unitary.conjStarAlgAut_apply (S := ℂ) u A,
-    ← Unitary.conjStarAlgAut_apply (S := ℂ) u (cfc Real.log A)]
-  refine (StarAlgHomClass.map_cfc (Unitary.conjStarAlgAut ℂ (Matrix n n ℂ) u) Real.log A hcont
-    hphi hAh ?_).symm
-  rwa [Unitary.conjStarAlgAut_apply]
-
-lemma mul_conj_mul_conj (u : unitary (Matrix n n ℂ)) (A B : Matrix n n ℂ) :
-    ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ)) *
-        ((u : Matrix n n ℂ) * B * star (u : Matrix n n ℂ))
-      = (u : Matrix n n ℂ) * (A * B) * star (u : Matrix n n ℂ) := by
-  have h : star (u : Matrix n n ℂ) * (u : Matrix n n ℂ) = 1 := Unitary.star_mul_self_of_mem u.2
-  calc ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ)) *
-        ((u : Matrix n n ℂ) * B * star (u : Matrix n n ℂ))
-      = (u : Matrix n n ℂ) * A * (star (u : Matrix n n ℂ) * (u : Matrix n n ℂ)) * B *
-          star (u : Matrix n n ℂ) := by
-        simp only [mul_assoc]
-    _ = (u : Matrix n n ℂ) * (A * B) * star (u : Matrix n n ℂ) := by
-        rw [h]; simp only [mul_one, mul_assoc]
-
-lemma trace_conj (u : unitary (Matrix n n ℂ)) (A : Matrix n n ℂ) :
-    ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ)).trace = A.trace := by
-  have h : star (u : Matrix n n ℂ) * (u : Matrix n n ℂ) = 1 := Unitary.star_mul_self_of_mem u.2
-  rw [Matrix.trace_mul_comm]
-  rw [show star (u : Matrix n n ℂ) * ((u : Matrix n n ℂ) * A) =
-    (star (u : Matrix n n ℂ) * (u : Matrix n n ℂ)) * A by simp only [mul_assoc], h, one_mul]
-
-/-- The relative entropy is invariant under conjugation by a unitary. -/
-lemma relEntropy_conj (u : unitary (Matrix n n ℂ)) (hA : ρ.IsHermitian) (hB : σ.IsHermitian) :
-    relEntropy ((u : Matrix n n ℂ) * ρ * star (u : Matrix n n ℂ))
-        ((u : Matrix n n ℂ) * σ * star (u : Matrix n n ℂ)) = relEntropy ρ σ := by
-  rw [relEntropy, relEntropy, logm_conj u ρ hA, logm_conj u σ hB, ← Matrix.sub_mul,
-    ← Matrix.mul_sub, mul_conj_mul_conj, trace_conj]
-
-/-- The von Neumann measurement channel associated with the orthonormal basis given by the
-columns of the unitary `u`: it measures in that basis and records the outcome, i.e. it kills
-all coherences between distinct basis vectors. -/
-noncomputable def measurement (u : unitary (Matrix n n ℂ)) (ρ : Matrix n n ℂ) :
-    Matrix n n ℂ :=
-  (u : Matrix n n ℂ) * dephase (star (u : Matrix n n ℂ) * ρ * (u : Matrix n n ℂ)) *
-    star (u : Matrix n n ℂ)
-
-lemma conj_star_conj (u : unitary (Matrix n n ℂ)) (A : Matrix n n ℂ) :
-    (u : Matrix n n ℂ) * (star (u : Matrix n n ℂ) * A * (u : Matrix n n ℂ)) *
-      star (u : Matrix n n ℂ) = A := by
-  have h : (u : Matrix n n ℂ) * star (u : Matrix n n ℂ) = 1 := Unitary.mul_star_self_of_mem u.2
-  calc (u : Matrix n n ℂ) * (star (u : Matrix n n ℂ) * A * (u : Matrix n n ℂ)) *
-        star (u : Matrix n n ℂ)
-      = ((u : Matrix n n ℂ) * star (u : Matrix n n ℂ)) * A *
-          ((u : Matrix n n ℂ) * star (u : Matrix n n ℂ)) := by simp only [mul_assoc]
-    _ = A := by rw [h, one_mul, mul_one]
-
-/-- The relative entropy is invariant under conjugation by the adjoint of a unitary. -/
-lemma relEntropy_conj_star (u : unitary (Matrix n n ℂ)) (hA : ρ.IsHermitian)
-    (hB : σ.IsHermitian) :
-    relEntropy (star (u : Matrix n n ℂ) * ρ * (u : Matrix n n ℂ))
-        (star (u : Matrix n n ℂ) * σ * (u : Matrix n n ℂ)) = relEntropy ρ σ := by
-  have h := relEntropy_conj (star u) hA hB
-  simpa only [Unitary.coe_star, star_star] using h
-
-lemma star_conj_conj (u : unitary (Matrix n n ℂ)) (A : Matrix n n ℂ) :
-    star (u : Matrix n n ℂ) * ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ)) *
-      (u : Matrix n n ℂ) = A := by
-  have h : star (u : Matrix n n ℂ) * (u : Matrix n n ℂ) = 1 := Unitary.star_mul_self_of_mem u.2
-  calc star (u : Matrix n n ℂ) * ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ)) *
-        (u : Matrix n n ℂ)
-      = (star (u : Matrix n n ℂ) * (u : Matrix n n ℂ)) * A *
-          (star (u : Matrix n n ℂ) * (u : Matrix n n ℂ)) := by simp only [mul_assoc]
-    _ = A := by rw [h, one_mul, mul_one]
-
-lemma posDef_conj (u : unitary (Matrix n n ℂ)) (hρ : ρ.PosDef) :
-    (star (u : Matrix n n ℂ) * ρ * (u : Matrix n n ℂ)).PosDef := by
-  have hu : IsUnit (u : Matrix n n ℂ) := (Unitary.toUnits u).isUnit
-  have := hρ.conjTranspose_mul_mul_same (B := (u : Matrix n n ℂ))
-    (Matrix.mulVec_injective_of_isUnit hu)
-  simpa [Matrix.star_eq_conjTranspose] using this
-
-end Measurement
-
-/-- **Data-processing inequality** for the quantum (Umegaki) relative entropy
-`D(ρ‖σ) = Tr[ρ (log ρ - log σ)]`, for a von Neumann measurement channel `Φ = measurement u`
-(measurement in the orthonormal basis given by the columns of the unitary `u`, recording the
-outcome) and a reference state `σ` left invariant by the channel:
-
-`D(Φ ρ ‖ Φ σ) ≤ D(ρ ‖ σ)`.
-
-The two states are assumed to be positive definite (faithful states); note that the states are
-not required to have unit trace, only the invariance `Φ σ = σ` of the reference state is used.
--/
-theorem data_processing {ρ σ : Matrix n n ℂ} (u : unitary (Matrix n n ℂ)) (hρ : ρ.PosDef)
-    (hσ : σ.PosDef) (hinv : measurement u σ = σ) :
-    relEntropy (measurement u ρ) (measurement u σ) ≤ relEntropy ρ σ := by
-  have hρ'pos : (star (u : Matrix n n ℂ) * ρ * (u : Matrix n n ℂ)).PosDef := posDef_conj u hρ
-  have hσ'pos : (star (u : Matrix n n ℂ) * σ * (u : Matrix n n ℂ)).PosDef := posDef_conj u hσ
-  -- the reference state is diagonal in the measurement basis
-  have hfix : dephase (star (u : Matrix n n ℂ) * σ * (u : Matrix n n ℂ))
-      = star (u : Matrix n n ℂ) * σ * (u : Matrix n n ℂ) := by
-    conv_rhs => rw [← hinv, measurement, star_conj_conj]
-  have hd : (star (u : Matrix n n ℂ) * σ * (u : Matrix n n ℂ)).IsDiag := by
-    rw [← hfix]; exact dephase_isDiag _
-  -- transport everything to the measurement basis
-  have e1 : relEntropy (measurement u ρ) (measurement u σ)
-      = relEntropy (dephase (star (u : Matrix n n ℂ) * ρ * (u : Matrix n n ℂ)))
-          (dephase (star (u : Matrix n n ℂ) * σ * (u : Matrix n n ℂ))) :=
-    relEntropy_conj u (dephase_posDef hρ'pos).isHermitian (dephase_posDef hσ'pos).isHermitian
-  have e2 : relEntropy (star (u : Matrix n n ℂ) * ρ * (u : Matrix n n ℂ))
-      (star (u : Matrix n n ℂ) * σ * (u : Matrix n n ℂ)) = relEntropy ρ σ :=
-    relEntropy_conj_star u hρ.isHermitian hσ.isHermitian
-  rw [e1, ← e2]
-  exact data_processing_dephase hρ'pos hd
-
-end QI
 

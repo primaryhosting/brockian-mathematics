@@ -31,17 +31,13 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-
 namespace Algebra
 
-/-- **Fundamental theorem of algebra**: every complex polynomial of positive degree
-has a root. Proved via Mathlib's `Complex.exists_root`. -/
+/-- **Fundamental theorem of algebra**: every non-constant complex polynomial has a root. -/
 
-theorem fundamental_theorem_of_algebra
-    (p : Polynomial Complex) (hp : 0 < p.degree) :
+theorem fundamental_theorem_of_algebra (p : Polynomial Complex) (hp : 0 < p.degree) :
     ∃ z : Complex, p.eval z = 0 :=
   Complex.exists_root hp
 
 end Algebra
-
 

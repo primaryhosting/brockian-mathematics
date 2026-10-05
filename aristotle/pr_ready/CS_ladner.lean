@@ -7,396 +7,357 @@ Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
 
-/-!
-## Ladner's theorem
 
-If `P ≠ NP`, then there is an `NP`-intermediate language: a language in `NP` that is
-neither in `P` nor `NP`-complete.
-
-Mathlib has no development of computational complexity, so the ambient complexity-theoretic
-setting is packaged into the structure `CS.Model` below: it fixes the classes `P` and `NP`
-(as sets of languages, a language being a set of natural numbers viewed as encoded strings),
-a length function, an effective enumeration `dec` of the polynomial-time decision procedures
-and an effective enumeration `red` of the polynomial-time functions (used to define
-polynomial-time many-one reducibility), together with the standard closure properties of
-these classes.
-
-Everything in the proof of `CS.ladner` — the delayed-diagonalization construction
-(`CS.Model.stage`, defined by well-founded recursion) and all its properties — is carried out
-from these data.  The one remaining machine-model fact is supplied as the explicit hypothesis
-`hstage` of `CS.ladner`: the "hole" set `{x | Even (stage L (len x))}` determined by the stage
-function lies in `P`.  This is the routine clock/bookkeeping part of Ladner's argument: the
-witness search performed at stage `n` only inspects inputs of length at most `log₂ log₂ n`
-(see `CS.Model.Wit`), so the values `stage L 0, …, stage L n` can be tabulated in time
-polynomial in `n`.
+/-
+This development is deliberately self-contained: the required header comment
+above is a module docstring, and Lean only accepts a module docstring at the
+very beginning of a file when the file has no `import` commands.  Everything
+below therefore uses only the Lean 4 core library.
 -/
 
 namespace CS
 
-open scoped Classical
+open Classical
 
-/-- A language is a set of (encoded) inputs. -/
-abbrev Lang : Type := Set ℕ
+/-- A language: a set of (encoded) strings, i.e. a predicate on `Nat`. -/
+abbrev Lang := Nat → Prop
 
-/-- The complexity-theoretic data the argument runs on: the classes `P` and `NP`, a length
-function on encoded inputs, effective enumerations of polynomial-time deciders and of
-polynomial-time functions, and the standard closure properties. -/
-structure Model where
-  /-- The class `P`. -/
-  P : Set Lang
-  /-- The class `NP`. -/
-  NP : Set Lang
-  /-- Length of an encoded input. -/
-  len : ℕ → ℕ
-  /-- `dec i` is the decision procedure of the `i`-th polynomial-time machine. -/
-  dec : ℕ → ℕ → Bool
-  /-- `red i` is the `i`-th polynomial-time computable function. -/
-  red : ℕ → ℕ → ℕ
-  /-- There are only finitely many inputs of any given length. -/
-  len_finite : ∀ t : ℕ, {x : ℕ | len x ≤ t}.Finite
-  /-- `P` is exactly the class of languages decided by the enumerated machines. -/
-  P_eq : ∀ A : Lang, A ∈ P ↔ ∃ i, ∀ x, x ∈ A ↔ dec i x = true
-  /-- `P ⊆ NP`. -/
-  P_subset_NP : P ⊆ NP
-  /-- `NP` is closed under intersection with languages in `P`. -/
-  NP_inter_P : ∀ A ∈ NP, ∀ B ∈ P, A ∩ B ∈ NP
-  /-- Finite languages are in `P`. -/
-  P_of_finite : ∀ A : Lang, A.Finite → A ∈ P
-  /-- `P` is closed under finite variation. -/
-  P_of_finite_symmDiff : ∀ A ∈ P, ∀ B : Lang, {x | ¬ (x ∈ A ↔ x ∈ B)}.Finite → B ∈ P
-  /-- `P` is closed downwards under polynomial-time many-one reductions. -/
-  P_red_closed : ∀ A B : Lang, (∃ i, ∀ x, x ∈ A ↔ red i x ∈ B) → B ∈ P → A ∈ P
-  /-- Polynomial-time functions have polynomially bounded output length. -/
-  red_poly : ∀ i, ∃ c, ∀ x, len (red i x) ≤ c * (len x + 1) ^ c
+/-! ## Classical helpers -/
 
-namespace Model
+theorem not_forall_exists {α : Sort _} {p : α → Prop} (h : ¬ ∀ a, p a) : ∃ a, ¬ p a :=
+  Classical.byContradiction fun hh =>
+    h fun a => Classical.byContradiction fun hp => hh ⟨a, hp⟩
 
-variable (M : Model)
-
-/-- Polynomial-time many-one reducibility `A ≤ₚ B`. -/
-def Red (A B : Lang) : Prop := ∃ i, ∀ x, x ∈ A ↔ M.red i x ∈ B
-
-/-- `A` is `NP`-complete: it lies in `NP` and every `NP` language reduces to it. -/
-def NPComplete (A : Lang) : Prop := A ∈ M.NP ∧ ∀ B ∈ M.NP, M.Red B A
-
-/-- `A` is `NP`-intermediate: in `NP`, not in `P`, and not `NP`-complete. -/
-def NPIntermediate (A : Lang) : Prop := A ∈ M.NP ∧ A ∉ M.P ∧ ¬ M.NPComplete A
-
-end Model
-
-/-- `llog n = log₂ (log₂ n)`. -/
-def llog (n : ℕ) : ℕ := Nat.log 2 (Nat.log 2 n)
-
-lemma llog_le_self (n : ℕ) : llog n ≤ n :=
-  le_trans (Nat.log_le_self 2 _) (Nat.log_le_self 2 n)
-
-lemma llog_mono : Monotone llog := fun _ _ h =>
-  Nat.log_mono_right (Nat.log_mono_right h)
-
-lemma llog_unbounded (t : ℕ) : ∃ n, t ≤ llog n := by
-  refine ⟨2 ^ 2 ^ t, ?_⟩
-  have h1 : Nat.log 2 (2 ^ 2 ^ t) = 2 ^ t := Nat.log_pow (by norm_num) _
-  simp [llog, h1, Nat.log_pow]
-
-namespace Model
-
-variable (M : Model)
-
-/-- Requirement `k` is violated at the input `x`, where membership in the diagonal language
-is computed using the (partial) stage function `F`.
-
-Even requirements `k = 2 i` say that the `i`-th polynomial-time machine does not decide the
-diagonal language; odd requirements `k = 2 i + 1` say that the `i`-th polynomial-time function
-is not a reduction of `L` to the diagonal language. -/
-def Mism (L : Lang) (F : ℕ → ℕ) (k x : ℕ) : Prop :=
-  if k % 2 = 0 then
-    ¬ ((x ∈ L ∧ Even (F (M.len x))) ↔ M.dec (k / 2) x = true)
-  else
-    ¬ ((x ∈ L) ↔ (M.red (k / 2) x ∈ L ∧ Even (F (M.len (M.red (k / 2) x)))))
-
-/-- Requirement `k` has a witness found by stage `n`: the search only inspects inputs `x`
-of length at most `llog n` whose image under the relevant reduction also has length at most
-`llog n`. -/
-def Wit (L : Lang) (F : ℕ → ℕ) (k n : ℕ) : Prop :=
-  ∃ x, M.len x ≤ llog n ∧ M.len (M.red (k / 2) x) ≤ llog n ∧ M.Mism L F k x
-
-/-- The stage function of the delayed diagonalization: `stage L n` is the number of
-requirements that have been satisfied by stage `n`. -/
-noncomputable def stage (L : Lang) : ℕ → ℕ
-  | 0 => 0
-  | (n + 1) =>
-      if M.Wit L (fun m => if _h : m ≤ n then stage L m else 0) (stage L n) n then
-        stage L n + 1
-      else stage L n
-
-lemma stage_zero (L : Lang) : M.stage L 0 = 0 := by
-  simp [stage]
-
-lemma stage_succ (L : Lang) (n : ℕ) :
-    M.stage L (n + 1) =
-      if M.Wit L (fun m => if _h : m ≤ n then M.stage L m else 0) (M.stage L n) n then
-        M.stage L n + 1
-      else M.stage L n := by
-  rw [stage]
-
-lemma stage_le_succ (L : Lang) (n : ℕ) : M.stage L n ≤ M.stage L (n + 1) := by
-  rw [stage_succ]; split <;> omega
-
-lemma stage_succ_le (L : Lang) (n : ℕ) : M.stage L (n + 1) ≤ M.stage L n + 1 := by
-  rw [stage_succ]; split <;> omega
-
-lemma stage_mono (L : Lang) : Monotone (M.stage L) :=
-  monotone_nat_of_le_succ (M.stage_le_succ L)
-
-/-- The value of `Mism` only depends on the values of `F` at the lengths of `x` and of its
-image under the reduction. -/
-lemma mism_congr (L : Lang) (F G : ℕ → ℕ) (k x : ℕ)
-    (h1 : F (M.len x) = G (M.len x))
-    (h2 : F (M.len (M.red (k / 2) x)) = G (M.len (M.red (k / 2) x))) :
-    M.Mism L F k x ↔ M.Mism L G k x := by
-  unfold Mism
-  split <;> simp only [h1, h2]
-
-/-- If the stage counter increases at `n`, then requirement `stage L n` genuinely fails,
-witnessed by some input. -/
-lemma mism_of_progress (L : Lang) (n : ℕ)
-    (h : M.stage L (n + 1) = M.stage L n + 1) :
-    ∃ x, M.Mism L (M.stage L) (M.stage L n) x := by
-  rw [stage_succ] at h
-  split at h
-  · rename_i hw
-    obtain ⟨x, hx1, hx2, hx3⟩ := hw
-    refine ⟨x, ?_⟩
-    have hxn : M.len x ≤ n := le_trans hx1 (llog_le_self n)
-    have hrn : M.len (M.red (M.stage L n / 2) x) ≤ n := le_trans hx2 (llog_le_self n)
-    rw [M.mism_congr L _ (M.stage L) _ x (by simp [hxn]) (by simp [hrn])] at hx3
-    exact hx3
-  · omega
-
-/-- If the stage counter does not increase at `n`, then no short input witnesses the
-current requirement. -/
-lemma not_mism_of_no_progress (L : Lang) (n : ℕ)
-    (h : M.stage L (n + 1) = M.stage L n) :
-    ∀ x, M.len x ≤ llog n → M.len (M.red (M.stage L n / 2) x) ≤ llog n →
-      ¬ M.Mism L (M.stage L) (M.stage L n) x := by
-  intro x hx1 hx2 hmis
-  rw [stage_succ] at h
-  split at h
-  · omega
-  · rename_i hw
-    refine hw ⟨x, hx1, hx2, ?_⟩
-    have hxn : M.len x ≤ n := le_trans hx1 (llog_le_self n)
-    have hrn : M.len (M.red (M.stage L n / 2) x) ≤ n := le_trans hx2 (llog_le_self n)
-    rw [M.mism_congr L _ (M.stage L) _ x (by simp [hxn]) (by simp [hrn])]
-    exact hmis
-
-end Model
-
-/-- **Ladner's theorem.**  In the complexity-theoretic setting given by `M`, if `P ≠ NP`
-then there is an `NP`-intermediate language: a language in `NP` which is neither in `P`
-nor `NP`-complete. -/
-theorem ladner (M : Model)
-    (hstage : ∀ L : Lang, L ∈ M.NP → {x | Even (M.stage L (M.len x))} ∈ M.P)
-    (hPNP : M.P ≠ M.NP) :
-    ∃ A : Lang, M.NPIntermediate A := by
-  -- Pick a language in `NP \ P`.
-  obtain ⟨L, hLNP, hLP⟩ : ∃ L, L ∈ M.NP ∧ L ∉ M.P := by
-    by_contra hcon
-    push_neg at hcon
-    exact hPNP (Set.Subset.antisymm M.P_subset_NP hcon)
-  -- Step 1: the stage function is unbounded.
-  have hunb : ∀ B : ℕ, ∃ n, B < M.stage L n := by
-    by_contra hcon
-    push_neg at hcon
-    obtain ⟨B, hB⟩ := hcon
-    -- the stage function is eventually constant, with value `k`
-    have hbdd : BddAbove (Set.range (M.stage L)) := ⟨B, by rintro _ ⟨n, rfl⟩; exact hB n⟩
-    have hne : (Set.range (M.stage L)).Nonempty := ⟨M.stage L 0, 0, rfl⟩
-    obtain ⟨N, hN⟩ : sSup (Set.range (M.stage L)) ∈ Set.range (M.stage L) :=
-      Nat.sSup_mem hne hbdd
-    obtain ⟨k, hk⟩ : ∃ k, M.stage L N = k := ⟨_, rfl⟩
-    have hconst : ∀ n, N ≤ n → M.stage L n = k := by
-      intro n hn
-      have h1 : M.stage L N ≤ M.stage L n := M.stage_mono L hn
-      have h2 : M.stage L n ≤ sSup (Set.range (M.stage L)) := le_csSup hbdd ⟨n, rfl⟩
-      omega
-    -- hence requirement `k` is never satisfied
-    have hnomis : ∀ x, ¬ M.Mism L (M.stage L) k x := by
-      intro x
-      obtain ⟨n0, hn0⟩ := llog_unbounded (max (M.len x) (M.len (M.red (k / 2) x)))
-      obtain ⟨n, hnmax⟩ : ∃ n, n = max n0 N := ⟨_, rfl⟩
-      have hlog : max (M.len x) (M.len (M.red (k / 2) x)) ≤ llog n := by
-        rw [hnmax]; exact le_trans hn0 (llog_mono (le_max_left n0 N))
-      have hNn : N ≤ n := by rw [hnmax]; exact le_max_right n0 N
-      have hfn : M.stage L n = k := hconst n hNn
-      have hstep : M.stage L (n + 1) = M.stage L n := by
-        rw [hconst (n + 1) (by omega), hfn]
-      have h2 := M.not_mism_of_no_progress L n hstep x
-      rw [hfn] at h2
-      exact h2 (le_trans (le_max_left _ _) hlog) (le_trans (le_max_right _ _) hlog)
-    -- both parities lead to `L ∈ P`, a contradiction
-    rcases Nat.even_or_odd k with hpar | hpar
-    · -- `k` even: the diagonal language is in `P` and differs from `L` on finitely many inputs
-      have hpar' : k % 2 = 0 := Nat.even_iff.mp hpar
-      have hAP : {x | x ∈ L ∧ Even (M.stage L (M.len x))} ∈ M.P := by
-        rw [M.P_eq]
-        refine ⟨k / 2, fun x => ?_⟩
-        have hx := hnomis x
-        unfold Model.Mism at hx
-        rw [if_pos hpar'] at hx
-        simpa using not_not.mp hx
-      refine hLP (M.P_of_finite_symmDiff _ hAP L ?_)
-      refine Set.Finite.subset (M.len_finite N) ?_
-      intro x hx
-      simp only [Set.mem_setOf_eq] at hx ⊢
-      by_contra hlen
-      push_neg at hlen
-      have hfx : M.stage L (M.len x) = k := hconst _ (le_of_lt hlen)
-      exact hx (by simp [hfx, Nat.even_iff.mpr hpar'])
-    · -- `k` odd: the diagonal language is finite, hence in `P`, and `L` reduces to it
-      have hpar' : ¬ (k % 2 = 0) := by
-        have := Nat.odd_iff.mp hpar; omega
-      have hred : ∀ x, x ∈ L ↔ M.red (k / 2) x ∈ {x | x ∈ L ∧ Even (M.stage L (M.len x))} := by
-        intro x
-        have hx := hnomis x
-        unfold Model.Mism at hx
-        rw [if_neg hpar'] at hx
-        simpa using not_not.mp hx
-      have hAfin : {x | x ∈ L ∧ Even (M.stage L (M.len x))}.Finite := by
-        refine Set.Finite.subset (M.len_finite N) ?_
-        intro x hx
-        simp only [Set.mem_setOf_eq]
-        by_contra hlen
-        push_neg at hlen
-        have h1 : M.stage L (M.len x) = k := hconst _ (le_of_lt hlen)
-        have h2 : Even (M.stage L (M.len x)) := hx.2
-        rw [h1] at h2
-        have := Nat.even_iff.mp h2
+/-- A `Nat`-valued function bounded by `N` attains a maximum value. -/
+theorem exists_max : ∀ (N : Nat) (g : Nat → Nat), (∀ n, g n ≤ N) → ∃ n0, ∀ n, g n ≤ g n0 := by
+  intro N
+  induction N with
+  | zero =>
+      intro g h
+      exact ⟨0, fun n => by have h1 := h n; have h2 := h 0; omega⟩
+  | succ N ih =>
+      intro g h
+      by_cases hc : ∀ n, g n ≤ N
+      · exact ih g hc
+      · obtain ⟨m, hm⟩ := not_forall_exists hc
+        refine ⟨m, fun n => ?_⟩
+        have h1 := h n
         omega
-      exact hLP (M.P_red_closed L _ ⟨k / 2, hred⟩ (M.P_of_finite _ hAfin))
-  -- Step 2: every requirement is eventually satisfied.
-  have hprog : ∀ k : ℕ, ∃ n, M.stage L n = k ∧ M.stage L (n + 1) = M.stage L n + 1 := by
-    intro k
-    have hex : ∃ m, k + 1 ≤ M.stage L m := by
-      obtain ⟨m, hm⟩ := hunb k; exact ⟨m, hm⟩
-    have hmspec : k + 1 ≤ M.stage L (Nat.find hex) := Nat.find_spec hex
-    have hm0 : Nat.find hex ≠ 0 := by
+
+/-! ## Ladner's construction
+
+Fix an enumeration `dec` of the polynomial-time deciders, an enumeration `red`
+of the polynomial-time computable functions, a language `K`, and a *clock*
+`clock : Nat → Nat` (in the intended instantiation, `clock n` is roughly
+`log n`; the two requirements on it are that `clock n ≤ n`, which keeps the
+construction well-founded and makes it polynomial-time computable, and that it
+is nondecreasing and unbounded).
+
+The gap function `gapF` is built stage by stage: at input `n` the current stage
+is `gapF n`.  An even stage `2 * i` is devoted to diagonalising against the
+`i`-th polynomial-time decider, and an odd stage `2 * i + 1` to killing the
+`i`-th candidate reduction of `K` to the constructed language; the stage
+advances as soon as a witness of failure is spotted inside the clock bound. -/
+
+section Construction
+
+variable (dec : Nat → Nat → Bool) (red : Nat → Nat → Nat) (K : Lang) (clock : Nat → Nat)
+
+/-- The "defeat" condition of Ladner's blow-hole construction, evaluated at
+input `n` for the stage `g n`.  All queries made by the condition are at
+arguments `≤ clock n ≤ n`, so it only depends on the values of `g` on
+`[0, n]`. -/
+def defeated (g : Nat → Nat) (n : Nat) : Prop :=
+  (g n % 2 = 0 ∧ ∃ z, z ≤ clock n ∧ ¬ (dec (g n / 2) z = true ↔ (K z ∧ g z % 2 = 0))) ∨
+  (g n % 2 = 1 ∧ ∃ z, z ≤ clock n ∧ red (g n / 2) z ≤ clock n ∧
+      ¬ (K z ↔ (K (red (g n / 2) z) ∧ g (red (g n / 2) z) % 2 = 0)))
+
+/-- Stage-by-stage approximation of the gap function: `fAux m` agrees with the
+gap function on all inputs `≤ m`. -/
+noncomputable def fAux : Nat → Nat → Nat
+  | 0 => fun _ => 0
+  | (n + 1) => fun m =>
+      if m ≤ n then fAux n m
+      else fAux n n + (if defeated dec red K clock (fAux n) n then 1 else 0)
+
+/-- The gap function of Ladner's construction. -/
+noncomputable def gapF (n : Nat) : Nat := fAux dec red K clock n n
+
+/-- The language obtained from `K` by "blowing holes" along the gap function:
+`x` is kept exactly when the gap function is even at `x`. -/
+noncomputable def ladnerLang : Lang := fun x => K x ∧ gapF dec red K clock x % 2 = 0
+
+theorem fAux_stable :
+    ∀ (m k : Nat), k ≤ m → fAux dec red K clock m k = gapF dec red K clock k := by
+  intro m
+  induction m with
+  | zero =>
+      intro k hk
+      have : k = 0 := by omega
+      subst this
+      rfl
+  | succ n ih =>
+      intro k hk
+      by_cases hkn : k ≤ n
+      · simp only [fAux]
+        rw [if_pos hkn]
+        exact ih k hkn
+      · have : k = n + 1 := by omega
+        subst this
+        rfl
+
+theorem defeated_congr {g h : Nat → Nat} {n : Nat} (hcl : clock n ≤ n)
+    (H : ∀ k, k ≤ n → g k = h k) :
+    defeated dec red K clock g n ↔ defeated dec red K clock h n := by
+  have hn : g n = h n := H n (Nat.le_refl n)
+  unfold defeated
+  rw [hn]
+  constructor
+  · rintro (⟨he, z, hz, hw⟩ | ⟨he, z, hz, hred, hw⟩)
+    · exact Or.inl ⟨he, z, hz, by rw [H z (Nat.le_trans hz hcl)] at hw; exact hw⟩
+    · exact Or.inr ⟨he, z, hz, hred, by rw [H _ (Nat.le_trans hred hcl)] at hw; exact hw⟩
+  · rintro (⟨he, z, hz, hw⟩ | ⟨he, z, hz, hred, hw⟩)
+    · exact Or.inl ⟨he, z, hz, by rw [H z (Nat.le_trans hz hcl)]; exact hw⟩
+    · exact Or.inr ⟨he, z, hz, hred, by rw [H _ (Nat.le_trans hred hcl)]; exact hw⟩
+
+theorem gapF_zero : gapF dec red K clock 0 = 0 := rfl
+
+theorem gapF_succ (hcl : ∀ n, clock n ≤ n) (n : Nat) :
+    gapF dec red K clock (n + 1) =
+      gapF dec red K clock n +
+        (if defeated dec red K clock (gapF dec red K clock) n then 1 else 0) := by
+  have h1 : gapF dec red K clock (n + 1) = fAux dec red K clock (n + 1) (n + 1) := rfl
+  rw [h1]
+  simp only [fAux]
+  rw [if_neg (by omega : ¬ (n + 1 ≤ n))]
+  have h2 : ∀ k, k ≤ n → fAux dec red K clock n k = gapF dec red K clock k :=
+    fAux_stable dec red K clock n
+  rw [h2 n (Nat.le_refl n), defeated_congr dec red K clock (hcl n) h2]
+
+theorem gapF_le_succ (hcl : ∀ n, clock n ≤ n) (n : Nat) :
+    gapF dec red K clock n ≤ gapF dec red K clock (n + 1) := by
+  rw [gapF_succ dec red K clock hcl]
+  omega
+
+theorem gapF_succ_le (hcl : ∀ n, clock n ≤ n) (n : Nat) :
+    gapF dec red K clock (n + 1) ≤ gapF dec red K clock n + 1 := by
+  rw [gapF_succ dec red K clock hcl]
+  split <;> omega
+
+theorem gapF_mono (hcl : ∀ n, clock n ≤ n) :
+    ∀ (m n : Nat), m ≤ n → gapF dec red K clock m ≤ gapF dec red K clock n := by
+  intro m n
+  induction n with
+  | zero =>
       intro h
-      rw [h, M.stage_zero L] at hmspec
+      have : m = 0 := by omega
+      subst this
+      exact Nat.le_refl _
+  | succ k ih =>
+      intro h
+      by_cases hk : m ≤ k
+      · have h1 := ih hk
+        have h2 := gapF_le_succ dec red K clock hcl k
+        omega
+      · have : m = k + 1 := by omega
+        subst this
+        exact Nat.le_refl _
+
+/-- If the gap function ever exceeds `v`, then it passes through the value `v`,
+and at the input where it leaves the value `v` the defeat condition holds. -/
+theorem exists_defeat (hcl : ∀ n, clock n ≤ n) :
+    ∀ (m v : Nat), v + 1 ≤ gapF dec red K clock m →
+      ∃ n, gapF dec red K clock n = v ∧ defeated dec red K clock (gapF dec red K clock) n := by
+  intro m
+  induction m with
+  | zero =>
+      intro v h
+      rw [gapF_zero] at h
       omega
-    obtain ⟨n, hn⟩ : ∃ n, Nat.find hex = n + 1 := ⟨Nat.find hex - 1, by omega⟩
-    have hlt : ¬ (k + 1 ≤ M.stage L n) := Nat.find_min hex (by omega)
-    rw [hn] at hmspec
-    have hle : M.stage L (n + 1) ≤ M.stage L n + 1 := M.stage_succ_le L n
-    exact ⟨n, by omega, by omega⟩
-  have hreq : ∀ k : ℕ, ∃ x, M.Mism L (M.stage L) k x := by
-    intro k
-    obtain ⟨n, hn1, hn2⟩ := hprog k
-    have h := M.mism_of_progress L n hn2
-    rw [hn1] at h
-    exact h
-  -- Step 3: the diagonal language is `NP`-intermediate.
-  refine ⟨{x | x ∈ L ∧ Even (M.stage L (M.len x))}, ?_, ?_, ?_⟩
-  · have hinter : {x | x ∈ L ∧ Even (M.stage L (M.len x))}
-        = L ∩ {x | Even (M.stage L (M.len x))} := by ext x; simp
-    rw [hinter]
-    exact M.NP_inter_P L hLNP _ (hstage L hLNP)
-  · intro hAP
-    obtain ⟨i, hi⟩ := (M.P_eq _).mp hAP
-    obtain ⟨x, hx⟩ := hreq (2 * i)
-    unfold Model.Mism at hx
-    rw [if_pos (by omega : (2 * i) % 2 = 0), (by omega : 2 * i / 2 = i)] at hx
-    exact hx (by simpa using hi x)
-  · rintro ⟨-, hc⟩
-    obtain ⟨i, hi⟩ := hc L hLNP
-    obtain ⟨x, hx⟩ := hreq (2 * i + 1)
-    unfold Model.Mism at hx
-    rw [if_neg (by omega : ¬ ((2 * i + 1) % 2 = 0)), (by omega : (2 * i + 1) / 2 = i)] at hx
-    exact hx (by simpa using hi x)
+  | succ k ih =>
+      intro v h
+      by_cases hk : v + 1 ≤ gapF dec red K clock k
+      · exact ih v hk
+      · have hstep := gapF_succ_le dec red K clock hcl k
+        have heq1 : gapF dec red K clock (k + 1) = v + 1 := by omega
+        have heq0 : gapF dec red K clock k = v := by omega
+        refine ⟨k, heq0, ?_⟩
+        by_cases hd : defeated dec red K clock (gapF dec red K clock) k
+        · exact hd
+        · rw [gapF_succ dec red K clock hcl, if_neg hd] at heq1
+          omega
 
-/-!
-## Consistency of the axioms
+end Construction
 
-The axioms bundled in `CS.Model` are consistent, and are consistent with `P ≠ NP`: the toy
-instance below (where `P` consists of the finite languages and `NP` of the finite languages
-together with the full language) satisfies all of them, and separates its two classes.
-This rules out the possibility that `CS.ladner` is vacuously true because of contradictory
-assumptions on the model.  (Of course the toy instance does not satisfy the hypothesis
-`hstage` of `CS.ladner` for any interesting reason; it is only a consistency witness.)
--/
+/-- **Ladner's theorem: if `P ≠ NP` then `NP`-intermediate languages exist.**
 
-/-- A toy instance of `Model`: `P` is the class of finite languages, and `NP` is the class of
-finite languages together with the full language. -/
-def toyModel : Model where
-  P := {A : Lang | A.Finite}
-  NP := {A : Lang | A.Finite ∨ A = Set.univ}
-  len := id
-  dec := fun i x => decide (x ∈ (Denumerable.ofNat (Finset ℕ) i))
-  red := fun _ x => x
-  len_finite := fun t => Set.finite_Iic t
-  P_eq := by
-    intro A
-    constructor
-    · intro hA
-      refine ⟨Denumerable.eqv (Finset ℕ) hA.toFinset, fun x => ?_⟩
-      have h : Denumerable.ofNat (Finset ℕ) (Denumerable.eqv (Finset ℕ) hA.toFinset)
-          = hA.toFinset := by simp [Denumerable.eqv]
-      rw [decide_eq_true_eq, h]
-      exact (Set.Finite.mem_toFinset hA).symm
-    · rintro ⟨i, hi⟩
-      have h : A = ↑(Denumerable.ofNat (Finset ℕ) i) := by ext x; simpa using hi x
-      rw [h]; exact (Denumerable.ofNat (Finset ℕ) i).finite_toSet
-  P_subset_NP := fun _ hA => Or.inl hA
-  NP_inter_P := by
-    rintro A - B hB
-    exact Or.inl (hB.subset Set.inter_subset_right)
-  P_of_finite := fun _ hA => hA
-  P_of_finite_symmDiff := by
-    intro A hA B hfin
-    have hsub : B ⊆ A ∪ {x | ¬ (x ∈ A ↔ x ∈ B)} := by
-      intro x hx
-      by_cases h : x ∈ A
-      · exact Or.inl h
-      · exact Or.inr (by simp [h, hx])
-    exact (hA.union hfin).subset hsub
-  P_red_closed := by
-    rintro A B ⟨i, hi⟩ hB
-    have h : A = B := by ext x; simpa using hi x
-    rw [h]; exact hB
-  red_poly := fun _ => ⟨1, fun x => by simp⟩
+The statement is formulated over an abstract but faithful axiomatisation of the
+relevant structure of complexity theory.  Languages are predicates on `Nat`
+(strings encoded as naturals) and:
 
-/-- The toy model separates `P` from `NP`; in particular the axioms of `Model` do not
-already imply `P = NP`. -/
-theorem toyModel_P_ne_NP : toyModel.P ≠ toyModel.NP := by
-  intro h
-  have h1 : (Set.univ : Lang) ∈ toyModel.P := by rw [h]; exact Or.inr rfl
-  exact Set.infinite_univ (h1 : (Set.univ : Set ℕ).Finite)
+* `P` and `NP` are classes of languages with `P ⊆ NP` (`hPsubNP`);
+* `dec` enumerates the polynomial-time deciders, so that `P` consists exactly
+  of the languages decided by some `dec i` (`hPdec`: a recursive presentation
+  of `P`);
+* `red` enumerates the polynomial-time computable functions, so that `Red A B`
+  (polynomial-time many-one reducibility) holds exactly when some `red i` is a
+  reduction of `A` to `B` (`hRedEnum`);
+* `P` contains the empty language (`hPempty`), is closed under variation on a
+  bounded set of inputs (`hPfinvar`), and is closed downwards under `Red`
+  (`hPdown`);
+* `K` is an `NP`-complete language (`hKNP`, `hKhard`; e.g. SAT, by Cook–Levin);
+* `clock` is the clock of the construction, nondecreasing, unbounded and
+  bounded above by the identity (in the intended instantiation, `clock n` is
+  the logarithm of `n`);
+* `hGapNP` is the polynomial-time-computability input of Ladner's proof: the
+  clocked gap function is polynomial-time computable, hence the language
+  obtained from `K` by blowing holes along it is again in `NP`.
+
+The conclusion is the existence of an `NP`-intermediate language: a language
+`A` in `NP` which is not in `P` and which is not `NP`-hard (hence not
+`NP`-complete).
+
+The proof is Ladner's "blowing holes" diagonalisation.  The gap function is
+built so that it advances to the next stage as soon as the current adversary (a
+decider at an even stage, a reduction at an odd stage) has been defeated within
+the clock bound.  A case split on whether the gap function is bounded then
+yields the result: if it stabilises at an even stage the constructed language
+is in `P` and is a bounded variant of `K`, forcing `K ∈ P`; if it stabilises at
+an odd stage the constructed language is bounded, hence in `P`, while `K`
+reduces to it, again forcing `K ∈ P`; and if it is unbounded every decider and
+every reduction is explicitly defeated. -/
+theorem ladner
+    (P NP : Lang → Prop) (Red : Lang → Lang → Prop)
+    (dec : Nat → Nat → Bool) (red : Nat → Nat → Nat) (K : Lang) (clock : Nat → Nat)
+    (hPdec : ∀ A : Lang, P A ↔ ∃ i, ∀ x, (A x ↔ dec i x = true))
+    (hRedEnum : ∀ A B : Lang, Red A B ↔ ∃ i, ∀ x, (A x ↔ B (red i x)))
+    (hPsubNP : ∀ A : Lang, P A → NP A)
+    (hPempty : P (fun _ => False))
+    (hPfinvar : ∀ A B : Lang, (∃ N, ∀ x, N ≤ x → (A x ↔ B x)) → P A → P B)
+    (hPdown : ∀ A B : Lang, Red A B → P B → P A)
+    (hKNP : NP K) (hKhard : ∀ B : Lang, NP B → Red B K)
+    (hclock_le : ∀ n, clock n ≤ n)
+    (hclock_mono : ∀ a b, a ≤ b → clock a ≤ clock b)
+    (hclock_unb : ∀ M, ∃ n, M ≤ clock n)
+    (hGapNP : NP (ladnerLang dec red K clock))
+    (hPNP : P ≠ NP) :
+    ∃ A : Lang, NP A ∧ ¬ P A ∧ ¬ (∀ B : Lang, NP B → Red B A) := by
+  classical
+  -- `K` is not in `P`, since it is `NP`-complete and `P ≠ NP`.
+  have hKP : ¬ P K := by
+    intro hK
+    exact hPNP (funext fun A => propext
+      ⟨fun h => hPsubNP A h, fun h => hPdown A K (hKhard A h) hK⟩)
+  -- The clock eventually exceeds any bound, at arbitrarily late inputs.
+  have hbig : ∀ (M n0 : Nat), ∃ n, n0 ≤ n ∧ M ≤ clock n := by
+    intro M n0
+    obtain ⟨m, hm⟩ := hclock_unb M
+    refine ⟨max m n0, Nat.le_max_right _ _, ?_⟩
+    exact Nat.le_trans hm (hclock_mono m (max m n0) (Nat.le_max_left _ _))
+  -- The gap function is unbounded.
+  have hunb : ∀ N : Nat, ∃ n, N < gapF dec red K clock n := by
+    intro N
+    by_cases hex : ∃ n, N < gapF dec red K clock n
+    · exact hex
+    · exfalso
+      have hN : ∀ n, gapF dec red K clock n ≤ N := by
+        intro n
+        by_cases hle : gapF dec red K clock n ≤ N
+        · exact hle
+        · exact absurd ⟨n, by omega⟩ hex
+      -- bounded and monotone, hence eventually constant
+      obtain ⟨n0, hn0⟩ := exists_max N (gapF dec red K clock) hN
+      have hconst : ∀ n, n0 ≤ n → gapF dec red K clock n = gapF dec red K clock n0 := by
+        intro n hn
+        have h1 := hn0 n
+        have h2 := gapF_mono dec red K clock hclock_le n0 n hn
+        omega
+      -- from `n0` on, the defeat condition never holds
+      have hnodef : ∀ n, n0 ≤ n → ¬ defeated dec red K clock (gapF dec red K clock) n := by
+        intro n hn hd
+        have h1 := gapF_succ dec red K clock hclock_le n
+        rw [if_pos hd, hconst n hn, hconst (n + 1) (by omega)] at h1
+        omega
+      by_cases hev : gapF dec red K clock n0 % 2 = 0
+      · -- Even final stage: the constructed language is decided by machine
+        -- `s / 2`, hence lies in `P`; but it agrees with `K` beyond `n0`, so
+        -- `K ∈ P`, a contradiction.
+        have hdecA : ∀ z, (dec (gapF dec red K clock n0 / 2) z = true ↔
+            (K z ∧ gapF dec red K clock z % 2 = 0)) := by
+          intro z
+          by_cases hw : (dec (gapF dec red K clock n0 / 2) z = true ↔
+              (K z ∧ gapF dec red K clock z % 2 = 0))
+          · exact hw
+          · exfalso
+            obtain ⟨n, hn, hz⟩ := hbig z n0
+            refine hnodef n hn (Or.inl ⟨?_, z, hz, ?_⟩)
+            · rw [hconst _ hn]; exact hev
+            · rw [hconst _ hn]; exact hw
+        have hAP : P (ladnerLang dec red K clock) := by
+          rw [hPdec]
+          exact ⟨gapF dec red K clock n0 / 2, fun x => (hdecA x).symm⟩
+        refine hKP (hPfinvar (ladnerLang dec red K clock) K ⟨n0, ?_⟩ hAP)
+        intro x hx
+        have hgx : gapF dec red K clock x % 2 = 0 := by rw [hconst x hx]; exact hev
+        exact ⟨fun h => h.1, fun h => ⟨h, hgx⟩⟩
+      · -- Odd final stage: `K` reduces to the constructed language, which is
+        -- empty beyond `n0`, hence in `P`; so `K ∈ P`, a contradiction.
+        have hodd : gapF dec red K clock n0 % 2 = 1 := by omega
+        have hredA : ∀ z, (K z ↔
+            ladnerLang dec red K clock (red (gapF dec red K clock n0 / 2) z)) := by
+          intro z
+          by_cases hw : (K z ↔
+              ladnerLang dec red K clock (red (gapF dec red K clock n0 / 2) z))
+          · exact hw
+          · exfalso
+            obtain ⟨n, hn, hz⟩ :=
+              hbig (max z (red (gapF dec red K clock n0 / 2) z)) n0
+            refine hnodef n hn (Or.inr ⟨?_, z, ?_, ?_, ?_⟩)
+            · rw [hconst _ hn]; exact hodd
+            · exact Nat.le_trans (Nat.le_max_left _ _) hz
+            · rw [hconst _ hn]
+              exact Nat.le_trans (Nat.le_max_right _ _) hz
+            · rw [hconst _ hn]
+              exact hw
+        have hRedKA : Red K (ladnerLang dec red K clock) :=
+          (hRedEnum K (ladnerLang dec red K clock)).mpr
+            ⟨gapF dec red K clock n0 / 2, hredA⟩
+        have hAP : P (ladnerLang dec red K clock) := by
+          refine hPfinvar (fun _ => False) (ladnerLang dec red K clock) ⟨n0, ?_⟩ hPempty
+          intro x hx
+          have hgx : gapF dec red K clock x % 2 = 1 := by rw [hconst x hx]; exact hodd
+          exact ⟨fun h => absurd h (fun h => h), fun h => by
+            have h2 := h.2
+            omega⟩
+        exact hKP (hPdown K (ladnerLang dec red K clock) hRedKA hAP)
+  refine ⟨ladnerLang dec red K clock, hGapNP, ?_, ?_⟩
+  · -- The constructed language is not in `P`: every decider is defeated at
+    -- some even stage.
+    intro hAP
+    obtain ⟨i, hi⟩ := (hPdec (ladnerLang dec red K clock)).mp hAP
+    obtain ⟨m, hm⟩ := hunb (2 * i)
+    obtain ⟨n, hn, hd⟩ := exists_defeat dec red K clock hclock_le m (2 * i) (by omega)
+    rcases hd with ⟨_, z, _, hw⟩ | ⟨hpar, _⟩
+    · rw [hn] at hw
+      have h3 : (2 * i) / 2 = i := by omega
+      rw [h3] at hw
+      exact hw (hi z).symm
+    · rw [hn] at hpar
+      omega
+  · -- The constructed language is not `NP`-hard: every candidate reduction of
+    -- `K` to it is defeated at some odd stage.
+    intro hhard
+    obtain ⟨i, hi⟩ := (hRedEnum K (ladnerLang dec red K clock)).mp (hhard K hKNP)
+    obtain ⟨m, hm⟩ := hunb (2 * i + 1)
+    obtain ⟨n, hn, hd⟩ := exists_defeat dec red K clock hclock_le m (2 * i + 1) (by omega)
+    rcases hd with ⟨hpar, _⟩ | ⟨_, z, _, _, hw⟩
+    · rw [hn] at hpar
+      omega
+    · rw [hn] at hw
+      have h3 : (2 * i + 1) / 2 = i := by omega
+      rw [h3] at hw
+      exact hw (hi z)
 
 end CS
-
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 

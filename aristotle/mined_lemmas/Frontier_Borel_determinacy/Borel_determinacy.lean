@@ -8,51 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Frontier
-
-universe u
-
-variable {A : Type u}
-
-/-! ## The game framework
-
-We consider infinite two–player games on a set `A` of moves.  A *play* is a sequence
-`x : ℕ → A`; player `0` chooses the moves `x n` with `n` even, player `1` chooses the moves
-`x n` with `n` odd.  A *strategy* is a function `List A → A` assigning a move to every finite
-position (the player only consults it at their own turns). -/
-
-/-- The length-`n` initial segment of a play. -/
-
-theorem Borel_determinacy
-    (hUnion : ∀ f : ℕ → Set (ℕ → A), (∀ n, IsBorelSet (f n)) →
-      (∀ n, BiDetermined (f n)) → BiDetermined (⋃ n, f n))
-    {S : Set (ℕ → A)} (hS : IsBorelSet S) : Determined S := by
-  have hgen : ∀ t : Set (ℕ → A),
-      MeasurableSpace.GenerateMeasurable {u : Set (ℕ → A) | IsClosed u} t → IsBorelSet t := by
-    intro t ht
-    show @MeasurableSet (ℕ → A) (borel (ℕ → A)) t
-    rw [borel_eq_generateFrom_isClosed]
-    exact ht
-  have key : ∀ t : Set (ℕ → A),
-      MeasurableSpace.GenerateMeasurable {u : Set (ℕ → A) | IsClosed u} t → BiDetermined t := by
-    intro t ht
-    induction ht with
-    | basic u hu => exact closed_biDetermined hu
-    | empty => exact closed_biDetermined isClosed_empty
-    | compl t _ ih => exact ih.compl
-    | iUnion f hf ih => exact hUnion f (fun n => hgen _ (hf n)) ih
-  have hS' : MeasurableSpace.GenerateMeasurable {u : Set (ℕ → A) | IsClosed u} S := by
-    have h := hS
-    rw [IsBorelSet, borel_eq_generateFrom_isClosed] at h
-    exact h
-  exact (key S hS').1
-
-end Borel
-
-end Frontier
-
-import Mathlib
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -67,12 +22,27 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
+namespace Frontier
+
+/-! ## Infinite games: positions, strategies, winning strategies
+
+We consider infinite two-player games with perfect information played on an alphabet `X`.
+A *play* is a sequence `x : ℕ → X`; the move at time `n` is `x n`.  Which player moves at
+time `n` is recorded by a predicate `turn : ℕ → Prop` (the *turn set* of the player under
+consideration).  In the classical game `G(A)` on Baire space, player I moves at the even
+times and player II at the odd times, and player I wins the play `x` iff `x ∈ A`.
+-/
+
+variable {X : Type*}
+
+/-- The position reached after the first `n` moves of the play `x`. -/
+
+theorem Borel_determinacy
+    (martin_unraveling : ∀ A : Set (ℕ → ℕ),
+      @MeasurableSet (ℕ → ℕ) (borel (ℕ → ℕ)) A → HasClopenUnraveling A) :
+    BorelDeterminacy :=
+  fun A hA => determined_of_hasClopenUnraveling (martin_unraveling A hA)
+
+/-- Unconditional base case on Baire space: every closed game is determined. -/

@@ -2,29 +2,38 @@
 # Kochen Specker 18
 Category: Frontier Phys
 Target: Phys.kochen_specker_18
-Statement: An explicit 18-vector Kochen–Specker set in ℝ⁴ has no {0,1} coloring.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
 
-/-!
-# Kochen Specker 18
-Category: Frontier Phys
-Target: Phys.kochen_specker_18
-Statement: An explicit 18-vector Kochen–Specker set in ℝ⁴ has no {0,1} coloring.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Phys
 
-/-- The 18 vectors of the Cabello–Estebaranz–García-Alcaine Kochen–Specker set,
-with integer entries. -/
+/-! ### The 18 vectors
 
-def ksVec (i : Fin 18) (k : Fin 4) : ℝ := ((ksVecZ i k : ℤ) : ℝ)
+We use the Cabello–Estebaranz–García-Alcaine 18-vector, 9-basis Kochen–Specker set in `ℝ⁴`.
+The vectors have integer coordinates, listed here as rows. -/
 
-/-- The Euclidean inner product of two of the vectors. -/
+/-- Integer coordinates of the 18 Kochen–Specker vectors. -/
+
+noncomputable def ksVec (i : Fin 18) : EuclideanSpace ℝ (Fin 4) :=
+  WithLp.toLp 2 (fun k => ((ksCoord i k : ℤ) : ℝ))
+
+/-- The integer dot product of two of the 18 vectors. -/

@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Qft Unitary
 Category: Quantum Computing
 Target: QC.qft_unitary
@@ -33,11 +31,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
 namespace QC
 
-open Complex Matrix
+open Complex Finset
 
-/-- The primitive `N`-th root of unity `exp (2πi/N)`. -/
+/-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
 lemma omegaN_ne_zero (N : ℕ) : omegaN N ≠ 0 := Complex.exp_ne_zero _
 

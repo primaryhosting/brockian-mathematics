@@ -23,13 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Deficiency Represents ODE Of Weak Regularity
-Category: Brockian (Literature Discharge)
-Target: Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -42,25 +35,25 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 open scoped BigOperators
 open scoped Real
-open scoped Nat
 open scoped Classical
-open scoped Pointwise
 
 open Set MeasureTheory
 
 namespace Brockian.Weyl.DeficiencyODE
 
-/-- The state space of a first-order linear system of `n` equations. -/
-abbrev State (n : ℕ) : Type := Fin n → ℂ
+/-- **Weak regularity** of a potential `q : ℝ → ℂ`: `q` is bounded on every compact interval.
+This is much weaker than continuity of `q`; it is exactly what is needed to run the Gronwall
+argument behind uniqueness for the Sturm–Liouville system. -/
 
-variable {n : ℕ}
+def deficiencySpace (q : ℝ → ℂ) (z : ℂ) : Submodule ℂ (ℝ → ℂ × ℂ) where
+  carrier := {w | IsSolution q z w ∧ MemLp (fun t => (w t).1) 2 (volume.restrict (Set.Ioi 0))}
+  add_mem' := by
+    rintro w₁ w₂ ⟨hs₁, hL₁⟩ ⟨hs₂, hL₂⟩
+    exact ⟨(solutionSpace q z).add_mem hs₁ hs₂, by simpa using hL₁.add hL₂⟩
+  zero_mem' := ⟨(solutionSpace q z).zero_mem, by simp⟩
+  smul_mem' := by
+    rintro c w ⟨hs, hL⟩
+    exact ⟨(solutionSpace q z).smul_mem c hs, by simpa using hL.const_smul c⟩
 
-/-- *Weak regularity* of the coefficient family of the first-order linear system
-`u' t = A t (u t)`: the coefficient operators depend continuously on time.  This is the
-hypothesis retained in the Weyl-theoretic statement below. -/
-
-def deficiencySpace (A : ℝ → (State n →L[ℂ] State n)) : Submodule ℂ (ℝ → State n) :=
-  solutions A ⊓ sqIntegrable n
-
-/-- Evaluation of a deficiency vector at time `0`, i.e. its initial data, as a linear map
-into the finite dimensional space `ℂⁿ`. -/
+/-- Evaluation of a deficiency element at the base point `0`, recording the Cauchy data
+`(u 0, u' 0)` of the underlying ODE solution. -/

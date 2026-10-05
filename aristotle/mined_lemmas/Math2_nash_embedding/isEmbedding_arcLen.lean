@@ -1,0 +1,74 @@
+/-
+# Nash Embedding
+Category: Frontier Math
+Target: Math2.nash_embedding
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+(Note: Lean does not allow a module docstring before `import`, so this header is a plain
+block comment and is repeated as a module docstring below.)
+-/
+
+import Mathlib
+
+/-!
+# Nash Embedding
+Category: Frontier Math
+Target: Math2.nash_embedding
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+## Scope of what is proved here
+
+The full Nash embedding theorem (every Riemannian manifold admits a smooth isometric
+embedding into some `ℝᴺ`) is not available in Mathlib, and its proof (Nash-Moser implicit
+function theorem, or the Gunther fixed-point argument) is a large development that is not
+formalised here.
+
+What *is* proved, in full, is the isometric embedding theorem for an explicit infinite
+dimensional family of Riemannian metrics on `ℝⁿ`, namely those of the form
+
+  `g x (u, v) = ∑ i, a i (x i) * u i * v i + ∑ k, (dψ k x u) * (dψ k x v)`,
+
+with each `a i : ℝ → ℝ` smooth and positive and each `ψ k : ℝⁿ → ℝ` smooth.  Every such `g`
+is a smooth Riemannian metric, and the family contains, through the terms `ψ k`, the induced
+first fundamental forms of graphs of smooth maps `ℝⁿ → ℝᵐ` (which are not flat in general).
+For each of them we build an explicit smooth embedding `f : ℝⁿ → ℝⁿ⁺ᵐ` whose pullback of the
+Euclidean metric is exactly `g`; the construction reparametrises each coordinate by its
+arclength `t ↦ ∫₀ᵗ √(a i)` and adjoins the graph coordinates `ψ k`.
+-/
+
+open scoped ContDiff RealInnerProductSpace BigOperators
+open Topology
+
+namespace Math2
+
+/-! ## One-dimensional arclength reparametrisation -/
+
+/-- The antiderivative `x ↦ ∫₀ˣ h` of `h`. -/
+
+lemma isEmbedding_arcLen {h : ℝ → ℝ} (hc : ContDiff ℝ ∞ h) (hpos : ∀ x, 0 < h x) :
+    IsEmbedding (arcLen h) := by
+  have hmono := strictMono_arcLen hc.continuous hpos
+  refine hmono.isEmbedding_of_ordConnected ?_
+  have h1 : IsPreconnected (arcLen h '' Set.univ) :=
+    (isPreconnected_univ (α := ℝ)).image _ (contDiff_arcLen hc).continuous.continuousOn
+  rw [← Set.image_univ]
+  exact h1.ordConnected
+
+/-! ## The embedding theorem -/
+
+/--
+**Nash-type isometric embedding theorem.**
+
+For every Riemannian metric on `ℝⁿ` of the form
+`g x (u, v) = ∑ i, a i (x i) * u i * v i + ∑ k, (dψ k x u) * (dψ k x v)`
+(with each `a i` a smooth positive function of a single coordinate and each `ψ k` a smooth
+real function on `ℝⁿ`) there are `N` and a smooth embedding `f : ℝⁿ → ℝᴺ` whose pullback of
+the Euclidean metric is `g`, i.e. `⟪Df x u, Df x v⟫ = g x (u, v)` for all `x, u, v`.
+
+The embedding is explicit: `f x = (F₁ (x 1), …, Fₙ (x n), ψ₁ x, …, ψₘ x)` where `Fᵢ` is the
+arclength reparametrisation `Fᵢ t = ∫₀ᵗ √(aᵢ)`, and `N = n + m`.
+
+(This is the special case of Nash's theorem for this class of metrics; through the terms
+`ψ k` the class contains the induced metric of the graph of any smooth map `ℝⁿ → ℝᵐ`.)
+-/

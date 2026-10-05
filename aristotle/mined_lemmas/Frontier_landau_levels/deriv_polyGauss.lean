@@ -1,0 +1,64 @@
+/-
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment; the same text is repeated below as the module docstring.)
+
+import Mathlib
+
+/-!
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+open Polynomial
+
+/-! ### Hermite polynomials: the Hermite differential equation
+
+Mathlib provides `Polynomial.hermite : ℕ → ℤ[X]` (the *probabilists'* Hermite polynomials)
+together with `Polynomial.hermite_succ`, but not the Hermite ODE, which we derive here. -/
+
+/-- The Hermite differential equation `He_n'' = X * He_n' - n * He_n`. -/
+
+theorem deriv_polyGauss (q : ℝ[X]) (a b x0 : ℝ) (ha : a ≠ 0) :
+    deriv (polyGauss q a b x0)
+      = polyGauss (C a * derivative q - C (2 * b / a) * (X * q)) a b x0 := by
+  funext t
+  rw [(hasDerivAt_polyGauss q a b x0 t).deriv]
+  simp only [polyGauss, eval_sub, eval_mul, eval_C, eval_X]
+  field_simp
+
+/-- Second derivative of `He`-type solutions: if `q'' = X q' - c q` and `a² = 4b`, then
+`(q(a(x-x₀)) e^{-b(x-x₀)²})'' = (4b²(x-x₀)² - 2b(2c+1)) q(a(x-x₀)) e^{-b(x-x₀)²}`. -/

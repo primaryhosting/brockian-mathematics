@@ -30,39 +30,52 @@ Target: Brockian.LandauNSquaredPlusOne.LandauFourthConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 rejects a module doc comment `/-! ... -/` before `import`, so the header above
--- is an ordinary block comment; its text is otherwise exactly as requested.)
+-- (The header above uses `/-` rather than `/-!` because Lean does not allow a module
+-- docstring to precede the `import` commands; the text is otherwise verbatim.)
 
 import Mathlib
 
 /-!
-# Landau's fourth problem: infinitely many primes of the form `n ^ 2 + 1`
+# Landau Fourth Conjecture
 
-Landau's fourth conjecture is an open problem.  This file provides:
+Landau's fourth problem asks whether there are infinitely many primes of the form `n ^ 2 + 1`.
+This is a well-known open problem, so what is proved here is:
 
-* a formal statement of Bunyakovsky's conjecture (`Bunyakovsky`);
-* a Lean-checked *conditional reduction*: Landau's fourth conjecture follows from
-  Bunyakovsky's conjecture (`LandauFourthConjecture`), via the irreducibility of
-  `X ^ 2 + 1` over `ℤ` and the absence of a fixed divisor;
-* unconditional partial results: an odd prime divides some `n ^ 2 + 1` iff it is
-  `1 mod 4`, and hence infinitely many primes divide numbers of the form `n ^ 2 + 1`.
+* `LandauFourthConjecture` : a **conditional** reduction — Bunyakovsky's conjecture
+  (in the form `BunyakovskyHypothesis`) implies Landau's fourth conjecture
+  (`LandauFourthStatement`).  All the hypotheses of Bunyakovsky's conjecture are verified
+  unconditionally for the polynomial `X ^ 2 + 1`.
+* `X_sq_add_one_irreducible` : `X ^ 2 + 1` is irreducible over `ℤ`.
+* `infinite_setOf_prime_dvd_sq_add_one` : an **unconditional** partial result — infinitely many
+  primes divide some number of the form `n ^ 2 + 1`.
+* `infinite_setOf_large_prime_factor` : an **unconditional** partial result — for infinitely many
+  `n`, the number `n ^ 2 + 1` has a prime factor exceeding `2 * n`.
 -/
-
-namespace Brockian.LandauNSquaredPlusOne
 
 open Polynomial
 
-/-- The set of natural numbers `n` such that `n ^ 2 + 1` is prime. -/
+namespace Brockian.LandauNSquaredPlusOne
+
+/-- **Landau's fourth conjecture**: there are infinitely many natural numbers `n` such that
+`n ^ 2 + 1` is prime. -/
 
 theorem infinite_setOf_prime_dvd_sq_add_one :
     {p : ℕ | p.Prime ∧ ∃ n : ℕ, p ∣ n ^ 2 + 1}.Infinite := by
-  apply Set.infinite_of_forall_exists_gt
-  intro a
-  obtain ⟨p, hp, hap, hmod⟩ := Nat.exists_prime_gt_modEq_one (k := 4) (max a 2) (by norm_num)
-  have h4 : p % 4 = 1 := by
-    unfold Nat.ModEq at hmod
+  refine Set.Infinite.mono ?_
+    (Nat.infinite_setOf_prime_and_eq_mod (q := 4) (a := 1) isUnit_one)
+  rintro p ⟨hp, hp4⟩
+  refine ⟨hp, ?_⟩
+  haveI : Fact p.Prime := ⟨hp⟩
+  have hmod : p % 4 = 1 := by
+    have := (ZMod.natCast_eq_natCast_iff' p 1 4).mp (by simpa using hp4)
+    simpa using this
+  obtain ⟨r, hr⟩ : IsSquare (-1 : ZMod p) := by
+    rw [ZMod.exists_sq_eq_neg_one_iff]
     omega
-  exact ⟨p, ⟨hp, (prime_dvd_sq_add_one_iff hp (by omega)).2 h4⟩, by omega⟩
+  refine ⟨r.val, ?_⟩
+  have hz : ((r.val ^ 2 + 1 : ℕ) : ZMod p) = 0 := by
+    push_cast [ZMod.natCast_val, ZMod.cast_id]
+    rw [sq, ← hr]; ring
+  exact (ZMod.natCast_eq_zero_iff _ _).mp hz
 
-end Brockian.LandauNSquaredPlusOne
-
+/-- Auxiliary criterion: if `m ^ 2 + 1` vanishes modulo `p`, then `p ∣ m ^ 2 + 1`. -/

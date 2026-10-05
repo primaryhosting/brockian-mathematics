@@ -6,47 +6,47 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+/-
+A self-contained formalization of the P vs NP question in terms of time-bounded
+(deterministic and nondeterministic) single-tape Turing machines and polynomial-time
+many-one reducibility.
 
-This file gives a precise, self-contained formalization of the statement
-`P ≠ NP`, in terms of time-bounded (deterministic and nondeterministic)
-one-tape Turing machines, together with polynomial-time many-one reducibility
-and NP-completeness.
+The development is elementary and depends on nothing beyond the Lean 4 prelude, so that
+the file can literally begin with the header comment above.
 
-The file deliberately uses no imports beyond Lean's `Init`, so that the meaning
-of the statement depends on nothing but the definitions given here.
+Main declarations:
 
-The main theorem `Frontier.P_vs_NP_statement` records the equivalence between
-the assertion `P ≠ NP` and the existence of a language lying in `NP` but not in
-`P`.  (Whether that assertion is *true* is the open Millennium Problem; what is
-proved here is the equivalence of the two formulations, which rests on the
-inclusion `P ⊆ NP`, proved below as `Frontier.P_subset_NP`.)
+* `Frontier.Machine`             : single-tape Turing machine with finite control;
+* `Frontier.AcceptsWithin`       : acceptance within a given number of steps;
+* `Frontier.Deterministic`       : determinism of the transition relation;
+* `Frontier.DecidesInPolyTime`   : deciding a language within a polynomial time bound;
+* `Frontier.P`, `Frontier.NP`    : the two complexity classes;
+* `Frontier.PolyReducible`       : polynomial-time many-one reducibility `≤ₚ`;
+* `Frontier.NPComplete`          : NP-completeness;
+* `Frontier.P_vs_NP_statement`   : the statement of the P vs NP problem, in the form
+  `P ≠ NP ↔ ∃ L, L ∈ NP ∧ L ∉ P`.
 -/
 
 namespace Frontier
 
-/-! ## Machine model
+/-- Words are finite binary strings. -/
+abbrev Word : Type := List Bool
 
-A one-tape Turing machine over the binary alphabet.  The tape is bi-infinite,
-indexed by `ℤ`; a cell holds `some b` for a bit `b`, or `none` for the blank.
-Nondeterminism is part of the model: the transition relation `next q a` may
-relate a (state, scanned symbol) pair to any number of successor triples
-(new state, symbol written, head move).  A machine is *deterministic* when each
-such set of successors has at most one element.
--/
+/-- A language is a set of words, represented by its membership predicate. -/
+abbrev Language : Type := Word → Prop
 
-/-- A head move: left, stay, or right. -/
-inductive Move
-  | left
-  | stay
-  | right
-  deriving DecidableEq
+/-- The direction in which the tape head moves in one step. -/
+inductive Dir : Type
+  | left : Dir
+  | right : Dir
+  | stay : Dir
 
-/-- The displacement of the head associated with a move. -/
+/-- The displacement of the head associated with a direction. -/
 
-def Deterministic {Q : Type} (M : Machine Q) : Prop :=
-  ∀ q a y z, M.next q a y → M.next q a z → y = z
+def Deterministic (M : Machine) : Prop :=
+  ∀ (q : M.State) (a : Option Bool) (q₁ : M.State) (w₁ : Option Bool) (d₁ : Dir)
+    (q₂ : M.State) (w₂ : Option Bool) (d₂ : Dir),
+    M.next q a q₁ w₁ d₁ → M.next q a q₂ w₂ d₂ → q₁ = q₂ ∧ w₁ = w₂ ∧ d₁ = d₂
 
-/-- `M` accepts `x` within `t` steps: some computation of length at most `t`,
-starting from the initial configuration on `x`, reaches an accepting state. -/
+/-- `M` decides `L` in polynomial time: there are constants `c, k` such that a word `x`
+belongs to `L` exactly when `M` accepts `x` within `c * |x| ^ k + c` steps. -/

@@ -1,30 +1,67 @@
 import Mathlib
-import RequestProject.AlexanderTrick
 
 /-!
-# Twisted spheres
-
-A *twisted sphere* is obtained by gluing two copies of the closed `n`-disk along their boundary
-`𝕊ⁿ⁻¹` by a homeomorphism `f`.  All the known exotic spheres in dimension `7` arise this way
-(Milnor's `S³`-bundles over `S⁴` carry Morse functions with exactly two critical points, which exhibits
-them as twisted spheres).
-
-The main result of this file is that **every twisted sphere is homeomorphic to the standard
-sphere**: this is the topological half of Milnor's theorem, and it is proved here in full, for
-every dimension `n`, using the Alexander trick from `RequestProject.AlexanderTrick`.
+# Milnor Exotic 7 Sphere
+Category: Frontier Abel
+Target: Frontier.milnor_exotic_7sphere
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped Manifold
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-open Metric
+/-! ## Smooth 7-manifolds
 
-/-- The unit sphere `𝕊ⁿ⁻¹ ⊆ ℝⁿ`. -/
-abbrev Sph (n : ℕ) : Type := sphere (0 : EuclideanSpace ℝ (Fin n)) 1
+We package a smooth (`C^∞`) 7-dimensional manifold without boundary, modelled on
+`EuclideanSpace ℝ (Fin 7)`, as a bundled structure so that we can quantify over such
+objects. -/
 
-/-- The closed unit disk `Dⁿ ⊆ ℝⁿ`. -/
-abbrev Dsk (n : ℕ) : Type := closedBall (0 : EuclideanSpace ℝ (Fin n)) 1
+/-- The model space for 7-dimensional smooth manifolds. -/
+abbrev E7 : Type := EuclideanSpace ℝ (Fin 7)
 
+/-- A bundled smooth (`C^∞`) 7-manifold without boundary. -/
+structure Smooth7Manifold where
+  /-- The underlying type of points. -/
+  carrier : Type
+  [top : TopologicalSpace carrier]
+  [charted : ChartedSpace E7 carrier]
+  [smooth : IsManifold (𝓘(ℝ, E7)) ⊤ carrier]
 
-theorem milnorLambda_one : milnorLambda 1 = 0 := by decide
+attribute [instance] Smooth7Manifold.top Smooth7Manifold.charted Smooth7Manifold.smooth
 
-/-- For `j = 3` the invariant is nonzero, so `M₃` cannot be diffeomorphic to `𝕊⁷`. -/
+namespace Smooth7Manifold
+
+/-- Two bundled smooth 7-manifolds are *homeomorphic* if their underlying topological
+spaces are homeomorphic. -/
+
+theorem milnorLambda_one : milnorLambda 1 = 0 := by
+  unfold milnorLambda
+  norm_num
+
+/-- **Base case.**  For `h = 2` (i.e. `(h, l) = (2, -1)`) Milnor's invariant equals `1 ≠ 0`
+in `ZMod 7`.  This is the arithmetic heart of Milnor's argument: it distinguishes
+`M_{2,-1}` from the standard 7-sphere. -/

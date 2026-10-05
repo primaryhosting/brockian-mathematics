@@ -1,16 +1,4 @@
-/-
-# Gottesman Knill
-Category: Frontier Qi
-Target: QI.gottesman_knill
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean requires `import` lines to precede any module docstring `/-! ... -/`,
--- so the header above is a plain comment and is repeated as a docstring below.)
-
 import Mathlib
-
 /-!
 # Gottesman Knill
 Category: Frontier Qi
@@ -20,16 +8,33 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
-open Matrix
+open scoped Real
+open scoped Nat
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace QI
 
-/-! ## Phases and signs -/
+open Matrix
 
-/-- Computational basis labels for `n` qubits: bit strings of length `n`. -/
-abbrev Bits (n : ℕ) : Type := Fin n → ZMod 2
+/-! ## Basis states and tensor products of one-qubit operators -/
 
-/-- The fourth root of unity `i ^ s` attached to `s : ZMod 4`. -/
+/-- A computational basis state of `n` qubits. -/
+abbrev BasisState (n : ℕ) := Fin n → Bool
 
-def simCost {n : ℕ} (gs : List (Gate n)) : ℕ := 2 * n * (gs.map gateCost).sum
+/-- An operator on `n` qubits, as a `2^n × 2^n` complex matrix. -/
+abbrev Op (n : ℕ) := Matrix (BasisState n) (BasisState n) ℂ
+
+/-- The tensor product `f 0 ⊗ f 1 ⊗ ⋯ ⊗ f (n-1)` of one-qubit operators. -/
+
+def simCost {n : ℕ} (C : List (Gate n)) : ℕ := (C.map stepCost).sum + (2 * n + 2)
 

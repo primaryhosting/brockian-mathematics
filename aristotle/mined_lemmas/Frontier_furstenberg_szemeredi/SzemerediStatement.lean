@@ -1,11 +1,3 @@
-/-
-# Furstenberg Szemeredi
-Category: Frontier Abel
-Target: Frontier.furstenberg_szemeredi
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,11 +33,9 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- The counting function of a set of naturals: the number of elements of `A` below `n`. -/
+/-- The number of elements of `A` below `n`. -/
 
-def SzemerediStatement : Prop :=
-  ∀ A : Set ℕ, 0 < upperDensity A → ∀ k : ℕ, HasAPOfLength A k
+def SzemerediStatement (k : ℕ) : Prop :=
+  ∀ A : Set ℕ, HasPositiveUpperDensity A → HasAPOfLength A k
 
-/-- The finitary form of Szemerédi's theorem: for every length `k` and density `ε > 0` there is
-an `N` such that every subset of `{0, …, n-1}` with `n ≥ N` and at least `ε n` elements contains
-an arithmetic progression of length `k`. -/
+/-- A set of positive upper density is unbounded. -/

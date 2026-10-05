@@ -23,6 +23,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Omega Add Omega
+Category: Frontier Wave 2 (deeper machinery)
+Target: Ordinal.omega_add_omega
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -35,14 +43,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Ordinal
 
-/-- Ordinal arithmetic: `ω + ω = ω * 2`.
+/-- `ω + ω = ω * 2` in ordinal arithmetic.
 
-In current Mathlib the ordinal `ω` is denoted `Ordinal.omega0` (`Ordinal.omega` is the
-`ω_·` indexing order embedding), so the statement is phrased with `omega0`. -/
+In current Mathlib the ordinal `ω` is named `Ordinal.omega0` (the name `Ordinal.omega`
+now denotes the aleph-indexed family of initial ordinals), so the statement is phrased
+with `omega0`. The proof uses left distributivity of ordinal multiplication (`mul_add`). -/
 
 theorem omega_add_omega : omega0 + omega0 = omega0 * 2 := by
-  have h2 : (2 : Ordinal) = Order.succ 1 := by
-    rw [Order.succ_eq_add_one]; norm_num
-  rw [h2, mul_succ, mul_one]
+  have h : (2 : Ordinal) = 1 + 1 := by norm_num
+  rw [h, mul_add, mul_one]
 
-/-- Restatement in terms of `Ordinal.omega 0`, which equals `ω`. -/
+end Ordinal
+

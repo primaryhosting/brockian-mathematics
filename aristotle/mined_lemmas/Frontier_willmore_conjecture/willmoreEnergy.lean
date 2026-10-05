@@ -5,6 +5,8 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the header above is
+-- therefore a plain block comment, and is repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -30,29 +32,23 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Basic vector algebra in `ℝ³` -/
+open Real intervalIntegral
 
-/-- Euclidean three-space, as a triple of reals. -/
-abbrev R3 := ℝ × ℝ × ℝ
+/-! ## Vector algebra in `ℝ³`
 
-/-- The standard inner product on `ℝ³`. -/
+We use `ℝ × ℝ × ℝ` as a model of `ℝ³` together with explicitly defined dot product,
+cross product and Euclidean norm.  (The ambient `Prod` norm of Mathlib is the sup norm,
+so we never use `‖·‖`; note that the notion of (Fréchet/one-variable) derivative does
+not depend on the choice of an equivalent norm, so `deriv` below is the usual derivative
+of an `ℝ³`-valued function.) -/
 
-noncomputable def willmoreEnergy (X : ℝ → ℝ → R3) : ℝ :=
-  ∫ v in (0:ℝ)..(2 * Real.pi), ∫ u in (0:ℝ)..(2 * Real.pi),
-    (meanCurvature X u v) ^ 2 * areaElement X u v
+/-- Euclidean dot product on `ℝ³`. -/
 
-/-! ## The torus of revolution -/
+noncomputable def willmoreEnergy (R r : ℝ) : ℝ :=
+  ∫ v in (0:ℝ)..(2 * π), ∫ u in (0:ℝ)..(2 * π), meanCurv R r u v ^ 2 * areaElt R r u v
 
-/-- The standard parametrization of the torus of revolution in `ℝ³` obtained by revolving
-the circle of radius `r` centred at distance `R` from the axis. -/
+/-- The classical closed formula `W = π² R² / (r √(R² - r²))`. -/

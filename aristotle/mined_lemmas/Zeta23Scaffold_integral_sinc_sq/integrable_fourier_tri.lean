@@ -1,3 +1,11 @@
+/-
+# Integral Sinc Sq
+Category: C Integral
+Target: Zeta23Scaffold.integral_sinc_sq
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -6,15 +14,27 @@ Category: C Integral
 Target: Zeta23Scaffold.integral_sinc_sq
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+The normalization integral of the sine kernel,
+`∫ x : ℝ, (sin x / x) ^ 2 = π`.
+
+The proof computes the Fourier transform of the triangle function
+`tri x = max (1 - |x|) 0`, which is `w ↦ sinc (π w) ^ 2`, and then applies the
+Fourier inversion formula at `0`.
+
+Note that in Lean `sin 0 / 0 = 0`, so the integrand of the main statement differs from the
+continuous extension `sinc` only on the null set `{0}`; the value of the integral is unaffected.
 -/
 
-open MeasureTheory Complex Filter intervalIntegral
-open scoped FourierTransform Topology Real
+open MeasureTheory Real Complex
+open scoped FourierTransform
 
 namespace Zeta23Scaffold
 
-/-- The triangle ("tent") function `x ↦ max 0 (1 - |x|)`, viewed as a complex-valued function. -/
+/-- The triangle function `x ↦ max (1 - |x|) 0`, viewed as a complex-valued function on `ℝ`. -/
 
-lemma integrable_fourier_tri : Integrable (𝓕 tri) :=
-  (integrable_scaled.ofReal (𝕜 := ℂ)).congr fourier_tri_ae.symm
+lemma integrable_fourier_tri : Integrable (𝓕 tri) := by
+  have h : 𝓕 tri = fun w : ℝ => ((Real.sinc (π * w) ^ 2 : ℝ) : ℂ) := funext fun w => fourier_tri w
+  rw [h]
+  exact (integrable_sinc_sq.comp_mul_left' Real.pi_ne_zero).ofReal
 

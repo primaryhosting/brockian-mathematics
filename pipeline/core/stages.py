@@ -4,7 +4,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Optional
 
-from .ledger import AttemptFacts, derive_problem_register, facts_from_card
+from .ledger import derive_problem_register, facts_from_card
 from .schema import ProblemCard
 
 
@@ -116,6 +116,13 @@ def record_attempt(
         "agent": agent,
         "artifacts": artifacts or [],
     }
+    if axle_verified is not None:
+        # Store verification as an atomic observation.  A later failed AXLE
+        # observation must be able to revoke an earlier successful one.
+        attempt["axle_verified"] = axle_verified
+        attempt["axioms_clean"] = axioms_clean
+    elif axioms_clean:
+        attempt["axioms_clean"] = True
     card.attempts = list(card.attempts or []) + [attempt]
 
     # Status transitions (conservative)

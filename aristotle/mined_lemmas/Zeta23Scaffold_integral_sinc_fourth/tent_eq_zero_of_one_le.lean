@@ -1,29 +1,10 @@
-/-
-# Integral Sinc Fourth
-Category: C Integral
-Target: Zeta23Scaffold.integral_sinc_fourth
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
-
 /-!
 # Integral Sinc Fourth
 Category: C Integral
 Target: Zeta23Scaffold.integral_sinc_fourth
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-We prove `∫ x : ℝ, (sin x / x) ^ 4 = 2 * π / 3`.
-
-The argument is the classical Fourier-analytic one.  Let `tent` be the triangle function
-`t ↦ max (1 - |t|) 0`.  Its Fourier transform is `ξ ↦ sinc (π ξ) ^ 2`.  The multiplication
-(Parseval) formula `∫ 𝓕 f * g = ∫ f * 𝓕 g`, applied with `f = tent` and `g = 𝓕 tent`,
-together with Fourier inversion (`𝓕 (𝓕 tent) = tent ∘ neg`), gives
-
-`∫ sinc (π ξ) ^ 4 dξ = ∫ tent ^ 2 = 2 / 3`,
-
-and a change of variables `x = π ξ` yields the result.
 -/
 
 open scoped BigOperators
@@ -44,11 +25,14 @@ set_option grind.warning false
 
 namespace Zeta23Scaffold
 
-open MeasureTheory FourierTransform Real Complex
+open scoped FourierTransform
+open MeasureTheory Real Complex
 
-/-- The tent (triangle) function, supported on `[-1, 1]`. -/
+/-! ## The tent function and its Fourier transform -/
 
-lemma tent_eq_zero_of_one_le {t : ℝ} (ht : 1 ≤ |t|) : tent t = 0 := by
-  simp only [tent, max_eq_right_iff]
-  linarith
+/-- The tent (triangle) function, supported on `[-1,1]`. -/
+
+lemma tent_eq_zero_of_one_le {x : ℝ} (hx : 1 ≤ |x|) : tent x = 0 := by
+  simp only [tent]
+  exact max_eq_right (by linarith)
 

@@ -1,50 +1,50 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-import Mathlib
-import RequestProject.Savitch.Enc
+import RequestProject.Savitch.Machine
 
 /-!
-# The Savitch simulator and its correctness
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-We build, from a nondeterministic machine `M` and a recursion depth `K`, a
-deterministic machine `savitchDM M K` which decides, by Savitch's recursive midpoint
-search, whether the sink vertex `none` of the configuration graph of `M` is reachable
-from the start vertex within `2 ^ K` steps.  If `cV M ≤ 2 ^ K` this is exactly
-acceptance by `M`.
+/-!
+## Savitch's theorem
+
+We model a space-`s` machine by its configuration graph: it has at most `2 ^ s`
+configurations (`s` bits of workspace), a start configuration, an acceptance
+predicate, and a transition relation (a relation for nondeterministic machines, a
+function for deterministic ones).  A nondeterministic machine accepts when some
+accepting configuration is reachable from the start configuration; a deterministic
+machine accepts when its (unique) run visits an accepting configuration.
+
+The main theorem `CS.savitch` states `NSPACE f ⊆ DSPACE (9 * (f + 1) ^ 2)`, i.e.
+nondeterministic space `f` is contained in deterministic space `O(f ^ 2)`, and
+`CS.PSPACE_eq_NPSPACE` deduces `PSPACE = NPSPACE`.
 -/
 
 namespace CS
-namespace Savitch
 
-variable {Sigma : Type}
+open Savitch
 
+/-- A nondeterministic machine using space `s`: at most `2 ^ s` configurations. -/
+structure NMachine (s : ℕ) where
+  /-- Number of configurations. -/
+  size : ℕ
+  /-- The space bound: `s` bits of workspace. -/
+  hsize : size ≤ 2 ^ s
+  /-- The (nondeterministic) transition relation. -/
+  step : Fin size → Fin size → Bool
+  /-- The initial configuration. -/
+  start : Fin size
+  /-- The accepting configurations. -/
+  acc : Fin size → Bool
 
-noncomputable def advance (M : NMachine Sigma) (u v : Vert M) (i j : ℕ)
-    (st : List (Frame M)) : Raw M :=
-  if j + 1 < cV M then (Mode.call u (mid M (j + 1)) i, (u, v, i, j + 1, false) :: st)
-  else (Mode.ret false, st)
+/-- A nondeterministic machine accepts if some accepting configuration is reachable. -/
 
-/-- One step of the simulator, as a function of the input symbol currently scanned. -/
+def advance (a b mid : Fin n) (st : List (Frame n)) : Raw n :=
+  if h : (mid : ℕ) + 1 < n then
+    (Sum.inl (a, ⟨(mid : ℕ) + 1, h⟩), (a, b, ⟨(mid : ℕ) + 1, h⟩, false) :: st)
+  else (Sum.inr false, st)
+
+/-- One step of the Savitch machine with recursion depth budget `K`. -/

@@ -1,0 +1,113 @@
+{
+  "module": "Brockian.HighAssurance.Revocation",
+  "environment": "lean-4.32.2",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.HighAssurance.Revocation.upReach_refl",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.upReach_step",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.descendant_refl",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.descendant_of_derivedFrom",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.revoke_removes_descendants",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.revoke_monotone",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.revoke_preserves_unrelated",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.revoke_idempotent",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.no_residual_authority",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.derive_derivedFrom",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Revocation.derive_live",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

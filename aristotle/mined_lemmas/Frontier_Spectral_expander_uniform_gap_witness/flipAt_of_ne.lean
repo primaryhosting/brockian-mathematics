@@ -5,6 +5,7 @@ Target: Frontier.Spectral.expander_uniform_gap_witness
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
@@ -21,6 +22,8 @@ open scoped Nat
 open scoped Classical
 open scoped Pointwise
 
+open Matrix
+
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
 set_option synthInstance.maxHeartbeats 20000
@@ -33,15 +36,9 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Finset Matrix SimpleGraph
+/-! ### Arithmetic in `ZMod 2` -/
 
-variable {k : ℕ}
 
-/-! ## The hypercube graph -/
-
-/-- Flip the `i`-th coordinate of a point of the discrete cube `(ZMod 2)^k`. -/
-
-lemma flipAt_of_ne (x : Fin k → ZMod 2) {i j : Fin k} (h : j ≠ i) :
-    flipAt x i j = x j := by
-  simp [flipAt, Function.update_of_ne h]
+lemma flipAt_of_ne {k : ℕ} (x : Cube k) {i j : Fin k} (h : j ≠ i) : flipAt x i j = x j := by
+  simp [flipAt, h]
 

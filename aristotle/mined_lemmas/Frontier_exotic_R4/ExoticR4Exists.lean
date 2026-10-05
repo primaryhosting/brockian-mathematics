@@ -1,4 +1,13 @@
 /-
+# Exotic R 4
+Category: Frontier — Fields Medal Work
+Target: Frontier.exotic_R4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 /-!
 # Exotic R 4
 Category: Frontier — Fields Medal Work
@@ -6,15 +15,14 @@ Target: Frontier.exotic_R4
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped Manifold
+open scoped ContDiff
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -35,42 +43,26 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Setting up the statement
+/-- The standard topological/smooth model `ℝ⁴`. -/
+abbrev R4 : Type := EuclideanSpace ℝ (Fin 4)
 
-We work with the model space `EuclideanSpace ℝ (Fin 4)` and the trivial model with corners
-on it, so that "smooth manifold modelled on `E4`" means a genuine boundaryless smooth
-`4`-manifold in Mathlib's sense. -/
+/-- The standard model with corners on `ℝ⁴` (no boundary). -/
+noncomputable abbrev I4 : ModelWithCorners ℝ R4 R4 := 𝓘(ℝ, R4)
 
-/-- The model space `ℝ⁴`. -/
-abbrev E4 : Type := EuclideanSpace ℝ (Fin 4)
-
-/-- The (boundaryless) model with corners used throughout: `ℝ⁴` modelled on itself. -/
-noncomputable abbrev I4 : ModelWithCorners ℝ E4 E4 := modelWithCornersSelf ℝ E4
-
-/-- A *smooth manifold homeomorphic to `ℝ⁴`*: a topological space `carrier`, equipped with a
-`C^∞` manifold structure modelled on `ℝ⁴`, together with a homeomorphism onto `ℝ⁴`.
-
-Equivalently (and this is how it is used below) this is a smooth structure on the topological
-space `ℝ⁴`, presented invariantly. -/
-structure SmoothR4 : Type 1 where
-  /-- The underlying set. -/
+/-- A smooth (`C^∞`) manifold modelled on `ℝ⁴`, together with a homeomorphism onto `ℝ⁴`.
+This packages "a smooth manifold homeomorphic to `ℝ⁴`". -/
+structure SmoothStructureHomeoR4 where
+  /-- The underlying type. -/
   carrier : Type
-  /-- Its topology. -/
-  topology : TopologicalSpace carrier
-  /-- An atlas of charts with values in `ℝ⁴`. -/
-  charts : @ChartedSpace E4 _ carrier topology
-  /-- The atlas is `C^∞`-compatible, i.e. this is a smooth manifold. -/
-  isManifold : @IsManifold ℝ _ E4 _ _ E4 _ I4 ⊤ carrier topology charts
-  /-- The underlying topological space is homeomorphic to `ℝ⁴`. -/
-  homeomorphicToR4 : Nonempty (@Homeomorph carrier E4 topology _)
+  [top : TopologicalSpace carrier]
+  [charted : ChartedSpace R4 carrier]
+  [manifold : IsManifold I4 ∞ carrier]
+  /-- The witnessing homeomorphism with the standard `ℝ⁴`. -/
+  homeo : carrier ≃ₜ R4
 
-attribute [instance] SmoothR4.topology SmoothR4.charts SmoothR4.isManifold
+/-- Such a smooth manifold is *exotic* if it admits no diffeomorphism onto the standard `ℝ⁴`. -/
 
-/-- Two smooth structures on `ℝ⁴` are *diffeomorphic* when there is a `C^∞` diffeomorphism
-between them. -/
+def ExoticR4Exists : Prop := ∃ M : SmoothStructureHomeoR4, IsExotic M
 
-def ExoticR4Exists : Prop := ∃ A : SmoothR4, IsExoticR4 A
-
-/-! ## Basic properties of the diffeomorphism relation -/
-
-@[refl]
+/-- The "small exotic `ℝ⁴`" form of the statement: some open subset of the standard `ℝ⁴`,
+equipped with its induced smooth structure, is homeomorphic but not diffeomorphic to `ℝ⁴`. -/

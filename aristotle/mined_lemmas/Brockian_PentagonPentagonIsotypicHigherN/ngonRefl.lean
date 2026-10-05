@@ -1,11 +1,3 @@
-/-
-# Pentagon Pentagon Isotypic Higher N
-Category: Brockian Corpus
-Target: Brockian.PentagonPentagonIsotypicHigherN
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,47 +8,27 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+-- Note: Lean 4 requires every `import` to precede any module docstring, so the header
+-- comment above sits immediately after the single `import Mathlib` line.
+
 open scoped BigOperators
 open scoped Real
-open scoped Nat
 open scoped Classical
-open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+set_option maxHeartbeats 1000000
 
 namespace Brockian
 
-/-! ## Setup
+/-- The vertex space of the regular `n`-gon: complex-valued functions on the vertex
+set `ZMod n`.  The dihedral group `D_n` acts on it through the rotation `ngonShift`
+and the reflection `ngonRefl`. -/
+abbrev NGon (n : ℕ) : Type := ZMod n → ℂ
 
-We model a function on the vertices of a regular `n`-gon as a function `ℤ → ℝ` which is
-`n`-periodic (the vertex labelled `j` is the vertex `j mod n`).  The dihedral group `D n`
-acts by the rotation `j ↦ j + 1` and the reflection `j ↦ -j`.
+/-- Rotation of the `n`-gon by `t` vertices, acting on functions by translation. -/
 
-The `k`-th *mode subspace* is the span of the two "Fourier" functions
-`j ↦ cos (2πkj/n)` and `j ↦ sin (2πkj/n)`.  For the pentagon (`n = 5`) the modes `k = 1, 2`
-are exactly the two two-dimensional isotypic components of the vertex representation of
-`D 5`; the results below establish the corresponding statements for arbitrary `n`. -/
-
-/-- The cosine Fourier mode of index `k` on the vertices of the `n`-gon. -/
-
-def ngonRefl : (ℤ → ℝ) →ₗ[ℝ] (ℤ → ℝ) where
-  toFun f := fun j => f (-j)
+def ngonRefl (n : ℕ) : NGon n →ₗ[ℂ] NGon n where
+  toFun f := fun k => f (-k)
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-/-- The `k`-th mode subspace of the `n`-gon: the span of the `k`-th cosine and sine modes. -/
+/-- The adjacency operator of the cycle graph on the vertices of the `n`-gon. -/

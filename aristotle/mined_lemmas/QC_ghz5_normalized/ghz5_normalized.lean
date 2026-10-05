@@ -1,4 +1,4 @@
-/-
+/-!
 # Ghz 5 Normalized
 Category: Quantum Computing
 Target: QC.ghz5_normalized
@@ -8,31 +8,29 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped Classical
-
 namespace QC
 
-/-- Computational basis states of 5 qubits are indexed by `Fin 5 → Bool`; the state space is
-the Hilbert space `EuclideanSpace ℂ (Fin 5 → Bool)` (dimension `2^5 = 32`). -/
-abbrev Qubits5 := EuclideanSpace ℂ (Fin 5 → Bool)
+/-- Computational basis labels for 5 qubits: functions `Fin 5 → Bool`
+(so the state space `EuclideanSpace ℂ (Fin 5 → Bool)` is the 32-dimensional
+tensor product of five qubit spaces). -/
+abbrev Qubits5 := Fin 5 → Bool
 
-/-- The 5-qubit GHZ state `(|00000⟩ + |11111⟩)/√2`. -/
+/-- The all-zeros label `|00000⟩`. -/
 
 theorem ghz5_normalized : ‖ghz5‖ = 1 := by
-  have hne : (fun _ => false : Fin 5 → Bool) ≠ (fun _ => true) := by
-    intro h; have := congrFun h 0; simp at this
+  have key : ∀ v : Qubits5, ‖(ghz5.ofLp) v‖ ^ 2
+      = (if v = allZero then (1 : ℝ) / 2 else 0)
+        + (if v = allOne then (1 : ℝ) / 2 else 0) := by
+    intro v
+    rcases eq_or_ne v allZero with h1 | h1
+    · subst h1
+      simp [ghz5, allZero_ne_allOne, Complex.norm_real, Real.sq_sqrt]
+    · rcases eq_or_ne v allOne with h2 | h2
+      · subst h2
+        simp [ghz5, Ne.symm allZero_ne_allOne, Complex.norm_real, Real.sq_sqrt]
+      · simp [ghz5, h1, h2]
   rw [EuclideanSpace.norm_eq]
-  have h : ∀ b : Fin 5 → Bool, ‖(ghz5 : Qubits5).ofLp b‖ ^ 2
-      = (if b = (fun _ => false) then (1 / 2 : ℝ) else 0)
-        + (if b = (fun _ => true) then (1 / 2 : ℝ) else 0) := by
-    intro b
-    simp only [ghz5, WithLp.ofLp_toLp]
-    by_cases h0 : b = (fun _ => false)
-    · subst h0; simp [hne]
-    · by_cases h1 : b = (fun _ => true)
-      · subst h1; simp [Ne.symm hne]
-      · simp [h0, h1]
-  simp only [h, Finset.sum_add_distrib, Finset.sum_ite_eq' Finset.univ, Finset.mem_univ, if_true]
+  simp only [key, Finset.sum_add_distrib, Finset.sum_ite_eq' Finset.univ]
   norm_num
 
 end QC

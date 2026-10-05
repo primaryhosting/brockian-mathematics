@@ -1,0 +1,55 @@
+/-
+# Sato Tate
+Category: Frontier Math
+Target: Math2.sato_tate
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Sato Tate
+Category: Frontier Math
+Target: Math2.sato_tate
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped ENNReal NNReal
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Math2
+
+open MeasureTheory Filter Topology Set
+
+/-- The Sato–Tate density on `[0, π]`: `θ ↦ (2/π) sin²θ`. -/
+
+lemma satoTate_apply {s : Set ℝ} (hs : MeasurableSet s) :
+    satoTateMeasure s = ∫⁻ θ in s ∩ Icc 0 Real.pi, ENNReal.ofReal (satoTateDensity θ) := by
+  rw [satoTateMeasure, withDensity_apply _ hs, Measure.restrict_restrict hs]
+
+instance : IsProbabilityMeasure satoTateMeasure := by
+  constructor
+  rw [satoTate_apply MeasurableSet.univ, Set.univ_inter, ← ofReal_integral_eq_lintegral_ofReal]
+  · rw [MeasureTheory.integral_Icc_eq_integral_Ioc,
+      ← intervalIntegral.integral_of_le Real.pi_nonneg]
+    simp [satoTateDensity, intervalIntegral.integral_const_mul, integral_sin_sq]
+  · exact continuous_satoTateDensity.integrableOn_Icc
+  · exact Filter.Eventually.of_forall satoTateDensity_nonneg
+
+/-- The Sato–Tate measure as a `ProbabilityMeasure`. -/

@@ -1,26 +1,34 @@
+/-
+# Cos Trace Norm 2003
+Category: Brockian Corpus
+Target: Brockian.CosTraceNorm2003
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
-# Trace-norm bounds for the matrix cosine and sine (`CosTraceNorm` family)
-
-This file develops, from scratch, the Schatten 1-norm (trace norm) of a complex square matrix,
-the Hermitian functional calculus `Brockian.hermFun`, and proves a family of trace-norm bounds
-for the matrix cosine and sine of a Hermitian matrix.
+# Cos Trace Norm 2003
+Category: Brockian Corpus
+Target: Brockian.CosTraceNorm2003
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxRecDepth 8000
-
 open scoped BigOperators
-open Matrix Polynomial
+open scoped Real
+open scoped ComplexOrder
 
 namespace Brockian
 
+open Matrix Finset
+
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- The trace norm (Schatten 1-norm) of a complex square matrix: the sum of its singular
-values, i.e. the sum of the square roots of the eigenvalues of `Aᴴ * A`. -/
+/-- The `i`-th singular value of a complex square matrix `A`: the square root of the `i`-th
+eigenvalue of the positive semidefinite matrix `Aᴴ * A`. -/
 
 lemma traceNorm_nonneg (A : Matrix n n ℂ) : 0 ≤ traceNorm A :=
-  Finset.sum_nonneg fun _ _ => Real.sqrt_nonneg _
+  Finset.sum_nonneg fun i _ => singularValue_nonneg A i
 
-/-- Sanity check: the trace norm of the identity matrix is the size of the matrix. -/

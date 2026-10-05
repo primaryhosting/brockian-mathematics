@@ -1,52 +1,49 @@
 import Mathlib
 
-/-!
-# Riemann Roch Curve
-Category: Frontier Math
-Target: Math2.riemann_roch_curve
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
+open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-/-!
-## Scope and setup
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-We formalise the Riemann–Roch theorem for the projective line `ℙ¹` over an algebraically
-closed field `k`, a smooth projective curve, with everything built from scratch:
+set_option grind.warning false
 
-* the places of `ℙ¹` are the points `a : k` of the affine line together with the point at
-  infinity, and the associated discrete valuations are `ordAt a` and `ordInf`;
-* a divisor is a finitely supported family of integers on the affine points together with a
-  coefficient at infinity, and `Divisor.deg` is its degree;
-* `RRSpace D` is the Riemann-Roch space `L(D) = {f : div f + D ≥ 0}` and
-  `ell D = ℓ(D) = dim_k L(D)`;
-* `canonicalDivisor k` is the divisor `-2·∞` of the differential `dt`, and the genus is
-  defined intrinsically as `genus k = ℓ(K)`.
-
-The main theorem `Math2.riemann_roch_curve` states `ℓ(D) - ℓ(K - D) = deg D + 1 - g`.
-It is deduced from the computation `Math2.ell_eq : ℓ(D) = max (deg D + 1) 0`, which is proved
-by exhibiting an explicit `k`-linear isomorphism between `L(D)` and the space of polynomials
-of degree at most `deg D`.
+/-
+General linear algebra helpers: quotients `b / a` of nested submodules and additivity
+of their dimensions along chains.
 -/
+import Mathlib
+
+set_option maxHeartbeats 1000000
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
 
 namespace Math2
 
-open Polynomial
+open Submodule
 
-variable {k : Type*} [Field k]
+variable {k M N : Type*} [Field k] [AddCommGroup M] [Module k M] [AddCommGroup N] [Module k N]
 
-/-! ## Orders of vanishing (the discrete valuations of `ℙ¹`) -/
+/-- The quotient `b / a` of two submodules (interesting when `a ≤ b`). -/
+abbrev Qt (a b : Submodule k M) : Type _ := b ⧸ a.submoduleOf b
 
-/-- The order of vanishing at the point `a` of the affine line, of a rational function `f`. -/
+/-- `b / ⊥ ≃ b`. -/
 
-@[simp] theorem mulEquiv_apply (h : RatFunc k) (hh : h ≠ 0) (f : RatFunc k) :
-    mulEquiv h hh f = f * h := rfl
+@[simp] lemma mulEquiv_apply {u : K} (hu : u ≠ 0) (x : K) :
+    (mulEquiv (k := k) hu) x = u * x := rfl
 
-/-- The space of polynomials of degree `< N`, viewed inside the field of rational functions. -/

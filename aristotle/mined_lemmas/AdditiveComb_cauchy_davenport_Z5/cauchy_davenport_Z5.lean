@@ -31,18 +31,12 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-
 namespace AdditiveComb
 
-/-- Cauchy–Davenport, concrete instance: in `ZMod 5`, for `A = {0,1}` and `B = {0,2}`,
-the sumset `A + B = {0,1,2,3}` has cardinality `4`, which is at least
-`min 5 (|A| + |B| - 1) = 3`. -/
+/-- The sumset of `A = {0,1}` and `B = {0,2}` in `ZMod 5` is `{0,1,2,3}`. -/
 
 theorem cauchy_davenport_Z5 :
-    (({0, 1} : Finset (ZMod 5)) + ({0, 2} : Finset (ZMod 5))).card = 4 ∧
-      (({0, 1} : Finset (ZMod 5)) + ({0, 2} : Finset (ZMod 5))).card ≥
-        min 5 (({0, 1} : Finset (ZMod 5)).card + ({0, 2} : Finset (ZMod 5)).card - 1) := by
-  constructor <;> decide
+    (({0, 1} : Finset (ZMod 5)) + ({0, 2} : Finset (ZMod 5))).card = 4 := by
+  decide
 
-end AdditiveComb
-
+/-- The Cauchy–Davenport bound `|A + B| ≥ min p (|A| + |B| - 1)` in this concrete instance. -/

@@ -39,29 +39,31 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many even perfect numbers is a famous open problem, equivalent
-to the infinitude of Mersenne primes.  What is proved here is exactly that equivalence: the
-set of even perfect numbers is infinite **iff** the set of Mersenne primes is infinite.
-
-The mathematical input is the Euclid–Euler theorem.  Mathlib contains it in the
-`Archive` (see `Archive/Wiedijk100Theorems/PerfectNumbers.lean`, Theorem 70 of the
-100 Theorems list, by Aaron Anderson), but the `Archive` is not importable from a
-downstream project, so the relevant statements are reproved here, following that file.
 -/
 
-namespace Brockian
+/-!
+The infinitude of even perfect numbers is equivalent to the infinitude of Mersenne primes,
+which is a well-known open problem.  What is proved here is therefore the (unconditional)
+*reduction*: the set of even perfect numbers is infinite **iff** the set of exponents `p`
+with `2 ^ p - 1` prime is infinite.
 
-namespace MersennePerfect
+The Euclid–Euler development below (`sigma_two_pow_eq_mersenne_succ`,
+`perfect_two_pow_mul_mersenne_of_prime`, `eq_two_pow_mul_prime_mersenne_of_even_perfect`,
+`even_and_perfect_iff`) follows the proof of Theorem 70 of the 100 theorems list as
+developed by Aaron Anderson in the Mathlib `Archive` (Apache 2.0); it is reproduced here
+because the `Archive` is not part of the importable `Mathlib` library.
+-/
 
-open ArithmeticFunction Finset
+namespace Brockian.MersennePerfect
+
+open Nat ArithmeticFunction Finset
 
 open scoped sigma
 
-/-- `σ 1 (2 ^ k) = 2 ^ (k+1) - 1`. -/
+/-! ## The Euclid–Euler theorem -/
 
-theorem eq_two_pow_mul_prime_mersenne_of_even_perfect {n : ℕ} (ev : Even n)
-    (perf : Nat.Perfect n) :
+
+theorem eq_two_pow_mul_prime_mersenne_of_even_perfect {n : ℕ} (ev : Even n) (perf : Nat.Perfect n) :
     ∃ k : ℕ, Nat.Prime (mersenne (k + 1)) ∧ n = 2 ^ k * mersenne (k + 1) := by
   have hpos := perf.2
   rcases eq_two_pow_mul_odd hpos with ⟨k, m, rfl, hm⟩
@@ -94,10 +96,10 @@ theorem eq_two_pow_mul_prime_mersenne_of_even_perfect {n : ℕ} (ev : Even n)
         rw [← jcon2, one_mul]
         exact even_iff_two_dvd.mp ev
       | .succ k =>
-        apply ne_of_lt _ jcon2
+        apply _root_.ne_of_lt _ jcon2
         rw [mersenne, ← Nat.pred_eq_sub_one, Nat.lt_pred_iff, ← pow_one (Nat.succ 1)]
         apply pow_lt_pow_right₀ (Nat.lt_succ_self 1) (Nat.succ_lt_succ k.succ_pos)
     contrapose! hm
     simp [hm]
 
-/-- The Euclid–Euler theorem characterizing even perfect numbers. -/
+/-- The Euclid-Euler theorem characterizing even perfect numbers -/

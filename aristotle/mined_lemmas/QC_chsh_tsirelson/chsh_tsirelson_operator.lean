@@ -34,29 +34,41 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-!
-The quantum CHSH operator `A₀B₀ + A₀B₁ + A₁B₀ - A₁B₁`, built from a CHSH tuple of
-observables in a C⋆-algebra (e.g. the bounded operators on a Hilbert space), has norm
-at most `2√2`.  This is Tsirelson's bound.
+## Overview
 
-The order-theoretic core is Mathlib's `tsirelson_inequality`
-(`Mathlib/Algebra/Star/CHSH.lean`), which gives
-`A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁ ≤ √2 ^ 3 • 1`.
-Here we upgrade that to a bound on the C⋆-norm: applying it also to the CHSH tuple
-`(A₀, A₁, -B₀, -B₁)` yields the matching lower bound, and a two-sided order bound on a
-selfadjoint element gives a norm bound.
+For a CHSH tuple `A₀, A₁, B₀, B₁` (four self-adjoint involutions, with the `Aᵢ` commuting with
+the `Bⱼ`) inside a unital C*-algebra, the CHSH operator
+
+  `M = A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁`
+
+satisfies Tsirelson's bound `‖M‖ ≤ 2 √2`.
+
+The proof is the classical one: one checks the algebraic identity
+
+  `M ^ 2 = 4 - [A₀, A₁] * [B₀, B₁]`,
+
+each commutator has norm at most `2` (since each entry is a self-adjoint involution, hence of
+norm one), so `‖M ^ 2‖ ≤ 8`; since `M` is self-adjoint, the C*-identity gives
+`‖M‖ ^ 2 = ‖M ^ 2‖ ≤ 8`, i.e. `‖M‖ ≤ 2 √2`.
+
+The statement is given for an arbitrary unital C*-algebra; since the algebra `H →L[ℂ] H` of
+bounded operators on a Hilbert space is such an algebra, the usual statement about the operator
+norm of the quantum CHSH operator follows (see `QC.chsh_tsirelson_operator`).
 -/
 
 namespace QC
 
-variable {A : Type*} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A]
+open scoped Real
 
-/-- A selfadjoint element of a unital C⋆-algebra squeezed between `-r` and `r`
-has norm at most `r`. -/
+variable {R : Type*}
+
+/-- The CHSH operator associated with four observables. -/
 
 theorem chsh_tsirelson_operator {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
-    [CompleteSpace H] (A₀ A₁ B₀ B₁ : H →L[ℂ] H) (T : IsCHSHTuple A₀ A₁ B₀ B₁) :
-    ‖A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁‖ ≤ 2 * Real.sqrt 2 :=
-  chsh_tsirelson A₀ A₁ B₀ B₁ T
+    [CompleteSpace H] [Nontrivial H] {A₀ A₁ B₀ B₁ : H →L[ℂ] H}
+    (T : IsCHSHTuple A₀ A₁ B₀ B₁) :
+    ‖chshOp A₀ A₁ B₀ B₁‖ ≤ 2 * Real.sqrt 2 :=
+  chsh_tsirelson T
 
 end QC
 

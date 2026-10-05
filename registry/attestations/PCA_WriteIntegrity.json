@@ -1,0 +1,79 @@
+{
+  "module": "PCA.WriteIntegrity",
+  "environment": "lean-4.32.2",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "PCA.WriteIntegrity.upd_of_ne",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "PCA.WriteIntegrity.member_check_prevents_cross_tenant_write",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "PCA.WriteIntegrity.foreign_owner_stable",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "PCA.WriteIntegrity.foldl_step_preserves_foreign",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "PCA.WriteIntegrity.step_of_authorized",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "PCA.WriteIntegrity.rawWrite_can_cross_tenant",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "PCA.WriteIntegrity.with_check_true_admits_forge",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

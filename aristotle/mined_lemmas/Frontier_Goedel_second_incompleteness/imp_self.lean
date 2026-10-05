@@ -1,3 +1,13 @@
+/-
+# Goedel Second Incompleteness
+Category: Frontier — Set Theory
+Target: Frontier.Goedel_second_incompleteness
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 /-!
 # Goedel Second Incompleteness
 Category: Frontier — Set Theory
@@ -6,78 +16,75 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Mathlib does not contain any arithmetization of syntax, so the statement
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-  "no consistent recursively axiomatized theory extending `PA` proves its own consistency"
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-is formalized here in the standard *abstract* (Hilbert–Bernays–Löb) way, which is exactly the
-Lean-checked reduction requested:
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-* A `ProvabilitySystem` packages a set of sentences with implication `imp`, falsum `bot`, a
-  provability predicate `Prov` (the theorems of the theory) and a *provability operator* `box`
-  (the arithmetized provability predicate `Prov_T(⌜·⌝)` of the theory).
-* The hypotheses are precisely: closure of `Prov` under modus ponens together with the
-  implicational Hilbert axioms `K` and `S` (available in any theory extending `PA`), and the
-  three Hilbert–Bernays–Löb derivability conditions
-
-    D1: `⊢ p  →  ⊢ □p`,
-    D2: `⊢ □(p → q) → (□p → □q)`,
-    D3: `⊢ □p → □□p`.
-
-  These hold for the standard provability predicate of any consistent recursively axiomatized
-  theory extending `PA` (this arithmetical fact is the part not formalized here).
-* The remaining input is the diagonal lemma: existence of a Gödel sentence `g` with
-  `⊢ g ↔ ¬□g`.
-
-Under exactly these hypotheses we prove, fully formally:
-
-* `Frontier.Goedel_first_incompleteness` : a consistent such theory does not prove `g`;
-* `Frontier.Goedel_second_incompleteness` : a consistent such theory does not prove its own
-  consistency statement `Con := ¬□⊥`.
-
-The framework is shown to be non-vacuous by `Frontier.toyExample`, an explicitly constructed
-provability system satisfying all the hypotheses, including consistency and the diagonal lemma.
--/
+set_option grind.warning false
 
 namespace Frontier
 
-/-- An abstract provability system: the syntactic skeleton (`imp`, `bot`, `box`) of a theory
-together with its set `Prov` of theorems, satisfying implicational logic and the
-Hilbert–Bernays–Löb derivability conditions. -/
-structure ProvabilitySystem where
-  /-- The type of sentences of the theory. -/
-  Sentence : Type
-  /-- Falsum. -/
-  bot : Sentence
-  /-- Implication. -/
-  imp : Sentence → Sentence → Sentence
-  /-- The provability operator: `box p` is the arithmetized statement "`p` is provable". -/
-  box : Sentence → Sentence
-  /-- `Prov p` says that `p` is a theorem of the theory. -/
-  Prov : Sentence → Prop
-  /-- Hilbert axiom `K`. -/
-  ax_K : ∀ p q, Prov (imp p (imp q p))
-  /-- Hilbert axiom `S`. -/
-  ax_S : ∀ p q r, Prov (imp (imp p (imp q r)) (imp (imp p q) (imp p r)))
-  /-- Closure under modus ponens. -/
-  mp : ∀ {p q}, Prov (imp p q) → Prov p → Prov q
-  /-- First derivability condition (necessitation). -/
-  HBL1 : ∀ {p}, Prov p → Prov (box p)
-  /-- Second derivability condition (distribution). -/
-  HBL2 : ∀ p q, Prov (imp (box (imp p q)) (imp (box p) (box q)))
-  /-- Third derivability condition. -/
-  HBL3 : ∀ p, Prov (imp (box p) (box (box p)))
+/-!
+## Setting
 
-namespace ProvabilitySystem
+Gödel's second incompleteness theorem says: *no consistent, recursively axiomatized
+theory `T` extending `PA` proves its own consistency*.
 
-variable (T : ProvabilitySystem)
+The content of the hypothesis "recursively axiomatized extension of `PA`" is used in
+exactly two places in the classical proof:
 
-/-- Negation, defined as implication to falsum. -/
+* the *Hilbert–Bernays–Löb derivability conditions* for the arithmetized provability
+  predicate `Pr_T`, namely
+  - **D1** `T ⊢ σ  ⟹  T ⊢ Pr_T(⌜σ⌝)` (necessitation),
+  - **D2** `T ⊢ Pr_T(⌜σ → τ⌝) → (Pr_T(⌜σ⌝) → Pr_T(⌜τ⌝))` (distribution),
+  - **D3** `T ⊢ Pr_T(⌜σ⌝) → Pr_T(⌜Pr_T(⌜σ⌝)⌝)`;
+* the *diagonal (fixed point) lemma*: for every sentence `A` there is a sentence `γ`
+  with `T ⊢ γ ↔ (Pr_T(⌜γ⌝) → A)`.
 
-theorem imp_self (p : T.Sentence) : T.Prov (T.imp p p) :=
-  T.mp (T.mp (T.ax_S p (T.imp p p) p) (T.ax_K p (T.imp p p))) (T.ax_K p p)
+We therefore formalize the theorem in exactly this shape.  The language of sentences is
+the modal language with `⊥`, `→` and a unary provability operator `□` (the operator
+`□σ` stands for the arithmetical sentence `Pr_T(⌜σ⌝)`), and `Prv T` is the smallest
+relation containing the axioms of `T`, closed under classical propositional logic and
+satisfying **D1**, **D2**, **D3**.  The consistency statement `Con_T` is `¬ □⊥`.
+
+The main theorem `Frontier.Goedel_second_incompleteness` states that a consistent such
+theory that admits fixed points does not prove `Con_T`.  It is obtained from Löb's
+theorem, proved here from scratch inside the Hilbert calculus.
+
+`Frontier.Goedel_second_incompleteness_nonvacuous` shows that the hypotheses of the
+main theorem are satisfiable, so the statement is not vacuously true.
+-/
+
+/-- Sentences of the language of provability: `⊥`, implication, and the provability
+operator `□` (read `□ p` as `Pr_T(⌜p⌝)`). -/
+inductive Form : Type
+  | bot : Form
+  | imp : Form → Form → Form
+  | box : Form → Form
+  deriving DecidableEq
+
+namespace Form
+
+/-- Negation, `¬ p := p → ⊥`. -/
+
+theorem imp_self (p : Form) : Prv T (Form.imp p p) :=
+  imp_mp (Prv.k1 p (Form.imp p p)) (Prv.k1 p p)
 
 /-- Weakening: from `⊢ q` infer `⊢ p → q`. -/

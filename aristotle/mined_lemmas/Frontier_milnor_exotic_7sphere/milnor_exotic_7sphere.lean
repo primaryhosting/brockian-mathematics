@@ -1,39 +1,78 @@
 import Mathlib
-import RequestProject.AlexanderTrick
 
 /-!
-# Twisted spheres
-
-A *twisted sphere* is obtained by gluing two copies of the closed `n`-disk along their boundary
-`𝕊ⁿ⁻¹` by a homeomorphism `f`.  All the known exotic spheres in dimension `7` arise this way
-(Milnor's `S³`-bundles over `S⁴` carry Morse functions with exactly two critical points, which exhibits
-them as twisted spheres).
-
-The main result of this file is that **every twisted sphere is homeomorphic to the standard
-sphere**: this is the topological half of Milnor's theorem, and it is proved here in full, for
-every dimension `n`, using the Alexander trick from `RequestProject.AlexanderTrick`.
+# Milnor Exotic 7 Sphere
+Category: Frontier Abel
+Target: Frontier.milnor_exotic_7sphere
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped Manifold
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-open Metric
+/-! ## Smooth 7-manifolds
 
-/-- The unit sphere `𝕊ⁿ⁻¹ ⊆ ℝⁿ`. -/
-abbrev Sph (n : ℕ) : Type := sphere (0 : EuclideanSpace ℝ (Fin n)) 1
+We package a smooth (`C^∞`) 7-dimensional manifold without boundary, modelled on
+`EuclideanSpace ℝ (Fin 7)`, as a bundled structure so that we can quantify over such
+objects. -/
 
-/-- The closed unit disk `Dⁿ ⊆ ℝⁿ`. -/
-abbrev Dsk (n : ℕ) : Type := closedBall (0 : EuclideanSpace ℝ (Fin n)) 1
+/-- The model space for 7-dimensional smooth manifolds. -/
+abbrev E7 : Type := EuclideanSpace ℝ (Fin 7)
 
+/-- A bundled smooth (`C^∞`) 7-manifold without boundary. -/
+structure Smooth7Manifold where
+  /-- The underlying type of points. -/
+  carrier : Type
+  [top : TopologicalSpace carrier]
+  [charted : ChartedSpace E7 carrier]
+  [smooth : IsManifold (𝓘(ℝ, E7)) ⊤ carrier]
 
-theorem milnor_exotic_7sphere (f : Sph 7 ≃ₜ Sph 7)
-    (charts : ChartedSpace E7 (TwistedSphere f))
-    (smooth : IsManifold (𝓡 7) ∞ (TwistedSphere f))
-    (hnd : IsEmpty (TwistedSphere f ≃ₘ⟮𝓡 7, 𝓡 7⟯ S7)) :
-    ExoticSevenSphereExists :=
-  ⟨TwistedSphere f, inferInstance, charts, smooth, twistedSphereHomeomorphSphere f, hnd⟩
+attribute [instance] Smooth7Manifold.top Smooth7Manifold.charted Smooth7Manifold.smooth
 
-/-- **Milnor's exotic 7-sphere, as an abstract Lean-checked reduction.**
+namespace Smooth7Manifold
 
-If `P` is any predicate on smooth `7`-manifolds which is invariant under diffeomorphism, and if
-some smooth `7`-manifold `M` is homeomorphic to the standard `7`-sphere while `P` separates `M`
-from `𝕊⁷`, then an exotic `7`-sphere exists. -/
+/-- Two bundled smooth 7-manifolds are *homeomorphic* if their underlying topological
+spaces are homeomorphic. -/
+
+theorem milnor_exotic_7sphere
+    (M : ℤ → Smooth7Manifold)
+    (hHomeo : ∀ h : ℤ, Smooth7Manifold.Homeomorphic (M h) standardSphere7)
+    (lam : Smooth7Manifold → ZMod 7)
+    (hlam_inv : ∀ A B : Smooth7Manifold, Smooth7Manifold.Diffeomorphic A B → lam A = lam B)
+    (hlam_M : ∀ h : ℤ, lam (M h) = milnorLambda h)
+    (hlam_std : lam standardSphere7 = 0) :
+    ∃ N : Smooth7Manifold,
+      Smooth7Manifold.Homeomorphic N standardSphere7 ∧
+        ¬ Smooth7Manifold.Diffeomorphic N standardSphere7 := by
+  refine ⟨M 2, hHomeo 2, ?_⟩
+  intro hdiff
+  have h1 : lam (M 2) = lam standardSphere7 := hlam_inv _ _ hdiff
+  rw [hlam_M 2, hlam_std] at h1
+  exact milnorLambda_two_ne_zero h1
+
+end Frontier
+

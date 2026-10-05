@@ -2,13 +2,17 @@ import Mathlib
 import RequestProject.GoldbachWheelK2_947
 
 /-!
-Companion file: certifies that the self-contained primality predicate
-`Brockian.IsPrime` used in `RequestProject/GoldbachWheelK2_947.lean` coincides with
-Mathlib's `Nat.Prime`, and restates the main theorem in Mathlib terms.
+# Goldbach Wheel K 2 947 — Mathlib interface
+
+The target theorem `Brockian.GoldbachWheelK2_947` lives in the self-contained file
+`RequestProject/GoldbachWheelK2_947.lean` (which carries no imports, since its header
+comment must be the first thing in the file). Here we identify the primality notion used
+there with Mathlib's `Nat.Prime` and restate the result in Mathlib terms.
 -/
 
 namespace Brockian
 
+/-- The self-contained primality predicate agrees with Mathlib's `Nat.Prime`. -/
 
-def isPrimeB (n : Nat) : Bool := 2 ≤ n && trialDiv n n 2
+def isPrimeB (n : Nat) : Bool := decide (2 ≤ n) && noDivBelow n (trialBound n)
 

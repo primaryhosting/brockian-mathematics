@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Equidistribution Of Asymptotic
-Category: Brockian (Open Discharge)
-Target: Brockian.Equidistribution.equidistribution_of_asymptotic
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,171 +33,132 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open MeasureTheory Filter Topology AddCircle
+open scoped BigOperators
+open scoped Real
+open scoped Classical
+
+open Filter Topology
 
 namespace Brockian.Equidistribution
 
-/-- The Cesàro (Birkhoff) average of `f` along the first `N` terms of the sequence `x`. -/
+/-- The number of indices `n < N` whose fractional part `Int.fract (x n)` is `< c`. -/
+noncomputable def countLT (x : ℕ → ℝ) (N : ℕ) (c : ℝ) : ℕ :=
+  ((Finset.range N).filter fun n => Int.fract (x n) < c).card
 
-noncomputable def cesaroAvg (x : ℕ → AddCircle (1 : ℝ)) (f : AddCircle (1 : ℝ) → ℂ) (N : ℕ) : ℂ :=
-  (N : ℂ)⁻¹ * ∑ n ∈ Finset.range N, f (x n)
+/-- The number of indices `n < N` whose fractional part lies in `[a, b)`. -/
+noncomputable def countIco (x : ℕ → ℝ) (N : ℕ) (a b : ℝ) : ℕ :=
+  ((Finset.range N).filter fun n => Int.fract (x n) ∈ Set.Ico a b).card
 
-section Basic
+/-- The empirical distribution function of the first `N` terms. -/
+noncomputable def edf (x : ℕ → ℝ) (N : ℕ) (c : ℝ) : ℝ := (countLT x N c : ℝ) / N
 
-variable (x : ℕ → AddCircle (1 : ℝ))
+lemma countLT_mono (x : ℕ → ℝ) (N : ℕ) {c c' : ℝ} (h : c ≤ c') :
+    countLT x N c ≤ countLT x N c' := by
+  refine Finset.card_le_card ?_
+  intro n hn
+  simp only [Finset.mem_filter] at hn ⊢
+  exact ⟨hn.1, lt_of_lt_of_le hn.2 h⟩
 
-lemma cesaroAvg_add (g₁ g₂ : C(AddCircle (1 : ℝ), ℂ)) (N : ℕ) :
-    cesaroAvg x (⇑(g₁ + g₂)) N = cesaroAvg x g₁ N + cesaroAvg x g₂ N := by
-  simp only [cesaroAvg, ContinuousMap.coe_add, Pi.add_apply, Finset.sum_add_distrib, mul_add]
+lemma countLT_le (x : ℕ → ℝ) (N : ℕ) (c : ℝ) : countLT x N c ≤ N := by
+  simpa using Finset.card_filter_le (Finset.range N) (fun n => Int.fract (x n) < c)
 
-lemma cesaroAvg_sub (g₁ g₂ : C(AddCircle (1 : ℝ), ℂ)) (N : ℕ) :
-    cesaroAvg x (⇑(g₁ - g₂)) N = cesaroAvg x g₁ N - cesaroAvg x g₂ N := by
-  simp only [cesaroAvg, ContinuousMap.coe_sub, Pi.sub_apply, Finset.sum_sub_distrib, mul_sub]
+lemma edf_nonneg (x : ℕ → ℝ) (N : ℕ) (c : ℝ) : 0 ≤ edf x N c :=
+  div_nonneg (Nat.cast_nonneg _) (Nat.cast_nonneg _)
 
-lemma cesaroAvg_smul (c : ℂ) (g : C(AddCircle (1 : ℝ), ℂ)) (N : ℕ) :
-    cesaroAvg x (⇑(c • g)) N = c * cesaroAvg x g N := by
-  simp only [cesaroAvg, ContinuousMap.coe_smul, Pi.smul_apply, smul_eq_mul, ← Finset.mul_sum]
-  ring
+lemma edf_le_one (x : ℕ → ℝ) (N : ℕ) (c : ℝ) : edf x N c ≤ 1 := by
+  rcases Nat.eq_zero_or_pos N with hN | hN
+  · simp [edf, hN]
+  · rw [edf, div_le_one (by exact_mod_cast hN)]
+    exact_mod_cast countLT_le x N c
 
-lemma cesaroAvg_zero : cesaroAvg x (⇑(0 : C(AddCircle (1 : ℝ), ℂ))) = fun _ => 0 := by
-  funext N; simp [cesaroAvg]
+lemma edf_mono (x : ℕ → ℝ) (N : ℕ) {c c' : ℝ} (h : c ≤ c') : edf x N c ≤ edf x N c' := by
+  unfold edf
+  gcongr
+  exact_mod_cast countLT_mono x N h
 
-lemma cesaroAvg_fourier_zero {N : ℕ} (hN : 1 ≤ N) :
-    cesaroAvg x (fourier (T := 1) 0) N = 1 := by
-  have hne : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (by omega)
-  simp [cesaroAvg, inv_mul_cancel₀ hne]
+/-- Splitting the count below `b` into the count below `a` and the count in `[a, b)`. -/
+lemma countLT_add_countIco (x : ℕ → ℝ) (N : ℕ) {a b : ℝ} (hab : a ≤ b) :
+    countLT x N a + countIco x N a b = countLT x N b := by
+  classical
+  have h := Finset.card_filter_add_card_filter_not
+    (s := (Finset.range N).filter fun n => Int.fract (x n) < b)
+    (p := fun n => Int.fract (x n) < a)
+  rw [Finset.filter_filter, Finset.filter_filter] at h
+  have h1 : ((Finset.range N).filter
+      fun n => Int.fract (x n) < b ∧ Int.fract (x n) < a)
+      = (Finset.range N).filter fun n => Int.fract (x n) < a := by
+    apply Finset.filter_congr
+    intro n _
+    constructor
+    · exact fun h => h.2
+    · exact fun h => ⟨lt_of_lt_of_le h hab, h⟩
+  have h2 : ((Finset.range N).filter
+      fun n => Int.fract (x n) < b ∧ ¬ Int.fract (x n) < a)
+      = (Finset.range N).filter fun n => Int.fract (x n) ∈ Set.Ico a b := by
+    apply Finset.filter_congr
+    intro n _
+    simp only [Set.mem_Ico, not_lt]
+    exact and_comm
+  rw [h1, h2] at h
+  exact h
 
-/-- The Cesàro averages are bounded by the sup-norm. -/
-
-lemma norm_cesaroAvg_le (f : C(AddCircle (1 : ℝ), ℂ)) (N : ℕ) :
-    ‖cesaroAvg x f N‖ ≤ ‖f‖ := by
-  rcases Nat.eq_zero_or_pos N with h | h
-  · simp [cesaroAvg, h, norm_nonneg]
-  · rw [cesaroAvg, norm_mul, norm_inv]
-    have hN : (0 : ℝ) < N := by exact_mod_cast h
-    have hsum : ‖∑ n ∈ Finset.range N, f (x n)‖ ≤ N * ‖f‖ := by
-      calc ‖∑ n ∈ Finset.range N, f (x n)‖ ≤ ∑ n ∈ Finset.range N, ‖f (x n)‖ := norm_sum_le _ _
-        _ ≤ ∑ _n ∈ Finset.range N, ‖f‖ := Finset.sum_le_sum fun n _ => f.norm_coe_le_norm _
-        _ = N * ‖f‖ := by simp
-    have hcast : ‖(N : ℂ)‖ = (N : ℝ) := by simp
-    rw [hcast, inv_mul_le_iff₀ hN]
-    linarith
-
-end Basic
-
-/-- The `k`-th Fourier character integrates to zero over the circle for `k ≠ 0`. -/
-
-lemma integral_fourier_eq_zero {k : ℤ} (hk : k ≠ 0) :
-    ∫ t, (fourier k t : ℂ) ∂(haarAddCircle (T := 1)) = 0 := by
-  have h := congrFun (fourierCoeff_fourier (T := 1) k) 0
-  rw [fourierCoeff] at h
-  simpa [Pi.single, Function.update, hk, eq_comm] using h
-
-/-- Continuous functions on the circle are integrable for the Haar probability measure. -/
-
-lemma integrable_continuous (f : C(AddCircle (1 : ℝ), ℂ)) :
-    Integrable f (haarAddCircle (T := 1)) :=
-  (map_continuous f).integrable_of_hasCompactSupport (HasCompactSupport.of_compactSpace _)
-
-/-- The integral of a continuous function is bounded by its sup-norm. -/
-
-lemma norm_integral_le (f : C(AddCircle (1 : ℝ), ℂ)) :
-    ‖∫ t, f t ∂(haarAddCircle (T := 1))‖ ≤ ‖f‖ := by
-  simpa using norm_integral_le_of_norm_le_const (μ := haarAddCircle (T := 1)) (C := ‖f‖)
-    (f := fun t => f t) (Filter.Eventually.of_forall fun t => f.norm_coe_le_norm t)
-
-/-- Under the Weyl hypothesis, the Cesàro averages of every element of the span of the
-Fourier characters converge to the corresponding integral. -/
-
-lemma tendsto_cesaroAvg_of_mem_span (x : ℕ → AddCircle (1 : ℝ))
-    (hx : ∀ k : ℤ, k ≠ 0 → Tendsto (cesaroAvg x (fourier k)) atTop (𝓝 0))
-    (g : C(AddCircle (1 : ℝ), ℂ)) (hg : g ∈ Submodule.span ℂ (Set.range (fourier (T := 1)))) :
-    Tendsto (cesaroAvg x g) atTop (𝓝 (∫ t, g t ∂(haarAddCircle (T := 1)))) := by
-  induction hg using Submodule.span_induction with
-  | mem g hg =>
-      obtain ⟨k, rfl⟩ := hg
-      rcases eq_or_ne k 0 with rfl | hk
-      · have hint : ∫ t, (fourier (T := 1) 0 t : ℂ) ∂(haarAddCircle (T := 1)) = 1 := by simp
-        rw [hint]
-        refine Tendsto.congr' ?_ (tendsto_const_nhds (x := (1 : ℂ)))
-        filter_upwards [eventually_ge_atTop 1] with N hN
-        exact (cesaroAvg_fourier_zero x hN).symm
-      · rw [integral_fourier_eq_zero hk]
-        exact hx k hk
-  | zero =>
-      rw [cesaroAvg_zero]
-      simp
-  | add g₁ g₂ _ _ ih₁ ih₂ =>
-      rw [show cesaroAvg x (⇑(g₁ + g₂)) = fun N => cesaroAvg x g₁ N + cesaroAvg x g₂ N from
-        funext (cesaroAvg_add x g₁ g₂)]
-      have hint : ∫ t, (g₁ + g₂) t ∂(haarAddCircle (T := 1))
-          = (∫ t, g₁ t ∂(haarAddCircle (T := 1))) + ∫ t, g₂ t ∂(haarAddCircle (T := 1)) := by
-        simp only [ContinuousMap.coe_add, Pi.add_apply]
-        exact integral_add (integrable_continuous g₁) (integrable_continuous g₂)
-      rw [hint]
-      exact ih₁.add ih₂
-  | smul c g _ ih =>
-      rw [show cesaroAvg x (⇑(c • g)) = fun N => c * cesaroAvg x g N from
-        funext (cesaroAvg_smul x c g)]
-      have hint : ∫ t, (c • g) t ∂(haarAddCircle (T := 1))
-          = c * ∫ t, g t ∂(haarAddCircle (T := 1)) := by
-        simp only [ContinuousMap.coe_smul, Pi.smul_apply, smul_eq_mul]
-        exact MeasureTheory.integral_const_mul c _
-      rw [hint]
-      exact ih.const_mul c
-
-/-- Elements of the span of the Fourier characters are sup-norm dense in `C(ℝ/ℤ, ℂ)`. -/
-
-lemma exists_mem_span_dist_lt (f : C(AddCircle (1 : ℝ), ℂ)) {ε : ℝ} (hε : 0 < ε) :
-    ∃ g ∈ Submodule.span ℂ (Set.range (fourier (T := 1))), dist f g < ε := by
-  have hf : f ∈ closure ((Submodule.span ℂ (Set.range (fourier (T := 1)))) : Set _) := by
-    rw [← Submodule.topologicalClosure_coe, span_fourier_closure_eq_top]
-    trivial
-  exact (Metric.mem_closure_iff.mp hf) ε hε
-
-/-- **Weyl's equidistribution criterion.**  If the exponential sums
-`(1/N) ∑_{n < N} e(k xₙ)` tend to `0` for every nonzero integer frequency `k`, then the
-sequence `x` is equidistributed in the circle `ℝ/ℤ`: the Cesàro averages of every continuous
-function converge to its integral against the Haar probability measure. -/
-
-theorem equidistribution_of_asymptotic (x : ℕ → AddCircle (1 : ℝ))
-    (hx : ∀ k : ℤ, k ≠ 0 → Tendsto (cesaroAvg x (fourier k)) atTop (𝓝 0))
-    (f : C(AddCircle (1 : ℝ), ℂ)) :
-    Tendsto (cesaroAvg x f) atTop (𝓝 (∫ t, f t ∂(haarAddCircle (T := 1)))) := by
+/-- **Pointwise equidistribution.**  If the empirical distribution function converges to `c`
+for every level `c` in a dense set `D`, then it converges to `c` for *every* `c ∈ [0,1]`. -/
+lemma tendsto_edf_of_dense (x : ℕ → ℝ) (D : Set ℝ) (hD : Dense D)
+    (hasym : ∀ c ∈ D, 0 ≤ c → c ≤ 1 → Tendsto (fun N => edf x N c) atTop (𝓝 c))
+    {c : ℝ} (hc0 : 0 ≤ c) (hc1 : c ≤ 1) :
+    Tendsto (fun N => edf x N c) atTop (𝓝 c) := by
   rw [Metric.tendsto_atTop]
   intro ε hε
-  obtain ⟨g, hgmem, hgdist⟩ := exists_mem_span_dist_lt f (by positivity : (0 : ℝ) < ε / 3)
-  have hg := tendsto_cesaroAvg_of_mem_span x hx g hgmem
-  rw [Metric.tendsto_atTop] at hg
-  obtain ⟨N₀, hN₀⟩ := hg (ε / 3) (by positivity)
+  have hlow : ∀ᶠ N in atTop, c - ε < edf x N c := by
+    rcases lt_or_ge (c - ε) 0 with h | h
+    · filter_upwards with N using lt_of_lt_of_le h (edf_nonneg x N c)
+    · obtain ⟨d, hdD, hd⟩ := hD.exists_between (show c - ε < c by linarith)
+      have hd0 : (0:ℝ) ≤ d := le_of_lt (lt_of_le_of_lt h hd.1)
+      have hd1 : d ≤ 1 := le_trans hd.2.le hc1
+      have hev := (hasym d hdD hd0 hd1).eventually_const_lt hd.1
+      filter_upwards [hev] with N hN
+      exact lt_of_lt_of_le hN (edf_mono x N hd.2.le)
+  have hhigh : ∀ᶠ N in atTop, edf x N c < c + ε := by
+    rcases lt_or_ge 1 (c + ε) with h | h
+    · filter_upwards with N using lt_of_le_of_lt (edf_le_one x N c) h
+    · obtain ⟨d, hdD, hd⟩ := hD.exists_between (show c < c + ε by linarith)
+      have hd0 : (0:ℝ) ≤ d := le_of_lt (lt_of_le_of_lt hc0 hd.1)
+      have hd1 : d ≤ 1 := le_trans hd.2.le h
+      have hev := (hasym d hdD hd0 hd1).eventually_lt_const hd.2
+      filter_upwards [hev] with N hN
+      exact lt_of_le_of_lt (edf_mono x N hd.1.le) hN
+  obtain ⟨N₀, hN₀⟩ := (hlow.and hhigh).exists_forall_of_atTop
   refine ⟨N₀, fun N hN => ?_⟩
-  have h1 : ‖cesaroAvg x f N - cesaroAvg x g N‖ < ε / 3 := by
-    rw [← cesaroAvg_sub]
-    exact lt_of_le_of_lt (norm_cesaroAvg_le x (f - g) N) (by
-      rwa [← NormedAddGroup.dist_eq])
-  have h2 : dist (cesaroAvg x g N) (∫ t, g t ∂(haarAddCircle (T := 1))) < ε / 3 := hN₀ N hN
-  have h3 : ‖(∫ t, g t ∂(haarAddCircle (T := 1))) - ∫ t, f t ∂(haarAddCircle (T := 1))‖
-      < ε / 3 := by
-    rw [← integral_sub (integrable_continuous g) (integrable_continuous f)]
-    refine lt_of_le_of_lt ?_ (by rwa [← NormedAddGroup.dist_eq, dist_comm] :
-      ‖g - f‖ < ε / 3)
-    simpa using norm_integral_le (g - f)
-  calc dist (cesaroAvg x f N) (∫ t, f t ∂(haarAddCircle (T := 1)))
-      ≤ dist (cesaroAvg x f N) (cesaroAvg x g N)
-        + dist (cesaroAvg x g N) (∫ t, g t ∂(haarAddCircle (T := 1)))
-        + dist (∫ t, g t ∂(haarAddCircle (T := 1))) (∫ t, f t ∂(haarAddCircle (T := 1))) := by
-        exact dist_triangle4 _ _ _ _
-    _ < ε / 3 + ε / 3 + ε / 3 := by
-        rw [dist_eq_norm, dist_eq_norm (∫ t, g t ∂(haarAddCircle (T := 1)))]
-        exact add_lt_add (add_lt_add h1 h2) h3
-    _ = ε := by ring
+  obtain ⟨h1, h2⟩ := hN₀ N hN
+  rw [Real.dist_eq, abs_sub_lt_iff]
+  constructor <;> linarith
 
-/-!
-### An unconditional application: irrational rotations
+/-- **Equidistribution from asymptotics on a dense set of levels.**
 
-The hypothesis of `equidistribution_of_asymptotic` is verified for the orbit `n ↦ n * a`
-of an irrational rotation, which yields Weyl's equidistribution theorem for `(n a)` unconditionally.
--/
+Let `x : ℕ → ℝ` be a sequence.  Assume that for every level `c` in a dense set `D ⊆ ℝ`
+with `0 ≤ c ≤ 1`, the proportion of the first `N` terms whose fractional part is `< c`
+tends to `c`.  Then the sequence is equidistributed modulo one: for every subinterval
+`[a, b) ⊆ [0, 1]`, the proportion of the first `N` terms whose fractional part lies in
+`[a, b)` tends to `b - a`. -/
+theorem equidistribution_of_asymptotic (x : ℕ → ℝ) (D : Set ℝ) (hD : Dense D)
+    (hasym : ∀ c ∈ D, 0 ≤ c → c ≤ 1 → Tendsto (fun N => edf x N c) atTop (𝓝 c))
+    {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) (hb : b ≤ 1) :
+    Tendsto (fun N => (countIco x N a b : ℝ) / N) atTop (𝓝 (b - a)) := by
+  have hb0 : (0:ℝ) ≤ b := le_trans ha hab
+  have ha1 : a ≤ 1 := le_trans hab hb
+  have hta := tendsto_edf_of_dense x D hD hasym ha ha1
+  have htb := tendsto_edf_of_dense x D hD hasym hb0 hb
+  have key : ∀ N : ℕ, (countIco x N a b : ℝ) / N = edf x N b - edf x N a := by
+    intro N
+    have h := countLT_add_countIco x N hab
+    have : (countIco x N a b : ℝ) = (countLT x N b : ℝ) - (countLT x N a : ℝ) := by
+      have : ((countLT x N a + countIco x N a b : ℕ) : ℝ) = ((countLT x N b : ℕ) : ℝ) := by
+        exact_mod_cast congrArg (fun k : ℕ => (k : ℝ)) h
+      push_cast at this
+      linarith
+    rw [this, edf, edf, sub_div]
+  simpa only [key] using htb.sub hta
 
-/-- For irrational `a` and a nonzero frequency `k`, the exponential sums along the orbit
-`n ↦ n * a` of the irrational rotation tend to zero (geometric sum bound). -/
+end Brockian.Equidistribution
+

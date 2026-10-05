@@ -3,38 +3,63 @@ import Mathlib
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 100000
+set_option maxRecDepth 4000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
-namespace Math
+/-
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-! ## Cliques and independent sets inside a finite set of vertices -/
+import Mathlib
 
-section General
+/-!
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-variable {V : Type*} [DecidableEq V] {G : SimpleGraph V} {s t : Finset V} {n : ℕ} {v : V}
+open Finset SimpleGraph
 
-/-- `CliqueOn G s n` : the vertex set `s` contains a clique of `G` with `n` vertices. -/
+namespace Ramsey35
 
-lemma exists_sorted_five {B : Finset (Fin 13)} (hcard : B.card = 5) :
-    ∃ a b c d e : Fin 13, a < b ∧ b < c ∧ c < d ∧ d < e ∧
-      a ∈ B ∧ b ∈ B ∧ c ∈ B ∧ d ∈ B ∧ e ∈ B := by
-  have hlen : (B.sort (· ≤ ·)).length = 5 := by rw [Finset.length_sort, hcard]
-  have hsorted : (B.sort (· ≤ ·)).Pairwise (· < ·) := B.sortedLT_sort.pairwise
-  have hmem : ∀ x, x ∈ B.sort (· ≤ ·) → x ∈ B := fun x hx => (Finset.mem_sort _).mp hx
-  rcases hs : B.sort (· ≤ ·) with _ | ⟨a, _ | ⟨b, _ | ⟨c, _ | ⟨d, _ | ⟨e, t⟩⟩⟩⟩⟩ <;>
-    rw [hs] at hlen hsorted hmem <;> simp at hlen
-  · subst hlen
-    simp only [List.pairwise_cons, List.mem_cons, List.not_mem_nil, or_false] at hsorted
-    refine ⟨a, b, c, d, e, ?_, ?_, ?_, ?_, hmem _ (by simp), hmem _ (by simp), hmem _ (by simp),
-      hmem _ (by simp), hmem _ (by simp)⟩ <;> aesop
+variable {V : Type*} [DecidableEq V]
+
+/-! ### Basic clique helpers -/
+
+omit [DecidableEq V] in
+/-- A finset all of whose distinct pairs are non-adjacent is a clique in the complement. -/
+
+lemma exists_sorted_five {α : Type*} [LinearOrder α] {t : Finset α} (h : #t = 5) :
+    ∃ a b c d e : α, a < b ∧ b < c ∧ c < d ∧ d < e ∧
+      a ∈ t ∧ b ∈ t ∧ c ∈ t ∧ d ∈ t ∧ e ∈ t := by
+  set f := t.orderIsoOfFin h
+  exact ⟨f 0, f 1, f 2, f 3, f 4,
+    Subtype.coe_lt_coe.2 (f.lt_iff_lt.2 (by decide)),
+    Subtype.coe_lt_coe.2 (f.lt_iff_lt.2 (by decide)),
+    Subtype.coe_lt_coe.2 (f.lt_iff_lt.2 (by decide)),
+    Subtype.coe_lt_coe.2 (f.lt_iff_lt.2 (by decide)),
+    (f 0).2, (f 1).2, (f 2).2, (f 3).2, (f 4).2⟩
 

@@ -5,29 +5,31 @@ Target: Math.cauchy_group
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` lines to precede any module docstring `/-! ... -/`,
--- so the header above is written as a plain block comment.)
 
-import RequestProject.CauchySelfContained
+import Mathlib
 
-/-!
-# Cauchy Group
-Category: Pure Mathematics
-Target: Math.cauchy_group
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Math
 
-/-- **Cauchy's theorem**: if a prime `p` divides the order of a finite group `G`,
-then `G` contains an element of order `p`.
+open MulAction Subgroup
 
-The proof is self-contained (it does not invoke Mathlib's `exists_prime_orderOf_dvd_card`):
-see `Math.cauchy_of_dvd_card`, which argues by strong induction on the order of the group. -/
+/-- From an element whose order is divisible by `p` we get an element of order exactly `p`. -/
 
-lemma exists_orderOf_eq_of_dvd_orderOf {G : Type*} [Group G] [Finite G] {p : ℕ} {x : G}
-    (h : p ∣ orderOf x) : ∃ g : G, orderOf g = p :=
-  ⟨x ^ (orderOf x / p), orderOf_pow_orderOf_div (orderOf_pos x).ne' h⟩
+theorem exists_orderOf_eq_of_dvd_orderOf {G : Type*} [Group G] [Finite G] {p : ℕ}
+    (x : G) (hdvd : p ∣ orderOf x) : ∃ g : G, orderOf g = p :=
+  ⟨x ^ (orderOf x / p), orderOf_pow_orderOf_div (orderOf_pos x).ne' hdvd⟩
 
-/-- A proper subgroup of a finite group is strictly smaller than the group. -/
+/-- The size of the conjugacy class of `g` times the size of its centralizer is `|G|`. -/

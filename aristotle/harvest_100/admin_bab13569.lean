@@ -1,0 +1,101 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Alkane Tree
+Category: Chemistry
+Target: Chem.alkane_tree
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+namespace Chem
+
+open Finset
+
+/-- The number of hydrogen atoms attached to the carbon atom `v` of a carbon
+skeleton `G`: carbon is tetravalent, so the valences left over after the C–C
+bonds at `v` are saturated by hydrogens. -/
+def hydrogens {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel G.Adj] (v : Fin n) : ℕ :=
+  4 - G.degree v
+
+/-- **The carbon skeleton of an acyclic alkane.**
+
+If the carbon skeleton `G` of a molecule with `n` carbon atoms is connected and
+acyclic (i.e. a tree), and carbon is tetravalent (each atom has at most `4` bonds),
+then the skeleton has exactly `n - 1` C–C bonds, and the molecule carries exactly
+`2n + 2` hydrogen atoms, i.e. it has formula `CₙH₂ₙ₊₂`. -/
+theorem alkane_tree {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel G.Adj]
+    (htree : G.IsTree) (hval : ∀ v, G.degree v ≤ 4) :
+    G.edgeFinset.card = n - 1 ∧ ∑ v, hydrogens G v = 2 * n + 2 := by
+  have hcard : G.edgeFinset.card + 1 = n := by
+    simpa using htree.card_edgeFinset
+  have hdeg : ∑ v, G.degree v = 2 * G.edgeFinset.card :=
+    G.sum_degrees_eq_twice_card_edges
+  have hsum : (∑ v, hydrogens G v) + ∑ v, G.degree v = 4 * n := by
+    rw [← Finset.sum_add_distrib]
+    have : ∀ v ∈ (univ : Finset (Fin n)), hydrogens G v + G.degree v = 4 := by
+      intro v _
+      have := hval v
+      simp only [hydrogens]
+      omega
+    rw [Finset.sum_congr rfl this]
+    simp [mul_comm]
+  refine ⟨by omega, by omega⟩
+
+/-- Contrapositive form: a carbon skeleton whose number of C–C bonds is not `n - 1`
+cannot be acyclic and connected, i.e. it is not the skeleton of an acyclic alkane. -/
+theorem not_isTree_of_bond_count_ne {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel G.Adj]
+    (h : G.edgeFinset.card ≠ n - 1) : ¬ G.IsTree := by
+  intro htree
+  exact h (by have := htree.card_edgeFinset; simp at this; omega)
+
+section Butane
+
+open SimpleGraph
+
+instance instDecidablePathGraphAdj (n : ℕ) : DecidableRel (pathGraph n).Adj := fun u v =>
+  decidable_of_iff _ (pathGraph_adj (u := u) (v := v)).symm
+
+/-- The straight-chain skeleton on four carbons (the path graph on `Fin 4`) is a tree. -/
+theorem pathGraph_four_isTree : (pathGraph 4).IsTree := by
+  rw [isTree_iff_connected_and_card]
+  refine ⟨pathGraph_connected 3, ?_⟩
+  rw [Nat.card_eq_fintype_card, Nat.card_eq_fintype_card, ← SimpleGraph.edgeFinset_card]
+  have h3 : (pathGraph 4).edgeFinset.card = 3 := by decide
+  simp [h3]
+
+/-- **n-Butane.** The straight-chain skeleton on four carbons has `3` C–C bonds and
+`10` hydrogens: `C₄H₁₀`. -/
+theorem butane_formula :
+    (pathGraph 4).edgeFinset.card = 3 ∧ ∑ v, hydrogens (pathGraph 4) v = 10 :=
+  alkane_tree (pathGraph 4) pathGraph_four_isTree (by decide)
+
+end Butane
+
+end Chem
+

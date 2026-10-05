@@ -30,6 +30,7 @@ NOTIFY = os.environ.get("SOLVER_NOTIFY_TO", "chrisbrock54@gmail.com")
 KEYENV = {"admin": "ARISTOTLE_API_KEY", "chris": "ARISTOTLE_API_KEY_CHRIS"}
 MAX = int(os.environ.get("HARVEST_MAX", "60"))
 BAD = re.compile(r"\b(sorry|admit|native_decide|sorryAx)\b")
+HAS_DECL = re.compile(r"\b(theorem|lemma)\s+[A-Za-z_]")
 PINNED_ARISTOTLE_BIN = os.path.expanduser(
     "~/.local/share/aristotlelib-2.1.0/bin/aristotle"
 )
@@ -67,6 +68,9 @@ def fetch(pid, key):
     if not lean.strip():
         return False, None, ""
     body = "\n".join(l for l in lean.splitlines() if not l.strip().startswith("--"))
+    # Imports-only stub (zero theorems) is not a proof — see audit 2026-08-21.
+    if not HAS_DECL.search(body):
+        return True, "STOPPED", lean
     return True, ("STOPPED" if BAD.search(body) else "PROVED"), lean
 
 

@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Riesel Problem
 Category: Brockian Conjecture
 Target: Brockian.RieselCovering.RieselProblem
@@ -33,16 +31,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
 namespace Brockian.RieselCovering
 
-/-- The Riesel number under consideration. -/
+/-- A *Riesel number* is a positive odd natural number `k` such that `k * 2 ^ n - 1`
+is composite (never prime) for every `n ≥ 1`. -/
 
-lemma two_pow_modEq (n : ℕ) : 2 ^ n ≡ 2 ^ (n % 24) [MOD M] := by
-  have h24 : (2 : ℕ) ^ 24 ≡ 1 [MOD M] := by decide
+theorem two_pow_modEq (n : ℕ) : (2 : ℕ) ^ n ≡ 2 ^ (n % 24) [MOD 16777215] := by
   conv_lhs => rw [← Nat.div_add_mod n 24, pow_add, pow_mul]
-  calc ((2 : ℕ) ^ 24) ^ (n / 24) * 2 ^ (n % 24)
-      ≡ 1 ^ (n / 24) * 2 ^ (n % 24) [MOD M] := Nat.ModEq.mul (h24.pow _) rfl
-    _ = 2 ^ (n % 24) := by ring
+  have h : ((2 : ℕ) ^ 24) ^ (n / 24) ≡ 1 ^ (n / 24) [MOD 16777215] :=
+    Nat.ModEq.pow _ (by decide)
+  simpa using h.mul_right ((2 : ℕ) ^ (n % 24))
 
-/-- The covering argument: for every `n`, one of the six primes of the covering set
-`{3, 5, 7, 13, 17, 241}` divides `509203 * 2 ^ n - 1`. -/
+/-- The core covering step: if a prime `p` divides `2 ^ 24 - 1` and divides
+`509203 * 2 ^ r - 1` where `r = n % 24`, then `p` divides `509203 * 2 ^ n - 1`. -/

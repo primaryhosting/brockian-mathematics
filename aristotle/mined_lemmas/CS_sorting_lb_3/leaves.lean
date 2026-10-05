@@ -1,3 +1,13 @@
+/-
+# Sorting Lb 3
+Category: Computer Science
+Target: CS.sorting_lb_3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (The header above uses `/- -/` rather than `/-! -/`: a module docstring is a
+-- command and Lean 4 does not permit it before the `import` line.)
+
 import Mathlib
 
 open scoped BigOperators
@@ -17,21 +27,32 @@ set_option grind.warning false
 
 namespace CS
 
-/-- A comparison-based decision tree for sorting 3 elements.
+/-! ## The comparison-sort decision-tree model on 3 elements
 
-An input is a permutation `s : Equiv.Perm (Fin 3)`, thought of as assigning to each
-position `i` its rank `s i`.  An internal node `node i j l r` compares the keys at
-positions `i` and `j`, descending into `l` if `s i < s j` and into `r` otherwise.
-A leaf outputs a permutation, the algorithm's claimed ranking of the input. -/
-inductive DTree where
+An input to a comparison sort on 3 distinct keys is described, up to order
+isomorphism, by the permutation `σ : Equiv.Perm (Fin 3)` giving the *rank*
+`σ i` of the key stored at position `i`.
+
+A deterministic comparison sort is a binary decision tree: each internal node
+compares the keys at two positions `i` and `j` (the only information the
+algorithm may extract from the input), and branches on the outcome; each leaf
+outputs a permutation, the claimed ranking of the input. -/
+
+/-- A comparison-based decision tree for sorting 3 elements. -/
+inductive DTree : Type
   | leaf : Equiv.Perm (Fin 3) → DTree
   | node : Fin 3 → Fin 3 → DTree → DTree → DTree
+  deriving Inhabited
 
 namespace DTree
 
-/-- The worst-case number of comparisons performed by the tree, i.e. its height. -/
+/-- Running the decision tree on the input whose ranking is `σ`: the comparison
+at a node `node i j l r` asks whether the key at position `i` is smaller than
+the key at position `j`, i.e. whether `σ i < σ j`. -/
 
-def leaves : DTree → List (Equiv.Perm (Fin 3))
-  | .leaf p => [p]
-  | .node _ _ l r => l.leaves ++ r.leaves
+def leaves : DTree → Finset (Equiv.Perm (Fin 3))
+  | leaf p => {p}
+  | node _ _ l r => l.leaves ∪ r.leaves
 
+/-- The tree is a *correct* sorting algorithm: on every input it outputs the
+true ranking of that input. -/

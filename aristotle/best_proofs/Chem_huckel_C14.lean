@@ -1,11 +1,3 @@
-/-
-# Huckel C 14
-Category: Chemistry
-Target: Chem.huckel_C14
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,6 +7,108 @@ Target: Chem.huckel_C14
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped Real
+open Complex SimpleGraph
+
+namespace Chem
+
+/-- The adjacency matrix (over `ℂ`) of the cycle graph `C₁₄`, i.e. the Hückel matrix of the
+carbon skeleton of a 14-membered annulene in units where `α = 0` and `β = 1`. -/
+noncomputable def C14adj : Matrix (Fin 14) (Fin 14) ℂ := (cycleGraph 14).adjMatrix ℂ
+
+/-- The standard additive character `j ↦ exp (2 π I j / 14)` on `ZMod 14`. -/
+private noncomputable abbrev chi : AddChar (ZMod 14) ℂ := ZMod.stdAddChar
+
+/-- Multiplying by the adjacency matrix of `C₁₄` sums the two cyclic neighbours. -/
+private lemma C14adj_mulVec (v : Fin 14 → ℂ) (i : Fin 14) :
+    C14adj.mulVec v i = v (i - 1) + v (i + 1) := by
+  have hne : i - 1 ≠ i + 1 := by revert i; decide
+  rw [C14adj, SimpleGraph.adjMatrix_mulVec_apply]
+  rw [show (14 : ℕ) = 12 + 2 from rfl] at *
+  rw [SimpleGraph.cycleGraph_neighborFinset, Finset.sum_pair hne]
+
+/-- The same statement, with the index set `Fin 14` viewed as the additive group `ZMod 14`. -/
+private lemma C14adj_mulVec_zmod (v : ZMod 14 → ℂ) (i : ZMod 14) :
+    C14adj.mulVec v i = v (i + -1) + v (i + 1) := by
+  have h := C14adj_mulVec v i
+  rw [sub_eq_add_neg] at h
+  exact h
+
+/-- `χ(k) + χ(-k) = 2 cos (2πk/14)`. -/
+private lemma chi_add_chi_neg (k : ZMod 14) :
+    chi k + chi (-k) = 2 * Real.cos (2 * π * k.val / 14) := by
+  have h1 : chi k = Complex.exp ((2 * π * k.val / 14 : ℝ) * I) := by
+    rw [chi, ZMod.stdAddChar_apply, ZMod.toCircle_apply]
+    push_cast; ring_nf
+  have h2 : chi (-k) = (chi k)⁻¹ := AddChar.map_neg_eq_inv _ _
+  rw [h2, h1, ← Complex.exp_neg, ← neg_mul, Complex.exp_mul_I, Complex.exp_mul_I,
+    ← Complex.ofReal_neg, ← Complex.ofReal_cos, ← Complex.ofReal_cos, ← Complex.ofReal_sin,
+    ← Complex.ofReal_sin, Real.cos_neg, Real.sin_neg]
+  push_cast; ring
+
+/-- Translation rule for the discrete Fourier transform on `ZMod 14`. -/
+private lemma dft_shift (v : ZMod 14 → ℂ) (a k : ZMod 14) :
+    ZMod.dft (fun j => v (j + a)) k = chi (a * k) * ZMod.dft v k := by
+  rw [ZMod.dft_apply, ZMod.dft_apply, Finset.mul_sum]
+  refine Fintype.sum_equiv (Equiv.addRight a) _ _ (fun j => ?_)
+  simp only [Equiv.coe_addRight, smul_eq_mul, chi]
+  rw [← mul_assoc, ← AddChar.map_add_eq_mul]
+  ring_nf
+
+/-- **Hückel theory for C₁₄.** The eigenvalues of the adjacency matrix of the cycle graph `C₁₄`
+are exactly the numbers `2 cos (2πk/14)` for `k = 0, 1, …, 13`. -/
+theorem huckel_C14 :
+    {μ : ℂ | ∃ v : Fin 14 → ℂ, v ≠ 0 ∧ C14adj.mulVec v = μ • v}
+      = {μ : ℂ | ∃ k : ℕ, k < 14 ∧ μ = 2 * Real.cos (2 * π * k / 14)} := by
+  ext μ
+  simp only [Set.mem_setOf_eq]
+  constructor
+  · rintro ⟨v, hv, hA⟩
+    obtain ⟨V, hV⟩ : ∃ V : ZMod 14 → ℂ, V = v := ⟨v, rfl⟩
+    have hVne : V ≠ 0 := by rw [hV]; exact hv
+    have hAV : ∀ i : ZMod 14, C14adj.mulVec V i = μ * V i := by
+      rw [hV]; exact fun i => congrFun hA i
+    have hw0 : ZMod.dft (N := 14) V ≠ 0 := by simpa using hVne
+    obtain ⟨k, hk⟩ : ∃ k : ZMod 14, ZMod.dft (N := 14) V k ≠ 0 := by
+      by_contra h
+      push_neg at h
+      exact hw0 (funext h)
+    refine ⟨k.val, ZMod.val_lt k, ?_⟩
+    have hfun : (fun j : ZMod 14 => V (j + -1)) + (fun j : ZMod 14 => V (j + 1)) = μ • V := by
+      funext i
+      have h := hAV i
+      rw [C14adj_mulVec_zmod] at h
+      exact h
+    have h2 := congrArg (fun f : ZMod 14 → ℂ => ZMod.dft (N := 14) f k) hfun
+    simp only [map_add, map_smul, Pi.add_apply, Pi.smul_apply, smul_eq_mul] at h2
+    rw [dft_shift, dft_shift] at h2
+    have h3 : (chi (-1 * k) + chi (1 * k)) * ZMod.dft (N := 14) V k
+        = μ * ZMod.dft (N := 14) V k := by rw [add_mul]; exact h2
+    have h4 : chi (-1 * k) + chi (1 * k) = μ := mul_right_cancel₀ hk h3
+    rw [neg_one_mul, one_mul, add_comm] at h4
+    rw [← h4, chi_add_chi_neg]
+  · rintro ⟨k, hk, rfl⟩
+    have hKval : ((k : ZMod 14)).val = k := ZMod.val_natCast_of_lt hk
+    refine ⟨fun j : ZMod 14 => chi ((k : ZMod 14) * j), ?_, ?_⟩
+    · intro h
+      have h0 := congrFun h (0 : ZMod 14)
+      simp at h0
+    · have key : ∀ i : ZMod 14, C14adj.mulVec (fun j : ZMod 14 => chi ((k : ZMod 14) * j)) i
+          = (2 * (Real.cos (2 * π * k / 14) : ℂ)) * chi ((k : ZMod 14) * i) := by
+        intro i
+        rw [C14adj_mulVec_zmod]
+        have e1 : (k : ZMod 14) * (i + -1) = (k : ZMod 14) * i + (-(k : ZMod 14)) := by ring
+        have e2 : (k : ZMod 14) * (i + 1) = (k : ZMod 14) * i + (k : ZMod 14) := by ring
+        show chi ((k : ZMod 14) * (i + -1)) + chi ((k : ZMod 14) * (i + 1)) = _
+        rw [e1, e2, AddChar.map_add_eq_mul, AddChar.map_add_eq_mul, ← mul_add,
+          add_comm (chi (-(k : ZMod 14))) (chi (k : ZMod 14)), chi_add_chi_neg, hKval, mul_comm]
+      funext i
+      exact key i
+
+end Chem
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -30,134 +124,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
-
-namespace Chem
-
-open Complex Matrix
-
-/-- The primitive 14-th root of unity `exp(2πi/14)`. -/
-noncomputable def om : ℂ := Complex.exp (2 * (Real.pi : ℂ) * Complex.I / 14)
-
-/-- The Hückel eigenvalues `2 cos (2πk/14)`. -/
-noncomputable def eigval (k : Fin 14) : ℂ := ((2 * Real.cos (2 * Real.pi * k.val / 14) : ℝ) : ℂ)
-
-/-- The (Vandermonde/DFT) matrix diagonalizing the adjacency matrix of `C₁₄`. -/
-noncomputable def dftMat : Matrix (Fin 14) (Fin 14) ℂ :=
-  Matrix.vandermonde (fun j : Fin 14 => om ^ (j : ℕ))
-
-lemma om_prim : IsPrimitiveRoot om 14 := by
-  have h := Complex.isPrimitiveRoot_exp 14 (by norm_num)
-  have h14 : ((14 : ℕ) : ℂ) = (14 : ℂ) := by norm_num
-  simpa [om, h14] using h
-
-lemma om_ne_zero : om ≠ 0 := Complex.exp_ne_zero _
-
-lemma om_pow14 : om ^ (14 : ℕ) = 1 := om_prim.pow_eq_one
-
-lemma om_zpow_eq {a b : ℤ} (h : (14 : ℤ) ∣ a - b) : om ^ a = om ^ b := by
-  obtain ⟨c, hc⟩ := h
-  have ha : a = b + 14 * c := by linarith
-  have h14 : om ^ (14 : ℤ) = 1 := by
-    rw [show (14 : ℤ) = ((14 : ℕ) : ℤ) by norm_num, zpow_natCast, om_pow14]
-  rw [ha, zpow_add₀ om_ne_zero, _root_.zpow_mul, h14, _root_.one_zpow, mul_one]
-
-/-- The Hückel eigenvalue `2 cos (2πk/14)` as a sum of two powers of `om`. -/
-lemma eigval_eq (k : Fin 14) :
-    eigval k = om ^ ((k.val : ℤ)) + om ^ (-(k.val : ℤ)) := by
-  have h1 : ((2 * Real.pi * k.val / 14 : ℝ) : ℂ) * Complex.I
-      = ((k.val : ℤ) : ℂ) * (2 * (Real.pi : ℂ) * Complex.I / 14) := by push_cast; ring
-  have h2 : -((2 * Real.pi * k.val / 14 : ℝ) : ℂ) * Complex.I
-      = ((-(k.val : ℤ) : ℤ) : ℂ) * (2 * (Real.pi : ℂ) * Complex.I / 14) := by push_cast; ring
-  have h3 : eigval k = 2 * Complex.cos ((2 * Real.pi * k.val / 14 : ℝ) : ℂ) := by
-    rw [eigval, Complex.ofReal_mul, Complex.ofReal_cos]
-    norm_num
-  rw [h3, Complex.two_cos, h1, h2, Complex.exp_int_mul, Complex.exp_int_mul, om]
-
-lemma dftMat_apply (m k : Fin 14) : dftMat m k = om ^ ((m.val * k.val : ℕ) : ℤ) := by
-  rw [zpow_natCast]
-  simp [dftMat, Matrix.vandermonde, ← pow_mul]
-
-lemma cycle14_neighborFinset (j : Fin 14) :
-    (SimpleGraph.cycleGraph 14).neighborFinset j = {j - 1, j + 1} :=
-  SimpleGraph.cycleGraph_neighborFinset (n := 12)
-
-lemma fin14_pred_ne_succ (j : Fin 14) : j - 1 ≠ j + 1 := by decide +revert
-
-/-- The adjacency matrix of `C₁₄` is diagonalized by the discrete Fourier (Vandermonde) matrix. -/
-lemma adj_mul_dft :
-    SimpleGraph.adjMatrix ℂ (SimpleGraph.cycleGraph 14) * dftMat
-      = dftMat * Matrix.diagonal eigval := by
-  ext j k
-  have hL : (SimpleGraph.adjMatrix ℂ (SimpleGraph.cycleGraph 14) * dftMat) j k
-      = ∑ m ∈ (SimpleGraph.cycleGraph 14).neighborFinset j, dftMat m k := by
-    rw [show (SimpleGraph.adjMatrix ℂ (SimpleGraph.cycleGraph 14) * dftMat) j k
-        = (SimpleGraph.adjMatrix ℂ (SimpleGraph.cycleGraph 14) *ᵥ fun m => dftMat m k) j from rfl,
-      SimpleGraph.adjMatrix_mulVec_apply]
-  rw [hL, cycle14_neighborFinset, Finset.sum_pair (fin14_pred_ne_succ j),
-    Matrix.mul_diagonal, dftMat_apply, dftMat_apply, dftMat_apply, eigval_eq, mul_add,
-    ← zpow_add₀ om_ne_zero, ← zpow_add₀ om_ne_zero]
-  have e2 : om ^ ((((j - 1).val * k.val : ℕ)) : ℤ)
-      = om ^ (((j.val * k.val : ℕ) : ℤ) + -(k.val : ℤ)) := by
-    refine om_zpow_eq ?_
-    have hq : ((j - 1).val : ℕ) = (j.val + 13) % 14 := by simp [Fin.sub_def]; omega
-    have h : (14 : ℤ) ∣ (((j - 1).val : ℤ) - (j.val : ℤ) + 1) := by
-      have hj := j.isLt; omega
-    obtain ⟨c, hc⟩ := h
-    refine ⟨c * k.val, ?_⟩
-    push_cast
-    nlinarith [hc]
-  have e1 : om ^ ((((j + 1).val * k.val : ℕ)) : ℤ)
-      = om ^ (((j.val * k.val : ℕ) : ℤ) + (k.val : ℤ)) := by
-    refine om_zpow_eq ?_
-    have hp : ((j + 1).val : ℕ) = (j.val + 1) % 14 := by simp [Fin.add_def]
-    have h : (14 : ℤ) ∣ (((j + 1).val : ℤ) - (j.val : ℤ) - 1) := by
-      have hj := j.isLt; omega
-    obtain ⟨c, hc⟩ := h
-    refine ⟨c * k.val, ?_⟩
-    push_cast
-    nlinarith [hc]
-  rw [e1, e2, add_comm]
-
-lemma dftMat_det_ne_zero : (dftMat).det ≠ 0 := by
-  rw [dftMat, Matrix.det_vandermonde]
-  refine Finset.prod_ne_zero_iff.mpr fun i _ => Finset.prod_ne_zero_iff.mpr fun j hj => ?_
-  have hij : i < j := Finset.mem_Ioi.mp hj
-  refine sub_ne_zero_of_ne fun h => ?_
-  have := om_prim.pow_inj j.isLt i.isLt h
-  exact absurd (Fin.ext this) (ne_of_gt hij)
-
-/-- The adjacency matrix of `C₁₄` is conjugate (by the invertible Fourier matrix) to the
-diagonal matrix of the Hückel eigenvalues. -/
-lemma exists_unit_conj_diagonal : ∃ u : (Matrix (Fin 14) (Fin 14) ℂ)ˣ,
-    SimpleGraph.adjMatrix ℂ (SimpleGraph.cycleGraph 14)
-      = (u : Matrix (Fin 14) (Fin 14) ℂ) * Matrix.diagonal eigval
-          * (↑u⁻¹ : Matrix (Fin 14) (Fin 14) ℂ) := by
-  have hdet : IsUnit (dftMat).det := isUnit_iff_ne_zero.mpr dftMat_det_ne_zero
-  obtain ⟨u, hu⟩ := (Matrix.isUnit_iff_isUnit_det dftMat).mpr hdet
-  refine ⟨u, ?_⟩
-  rw [Matrix.coe_units_inv, hu, ← adj_mul_dft, Matrix.mul_assoc,
-    Matrix.mul_nonsing_inv dftMat hdet, Matrix.mul_one]
-
-/-- **Hückel theory for the annulene C₁₄.**  The spectrum of the adjacency matrix of the cycle
-graph `C₁₄` is exactly `{2 cos (2πk/14) : k = 0, …, 13}`. -/
-theorem huckel_C14 :
-    spectrum ℂ (SimpleGraph.adjMatrix ℂ (SimpleGraph.cycleGraph 14)) =
-      {z : ℂ | ∃ k : Fin 14, z = ((2 * Real.cos (2 * Real.pi * k.val / 14) : ℝ) : ℂ)} := by
-  obtain ⟨u, hA⟩ := exists_unit_conj_diagonal
-  rw [hA, spectrum.units_conjugate, spectrum_diagonal]
-  ext z
-  simp only [Set.mem_range, Set.mem_setOf_eq, eigval, eq_comm]
-
-/-- The characteristic polynomial of the adjacency matrix of `C₁₄` splits as
-`∏_{k=0}^{13} (X - 2 cos (2πk/14))`; this records the eigenvalues with multiplicity. -/
-theorem huckel_C14_charpoly :
-    (SimpleGraph.adjMatrix ℂ (SimpleGraph.cycleGraph 14)).charpoly =
-      ∏ k : Fin 14, (Polynomial.X -
-        Polynomial.C ((2 * Real.cos (2 * Real.pi * k.val / 14) : ℝ) : ℂ)) := by
-  obtain ⟨u, hA⟩ := exists_unit_conj_diagonal
-  rw [hA, Matrix.charpoly_units_conj, Matrix.charpoly_diagonal]
-  rfl
-
-end Chem
 

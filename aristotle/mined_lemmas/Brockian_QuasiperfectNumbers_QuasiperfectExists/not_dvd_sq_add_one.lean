@@ -23,7 +23,9 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Quasiperfect Exists
 Category: Brockian Conjecture
 Target: Brockian.QuasiperfectNumbers.QuasiperfectExists
@@ -31,33 +33,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-/-!
-# Quasiperfect numbers
-
-A natural number `n` is *quasiperfect* if `σ(n) = 2n + 1`, i.e. the sum of its proper
-divisors is `n + 1`.  No quasiperfect number is known, and their existence is a
-long-standing open problem.
-
-This file proves Cattaneo's theorem — every quasiperfect number is an odd perfect
-square — and deduces from it the conditional reduction
-`Brockian.QuasiperfectNumbers.QuasiperfectExists`: a quasiperfect number exists if and
-only if a quasiperfect number that is an odd perfect square exists.
--/
-
 namespace Brockian.QuasiperfectNumbers
 
 open Finset
 
-/-- `sigmaSum n` is the sum of all positive divisors of `n`. -/
+/-- A natural number `n` is *quasiperfect* if the sum of its divisors equals `2 * n + 1`,
+i.e. the sum of its proper divisors is `n + 1`. -/
 
-theorem not_dvd_sq_add_one {p y : ℕ} (hp : p.Prime) (hp3 : p % 4 = 3) : ¬ p ∣ y ^ 2 + 1 := by
-  intro hd
+lemma not_dvd_sq_add_one {p t : ℕ} (hp : p.Prime) (hp4 : p % 4 = 3) : ¬ p ∣ t ^ 2 + 1 := by
+  intro hdvd
   haveI : Fact p.Prime := ⟨hp⟩
-  have h0 : ((y ^ 2 + 1 : ℕ) : ZMod p) = 0 := (ZMod.natCast_eq_zero_iff _ p).mpr hd
+  have h0 : ((t ^ 2 + 1 : ℕ) : ZMod p) = 0 := (ZMod.natCast_eq_zero_iff _ p).mpr hdvd
   push_cast at h0
-  have hsq : IsSquare (-1 : ZMod p) := ⟨y, by linear_combination -h0⟩
-  exact (ZMod.exists_sq_eq_neg_one_iff.mp hsq) hp3
+  have hsq : IsSquare (-1 : ZMod p) := ⟨(t : ZMod p), by linear_combination -h0⟩
+  exact (ZMod.exists_sq_eq_neg_one_iff.mp hsq) hp4
 
-/-- **Cattaneo's theorem**: every quasiperfect number is an odd perfect square. -/
+/-- If `n` has an odd number of divisors, then `n` is a perfect square. -/

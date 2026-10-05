@@ -1,41 +1,39 @@
 /-
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+Models of ZFC given by suitable classes of ZFC sets.
 -/
-import Mathlib
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-/-!
-This file formalizes the statement that a (strongly) inaccessible cardinal `κ` yields a model of
-`ZFC`, namely the rank-initial segment `V κ = {x : ZFSet | rank x < κ.ord}` of the von Neumann
-hierarchy, and deduces the semantic consistency statement `Con(ZFC)` (i.e. satisfiability of the
-first-order theory `ZFCTheory`) from the existence of an inaccessible cardinal.
--/
-
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language Cardinal Ordinal ZFSet
+open FirstOrder Language ZFSet
 
-/-! ## The first-order language of set theory -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-/-- The relations of the language of set theory: a single binary relation `∈`. -/
-inductive memRel : ℕ → Type
-  | mem : memRel 2
-
-/-- The first-order language of set theory: one binary relation symbol, no functions. -/
-
-theorem models_foundAx : (Vs κ) ⊨ foundAx :=
-  realize_foundAx_iff.mpr fun a h => Vs.found a h
+theorem models_foundAx : VClass P ⊨ foundAx.{u + 1} := by
+  rw [realize_foundAx]
+  rintro ⟨x, hx⟩ ⟨⟨y, hy⟩, hyx⟩
+  have hne : x ≠ ∅ := by
+    rintro rfl
+    exact ZFSet.notMem_empty _ hyx
+  obtain ⟨w, hw, hint⟩ := ZFSet.regularity x hne
+  refine ⟨⟨w, h.mem_trans hx hw⟩, hw, ?_⟩
+  rintro ⟨⟨z, hz⟩, h1, h2⟩
+  have : z ∈ x ∩ w := ZFSet.mem_inter.2 ⟨h2, h1⟩
+  rw [hint] at this
+  exact ZFSet.notMem_empty _ this
 

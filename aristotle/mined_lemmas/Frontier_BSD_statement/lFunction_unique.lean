@@ -31,42 +31,53 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Frontier
-
-open Filter Topology WeierstrassCurve
-
 /-!
-## Setup
+## Overview
 
-An elliptic curve over `ℚ` is presented by an integral Weierstrass model `W : WeierstrassCurve ℤ`
-with nonvanishing discriminant.  We formalize:
+We formalise the statement of the Birch–Swinnerton-Dyer conjecture (rank part) for an
+elliptic curve over `ℚ`, given by a minimal integral Weierstrass model `E`:
 
-* the *algebraic rank* of `W`, i.e. the rank of the Mordell–Weil group `E(ℚ)`;
-* the local data (`a_p`, `ε_p`) and the Euler factors of the Hasse–Weil `L`-function of `W`;
-* the predicate `IsHasseWeilLFunction W L` saying that the entire function `L` is the analytic
-  continuation of the Hasse–Weil `L`-series of `W`;
-* the Birch–Swinnerton-Dyer equality `ord_{s=1} L(E, s) = rank E(ℚ)`.
+  `ord_{s=1} L(E, s) = rank E(ℚ)`.
+
+* The *analytic* side is the order of vanishing at `s = 1` of any entire function `L`
+  which agrees with the Dirichlet series `∑ a_n n^{-s}` on the half plane `Re s > 3/2`
+  (where that series converges); the coefficients `a_n` are built from the point counts
+  of the reductions `E mod p` in the usual way.
+* The *algebraic* side is the Mordell–Weil rank, i.e. the `ℚ`-dimension of
+  `ℚ ⊗_ℤ E(ℚ)`.
+
+The statement is well posed: by the identity theorem, an entire continuation of the
+Dirichlet series is unique (`Frontier.LFunction_unique`), so the analytic order of
+vanishing does not depend on the choice of `L`
+(`Frontier.analyticOrder_eq_of_isLFunction`).
+
+The target theorem `Frontier.BSD_statement` is a Lean-checked reduction: assuming the
+conjecture, we derive the classical rank-zero criterion
+`L(E, 1) ≠ 0 ↔ rank E(ℚ) = 0`.
 -/
 
-/-- The Mordell–Weil group `E(ℚ)` of the Weierstrass model `W` over `ℤ`, namely the group of
-nonsingular rational points of the base change of `W` to `ℚ`. -/
-abbrev MordellWeil (W : WeierstrassCurve ℤ) : Type := (W.baseChange ℚ).toAffine.Point
+namespace Frontier
 
-/-- The *algebraic rank* of `W`, i.e. the rank of the Mordell–Weil group `E(ℚ)`, defined as the
-dimension of the `ℚ`-vector space `ℚ ⊗_ℤ E(ℚ)`. -/
+open WeierstrassCurve
 
-theorem lFunction_unique {W : WeierstrassCurve ℤ} {L₁ L₂ : ℂ → ℂ}
-    (h₁ : IsHasseWeilLFunction W L₁) (h₂ : IsHasseWeilLFunction W L₂) : L₁ = L₂ := by
-  have hopen : IsOpen {s : ℂ | 3 / 2 < s.re} :=
-    isOpen_lt continuous_const Complex.continuous_re
+/-- The trace of Frobenius at `p` for the integral Weierstrass model `E`, defined as
+`a_p = p + 1 - #E_ns(𝔽_p)`, where `E_ns(𝔽_p)` is the group of nonsingular points of the
+reduction of `E` modulo `p` (this is the usual `a_p` for good primes, and gives
+`1`, `-1`, `0` at primes of split multiplicative, nonsplit multiplicative and additive
+reduction respectively, provided the model is minimal). -/
+
+theorem LFunction_unique (E : WeierstrassCurve ℤ) (L₁ L₂ : ℂ → ℂ)
+    (h₁ : IsLFunction E L₁) (h₂ : IsLFunction E L₂) : L₁ = L₂ := by
   have hmem : (2 : ℂ) ∈ {s : ℂ | 3 / 2 < s.re} := by
-    simp only [Set.mem_setOf_eq, Complex.re_ofNat]
+    simp only [Set.mem_setOf_eq]
     norm_num
-  have hev : L₁ =ᶠ[𝓝 (2 : ℂ)] L₂ :=
-    Filter.eventually_of_mem (hopen.mem_nhds hmem)
-      (fun s hs => (h₁.euler s hs).trans (h₂.euler s hs).symm)
-  exact AnalyticOnNhd.eq_of_eventuallyEq (fun s _ => h₁.entire s) (fun s _ => h₂.entire s) hev
+  have hev : L₁ =ᶠ[nhds (2 : ℂ)] L₂ := by
+    filter_upwards [isOpen_halfPlane.mem_nhds hmem] with s hs
+    rw [h₁.2 s hs, h₂.2 s hs]
+  have := h₁.1.eqOn_of_preconnected_of_eventuallyEq h₂.1 isPreconnected_univ
+    (Set.mem_univ (2 : ℂ)) hev
+  funext s
+  exact this (Set.mem_univ s)
 
-/-- Factorization form of the BSD equality: the order of vanishing of `L` at `s = 1` equals the
-algebraic rank `r` exactly when `L(s) = (s-1)^r g(s)` near `s = 1` for some analytic `g` with
-`g(1) ≠ 0`. -/
+/-- Consequently the analytic order of vanishing at `s = 1` does not depend on the choice
+of the analytic continuation. -/

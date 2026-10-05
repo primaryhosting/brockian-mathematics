@@ -5,7 +5,6 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -30,9 +29,9 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
+set_option pp.fullNames false
 set_option pp.structureInstances true
-set_option pp.coercions.types true
+set_option pp.coercions.types false
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
@@ -41,17 +40,13 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Basic vector algebra in `ℝ³` -/
+open Real
 
-/-- Euclidean three-space, as a triple of reals. -/
-abbrev R3 := ℝ × ℝ × ℝ
+/-! ## Partial derivatives of functions of two real variables -/
 
-/-- The standard inner product on `ℝ³`. -/
+/-- Partial derivative with respect to the first variable. -/
 
-noncomputable def areaElement (X : ℝ → ℝ → R3) (u v : ℝ) : ℝ :=
-  nrm3 (cross3 (pd1 X u v) (pd2 X u v))
+noncomputable def areaElement (u v : ℝ) : ℝ :=
+  Real.sqrt (S.Efst u v * S.Gfst u v - S.Ffst u v ^ 2)
 
-/-- The mean curvature `H = (eG - 2fF + gE) / (2(EG - F²))` of a parametrized surface,
-computed from the coefficients `E, F, G` of the first fundamental form and the coefficients
-`e, f, g` of the second fundamental form (taken with respect to the unit normal
-`(X_u × X_v)/‖X_u × X_v‖`). -/
+/-- The Willmore energy `∫∫ H² dA` of a surface parametrized by the square `[0, 2π]²`. -/

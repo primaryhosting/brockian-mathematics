@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Betrothed Infinitude
-Category: Brockian Conjecture
-Target: Brockian.BetrothedNumbers.BetrothedInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -44,36 +36,42 @@ Provenance: Aristotle theorem prover (Harmonic)
 /-!
 ## Betrothed (quasi-amicable) numbers
 
-Two distinct natural numbers `m ≠ n` are *betrothed* (also called *quasi-amicable*)
-when each is the sum of the *nontrivial* proper divisors of the other, i.e.
+A pair `(m, n)` of distinct positive integers is *betrothed* (or *quasi-amicable*,
+or a *reduced amicable pair*) when
 
   `σ m = σ n = m + n + 1`,
 
-where `σ = ArithmeticFunction.sigma 1` is the sum-of-divisors function.
+i.e. each of `m` and `n` is the sum of the *nontrivial* proper divisors of the other.
 The smallest example is `(48, 75)`.
 
-Whether there are infinitely many betrothed pairs is an open problem.  What is
-proved here is therefore a *conditional reduction* together with the unconditional
-structural facts it rests on:
+Whether there are infinitely many betrothed pairs is an open problem, so the target
+theorem `BetrothedInfinitude` is stated here as a **Lean-checked conditional
+reduction**: infinitude of betrothed pairs follows from a prime-pattern hypothesis
+`PrimePatternUnbounded`, which asks for arbitrarily large solutions of a pair of
+`σ`-equations in which the two "new" factors are primes.
 
-* `Brockian.BetrothedNumbers.quasiAliquot_iff` — the key intermediate lemma:
-  a pair is betrothed exactly when the *quasi-aliquot* map
-  `q n = σ n - n - 1` swaps `m` and `n` (and `m ≠ n`, `2 ≤ m`, `2 ≤ n`).
-  In particular each member of a betrothed pair determines the other.
-* `Brockian.BetrothedNumbers.BetrothedInfinitude` — from the (open) hypothesis
-  that betrothed pairs have arbitrarily large members it follows that the set of
-  betrothed pairs is infinite.
+The hypothesis is *not* vacuous: `isBetrothedPattern_16_25_3_3` exhibits the
+solution `(a, b, p, q) = (16, 25, 3, 3)`, which produces the betrothed pair
+`(48, 75)`.
+
+Alongside the reduction, several unconditional facts are proved: the first three
+betrothed pairs, that no member of a betrothed pair is prime, that both members are
+at least `48`, that the set of betrothed pairs is infinite exactly when betrothed
+numbers are unbounded, and a parity restriction (in a betrothed pair whose two members
+have the same parity, each member is a square or twice a square).
 -/
 
-namespace Brockian.BetrothedNumbers
+namespace Brockian
+namespace BetrothedNumbers
 
 open ArithmeticFunction
 
-/-- The quasi-aliquot sum of `n`: the sum of the divisors of `n` other than `1` and `n`
-itself (using truncated subtraction, so the value at `n ≤ 1` is `0`). -/
+set_option maxRecDepth 100000
+
+/-- `IsBetrothedPair m n` says that `m` and `n` are distinct positive integers with
+`σ m = σ n = m + n + 1`; equivalently, each is the sum of the proper divisors of the
+other, excluding `1`. -/
 
 theorem isBetrothedPair_140_195 : IsBetrothedPair 140 195 := by
-  refine ⟨by norm_num, ?_, ?_⟩ <;> rw [sigma_one_apply] <;> decide
+  refine ⟨by norm_num, by norm_num, by norm_num, ?_, ?_⟩ <;> decide
 
-set_option maxRecDepth 20000 in
-/-- `(1050, 1925)` is a betrothed pair. -/

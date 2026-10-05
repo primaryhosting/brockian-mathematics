@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Cos Trace Norm 1279
 Category: Brockian Corpus
@@ -7,6 +5,8 @@ Target: Brockian.CosTraceNorm1279
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,10 +33,13 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- The cosine Gram matrix of a family of angles: `C i j = cos (θ i - θ j)`. -/
+open Matrix
 
-theorem cosGram_posSemidef (n : ℕ) (θ : Fin n → ℝ) : (cosGram n θ).PosSemidef := by
-  rw [cosGram_eq_conjTranspose_mul_self]
-  exact Matrix.posSemidef_conjTranspose_mul_self _
+/-- The "cosine kernel" matrix attached to a family of angles `x : Fin n → ℝ`:
+its `(i, j)` entry is `cos (x i - x j)`. -/
 
-/-- The trace of the cosine Gram matrix is `n`, since its diagonal entries are `cos 0 = 1`. -/
+theorem cosGram_posSemidef {n : ℕ} (x : Fin n → ℝ) : (cosGram x).PosSemidef := by
+  rw [cosGram_eq_gram]
+  exact Matrix.posSemidef_self_mul_conjTranspose _
+
+/-- The cosine kernel matrix is Hermitian (i.e. symmetric, over `ℝ`). -/

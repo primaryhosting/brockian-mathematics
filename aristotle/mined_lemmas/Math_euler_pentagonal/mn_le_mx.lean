@@ -1,13 +1,19 @@
-/-
-Franklin's involution and the combinatorial core of Euler's pentagonal number theorem.
--/
 import Mathlib
 
-namespace EulerPentagonal
+/-!
+# Franklin's involution and the pentagonal number theorem (combinatorial core)
+
+A partition of `n` into distinct positive parts is encoded as a `Finset ℕ` not containing `0`
+whose sum is `n`.  The main result of this file, `Franklin.sum_sign_DP`, is Franklin's theorem:
+the signed count `∑ (-1)^(number of parts)` over all partitions of `n` into distinct parts is
+`(-1)^k` if `n` is a generalized pentagonal number `k(3k∓1)/2`, and `0` otherwise.
+-/
+
+namespace Franklin
 
 open Finset
 
-/-- The minimum of a finset of naturals (`0` for the empty set). -/
+/-- Partitions of `n` into distinct positive parts, encoded as finsets of positive naturals. -/
 
-lemma mn_le_mx (hne : S.Nonempty) : mn S ≤ mx S := le_mx S (mn_mem S hne)
+lemma mn_le_mx (hs : s.Nonempty) : mn s ≤ mx s := le_mx (mn_mem hs)
 

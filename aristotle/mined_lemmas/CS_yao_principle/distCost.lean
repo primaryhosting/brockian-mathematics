@@ -8,6 +8,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Yao Principle
+Category: Frontier Cs
+Target: CS.yao_principle
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- (Lean requires `import` to come before any module docstring, so the required header appears
+-- at the top of the file as a plain comment and again here as the module docstring.)
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,34 +33,16 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-
 set_option grind.warning false
-
-/-!
-## Overview
-
-Mathlib has no minimax theorem, so the result is proved from scratch.  The only nontrivial
-input from Mathlib is the separation theorem `geometric_hahn_banach_compact_closed`
-(`Mathlib/Analysis/LocallyConvex/Separation.lean`), which is used to prove Ville's theorem of
-the alternative (`CS.ville_alternative`).  Yao's principle then follows by applying the
-alternative to the shifted cost matrix `cost a x - v`, where `v` is the randomized complexity,
-together with weak duality (`CS.distCost_le_randCost`).
--/
 
 namespace CS
 
-section Orthant
+variable {A I : Type*} [Fintype A] [Fintype I] [Nonempty A] [Nonempty I]
 
-variable {A : Type*}
+/-- The worst-case expected cost of the randomized algorithm given by the distribution `p`
+over deterministic algorithms:  `max over inputs i of  E_{a ~ p} [c a i]`. -/
 
-/-- The nonnegative orthant in `A → ℝ` is convex. -/
+noncomputable def distCost (c : A → I → ℝ) (q : I → ℝ) : ℝ := ⨅ a, ∑ i, q i * c a i
 
-noncomputable def distCost (cost : A → X → ℝ) (q : X → ℝ) : ℝ :=
-  ⨅ a : A, ∑ x, q x * cost a x
+/-! ### Basic facts about `randCost` and `distCost` -/
 
-omit [Nonempty A] [Nonempty X] in
-/-- Weak duality: any input distribution gives a lower bound for any randomized algorithm. -/

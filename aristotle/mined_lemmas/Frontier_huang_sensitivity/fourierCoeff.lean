@@ -1,61 +1,35 @@
+/-
+# Huang Sensitivity
+Category: Frontier — Fields Medal Work
+Target: Frontier.huang_sensitivity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
-import Archive.Sensitivity
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
 
 /-!
-# Huang's sensitivity theorem: degree is at most sensitivity squared
-
-We formalize the sensitivity conjecture (Huang, 2019) for Boolean functions
-`f : (ι → Bool) → Bool` on a finite set `ι` of variables:
-
-  `degree f ≤ (sensitivity f)^2`.
-
-Here `degree f` is the Fourier degree: the largest cardinality of a set `S` of variables
-whose Fourier–Walsh coefficient `fourierCoeff f S` is non-zero (equivalently, the degree
-of the unique multilinear real polynomial representing `f`), and `sensitivity f` is the
-maximum over inputs `x` of the number of coordinates `i` such that flipping `x i`
-changes the value of `f`.
-
-The combinatorial core (Huang's degree theorem on the hypercube: every set of more than
-half of the vertices of the `n`-dimensional hypercube induces a subgraph with a vertex of
-degree at least `√n`) is taken from `Archive.Sensitivity`.  The remaining work here is the
-Gotsman–Linial style reduction from the sensitivity conjecture to that theorem:
-
-* transferring Huang's theorem from the cube `Fin n → Bool` to a cube `ι → Bool` indexed by
-  an arbitrary finite type (`Frontier.huang_flip`);
-* the top-degree case: if the top Fourier coefficient of `f` is non-zero, then
-  `√(card ι) ≤ sensitivity f` (`Frontier.sqrt_card_le_sensitivity_of_top_coeff`);
-* the restriction argument: a non-zero coefficient at `S` survives in some restriction of
-  the variables outside `S`, and restricting does not increase sensitivity.
+# Huang Sensitivity
+Category: Frontier — Fields Medal Work
+Target: Frontier.huang_sensitivity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped BigOperators
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 8000
 
 namespace Frontier
 
-open Finset
+/-! ## Basic definitions for Boolean functions on the hypercube -/
 
-variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+/-- The character `χ_S(x) = ∏_{i ∈ S} (-1)^{x i}`, valued in `ℤ`. -/
 
-/-! ## Basic definitions -/
+def fourierCoeff {n : ℕ} (f : (Fin n → Bool) → Bool) (S : Finset (Fin n)) : ℤ :=
+  ∑ x : Fin n → Bool, (if f x then (-1 : ℤ) else 1) * chi S x
 
-/-- Flip the `i`-th coordinate of a point of the hypercube. -/
-
-noncomputable def fourierCoeff (f : (ι → Bool) → Bool) (S : Finset ι) : ℝ :=
-  (2 ^ Fintype.card ι : ℝ)⁻¹ * ∑ x : ι → Bool, bsign (f x) * chi S x
-
-/-- The (Fourier) degree of a Boolean function: the largest size of a set of coordinates
-with a non-zero Fourier coefficient. -/
+/-- The degree of a Boolean function: the largest size of a set carrying a nonzero
+Fourier coefficient, i.e. the degree of the unique multilinear polynomial
+representing `f`. -/

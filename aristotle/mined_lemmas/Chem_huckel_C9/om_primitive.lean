@@ -8,13 +8,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators Real
-open Complex Polynomial
-
 namespace Chem
 
-/-- A primitive 9th root of unity. -/
+open Complex Matrix Finset
 
-theorem om_primitive : IsPrimitiveRoot om 9 := by
-  simpa [om, mul_comm, mul_assoc, mul_left_comm] using Complex.isPrimitiveRoot_exp 9 (by norm_num)
+noncomputable section
+
+/-- A primitive 9-th root of unity. -/
+
+lemma om_primitive : IsPrimitiveRoot om 9 := by
+  simpa [om] using Complex.isPrimitiveRoot_exp 9 (by norm_num)
 

@@ -23,6 +23,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Goldbach Beyond Of Model
+Category: Brockian (Open Discharge)
+Target: Brockian.GoldbachSchema.goldbach_beyond_of_model
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -31,16 +39,41 @@ Category: Brockian (Open Discharge)
 Target: Brockian.GoldbachSchema.goldbach_beyond_of_model
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+## Scope of what is proved here
+
+* `goldbach_beyond_of_model` is proved unconditionally (no hypothesis beyond the model datum):
+  given a *model* certifying Goldbach's conjecture on a finite initial range `[4, N]`, the full
+  conjecture is equivalent to its "beyond `N`" form.
+* A model for `N = 400` (`model400`) is constructed and proved by kernel computation, so
+  `goldbach_iff_beyond_400` is likewise unconditional.
+* Goldbach's conjecture itself (`Goldbach`) is *not* proved here; it is an open problem, and
+  nothing in this file asserts it.  Everything stated is either unconditional or explicitly
+  conditional on `Goldbach` (see `ternary_of_goldbach`).
 -/
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 100000
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 
 namespace Brockian.GoldbachSchema
 
-/-- `GoldbachBeyond N` says that *beyond* the bound `N` there is an even number which is a
-sum of two distinct primes, i.e. the Goldbach representation property is witnessed at some
-even number larger than `N`. -/
+/-- `IsGoldbach n` : the natural number `n` is a sum of two primes. -/
 
 def GoldbachBeyond (N : ℕ) : Prop :=
-  ∃ m p q : ℕ, N < m ∧ Even m ∧ Nat.Prime p ∧ Nat.Prime q ∧ p ≠ q ∧ p + q = m
+  ∀ n : ℕ, 4 ≤ n → N < n → Even n → IsGoldbach n
 
-/-- The "model" hypothesis of the schema: a Bertrand-type prime model, asserting that for every
-positive `n` there is a prime in the interval `(n, 2n]`. -/
+/-- A *Goldbach model up to `N`* is a certificate that Goldbach's conjecture holds throughout
+the finite initial range `[4, N]`.  Such certificates are decidable finite objects: one is
+constructed explicitly for `N = 400` below (`model400`). -/
+structure GoldbachModel (N : ℕ) : Prop where
+  /-- Every even `n` with `4 ≤ n ≤ N` is a sum of two primes. -/
+  certificate : ∀ n : ℕ, 4 ≤ n → n ≤ N → Even n → IsGoldbach n
+
+/-- **Main theorem.**  Relative to a Goldbach model up to `N`, the full Goldbach conjecture is
+*equivalent* to its "beyond `N`" form: the finite initial segment of the conjecture is
+discharged by the model, so nothing but the tail remains.
+
+This statement is unconditional: it carries no unproven hypothesis, only the finite (and
+explicitly constructible) model datum. -/

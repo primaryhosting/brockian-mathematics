@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Ghz 3 Normalized
+Category: Quantum Computing
+Target: QC.ghz3_normalized
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,13 +31,20 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+
 namespace QC
 
-/-- The 3-qubit GHZ state `(|000⟩ + |111⟩)/√2`, as a vector in the Hilbert space
-`EuclideanSpace ℂ (Fin 2 × Fin 2 × Fin 2)` of three qubits. -/
+/-- The state space of three qubits: `ℂ^(2×2×2)` with the Euclidean (Hermitian) norm. -/
+abbrev Qubits3 := EuclideanSpace ℂ (Fin 2 × Fin 2 × Fin 2)
 
-theorem ghz3_apply (i : Fin 2 × Fin 2 × Fin 2) :
-    ghz3 i = if i = (0, 0, 0) ∨ i = (1, 1, 1) then ((Real.sqrt 2 : ℂ))⁻¹ else 0 := by
-  fin_cases i <;> simp [ghz3, EuclideanSpace.single_apply, Prod.ext_iff]
+/-- The computational basis ket `|v⟩` for a bit-triple `v`. -/
+
+lemma ghz3_apply (v : Fin 2 × Fin 2 × Fin 2) :
+    ghz3 v =
+      if v = (0, 0, 0) then ((Real.sqrt 2)⁻¹ : ℂ)
+      else if v = (1, 1, 1) then ((Real.sqrt 2)⁻¹ : ℂ) else 0 := by
+  simp only [ghz3, ket, PiLp.smul_apply, PiLp.add_apply, EuclideanSpace.single_apply,
+    smul_eq_mul]
+  split_ifs with h1 h2 <;> simp_all
 
 /-- The 3-qubit GHZ state `(|000⟩ + |111⟩)/√2` is a unit vector. -/

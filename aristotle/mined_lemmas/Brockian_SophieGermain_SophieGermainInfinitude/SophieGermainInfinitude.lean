@@ -35,20 +35,18 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.SophieGermain
 
-/-- `p` is a *Sophie Germain prime* if both `p` and `2 * p + 1` are prime. -/
+/-- `p` is a Sophie Germain prime if both `p` and `2 * p + 1` are prime. -/
 
-theorem SophieGermainInfinitude (hD : DicksonsConjecture) :
-    {p : ℕ | IsSophieGermain p}.Infinite := by
-  rw [show {p : ℕ | IsSophieGermain p} = sophieGermainSet from rfl,
-    infinite_sophieGermainSet_iff_unbounded]
+theorem SophieGermainInfinitude
+    (h : ∀ N : ℕ, ∃ p : ℕ, N < p ∧ p.Prime ∧ ((2 * p + 1) ∣ 2 ^ p - 1 ∨ (2 * p + 1) ∣ 2 ^ p + 1)) :
+    {p : ℕ | p.Prime ∧ (2 * p + 1).Prime}.Infinite := by
+  apply Set.infinite_of_forall_exists_gt
   intro N
-  obtain ⟨n, hn, hprime⟩ := hD 2 sgForms sgForms_pos admissible_sgForms N
-  refine ⟨n, hn, ?_, ?_⟩
-  · have := hprime 0
-    simpa [sgForms] using this
-  · have := hprime 1
-    simpa [sgForms] using this
+  obtain ⟨p, hN, hp, hd⟩ := h N
+  refine ⟨p, ?_, hN⟩
+  rcases hd with hd | hd
+  · exact ⟨hp, prime_of_dvd_two_pow_sub_one hp hd⟩
+  · exact ⟨hp, prime_of_dvd_two_pow_add_one hp hd⟩
 
-/-! ## Unconditional partial results -/
-
-/-- Explicit small Sophie Germain primes. -/
+/-- The hypothesis of `SophieGermainInfinitude` is *equivalent* to the Sophie Germain
+conjecture, so the reduction loses nothing. -/

@@ -1,111 +1,94 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-
+# Jones Polynomial Invariant
+Category: Frontier — Fields Medal Work
+Target: Frontier.jones_polynomial_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 import Mathlib
 
 /-!
-# Reidemeister invariance of the (writhe-normalized) Kauffman bracket
-
-This file formalizes the algebraic core of the statement *"the Jones polynomial is a link
-invariant"*, i.e. that the writhe-normalized Kauffman bracket is unchanged by the three
-Reidemeister moves.
-
-The set-up is the standard *local skein* axiomatization.  A `KauffmanBracket` consists of
-
-* a coefficient ring `R` together with an invertible element `A : Rˣ`;
-* a monoid `T` of *local tangles* (composition = vertical stacking), containing the two
-  Temperley–Lieb cap–cup elements `e 0`, `e 1` and the two kinds of crossings
-  `xp i`, `xm i` sitting at position `i`;
-* a type `D` of link diagrams and a type `Ctx` of *contexts*, i.e. diagrams with a hole in
-  which a local tangle can be inserted, via `plug : Ctx → T → D`; contexts can absorb tangles
-  on either side (`pre`, `post`);
-* a bracket functional `br : D → R`,
-
-subject to Kauffman's axioms: the two skein relations, the loop relation
-`⟨D ⊔ ○⟩ = (-A² - A⁻²) ⟨D⟩`, the relation `e i * e i = ○ · e i`, and the Temperley–Lieb
-relations `e i * e j * e i = e i`.
-
-From these purely local axioms we prove:
-
-* `KauffmanBracket.br_R2` : invariance of the bracket under the second Reidemeister move;
-* `KauffmanBracket.br_R3` : invariance of the bracket under the third Reidemeister move;
-* `KauffmanBracket.br_kink_xm` / `br_kink_xp` : a curl multiplies the bracket by `-A³`
-  (resp. `-A⁻³`), whence the *writhe-normalized* bracket
-  `jones D w = (-A³)^(-w) ⟨D⟩` is invariant under the first Reidemeister move as well.
-
-`Frontier.jones_polynomial_invariant` collects these four statements.
-
-Finally `Frontier.exists_nontrivial_kauffmanBracket` exhibits a model of the axioms with a
-nonzero bracket and with `e 0 ≠ e 1` (built from a two–dimensional representation of the
-Temperley–Lieb algebra `TL₃`), so that the axiom system — and hence the main theorem — is not
-vacuous.
+# Jones Polynomial Invariant
+Category: Frontier — Fields Medal Work
+Target: Frontier.jones_polynomial_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+set_option autoImplicit false
 
 namespace Frontier
 
-open scoped BigOperators
+/-!
+## The Kauffman-bracket model of the Jones polynomial
 
-/-- Kauffman's local skein axioms for a bracket functional on link diagrams. -/
-structure KauffmanBracket (R : Type*) [CommRing R] (T : Type*) [Monoid T]
-    (D : Type*) (Ctx : Type*) where
-  /-- The invertible variable `A`. -/
-  A : Rˣ
-  /-- The two Temperley–Lieb cap–cup tangles. -/
-  e : Fin 2 → T
-  /-- Crossings whose `A`-smoothing is the identity tangle. -/
-  xp : Fin 2 → T
-  /-- Crossings whose `A`-smoothing is the cap–cup tangle. -/
-  xm : Fin 2 → T
-  /-- Inserting a local tangle into a context produces a diagram. -/
-  plug : Ctx → T → D
-  /-- A context can absorb a tangle stacked below the hole. -/
-  pre : Ctx → T → Ctx
-  /-- A context can absorb a tangle stacked above the hole. -/
-  post : Ctx → T → Ctx
-  plug_pre : ∀ C t s, plug (pre C t) s = plug C (s * t)
-  plug_post : ∀ C t s, plug (post C t) s = plug C (t * s)
-  /-- Adding a disjoint circle to a diagram. -/
-  circle : D → D
-  /-- The bracket functional. -/
-  br : D → R
-  br_circle : ∀ d, br (circle d) = (-(A : R) ^ 2 - ((A⁻¹ : Rˣ) : R) ^ 2) * br d
-  skein_xp : ∀ C i, br (plug C (xp i))
-      = (A : R) * br (plug C 1) + ((A⁻¹ : Rˣ) : R) * br (plug C (e i))
-  skein_xm : ∀ C i, br (plug C (xm i))
-      = ((A⁻¹ : Rˣ) : R) * br (plug C 1) + (A : R) * br (plug C (e i))
-  plug_ee : ∀ C i, plug C (e i * e i) = circle (plug C (e i))
-  tl_zero : e 0 * e 1 * e 0 = e 0
-  tl_one : e 1 * e 0 * e 1 = e 1
+The Jones polynomial of a link is obtained from the Kauffman bracket state sum
+of a link diagram, normalised by the writhe.  The content of the statement
+"the Jones polynomial is a link invariant" is the invariance of this
+construction under the three Reidemeister moves, and this is a purely local,
+algebraic computation in the Temperley–Lieb algebras over the coefficient ring,
+where a crossing is resolved as
 
-namespace KauffmanBracket
+    ⟨crossing⟩ = A · ⟨identity smoothing⟩ + A⁻¹ · ⟨cup–cap smoothing⟩
 
-variable {R : Type*} [CommRing R] {T : Type*} [Monoid T] {D Ctx : Type*}
-  (K : KauffmanBracket R T D Ctx)
+and a closed loop contributes the factor `d = -A² - A⁻²`.
 
-/-- Shorthand for `A⁻¹` as an element of `R`. -/
+This file sets up the Temperley–Lieb algebras `TL₂` and `TL₃` over an arbitrary
+commutative ring (with loop parameter `d`), defines the Kauffman resolution of
+a crossing, and proves the three local invariance statements:
 
-@[simp] lemma negA3_val : ((K.negA3 : Rˣ) : R) = -(K.A : R) ^ 3 := by
-  simp [negA3]
+* Reidemeister I : a kink multiplies the bracket by `-A³`, so the writhe
+  normalisation `(-A³)^(-w) ⟨D⟩` is unchanged;
+* Reidemeister II: `σ⁺ · σ⁻ = 1` in `TL₂`;
+* Reidemeister III: `σ₁ σ₂ σ₁ = σ₂ σ₁ σ₂` in `TL₃`.
+-/
 
+namespace Jones
+
+/-! ### The Temperley–Lieb algebra `TL₂`
+
+Basis: the identity diagram `1` and the cup–cap diagram `e`, with `e * e = d * e`.
+-/
+
+/-- An element of the Temperley–Lieb algebra on two strands, written in the
+planar basis `{1, e}`. -/
+structure TL2 (K : Type*) where
+  /-- coefficient of the identity diagram -/
+  c1 : K
+  /-- coefficient of the cup–cap diagram `e` -/
+  ce : K
+
+namespace TL2
+
+variable {K : Type*} [CommRing K]
+
+omit [CommRing K] in
+
+theorem negA3_val :
+    (negA3 : LaurentPolynomial ℤ) = -(LaurentPolynomial.T 1 : LaurentPolynomial ℤ) ^ 3 := by
+  show -LaurentPolynomial.T 3 = _
+  rw [show (3 : ℤ) = 1 + 1 + 1 by ring, LaurentPolynomial.T_add, LaurentPolynomial.T_add]
+  ring
+
+end Jones
+
+/-! ### The main statement -/
+
+open Jones
+
+/-- **The Jones polynomial is a link invariant** (base case: invariance of the
+Kauffman-bracket construction under all three Reidemeister moves).
+
+Working over the ring `LaurentPolynomial ℤ = ℤ[A, A⁻¹]` of Kauffman-bracket
+coefficients, with the loop value `d = -A² - A⁻²`:
+
+1. *Reidemeister I*: adding a positive kink to a diagram multiplies the
+   Kauffman bracket by `kinkFactor A A⁻¹ = -A³` and increases the writhe by
+   `1`, hence the writhe-normalised bracket `f(D) = (-A³)^(-w(D)) ⟨D⟩` — the
+   Jones polynomial, up to the substitution `A = t^(-1/4)` — is unchanged.
+2. *Reidemeister II*: the Kauffman resolutions of a positive and a negative
+   crossing compose to the identity tangle in `TL₂`.
+3. *Reidemeister III*: the Kauffman resolutions satisfy the braid relation in
+   `TL₃`.
+-/

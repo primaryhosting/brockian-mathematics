@@ -1,0 +1,94 @@
+/-!
+# Bhargava Cube Law
+Category: Frontier — Fields Medal Work
+Target: Frontier.bhargava_cube_law
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+/-!
+## Bhargava cubes and their three binary quadratic forms
+
+A *Bhargava cube* is a `2 × 2 × 2` array of integers
+
+```
+      e ------- f
+     /|        /|
+    a ------- b |
+    | |       | |
+    | g ------| h
+    |/        |/
+    c ------- d
+```
+
+There are three ways of slicing the cube into a pair of `2 × 2` matrices `(M, N)`:
+
+* front/back:   `M₁ = ![![a, b], ![c, d]]`,  `N₁ = ![![e, f], ![g, h]]`;
+* top/bottom:   `M₂ = ![![a, c], ![e, g]]`,  `N₂ = ![![b, d], ![f, h]]`;
+* left/right:   `M₃ = ![![a, e], ![b, f]]`,  `N₃ = ![![c, g], ![d, h]]`.
+
+Each slicing produces a binary quadratic form `Qᵢ(x, y) = -det(Mᵢ x - Nᵢ y)`.
+
+Bhargava's *cube law* asserts that these three forms all have the same discriminant `D`
+and that their classes compose to the identity in the class group of forms of
+discriminant `D`, thereby recovering Gauss composition.
+
+This file
+* defines cubes and the three associated forms,
+* proves the discriminant identity `Disc Q₁ = Disc Q₂ = Disc Q₃` for **every** cube, and
+* proves the base case of the cube law: for the cube whose first slicing yields the
+  *principal* form, the law becomes an explicit bilinear Gauss-composition identity
+  `Q₂(x₁,y₁) · Q₃(x₂,y₂) = Q₁(L₁, L₂)`.
+-/
+
+/-- A Bhargava cube: a `2 × 2 × 2` array of integers. -/
+structure Cube where
+  /-- vertex `(0,0,0)` -/ a : ℤ
+  /-- vertex `(0,0,1)` -/ b : ℤ
+  /-- vertex `(0,1,0)` -/ c : ℤ
+  /-- vertex `(0,1,1)` -/ d : ℤ
+  /-- vertex `(1,0,0)` -/ e : ℤ
+  /-- vertex `(1,0,1)` -/ f : ℤ
+  /-- vertex `(1,1,0)` -/ g : ℤ
+  /-- vertex `(1,1,1)` -/ h : ℤ
+  deriving DecidableEq, Repr
+
+namespace Cube
+
+variable (K : Cube)
+
+/-- The first form of a cube, `Q₁(x,y) = -det(M₁ x - N₁ y)` with
+`M₁ = ![![a, b], ![c, d]]` and `N₁ = ![![e, f], ![g, h]]`. -/
+
+@[simp] lemma baseCube_Q₃ (A C f g x y : ℤ) :
+    (baseCube A C f g).Q₃ x y = A * x ^ 2 - (g - f) * x * y + C * y ^ 2 := by
+  simp only [baseCube, Cube.Q₃]; ring
+
+/-- The principal form `Q₁` of the base cube represents `1`. -/

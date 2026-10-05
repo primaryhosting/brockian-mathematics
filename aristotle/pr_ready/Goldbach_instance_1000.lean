@@ -9,13 +9,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace Goldbach
-
-/-- 1000 is a sum of two primes: `3` and `997` are prime and `3 + 997 = 1000`. -/
-theorem instance_1000 : Nat.Prime 3 ∧ Nat.Prime 997 ∧ 3 + 997 = 1000 :=
-  ⟨by norm_num, by norm_num, by norm_num⟩
-
-end Goldbach
+/-
+# Instance 1000
+Category: Frontier — Prime Numbers
+Target: Goldbach.instance_1000
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
@@ -40,4 +40,12 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Goldbach
+
+/-- 1000 is a sum of two primes: 3 and 997. -/
+theorem instance_1000 : Nat.Prime 3 ∧ Nat.Prime 997 ∧ 3 + 997 = 1000 := by
+  refine ⟨by norm_num, by norm_num, by norm_num⟩
+
+end Goldbach
 

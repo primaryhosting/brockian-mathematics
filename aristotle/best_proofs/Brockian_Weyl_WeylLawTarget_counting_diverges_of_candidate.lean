@@ -1,3 +1,4 @@
+import Brockian.Weyl.WeylLawTarget
 import Mathlib
 
 open scoped BigOperators
@@ -32,57 +33,49 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Note: Lean 4 requires `import` lines to precede every other token in a file
--- (a module doc comment before an `import` is a syntax error), so the required
--- header comment is placed immediately after the single `import Mathlib` line.
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-open Filter Set
-open scoped Topology
+set_option maxHeartbeats 1000000
 
 namespace Brockian.Weyl.WeylLawTarget
 
-/-- A *candidate spectrum* for a Weyl law: a nondecreasing sequence of real
-"eigenvalues" `mu 0 ≤ mu 1 ≤ ⋯` diverging to `+∞`.  This is the standard shape
-of the spectrum of an operator with compact resolvent. -/
-structure Candidate where
-  /-- The candidate eigenvalue sequence, listed with multiplicity. -/
-  mu : ℕ → ℝ
-  /-- The eigenvalues are listed in nondecreasing order. -/
-  mono : Monotone mu
-  /-- The eigenvalues tend to `+∞`; equivalently, the spectrum is discrete. -/
-  diverges : Tendsto mu atTop atTop
+/-- The eigenvalue counting function of a candidate spectrum `mu : ℕ → ℝ`:
+`counting mu t` is the number of indices `n` with `mu n ≤ t`. -/
+noncomputable def counting (mu : ℕ → ℝ) (t : ℝ) : ℕ := {n : ℕ | mu n ≤ t}.ncard
 
-/-- The eigenvalue counting function `N(λ) = #{n | mu n ≤ λ}` of a candidate
-spectrum. -/
-noncomputable def countingFn (C : Candidate) (lam : ℝ) : ℕ :=
-  {n : ℕ | C.mu n ≤ lam}.ncard
-
-/-- For a candidate spectrum every sublevel set of the eigenvalue sequence is
-finite; this is what makes the counting function meaningful. -/
-theorem finite_sublevel (C : Candidate) (lam : ℝ) :
-    {n : ℕ | C.mu n ≤ lam}.Finite := by
-  obtain ⟨N, hN⟩ := (C.diverges.eventually_gt_atTop lam).exists_forall_of_atTop
+/-- For a candidate spectrum tending to infinity, each sublevel set is finite. -/
+theorem finite_sublevel {mu : ℕ → ℝ} (htop : Filter.Tendsto mu Filter.atTop Filter.atTop)
+    (t : ℝ) : {n : ℕ | mu n ≤ t}.Finite := by
+  have h : ∀ᶠ n in Filter.atTop, t < mu n :=
+    htop.eventually (Filter.eventually_gt_atTop t)
+  obtain ⟨N, hN⟩ := Filter.eventually_atTop.1 h
   refine Set.Finite.subset (Set.finite_Iio N) ?_
   intro n hn
-  simp only [Set.mem_setOf_eq] at hn
-  by_contra hcon
-  exact absurd hn (not_le.2 (hN n (not_lt.1 hcon)))
+  by_contra hlt
+  exact absurd (hN n (le_of_not_gt hlt)) (not_lt.2 hn)
 
-/-- **Weyl-law target, unconditional form.**  For any candidate spectrum the
-eigenvalue counting function diverges: `N(λ) → ∞` as `λ → ∞`.
+/-- Beyond the maximum of the first `K` candidate eigenvalues, the counting function is `≥ K`. -/
+theorem le_counting_of_ge {mu : ℕ → ℝ} (htop : Filter.Tendsto mu Filter.atTop Filter.atTop)
+    (K : ℕ) : ∀ᶠ t in Filter.atTop, K ≤ counting mu t := by
+  obtain ⟨M, hM⟩ := Finset.exists_le ((Finset.range K).image mu)
+  filter_upwards [Filter.eventually_ge_atTop M] with t ht
+  have hsub : (Finset.range K : Set ℕ) ⊆ {n : ℕ | mu n ≤ t} := by
+    intro n hn
+    have hle : mu n ≤ M := hM (mu n) (Finset.mem_image_of_mem mu (by simpa using hn))
+    exact hle.trans ht
+  have hcard := Set.ncard_le_ncard hsub (finite_sublevel htop t)
+  simpa [counting, Set.ncard_coe_finset] using hcard
 
-The hypothesis previously assumed — that the counting function of the candidate
-is unbounded — is discharged here from the defining properties of a candidate
-spectrum (monotonicity and divergence of the eigenvalue sequence). -/
-theorem counting_diverges_of_candidate (C : Candidate) :
-    Tendsto (countingFn C) atTop atTop := by
-  refine tendsto_atTop.2 fun k => ?_
-  filter_upwards [eventually_ge_atTop (C.mu k)] with lam hlam
-  have hsub : Set.Iio k ⊆ {n : ℕ | C.mu n ≤ lam} := fun n hn =>
-    le_trans (C.mono (le_of_lt hn)) hlam
-  calc k = (Set.Iio k).ncard := (Set.ncard_Iio_nat k).symm
-    _ ≤ ({n : ℕ | C.mu n ≤ lam}).ncard :=
-        Set.ncard_le_ncard hsub (finite_sublevel C lam)
+/-- **Weyl law target (open discharge).** If a candidate spectrum `mu : ℕ → ℝ` tends to
+infinity, then its eigenvalue counting function `t ↦ #{n | mu n ≤ t}` diverges to infinity. -/
+theorem counting_diverges_of_candidate {mu : ℕ → ℝ}
+    (htop : Filter.Tendsto mu Filter.atTop Filter.atTop) :
+    Filter.Tendsto (counting mu) Filter.atTop Filter.atTop :=
+  Filter.tendsto_atTop.2 fun K => le_counting_of_ge htop K
 
 end Brockian.Weyl.WeylLawTarget
 

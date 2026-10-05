@@ -5,9 +5,9 @@ Target: Frontier.landau_levels
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment; the same text is repeated below as the module docstring.)
 
--- (Lean requires `import` to precede any module doc-comment, so the header above is
--- reproduced verbatim as a module doc-comment immediately after the import.)
 import Mathlib
 
 /-!
@@ -45,10 +45,12 @@ namespace Frontier
 
 open Polynomial
 
-/-! ## Hermite polynomials over `ℝ` -/
+/-! ### Hermite polynomials: the Hermite differential equation
 
-/-- The (probabilists') Hermite polynomials, with real coefficients. -/
+Mathlib provides `Polynomial.hermite : ℕ → ℤ[X]` (the *probabilists'* Hermite polynomials)
+together with `Polynomial.hermite_succ`, but not the Hermite ODE, which we derive here. -/
 
-noncomputable def hermiteR (n : ℕ) : Polynomial ℝ :=
-  (Polynomial.hermite n).map (Int.castRingHom ℝ)
+/-- The Hermite differential equation `He_n'' = X * He_n' - n * He_n`. -/
+
+noncomputable def hermiteR (n : ℕ) : ℝ[X] := (hermite n).map (Int.castRingHom ℝ)
 

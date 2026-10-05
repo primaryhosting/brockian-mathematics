@@ -30,41 +30,37 @@ Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
-# Equidistribution: existence of the asymptotic average
+# Equidistribution Of Asymptotic Exists
+Category: Brockian (Open Discharge)
+Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-This file develops Weyl's criterion for equidistribution modulo one on the circle
-`AddCircle (1 : ℝ) = ℝ / ℤ`, and deduces from it Weyl's equidistribution theorem for the
-sequence `n ↦ n * a` with `a` irrational.
+This file constructs an explicit sequence in `[0, 1)` whose empirical distribution is
+asymptotically the uniform one: for every subinterval `[a, b) ⊆ [0, 1)` the proportion of
+the first `N` terms lying in `[a, b)` converges to `b - a`.
 
-Main results:
-
-* `Brockian.Equidistribution.isEquidistributed_of_tendsto_fourier`: Weyl's criterion.
-* `Brockian.Equidistribution.isEquidistributed_irrational`: the orbit of an irrational
-  rotation is equidistributed mod 1.
-* `Brockian.Equidistribution.equidistribution_of_asymptotic_exists`: unconditional statement
-  that for irrational `a` the asymptotic average of any continuous function along `n * a`
-  exists and equals the integral of the function.
+The construction is the "triangular block" sequence
+`0/1 ; 0/2, 1/2 ; 0/3, 1/3, 2/3 ; 0/4, …` .
 -/
 
-open MeasureTheory Filter Complex
-open scoped Topology BigOperators
+open Filter Topology
 
 namespace Brockian.Equidistribution
 
-local instance factZeroLtOne : Fact ((0 : ℝ) < 1) := ⟨one_pos⟩
+/-- Triangular numbers: `tri k = 0 + 1 + ⋯ + k`. -/
 
-/-- The Birkhoff-type average of a continuous function `f` on the circle `ℝ / ℤ` along the
-first `N` points of the real sequence `x`, taken modulo `1`. -/
+def IsEquidistributed (u : ℕ → ℝ) : Prop :=
+  ∀ a b : ℝ, 0 ≤ a → a ≤ b → b ≤ 1 →
+    Tendsto (fun N : ℕ =>
+        (((Finset.range N).filter (fun n => u n ∈ Set.Ico a b)).card : ℝ) / (N : ℝ))
+      atTop (𝓝 (b - a))
 
-def IsEquidistributed (x : ℕ → ℝ) : Prop :=
-  ∀ f : C(AddCircle (1 : ℝ), ℂ),
-    Tendsto (avg x f) atTop (𝓝 (∫ t : AddCircle (1 : ℝ), f t ∂AddCircle.haarAddCircle))
+section Counting
 
-section Basic
+variable (a b : ℝ)
 
-variable (x : ℕ → ℝ)
-
+/-- Number of the first `N` terms of `seq` lying in `[a, b)`. -/

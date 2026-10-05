@@ -23,13 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Deficiency Represents ODE Of Weak Regularity
-Category: Brockian (Literature Discharge)
-Target: Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -40,30 +33,31 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
 open Set MeasureTheory
 
 namespace Brockian.Weyl.DeficiencyODE
 
-/-- The state space of a first-order linear system of `n` equations. -/
-abbrev State (n : ℕ) : Type := Fin n → ℂ
+/-- **Weak regularity of the potential.** The coefficient `q` is bounded on every compact
+interval.  This is far weaker than continuity (no measurability, no smoothness); it is exactly
+the amount of regularity needed for Weyl's deficiency theory of the Sturm–Liouville expression
+`τ u = -u'' + q u`. -/
 
-variable {n : ℕ}
+def deficiencyEval (q : ℝ → ℂ) (z : ℂ) (μ : Measure ℝ) (t₀ : ℝ) :
+    deficiencySubmodule q z μ →ₗ[ℂ] ℂ × ℂ where
+  toFun Y := (Y : ℝ → ℂ × ℂ) t₀
+  map_add' := by intro Y W; rfl
+  map_smul' := by intro c Y; rfl
 
-/-- *Weak regularity* of the coefficient family of the first-order linear system
-`u' t = A t (u t)`: the coefficient operators depend continuously on time.  This is the
-hypothesis retained in the Weyl-theoretic statement below. -/
+/-- **Deficiency represents the ODE (under weak regularity only).**
 
-def deficiencyEval (A : ℝ → (State n →L[ℂ] State n)) :
-    deficiencySpace A →ₗ[ℂ] State n where
-  toFun u := (u : ℝ → State n) 0
-  map_add' _ _ := rfl
-  map_smul' _ _ := rfl
+Let `q : ℝ → ℂ` be weakly regular (bounded on compact intervals — no continuity, smoothness or
+measurability is assumed) and let `z : ℂ`.  Then, for the deficiency space at `z` relative to any
+measure `μ`:
 
-/-- Uniqueness for the linear system: a solution vanishing at one time vanishes
-identically. -/
+1. every element of the deficiency space is genuinely a solution of the Sturm–Liouville
+   differential equation `-u'' + q u = z u`, its two components being `u` and `u'`;
+2. an element of the deficiency space is uniquely determined by its initial data
+   `(u t₀, u' t₀)` at any point `t₀`, i.e. the deficiency space is faithfully represented
+   inside the two-dimensional space of initial data of the ODE;
+3. consequently the deficiency space is finite-dimensional and the deficiency index is at most
+   the order `2` of the differential expression. -/

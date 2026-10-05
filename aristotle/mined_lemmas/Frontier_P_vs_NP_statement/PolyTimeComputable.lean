@@ -6,45 +6,45 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option autoImplicit false
-/-!
-## Overview
+/-
+A self-contained formalization of the P vs NP question in terms of time-bounded
+(deterministic and nondeterministic) single-tape Turing machines and polynomial-time
+many-one reducibility.
 
-This file is a self-contained formalisation (it needs no imports beyond the Lean core
-prelude, so that the module header above can literally begin the file) of:
+The development is elementary and depends on nothing beyond the Lean 4 prelude, so that
+the file can literally begin with the header comment above.
 
-* single-tape Turing machines over the binary alphabet, deterministic (`Frontier.DTM`) and
-  nondeterministic (`Frontier.NTM`), with a *finite* state set `Fin (states + 1)`;
-* their step semantics on a two-way infinite tape `Int → Sym`;
-* time-bounded decision of a language, and the complexity classes `Frontier.P` and
-  `Frontier.NP`;
-* polynomial-time computable functions, Karp (polynomial-time many-one) reducibility
-  `Frontier.PolyReducible`, NP-hardness and NP-completeness.
+Main declarations:
 
-The target declaration `Frontier.P_vs_NP_statement` states the precise content of the
-assertion `P ≠ NP`: the classes differ exactly when some language is decided by a
-polynomial-time nondeterministic Turing machine but by no polynomial-time deterministic one.
-The theorem is the conjunction of the (proved) inclusion `P ⊆ NP` with pure logic; the
-assertion `P ≠ NP` itself is of course open, and is *not* proved here.
+* `Frontier.Machine`             : single-tape Turing machine with finite control;
+* `Frontier.AcceptsWithin`       : acceptance within a given number of steps;
+* `Frontier.Deterministic`       : determinism of the transition relation;
+* `Frontier.DecidesInPolyTime`   : deciding a language within a polynomial time bound;
+* `Frontier.P`, `Frontier.NP`    : the two complexity classes;
+* `Frontier.PolyReducible`       : polynomial-time many-one reducibility `≤ₚ`;
+* `Frontier.NPComplete`          : NP-completeness;
+* `Frontier.P_vs_NP_statement`   : the statement of the P vs NP problem, in the form
+  `P ≠ NP ↔ ∃ L, L ∈ NP ∧ L ∉ P`.
 -/
 
 namespace Frontier
 
-/-! ## Words, languages, tapes -/
-
-/-- The tape alphabet: `none` is the blank symbol, `some b` is the bit `b`. -/
-abbrev Sym : Type := Option Bool
-
-/-- A word is a finite binary string. -/
+/-- Words are finite binary strings. -/
 abbrev Word : Type := List Bool
 
-/-- A language is a set of binary words. -/
+/-- A language is a set of words, represented by its membership predicate. -/
 abbrev Language : Type := Word → Prop
 
-/-- The initial tape holding the input word `x`: the `i`-th cell (for `i ≥ 0`) holds the
-`i`-th bit of `x`, and all other cells are blank. -/
+/-- The direction in which the tape head moves in one step. -/
+inductive Dir : Type
+  | left : Dir
+  | right : Dir
+  | stay : Dir
 
-def PolyTimeComputable (g : Word → Word) : Prop :=
-  ∃ (D : DTM) (f : Nat → Nat), IsPolyBounded f ∧ ∀ x, D.Outputs x (g x) (f x.length)
+/-- The displacement of the head associated with a direction. -/
 
-/-- Karp reducibility: `L₁` reduces to `L₂` by a polynomial-time computable map. -/
+def PolyTimeComputable (f : Word → Word) : Prop :=
+  ∃ M : Machine, ComputesInPolyTime M f
+
+/-- Polynomial-time many-one reducibility: `A ≤ₚ B` when there is a polynomial-time
+computable `f` with `x ∈ A ↔ f x ∈ B`. -/

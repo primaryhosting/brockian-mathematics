@@ -1,0 +1,40 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+
+theorem admissible_image_add_const (S : Finset ℤ) (c : ℤ)
+    (h : Admissible S) : Admissible (S.image (· + c)) := by
+  intro p hp
+  obtain ⟨r, hr⟩ := h p hp
+  refine ⟨r + (c : ZMod p), ?_⟩
+  intro hmem
+  apply hr
+  simp only [residueImage, Finset.mem_image, Finset.image_image] at hmem ⊢
+  obtain ⟨s, hs, hs2⟩ := hmem
+  refine ⟨s, hs, ?_⟩
+  simp only [Function.comp_apply, Int.cast_add] at hs2
+  exact add_right_cancel hs2
+
+

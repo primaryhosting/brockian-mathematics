@@ -23,8 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-/-!
+/-
 # Same Parity Betrothed Exists
 Category: Brockian Conjecture
 Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
@@ -32,17 +31,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to be the very first command in a file, so the header module
--- docstring above sits immediately after the single `import Mathlib` line.)
+import Mathlib
 
-namespace Brockian
-namespace BetrothedNumbers
+namespace Brockian.BetrothedNumbers
 
-open Finset
+open ArithmeticFunction Finset
 
-/-- The sum-of-divisors function `σ₁`. -/
+/-- `sigmaOne n` is the sum of all divisors of `n`. -/
 
 def sigmaOne (n : ℕ) : ℕ := ∑ d ∈ n.divisors, d
 
-/-- `m` and `n` form a *betrothed* (quasi-amicable) pair: they are distinct and each one's
-sum of proper divisors is one more than the other, i.e. `σ(m) = σ(n) = m + n + 1`. -/
+/-- `Betrothed m n` says that `m` and `n` form a *betrothed* (quasi-amicable) pair:
+they are distinct positive integers such that the sum of the proper divisors of each
+one is one more than the other, i.e. `σ(m) = σ(n) = m + n + 1`. -/

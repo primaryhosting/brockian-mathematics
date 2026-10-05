@@ -1,97 +1,72 @@
-/-
-# Euler Polyhedron
-Category: Chemistry
-Target: Chem.euler_polyhedron
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
+import RequestProject.Chem
 
 /-!
-# Euler Polyhedron
-Category: Chemistry
-Target: Chem.euler_polyhedron
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+# Polyhedral cages with full incidence data
 
-open scoped BigOperators
+The previous modules describe a polyhedral surface by its vertex, edge and face sets.  Here the
+incidence structure itself is formalized: a `Cage` carries, besides the three finite sets, the
+endpoint set of every edge and the boundary-edge set of every face.  Well-formedness (`Cage.WF`)
+demands what a closed polyhedral surface must satisfy:
+
+* every edge has exactly two endpoints, both of them vertices;
+* every face is bounded by at least three edges of the surface;
+* **every edge lies on exactly two faces** — the closed-surface condition.
+
+The two basic construction steps (subdividing an edge, splitting a face by a diagonal) are
+defined on the incidence data and are proved to preserve well-formedness, and Euler's formula
+`|V| - |E| + |F| = 2` is proved for every cage built in this way.
+-/
 
 namespace Chem
 
-/-- A combinatorial *polyhedral surface*: a finite set of vertices, a finite set of
-(undirected) edges, a finite set of face labels, and, for each label, the set of edges
-on the boundary of that face. -/
-structure Surface where
-  /-- The vertices of the surface. -/
-  verts : Finset ℕ
-  /-- The edges of the surface. -/
-  edges : Finset (Sym2 ℕ)
-  /-- The labels of the faces of the surface. -/
-  faces : Finset ℕ
-  /-- The boundary of each face, given as a set of edges. -/
-  bd : ℕ → Finset (Sym2 ℕ)
+open Finset
 
-/-- `IsSphere S` says that the surface `S` is a *spherical* (equivalently, planar) map,
-i.e. it is the surface graph of a convex polyhedron, described by the standard
-construction of plane graphs:
+/-- A polyhedral cage: finite sets of vertices, edges and faces together with the incidence
+data (endpoints of each edge, boundary edges of each face). -/
+structure Cage where
+  /-- The vertex set. -/
+  V : Finset ℕ
+  /-- The edge set. -/
+  E : Finset ℕ
+  /-- The face set. -/
+  F : Finset ℕ
+  /-- The two endpoints of an edge. -/
+  ends : ℕ → Finset ℕ
+  /-- The boundary edges of a face. -/
+  sides : ℕ → Finset ℕ
 
-* one may start from a single vertex drawn on the sphere, whose complement is a single face;
-* one may attach a new vertex `v` to an existing vertex `u` by an edge drawn inside a face `f`
-  (this creates no new face, and the new edge is added to the boundary of `f`);
-* one may join two existing vertices `u`, `v` lying on a common face `f` by a new edge drawn
-  inside `f`; this splits `f` into two faces, one of which keeps the label `f` and the other
-  gets a fresh label `g`, and the new edge lies on the boundary of both.
+/-- Well-formedness of a cage: edges have two endpoints among the vertices, faces are bounded
+by at least three edges of the cage, and every edge lies on exactly two faces. -/
 
-Every plane graph (in particular the edge graph of a convex polyhedron, e.g. a fullerene
-cage) arises in this way; conversely every surface produced by these moves is a plane graph. -/
-inductive IsSphere : Surface → Prop
-  | base (v f : ℕ) : IsSphere ⟨{v}, ∅, {f}, fun _ => ∅⟩
-  | pendant (S : Surface) (hS : IsSphere S) (u v f : ℕ) (hu : u ∈ S.verts) (hv : v ∉ S.verts)
-      (hf : f ∈ S.faces) :
-      IsSphere ⟨insert v S.verts, insert s(u, v) S.edges, S.faces,
-        Function.update S.bd f (insert s(u, v) (S.bd f))⟩
-  | split (S : Surface) (hS : IsSphere S) (u v f g : ℕ) (hu : u ∈ S.verts) (hv : v ∈ S.verts)
-      (hf : f ∈ S.faces) (hg : g ∉ S.faces) (he : s(u, v) ∉ S.edges) :
-      IsSphere ⟨S.verts, insert s(u, v) S.edges, insert g S.faces,
-        Function.update (Function.update S.bd f (insert s(u, v) (S.bd f))) g
-          (insert s(u, v) (S.bd g))⟩
+theorem fullerene_C60 : IsPolyhedron 60 90 32 := by
+  have base : IsPolyhedron 4 6 4 := IsPolyhedron.tetrahedron
+  -- eight pyramids over triangular faces: (4,6,4) → (12,30,20)
+  have pyr : ∀ V E F : Nat, IsPolyhedron V E F → IsPolyhedron (V + 1) (E + 3) (F + 2) :=
+    fun _ _ _ h => IsPolyhedron.pyramid 3 (by omega) h
+  have h1 : IsPolyhedron 5 9 6 := pyr _ _ _ base
+  have h2 : IsPolyhedron 6 12 8 := pyr _ _ _ h1
+  have h3 : IsPolyhedron 7 15 10 := pyr _ _ _ h2
+  have h4 : IsPolyhedron 8 18 12 := pyr _ _ _ h3
+  have h5 : IsPolyhedron 9 21 14 := pyr _ _ _ h4
+  have h6 : IsPolyhedron 10 24 16 := pyr _ _ _ h5
+  have h7 : IsPolyhedron 11 27 18 := pyr _ _ _ h6
+  have icosa : IsPolyhedron 12 30 20 := pyr _ _ _ h7
+  -- twelve truncations of degree-5 vertices: each adds (4,5,1)
+  have trunc : ∀ V E F : Nat, IsPolyhedron V E F → IsPolyhedron (V + 4) (E + 5) (F + 1) :=
+    fun _ _ _ h => IsPolyhedron.truncate 5 (by omega) h
+  have t1 : IsPolyhedron 16 35 21 := trunc _ _ _ icosa
+  have t2 : IsPolyhedron 20 40 22 := trunc _ _ _ t1
+  have t3 : IsPolyhedron 24 45 23 := trunc _ _ _ t2
+  have t4 : IsPolyhedron 28 50 24 := trunc _ _ _ t3
+  have t5 : IsPolyhedron 32 55 25 := trunc _ _ _ t4
+  have t6 : IsPolyhedron 36 60 26 := trunc _ _ _ t5
+  have t7 : IsPolyhedron 40 65 27 := trunc _ _ _ t6
+  have t8 : IsPolyhedron 44 70 28 := trunc _ _ _ t7
+  have t9 : IsPolyhedron 48 75 29 := trunc _ _ _ t8
+  have t10 : IsPolyhedron 52 80 30 := trunc _ _ _ t9
+  have t11 : IsPolyhedron 56 85 31 := trunc _ _ _ t10
+  exact trunc _ _ _ t11
 
-/-- In a spherical map every endpoint of an edge is a vertex. -/
-
-theorem fullerene_C60 {S : Surface} (hS : IsSphere S) (p h : ℕ)
-    (hV : S.verts.card = 60)
-    (hcubic : 3 * S.verts.card = 2 * S.edges.card)
-    (hfaces : S.faces.card = p + h)
-    (hedges : 5 * p + 6 * h = 2 * S.edges.card) :
-    S.edges.card = 90 ∧ S.faces.card = 32 ∧ p = 12 ∧ h = 20 := by
-  have := euler_polyhedron_nat hS
-  omega
-
-end Chem
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-- All five Platonic count tables are realized by polyhedra: tetrahedron `(4,6,4)`, cube
+`(8,12,6)`, octahedron `(6,12,8)`, dodecahedron `(20,30,12)` and icosahedron `(12,30,20)`. -/

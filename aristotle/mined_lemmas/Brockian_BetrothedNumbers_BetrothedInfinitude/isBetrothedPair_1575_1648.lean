@@ -45,9 +45,8 @@ namespace Brockian.BetrothedNumbers
 
 open Finset
 
-/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d`. -/
+/-- The sum-of-divisors function `σ₁`. -/
 
-theorem isBetrothedPair_1575_1648 : IsBetrothedPair 1575 1648 :=
-  ⟨by norm_num, by norm_num, by norm_num, by decide, by decide⟩
+theorem isBetrothedPair_1575_1648 : IsBetrothedPair 1575 1648 := by decide
 
-set_option maxRecDepth 40000 in
+set_option maxRecDepth 100000 in

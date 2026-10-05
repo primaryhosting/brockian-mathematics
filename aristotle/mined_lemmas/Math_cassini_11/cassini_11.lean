@@ -1,3 +1,22 @@
+/-!
+# Cassini 11
+Category: Pure Mathematics
+Target: Math.cassini_11
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Math
+
+/-- The Fibonacci sequence, `fib 0 = 0`, `fib 1 = 1`,
+`fib (n + 2) = fib n + fib (n + 1)`. -/
+
+theorem cassini_11 :
+    (fib 10 : Int) * (fib 12 : Int) - (fib 11 : Int) ^ 2 = (-1) ^ 11 := by
+  decide
+
+end Math
+
 import Mathlib
 
 open scoped BigOperators
@@ -23,13 +42,17 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+import Mathlib
+import RequestProject.Cassini11
+
+/-!
+# Cassini 11, phrased with Mathlib's `Nat.fib`
+
+The target theorem `Math.cassini_11` lives in `RequestProject/Cassini11.lean`, whose required
+header comment must be the very first thing in the file (so that file carries no imports and
+uses its own copy `Math.fib` of the Fibonacci sequence).  Here we check that `Math.fib` agrees
+with Mathlib's `Nat.fib` and restate Cassini's identity accordingly.
+-/
+
 namespace Math
-
-/-- Cassini's identity at n = 11: `F(10) * F(12) - F(11)^2 = (-1)^11`. -/
-
-theorem cassini_11 :
-    (Nat.fib 10 : ℤ) * (Nat.fib 12 : ℤ) - (Nat.fib 11 : ℤ) ^ 2 = (-1) ^ 11 := by
-  norm_num [Nat.fib]
-
-end Math
 

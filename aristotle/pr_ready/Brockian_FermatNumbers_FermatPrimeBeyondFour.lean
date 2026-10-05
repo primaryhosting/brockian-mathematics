@@ -31,8 +31,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
--- (Lean 4 requires `import` lines to precede any module doc-comment, so the requested
--- header block appears immediately below the import.)
 
 /-!
 # Fermat Prime Beyond Four
@@ -42,100 +40,86 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-The existence of a Fermat prime `F_n = 2^(2^n) + 1` with `n > 4` (i.e. beyond `F_4 = 65537`)
-is an open problem.  What is proved here is a *complete, unconditional reduction* of that
-statement to Pépin's criterion: for every `n ≥ 1`,
-
-  `F_n` is prime  ↔  `3 ^ ((F_n - 1)/2) = -1` in `ZMod (F_n)`.
-
-The `←` direction is Mathlib's `Nat.pepin_primality`; the `→` direction (that `3` is a
-quadratic non-residue modulo a Fermat prime) is proved here from quadratic reciprocity
-(`legendreSym.quadratic_reciprocity_one_mod_four`) and Euler's criterion
-(`legendreSym.eq_pow`).
--/
-
 namespace Brockian.FermatNumbers
 
-open Nat
+private instance factPrimeThree : Fact (Nat.Prime 3) := ⟨by norm_num⟩
 
-/-- `F_n % 4 = 1` for `n ≥ 1`. -/
-lemma fermatNumber_mod_four (n : ℕ) (hn : 1 ≤ n) : fermatNumber n % 4 = 1 := by
+/-- The Pépin condition for the `n`-th Fermat number `Fₙ = 2 ^ 2 ^ n + 1`:
+`3 ^ ((Fₙ - 1) / 2) = -1` in `ZMod Fₙ`. -/
+def PepinCondition (n : ℕ) : Prop :=
+  (3 : ZMod (Nat.fermatNumber n)) ^ 2 ^ (2 ^ n - 1) = -1
+
+/-- `Fₙ ≡ 1 [MOD 4]` for `n ≥ 1`. -/
+lemma fermatNumber_mod_four (n : ℕ) (hn : 1 ≤ n) : Nat.fermatNumber n % 4 = 1 := by
   have h2 : 2 ≤ 2 ^ n := by
-    calc 2 = 2 ^ 1 := (pow_one 2).symm
-    _ ≤ 2 ^ n := Nat.pow_le_pow_right (by norm_num) hn
-  obtain ⟨k, hk⟩ : ∃ k, 2 ^ n = k + 2 := ⟨2 ^ n - 2, by omega⟩
-  unfold fermatNumber
-  rw [hk, pow_add]
-  omega
+    calc (2 : ℕ) = 2 ^ 1 := rfl
+      _ ≤ 2 ^ n := Nat.pow_le_pow_right (by norm_num) hn
+  have h : (2 : ℕ) ^ 2 ^ n = 4 * 2 ^ (2 ^ n - 2) := by
+    rw [show (4 : ℕ) = 2 ^ 2 from rfl, ← pow_add]
+    congr 1
+    omega
+  simp [Nat.fermatNumber, h, Nat.add_mod, Nat.mul_mod_right]
 
-/-- `F_n % 3 = 2` for `n ≥ 1`. -/
-lemma fermatNumber_mod_three (n : ℕ) (hn : 1 ≤ n) : fermatNumber n % 3 = 2 := by
-  obtain ⟨m, hm⟩ : ∃ m, 2 ^ n = 2 * m := ⟨2 ^ (n - 1), by
-    rw [← pow_succ']
+/-- `Fₙ ≡ 2 [MOD 3]` for `n ≥ 1`. -/
+lemma fermatNumber_mod_three (n : ℕ) (hn : 1 ≤ n) : Nat.fermatNumber n % 3 = 2 := by
+  obtain ⟨k, hk⟩ : ∃ k, 2 ^ n = 2 * k := ⟨2 ^ (n - 1), by
+    rw [show (2 : ℕ) * 2 ^ (n - 1) = 2 ^ (n - 1 + 1) by ring]
     congr 1
     omega⟩
-  have h : 2 ^ (2 ^ n) % 3 = 1 := by
-    rw [hm, pow_mul]
-    have h4 : (2 : ℕ) ^ 2 = 3 + 1 := by norm_num
-    rw [h4]
-    simpa using Nat.pow_mod (3 + 1) m 3
-  unfold fermatNumber
-  omega
+  have h : (2 : ℕ) ^ 2 ^ n % 3 = 1 := by
+    rw [hk, pow_mul, show (2 : ℕ) ^ 2 = 3 + 1 by norm_num]
+    simpa using Nat.pow_mod (3 + 1) k 3
+  simp [Nat.fermatNumber, Nat.add_mod, h]
 
-/-- Euler's criterion applied to a Fermat prime: `3` is a quadratic non-residue modulo
-`F_n` for `n ≥ 1`, hence the converse direction of Pépin's test. -/
-lemma pepin_converse (n : ℕ) (hn : 1 ≤ n) (hp : (fermatNumber n).Prime) :
-    (3 : ZMod (fermatNumber n)) ^ (2 ^ (2 ^ n - 1)) = -1 := by
-  haveI : Fact (fermatNumber n).Prime := ⟨hp⟩
-  have h4 : fermatNumber n % 4 = 1 := fermatNumber_mod_four n hn
-  have h3 : fermatNumber n % 3 = 2 := fermatNumber_mod_three n hn
-  -- Quadratic reciprocity: since `F_n ≡ 1 [MOD 4]`, `(3 | F_n) = (F_n | 3)`.
-  have hqr : legendreSym 3 (fermatNumber n : ℤ) = legendreSym (fermatNumber n) 3 :=
-    legendreSym.quadratic_reciprocity_one_mod_four h4 (by norm_num)
-  -- and `F_n ≡ 2 [MOD 3]`, while `2` is a non-residue mod `3`.
-  have hleft : legendreSym 3 (fermatNumber n : ℤ) = -1 := by
-    rw [legendreSym.mod 3 (fermatNumber n : ℤ)]
-    have h : ((fermatNumber n : ℤ) % ((3 : ℕ) : ℤ)) = 2 := by omega
-    rw [h]
-    exact (by decide : legendreSym 3 2 = -1)
-  -- Euler's criterion turns this into the Pépin congruence.
-  have heuler := legendreSym.eq_pow (fermatNumber n) (3 : ℤ)
-  rw [hqr.symm.trans hleft] at heuler
-  have hdiv : fermatNumber n / 2 = 2 ^ (2 ^ n - 1) := by
+/-- `3` is a quadratic non-residue modulo a prime Fermat number `Fₙ` with `n ≥ 1`. -/
+lemma legendreSym_three_fermatNumber (n : ℕ) (hn : 1 ≤ n)
+    (hp : Fact (Nat.Prime (Nat.fermatNumber n))) :
+    legendreSym (Nat.fermatNumber n) 3 = -1 := by
+  have hrec : legendreSym 3 (Nat.fermatNumber n : ℤ) = legendreSym (Nat.fermatNumber n) (3 : ℤ) :=
+    legendreSym.quadratic_reciprocity_one_mod_four (fermatNumber_mod_four n hn) (by norm_num)
+  have hmod : (Nat.fermatNumber n : ℤ) % ((3 : ℕ) : ℤ) = 2 := by
+    have h := fermatNumber_mod_three n hn
+    push_cast
+    omega
+  rw [← hrec, legendreSym.mod, hmod]
+  decide
+
+/-- **Converse of Pépin's test.** If the Fermat number `Fₙ` (`n ≥ 1`) is prime, then it satisfies
+the Pépin condition `3 ^ ((Fₙ - 1) / 2) = -1` in `ZMod Fₙ`. -/
+theorem pepinCondition_of_prime (n : ℕ) (hn : 1 ≤ n) (hp : Nat.Prime (Nat.fermatNumber n)) :
+    PepinCondition n := by
+  haveI : Fact (Nat.Prime (Nat.fermatNumber n)) := ⟨hp⟩
+  have hhalf : Nat.fermatNumber n / 2 = 2 ^ (2 ^ n - 1) := by
     have h1 : 1 ≤ 2 ^ n := Nat.one_le_two_pow
-    have h2 : (2 : ℕ) ^ (2 ^ n) = 2 * 2 ^ (2 ^ n - 1) := by
-      rw [← _root_.pow_succ']
+    have h : (2 : ℕ) ^ 2 ^ n = 2 * 2 ^ (2 ^ n - 1) := by
+      rw [← pow_succ']
       congr 1
       omega
-    unfold fermatNumber
-    omega
-  rw [hdiv] at heuler
+    simp [Nat.fermatNumber, h, Nat.mul_add_div]
+  have heuler : ((legendreSym (Nat.fermatNumber n) 3 : ℤ) : ZMod (Nat.fermatNumber n))
+      = ((3 : ℤ) : ZMod (Nat.fermatNumber n)) ^ (Nat.fermatNumber n / 2) :=
+    legendreSym.eq_pow (Nat.fermatNumber n) 3
+  rw [legendreSym_three_fermatNumber n hn ⟨hp⟩, hhalf] at heuler
+  unfold PepinCondition
   push_cast at heuler
   exact heuler.symm
 
-/-- **Pépin's test**, as an equivalence: for `n ≥ 1`, the Fermat number `F_n` is prime
-iff `3 ^ (2 ^ (2 ^ n - 1)) = -1` in `ZMod (F_n)`. -/
-theorem pepin_iff (n : ℕ) (hn : 1 ≤ n) :
-    (fermatNumber n).Prime ↔ (3 : ZMod (fermatNumber n)) ^ (2 ^ (2 ^ n - 1)) = -1 :=
-  ⟨pepin_converse n hn, fun h => Nat.pepin_primality n h⟩
+/-- **Pépin's test**: for `n ≥ 1`, the Fermat number `Fₙ` is prime if and only if the Pépin
+condition holds. -/
+theorem prime_fermatNumber_iff_pepinCondition (n : ℕ) (hn : 1 ≤ n) :
+    Nat.Prime (Nat.fermatNumber n) ↔ PepinCondition n :=
+  ⟨pepinCondition_of_prime n hn, fun h => Nat.pepin_primality n h⟩
 
-/-- **Conditional reduction of the "Fermat prime beyond four" conjecture.**
-There is a Fermat prime `F_n` with `n > 4` if and only if Pépin's criterion
-`3 ^ (2 ^ (2 ^ n - 1)) = -1 (mod F_n)` holds for some `n > 4`. -/
+/-- **Reduction of the "Fermat prime beyond four" problem.**
+There is a Fermat prime `Fₙ` with `n > 4` if and only if some `n > 4` passes Pépin's test.
+(Whether either side holds is a famous open problem.) -/
 theorem FermatPrimeBeyondFour :
-    (∃ n, 4 < n ∧ Nat.Prime (fermatNumber n)) ↔
-      (∃ n, 4 < n ∧ (3 : ZMod (fermatNumber n)) ^ (2 ^ (2 ^ n - 1)) = -1) := by
+    (∃ n, 4 < n ∧ Nat.Prime (Nat.fermatNumber n)) ↔ (∃ n, 4 < n ∧ PepinCondition n) := by
   constructor
   · rintro ⟨n, hn, hp⟩
-    exact ⟨n, hn, (pepin_iff n (by omega)).1 hp⟩
+    exact ⟨n, hn, pepinCondition_of_prime n (by omega) hp⟩
   · rintro ⟨n, hn, h⟩
-    exact ⟨n, hn, (pepin_iff n (by omega)).2 h⟩
-
-/-- Sanity check that the criterion is satisfiable: `F_4 = 65537` is prime, so Pépin's
-congruence holds for `n = 4` (the largest currently known Fermat prime). -/
-lemma pepin_at_four : (3 : ZMod (fermatNumber 4)) ^ (2 ^ (2 ^ 4 - 1)) = -1 :=
-  (pepin_iff 4 (by norm_num)).1 (by norm_num [fermatNumber])
+    exact ⟨n, hn, Nat.pepin_primality n h⟩
 
 end Brockian.FermatNumbers
 

@@ -1,4 +1,5 @@
-/-
+import Mathlib
+
 /-!
 # Furstenberg Szemeredi
 Category: Frontier Abel
@@ -6,26 +7,41 @@ Target: Frontier.furstenberg_szemeredi
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--/
--- (Lean 4 does not permit a module docstring to precede `import`, so the header above is
--- wrapped in an outer block comment.)
-import Mathlib
 
-open Finset Filter MeasureTheory
+open scoped BigOperators
+open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-- `ContainsAP A k` says that the set `A ⊆ ℕ` contains an arithmetic progression
-`a, a + d, …, a + (k-1) d` of length `k` with positive common difference `d`. -/
+/-! ## Basic definitions -/
 
-theorem szemerediFinitary_of_le_three {k : ℕ} (hk : k ≤ 3) : SzemerediFinitary k :=
-  szemerediFinitary_mono hk szemerediFinitary_three
+/-- `HasAP A k` says that the set `A ⊆ ℕ` contains a non-degenerate arithmetic progression
+`a, a + d, …, a + (k-1) d` of length `k` (with common difference `d > 0`). -/
 
-/-- **Szemerédi's theorem**, in the form of a Lean-checked reduction of the infinitary
-(positive upper density) statement to the finitary one, which in the ergodic-theoretic
-approach of Furstenberg is supplied by the multiple recurrence theorem.
+theorem szemerediFinitary_of_le_three {k : ℕ} (hk : k ≤ 3) : SzemerediFinitary k := by
+  intro δ hδ
+  refine ⟨cornersTheoremBound (δ / 3), fun N hN S hSsub hScard => ?_⟩
+  exact (hasAP_three_of_dense_finset hδ hN S hSsub hScard).mono hk
 
-For `k ≤ 3` the hypothesis is unconditionally available
-(see `Frontier.szemerediFinitary_of_le_three`), so the conclusion holds outright; this is the
-base case of the induction on the length `k` of the progression. -/
+/-- The density form of Szemerédi's theorem holds for `k ≤ 3`; equivalently, this is the target
+theorem `Frontier.furstenberg_szemeredi` in packaged form. -/

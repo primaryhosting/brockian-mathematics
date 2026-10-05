@@ -30,44 +30,41 @@ Target: Brockian.LandauNSquaredPlusOne.LandauFourthConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above uses `/-` rather than `/-!` because Lean does not allow a module
+-- docstring to precede the `import` commands; the text is otherwise verbatim.)
 
 import Mathlib
 
 /-!
 # Landau Fourth Conjecture
-Category: Brockian Conjecture
-Target: Brockian.LandauNSquaredPlusOne.LandauFourthConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
-open Filter Asymptotics
-
-namespace Brockian
-namespace LandauNSquaredPlusOne
-
-/-! ## The statement
 
 Landau's fourth problem asks whether there are infinitely many primes of the form `n ^ 2 + 1`.
-This is an open problem, so the main theorem below is a *conditional reduction*: it derives the
-conjecture from a Hardy–Littlewood style lower bound for the associated counting function.
+This is a well-known open problem, so what is proved here is:
 
-Alongside it we prove a number of unconditional results:
-
-* several reformulations of the conjecture (unboundedness of witnesses, unboundedness of the
-  counting function, infinitude of the set of primes of the shape `n ^ 2 + 1`);
-* the classical congruence restriction on the prime divisors of `n ^ 2 + 1`;
-* the unconditional partial result that infinitely many primes divide *some* value `n ^ 2 + 1`.
+* `LandauFourthConjecture` : a **conditional** reduction — Bunyakovsky's conjecture
+  (in the form `BunyakovskyHypothesis`) implies Landau's fourth conjecture
+  (`LandauFourthStatement`).  All the hypotheses of Bunyakovsky's conjecture are verified
+  unconditionally for the polynomial `X ^ 2 + 1`.
+* `X_sq_add_one_irreducible` : `X ^ 2 + 1` is irreducible over `ℤ`.
+* `infinite_setOf_prime_dvd_sq_add_one` : an **unconditional** partial result — infinitely many
+  primes divide some number of the form `n ^ 2 + 1`.
+* `infinite_setOf_large_prime_factor` : an **unconditional** partial result — for infinitely many
+  `n`, the number `n ^ 2 + 1` has a prime factor exceeding `2 * n`.
 -/
 
-/-- The set of natural numbers `n` such that `n ^ 2 + 1` is prime. -/
+open Polynomial
 
-theorem LandauFourthConjecture (H : HardyLittlewoodLowerBound) :
-    {n : ℕ | Nat.Prime (n ^ 2 + 1)}.Infinite :=
-  landauSet_infinite_iff_landauCount_unbounded.mpr
-    (landauCount_unbounded_of_hardyLittlewood H)
+namespace Brockian.LandauNSquaredPlusOne
 
-end LandauNSquaredPlusOne
-end Brockian
+/-- **Landau's fourth conjecture**: there are infinitely many natural numbers `n` such that
+`n ^ 2 + 1` is prime. -/
 
+theorem LandauFourthConjecture (hB : BunyakovskyHypothesis) : LandauFourthStatement := by
+  have h := hB (X ^ 2 + 1) (by rw [X_sq_add_one_natDegree]; norm_num)
+    (by rw [X_sq_add_one_monic.leadingCoeff]; norm_num)
+    X_sq_add_one_irreducible X_sq_add_one_no_fixed_divisor
+  rwa [setOf_prime_eval_eq] at h
+
+/-- **Unconditional partial result.**  There are infinitely many primes `p` dividing some number
+of the form `n ^ 2 + 1`; equivalently, infinitely many primes occur as prime factors of the
+sequence `n ^ 2 + 1`. -/

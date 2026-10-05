@@ -6,8 +6,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to precede any module doc-comment, so the header above is
--- reproduced verbatim as a module doc-comment immediately after the import.)
 import Mathlib
 
 /-!
@@ -18,45 +16,41 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+open Polynomial
 
 namespace Frontier
 
-open Polynomial
+/-! ### Hermite polynomial facts -/
 
-/-! ## Hermite polynomials over `ℝ` -/
+/-- The derivative of the `(n+1)`-st probabilists' Hermite polynomial. -/
 
-/-- The (probabilists') Hermite polynomials, with real coefficients. -/
-
-lemma hasDerivAt_hermiteGauss' (n : ℕ) (t : ℝ) :
-    HasDerivAt (fun u : ℝ => eval u (gDeriv (hermiteR n)) * Real.exp (-(u ^ 2 / 4)))
-      ((t ^ 2 / 4 - ((n : ℝ) + 1 / 2)) * hermiteGauss n t) t := by
-  have h := hasDerivAt_polyGauss (gDeriv (hermiteR n)) t
-  rw [gDeriv_gDeriv_hermiteR n] at h
-  convert h using 1
-  simp [hermiteGauss]
+theorem hasDerivAt_hermiteGauss' (n : ℕ) (x : ℝ) :
+    HasDerivAt (hermiteGauss' n)
+      ((x ^ 2 / 4 - ((n : ℝ) + 1 / 2)) * hermiteGauss n x) x := by
+  have hode : ∀ y : ℝ, aeval y (derivative (derivative (hermite n)))
+      = y * aeval y (derivative (hermite n)) - (n : ℝ) * aeval y (hermite n) := by
+    intro y
+    have := congrArg (fun p : Polynomial ℤ => aeval y p) (hermite_ode n)
+    simp only [map_add, map_sub, map_mul, aeval_X, aeval_C, map_zero] at this
+    push_cast at this
+    linarith
+  have h1 : HasDerivAt (fun y : ℝ => aeval y (derivative (hermite n)))
+      (aeval x (derivative (derivative (hermite n)))) x :=
+    Polynomial.hasDerivAt_aeval _ _
+  have h0 : HasDerivAt (fun y : ℝ => aeval y (hermite n)) (aeval x (derivative (hermite n))) x :=
+    Polynomial.hasDerivAt_aeval _ _
+  have hid : HasDerivAt (fun y : ℝ => y / 2) (1 / 2 : ℝ) x := by
+    simpa using (hasDerivAt_id x).div_const 2
+  have hA : HasDerivAt (fun y : ℝ => aeval y (derivative (hermite n)) - y / 2 * aeval y (hermite n))
+      (aeval x (derivative (derivative (hermite n)))
+        - (1 / 2 * aeval x (hermite n) + x / 2 * aeval x (derivative (hermite n)))) x :=
+    h1.sub (hid.mul h0)
+  have h2 := hasDerivAt_gauss x
+  have hmul := hA.mul h2
+  refine hmul.congr_deriv ?_
+  simp only [hermiteGauss, He, hode x]
   ring
 
-end Frontier
+/-! ### The physical Landau problem -/
 
+/-- The magnetic length scale `sqrt (ħ / (2 m ω_c))` appearing in the Landau eigenfunctions. -/

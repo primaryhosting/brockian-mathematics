@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Hardy Paradox
 Category: Frontier Qi
@@ -7,60 +8,61 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on the header: Lean 4 requires every `import` line to precede all other commands,
-so the module docstring above sits immediately after `import Mathlib`.
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Content of this file.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-Hardy's nonlocality argument, in the "without inequalities" (logical) form.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-Two spacelike separated parties, Alice and Bob, each choose one of two dichotomic
-measurements (`1` or `2`) with outcomes in `{yes, no}`.  Hardy's four conditions are
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-  (H1)  P(a₁ = yes, b₁ = yes) = 0
-  (H2)  P(a₂ = yes, b₁ = no ) = 0
-  (H3)  P(a₁ = no , b₂ = yes) = 0
-  (H4)  P(a₂ = yes, b₂ = yes) > 0.
-
-*Local realism* (a local hidden-variable model) assigns, to each hidden state `λ`,
-definite outcomes for all four observables, and the observed probabilities are
-measures of the corresponding events on the hidden-variable space.  Conditions
-(H1)–(H3) then force `P(a₂ = yes, b₂ = yes) = 0`, contradicting (H4): the runs in
-which Alice measures `2`, Bob measures `2` and both obtain `yes` — a fraction
-`1/12` of such runs for the quantum state exhibited below — cannot be explained
-by any local hidden-variable model, *without any inequality being used*.
-
-Quantum mechanics realises (H1)–(H4): we exhibit two qubits in the state
-`|ψ⟩ ∝ |00⟩ + |01⟩ + |10⟩` together with the measurement vectors
-
-  a₁ = yes : |1⟩            a₁ = no  : |0⟩
-  a₂ = yes : |0⟩ - |1⟩
-  b₁ = yes : |1⟩            b₁ = no  : |0⟩
-  b₂ = yes : |0⟩ - |1⟩
-
-and check by the Born rule that the three Hardy probabilities vanish while
-P(a₂ = yes, b₂ = yes) = 1/12.
-
-(There is no Mathlib lemma for this statement; the quantum side is a direct
-Born-rule computation and the local-realism side is a short measure-theoretic
-argument built from `measure_mono_null` and `measure_union_null`.)
--/
+set_option grind.warning false
 
 namespace QI
 
 open MeasureTheory
 
-noncomputable section
+/-! ## Hardy's paradox for local hidden-variable models
 
-/-- A one-qubit vector. -/
-abbrev Qubit := Fin 2 → ℂ
+A local hidden-variable model for a bipartite experiment with two binary settings and two
+binary outcomes per party consists of a probability space `Ω` (the hidden variables) together
+with outcome functions `A x ω` for Alice and `B y ω` for Bob.  *Locality* is encoded in the
+types: Alice's outcome depends only on her own setting `x` and the hidden variable `ω`, never
+on Bob's setting `y`, and symmetrically for Bob.
 
-/-- A two-qubit vector (an element of `ℂ² ⊗ ℂ²`, written in the product basis). -/
-abbrev TwoQubit := Fin 2 → Fin 2 → ℂ
+Hardy's argument shows that no such model can satisfy the four *Hardy conditions*:
 
-/-- Hermitian inner product on one-qubit vectors. -/
+* `A₁ = 1` implies `B₂ = 1` (almost surely),
+* `B₁ = 1` implies `A₂ = 1` (almost surely),
+* `A₂ = 1` and `B₂ = 1` never happen together (almost surely),
+* yet `A₁ = 1` and `B₁ = 1` happen with nonzero probability.
 
-def psi : TwoQubit := ![![1, 1], ![1, 0]]
+Here the setting `false` stands for the first measurement and `true` for the second one, and
+the outcome `true` stands for the outcome "1".
+-/
 
-/-- Outcome vector for `a₁ = yes` (and for `b₁ = yes`): `|1⟩`. -/
+/-- **Hardy's paradox.**  There is no local hidden-variable model satisfying the four Hardy
+conditions.  Locality is built into the statement: Alice's outcome `A x ω` does not depend on
+Bob's setting and Bob's outcome `B y ω` does not depend on Alice's setting.
+
+The three "impossible" events have probability zero, while the event `A₁ = 1 ∧ B₁ = 1` has
+nonzero probability; but that event is contained in the union of the three null events, a
+contradiction.  No measurability assumptions are needed. -/
+
+noncomputable def psi : Fin 2 → Fin 2 → ℂ :=
+  ![![0, 1 / Real.sqrt 3], ![1 / Real.sqrt 3, -(1 / Real.sqrt 3)]]
+
+/-- The Born-rule probability of outcomes `(a, b)` given settings `(x, y)`. -/

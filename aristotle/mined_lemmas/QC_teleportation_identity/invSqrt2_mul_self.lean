@@ -1,4 +1,22 @@
+/-
+# Teleportation Identity
+Category: Quantum Computing
+Target: QC.teleportation_identity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean 4 requires `import` to be the first command of a file, so the header above is a
+-- plain block comment; the identical text is repeated below as the module docstring.)
+
 import Mathlib
+
+/-!
+# Teleportation Identity
+Category: Quantum Computing
+Target: QC.teleportation_identity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,34 +32,32 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace QC
 
-/-! ## Quantum teleportation
+/-! ## Basic notions
 
-A single qubit is a vector in `ℂ²`, represented as `Fin 2 → ℂ`.
-Multi-qubit states are represented by their coefficient functions on the
-computational basis (so a three-qubit state is `Fin 2 → Fin 2 → Fin 2 → ℂ`).
-Addition on `Fin 2` is addition mod 2, i.e. the XOR of classical bits.
--/
+A qubit state is an amplitude vector indexed by `Fin 2`; a three-qubit register state is
+an amplitude array indexed by `Fin 2 × Fin 2 × Fin 2` (written in curried form).
+Addition on `Fin 2` is exactly the XOR of classical bits.
 
-/-- A one-qubit state vector, given by its coefficients in the basis `|0⟩, |1⟩`. -/
+Mathlib has no development of the quantum teleportation protocol (there is no lemma that
+`exact?`/`rw?` can apply here), so the protocol is set up from scratch below; the proof
+itself only uses `Real.mul_self_sqrt` from Mathlib together with ring normalisation. -/
+
+/-- Amplitude vector of a single qubit. -/
 abbrev Qubit : Type := Fin 2 → ℂ
 
-/-- The scalar `1/√2`. -/
+/-- Amplitude array of a three-qubit register. -/
+abbrev State3 : Type := Fin 2 → Fin 2 → Fin 2 → ℂ
+
+/-- The normalisation constant `1/√2`. -/
 
 lemma invSqrt2_mul_self : invSqrt2 * invSqrt2 = 1 / 2 := by
-  have h2 : ((Real.sqrt 2 : ℝ) : ℂ) * ((Real.sqrt 2 : ℝ) : ℂ) = (2 : ℂ) := by
-    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by norm_num)]
+  have h : ((Real.sqrt 2 : ℝ) : ℂ) * ((Real.sqrt 2 : ℝ) : ℂ) = 2 := by
+    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by norm_num : (0:ℝ) ≤ 2)]
     norm_num
-  rw [invSqrt2, ← mul_inv, h2]
+  rw [invSqrt2, ← mul_inv, h]
   norm_num
 

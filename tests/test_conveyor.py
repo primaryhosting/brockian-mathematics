@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 from unittest.mock import patch
@@ -428,11 +429,67 @@ def test_lovable_down_queues_event_in_state(tmp_path, monkeypatch):
     assert not ok
     assert len(state["pending_lovable_events"]) == 1
     assert state["pending_lovable_events"][0]["project"] == "spectral"
+    retry_at = datetime.datetime.fromisoformat(
+        state["pending_lovable_events"][0]["next_attempt_at"])
 
     delivered = conveyor.flush_pending_lovable(
-        state, poster=lambda prompt: True)
+        state, poster=lambda prompt: True,
+        now=retry_at + datetime.timedelta(seconds=1))
     assert delivered == 1
     assert state["pending_lovable_events"] == []
+
+
+def test_lovable_queue_never_silently_truncates_and_dedupes():
+    state = {}
+    for index in range(75):
+        assert not conveyor.queue_or_send_lovable(
+            state, f"event-{index}", poster=lambda prompt: False)
+    assert len(state["pending_lovable_events"]) == 75
+    assert not conveyor.queue_or_send_lovable(
+        state, "event-0", poster=lambda prompt: False)
+    assert len(state["pending_lovable_events"]) == 75
+
+
+def test_lovable_flush_backs_off_opens_circuit_and_dead_letters():
+    now = datetime.datetime(2026, 8, 27, tzinfo=datetime.UTC)
+    state = {
+        "pending_lovable_events": [
+            {"queued_at": now.isoformat(), "project": "spectral",
+             "prompt": "first", "attempts": 0},
+            {"queued_at": now.isoformat(), "project": "spectral",
+             "prompt": "second", "attempts": 0},
+        ]
+    }
+    calls = []
+
+    def down(prompt):
+        calls.append(prompt)
+        return False
+
+    assert conveyor.flush_pending_lovable(state, down, now=now) == 0
+    assert calls == ["first"]
+    assert len(state["pending_lovable_events"]) == 2
+    first = state["pending_lovable_events"][0]
+    assert first["attempts"] == 1 and first["next_attempt_at"]
+
+    # Before next_attempt_at the first item is skipped and the next due item is
+    # attempted once; a single outage never fans out across the queue.
+    calls.clear()
+    assert conveyor.flush_pending_lovable(
+        state, down, now=now + datetime.timedelta(seconds=1)) == 0
+    assert calls == ["second"]
+
+    exhausted = {
+        "pending_lovable_events": [{
+            "queued_at": now.isoformat(), "project": "spectral",
+            "prompt": "exhausted",
+            "attempts": conveyor.LOVABLE_MAX_ATTEMPTS - 1,
+        }]
+    }
+    assert conveyor.flush_pending_lovable(exhausted, down, now=now) == 0
+    assert exhausted["pending_lovable_events"] == []
+    assert exhausted["lovable_dead_letter_events"][0][
+        "dead_letter_reason"] == "retry_exhausted"
 
 
 def test_post_lovable_targets_queue_submit_only(monkeypatch):

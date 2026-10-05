@@ -1,6 +1,14 @@
+/-
+# Mobius Root Sum 1
+Category: Pure Mathematics
+Target: Math.mobius_root_sum_1
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-/-
+/-!
 # Mobius Root Sum 1
 Category: Pure Mathematics
 Target: Math.mobius_root_sum_1
@@ -10,13 +18,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Math
 
-/-- The sum of the primitive `1`-st roots of unity in `ℂ` equals `μ 1 = 1`.
-The set of primitive first roots of unity is `{1}` (`IsPrimitiveRoot.primitiveRoots_one`). -/
+/-- The sum of the primitive `1`-th roots of unity (in `ℂ`) equals `μ(1) = 1`. -/
 
 theorem mobius_root_sum_1 :
-    ∑ ζ ∈ primitiveRoots 1 ℂ, ζ = (ArithmeticFunction.moebius 1 : ℂ) := by
-  rw [IsPrimitiveRoot.primitiveRoots_one]
-  simp
+    ∑ z ∈ primitiveRoots 1 ℂ, z = (ArithmeticFunction.moebius 1 : ℂ) := by
+  have h : primitiveRoots 1 ℂ = {1} := by
+    ext x
+    simp
+  simp [h]
 
 end Math
 

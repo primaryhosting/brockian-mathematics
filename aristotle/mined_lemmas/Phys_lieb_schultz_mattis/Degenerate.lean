@@ -1,4 +1,14 @@
-import RequestProject.LSM.Ground
+/-
+# Lieb Schultz Mattis
+Category: Frontier Phys
+Target: Phys.lieb_schultz_mattis
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- (Lean 4 requires `import` to precede every command, including module doc comments,
+-- so the header above is written as a plain block comment and repeated below.)
+import Mathlib
 
 /-!
 # Lieb Schultz Mattis
@@ -8,50 +18,27 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-(The header comment above has to follow the `import` line, because Lean 4 requires the
-`import` commands to be the very first commands of a file.)
-
-## Statement
-
-A half-integer-spin translation-invariant chain is gapless or degenerate.
-
-We formalise this for the spin-`1/2` XY chain with `L` sites and periodic boundary
-conditions, whose Hilbert space is `Phys.Chain L = EuclideanSpace ℂ (Fin L → Bool)` and
-whose Hamiltonian `Phys.hamOp L` is the translation invariant nearest neighbour exchange
-Hamiltonian `-∑ⱼ (S⁺ⱼ S⁻ⱼ₊₁ + S⁻ⱼ S⁺ⱼ₊₁)`.
-
-The theorem `Phys.lieb_schultz_mattis` states the LSM dichotomy in finite volume: either
-the ground state is degenerate (there are two orthogonal ground states), or there is a
-state orthogonal to the ground state whose energy exceeds the ground state energy by at
-most `2π²/L`.  Since this bound tends to `0` as `L → ∞`
-(`Phys.lieb_schultz_mattis_bound_tendsto_zero`), the chain is gapless or degenerate.
-
-The proof is the Lieb-Schultz-Mattis twist argument: the twist operator
-`U = exp (i (2π/L) ∑ⱼ j Sᶻⱼ)` produces a variational state of energy `cos (2π/L) E₀`,
-and it satisfies the *anomalous* commutation relation `T U = -e^{-i(2π/L)Sᶻ} U T` with the
-translation `T`.  The crucial sign `-1` is `exp (2π i Sᶻ)` for the half-integer spin `Sᶻ`
-carried by the site that wraps around the chain; it forces the twisted state to be
-orthogonal to any non-degenerate (hence translation invariant) ground state.
--/
-
 namespace Phys
 
-open scoped ComplexConjugate
+open Finset
 
-instance instNontrivialChain (L : ℕ) : Nontrivial (Chain L) := by
-  have : Nonempty (Conf L) := ⟨fun _ => true⟩
-  infer_instance
+/-!
+## The algebraic core of the Lieb–Schultz–Mattis argument
 
-/-- **Lieb-Schultz-Mattis theorem** for the translation invariant spin-`1/2` (half-integer
-spin) XY chain with `L ≥ 2` sites and periodic boundary conditions:
+If a Hamiltonian commutes with two symmetries that *anticommute* with each other, then
+every energy level is (at least) two-fold degenerate.  This is the finite-volume mechanism
+behind the Lieb–Schultz–Mattis theorem: on a half-integer-spin chain of odd length the two
+π-rotations about the `x`- and `z`-axes anticommute, so no energy level — in particular no
+ground level — can be a simple eigenvalue.
+-/
 
-either the ground state is degenerate, or there is an excited state whose energy lies
-within `2π²/L` of the ground state energy.  As `L → ∞` this bound tends to zero: the chain
-is gapless or degenerate. -/
+/-- **Degeneracy from anticommuting symmetries.**
+Let `A` be an operator on a finite-dimensional complex vector space, and let `S`, `K` be two
+operators commuting with `A` such that `S` is an involution, `K` is injective and `S`, `K`
+anticommute.  Then every eigenvalue of `A` has an eigenspace of dimension at least `2`. -/
 
-def Degenerate (H : E →L[ℂ] E) : Prop :=
-  ∃ ψ φ : E, IsGroundState H ψ ∧ IsGroundState H φ ∧ inner ℂ ψ φ = (0 : ℂ)
+def Degenerate {L : ℕ} (A : Chain L →ₗ[ℂ] Chain L) (E₀ : ℂ) : Prop :=
+  2 ≤ Module.finrank ℂ (Module.End.eigenspace A E₀)
 
-/-- `H` has an excitation of energy at most `ε` above the ground state energy: some unit
-vector orthogonal to a ground state has energy at most `E₀ + ε`. -/
+/-- The spectrum of `A` is **gapless at scale `ε`** above `E₀`: there is a different (real)
+eigenvalue lying within `ε` of `E₀`. -/

@@ -1,23 +1,31 @@
+/-
+# Halls Marriage
+Category: Pure Mathematics
+Target: Math.halls_marriage
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
-# Hall's marriage theorem
-
-A bipartite graph has a matching saturating one side iff Hall's condition holds,
-and (when the two sides have the same size) a perfect matching iff Hall's condition holds.
+# Halls Marriage
+Category: Pure Mathematics
+Target: Math.halls_marriage
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 namespace Math
 
-open Finset
+open SimpleGraph
 
-variable {L R : Type*} [Fintype L] [Fintype R] [DecidableEq R]
-  (r : L → R → Prop) [∀ a, DecidablePred (r a)]
+variable {V : Type*} {G : SimpleGraph V}
 
-/-- The set of neighbours of a left vertex `a` in the bipartite graph given by `r`. -/
+/-- The *Hall condition* for a graph `G`: every set of vertices `s` has at least as many
+neighbours (counted in the union of the neighbourhoods of its elements) as it has elements. -/
 
-def HallCondition : Prop :=
-  ∀ s : Finset L, s.card ≤ (s.biUnion (neighbors r)).card
+def HallCondition (G : SimpleGraph V) : Prop :=
+  ∀ s : Set V, s.ncard ≤ (⋃ x ∈ s, G.neighborSet x).ncard
 
-/-- There is a matching saturating the left side: an injective choice of a neighbour
-for every left vertex. -/
+/-- The neighbourhood of a finite set of vertices in a locally finite graph is finite. -/

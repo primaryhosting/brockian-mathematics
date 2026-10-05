@@ -1,3 +1,11 @@
+/-
+# No Pair Of Mersenne And Shifted Prime
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.no_pair_of_mersenne_and_shifted_prime
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -22,17 +30,25 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian.BetrothedNumbers
 
-open Finset ArithmeticFunction
+open ArithmeticFunction
 open scoped ArithmeticFunction.sigma
 
-/-- The sum-of-divisors function `σ₁`. -/
+/-- `n` and `m` form a *betrothed* (quasi-amicable) pair: they are distinct and each one's
+sum of divisors equals the sum of the two numbers plus one. -/
 
-def sigmaOne (n : ℕ) : ℕ := ∑ d ∈ n.divisors, d
+lemma sigma_one_prime {q : ℕ} (hq : q.Prime) : σ 1 q = q + 1 := by
+  have := sigma_one_apply_prime_pow (p := q) (i := 1) hq
+  simpa [Finset.sum_range_succ, add_comm] using this
 
-lemma sigmaOne_mul_of_coprime {a b : ℕ} (h : Nat.Coprime a b) :
-    sigmaOne (a * b) = sigmaOne a * sigmaOne b :=
-  Nat.Coprime.sum_divisors_mul h
+/-- The sum of divisors of the square of a prime. -/

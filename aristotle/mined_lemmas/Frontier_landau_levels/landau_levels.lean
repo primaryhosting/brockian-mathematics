@@ -1,4 +1,12 @@
 import Mathlib
+import RequestProject.Fock
+/-!
+# Landau Levels
+Category: Frontier Physics
+Target: Frontier.landau_levels
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -18,50 +26,28 @@ set_option grind.warning false
 
 namespace Frontier
 
-open Polynomial
+open scoped InnerProductSpace
 
-/-! ## Physicists' Hermite polynomials -/
+/-- The cyclotron frequency `ω_c = q B / m` of a particle of charge `q` and mass `m`
+in a uniform magnetic field of strength `B`. -/
 
-/-- The physicists' Hermite polynomials, defined by `H₀ = 1` and
-`H_{n+1} = 2X H_n - H_n'`. -/
-
-theorem landau_levels (m hbar q B k : ℝ) (n : ℕ) (hm : m ≠ 0) (hhbar : 0 < hbar)
-    (hqB : 0 < q * B) :
-    landauH m hbar q B (landauPsi hbar q B n k) =
-      fun x y => ((hbar * omegaC m q B * (n + 1 / 2) : ℝ) : ℂ) * landauPsi hbar q B n k x y := by
-  have hQ : q * B ≠ 0 := ne_of_gt hqB
-  have hhb : hbar ≠ 0 := ne_of_gt hhbar
-  have hc : (Real.sqrt (q * B / hbar)) ^ 2 = q * B / hbar :=
-    Real.sq_sqrt (le_of_lt (div_pos hqB hhbar))
-  have h1 : ∀ x : ℝ,
-      HasDerivAt (fun s : ℝ => oscFun n (Real.sqrt (q * B / hbar) * (s - hbar * k / (q * B))))
-        (Real.sqrt (q * B / hbar) *
-          gfun (hermiteQ n) (Real.sqrt (q * B / hbar) * (x - hbar * k / (q * B)))) x :=
-    fun x => hasDerivAt_gfun_affine (hermiteP n) _ _ x
-  have h2 : ∀ x : ℝ,
-      HasDerivAt (fun s : ℝ => Real.sqrt (q * B / hbar) *
-          gfun (hermiteQ n) (Real.sqrt (q * B / hbar) * (s - hbar * k / (q * B))))
-        (Real.sqrt (q * B / hbar) * (Real.sqrt (q * B / hbar) *
-          gfun (derivative (hermiteQ n) - X * hermiteQ n)
-            (Real.sqrt (q * B / hbar) * (x - hbar * k / (q * B))))) x :=
-    fun x => (hasDerivAt_gfun_affine (hermiteQ n) _ _ x).const_mul _
-  have hpsi : landauPsi hbar q B n k = fun x y : ℝ => Complex.exp (Complex.I * k * y) *
-      (((fun s : ℝ => oscFun n (Real.sqrt (q * B / hbar) * (s - hbar * k / (q * B)))) x : ℝ) : ℂ) :=
-    rfl
-  funext x y
-  rw [hpsi]
-  simp only [landauH, piX_sq_sep hbar k _ _ _ h1 h2, piY_sep]
-  rw [gfun_hermiteQ_deriv]
-  simp only [omegaC]
+theorem landau_levels {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℂ V]
+    (q B m hbar : ℝ) (a b : V →ₗ[ℂ] V)
+    (hcomm : ∀ x, a (b x) = b (a x) + x)
+    (hadj : ∀ x y : V, ⟪b x, y⟫_ℂ = ⟪x, a y⟫_ℂ)
+    (psi0 : V) (hpsi0 : psi0 ≠ 0) (h0 : a psi0 = 0)
+    (H : V →ₗ[ℂ] V)
+    (hH : ∀ x, H x = ((hbar * cyclotronFrequency q B m : ℝ) : ℂ) •
+      (b (a x) + ((1 / 2 : ℂ)) • x)) :
+    ∀ n : ℕ, ladderState b psi0 n ≠ 0 ∧
+      H (ladderState b psi0 n)
+        = ((landauEnergy hbar (cyclotronFrequency q B m) n : ℝ) : ℂ)
+          • ladderState b psi0 n := by
+  intro n
+  refine ⟨ladderState_ne_zero hcomm hadj hpsi0 h0 n, ?_⟩
+  rw [hH, number_apply_ladderState hcomm h0 n]
+  rw [landauEnergy]
   push_cast
-  have hCsq : ((Real.sqrt (q * B / hbar) : ℝ) : ℂ) ^ 2 = ((q : ℂ) * B) / (hbar : ℂ) := by
-    rw [← Complex.ofReal_pow, hc]; push_cast; ring
-  have halg := landau_alg (m : ℂ) (hbar : ℂ) ((q : ℂ) * B)
-    ((Real.sqrt (q * B / hbar) : ℝ) : ℂ)
-    ((oscFun n (Real.sqrt (q * B / hbar) * (x - hbar * k / (q * B))) : ℝ) : ℂ)
-    (Complex.exp (Complex.I * k * y)) (n : ℂ) (k : ℂ) (x : ℂ)
-    (by exact_mod_cast hm) (by exact_mod_cast hhb) (by exact_mod_cast hQ) hCsq
-  linear_combination halg
+  module
 
-/-- The Landau eigenstates are genuinely nonzero, so `landau_levels` really exhibits
-`ℏ ω_c (n + 1/2)` as an eigenvalue. -/
+/-- The Landau Hamiltonian in the concrete Bargmann–Fock model. -/

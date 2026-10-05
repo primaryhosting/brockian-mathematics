@@ -1,13 +1,4 @@
-/-
-# Valiant Permanent
-Category: Frontier Cs
-Target: CS.valiant_permanent
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-import RequestProject.PermanentGadget
 
 /-!
 # Valiant Permanent
@@ -15,45 +6,30 @@ Category: Frontier Cs
 Target: CS.valiant_permanent
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-## Scope of the formalization
-
-The statement "the `0/1` permanent is `#P`-complete" has two halves.  What is formalized here is
-
-* the *membership* half, in full: the `0/1` permanent is the counting function of an explicitly
-  constructed family of Boolean verifier circuits of polynomial size (`InSharpP perm01Count`);
-* the combinatorial identity underlying the problem: the permanent of a `0/1` matrix is the
-  number of perfect matchings of the associated bipartite graph;
-* the weight-elimination step of Valiant's hardness argument: restricting to `0/1` entries loses
-  no generality, since every matrix of natural numbers has the same permanent as a `0/1` matrix
-  of controlled size.
-
-The remaining half of Valiant's theorem, namely the parsimonious reduction of an arbitrary `#P`
-verifier to a permanent (the gadget construction), is *not* formalized here.
 -/
 
+open scoped BigOperators
+open scoped Classical
+
+set_option maxHeartbeats 1000000
+set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
 namespace CS
 
-/-! ## Boolean circuits -/
+open Finset Matrix
 
-/-- Boolean circuits (formulas) over a set `ι` of input variables. -/
-inductive Circuit (ι : Type) where
-  | var : ι → Circuit ι
-  | const : Bool → Circuit ι
-  | not : Circuit ι → Circuit ι
-  | and : Circuit ι → Circuit ι → Circuit ι
-  | or : Circuit ι → Circuit ι → Circuit ι
+/-! ## Part A: the 0/1 permanent as a counting problem -/
 
-namespace Circuit
+/-- For a 0/1 matrix, the permanent counts the permutations supported on the matrix, i.e. the
+perfect matchings of the associated bipartite graph (equivalently, the cycle covers of the
+associated digraph). -/
 
-variable {ι : Type}
-
-/-- Evaluation of a circuit at a Boolean assignment of its variables. -/
-
-def permVerifier (n : ℕ) : Circuit (PermVar n) :=
-  .allL [.allL ((List.finRange n).map (rowExactlyOne n)),
-         .allL ((List.finRange n).map (colExactlyOne n)),
-         dominated n]
+def permVerifier (n : ℕ) : Circuit (Fin (n * n) ⊕ Fin (n * n)) :=
+  Circuit.conj
+    (Circuit.bigAnd ((List.finRange n).map fun i => Circuit.exactlyOne n (fun j => yvar n i j)))
+    (Circuit.conj
+      (Circuit.bigAnd ((List.finRange n).map fun j => Circuit.exactlyOne n (fun i => yvar n i j)))
+      (Circuit.bigAnd ((List.finRange n).flatMap fun i => (List.finRange n).map fun j =>
+        Circuit.disj (Circuit.neg (yvar n i j)) (xvar n i j))))
 

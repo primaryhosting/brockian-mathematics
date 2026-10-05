@@ -35,32 +35,44 @@ import Mathlib
 
 /-!
 # Odd Zumkeller From 3 Structure
-
-A *Zumkeller number* is a positive integer whose divisors can be split into two sets with
-equal sums.  Here we prove that an odd Zumkeller number must have at least three distinct
-prime factors.
-
-The argument: a Zumkeller number is perfect or abundant (`σ(n) ≥ 2n`), while an odd number
-with at most two distinct prime factors `p < q` satisfies
-`σ(n)/n < p/(p-1) · q/(q-1) ≤ (3/2)(5/4) < 2`, hence is deficient.
+Category: Brockian Conjecture
+Target: Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
 
-set_option maxRecDepth 40000
-
 namespace Brockian.ZumkellerNumbers
 
-/-- `n` is a *Zumkeller number* if it is positive and its set of divisors can be split into
-two parts having the same sum. -/
+/-- A positive integer `n` is a *Zumkeller number* if its set of divisors can be split into
+two parts with equal sums, i.e. there is a set `A` of divisors of `n` whose sum is exactly
+half of `σ(n)`. -/
 
-theorem OddZumkellerFrom3Structure {n : ℕ} (hodd : Odd n) (hz : IsZumkeller n) :
-    3 ≤ n.primeFactors.card := by
-  by_contra hcon
-  have hcard : n.primeFactors.card ≤ 2 := by omega
-  have h1 := two_mul_le_sigma_of_isZumkeller hz
-  have h2 := sigma_lt_two_mul_of_card_le_two hz.1 hodd hcard
-  omega
+theorem OddZumkellerFrom3Structure (a m : ℕ) (ha : 3 ≤ a) (hodd : Odd m)
+    (hcop : Nat.Coprime 105 m) :
+    Odd (3 ^ a * 35 * m) ∧ IsZumkeller (3 ^ a * 35 * m) ∧
+      3 ^ a ∣ 3 ^ a * 35 * m ∧ ¬ (3 ^ (a + 1) ∣ 3 ^ a * 35 * m) := by
+  have hm0 : 0 < m := by
+    have := Nat.odd_iff.mp hodd
+    omega
+  have hc3 : Nat.Coprime 3 m := Nat.Coprime.coprime_dvd_left (by norm_num) hcop
+  have hc35 : Nat.Coprime 35 m := Nat.Coprime.coprime_dvd_left (by norm_num) hcop
+  have hcm : Nat.Coprime (3 ^ a * 35) m :=
+    Nat.Coprime.mul_left (Nat.Coprime.pow_left _ hc3) hc35
+  refine ⟨?_, zumkeller_mul_of_coprime (zumkeller_three_pow_mul_35 ha) hm0 hcm,
+    ⟨35 * m, by ring⟩, ?_⟩
+  · exact (Odd.mul (Odd.pow (by decide)) (by decide)).mul hodd
+  · intro hdvd
+    have h1 : (3 : ℕ) ^ a * 3 ∣ 3 ^ a * (35 * m) := by
+      rw [← mul_assoc]
+      rw [pow_succ] at hdvd
+      exact hdvd
+    have h2 : (3 : ℕ) ∣ 35 * m := (mul_dvd_mul_iff_left (by positivity : (3 : ℕ) ^ a ≠ 0)).mp h1
+    rcases (Nat.Prime.dvd_mul (by norm_num)).mp h2 with h | h
+    · norm_num at h
+    · have h3 : (3 : ℕ) ∣ Nat.gcd 3 m := Nat.dvd_gcd dvd_rfl h
+      rw [hc3] at h3
+      norm_num at h3
 
-/-- `945` is an odd Zumkeller number, witnessing that the hypotheses of
-`OddZumkellerFrom3Structure` are satisfiable. -/
+/-- There are infinitely many odd Zumkeller numbers. -/

@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Parseval Fourier
 Category: Quantum Physics
 Target: QPhys.parseval_fourier
@@ -6,43 +8,23 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open MeasureTheory SchwartzMap FourierTransform ComplexInnerProductSpace
 
-open MeasureTheory FourierTransform ComplexInnerProductSpace
+noncomputable section
 
 namespace QPhys
 
-/-- For an `L²` function `f : ℝ → ℂ` (a one–dimensional wavefunction), the integral of `‖f‖²`
-is the square of its `L²` norm. -/
+variable {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V] [FiniteDimensional ℝ V]
+  [MeasurableSpace V] [BorelSpace V]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
-theorem inner_fourier_eq_inner (f g : Lp (α := ℝ) ℂ 2) :
-    ⟪𝓕 f, 𝓕 g⟫ = ⟪f, g⟫ :=
-  Lp.inner_fourier_eq f g
+omit [CompleteSpace H] in
+/-- For an `L²` function, the integral of the squared norm is the square of the `L²` norm. -/
 
-end QPhys
+theorem inner_fourier_eq_inner (f g : Lp (α := V) H 2) :
+    ∫ ξ : V, (inner ℂ (((𝓕 f : Lp (α := V) H 2)) ξ) (((𝓕 g : Lp (α := V) H 2)) ξ) : ℂ)
+      = ∫ x : V, (inner ℂ ((f : V → H) x) ((g : V → H) x) : ℂ) := by
+  rw [← L2.inner_def, ← L2.inner_def, Lp.inner_fourier_eq]
 
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-- **Parseval's theorem in explicit integral form**, for Schwartz functions on the line:
+the Fourier integral `𝓕 f ξ = ∫ x, exp (-2πi x ξ) f x` preserves the `L²` norm. -/

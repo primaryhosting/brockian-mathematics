@@ -1,28 +1,17 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+/-!
+# Singular Series Gaps 16021610
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps16021610
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Brockian
 
-/-- A finite set `H` of integers is *admissible* if for every prime `p` it fails to cover
-all residue classes modulo `p`, i.e. some residue class mod `p` is missed by `H`.
-This is the classical admissibility condition of the Hardy–Littlewood prime `k`-tuple
-conjecture. -/
+/-- Primality of a natural number: `2 ≤ p` and the only divisors of `p` are `1` and `p`.
+(This is the usual notion of a prime natural number.) -/
 
-def Admissible (H : Finset ℤ) : Prop :=
-  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r
+def Admissible (H : List Nat) : Prop :=
+  ∀ p : Nat, NatPrime p → ∃ r, r < p ∧ ∀ h ∈ H, h % p ≠ r
 
-/-- The odd part of the arithmetic factor of the Hardy–Littlewood singular series for
-prime pairs `(n, n + d)`: the product of `(p-1)/(p-2)` over the odd primes dividing `d`. -/
+/-- A number with a divisor other than `1` and itself is not prime. -/

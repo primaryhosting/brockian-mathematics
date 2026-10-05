@@ -1,13 +1,4 @@
-/-
-# Wellordering
-Category: Frontier Wave 2 (deeper machinery)
-Target: SetTheory.wellordering
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Wellordering
 Category: Frontier Wave 2 (deeper machinery)
@@ -18,16 +9,16 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace SetTheory
 
-/-- **Zermelo's well-ordering theorem**: every type admits a well-order, i.e. a relation on `α`
-which is `IsWellOrder` (trichotomous, transitive, and well-founded), and hence induces a linear
-order on `α`.
-
-Closed by Mathlib's instance `IsWellOrder.subtype_nonempty`. -/
+/-- **Zermelo's well-ordering theorem.** Every type admits a well-order: there exists a
+relation `r` on `α` which is a well-order, i.e. a trichotomous, transitive, well-founded
+relation (equivalently, a linear order on `α` whose strict order is well-founded). -/
 
 theorem exists_wellOrder_linearOrder (α : Type*) :
     ∃ _ : LinearOrder α, WellFoundedLT α := by
   obtain ⟨r, hr⟩ := wellordering α
-  exact ⟨IsWellOrder.linearOrder r, ⟨hr.wf⟩⟩
+  letI : IsWellOrder α r := hr
+  letI : DecidableRel r := Classical.decRel r
+  exact ⟨linearOrderOfSTO r, ⟨hr.wf⟩⟩
 
 end SetTheory
 

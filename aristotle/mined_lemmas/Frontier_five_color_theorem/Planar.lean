@@ -1,67 +1,72 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
-
-/-!
-# Planar graphs and colourings
-
-This file sets up a faithful (topological) notion of planarity for simple graphs — a
-drawing of the graph in the plane `ℝ × ℝ` where vertices are distinct points and edges
-are arcs meeting only at common endpoints — and proves a base case of the five colour
-theorem.
+/-
+# Five Color Theorem
+Category: Frontier — Fields Medal Work
+Target: Frontier.five_color_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace SimpleGraph
+-- (Lean requires `import` to be the first command, so the header above is a plain
+-- block comment and is repeated below as the module docstring.)
+import Mathlib
 
-variable {V : Type*}
+/-!
+# Five Color Theorem
+Category: Frontier — Fields Medal Work
+Target: Frontier.five_color_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-- A drawing of a simple graph `G` in the plane: an injective placement of the vertices
-as points of `ℝ × ℝ`, together with, for every edge, an arc (a continuous injective image
-of the unit interval) joining the two endpoints, such that two distinct arcs meet only in
-the images of their common endpoints, and a vertex point lies on an arc only if it is an
-endpoint of the corresponding edge. -/
-structure PlanarEmbedding (G : SimpleGraph V) where
-  /-- The position of each vertex in the plane. -/
-  point : V → ℝ × ℝ
-  /-- Distinct vertices get distinct points. -/
-  point_inj : Function.Injective point
-  /-- The set of points of the plane covered by the arc drawn for an edge. -/
-  arc : Sym2 V → Set (ℝ × ℝ)
-  /-- Each edge is drawn as an arc: a continuous injective image of `[0,1]` whose
-  endpoints are the points of the two ends of the edge. -/
-  arc_isArc : ∀ e ∈ G.edgeSet, ∃ f : unitInterval → ℝ × ℝ,
-    Continuous f ∧ Function.Injective f ∧ Set.range f = arc e ∧
-      Sym2.map point e = s(f 0, f 1)
-  /-- Two distinct arcs meet only at points of common endpoints. -/
-  arc_inter : ∀ e ∈ G.edgeSet, ∀ e' ∈ G.edgeSet, e ≠ e' →
-    arc e ∩ arc e' ⊆ point '' {v | v ∈ e ∧ v ∈ e'}
-  /-- A vertex point lying on an arc must be an endpoint of that edge. -/
-  point_mem_arc : ∀ e ∈ G.edgeSet, ∀ v : V, point v ∈ arc e → v ∈ e
+open scoped Classical
 
-/-- A simple graph is *planar* if it can be drawn in the plane. -/
+namespace Frontier
 
-theorem Planar.mono {G H : SimpleGraph V} (hle : H ≤ G) (hG : G.Planar) : H.Planar := by
-  obtain ⟨E⟩ := hG
-  have hsub : H.edgeSet ⊆ G.edgeSet := edgeSet_mono hle
-  exact ⟨{ point := E.point
-           point_inj := E.point_inj
-           arc := E.arc
-           arc_isArc := fun e he => E.arc_isArc e (hsub he)
-           arc_inter := fun e he e' he' hne => E.arc_inter e (hsub he) e' (hsub he') hne
-           point_mem_arc := fun e he v hv => E.point_mem_arc e (hsub he) v hv }⟩
+universe u
 
-/-- The empty graph on a type that embeds in the plane is planar. -/
+variable {V : Type u}
+
+/-! ## Planarity
+
+We record a faithful topological definition of planarity: a *plane drawing* of a
+simple graph `G` consists of an injective placement of the vertices in the plane
+together with, for each edge, an arc (a homeomorphic copy of the unit interval)
+joining the images of its endpoints, such that arcs meet each other only in
+common endpoints and meet vertex points only in their own endpoints. -/
+
+/-- A drawing of `G` in the plane: vertices are distinct points, edges are arcs
+joining their endpoints, and two arcs meet only at points that are images of
+common endpoints. -/
+structure PlaneDrawing (G : SimpleGraph V) where
+  /-- the position of each vertex in the plane -/
+  pt : V → ℝ × ℝ
+  /-- distinct vertices get distinct points -/
+  pt_inj : Function.Injective pt
+  /-- the arc drawn for each edge (as a subset of the plane) -/
+  arc : ∀ ⦃u v : V⦄, G.Adj u v → Set (ℝ × ℝ)
+  /-- an edge is drawn by the same arc in either direction -/
+  arc_symm : ∀ ⦃u v : V⦄ (h : G.Adj u v), arc h.symm = arc h
+  /-- each arc is a homeomorphic image of `[0,1]` running from `pt u` to `pt v` -/
+  arc_isArc : ∀ ⦃u v : V⦄ (h : G.Adj u v),
+    ∃ f : C(unitInterval, ℝ × ℝ), Function.Injective f ∧ Set.range f = arc h ∧
+      f 0 = pt u ∧ f 1 = pt v
+  /-- an arc contains no vertex point other than those of its own endpoints -/
+  arc_mem_pt : ∀ ⦃u v : V⦄ (h : G.Adj u v) (w : V), pt w ∈ arc h ↔ (w = u ∨ w = v)
+  /-- two arcs of different edges meet only at points of shared endpoints -/
+  arc_inter : ∀ ⦃u v u' v' : V⦄ (h : G.Adj u v) (h' : G.Adj u' v'),
+    s(u, v) ≠ s(u', v') →
+      arc h ∩ arc h' ⊆ pt '' (({u, v} : Set V) ∩ ({u', v'} : Set V))
+
+/-- A simple graph is *planar* if it admits a drawing in the plane. -/
+
+theorem Planar.mono {G H : SimpleGraph V} (hHG : H ≤ G) (hG : Planar G) : Planar H := by
+  obtain ⟨D⟩ := hG
+  refine ⟨{ pt := D.pt
+            pt_inj := D.pt_inj
+            arc := fun _ _ h => D.arc (hHG h)
+            arc_symm := fun _ _ h => D.arc_symm (hHG h)
+            arc_isArc := fun _ _ h => D.arc_isArc (hHG h)
+            arc_mem_pt := fun _ _ h w => D.arc_mem_pt (hHG h) w
+            arc_inter := fun _ _ _ _ h h' hne => D.arc_inter (hHG h) (hHG h') hne }⟩
+
+/-- The empty graph on `Fin n` is planar: place the vertices along a line. -/

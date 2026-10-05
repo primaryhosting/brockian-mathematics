@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Grover Optimal
 Category: Frontier Qi
@@ -6,76 +7,74 @@ Target: QI.grover_optimal
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` to be the first command of a module, so the header
--- module docstring above is placed immediately after the single `import Mathlib` line.)
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 /-!
-## The BBBV lower bound for unstructured search
+## The BBBV lower bound for unstructured quantum search
 
 We formalise the Bennett–Bernstein–Brassard–Vazirani hybrid argument: any quantum
-algorithm that finds a marked item among `N` possibilities with success probability
-at least `2/3` must make `Ω(√N)` queries to the oracle.
+algorithm that makes `T` queries to a phase oracle marking an unknown element `x`
+of a search space `κ` of size `N`, and that identifies `x` with probability at
+least `2/3`, must satisfy `T ≥ √N / 25`.  In particular `T = Ω(√N)`, so Grover's
+algorithm, which uses `O(√N)` queries, is optimal up to a constant factor.
 
-**The model.**  The workspace is the finite dimensional Hilbert space
-`QState N W = EuclideanSpace ℂ (Fin N × Fin W)`: an index register holding one of the
-`N` candidate items, tensored with an arbitrary `W`-dimensional workspace.
-For a marked item `x : Fin N`, the (phase) oracle `oracle x` flips the sign of every
-basis vector whose index register equals `x`; it is a norm preserving linear map.
-An algorithm consists of a unit initial state `psi0` and an arbitrary sequence
-`U : ℕ → QState N W →ₗᵢ[ℂ] QState N W` of linear isometries (in particular every
-unitary is allowed).  With oracle `x` the state after `t` queries is
-`runOracle U psi0 x t`, and `runFree U psi0 t` is the corresponding oracle-free run.
-The algorithm answers by measuring the index register of its final state, so its
-success probability on input `x` is `‖proj x (runOracle U psi0 x T)‖ ^ 2`.
+The computational model:
 
-**The result** (`QI.grover_optimal`): if `6 ≤ N` and the algorithm succeeds with
-probability at least `2/3` on *every* marked item `x`, then `√N / 20 ≤ T`.
-Since Grover's algorithm achieves `O(√N)` queries, this is optimal up to constants.
+* the algorithm works on a finite dimensional Hilbert space `EuclideanSpace ℂ ι`,
+  whose basis vectors are indexed by `ι` (query register together with an arbitrary
+  workspace);
+* `Q x ⊆ ι` is the set of basis vectors on which the oracle for the marked element
+  `x` flips the phase; different marked elements flip disjoint sets of basis states
+  (a basis state queries at most one index);
+* the algorithm alternates arbitrary unitaries `U 0, U 1, …` with oracle calls,
+  starting from an arbitrary unit vector `psi0`;
+* the answer is read off by measuring: `Ans x ⊆ ι` is the set of basis states on
+  which the algorithm outputs `x`, and these sets are pairwise disjoint.
 -/
 
 namespace QI
 
 open Finset
 
-/-- The state space of the search algorithm: an `N`-dimensional index register
-tensored with a `W`-dimensional workspace. -/
-abbrev QState (N W : ℕ) := EuclideanSpace ℂ (Fin N × Fin W)
+noncomputable section
 
-variable {N W : ℕ}
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
-/-- Orthogonal projection onto the subspace where the index register holds `x`. -/
+/-- The state space of the algorithm: amplitudes indexed by the basis `ι`. -/
+abbrev St (ι : Type*) [Fintype ι] := EuclideanSpace ℂ ι
 
-lemma hybrid (U : ℕ → (QState N W →ₗᵢ[ℂ] QState N W)) (psi0 : QState N W) (x : Fin N)
-    (T : ℕ) :
-    ‖runOracle U psi0 x T - runFree U psi0 T‖
-      ≤ 2 * ∑ t ∈ Finset.range T, ‖proj x (runFree U psi0 t)‖ := by
+/-- Restriction of a state to the coordinates in `S` (orthogonal projection). -/
+
+lemma hybrid (U : ℕ → (St ι ≃ₗᵢ[ℂ] St ι)) (S : Finset ι) (psi0 : St ι) (T : ℕ) :
+    ‖run U S psi0 T - run U ∅ psi0 T‖
+      ≤ 2 * ∑ t ∈ Finset.range T, ‖restrict S (run U ∅ psi0 t)‖ := by
   induction T with
-  | zero => simp [runOracle, runFree]
+  | zero => simp [run]
   | succ T ih =>
-      have key : ‖runOracle U psi0 x (T + 1) - runFree U psi0 (T + 1)‖
-          ≤ ‖runOracle U psi0 x T - runFree U psi0 T‖ + 2 * ‖proj x (runFree U psi0 T)‖ := by
-        have h1 : runOracle U psi0 x (T + 1) - runFree U psi0 (T + 1)
-            = U T (oracle x (runOracle U psi0 x T) - runFree U psi0 T) := by
-          rw [runOracle, runFree, map_sub]
-        rw [h1, LinearIsometry.norm_map]
-        have h2 : oracle x (runOracle U psi0 x T) - runFree U psi0 T
-            = oracle x (runOracle U psi0 x T - runFree U psi0 T)
-              + (oracle x (runFree U psi0 T) - runFree U psi0 T) := by
-          rw [oracle_sub]; abel
-        calc ‖oracle x (runOracle U psi0 x T) - runFree U psi0 T‖
-            ≤ ‖oracle x (runOracle U psi0 x T - runFree U psi0 T)‖
-              + ‖oracle x (runFree U psi0 T) - runFree U psi0 T‖ := by
-              rw [h2]; exact norm_add_le _ _
-          _ = ‖runOracle U psi0 x T - runFree U psi0 T‖ + 2 * ‖proj x (runFree U psi0 T)‖ := by
-              rw [norm_oracle, norm_oracle_sub_self]
-      rw [Finset.sum_range_succ, mul_add]
-      linarith [ih]
+      have key : run U S psi0 (T + 1) - run U ∅ psi0 (T + 1)
+          = U T (oracle S (run U S psi0 T)) - U T (oracle ∅ (run U ∅ psi0 T)) := rfl
+      rw [key, ← LinearIsometryEquiv.map_sub, LinearIsometryEquiv.norm_map, oracle_empty]
+      have h1 : ‖oracle S (run U S psi0 T) - run U ∅ psi0 T‖
+          ≤ ‖oracle S (run U S psi0 T) - oracle S (run U ∅ psi0 T)‖
+            + ‖oracle S (run U ∅ psi0 T) - run U ∅ psi0 T‖ :=
+        norm_sub_le_norm_sub_add_norm_sub _ _ _
+      rw [oracle_sub, oracle_norm, oracle_sub_self] at h1
+      rw [Finset.sum_range_succ]
+      linarith
 
-/-! ### The main theorem -/
-
-/-- **BBBV / optimality of Grover search.**
-Any quantum algorithm (unit initial state `psi0`, arbitrary linear isometries `U t`
-interleaved with `T` phase-oracle queries) that finds the marked item with success
-probability at least `2/3` for *every* marked item `x : Fin N` must satisfy
-`T ≥ √N / 20`.  Hence unstructured search requires `Ω(√N)` queries, and Grover's
-algorithm, which uses `O(√N)` queries, is optimal up to a constant factor. -/
+/-- Total weight carried by a pairwise disjoint family of coordinate sets. -/

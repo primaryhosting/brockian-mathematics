@@ -6,63 +6,50 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- This development needs no Mathlib import: every lemma used
--- (`List.isPrefixOf_iff_prefix`, `List.any_eq_true`, `decidable_of_iff`)
--- is available in the Lean 4 core library, and the required header comment
--- must be the first thing in the file (Lean forbids `import` after a `/-! -/`
--- module docstring).
-
+set_option maxRecDepth 4000
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-/-! ## The isolation model
-
-A *resource* is identified by a hierarchical path (a list of path components).
-A *scope* granted to an application is a path prefix: holding the scope `s`
-authorises access to every resource whose path extends `s.root`.
-
-The isolation engine of a proof-carrying app does not reason with the
-propositional predicate directly; it evaluates a decidable *encoding*
-(a `Bool`-valued function) built from `List.isPrefixOf` / `List.any`.
-The theorems below state that this encoding is sound and complete with
-respect to the intended semantics. -/
-
-/-- A resource path: a list of hierarchical components. -/
+/-- A resource is identified by a hierarchical path: a list of name segments,
+read from the root downwards. -/
 abbrev Path := List String
 
-/-- A capability scope: everything below `root` is authorised. -/
+/-- The isolation policy of a sandboxed app: a list of granted subtrees
+(`roots`) together with a list of explicitly revoked subtrees (`denied`). -/
 structure Scope where
-  root : Path
-  deriving DecidableEq
+  /-- Subtrees the app has been granted access to. -/
+  roots : List Path
+  /-- Subtrees carved out of the grants; denial takes precedence. -/
+  denied : List Path
+  deriving Repr
 
-/-- Semantics of a single scope: `s` covers `p` when `s.root` is a prefix of `p`. -/
+/-- Declarative semantics of the isolation engine: a resource `p` lies in the
+scope `s` when some granted root is an ancestor of (or equal to) `p`, and no
+denied subtree is an ancestor of (or equal to) `p`. -/
 
-def Scope.Covers (s : Scope) (p : Path) : Prop := s.root <+: p
+def InScope (s : Scope) (p : Path) : Prop :=
+  (∃ r ∈ s.roots, r <+: p) ∧ ∀ d ∈ s.denied, ¬ d <+: p
 
-/-- Boolean encoding of `Scope.Covers`, as evaluated by the isolation engine. -/
+/-- The executable encoding of the scope check used by the isolation engine. -/
 
-def Scope.coversB (s : Scope) (p : Path) : Bool := s.root.isPrefixOf p
+def encodeInScope (s : Scope) (p : Path) : Bool :=
+  s.roots.any (fun r => r.isPrefixOf p) && !s.denied.any (fun d => d.isPrefixOf p)
 
-/-- A policy is the list of scopes granted to an application. -/
-abbrev Policy := List Scope
+/-- **Soundness and completeness of the `in scope` encoding.**
+The boolean decision procedure `encodeInScope` returns `true` on exactly those
+resource paths that the declarative isolation model `InScope` admits. -/
 
-/-- Semantics: a path is in scope for a policy when some granted scope covers it. -/
+theorem in_scope_encoding_sound (s : Scope) (p : Path) :
+    encodeInScope s p = true ↔ InScope s p := by
+  unfold encodeInScope InScope
+  simp only [Bool.and_eq_true, Bool.not_eq_true', List.any_eq_true,
+    List.any_eq_false, List.isPrefixOf_iff_prefix]
 
-def inScopeB (pol : Policy) (p : Path) : Bool := pol.any (fun s => s.coversB p)
+/-- Decidability of the declarative model, transported along the encoding. -/
+instance instDecidableInScope (s : Scope) (p : Path) : Decidable (InScope s p) :=
+  decidable_of_iff _ (in_scope_encoding_sound s p)
 
-/-- Soundness and completeness of the single-scope encoding.
-The Mathlib/core lemma `List.isPrefixOf_iff_prefix` closes this immediately. -/
-
-theorem covers_encoding_sound (s : Scope) (p : Path) :
-    s.coversB p = true ↔ s.Covers p :=
-  List.isPrefixOf_iff_prefix
-
-/-- **Main theorem.** The isolation engine's boolean encoding of "the requested
-resource is in scope" is sound and complete with respect to the intended
-semantics: `inScopeB pol p` returns `true` exactly when some granted scope of
-the policy covers the requested path.
-
-The proof reduces to `List.any_eq_true` together with the core lemma
-`List.isPrefixOf_iff_prefix`. -/
+/-- Denial always wins: a path lying under a denied subtree is never in scope. -/

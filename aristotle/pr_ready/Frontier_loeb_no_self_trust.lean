@@ -9,134 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-Mathlib (as of the pinned revision) contains no development of provability logic,
-Gödel's incompleteness theorems, or Löb's theorem: a search for `Loeb`, `Provable`,
-`reflection` turns up nothing applicable, so nothing in the library closes or nearly
-closes the goal.  We therefore build the standard abstract setting (a theory together
-with a provability predicate satisfying the Hilbert–Bernays–Löb derivability
-conditions and the diagonal lemma) from scratch.
--/
-
-namespace Frontier
-
-universe u
-
-/-- An abstract *provability frame*: a type `S` of sentences equipped with
-
-* an implication connective `imp`,
-* a falsity constant `bot`,
-* an internal provability operator `box` (`box a` is the sentence "`a` is provable"),
-* the external predicate `Pr a`, meaning "the theory proves `a`",
-
-subject to the usual closure conditions of a theory containing enough arithmetic:
-modus ponens, the propositional laws used below, *ex falso*, the three
-Hilbert–Bernays–Löb derivability conditions, and the diagonal (fixed point) lemma. -/
-structure ProvabilityFrame (S : Type u) where
-  /-- The implication connective. -/
-  imp : S → S → S
-  /-- The falsity constant. -/
-  bot : S
-  /-- The internal provability operator: `box a` says "`a` is provable". -/
-  box : S → S
-  /-- `Pr a` means: the theory proves the sentence `a`. -/
-  Pr : S → Prop
-  /-- The theory is closed under modus ponens. -/
-  mp : ∀ {a b}, Pr (imp a b) → Pr a → Pr b
-  /-- Derivability condition D1 (necessitation): what is provable is provably provable. -/
-  nec : ∀ {a}, Pr a → Pr (box a)
-  /-- Provable implications compose. -/
-  imp_trans : ∀ {a b c}, Pr (imp a b) → Pr (imp b c) → Pr (imp a c)
-  /-- The propositional law `(a → b → c) → (a → b) → (a → c)`, in rule form. -/
-  distrib : ∀ {a b c}, Pr (imp a (imp b c)) → Pr (imp a b) → Pr (imp a c)
-  /-- Derivability condition D2: the provability operator distributes over implication. -/
-  boxK : ∀ a b, Pr (imp (box (imp a b)) (imp (box a) (box b)))
-  /-- Derivability condition D3: provability is provably transitive. -/
-  box4 : ∀ a, Pr (imp (box a) (box (box a)))
-  /-- *Ex falso quodlibet*. -/
-  efq : ∀ a, Pr (imp bot a)
-  /-- The diagonal lemma: every `a` has a fixed point `l` provably equivalent to
-  the sentence "if `l` is provable then `a`". -/
-  diag : ∀ a, ∃ l, Pr (imp l (imp (box l) a)) ∧ Pr (imp (imp (box l) a) l)
-
-namespace ProvabilityFrame
-
-variable {S : Type u} (F : ProvabilityFrame S)
-
-/-- The theory is *consistent* if it does not prove falsity. -/
-def Consistent : Prop := ¬ F.Pr F.bot
-
-/-- The *reflection sentence* for `a`: "if `a` is provable, then `a`". -/
-def reflection (a : S) : S := F.imp (F.box a) a
-
-variable {F}
-
-/-- If the theory proves `a → b` then it proves `□a → □b`. -/
-theorem box_mono {a b : S} (h : F.Pr (F.imp a b)) :
-    F.Pr (F.imp (F.box a) (F.box b)) :=
-  F.mp (F.boxK a b) (F.nec h)
-
-/-- **Löb's theorem**: if the theory proves the reflection sentence for `a`,
-then it proves `a`. -/
-theorem loeb {a : S} (h : F.Pr (F.reflection a)) : F.Pr a := by
-  obtain ⟨l, h1, h2⟩ := F.diag a
-  -- `⊢ □l → □(□l → a)`
-  have step2 : F.Pr (F.imp (F.box l) (F.box (F.imp (F.box l) a))) := box_mono h1
-  -- `⊢ □(□l → a) → (□□l → □a)`
-  have step3 : F.Pr (F.imp (F.box (F.imp (F.box l) a))
-      (F.imp (F.box (F.box l)) (F.box a))) := F.boxK _ _
-  -- `⊢ □l → (□□l → □a)`
-  have step4 : F.Pr (F.imp (F.box l) (F.imp (F.box (F.box l)) (F.box a))) :=
-    F.imp_trans step2 step3
-  -- `⊢ □l → □a`
-  have step6 : F.Pr (F.imp (F.box l) (F.box a)) := F.distrib step4 (F.box4 l)
-  -- `⊢ □l → a`
-  have step7 : F.Pr (F.imp (F.box l) a) := F.imp_trans step6 h
-  -- hence `⊢ l`, so `⊢ □l`, so `⊢ a`
-  exact F.mp step7 (F.nec (F.mp h2 step7))
-
-/-- An inconsistent theory proves everything. -/
-theorem pr_of_inconsistent (h : F.Pr F.bot) (a : S) : F.Pr a := F.mp (F.efq a) h
-
-end ProvabilityFrame
-
-/-- **No self trust (Löb).**  Let `F` be a theory with a provability predicate
-satisfying the Hilbert–Bernays–Löb derivability conditions and the diagonal lemma,
-and let `a` be a sentence that the theory does *not* prove.  Then:
-
-* the theory is consistent, and
-* it does not prove the reflection principle `□a → a` for `a`.
-
-In words: a consistent theory can never prove "if `a` is provable then `a`" for a
-sentence `a` it cannot already prove — it cannot trust itself.  (Taking `a = ⊥`
-gives Gödel's second incompleteness theorem, see `Frontier.goedel_second`.) -/
-theorem loeb_no_self_trust {S : Type u} (F : ProvabilityFrame S) {a : S}
-    (ha : ¬ F.Pr a) : F.Consistent ∧ ¬ F.Pr (F.reflection a) :=
-  ⟨fun hbot => ha (ProvabilityFrame.pr_of_inconsistent hbot a),
-    fun h => ha (ProvabilityFrame.loeb h)⟩
-
-/-- **Gödel's second incompleteness theorem** as a corollary: a consistent theory
-does not prove its own consistency statement `□⊥ → ⊥`. -/
-theorem goedel_second {S : Type u} (F : ProvabilityFrame S) (hcon : F.Consistent) :
-    ¬ F.Pr (F.reflection F.bot) :=
-  (loeb_no_self_trust F hcon).2
-
-/-- The axioms of `ProvabilityFrame` are satisfiable together with the existence of an
-unprovable sentence, so `loeb_no_self_trust` is not vacuous: take sentences to be
-Lean propositions, `Pr` to be truth, and `box` the constant `True`. -/
-theorem exists_frame_with_unprovable_sentence :
-    ∃ (F : ProvabilityFrame Prop) (a : Prop), ¬ F.Pr a := by
-  refine ⟨{ imp := fun p q => p → q, bot := False, box := fun _ => True, Pr := id,
-            mp := fun h ha => h ha, nec := fun _ => trivial,
-            imp_trans := fun h1 h2 x => h2 (h1 x),
-            distrib := fun h1 h2 x => h1 x (h2 x),
-            boxK := fun _ _ _ _ => trivial, box4 := fun _ _ => trivial,
-            efq := fun _ h => h.elim,
-            diag := fun a => ⟨a, fun ha _ => ha, fun h => h trivial⟩ }, False, id⟩
-
-end Frontier
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -159,4 +31,127 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Frontier
+
+/-- An abstract *provability structure*: a theory `T` over a type of sentences, equipped with
+an implication connective, a provability predicate `Prf` ("`T` proves ..."), and an internal
+provability operator `box` (the arithmetized provability predicate of `T`).
+
+The axioms are:
+
+* `mp` : the provable sentences are closed under modus ponens;
+* `ax_K1`, `ax_K2` : the two Hilbert axiom schemes for implication, so that `T` contains
+  (implicational) propositional logic;
+* `nec` : necessitation — if `T` proves `A`, then `T` proves `□A`;
+* `ax_K` : the distribution axiom `□(A → B) → (□A → □B)`;
+* `ax_four` : `□A → □□A`;
+* `diag` : the diagonal (fixed point) lemma: for every sentence `A` there is a sentence `F`
+  with `T ⊢ F ↔ (□F → A)`.
+
+These are exactly the Hilbert–Bernays–Löb derivability conditions together with the
+diagonal lemma, all of which hold e.g. for Peano arithmetic and its provability predicate. -/
+structure ProvabilityStructure where
+  /-- The type of sentences of the language. -/
+  Sent : Type*
+  /-- Implication between sentences. -/
+  imp : Sent → Sent → Sent
+  /-- `Prf A` means: the theory proves the sentence `A`. -/
+  Prf : Sent → Prop
+  /-- `box A` is the sentence expressing "`A` is provable in the theory". -/
+  box : Sent → Sent
+  /-- Modus ponens. -/
+  mp : ∀ {a b : Sent}, Prf (imp a b) → Prf a → Prf b
+  /-- Hilbert axiom scheme `A → (B → A)`. -/
+  ax_K1 : ∀ a b : Sent, Prf (imp a (imp b a))
+  /-- Hilbert axiom scheme `(A → (B → C)) → ((A → B) → (A → C))`. -/
+  ax_K2 : ∀ a b c : Sent, Prf (imp (imp a (imp b c)) (imp (imp a b) (imp a c)))
+  /-- Necessitation. -/
+  nec : ∀ {a : Sent}, Prf a → Prf (box a)
+  /-- Distribution axiom for the provability operator. -/
+  ax_K : ∀ a b : Sent, Prf (imp (box (imp a b)) (imp (box a) (box b)))
+  /-- Transparency of provability: `□A → □□A`. -/
+  ax_four : ∀ a : Sent, Prf (imp (box a) (box (box a)))
+  /-- Diagonal lemma. -/
+  diag : ∀ a : Sent, ∃ f : Sent,
+    Prf (imp f (imp (box f) a)) ∧ Prf (imp (imp (box f) a) f)
+
+namespace ProvabilityStructure
+
+variable (T : ProvabilityStructure)
+
+/-- The derived rule: from `A → (B → C)` and `A → B` infer `A → C`. -/
+theorem imp_S {a b c : T.Sent} (h1 : T.Prf (T.imp a (T.imp b c)))
+    (h2 : T.Prf (T.imp a b)) : T.Prf (T.imp a c) :=
+  T.mp (T.mp (T.ax_K2 a b c) h1) h2
+
+/-- Weakening: from `B` infer `A → B`. -/
+theorem imp_weaken {a b : T.Sent} (h : T.Prf b) : T.Prf (T.imp a b) :=
+  T.mp (T.ax_K1 b a) h
+
+/-- Syllogism: from `A → B` and `B → C` infer `A → C`. -/
+theorem imp_trans {a b c : T.Sent} (h1 : T.Prf (T.imp a b))
+    (h2 : T.Prf (T.imp b c)) : T.Prf (T.imp a c) :=
+  T.imp_S (T.imp_weaken h2) h1
+
+/-- **Löb's theorem.** If a theory satisfying the derivability conditions and the diagonal
+lemma proves the reflection sentence `□A → A`, then it already proves `A`. -/
+theorem loeb {a : T.Sent} (h : T.Prf (T.imp (T.box a) a)) : T.Prf a := by
+  obtain ⟨f, hf1, hf2⟩ := T.diag a
+  -- `□f → □(□f → a)`
+  have hB : T.Prf (T.imp (T.box f) (T.box (T.imp (T.box f) a))) :=
+    T.mp (T.ax_K f (T.imp (T.box f) a)) (T.nec hf1)
+  -- `□(□f → a) → (□□f → □a)`
+  have hC : T.Prf (T.imp (T.box (T.imp (T.box f) a))
+      (T.imp (T.box (T.box f)) (T.box a))) := T.ax_K (T.box f) a
+  -- `□f → (□□f → □a)`
+  have hD : T.Prf (T.imp (T.box f) (T.imp (T.box (T.box f)) (T.box a))) :=
+    T.imp_trans hB hC
+  -- `□f → □a`
+  have hF : T.Prf (T.imp (T.box f) (T.box a)) := T.imp_S hD (T.ax_four f)
+  -- `□f → a`
+  have hG : T.Prf (T.imp (T.box f) a) := T.imp_trans hF h
+  -- hence `f`, hence `□f`, hence `a`
+  exact T.mp hG (T.nec (T.mp hf2 hG))
+
+end ProvabilityStructure
+
+/-- **No self-trust (Löb).**
+
+A consistent theory cannot prove the reflection principle for a sentence it does not prove:
+if the theory `T` (satisfying the Hilbert–Bernays–Löb derivability conditions and the diagonal
+lemma) is consistent — witnessed here by some sentence `c` that `T` does not prove — and `a` is
+a sentence with `T ⊬ a`, then `T ⊬ (□a → a)`.
+
+Remark: the consistency hypothesis `hcon` is included because it is part of the informal
+statement, but it is in fact not needed: `T ⊬ a` already rules out `T ⊢ (□a → a)` by Löb's
+theorem. -/
+theorem loeb_no_self_trust (T : ProvabilityStructure) {c a : T.Sent}
+    (_hcon : ¬ T.Prf c) (ha : ¬ T.Prf a) : ¬ T.Prf (T.imp (T.box a) a) :=
+  fun h => ha (T.loeb h)
+
+/-- A concrete consistent provability structure, showing that the hypotheses of
+`Frontier.loeb_no_self_trust` are simultaneously satisfiable (so the theorem is not vacuous):
+sentences are booleans, `Prf a` means `a = true`, and `□a` is the constant `true`. -/
+def boolStructure : ProvabilityStructure where
+  Sent := Bool
+  imp a b := (!a || b)
+  Prf a := a = true
+  box _ := true
+  mp := by decide
+  ax_K1 := by decide
+  ax_K2 := by decide
+  nec := by decide
+  ax_K := by decide
+  ax_four := by decide
+  diag a := ⟨a, by revert a; decide, by revert a; decide⟩
+
+/-- In `Frontier.boolStructure` the sentence `false` is unprovable (the structure is
+consistent), hence by `Frontier.loeb_no_self_trust` the reflection sentence `□false → false`
+is not provable there either. -/
+example : ¬ boolStructure.Prf (boolStructure.imp (boolStructure.box false) false) :=
+  loeb_no_self_trust boolStructure (c := false)
+    (by simp [boolStructure]) (by simp [boolStructure])
+
+end Frontier
 

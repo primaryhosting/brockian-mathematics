@@ -1,54 +1,23 @@
 import Mathlib
 
 /-!
-# Correctness of Dijkstra's algorithm
-
-We model a finite weighted digraph on a finite vertex type `V` by a weight function
-`w : V → V → ℝ≥0∞`.  Using `ℝ≥0∞` (extended nonnegative reals) as the weight type
-encodes exactly the hypotheses of Dijkstra's algorithm:
-
-* every weight is nonnegative;
-* `w u v = ⊤` means "there is no edge from `u` to `v`" (an infinitely expensive edge).
-
-A *path* starting at `x` is a list `l : List V` of the vertices visited after `x`.
-`pathCost w x l` is its total weight and `pathEnd x l` its final vertex.
-`spDist w s t` is the shortest-path distance, the infimum of the costs of all paths
-from `s` to `t` (`⊤` if `t` is unreachable from `s`).
-
-`dijkstra w s` runs the usual Dijkstra loop (`Fintype.card V` rounds of
-"extract an unvisited vertex of minimal tentative distance, then relax its outgoing
-edges"), and the main theorem `CS.dijkstra_correct` states that it returns exactly
-the shortest-path distances from `s`.
-
-The two mathematical ingredients are isolated as `CS.key_extract` (the extracted
-vertex already has its final distance — this is the step that uses nonnegativity of
-the weights) and `CS.key_update` (relaxing the edges out of the extracted vertex
-updates the restricted distances correctly).
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped Classical ENNReal
-
-set_option autoImplicit false
-set_option relaxedAutoImplicit false
 
 namespace CS
 
-variable {V : Type*}
+open scoped ENNReal
 
-/-! ## Paths -/
+variable {V : Type*} [Fintype V] [DecidableEq V]
 
-/-- The endpoint of the path that starts at `x` and then visits the vertices of `l`. -/
+/-- `wcost w u l` is the total weight of the walk that starts at `u` and visits the
+vertices of `l` in order. -/
 
-lemma argMin_mem (d : V → ℝ≥0∞) (x : V) (l : List V) : argMin d x l ∈ x :: l := by
-  induction l generalizing x with
-  | nil => simp [argMin]
-  | cons y l ih =>
-    rw [argMin]
-    by_cases hc : d y < d x
-    · rw [if_pos hc]
-      exact List.mem_cons_of_mem x (ih y)
-    · rw [if_neg hc]
-      rcases List.mem_cons.mp (ih x) with h | h
-      · rw [h]; exact List.mem_cons_self
-      · exact List.mem_cons_of_mem x (List.mem_cons_of_mem y h)
+lemma argmin_mem (S : Finset V) (d : V → ℝ≥0∞) (h : S.Nonempty) : argmin S d h ∈ S :=
+  (S.exists_min_image d h).choose_spec.1
 
+omit [Fintype V] [DecidableEq V] in

@@ -33,11 +33,48 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+## Overview
+
+A *Ruth–Aaron pair* is a pair of consecutive positive integers `(n, n+1)` whose sums of prime
+factors, counted with multiplicity, agree:  `sopfr n = sopfr (n+1)`.  The first examples are
+`(5,6)`, `(8,9)`, `(15,16)`, `(77,78)`, `(125,126)` and the famous `(714,715)`.
+
+Whether there are infinitely many Ruth–Aaron pairs is an open problem (Erdős conjectured that
+there are).  Accordingly, this file develops the theory and proves a *conditional reduction*:
+Ruth–Aaron infinitude follows from a hypothesis asserting only the primality of two explicit
+numbers, with no reference to sums of prime factors of the resulting pair.
+
+The reduction rests on the following exact identity.  Write `Δ c = sopfr (c+1) - sopfr c`, put
+
+  `p = 1 + (c+1) * Δ c`,  `q = 1 + c * Δ c`,  `n = c * p`.
+
+Then, purely algebraically, `n + 1 = (c+1) * q`, and since `sopfr` is completely additive,
+
+  `sopfr n = sopfr c + p`,  `sopfr (n+1) = sopfr (c+1) + q = sopfr c + Δ c + q = sopfr c + p`,
+
+so `(n, n+1)` is a Ruth–Aaron pair *whenever `p` and `q` are both prime*.  Thus the sum-of-prime-
+factors condition disappears entirely, and only a two-fold primality condition remains.
+
+For instance `c = 1` gives `Δ = 2`, `q = 3`, `p = 5`, `n = 5`, the pair `(5,6)`; and `c = 12`
+gives `Δ = 6`, `q = 73`, `p = 79`, `n = 948 = 2^2·3·79` with `949 = 13·73`, both of
+sum-of-prime-factors `86`.
+-/
+
 namespace Brockian.RuthAaronPairs
 
+open scoped Nat
+
 /-- `sopfr n` is the sum of the prime factors of `n`, counted with multiplicity
-(A001414, the "integer logarithm"). By convention `sopfr 0 = sopfr 1 = 0`. -/
+(with the convention `sopfr 0 = sopfr 1 = 0`). -/
 
-theorem isRuthAaronPair_fifteen : IsRuthAaronPair 15 :=
-  ⟨by norm_num, by rw [sopfr_fifteen]; exact sopfr_sixteen.symm⟩
+theorem isRuthAaronPair_fifteen : IsRuthAaronPair 15 := by
+  refine ⟨by norm_num, ?_⟩
+  have h15 : (15 : ℕ) = 3 * 5 := by norm_num
+  have h16 : (15 : ℕ) + 1 = 2 * (2 * (2 * 2)) := by norm_num
+  rw [h15, h16, sopfr_mul (by norm_num) (by norm_num), sopfr_mul (by norm_num) (by norm_num),
+    sopfr_mul (by norm_num) (by norm_num), sopfr_mul (by norm_num) (by norm_num),
+    sopfr_two, sopfr_three, sopfr_five]
 
+/-- `(714,715)` is a Ruth–Aaron pair (the pair that gave the notion its name):
+`714 = 2·3·7·17` and `715 = 5·11·13`, both with prime-factor sum `29`. -/

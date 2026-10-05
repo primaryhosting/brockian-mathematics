@@ -16,16 +16,39 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Polynomial
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
 noncomputable section
 
-/-! ## Hermite polynomials over `ℝ` -/
+open Polynomial
 
-/-- The `n`-th probabilists' Hermite polynomial, viewed as a real polynomial. -/
+/-! ## Probabilists' Hermite polynomials over `ℝ` -/
 
-lemma He_succ (n : ℕ) : He (n + 1) = X * He n - derivative (He n) := by
-  simp [He, Polynomial.hermite_succ, Polynomial.derivative_map]
+/-- The `n`-th probabilists' Hermite polynomial, with real coefficients. -/
+
+theorem He_succ (n : ℕ) (x : ℝ) : He (n + 1) x = x * He n x - He' n x := by
+  simp [He, He', Herm_succ n]
 

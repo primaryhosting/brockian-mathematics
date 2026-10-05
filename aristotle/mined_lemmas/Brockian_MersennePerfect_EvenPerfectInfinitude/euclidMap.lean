@@ -24,21 +24,38 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 /-
+/-!
 # Even Perfect Infinitude
 Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.EvenPerfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above is wrapped in an outer block comment because Lean 4 requires
+-- `import` commands to precede every other command, including module docstrings.)
+-/
 
 import Mathlib
+import Archive.Wiedijk100Theorems.PerfectNumbers
+
+/-!
+Whether there are infinitely many even perfect numbers is an open problem (it is equivalent
+to the infinitude of Mersenne primes).  What is proved here is exactly that equivalence, i.e.
+a Lean-checked reduction of the conjecture:
+
+  `{n | Even n ∧ n.Perfect}.Infinite ↔ {p | (mersenne p).Prime}.Infinite`
+
+The proof goes through the Euclid–Euler theorem: the map `p ↦ 2 ^ (p - 1) * (2 ^ p - 1)`
+is a bijection from the set of Mersenne exponents `p` with `2 ^ p - 1` prime onto the set of
+even perfect numbers.
+-/
 
 namespace Brockian.MersennePerfect
 
-open ArithmeticFunction Finset
-open scoped sigma
+open Set
 
-/-- The set of even perfect numbers. -/
+/-- The set of exponents `p` for which `mersenne p = 2 ^ p - 1` is prime. -/
 
-def euclidMap (k : ℕ) : ℕ := 2 ^ k * mersenne (k + 1)
+def euclidMap (p : ℕ) : ℕ := 2 ^ (p - 1) * mersenne p
 
+/-- A Mersenne exponent is positive: `mersenne 0 = 0` is not prime. -/

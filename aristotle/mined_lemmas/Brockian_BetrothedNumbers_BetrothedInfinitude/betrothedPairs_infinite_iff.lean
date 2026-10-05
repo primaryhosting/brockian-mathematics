@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Betrothed Infinitude
-Category: Brockian Conjecture
-Target: Brockian.BetrothedNumbers.BetrothedInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -44,54 +36,64 @@ Provenance: Aristotle theorem prover (Harmonic)
 /-!
 ## Betrothed (quasi-amicable) numbers
 
-Two distinct natural numbers `m ≠ n` are *betrothed* (also called *quasi-amicable*)
-when each is the sum of the *nontrivial* proper divisors of the other, i.e.
+A pair `(m, n)` of distinct positive integers is *betrothed* (or *quasi-amicable*,
+or a *reduced amicable pair*) when
 
   `σ m = σ n = m + n + 1`,
 
-where `σ = ArithmeticFunction.sigma 1` is the sum-of-divisors function.
+i.e. each of `m` and `n` is the sum of the *nontrivial* proper divisors of the other.
 The smallest example is `(48, 75)`.
 
-Whether there are infinitely many betrothed pairs is an open problem.  What is
-proved here is therefore a *conditional reduction* together with the unconditional
-structural facts it rests on:
+Whether there are infinitely many betrothed pairs is an open problem, so the target
+theorem `BetrothedInfinitude` is stated here as a **Lean-checked conditional
+reduction**: infinitude of betrothed pairs follows from a prime-pattern hypothesis
+`PrimePatternUnbounded`, which asks for arbitrarily large solutions of a pair of
+`σ`-equations in which the two "new" factors are primes.
 
-* `Brockian.BetrothedNumbers.quasiAliquot_iff` — the key intermediate lemma:
-  a pair is betrothed exactly when the *quasi-aliquot* map
-  `q n = σ n - n - 1` swaps `m` and `n` (and `m ≠ n`, `2 ≤ m`, `2 ≤ n`).
-  In particular each member of a betrothed pair determines the other.
-* `Brockian.BetrothedNumbers.BetrothedInfinitude` — from the (open) hypothesis
-  that betrothed pairs have arbitrarily large members it follows that the set of
-  betrothed pairs is infinite.
+The hypothesis is *not* vacuous: `isBetrothedPattern_16_25_3_3` exhibits the
+solution `(a, b, p, q) = (16, 25, 3, 3)`, which produces the betrothed pair
+`(48, 75)`.
+
+Alongside the reduction, several unconditional facts are proved: the first three
+betrothed pairs, that no member of a betrothed pair is prime, that both members are
+at least `48`, that the set of betrothed pairs is infinite exactly when betrothed
+numbers are unbounded, and a parity restriction (in a betrothed pair whose two members
+have the same parity, each member is a square or twice a square).
 -/
 
-namespace Brockian.BetrothedNumbers
+namespace Brockian
+namespace BetrothedNumbers
 
 open ArithmeticFunction
 
-/-- The quasi-aliquot sum of `n`: the sum of the divisors of `n` other than `1` and `n`
-itself (using truncated subtraction, so the value at `n ≤ 1` is `0`). -/
+set_option maxRecDepth 100000
+
+/-- `IsBetrothedPair m n` says that `m` and `n` are distinct positive integers with
+`σ m = σ n = m + n + 1`; equivalently, each is the sum of the proper divisors of the
+other, excluding `1`. -/
 
 theorem betrothedPairs_infinite_iff :
-    betrothedPairs.Infinite ↔ ∀ N : ℕ, ∃ m n : ℕ, N < n ∧ IsBetrothedPair m n := by
+    BetrothedPairs.Infinite ↔ ∀ N : ℕ, ∃ m n : ℕ, N < m ∧ IsBetrothedPair m n := by
   constructor
   · intro hinf N
-    have himg : betrothedNumbers.Infinite := by
-      rw [← image_snd_betrothedPairs]
-      exact hinf.image snd_injOn_betrothedPairs
-    obtain ⟨n, ⟨m, hmn⟩, hlt⟩ := himg.exists_gt N
-    exact ⟨m, n, hlt, hmn⟩
-  · intro h
-    refine Set.Infinite.of_image Prod.snd ?_
-    rw [image_snd_betrothedPairs]
-    exact betrothedNumbers_infinite h
+    by_contra hcon
+    push_neg at hcon
+    have hsub : Prod.fst '' BetrothedPairs ⊆ Set.Iic N := by
+      rintro x ⟨⟨m, n⟩, hmem, rfl⟩
+      exact Nat.not_lt.mp fun hlt => (hcon m n hlt) hmem
+    have hinj : Set.InjOn Prod.fst BetrothedPairs := by
+      rintro ⟨m, n⟩ hmn ⟨m', n'⟩ hmn' (heq : m = m')
+      subst heq
+      exact Prod.ext rfl (partner_unique hmn hmn')
+    exact hinf (((Set.finite_Iic N).subset hsub).of_finite_image hinj)
+  · intro H
+    refine Set.Infinite.of_image Prod.fst (Set.infinite_of_not_bddAbove ?_)
+    rintro ⟨B, hB⟩
+    obtain ⟨m, n, hlt, hpair⟩ := H B
+    exact absurd (hB ⟨(m, n), hpair, rfl⟩) (by omega)
 
-/-- **Betrothed Infinitude (conditional reduction).**
+/-! ### A prime-pattern reduction -/
 
-If betrothed pairs have arbitrarily large members — i.e. for every bound `N` there is
-a betrothed pair `(m, n)` with `N < n` — then there are infinitely many betrothed pairs.
-
-The hypothesis is exactly the open part of the Brockian "betrothed infinitude"
-conjecture; everything else is proved unconditionally here, the crucial ingredient
-being `quasiAliquot_iff`, which shows that a betrothed pair is determined by either
-of its members. -/
+/-- The prime pattern underlying the reduction: `a, b` are positive, `p, q` are primes
+not dividing `a, b` respectively, and the two `σ`-equations defining a betrothed pair
+hold for `m = a * p`, `n = b * q` after using multiplicativity of `σ`. -/

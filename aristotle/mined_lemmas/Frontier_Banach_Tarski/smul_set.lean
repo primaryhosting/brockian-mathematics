@@ -1,24 +1,31 @@
-import RequestProject.BT.Ball
+import RequestProject.Equidecomp
 
 /-!
-# Banach Tarski
-Category: Frontier — Set Theory
-Target: Frontier.Banach_Tarski
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Rotations of `ℝ³`
+
+Set-up for the Banach–Tarski paradox: the group `SO(3)` of rotations acting on
+`E = EuclideanSpace ℝ (Fin 3)`, the group of isometries of `E`, and the fact that a
+non-identity rotation fixes at most two points of the unit sphere.
 -/
 
-open Metric Set
-open scoped Pointwise
+open Matrix
 
-namespace Frontier
+namespace BanachTarski
 
-/-- The vector by which the second copy of the ball is translated. -/
+/-- Three dimensional Euclidean space. -/
+abbrev E := EuclideanSpace ℝ (Fin 3)
 
-theorem smul_set (g : G) (A : Set X) : Equidec G A (g • A) := by
-  refine ⟨fun x => g • x, {g}, ⟨fun x hx => ⟨x, hx, rfl⟩, fun x _ y _ h => by
-    simpa using congrArg (fun z => g⁻¹ • z) h, fun x hx => ?_⟩, fun a _ => ⟨g, by simp⟩⟩
-  obtain ⟨y, hy, rfl⟩ := hx
-  exact ⟨y, hy, rfl⟩
+/-- The group of rotations of `ℝ³`. -/
+abbrev SO3 := Matrix.specialOrthogonalGroup (Fin 3) ℝ
 
-/-- Transport an equidecomposition along a group homomorphism compatible with the actions. -/
+noncomputable instance : SMul ↥SO3 E :=
+  ⟨fun M x => WithLp.toLp 2 ((M : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ WithLp.ofLp x)⟩
+
+
+theorem smul_set (g : G) (A : Set X) : Equidecomp G A (g • A) := by
+  refine ⟨fun x => g • x, {g}, Set.finite_singleton _, ⟨?_, ?_, ?_⟩, fun x _ => ⟨g, rfl, rfl⟩⟩
+  · intro x hx; exact ⟨x, hx, rfl⟩
+  · intro x _ y _ h; exact MulAction.injective g h
+  · rintro y ⟨x, hx, rfl⟩; exact ⟨x, hx, rfl⟩
+
+/-- Any part of `A` can be matched with a part of `B`, with matching complements. -/

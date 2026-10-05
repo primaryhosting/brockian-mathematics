@@ -14,20 +14,61 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Chsh Tsirelson
+Category: Quantum Computing
+Target: QC.chsh_tsirelson
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+## Overview
+
+For a CHSH tuple `A₀, A₁, B₀, B₁` (four self-adjoint involutions, with the `Aᵢ` commuting with
+the `Bⱼ`) inside a unital C*-algebra, the CHSH operator
+
+  `M = A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁`
+
+satisfies Tsirelson's bound `‖M‖ ≤ 2 √2`.
+
+The proof is the classical one: one checks the algebraic identity
+
+  `M ^ 2 = 4 - [A₀, A₁] * [B₀, B₁]`,
+
+each commutator has norm at most `2` (since each entry is a self-adjoint involution, hence of
+norm one), so `‖M ^ 2‖ ≤ 8`; since `M` is self-adjoint, the C*-identity gives
+`‖M‖ ^ 2 = ‖M ^ 2‖ ≤ 8`, i.e. `‖M‖ ≤ 2 √2`.
+
+The statement is given for an arbitrary unital C*-algebra; since the algebra `H →L[ℂ] H` of
+bounded operators on a Hilbert space is such an algebra, the usual statement about the operator
+norm of the quantum CHSH operator follows (see `QC.chsh_tsirelson_operator`).
+-/
 
 namespace QC
 
-variable {A : Type*}
+open scoped Real
 
-/-- The CHSH operator associated to a tuple of observables
-`A₀, A₁` (Alice) and `B₀, B₁` (Bob). -/
+variable {R : Type*}
 
-def chshOp [Mul A] [Add A] [Sub A] (A₀ A₁ B₀ B₁ : A) : A :=
+/-- The CHSH operator associated with four observables. -/
+
+def chshOp [Mul R] [Add R] [Sub R] (A₀ A₁ B₀ B₁ : R) : R :=
   A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁
 
-section Ring
+section Algebraic
 
-variable [Ring A] [StarRing A] {A₀ A₁ B₀ B₁ : A}
+variable [Ring R] [StarRing R]
 
-/-- The square of the CHSH operator equals `4` minus the product of the two commutators. -/
+/-- The key algebraic identity `M ^ 2 = 4 - [A₀, A₁] * [B₀, B₁]` for the CHSH operator `M`. -/

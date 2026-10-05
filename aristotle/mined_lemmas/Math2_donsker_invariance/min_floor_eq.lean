@@ -1,0 +1,68 @@
+/-
+# Donsker Invariance
+Category: Frontier Math
+Target: Math2.donsker_invariance
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+/-!
+# Donsker Invariance
+Category: Frontier Math
+Target: Math2.donsker_invariance
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+Donsker's invariance principle states that the diffusively rescaled random walk built from
+i.i.d. centered increments of unit variance converges in law, as a process, to Brownian motion.
+
+Mathlib currently contains neither Brownian motion, nor weak convergence on the Skorokhod space,
+nor the central limit theorem, so the functional statement cannot be phrased.  What is proved
+here is the *second-order (moment) form* of the invariance principle, which is the part of the
+statement that can be expressed with the available theory:
+
+* the rescaled walk `W_n(t) = S_{⌊n t⌋} / √n` is centered;
+* its covariance converges to the Brownian covariance, `E[W_n(s) W_n(t)] → min s t`;
+* its increments have the Brownian variance in the limit, `E[(W_n(t) - W_n(s))²] → t - s`;
+* its increments over disjoint time intervals are exactly independent.
+
+All the limits depend only on the first two moments of the increments and not on their law —
+this is the *invariance* content of the principle, isolated in
+`Math2.donsker_invariance_law_independent`.
+-/
+
+namespace Math2
+
+open MeasureTheory ProbabilityTheory Filter Topology
+
+/-- The diffusively rescaled random walk built from the increments `X`:
+`rescaledWalk X n t ω = (X 0 + ⋯ + X (⌊n t⌋ - 1)) / √n`.
+This is the piecewise-constant process appearing in Donsker's invariance principle. -/
+
+lemma min_floor_eq (n : ℕ) {s t : ℝ} :
+    (min ⌊(n : ℝ) * s⌋₊ ⌊(n : ℝ) * t⌋₊ : ℕ) = ⌊(n : ℝ) * min s t⌋₊ := by
+  rcases le_total s t with h | h
+  · rw [min_eq_left h, min_eq_left (Nat.floor_mono
+      (mul_le_mul_of_nonneg_left h (Nat.cast_nonneg n)))]
+  · rw [min_eq_right h, min_eq_right (Nat.floor_mono
+      (mul_le_mul_of_nonneg_left h (Nat.cast_nonneg n)))]
+
+/-- `⌊n u⌋ / n → u` along the naturals, for `u ≥ 0`. -/

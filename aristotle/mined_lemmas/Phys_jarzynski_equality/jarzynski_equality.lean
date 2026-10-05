@@ -1,4 +1,5 @@
-/-
+import Mathlib
+/-!
 # Jarzynski Equality
 Category: Frontier Phys
 Target: Phys.jarzynski_equality
@@ -6,40 +7,38 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 namespace Phys
 
 open Finset
 
-variable {S : Type*} [Fintype S] [Nonempty S]
+variable {Ω : Type*} [Fintype Ω]
 
-/-- Canonical partition function at inverse temperature `β` for energy function `H`. -/
+/-- Canonical partition function `Z = ∑ₓ e^{-βH(x)}` of a Hamiltonian `H` on a finite
+state space at inverse temperature `β`. -/
 
-theorem jarzynski_equality (beta : ℝ) (hbeta : beta ≠ 0) (H₀ H₁ : S → ℝ) (T : S ≃ S) :
-    ∑ x, boltzmann beta H₀ x * Real.exp (-beta * work H₀ H₁ T x)
-      = Real.exp (-beta * (freeEnergy beta H₁ - freeEnergy beta H₀)) := by
-  have h0 : (0:ℝ) < partition beta H₀ := partition_pos beta H₀
-  have h1 : (0:ℝ) < partition beta H₁ := partition_pos beta H₁
-  have hterm : ∀ x : S, boltzmann beta H₀ x * Real.exp (-beta * work H₀ H₁ T x)
-      = Real.exp (-beta * H₁ (T x)) / partition beta H₀ := by
-    intro x
-    unfold boltzmann work
-    rw [div_mul_eq_mul_div, ← Real.exp_add]
-    ring_nf
-  have hLHS : ∑ x, boltzmann beta H₀ x * Real.exp (-beta * work H₀ H₁ T x)
-      = partition beta H₁ / partition beta H₀ := by
-    rw [Finset.sum_congr rfl (fun x _ => hterm x), ← Finset.sum_div]
-    congr 1
-    exact T.sum_comp (fun y => Real.exp (-beta * H₁ y))
-  rw [hLHS]
-  unfold freeEnergy
-  have hexp : -beta * (-(1 / beta) * Real.log (partition beta H₁)
-      - -(1 / beta) * Real.log (partition beta H₀))
-      = Real.log (partition beta H₁) - Real.log (partition beta H₀) := by
+theorem jarzynski_equality [Nonempty Ω] (β : ℝ) (hβ : β ≠ 0)
+    (H₀ H₁ : Ω → ℝ) (Φ : Equiv.Perm Ω) :
+    ∑ x : Ω, gibbs β H₀ x * Real.exp (-β * work H₀ H₁ Φ x)
+      = Real.exp (-β * (freeEnergy β H₁ - freeEnergy β H₀)) := by
+  have h0 : 0 < partitionFunction β H₀ := partitionFunction_pos β H₀
+  have h1 : 0 < partitionFunction β H₁ := partitionFunction_pos β H₁
+  have hlhs : ∑ x : Ω, gibbs β H₀ x * Real.exp (-β * work H₀ H₁ Φ x)
+      = partitionFunction β H₁ / partitionFunction β H₀ := by
+    have hterm : ∀ x : Ω, gibbs β H₀ x * Real.exp (-β * work H₀ H₁ Φ x)
+        = Real.exp (-β * H₁ (Φ x)) / partitionFunction β H₀ := by
+      intro x
+      rw [gibbs, work, div_mul_eq_mul_div, ← Real.exp_add]
+      ring_nf
+    rw [Finset.sum_congr rfl (fun x _ => hterm x), ← Finset.sum_div,
+      Equiv.sum_comp Φ (fun y => Real.exp (-β * H₁ y))]
+    rfl
+  rw [hlhs, freeEnergy, freeEnergy]
+  have : -β * (-(1 / β) * Real.log (partitionFunction β H₁)
+      - -(1 / β) * Real.log (partitionFunction β H₀))
+      = Real.log (partitionFunction β H₁) - Real.log (partitionFunction β H₀) := by
     field_simp
     ring
-  rw [hexp, Real.exp_sub, Real.exp_log h1, Real.exp_log h0]
+  rw [this, Real.exp_sub, Real.exp_log h1, Real.exp_log h0]
 
 end Phys
 

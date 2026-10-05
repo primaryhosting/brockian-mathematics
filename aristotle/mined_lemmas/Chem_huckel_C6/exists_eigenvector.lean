@@ -14,36 +14,70 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+/-
+# Huckel C 6
+Category: Chemistry
+Target: Chem.huckel_C6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+open SimpleGraph Matrix Real
 
 namespace Chem
 
-open Matrix
+/-- The adjacency matrix of the cycle graph `C₆`, over `ℂ`
+(the Hückel matrix of benzene in units where `α = 0`, `β = 1`). -/
 
-/-- The adjacency matrix of the cycle graph `C₆`, written out explicitly. -/
+lemma exists_eigenvector (k : ℕ) (hk : k < 6) :
+    ∃ v : Fin 6 → ℂ, v ≠ 0 ∧ C6 *ᵥ v = ((lam k : ℝ) : ℂ) • v := by
+  interval_cases k
+  · rw [lam_zero]
+    push_cast
+    refine eigen_of ![1,1,1,1,1,1] 2 (by norm_num) ?_
+    ext i
+    fin_cases i <;>
+      simp [C6_eq, Matrix.mulVec, dotProduct, Fin.sum_univ_six] <;> ring
+  · rw [lam_one]
+    push_cast
+    refine eigen_of ![1,1,0,-1,-1,0] 1 (by norm_num) ?_
+    ext i
+    fin_cases i <;>
+      simp [C6_eq, Matrix.mulVec, dotProduct, Fin.sum_univ_six]
+  · rw [lam_two]
+    push_cast
+    refine eigen_of ![1,-1,0,1,-1,0] (-1) (by norm_num) ?_
+    ext i
+    fin_cases i <;>
+      simp [C6_eq, Matrix.mulVec, dotProduct, Fin.sum_univ_six]
+  · rw [lam_three]
+    push_cast
+    refine eigen_of ![1,-1,1,-1,1,-1] (-2) (by norm_num) ?_
+    ext i
+    fin_cases i <;>
+      simp [C6_eq, Matrix.mulVec, dotProduct, Fin.sum_univ_six] <;> ring
+  · rw [lam_four]
+    push_cast
+    refine eigen_of ![1,-1,0,1,-1,0] (-1) (by norm_num) ?_
+    ext i
+    fin_cases i <;>
+      simp [C6_eq, Matrix.mulVec, dotProduct, Fin.sum_univ_six]
+  · rw [lam_five]
+    push_cast
+    refine eigen_of ![1,1,0,-1,-1,0] 1 (by norm_num) ?_
+    ext i
+    fin_cases i <;>
+      simp [C6_eq, Matrix.mulVec, dotProduct, Fin.sum_univ_six]
 
-lemma exists_eigenvector {μ : ℝ} (hμ : μ = 2 ∨ μ = 1 ∨ μ = -1 ∨ μ = -2) :
-    ∃ v : Fin 6 → ℝ, v ≠ 0 ∧ A6 *ᵥ v = μ • v := by
-  have key : ∀ w : Fin 6 → ℝ, w 0 ≠ 0 → w ≠ 0 := by
-    intro w hw h
-    exact hw (by rw [h]; rfl)
-  rcases hμ with rfl | rfl | rfl | rfl
-  · refine ⟨![1, 1, 1, 1, 1, 1], key _ (by norm_num), ?_⟩
-    funext i
-    fin_cases i <;>
-      simp [A6, Matrix.mulVec, dotProduct, Fin.sum_univ_six] <;> norm_num
-  · refine ⟨![1, 1, 0, -1, -1, 0], key _ (by norm_num), ?_⟩
-    funext i
-    fin_cases i <;>
-      simp [A6, Matrix.mulVec, dotProduct, Fin.sum_univ_six]
-  · refine ⟨![1, -1, 0, 1, -1, 0], key _ (by norm_num), ?_⟩
-    funext i
-    fin_cases i <;>
-      simp [A6, Matrix.mulVec, dotProduct, Fin.sum_univ_six]
-  · refine ⟨![1, -1, 1, -1, 1, -1], key _ (by norm_num), ?_⟩
-    funext i
-    fin_cases i <;>
-      simp [A6, Matrix.mulVec, dotProduct, Fin.sum_univ_six] <;> norm_num
-
-/-- **Hückel theory for benzene.**  The eigenvalues of the adjacency matrix of the cycle
-graph `C₆` are exactly the numbers `2 cos (2πk/6)` for `k = 0, 1, …, 5`. -/
+/-- The adjacency matrix of `C₆` satisfies `A⁴ = 5A² - 4I`. -/

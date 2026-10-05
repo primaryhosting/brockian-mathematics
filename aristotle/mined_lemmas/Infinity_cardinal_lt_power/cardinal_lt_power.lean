@@ -1,30 +1,17 @@
 /-
-Lean requires `import` lines to precede any module docstring, so the required
-header is reproduced verbatim inside this comment (and again as the module
-docstring below, after the import).
-
-/-!
 # Cardinal Lt Power
 Category: Frontier — Set Theory
 Target: Infinity.cardinal_lt_power
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--/
+
 import Mathlib
-
-/-!
-# Cardinal Lt Power
-Category: Frontier — Set Theory
-Target: Infinity.cardinal_lt_power
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 namespace Infinity
 
-/-- Cantor's theorem in cardinal form: `c < 2 ^ c` for every cardinal `c`.
-This is `Cardinal.cantor` in Mathlib. -/
+/-- Cantor's theorem for cardinals: every cardinal is strictly smaller than
+`2 ^ c`.  This is `Cardinal.cantor` in Mathlib. -/
 
 theorem cardinal_lt_power (c : Cardinal) : c < 2 ^ c :=
   Cardinal.cantor c

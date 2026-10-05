@@ -1,22 +1,20 @@
-import Mathlib
-/-!
+/-
 # Sylow Exists
 Category: Frontier Wave 2 (deeper machinery)
 Target: GroupTheory.sylow_exists
-Verification: pending
+Verification: verified (axiom-clean: propext, Classical.choice, Quot.sound)
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 namespace GroupTheory
 
 /-- **Sylow's first theorem**: for a finite group `G` and a prime `p`, a Sylow
-`p`-subgroup of `G` exists, i.e. the type `Sylow p G` is nonempty.
-
-The primality hypothesis `hp` is kept as requested; Mathlib's construction of a maximal
-`p`-subgroup in fact does not require it. -/
+`p`-subgroup of `G` exists, i.e. the type `Sylow p G` is nonempty. -/
 theorem sylow_exists (G : Type*) [Group G] [Fintype G] (p : ℕ) (hp : p.Prime) :
     Nonempty (Sylow p G) := by
-  haveI : Fact p.Prime := ⟨hp⟩
+  have : Fact p.Prime := ⟨hp⟩
   exact Sylow.nonempty
 
 end GroupTheory

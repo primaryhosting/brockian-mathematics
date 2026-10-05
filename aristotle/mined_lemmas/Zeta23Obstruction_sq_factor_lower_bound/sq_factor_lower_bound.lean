@@ -18,8 +18,7 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Zeta23Obstruction
 
-/-- The modulation factor `1 - (1/10)·cos(3πx)` is bounded below by `9/10` for all real `x`:
-since `cos ≤ 1`, we get `(1/10)·cos(3πx) ≤ 1/10`. -/
+/-- The modulation factor `1 - (1/10) * cos (3πx)` is bounded below by `9/10` for every real `x`. -/
 
 theorem sq_factor_lower_bound (x : ℝ) :
     (9 : ℝ) / 10 ≤ 1 - (1 / 10) * Real.cos (3 * Real.pi * x) := by

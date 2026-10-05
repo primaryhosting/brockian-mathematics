@@ -1,10 +1,11 @@
-/-!
-# Rls Off Implies No Row Protection
-Category: Proof-Carrying Apps
-Target: PCA.Invariant.rls_off_implies_no_row_protection
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+import Mathlib
+import RequestProject.PCA.Invariant
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -23,75 +24,55 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+#print axioms PCA.Invariant.rls_off_implies_no_row_protection
+
+/-!
+# Rls Off Implies No Row Protection
+Category: Proof-Carrying Apps
+Target: PCA.Invariant.rls_off_implies_no_row_protection
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
 namespace PCA
+namespace Invariant
 
-/-! ## A model of the row-level-security (RLS) isolation engine -/
+universe u v
 
-/-- Identifier of a database role (a principal's identity). -/
-abbrev RoleId := Nat
+/-- A row-level security policy on a table: a permissive predicate saying which
+subjects may see which rows. -/
+structure Policy (Subject : Type u) (Row : Type v) where
+  /-- `applies s r` holds when the policy grants subject `s` access to row `r`. -/
+  applies : Subject → Row → Prop
 
-/-- Identifier of a table. -/
-abbrev TableId := Nat
-
-/-- A row of some table, carrying its owning role (used by ownership policies). -/
-structure Row where
-  /-- Row identifier. -/
-  id : Nat
-  /-- The table this row belongs to. -/
-  table : TableId
-  /-- The role that owns this row. -/
-  owner : RoleId
-  deriving DecidableEq, Repr
-
-/-- A row-level security policy: it targets one table, applies to a list of roles,
-is either *permissive* (grants access when its predicate holds) or *restrictive*
-(denies access when its predicate fails), and is given by a boolean predicate on rows. -/
-structure Policy where
-  /-- The table the policy is attached to. -/
-  table : TableId
-  /-- The roles the policy applies to. -/
-  roles : List RoleId
-  /-- `true` for a permissive policy, `false` for a restrictive one. -/
-  permissive : Bool
-  /-- The `USING` predicate of the policy. -/
-  pred : Row → Bool
-
-/-- A principal issuing a query: a role, possibly with the `BYPASSRLS` attribute. -/
-structure Principal where
-  /-- The role the principal acts as. -/
-  role : RoleId
-  /-- Whether the principal has the `BYPASSRLS` attribute. -/
-  bypassRLS : Bool
-  deriving DecidableEq, Repr
-
-/-- A table together with its RLS configuration. -/
-structure Table where
-  /-- Table identifier. -/
-  id : TableId
-  /-- Whether `ROW LEVEL SECURITY` is enabled on the table. -/
+/-- A table of the isolation engine's model: a membership predicate describing the
+stored rows, a row-level-security switch, and a list of permissive policies which is
+consulted only when the switch is on. -/
+structure Table (Subject : Type u) (Row : Type v) where
+  /-- `rows r` holds when `r` is stored in the table. -/
+  rows : Row → Prop
+  /-- Whether row-level security is enabled for this table. -/
   rlsEnabled : Bool
-  /-- Whether `FORCE ROW LEVEL SECURITY` is set (so the owner is not exempt). -/
-  rlsForced : Bool
-  /-- The role owning the table. -/
-  owner : RoleId
-  deriving DecidableEq, Repr
+  /-- The permissive policies attached to the table. -/
+  policies : List (Policy Subject Row)
 
-/-- The isolation engine state: the set of policies currently installed. -/
-structure Engine where
-  /-- All installed policies, for all tables. -/
-  policies : List Policy
+variable {Subject : Type u} {Row : Type v}
 
-/-- A policy is *applicable* to a principal querying a table when it is attached to that
-table and lists the principal's role. -/
+/-- The engine's access decision: a row is visible to a subject when it is stored in
+the table and, *if* row-level security is enabled, some permissive policy grants
+access. With RLS off the policy list is never consulted. -/
 
-theorem rowProtected_of_rls_on_no_policies
-    (e : Engine) (t : Table) (r : Row)
-    (hOn : t.rlsEnabled = true) (hForced : t.rlsForced = true)
-    (hPol : e.policies = []) :
-    e.rowProtected t r :=
-  ⟨⟨t.owner, false⟩, by simp [Engine.visible, hOn, hForced, hPol]⟩
+theorem rowProtected_of_rls_on_no_policies {t : Table Subject Row}
+    (hon : t.rlsEnabled = true) (hp : t.policies = []) (s : Subject) {r : Row}
+    (hr : t.rows r) : RowProtected t r := by
+  refine ⟨hr, s, fun hv => ?_⟩
+  obtain ⟨p, hpmem, -⟩ := hv.2 hon
+  rw [hp] at hpmem
+  exact List.not_mem_nil hpmem
 
 end Invariant
-
 end PCA
 

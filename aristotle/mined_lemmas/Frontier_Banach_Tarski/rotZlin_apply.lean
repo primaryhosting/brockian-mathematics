@@ -1,20 +1,47 @@
-import RequestProject.BT.Ball
+import Mathlib
 
-/-!
-# Banach Tarski
-Category: Frontier — Set Theory
-Target: Frontier.Banach_Tarski
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open Metric Set
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
-namespace Frontier
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-/-- The vector by which the second copy of the ball is translated. -/
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-@[simp] theorem rotZlin_apply (c s : ℝ) (x : E) :
-    rotZlin c s x = !₂[c * x 0 - s * x 1, s * x 0 + c * x 1, x 2] := rfl
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
+set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Rotations of three dimensional Euclidean space
+
+Explicit rotations about the `z`- and `x`-axes, the cross product, and the fact that a
+nontrivial rotation fixes at most two points of the unit sphere.
+-/
+
+open scoped RealInnerProductSpace
+
+namespace BT
+
+/-- Three dimensional Euclidean space. -/
+abbrev E3 := EuclideanSpace ℝ (Fin 3)
+
+/-- A vector of `E3` given by its three coordinates. -/
+
+@[simp] lemma rotZlin_apply (c s : ℝ) (v : E3) :
+    rotZlin c s v = vec3 (c * v 0 - s * v 1) (s * v 0 + c * v 1) (v 2) := rfl
+
+/-- The linear map rotating the `yz`-plane. -/

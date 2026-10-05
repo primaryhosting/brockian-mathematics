@@ -1,5 +1,3 @@
-import Brockian.CullenWoodall
-
 import Mathlib
 
 open scoped BigOperators
@@ -35,27 +33,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Woodall Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.CullenWoodall.WoodallPrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Brockian
+namespace CullenWoodall
 
-/-!
-Mathlib (as of this toolchain) contains no material on Cullen or Woodall numbers -- a search
-for `Woodall` returns nothing -- so the notions below are developed from scratch.  The Mathlib
-results actually used are `strictMono_nat_of_lt_succ`, `Nat.sub_lt_sub_right`,
-`Set.infinite_of_not_bddAbove` and `Set.Infinite.exists_gt`.
--/
-
-namespace Brockian.CullenWoodall
-
-/-- The `n`-th Woodall number `W n = n * 2 ^ n - 1` (natural subtraction; for `n ≥ 1`
-this agrees with the usual integer definition). -/
+/-- The `n`-th Woodall number `W n = n * 2 ^ n - 1` (natural subtraction; `W 0 = 0`). -/
 
 lemma woodall_six_prime : Nat.Prime (woodall 6) := by
-  rw [woodall_six]; norm_num
+  have h : woodall 6 = 383 := by norm_num [woodall]
+  rw [h]; norm_num
 
-/-- The auxiliary map `n ↦ n * 2 ^ n` is strictly monotone. -/
+/-! ## Infinitely many composite Woodall numbers -/
+

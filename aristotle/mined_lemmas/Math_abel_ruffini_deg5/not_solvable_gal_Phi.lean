@@ -5,22 +5,8 @@ Target: Math.abel_ruffini_deg5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` lines to precede any module docstring `/-! ... -/`, so the header
--- above is a plain comment and is repeated verbatim as a module docstring after the import.)
-
-/-
-The argument below is the classical Galois-theoretic proof of the Abel-Ruffini theorem
-in degree 5, following the treatment of `Archive/Wiedijk100Theorems/AbelRuffini.lean`
-in mathlib4 (author: Thomas Browning, Apache 2.0).  It is reproduced here in
-self-contained form because the mathlib `Archive` library is not imported by default.
-
-The key mathlib ingredients are:
-* `solvableByRad.isSolvable'`  (an irreducible polynomial with a root solvable by radicals
-  has solvable Galois group);
-* `Polynomial.Gal.galActionHom_bijective_of_prime_degree'`  (an irreducible polynomial of
-  prime degree with 1-3 non-real roots has full Galois group);
-* `Equiv.Perm.not_solvable`  (the symmetric group on 5 letters is not solvable).
--/
+-- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the header above is
+-- given as a plain block comment; the same text is repeated as a module docstring below.)
 
 import Mathlib
 
@@ -32,22 +18,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Math
+open scoped BigOperators
+open scoped Polynomial
+open scoped Classical
+
+set_option maxHeartbeats 1000000
 
 namespace AbelRuffiniQuintic
 
 open Function Polynomial Polynomial.Gal Ideal
 
-open scoped Polynomial
-
-attribute [local instance] splits_ℚ_ℂ
+attribute [local instance] Polynomial.Gal.splits_ℚ_ℂ
 
 variable (R : Type*) [CommRing R] (a b : ℕ)
 
-/-- The quintic `X ^ 5 - a * X + b`. -/
+/-- The quintic `X ^ 5 - a * X + b`, which for suitable `a, b` is irreducible over `ℚ`
+with Galois group `S₅`. -/
 
-theorem not_solvable_gal_Phi (p : ℕ) (hab : b < a) (hp : p.Prime) (hpa : p ∣ a) (hpb : p ∣ b)
-    (hp2b : ¬p ^ 2 ∣ b) : ¬ IsSolvable (Phi ℚ a b).Gal := by
+theorem not_solvable_gal_Phi (p : ℕ) (hab : b < a)
+    (hp : p.Prime) (hpa : p ∣ a) (hpb : p ∣ b) (hp2b : ¬p ^ 2 ∣ b) :
+    ¬ IsSolvable (Phi ℚ a b).Gal := by
   have h_irred := irreducible_Phi a b p hp hpa hpb hp2b
   intro h
   refine Equiv.Perm.not_solvable _ (le_of_eq ?_)

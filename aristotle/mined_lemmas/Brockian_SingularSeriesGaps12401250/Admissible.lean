@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Singular Series Gaps 12401250
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesGaps12401250
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,15 +23,36 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+# Singular Series Gaps 12401250
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps12401250
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+This development is deliberately self-contained (no imports beyond Lean's `Init`), so that the
+header comment above can literally begin the file.
+
+We study the Hardy-Littlewood data attached to a prime gap `d`:
+
+* admissibility of the two-element tuple `{0, d}` (no prime obstruction to `n`, `n + d` being
+  simultaneously prime infinitely often), and
+* the singular-series factor `∏_{p ∣ d, p odd prime} (p-1)/(p-2)`, recorded as an explicit
+  positive rational `gapNum d / gapDen d`.
+
+The main result `Brockian.SingularSeriesGaps12401250` verifies both for every even gap `d` in the
+range `1240 ≤ d ≤ 1250`, extending the `SingularSeriesGaps` family to this range.
+-/
+
 namespace Brockian
 
-/-- A finite set of shifts `H` is *admissible* (in the sense of the Hardy–Littlewood
-prime `k`-tuple conjecture) if for every prime `p` the residues of `H` modulo `p`
-do not cover all of `ℤ/pℤ`.  Equivalently, the local factor of the singular series
-attached to `H` is nonzero at every prime. -/
+/-! ## Primes -/
 
-def Admissible (H : Finset ℕ) : Prop :=
-  ∀ p : ℕ, p.Prime → (H.image (· % p)).card < p
+/-- Primality, stated from first principles. -/
 
-/-- Only primes `p ≤ #H` need to be tested for admissibility: for larger primes the
-residues of `H` cannot cover all residue classes for cardinality reasons. -/
+def Admissible (H : List Int) : Prop :=
+  ∀ p : Nat, IsPrimeN p → ∃ r : Int, 0 ≤ r ∧ r < (p : Int) ∧ ∀ x ∈ H, x % (p : Int) ≠ r
+
+/-- Every even gap `d` gives an admissible pair `{0, d}`. -/

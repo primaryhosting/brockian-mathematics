@@ -1,3 +1,11 @@
+/-
+# Dft Inversion
+Category: Characters
+Target: Brockian.Characters5.dft_inversion
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -24,46 +32,33 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-namespace Brockian
-namespace Characters5
+namespace Brockian.Characters5
 
 /-- A primitive fifth root of unity. -/
-noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
-
 
 theorem dft_inversion (f : ZMod 5 → ℂ) (x : ZMod 5) :
     f x = (1 / 5 : ℂ) * ∑ a : ZMod 5, e (-(a * x)) * dft f a := by
-  have hchar : ∀ a y : ZMod 5, e (a * (y - x)) = e (-(a * x)) * e (a * y) := by
-    intro a y
-    rw [← e_add]
-    congr 1
-    ring
   have key : ∑ a : ZMod 5, e (-(a * x)) * dft f a
-      = ∑ y : ZMod 5, f y * ∑ a : ZMod 5, e (a * (y - x)) := by
-    calc ∑ a : ZMod 5, e (-(a * x)) * dft f a
-        = ∑ a : ZMod 5, ∑ y : ZMod 5, e (a * (y - x)) * f y := by
-          refine Finset.sum_congr rfl fun a _ => ?_
-          rw [dft, Finset.mul_sum]
-          refine Finset.sum_congr rfl fun y _ => ?_
-          rw [hchar a y]
-          ring
-      _ = ∑ y : ZMod 5, ∑ a : ZMod 5, e (a * (y - x)) * f y := Finset.sum_comm
-      _ = ∑ y : ZMod 5, f y * ∑ a : ZMod 5, e (a * (y - x)) := by
-          refine Finset.sum_congr rfl fun y _ => ?_
-          rw [← Finset.sum_mul]
-          ring
+      = ∑ y : ZMod 5, f y * (if y - x = 0 then (5 : ℂ) else 0) := by
+    simp only [dft, Finset.mul_sum]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun y _ => ?_
+    have : ∀ a : ZMod 5, e (-(a * x)) * (e (a * y) * f y) = e (a * (y - x)) * f y := by
+      intro a
+      rw [← mul_assoc, ← e_add]
+      congr 2
+      ring
+    rw [Finset.sum_congr rfl (fun a _ => this a), ← Finset.sum_mul, sum_e_mul, mul_comm]
   rw [key]
-  have : ∀ y : ZMod 5, f y * ∑ a : ZMod 5, e (a * (y - x))
-      = if y = x then 5 * f x else 0 := by
+  have : ∀ y : ZMod 5, f y * (if y - x = 0 then (5 : ℂ) else 0)
+      = if y = x then f y * 5 else 0 := by
     intro y
-    rw [sum_e_mul]
     by_cases h : y = x
-    · subst h; simp [mul_comm]
-    · rw [if_neg (fun hc => h (sub_eq_zero.mp hc)), if_neg h, mul_zero]
-  rw [Finset.sum_congr rfl fun y _ => this y, Finset.sum_ite_eq' Finset.univ x
-    (fun _ => (5 : ℂ) * f x)]
-  simp
+    · simp [h]
+    · rw [if_neg h, if_neg (fun hc => h (sub_eq_zero.1 hc)), mul_zero]
+  rw [Finset.sum_congr rfl (fun y _ => this y), Finset.sum_ite_eq' Finset.univ x (fun y => f y * 5)]
+  rw [if_pos (Finset.mem_univ x)]
+  ring
 
-end Characters5
-end Brockian
+end Brockian.Characters5
 

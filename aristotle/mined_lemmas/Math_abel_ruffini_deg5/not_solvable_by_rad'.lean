@@ -1,32 +1,26 @@
-import Mathlib
 /-
-Copyright (c) 2021 Thomas Browning. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Thomas Browning
+# Abel Ruffini Deg 5
+Category: Pure Mathematics
+Target: Math.abel_ruffini_deg5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-
-
-
-
-
+/-
+The construction of the quintic `Φ R a b = X^5 - C a * X + C b` and the supporting lemmas below
+are adapted from Mathlib's Archive file `Archive/Wiedijk100Theorems/AbelRuffini.lean`
+(author: Thomas Browning, Apache 2.0 license).  They are reproduced here because the Archive is
+not part of the `Mathlib` library target and hence cannot be imported.
+-/
+import Mathlib
 
 /-!
-# Construction of an algebraic number that is not solvable by radicals.
-
-The main ingredients are:
-* `solvableByRad.isSolvable'` in `Mathlib/FieldTheory/AbelRuffini.lean` :
-  an irreducible polynomial with an `IsSolvableByRad` root has solvable Galois group
-* `galActionHom_bijective_of_prime_degree'` in `Mathlib/FieldTheory/PolynomialGaloisGroup.lean` :
-  an irreducible polynomial of prime degree with 1-3 non-real roots has full Galois group
-* `Equiv.Perm.not_solvable` in `Mathlib/GroupTheory/Solvable.lean` : the symmetric group is not
-  solvable
-
-Then all that remains is the construction of a specific polynomial satisfying the conditions of
-`galActionHom_bijective_of_prime_degree'`, which is done in this file.
-
+# Abel Ruffini Deg 5
+Category: Pure Mathematics
+Target: Math.abel_ruffini_deg5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 
 namespace AbelRuffiniQuintic
 

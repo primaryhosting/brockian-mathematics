@@ -1,86 +1,84 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
-
 /-!
-# Tarski's undefinability of truth
+# Tarski Undefinability
+Category: Frontier — Set Theory
+Target: Frontier.Tarski_undefinability
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-This file formalizes Tarski's theorem: *arithmetical truth is not arithmetically definable*.
+/-
+Arithmetical truth is not arithmetically definable (Tarski's undefinability theorem).
 
-We work with the first-order language of arithmetic `Frontier.arith`, with signature
-`(0, 1, +, *)`, interpreted in its standard model `ℕ`.
-
-* A set `S ⊆ ℕ` is **arithmetical** (`Frontier.Arithmetical`) if there is a formula `phi(x)` of
-  the language of arithmetic, with one free variable, such that `n ∈ S ↔ ℕ ⊨ phi(n)`.
-  Similarly for binary relations (`Frontier.Arithmetical₂`).
-
-* Fix any enumeration `f : ℕ → arith.Formula (Fin 1)` of the formulas with one free variable
-  (such enumerations exist, since the language is countable: see
-  `Frontier.exists_surjective_enumeration`). The **arithmetical truth relation** relative to
-  this enumeration is
-  `Frontier.truthSet f = {(e, n) | ℕ ⊨ (f e)(n)}`,
-  i.e. the satisfaction relation "the `e`-th formula is true of `n`".
-
-The theorem `Frontier.Tarski_undefinability` states that, for *every* enumeration `f` of the
-formulas, the truth relation `truthSet f` is **not** arithmetical: no single arithmetical
-formula `psi(x, y)` can express "the formula with code `x` is true of `y`". This is the standard
-coding-free (semantic) form of Tarski's undefinability theorem, and it is proved by
-diagonalization.
+Everything is built from scratch: the syntax of first-order arithmetic (with named
+variables), its satisfaction relation in the standard model `ℕ`, the notion of an
+arithmetically definable set/relation, Gödel numberings, and the truth set.
 -/
 
 namespace Frontier
 
-open FirstOrder Language Function
+set_option autoImplicit false
 
-/-- The function symbols of the language of arithmetic: the constants `0` and `1`, and the
-binary operations `+` and `*`. -/
-inductive arithFunc : ℕ → Type
-  | zero : arithFunc 0
-  | one : arithFunc 0
-  | add : arithFunc 2
-  | mul : arithFunc 2
-  deriving DecidableEq
+/-! ## Syntax of first-order arithmetic -/
 
-/-- The first-order language of arithmetic, with signature `(0, 1, +, *)` and no relation
-symbols. -/
+/-- Terms of the language of arithmetic `{0, S, +, *}`, with variables indexed by `ℕ`. -/
+inductive ATerm : Type
+  | var : ℕ → ATerm
+  | zero : ATerm
+  | succ : ATerm → ATerm
+  | add : ATerm → ATerm → ATerm
+  | mul : ATerm → ATerm → ATerm
+  deriving DecidableEq, Encodable
 
-theorem Tarski_undefinability (f : ℕ → arith.Formula (Fin 1)) (hf : Surjective f) :
-    ¬ Arithmetical₂ (truthSet f) := by
-  rintro ⟨psi, hpsi⟩
-  -- The diagonal set is defined by the formula `¬ psi(x, x)`, contradicting `diagonal_not_arithmetical`.
-  refine diagonal_not_arithmetical f hf ⟨(Formula.relabel (fun _ => 0) psi).not, fun n => ?_⟩
-  have hcomp : (![n] : Fin 1 → ℕ) ∘ (fun _ : Fin 2 => (0 : Fin 1)) = ![n, n] := by
-    funext i; fin_cases i <;> rfl
-  rw [Set.mem_setOf_eq, Formula.realize_not, Formula.realize_relabel, hcomp]
-  exact not_congr (hpsi n n)
+/-- Formulas of the language of arithmetic.  `all i φ` is `∀ xᵢ, φ`. -/
+inductive AForm : Type
+  | eq : ATerm → ATerm → AForm
+  | not : AForm → AForm
+  | and : AForm → AForm → AForm
+  | all : ℕ → AForm → AForm
+  deriving DecidableEq, Encodable
 
-/-! ### Sanity checks: the notion of an arithmetical set is not degenerate. -/
+instance : Inhabited AForm := ⟨AForm.eq ATerm.zero ATerm.zero⟩
 
-/-- The set of idempotent naturals is arithmetical, being defined by `x * x = x`. -/
-example : Arithmetical {n : ℕ | n * n = n} :=
-  ⟨Term.equal (Functions.apply₂ arithFunc.mul (Term.var 0) (Term.var 0)) (Term.var 0), by
-    intro n; simp [Formula.Realize, Term.equal, Term.realize, Structure.funMap]⟩
+/-- Evaluation of a term in the standard model `ℕ` under an assignment `ρ`. -/
 
-/-- The set of even naturals is arithmetical, being defined by `∃ y, x = y + y`. -/
-example : Arithmetical {n : ℕ | ∃ m, n = m + m} :=
-  ⟨BoundedFormula.ex (Term.bdEqual (Term.var (Sum.inl 0))
-      (Functions.apply₂ arithFunc.add (Term.var (Sum.inr 0)) (Term.var (Sum.inr 0)))), by
-    intro n
-    simp [Formula.Realize, Term.realize, Structure.funMap, Fin.snoc]⟩
+theorem Tarski_undefinability
+    (code : AForm → ℕ) (hcode : Function.Injective code)
+    (enum : ℕ → AForm) (henum : Function.Surjective enum)
+    (diag : ℕ → AForm)
+    (hdiag : ∀ (e : ℕ) (ρ : ℕ → ℕ), Sat (diag e) ρ ↔ Sat (enum e) (Function.update ρ 0 e))
+    (hdiagdef : Definable2 fun x y => y = code (diag x)) :
+    ¬ Definable1 (TruthSet code) := by
+  intro hT
+  -- `S` is the set of `e` such that the `e`-th diagonal formula is *not* true.
+  set S : Set ℕ := (fun e => code (diag e)) ⁻¹' (TruthSet code) with hS
+  have hSdef : Definable1 Sᶜ := (hT.preimage hdiagdef).compl
+  obtain ⟨χ, hχ⟩ := hSdef
+  obtain ⟨e, he⟩ := henum χ
+  -- membership in the truth set is exactly truth of the diagonal formula
+  have hmem : code (diag e) ∈ TruthSet code ↔ IsTrue (diag e) := by
+    constructor
+    · rintro ⟨ψ, h1, h2⟩
+      exact hcode h1 ▸ h2
+    · intro h
+      exact ⟨diag e, rfl, h⟩
+  -- and truth of the diagonal formula is exactly membership of `e` in `Sᶜ`
+  have hdiagtrue : IsTrue (diag e) ↔ e ∈ Sᶜ := by
+    constructor
+    · intro h
+      have := (hχ (Function.update (fun _ => 0) 0 e)).mp
+        (he ▸ (hdiag e (fun _ => 0)).mp (h _))
+      simpa using this
+    · intro h ρ
+      rw [hdiag e ρ, he, hχ]
+      simpa using h
+  have hSe : e ∈ S ↔ code (diag e) ∈ TruthSet code := Iff.rfl
+  rw [Set.mem_compl_iff] at hdiagtrue
+  rw [hSe, hmem] at hdiagtrue
+  tauto
 
-end Frontier
+/-! ## The hypotheses are satisfiable: an explicit Gödel numbering -/
 
+open Classical in
+/-- An enumeration of all formulas of arithmetic. -/

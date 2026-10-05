@@ -8,53 +8,72 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Virial Theorem
-Category: Frontier Phys
-Target: Phys.virial_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open MeasureTheory Filter Set Topology
+open Filter MeasureTheory Topology Complex
 
 namespace Phys
 
-/-- The auxiliary "virial current"
-`F x = x * ψ' x ^ 2 - x * (V x - E) * ψ x ^ 2 + ψ x * ψ' x`,
-whose derivative is exactly `2 * ψ' x ^ 2 - x * V' x * ψ x ^ 2` for a solution of the
-stationary Schrödinger equation. -/
+/-- `‖z‖ ^ 2` in terms of the real and imaginary parts of `z`. -/
 
 theorem virial_theorem_harmonic_oscillator :
-    2 * (∫ x : ℝ, (-x * Real.exp (-x ^ 2 / 2)) ^ 2)
-      = ∫ x : ℝ, x * (2 * x) * (Real.exp (-x ^ 2 / 2)) ^ 2 := by
-  have hzero : virialCurrent (fun x : ℝ => Real.exp (-x ^ 2 / 2))
-      (fun x : ℝ => -x * Real.exp (-x ^ 2 / 2)) (fun x : ℝ => x ^ 2) 1 = fun _ => (0 : ℝ) := by
-    funext x
-    simp only [virialCurrent]
-    ring
-  have hinner : ∀ x : ℝ, HasDerivAt (fun y : ℝ => -y ^ 2 / 2) (-x) x := by
+    2 * ∫ x : ℝ, ‖dpsi x‖ ^ 2 = ∫ x : ℝ, x * dpot x * ‖psi x‖ ^ 2 := by
+  have hnorms : ∀ x : ℝ, ‖psi x‖ ^ 2 = Real.exp (-x ^ 2) := norm_psi_sq
+  have hnormd : ∀ x : ℝ, ‖dpsi x‖ ^ 2 = x ^ 2 * Real.exp (-x ^ 2) := norm_dpsi_sq
+  have hexp : ∀ x : ℝ, HasDerivAt (fun y : ℝ => Real.exp (-y ^ 2 / 2))
+      ((-x) * Real.exp (-x ^ 2 / 2)) x := by
     intro x
-    have h := ((hasDerivAt_pow 2 x).neg).div_const 2
-    convert h using 1
+    have h : HasDerivAt (fun y : ℝ => -y ^ 2 / 2) (-x) x := by
+      have := (hasDerivAt_pow 2 x).neg.div_const 2
+      convert this using 1
+      ring
+    simpa [mul_comm] using h.exp
+  refine Phys.virial_theorem psi dpsi ddpsi pot dpot 1 ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_
+  · intro x
+    exact (hexp x).ofReal_comp
+  · intro x
+    have h : HasDerivAt (fun y : ℝ => (-y) * Real.exp (-y ^ 2 / 2))
+        ((x ^ 2 - 1) * Real.exp (-x ^ 2 / 2)) x := by
+      have h1 : HasDerivAt (fun y : ℝ => -y) (-1 : ℝ) x := by
+        simpa using (hasDerivAt_id x).neg
+      have h2 := h1.mul (hexp x)
+      convert h2 using 1
+      ring
+    exact h.ofReal_comp
+  · intro x
+    simpa [pot, dpot] using (hasDerivAt_pow 2 x)
+  · intro x
+    simp only [psi, ddpsi, pot]
+    push_cast
     ring
-  refine virial_theorem (fun x => Real.exp (-x ^ 2 / 2)) (fun x => -x * Real.exp (-x ^ 2 / 2))
-    (fun x => (x ^ 2 - 1) * Real.exp (-x ^ 2 / 2)) (fun x => x ^ 2) (fun x => 2 * x) 1
-    (fun x => by simpa [mul_comm] using (hinner x).exp) (fun x => ?_)
-    (fun x => by simpa using hasDerivAt_pow 2 x) (fun x => by ring) ?_ ?_ ?_ ?_
-  · have h : HasDerivAt (fun y : ℝ => -y * Real.exp (-y ^ 2 / 2))
-        (-1 * Real.exp (-x ^ 2 / 2) + -x * (Real.exp (-x ^ 2 / 2) * -x)) x :=
-      ((hasDerivAt_id x).neg).mul (hinner x).exp
-    convert h using 1
+  · exact integrable_sq_gauss.congr (by filter_upwards with x using (hnormd x).symm)
+  · refine (integrable_sq_gauss.sub integrable_gauss).congr ?_
+    filter_upwards with x
+    simp only [Pi.sub_apply]
+    rw [hnorms x, pot]
     ring
-  · refine integrable_sq_mul_gaussian.congr (Filter.Eventually.of_forall fun x => ?_)
-    show x ^ 2 * Real.exp (-1 * x ^ 2) = (-x * Real.exp (-x ^ 2 / 2)) ^ 2
-    rw [mul_pow, neg_sq, exp_sq_aux]
-  · refine (integrable_sq_mul_gaussian.const_mul 2).congr (Filter.Eventually.of_forall fun x => ?_)
-    show 2 * (x ^ 2 * Real.exp (-1 * x ^ 2)) = x * (2 * x) * (Real.exp (-x ^ 2 / 2)) ^ 2
-    rw [exp_sq_aux]; ring
-  · rw [hzero]; exact tendsto_const_nhds
-  · rw [hzero]; exact tendsto_const_nhds
+  · refine (integrable_sq_gauss.const_mul 2).congr ?_
+    filter_upwards with x
+    rw [hnorms x, dpot]
+    ring
+  · refine (tendsto_abs_gauss_atBot).congr fun x => ?_
+    rw [psi, dpsi, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs, Real.norm_eq_abs,
+      abs_of_nonneg (Real.exp_pos _).le, abs_mul, abs_neg, abs_of_nonneg (Real.exp_pos _).le]
+    rw [← mul_assoc, mul_comm (Real.exp (-x ^ 2 / 2)) |x|, mul_assoc, exp_half_sq]
+  · refine (tendsto_abs_gauss_atTop).congr fun x => ?_
+    rw [psi, dpsi, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs, Real.norm_eq_abs,
+      abs_of_nonneg (Real.exp_pos _).le, abs_mul, abs_neg, abs_of_nonneg (Real.exp_pos _).le]
+    rw [← mul_assoc, mul_comm (Real.exp (-x ^ 2 / 2)) |x|, mul_assoc, exp_half_sq]
+  · refine squeeze_zero_norm (fun x => ?_) tendsto_abs_gauss_atBot
+    rw [hnorms x, hnormd x, pot, Real.norm_eq_abs, abs_mul]
+    have : x ^ 2 * Real.exp (-x ^ 2) - (x ^ 2 - 1) * Real.exp (-x ^ 2) = Real.exp (-x ^ 2) := by
+      ring
+    rw [this, abs_of_nonneg (Real.exp_pos _).le]
+  · refine squeeze_zero_norm (fun x => ?_) tendsto_abs_gauss_atTop
+    rw [hnorms x, hnormd x, pot, Real.norm_eq_abs, abs_mul]
+    have : x ^ 2 * Real.exp (-x ^ 2) - (x ^ 2 - 1) * Real.exp (-x ^ 2) = Real.exp (-x ^ 2) := by
+      ring
+    rw [this, abs_of_nonneg (Real.exp_pos _).le]
+
+end HarmonicOscillator
 
 end Phys
 

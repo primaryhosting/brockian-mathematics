@@ -16,18 +16,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Brockian
 
-/-- A finite set of non-negative integers `H` is *admissible* (in the sense of the
-Hardy–Littlewood prime `k`-tuple conjecture) if for every prime `p` the elements of `H`
-do not cover all residue classes modulo `p`.  Equivalently, the local factor of the
-singular series `𝔖(H)` attached to `H` is non-zero at every prime. -/
+/-- `H` covers all residue classes modulo `p`. -/
 
 def IsAdmissible (H : Finset ℕ) : Prop :=
-  ∀ p : ℕ, p.Prime → ∃ r < p, ∀ h ∈ H, h % p ≠ r
+  ∀ p : ℕ, p.Prime → ¬ CoversAllResidues H p
 
-/-- Large primes never obstruct admissibility: if `p` exceeds the size of `H`, then the
-residues of `H` modulo `p` cannot exhaust the `p` residue classes.
-
-The counting step is `Finset.card_le_card_of_injOn`-style reasoning packaged as
-`Finset.card_image_le` together with `Finset.exists_mem_notMem_of_card_lt_card`. -/
+/-- Covering all residues mod `p` forces `p ≤ |H|`. -/

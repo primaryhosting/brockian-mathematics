@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Box Level 5
+Category: Quantum Physics
+Target: QPhys.box_level_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -26,11 +34,11 @@ set_option grind.warning false
 namespace QPhys
 
 /-- Energy of the `n`-th stationary state of a particle of mass `m` in a
-one-dimensional infinite potential well ("particle in a box") of width `L`,
-with reduced Planck constant `hbar`:  `E n = n^2 * pi^2 * hbar^2 / (2 * m * L^2)`. -/
+one-dimensional infinite square well ("particle in a box") of width `L`,
+with reduced Planck constant `hbar`:
+`E n = n² π² ħ² / (2 m L²)`. -/
 
 noncomputable def boxEnergy (hbar m L : ℝ) (n : ℕ) : ℝ :=
-  (n : ℝ) ^ 2 * Real.pi ^ 2 * hbar ^ 2 / (2 * m * L ^ 2)
+    (n : ℝ) ^ 2 * Real.pi ^ 2 * hbar ^ 2 / (2 * m * L ^ 2)
 
-/-- For the infinite square well, the ratio of the fifth energy level to the
-ground-state energy is `5^2`. -/
+/-- The ground state energy of the infinite well is positive when `ħ, m, L > 0`. -/

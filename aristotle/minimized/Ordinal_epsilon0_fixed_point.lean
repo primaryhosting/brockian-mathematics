@@ -1,12 +1,13 @@
-/-
+import Mathlib
+-- Note: Lean 4 requires `import` lines to come first in a file, so the required
+-- header comment appears immediately below the import.
+/-!
 # Epsilon 0 Fixed Point
 Category: Frontier Wave 2 (deeper machinery)
 Target: Ordinal.epsilon0_fixed_point
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -28,13 +29,9 @@ namespace Ordinal
 
 open scoped Ordinal
 
-/-- `ε₀` is a fixed point of ordinal `ω`-exponentiation: `ω ^ ε₀ = ε₀`.
+/-- `ε₀` is a fixed point of ordinal `ω`-exponentiation: `ω ^ ε₀ = ε₀`. -/
 
-This is the `o = 0` instance of Mathlib's `Ordinal.omega0_opow_epsilon`, which states that every
-value `ε_ o` of the epsilon function is a fixed point of `ω ^ ⬝`. -/
-
-theorem epsilon0_fixed_point : (ω : Ordinal) ^ ε₀ = ε₀ :=
+theorem epsilon0_fixed_point : Ordinal.omega0 ^ Ordinal.epsilon 0 = Ordinal.epsilon 0 :=
   omega0_opow_epsilon 0
 
-/-- `ε₀` is the *least* fixed point of `ω ^ ⬝`: any ordinal `o` with `ω ^ o ≤ o` satisfies
-`ε₀ ≤ o`. Together with `Ordinal.epsilon0_fixed_point` this characterizes `ε₀`. -/
+/-- `ε₀` is the *least* ordinal fixed by `ω`-exponentiation. -/

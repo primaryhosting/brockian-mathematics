@@ -1,11 +1,3 @@
-/-
-# Hadamard Involutive
-Category: Quantum Computing
-Target: QC.hadamard_involutive
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,6 +7,20 @@ Target: QC.hadamard_involutive
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+namespace QC
+
+open Matrix
+
+/-- The single-qubit Hadamard gate `H = (1/√2) • !![1, 1; 1, -1]`, as a complex
+`2 × 2` matrix. -/
+
+theorem hadamard_unitary : hadamardMatrixᴴ * hadamardMatrix = 1 := by
+  rw [hadamard_conjTranspose, hadamard_mul_self]
+
+end QC
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -38,13 +44,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace QC
-
-/-- The Hadamard gate `H = (1/√2) • !![1, 1; 1, -1]` as a complex `2 × 2` matrix. -/
-
-theorem hadamard_unitary : hadamard.conjTranspose * hadamard = 1 := by
-  rw [hadamard_involutive.1]; exact hadamard_involutive.2
-
-end QC
 

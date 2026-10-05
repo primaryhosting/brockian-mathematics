@@ -33,84 +33,46 @@ set_option grind.warning false
 
 namespace Frontier
 
-open MeasureTheory ProbabilityTheory Set
+open MeasureTheory ProbabilityTheory
 
-/-- A set is *symmetric convex* if it is convex and invariant under `x ↦ -x`. -/
+/-- The standard (centered, isotropic) Gaussian measure on `ℝ ^ n`, realized as the product of
+`n` copies of the standard Gaussian measure on `ℝ`. -/
 
-def IsSymmConvex {E : Type*} [AddCommGroup E] [Module ℝ E] (K : Set E) : Prop :=
-  Convex ℝ K ∧ ∀ x ∈ K, -x ∈ K
+noncomputable def gaussianMeasure (n : ℕ) : Measure (Fin n → ℝ) :=
+  Measure.pi (fun _ => gaussianReal 0 1)
 
-/-- The Gaussian correlation inequality (Royen's theorem) for the space `E`:
-for every centered Gaussian measure `μ` on `E` (centered being expressed as the invariance
-`μ.map (fun x ↦ -x) = μ`) and all symmetric convex measurable sets `K` and `L`, one has
-`μ K * μ L ≤ μ (K ∩ L)`. -/
+instance instIsProbabilityMeasureGaussianMeasure (n : ℕ) :
+    IsProbabilityMeasure (gaussianMeasure n) := by
+  unfold gaussianMeasure; infer_instance
 
-def GaussianCorrelationProperty (E : Type*) [NormedAddCommGroup E] [NormedSpace ℝ E]
-    [MeasurableSpace E] : Prop :=
-  ∀ (μ : Measure E), IsGaussian μ → μ.map (fun x ↦ -x) = μ →
-    ∀ K L : Set E, IsSymmConvex K → IsSymmConvex L → MeasurableSet K → MeasurableSet L →
-      μ K * μ L ≤ μ (K ∩ L)
+/-- `GaussianCorrelationHolds n` is the Gaussian correlation inequality (Royen's theorem) in
+dimension `n`: for any two origin-symmetric convex sets `K`, `L` in `ℝ ^ n`, the standard
+Gaussian measure of the intersection is at least the product of the measures. The full
+Gaussian correlation inequality is the statement `∀ n, GaussianCorrelationHolds n`. -/
 
-/-! ### The one-dimensional case -/
+def GaussianCorrelationHolds (n : ℕ) : Prop :=
+  ∀ K L : Set (Fin n → ℝ), Convex ℝ K → Convex ℝ L →
+    (∀ x ∈ K, -x ∈ K) → (∀ x ∈ L, -x ∈ L) →
+    gaussianMeasure n K * gaussianMeasure n L ≤ gaussianMeasure n (K ∩ L)
 
-/-- A symmetric convex subset of `ℝ` containing `a` contains every point of absolute value
-at most `|a|`. -/
+section Symmetric
 
-theorem mem_of_abs_le_abs_of_isSymmConvex {K : Set ℝ} (hK : IsSymmConvex K) {a x : ℝ}
-    (ha : a ∈ K) (hx : |x| ≤ |a|) : x ∈ K := by
-  obtain ⟨hconv, hsym⟩ := hK
-  have hna : -a ∈ K := hsym a ha
-  rcases le_total 0 a with h | h
-  · have h1 : segment ℝ (-a) a ⊆ K := hconv.segment_subset hna ha
-    apply h1
-    rw [segment_eq_Icc (by linarith)]
-    rw [abs_of_nonneg h] at hx
-    exact abs_le.mp hx
-  · have h1 : segment ℝ a (-a) ⊆ K := hconv.segment_subset ha hna
-    apply h1
-    rw [segment_eq_Icc (by linarith)]
-    rw [abs_of_nonpos h] at hx
-    constructor <;> [linarith [neg_abs_le x, le_abs_self x]; linarith [le_abs_self x]]
+variable {E : Type*} [AddCommGroup E] [Module ℝ E]
 
-/-- Two symmetric convex subsets of `ℝ` are nested. -/
+/-- An origin-symmetric convex set is closed under scaling by a factor of absolute value at
+most one. -/
 
-theorem subset_or_subset_of_isSymmConvex {K L : Set ℝ} (hK : IsSymmConvex K)
-    (hL : IsSymmConvex L) : K ⊆ L ∨ L ⊆ K := by
-  by_contra hcon
-  push_neg at hcon
-  obtain ⟨h1, h2⟩ := hcon
-  rw [Set.not_subset] at h1 h2
-  obtain ⟨a, haK, haL⟩ := h1
-  obtain ⟨b, hbL, hbK⟩ := h2
-  rcases le_total |a| |b| with h | h
-  · exact haL (mem_of_abs_le_abs_of_isSymmConvex hL hbL h)
-  · exact hbK (mem_of_abs_le_abs_of_isSymmConvex hK haK h)
+theorem gaussian_correlation_of_subset {n : ℕ} {K L : Set (Fin n → ℝ)} (h : K ⊆ L) :
+    gaussianMeasure n K * gaussianMeasure n L ≤ gaussianMeasure n (K ∩ L) := by
+  have hinter : K ∩ L = K := Set.inter_eq_self_of_subset_left h
+  rw [hinter]
+  calc gaussianMeasure n K * gaussianMeasure n L
+      ≤ gaussianMeasure n K * 1 := mul_le_mul_right prob_le_one _
+    _ = gaussianMeasure n K := mul_one _
 
-/-- For a probability measure on `ℝ`, the correlation inequality holds for symmetric convex
-sets, because two such sets are nested. -/
+/-- **Gaussian correlation inequality, base case `n = 1`.**
 
-theorem prob_mul_le_prob_inter_real (μ : Measure ℝ) [IsProbabilityMeasure μ]
-    {K L : Set ℝ} (hK : IsSymmConvex K) (hL : IsSymmConvex L) :
-    μ K * μ L ≤ μ (K ∩ L) := by
-  rcases subset_or_subset_of_isSymmConvex hK hL with h | h
-  · rw [Set.inter_eq_self_of_subset_left h]
-    calc μ K * μ L ≤ μ K * 1 := by gcongr; exact prob_le_one
-      _ = μ K := mul_one _
-  · rw [Set.inter_eq_self_of_subset_right h]
-    calc μ K * μ L ≤ 1 * μ L := by gcongr; exact prob_le_one
-      _ = μ L := one_mul _
-
-/-- **Gaussian correlation inequality (Royen's theorem), one-dimensional base case.**
-For every centered Gaussian measure `μ` on `ℝ` and all symmetric convex measurable sets
-`K`, `L`, one has `μ K * μ L ≤ μ (K ∩ L)`. -/
-
-theorem gaussian_correlation : GaussianCorrelationProperty ℝ := by
-  intro μ hμ _ K L hK hL _ _
-  haveI := hμ
-  exact prob_mul_le_prob_inter_real μ hK hL
-
-/-! ### Reductions -/
-
-/-- Invariance of the Gaussian correlation inequality under linear isomorphisms: this reduces
-the inequality for an arbitrary centered Gaussian measure to the case of its image under any
-continuous linear equivalence (for instance one putting the covariance in standard form). -/
+For origin-symmetric convex sets `K, L ⊆ ℝ ^ 1`, the standard Gaussian measure satisfies
+`γ(K) · γ(L) ≤ γ(K ∩ L)`. The proof is the base case of Royen's theorem: in dimension one two
+origin-symmetric convex sets are necessarily nested, so the intersection is the smaller of the
+two, whose measure dominates the product since a probability measure is bounded by one. -/

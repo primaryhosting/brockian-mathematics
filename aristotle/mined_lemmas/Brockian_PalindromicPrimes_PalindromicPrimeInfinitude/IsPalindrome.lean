@@ -33,30 +33,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Palindromic Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many base-10 palindromic primes is an open problem, so
-what is proved here is an unconditional *reduction*: the infinitude of palindromic
-primes is equivalent to the existence of arbitrarily large palindromic primes whose
-decimal expansion has an **odd** number of digits.
-
-The key intermediate lemma is that a base-10 palindrome with an even number of
-digits is divisible by `11`; hence `11` is the only palindromic prime with an even
-number of digits.
--/
-
 namespace Brockian.PalindromicPrimes
 
-open List
+/-- `n` is a palindrome in base `b` if its list of base-`b` digits is equal to its reverse. -/
 
-/-- `n` is a palindrome in base `b` if its list of base-`b` digits reads the same
-backwards as forwards. -/
+def IsPalindrome (b n : ℕ) : Prop := (Nat.digits b n).reverse = Nat.digits b n
 
-def IsPalindrome (b n : ℕ) : Prop := (Nat.digits b n).Palindrome
+instance (b n : ℕ) : Decidable (IsPalindrome b n) := by
+  unfold IsPalindrome; infer_instance
 
-/-- The alternating sum of a palindromic list of even length vanishes. -/
+/-- The set of base-10 palindromic primes. -/

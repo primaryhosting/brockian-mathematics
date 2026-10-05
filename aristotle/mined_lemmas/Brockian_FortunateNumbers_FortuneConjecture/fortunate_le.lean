@@ -23,17 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Fortune Conjecture
-Category: Brockian Conjecture
-Target: Brockian.FortunateNumbers.FortuneConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean requires `import` lines to precede any module docstring, so the header above is a
--- plain comment and is repeated verbatim as the module docstring below.)
-
 import Mathlib
 
 /-!
@@ -46,26 +35,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.FortunateNumbers
 
-open Finset
+open Nat
 
-/-!
-## Setup
+/-- Existence of a "fortunate offset": for every `n` there is some `m > 1` such that
+`n# + m` is prime, where `n#` is the primorial of `n`.  This follows from Bertrand's
+postulate applied to `n# + 1`. -/
 
-For a bound `N`, `primorial N` (Mathlib's `primorial`, notation `N#`) is the product of all
-primes `≤ N`.  The *fortunate number* attached to `N` is the least `m ≥ 2` such that
-`N# + m` is prime.  Fortune's conjecture asserts that this number is always prime.
+theorem fortunate_le {n m : ℕ} (hm : 1 < m) (hp : Nat.Prime (primorial n + m)) :
+    fortunate n ≤ m :=
+  Nat.find_le ⟨hm, hp⟩
 
-The conjecture is open.  What we prove here is the classical unconditional dichotomy
-(`fortunate_prime_or_sq_le`): the fortunate number is either prime or at least `(N+1)^2`,
-because none of its prime factors can be `≤ N`.  The named target
-`FortuneConjecture` is therefore the corresponding *conditional* statement: the fortunate
-number is prime as soon as it is smaller than `(N+1)^2`.
--/
-
-/-- Every prime `q ≤ N` divides the primorial `N#`. -/
-
-theorem fortunate_le {N m : ℕ} (hm : 2 ≤ m) (h : (primorial N + m).Prime) :
-    fortunate N ≤ m :=
-  Nat.sInf_le ⟨hm, h⟩
-
-/-- No prime `q ≤ N` divides the fortunate number of `N`. -/
+/-- Every prime `≤ n` divides the primorial `n#`. -/

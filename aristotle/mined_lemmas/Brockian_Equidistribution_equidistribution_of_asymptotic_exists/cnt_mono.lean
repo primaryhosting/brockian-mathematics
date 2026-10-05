@@ -30,7 +30,6 @@ Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -39,34 +38,25 @@ Category: Brockian (Open Discharge)
 Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+This file constructs an explicit sequence in `[0, 1)` whose empirical distribution is
+asymptotically the uniform one: for every subinterval `[a, b) ⊆ [0, 1)` the proportion of
+the first `N` terms lying in `[a, b)` converges to `b - a`.
+
+The construction is the "triangular block" sequence
+`0/1 ; 0/2, 1/2 ; 0/3, 1/3, 2/3 ; 0/4, …` .
 -/
 
-/-!
-## Overview
-
-The named hypothesis is discharged unconditionally by exhibiting an explicit equidistributed
-sequence: the base-`2` van der Corput sequence `vdc`, defined by `vdc n = ((n % 2) + vdc (n / 2))/2`.
-Writing `bitRev k n` for the reversal of the lowest `k` binary digits of `n`, one has
-`vdc n = (bitRev k n + vdc (n / 2 ^ k)) / 2 ^ k`, so `vdc n` lies in the dyadic interval
-`[bitRev k n / 2 ^ k, (bitRev k n + 1) / 2 ^ k)`. Since `bitRev k` is a bijection of
-`{0, …, 2 ^ k - 1}` depending only on `n % 2 ^ k`, counting the visits to a dyadic interval
-reduces to counting an arithmetic progression, which is handled by the Mathlib lemma
-`Nat.count_modEq_card_eq_ceil`. Sandwiching an arbitrary interval between dyadic ones then gives
-the discrepancy bound `|#{n < N : vdc n < x} - x * N| ≤ N / 2 ^ k + 2 ^ k`, whence equidistribution.
--/
-
-open Filter Finset
-open scoped Topology
+open Filter Topology
 
 namespace Brockian.Equidistribution
 
-/-- A sequence `u : ℕ → ℝ` is equidistributed modulo `1` when, for every subinterval
-`[a, b) ⊆ [0, 1)`, the asymptotic frequency with which the fractional parts `Int.fract (u n)`
-land in `[a, b)` exists and equals the length `b - a` of the interval. -/
+/-- Triangular numbers: `tri k = 0 + 1 + ⋯ + k`. -/
 
-lemma cnt_mono {x y : ℝ} (h : x ≤ y) (N : ℕ) : cnt x N ≤ cnt y N := by
-  apply Finset.card_le_card
-  intro n hn
-  simp only [Finset.mem_filter, Finset.mem_range] at hn ⊢
-  exact ⟨hn.1, lt_of_lt_of_le hn.2 h⟩
+lemma cnt_mono : Monotone (cnt a b) := by
+  intro M N hMN
+  have hsub : Finset.range M ⊆ Finset.range N := Finset.range_subset_range.mpr hMN
+  exact Finset.card_le_card (Finset.filter_subset_filter _ hsub)
 
+/-- Main quantitative estimate: the counting error over `[0, N)` is `O(K)` where `K` is the
+block index of `N`. -/

@@ -1,5 +1,137 @@
 import Mathlib
 
+/-!
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+This file contains auxiliary material used in the construction of an Aronszajn tree:
+basic facts about countable ordinals, a dependent-choice helper, and the key
+"extension" lemma for almost-disjoint modifications of injections into `ℕ`.
+-/
+
+namespace Aronszajn
+
+open Set Cardinal Ordinal
+open scoped Ordinal
+
+/-! ### Countability of initial segments -/
+
+/-- An initial segment of the ordinals is countable iff it lies below `ω₁`. -/
+
+theorem exists_extend {α β : Ordinal.{0}} (hαβ : α ≤ β) (fβ g : Ordinal.{0} → ℕ) {R : Set ℕ}
+    (hR : R.Finite) (hinj : Set.InjOn fβ (Set.Iio β)) (hcoinf : CoInf β fβ)
+    (hg : Set.InjOn g (Set.Iio α)) (hdiff : (diffSet α g fβ).Finite)
+    (hgR : ∀ γ < α, g γ ∉ R) :
+    ∃ h : Ordinal.{0} → ℕ, (∀ γ < α, h γ = g γ) ∧ Set.InjOn h (Set.Iio β) ∧
+      (diffSet β h fβ).Finite ∧ (∀ γ < β, h γ ∉ R) := by
+  classical
+  set D : Set Ordinal.{0} := diffSet α g fβ with hD
+  -- the finite set of "bad values"
+  set B : Set ℕ := g '' D ∪ R with hB
+  have hBfin : B.Finite := (hdiff.image g).union hR
+  -- the finite set of points of `[α, β)` that need repairing
+  set E : Set Ordinal.{0} := {δ | δ < β ∧ α ≤ δ ∧ fβ δ ∈ B} with hE
+  have hEfin : E.Finite := by
+    apply Set.Finite.of_finite_image (f := fβ)
+    · exact hBfin.subset (by rintro n ⟨δ, hδ, rfl⟩; exact hδ.2.2)
+    · exact hinj.mono (fun δ hδ => hδ.1)
+  -- the infinite set of "fresh values"
+  set S : Set ℕ := (fβ '' Set.Iio β ∪ g '' Set.Iio α ∪ R)ᶜ with hS
+  have hgsub : g '' Set.Iio α ⊆ fβ '' Set.Iio β ∪ g '' D := by
+    intro n hn
+    rcases image_subset_of_diffSet α fβ g hn with h | h
+    · exact Or.inl (Set.image_mono (Set.Iio_subset_Iio hαβ) h)
+    · refine Or.inr ?_
+      rw [hD, diffSet_comm]
+      exact h
+  have hSinf : S.Infinite := by
+    have h1 : ((fβ '' Set.Iio β)ᶜ \ (g '' D ∪ R)) ⊆ S := by
+      intro n hn
+      rw [hS]
+      intro hmem
+      rcases hmem with hmem | hmem
+      · rcases hmem with hmem | hmem
+        · exact hn.1 hmem
+        · rcases hgsub hmem with h | h
+          · exact hn.1 h
+          · exact hn.2 (Or.inl h)
+      · exact hn.2 (Or.inr hmem)
+    exact (hcoinf.diff ((hdiff.image g).union hR)).mono h1
+  have hSnot : ∀ n ∈ S, n ∉ fβ '' Set.Iio β ∧ n ∉ g '' Set.Iio α ∧ n ∉ R := by
+    intro n hn
+    rw [hS, Set.mem_compl_iff] at hn
+    exact ⟨fun h => hn (Or.inl (Or.inl h)), fun h => hn (Or.inl (Or.inr h)),
+      fun h => hn (Or.inr h)⟩
+  obtain ⟨r, hrinj, hrS⟩ := exists_injOn_into_infinite hEfin hSinf
+  set h : Ordinal.{0} → ℕ := fun γ => if γ < α then g γ else if γ ∈ E then r γ else fβ γ with hdef
+  have hlow : ∀ γ < α, h γ = g γ := by intro γ hγ; simp [hdef, hγ]
+  have hmid : ∀ γ ∈ E, ¬ γ < α → h γ = r γ := by
+    intro γ hγ hγα; simp [hdef, hγ, hγα]
+  have hhigh : ∀ γ, ¬ γ < α → γ ∉ E → h γ = fβ γ := by
+    intro γ hγα hγ; simp [hdef, hγ, hγα]
+  have hnotB : ∀ γ, γ < β → ¬ γ < α → γ ∉ E → fβ γ ∉ B := by
+    intro γ hγβ hγα hγE hmem
+    exact hγE ⟨hγβ, not_lt.1 hγα, hmem⟩
+  refine ⟨h, hlow, ?_, ?_, ?_⟩
+  · -- injectivity on `Iio β`
+    have key : ∀ γ₁ ∈ Set.Iio β, ∀ γ₂ ∈ Set.Iio β, γ₁ < α → ¬ γ₂ < α → h γ₁ ≠ h γ₂ := by
+      intro γ₁ h₁ γ₂ h₂ hγ₁ hγ₂ heq
+      rw [hlow γ₁ hγ₁] at heq
+      by_cases hE₂ : γ₂ ∈ E
+      · rw [hmid γ₂ hE₂ hγ₂] at heq
+        exact (hSnot _ (hrS _ hE₂)).2.1 ⟨γ₁, hγ₁, heq.symm⟩
+      · rw [hhigh γ₂ hγ₂ hE₂] at heq
+        by_cases hD₁ : γ₁ ∈ D
+        · exact hnotB γ₂ h₂ hγ₂ hE₂ (Or.inl ⟨γ₁, hD₁, heq⟩)
+        · have : g γ₁ = fβ γ₁ := by
+            by_contra hne
+            exact hD₁ ⟨hγ₁, hne⟩
+          rw [this] at heq
+          have := hinj (Set.mem_Iio.2 (hγ₁.trans_le hαβ)) h₂ heq
+          exact absurd (this ▸ hγ₁) hγ₂
+    have key2 : ∀ γ₁ ∈ Set.Iio β, ∀ γ₂ ∈ Set.Iio β, γ₁ ∈ E → ¬ γ₁ < α → ¬ γ₂ < α →
+        γ₂ ∉ E → h γ₁ ≠ h γ₂ := by
+      intro γ₁ _ γ₂ h₂ hE₁ hγ₁ hγ₂ hE₂ heq
+      rw [hmid γ₁ hE₁ hγ₁, hhigh γ₂ hγ₂ hE₂] at heq
+      exact (hSnot _ (hrS _ hE₁)).1 ⟨γ₂, h₂, heq.symm⟩
+    intro γ₁ h₁ γ₂ h₂ heq
+    by_cases hγ₁ : γ₁ < α <;> by_cases hγ₂ : γ₂ < α
+    · rw [hlow γ₁ hγ₁, hlow γ₂ hγ₂] at heq
+      exact hg hγ₁ hγ₂ heq
+    · exact absurd heq (key γ₁ h₁ γ₂ h₂ hγ₁ hγ₂)
+    · exact absurd heq.symm (key γ₂ h₂ γ₁ h₁ hγ₂ hγ₁)
+    · by_cases hE₁ : γ₁ ∈ E <;> by_cases hE₂ : γ₂ ∈ E
+      · rw [hmid γ₁ hE₁ hγ₁, hmid γ₂ hE₂ hγ₂] at heq
+        exact hrinj hE₁ hE₂ heq
+      · exact absurd heq (key2 γ₁ h₁ γ₂ h₂ hE₁ hγ₁ hγ₂ hE₂)
+      · exact absurd heq.symm (key2 γ₂ h₂ γ₁ h₁ hE₂ hγ₂ hγ₁ hE₁)
+      · rw [hhigh γ₁ hγ₁ hE₁, hhigh γ₂ hγ₂ hE₂] at heq
+        exact hinj h₁ h₂ heq
+  · -- the difference set is finite
+    refine (hdiff.union hEfin).subset ?_
+    rintro γ ⟨hγβ, hne⟩
+    by_cases hγα : γ < α
+    · exact Or.inl ⟨hγα, by rwa [hlow γ hγα] at hne⟩
+    · by_cases hγE : γ ∈ E
+      · exact Or.inr hγE
+      · exact absurd (hhigh γ hγα hγE) hne
+  · -- values avoid `R`
+    intro γ hγβ
+    by_cases hγα : γ < α
+    · rw [hlow γ hγα]; exact hgR γ hγα
+    · by_cases hγE : γ ∈ E
+      · rw [hmid γ hγE hγα]
+        exact (hSnot _ (hrS _ hγE)).2.2
+      · rw [hhigh γ hγα hγE]
+        exact fun hmem => hnotB γ hγβ hγα hγE (Or.inr hmem)
+
+end Aronszajn
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,151 +155,3 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-The limit step of the transfinite construction: at a countable limit ordinal `a`
-we build a nice partial injection with domain `a` coherent with all previous ones,
-by an `ω`-recursion along a cofinal sequence, reserving one new value at each stage
-so that the resulting function still omits infinitely many naturals.
--/
-import RequestProject.Aronszajn.Step
-
-open Ordinal Cardinal Set
-
-namespace Aronszajn
-
-
-theorem exists_extend {b c : Ordinal.{0}} (hbc : b ≤ c) {h k : Ordinal.{0} → ℕ}
-    (hh : Nice b h) (hk : Nice c k) (hcoh : Coh h k b) {S : Set ℕ} (hSfin : S.Finite)
-    (hS : ∀ d < b, h d ∉ S) :
-    ∃ h' : Ordinal.{0} → ℕ, Nice c h' ∧ (∀ d < b, h' d = h d) ∧ Coh h' k c ∧
-      (∀ d < c, h' d ∉ S) := by
-  classical
-  obtain ⟨hinj, hnorm, hcoinf⟩ := hh
-  obtain ⟨kinj, knorm, kcoinf⟩ := hk
-  set F : Set Ordinal.{0} := {d | d < b ∧ h d ≠ k d} with hFdef
-  have hFfin : F.Finite := hcoh
-  set V : Set ℕ := (h '' F) ∪ S with hVdef
-  have hVfin : V.Finite := (hFfin.image h).union hSfin
-  set C : Set ℕ := {n | ∀ d < c, k d ≠ n} \ V with hCdef
-  have hCinf : C.Infinite := kcoinf.diff hVfin
-  obtain ⟨nu, hnuinj, hnuC⟩ := exists_inj_into hCinf
-  set P : Set ℕ := (h '' Set.Iio b) ∪ S with hPdef
-  -- the new function
-  set h' : Ordinal.{0} → ℕ :=
-    fun d => if d < b then h d else if d < c then (if k d ∈ P then nu (k d) else k d) else 0
-    with hh'def
-  -- `C` is disjoint from `P`
-  have hCP : ∀ n ∈ C, n ∉ P := by
-    rintro n ⟨hnk, hnV⟩ hnP
-    rcases hnP with ⟨e, he, rfl⟩ | hnS
-    · by_cases hef : h e = k e
-      · exact hnk e (lt_of_lt_of_le he hbc) hef.symm
-      · exact hnV (Or.inl ⟨e, ⟨he, hef⟩, rfl⟩)
-    · exact hnV (Or.inr hnS)
-  have hCkval : ∀ n ∈ C, ∀ d < c, k d ≠ n := fun n hn => hn.1
-  -- values of `h'`
-  have hlow : ∀ d < b, h' d = h d := by
-    intro d hd; simp [hh'def, hd]
-  have hlowP : ∀ d < b, h' d ∈ P := by
-    intro d hd; rw [hlow d hd]; exact Or.inl ⟨d, hd, rfl⟩
-  have hhigh : ∀ d, b ≤ d → d < c → (h' d = nu (k d) ∧ k d ∈ P) ∨ (h' d = k d ∧ k d ∉ P) := by
-    intro d hbd hdc
-    by_cases hkP : k d ∈ P
-    · exact Or.inl ⟨by simp [hh'def, not_lt.2 hbd, hdc, hkP], hkP⟩
-    · exact Or.inr ⟨by simp [hh'def, not_lt.2 hbd, hdc, hkP], hkP⟩
-  have hhighnotP : ∀ d, b ≤ d → d < c → h' d ∉ P := by
-    intro d hbd hdc
-    rcases hhigh d hbd hdc with ⟨he, -⟩ | ⟨he, hkP⟩
-    · rw [he]; exact hCP _ (hnuC _)
-    · rw [he]; exact hkP
-  -- `D`, the finite set of repaired positions
-  set D : Set Ordinal.{0} := {d | d < c ∧ k d ∈ (h '' F) ∪ S} with hDdef
-  have hDfin : D.Finite := finite_preimage_of_injBelow kinj hVfin
-  have hDsub : ∀ d, b ≤ d → d < c → k d ∈ P → d ∈ D := by
-    intro d hbd hdc hkP
-    refine ⟨hdc, ?_⟩
-    rcases hkP with ⟨e, he, hek⟩ | hnS
-    · by_cases hef : h e = k e
-      · exact absurd (kinj e (lt_of_lt_of_le he hbc) d hdc (by rw [hef] at hek; exact hek))
-          (by intro hh2; exact absurd (hh2 ▸ he) (not_lt.2 hbd))
-      · exact Or.inl ⟨e, ⟨he, hef⟩, hek⟩
-    · exact Or.inr hnS
-  refine ⟨h', ⟨?_, ?_, ?_⟩, hlow, ?_, ?_⟩
-  · -- injectivity
-    intro d hd e he hde
-    rcases lt_or_ge d b with hdb | hdb
-    · rcases lt_or_ge e b with heb | heb
-      · exact hinj d hdb e heb (by rw [← hlow d hdb, ← hlow e heb]; exact hde)
-      · exact absurd (hde ▸ hlowP d hdb) (hhighnotP e heb he)
-    · rcases lt_or_ge e b with heb | heb
-      · exact absurd (hde ▸ hlowP e heb) (by rw [← hde] at *; exact hhighnotP d hdb hd)
-      · rcases hhigh d hdb hd with ⟨hd1, hd2⟩ | ⟨hd1, hd2⟩ <;>
-          rcases hhigh e heb he with ⟨he1, he2⟩ | ⟨he1, he2⟩
-        · exact kinj d hd e he (hnuinj (by rw [← hd1, ← he1]; exact hde))
-        · exact absurd (by rw [← he1, ← hde, hd1] : k e = nu (k d))
-            (hCkval _ (hnuC (k d)) e he)
-        · exact absurd (by rw [← hd1, hde, he1] : k d = nu (k e))
-            (hCkval _ (hnuC (k e)) d hd)
-        · exact kinj d hd e he (by rw [← hd1, ← he1]; exact hde)
-  · -- normalization
-    intro d hcd
-    have : ¬ d < b := not_lt.2 (le_trans hbc hcd)
-    simp [hh'def, this, not_lt.2 hcd]
-  · -- coinfinite
-    have hsub : ({n | ∀ d < c, k d ≠ n} \ (V ∪ nu '' (k '' D))) ⊆ {n | ∀ d < c, h' d ≠ n} := by
-      rintro n ⟨hnk, hnV⟩ d hd hdn
-      rcases lt_or_ge d b with hdb | hdb
-      · rw [hlow d hdb] at hdn
-        by_cases hef : h d = k d
-        · exact hnk d hd (by rw [← hef]; exact hdn)
-        · exact hnV (Or.inl (Or.inl ⟨d, ⟨hdb, hef⟩, hdn⟩))
-      · rcases hhigh d hdb hd with ⟨hd1, hd2⟩ | ⟨hd1, -⟩
-        · exact hnV (Or.inr ⟨k d, ⟨d, hDsub d hdb hd hd2, rfl⟩, by rw [← hd1]; exact hdn⟩)
-        · exact hnk d hd (by rw [← hd1]; exact hdn)
-    exact Set.Infinite.mono hsub
-      (kcoinf.diff (hVfin.union ((hDfin.image k).image nu)))
-  · -- coherence with `k`
-    apply Set.Finite.subset (hFfin.union hDfin)
-    rintro d ⟨hd, hne⟩
-    rcases lt_or_ge d b with hdb | hdb
-    · refine Or.inl ⟨hdb, ?_⟩
-      rw [hlow d hdb] at hne; exact hne
-    · rcases hhigh d hdb hd with ⟨-, hd2⟩ | ⟨hd1, -⟩
-      · exact Or.inr (hDsub d hdb hd hd2)
-      · exact absurd hd1 hne
-  · -- still avoids `S`
-    intro d hd
-    rcases lt_or_ge d b with hdb | hdb
-    · rw [hlow d hdb]; exact hS d hdb
-    · exact fun hmem => hhighnotP d hdb hd (Or.inr hmem)
-
-end Aronszajn
-
-/-
-# Aronszajn Tree Exists
-Category: Frontier — Set Theory
-Target: Frontier.Aronszajn_tree_exists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import RequestProject.Aronszajn.Tree
-
-open Ordinal Cardinal Set
-
-namespace Frontier
-
-/-- **An Aronszajn tree exists.**
-
-There is a partial order `(T, le)` together with a level function `lvl : T → Ordinal`
-such that:
-
-* the predecessors of any node are linearly ordered by `le`, and `lvl` restricts to an
-  order isomorphism from them onto the ordinals `< lvl x` (so `T` is a tree and `lvl x`
-  is the order type of the set of predecessors of `x`);
-* every node has level `< ω₁` and every ordinal `< ω₁` occurs as a level, i.e. the tree
-  has height `ω₁`;
-* every level of the tree is countable;
-* every chain of `T` — in particular every branch — is countable.
-
-The tree is constructed as the tree of finite modifications of a coherent sequence
-`Aronszajn.E` of injections `a → ℕ` (`a < ω₁`), ordered by end-extension. -/

@@ -1,11 +1,3 @@
-/-
-# Holevo Bound
-Category: Frontier Qi
-Target: QI.holevo_bound
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -14,37 +6,39 @@ Category: Frontier Qi
 Target: QI.holevo_bound
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-## Contents
-
-* `QI.log_sum_le`, `QI.klDiv_stochastic_le`, `QI.classical_holevo`: the classical core, namely the
-  log-sum inequality, the data-processing inequality for the Kullback–Leibler divergence, and the
-  resulting data-processing inequality for mutual information.
-* `QI.vonNeumannEntropy`, `QI.IsState`, `QI.IsPOVM`, `QI.outcomeProb`, `QI.holevoChi`,
-  `QI.measuredInfo`, `QI.accessibleInfo`: the quantum-information definitions.
-* `QI.holevo_bound`: for an ensemble of density matrices measured by an arbitrary POVM, the
-  mutual information between the ensemble label and the measurement outcome is at most the
-  Holevo quantity `χ`.
-* `QI.accessibleInfo_le_holevoChi`: the same statement for the supremum over POVMs.
-
-## Scope
-
-The ensemble is assumed to consist of *commuting* density matrices: they are given as
-`ρ x = U * diagonal (r x) * Uᴴ` for one fixed unitary `U` and probability vectors `r x`.  The
-measurement, on the other hand, is a completely arbitrary POVM, so the argument is not a purely
-classical one: the POVM has to be turned into a stochastic matrix via `i ↦ (Uᴴ (E y) U) i i`.
-The fully general (non-commuting) Holevo bound needs monotonicity of the *quantum* relative
-entropy under measurement, which is not available in Mathlib.
 -/
 
-open Finset
+/-!
+## Scope and contents
+
+States are density matrices `ρ : Matrix d d ℂ`, measurements are POVMs (`QI.IsPOVM`), the von
+Neumann entropy `QI.vonNeumannEntropy` is the sum of `-λ log λ` over the eigenvalues, and
+`QI.holevoChi` is `S(∑ pₓ ρₓ) - ∑ pₓ S(ρₓ)`.
+
+The main theorem `QI.holevo_bound` proves the Holevo bound
+`I(X;Y) ≤ χ` for ensembles of *commuting* states, i.e. states that are simultaneously
+diagonalizable by one unitary `U`, and for an arbitrary POVM measurement; the supremum form
+`QI.accessibleInfo_le_holevoChi` then bounds the accessible information by `χ`.
+The general (non-commuting) case rests on the monotonicity of quantum relative entropy, which
+is not available in Mathlib and is not developed here.
+
+The mathematical core is classical: the log-sum inequality (`QI.log_sum_inequality`) and the
+resulting data-processing inequality for the Kullback-Leibler divergence
+(`QI.kl_data_processing`); the Holevo quantity of a commuting ensemble is
+`∑ₓ pₓ D(rₓ ‖ r̄)`, and measuring with a POVM applies the stochastic map
+`W y i = (E y) i i` to each `rₓ`.
+-/
 
 namespace QI
 
+open Matrix Real Finset ComplexOrder
+
 /-! ## Classical information-theoretic core -/
 
-/-- Shannon entropy of a finite (sub)probability vector, with the convention `0 * log 0 = 0`. -/
+/-- The log-sum inequality:
+`(∑ aᵢ) log ((∑ aᵢ)/(∑ bᵢ)) ≤ ∑ aᵢ log (aᵢ/bᵢ)` for nonnegative `a`, `b` with `a ≪ b`. -/
 
-noncomputable def outcomeProb (ρ F : Matrix n n ℂ) : ℝ := (ρ * F).trace.re
+noncomputable def outcomeProb [Fintype d] (E ρ : Matrix d d ℂ) : ℝ := ((E * ρ).trace).re
 
-/-- The Holevo quantity `χ` of the ensemble `{p x, ρ x}`. -/
+/-- The classical mutual information `I(X;Y)` of the joint distribution
+`P(x,y) = p x * Tr (E y * ρ x)` obtained by measuring the ensemble `(p, ρ)` with the POVM `E`. -/

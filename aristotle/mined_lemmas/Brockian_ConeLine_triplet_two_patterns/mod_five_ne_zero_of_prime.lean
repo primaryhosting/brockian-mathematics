@@ -1,3 +1,11 @@
+/-
+# Triplet Two Patterns
+Category: Cone Line
+Target: Brockian.ConeLine.triplet_two_patterns
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -23,31 +31,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Triplet Two Patterns
-Category: Cone Line
-Target: Brockian.ConeLine.triplet_two_patterns
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import Mathlib
-
-/-!
-# Triplet Two Patterns
-Category: Cone Line
-Target: Brockian.ConeLine.triplet_two_patterns
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Brockian.ConeLine
 
-/-- A prime `q > 5` is not divisible by `5`, i.e. `q % 5 ≠ 0`. -/
+/-- A prime `q > 5` is not divisible by `5`. -/
 
 lemma mod_five_ne_zero_of_prime {q : ℕ} (hq : Nat.Prime q) (h5 : 5 < q) : q % 5 ≠ 0 := by
   intro h
-  have hdvd : (5 : ℕ) ∣ q := Nat.dvd_of_mod_eq_zero h
-  rcases (Nat.Prime.eq_one_or_self_of_dvd hq 5 hdvd) with h1 | h1 <;> omega
+  rcases (Nat.Prime.eq_one_or_self_of_dvd hq 5 (Nat.dvd_of_mod_eq_zero h)) with h' | h' <;>
+    omega
 
-/-- A prime triplet `(p, p+2, p+6)` with `p > 5` has exactly two possible ray
-patterns modulo `5`: `(1,3,2)` or `(2,4,3)`. -/
+/-- A prime triplet `(p, p+2, p+6)` with `p > 5` has exactly two possible ray patterns
+modulo `5`: `(1, 3, 2)` or `(2, 4, 3)`. -/

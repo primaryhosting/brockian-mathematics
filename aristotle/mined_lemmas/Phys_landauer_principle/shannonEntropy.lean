@@ -24,6 +24,7 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
+
 /-!
 # Landauer Principle
 Category: Frontier Phys
@@ -32,15 +33,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-
 namespace Phys
 
-/-- Shannon (Gibbs) entropy, in nats, of a finite probability distribution `p`.
-Uses the convention `0 * log 0 = 0`, which holds automatically in Mathlib since
-`Real.log 0 = 0`. -/
+open Finset
+
+/-- Shannon entropy (in nats) of a finite probability vector `p`. -/
 
 noncomputable def shannonEntropy {n : ℕ} (p : Fin n → ℝ) : ℝ :=
   ∑ i, -(p i * Real.log (p i))
 
-/-- A deterministic ("erased") state carries zero entropy. -/
+/-- The entropy of a fair bit (uniform distribution on two states) is `log 2` nats. -/

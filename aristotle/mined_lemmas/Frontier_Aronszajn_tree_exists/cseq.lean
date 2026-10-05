@@ -5,17 +5,24 @@ Target: Frontier.Aronszajn_tree_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
-open Ordinal Set Cardinal
-open scoped Classical
+/-!
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-namespace Frontier
+open Ordinal Cardinal Set
 
-/-- The first uncountable ordinal `ω₁`. -/
+namespace Aronszajn
 
-noncomputable def cseq (a : Ordinal) : ℕ → Ordinal
-  | 0 => 0
-  | (n + 1) => max (cseq a n) (enumIio a n) + 1
+/-! ## Cofinal `ω`-sequences in countable limit ordinals -/
+
+/-- `c` is a nondecreasing `ω`-indexed sequence, starting at `0`, cofinal in `l`. -/
+
+noncomputable def cseq (l : Ordinal) : ℕ → Ordinal :=
+  if h : ∃ c, IsCofSeq l c then h.choose else fun _ => 0
 

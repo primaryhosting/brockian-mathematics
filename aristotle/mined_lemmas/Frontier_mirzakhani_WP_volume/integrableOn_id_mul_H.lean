@@ -1,29 +1,65 @@
+/-
+# Mirzakhani WP Volume
+Category: Frontier — Fields Medal Work
+Target: Frontier.mirzakhani_WP_volume
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
-# The Fermi–Dirac integral `∫_0^∞ t/(1+e^t) dt = π²/12`
-
-This auxiliary file establishes the elementary integral underlying Mirzakhani's
-integration kernel, via the Mellin transform of the Dirichlet eta function.
+# Mirzakhani WP Volume
+Category: Frontier — Fields Medal Work
+Target: Frontier.mirzakhani_WP_volume
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-
-open Real MeasureTheory Set Complex
+open scoped BigOperators
 open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-namespace Mirzakhani
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-/-- Coefficients of the Dirichlet eta series, with the (irrelevant) `n = 0` term set to `0`. -/
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-theorem integrableOn_id_mul_H (y : ℝ) :
-    IntegrableOn (fun x => x * H x y) (Ioi (0:ℝ)) := by
-  have h1 := integrableOn_affine_mul_w_shift (0:ℝ) 1 0 y
-  have h2 := integrableOn_affine_mul_w_shift (0:ℝ) 1 0 (-y)
-  have h3 : IntegrableOn
-      (fun u => (1 * u + 0) * w (u + y) + (1 * u + 0) * w (u + -y)) (Ioi (0:ℝ)) :=
-    Integrable.add h1 h2
-  refine h3.congr_fun ?_ measurableSet_Ioi
+set_option grind.warning false
+
+namespace Frontier
+
+open MeasureTheory Set Real
+
+/-! ## Mirzakhani's integration kernel
+
+Mirzakhani's recursion for Weil–Petersson volumes of moduli spaces of bordered
+hyperbolic surfaces is driven by the kernel
+
+`H (x, t) = 1 / (1 + exp ((x + t) / 2)) + 1 / (1 + exp ((x - t) / 2))`.
+
+We write `wpPhi u = 1 / (1 + exp (u / 2))`, so that `H (x, t) = wpPhi (x+t) + wpPhi (x-t)`.
+-/
+
+/-- The basic Fermi–Dirac type profile `u ↦ 1 / (1 + e^{u/2})` out of which Mirzakhani's
+integration kernel is built. -/
+
+theorem integrableOn_id_mul_H (t : ℝ) :
+    IntegrableOn (fun x : ℝ => x * mirzakhaniH x t) (Ioi 0) := by
+  have h1 := integrableOn_id_mul_wpPhi_shift t
+  have h2 := integrableOn_id_mul_wpPhi_shift (-t)
+  have h3 : IntegrableOn (fun x : ℝ => x * wpPhi (x + t) + x * wpPhi (x + -t)) (Ioi 0) :=
+    h1.add h2
+  apply MeasureTheory.IntegrableOn.congr_fun h3 _ measurableSet_Ioi
   intro x _
-  simp only [H, sub_eq_add_neg]
+  show x * wpPhi (x + t) + x * wpPhi (x + -t) = x * mirzakhaniH x t
+  unfold mirzakhaniH
+  rw [show x - t = x + -t from by ring]
   ring
+
+/-! ## The two basic definite integrals -/
 

@@ -8,17 +8,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators Real Nat Classical Pointwise
+
+open MeasureTheory Topology Filter Set
+
 namespace Math2
 
-/-- The homogeneous space `X = G / Γ` for `G = ℝ²` and the lattice `Γ = ℤ²`, i.e. the
-two-dimensional torus. -/
-abbrev Torus2 : Type := AddCircle (1 : ℝ) × AddCircle (1 : ℝ)
+noncomputable section
 
-/-- The projection `G = ℝ² → X = ℝ²/ℤ²`. -/
+/-! ## Setting
 
-def proj : (ℝ × ℝ) →+ Torus2 :=
-  AddMonoidHom.prodMap (QuotientAddGroup.mk' (AddSubgroup.zmultiples (1 : ℝ)))
+We work with the homogeneous space `X = G / Γ` where `G = ℝ²` is an abelian Lie group and
+`Γ = ℤ²` is a lattice in it, so that `X` is the two–dimensional torus `𝕋² = ℝ²/ℤ²`.
+Since `G` is abelian, every one–parameter subgroup `t ↦ t • v` of `G` is unipotent
+(the adjoint representation is trivial), so the flow it induces on `X` is a unipotent flow.
+
+This is the classical abelian model case of Ratner's theorems, containing the linear flows on
+the torus with irrational slope. -/
+
+/-- The two-dimensional torus `ℝ²/ℤ²`, the homogeneous space `G/Γ` for `G = ℝ²`, `Γ = ℤ²`. -/
+abbrev Torus : Type := AddCircle (1 : ℝ) × AddCircle (1 : ℝ)
+
+/-- The projection `ℝ² → ℝ²/ℤ²`. -/
+
+def proj : ℝ × ℝ →+ Torus :=
+  (QuotientAddGroup.mk' (AddSubgroup.zmultiples (1 : ℝ))).prodMap
     (QuotientAddGroup.mk' (AddSubgroup.zmultiples (1 : ℝ)))
 
-/-- The one-parameter unipotent subgroup with direction `v`, acting on `X` by translations:
-`t ↦ (t • v mod ℤ²)`. -/

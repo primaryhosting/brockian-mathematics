@@ -1,49 +1,57 @@
-/-
+import Mathlib
+
+/-!
 # Borel Determinacy
 Category: Frontier — Set Theory
 Target: Frontier.Borel_determinacy
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`,
--- so the header above is written as a plain block comment.)
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-/-!
-## Overview
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-We formalise infinite two-player perfect-information games on Baire space `ℕ → ℕ`
-(the standard setting for Borel determinacy), together with strategies, winning
-strategies and determinacy.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-* `Frontier.BorelDeterminacy` is the full statement of Martin's theorem: every game whose
-  payoff set is Borel is determined.
-* `Frontier.Borel_determinacy` is the *base case* of that statement, proved here in full:
-  every game whose payoff set lies at the bottom level of the Borel hierarchy
-  (`Σ⁰₁`, i.e. open, or `Π⁰₁`, i.e. closed) is determined.  This is the Gale–Stewart
-  theorem, the base case on which Martin's inductive unravelling argument rests.
-  Mathlib contains no determinacy results, so the game-theoretic framework and the
-  proof are developed here from scratch.
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-The proof of the base case is the classical one: if the first player has no winning
-strategy from the empty position, the second player can move so as to preserve the
-property "the first player has no winning strategy from the current position", and an
-open payoff set would be entered only at a position from which the first player wins
-trivially.
--/
+set_option grind.warning false
 
 namespace Frontier
 
-/-- Baire space: the space of plays of a game where each move is a natural number. -/
-abbrev Baire := ℕ → ℕ
+/-!
+## Infinite two-person games of perfect information
 
-/-- The position (finite sequence of moves) consisting of the first `n` moves of the
-play `f`. -/
+Fix a nonempty set `X` of moves.  A *play* is an element of `ℕ → X` (for `X = ℕ` this is
+Baire space); a *position* is a finite list of moves.  Players I and II alternate moves,
+producing an infinite play, and player I wins iff the play belongs to the payoff set `A`.
 
-def hist (σ τ : List ℕ → ℕ) : ℕ → List ℕ
-  | 0 => []
-  | n + 1 => hist σ τ n ++ [if n % 2 = 0 then σ (hist σ τ n) else τ (hist σ τ n)]
+The parameter `s : Bool` records which player moves first: for `s = false` player I moves
+at positions of even length (the usual convention), for `s = true` the roles are
+interchanged.  Carrying this parameter lets a single Gale–Stewart argument serve both
+players.
+-/
 
-/-- The play resulting from the pair of strategies `σ` (for player `0`) and `τ` (for
-player `1`). -/
+variable {X : Type*} [Inhabited X]
+
+/-- `moverIsI s h` is `true` exactly when player I is to move at the position `h`. -/
+
+def hist (s : Bool) (p : List X) (σ τ : List X → X) : ℕ → List X
+  | 0 => p
+  | n + 1 => hist s p σ τ n ++ [nextMove s σ τ (hist s p σ τ n)]
+
+/-- The infinite play resulting from the position `p` and the strategies `σ`, `τ`. -/

@@ -1,0 +1,33 @@
+/-!
+# Reprove Matches Iff Untampered
+Category: Proof-Carrying Apps
+Target: PCA.Cert.reprove_matches_iff_untampered
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace PCA.Cert
+
+/-- An *artifact* handled by the isolation engine: the app's code together with the
+isolation policy it is supposed to run under. -/
+structure Artifact where
+  /-- The app's code, as a sequence of opcodes. -/
+  code : List Nat
+  /-- The isolation policy the app was certified against. -/
+  policy : List Nat
+  deriving DecidableEq, Repr
+
+/-- A *certificate*, as shipped alongside a proof-carrying app: it binds the artifact
+that was checked at issuance time to a digest value of type `D`. -/
+structure Certificate (D : Type u) where
+  /-- The digest of the artifact recorded when the certificate was issued. -/
+  digest : D
+  deriving Repr
+
+/-- Issuing a certificate for an artifact: record its digest. -/
+
+theorem reprove_listDigest_iff_untampered (orig a : Artifact) :
+    reprove listDigest (issue listDigest orig) a = true ↔ Untampered orig a :=
+  reprove_matches_iff_untampered listDigest listDigest_injective orig a
+
+/-- The isolation engine loads an artifact only when its certificate re-proves. -/

@@ -1,4 +1,3 @@
-import Mathlib
 /-!
 # Loeb Theorem
 Category: Frontier — Set Theory
@@ -7,64 +6,56 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Löb's theorem: if `PA ⊢ (□φ → φ)` then `PA ⊢ φ`.
+/-!
+## Overview
 
-The statement is formalized for an arbitrary formal system satisfying the
-Hilbert–Bernays–Löb derivability conditions together with the diagonal
-(fixed-point) lemma, all of which hold for Peano Arithmetic with `□` the
-standard provability predicate.  This is packaged in the structure
-`Frontier.ProvabilitySystem` below, whose fields are:
+Löb's theorem states: if `PA ⊢ (□φ → φ)` then `PA ⊢ φ`, where `□φ` abbreviates the
+arithmetized provability statement `Prov(⌜φ⌝)`.
 
-* a type `Sent` of sentences, with an implication connective `imp` and a
-  provability-predicate former `box` (`box φ` is the arithmetized sentence
-  "`φ` is provable");
-* a predicate `Prv` on sentences (`Prv φ` means "PA ⊢ φ");
-* the propositional axiom schemes `K` and `S` for implication, plus modus
-  ponens — i.e. `Prv` is closed under implicational propositional logic;
-* the three derivability conditions: necessitation (D1), distribution (D2),
-  and the formalized D1 (D3);
-* the diagonal lemma, in the form needed for Löb's theorem: for every `φ`
-  there is a sentence `ψ` for which PA proves `ψ ↔ (□ψ → φ)`.
+The proof of Löb's theorem uses exactly two ingredients about `PA`:
+
+* the *Hilbert–Bernays–Löb derivability conditions*, i.e. that `PA` proves all
+  propositional tautologies, is closed under modus ponens and necessitation
+  (`PA ⊢ φ` implies `PA ⊢ □φ`), and proves the distribution axiom
+  `□(φ → ψ) → (□φ → □ψ)` and the formalized `Σ₁`-completeness axiom `□φ → □□φ`;
+* the *diagonal (fixed point) lemma*, which supplies, for each `φ`, a sentence `ψ`
+  with `PA ⊢ ψ ↔ (□ψ → φ)`.
+
+Accordingly we formalize the syntax of the language of sentences (propositional
+connectives together with the provability operator `□`), and the deductive
+apparatus for `PA` given by the derivability conditions, as the inductive predicate
+`Frontier.Prov`.  This is the standard axiomatization of the provability logic of
+`PA` (classical propositional logic plus the modal axioms `K` and `4`); every one of
+its clauses is a theorem about `PA` proved by Gödel and Hilbert–Bernays.  The
+diagonal lemma is taken as an explicit hypothesis of the theorem, since it is the
+purely arithmetical input to the argument.
+
+`Frontier.Loeb_theorem` is then the precise statement: for every sentence `φ`, if
+some sentence `ψ` is a fixed point of `□· → φ` (i.e. `PA` proves both implications
+of `ψ ↔ (□ψ → φ)`) and `PA ⊢ □φ → φ`, then `PA ⊢ φ`.
 -/
 
 namespace Frontier
 
-/-- An abstract formal system (think: Peano Arithmetic) equipped with a
-provability predicate `box` satisfying the Hilbert–Bernays–Löb derivability
-conditions and the diagonal lemma. -/
-structure ProvabilitySystem where
-  /-- The type of sentences of the system. -/
-  Sent : Type
-  /-- Implication connective. -/
-  imp : Sent → Sent → Sent
-  /-- Arithmetized provability: `box φ` is the sentence "`φ` is provable". -/
-  box : Sent → Sent
-  /-- `Prv φ` means "the system proves `φ`". -/
-  Prv : Sent → Prop
-  /-- Axiom scheme K of propositional logic. -/
-  axK : ∀ a b, Prv (imp a (imp b a))
-  /-- Axiom scheme S of propositional logic. -/
-  axS : ∀ a b c, Prv (imp (imp a (imp b c)) (imp (imp a b) (imp a c)))
-  /-- Modus ponens: provability is closed under detachment. -/
-  mp : ∀ {a b}, Prv (imp a b) → Prv a → Prv b
-  /-- Derivability condition D1 (necessitation): if `⊢ φ` then `⊢ □φ`. -/
-  D1 : ∀ {a}, Prv a → Prv (box a)
-  /-- Derivability condition D2 (distribution): `⊢ □(φ → ψ) → (□φ → □ψ)`. -/
-  D2 : ∀ a b, Prv (imp (box (imp a b)) (imp (box a) (box b)))
-  /-- Derivability condition D3: `⊢ □φ → □□φ`. -/
-  D3 : ∀ a, Prv (imp (box a) (box (box a)))
-  /-- Diagonal lemma: for each `φ` there is `ψ` with `⊢ ψ ↔ (□ψ → φ)`. -/
-  diag : ∀ a, ∃ p, Prv (imp p (imp (box p) a)) ∧ Prv (imp (imp (box p) a) p)
+/-- Sentences: propositional formulas built from atoms and falsity using
+implication, together with the provability operator `box`, whose intended reading
+is `box φ = Prov(⌜φ⌝)`, the arithmetized statement "`φ` is provable in `PA`". -/
+inductive Form : Type
+  | atom : ℕ → Form
+  | bot : Form
+  | imp : Form → Form → Form
+  | box : Form → Form
 
-namespace ProvabilitySystem
+namespace Form
 
-variable (S : ProvabilitySystem)
+/-- Implication. -/
+scoped infixr:25 " ⟶ " => Form.imp
+/-- Provability operator. -/
+scoped prefix:max "□" => Form.box
 
-/-- `⊢ φ → φ`. -/
+/-- Negation, `¬φ := φ → ⊥`. -/
 
-theorem syll {a b c : S.Sent} (hab : S.Prv (S.imp a b)) (hbc : S.Prv (S.imp b c)) :
-    S.Prv (S.imp a c) :=
-  S.mp (S.mp (S.axS a b c) (S.imp_intro a hbc)) hab
+theorem syll (h₁ : Prov (a ⟶ b)) (h₂ : Prov (b ⟶ c)) : Prov (a ⟶ c) :=
+  mp_under (imp_intro h₂) h₁
 
-/-- Distribution of a hypothesis: from `⊢ a → (b → c)` and `⊢ a → b` infer `⊢ a → c`. -/
+/-- `φ → φ`. -/

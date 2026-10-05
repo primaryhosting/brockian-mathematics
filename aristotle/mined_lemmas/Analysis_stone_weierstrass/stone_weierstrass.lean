@@ -1,11 +1,3 @@
-/-
-# Stone Weierstrass
-Category: Frontier Wave 2 (deeper machinery)
-Target: Analysis.stone_weierstrass
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,23 +33,14 @@ set_option grind.warning false
 
 namespace Analysis
 
-/-- **Key intermediate lemma (uniform approximation by polynomials).**
-Every continuous real-valued function on a compact interval `[a, b]` can be approximated,
-uniformly on `[a, b]` and to any prescribed accuracy `ε > 0`, by a real polynomial. -/
+/-- **Stone-Weierstrass theorem (polynomial form).**
+On a compact interval `[a, b]`, the topological closure of the subalgebra of polynomial
+functions inside the algebra `C([a,b], ℝ)` of continuous real-valued functions
+(with the uniform topology) is the whole algebra. -/
 
 theorem stone_weierstrass (a b : ℝ) :
-    (polynomialFunctions (Set.Icc a b)).topologicalClosure = ⊤ := by
-  refine top_unique fun f _ => ?_
-  show f ∈ closure ((polynomialFunctions (Set.Icc a b) : Subalgebra ℝ C(Set.Icc a b, ℝ)) :
-    Set C(Set.Icc a b, ℝ))
-  refine Metric.mem_closure_iff.mpr fun ε hε => ?_
-  obtain ⟨p, hp⟩ := exists_polynomial_forall_abs_sub_lt a b f (half_pos hε)
-  refine ⟨p.toContinuousMapOn (Set.Icc a b), ⟨p, trivial, rfl⟩, ?_⟩
-  have hle : dist f (p.toContinuousMapOn (Set.Icc a b)) ≤ ε / 2 :=
-    (ContinuousMap.dist_le (by positivity)).mpr fun x => by
-      rw [Real.dist_eq, abs_sub_comm]
-      exact (hp x).le
-  linarith [half_lt_self hε]
+    (polynomialFunctions (Set.Icc a b)).topologicalClosure = (⊤ : Subalgebra ℝ C(Set.Icc a b, ℝ)) :=
+  polynomialFunctions_closure_eq_top a b
 
-end Analysis
-
+/-- Uniform-approximation form of the Stone-Weierstrass theorem: every continuous function
+on `[a, b]` is, for every `ε > 0`, uniformly approximated to within `ε` by a polynomial. -/

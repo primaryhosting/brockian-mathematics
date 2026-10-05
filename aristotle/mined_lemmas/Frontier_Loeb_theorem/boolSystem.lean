@@ -1,4 +1,3 @@
-import Mathlib
 /-!
 # Loeb Theorem
 Category: Frontier — Set Theory
@@ -7,76 +6,104 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Löb's theorem: if `PA ⊢ (□φ → φ)` then `PA ⊢ φ`.
+/-!
+## Overview
 
-The statement is formalized for an arbitrary formal system satisfying the
-Hilbert–Bernays–Löb derivability conditions together with the diagonal
-(fixed-point) lemma, all of which hold for Peano Arithmetic with `□` the
-standard provability predicate.  This is packaged in the structure
-`Frontier.ProvabilitySystem` below, whose fields are:
+Löb's theorem: *if `PA ⊢ (□φ → φ)` then `PA ⊢ φ`*, where `□φ` is the arithmetized
+provability statement `Prov_PA(⌜φ⌝)`.
 
-* a type `Sent` of sentences, with an implication connective `imp` and a
-  provability-predicate former `box` (`box φ` is the arithmetized sentence
-  "`φ` is provable");
-* a predicate `Prv` on sentences (`Prv φ` means "PA ⊢ φ");
-* the propositional axiom schemes `K` and `S` for implication, plus modus
-  ponens — i.e. `Prv` is closed under implicational propositional logic;
-* the three derivability conditions: necessitation (D1), distribution (D2),
-  and the formalized D1 (D3);
-* the diagonal lemma, in the form needed for Löb's theorem: for every `φ`
-  there is a sentence `ψ` for which PA proves `ψ ↔ (□ψ → φ)`.
+A search of Mathlib (`lean_local_search`, `exact?`/`apply?`, LeanSearch) turns up **no**
+existing declaration about provability predicates, the Hilbert–Bernays–Löb derivability
+conditions, the diagonal (fixed point) lemma, or Löb's theorem.  Mathlib's
+`Mathlib.ModelTheory.*` develops first-order syntax, satisfaction and (in
+`Mathlib.ModelTheory.Satisfiability`) the completeness theorem, but it contains no
+arithmetization of syntax, no Gödel numbering, and hence no internal provability
+predicate for `PA`.  So the statement has to be formalized from scratch here.
+
+## What is formalized
+
+Löb's theorem is *not* a theorem about the specific theory `PA`: it is a theorem about any
+provability predicate satisfying the three Hilbert–Bernays–Löb derivability conditions
+together with the diagonal lemma.  These are exactly the properties of `PA`'s provability
+predicate `Prov_PA` that Gödel's arithmetization establishes.  We therefore package them
+into a structure `Frontier.ProvabilitySystem`:
+
+* a type of sentences with an implication connective `imp`,
+* a provability *judgement* `Prov` (read: `PA ⊢ ·`),
+* a provability *formula* `box` (read: `□`, i.e. `Prov_PA(⌜·⌝)`),
+* modus ponens and the two implicational Hilbert axiom schemes `K`, `S`
+  (i.e. `PA` proves all implicational tautologies and is closed under MP),
+* **D1** (necessitation):     `⊢ p  ⟹  ⊢ □p`,
+* **D2** (distribution):      `⊢ □(p → q) → (□p → □q)`,
+* **D3** (formalized D1):     `⊢ □p → □□p`,
+* **diagonal lemma**: for every `p` there is a sentence `d` with `⊢ d ↔ (□d → p)`
+  (stated as the two implications, to avoid needing a biconditional connective).
+
+`Frontier.Loeb_theorem` then states: in any such system, `Prov (□φ → φ)` implies `Prov φ`.
+
+The axiom set is consistent and non-degenerate: `Frontier.boolSystem` below is an explicit
+model in which `Prov` does **not** hold of every sentence, so the theorem is not vacuous.
 -/
+
+universe u
 
 namespace Frontier
 
-/-- An abstract formal system (think: Peano Arithmetic) equipped with a
-provability predicate `box` satisfying the Hilbert–Bernays–Löb derivability
-conditions and the diagonal lemma. -/
+/-- An abstract **provability system**: a set of sentences together with a provability
+judgement `Prov` (`PA ⊢ ·`) and an internal provability formula `box` (`□`, i.e.
+`Prov_PA(⌜·⌝)`), satisfying the Hilbert–Bernays–Löb derivability conditions and the
+diagonal lemma.  These are precisely the properties of Peano Arithmetic and its
+arithmetized provability predicate that Gödel's arithmetization of syntax establishes. -/
 structure ProvabilitySystem where
-  /-- The type of sentences of the system. -/
-  Sent : Type
-  /-- Implication connective. -/
-  imp : Sent → Sent → Sent
-  /-- Arithmetized provability: `box φ` is the sentence "`φ` is provable". -/
-  box : Sent → Sent
-  /-- `Prv φ` means "the system proves `φ`". -/
-  Prv : Sent → Prop
-  /-- Axiom scheme K of propositional logic. -/
-  axK : ∀ a b, Prv (imp a (imp b a))
-  /-- Axiom scheme S of propositional logic. -/
-  axS : ∀ a b c, Prv (imp (imp a (imp b c)) (imp (imp a b) (imp a c)))
-  /-- Modus ponens: provability is closed under detachment. -/
-  mp : ∀ {a b}, Prv (imp a b) → Prv a → Prv b
-  /-- Derivability condition D1 (necessitation): if `⊢ φ` then `⊢ □φ`. -/
-  D1 : ∀ {a}, Prv a → Prv (box a)
-  /-- Derivability condition D2 (distribution): `⊢ □(φ → ψ) → (□φ → □ψ)`. -/
-  D2 : ∀ a b, Prv (imp (box (imp a b)) (imp (box a) (box b)))
-  /-- Derivability condition D3: `⊢ □φ → □□φ`. -/
-  D3 : ∀ a, Prv (imp (box a) (box (box a)))
-  /-- Diagonal lemma: for each `φ` there is `ψ` with `⊢ ψ ↔ (□ψ → φ)`. -/
-  diag : ∀ a, ∃ p, Prv (imp p (imp (box p) a)) ∧ Prv (imp (imp (box p) a) p)
+  /-- The type of sentences of the theory. -/
+  Sentence : Type u
+  /-- The implication connective. -/
+  imp : Sentence → Sentence → Sentence
+  /-- The internal provability formula: `box p` is the arithmetized statement
+  "`p` is provable". -/
+  box : Sentence → Sentence
+  /-- The provability judgement: `Prov p` means "the theory proves `p`". -/
+  Prov : Sentence → Prop
+  /-- Modus ponens. -/
+  mp : ∀ {p q : Sentence}, Prov (imp p q) → Prov p → Prov q
+  /-- The Hilbert axiom scheme `K : p → (q → p)`. -/
+  ax_K : ∀ p q : Sentence, Prov (imp p (imp q p))
+  /-- The Hilbert axiom scheme `S : (p → (q → r)) → ((p → q) → (p → r))`. -/
+  ax_S : ∀ p q r : Sentence,
+    Prov (imp (imp p (imp q r)) (imp (imp p q) (imp p r)))
+  /-- Derivability condition **D1** (necessitation): if `p` is provable, then the theory
+  proves that `p` is provable. -/
+  D1 : ∀ {p : Sentence}, Prov p → Prov (box p)
+  /-- Derivability condition **D2**: the theory proves that provability distributes over
+  implication. -/
+  D2 : ∀ p q : Sentence, Prov (imp (box (imp p q)) (imp (box p) (box q)))
+  /-- Derivability condition **D3**: the theory proves that provability is provably
+  provable. -/
+  D3 : ∀ p : Sentence, Prov (imp (box p) (box (box p)))
+  /-- The **diagonal lemma** (Gödel's fixed point lemma), in the form needed for Löb's
+  theorem: for every sentence `p` there is a sentence `d` provably equivalent to
+  `□d → p`. -/
+  diagonal : ∀ p : Sentence, ∃ d : Sentence,
+    Prov (imp d (imp (box d) p)) ∧ Prov (imp (imp (box d) p) d)
 
 namespace ProvabilitySystem
 
-variable (S : ProvabilitySystem)
+variable (S : ProvabilitySystem.{u})
 
-/-- `⊢ φ → φ`. -/
+/-- Every sentence provably implies itself. -/
 
-def boolSystem : ProvabilitySystem where
-  Sent := Bool
-  imp a b := (!a || b)
+def boolSystem : ProvabilitySystem.{0} where
+  Sentence := Bool
+  imp p q := !p || q
   box _ := true
-  Prv b := b = true
-  axK := by decide
-  axS := by decide
-  mp := by
-    intro a b
-    revert a b
-    decide
-  D1 := by decide
-  D2 := by decide
-  D3 := by decide
-  diag a := ⟨a, by revert a; decide, by revert a; decide⟩
+  Prov p := p = true
+  mp := by decide +kernel
+  ax_K := by decide +kernel
+  ax_S := by decide +kernel
+  D1 := by decide +kernel
+  D2 := by decide +kernel
+  D3 := by decide +kernel
+  diagonal p := ⟨p, by cases p <;> rfl, by cases p <;> rfl⟩
 
-
+/-- In the model `boolSystem` the provability judgement is not trivial: `false` is not
+provable.  Hence `Frontier.Loeb_theorem` is not vacuously true. -/

@@ -8,29 +8,24 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset
-open scoped Pointwise
-
 namespace AdditiveComb
 
-variable {A B : Finset ℤ}
+open Finset Pointwise
 
-/-- The two "extremal translates" `A + {min B}` and `{max A} + B` meet in exactly one point,
+/-- The translate `A + {min B}` and the translate `{max A} + B` meet in exactly one point,
 namely `max A + min B`. -/
 
 theorem sumset_lower_bound (A B : Finset ℤ) (hA : A.Nonempty) (hB : B.Nonempty) :
     A.card + B.card - 1 ≤ (A + B).card := by
+  have key := inter_translates_eq_singleton A B hA hB
   have hsub : (A + {B.min' hB}) ∪ ({A.max' hA} + B) ⊆ A + B :=
-    Finset.union_subset
-      (Finset.add_subset_add_left (Finset.singleton_subset_iff.2 (B.min'_mem hB)))
-      (Finset.add_subset_add_right (Finset.singleton_subset_iff.2 (A.max'_mem hA)))
-  have hcard := Finset.card_le_card hsub
-  have hunion :
-      ((A + {B.min' hB}) ∪ ({A.max' hA} + B)).card + 1 = A.card + B.card := by
-    have h := Finset.card_union_add_card_inter (A + {B.min' hB}) ({A.max' hA} + B)
-    rw [inter_extremal_translates hA hB, Finset.card_singleton,
-      Finset.card_add_singleton, Finset.card_singleton_add] at h
-    exact h
+    union_subset (add_subset_add_left <| singleton_subset_iff.2 <| min'_mem _ _) <|
+      add_subset_add_right <| singleton_subset_iff.2 <| max'_mem _ _
+  have hcards : (A + {B.min' hB}).card = A.card := card_add_singleton _ _
+  have hcardt : ({A.max' hA} + B).card = B.card := card_singleton_add _ _
+  have hunion := card_union_add_card_inter (A + {B.min' hB}) ({A.max' hA} + B)
+  rw [key, hcards, hcardt, card_singleton] at hunion
+  have := card_le_card hsub
   omega
 
 end AdditiveComb

@@ -1,37 +1,30 @@
 import Mathlib
+import RequestProject.Main
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Mergesort on a linear order
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+A Mathlib-facing corollary of `CS.mergesort_correct`: on any linear order,
+`CS.mergeSort (· ≤ ·)` produces a `List.Sorted (· ≤ ·)` permutation of its input.
+-/
 
 namespace CS
 
-variable {α : Type*} [LinearOrder α]
+/-- On a linear order, `mergeSort (· ≤ ·) l` is sorted and a permutation of `l`. -/
 
-/-- Merge two lists, assumed sorted, into one list. -/
-
-theorem mergeSort_perm : ∀ l : List α, (mergeSort l).Perm l
-  | [] => by simp [mergeSort]
-  | [a] => by simp [mergeSort]
-  | a :: b :: t => by
+theorem mergeSort_perm (r : α → α → Prop) [DecidableRel r] :
+    ∀ l : List α, (mergeSort r l).Perm l
+  | [] => by rw [mergeSort]
+  | [x] => by rw [mergeSort]
+  | x :: y :: t => by
+      have h1 : (mergeSort r (split (x :: y :: t)).1).Perm (split (x :: y :: t)).1 :=
+        mergeSort_perm r _
+      have h2 : (mergeSort r (split (x :: y :: t)).2).Perm (split (x :: y :: t)).2 :=
+        mergeSort_perm r _
       rw [mergeSort]
-      refine (merge_perm _ _).trans ?_
-      refine ((mergeSort_perm _).append (mergeSort_perm _)).trans ?_
-      rw [List.take_append_drop]
-  termination_by l => l.length
-  decreasing_by
-  · simp only [List.length_take, List.length_cons]; omega
-  · simp only [List.length_drop, List.length_cons]; omega
+      exact (merge_perm r _ _).trans ((h1.append h2).trans (split_perm (x :: y :: t)))
+termination_by l => l.length
+decreasing_by
+  · exact split_fst_length_lt x y t
+  · exact split_snd_length_lt x y t
 

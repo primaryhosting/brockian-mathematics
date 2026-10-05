@@ -1,25 +1,27 @@
-import Mathlib
+import RequestProject.BelyiPoly
 
 /-!
-# Belyi Theorem
-Category: Frontier Math
-Target: Math2.belyi_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Belyi polynomials for finite sets of rational points
+
+A polynomial `f ∈ ℚ[X]` is *Belyi* if it is non-constant and all of its finite critical values
+(computed over `ℂ`) lie in `{0, 1}`; viewed as a map `ℙ¹ → ℙ¹` such an `f` is ramified only
+above `{0, 1, ∞}`.
+
+The main result of this file is `Math2.exists_belyiPolynomial_of_rat`: for every finite set of
+rational numbers there is a Belyi polynomial taking each of them to `0` or `1`.
 -/
 
-open Polynomial
-open scoped IntermediateField
+set_option maxRecDepth 8000
 
 namespace Math2
 
-/-- A *Belyi map* (in the genus-zero, polynomial model): a nonconstant polynomial with
-rational coefficients, viewed as a morphism `ℙ¹ → ℙ¹` defined over `ℚ`, all of whose
-finite critical values lie in `{0, 1}`.  Being a polynomial, such a map is totally
-ramified over `∞`, so it is ramified only above `{0, 1, ∞}`. -/
+open Polynomial
 
-theorem aeval_rat (p : ℚ[X]) (q : ℚ) : aeval ((q : ℂ)) p = ((p.eval q : ℚ) : ℂ) := by
+/-- `f` is a Belyi polynomial: non-constant, with all finite critical values in `{0, 1}`. -/
+
+lemma aeval_rat (p : ℚ[X]) (q : ℚ) : aeval (q : ℂ) p = ((p.eval q : ℚ) : ℂ) := by
   have h : ((q : ℂ)) = algebraMap ℚ ℂ q := by simp
-  rw [h, aeval_algebraMap_apply]; simp
+  rw [h, aeval_algebraMap_apply]
+  simp
 
-/-- The normalized Belyi polynomial `((m+n)^(m+n) / (m^m n^n)) * X^m * (1-X)^n`. -/
+/-- Every finite critical value of `B_{m,n}` lies in `{0, 1}`. -/

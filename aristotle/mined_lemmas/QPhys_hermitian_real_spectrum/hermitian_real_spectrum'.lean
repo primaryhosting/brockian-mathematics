@@ -1,3 +1,11 @@
+/-
+# Hermitian Real Spectrum
+Category: Quantum Physics
+Target: QPhys.hermitian_real_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -8,23 +16,22 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option maxHeartbeats 1000000
+
 namespace QPhys
 
-open scoped InnerProductSpace
-open RCLike
+open scoped ComplexConjugate
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-/-- **Every eigenvalue of a Hermitian operator is real.**
+/-- For a Hermitian (symmetric) operator `T` on a complex inner product space, an eigenvalue
+equation `T v = μ • v` with `v ≠ 0` forces `μ` to be fixed by complex conjugation. -/
 
-`T : E →ₗ[ℂ] E` is Hermitian (symmetric): `⟪T x, y⟫ = ⟪x, T y⟫` for all `x y`.
-If `μ : ℂ` is an eigenvalue of `T`, i.e. there is a nonzero `v` with `T v = μ • v`,
-then `μ` is real: `μ = (r : ℂ)` for some `r : ℝ`. -/
+theorem hermitian_real_spectrum' {T : H →ₗ[ℂ] H} (hT : LinearMap.IsSymmetric T)
+    {μ : ℂ} (hμ : Module.End.HasEigenvalue T μ) :
+    μ.im = 0 := by
+  obtain ⟨v, hv, hv0⟩ := hμ.exists_hasEigenvector
+  exact (hermitian_real_spectrum hT hv0 (Module.End.mem_eigenspace_iff.mp hv)).1
 
-theorem hermitian_real_spectrum' {T : E →ₗ[ℂ] E} (hT : T.IsSymmetric) {μ : ℂ}
-    (hμ : Module.End.HasEigenvalue T μ) : ∃ r : ℝ, μ = (r : ℂ) := by
-  obtain ⟨v, hv₁, hv₂⟩ := hμ.exists_hasEigenvector
-  exact hermitian_real_spectrum hT hv₂ (Module.End.mem_eigenspace_iff.mp hv₁)
+end QPhys
 
-/-- Corollary for bounded (continuous) self-adjoint operators, the usual setting for
-quantum-mechanical observables: every eigenvalue is real. -/

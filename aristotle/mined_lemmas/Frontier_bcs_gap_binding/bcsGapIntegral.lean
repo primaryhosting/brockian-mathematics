@@ -1,4 +1,20 @@
+/-
+# Bcs Gap Binding
+Category: Frontier Physics
+Target: Frontier.bcs_gap_binding
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Bcs Gap Binding
+Category: Frontier Physics
+Target: Frontier.bcs_gap_binding
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,27 +39,15 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# BCS gap equation: existence of a nonzero gap for any attractive coupling
-
-At zero temperature, in the standard BCS model with a constant density of states and a
-Debye cut-off `ω > 0`, the gap equation reads
-
-  `1 = g * ∫_0^ω dξ / sqrt(ξ² + Δ²)`,
-
-where `g > 0` is the (attractive) dimensionless coupling `N(0)·V`.  The integral is
-computed in closed form as `arsinh (ω / Δ)`, and the equation therefore always has the
-strictly positive solution `Δ = ω / sinh (1 / g)` — the Cooper instability: *any*
-attractive coupling, no matter how weak, binds a nonzero gap.
--/
-
 namespace Frontier
 
-/-- The BCS gap functional: `∫_0^ω dξ / sqrt(ξ² + Δ²)` (constant density of states,
-zero temperature, Debye cut-off `ω`). -/
+/-- The right-hand side of the (zero-temperature, constant density of states) BCS gap
+equation: the pairing integral
 
-noncomputable def bcsGapIntegral (ω Δ : ℝ) : ℝ :=
-  ∫ ξ in (0 : ℝ)..ω, (Real.sqrt (ξ ^ 2 + Δ ^ 2))⁻¹
+  `∫_0^ω dξ / √(ξ² + Δ²)`
 
-/-- Closed form of the BCS gap integral: `∫_0^ω dξ / sqrt(ξ² + Δ²) = arsinh (ω / Δ)`
-for a positive gap `Δ`. -/
+over the energy shell `[0, ω]` around the Fermi surface, for a gap parameter `Δ`. -/
+
+noncomputable def bcsGapIntegral (Δ ω : ℝ) : ℝ := ∫ ξ in (0:ℝ)..ω, 1 / Real.sqrt (ξ ^ 2 + Δ ^ 2)
+
+/-- Closed form of the BCS pairing integral for a positive gap: it equals `arsinh (ω / Δ)`. -/

@@ -1,0 +1,34 @@
+/-
+# Singular Series Gaps 12401250
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps12401250
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Singular Series Gaps 12401250
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps12401250
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+Key Mathlib ingredients used: `Finset.card_image_le` (a tuple occupies at most `#H`
+residue classes, so only primes `p ≤ #H` can obstruct admissibility),
+`ZMod.intCast_zmod_eq_zero_iff_dvd` and `even_iff_two_dvd` (the prime `2` analysis),
+`Finset.prod_pos` and `zpow_pos` (positivity of the singular series).
+-/
+
+open Finset
+
+namespace Brockian
+
+/-- The set of residue classes modulo `p` occupied by the integer tuple `H`. -/
+
+lemma residues_card_lt_of_card_lt {H : Finset ℤ} {p : ℕ} (hp : H.card < p) :
+    (residues H p).card < p :=
+  lt_of_le_of_lt (card_residues_le H p) hp
+
+/-- Admissibility only has to be checked at the primes `p ≤ H.card`. -/

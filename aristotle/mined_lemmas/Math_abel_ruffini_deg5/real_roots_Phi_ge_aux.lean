@@ -5,23 +5,13 @@ Target: Math.abel_ruffini_deg5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` lines to precede any module docstring `/-! ... -/`, so the header
--- above is a plain comment and is repeated verbatim as a module docstring after the import.)
 
 /-
-The argument below is the classical Galois-theoretic proof of the Abel-Ruffini theorem
-in degree 5, following the treatment of `Archive/Wiedijk100Theorems/AbelRuffini.lean`
-in mathlib4 (author: Thomas Browning, Apache 2.0).  It is reproduced here in
-self-contained form because the mathlib `Archive` library is not imported by default.
-
-The key mathlib ingredients are:
-* `solvableByRad.isSolvable'`  (an irreducible polynomial with a root solvable by radicals
-  has solvable Galois group);
-* `Polynomial.Gal.galActionHom_bijective_of_prime_degree'`  (an irreducible polynomial of
-  prime degree with 1-3 non-real roots has full Galois group);
-* `Equiv.Perm.not_solvable`  (the symmetric group on 5 letters is not solvable).
+The construction of the quintic `Φ R a b = X^5 - C a * X + C b` and the supporting lemmas below
+are adapted from Mathlib's Archive file `Archive/Wiedijk100Theorems/AbelRuffini.lean`
+(author: Thomas Browning, Apache 2.0 license).  They are reproduced here because the Archive is
+not part of the `Mathlib` library target and hence cannot be imported.
 -/
-
 import Mathlib
 
 /-!
@@ -32,9 +22,8 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Math
-
 namespace AbelRuffiniQuintic
+
 
 open Function Polynomial Polynomial.Gal Ideal
 
@@ -44,13 +33,19 @@ attribute [local instance] splits_ℚ_ℂ
 
 variable (R : Type*) [CommRing R] (a b : ℕ)
 
-/-- The quintic `X ^ 5 - a * X + b`. -/
+/-- A quintic polynomial that we will show is irreducible -/
+noncomputable def Φ : R[X] :=
+  X ^ 5 - C (a : R) * X + C (b : R)
+
+variable {R}
+
+@[simp]
 
 theorem real_roots_Phi_ge_aux (hab : b < a) :
-    ∃ x y : ℝ, x ≠ y ∧ aeval x (Phi ℚ a b) = 0 ∧ aeval y (Phi ℚ a b) = 0 := by
-  let f : ℝ → ℝ := fun x : ℝ => aeval x (Phi ℚ a b)
-  have hf : f = fun x : ℝ => x ^ 5 - a * x + b := by simp [f, Phi]
-  have hc : ∀ s : Set ℝ, ContinuousOn f s := fun s => (Phi ℚ a b).continuousOn_aeval
+    ∃ x y : ℝ, x ≠ y ∧ aeval x (Φ ℚ a b) = 0 ∧ aeval y (Φ ℚ a b) = 0 := by
+  let f : ℝ → ℝ := fun x : ℝ => aeval x (Φ ℚ a b)
+  have hf : f = fun x : ℝ => x ^ 5 - a * x + b := by simp [f, Φ]
+  have hc : ∀ s : Set ℝ, ContinuousOn f s := fun s => (Φ ℚ a b).continuousOn_aeval
   have ha : (1 : ℝ) ≤ a := Nat.one_le_cast.mpr (Nat.one_le_of_lt hab)
   have hle : (0 : ℝ) ≤ 1 := zero_le_one
   have hf0 : 0 ≤ f 0 := by simp [hf]

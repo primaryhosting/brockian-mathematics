@@ -1,15 +1,3 @@
-/-
-# Carleson
-Category: Frontier Math
-Target: Math2.carleson
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-(Note: Lean 4 does not allow a module docstring before the import line, so the
-required header is reproduced here as a plain comment and again as a module
-docstring immediately after the import.)
--/
-
 import Mathlib
 
 /-!
@@ -34,29 +22,21 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Math2
 
-open MeasureTheory Filter Topology
-open scoped ENNReal
+open MeasureTheory Filter Topology AddCircle
 
-variable {T : ℝ} [hT : Fact (0 < T)]
+/-- The `N`-th symmetric partial sum of the Fourier series of `f : AddCircle T → ℂ`,
+i.e. `∑_{|n| ≤ N} (fourierCoeff f n) * e^{2πinx/T}`. -/
 
-/-- The `N`-th symmetric partial sum of the Fourier series of `f` at the point `x`. -/
+  theorem carleson_full {T : ℝ} [hT : Fact (0 < T)] (f : Lp ℂ 2 (@haarAddCircle T hT)) :
+      ∀ᵐ x ∂(@haarAddCircle T hT),
+        Tendsto (fun N : ℕ => fourierPartialSum (⇑f) N x) atTop (𝓝 (f x))
 
-theorem carleson_full (f : Lp ℂ 2 (@AddCircle.haarAddCircle T hT)) :
-    ∀ᵐ x ∂(@AddCircle.haarAddCircle T hT),
-      Tendsto (fun N => fourierPartialSum (⇑f) N x) atTop (𝓝 (f x))
-
-It is not proved in this file (and is not available in Mathlib).
+This statement is NOT established in this file: neither it nor the machinery of its proof
+(the Carleson operator and its weak-type bound) is available in Mathlib.
 -/
 
 end Math2

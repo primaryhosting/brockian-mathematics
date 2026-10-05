@@ -8,13 +8,32 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Huckel C 17
-Category: Chemistry
-Target: Chem.huckel_C17
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Chem
+
+open scoped Real
+open Finset
+
+instance : Fact (Nat.Prime 17) := ⟨by norm_num⟩
+
+/-- A primitive 17-th root of unity. -/
+
+theorem huckel_C17_spectrum :
+    spectrum ℂ (Matrix.toLin' adjC17)
+      = {mu : ℂ | ∃ k : ℕ, k < 17 ∧ mu = ((2 * Real.cos (2 * Real.pi * k / 17) : ℝ) : ℂ)} := by
+  ext mu
+  rw [Set.mem_setOf_eq, ← Module.End.hasEigenvalue_iff_mem_spectrum, ← huckel_C17 mu]
+  constructor
+  · intro h
+    obtain ⟨v, hv⟩ := h.exists_hasEigenvector
+    refine ⟨v, hv.2, ?_⟩
+    simpa [Matrix.toLin'_apply] using Module.End.mem_eigenspace_iff.mp hv.1
+  · rintro ⟨v, hv0, hv⟩
+    refine Module.End.hasEigenvalue_of_hasEigenvector ⟨Module.End.mem_eigenspace_iff.mpr ?_, hv0⟩
+    simpa [Matrix.toLin'_apply] using hv
+
+end Chem
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -30,19 +49,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace Chem
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-open Matrix Polynomial
-
-/-- A primitive 17-th root of unity. -/
-
-theorem huckel_C17_spectrum :
-    spectrum ℂ ((SimpleGraph.cycleGraph 17).adjMatrix ℂ) =
-      Set.range (fun k : Fin 17 => ((2 * Real.cos (2 * Real.pi * (k : ℕ) / 17) : ℝ) : ℂ)) := by
-  obtain ⟨u, hu⟩ := F17_isUnit
-  have hA : ((SimpleGraph.cycleGraph 17).adjMatrix ℂ) = u.val * D17 * u⁻¹.val := by
-    rw [← A17, A17_eq_conj, Matrix.coe_units_inv, hu]
-  rw [hA, spectrum.units_conjugate, D17, spectrum_diagonal]
-
-end Chem
+set_option grind.warning false
 

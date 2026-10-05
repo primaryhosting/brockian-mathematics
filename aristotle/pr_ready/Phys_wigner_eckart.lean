@@ -19,195 +19,19 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 
 /-!
-## The Wigner–Eckart theorem
-
-The physical statement is: the matrix elements of the components of a spherical tensor
-operator `T^{(k)}_q` between angular-momentum eigenstates factor as
-
-`⟨j' m' | T^{(k)}_q | j m⟩ = ⟨j m; k q | j' m'⟩ · ⟨j' ‖ T^{(k)} ‖ j⟩`,
-
-i.e. as a Clebsch–Gordan coefficient (which depends on all the magnetic quantum numbers,
-but not on the operator) times a *reduced matrix element* (which depends on the operator,
-but on none of the magnetic quantum numbers `m, m', q`).
-
-Mathematically this is Schur's lemma plus multiplicity one:
-
-* a spherical tensor operator of rank `k`, restricted to the initial multiplet `Vin` and
-  followed by the projection onto the final multiplet `Vout`, is exactly an equivariant map
-  `T : Vop ⊗ Vin ⟶ Vout` of representations (`Vop` being the multiplet carried by the
-  operator components);
-* the Clebsch–Gordan map `CG : Vop ⊗ Vin ⟶ Vout` is one fixed nonzero such map;
-* multiplicity one says that the space of such equivariant maps is at most one-dimensional,
-  so `T = reduced • CG` for a unique scalar `reduced`, and taking matrix elements
-  `⟨bra, -⟩` gives the Wigner–Eckart factorization.
-
-Multiplicity one is automatic when source and target are irreducible: this is Schur's lemma,
-available in Mathlib as `FDRep.finrank_hom_simple_simple`
-(`Mathlib/RepresentationTheory/FDRep.lean`), recorded below as
-`Phys.finrank_hom_le_one_of_simple`.
-
-Main results:
-
-* `Phys.wigner_eckart` — the factorization of matrix elements of a tensor operator;
-* `Phys.reduced_matrix_element_unique` — the reduced matrix element is unique, so the
-  factorization has genuine content;
-* `Phys.exists_multiplicity_one_tensor_operator` — the hypotheses of `Phys.wigner_eckart`
-  are satisfiable (they are not vacuous).
+# Wigner Eckart
+Category: Frontier Phys
+Target: Phys.wigner_eckart
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open CategoryTheory Module MonoidalCategory
-
-universe u
-
-namespace Phys
-
-/-- A vector space of dimension at most one, containing a nonzero vector `c`, is spanned by `c`. -/
-private lemma exists_smul_of_finrank_le_one {k E : Type*} [Field k] [AddCommGroup E] [Module k E]
-    [FiniteDimensional k E] (h : finrank k E ≤ 1) {c : E} (hc : c ≠ 0) (t : E) :
-    ∃ r : k, t = r • c := by
-  have h1 : finrank k (Submodule.span k {c}) = 1 := finrank_span_singleton hc
-  have hle : finrank k (Submodule.span k {c}) ≤ finrank k E := Submodule.finrank_le _
-  have h2 : Submodule.span k ({c} : Set E) = ⊤ := Submodule.eq_top_of_finrank_eq (by omega)
-  have ht : t ∈ Submodule.span k ({c} : Set E) := by rw [h2]; trivial
-  obtain ⟨r, hr⟩ := Submodule.mem_span_singleton.mp ht
-  exact ⟨r, hr.symm⟩
-
-/-- A nonzero vector of a finite-dimensional space is detected by some linear functional. -/
-private lemma exists_functional_ne_zero {k V : Type*} [Field k] [AddCommGroup V] [Module k V]
-    [FiniteDimensional k V] {w : V} (hw : w ≠ 0) : ∃ f : V →ₗ[k] k, f w ≠ 0 := by
-  by_contra hc
-  push_neg at hc
-  exact hw ((Module.Basis.forall_coord_eq_zero_iff (Module.Free.chooseBasis k V)).mp
-    fun i => hc _)
-
-/-- An intertwiner of representations which kills every vector is the zero intertwiner. -/
-private lemma hom_eq_zero_of_apply_eq_zero {k G : Type u} [Field k] [Monoid G] {X Y : FDRep k G}
-    {f : X ⟶ Y} (h : ∀ v : X, f.hom.hom v = 0) : f = 0 := by
-  ext v
-  simpa using h v
-
-/-- **Multiplicity one from Schur's lemma.** Between two irreducible finite-dimensional
-representations over an algebraically closed field, the space of intertwiners is at most
-one-dimensional. This is `FDRep.finrank_hom_simple_simple`. -/
-theorem finrank_hom_le_one_of_simple {k G : Type u} [Field k] [IsAlgClosed k] [Monoid G]
-    (X Y : FDRep k G) [Simple X] [Simple Y] : finrank k (X ⟶ Y) ≤ 1 := by
-  rw [FDRep.finrank_hom_simple_simple]
-  split <;> simp
-
-/-- The space of intertwiners between two finite-dimensional representations embeds into the
-space of all linear maps, hence has dimension at most `dim X * dim Y`. -/
-theorem finrank_hom_le_mul {k G : Type u} [Field k] [Monoid G] (X Y : FDRep k G) :
-    finrank k (X ⟶ Y) ≤ finrank k X * finrank k Y := by
-  have e : ((forget₂ (FGModuleCat k) (ModuleCat k)).obj X.V ⟶
-      (forget₂ (FGModuleCat k) (ModuleCat k)).obj Y.V) ≃ₗ[k] (X →ₗ[k] Y) :=
-    ModuleCat.homLinearEquiv
-  haveI : FiniteDimensional k ((forget₂ (FGModuleCat k) (ModuleCat k)).obj X.V ⟶
-      (forget₂ (FGModuleCat k) (ModuleCat k)).obj Y.V) := e.symm.finiteDimensional
-  have hinj : Function.Injective
-      (((forget₂ (FGModuleCat k) (ModuleCat k)).mapLinearMap k (X := X.V) (Y := Y.V)).comp
-        ((forget₂ (FDRep k G) (FGModuleCat k)).mapLinearMap k (X := X) (Y := Y))) :=
-    fun a b hab => Functor.map_injective (forget₂ (FDRep k G) (FGModuleCat k))
-      (Functor.map_injective (forget₂ (FGModuleCat k) (ModuleCat k)) hab)
-  have h1 := LinearMap.finrank_le_finrank_of_injective hinj
-  have h2 : finrank k ((forget₂ (FGModuleCat k) (ModuleCat k)).obj X.V ⟶
-      (forget₂ (FGModuleCat k) (ModuleCat k)).obj Y.V) = finrank k X * finrank k Y := by
-    rw [e.finrank_eq, Module.finrank_linearMap, mul_comm]
-  omega
-
-/-- **Reduced matrix element.** If the space of intertwiners `X ⟶ Y` is at most
-one-dimensional and `CG` is a nonzero intertwiner, then every intertwiner `T` has all of its
-matrix elements equal to those of `CG` scaled by a single scalar, the *reduced matrix
-element*, which is independent of the chosen state `v` and of the chosen bra `bra`. -/
-theorem exists_reduced_matrix_element {k G : Type u} [Field k] [Monoid G] {X Y : FDRep k G}
-    (hmult : finrank k (X ⟶ Y) ≤ 1) {CG : X ⟶ Y} (hCG : CG ≠ 0) (T : X ⟶ Y) :
-    ∃ reduced : k, ∀ (bra : Y →ₗ[k] k) (v : X),
-      bra (T.hom.hom v) = reduced * bra (CG.hom.hom v) := by
-  obtain ⟨r, hr⟩ := exists_smul_of_finrank_le_one hmult hCG T
-  refine ⟨r, fun bra v => ?_⟩
-  have hv : T.hom.hom v = r • CG.hom.hom v := by rw [hr]; rfl
-  rw [hv, map_smul, smul_eq_mul]
-
-/-- **The Wigner–Eckart theorem.**
-
-Let `Vop` be the representation carried by the components of a tensor operator (rank `k` in
-the physics notation), `Vin` the initial multiplet and `Vout` the final multiplet, all
-finite-dimensional representations of a group (or monoid) `G`. A tensor operator, viewed
-between these multiplets, is an equivariant map `T : Vop ⊗ Vin ⟶ Vout`, and `CG` is a fixed
-nonzero equivariant map, the Clebsch–Gordan map. Assuming multiplicity one, i.e. that the
-space of equivariant maps `Vop ⊗ Vin ⟶ Vout` is at most one-dimensional (automatic for
-irreducible source and target by Schur's lemma, see `Phys.finrank_hom_le_one_of_simple`),
-there is a single scalar `reduced` — the reduced matrix element `⟨Vout ‖ T ‖ Vin⟩`, depending
-on neither the operator component `q`, nor the initial state `m`, nor the final state `bra` —
-such that every matrix element of `T` is the corresponding Clebsch–Gordan coefficient times
-`reduced`:
-
-`⟨bra | T (q ⊗ m)⟩ = reduced * ⟨bra | CG (q ⊗ m)⟩`. -/
-theorem wigner_eckart {k G : Type u} [Field k] [Monoid G] {Vop Vin Vout : FDRep k G}
-    (hmult : finrank k (Vop ⊗ Vin ⟶ Vout) ≤ 1)
-    {CG : Vop ⊗ Vin ⟶ Vout} (hCG : CG ≠ 0) (T : Vop ⊗ Vin ⟶ Vout) :
-    ∃ reduced : k, ∀ (bra : Vout →ₗ[k] k) (q : Vop) (m : Vin),
-      bra (T.hom.hom (TensorProduct.tmul k q m))
-        = reduced * bra (CG.hom.hom (TensorProduct.tmul k q m)) := by
-  obtain ⟨reduced, h⟩ := exists_reduced_matrix_element hmult hCG T
-  exact ⟨reduced, fun bra q m => h bra _⟩
-
-/-- The Wigner–Eckart theorem in the case where multiplicity one is supplied by Schur's lemma
-(irreducible source and target over an algebraically closed field) rather than assumed. -/
-theorem wigner_eckart_of_simple {k G : Type u} [Field k] [IsAlgClosed k] [Monoid G]
-    {Vop Vin Vout : FDRep k G} [Simple (Vop ⊗ Vin)] [Simple Vout]
-    {CG : Vop ⊗ Vin ⟶ Vout} (hCG : CG ≠ 0) (T : Vop ⊗ Vin ⟶ Vout) :
-    ∃ reduced : k, ∀ (bra : Vout →ₗ[k] k) (q : Vop) (m : Vin),
-      bra (T.hom.hom (TensorProduct.tmul k q m))
-        = reduced * bra (CG.hom.hom (TensorProduct.tmul k q m)) :=
-  wigner_eckart (finrank_hom_le_one_of_simple _ _) hCG T
-
-/-- The reduced matrix element is unique: two scalars that both factor all matrix elements of
-`T` through those of a nonzero `CG` are equal. In particular the conclusion of
-`Phys.wigner_eckart` pins `reduced` down. -/
-theorem reduced_matrix_element_unique {k G : Type u} [Field k] [Monoid G] {X Y : FDRep k G}
-    {CG : X ⟶ Y} (hCG : CG ≠ 0) {T : X ⟶ Y} {r r' : k}
-    (hr : ∀ (bra : Y →ₗ[k] k) (v : X), bra (T.hom.hom v) = r * bra (CG.hom.hom v))
-    (hr' : ∀ (bra : Y →ₗ[k] k) (v : X), bra (T.hom.hom v) = r' * bra (CG.hom.hom v)) :
-    r = r' := by
-  obtain ⟨v, hv⟩ : ∃ v : X, CG.hom.hom v ≠ 0 := by
-    by_contra hc
-    push_neg at hc
-    exact hCG (hom_eq_zero_of_apply_eq_zero hc)
-  obtain ⟨bra, hbra⟩ := exists_functional_ne_zero (k := k) hv
-  have := (hr bra v).symm.trans (hr' bra v)
-  exact mul_right_cancel₀ hbra this
-
-/-- The hypotheses of `Phys.wigner_eckart` are not vacuous: for any field `k` and monoid `G`
-there are representations and a nonzero Clebsch–Gordan map satisfying multiplicity one (take
-all three multiplets to be the trivial one-dimensional representation, with `CG` the left
-unitor). -/
-theorem exists_multiplicity_one_tensor_operator (k G : Type u) [Field k] [Monoid G] :
-    ∃ (Vop Vin Vout : FDRep k G) (CG : Vop ⊗ Vin ⟶ Vout),
-      finrank k (Vop ⊗ Vin ⟶ Vout) ≤ 1 ∧ CG ≠ 0 := by
-  refine ⟨𝟙_ (FDRep k G), 𝟙_ (FDRep k G), 𝟙_ (FDRep k G), (λ_ (𝟙_ (FDRep k G))).hom, ?_, ?_⟩
-  · have hunit : finrank k ((𝟙_ (FDRep k G) : FDRep k G) : Type u) = 1 := finrank_self k
-    have htensor : finrank k ((𝟙_ (FDRep k G) ⊗ 𝟙_ (FDRep k G) : FDRep k G) : Type u) = 1 := by
-      show finrank k (TensorProduct k ((𝟙_ (FDRep k G) : FDRep k G) : Type u)
-        ((𝟙_ (FDRep k G) : FDRep k G) : Type u)) = 1
-      rw [Module.finrank_tensorProduct, hunit, one_mul]
-    have := finrank_hom_le_mul (𝟙_ (FDRep k G) ⊗ 𝟙_ (FDRep k G)) (𝟙_ (FDRep k G))
-    rw [htensor, hunit] at this
-    omega
-  · intro h
-    have h1 := congrArg (fun f => f.hom.hom (TensorProduct.tmul k (1 : k) (1 : k))) h
-    have h2 : ((0 : 𝟙_ (FDRep k G) ⊗ 𝟙_ (FDRep k G) ⟶ 𝟙_ (FDRep k G))).hom.hom
-        (TensorProduct.tmul k (1 : k) (1 : k)) = 0 := rfl
-    simp only [h2] at h1
-    simp at h1
-
-end Phys
-
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped TensorProduct
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -225,4 +49,157 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Phys
+
+section
+
+variable {G : Type*} [Group G]
+variable {V W : Type*} [AddCommGroup V] [Module ℂ V] [AddCommGroup W] [Module ℂ W]
+
+/-- A complex representation is *irreducible* if the space is nontrivial and the only
+subspaces invariant under the group action are `⊥` and `⊤`. -/
+def IsIrrep (ρ : Representation ℂ G V) : Prop :=
+  Nontrivial V ∧
+    ∀ p : Submodule ℂ V, (∀ g : G, ∀ v ∈ p, ρ g v ∈ p) → p = ⊥ ∨ p = ⊤
+
+/-- A linear map intertwines two representations (it is *equivariant*). -/
+def Intertwines (ρ : Representation ℂ G V) (σ : Representation ℂ G W)
+    (T : V →ₗ[ℂ] W) : Prop :=
+  ∀ (g : G) (v : V), T (ρ g v) = σ g (T v)
+
+/-- A nonzero intertwiner between irreducible representations is bijective (Schur). -/
+theorem bijective_of_intertwines_of_ne_zero {ρ : Representation ℂ G V}
+    {σ : Representation ℂ G W} (hρ : IsIrrep ρ) (hσ : IsIrrep σ)
+    {S : V →ₗ[ℂ] W} (hS : Intertwines ρ σ S) (hS0 : S ≠ 0) :
+    Function.Bijective S := by
+  have hker : LinearMap.ker S = ⊥ := by
+    rcases hρ.2 (LinearMap.ker S) (by
+      intro g v hv
+      simp only [LinearMap.mem_ker] at hv ⊢
+      rw [hS g v, hv, map_zero]) with h | h
+    · exact h
+    · exact absurd (LinearMap.ker_eq_top.mp h) hS0
+  have hran : LinearMap.range S = ⊤ := by
+    rcases hσ.2 (LinearMap.range S) (by
+      rintro g _ ⟨v, rfl⟩
+      exact ⟨ρ g v, hS g v⟩) with h | h
+    · exact absurd (LinearMap.range_eq_bot.mp h) hS0
+    · exact h
+  exact ⟨LinearMap.ker_eq_bot.mp hker, LinearMap.range_eq_top.mp hran⟩
+
+/-- **Schur's lemma, quantitative form.**  Over `ℂ`, any two intertwiners between
+finite-dimensional irreducible representations are proportional: if `S ≠ 0`, then
+`T = c • S` for a unique scalar `c` (the *reduced matrix element*). -/
+theorem exists_smul_of_intertwines [FiniteDimensional ℂ V] {ρ : Representation ℂ G V}
+    {σ : Representation ℂ G W} (hρ : IsIrrep ρ) (hσ : IsIrrep σ)
+    {T S : V →ₗ[ℂ] W} (hT : Intertwines ρ σ T) (hS : Intertwines ρ σ S) (hS0 : S ≠ 0) :
+    ∃ c : ℂ, T = c • S := by
+  haveI : Nontrivial V := hρ.1
+  -- `S` is an isomorphism of representations.
+  obtain ⟨hinj, hsurj⟩ := bijective_of_intertwines_of_ne_zero hρ hσ hS hS0
+  let e : V ≃ₗ[ℂ] W := LinearEquiv.ofBijective S ⟨hinj, hsurj⟩
+  have he : ∀ v : V, e v = S v := fun _ => rfl
+  have hsymm : ∀ (g : G) (w : W), e.symm (σ g w) = ρ g (e.symm w) := by
+    intro g w
+    apply e.injective
+    have h1 : e (ρ g (e.symm w)) = S (ρ g (e.symm w)) := rfl
+    rw [e.apply_symm_apply, h1, hS g (e.symm w)]
+    congr 1
+    exact (e.apply_symm_apply w).symm
+  -- The endomorphism `E = S⁻¹ ∘ T` of `V` is equivariant.
+  let E : Module.End ℂ V := (e.symm : W →ₗ[ℂ] V) ∘ₗ T
+  have hE : ∀ (g : G) (v : V), E (ρ g v) = ρ g (E v) := by
+    intro g v
+    show e.symm (T (ρ g v)) = ρ g (e.symm (T v))
+    rw [hT g v, hsymm g (T v)]
+  -- `E` has an eigenvalue since `ℂ` is algebraically closed.
+  obtain ⟨c, hc⟩ := Module.End.exists_eigenvalue E
+  refine ⟨c, ?_⟩
+  have hspace : Module.End.eigenspace E c = ⊤ := by
+    rcases hρ.2 (Module.End.eigenspace E c) (by
+      intro g v hv
+      rw [Module.End.mem_eigenspace_iff] at hv ⊢
+      rw [hE g v, hv, map_smul]) with h | h
+    · exact absurd h hc
+    · exact h
+  ext v
+  have hv : E v = c • v := by
+    rw [← Module.End.mem_eigenspace_iff, hspace]
+    trivial
+  have : T v = e (E v) := by
+    show T v = e (e.symm (T v))
+    rw [e.apply_symm_apply]
+  rw [this, hv, map_smul, he]
+  rfl
+
+/-- **Wigner–Eckart theorem (abstract form).**
+
+Let `ρ` (acting on `V`) and `σ` (acting on `W`) be irreducible complex representations of a
+group `G`, with `V` finite-dimensional.  Let `S : V →ₗ[ℂ] W` be a fixed nonzero intertwiner
+(the *Clebsch–Gordan map*) and let `T : V →ₗ[ℂ] W` be any intertwiner (a *tensor operator*).
+Then every matrix element of `T` factors as a single scalar `c` — the *reduced matrix
+element*, independent of the states involved — times the corresponding matrix element of the
+Clebsch–Gordan map:
+`⟨f, T v⟩ = c * ⟨f, S v⟩` for all states `v` and all linear functionals `f` on `W`. -/
+theorem wigner_eckart [FiniteDimensional ℂ V] {ρ : Representation ℂ G V}
+    {σ : Representation ℂ G W} (hρ : IsIrrep ρ) (hσ : IsIrrep σ)
+    {T S : V →ₗ[ℂ] W} (hT : Intertwines ρ σ T) (hS : Intertwines ρ σ S) (hS0 : S ≠ 0) :
+    ∃ c : ℂ, ∀ (f : W →ₗ[ℂ] ℂ) (v : V), f (T v) = c * f (S v) := by
+  obtain ⟨c, hc⟩ := exists_smul_of_intertwines hρ hσ hT hS hS0
+  refine ⟨c, fun f v => ?_⟩
+  rw [hc]
+  simp
+
+end
+
+section TensorOperator
+
+variable {G : Type*} [Group G]
+variable {Vj Vk W : Type*}
+variable [AddCommGroup Vj] [Module ℂ Vj] [AddCommGroup Vk] [Module ℂ Vk]
+variable [AddCommGroup W] [Module ℂ W]
+
+/-- **Wigner–Eckart theorem for tensor operators, in coordinates.**
+
+Here `Vj` carries the representation `ρ` of the "state" multiplet (basis vectors `bj m`,
+labelled by magnetic quantum numbers `m`), `Vk` carries the representation `τ` of the tensor
+operator's multiplet (basis `bk q`), and `W` carries the final irreducible representation `σ`
+(basis `bW m'`).  A tensor operator is an intertwiner `T : Vj ⊗ Vk →ₗ[ℂ] W`, and the
+Clebsch–Gordan map is a fixed nonzero intertwiner `S`.
+
+The conclusion is the physicists' statement: there is a single reduced matrix element `c`,
+independent of `m`, `q` and `m'`, with
+`⟨m'| T^k_q |j m⟩ = c * ⟨j m ; k q | m'⟩`. -/
+theorem wigner_eckart_tensor_operator
+    [FiniteDimensional ℂ Vj] [FiniteDimensional ℂ Vk]
+    {ρ : Representation ℂ G Vj} {τ : Representation ℂ G Vk} {σ : Representation ℂ G W}
+    (hρτ : IsIrrep (Representation.tprod ρ τ)) (hσ : IsIrrep σ)
+    {T S : Vj ⊗[ℂ] Vk →ₗ[ℂ] W}
+    (hT : Intertwines (Representation.tprod ρ τ) σ T)
+    (hS : Intertwines (Representation.tprod ρ τ) σ S) (hS0 : S ≠ 0)
+    {M Q M' : Type*} (bj : Module.Basis M ℂ Vj) (bk : Module.Basis Q ℂ Vk) (bW : Module.Basis M' ℂ W) :
+    ∃ c : ℂ, ∀ (m : M) (q : Q) (m' : M'),
+      bW.repr (T (bj m ⊗ₜ[ℂ] bk q)) m' = c * bW.repr (S (bj m ⊗ₜ[ℂ] bk q)) m' := by
+  obtain ⟨c, hc⟩ := wigner_eckart hρτ hσ hT hS hS0
+  exact ⟨c, fun m q m' =>
+    hc ((Finsupp.lapply m').comp (bW.repr : W →ₗ[ℂ] (M' →₀ ℂ))) (bj m ⊗ₜ[ℂ] bk q)⟩
+
+/-- Sanity check (non-vacuity): the hypotheses of `Phys.wigner_eckart` are satisfiable —
+the one-dimensional trivial representation of any group is irreducible and the identity is a
+nonzero intertwiner of it with itself. -/
+theorem wigner_eckart_hypotheses_satisfiable {G : Type*} [Group G] :
+    ∃ (ρ : Representation ℂ G ℂ) (S : ℂ →ₗ[ℂ] ℂ),
+      IsIrrep ρ ∧ Intertwines ρ ρ S ∧ S ≠ 0 := by
+  refine ⟨Representation.trivial ℂ G ℂ, LinearMap.id, ⟨inferInstance, ?_⟩, ?_, ?_⟩
+  · intro p _
+    exact Ideal.eq_bot_or_top p
+  · intro g v; rfl
+  · intro h
+    have h1 := LinearMap.congr_fun h (1 : ℂ)
+    simp at h1
+
+end TensorOperator
+
+end Phys
 

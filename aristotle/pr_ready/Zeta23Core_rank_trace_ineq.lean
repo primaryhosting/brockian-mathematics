@@ -9,386 +9,360 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-/-!
-# Rank Trace Ineq
-Category: Brockian Corpus
-Target: Zeta23Core.rank_trace_ineq
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--/
-
-/-!
-# Rank Trace Ineq
-Category: Brockian Corpus
-Target: Zeta23Core.rank_trace_ineq
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-Rank–trace inequality (preprint Lemma 3.2):
-`c·tr P − (c²/4)·r + 2c·tr Q − c²·b ≤ ‖P+Q‖_F²`,
-for `P` positive semidefinite of rank at most `r`, `Q` Hermitian with at most `b` positive
-eigenvalues, and `c > 0`.
-
-The proof does not use von Neumann's trace inequality; instead it uses the two orthogonal
-projections `Pi` (onto the positive spectral subspace of `Q`) and `R` (onto the range of the
-compression `(1 - Pi) P (1 - Pi)`), and the elementary estimate `0 ≤ ‖S - M‖_F²` for
-`S = P + Q` and `M = c·Pi + (c/2)·R`.
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Pointwise
+open scoped ComplexOrder
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Core
 
 open Matrix
-open scoped ComplexOrder
 
 variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
 
-/-! ## Basic notions -/
+/-! ## Basic definitions -/
 
-/-- The squared Frobenius norm of a matrix, `‖M‖_F² = Re tr(Mᴴ M)`. -/
+/-- The squared Frobenius norm of a matrix, `‖M‖_F² = Re tr (Mᴴ M)`. -/
 noncomputable def frobSq (M : Matrix n n 𝕜) : ℝ := RCLike.re (Matrix.trace (Mᴴ * M))
 
-/-- The positive index of a Hermitian matrix: the number of its positive eigenvalues. -/
+/-- The positive index of inertia of a Hermitian matrix: the number of positive eigenvalues. -/
 noncomputable def posIndex {Q : Matrix n n 𝕜} (hQ : Q.IsHermitian) : ℕ :=
-  Fintype.card {i // 0 < hQ.eigenvalues i}
+  Nat.card {i // 0 < hQ.eigenvalues i}
 
-/-! ## Functional calculus for Hermitian matrices (spectral functions) -/
+/-! ## Functional calculus for Hermitian matrices -/
 
-/-- `specFun hM f` applies the real function `f` to the Hermitian matrix `M` through its
-spectral decomposition. -/
-noncomputable def specFun {M : Matrix n n 𝕜} (hM : M.IsHermitian) (f : ℝ → ℝ) : Matrix n n 𝕜 :=
-  (hM.eigenvectorUnitary : Matrix n n 𝕜) *
-      Matrix.diagonal (fun i => ((f (hM.eigenvalues i) : ℝ) : 𝕜)) *
-    (hM.eigenvectorUnitary : Matrix n n 𝕜)ᴴ
+/-- `hFun hA g` is the matrix obtained by applying the real function `g` to the eigenvalues of
+the Hermitian matrix `A`, in an eigenbasis of `A`. -/
+noncomputable def hFun {A : Matrix n n 𝕜} (hA : A.IsHermitian) (g : ℝ → ℝ) : Matrix n n 𝕜 :=
+  (hA.eigenvectorUnitary : Matrix n n 𝕜) *
+      diagonal (fun i => (RCLike.ofReal (g (hA.eigenvalues i)) : 𝕜)) *
+    star (hA.eigenvectorUnitary : Matrix n n 𝕜)
 
-variable {M : Matrix n n 𝕜}
+variable {A : Matrix n n 𝕜} (hA : A.IsHermitian)
 
-theorem eigenvectorUnitary_conjTranspose_mul (hM : M.IsHermitian) :
-    (hM.eigenvectorUnitary : Matrix n n 𝕜)ᴴ * (hM.eigenvectorUnitary : Matrix n n 𝕜) = 1 :=
-  Matrix.mem_unitaryGroup_iff'.mp hM.eigenvectorUnitary.2
+lemma hFun_congr {g h : ℝ → ℝ} (hgh : ∀ i, g (hA.eigenvalues i) = h (hA.eigenvalues i)) :
+    hFun hA g = hFun hA h := by
+  have h' : (fun i => (RCLike.ofReal (g (hA.eigenvalues i)) : 𝕜))
+      = fun i => (RCLike.ofReal (h (hA.eigenvalues i)) : 𝕜) := funext fun i => by rw [hgh i]
+  simp only [hFun, h']
 
-theorem eigenvectorUnitary_mul_conjTranspose (hM : M.IsHermitian) :
-    (hM.eigenvectorUnitary : Matrix n n 𝕜) * (hM.eigenvectorUnitary : Matrix n n 𝕜)ᴴ = 1 :=
-  Matrix.mem_unitaryGroup_iff.mp hM.eigenvectorUnitary.2
-
-theorem specFun_mul (hM : M.IsHermitian) (f g : ℝ → ℝ) :
-    specFun hM f * specFun hM g = specFun hM (fun x => f x * g x) := by
-  simp only [specFun, Matrix.mul_assoc]
-  rw [← Matrix.mul_assoc ((hM.eigenvectorUnitary : Matrix n n 𝕜)ᴴ),
-    eigenvectorUnitary_conjTranspose_mul hM, Matrix.one_mul,
-    ← Matrix.mul_assoc (Matrix.diagonal _), Matrix.diagonal_mul_diagonal]
+lemma hFun_mul (g h : ℝ → ℝ) :
+    hFun hA g * hFun hA h = hFun hA (fun x => g x * h x) := by
+  have hU : star (hA.eigenvectorUnitary : Matrix n n 𝕜) * (hA.eigenvectorUnitary : Matrix n n 𝕜)
+      = 1 := Unitary.coe_star_mul_self _
+  simp only [hFun, Matrix.mul_assoc]
+  rw [← Matrix.mul_assoc (star (hA.eigenvectorUnitary : Matrix n n 𝕜)), hU, Matrix.one_mul,
+    ← Matrix.mul_assoc (diagonal _) (diagonal _), diagonal_mul_diagonal]
   simp
 
-theorem specFun_one (hM : M.IsHermitian) : specFun hM (fun _ => 1) = 1 := by
-  simp [specFun, eigenvectorUnitary_mul_conjTranspose hM]
+lemma hFun_id : hFun hA (fun x => x) = A := by
+  conv_rhs => rw [hA.spectral_theorem]
+  simp [hFun, Unitary.conjStarAlgAut_apply, Function.comp_def]
 
-theorem specFun_zero (hM : M.IsHermitian) : specFun hM (fun _ => 0) = 0 := by
-  simp [specFun]
+lemma hFun_one : hFun hA (fun _ => 1) = 1 := by
+  simp [hFun]
 
-theorem specFun_id (hM : M.IsHermitian) : specFun hM id = M := by
-  conv_rhs => rw [hM.spectral_theorem]
-  simp [specFun, Unitary.conjStarAlgAut_apply, Matrix.star_eq_conjTranspose, Function.comp_def]
+lemma hFun_zero : hFun hA (fun _ => 0) = 0 := by
+  simp [hFun]
 
-theorem specFun_congr (hM : M.IsHermitian) {f g : ℝ → ℝ}
-    (h : ∀ i, f (hM.eigenvalues i) = g (hM.eigenvalues i)) : specFun hM f = specFun hM g := by
-  simp only [specFun, h]
+lemma hFun_add (g h : ℝ → ℝ) : hFun hA g + hFun hA h = hFun hA (fun x => g x + h x) := by
+  simp only [hFun, ← Matrix.add_mul, ← Matrix.mul_add]
+  simp
 
-theorem specFun_isHermitian (hM : M.IsHermitian) (f : ℝ → ℝ) : (specFun hM f).IsHermitian := by
-  unfold Matrix.IsHermitian specFun
-  rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose,
-    Matrix.diagonal_conjTranspose]
-  simp [Matrix.mul_assoc, Pi.star_def, RCLike.star_def]
+lemma hFun_isHermitian (g : ℝ → ℝ) : (hFun hA g).IsHermitian := by
+  unfold Matrix.IsHermitian hFun
+  rw [conjTranspose_mul, conjTranspose_mul]
+  simp [Matrix.star_eq_conjTranspose, diagonal_conjTranspose, Matrix.mul_assoc, Pi.star_def,
+    RCLike.star_def]
 
-theorem specFun_posSemidef (hM : M.IsHermitian) (f : ℝ → ℝ) (hf : ∀ i, 0 ≤ f (hM.eigenvalues i)) :
-    (specFun hM f).PosSemidef := by
-  have h : specFun hM f = ((hM.eigenvectorUnitary : Matrix n n 𝕜)ᴴ)ᴴ *
-      (Matrix.diagonal (fun i => ((f (hM.eigenvalues i) : ℝ) : 𝕜))) *
-      (hM.eigenvectorUnitary : Matrix n n 𝕜)ᴴ := by
-    simp [specFun]
-  rw [h]
-  refine Matrix.PosSemidef.conjTranspose_mul_mul_same ?_ _
-  refine Matrix.PosSemidef.diagonal (Pi.le_def.mpr fun i => ?_)
-  exact (RCLike.ofReal_nonneg (K := 𝕜)).mpr (hf i)
+lemma trace_hFun (g : ℝ → ℝ) :
+    (hFun hA g).trace = ∑ i, (RCLike.ofReal (g (hA.eigenvalues i)) : 𝕜) := by
+  rw [hFun, Matrix.trace_mul_comm, ← Matrix.mul_assoc, Unitary.coe_star_mul_self, Matrix.one_mul,
+    trace_diagonal]
 
-theorem specFun_neg (hM : M.IsHermitian) (f : ℝ → ℝ) :
-    -(specFun hM f) = specFun hM (fun x => -f x) := by
-  have hd : (Matrix.diagonal fun i => (((-f (hM.eigenvalues i)) : ℝ) : 𝕜))
-      = -(Matrix.diagonal fun i => ((f (hM.eigenvalues i) : ℝ) : 𝕜)) := by
-    ext i j
-    by_cases h : i = j <;> simp [h]
-  simp only [specFun, hd, Matrix.neg_mul, Matrix.mul_neg]
+lemma re_trace_hFun (g : ℝ → ℝ) :
+    RCLike.re ((hFun hA g).trace) = ∑ i, g (hA.eigenvalues i) := by
+  rw [trace_hFun, map_sum]
+  simp
 
-theorem specFun_add (hM : M.IsHermitian) (f g : ℝ → ℝ) :
-    specFun hM f + specFun hM g = specFun hM (fun x => f x + g x) := by
-  simp only [specFun, ← Matrix.add_mul, ← Matrix.mul_add]
-  norm_num
+lemma hFun_posSemidef {g : ℝ → ℝ} (hg : ∀ i, 0 ≤ g (hA.eigenvalues i)) :
+    (hFun hA g).PosSemidef := by
+  have hd : (diagonal (fun i => (RCLike.ofReal (g (hA.eigenvalues i)) : 𝕜))).PosSemidef := by
+    apply Matrix.PosSemidef.diagonal
+    intro i
+    have : (0:ℝ) ≤ g (hA.eigenvalues i) := hg i
+    simpa using RCLike.ofReal_nonneg (K := 𝕜) |>.mpr this
+  have := hd.mul_mul_conjTranspose_same (B := (hA.eigenvectorUnitary : Matrix n n 𝕜))
+  simpa [hFun, Matrix.star_eq_conjTranspose] using this
 
-theorem specFun_trace (hM : M.IsHermitian) (f : ℝ → ℝ) :
-    Matrix.trace (specFun hM f) = ∑ i, ((f (hM.eigenvalues i) : ℝ) : 𝕜) := by
-  simp only [specFun]
-  rw [Matrix.trace_mul_cycle, eigenvectorUnitary_conjTranspose_mul hM, Matrix.one_mul,
-    Matrix.trace_diagonal]
+/-! ## Generalities on the Frobenius norm and traces -/
 
-/-- The real part of the trace of a spectral projection is the number of eigenvalues selected. -/
-theorem re_trace_specFun_indicator (hM : M.IsHermitian) (p : ℝ → Prop) [DecidablePred p] :
-    RCLike.re (Matrix.trace (specFun hM (fun x => if p x then 1 else 0)))
-      = (Fintype.card {i // p (hM.eigenvalues i)} : ℝ) := by
-  rw [specFun_trace, map_sum]
-  simp only [RCLike.ofReal_re]
-  rw [Finset.sum_boole, Fintype.card_subtype]
+omit [DecidableEq n] in
+lemma frobSq_nonneg (M : Matrix n n 𝕜) : 0 ≤ frobSq M := by
+  have h : (Mᴴ * M).PosSemidef := Matrix.posSemidef_conjTranspose_mul_self M
+  have := h.trace_nonneg
+  simpa [frobSq] using RCLike.re_le_re this
 
-/-! ## Trace positivity toolbox -/
-
-theorem posSemidef_re_trace_nonneg {A : Matrix n n 𝕜} (hA : A.PosSemidef) :
-    0 ≤ RCLike.re A.trace := (RCLike.nonneg_iff.mp hA.trace_nonneg).1
-
-theorem re_trace_conj_nonpos {N A : Matrix n n 𝕜} (hN : (-N).PosSemidef) :
-    RCLike.re (Matrix.trace (Aᴴ * N * A)) ≤ 0 := by
-  have h := posSemidef_re_trace_nonneg (hN.conjTranspose_mul_mul_same A)
-  have h2 : Aᴴ * (-N) * A = -(Aᴴ * N * A) := by simp
-  rw [h2] at h
-  simp only [Matrix.trace_neg, map_neg] at h
-  linarith
-
-theorem frobSq_nonneg (A : Matrix n n 𝕜) : 0 ≤ frobSq A :=
-  posSemidef_re_trace_nonneg (Matrix.posSemidef_conjTranspose_mul_self A)
-
-theorem frobSq_sub {S T : Matrix n n 𝕜} (hS : S.IsHermitian) (hT : T.IsHermitian) :
-    frobSq (S - T) = frobSq S - 2 * RCLike.re (Matrix.trace (S * T)) + frobSq T := by
-  simp only [frobSq, Matrix.conjTranspose_sub, hS.eq, hT.eq, Matrix.sub_mul, Matrix.mul_sub,
-    Matrix.trace_sub, map_sub]
-  rw [Matrix.trace_mul_comm T S]
+omit [DecidableEq n] in
+lemma frobSq_sub (M X : Matrix n n 𝕜) :
+    frobSq (M - X) = frobSq M - 2 * RCLike.re (Matrix.trace (Mᴴ * X)) + frobSq X := by
+  have hcross : RCLike.re (Matrix.trace (Xᴴ * M)) = RCLike.re (Matrix.trace (Mᴴ * X)) := by
+    have h : (Mᴴ * X)ᴴ = Xᴴ * M := by simp
+    rw [← h, Matrix.trace_conjTranspose]
+    simp
+  simp only [frobSq, conjTranspose_sub, Matrix.sub_mul, Matrix.mul_sub, Matrix.trace_sub, map_sub,
+    hcross]
   ring
 
-theorem conjTranspose_real_smul (a : ℝ) (A : Matrix n n 𝕜) : (a • A)ᴴ = a • Aᴴ := by
-  ext i j
-  simp [Matrix.conjTranspose_apply, RCLike.real_smul_eq_coe_mul, RCLike.conj_ofReal]
-
-/-! ## The core inequality, given a suitable pair of orthogonal projections -/
-
-/-- The main estimate, assuming the existence of two orthogonal projections `Pi` (capturing the
-positive part of `Q`) and `R` (capturing the part of the range of `P` orthogonal to `Pi`). -/
-theorem trace_ineq_of_projections {P Q Pi R : Matrix n n 𝕜} {r b : ℕ} {c : ℝ}
-    (hc : 0 < c) (hP : P.PosSemidef) (hQ : Q.IsHermitian)
-    (hPih : Pi.IsHermitian) (hPi2 : Pi * Pi = Pi)
-    (hRh : R.IsHermitian) (hR2 : R * R = R)
-    (hPiR : Pi * R = 0) (hRPi : R * Pi = 0)
-    (htPi : RCLike.re Pi.trace ≤ b) (htR : RCLike.re R.trace ≤ r)
-    (hNSD : (-((1 - Pi) * Q * (1 - Pi))).PosSemidef)
-    (hKE : ((1 - Pi) * P * (1 - Pi)) * (1 - Pi - R) = 0) :
-    c * RCLike.re P.trace - c ^ 2 / 4 * r + 2 * c * RCLike.re Q.trace - c ^ 2 * b
-      ≤ frobSq (P + Q) := by
-  obtain ⟨E, hE⟩ : ∃ E : Matrix n n 𝕜, E = 1 - Pi - R := ⟨_, rfl⟩
-  obtain ⟨S, hS⟩ : ∃ S : Matrix n n 𝕜, S = P + Q := ⟨_, rfl⟩
-  have hSh : S.IsHermitian := by rw [hS]; exact hP.1.add hQ
-  have hEh : E.IsHermitian := by
-    rw [Matrix.IsHermitian, hE]
-    simp [Matrix.conjTranspose_sub, hPih.eq, hRh.eq]
-  -- orthogonality relations between the three projections
-  have hEPi : E * Pi = 0 := by rw [hE]; simp [Matrix.sub_mul, hPi2, hRPi]
-  have hPiE : Pi * E = 0 := by rw [hE]; simp [Matrix.mul_sub, hPi2, hPiR]
-  have hER : E * R = 0 := by rw [hE]; simp [Matrix.sub_mul, hR2, hPiR]
-  have hEE : E * E = E := by
-    nth_rewrite 2 [hE]
-    rw [Matrix.mul_sub, Matrix.mul_sub, hEPi, hER, Matrix.mul_one, sub_zero, sub_zero]
-  have hE1Pi : E * (1 - Pi) = E := by rw [Matrix.mul_sub, Matrix.mul_one, hEPi, sub_zero]
-  have h1PiE : (1 - Pi) * E = E := by rw [Matrix.sub_mul, Matrix.one_mul, hPiE, sub_zero]
-  have hR1Pi : R * (1 - Pi) = R := by rw [Matrix.mul_sub, Matrix.mul_one, hRPi, sub_zero]
-  have h1PiR : (1 - Pi) * R = R := by rw [Matrix.sub_mul, Matrix.one_mul, hPiR, sub_zero]
-  -- Step 1: `Re tr (S E) ≤ 0`
-  have hSEle : RCLike.re (Matrix.trace (S * E)) ≤ 0 := by
-    have hSE : Matrix.trace (E * S * E) = Matrix.trace (S * E) := by
-      rw [Matrix.mul_assoc, Matrix.trace_mul_comm, Matrix.mul_assoc, hEE]
-    have hKE' : ((1 - Pi) * P * (1 - Pi)) * E = 0 := by rw [hE]; exact hKE
-    have hEPE : E * P * E = 0 := by
-      calc E * P * E = (E * (1 - Pi)) * P * ((1 - Pi) * E) := by rw [hE1Pi, h1PiE]
-        _ = E * (((1 - Pi) * P * (1 - Pi)) * E) := by noncomm_ring
-        _ = 0 := by rw [hKE']; simp
-    have hEQE : E * Q * E = Eᴴ * ((1 - Pi) * Q * (1 - Pi)) * E := by
-      rw [hEh.eq]
-      calc E * Q * E = (E * (1 - Pi)) * Q * ((1 - Pi) * E) := by rw [hE1Pi, h1PiE]
-        _ = E * ((1 - Pi) * Q * (1 - Pi)) * E := by noncomm_ring
-    have hsplit : E * S * E = E * P * E + E * Q * E := by rw [hS]; noncomm_ring
-    rw [← hSE, hsplit, hEPE, hEQE, zero_add]
-    exact re_trace_conj_nonpos hNSD
-  -- Step 2: `Re tr (S R) ≤ Re tr P`
-  have hSRle : RCLike.re (Matrix.trace (S * R)) ≤ RCLike.re P.trace := by
-    have hRSR : Matrix.trace (R * S * R) = Matrix.trace (S * R) := by
-      rw [Matrix.mul_assoc, Matrix.trace_mul_comm, Matrix.mul_assoc, hR2]
-    have hsplit : R * S * R = R * P * R + R * Q * R := by rw [hS]; noncomm_ring
-    have hRQR : RCLike.re (Matrix.trace (R * Q * R)) ≤ 0 := by
-      have h : R * Q * R = Rᴴ * ((1 - Pi) * Q * (1 - Pi)) * R := by
-        rw [hRh.eq]
-        calc R * Q * R = (R * (1 - Pi)) * Q * ((1 - Pi) * R) := by rw [hR1Pi, h1PiR]
-          _ = R * ((1 - Pi) * Q * (1 - Pi)) * R := by noncomm_ring
-      rw [h]
-      exact re_trace_conj_nonpos hNSD
-    have h1R2 : (1 - R) * (1 - R) = 1 - R := by
-      rw [Matrix.sub_mul, Matrix.mul_sub, Matrix.mul_sub, hR2]; simp
-    have hRPR : RCLike.re (Matrix.trace (R * P * R)) ≤ RCLike.re P.trace := by
-      have e1 : Matrix.trace ((1 - R) * P * (1 - R)) = Matrix.trace (P * (1 - R)) := by
-        rw [Matrix.mul_assoc, Matrix.trace_mul_comm, Matrix.mul_assoc, h1R2]
-      have e2 : Matrix.trace (R * P * R) = Matrix.trace (P * R) := by
-        rw [Matrix.mul_assoc, Matrix.trace_mul_comm, Matrix.mul_assoc, hR2]
-      have e3 : Matrix.trace (P * (1 - R)) = Matrix.trace P - Matrix.trace (P * R) := by
-        rw [Matrix.mul_sub, Matrix.mul_one, Matrix.trace_sub]
-      have hpsd : ((1 - R)ᴴ * P * (1 - R)).PosSemidef := hP.conjTranspose_mul_mul_same _
-      have hherm : (1 - R : Matrix n n 𝕜)ᴴ = 1 - R := by
-        simp [Matrix.conjTranspose_sub, hRh.eq]
-      rw [hherm] at hpsd
-      have hnn := posSemidef_re_trace_nonneg hpsd
-      rw [e1, e3] at hnn
-      rw [e2]
-      simp only [map_sub] at hnn
-      linarith
-    rw [← hRSR, hsplit, Matrix.trace_add, map_add]
-    linarith
-  -- Step 3: the Frobenius estimate against `M = c·Pi + (c/2)·R`
-  obtain ⟨Mm, hM⟩ : ∃ Mm : Matrix n n 𝕜, Mm = c • Pi + (c / 2) • R := ⟨_, rfl⟩
-  have hMh : Mm.IsHermitian := by
-    rw [Matrix.IsHermitian, hM, Matrix.conjTranspose_add, conjTranspose_real_smul,
-      conjTranspose_real_smul, hPih.eq, hRh.eq]
-  have hMM : Mm * Mm = (c ^ 2) • Pi + (c ^ 2 / 4) • R := by
-    rw [hM]
-    simp only [Matrix.add_mul, Matrix.mul_add, smul_mul, Matrix.mul_smul, smul_smul, hPi2, hR2,
-      hPiR, hRPi, smul_zero, add_zero, zero_add]
-    congr 2 <;> ring
-  have htrMM : RCLike.re (Matrix.trace (Mm * Mm))
-      = c ^ 2 * RCLike.re Pi.trace + c ^ 2 / 4 * RCLike.re R.trace := by
-    rw [hMM, Matrix.trace_add, Matrix.trace_smul, Matrix.trace_smul, map_add, RCLike.smul_re,
-      RCLike.smul_re]
-  have htrSM : RCLike.re (Matrix.trace (S * Mm))
-      = c * RCLike.re (Matrix.trace (S * Pi)) + c / 2 * RCLike.re (Matrix.trace (S * R)) := by
-    rw [hM, Matrix.mul_add, Matrix.mul_smul, Matrix.mul_smul, Matrix.trace_add, Matrix.trace_smul,
-      Matrix.trace_smul, map_add, RCLike.smul_re, RCLike.smul_re]
-  have hSPi : Matrix.trace (S * Pi)
-      = Matrix.trace S - Matrix.trace (S * R) - Matrix.trace (S * E) := by
-    have h1 : S * Pi = S - S * R - S * E := by rw [hE]; noncomm_ring
-    rw [h1, Matrix.trace_sub, Matrix.trace_sub]
-  have htrS : RCLike.re (Matrix.trace S) = RCLike.re P.trace + RCLike.re Q.trace := by
-    rw [hS, Matrix.trace_add, map_add]
-  have hkey := frobSq_nonneg (S - Mm)
-  rw [frobSq_sub hSh hMh] at hkey
-  have hfrobM : frobSq Mm = RCLike.re (Matrix.trace (Mm * Mm)) := by rw [frobSq, hMh.eq]
-  have hb : c ^ 2 * RCLike.re Pi.trace ≤ c ^ 2 * b :=
-    mul_le_mul_of_nonneg_left htPi (sq_nonneg c)
-  have hr : c ^ 2 / 4 * RCLike.re R.trace ≤ c ^ 2 / 4 * r :=
-    mul_le_mul_of_nonneg_left htR (by positivity)
-  have hSRc : c * RCLike.re (Matrix.trace (S * R)) ≤ c * RCLike.re P.trace :=
-    mul_le_mul_of_nonneg_left hSRle hc.le
-  have hSEc : c * RCLike.re (Matrix.trace (S * E)) ≤ 0 :=
-    mul_nonpos_of_nonneg_of_nonpos hc.le hSEle
-  rw [hfrobM, htrMM, htrSM, hSPi] at hkey
-  simp only [map_sub] at hkey
-  rw [htrS] at hkey
-  have hFS : frobSq S = frobSq (P + Q) := by rw [hS]
-  rw [hFS] at hkey
+omit [DecidableEq n] in
+lemma frobSq_ge (M X : Matrix n n 𝕜) :
+    2 * RCLike.re (Matrix.trace (Mᴴ * X)) - frobSq X ≤ frobSq M := by
+  have h := frobSq_nonneg (M - X)
+  rw [frobSq_sub] at h
   linarith
 
-/-! ## Main theorem -/
+/-- The trace of the product of two positive semidefinite matrices is nonnegative. -/
+lemma re_trace_mul_nonneg {P₁ P₂ : Matrix n n 𝕜} (h₁ : P₁.PosSemidef) (h₂ : P₂.PosSemidef) :
+    0 ≤ RCLike.re (Matrix.trace (P₁ * P₂)) := by
+  obtain ⟨T, hTpsd, hTT⟩ : ∃ T : Matrix n n 𝕜, T.PosSemidef ∧ T * T = P₁ := by
+    refine ⟨hFun h₁.1 Real.sqrt, hFun_posSemidef h₁.1 fun i => Real.sqrt_nonneg _, ?_⟩
+    rw [hFun_mul, show (hFun h₁.1 fun x => Real.sqrt x * Real.sqrt x) = hFun h₁.1 (fun x => x) from
+      hFun_congr h₁.1 fun i => Real.mul_self_sqrt (h₁.eigenvalues_nonneg i), hFun_id]
+  have hTH : Tᴴ = T := hTpsd.1
+  have key : Matrix.trace (P₁ * P₂) = Matrix.trace (Tᴴ * P₂ * T) := by
+    rw [hTH, ← hTT, Matrix.mul_assoc, Matrix.trace_mul_comm T (T * P₂), Matrix.mul_assoc]
+  rw [key]
+  simpa using RCLike.re_le_re (h₂.conjTranspose_mul_mul_same T).trace_nonneg
 
-/-- **Rank–trace inequality**.  If `P` is positive semidefinite of rank at most `r`, `Q` is
-Hermitian with at most `b` positive eigenvalues and `c > 0`, then
-`c·Re tr P − (c²/4)·r + 2c·Re tr Q − c²·b ≤ ‖P + Q‖_F²`. -/
-theorem rank_trace_ineq {P Q : Matrix n n 𝕜} {r b : ℕ} {c : ℝ}
-    (hc : 0 < c) (hP : P.PosSemidef) (hPr : P.rank ≤ r)
-    (hQ : Q.IsHermitian) (hQb : posIndex hQ ≤ b) :
+omit [DecidableEq n] in
+/-- A Hermitian idempotent matrix is positive semidefinite. -/
+lemma posSemidef_of_idem {G : Matrix n n 𝕜} (hG : G.IsHermitian) (hGG : G * G = G) :
+    G.PosSemidef := by
+  have h : G = Gᴴ * G := by rw [hG, hGG]
+  rw [h]
+  exact Matrix.posSemidef_conjTranspose_mul_self G
+
+/-! ## Spectral projections -/
+
+/-- The spectral projection onto the positive part of a Hermitian matrix `Q`, together with its
+complement `R` and the negative part `S = -R Q R` of `Q`. -/
+lemma exists_pos_proj {Q : Matrix n n 𝕜} (hQ : Q.IsHermitian) :
+    ∃ E R S : Matrix n n 𝕜, Eᴴ = E ∧ Rᴴ = R ∧ E + R = 1 ∧ E * E = E ∧ R * R = R ∧
+      E * R = 0 ∧ R * E = 0 ∧ R * Q * R = -S ∧ S.PosSemidef ∧
+      RCLike.re E.trace = (posIndex hQ : ℝ) := by
+  classical
+  refine ⟨hFun hQ (fun x => if 0 < x then 1 else 0), hFun hQ (fun x => if 0 < x then 0 else 1),
+    hFun hQ (fun x => if 0 < x then 0 else -x), hFun_isHermitian hQ _, hFun_isHermitian hQ _,
+    ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · rw [hFun_add, ← hFun_one hQ]
+    exact hFun_congr hQ fun i => by split_ifs <;> norm_num
+  · rw [hFun_mul]
+    exact hFun_congr hQ fun i => by split_ifs <;> norm_num
+  · rw [hFun_mul]
+    exact hFun_congr hQ fun i => by split_ifs <;> norm_num
+  · rw [hFun_mul, ← hFun_zero hQ]
+    exact hFun_congr hQ fun i => by split_ifs <;> norm_num
+  · rw [hFun_mul, ← hFun_zero hQ]
+    exact hFun_congr hQ fun i => by split_ifs <;> norm_num
+  · have key : hFun hQ (fun x => if 0 < x then (0:ℝ) else 1) * hFun hQ (fun x => x) *
+        hFun hQ (fun x => if 0 < x then (0:ℝ) else 1)
+        = hFun hQ (fun x => (if 0 < x then (0:ℝ) else 1) * x * (if 0 < x then (0:ℝ) else 1)) := by
+      rw [hFun_mul, hFun_mul]
+    rw [hFun_id] at key
+    rw [key, eq_comm, neg_eq_iff_add_eq_zero, hFun_add, ← hFun_zero hQ]
+    exact hFun_congr hQ fun i => by split_ifs <;> ring
+  · refine hFun_posSemidef hQ fun i => ?_
+    split_ifs with h
+    · exact le_refl 0
+    · linarith [not_lt.mp h]
+  · rw [re_trace_hFun, posIndex, Nat.card_eq_fintype_card, Fintype.card_subtype]
+    simp [Finset.sum_boole]
+
+/-- The orthogonal projection onto the range of a positive semidefinite matrix `A`. -/
+lemma exists_range_proj {A : Matrix n n 𝕜} (hA : A.PosSemidef) :
+    ∃ F B : Matrix n n 𝕜, Fᴴ = F ∧ F * F = F ∧ A * F = A ∧ A * B = F ∧
+      RCLike.re F.trace = (A.rank : ℝ) := by
+  classical
+  refine ⟨hFun hA.1 (fun x => if x ≠ 0 then 1 else 0),
+    hFun hA.1 (fun x => if x ≠ 0 then x⁻¹ else 0), hFun_isHermitian hA.1 _, ?_, ?_, ?_, ?_⟩
+  · rw [hFun_mul]
+    exact hFun_congr hA.1 fun i => by split_ifs <;> norm_num
+  · have key : hFun hA.1 (fun x => x) * hFun hA.1 (fun x => if x ≠ 0 then (1:ℝ) else 0)
+        = hFun hA.1 (fun x => x * (if x ≠ 0 then (1:ℝ) else 0)) := hFun_mul hA.1 _ _
+    rw [hFun_id] at key
+    rw [key, show (hFun hA.1 fun x => x * (if x ≠ 0 then (1:ℝ) else 0))
+        = hFun hA.1 (fun x => x) from hFun_congr hA.1 fun i => by
+          split_ifs with h
+          · ring
+          · simp only [ne_eq, not_not] at h; simp [h]]
+    exact hFun_id hA.1
+  · have key : hFun hA.1 (fun x => x) * hFun hA.1 (fun x => if x ≠ 0 then x⁻¹ else 0)
+        = hFun hA.1 (fun x => x * (if x ≠ 0 then x⁻¹ else 0)) := hFun_mul hA.1 _ _
+    rw [hFun_id] at key
+    rw [key]
+    exact hFun_congr hA.1 fun i => by
+      split_ifs with h
+      · exact mul_inv_cancel₀ h
+      · ring
+  · rw [re_trace_hFun, hA.1.rank_eq_card_non_zero_eigs, Fintype.card_subtype, Finset.card_filter]
+    push_cast
+    exact Finset.sum_congr rfl fun i _ => by split_ifs <;> simp_all
+
+/-! ## Two computations with the test matrix -/
+
+lemma re_trace_mul_comb (M E F : Matrix n n 𝕜) (c d : ℝ) :
+    RCLike.re (Matrix.trace (M * ((c : 𝕜) • E + (d : 𝕜) • F)))
+      = c * RCLike.re (Matrix.trace (M * E)) + d * RCLike.re (Matrix.trace (M * F)) := by
+  simp [Matrix.mul_add, Matrix.trace_add, Matrix.trace_smul, RCLike.smul_re]
+
+omit [DecidableEq n] in
+lemma frobSq_proj_comb {E F : Matrix n n 𝕜} (hEH : Eᴴ = E) (hFH : Fᴴ = F)
+    (hEE : E * E = E) (hFF : F * F = F) (hEF : E * F = 0) (hFE : F * E = 0) (c d : ℝ) :
+    frobSq ((c : 𝕜) • E + (d : 𝕜) • F)
+      = c ^ 2 * RCLike.re E.trace + d ^ 2 * RCLike.re F.trace := by
+  have hXH : (((c : 𝕜) • E + (d : 𝕜) • F))ᴴ = (c : 𝕜) • E + (d : 𝕜) • F := by
+    rw [conjTranspose_add, conjTranspose_smul, conjTranspose_smul, hEH, hFH]
+    simp
+  rw [frobSq, hXH]
+  simp only [Matrix.add_mul, Matrix.mul_add, Matrix.smul_mul, Matrix.mul_smul, hEE, hFF, hEF, hFE,
+    smul_zero, add_zero, zero_add, Matrix.trace_add, Matrix.trace_smul,
+    smul_eq_mul, map_add, smul_smul]
+  simp [RCLike.mul_re]
+  ring
+
+/-! ## The main inequality -/
+
+/-- **Rank–trace inequality** (Lemma 3.2).  If `P` is positive semidefinite of rank at most `r`,
+`Q` is Hermitian with at most `b` positive eigenvalues, and `c > 0`, then
+`c·tr P − (c²/4)·r + 2c·tr Q − c²·b ≤ ‖P + Q‖_F²`. -/
+theorem rank_trace_ineq {P Q : Matrix n n 𝕜} (hP : P.PosSemidef) (hQ : Q.IsHermitian)
+    (r b : ℕ) (hr : P.rank ≤ r) (hb : posIndex hQ ≤ b) (c : ℝ) (hc : 0 < c) :
     c * RCLike.re P.trace - c ^ 2 / 4 * r + 2 * c * RCLike.re Q.trace - c ^ 2 * b
       ≤ frobSq (P + Q) := by
   classical
-  -- `Pi` is the spectral projection of `Q` onto its positive eigenvalues
-  obtain ⟨Pi, hPidef⟩ : ∃ X : Matrix n n 𝕜, X = specFun hQ (fun x => if 0 < x then 1 else 0) :=
-    ⟨_, rfl⟩
-  have hPih : Pi.IsHermitian := hPidef ▸ specFun_isHermitian hQ _
-  have hPi2 : Pi * Pi = Pi := by
-    rw [hPidef, specFun_mul]
-    exact specFun_congr hQ (fun i => by by_cases h : 0 < hQ.eigenvalues i <;> simp [h])
-  have htPi : RCLike.re Pi.trace ≤ (b : ℝ) := by
-    rw [hPidef, re_trace_specFun_indicator]
-    exact_mod_cast hQb
-  have hcomp : (1 : Matrix n n 𝕜) - Pi = specFun hQ (fun x => if 0 < x then 0 else 1) := by
-    have h : specFun hQ (fun x => (if 0 < x then (0 : ℝ) else 1) + (if 0 < x then 1 else 0))
-        = specFun hQ (fun _ => 1) :=
-      specFun_congr hQ (fun i => by by_cases h : 0 < hQ.eigenvalues i <;> simp [h])
-    rw [sub_eq_iff_eq_add, hPidef, specFun_add, h, specFun_one]
-  -- the compression of `Q` to the orthogonal complement is negative semidefinite
-  have hNSD : (-((1 - Pi) * Q * (1 - Pi))).PosSemidef := by
-    rw [hcomp]
-    nth_rewrite 2 [← specFun_id hQ]
-    rw [specFun_mul, specFun_mul, specFun_neg]
-    refine specFun_posSemidef hQ _ (fun i => ?_)
-    by_cases h : 0 < hQ.eigenvalues i
-    · simp [h]
-    · simp only [h, if_false, id, one_mul, mul_one, neg_nonneg]
-      exact not_lt.mp h
-  have hPicomp : Pi * (1 - Pi) = 0 := by
-    rw [hcomp, hPidef, specFun_mul,
-      specFun_congr hQ (f := fun x => (if 0 < x then (1 : ℝ) else 0) * (if 0 < x then 0 else 1))
-        (g := fun _ => 0) (fun i => by by_cases h : 0 < hQ.eigenvalues i <;> simp [h]),
-      specFun_zero]
-  -- `R` is the projection onto the range of the compression of `P`
-  have hcompH : ((1 : Matrix n n 𝕜) - Pi).IsHermitian := by
-    simp [Matrix.IsHermitian, Matrix.conjTranspose_sub, hPih.eq]
-  have hK : ((1 - Pi) * P * (1 - Pi)).PosSemidef := by
-    have h := hP.conjTranspose_mul_mul_same ((1 : Matrix n n 𝕜) - Pi)
-    rwa [hcompH.eq] at h
-  obtain ⟨R, hRdef⟩ : ∃ X : Matrix n n 𝕜, X = specFun hK.1 (fun x => if x ≠ 0 then 1 else 0) :=
-    ⟨_, rfl⟩
-  have hRh : R.IsHermitian := hRdef ▸ specFun_isHermitian hK.1 _
-  have hR2 : R * R = R := by
-    rw [hRdef, specFun_mul]
-    exact specFun_congr hK.1 (fun i => by by_cases h : hK.1.eigenvalues i ≠ 0 <;> simp [h])
-  have htR : RCLike.re R.trace ≤ (r : ℝ) := by
-    rw [hRdef, re_trace_specFun_indicator]
-    have h1 : Fintype.card {i // hK.1.eigenvalues i ≠ 0} = ((1 - Pi) * P * (1 - Pi)).rank :=
-      (Matrix.IsHermitian.rank_eq_card_non_zero_eigs hK.1).symm
-    have h2 : ((1 - Pi) * P * (1 - Pi)).rank ≤ r :=
-      le_trans (le_trans (Matrix.rank_mul_le_left _ _) (Matrix.rank_mul_le_right _ _)) hPr
-    rw [h1]
-    exact_mod_cast h2
-  have hKR : ((1 - Pi) * P * (1 - Pi)) * R = (1 - Pi) * P * (1 - Pi) := by
-    have h1 : ((1 - Pi) * P * (1 - Pi)) * R
-        = specFun hK.1 id * specFun hK.1 (fun x => if x ≠ 0 then 1 else 0) := by
-      rw [hRdef, specFun_id]
-    have h2 : ∀ i, id (hK.1.eigenvalues i) * (if hK.1.eigenvalues i ≠ 0 then (1 : ℝ) else 0)
-        = id (hK.1.eigenvalues i) := by
-      intro i
-      by_cases h : hK.1.eigenvalues i ≠ 0
-      · simp [h]
-      · push_neg at h
-        simp [h]
-    rw [h1, specFun_mul, specFun_congr hK.1 h2, specFun_id]
-  have hRK : R
-      = ((1 - Pi) * P * (1 - Pi)) * specFun hK.1 (fun x => if x = 0 then 0 else 1 / x) := by
-    have h1 : ((1 - Pi) * P * (1 - Pi)) * specFun hK.1 (fun x => if x = 0 then 0 else 1 / x)
-        = specFun hK.1 id * specFun hK.1 (fun x => if x = 0 then 0 else 1 / x) := by
-      rw [specFun_id]
-    rw [h1, specFun_mul, hRdef]
-    refine specFun_congr hK.1 (fun i => ?_)
-    by_cases h : hK.1.eigenvalues i = 0 <;> simp [h] <;> field_simp
-  have hPiK : Pi * ((1 - Pi) * P * (1 - Pi)) = 0 := by
-    calc Pi * ((1 - Pi) * P * (1 - Pi)) = (Pi * (1 - Pi)) * P * (1 - Pi) := by noncomm_ring
-      _ = 0 := by rw [hPicomp]; simp
-  have hPiR : Pi * R = 0 := by rw [hRK, ← Matrix.mul_assoc, hPiK, Matrix.zero_mul]
-  have hRPi : R * Pi = 0 := by
-    have h := congrArg Matrix.conjTranspose hPiR
-    rw [Matrix.conjTranspose_mul, hPih.eq, hRh.eq, Matrix.conjTranspose_zero] at h
+  obtain ⟨E, R, S, hEH, hRH, hER1, hEE, hRR, hER0, hRE0, hRQR, hSpsd, hEtr⟩ :=
+    exists_pos_proj hQ
+  have hEpsd : E.PosSemidef := posSemidef_of_idem hEH hEE
+  have hRPRpsd : (R * P * R).PosSemidef := by
+    have h := hP.conjTranspose_mul_mul_same R
+    rwa [hRH] at h
+  obtain ⟨F, B, hFH, hFF, hAF, hAB, hFtr⟩ := exists_range_proj hRPRpsd
+  -- `F` lives inside the range of `R`
+  have hRRP : R * (R * P * R) = R * P * R := by
+    rw [← Matrix.mul_assoc R (R * P) R, ← Matrix.mul_assoc R R P, hRR]
+  have hRF : R * F = F := by
+    rw [← hAB, ← Matrix.mul_assoc, hRRP]
+  have hFR : F * R = F := by
+    have h := congrArg Matrix.conjTranspose hRF
+    rw [conjTranspose_mul, hFH, hRH] at h
     exact h
-  have hKPi : ((1 - Pi) * P * (1 - Pi)) * Pi = 0 := by
-    have h := congrArg Matrix.conjTranspose hPiK
-    rw [Matrix.conjTranspose_mul, hPih.eq, hK.1.eq, Matrix.conjTranspose_zero] at h
-    exact h
-  have hKE : ((1 - Pi) * P * (1 - Pi)) * (1 - Pi - R) = 0 := by
-    rw [Matrix.mul_sub, Matrix.mul_sub, Matrix.mul_one, hKPi, hKR, sub_zero, sub_self]
-  exact trace_ineq_of_projections hc hP hQ hPih hPi2 hRh hR2 hPiR hRPi htPi htR hNSD hKE
+  have hRFR : R * F * R = F := by rw [hRF, hFR]
+  have hEF : E * F = 0 := by rw [← hRF, ← Matrix.mul_assoc, hER0, Matrix.zero_mul]
+  have hFE : F * E = 0 := by rw [← hFR, Matrix.mul_assoc, hRE0, Matrix.mul_zero]
+  have hFpsd : F.PosSemidef := posSemidef_of_idem hFH hFF
+  -- `R = 1 - E`
+  have hRE : R = 1 - E := by rw [← hER1]; abel
+  -- traces
+  have hpe : 0 ≤ RCLike.re (Matrix.trace (P * E)) := re_trace_mul_nonneg hP hEpsd
+  have hs : 0 ≤ RCLike.re S.trace := by simpa using RCLike.re_le_re hSpsd.trace_nonneg
+  have hSFle : RCLike.re (Matrix.trace (S * F)) ≤ RCLike.re S.trace := by
+    have h1 : (1 - F : Matrix n n 𝕜).PosSemidef := by
+      refine posSemidef_of_idem (by simp [Matrix.IsHermitian, hFH]) ?_
+      rw [Matrix.sub_mul, Matrix.mul_sub, Matrix.mul_sub, hFF]
+      simp
+    have h2 := re_trace_mul_nonneg hSpsd h1
+    rw [Matrix.mul_sub, Matrix.mul_one, Matrix.trace_sub, map_sub] at h2
+    linarith
+  have hPF : RCLike.re (Matrix.trace (P * F))
+      = RCLike.re P.trace - RCLike.re (Matrix.trace (P * E)) := by
+    have e1 : Matrix.trace (P * F) = Matrix.trace (R * P * R * F) := by
+      calc Matrix.trace (P * F) = Matrix.trace (P * (R * F * R)) := by rw [hRFR]
+        _ = Matrix.trace (P * R * F * R) := by simp [Matrix.mul_assoc]
+        _ = Matrix.trace (R * (P * R * F)) := Matrix.trace_mul_comm _ _
+        _ = Matrix.trace (R * P * R * F) := by simp [Matrix.mul_assoc]
+    have e2 : Matrix.trace (R * P * R * F) = Matrix.trace (P * R) := by
+      calc Matrix.trace (R * P * R * F) = Matrix.trace (R * P * R) := by rw [hAF]
+        _ = Matrix.trace (R * (P * R)) := by simp [Matrix.mul_assoc]
+        _ = Matrix.trace (P * R * R) := Matrix.trace_mul_comm _ _
+        _ = Matrix.trace (P * (R * R)) := by simp [Matrix.mul_assoc]
+        _ = Matrix.trace (P * R) := by rw [hRR]
+    have e3 : Matrix.trace (P * R) = Matrix.trace P - Matrix.trace (P * E) := by
+      rw [hRE, Matrix.mul_sub, Matrix.mul_one, Matrix.trace_sub]
+    rw [e1, e2, e3, map_sub]
+  have hQR : Matrix.trace (Q * R) = -Matrix.trace S := by
+    have e1 : Matrix.trace (Q * R) = Matrix.trace (R * Q * R) := by
+      calc Matrix.trace (Q * R) = Matrix.trace (Q * (R * R)) := by rw [hRR]
+        _ = Matrix.trace (Q * R * R) := by simp [Matrix.mul_assoc]
+        _ = Matrix.trace (R * (Q * R)) := Matrix.trace_mul_comm _ _
+        _ = Matrix.trace (R * Q * R) := by simp [Matrix.mul_assoc]
+    rw [e1, hRQR, Matrix.trace_neg]
+  have hQE : RCLike.re (Matrix.trace (Q * E))
+      = RCLike.re Q.trace + RCLike.re S.trace := by
+    have e0 : Matrix.trace (Q * E) + Matrix.trace (Q * R) = Matrix.trace Q := by
+      rw [← Matrix.trace_add, ← Matrix.mul_add, hER1, Matrix.mul_one]
+    have h := congrArg RCLike.re e0
+    rw [map_add, hQR, map_neg] at h
+    linarith
+  have hQF : -RCLike.re S.trace ≤ RCLike.re (Matrix.trace (Q * F)) := by
+    have e1 : Matrix.trace (Q * F) = Matrix.trace (R * Q * R * F) := by
+      calc Matrix.trace (Q * F) = Matrix.trace (Q * (R * F * R)) := by rw [hRFR]
+        _ = Matrix.trace (Q * R * F * R) := by simp [Matrix.mul_assoc]
+        _ = Matrix.trace (R * (Q * R * F)) := Matrix.trace_mul_comm _ _
+        _ = Matrix.trace (R * Q * R * F) := by simp [Matrix.mul_assoc]
+    rw [e1, hRQR, Matrix.neg_mul, Matrix.trace_neg, map_neg]
+    linarith
+  -- rank / index bounds
+  have hEb : RCLike.re E.trace ≤ (b : ℝ) := by
+    rw [hEtr]; exact_mod_cast hb
+  have hFr : RCLike.re F.trace ≤ (r : ℝ) := by
+    rw [hFtr]
+    have h1 : (R * P * R).rank ≤ P.rank :=
+      le_trans (Matrix.rank_mul_le_left (R * P) R) (Matrix.rank_mul_le_right R P)
+    exact_mod_cast le_trans h1 hr
+  -- the variational bound
+  have hMH : (P + Q)ᴴ = P + Q := by rw [conjTranspose_add, hP.1, hQ]
+  have main := frobSq_ge (P + Q) ((c : 𝕜) • E + ((c / 2 : ℝ) : 𝕜) • F)
+  rw [hMH, re_trace_mul_comb, frobSq_proj_comb hEH hFH hEE hFF hEF hFE] at main
+  rw [Matrix.add_mul, Matrix.add_mul, Matrix.trace_add, Matrix.trace_add, map_add, map_add] at main
+  nlinarith [main, hpe, hs, hSFle, hPF, hQE, hQF, hEb, hFr, hc.le, sq_nonneg c]
+
+
+/-! ## A scalar shadow of the inequality
+
+Instantiating `rank_trace_ineq` with `P = 0`, `Q = (m)` a `1 × 1` real matrix, `r = 0`, `b = 1`
+and `c = 1` yields the integrality step `2 m - 1 ≤ m ^ 2`.  This is recorded to witness that the
+main inequality is not vacuous. -/
+
+theorem two_mul_sub_one_le_sq (m : ℝ) : 2 * m - 1 ≤ m ^ 2 := by
+  have hQ : ((!![m] : Matrix (Fin 1) (Fin 1) ℝ)).IsHermitian := by
+    unfold Matrix.IsHermitian
+    ext i j
+    fin_cases i
+    fin_cases j
+    simp
+  have hb : posIndex hQ ≤ 1 := by
+    have h := Nat.card_le_card_of_injective
+      (Subtype.val : {i // 0 < hQ.eigenvalues i} → Fin 1) Subtype.val_injective
+    simpa [posIndex] using h
+  have h := rank_trace_ineq (P := (0 : Matrix (Fin 1) (Fin 1) ℝ)) (Q := !![m])
+    Matrix.PosSemidef.zero hQ 0 1 (by simp) hb 1 one_pos
+  have hf : frobSq ((0 : Matrix (Fin 1) (Fin 1) ℝ) + !![m]) = m ^ 2 := by
+    rw [zero_add, frobSq, Matrix.trace_fin_one]
+    simp [Matrix.mul_apply]
+    ring
+  rw [hf] at h
+  simpa using h
 
 end Zeta23Core
 

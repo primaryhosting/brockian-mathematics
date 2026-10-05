@@ -1,23 +1,22 @@
 import Mathlib
 import RequestProject.TwoSquares13
 
-/-
-# Two Squares 13 — Mathlib version
+/-!
+# Two Squares 13 (Mathlib phrasing)
 
-Companion to `RequestProject/TwoSquares13.lean`.  (That file must literally begin with the
-prescribed module-doc header, and Lean 4 does not allow `import` commands after a doc comment,
-so the Mathlib-based development lives here.)
-
-The relevant Mathlib result is `Nat.Prime.sq_add_sq` (Mathlib/NumberTheory/SumTwoSquares.lean):
-for a prime `p` with `p % 4 ≠ 3` there are naturals `a b` with `a ^ 2 + b ^ 2 = p`.
+A companion to `RequestProject/TwoSquares13.lean`, restating the result with
+Mathlib's `Nat.Prime`.
 -/
 
 namespace Math
 
-/-- `13` is prime, in Mathlib's sense. -/
+/-- The prime `13` is a sum of two squares: `13 = 2 ^ 2 + 3 ^ 2`. -/
 
 theorem two_squares_13_prime : Nat.Prime 13 ∧ ∃ a b : ℕ, 13 = a ^ 2 + b ^ 2 :=
-  ⟨thirteen_prime_mathlib, two_squares_13⟩
+  ⟨(Nat.prime_def_lt.2 ⟨by norm_num, fun m hm hdvd => by
+      rcases Math.divisors_13 m hdvd with h | h
+      · exact h
+      · omega⟩), 2, 3, by norm_num⟩
 
 end Math
 
@@ -29,6 +28,14 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+/-
+Note: Lean 4 requires `import` commands to precede every other command in a file,
+including module doc comments such as the mandated header above.  Since the header
+must literally begin the file, this development is carried out in pure core Lean,
+without importing Mathlib; primality of 13 is therefore spelled out explicitly
+(`2 ≤ 13` together with the fact that every divisor of 13 is `1` or `13`).
+-/
+
 namespace Math
 
-/-- **Two squares for 13.** The prime `13` is a sum of two squares: `13 = 2 ^ 2 + 3 ^ 2`. -/
+/-- Every divisor of `13` is `1` or `13`. -/

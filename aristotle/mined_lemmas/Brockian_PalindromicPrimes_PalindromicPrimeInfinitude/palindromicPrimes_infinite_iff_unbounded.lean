@@ -34,37 +34,31 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 /-!
-## Overview
-
-Whether there are infinitely many base-ten palindromic primes is an open problem, so the
-unconditional statement is out of reach.  What is proved here is an unconditional *reduction*
-of that question, resting on a genuine intermediate theorem:
-
-* every base-ten palindrome with an **even** number of digits is divisible by `11`
-  (`Brockian.PalindromicPrimes.eleven_dvd_of_isPalindrome_of_even_length`);
-* consequently `11` is the **only** palindromic prime with an even number of digits
-  (`Brockian.PalindromicPrimes.evenLengthPalindromicPrimes_eq`);
-* hence the palindromic primes are infinite **iff** the palindromic primes with an odd number
-  of digits are infinite (`Brockian.PalindromicPrimes.PalindromicPrimeInfinitude`).
-
-So the Brockian conjecture may be attacked entirely inside the odd-digit-length case, with no
-loss of generality.
+# Palindromic Prime Infinitude
+Category: Brockian Conjecture
+Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 namespace Brockian.PalindromicPrimes
 
-open scoped Nat
+open Nat
 
-/-- `n` is a base-ten palindrome: its list of decimal digits equals its own reversal. -/
+/-- A natural number is a (base-10) palindrome when its list of decimal digits
+reads the same forwards and backwards. -/
 
 theorem palindromicPrimes_infinite_iff_unbounded :
-    palindromicPrimes.Infinite ↔ ∀ N : ℕ, ∃ p ∈ palindromicPrimes, N < p := by
-  constructor
-  · intro h N
-    obtain ⟨p, hp, hlt⟩ := h.exists_gt N
-    exact ⟨p, hp, hlt⟩
-  · intro h
-    exact Set.infinite_of_forall_exists_gt (fun N => h N)
+    palindromicPrimes.Infinite ↔ ∀ N : ℕ, ∃ p ∈ palindromicPrimes, N < p :=
+  Set.infinite_iff_exists_gt
 
-/-- **Conditional form of the Brockian conjecture.**  It suffices to produce, above every bound,
-one palindromic prime with an odd number of decimal digits. -/
+/-! ## Sanity checks -/
+
+example : (11 : ℕ) ∈ palindromicPrimes :=
+  ⟨by norm_num, List.Palindrome.of_reverse_eq (by decide)⟩
+
+example : (131 : ℕ) ∈ oddLengthPalindromicPrimes :=
+  ⟨by norm_num, List.Palindrome.of_reverse_eq (by decide), by decide⟩
+
+end Brockian.PalindromicPrimes
+

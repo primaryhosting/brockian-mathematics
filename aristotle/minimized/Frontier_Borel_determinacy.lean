@@ -5,242 +5,213 @@ Target: Frontier.Borel_determinacy
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`,
--- so the header above is written as a plain block comment.)
+
+-- (The header above repeats verbatim as a module docstring below; Lean 4 does not allow a
+-- module docstring to precede the `import` commands.)
 
 import Mathlib
 
 /-!
-## Overview
-
-We formalise infinite two-player perfect-information games on Baire space `ℕ → ℕ`
-(the standard setting for Borel determinacy), together with strategies, winning
-strategies and determinacy.
-
-* `Frontier.BorelDeterminacy` is the full statement of Martin's theorem: every game whose
-  payoff set is Borel is determined.
-* `Frontier.Borel_determinacy` is the *base case* of that statement, proved here in full:
-  every game whose payoff set lies at the bottom level of the Borel hierarchy
-  (`Σ⁰₁`, i.e. open, or `Π⁰₁`, i.e. closed) is determined.  This is the Gale–Stewart
-  theorem, the base case on which Martin's inductive unravelling argument rests.
-  Mathlib contains no determinacy results, so the game-theoretic framework and the
-  proof are developed here from scratch.
-
-The proof of the base case is the classical one: if the first player has no winning
-strategy from the empty position, the second player can move so as to preserve the
-property "the first player has no winning strategy from the current position", and an
-open payoff set would be entered only at a position from which the first player wins
-trivially.
+# Borel Determinacy
+Category: Frontier — Set Theory
+Target: Frontier.Borel_determinacy
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 namespace Frontier
 
-/-- Baire space: the space of plays of a game where each move is a natural number. -/
-abbrev Baire := ℕ → ℕ
+universe u
 
-/-- The position (finite sequence of moves) consisting of the first `n` moves of the
-play `f`. -/
+/-! ## Infinite two-player games on sequences -/
 
-def pre (f : Baire) (n : ℕ) : List ℕ := (List.range n).map f
+/-- A strategy is a map from the finite history of moves played so far to the next move. -/
 
-/-- The `i`-th entry of a position, with junk value `0` out of range. -/
+def Strategy (A : Type u) : Type u := List A → A
 
-def nth (q : List ℕ) (i : ℕ) : ℕ := q.getD i 0
+variable {A : Type u}
 
-lemma pre_succ (f : Baire) (n : ℕ) : pre f (n + 1) = pre f n ++ [f n] := by
-  simp [pre, List.range_succ]
+/-- The list of the first `n` moves of the play `x`. -/
 
-lemma nth_pre {f : Baire} {n i : ℕ} (h : i < n) : nth (pre f n) i = f i := by
-  rw [nth, pre, List.getD_eq_getElem] <;> simp [h]
+def hist (x : ℕ → A) (n : ℕ) : List A := (List.range n).map x
 
-/-- The play `f` starts with the position `p`. -/
+lemma hist_succ (x : ℕ → A) (n : ℕ) : hist x (n + 1) = hist x n ++ [x n] := by
+  simp [hist, List.range_succ]
 
-def Extends (p : List ℕ) (f : Baire) : Prop := pre f p.length = p
+lemma hist_getD [Inhabited A] (x : ℕ → A) {i n : ℕ} (h : i < n) :
+    (hist x n).getD i default = x i := by
+  simp [hist, List.getD_eq_getElem?_getD, h]
 
-/-- `Cons e p σ f` says that from the position `p` onwards, the play `f` follows the
-strategy `σ` at all moves belonging to the player `e` (`e = 0` is the player who moves
-at even stages, `e = 1` the player who moves at odd stages). -/
+def ConsI (p : List A) (σ : Strategy A) (x : ℕ → A) : Prop :=
+  hist x p.length = p ∧ ∀ n, p.length ≤ n → Even n → x n = σ (hist x n)
 
-def Cons (e : ℕ) (p : List ℕ) (σ : List ℕ → ℕ) (f : Baire) : Prop :=
-  ∀ n, p.length ≤ n → n % 2 = e → f n = σ (pre f n)
+/-- `ConsII p τ x` : the play `x` extends the position `p` and player II (who moves at the odd
+positions) follows the strategy `τ` from `p` onwards. -/
 
-/-- The strategy `σ` for player `e`, played from the position `p`, guarantees that the
-resulting play lies in the payoff set `S`. -/
+def ConsII (p : List A) (τ : Strategy A) (x : ℕ → A) : Prop :=
+  hist x p.length = p ∧ ∀ n, p.length ≤ n → Odd n → x n = τ (hist x n)
 
-def Wins (S : Set Baire) (e : ℕ) (p : List ℕ) (σ : List ℕ → ℕ) : Prop :=
-  ∀ f, Extends p f → Cons e p σ f → f ∈ S
+/-- Player I follows `σ` throughout the whole play `x`. -/
 
-/-- Player `e` has a winning strategy for the payoff set `S` from the position `p`. -/
+def ConsistentI (σ : Strategy A) (x : ℕ → A) : Prop := ConsI [] σ x
 
-def Win (S : Set Baire) (e : ℕ) (p : List ℕ) : Prop := ∃ σ, Wins S e p σ
+/-- Player II follows `τ` throughout the whole play `x`. -/
 
-/-- A game with payoff set `A` (for the player who moves first, at even stages) is
-*determined* if one of the two players has a winning strategy: either the first player
-has a strategy forcing the play into `A`, or the second player has a strategy forcing
-the play into the complement of `A`. -/
+def ConsistentII (τ : Strategy A) (x : ℕ → A) : Prop := ConsII [] τ x
 
-def Determined (A : Set Baire) : Prop := Win A 0 [] ∨ Win Aᶜ 1 []
+/-- `σ` is a winning strategy for player I in the game with payoff set `S` started at `p`. -/
 
-/-!
-### The play produced by a pair of strategies
+def WinIFrom (S : Set (ℕ → A)) (p : List A) (σ : Strategy A) : Prop :=
+  ∀ x, ConsI p σ x → x ∈ S
 
-This section checks that the notion of determinacy above is a genuine dichotomy: a pair of
-strategies always produces a play consistent with both, so the two players cannot both
-have a winning strategy.
--/
+/-- Player I has a winning strategy in the game with payoff set `S` started at `p`. -/
 
-/-- The position reached after `n` moves when player `0` follows `σ` and player `1`
-follows `τ`. -/
+def IWins (S : Set (ℕ → A)) (p : List A) : Prop := ∃ σ, WinIFrom S p σ
 
-theorem win_of_win_append {S : Set Baire} {e : ℕ} {p : List ℕ} {a : ℕ}
-    (hp : p.length % 2 = e) (h : Win S e (p ++ [a])) : Win S e p := by
-  obtain ⟨σ, hσ⟩ := h
-  refine ⟨fun q => if q = p then a else σ q, fun f hf hcons => ?_⟩
-  have hfp : f p.length = a := by
-    have := hcons p.length le_rfl hp
-    rw [Extends] at hf
-    simpa [hf] using this
-  have hext : Extends (p ++ [a]) f := by
-    have : pre f (p.length + 1) = p ++ [a] := by
-      rw [pre_succ, hf, hfp]
-    simpa [Extends] using this
-  refine hσ f hext ?_
-  intro n hn hpar
-  have hlen : p.length < n := by simpa using hn
-  have hne : pre f n ≠ p := by
-    intro hEq
-    have := congrArg List.length hEq
+/-- The game with payoff set `S` (player I wins a play `x` iff `x ∈ S`) is determined. -/
+
+def Determined (S : Set (ℕ → A)) : Prop :=
+  (∃ σ : Strategy A, ∀ x, ConsistentI σ x → x ∈ S) ∨
+  (∃ τ : Strategy A, ∀ x, ConsistentII τ x → x ∉ S)
+
+/-! ## A combinatorial description of the (cl)open sets of the sequence space -/
+
+/-- `S` is open in the product topology on `ℕ → A` with `A` discrete: every member of `S` has a
+finite prefix all of whose extensions lie in `S`. -/
+
+def IsOpenSeq (S : Set (ℕ → A)) : Prop :=
+  ∀ x ∈ S, ∃ n, ∀ y, hist y n = hist x n → y ∈ S
+
+/-- `S` is clopen in the product topology on `ℕ → A` with `A` discrete. -/
+
+def IsClopenSeq (S : Set (ℕ → A)) : Prop := IsOpenSeq S ∧ IsOpenSeq Sᶜ
+
+section Topology
+
+variable [TopologicalSpace A] [DiscreteTopology A]
+
+omit [DiscreteTopology A] in
+/-- Openness in the product topology implies the combinatorial notion `IsOpenSeq`. -/
+
+lemma iWins_of_all_extensions {S : Set (ℕ → A)} {p : List A}
+    (h : ∀ y, hist y p.length = p → y ∈ S) : IWins S p :=
+  ⟨fun _ => default, fun x hx => h x hx.1⟩
+
+omit [Inhabited A] in
+
+lemma not_iWins_snoc_of_even {S : Set (ℕ → A)} {p : List A} (hp : Even p.length)
+    (h : ¬ IWins S p) (a : A) : ¬ IWins S (p ++ [a]) := by
+  classical
+  rintro ⟨σ, hσ⟩
+  refine h ⟨fun l => if l = p then a else σ l, fun x hx => ?_⟩
+  obtain ⟨hx1, hx2⟩ := hx
+  have hfirst : x p.length = a := by
+    have := hx2 p.length le_rfl hp
+    simpa [hx1] using this
+  have hext : hist x (p ++ [a]).length = p ++ [a] := by
+    have : (p ++ [a]).length = p.length + 1 := by simp
+    rw [this, hist_succ, hx1, hfirst]
+  refine hσ x ⟨hext, fun n hn hne => ?_⟩
+  have hn' : p.length < n := by simpa using hn
+  have hne' : hist x n ≠ p := by
+    intro hcon
+    have := congrArg List.length hcon
     simp at this
     omega
-  have := hcons n (le_of_lt hlen) hpar
-  simpa [hne] using this
+  have := hx2 n (le_of_lt hn') hne
+  simpa [hne'] using this
 
-/-- If player `e` wins from *every* immediate successor position of `p`, then player `e`
-wins from `p`.  (This is used when it is the opponent's turn at `p`; the parity of
-`p.length` is in fact irrelevant, since a strategy may read off the last move played.) -/
+lemma exists_not_iWins_snoc {S : Set (ℕ → A)} {p : List A}
+    (h : ¬ IWins S p) : ∃ b : A, ¬ IWins S (p ++ [b]) := by
+  by_contra hcon
+  push_neg at hcon
+  choose f hf using fun b => (hcon b)
+  refine h ⟨fun l => f (l.getD p.length default) l, fun x hx => ?_⟩
+  obtain ⟨hx1, hx2⟩ := hx
+  set b := x p.length with hb
+  refine hf b x ⟨?_, fun n hn hno => ?_⟩
+  · have hlen : (p ++ [b]).length = p.length + 1 := by simp
+    rw [hlen, hist_succ, hx1]
+  · have hn' : p.length < n := by simpa using hn
+    have hxn := hx2 n (le_of_lt hn') hno
+    simp only [hist_getD x hn'] at hxn
+    exact hxn
 
-theorem win_of_forall_win_append {S : Set Baire} {e : ℕ} {p : List ℕ}
-    (h : ∀ a, Win S e (p ++ [a])) : Win S e p := by
-  choose sig hsig using h
-  refine ⟨fun q => sig (nth q p.length) q, fun f hf hcons => ?_⟩
-  set a := f p.length with ha
-  have hext : Extends (p ++ [a]) f := by
-    have : pre f (p.length + 1) = p ++ [a] := by rw [pre_succ, hf]
-    simpa [Extends] using this
-  refine hsig a f hext ?_
-  intro n hn hpar
-  have hlen : p.length < n := by simpa using hn
-  have hnth : nth (pre f n) p.length = a := nth_pre hlen
-  have := hcons n (le_of_lt hlen) hpar
-  rw [this]
-  show sig (nth (pre f n) p.length) (pre f n) = sig a (pre f n)
-  rw [hnth]
+/-- **Gale–Stewart theorem** (base case of Borel determinacy): a game whose payoff set is open
+is determined. -/
 
-/-!
-### The Gale–Stewart theorem
--/
-
-/-- **Gale–Stewart.**  If the payoff set `S` of player `e` is open and player `e` has no
-winning strategy from the position `p`, then the opponent `1 - e` has a winning strategy
-for the complementary payoff set from `p`. -/
-
-theorem win_compl_of_not_win_of_isOpen {S : Set Baire} {e : ℕ} {p : List ℕ} (he : e < 2)
-    (hS : IsOpen S) (h : ¬ Win S e p) : Win Sᶜ (1 - e) p := by
+theorem determined_of_isOpenSeq {S : Set (ℕ → A)} (hS : IsOpenSeq S) : Determined S := by
   classical
-  -- the opponent's strategy: always move to a position from which player `e` does not win
-  set τ : List ℕ → ℕ := fun q => if h : ∃ a, ¬ Win S e (q ++ [a]) then h.choose else 0
-    with hτ
-  refine ⟨τ, fun f hf hcons => ?_⟩
-  have hfp : pre f p.length = p := hf
-  -- every position reached is one from which player `e` has no winning strategy
-  have key : ∀ n, p.length ≤ n → ¬ Win S e (pre f n) := by
-    intro n hn
-    induction n, hn using Nat.le_induction with
-    | base => rw [hfp]; exact h
-    | succ n hn ih =>
-        rw [pre_succ]
-        by_cases hpar : n % 2 = e
-        · -- player `e` moves: by `win_of_win_append` no successor can be winning
-          intro hw
-          exact ih (win_of_win_append (by simpa using hpar) hw)
-        · -- the opponent moves, following `τ`
-          have hex : ∃ a, ¬ Win S e (pre f n ++ [a]) := by
-            by_contra hall
-            push_neg at hall
-            exact ih (win_of_forall_win_append hall)
-          have hfn : f n = τ (pre f n) := by
-            refine hcons n hn ?_
-            have : n % 2 < 2 := Nat.mod_lt _ (by norm_num)
-            omega
-          have hch : τ (pre f n) = hex.choose := by simp only [hτ, dif_pos hex]
-          rw [hfn, hch]
+  by_cases hI : IWins S []
+  · obtain ⟨σ, hσ⟩ := hI
+    exact Or.inl ⟨σ, hσ⟩
+  · right
+    refine ⟨fun p => if h : ∃ b, ¬ IWins S (p ++ [b]) then h.choose else default,
+      fun x hx hxS => ?_⟩
+    obtain ⟨-, hx2⟩ := hx
+    have hgood : ∀ n, ¬ IWins S (hist x n) := by
+      intro n
+      induction n with
+      | zero => simpa using hI
+      | succ n ih =>
+        rw [hist_succ]
+        rcases Nat.even_or_odd n with he | ho
+        · exact not_iWins_snoc_of_even (by simpa using he) ih (x n)
+        · have hex : ∃ b, ¬ IWins S (hist x n ++ [b]) := exists_not_iWins_snoc ih
+          have hxn := hx2 n (by simp) ho
+          simp only [dif_pos hex] at hxn
+          rw [hxn]
           exact hex.choose_spec
-  -- an open payoff set can only be entered at a position which player `e` wins outright
-  intro hmem
-  obtain ⟨u, ⟨y, n, rfl⟩, hxu, hus⟩ :=
-    (PiNat.isTopologicalBasis_cylinders (fun _ => ℕ)).exists_subset_of_mem_open hmem hS
-  refine key (max n p.length) (le_max_right _ _) ⟨fun _ => 0, fun g hg _ => hus ?_⟩
-  simp only [PiNat.cylinder, Set.mem_setOf_eq] at hxu ⊢
-  intro i hi
-  have hi' : i < max n p.length := lt_of_lt_of_le hi (le_max_left _ _)
-  have hgn : pre g (max n p.length) = pre f (max n p.length) := by simpa [Extends] using hg
-  have h2 : nth (pre g (max n p.length)) i = nth (pre f (max n p.length)) i := by rw [hgn]
-  rw [nth_pre hi', nth_pre hi'] at h2
-  rw [h2, hxu i hi]
+    obtain ⟨n, hn⟩ := hS x hxS
+    refine hgood n (iWins_of_all_extensions (p := hist x n) fun y hy => hn y ?_)
+    simpa using hy
 
-/-- Every open game is determined, from any starting position. -/
+/-- Clopen games are determined. -/
 
-theorem determined_of_isOpen {A : Set Baire} (hA : IsOpen A) : Determined A := by
-  by_cases h : Win A 0 []
-  · exact Or.inl h
-  · exact Or.inr (by simpa using win_compl_of_not_win_of_isOpen (p := []) (by norm_num) hA h)
+theorem determined_of_isClopenSeq {S : Set (ℕ → A)} (hS : IsClopenSeq S) : Determined S :=
+  determined_of_isOpenSeq hS.1
 
-/-- Every closed game is determined. -/
+/-- **Gale–Stewart theorem**, topological form: a game on a discrete alphabet whose payoff set is
+open in the product topology is determined. -/
 
-theorem determined_of_isClosed {A : Set Baire} (hA : IsClosed A) : Determined A := by
-  by_cases h : Win Aᶜ 1 []
-  · exact Or.inr h
-  · have := win_compl_of_not_win_of_isOpen (S := Aᶜ) (e := 1) (p := []) (by norm_num)
-      hA.isOpen_compl h
-    exact Or.inl (by simpa using this)
+def Covering.refl (A : Type u) : Covering A A where
+  push := id
+  liftI := id
+  liftII := id
+  liftI_spec := fun _ x hx => ⟨x, hx, rfl⟩
+  liftII_spec := fun _ x hx => ⟨x, hx, rfl⟩
 
-/-!
-### The statement of Martin's theorem, and the base case
--/
+/-- Determinacy transfers downwards along a covering. -/
 
-/-- **Martin's Borel determinacy theorem** (statement).  Every game on Baire space whose
-payoff set is Borel is determined.  This is the full theorem; only its base case is
-proved in this file (see `Frontier.Borel_determinacy`). -/
+theorem Covering.determined {B : Type u} (cov : Covering A B) {S : Set (ℕ → A)}
+    (h : Determined (cov.push ⁻¹' S)) : Determined S := by
+  rcases h with ⟨σ, hσ⟩ | ⟨τ, hτ⟩
+  · refine Or.inl ⟨cov.liftI σ, fun x hx => ?_⟩
+    obtain ⟨y, hy, hpush⟩ := cov.liftI_spec σ x hx
+    have := hσ y hy
+    rwa [Set.mem_preimage, hpush] at this
+  · refine Or.inr ⟨cov.liftII τ, fun x hx => ?_⟩
+    obtain ⟨y, hy, hpush⟩ := cov.liftII_spec τ x hx
+    have := hτ y hy
+    rwa [Set.mem_preimage, hpush] at this
 
-theorem Borel_determinacy :
-    ∀ A : Set Baire, (IsOpen A ∨ IsClosed A) → Determined A := by
-  rintro A (hA | hA)
-  · exact determined_of_isOpen hA
-  · exact determined_of_isClosed hA
+/-! ## Borel determinacy -/
+
+/-- Martin's *unravelling* hypothesis: every Borel payoff set admits a covering in which it
+becomes clopen.  This is the deep combinatorial content of Martin's theorem. -/
+
+def UnravelsBorel (A : Type u) [TopologicalSpace A] : Prop :=
+  ∀ S : Set (ℕ → A), @MeasurableSet (ℕ → A) (borel (ℕ → A)) S →
+    ∃ (B : Type u) (cov : Covering A B), Nonempty (Inhabited B) ∧ IsClopenSeq (cov.push ⁻¹' S)
+
+/-- A payoff set that is already clopen is unravelled by the identity covering; in particular the
+unravelling condition is satisfiable. -/
+
+theorem Borel_determinacy [TopologicalSpace A] [DiscreteTopology A] [Inhabited A]
+    (hUnravel : UnravelsBorel A) (S : Set (ℕ → A)) (hS : @MeasurableSet (ℕ → A) (borel (ℕ → A)) S) :
+    Determined S := by
+  obtain ⟨B, cov, ⟨hB⟩, hclopen⟩ := hUnravel S hS
+  haveI : Inhabited B := hB
+  exact cov.determined (determined_of_isClopenSeq hclopen)
 
 end Frontier
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false

@@ -9,249 +9,140 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
 open scoped Classical
-open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
+set_option maxHeartbeats 1000000
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames false
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-!
-## Suslin's problem
-
-Cantor characterised the real line as (up to order isomorphism) the unique
-nonempty separable dense linear order without endpoints that is complete.
-*Suslin's problem* asks whether "separable" may be weakened to the
-**countable chain condition** (ccc): every family of pairwise disjoint nonempty
-open sets is countable.  Separability implies ccc (`Frontier.isCcc_of_separable`
-below), so the question is whether the two conditions coincide for dense linear
-orders.
-
-A **Suslin line** is a counterexample: a nontrivial dense linear order without
-endpoints, carrying the order topology, which is ccc but *not* separable.
-**Suslin's Hypothesis** (`Frontier.SuslinHypothesis`) is the statement that no
-Suslin line exists.
-
-Suslin's Hypothesis is independent of ZFC: Jensen's diamond principle `◊`
-(which holds in Gödel's constructible universe `L`) implies that a Suslin line
-exists, while `MA_{ℵ₁} + ¬CH` implies that none does.  Consequently the
-phrasing "a Suslin line exists iff ◊-type hypotheses fail" is *not* a theorem —
-both `◊` and its failure are consistent with the existence of a Suslin line
-being false, and the existence of a Suslin line is simply not decided by ZFC
-(so, in particular, it is not provably equivalent to any ZFC-refutable or
-ZFC-provable statement).  What can be established inside Lean/ZFC is the precise
-formulation of the problem together with the ZFC-provable reductions; those are
-what is proved here, in `Frontier.Suslin_line`:
-
-* separability implies ccc, so a Suslin line, if any, is a genuine gap between
-  the two conditions;
-* the real line is not a Suslin line;
-* a Suslin line is uncountable, is not second countable, and is not order
-  isomorphic to `ℝ`;
-* Suslin's Hypothesis is equivalent to the assertion that every ccc dense
-  linear order without endpoints (with the order topology) is separable.
--/
+universe u
 
 namespace Frontier
 
-open TopologicalSpace
+/-!
+## Suslin's problem, stated precisely
+
+Cantor characterised the real line: up to order isomorphism, `ℝ` is the unique
+*separable* linear continuum (a nonempty, densely ordered, Dedekind complete
+linear order without endpoints whose order topology has a countable dense set).
+
+Suslin asked whether "separable" can be weakened to the *countable chain
+condition* (ccc): every family of pairwise disjoint nonempty open sets is
+countable.  A **Suslin line** is a counterexample: a ccc linear continuum that
+is not separable.  *Suslin's Hypothesis* (`SuslinHypothesis` below) is the
+statement that no Suslin line exists.
+
+Suslin's Hypothesis is independent of ZFC: Jensen showed that Gödel's diamond
+principle `◇` (which holds in `L`) yields a Suslin line, while Solovay and
+Tennenbaum showed that `MA + ¬CH` implies that none exists.  Hence neither
+`SuslinHypothesis` nor its negation is provable, and this file does not attempt
+to prove either.  What is proved here is the ZFC-provable content surrounding
+the problem:
+
+* `separableSpace_hasCCC`: separability always implies ccc, in any topological
+  space.  This is what makes Suslin's question a genuine weakening of Cantor's
+  hypothesis, and it shows that the two defining features of a Suslin line
+  (ccc, non-separable) point in a consistent direction.
+* `IsSuslinLine.uncountable`: a Suslin line is necessarily uncountable.
+* `not_isSuslinLine_real`: the real line is not a Suslin line.
+* `suslinHypothesis_iff`: the precise reduction of Suslin's Hypothesis to the
+  statement "every ccc linear continuum is separable".
+-/
 
 /-- The **countable chain condition**: every family of pairwise disjoint
 nonempty open sets is countable. -/
-def IsCcc (α : Type*) [TopologicalSpace α] : Prop :=
-  ∀ S : Set (Set α), (∀ s ∈ S, IsOpen s) → (∀ s ∈ S, s.Nonempty) →
-    S.PairwiseDisjoint id → S.Countable
+def HasCCC (X : Type u) [TopologicalSpace X] : Prop :=
+  ∀ (ι : Type u) (U : ι → Set X), (∀ i, IsOpen (U i)) → (∀ i, (U i).Nonempty) →
+    (Pairwise fun i j => Disjoint (U i) (U j)) → Countable ι
 
-/-- `α` (a linearly ordered topological space) is a **Suslin line**: it carries
-the order topology, is nontrivial, densely ordered, has no endpoints, satisfies
-the countable chain condition, but is not separable. -/
-def IsSuslinLine (α : Type*) [LinearOrder α] [TopologicalSpace α] : Prop :=
-  OrderTopology α ∧ Nontrivial α ∧ DenselyOrdered α ∧ NoMaxOrder α ∧ NoMinOrder α ∧
-    IsCcc α ∧ ¬ SeparableSpace α
+/-- A **linear continuum**: a nontrivial, densely ordered, Dedekind complete
+linear order without endpoints.  (Up to order isomorphism, `ℝ` is the unique
+*separable* such order — Cantor's theorem.) -/
+def IsLinearContinuum (X : Type u) [LinearOrder X] : Prop :=
+  Nontrivial X ∧ DenselyOrdered X ∧ NoMinOrder X ∧ NoMaxOrder X ∧
+    ∀ s : Set X, s.Nonempty → BddAbove s → ∃ x, IsLUB s x
 
-/-- **Suslin's Hypothesis**: there is no Suslin line. -/
+/-- A **Suslin line**: a linear continuum, equipped with its order topology,
+which satisfies the countable chain condition but is not separable. -/
+def IsSuslinLine (X : Type u) [LinearOrder X] [TopologicalSpace X] [OrderTopology X] : Prop :=
+  IsLinearContinuum X ∧ HasCCC X ∧ ¬ TopologicalSpace.SeparableSpace X
+
+/-- **Suslin's Hypothesis**: there is no Suslin line, i.e. every ccc linear
+continuum (with its order topology) is separable. -/
 def SuslinHypothesis : Prop :=
-  ∀ (α : Type) (_ : LinearOrder α) (_ : TopologicalSpace α), ¬ IsSuslinLine α
+  ∀ (X : Type) [LinearOrder X] [TopologicalSpace X] [OrderTopology X], ¬ IsSuslinLine X
 
-/-- A separable space satisfies the countable chain condition. -/
-theorem isCcc_of_separable (α : Type*) [TopologicalSpace α] [SeparableSpace α] :
-    IsCcc α := by
-  obtain ⟨D, hDc, hDd⟩ := exists_countable_dense α
-  intro S hopen hne hdisj
-  rcases isEmpty_or_nonempty α with hα | hα
-  · have hS : S = ∅ := by
-      ext s
-      simp only [Set.mem_empty_iff_false, iff_false]
-      intro hs
-      obtain ⟨x, -⟩ := hne s hs
-      exact hα.elim x
-    simp [hS]
-  -- choose a point of `D` in each member of `S`
-  have hpt : ∀ s ∈ S, ∃ x, x ∈ s ∩ D := by
-    intro s hs
-    have := hDd.inter_open_nonempty s (hopen s hs) (hne s hs)
-    obtain ⟨x, hx⟩ := this
-    exact ⟨x, hx⟩
-  choose! f hf using hpt
-  have hinj : Set.InjOn f S := by
-    intro s hs t ht hst
-    by_contra hne'
-    have hd := hdisj hs ht hne'
-    have h1 : f s ∈ s := (hf s hs).1
-    have h2 : f s ∈ t := by rw [hst]; exact (hf t ht).1
-    exact (Set.disjoint_left.mp hd h1) h2
-  refine Set.countable_of_injective_of_countable_image hinj ?_
-  refine hDc.mono ?_
-  rintro x ⟨s, hs, rfl⟩
-  exact (hf s hs).2
+/-- Every separable topological space satisfies the countable chain condition. -/
+theorem separableSpace_hasCCC (X : Type u) [TopologicalSpace X]
+    [TopologicalSpace.SeparableSpace X] : HasCCC X := by
+  intro ι U hopen hne hdisj
+  obtain ⟨D, hDc, hDd⟩ := TopologicalSpace.exists_countable_dense X
+  have := hDc.to_subtype
+  -- pick a point of `D` inside each `U i`
+  have hpick : ∀ i, ∃ d : D, (d : X) ∈ U i := by
+    intro i
+    obtain ⟨x, hxU, hxD⟩ := hDd.inter_open_nonempty (U i) (hopen i) (hne i)
+    exact ⟨⟨x, hxD⟩, hxU⟩
+  choose f hf using hpick
+  refine Function.Injective.countable (f := f) ?_
+  intro i j hij
+  by_contra hne'
+  have hd := hdisj hne'
+  have h1 : (f i : X) ∈ U i := hf i
+  have h2 : (f i : X) ∈ U j := by rw [hij]; exact hf j
+  exact (Set.disjoint_left.mp hd h1) h2
 
-/-- A countable space satisfies the countable chain condition. -/
-theorem isCcc_of_countable (α : Type*) [TopologicalSpace α] [Countable α] : IsCcc α :=
-  isCcc_of_separable α
+/-- A Suslin line is uncountable: a countable space is separable. -/
+theorem IsSuslinLine.uncountable (X : Type) [LinearOrder X] [TopologicalSpace X]
+    [OrderTopology X] (h : IsSuslinLine X) : Uncountable X := by
+  rw [← not_countable_iff]
+  intro hc
+  exact h.2.2 (by infer_instance)
 
 /-- The real line is not a Suslin line: it is separable. -/
 theorem not_isSuslinLine_real : ¬ IsSuslinLine ℝ := by
-  rintro ⟨-, -, -, -, -, -, hsep⟩
-  exact hsep inferInstance
+  intro h
+  exact h.2.2 (by infer_instance)
 
-/-- A Suslin line is uncountable. -/
-theorem not_countable_of_isSuslinLine (α : Type*) [LinearOrder α] [TopologicalSpace α]
-    (h : IsSuslinLine α) : ¬ Countable α := by
-  intro hc
-  haveI := hc
-  exact h.2.2.2.2.2.2 inferInstance
-
-/-- A Suslin line is not second countable. -/
-theorem not_secondCountable_of_isSuslinLine (α : Type*) [LinearOrder α] [TopologicalSpace α]
-    (h : IsSuslinLine α) : ¬ SecondCountableTopology α := by
-  intro hsc
-  haveI := hsc
-  exact h.2.2.2.2.2.2 inferInstance
-
-/-- A linear order with a countable *order-dense* subset (one meeting every nonempty
-open interval) and no endpoints is a separable space for the order topology. -/
-theorem separableSpace_of_countable_orderDense (α : Type*) [LinearOrder α]
-    [TopologicalSpace α] [OrderTopology α] [Nontrivial α] {D : Set α} (hDc : D.Countable)
-    (hD : ∀ x y : α, x < y → ∃ d ∈ D, x < d ∧ d < y) : SeparableSpace α := by
-  refine ⟨⟨D, hDc, ?_⟩⟩
-  rw [dense_iff_inter_open]
-  intro U hU hUne
-  obtain ⟨a, b, hab, hsub⟩ := hU.exists_Ioo_subset hUne
-  obtain ⟨d, hdD, hd1, hd2⟩ := hD a b hab
-  exact ⟨d, hsub ⟨hd1, hd2⟩, hdD⟩
-
-/-- A densely ordered set that order-embeds into `ℝ` has a countable order-dense subset. -/
-theorem exists_countable_orderDense_of_orderEmbedding_real (α : Type*) [LinearOrder α]
-    [Nonempty α] [DenselyOrdered α] (f : α ↪o ℝ) :
-    ∃ D : Set α, D.Countable ∧ ∀ x y : α, x < y → ∃ d ∈ D, x < d ∧ d < y := by
-  set A : ℚ × ℚ → Set α := fun pq => {x : α | (pq.1 : ℝ) < f x ∧ f x < (pq.2 : ℝ)}
-  have hchoice : ∀ pq : ℚ × ℚ, ∃ x : α, (A pq).Nonempty → x ∈ A pq := by
-    intro pq
-    by_cases h : (A pq).Nonempty
-    · exact ⟨h.choose, fun _ => h.choose_spec⟩
-    · exact ⟨Classical.arbitrary α, fun hc => absurd hc h⟩
-  choose g hg using hchoice
-  refine ⟨Set.range g, Set.countable_range g, ?_⟩
-  intro x y hxy
-  obtain ⟨z, hxz, hzy⟩ := exists_between hxy
-  obtain ⟨w, hxw, hwz⟩ := exists_between hxz
-  obtain ⟨v, hzv, hvy⟩ := exists_between hzy
-  obtain ⟨p, hp1, hp2⟩ := exists_rat_btwn (f.lt_iff_lt.mpr hwz)
-  obtain ⟨q, hq1, hq2⟩ := exists_rat_btwn (f.lt_iff_lt.mpr hzv)
-  have hne : (A (p, q)).Nonempty := ⟨z, hp2, hq1⟩
-  have hmem := hg (p, q) hne
-  obtain ⟨h1, h2⟩ := hmem
-  refine ⟨g (p, q), Set.mem_range_self _, ?_, ?_⟩
-  · exact hxw.trans (f.lt_iff_lt.mp (hp1.trans h1))
-  · exact (f.lt_iff_lt.mp (h2.trans hq2)).trans hvy
-
-/-- A nontrivial densely ordered space with the order topology that order-embeds into `ℝ`
-is separable. -/
-theorem separableSpace_of_orderEmbedding_real (α : Type*) [LinearOrder α] [TopologicalSpace α]
-    [OrderTopology α] [Nontrivial α] [DenselyOrdered α] (f : α ↪o ℝ) : SeparableSpace α := by
-  haveI : Nonempty α := inferInstance
-  obtain ⟨D, hDc, hD⟩ := exists_countable_orderDense_of_orderEmbedding_real α f
-  exact separableSpace_of_countable_orderDense α hDc hD
-
-/-- A Suslin line does not order-embed into the real line. -/
-theorem isEmpty_orderEmbedding_real_of_isSuslinLine (α : Type*) [LinearOrder α]
-    [TopologicalSpace α] (h : IsSuslinLine α) : IsEmpty (α ↪o ℝ) := by
-  obtain ⟨hot, hnt, hdo, -, -, -, hsep⟩ := h
-  haveI := hot; haveI := hnt; haveI := hdo
-  exact ⟨fun f => hsep (separableSpace_of_orderEmbedding_real α f)⟩
-
-/-- A Suslin line is not order isomorphic to the real line. -/
-theorem isEmpty_orderIso_real_of_isSuslinLine (α : Type*) [LinearOrder α] [TopologicalSpace α]
-    (h : IsSuslinLine α) : IsEmpty (α ≃o ℝ) :=
-  ⟨fun e => (isEmpty_orderEmbedding_real_of_isSuslinLine α h).elim e.toOrderEmbedding⟩
-
-/-- **Cantor's base case.** A countable nontrivial dense linear order without endpoints is
-order isomorphic to `ℚ`; in particular (being countable) it is separable and hence not a
-Suslin line. -/
-theorem nonempty_orderIso_rat_of_countable (α : Type*) [LinearOrder α] [Countable α]
-    [DenselyOrdered α] [NoMinOrder α] [NoMaxOrder α] [Nonempty α] :
-    Nonempty (α ≃o ℚ) :=
-  Order.iso_of_countable_dense α ℚ
-
-/-- Suslin's Hypothesis, restated: every ccc dense linear order without
-endpoints (with the order topology) is separable. -/
+/-- Suslin's Hypothesis is exactly the statement that every ccc linear
+continuum is separable. -/
 theorem suslinHypothesis_iff :
     SuslinHypothesis ↔
-      ∀ (α : Type) (_ : LinearOrder α) (_ : TopologicalSpace α),
-        OrderTopology α → Nontrivial α → DenselyOrdered α → NoMaxOrder α → NoMinOrder α →
-          IsCcc α → SeparableSpace α := by
+      ∀ (X : Type) [LinearOrder X] [TopologicalSpace X] [OrderTopology X],
+        IsLinearContinuum X → HasCCC X → TopologicalSpace.SeparableSpace X := by
   constructor
-  · intro h α _ _ h1 h2 h3 h4 h5 h6
-    by_contra h7
-    exact h α ‹_› ‹_› ⟨h1, h2, h3, h4, h5, h6, h7⟩
-  · rintro h α _ _ ⟨h1, h2, h3, h4, h5, h6, h7⟩
-    exact h7 (h α ‹_› ‹_› h1 h2 h3 h4 h5 h6)
+  · intro h X _ _ _ hcont hccc
+    by_contra hsep
+    exact h X ⟨hcont, hccc, hsep⟩
+  · intro h X _ _ _ hS
+    exact hS.2.2 (h X hS.1 hS.2.1)
 
 /-- **Suslin's problem, formalized.**
 
-`Frontier.SuslinHypothesis` says that there is no *Suslin line*, i.e. no
-nontrivial dense linear order without endpoints, equipped with the order
-topology, that satisfies the countable chain condition but is not separable.
-This statement is independent of ZFC (it fails under Jensen's `◊`, and holds
-under `MA_{ℵ₁} + ¬CH`), so it is neither provable nor refutable here.  The
-present theorem collects the ZFC-provable content:
+The four conjuncts are:
 
-1. Suslin's Hypothesis is exactly the assertion that ccc implies separability
-   for dense linear orders without endpoints (so Suslin's problem is precisely
-   Cantor's characterisation of `ℝ` with "separable" weakened to "ccc").
-2. Separability always implies ccc — the implication that is *not* in question.
-3. The real line is not a Suslin line.
-4. Any Suslin line is uncountable, not second countable, and does not order-embed
-   into `ℝ` (in particular it is not order isomorphic to `ℝ`). -/
+1. separability implies the countable chain condition in every topological
+   space (so a Suslin line really is a weakening of Cantor's characterisation
+   of `ℝ`, and its two defining properties are not accidentally compatible);
+2. every Suslin line is uncountable;
+3. the real line is not a Suslin line;
+4. Suslin's Hypothesis — "no Suslin line exists" — is equivalent to
+   "every ccc linear continuum is separable".
+
+Whether a Suslin line exists is independent of ZFC (Jensen: `◇` produces one;
+Solovay–Tennenbaum: `MA + ¬CH` refutes them all), so no ZFC proof of either
+`SuslinHypothesis` or its negation is possible; the content above is the
+ZFC-provable part of the problem. -/
 theorem Suslin_line :
+    (∀ (X : Type) [TopologicalSpace X], TopologicalSpace.SeparableSpace X → HasCCC X) ∧
+    (∀ (X : Type) [LinearOrder X] [TopologicalSpace X] [OrderTopology X],
+        IsSuslinLine X → Uncountable X) ∧
+    ¬ IsSuslinLine ℝ ∧
     (SuslinHypothesis ↔
-      ∀ (α : Type) (_ : LinearOrder α) (_ : TopologicalSpace α),
-        OrderTopology α → Nontrivial α → DenselyOrdered α → NoMaxOrder α → NoMinOrder α →
-          IsCcc α → SeparableSpace α)
-    ∧ (∀ (α : Type*) [TopologicalSpace α] [SeparableSpace α], IsCcc α)
-    ∧ ¬ IsSuslinLine ℝ
-    ∧ (∀ (α : Type*) [LinearOrder α] [TopologicalSpace α], IsSuslinLine α →
-        ¬ Countable α ∧ ¬ SecondCountableTopology α ∧ IsEmpty (α ↪o ℝ) ∧ IsEmpty (α ≃o ℝ)) := by
-  refine ⟨suslinHypothesis_iff, fun α _ _ => isCcc_of_separable α, not_isSuslinLine_real,
-    fun α _ _ h => ⟨not_countable_of_isSuslinLine α h, not_secondCountable_of_isSuslinLine α h,
-      isEmpty_orderEmbedding_real_of_isSuslinLine α h,
-      isEmpty_orderIso_real_of_isSuslinLine α h⟩⟩
+      ∀ (X : Type) [LinearOrder X] [TopologicalSpace X] [OrderTopology X],
+        IsLinearContinuum X → HasCCC X → TopologicalSpace.SeparableSpace X) := by
+  refine ⟨fun X _ hsep => separableSpace_hasCCC X, fun X _ _ _ h => h.uncountable X,
+    not_isSuslinLine_real, suslinHypothesis_iff⟩
 
 end Frontier
 

@@ -18,32 +18,28 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Frontier
 
-/-! ## Setting
+open Metric Filter Topology
 
-We work with the standard "conjugacy" formulation of KAM theory.  The phase space is an
-arbitrary type `P`, the `n`-dimensional torus is modelled by its universal cover
-`Fin n → ℝ` (all objects below are invariant under the choice of representative, so
-nothing is lost), and a *torus with rotation vector `ω`* for a dynamical system
-`f : P → P` is an embedding `Ψ : (Fin n → ℝ) → P` satisfying the conjugacy equation
+/-- A parameterization `K : Θ → P` of a torus is *invariant* for the dynamics `F : P → P`
+with internal (rigid rotation) dynamics `R : Θ → Θ` if it conjugates `R` to `F`:
+`F (K θ) = K (R θ)` for all `θ`.  This is the standard "parameterization method"
+formulation of an invariant torus carrying quasi-periodic motion with rotation `R`. -/
 
-  `f (Ψ θ) = Ψ (θ + ω)`  for all `θ`,
+def IsInvariantTorus {Θ P : Type*} (F : P → P) (R : Θ → Θ) (K : Θ → P) : Prop :=
+  ∀ θ, F (K θ) = K (R θ)
 
-i.e. `f` restricted to the image of `Ψ` is the rigid rotation by `ω`.
--/
+/-- **KAM (persistence of invariant tori), functional-analytic form.**
 
-/-- `IsInvariantTorus n f ω Ψ` : the parametrised torus `Ψ` is invariant under the
-dynamics `f` and the induced motion on it is the rigid rotation by the frequency
-vector `ω`. -/
+Data: a family of dynamical systems `F ε : P → P` on phase space `P`, a rigid rotation
+`R : Θ → Θ` of the model torus `Θ`, a complete metric space `X` of torus parameterizations
+with `emb : X → (Θ → P)` realizing each element as a map `Θ → P`, and an *invariance operator*
+`T ε : X → X` whose fixed points parameterize invariant tori of `F ε` (hypothesis `hsol`).
 
-def IsInvariantTorus {P : Type*} {n : ℕ} (f : P → P) (ω : Fin n → ℝ)
-    (Ψ : (Fin n → ℝ) → P) : Prop :=
-  ∀ θ : Fin n → ℝ, f (Ψ θ) = Ψ (θ + ω)
+Hypotheses: `T ε` is a uniform contraction (constant `L < 1`, uniformly in `ε`), the
+unperturbed operator `T 0` fixes the unperturbed torus `u₀`, and the perturbation moves
+`u₀` by at most `c * |ε|`.
 
-/-! ## The integrable (unperturbed) base case
-
-For an integrable system written in action–angle variables `(θ, I)`, the time-`t` map is
-`(θ, I) ↦ (θ + t • ω I, I)`.  Every level set of the action is then an invariant torus,
-carrying a rigid rotation with frequency `t • ω I₀`.  This is the base case `ε = 0` of KAM.
--/
-
-/-- The time-`t` map of an integrable system in action–angle variables. -/
+Conclusion: for every `ε` the system `F ε` has an invariant torus with the *same* rotation
+`R`, lying within `c * |ε| / (1 - L)` of the unperturbed torus (so the tori persist and
+depend on `ε` in an `O(ε)` fashion), it is the unique fixed point of the invariance operator,
+and at `ε = 0` it is the unperturbed torus itself (base case). -/

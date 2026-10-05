@@ -1,5 +1,26 @@
 import Mathlib
 
+/-!
+# Cassini 10
+Category: Pure Mathematics
+Target: Math.cassini_10
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Math
+
+/-- Cassini's identity at `n = 10`: `F(9) · F(11) − F(10)² = (−1)¹⁰`, stated over `ℤ`.
+Here `F` is `Nat.fib`, so `F 9 = 34`, `F 10 = 55`, `F 11 = 89`, and `34 · 89 − 55² = 1`. -/
+
+theorem cassini_10 :
+    (Nat.fib 9 : ℤ) * (Nat.fib 11 : ℤ) - (Nat.fib 10 : ℤ) ^ 2 = (-1 : ℤ) ^ 10 := by
+  norm_num
+
+end Math
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,14 +43,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Math
-
-/-- Cassini's identity at `n = 10`: `F(9) * F(11) - F(10)^2 = (-1)^10`. -/
-
-theorem cassini_10 :
-    (Nat.fib 9 : ℤ) * (Nat.fib 11 : ℤ) - (Nat.fib 10 : ℤ) ^ 2 = (-1 : ℤ) ^ 10 := by
-  norm_num [Nat.fib]
-
-end Math
 

@@ -2,22 +2,23 @@ import Mathlib
 import RequestProject.Cassini6
 
 /-!
-# Cassini 6, Mathlib version
+# Cassini 6 — agreement with Mathlib's Fibonacci numbers
 
-Companion file to `RequestProject/Cassini6.lean`.  We check that the Fibonacci
-sequence `Math.fib` used there agrees with Mathlib's `Nat.fib`, restate
-Cassini's identity at `n = 6` for `Nat.fib`, and derive it once more from
-Mathlib's general Cassini identity `Int.fib_succ_mul_fib_pred_sub_fib_sq`.
+The target file `RequestProject/Cassini6.lean` must literally begin with a module
+documentation comment, so it cannot contain any `import`.  It therefore defines the
+Fibonacci sequence `Math.fib` from scratch.  Here we check that this definition
+agrees with Mathlib's `Nat.fib`, and restate Cassini's identity at `n = 6` in terms
+of `Nat.fib`.
 -/
 
 namespace Math
 
-/-- `Math.fib` agrees with Mathlib's `Nat.fib`. -/
+/-- The locally defined `Math.fib` agrees with Mathlib's `Nat.fib`. -/
 
-theorem fib_eq_nat_fib : ∀ n : ℕ, Math.fib n = Nat.fib n
+theorem fib_eq_nat_fib : ∀ n, fib n = Nat.fib n
   | 0 => rfl
   | 1 => rfl
   | n + 2 => by
-      rw [Math.fib, fib_eq_nat_fib n, fib_eq_nat_fib (n + 1), Nat.fib_add_two]
+      rw [fib, Nat.fib_add_two, fib_eq_nat_fib n, fib_eq_nat_fib (n + 1)]
 
 /-- Cassini's identity at `n = 6`, stated with Mathlib's `Nat.fib`. -/

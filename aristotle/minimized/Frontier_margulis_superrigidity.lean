@@ -1,14 +1,3 @@
-/-
-# Margulis Superrigidity
-Category: Frontier Abel
-Target: Frontier.margulis_superrigidity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean 4 requires `import` to precede every command, including module docstrings, so the
--- header above is written as an ordinary comment and repeated as a module docstring below.)
-
 import Mathlib
 
 /-!
@@ -33,86 +22,152 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Frontier
 
-/-! ## The shape of the superrigidity conclusion -/
+universe u
 
-section Defs
+/-! ## The conclusion of superrigidity -/
 
-variable {G H : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
+/-- The conclusion of Margulis superrigidity for a homomorphism `ρ : Γ →* H` defined on a
+subgroup `Γ` of a topological group `G`: `ρ` is the restriction of a continuous homomorphism
+`G →* H`. -/
 
-/-- The conclusion of a superrigidity theorem: the *abstract* group homomorphism
-`rho : Γ →* H`, defined on a subgroup `Γ` of a topological group `G`, is the restriction of a
-*continuous* homomorphism defined on all of `G`. -/
+def ExtendsContinuously {G H : Type*} [Group G] [TopologicalSpace G] [Group H]
+    [TopologicalSpace H] (Γ : Subgroup G) (ρ : Γ →* H) : Prop :=
+  ∃ σ : G →* H, Continuous σ ∧ ∀ γ : Γ, σ (γ : G) = ρ γ
 
-def VirtuallyExtendsToContinuousHom (Γ : Subgroup G) (rho : Γ →* H) : Prop :=
-  ∃ Γ₀ : Subgroup Γ, Γ₀.FiniteIndex ∧
-    ∃ F : G →* H, Continuous F ∧ ∀ γ ∈ Γ₀, F ((γ : Γ) : G) = rho γ
+/-! ## The hypotheses -/
 
-/-- **Margulis superrigidity, as a property of a lattice.**
+/-- `IsLatticeIn μ Γ` says that `Γ` is a lattice in the topological group `G`: it is a discrete
+subgroup admitting a fundamental domain of finite Haar measure. -/
 
-`MargulisSuperrigid Γ Admissible` says: every *admissible* abstract homomorphism from the lattice
-`Γ ≤ G` into the topological group `H` virtually extends to a continuous homomorphism of the
-ambient group `G`.
+def IsLatticeIn {G : Type*} [Group G] [TopologicalSpace G] [MeasurableSpace G]
+    (μ : MeasureTheory.Measure G) (Γ : Subgroup G) : Prop :=
+  DiscreteTopology Γ ∧
+    ∃ F : Set G, MeasureTheory.IsFundamentalDomain Γ.op F μ ∧ μ F ≠ ⊤
 
-In Margulis' theorem `G` is a semisimple group of higher real rank, `Γ ≤ G` an irreducible
-lattice, `H = 𝐇(k)` the `k`-points of a connected adjoint `k`-simple algebraic group over a local
-field `k`, and the admissibility predicate `Admissible rho` is "the image of `rho` is Zariski dense and
-unbounded".  Since Mathlib has no theory of algebraic groups, the admissibility predicate is kept
-as a parameter here; the results below are proved for *every* choice of `Admissible`, hence in
-particular for the Zariski-dense unbounded one. -/
+/-- `IsIrreducibleLattice Γ` says that the lattice `Γ ≤ G` is irreducible: `Γ` together with any
+proper closed normal subgroup of `G` generates a dense subgroup (equivalently, the image of `Γ`
+in every proper quotient of `G` by a closed normal subgroup is dense). -/
 
-def MargulisSuperrigid (Γ : Subgroup G) (Admissible : (Γ →* H) → Prop) : Prop :=
-  ∀ rho : Γ →* H, Admissible rho → VirtuallyExtendsToContinuousHom Γ rho
+def IsIrreducibleLattice {G : Type*} [Group G] [TopologicalSpace G] (Γ : Subgroup G) : Prop :=
+  ∀ N : Subgroup G, N.Normal → IsClosed (N : Set G) → N ≠ ⊤ →
+    Dense ((Γ ⊔ N : Subgroup G) : Set G)
 
-end Defs
+/-- A working formalization of "`G` is a connected semisimple group of real rank at least two":
+`G` is connected, topologically perfect and centre-free, and contains a closed two-parameter
+subgroup isomorphic to `ℝ × ℝ` (a two-dimensional split torus). -/
+structure IsHigherRank (G : Type*) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] : Prop where
+  connected : ConnectedSpace G
+  perfect : (commutator G).topologicalClosure = ⊤
+  centerless : Subgroup.center G = ⊥
+  splitRankTwo : ∃ f : Multiplicative (ℝ × ℝ) →* G,
+    Continuous f ∧ Function.Injective f ∧ IsClosed (Set.range f)
 
-/-! ## Elementary properties of the conclusion -/
+/-! ## The statement of Margulis superrigidity, and its dense-image special case -/
+
+/-- **Margulis superrigidity** (statement): let `G` be a connected semisimple group of real rank
+at least two, `Γ ≤ G` an irreducible lattice, `H` a Hausdorff topological group, and
+`ρ : Γ →* H` a homomorphism. Then `ρ` extends to a continuous homomorphism `G →* H`. -/
+
+def MargulisSuperrigidityStatement : Prop :=
+  ∀ {G H : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [MeasurableSpace G]
+    (μ : MeasureTheory.Measure G) [Group H] [TopologicalSpace H] [IsTopologicalGroup H]
+    [T2Space H] (Γ : Subgroup G) (ρ : Γ →* H),
+    IsHigherRank G → IsLatticeIn μ Γ → IsIrreducibleLattice Γ → ExtendsContinuously Γ ρ
+
+/-- The special case of Margulis superrigidity in which the image of `ρ` is dense in the target,
+i.e. the case to which Margulis' argument first reduces (replacing `H` by the closure of the
+image of `Γ`). -/
+
+def MargulisSuperrigidityDenseImage : Prop :=
+  ∀ {G H : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [MeasurableSpace G]
+    (μ : MeasureTheory.Measure G) [Group H] [TopologicalSpace H] [IsTopologicalGroup H]
+    [T2Space H] (Γ : Subgroup G) (ρ : Γ →* H),
+    IsHigherRank G → IsLatticeIn μ Γ → IsIrreducibleLattice Γ →
+    Dense (Set.range ρ) → ExtendsContinuously Γ ρ
+
+/-! ## Elementary facts about the superrigidity conclusion -/
 
 section Basic
 
-variable {G H : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
+variable {G H K : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
+  [Group K] [TopologicalSpace K]
 
-/-- An honest continuous extension is in particular a virtual one (take `Γ₀ = ⊤`). -/
+/-- Superrigidity is preserved by postcomposition with a continuous homomorphism. -/
 
-theorem hom_trivial_of_abelianization_finite {G H : Type*} [Group G] [CommGroup H]
-    (hH : ∀ (h : H) (n : ℕ), 0 < n → h ^ n = 1 → h = 1)
-    (Γ : Subgroup G) [Finite (Abelianization Γ)] (rho : Γ →* H) (γ : Γ) : rho γ = 1 := by
-  refine hH _ (Nat.card (Abelianization Γ)) Nat.card_pos ?_
-  have h1 : (Abelianization.of γ) ^ Nat.card (Abelianization Γ) = 1 := pow_card_eq_one'
-  have h2 : (Abelianization.lift rho) ((Abelianization.of γ) ^ Nat.card (Abelianization Γ)) = 1 := by
-    rw [h1, map_one]
-  rw [map_pow, Abelianization.lift_apply_of] at h2
-  exact h2
+theorem ExtendsContinuously.comp {Γ : Subgroup G} {ρ : Γ →* H} (h : ExtendsContinuously Γ ρ)
+    (f : H →* K) (hf : Continuous f) : ExtendsContinuously Γ (f.comp ρ) := by
+  obtain ⟨σ, hσc, hσ⟩ := h
+  exact ⟨f.comp σ, hf.comp hσc, fun γ => by simp [hσ γ]⟩
 
-/-- **Margulis superrigidity, base case.**
+/-- Superrigidity for two targets gives superrigidity for the product target. -/
 
-Let `Γ` be a lattice in a topological group `G` whose abelianization is finite — this holds for
-every irreducible lattice in a semisimple group of higher real rank, by property (T) — and let `H`
-be a torsion-free abelian topological group.  Then Margulis superrigidity holds for `Γ` with
-target `H`, for *any* admissibility condition: every abstract homomorphism `Γ →* H` is the
-restriction of a continuous homomorphism `G →* H` (necessarily the trivial one). -/
+theorem ExtendsContinuously.prod {Γ : Subgroup G} {ρ₁ : Γ →* H} {ρ₂ : Γ →* K}
+    (h₁ : ExtendsContinuously Γ ρ₁) (h₂ : ExtendsContinuously Γ ρ₂) :
+    ExtendsContinuously Γ (ρ₁.prod ρ₂) := by
+  obtain ⟨σ₁, hc₁, he₁⟩ := h₁
+  obtain ⟨σ₂, hc₂, he₂⟩ := h₂
+  refine ⟨σ₁.prod σ₂, hc₁.prodMk hc₂, fun γ => ?_⟩
+  simp [he₁ γ, he₂ γ]
 
-theorem margulis_superrigidity {G H : Type*} [Group G] [TopologicalSpace G]
-    [CommGroup H] [TopologicalSpace H]
-    (hH : ∀ (h : H) (n : ℕ), 0 < n → h ^ n = 1 → h = 1)
-    (Γ : Subgroup G) [Finite (Abelianization Γ)] (Admissible : (Γ →* H) → Prop) :
-    MargulisSuperrigid Γ Admissible := by
-  intro rho _
-  refine ⟨⊤, inferInstance, 1, continuous_const, fun γ _ => ?_⟩
-  simp [hom_trivial_of_abelianization_finite hH Γ rho γ]
+/-- **Uniqueness of the superrigid extension.** A continuous homomorphism into a Hausdorff group
+is determined by its restriction to a dense subgroup; in particular the extension provided by
+superrigidity is unique whenever `Γ` is dense in `G`. -/
 
-/-! ## Non-vacuity of the base case -/
+def corestrictClosure {Γ : Subgroup G} (ρ : Γ →* H) :
+    Γ →* ((MonoidHom.range ρ).topologicalClosure) :=
+  ρ.codRestrict _ fun γ => Subgroup.le_topologicalClosure _ ⟨γ, rfl⟩
 
-section Sanity
+theorem dense_range_corestrictClosure {Γ : Subgroup G} (ρ : Γ →* H) :
+    Dense (Set.range (corestrictClosure ρ)) := by
+  rw [(IsEmbedding.subtypeVal (p := fun x : H => x ∈ (MonoidHom.range ρ).topologicalClosure)).isInducing.dense_iff]
+  rintro ⟨x, hx⟩
+  have himg : Subtype.val '' (Set.range (corestrictClosure ρ)) = Set.range ρ := by
+    ext y
+    constructor
+    · rintro ⟨-, ⟨γ, rfl⟩, rfl⟩
+      exact ⟨γ, rfl⟩
+    · rintro ⟨γ, rfl⟩
+      exact ⟨corestrictClosure ρ γ, ⟨γ, rfl⟩, rfl⟩
+  rw [himg]
+  have : ((MonoidHom.range ρ).topologicalClosure : Set H) = closure (Set.range ρ) := by
+    simp [Subgroup.topologicalClosure_coe, MonoidHom.coe_range]
+  rw [this] at hx
+  exact hx
 
-/-- The additive group of the reals, written multiplicatively, is torsion free. -/
+/-- **Local reduction to the dense-image case.** If the corestriction of `ρ` to the closure of its
+image extends to a continuous homomorphism, then so does `ρ` itself. -/
+
+theorem extendsContinuously_of_corestrictClosure {Γ : Subgroup G} (ρ : Γ →* H)
+    (h : ExtendsContinuously Γ (corestrictClosure ρ)) : ExtendsContinuously Γ ρ := by
+  obtain ⟨σ, hσc, hσ⟩ := h
+  refine ⟨((MonoidHom.range ρ).topologicalClosure).subtype.comp σ,
+    (continuous_subtype_val).comp hσc, fun γ => ?_⟩
+  simpa [corestrictClosure] using congrArg (Subtype.val) (hσ γ)
+
+end Reduction
+
+/-! ## The target theorem -/
+
+/-- **Margulis superrigidity, reduced to the dense-image case.**
+
+The general statement of Margulis superrigidity for irreducible lattices in higher-rank groups
+follows from its special case in which the image of the lattice is dense in the target: given
+arbitrary data `(G, Γ, H, ρ)` satisfying the hypotheses, one replaces `H` by the closure of the
+image `ρ (Γ)`, which is again a Hausdorff topological group, applies the dense-image case there,
+and composes the resulting continuous extension with the (continuous) inclusion of that closed
+subgroup into `H`.
+
+This is a Lean-checked reduction: the hypotheses on the ambient group `G` and on the lattice `Γ`
+are untouched, and the only input is superrigidity for homomorphisms with dense image. -/
+
+theorem margulis_superrigidity
+    (hdense : MargulisSuperrigidityDenseImage.{u}) : MargulisSuperrigidityStatement.{u} := by
+  intro G H _ _ _ _ μ _ _ _ _ Γ ρ hG hΓ hirr
+  refine extendsContinuously_of_corestrictClosure ρ ?_
+  exact hdense μ Γ (corestrictClosure ρ) hG hΓ hirr (dense_range_corestrictClosure ρ)
+
+end Frontier

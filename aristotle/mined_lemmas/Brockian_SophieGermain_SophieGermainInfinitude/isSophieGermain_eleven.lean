@@ -23,7 +23,15 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+-- # Sophie Germain Infinitude
+-- Category: Brockian Conjecture
+-- Target: Brockian.SophieGermain.SophieGermainInfinitude
+-- Verification: pending
+-- Provenance: Aristotle theorem prover (Harmonic)
+
+import Mathlib
+
+/-!
 # Sophie Germain Infinitude
 Category: Brockian Conjecture
 Target: Brockian.SophieGermain.SophieGermainInfinitude
@@ -31,16 +39,11 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+set_option maxRecDepth 40000
 
 namespace Brockian.SophieGermain
 
-/-- `p` is a *Sophie Germain prime* if both `p` and `2 * p + 1` are prime. -/
+/-- A *Sophie Germain prime* is a prime `p` such that `2 * p + 1` is also prime. -/
 
-theorem isSophieGermain_eleven : IsSophieGermain 11 := by
-  constructor <;> norm_num
+theorem isSophieGermain_eleven : IsSophieGermain 11 := by decide
 
-/-- A finite family `F` of linear forms, each pair `(a, b)` standing for the form
-`n ↦ a * n + b`, is *admissible* when no prime divides the product of the values of the
-forms at every integer point: for each prime `q` there is some `n` at which none of the
-values is divisible by `q`. -/

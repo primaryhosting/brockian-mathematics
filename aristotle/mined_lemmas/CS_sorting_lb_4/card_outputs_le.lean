@@ -1,4 +1,11 @@
 import Mathlib
+/-!
+# Sorting Lb 4
+Category: Computer Science
+Target: CS.sorting_lb_4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,53 +21,55 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-# Information-theoretic lower bound for comparison sorting of 4 elements
-
-We model a comparison-based sorting algorithm on `n` inputs as a binary decision tree
-(`CS.CompTree n`): each internal node compares two input positions `i j` (asking `a i ≤ a j`)
-and branches accordingly; each leaf outputs a permutation, which is meant to list the input
-positions in sorted order.
-
-A tree *sorts* if, for every injective input `a : Fin n → ℕ`, the output permutation `p`
-satisfies that `a ∘ p` is strictly monotone.
-
-The main theorem `CS.sorting_lb_4` states that any comparison tree that sorts `4` elements has
-depth at least `⌈log₂ (4!)⌉ = 5`, i.e. it performs at least 5 comparisons in the worst case.
--/
 
 namespace CS
 
-/-- A comparison-based decision tree on `n` inputs: internal nodes compare two positions,
-leaves output a permutation. -/
-inductive CompTree (n : ℕ) : Type
-  | leaf : Equiv.Perm (Fin n) → CompTree n
-  | node : Fin n → Fin n → CompTree n → CompTree n → CompTree n
+/-- A comparison-based decision tree sorting 4 elements.
 
-namespace CompTree
+An input is modelled by a permutation `σ : Equiv.Perm (Fin 4)`, where `σ i` is the rank
+of the `i`-th input element (so all inputs are distinct and every ranking occurs).
+An internal node `node i j l r` performs the single comparison `σ i ≤ σ j`, i.e. it asks
+whether the `i`-th element is smaller than the `j`-th element, and branches accordingly.
+A leaf outputs a permutation, the algorithm's claimed ranking of the input. -/
+inductive DTree : Type
+  | leaf : Equiv.Perm (Fin 4) → DTree
+  | node : Fin 4 → Fin 4 → DTree → DTree → DTree
 
-variable {n : ℕ}
+/-- The output of the decision tree on the input with ranking `σ`. -/
 
-/-- The depth of a comparison tree: the worst-case number of comparisons performed. -/
-
-theorem card_outputs_le (t : CompTree n) : (outputs t).card ≤ 2 ^ depth t := by
+theorem card_outputs_le (t : DTree) :
+    (Finset.univ.image (run t)).card ≤ 2 ^ depth t := by
   induction t with
-  | leaf p => simp [outputs, depth]
+  | leaf p =>
+      simp only [run, depth, pow_zero]
+      rw [Finset.image_const Finset.univ_nonempty]
+      simp
   | node i j l r ihl ihr =>
-      refine le_trans (Finset.card_union_le _ _) ?_
-      have h1 : (2 : ℕ) ^ depth l ≤ 2 ^ (max (depth l) (depth r)) :=
-        Nat.pow_le_pow_right (by norm_num) (le_max_left _ _)
-      have h2 : (2 : ℕ) ^ depth r ≤ 2 ^ (max (depth l) (depth r)) :=
-        Nat.pow_le_pow_right (by norm_num) (le_max_right _ _)
-      simp only [depth, pow_succ]
-      omega
+      have hsub : Finset.univ.image (run (DTree.node i j l r)) ⊆
+          Finset.univ.image (run l) ∪ Finset.univ.image (run r) := by
+        intro x hx
+        simp only [Finset.mem_image, Finset.mem_univ, true_and] at hx
+        obtain ⟨σ, hσ⟩ := hx
+        by_cases h : σ i ≤ σ j
+        · refine Finset.mem_union_left _ ?_
+          simp only [Finset.mem_image, Finset.mem_univ, true_and]
+          exact ⟨σ, by rw [← hσ]; simp [run, h]⟩
+        · refine Finset.mem_union_right _ ?_
+          simp only [Finset.mem_image, Finset.mem_univ, true_and]
+          exact ⟨σ, by rw [← hσ]; simp [run, h]⟩
+      calc (Finset.univ.image (run (DTree.node i j l r))).card
+          ≤ (Finset.univ.image (run l) ∪ Finset.univ.image (run r)).card :=
+            Finset.card_le_card hsub
+        _ ≤ (Finset.univ.image (run l)).card + (Finset.univ.image (run r)).card :=
+            Finset.card_union_le _ _
+        _ ≤ 2 ^ depth l + 2 ^ depth r := Nat.add_le_add ihl ihr
+        _ ≤ 2 ^ max (depth l) (depth r) + 2 ^ max (depth l) (depth r) :=
+            Nat.add_le_add (Nat.pow_le_pow_right (by norm_num) (le_max_left _ _))
+              (Nat.pow_le_pow_right (by norm_num) (le_max_right _ _))
+        _ = 2 ^ depth (DTree.node i j l r) := by
+            rw [depth, pow_add]
+            ring
 
+/-- A correct comparison sort of 4 elements must have at least `4! = 24` distinct outputs,
+hence `2 ^ depth ≥ 24`. -/

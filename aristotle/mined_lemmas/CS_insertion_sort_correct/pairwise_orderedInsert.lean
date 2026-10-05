@@ -1,55 +1,43 @@
 import Mathlib
+import RequestProject.Main
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Insertion sort correctness, stated with Mathlib's `List.Sorted`
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+`RequestProject/Main.lean` contains the target theorem `CS.insertion_sort_correct`
+(it cannot contain an `import` line, since the mandated header comment must be the
+first command of the file).  Here we restate it in Mathlib vocabulary, for a
+`LinearOrder`, using `List.Pairwise (· ≤ ·)` (which is Mathlib's `List.Sorted (· ≤ ·)`).
+-/
 
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace CS
 
 variable {α : Type*} [LinearOrder α]
 
-/-- Insert `a` into a list, placing it before the first element that is `≥ a`. -/
+/-- **Insertion sort is correct** (Mathlib phrasing): over a linear order,
+`CS.insertionSort (· ≤ ·) l` is sorted (pairwise `≤`) and is a permutation of `l`. -/
 
-lemma pairwise_orderedInsert (a : α) (l : List α) (hl : l.Pairwise (· ≤ ·)) :
-    (orderedInsert a l).Pairwise (· ≤ ·) := by
-  induction l with
-  | nil => simp [orderedInsert]
-  | cons b l ih =>
-      rw [List.pairwise_cons] at hl
-      by_cases h : a ≤ b
-      · simp only [orderedInsert, h, if_true]
-        rw [List.pairwise_cons]
-        refine ⟨?_, by rw [List.pairwise_cons]; exact hl⟩
-        intro c hc
-        rcases List.mem_cons.1 hc with rfl | hc
-        · exact h
-        · exact le_trans h (hl.1 c hc)
-      · simp only [orderedInsert, h, if_false]
-        rw [List.pairwise_cons]
-        refine ⟨?_, ih hl.2⟩
-        intro c hc
-        have hc' : c ∈ a :: l := (orderedInsert_perm a l).mem_iff.1 hc
-        rcases List.mem_cons.1 hc' with rfl | hc'
-        · exact le_of_not_ge h
-        · exact hl.1 c hc'
+theorem pairwise_orderedInsert (htotal : ∀ a b : α, le a b ∨ le b a)
+    (htrans : ∀ a b c : α, le a b → le b c → le a c) (a : α) :
+    ∀ l : List α, l.Pairwise le → (orderedInsert le a l).Pairwise le
+  | [], _ => List.pairwise_singleton le a
+  | b :: l, hl => by
+    rw [List.pairwise_cons] at hl
+    by_cases h : le a b
+    · rw [orderedInsert_cons, if_pos h, List.pairwise_cons]
+      refine ⟨?_, List.pairwise_cons.2 hl⟩
+      intro c hc
+      rcases List.mem_cons.1 hc with rfl | hc
+      · exact h
+      · exact htrans _ _ _ h (hl.1 c hc)
+    · rw [orderedInsert_cons, if_neg h, List.pairwise_cons]
+      refine ⟨?_, pairwise_orderedInsert htotal htrans a l hl.2⟩
+      intro c hc
+      have hc' := (perm_orderedInsert le a l).mem_iff.1 hc
+      rcases List.mem_cons.1 hc' with rfl | hc'
+      · exact (htotal _ _).resolve_left h
+      · exact hl.1 c hc'
 
-/-- `insertionSort` returns a sorted permutation of its input. -/
+/-- `insertionSort` returns a permutation of its input. -/

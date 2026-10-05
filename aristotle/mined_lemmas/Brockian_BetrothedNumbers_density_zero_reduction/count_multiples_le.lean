@@ -8,81 +8,35 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames false
-set_option pp.structureInstances true
-set_option pp.coercions.types false
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+open scoped BigOperators
+open scoped Classical
+open ArithmeticFunction
+open scoped ArithmeticFunction.sigma
 
-set_option grind.warning false
+namespace Brockian
+namespace BetrothedNumbers
 
-/-!
-## Overview
+/-! ## Betrothed (quasi-amicable) numbers -/
 
-Betrothed (quasi-amicable) numbers are the members of pairs `(m, n)` with `m ≠ n` and
-`σ(m) = σ(n) = m + n + 1`.  Pollack proved that the set of betrothed numbers has asymptotic
-density zero.  This file decomposes that theorem into reusable pieces and proves everything
-except one clearly isolated analytic input, which concerns only pairs of bounded ratio.
+/-- `n` and `m` form a *betrothed* (quasi-amicable) pair: they are distinct positive
+integers whose sums of divisors both equal `n + m + 1`, i.e. each is the sum of the
+proper divisors, excluding `1`, of the other. -/
 
-Dependency graph (every node is proved in this file, except the node marked `HYP`, which is
-the hypothesis of the final reduction theorem):
+theorem count_multiples_le (d x : ℕ) (hd : 0 < d) :
+    count {n : ℕ | d ∣ n} x ≤ x / d + 1 := by
+  unfold count
+  refine le_trans (Finset.card_le_card
+      (t := (Finset.range (x / d + 1)).image (fun k => d * k)) ?_)
+    (le_trans Finset.card_image_le (by simp))
+  intro n hn
+  simp only [Finset.mem_filter, Finset.mem_range, Set.mem_setOf_eq] at hn
+  obtain ⟨hlt, k, rfl⟩ := hn
+  refine Finset.mem_image.2 ⟨k, ?_, rfl⟩
+  simp only [Finset.mem_range]
+  have h1 : k = d * k / d := by rw [Nat.mul_div_cancel_left _ hd]
+  have hk : d * k / d ≤ x / d := Nat.div_le_div_right (le_of_lt hlt)
+  omega
 
-```
-   sum_inv_sq_le                     (∑_{d ≤ x} 1/d² ≤ 2)
-        │
-        ├──────────────► sum_sigmaOne_div_le      (∑_{m ≤ x} σ(m)/m ≤ 2x)
-   sigmaOne_div_self ────►      │
-   (σ(m)/m = ∑_{d ∣ m} 1/d)     │
-                                ▼
-                     count_highly_abundant_le     (#{m ≤ x : σ(m) ≥ K·m} ≤ 2x/K)
-                                │
-   partner_eq                   │
-        │                       │
-        ▼                       │
-   count_larger_le_count_smaller │        (the partner map is injective)
-        │                       │
-        ▼                       ▼
-   count_betrothed_le_two_mul   count_smaller_le_add
-        │                       │
-        └───────────┬───────────┘
-                    ▼
-          density_zero_reduction  ◄── HYP: for every K, the smaller members of betrothed
-                                          pairs of bounded ratio (n < K·m) have density 0
-```
-
-Also proved here, as independent reusable infrastructure for the remaining bounded-ratio step:
-`count_multiples_le` (`#{n ≤ x : d ∣ n} ≤ x/d`) and the sieve criterion
-`hasDensityZero_of_covered_by_multiples`.
-
-The remaining hypothesis is strictly weaker than Pollack's theorem: it only concerns betrothed
-pairs whose two members have bounded ratio.  The unbounded-ratio part is handled here
-unconditionally, via the average order bound `∑_{m ≤ x} σ(m)/m ≤ 2x`.  Accordingly, the density
-
-lemma count_multiples_le (d x : ℕ) :
-    (countUpTo (fun n => d ∣ n) x : ℝ) ≤ (x : ℝ) / d := by
-  rw [countUpTo_eq]
-  have hcard : #{n ∈ Finset.Icc 1 x | d ∣ n} = x / d := by
-    have hIcc : Finset.Icc 1 x = Finset.Ioc 0 x := rfl
-    rw [hIcc, Nat.Ioc_filter_dvd_card_eq_div]
-  rw [hcard]
-  exact Nat.cast_div_le
-
-/-- **Sieve criterion for density zero.**  If, for every `ε > 0`, all sufficiently large
-elements of `P` are divisible by some element of a finite set `D` of moduli whose reciprocals
-sum to at most `ε`, then `P` has density zero.  This is the standard tool for discarding the
-integers with a prescribed small divisor structure. -/
+/-- The number of perfect squares below `x` is at most `√x + 1`. -/

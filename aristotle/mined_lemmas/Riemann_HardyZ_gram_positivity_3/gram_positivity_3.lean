@@ -1,4 +1,5 @@
-/-
+import Mathlib
+/-!
 # Gram Positivity 3
 Category: Riemann Program
 Target: Riemann.HardyZ.gram_positivity_3
@@ -6,15 +7,12 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
 namespace Riemann.HardyZ
 
-/-- A 3-point Weil/Hardy positivity shadow: the quadratic form of the positive
-semidefinite matrix with `1` on the diagonal and `1/2` off the diagonal is
-nonnegative.  The proof is the identity
-`2 * (x^2 + y^2 + z^2 + x*y + y*z + z*x) = (x+y)^2 + (y+z)^2 + (z+x)^2`
-together with `sq_nonneg` from Mathlib. -/
+/-- A 3-point Weil/Hardy positivity shadow: the quadratic form of the PSD matrix
+with `1` on the diagonal and `1/2` off the diagonal is nonnegative.
+
+Equivalently, `2 * (x^2 + y^2 + z^2 + x*y + y*z + z*x) = (x+y)^2 + (y+z)^2 + (z+x)^2 ≥ 0`. -/
 
 theorem gram_positivity_3 (x y z : ℝ) :
     0 ≤ x ^ 2 + y ^ 2 + z ^ 2 + x * y + y * z + z * x := by

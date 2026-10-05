@@ -1,31 +1,31 @@
-/-
-# Insertion Sort Correct
-Category: Computer Science
-Target: CS.insertion_sort_correct
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
+import RequestProject.Main
 
 /-!
-# Insertion Sort Correct
+# Insertion sort correctness, stated with Mathlib's `List.Sorted`
 
-A self-contained development of insertion sort and its correctness proof.
+`RequestProject/Main.lean` contains the target theorem `CS.insertion_sort_correct`
+(it cannot contain an `import` line, since the mandated header comment must be the
+first command of the file).  Here we restate it in Mathlib vocabulary, for a
+`LinearOrder`, using `List.Pairwise (· ≤ ·)` (which is Mathlib's `List.Sorted (· ≤ ·)`).
 -/
+
+set_option autoImplicit false
 
 namespace CS
 
-variable {α : Type*} (r : α → α → Prop) [DecidableRel r]
+variable {α : Type*} [LinearOrder α]
 
-/-- Insert `a` into the list `l`, assumed sorted with respect to `r`. -/
+/-- **Insertion sort is correct** (Mathlib phrasing): over a linear order,
+`CS.insertionSort (· ≤ ·) l` is sorted (pairwise `≤`) and is a permutation of `l`. -/
 
-theorem perm_orderedInsert (a : α) : ∀ l : List α, List.Perm (orderedInsert r a l) (a :: l)
+theorem perm_orderedInsert (a : α) : ∀ l : List α, (orderedInsert le a l).Perm (a :: l)
   | [] => List.Perm.refl _
   | b :: l => by
-    by_cases h : r a b
-    · simp [orderedInsert_cons, h]
-    · simpa [orderedInsert_cons, h] using
-        ((perm_orderedInsert a l).cons b).trans (List.Perm.swap a b l)
+    by_cases h : le a b
+    · simp [h]
+    · have : ((b :: orderedInsert le a l) : List α).Perm (b :: a :: l) :=
+        (perm_orderedInsert a l).cons b
+      simpa [h] using this.trans (List.Perm.swap a b l)
 
-/-- Insertion sort returns a permutation of its input. -/
+/-- Inserting into a sorted list keeps it sorted. -/

@@ -1,162 +1,163 @@
-/-
-# Huffman Optimal
-Category: Computer Science
-Target: CS.huffman_optimal
-Statement: Huffman coding minimizes expected codeword length among prefix codes.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
+
+/-!
+# Kraft's inequality
+
+This file proves the Kraft inequality for finite prefix-free binary codes.
+It is part of the development of `CS.huffman_optimal`.
+-/
 
 namespace CS
 
 open List
 
-variable {α : Type*} {ι : Type*}
+/-- A list of binary codewords is prefix-free when no codeword is a prefix of another. -/
 
-/-! ## Extracting a minimum-weight element from a list -/
+def PrefixFreeList (L : List (List Bool)) : Prop :=
+  L.Pairwise (fun x y => ¬ x <+: y ∧ ¬ y <+: x)
 
-/-- `popMin f a l` returns a pair whose first component is an element of `a :: l`
-minimizing `f`, and whose second component is the remaining list. -/
+/-- The Kraft sum `∑ 2^(-|s|)` of a list of codewords. -/
 
-noncomputable def popMin (f : α → ℝ) : α → List α → α × List α
-  | a, [] => (a, [])
-  | a, b :: l =>
-      if f b < f a then ((popMin f b l).1, a :: (popMin f b l).2)
-      else ((popMin f a l).1, b :: (popMin f a l).2)
+def kraftL (L : List (List Bool)) : ℝ := (L.map (fun s => (1/2:ℝ) ^ s.length)).sum
 
-lemma popMin_cons (f : α → ℝ) (a b : α) (l : List α) :
-    popMin f a (b :: l) =
-      if f b < f a then ((popMin f b l).1, a :: (popMin f b l).2)
-      else ((popMin f a l).1, b :: (popMin f a l).2) := rfl
+/-- The codewords starting with the bit `b`, with that leading bit removed. -/
 
-@[simp] lemma popMin_length (f : α → ℝ) (a : α) (l : List α) :
-    (popMin f a l).2.length = l.length := by
-  induction l generalizing a with
-  | nil => simp
-  | cons b l ih => by_cases h : f b < f a <;> simp [popMin_cons, h, ih]
+def child (b : Bool) : List (List Bool) → List (List Bool)
+  | [] => []
+  | [] :: L => child b L
+  | (c :: t) :: L => if c = b then t :: child b L else child b L
 
-def gw (w : ι → ℝ) (g : List (ι × List Bool)) : ℝ := (g.map fun p => w p.1).sum
+/-- Total length of all codewords, used as a termination measure. -/
 
-/-- The total cost (weighted codeword length) of a group. -/
+def lenSum (L : List (List Bool)) : ℕ := (L.map List.length).sum
 
-def gmerge (A B : List (ι × List Bool)) : List (ι × List Bool) :=
-  A.map (fun p => (p.1, false :: p.2)) ++ B.map (fun p => (p.1, true :: p.2))
-
-/-- One run of Huffman's algorithm: repeatedly merge two minimum-weight groups. -/
-
-noncomputable def hstep (w : ι → ℝ) :
-    List (ι × List Bool) → List (List (ι × List Bool)) → List (ι × List Bool)
-  | g, [] => g
-  | g, h :: F =>
-      hstep w (gmerge (popMin (gw w) g (h :: F)).1
-                (popMin (gw w) (popMin (gw w) g (h :: F)).2.headI
-                  (popMin (gw w) g (h :: F)).2.tail).1)
-            (popMin (gw w) (popMin (gw w) g (h :: F)).2.headI
-                  (popMin (gw w) g (h :: F)).2.tail).2
-  termination_by _ F => F.length
-  decreasing_by
-    simp [popMin_length]
-
-/-- The cost of the Huffman code for a list of weights, defined by Huffman's recursion. -/
-
-noncomputable def kraft (S : List (ℝ × ℕ)) : ℝ := (S.map fun p => (2:ℝ)⁻¹ ^ p.2).sum
-
-/-- Expected codeword length of a list of (weight, codeword length) pairs. -/
-
-lemma kraft_cons (p : ℝ × ℕ) (S : List (ℝ × ℕ)) :
-    kraft (p :: S) = (2:ℝ)⁻¹ ^ p.2 + kraft S := by simp [kraft]
-
-lemma nat_sum_even (L : List ℕ) (h : ∀ n ∈ L, n % 2 = 0) : L.sum % 2 = 0 := by
+lemma mem_child (b : Bool) {L : List (List Bool)} {u : List Bool}
+    (hu : u ∈ child b L) : (b :: u) ∈ L := by
   induction L with
-  | nil => simp
-  | cons n L ih =>
-      have h1 := h n (by simp)
-      have h2 := ih (fun k hk => h k (by simp [hk]))
-      simp only [List.sum_cons]
-      omega
+  | nil => simp [child] at hu
+  | cons s L ih =>
+    match s with
+    | [] =>
+      simp only [child] at hu
+      exact List.mem_cons_of_mem _ (ih hu)
+    | c :: t =>
+      simp only [child] at hu
+      by_cases hcb : c = b
+      · subst hcb
+        simp only [if_pos rfl, List.mem_cons] at hu
+        rcases hu with h | h
+        · subst h; exact List.mem_cons_self ..
+        · exact List.mem_cons_of_mem _ (ih h)
+      · rw [if_neg hcb] at hu
+        exact List.mem_cons_of_mem _ (ih hu)
 
-lemma kraft_mul_pow (m : ℕ) : ∀ (S : List (ℝ × ℕ)), (∀ p ∈ S, p.2 ≤ m) →
-    (2:ℝ)^m * kraft S = ((S.map fun p => 2^(m - p.2)).sum : ℕ) := by
-  intro S
-  induction S with
-  | nil => simp [kraft]
-  | cons p S ih =>
-      intro h
-      have hp : p.2 ≤ m := h p (by simp)
-      have key : (2:ℝ)^m * (2⁻¹)^p.2 = 2^(m - p.2) := by
-        rw [pow_sub₀ (2:ℝ) (by norm_num) hp, inv_pow]
-      have hIH := ih (fun q hq => h q (by simp [hq]))
-      rw [kraft_cons, mul_add, key, hIH]
-      simp only [List.map_cons, List.sum_cons]
-      push_cast
-      ring
+lemma prefixFree_child (b : Bool) {L : List (List Bool)} (h : PrefixFreeList L) :
+    PrefixFreeList (child b L) := by
+  induction L with
+  | nil => simp [child, PrefixFreeList]
+  | cons s L ih =>
+    rw [PrefixFreeList, List.pairwise_cons] at h
+    obtain ⟨hhead, htail⟩ := h
+    have ihp := ih htail
+    match s with
+    | [] => simpa only [child] using ihp
+    | c :: t =>
+      simp only [child]
+      by_cases hcb : c = b
+      · subst hcb
+        rw [if_pos rfl, PrefixFreeList, List.pairwise_cons]
+        refine ⟨?_, ihp⟩
+        intro u hu
+        have hmem := mem_child c hu
+        have := hhead _ hmem
+        constructor
+        · intro hpre
+          exact this.1 (List.cons_prefix_cons.2 ⟨rfl, hpre⟩)
+        · intro hpre
+          exact this.2 (List.cons_prefix_cons.2 ⟨rfl, hpre⟩)
+      · rw [if_neg hcb]; exact ihp
 
-/-- If the maximal depth `m` occurs only once, the Kraft sum leaves room to shorten it. -/
+lemma kraftL_split {L : List (List Bool)} (h : ∀ s ∈ L, s ≠ []) :
+    kraftL L = (kraftL (child false L) + kraftL (child true L)) / 2 := by
+  induction L with
+  | nil => simp [kraftL, child]
+  | cons s L ih =>
+    have hL : ∀ t ∈ L, t ≠ [] := fun t ht => h t (List.mem_cons_of_mem _ ht)
+    have ihL := ih hL
+    match s with
+    | [] => exact absurd rfl (h [] (List.mem_cons_self ..))
+    | c :: t =>
+      cases c with
+      | false =>
+        simp only [child, if_pos rfl, if_neg (by simp : ¬ (false = true))]
+        simp only [kraftL, List.map_cons, List.sum_cons, List.length_cons] at ihL ⊢
+        rw [ihL]; ring
+      | true =>
+        simp only [child, if_pos rfl, if_neg (by simp : ¬ (true = false))]
+        simp only [kraftL, List.map_cons, List.sum_cons, List.length_cons] at ihL ⊢
+        rw [ihL]; ring
 
-lemma kraft_shorten_unique_max (m : ℕ) (hm : 1 ≤ m) (x : ℝ) (T : List (ℝ × ℕ))
-    (hT : ∀ p ∈ T, p.2 < m) (hk : kraft ((x, m) :: T) ≤ 1) :
-    kraft ((x, m - 1) :: T) ≤ 1 := by
-  set N : ℕ := (((x, m) :: T).map fun p => 2^(m - p.2)).sum with hN
-  have hle : ∀ p ∈ (x, m) :: T, p.2 ≤ m := by
-    intro p hp
-    rcases List.mem_cons.1 hp with rfl | hp'
-    · exact le_rfl
-    · exact (hT p hp').le
-  have hkey : (2:ℝ)^m * kraft ((x, m) :: T) = (N : ℝ) := kraft_mul_pow m _ hle
-  -- `N` is odd
-  have hodd : N % 2 = 1 := by
-    have heven : ((T.map fun p => 2^(m - p.2)).sum) % 2 = 0 := by
-      refine nat_sum_even ?_
-      intro n hn
-      obtain ⟨q, hq, rfl⟩ := List.mem_map.1 hn
-      have h1 : 1 ≤ m - q.2 := by have := hT q hq; omega
-      obtain ⟨j, hj⟩ : ∃ j, m - q.2 = j + 1 := ⟨m - q.2 - 1, by omega⟩
-      rw [hj, pow_succ]
-      omega
-    have : N = 2^(m - m) + (T.map fun p => 2^(m - p.2)).sum := by
-      rw [hN]; simp
-    rw [this]
-    simp only [Nat.sub_self, pow_zero]
-    omega
-  -- `N ≤ 2 ^ m`
-  have hNle : (N : ℝ) ≤ 2^m := by
-    rw [← hkey]
-    have : (0:ℝ) < 2^m := by positivity
-    nlinarith
-  have hNle' : N ≤ 2^m := by exact_mod_cast hNle
-  have hNlt : N < 2^m := by
-    rcases lt_or_eq_of_le hNle' with h | h
-    · exact h
-    · exfalso
-      have : (2:ℕ)^m % 2 = 0 := by
-        obtain ⟨j, hj⟩ : ∃ j, m = j + 1 := ⟨m - 1, by omega⟩
-        rw [hj, pow_succ]; omega
-      omega
-  -- conclude
-  have hpow : (0:ℝ) < 2^m := by positivity
-  have h1 : kraft ((x, m) :: T) ≤ 1 - (2:ℝ)⁻¹^m := by
-    have hNle2 : (N : ℝ) ≤ 2^m - 1 := by
-      have : (N : ℝ) + 1 ≤ 2^m := by exact_mod_cast hNlt
+lemma lenSum_split {L : List (List Bool)} (h : ∀ s ∈ L, s ≠ []) :
+    lenSum L = L.length + lenSum (child false L) + lenSum (child true L) := by
+  induction L with
+  | nil => simp [lenSum, child]
+  | cons s L ih =>
+    have hL : ∀ t ∈ L, t ≠ [] := fun t ht => h t (List.mem_cons_of_mem _ ht)
+    have ihL := ih hL
+    match s with
+    | [] => exact absurd rfl (h [] (List.mem_cons_self ..))
+    | c :: t =>
+      cases c with
+      | false =>
+        simp only [child, if_pos rfl, if_neg (by simp : ¬ (false = true))]
+        simp only [lenSum, List.map_cons, List.sum_cons, List.length_cons] at ihL ⊢
+        omega
+      | true =>
+        simp only [child, if_pos rfl, if_neg (by simp : ¬ (true = false))]
+        simp only [lenSum, List.map_cons, List.sum_cons, List.length_cons] at ihL ⊢
+        omega
+
+/-- **Kraft's inequality**: a finite prefix-free binary code satisfies `∑ 2^(-|s|) ≤ 1`. -/
+
+theorem kraftL_le_one : ∀ (L : List (List Bool)), PrefixFreeList L → kraftL L ≤ 1 := by
+  intro L
+  induction hn : lenSum L using Nat.strong_induction_on generalizing L with
+  | _ n ih =>
+  intro hpf
+  subst hn
+  by_cases hemp : [] ∈ L
+  · -- the empty codeword forces `L = [[]]`
+    have hsingle : L = [[]] := by
+      rcases List.mem_iff_append.1 hemp with ⟨A, B, rfl⟩
+      have hA : A = [] := by
+        rcases A with _ | ⟨a, A'⟩
+        · rfl
+        · exfalso
+          rw [PrefixFreeList, List.pairwise_append] at hpf
+          have := hpf.2.2 a (List.mem_cons_self ..) [] (List.mem_cons_self ..)
+          exact this.2 (List.nil_prefix)
+      have hB : B = [] := by
+        rcases B with _ | ⟨b, B'⟩
+        · rfl
+        · exfalso
+          subst hA
+          simp only [List.nil_append, PrefixFreeList, List.pairwise_cons] at hpf
+          exact (hpf.1 b (List.mem_cons_self ..)).1 List.nil_prefix
+      subst hA; subst hB; rfl
+    rw [hsingle]; simp [kraftL]
+  · have hne : ∀ s ∈ L, s ≠ [] := by
+      intro s hs hcon; exact hemp (hcon ▸ hs)
+    rcases L with _ | ⟨s, L'⟩
+    · simp [kraftL]
+    · set L := s :: L' with hLdef
+      have hlen : 0 < L.length := by simp [hLdef]
+      have hsplit := lenSum_split hne
+      have h0 : lenSum (child false L) < lenSum L := by omega
+      have h1 : lenSum (child true L) < lenSum L := by omega
+      have k0 := ih _ h0 (child false L) rfl (prefixFree_child false hpf)
+      have k1 := ih _ h1 (child true L) rfl (prefixFree_child true hpf)
+      rw [kraftL_split hne]
       linarith
-    have hmul : (2:ℝ)^m * kraft ((x, m) :: T) ≤ 2^m - 1 := by rw [hkey]; exact hNle2
-    have h2 : kraft ((x, m) :: T) ≤ ((2:ℝ)^m - 1) / 2^m := by
-      rw [le_div_iff₀ hpow]; linarith
-    have h3 : ((2:ℝ)^m - 1)/2^m = 1 - (2:ℝ)⁻¹^m := by
-      rw [inv_pow]; field_simp
-    rw [h3] at h2
-    exact h2
-  have hstep : kraft ((x, m - 1) :: T) = kraft ((x, m) :: T) + (2:ℝ)⁻¹^m := by
-    rw [kraft_cons, kraft_cons]
-    have : (2:ℝ)⁻¹^(m-1) = 2 * 2⁻¹^m := by
-      obtain ⟨j, hj⟩ : ∃ j, m = j + 1 := ⟨m - 1, by omega⟩
-      subst hj
-      simp [pow_succ]
-      ring
-    simp only [this]
-    ring
-  rw [hstep]
-  linarith
 
 end CS
 

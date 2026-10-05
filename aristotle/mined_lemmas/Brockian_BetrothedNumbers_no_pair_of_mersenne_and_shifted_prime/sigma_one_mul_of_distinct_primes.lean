@@ -30,20 +30,26 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+namespace Brockian.BetrothedNumbers
 
 open ArithmeticFunction
 open scoped ArithmeticFunction.sigma
 
-namespace Brockian.BetrothedNumbers
+/-- `n` and `m` form a *betrothed* (quasi-amicable) pair: they are distinct and each one's
+sum of divisors equals the sum of the two numbers plus one. -/
 
-/-- `n` and `m` form a *betrothed* (quasi-amicable) pair: they are distinct positive integers
-whose sums of divisors both equal `n + m + 1`. -/
-
-theorem sigma_one_mul_of_distinct_primes {q r : ℕ} (hq : q.Prime) (hr : r.Prime) (h : q ≠ r) :
+lemma sigma_one_mul_of_distinct_primes {q r : ℕ} (hq : q.Prime) (hr : r.Prime) (hqr : q ≠ r) :
     σ 1 (q * r) = (q + 1) * (r + 1) := by
-  rw [ArithmeticFunction.isMultiplicative_sigma.map_mul_of_coprime
-    ((Nat.coprime_primes hq hr).mpr h)]
-  rw [sigma_one_prime hq, sigma_one_prime hr]
+  rw [isMultiplicative_sigma.map_mul_of_coprime ((Nat.coprime_primes hq hr).2 hqr),
+    sigma_one_prime hq, sigma_one_prime hr]
 
-/-- The sum of divisors of `2 ^ k * p` for `p` an odd prime. -/
+/-- The sum of divisors of `2 ^ k * p` for an odd prime `p`. -/

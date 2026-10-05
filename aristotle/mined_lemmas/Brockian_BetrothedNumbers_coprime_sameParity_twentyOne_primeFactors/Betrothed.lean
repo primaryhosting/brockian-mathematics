@@ -1,11 +1,3 @@
-/-
-# Coprime Same Parity Twenty One Prime Factors
-Category: Frontier — Betrothed Numbers
-Target: Brockian.BetrothedNumbers.coprime_sameParity_twentyOne_primeFactors
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -23,37 +15,33 @@ open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 40000
+set_option maxRecDepth 4000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
-open Finset
+namespace Brockian.BetrothedNumbers
+
+open Finset ArithmeticFunction
 open scoped ArithmeticFunction.sigma
 
-namespace Brockian
-namespace BetrothedNumbers
+/-- A *betrothed* (quasi-amicable) pair: two positive integers, each of whose sum of
+divisors equals their sum plus one. -/
 
-/-!
-## Betrothed (quasi-amicable) pairs
+def Betrothed (m n : ℕ) : Prop :=
+  0 < m ∧ 0 < n ∧ σ 1 m = m + n + 1 ∧ σ 1 n = m + n + 1
 
-A pair `(m, n)` of positive integers is *betrothed* (also called *quasi-amicable*, or a
-*reduced amicable pair*) when each of the two numbers is the sum of the *nontrivial* proper
-divisors of the other, i.e. `σ₁ m = σ₁ n = m + n + 1`.
--/
+/-! ### The rational abundancy bound `σ₁(N)/N ≤ ∏_{p ∣ N} p/(p-1)` -/
 
-/-- `Betrothed m n` says that `(m, n)` is a betrothed (quasi-amicable) pair:
-the sum of divisors of each of `m` and `n` equals `m + n + 1`. -/
-
-def Betrothed (m n : ℕ) : Prop := σ 1 m = m + n + 1 ∧ σ 1 n = m + n + 1
-
-/-!
-## Auxiliary results
--/
-
-/-- A nonzero natural number is a perfect square iff all exponents in its prime factorization
-are even. -/
+/-- For a prime power, `σ₁(p ^ a) ≤ p ^ a * p / (p - 1)`. -/

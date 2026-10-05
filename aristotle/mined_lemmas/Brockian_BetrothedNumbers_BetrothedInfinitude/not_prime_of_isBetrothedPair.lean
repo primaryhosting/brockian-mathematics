@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Betrothed Infinitude
-Category: Brockian Conjecture
-Target: Brockian.BetrothedNumbers.BetrothedInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,16 +33,50 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.BetrothedNumbers
+/-!
+## Betrothed (quasi-amicable) numbers
 
-open Finset
+A pair `(m, n)` of distinct positive integers is *betrothed* (or *quasi-amicable*,
+or a *reduced amicable pair*) when
 
-/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d`. -/
+  `σ m = σ n = m + n + 1`,
+
+i.e. each of `m` and `n` is the sum of the *nontrivial* proper divisors of the other.
+The smallest example is `(48, 75)`.
+
+Whether there are infinitely many betrothed pairs is an open problem, so the target
+theorem `BetrothedInfinitude` is stated here as a **Lean-checked conditional
+reduction**: infinitude of betrothed pairs follows from a prime-pattern hypothesis
+`PrimePatternUnbounded`, which asks for arbitrarily large solutions of a pair of
+`σ`-equations in which the two "new" factors are primes.
+
+The hypothesis is *not* vacuous: `isBetrothedPattern_16_25_3_3` exhibits the
+solution `(a, b, p, q) = (16, 25, 3, 3)`, which produces the betrothed pair
+`(48, 75)`.
+
+Alongside the reduction, several unconditional facts are proved: the first three
+betrothed pairs, that no member of a betrothed pair is prime, that both members are
+at least `48`, that the set of betrothed pairs is infinite exactly when betrothed
+numbers are unbounded, and a parity restriction (in a betrothed pair whose two members
+have the same parity, each member is a square or twice a square).
+-/
+
+namespace Brockian
+namespace BetrothedNumbers
+
+open ArithmeticFunction
+
+set_option maxRecDepth 100000
+
+/-- `IsBetrothedPair m n` says that `m` and `n` are distinct positive integers with
+`σ m = σ n = m + n + 1`; equivalently, each is the sum of the proper divisors of the
+other, excluding `1`. -/
 
 theorem not_prime_of_isBetrothedPair {m n : ℕ} (h : IsBetrothedPair m n) : ¬ m.Prime := by
   intro hp
   obtain ⟨-, hn, -, h1, -⟩ := h
-  rw [sigmaOne_prime hp] at h1
+  rw [ArithmeticFunction.sigma_one_apply, hp.sum_divisors] at h1
   omega
 
-/-- No member of a betrothed pair equals `1`. -/
+/-- Both members of a betrothed pair are at least `48`; the pair `(48, 75)` is the
+smallest one. -/

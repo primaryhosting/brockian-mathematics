@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-
 # Rung Glue Constant Upgrade
 Category: A Assembly
@@ -8,12 +33,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+set_option autoImplicit false
+
 namespace Zeta23Scaffold
 
-/-- Abbreviation for the eventual lower bound statement
-`∀ ε > 0, ∃ T₀, ∀ T ≥ T₀, (c - ε) * n T ≤ s T`. -/
+/-- Eventual lower bound of `s` by `(c - eps) * n`, for every `eps > 0`. -/
 
 def EventualBound (c : ℝ) (n s : ℝ → ℝ) : Prop :=
-  ∀ ε > 0, ∃ T0 : ℝ, ∀ T ≥ T0, (c - ε) * n T ≤ s T
+  ∀ eps : ℝ, 0 < eps → ∃ T0 : ℝ, ∀ T : ℝ, T0 ≤ T → (c - eps) * n T ≤ s T
 
-/-- (a) The `(2*(31/36) - 1 - ε)`-bound is literally the `(13/18 - ε)`-bound. -/
+/-- Monotonicity of the eventual bound in the constant `c`, for nonnegative `n`. -/

@@ -1,0 +1,51 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Alkane Tree
+Category: Chemistry
+Target: Chem.alkane_tree
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+namespace Chem
+
+open Finset
+
+/-- The number of hydrogen atoms attached to the carbon atom `v` of a carbon
+skeleton `G`: carbon is tetravalent, so the valences left over after the C–C
+bonds at `v` are saturated by hydrogens. -/
+
+theorem butane_formula :
+    (pathGraph 4).edgeFinset.card = 3 ∧ ∑ v, hydrogens (pathGraph 4) v = 10 :=
+  alkane_tree (pathGraph 4) pathGraph_four_isTree (by decide)
+
+end Butane
+
+end Chem
+

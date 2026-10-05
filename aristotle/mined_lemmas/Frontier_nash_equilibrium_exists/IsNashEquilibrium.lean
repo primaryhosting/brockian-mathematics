@@ -1,3 +1,11 @@
+/-
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -6,26 +14,23 @@ Category: Frontier Mind
 Target: Frontier.nash_equilibrium_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean 4 requires `import` to be the very first command in a file, so the header comment
-above is placed immediately after it.)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-section Defs
+open Finset
+
+/-! ## Finite games in normal form -/
 
 variable {ι : Type} [Fintype ι] [DecidableEq ι]
   {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
-/-- The pure strategy `a`, viewed as a (degenerate) mixed strategy. -/
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
 
-def IsNashEquilibrium (g : ι → (∀ i, S i) → ℝ) (x : ∀ i, S i → ℝ) : Prop :=
-  x ∈ MixedProfiles S ∧
-    ∀ i, ∀ y ∈ stdSimplex ℝ (S i),
-      expectedPayoff g i (Function.update x i y) ≤ expectedPayoff g i x
+def IsNashEquilibrium (u : ι → (∀ j, S j) → ℝ) (x : ∀ j, S j → ℝ) : Prop :=
+  IsMixed x ∧ ∀ (i : ι) (z : S i → ℝ), IsDist z →
+    payoff u i (Function.update x i z) ≤ payoff u i x
 
-/-- `s` is a pure-strategy Nash equilibrium: no player can improve by switching to
-another pure strategy. -/
+/-- Brouwer's fixed point theorem for the space `E`: every continuous self-map of a
+nonempty compact convex subset of `E` has a fixed point. (This is not available in
+Mathlib, so it is taken as an explicit hypothesis.) -/

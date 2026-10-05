@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-
 # Ramsey 3 5
 Category: Pure Mathematics
@@ -5,6 +30,7 @@ Target: Math.ramsey_3_5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
@@ -13,29 +39,41 @@ Category: Pure Mathematics
 Target: Math.ramsey_3_5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` to come first in a file, so the header above the import is a plain
-block comment and this is the module docstring with the same content.)
-
-Mathlib does not contain Ramsey numbers, so the whole development is built here:
-the recursion `R(3,t+1) ≤ t + R(3,t)`, the parity refinement giving `R(3,4) ≤ 9`,
-hence `R(3,5) ≤ 14`, and the circulant graph `C₁₃(1,5)` witnessing `R(3,5) > 13`.
 -/
 
-set_option maxHeartbeats 2000000
+open Finset SimpleGraph
 
-namespace Math
+namespace Ramsey35
 
-open Finset
+variable {V : Type*} [DecidableEq V]
 
-/-! ## The Ramsey property -/
+/-! ### Basic clique helpers -/
 
-/-- `RamseyProp n s t` says that every simple graph on `n` vertices contains either a clique
-of size `s` or an independent set of size `t` (equivalently, a clique of size `t` in the
-complement).  `R(s,t)` is the least `n` with this property. -/
+omit [DecidableEq V] in
+/-- A finset all of whose distinct pairs are non-adjacent is a clique in the complement. -/
 
-theorem G13_no_indep_five : ∀ a b c d e : Fin 13, a < b → b < c → c < d → d < e →
-    ¬ (¬ G13.Adj a b ∧ ¬ G13.Adj a c ∧ ¬ G13.Adj a d ∧ ¬ G13.Adj a e ∧ ¬ G13.Adj b c ∧
-       ¬ G13.Adj b d ∧ ¬ G13.Adj b e ∧ ¬ G13.Adj c d ∧ ¬ G13.Adj c e ∧ ¬ G13.Adj d e) := by
-  decide +kernel
+theorem G13_no_indep_five : ¬ ∃ t : Finset (Fin 13), G13ᶜ.IsNClique 5 t := by
+  rintro ⟨t, ht⟩
+  obtain ⟨a, b, c, d, e, hab, hbc, hcd, hde, ha, hb, hc, hd, he⟩ := exists_sorted_five ht.2
+  have hne : ∀ x ∈ t, ∀ y ∈ t, x ≠ y → ¬ G13.Adj x y := by
+    intro x hx y hy hxy
+    exact ((SimpleGraph.compl_adj G13 x y).1 (ht.1 hx hy hxy)).2
+  have h := G13_no_indep5 a b c d e hab hbc hcd hde
+  simp only [Bool.or_eq_true] at h
+  have hfalse : ∀ x ∈ t, ∀ y ∈ t, x < y → adjB x y = false := by
+    intro x hx y hy hxy
+    have := hne x hx y hy (ne_of_lt hxy)
+    simpa [G13] using this
+  rw [hfalse a ha b hb hab, hfalse a ha c hc (hab.trans hbc),
+    hfalse a ha d hd (hab.trans (hbc.trans hcd)),
+    hfalse a ha e he (hab.trans (hbc.trans (hcd.trans hde))),
+    hfalse b hb c hc hbc, hfalse b hb d hd (hbc.trans hcd),
+    hfalse b hb e he (hbc.trans (hcd.trans hde)),
+    hfalse c hc d hd hcd, hfalse c hc e he (hcd.trans hde),
+    hfalse d hd e he hde] at h
+  simp at h
 
+/-! ### Monotonicity of the Ramsey property -/
+
+/-- The set of `N` for which every graph on `Fin N` contains a triangle or an
+independent set of size 5. -/

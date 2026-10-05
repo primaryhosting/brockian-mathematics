@@ -1,10 +1,3 @@
-/-
-# Valiant Permanent
-Category: Frontier Cs
-Target: CS.valiant_permanent
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -17,226 +10,209 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace CS
 
-open Finset
+open Matrix Equiv Finset
 
-/-- An instance of the 0/1 permanent problem: a size `n` together with an `n × n`
-matrix of bits, viewed equivalently as the adjacency data of a bipartite graph. -/
-structure Inst where
-  size : ℕ
-  edge : Fin size → Fin size → Bool
+section Counting
 
-/-- The 0/1 matrix (over `ℕ`) attached to an instance. -/
-def matrixOf (I : Inst) : Matrix (Fin I.size) (Fin I.size) ℕ :=
-  fun i j => if I.edge i j then 1 else 0
+variable {V : Type*} [Fintype V] [DecidableEq V]
 
-/-- The value of the 0/1 permanent problem on an instance. -/
-def permanentCount (I : Inst) : ℕ := (matrixOf I).permanent
+/-- **Counting form of the permanent (membership in `#P`).**
+The permanent of a `0/1` matrix is the number of permutations `σ` all of whose entries
+`A (σ i) i` equal `1`, i.e. the number of perfect matchings of the bipartite graph
+described by `A`. -/
+theorem permanent_eq_card_perms (A : Matrix V V ℕ) (h01 : ∀ i j, A i j = 0 ∨ A i j = 1) :
+    A.permanent = (univ.filter (fun σ : Perm V => ∀ i, A (σ i) i = 1)).card := by
+  rw [Matrix.permanent, Finset.card_filter]
+  refine Finset.sum_congr rfl fun σ _ => ?_
+  by_cases h : ∀ i, A (σ i) i = 1
+  · simp [h]
+  · push_neg at h
+    obtain ⟨i, hi⟩ := h
+    rw [if_neg (by simpa using ⟨i, hi⟩)]
+    refine Finset.prod_eq_zero (Finset.mem_univ i) ?_
+    rcases h01 (σ i) i with h0 | h1
+    · exact h0
+    · exact absurd h1 hi
 
-/-- The number of witnesses: permutations all of whose selected entries are `1`. -/
-def assignmentCount (I : Inst) : ℕ :=
-  Fintype.card {σ : Equiv.Perm (Fin I.size) // ∀ i, I.edge i (σ i)}
-
-/-- Adjacency of the bipartite graph attached to an instance. -/
-def biAdj (I : Inst) : Fin I.size ⊕ Fin I.size → Fin I.size ⊕ Fin I.size → Prop
-  | Sum.inl i, Sum.inr j => I.edge i j
-  | Sum.inr j, Sum.inl i => I.edge i j
-  | _, _ => False
-
-/-- The bipartite graph attached to an instance: left and right copies of `Fin n`,
-with `inl i` adjacent to `inr j` exactly when the matrix entry `(i, j)` is `1`. -/
-def biGraph (I : Inst) : SimpleGraph (Fin I.size ⊕ Fin I.size) where
-  Adj := biAdj I
-  symm := by rintro (i | i) (j | j) h <;> simp_all [biAdj]
-  loopless := by
-    constructor
-    rintro (i | i) h <;> simp [biAdj] at h
-
-/-- The number of perfect matchings of the bipartite graph attached to an instance. -/
-noncomputable def matchingCount (I : Inst) : ℕ :=
-  Nat.card {M : (biGraph I).Subgraph // M.IsPerfectMatching}
-
-/-- A parsimonious reduction with linear size blow-up: an instance map preserving the
-counted quantity exactly. -/
-def ParsimoniousReduction (f g : Inst → ℕ) : Prop :=
-  ∃ r : Inst → Inst, (∃ c : ℕ, ∀ I, (r I).size ≤ c * I.size + c) ∧ ∀ I, f I = g (r I)
-
-theorem parsimoniousReduction_refl (f : Inst → ℕ) : ParsimoniousReduction f f :=
-  ⟨id, ⟨1, fun I => by simp⟩, fun _ => rfl⟩
-
-theorem parsimoniousReduction_of_eq {f g : Inst → ℕ} (h : ∀ I, f I = g I) :
-    ParsimoniousReduction f g :=
-  ⟨id, ⟨1, fun I => by simp⟩, h⟩
-
-theorem parsimoniousReduction_trans {f g h : Inst → ℕ} (hfg : ParsimoniousReduction f g)
-    (hgh : ParsimoniousReduction g h) : ParsimoniousReduction f h := by
-  obtain ⟨r, ⟨c, hc⟩, hrc⟩ := hfg
-  obtain ⟨s, ⟨d, hd⟩, hsd⟩ := hgh
-  refine ⟨s ∘ r, ⟨d * c + d, fun I => ?_⟩, fun I => (hrc I).trans (hsd (r I))⟩
-  have h1 := hd (r I)
-  have h2 := hc I
-  calc (s (r I)).size ≤ d * (r I).size + d := h1
-    _ ≤ d * (c * I.size + c) + d := by
-        exact Nat.add_le_add_right (Nat.mul_le_mul_left d h2) d
-    _ ≤ (d * c + d) * I.size + (d * c + d) := by ring_nf; omega
-
-/-- The hypotheses used below to speak about a counting class are satisfiable, so the
-completeness statement is not vacuous: the class of problems parsimoniously reducible to
-counting bipartite perfect matchings is such a class. -/
-theorem countingClass_hypotheses_satisfiable :
-    ∃ SharpP : (Inst → ℕ) → Prop,
-      (∀ f g, ParsimoniousReduction f g → SharpP g → SharpP f) ∧
-      SharpP matchingCount ∧ (∀ f, SharpP f → ParsimoniousReduction f matchingCount) :=
-  ⟨fun f => ParsimoniousReduction f matchingCount,
-    fun _ _ hfg hg => parsimoniousReduction_trans hfg hg,
-    parsimoniousReduction_refl _, fun _ h => h⟩
-
-/-! ### The permanent of a 0/1 matrix counts witnesses -/
-
-theorem permanent_eq_assignmentCount (I : Inst) : permanentCount I = assignmentCount I := by
-  have h1 : permanentCount I
-      = ∑ σ : Equiv.Perm (Fin I.size), ∏ i, (if I.edge i (σ i) then (1 : ℕ) else 0) := by
-    rw [permanentCount, ← Matrix.permanent_transpose]
-    rfl
-  rw [h1, assignmentCount, Fintype.card_subtype]
-  simp only [Finset.prod_boole, Finset.mem_univ, forall_true_left, Finset.sum_boole]
-  simp
-
-/-! ### Witnesses correspond to perfect matchings of the bipartite graph -/
-
-/-- The perfect matching attached to a permutation all of whose entries are edges. -/
-def matchingOfPerm (I : Inst) (σ : {σ : Equiv.Perm (Fin I.size) // ∀ i, I.edge i (σ i)}) :
-    (biGraph I).Subgraph where
-  verts := Set.univ
-  Adj := fun x y =>
-    match x, y with
-    | Sum.inl i, Sum.inr j => σ.1 i = j
-    | Sum.inr j, Sum.inl i => σ.1 i = j
-    | _, _ => False
-  adj_sub := by
-    rintro (i | i) (j | j) h <;> simp_all [biGraph, biAdj]
-    · exact h ▸ σ.2 i
-    · exact h ▸ σ.2 j
-  edge_vert := by intros; trivial
-  symm := by rintro (i | i) (j | j) h <;> simp_all
-
-theorem matchingOfPerm_isPerfectMatching (I : Inst)
-    (σ : {σ : Equiv.Perm (Fin I.size) // ∀ i, I.edge i (σ i)}) :
-    (matchingOfPerm I σ).IsPerfectMatching := by
-  rw [SimpleGraph.Subgraph.isPerfectMatching_iff]
-  rintro (i | j)
-  · refine ⟨Sum.inr (σ.1 i), rfl, ?_⟩
-    rintro (a | a) h <;> simp_all [matchingOfPerm]
-  · refine ⟨Sum.inl (σ.1.symm j), by simp [matchingOfPerm], ?_⟩
-    rintro (a | a) h
-    · simp only [matchingOfPerm] at h
-      simp [← h]
-    · simp [matchingOfPerm] at h
-
-theorem matchingOfPerm_injective (I : Inst) : Function.Injective (matchingOfPerm I) := by
-  rintro ⟨σ, hσ⟩ ⟨τ, hτ⟩ h
-  refine Subtype.ext (Equiv.ext fun i => ?_)
-  have h2 : (matchingOfPerm I ⟨τ, hτ⟩).Adj (Sum.inl i) (Sum.inr (σ i)) :=
-    h ▸ (rfl : (matchingOfPerm I ⟨σ, hσ⟩).Adj (Sum.inl i) (Sum.inr (σ i)))
-  have h3 : τ i = σ i := h2
-  exact h3.symm
-
-theorem matchingOfPerm_surjective (I : Inst) (M : (biGraph I).Subgraph)
-    (hM : M.IsPerfectMatching) : ∃ σ, matchingOfPerm I σ = M := by
-  have hu := SimpleGraph.Subgraph.isPerfectMatching_iff.mp hM
-  have key : ∀ i : Fin I.size, ∃ j : Fin I.size, M.Adj (Sum.inl i) (Sum.inr j) := by
+/-- The same count, phrased over *functions* `V → V` (bit strings of length `|V| log |V|`)
+subject to the polynomial-time checkable predicate "is a bijection and all selected entries
+are `1`". -/
+theorem permanent_eq_card_bijections (A : Matrix V V ℕ) (h01 : ∀ i j, A i j = 0 ∨ A i j = 1) :
+    A.permanent =
+      (univ.filter (fun f : V → V => Function.Bijective f ∧ ∀ i, A (f i) i = 1)).card := by
+  rw [permanent_eq_card_perms A h01]
+  refine Finset.card_bij (fun σ _ => ⇑σ) ?_ ?_ ?_
+  · intro σ hσ
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hσ ⊢
+    exact ⟨σ.bijective, hσ⟩
+  · intro σ _ τ _ h
+    exact Equiv.coe_fn_injective h
+  · intro f hf
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hf
+    refine ⟨Equiv.ofBijective f hf.1, ?_, rfl⟩
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
     intro i
-    obtain ⟨w, hw, -⟩ := hu (Sum.inl i)
-    cases w with
-    | inl a => exact absurd (M.adj_sub hw) (by simp [biGraph, biAdj])
-    | inr a => exact ⟨a, hw⟩
-  choose f hf using key
-  have huniq : ∀ (i j : Fin I.size), M.Adj (Sum.inl i) (Sum.inr j) → f i = j := by
-    intro i j h
-    obtain ⟨w, -, huq⟩ := hu (Sum.inl i)
-    have e3 : (Sum.inr (f i) : Fin I.size ⊕ Fin I.size) = Sum.inr j :=
-      (huq (Sum.inr (f i)) (hf i)).trans (huq (Sum.inr j) h).symm
-    simpa using e3
-  have hinj : Function.Injective f := by
-    intro a b hab
-    have h1 := hf a
-    have h2 := hf b
-    rw [hab] at h1
-    obtain ⟨w, -, huq⟩ := hu (Sum.inr (f b))
-    have := (huq _ (M.symm h1)).trans (huq _ (M.symm h2)).symm
-    simpa using this
-  let σ : Equiv.Perm (Fin I.size) := Equiv.ofBijective f (Finite.injective_iff_bijective.mp hinj)
-  have hσ : ∀ i, σ i = f i := fun i => rfl
-  have hedge : ∀ i, I.edge i (σ i) := by
-    intro i
-    have := M.adj_sub (hf i)
-    simpa [biGraph, biAdj, hσ] using this
-  refine ⟨⟨σ, hedge⟩, ?_⟩
-  refine SimpleGraph.Subgraph.ext (hM.2.verts_eq_univ).symm (funext₂ fun x y => propext ?_)
-  constructor
+    simpa using hf.2 i
+
+end Counting
+
+section Gadget
+
+variable {n K : ℕ}
+
+/-- Auxiliary ("midpoint") vertices of the gadget graph: for each pair `(i, j)` of original
+vertices there are `K + 1` midpoints, of which the first `A i j` are *live*. -/
+abbrev Mid (n K : ℕ) : Type := Fin n × Fin n × Fin (K + 1)
+
+/-- Vertices of the gadget graph: the original ones together with the midpoints. -/
+abbrev Vtx (n K : ℕ) : Type := Fin n ⊕ Mid n K
+
+/-- The `0/1` gadget matrix associated with a nonnegative integer matrix `A`:
+every entry `A i j` (a weight, given in unary) is replaced by `A i j` parallel length-two
+paths through fresh midpoint vertices, each unused midpoint carrying a loop. -/
+def gadget (A : Matrix (Fin n) (Fin n) ℕ) (K : ℕ) : Matrix (Vtx n K) (Vtx n K) ℕ :=
+  fun r c =>
+    match r, c with
+    | Sum.inl _, Sum.inl _ => 0
+    | Sum.inl r, Sum.inr m => if r = m.1 ∧ (m.2.2 : ℕ) < A m.1 m.2.1 then 1 else 0
+    | Sum.inr m, Sum.inl c => if m.2.1 = c ∧ (m.2.2 : ℕ) < A m.1 m.2.1 then 1 else 0
+    | Sum.inr m, Sum.inr m' => if m = m' then 1 else 0
+
+@[simp] theorem gadget_inl_inl (A : Matrix (Fin n) (Fin n) ℕ) (r c : Fin n) :
+    gadget A K (Sum.inl r) (Sum.inl c) = 0 := rfl
+
+@[simp] theorem gadget_inl_inr (A : Matrix (Fin n) (Fin n) ℕ) (r : Fin n) (m : Mid n K) :
+    gadget A K (Sum.inl r) (Sum.inr m) =
+      if r = m.1 ∧ (m.2.2 : ℕ) < A m.1 m.2.1 then 1 else 0 := rfl
+
+@[simp] theorem gadget_inr_inl (A : Matrix (Fin n) (Fin n) ℕ) (m : Mid n K) (c : Fin n) :
+    gadget A K (Sum.inr m) (Sum.inl c) =
+      if m.2.1 = c ∧ (m.2.2 : ℕ) < A m.1 m.2.1 then 1 else 0 := rfl
+
+@[simp] theorem gadget_inr_inr (A : Matrix (Fin n) (Fin n) ℕ) (m m' : Mid n K) :
+    gadget A K (Sum.inr m) (Sum.inr m') = if m = m' then 1 else 0 := rfl
+
+/-- The gadget matrix is a `0/1` matrix. -/
+theorem gadget_zero_or_one (A : Matrix (Fin n) (Fin n) ℕ) (r c : Vtx n K) :
+    gadget A K r c = 0 ∨ gadget A K r c = 1 := by
+  cases r <;> cases c <;> simp only [gadget_inl_inl, gadget_inl_inr, gadget_inr_inl,
+    gadget_inr_inr] <;> first | (left; rfl) | (split <;> simp)
+
+/-- The permutation of the gadget graph associated with a permutation `σ` of the original
+vertices together with a choice `t` of a parallel path for each vertex. -/
+def gadgetPerm (σ : Perm (Fin n)) (t : Fin n → Fin (K + 1)) : Perm (Vtx n K) where
+  toFun x := match x with
+    | Sum.inl c => Sum.inr (σ c, c, t c)
+    | Sum.inr m => if m = (σ m.2.1, m.2.1, t m.2.1) then Sum.inl m.1 else Sum.inr m
+  invFun x := match x with
+    | Sum.inl r => Sum.inr (r, σ.symm r, t (σ.symm r))
+    | Sum.inr m => if m = (σ m.2.1, m.2.1, t m.2.1) then Sum.inl m.2.1 else Sum.inr m
+  left_inv x := by
+    cases x with
+    | inl c => simp
+    | inr m =>
+      by_cases h : m = (σ m.2.1, m.2.1, t m.2.1)
+      · simp only [h, if_pos rfl]
+        conv_rhs => rw [h]
+        simp
+      · simp [h]
+  right_inv x := by
+    cases x with
+    | inl r => simp
+    | inr m =>
+      by_cases h : m = (σ m.2.1, m.2.1, t m.2.1)
+      · simp only [h, if_pos rfl]
+        conv_rhs => rw [h]
+        simp
+      · simp [h]
+
+@[simp] theorem gadgetPerm_inl (σ : Perm (Fin n)) (t : Fin n → Fin (K + 1)) (c : Fin n) :
+    gadgetPerm σ t (Sum.inl c) = Sum.inr (σ c, c, t c) := rfl
+
+@[simp] theorem gadgetPerm_inr (σ : Perm (Fin n)) (t : Fin n → Fin (K + 1)) (m : Mid n K) :
+    gadgetPerm σ t (Sum.inr m) =
+      if m = (σ m.2.1, m.2.1, t m.2.1) then Sum.inl m.1 else Sum.inr m := rfl
+
+/-- The permutation of the original vertices read off from a permutation of the gadget graph. -/
+def rowFun (τ : Perm (Vtx n K)) (c : Fin n) : Fin n :=
+  match τ (Sum.inl c) with
+  | Sum.inl r => r
+  | Sum.inr m => m.1
+
+/-- The choice of parallel path read off from a permutation of the gadget graph. -/
+def colFun (τ : Perm (Vtx n K)) (c : Fin n) : Fin (K + 1) :=
+  match τ (Sum.inl c) with
+  | Sum.inl _ => 0
+  | Sum.inr m => m.2.2
+
+/-- A permutation of the gadget graph contributes to the permanent iff it satisfies this
+predicate. -/
+def Valid (A : Matrix (Fin n) (Fin n) ℕ) (τ : Perm (Vtx n K)) : Prop :=
+  ∀ x, gadget A K (τ x) x = 1
+
+instance (A : Matrix (Fin n) (Fin n) ℕ) (τ : Perm (Vtx n K)) : Decidable (Valid A τ) := by
+  unfold Valid; infer_instance
+
+/-- A valid permutation sends an original vertex to the midpoint prescribed by
+`rowFun` and `colFun`, which is moreover live. -/
+theorem valid_inl (A : Matrix (Fin n) (Fin n) ℕ) {τ : Perm (Vtx n K)} (hτ : Valid A τ)
+    (c : Fin n) :
+    τ (Sum.inl c) = Sum.inr (rowFun τ c, c, colFun τ c) ∧
+      ((colFun τ c : ℕ) < A (rowFun τ c) c) := by
+  have h := hτ (Sum.inl c)
+  revert h
+  rcases hc : τ (Sum.inl c) with r | m
+  · simp
   · intro h
-    match x, y with
-    | Sum.inl i, Sum.inr j =>
-      have hfi : f i = j := h
-      exact hfi ▸ hf i
-    | Sum.inr j, Sum.inl i =>
-      have hfi : f i = j := h
-      exact M.symm (hfi ▸ hf i)
-    | Sum.inl i, Sum.inl j => exact absurd h (by simp [matchingOfPerm])
-    | Sum.inr i, Sum.inr j => exact absurd h (by simp [matchingOfPerm])
-  · intro h
-    match x, y with
-    | Sum.inl i, Sum.inr j => exact huniq i j h
-    | Sum.inr j, Sum.inl i => exact huniq i j (M.symm h)
-    | Sum.inl i, Sum.inl j => exact absurd (M.adj_sub h) (by simp [biGraph, biAdj])
-    | Sum.inr i, Sum.inr j => exact absurd (M.adj_sub h) (by simp [biGraph, biAdj])
+    simp only [gadget_inr_inl] at h
+    have h' : m.2.1 = c ∧ (m.2.2 : ℕ) < A m.1 m.2.1 := by
+      by_contra hcon
+      rw [if_neg hcon] at h
+      exact absurd h (by norm_num)
+    have hrow : rowFun τ c = m.1 := by simp [rowFun, hc]
+    have hcol : colFun τ c = m.2.2 := by simp [colFun, hc]
+    refine ⟨?_, ?_⟩
+    · rw [hc, hrow, hcol, h'.1]
+    · rw [hrow, hcol]
+      simpa [h'.1] using h'.2
 
-theorem assignmentCount_eq_matchingCount (I : Inst) : assignmentCount I = matchingCount I := by
-  rw [assignmentCount, matchingCount, ← Nat.card_eq_fintype_card]
-  refine Nat.card_congr (Equiv.ofBijective
-    (fun σ => (⟨matchingOfPerm I σ, matchingOfPerm_isPerfectMatching I σ⟩ :
-      {M : (biGraph I).Subgraph // M.IsPerfectMatching})) ⟨?_, ?_⟩)
-  · intro a b hab
-    exact matchingOfPerm_injective I (congrArg Subtype.val hab)
-  · rintro ⟨M, hM⟩
-    obtain ⟨σ, hσ⟩ := matchingOfPerm_surjective I M hM
-    exact ⟨σ, Subtype.ext hσ⟩
+theorem valid_inr (A : Matrix (Fin n) (Fin n) ℕ) {τ : Perm (Vtx n K)} (hτ : Valid A τ)
+    (d : Fin n) : τ (Sum.inr (rowFun τ d, d, colFun τ d)) = Sum.inl (rowFun τ d) := by
+  have hd := (valid_inl A hτ d).1
+  have hne : τ (Sum.inr (rowFun τ d, d, colFun τ d)) ≠ Sum.inr (rowFun τ d, d, colFun τ d) := by
+    intro hcon
+    have := τ.injective (hd.trans hcon.symm)
+    exact absurd this (by simp)
+  have hval := hτ (Sum.inr (rowFun τ d, d, colFun τ d))
+  revert hval hne
+  rcases hval2 : τ (Sum.inr (rowFun τ d, d, colFun τ d)) with r | m
+  · intro hval _
+    simp only [gadget_inl_inr] at hval
+    have : r = rowFun τ d ∧ _ := by
+      by_contra hcon
+      rw [if_neg hcon] at hval
+      exact absurd hval (by norm_num)
+    rw [this.1]
+  · intro hval hne
+    simp only [gadget_inr_inr] at hval
+    have : m = (rowFun τ d, d, colFun τ d) := by
+      by_contra hcon
+      rw [if_neg hcon] at hval
+      exact absurd hval (by norm_num)
+    exact absurd (by rw [this]) hne
 
-/-! ### Main statement -/
+theorem rowFun_injective (A : Matrix (Fin n) (Fin n) ℕ) {τ : Perm (Vtx n K)} (hτ : Valid A τ) :
+    Function.Injective (rowFun τ) := by
+  intro c c' h
+  have e1 := valid_inr A hτ c
+  have e2 := valid_inr A hτ c'
+  rw [h] at e1
+  have hmid := τ.injective (e1.trans e2.symm)
+  have : (rowFun τ c, c, colFun τ c) = (rowFun τ c', c', colFun τ c') := by
+    simpa using hmid
+  simpa using congrArg (fun p : Mid n K => p.2.1) this
 
-/--
-**Valiant's theorem (formalized core).**
-
-The 0/1 permanent is `#P`-complete.
-
-What is proved here:
-
-* the permanent of a 0/1 matrix is exactly the number of witnesses (permutations selecting
-  only `1` entries), so the permanent is a counting function of a polynomially bounded,
-  efficiently checkable relation — the `#P`-membership half;
-* those witnesses are in bijection with the perfect matchings of the associated bipartite
-  graph, so the 0/1 permanent problem *is* the problem of counting perfect matchings in a
-  bipartite graph;
-* consequently, for any class `SharpP` of counting problems that is closed under
-  parsimonious reductions and for which counting bipartite perfect matchings is complete,
-  the 0/1 permanent is complete as well: it lies in the class and every problem of the
-  class reduces to it parsimoniously.
--/
-theorem valiant_permanent :
-    (∀ I : Inst, permanentCount I = assignmentCount I) ∧
-    (∀ I : Inst, permanentCount I = matchingCount I) ∧
-    (∀ SharpP : (Inst → ℕ) → Prop,
-        (∀ f g, ParsimoniousReduction f g → SharpP g → SharpP f) →
-        SharpP matchingCount →
-        (∀ f, SharpP f → ParsimoniousReduction f matchingCount) →
-        SharpP permanentCount ∧ ∀ f, SharpP f → ParsimoniousReduction f permanentCount) := by
-  have hperm : ∀ I : Inst, permanentCount I = matchingCount I := fun I =>
-    (permanent_eq_assignmentCount I).trans (assignmentCount_eq_matchingCount I)
-  refine ⟨permanent_eq_assignmentCount, hperm, ?_⟩
-  intro SharpP hclosed hmem hhard
-  have hpm : permanentCount = matchingCount := funext hperm
-  refine ⟨hpm ▸ hmem, fun f hf => ?_⟩
-  obtain ⟨r, hsize, hcount⟩ := hhard f hf
-  exact ⟨r, hsize, fun I => (hcount I).trans (hperm (r I)).symm⟩
+end Gadget
 
 end CS
 

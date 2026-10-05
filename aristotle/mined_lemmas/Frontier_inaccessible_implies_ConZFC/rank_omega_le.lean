@@ -1,29 +1,38 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
+theorem rank_omega_le : ZFSet.rank ZFSet.omega.{u} ≤ Ordinal.omega0.{u} := by
+  rw [ZFSet.rank_le_iff]
+  intro y hy
+  induction y using Quotient.inductionOn with
+  | _ p =>
+    obtain ⟨i, hi⟩ := hy
+    show PSet.rank p < Ordinal.omega0
+    rw [PSet.rank_congr hi]
+    exact PSet_rank_ofNat_lt_omega0 i.down
 
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem rank_omega_le : rank ZFSet.omega.{u} ≤ Ordinal.omega0 := by
-  show PSet.rank PSet.omega ≤ _
-  rw [PSet.omega, PSet.rank]
-  refine Ordinal.iSup_le fun a => ?_
-  rw [rank_ofNat]
-  exact Order.succ_le_of_lt (Ordinal.nat_lt_omega0 _)
-
+/-- For `κ` inaccessible, the sets of rank `< κ.ord` form a class satisfying the ZFC closure
+conditions. -/

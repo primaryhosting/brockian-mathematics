@@ -1,32 +1,56 @@
+/-
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
 # Dijkstra Correct
 Category: Computer Science
 Target: CS.dijkstra_correct
-Statement: Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+We formalize Dijkstra's algorithm on a finite directed graph whose edge weights are
+elements of `ℝ≥0∞` (`ENNReal`).  Using `ℝ≥0∞` encodes exactly the two features of the
+setting Dijkstra's algorithm requires: weights are **nonnegative**, and a weight of `⊤`
+models a missing edge (so unreachable vertices get distance `⊤`).
+
+`CS.gdist w s v` is the true shortest-path distance: the infimum of the costs of all
+walks from `s` to `v`.  `CS.dijkstra w s` is the output of the algorithm (the classical
+loop: repeatedly select an unvisited vertex of minimal tentative distance, mark it
+visited, and relax all of its outgoing edges).  The main theorem `CS.dijkstra_correct`
+states that these agree.
 -/
 
 namespace CS
 
 open Finset
+open scoped ENNReal
 
-variable {V : Type*} [Fintype V] [DecidableEq V]
+section Defs
 
-/-! ## Walks and shortest-path distances
+variable {V : Type*}
 
-A weighted digraph on the finite vertex type `V` is given by a weight function
-`w : V → V → ℕ∞`, where `w u v = ⊤` encodes the absence of an edge from `u` to `v`.
-All weights are nonnegative by construction. -/
+/-- `ReachesVia w S s v c` means: there is a walk from `s` to `v` of total weight `c`
+all of whose vertices, except possibly the final one, lie in `S`. -/
+inductive ReachesVia (w : V → V → ℝ≥0∞) (S : Finset V) (s : V) : V → ℝ≥0∞ → Prop
+  | refl : ReachesVia w S s s 0
+  | step {u v c} (hu : u ∈ S) (h : ReachesVia w S s u c) :
+      ReachesVia w S s v (c + w u v)
 
-/-- `walkCost w u l` is the total weight of the walk that starts at `u` and then visits
-the vertices of `l` in order. -/
+/-- The infimum of the weights of walks from `s` to `v` with all intermediate vertices
+in `S`. -/
 
-noncomputable def dijkstraAux (w : V → V → ℕ∞) (src : V) : ℕ → Finset V × (V → ℕ∞)
-  | 0 => (∅, fun v => if v = src then 0 else ⊤)
-  | n + 1 => stepD w (dijkstraAux w src n)
+noncomputable def dijkstraAux (w : V → V → ℝ≥0∞) (s : V) : ℕ → Finset V × (V → ℝ≥0∞)
+  | 0 => (∅, fun v => if v = s then 0 else ⊤)
+  | n + 1 => dijkstraStep w (dijkstraAux w s n)
 
-/-- Dijkstra's algorithm: run `card V` steps from the source `src` and read off the
-distance function. -/
+/-- Dijkstra's algorithm: run the loop once per vertex and return the tentative
+distances. -/

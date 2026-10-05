@@ -8,14 +8,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Pigeonhole
-Category: Frontier Wave 2 (deeper machinery)
-Target: Combinatorics.pigeonhole
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -39,16 +31,24 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+# Pigeonhole
+Category: Frontier Wave 2 (deeper machinery)
+Target: Combinatorics.pigeonhole
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace Combinatorics
 
 /-- **Pigeonhole principle** (type version): if `f : α → β` with `α`, `β` finite types and
-`Fintype.card β < Fintype.card α`, then `f` collides: there are `a ≠ b` with `f a = f b`.
-Closed by Mathlib's `Fintype.exists_ne_map_eq_of_card_lt`. -/
+`Fintype.card β < Fintype.card α`, then `f` is not injective, i.e. there are two distinct
+elements of `α` with the same image. -/
 
-theorem pigeonhole_finset {α β : Type*} {s : Finset α} {t : Finset β} (f : α → β)
-    (hmaps : ∀ a ∈ s, f a ∈ t) (hcard : t.card < s.card) :
+theorem pigeonhole_finset {α β : Type*} [DecidableEq β] {s : Finset α} {t : Finset β}
+    (f : α → β) (hf : ∀ a ∈ s, f a ∈ t) (h : t.card < s.card) :
     ∃ a ∈ s, ∃ b ∈ s, a ≠ b ∧ f a = f b :=
-  Finset.exists_ne_map_eq_of_card_lt_of_maps_to hcard hmaps
+  Finset.exists_ne_map_eq_of_card_lt_of_maps_to h hf
 
 end Combinatorics
 

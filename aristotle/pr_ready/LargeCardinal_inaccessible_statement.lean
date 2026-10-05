@@ -23,19 +23,19 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option grind.warning false
+universe u
 
 namespace LargeCardinal
 
-/-- A cardinal `k` is *inaccessible* if it is uncountable, regular, and a strong limit. -/
-def Inaccessible (k : Cardinal.{0}) : Prop :=
-  Cardinal.aleph0 < k ∧ k.IsRegular ∧ ∀ c : Cardinal.{0}, c < k → 2 ^ c < k
+/-- A cardinal is *inaccessible* if it is uncountable, regular, and a strong limit. -/
+def Inaccessible (k : Cardinal) : Prop :=
+  Cardinal.aleph0 < k ∧ k.IsRegular ∧ ∀ c : Cardinal, c < k → 2 ^ c < k
 
-/-- Well-formedness of the inaccessible-cardinal statement: the assertion that an inaccessible
-cardinal exists is equivalent to itself.  (Existence of inaccessible cardinals is independent
-of ZFC and is *not* asserted here.) -/
+/-- Well-formedness (self-equivalence) of the inaccessible-cardinal statement.
+This asserts nothing about the existence of inaccessible cardinals, whose existence
+is independent of ZFC. -/
 theorem inaccessible_statement :
-    (∃ k : Cardinal.{0}, Inaccessible k) ↔ (∃ k : Cardinal.{0}, Inaccessible k) :=
+    (∃ k : Cardinal.{u}, Inaccessible k) ↔ (∃ k : Cardinal.{u}, Inaccessible k) :=
   Iff.rfl
 
 end LargeCardinal

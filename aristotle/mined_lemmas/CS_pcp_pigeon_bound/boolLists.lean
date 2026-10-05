@@ -26,8 +26,10 @@ set_option grind.warning false
 
 namespace CS
 
-/-- The finite set of all boolean lists of a given length. -/
+/-- The finset of all binary strings (lists of booleans) of length `n`. -/
 
-def boolLists (k : ℕ) : Finset (List Bool) :=
-  Finset.image Subtype.val (Finset.univ : Finset (List.Vector Bool k))
+def boolLists : ℕ → Finset (List Bool)
+  | 0 => {[]}
+  | n + 1 => (Finset.univ : Finset Bool).biUnion
+      (fun b => (boolLists n).image (fun l => b :: l))
 

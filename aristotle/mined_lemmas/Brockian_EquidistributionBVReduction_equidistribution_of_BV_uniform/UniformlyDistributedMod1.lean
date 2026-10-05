@@ -24,6 +24,7 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
+
 /-!
 # Equidistribution Of BV Uniform
 Category: Brockian (Literature Discharge)
@@ -32,21 +33,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Finset MeasureTheory
-open scoped Topology BigOperators Classical
+open Filter Finset MeasureTheory Set
+open scoped Topology
 
-namespace Brockian
-namespace EquidistributionBVReduction
+namespace Brockian.EquidistributionBVReduction
 
-/-- The number of indices `n < N` for which the fractional part of `x n` lies in `[a, b)`. -/
+/-- The frequency with which the fractional parts of the first `N` terms of the sequence `x`
+land in the interval `[a, b)`. -/
 
 def UniformlyDistributedMod1 (x : ℕ → ℝ) : Prop :=
-  ∀ a b : ℝ, 0 ≤ a → a ≤ b → b ≤ 1 →
-    Tendsto (fun N : ℕ => (countIn x a b N : ℝ) / N) atTop (𝓝 (b - a))
+  ∀ a b : ℝ, 0 ≤ a → a ≤ b → b ≤ 1 → Tendsto (freq x a b) atTop (𝓝 (b - a))
 
-section Helpers
-
-variable {x : ℕ → ℝ} {g : ℝ → ℝ}
-
-/-- Membership in the `i`-th dyadic-type subinterval of `[0,1)` is detected by the floor of
-`K * y`. -/
+/-- Sanity check: the hypothesis of uniform distribution mod 1 has genuine content; a constant
+sequence is not uniformly distributed mod 1. -/

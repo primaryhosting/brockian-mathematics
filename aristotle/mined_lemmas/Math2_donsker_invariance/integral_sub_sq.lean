@@ -1,0 +1,74 @@
+/-
+# Donsker Invariance
+Category: Frontier Math
+Target: Math2.donsker_invariance
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+/-!
+# Donsker Invariance
+Category: Frontier Math
+Target: Math2.donsker_invariance
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+Donsker's invariance principle states that the diffusively rescaled random walk built from
+i.i.d. centered increments of unit variance converges in law, as a process, to Brownian motion.
+
+Mathlib currently contains neither Brownian motion, nor weak convergence on the Skorokhod space,
+nor the central limit theorem, so the functional statement cannot be phrased.  What is proved
+here is the *second-order (moment) form* of the invariance principle, which is the part of the
+statement that can be expressed with the available theory:
+
+* the rescaled walk `W_n(t) = S_{⌊n t⌋} / √n` is centered;
+* its covariance converges to the Brownian covariance, `E[W_n(s) W_n(t)] → min s t`;
+* its increments have the Brownian variance in the limit, `E[(W_n(t) - W_n(s))²] → t - s`;
+* its increments over disjoint time intervals are exactly independent.
+
+All the limits depend only on the first two moments of the increments and not on their law —
+this is the *invariance* content of the principle, isolated in
+`Math2.donsker_invariance_law_independent`.
+-/
+
+namespace Math2
+
+open MeasureTheory ProbabilityTheory Filter Topology
+
+/-- The diffusively rescaled random walk built from the increments `X`:
+`rescaledWalk X n t ω = (X 0 + ⋯ + X (⌊n t⌋ - 1)) / √n`.
+This is the piecewise-constant process appearing in Donsker's invariance principle. -/
+
+lemma integral_sub_sq
+    (hmem : ∀ i, MemLp (X i) 2 μ) (hindep : iIndepFun X μ)
+    (hmean : ∀ i, ∫ ω, X i ω ∂μ = 0) (hvar : ∀ i, ∫ ω, (X i ω) ^ 2 ∂μ = 1)
+    {a b : ℕ} (hab : a ≤ b) :
+    ∫ ω, ((∑ i ∈ Finset.range b, X i ω) - ∑ i ∈ Finset.range a, X i ω) ^ 2 ∂μ
+      = ((b : ℝ) - a) := by
+  have hIco : ∀ ω, ((∑ i ∈ Finset.range b, X i ω) - ∑ i ∈ Finset.range a, X i ω) ^ 2
+      = (∑ i ∈ Finset.Ico a b, X i ω) * (∑ j ∈ Finset.Ico a b, X j ω) := by
+    intro ω
+    rw [← Finset.sum_Ico_eq_sub _ hab, pow_two]
+  simp_rw [hIco]
+  rw [integral_sum_mul_sum hmem hindep hmean hvar, Finset.inter_self, Nat.card_Ico,
+    Nat.cast_sub hab]
+
+/-- Second moment of a rescaled-walk increment. -/

@@ -16,35 +16,28 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Setting
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-A *molecule* is modelled as a finite set of atomic positions in `ℝ³` which is not contained in
-any plane through the origin (equivalently, the positions span `ℝ³`).  This non-degeneracy
-hypothesis is genuinely needed: a linear molecule such as `CO₂` has the infinite point group
-`D∞h`, so "molecular point groups are finite" is a statement about genuinely three-dimensional
-molecules.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-Its *point group* is the subgroup of `O(3)` consisting of those orthogonal transformations that
-map the molecule onto itself.  (Only the positions are recorded; the point group of a molecule
-with labelled atomic species is a subgroup of the group considered here, hence also finite.)
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-The key intermediate lemma is `Chem.eq_of_mulVec_eq_of_span`: an orthogonal transformation is
-determined by its values on a spanning set.  Since a symmetry permutes the finitely many atoms,
-this embeds the point group into the finite set of self-maps of the atom set.
--/
+set_option grind.warning false
 
 namespace Chem
 
-open scoped Matrix
+/-- The orthogonal group `O(3)`, realized as the group of real `3 × 3` orthogonal matrices. -/
+abbrev O3 : Type := ↥(Matrix.orthogonalGroup (Fin 3) ℝ)
 
-/-- `O3` is the orthogonal group `O(3)`: the group of real `3 × 3` matrices whose transpose is
-their inverse. -/
-abbrev O3 : Submonoid (Matrix (Fin 3) (Fin 3) ℝ) := Matrix.orthogonalGroup (Fin 3) ℝ
+/-- The natural action of `O(3)` on Euclidean 3-space. -/
 
-@[simp]
+@[simp] lemma act_one (x : Fin 3 → ℝ) : act 1 x = x := Matrix.one_mulVec x
 
-theorem act_one (v : Fin 3 → ℝ) : act 1 v = v := by
-  simp [act]
-
-@[simp]

@@ -23,55 +23,50 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Equidistribution Of BV Uniform
+Category: Brockian (Literature Discharge)
+Target: Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
-# Reduction of equidistribution to bounded–variation test functions
+# Equidistribution from uniform averaging against functions of bounded variation
 
-Let `x : ℕ → ℝ` be a sequence.  We say that the *bounded variation averages of `x`
-converge* if for every real function `f` of bounded variation on `[0,1]` the Birkhoff-type
-averages of `f` along the fractional parts of `x` converge to `∫_0^1 f`.
+If a real sequence `x : ℕ → ℝ` has the property that for *every* function `f : ℝ → ℝ` of
+bounded variation on `[0,1]` the Cesàro averages `(1/N) ∑_{n < N} f (x n)` converge to
+`∫_0^1 f`, then `x` is equidistributed in `[0,1]`: for every subinterval `[a,b) ⊆ [0,1]`
+the proportion of indices `n < N` with `x n ∈ [a,b)` converges to `b - a`.
 
-The main result, `Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform`,
-says that this hypothesis on `x` forces `x` to be uniformly distributed mod `1`:
-the proportion of the first `N` fractional parts falling into a subinterval `[a,b) ⊆ [0,1]`
-tends to its length `b - a`.
+The proof tests the hypothesis on the indicator function of `[a, b)`.  The two facts that
+this reduction relies on are proved here rather than assumed, making the statement
+unconditional:
 
-The point of the reduction is that indicator functions of intervals are of bounded
-variation; this is proved here from scratch (`Brockian.EquidistributionBVReduction.boundedVariationOn_indicator_Ico`),
-via a subadditivity estimate for `eVariationOn` and the fact that the two half-line
-indicators `1_{[a,∞)}` and `1_{[b,∞)}` are monotone.
+* `Brockian.EquidistributionBVReduction.boundedVariationOn_indicator_Ico` : the indicator
+  function of an interval `[a, b)` has bounded variation on `[0,1]`;
+* `Brockian.EquidistributionBVReduction.intervalIntegral_indicator_Ico` : its integral over
+  `[0,1]` equals `b - a` whenever `0 ≤ a ≤ b ≤ 1`.
 -/
-
-open Set Filter MeasureTheory
-open scoped ENNReal Topology
 
 namespace Brockian
 namespace EquidistributionBVReduction
 
-/-- A sequence `x : ℕ → ℝ` is *uniformly distributed mod 1* if for every subinterval
-`[a,b) ⊆ [0,1]`, the proportion of `n < N` with `Int.fract (x n) ∈ [a, b)` tends to `b - a`. -/
+open Filter Set MeasureTheory
+open scoped Topology ENNReal
 
-theorem boundedVariationOn_indicator_Ico {a b : ℝ} (hab : a ≤ b) :
-    BoundedVariationOn (Set.indicator (Set.Ico a b) (fun _ => (1 : ℝ))) (Set.Icc (0 : ℝ) 1) := by
-  have heq : Set.EqOn (Set.indicator (Set.Ico a b) (fun _ => (1 : ℝ)))
-      (fun t : ℝ => (if a ≤ t then (1 : ℝ) else 0) - (if b ≤ t then (1 : ℝ) else 0))
-      (Set.Icc (0 : ℝ) 1) := by
-    intro t _
-    by_cases hb : b ≤ t
-    · have ha : a ≤ t := hab.trans hb
-      simp [ha, hb]
-    · push_neg at hb
-      by_cases ha : a ≤ t
-      · have : t ∈ Set.Ico a b := ⟨ha, hb⟩
-        simp [Set.indicator_of_mem this, ha, not_le.2 hb]
-      · push_neg at ha
-        simp [not_le.2 ha, not_le.2 hb]
-  unfold BoundedVariationOn
-  rw [eVariationOn.eq_of_eqOn heq]
-  refine ne_top_of_le_ne_top ?_ (eVariationOn_sub_le _ _ _)
-  exact ENNReal.add_ne_top.2 ⟨boundedVariationOn_indicator_Ici a, boundedVariationOn_indicator_Ici b⟩
+/-- The Heaviside-type step function `t ↦ 1` if `a ≤ t`, and `0` otherwise. -/
 
-/-! ### The integral of an interval indicator -/
+lemma boundedVariationOn_indicator_Ico {a b : ℝ} (hab : a ≤ b) :
+    BoundedVariationOn (Set.indicator (Ico a b) (fun _ => (1:ℝ))) (Icc (0:ℝ) 1) := by
+  have hBV : BoundedVariationOn (fun t => stepGe a t - stepGe b t) (Icc (0:ℝ) 1) :=
+    boundedVariationOn_sub (boundedVariationOn_of_monotone (monotone_stepGe a))
+      (boundedVariationOn_of_monotone (monotone_stepGe b))
+  have : (Set.indicator (Ico a b) (fun _ => (1:ℝ))) = fun t => stepGe a t - stepGe b t :=
+    funext (indicator_Ico_eq_sub hab)
+  rw [this]
+  exact hBV
 
-/-- The integral over `[0,1]` of the indicator of `[a,b) ⊆ [0,1]` is `b - a`. -/
+/-- **Discharged hypothesis (2).** The integral of the indicator of `[a,b) ⊆ [0,1]` over `[0,1]`
+is `b - a`. -/

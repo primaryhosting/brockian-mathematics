@@ -16,38 +16,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open Complex
+
 namespace Chem
 
-open Matrix SimpleGraph Complex
+/-- A primitive 18-th root of unity. -/
 
-/-- The primitive 18-th root of unity `exp(2πi/18)`. -/
-
-lemma adj_mul_V : (cycleGraph 18).adjMatrix ℂ * V = V * D := by
-  ext j k
-  rw [SimpleGraph.adjMatrix_mul_apply, D, Matrix.mul_diagonal]
-  have hnb : (cycleGraph 18).neighborFinset j = {j - 1, j + 1} :=
-    cycleGraph_neighborFinset (n := 16) (v := j)
-  have hne : j - 1 ≠ j + 1 := by
-    intro h
-    rw [sub_eq_add_neg] at h
-    exact absurd (add_left_cancel h) (by decide)
-  rw [hnb, Finset.sum_pair hne]
-  have h1 : j - 1 = j + 17 := by
-    rw [sub_eq_add_neg]
-    congr 1
-  rw [h1, V_apply, V_apply, V_apply]
-  have e1 : ((j + 17 : Fin 18) : ℕ) * (k : ℕ) % 18 = ((j : ℕ) + 17) * (k : ℕ) % 18 := by
-    rw [Fin.val_add]
-    simp [Nat.mul_mod, Nat.add_mod]
-  have e2 : ((j + 1 : Fin 18) : ℕ) * (k : ℕ) % 18 = ((j : ℕ) + 1) * (k : ℕ) % 18 := by
-    rw [Fin.val_add]
-    simp [Nat.mul_mod, Nat.add_mod]
-  rw [om_pow_congr e1, om_pow_congr e2]
-  have expand1 : ((j : ℕ) + 17) * (k : ℕ) = (j : ℕ) * (k : ℕ) + 17 * (k : ℕ) := by ring
-  have expand2 : ((j : ℕ) + 1) * (k : ℕ) = (j : ℕ) * (k : ℕ) + (k : ℕ) := by ring
-  rw [expand1, expand2, pow_add, pow_add, ← om_pow_add_inv k]
+theorem adj_mul_V : (SimpleGraph.cycleGraph 18).adjMatrix ℂ * V = V * Matrix.diagonal mu := by
+  ext u k
+  have hL : ((SimpleGraph.cycleGraph 18).adjMatrix ℂ * V) u k
+      = Matrix.mulVec ((SimpleGraph.cycleGraph 18).adjMatrix ℂ) (fun v => V v k) u := rfl
+  rw [hL, SimpleGraph.adjMatrix_mulVec_apply, SimpleGraph.cycleGraph_neighborFinset,
+    Finset.sum_pair (sub_one_ne_add_one u), Matrix.mul_diagonal]
+  have h1 : V (u - 1) k = ch (u * k) * ch (-k) := by
+    show ch ((u - 1) * k) = _
+    rw [show (u - 1) * k = u * k + -k by rw [sub_mul, one_mul, sub_eq_add_neg], ch_add]
+  have h2 : V (u + 1) k = ch (u * k) * ch k := by
+    show ch ((u + 1) * k) = _
+    rw [show (u + 1) * k = u * k + k by rw [add_mul, one_mul], ch_add]
+  rw [h1, h2, show V u k = ch (u * k) from rfl, ← ch_add_ch_neg k]
   ring
 
-/-- **Hückel theory for the C₁₈ annulene.**
-The eigenvalues of the adjacency matrix of the cycle graph `C₁₈` are exactly the
-numbers `2 cos(2πk/18)` for `k = 0, …, 17`. -/
+/-- The Fourier matrix as a unit of the matrix algebra. -/

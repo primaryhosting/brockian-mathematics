@@ -1,35 +1,40 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
-
-/-!
-# Minimax for two player zero sum finite games
--/
+import Mathlib
 
 open scoped BigOperators
+open Set Function
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+/-! ## Finite games in normal form
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+A finite game in normal form consists of a finite set of players `I`, for each player a finite
+nonempty set of pure strategies `S i`, and a payoff function `u i : (∀ j, S j) → ℝ`.
 
-theorem expectedPayoff_eq_sum (G : FiniteGame ι S) (i : ι) (x : (i : ι) → S i → ℝ) :
-    expectedPayoff G i x = ∑ s : S i, x i s * devPayoff G i s x := by
-  simp only [expectedPayoff, devPayoff, Finset.mul_sum, prod_update_apply]
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl fun σ _ => ?_
-  rw [← Finset.mul_prod_erase Finset.univ (fun j => x j (σ j)) (Finset.mem_univ i)]
-  simp only [pureVec]
-  rw [Finset.sum_eq_single (σ i)]
-  · simp; ring
-  · intro b _ hb
-    simp [Ne.symm hb]
-  · intro h
-    exact absurd (Finset.mem_univ _) h
+A *mixed strategy* for player `i` is an element of `stdSimplex ℝ (S i)`, and a *mixed strategy
+profile* is an element of the product of these simplices. -/
 
-/-- A mixed profile is a Nash equilibrium iff no player can improve by a *pure* deviation. -/
+section Game
+
+variable {I : Type} [Fintype I] [DecidableEq I]
+  (S : I → Type) [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+  (u : I → (∀ i, S i) → ℝ)
+
+/-- The set of mixed strategy profiles of a finite game. -/
+
+theorem expectedPayoff_eq_sum (x : ∀ i, S i → ℝ) (i k : I) :
+    expectedPayoff S u x k
+      = ∑ s : S i, x i s * expectedPayoff S u (Function.update x i (Pi.single s 1)) k := by
+  conv_lhs => rw [← Function.update_eq_self i x]
+  exact expectedPayoff_update_eq_sum u x i k (x i)
+
+/-! ### Continuity -/
+
+omit [∀ i, DecidableEq (S i)] in

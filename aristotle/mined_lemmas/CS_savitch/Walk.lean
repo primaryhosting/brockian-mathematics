@@ -1,51 +1,51 @@
-/-
+import RequestProject.Savitch.Machine
+
+/-!
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` commands to precede every declaration, including module
-docstrings, so the header above is a plain block comment.)
 -/
-import Mathlib
-import RequestProject.Savitch.Model
-import RequestProject.Savitch.Walk
-import RequestProject.Savitch.Sim
-import RequestProject.Savitch.Semantics
-import RequestProject.Savitch.Space
 
 /-!
-The space-bounded machine model, the classes `CS.NSPACE`, `CS.DSPACE`,
-`CS.PSPACE` and `CS.NPSPACE`, and the simulator used in the proof are defined in
-the files `RequestProject/Savitch/*.lean`.
+## Savitch's theorem
 
-A machine reads its input through a head whose position is determined by its
-memory value, and it works in space `g` if on inputs of length `n` all reachable
-memory values lie in a set of at most `2 ^ g n` values depending only on `n`
-(the standard correspondence between `s` tape cells and `2 ^ O(s)`
-configurations).  The classes `NSPACE g` and `DSPACE g` are closed under
-constant factors by definition, as usual for space classes.
+We model a space-`s` machine by its configuration graph: it has at most `2 ^ s`
+configurations (`s` bits of workspace), a start configuration, an acceptance
+predicate, and a transition relation (a relation for nondeterministic machines, a
+function for deterministic ones).  A nondeterministic machine accepts when some
+accepting configuration is reachable from the start configuration; a deterministic
+machine accepts when its (unique) run visits an accepting configuration.
 
-Savitch's theorem is proved for space bounds `f` with `n + 1 ≤ 2 ^ f n`
-(i.e. `f n ≥ log₂ (n+1)`), the standard hypothesis `f (n) ≥ log n`.
+The main theorem `CS.savitch` states `NSPACE f ⊆ DSPACE (9 * (f + 1) ^ 2)`, i.e.
+nondeterministic space `f` is contained in deterministic space `O(f ^ 2)`, and
+`CS.PSPACE_eq_NPSPACE` deduces `PSPACE = NPSPACE`.
 -/
 
 namespace CS
 
-/-- **Savitch's theorem**: a language recognized by a nondeterministic machine in
-space `f` (with `f n ≥ log₂ (n + 1)`) is recognized by a deterministic machine in
-space `O(f²)`, i.e. `NSPACE f ⊆ DSPACE (f²)`. -/
+open Savitch
 
-theorem Walk.split {r : α → α → Prop} {t : ℕ} {a b : α} (h : Walk r t a b) (i : ℕ) (hi : i ≤ t) :
-    ∃ c, Walk r i a c ∧ Walk r (t - i) c b := by
-  obtain ⟨p, hp0, hpt, hstep⟩ := h.exists_path
-  refine ⟨p i, ?_, ?_⟩
-  · have := walk_of_path hstep i hi 0 (Nat.zero_le _)
-    simpa [hp0] using this
-  · have := walk_of_path hstep t le_rfl i hi
-    rwa [hpt] at this
+/-- A nondeterministic machine using space `s`: at most `2 ^ s` configurations. -/
+structure NMachine (s : ℕ) where
+  /-- Number of configurations. -/
+  size : ℕ
+  /-- The space bound: `s` bits of workspace. -/
+  hsize : size ≤ 2 ^ s
+  /-- The (nondeterministic) transition relation. -/
+  step : Fin size → Fin size → Bool
+  /-- The initial configuration. -/
+  start : Fin size
+  /-- The accepting configurations. -/
+  acc : Fin size → Bool
 
-/-- If all vertices reachable from `a` lie in a finite set `S`, then any vertex
-reachable from `a` is reachable by a walk of length `< S.card`. -/
+/-- A nondeterministic machine accepts if some accepting configuration is reachable. -/
+
+theorem Walk.split (h : Walk R (t₁ + t₂) a b) : ∃ m, Walk R t₁ a m ∧ Walk R t₂ m b := by
+  obtain ⟨f, hf0, hf1, hfs⟩ := h
+  refine ⟨f t₁, ⟨f, hf0, rfl, fun i hi => hfs i (by omega)⟩,
+    ⟨fun u => f (t₁ + u), rfl, by simpa using hf1, fun i hi => ?_⟩⟩
+  have := hfs (t₁ + i) (by omega)
+  simpa [Nat.add_assoc] using this
+

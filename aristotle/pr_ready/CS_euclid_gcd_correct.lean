@@ -7,66 +7,56 @@ Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
 
-namespace CS
-
-/-- Euclid's algorithm on the natural numbers: `euclid a b` repeatedly replaces
-the pair `(a, b)` by `(b % a, a)` until the first component is `0`.
-
-The definition is accepted by Lean only together with a termination proof: the
-first argument strictly decreases at each recursive call, since `b % a < a`
-whenever `a ≠ 0`. Hence `euclid` is a total function — the algorithm terminates
-on every input. -/
-def euclid (a b : Nat) : Nat :=
-  if a = 0 then b else euclid (b % a) a
-decreasing_by
-  exact Nat.mod_lt _ (Nat.pos_of_ne_zero (by assumption))
-
-@[simp] theorem euclid_zero_left (b : Nat) : euclid 0 b = b := by
-  rw [euclid]; simp
-
-/-- One step of the algorithm. -/
-theorem euclid_of_ne_zero (a b : Nat) (h : a ≠ 0) : euclid a b = euclid (b % a) a := by
-  rw [euclid]; simp [h]
-
-/-- **Correctness of Euclid's algorithm**: for all natural numbers `a` and `b`,
-the (terminating) algorithm `euclid` returns `gcd a b`. -/
-theorem euclid_gcd_correct (a b : Nat) : euclid a b = Nat.gcd a b := by
-  induction a, b using euclid.induct with
-  | case1 b => simp
-  | case2 a b h ih => rw [euclid_of_ne_zero a b h, Nat.gcd_rec, ih]
-
-/-- The value returned by Euclid's algorithm is a greatest common divisor: it
-divides both inputs, and every common divisor of the inputs divides it. -/
-theorem euclid_spec (a b : Nat) :
-    euclid a b ∣ a ∧ euclid a b ∣ b ∧ ∀ c : Nat, c ∣ a → c ∣ b → c ∣ euclid a b := by
-  rw [euclid_gcd_correct]
-  exact ⟨Nat.gcd_dvd_left a b, Nat.gcd_dvd_right a b, fun c => Nat.dvd_gcd⟩
-
-end CS
-
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace CS
 
-set_option grind.warning false
+/-- Euclid's algorithm, in its modulus form.
+The recursion is on the second argument, which strictly decreases at each
+recursive call; the termination checker verifies this, so the function is
+total: the algorithm terminates on every input. -/
+def euclid : Nat → Nat → Nat
+  | a, 0 => a
+  | a, b + 1 => euclid (b + 1) (a % (b + 1))
+  decreasing_by exact Nat.mod_lt _ (Nat.succ_pos b)
+
+@[simp] theorem euclid_zero (a : Nat) : euclid a 0 = a := by
+  rw [euclid]
+
+theorem euclid_succ (a b : Nat) : euclid a (b + 1) = euclid (b + 1) (a % (b + 1)) := by
+  rw [euclid]
+
+/-- The step equation of Euclid's algorithm for an arbitrary nonzero modulus. -/
+theorem euclid_pos (a b : Nat) (hb : 0 < b) : euclid a b = euclid b (a % b) := by
+  obtain ⟨c, rfl⟩ : ∃ c, b = c + 1 := ⟨b - 1, by omega⟩
+  exact euclid_succ a c
+
+/-- Euclid's algorithm computes the greatest common divisor. -/
+theorem euclid_eq_gcd (a b : Nat) : euclid a b = Nat.gcd a b := by
+  induction a, b using euclid.induct with
+  | case1 a => rw [euclid_zero, Nat.gcd_zero_right]
+  | case2 a b ih =>
+      rw [euclid_succ, ih, Nat.gcd_comm (b + 1) (a % (b + 1)), ← Nat.gcd_rec, Nat.gcd_comm]
+
+/-- **Correctness and termination of Euclid's algorithm.**
+
+`CS.euclid` is defined by a recursion whose measure (the second argument)
+strictly decreases at every recursive call, hence it is a total function: the
+algorithm terminates on every input.  Its value at `(a, b)` is a greatest
+common divisor of `a` and `b`: it divides both arguments, every common divisor
+of the arguments divides it, and it agrees with `Nat.gcd a b`. -/
+theorem euclid_gcd_correct (a b : Nat) :
+    euclid a b = Nat.gcd a b ∧
+      euclid a b ∣ a ∧ euclid a b ∣ b ∧
+        ∀ d : Nat, d ∣ a → d ∣ b → d ∣ euclid a b := by
+  have h := euclid_eq_gcd a b
+  refine ⟨h, ?_, ?_, ?_⟩
+  · rw [h]; exact Nat.gcd_dvd_left a b
+  · rw [h]; exact Nat.gcd_dvd_right a b
+  · intro d hda hdb; rw [h]; exact Nat.dvd_gcd hda hdb
+
+end CS
 

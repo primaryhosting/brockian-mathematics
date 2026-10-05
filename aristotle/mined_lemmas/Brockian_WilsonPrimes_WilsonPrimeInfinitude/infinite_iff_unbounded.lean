@@ -41,30 +41,37 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Nat
+open Nat
 
 namespace Brockian.WilsonPrimes
 
-/-- A *Wilson prime* is a prime `p` such that `p ^ 2 ∣ (p - 1)! + 1`, i.e. the congruence
-of Wilson's theorem holds modulo `p ^ 2` and not merely modulo `p`. -/
+/-- A *Wilson prime* is a prime `p` such that `p ^ 2` divides `(p - 1)! + 1`.
+(By Wilson's theorem, `p` itself always divides `(p - 1)! + 1` when `p` is prime,
+so a Wilson prime is one for which this divisibility holds to the second power.) -/
 
 theorem infinite_iff_unbounded :
-    {p : ℕ | WilsonPrime p}.Infinite ↔ ∀ N : ℕ, ∃ p, N < p ∧ WilsonPrime p := by
+    {p : ℕ | IsWilsonPrime p}.Infinite ↔ ∀ N : ℕ, ∃ p, N < p ∧ IsWilsonPrime p := by
   constructor
-  · intro h N
-    obtain ⟨p, hp, hlt⟩ := h.exists_gt N
-    exact ⟨p, hlt, hp⟩
+  · intro hinf N
+    obtain ⟨p, hp, hpN⟩ := hinf.exists_gt N
+    exact ⟨p, hpN, hp⟩
   · intro h
-    refine Set.infinite_of_forall_exists_gt ?_
-    intro N
-    obtain ⟨p, hlt, hp⟩ := h N
-    exact ⟨p, hp, hlt⟩
+    apply Set.infinite_of_not_bddAbove
+    rintro ⟨N, hN⟩
+    obtain ⟨p, hp, hpS⟩ := h N
+    exact absurd (hN hpS) (by omega)
 
-/-- **Main conditional theorem (Wilson prime infinitude, reduced to the Wilson quotient).**
+/-!
+## Main statement
 
-If for every bound `N` there is a prime `p > N` dividing its own Wilson quotient
-`((p - 1)! + 1) / p`, then there are infinitely many Wilson primes.
+Whether there are infinitely many Wilson primes is a well-known open problem: only
+`5`, `13` and `563` are known, and no unconditional proof of infinitude (nor of
+finiteness) is available.  What is proved here is a Lean-checked *conditional
+reduction*: the infinitude of Wilson primes follows from the statement that
+arbitrarily large primes divide their own Wilson quotient `((p - 1)! + 1) / p`.
+-/
 
-The unconditional infinitude of Wilson primes is an open problem; this is a Lean-checked
-reduction of it to the Wilson-quotient divisibility criterion, which by
-`WilsonPrimeInfinitude_converse` is in fact equivalent to it. -/
+/-- **Conditional Wilson prime infinitude.**  If for every bound `N` there is a prime
+`p > N` dividing its Wilson quotient `((p - 1)! + 1) / p`, then the set of Wilson
+primes is infinite.  The hypothesis is the standard open conjecture, so this is a
+verified reduction of the infinitude statement to it, not an unconditional proof. -/

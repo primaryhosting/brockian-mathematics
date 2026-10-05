@@ -31,7 +31,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+/-!
 # Odd Weird Exists
 Category: Brockian Conjecture
 Target: Brockian.WeirdNumbers.OddWeirdExists
@@ -40,187 +40,134 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 
+/-!
+## Overview
+
+A natural number `n` is *weird* (`Nat.Weird`, from Mathlib) when it is abundant
+(the sum of its proper divisors exceeds `n`) but not pseudoperfect (no subset of its
+proper divisors sums to `n`).  Whether an **odd** weird number exists is a well-known
+open problem, so the unconditional statement `∃ n, Odd n ∧ Nat.Weird n` is not proved
+here.  Instead this file contains:
+
+* `Brockian.WeirdNumbers.abundance`: the abundance `σ(n) - 2n` of `n`.
+* `Brockian.WeirdNumbers.pseudoperfect_iff_exists_sum_eq_abundance`: for an abundant `n`,
+  `n` is pseudoperfect iff some subset of its proper divisors sums to the *abundance* of
+  `n` (complementation of subsets).  This turns the subset-sum target `n` into the much
+  smaller target `abundance n`.
+* `Brockian.WeirdNumbers.OddWeirdExists`: an unconditional Lean-checked **reduction** of
+  the open problem: an odd weird number exists **iff** there is an odd abundant number no
+  subset of whose proper divisors sums to its abundance.
+* `Brockian.WeirdNumbers.weird_of_abundance_small`: a practical sufficient criterion for
+  weirdness (abundance different from `1` and smaller than every proper divisor `> 1`).
+* `Brockian.WeirdNumbers.weird_seventy` / `exists_weird`: `70` is weird, so weird numbers
+  do exist (unconditionally, by a finite kernel computation).
+-/
+
 open Finset
 
-/-!
-## Status
-
-`OddWeirdExists` (the existence of an odd weird number) is an open problem, and is **not** proved
-here. What is proved, axiom-cleanly:
-
-* `oddWeirdExists_iff` — an elementary restatement of the target;
-* `pseudoperfect_mul_left`, `pseudoperfect_of_dvd`, `not_pseudoperfect_of_dvd_of_weird` — every
-  multiple of a pseudoperfect number is pseudoperfect, hence no divisor of a weird number is
-  pseudoperfect;
-* `not_dvd_945_of_weird`, `not_dvd_of_perfect_of_weird`, `not_perfect_of_weird` — concrete
-  consequences (e.g. no weird number is a multiple of `945`, the smallest odd abundant number);
-* `weird_mul_prime` — if `n` is weird and `p` is a prime exceeding the sum of the divisors of `n`,
-  then `n * p` is weird;
-* `oddWeirdExists_iff_infinite` — the conditional reduction: one odd weird number would already
-  force infinitely many;
-* `even_weird_exists` — the even case, via Mathlib's `Nat.weird_seventy`.
-
-The relevant existing Mathlib material is `Mathlib/NumberTheory/FactorisationProperties.lean`
-(`Nat.Abundant`, `Nat.Pseudoperfect`, `Nat.Weird`, `Nat.Abundant.of_dvd`, `Nat.weird_seventy`);
-no Mathlib lemma closes the target itself.
--/
+set_option maxRecDepth 40000
 
 namespace Brockian.WeirdNumbers
 
-/-- The Brockian statement "an odd weird number exists".
+/-- The *abundance* of `n`, i.e. `σ(n) - 2n`, written as the excess of the sum of the
+proper divisors of `n` over `n` itself (truncated subtraction). -/
+def abundance (n : ℕ) : ℕ := (∑ i ∈ n.properDivisors, i) - n
 
-A natural number is *weird* (`Nat.Weird`, from Mathlib's
-`Mathlib/NumberTheory/FactorisationProperties.lean`) when it is abundant (the sum of its proper
-divisors exceeds it) but not pseudoperfect (no subset of its proper divisors sums to it).
-Whether an odd weird number exists is an open problem; this file therefore develops
-Lean-checked reductions and partial results around the statement. -/
-def OddWeirdExists : Prop := ∃ n : ℕ, Odd n ∧ n.Weird
+lemma sum_eq_add_abundance {n : ℕ} (h : n.Abundant) :
+    (∑ i ∈ n.properDivisors, i) = n + abundance n := by
+  have h' : n < ∑ i ∈ n.properDivisors, i := h
+  unfold abundance
+  omega
 
-/-- Unfolding of `OddWeirdExists` into elementary arithmetic terms. -/
-theorem oddWeirdExists_iff :
-    OddWeirdExists ↔
-      ∃ n : ℕ, Odd n ∧ n < ∑ i ∈ n.properDivisors, i ∧
-        ∀ s ⊆ n.properDivisors, ∑ i ∈ s, i ≠ n := by
+lemma abundance_pos {n : ℕ} (h : n.Abundant) : 0 < abundance n := by
+  have h' : n < ∑ i ∈ n.properDivisors, i := h
+  unfold abundance
+  omega
+
+/-- Complementation of subsets of the proper divisors: an abundant number `n` is
+pseudoperfect exactly when some subset of its proper divisors sums to `abundance n`. -/
+lemma pseudoperfect_iff_exists_sum_eq_abundance {n : ℕ} (hn : 0 < n) (h : n.Abundant) :
+    n.Pseudoperfect ↔ ∃ t ⊆ n.properDivisors, ∑ i ∈ t, i = abundance n := by
+  have h2 := sum_eq_add_abundance h
   constructor
-  · rintro ⟨n, hodd, ⟨hab, hps⟩⟩
-    refine ⟨n, hodd, hab, ?_⟩
-    rcases Nat.not_pseudoperfect_iff_forall.1 hps with h | h
-    · simp [Nat.Abundant, h] at hab
-    · exact h
-  · rintro ⟨n, hodd, hab, h⟩
-    exact ⟨n, hodd, hab, Nat.not_pseudoperfect_iff_forall.2 (Or.inr h)⟩
+  · rintro ⟨-, s, hs, hsum⟩
+    refine ⟨n.properDivisors \ s, sdiff_subset, ?_⟩
+    have hsd : (∑ i ∈ n.properDivisors \ s, i) + ∑ i ∈ s, i = ∑ i ∈ n.properDivisors, i :=
+      Finset.sum_sdiff hs
+    omega
+  · rintro ⟨t, ht, hsum⟩
+    refine ⟨hn, n.properDivisors \ t, sdiff_subset, ?_⟩
+    have hsd : (∑ i ∈ n.properDivisors \ t, i) + ∑ i ∈ t, i = ∑ i ∈ n.properDivisors, i :=
+      Finset.sum_sdiff ht
+    omega
 
-/-- Multiples of pseudoperfect numbers are pseudoperfect. -/
-theorem pseudoperfect_mul_left {m k : ℕ} (hm : m.Pseudoperfect) (hk : k ≠ 0) :
-    (k * m).Pseudoperfect := by
-  obtain ⟨hm0, s, hs, hsum⟩ := hm
-  have hk0 : 0 < k := Nat.pos_of_ne_zero hk
-  refine ⟨by positivity, s.image (fun d => k * d), ?_, ?_⟩
-  · intro x hx
-    simp only [mem_image] at hx
-    obtain ⟨d, hd, rfl⟩ := hx
-    have hd' := hs hd
-    rw [Nat.mem_properDivisors] at hd' ⊢
-    exact ⟨mul_dvd_mul_left k hd'.1, mul_lt_mul_of_pos_left hd'.2 hk0⟩
-  · rw [sum_image (by intro x _ y _ h; exact Nat.eq_of_mul_eq_mul_left hk0 h),
-      ← Finset.mul_sum, hsum]
+/-- Characterisation of weird numbers by the abundance subset-sum problem. -/
+theorem weird_iff_abundant_and_abundance_not_subset_sum {n : ℕ} (hn : 0 < n) :
+    n.Weird ↔ n.Abundant ∧ ∀ t ⊆ n.properDivisors, ∑ i ∈ t, i ≠ abundance n := by
+  constructor
+  · rintro ⟨hab, hnp⟩
+    refine ⟨hab, fun t ht hsum =>
+      hnp ((pseudoperfect_iff_exists_sum_eq_abundance hn hab).2 ⟨t, ht, hsum⟩)⟩
+  · rintro ⟨hab, ht⟩
+    refine ⟨hab, fun hp => ?_⟩
+    obtain ⟨t, hts, hsum⟩ := (pseudoperfect_iff_exists_sum_eq_abundance hn hab).1 hp
+    exact ht t hts hsum
 
-/-- A number with a pseudoperfect divisor is pseudoperfect. -/
-theorem pseudoperfect_of_dvd {m n : ℕ} (hm : m.Pseudoperfect) (hd : m ∣ n) (hn : n ≠ 0) :
-    n.Pseudoperfect := by
-  obtain ⟨k, rfl⟩ := hd
-  have hk : k ≠ 0 := by rintro rfl; simp at hn
-  rw [mul_comm]
-  exact pseudoperfect_mul_left hm hk
+/-- A sufficient criterion for weirdness: if `n` is abundant, its abundance is not `1`,
+and every proper divisor other than `1` exceeds the abundance, then `n` is weird. -/
+theorem weird_of_abundance_small {n : ℕ} (hn : 0 < n) (h : n.Abundant)
+    (h1 : abundance n ≠ 1)
+    (hlt : ∀ d ∈ n.properDivisors, d = 1 ∨ abundance n < d) : n.Weird := by
+  rw [weird_iff_abundant_and_abundance_not_subset_sum hn]
+  refine ⟨h, ?_⟩
+  intro t ht hsum
+  have habpos := abundance_pos h
+  by_cases hex : ∃ d ∈ t, d ≠ 1
+  · obtain ⟨d, hdt, hd1⟩ := hex
+    have hdle : d ≤ ∑ i ∈ t, i :=
+      Finset.single_le_sum (f := fun i => i) (by intros; positivity) hdt
+    rcases hlt d (ht hdt) with h' | h'
+    · exact hd1 h'
+    · omega
+  · push_neg at hex
+    have hsub : t ⊆ {1} := fun x hx => by simp [hex x hx]
+    have hcard : t.card ≤ 1 := by simpa using Finset.card_le_card hsub
+    have hle : ∑ i ∈ t, i ≤ 1 := by
+      calc ∑ i ∈ t, i = ∑ _i ∈ t, 1 := Finset.sum_congr rfl fun x hx => hex x hx
+        _ = t.card := by simp
+        _ ≤ 1 := hcard
+    omega
 
-/-- No divisor of a weird number is pseudoperfect. -/
-theorem not_pseudoperfect_of_dvd_of_weird {n m : ℕ} (hn : n.Weird) (hd : m ∣ n) :
-    ¬ m.Pseudoperfect := by
-  intro hm
-  have hn0 : n ≠ 0 := by rintro rfl; exact Nat.not_abundant_zero hn.1
-  exact hn.2 (pseudoperfect_of_dvd hm hd hn0)
+/-- `70` is a weird number (the smallest one). -/
+theorem weird_seventy : Nat.Weird 70 := by decide
 
-/-- `945`, the smallest odd abundant number, is pseudoperfect. -/
-theorem pseudoperfect_945 : Nat.Pseudoperfect 945 := by
-  refine ⟨by norm_num, {315, 189, 135, 105, 63, 45, 35, 27, 21, 9, 1}, by decide, by decide⟩
+/-- Weird numbers exist. -/
+theorem exists_weird : ∃ n : ℕ, Nat.Weird n := ⟨70, weird_seventy⟩
 
-/-- Partial result: no weird number is a multiple of `945` (in particular no odd weird number is). -/
-theorem not_dvd_945_of_weird {n : ℕ} (hn : n.Weird) : ¬ (945 ∣ n) :=
-  fun hd => not_pseudoperfect_of_dvd_of_weird hn hd pseudoperfect_945
-
-/-- A weird number is not perfect. -/
-theorem not_perfect_of_weird {n : ℕ} (hn : n.Weird) : ¬ n.Perfect :=
-  fun hper => hn.2 hper.pseudoperfect
-
-/-- No perfect number divides a weird number. -/
-theorem not_dvd_of_perfect_of_weird {n m : ℕ} (hn : n.Weird) (hm : m.Perfect) : ¬ (m ∣ n) :=
-  fun hd => not_pseudoperfect_of_dvd_of_weird hn hd hm.pseudoperfect
-
-/-- If `n` is weird and `p` is a prime larger than the sum of the divisors of `n`,
-then `n * p` is weird. -/
-theorem weird_mul_prime {n p : ℕ} (hn : n.Weird) (hp : p.Prime)
-    (hlt : ∑ i ∈ n.divisors, i < p) : (n * p).Weird := by
-  obtain ⟨hab, hps⟩ := hn
-  have hn0 : n ≠ 0 := by rintro rfl; simp [Nat.Abundant] at hab
-  have hnpos : 0 < n := Nat.pos_of_ne_zero hn0
-  have hppos : 0 < p := hp.pos
-  have hnp0 : n * p ≠ 0 := Nat.mul_ne_zero hn0 hp.ne_zero
-  refine ⟨Nat.Abundant.of_dvd hab (dvd_mul_right n p) hnp0, ?_⟩
-  rintro ⟨-, s, hs, hsum⟩
-  set s₁ := s.filter (fun d => ¬ p ∣ d) with hs₁
-  set s₂ := s.filter (fun d => p ∣ d) with hs₂
-  have hsplit : ∑ i ∈ s₂, i + ∑ i ∈ s₁, i = n * p := by
-    rw [hs₁, hs₂, Finset.sum_filter_add_sum_filter_not]; exact hsum
-  have hs₁div : s₁ ⊆ n.divisors := by
-    intro d hd
-    rw [hs₁, mem_filter] at hd
-    obtain ⟨hd, hpd⟩ := hd
-    have hd' := hs hd
-    rw [Nat.mem_properDivisors] at hd'
-    have hcop : Nat.Coprime d p := ((Nat.Prime.coprime_iff_not_dvd hp).2 hpd).symm
-    exact Nat.mem_divisors.2 ⟨hcop.dvd_of_dvd_mul_right hd'.1, hn0⟩
-  have hs₁lt : ∑ i ∈ s₁, i < p :=
-    lt_of_le_of_lt (Finset.sum_le_sum_of_subset hs₁div) hlt
-  set t := s₂.image (fun d => d / p) with ht
-  have hinj : Set.InjOn (fun d => d / p) s₂ := by
-    intro a ha b hb hab'
-    rw [hs₂, mem_coe, mem_filter] at ha hb
-    simp only at hab'
-    rw [← Nat.div_mul_cancel ha.2, ← Nat.div_mul_cancel hb.2, hab']
-  have hsum₂ : ∑ i ∈ s₂, i = p * ∑ e ∈ t, e := by
-    rw [ht, Finset.sum_image hinj, Finset.mul_sum]
-    refine Finset.sum_congr rfl ?_
-    intro d hd
-    rw [hs₂, mem_filter] at hd
-    exact (Nat.mul_div_cancel' hd.2).symm
-  have htsub : t ⊆ n.properDivisors := by
-    intro e he
-    rw [ht, mem_image] at he
-    obtain ⟨d, hd, rfl⟩ := he
-    rw [hs₂, mem_filter] at hd
-    obtain ⟨hd, hpd⟩ := hd
-    have hd' := hs hd
-    rw [Nat.mem_properDivisors] at hd'
-    obtain ⟨hdvd, hltd⟩ := hd'
-    obtain ⟨e, rfl⟩ := hpd
-    rw [Nat.mul_div_cancel_left _ hppos, Nat.mem_properDivisors]
-    rw [mul_comm n p] at hdvd hltd
-    exact ⟨(mul_dvd_mul_iff_left hp.ne_zero).1 hdvd, lt_of_mul_lt_mul_left hltd (Nat.zero_le p)⟩
-  have hpdvd : p ∣ ∑ i ∈ s₁, i := by
-    have h1 : ∑ i ∈ s₁, i = n * p - p * ∑ e ∈ t, e := by omega
-    rw [h1]
-    exact Nat.dvd_sub (Dvd.intro_left n rfl) (Dvd.intro _ rfl)
-  have hzero : ∑ i ∈ s₁, i = 0 := by
-    rcases Nat.eq_zero_or_pos (∑ i ∈ s₁, i) with h | h
-    · exact h
-    · exact absurd (Nat.le_of_dvd h hpdvd) (by omega)
-  have hT : ∑ e ∈ t, e = n := by
-    have h2 : p * ∑ e ∈ t, e = n * p := by omega
-    exact Nat.eq_of_mul_eq_mul_left hppos (h2.trans (mul_comm n p))
-  exact hps ⟨hnpos, t, htsub, hT⟩
-
-/-- Conditional reduction: if one odd weird number exists, there are infinitely many. -/
-theorem oddWeirdExists_iff_infinite :
-    OddWeirdExists ↔ {n : ℕ | Odd n ∧ n.Weird}.Infinite := by
+/-- **Reduction of the open problem.**  An odd weird number exists if and only if there is
+an odd abundant number none of whose subsets of proper divisors sums to its abundance
+`σ(n) - 2n`.  (The existence of an odd weird number is open; this equivalence replaces the
+subset-sum target `n` by the far smaller target `abundance n`.) -/
+theorem OddWeirdExists :
+    (∃ n : ℕ, Odd n ∧ Nat.Weird n) ↔
+      ∃ n : ℕ, Odd n ∧ n.Abundant ∧ ∀ t ⊆ n.properDivisors, ∑ i ∈ t, i ≠ abundance n := by
   constructor
   · rintro ⟨n, hodd, hw⟩
-    have hn0 : n ≠ 0 := by rintro rfl; simp [Nat.Weird, Nat.Abundant] at hw
-    rw [Set.infinite_iff_exists_gt]
-    intro a
-    obtain ⟨p, hple, hp⟩ :=
-      Nat.exists_infinite_primes (max (a + 1) (max ((∑ i ∈ n.divisors, i) + 1) 3))
-    have h1 : a < p := by omega
-    have h2 : ∑ i ∈ n.divisors, i < p := by omega
-    refine ⟨n * p, ⟨hodd.mul (hp.odd_of_ne_two (by omega)), weird_mul_prime hw hp h2⟩, ?_⟩
-    calc a < p := h1
-      _ ≤ n * p := Nat.le_mul_of_pos_left p (Nat.pos_of_ne_zero hn0)
-  · intro h
-    obtain ⟨n, hn⟩ := h.nonempty
-    exact ⟨n, hn.1, hn.2⟩
+    have hn : 0 < n := hodd.pos
+    obtain ⟨hab, ht⟩ := (weird_iff_abundant_and_abundance_not_subset_sum hn).1 hw
+    exact ⟨n, hodd, hab, ht⟩
+  · rintro ⟨n, hodd, hab, ht⟩
+    have hn : 0 < n := hodd.pos
+    exact ⟨n, hodd, (weird_iff_abundant_and_abundance_not_subset_sum hn).2 ⟨hab, ht⟩⟩
 
-/-- The even case is settled: `70` is weird (Mathlib's `Nat.weird_seventy`). -/
-theorem even_weird_exists : ∃ n : ℕ, Even n ∧ n.Weird :=
-  ⟨70, by decide, Nat.weird_seventy⟩
+/-- A concrete sufficient condition for the open problem: an odd abundant number whose
+abundance is neither `1` nor `≥` some proper divisor `> 1` would be an odd weird number. -/
+theorem oddWeird_of_exists_abundance_small
+    (h : ∃ n : ℕ, Odd n ∧ n.Abundant ∧ abundance n ≠ 1 ∧
+      ∀ d ∈ n.properDivisors, d = 1 ∨ abundance n < d) :
+    ∃ n : ℕ, Odd n ∧ Nat.Weird n := by
+  obtain ⟨n, hodd, hab, h1, hlt⟩ := h
+  exact ⟨n, hodd, weird_of_abundance_small hodd.pos hab h1 hlt⟩
 
 end Brockian.WeirdNumbers
 

@@ -1,5 +1,12 @@
 import Mathlib
-import Archive.Sensitivity
+
+/-!
+# Huang Sensitivity
+Category: Frontier — Fields Medal Work
+Target: Frontier.huang_sensitivity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -17,44 +24,20 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-/-!
-# Huang's sensitivity theorem: degree is at most sensitivity squared
-
-We formalize the sensitivity conjecture (Huang, 2019) for Boolean functions
-`f : (ι → Bool) → Bool` on a finite set `ι` of variables:
-
-  `degree f ≤ (sensitivity f)^2`.
-
-Here `degree f` is the Fourier degree: the largest cardinality of a set `S` of variables
-whose Fourier–Walsh coefficient `fourierCoeff f S` is non-zero (equivalently, the degree
-of the unique multilinear real polynomial representing `f`), and `sensitivity f` is the
-maximum over inputs `x` of the number of coordinates `i` such that flipping `x i`
-changes the value of `f`.
-
-The combinatorial core (Huang's degree theorem on the hypercube: every set of more than
-half of the vertices of the `n`-dimensional hypercube induces a subgraph with a vertex of
-degree at least `√n`) is taken from `Archive.Sensitivity`.  The remaining work here is the
-Gotsman–Linial style reduction from the sensitivity conjecture to that theorem:
-
-* transferring Huang's theorem from the cube `Fin n → Bool` to a cube `ι → Bool` indexed by
-  an arbitrary finite type (`Frontier.huang_flip`);
-* the top-degree case: if the top Fourier coefficient of `f` is non-zero, then
-  `√(card ι) ≤ sensitivity f` (`Frontier.sqrt_card_le_sensitivity_of_top_coeff`);
-* the restriction argument: a non-zero coefficient at `S` survives in some restriction of
-  the variables outside `S`, and restricting does not increase sensitivity.
--/
-
 namespace Frontier
 
 open Finset
+open scoped Matrix
 
-variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+/-! ## The Boolean hypercube -/
 
-/-! ## Basic definitions -/
+/-- Vertices of the `n`-dimensional Boolean hypercube. -/
+abbrev Cube (n : ℕ) := Fin n → Bool
 
-/-- Flip the `i`-th coordinate of a point of the hypercube. -/
+variable {n : ℕ}
 
-theorem flipAt_of_ne {x : ι → Bool} {i j : ι} (h : j ≠ i) : flipAt x i j = x j := by
-  simp [flipAt_apply, h]
+/-- Flip the `i`-th coordinate of a hypercube vertex. -/
 
-omit [Fintype ι] in
+lemma flipAt_of_ne (x : Cube n) {i j : Fin n} (h : j ≠ i) : flipAt x i j = x j := by
+  simp [flipAt, h]
+

@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Hd Ge Fwin Iff
 Category: A Assembly
@@ -7,6 +5,8 @@ Target: Zeta23Scaffold.Hd_ge_Fwin_iff
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -22,25 +22,27 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Zeta23Scaffold
 
 /-- The "window" function `H(λ) = 2 - 1/λ - λ/3`. -/
 
-theorem Hwin_nonneg_iff (lam : ℝ) (hlam : 0 < lam) :
+lemma Hwin_nonneg_iff {lam : ℝ} (hlam : 0 < lam) :
     0 ≤ Hwin lam ↔ 0 ≤ 6 * lam - 3 - lam ^ 2 := by
-  have h1 : lam ≠ 0 := ne_of_gt hlam
-  have : Hwin lam = (6 * lam - 3 - lam ^ 2) / (3 * lam) := by
-    unfold Hwin; field_simp; ring
-  rw [this, le_div_iff₀ (by positivity)]
-  constructor <;> intro h <;> nlinarith
+  rw [Hwin]
+  rw [ge_iff_le, ← sub_nonneg]
+  constructor
+  · intro h
+    have h' : 0 ≤ (2 - 1 / lam - lam / 3) * (3 * lam) := by positivity
+    have : (2 - 1 / lam - lam / 3) * (3 * lam) = 6 * lam - 3 - lam ^ 2 := by
+      field_simp; ring
+    linarith [this ▸ h']
+  · intro h
+    have h3 : 0 < 3 * lam := by linarith
+    have key : (2 - 1 / lam - lam / 3) * (3 * lam) = 6 * lam - 3 - lam ^ 2 := by
+      field_simp; ring
+    nlinarith [key, mul_pos h3 h3]
 
-/-- Unconditional form (valid for all `λ > 0`): `F(λ) ≤ H_d(λ) ↔ 0 ≤ H(λ)`. -/
+/-- The difference `H_d(λ) - F(λ)` factors as
+`(6λ - 3 - λ²)(λ² - 3λ + 3) / (6λ(3 + λ²))`. -/

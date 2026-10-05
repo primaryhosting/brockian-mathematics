@@ -23,8 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-/-!
+/-
 # Same Parity Betrothed Exists
 Category: Brockian Conjecture
 Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
@@ -32,17 +31,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to be the very first command in a file, so the header module
--- docstring above sits immediately after the single `import Mathlib` line.)
+import Mathlib
 
-namespace Brockian
-namespace BetrothedNumbers
+namespace Brockian.BetrothedNumbers
 
-open Finset
+open ArithmeticFunction Finset
 
-/-- The sum-of-divisors function `σ₁`. -/
+/-- `sigmaOne n` is the sum of all divisors of `n`. -/
 
-theorem sigmaOne_eq_sigma (n : ℕ) : sigmaOne n = ArithmeticFunction.sigma 1 n := by
-  rw [ArithmeticFunction.sigma_one_apply, sigmaOne]
+lemma sigmaOne_eq_sigma (n : ℕ) : sigmaOne n = (sigma 1) n := by
+  rw [sigma_one_apply]; rfl
 
-/-- Multiplicativity of the divisor sum at coprime arguments. -/
+/-- For an odd prime `p`, `σ(p ^ k)` is odd exactly when `k` is even. -/

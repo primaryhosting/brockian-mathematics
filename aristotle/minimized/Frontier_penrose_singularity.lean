@@ -8,217 +8,117 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-!
 ## Formalization
 
-Mathlib currently contains no Lorentzian causality theory (no `Spacetime`, no null
-geodesic congruences, no trapped surfaces), so the Penrose singularity theorem cannot
-be stated there verbatim.  What *is* the analytic core of the theorem, and what is
-formalized and proved below, is the **Raychaudhuri focusing argument**:
+Penrose's singularity theorem says that a spacetime containing a trapped surface, satisfying
+the null energy condition (plus global hyperbolicity with a non-compact Cauchy surface), is
+null geodesically incomplete.  The analytic heart of the theorem is the *focusing* argument:
+along the future-directed null geodesic congruence orthogonal to the trapped surface, the
+expansion scalar `θ` obeys the Raychaudhuri equation
 
-Along a future-directed null geodesic congruence with affine parameter `t`, the
-expansion `θ` obeys the Raychaudhuri equation
+  `θ' = -θ² / 2 - σ_{ab} σ^{ab} - R_{ab} k^a k^b`,
 
-  `θ' = -θ²/2 - σ_{ab}σ^{ab} - R_{ab} k^a k^b`.
+so that the null energy condition `R_{ab} k^a k^b ≥ 0` gives the differential inequality
 
-Hypersurface orthogonality gives `ω = 0` (no rotation term); the shear term
-`σ_{ab}σ^{ab}` is nonnegative, and the *null energy condition* forces
-`R_{ab} k^a k^b ≥ 0`.  A *trapped surface* is exactly the statement that the initial
-expansion of the outgoing null congruence is negative, `θ 0 < 0`.
+  `θ' ≤ -θ² / 2`.
 
-The Riccati comparison argument then shows that such a congruence **cannot exist on
-an affine interval longer than `2 / |θ 0|`**: a conjugate point (caustic) is reached
-first.  Consequently the null geodesics generating the congruence cannot be affinely
-extended to all `t ≥ 0`; this is precisely the null geodesic incompleteness asserted
-by Penrose's theorem (whose remaining, purely causal-theoretic, ingredients — global
-hyperbolicity / non-compact Cauchy surface — serve to guarantee that the congruence
-would otherwise have to be complete).
-
-The statements below are therefore a faithful, self-contained Lean formalization of
-the analytic reduction: *trapped surface + null energy condition ⟹ focusing in
-affine parameter at most `2/|θ 0|` ⟹ no complete congruence*.
+A trapped surface is exactly the condition `θ 0 < 0` for both orthogonal null congruences.
+The content proved below is the resulting focusing bound: the affine parameter of such a
+congruence cannot reach `2 / |θ 0|`, i.e. a conjugate point (caustic) forms within affine
+length `2 / |θ 0|` and the congruence cannot be affinely complete.  This is the base case /
+Lean-checked reduction of the singularity theorem: the global step (from a caustic to the
+compactness of `∂ J⁺(S)` and the contradiction with non-compactness of a Cauchy surface) is
+pure causal topology and is not formalized here.
 -/
 
 namespace Frontier
 
-/-- The Raychaudhuri equation for a hypersurface-orthogonal null geodesic congruence,
-holding on a set `S` of affine parameters.
+open Set
 
-`θ` is the expansion of the congruence, `θ'` its derivative with respect to the affine
-parameter, `ricci t` stands for the null-null Ricci curvature `R_{ab} k^a k^b`, and
-`shear t` for the (nonnegative) shear scalar `σ_{ab} σ^{ab}`. -/
+/-- **Focusing bound (Raychaudhuri + null energy condition).**
 
-def RaychaudhuriOn (S : Set ℝ) (θ θ' ricci shear : ℝ → ℝ) : Prop :=
-  (∀ t ∈ S, HasDerivAt θ (θ' t) t) ∧
-    (∀ t ∈ S, θ' t = -(θ t) ^ 2 / 2 - shear t - ricci t)
+If the expansion `θ` of a null geodesic congruence is defined on the affine interval `[0, L]`
+with derivative `θ'` there, satisfies the Raychaudhuri–NEC inequality `θ' ≤ -θ²/2`, and starts
+out converging, `θ 0 < 0` (the trapped surface condition), then the affine length satisfies
+`L < 2 / |θ 0|`: the congruence focuses to a caustic in finite affine parameter. -/
 
-/-- The null energy condition along the congruence: `R_{ab} k^a k^b ≥ 0` for the null
-tangent `k`.  We record alongside it the (automatic) nonnegativity of the shear scalar
-`σ_{ab}σ^{ab}` for a real hypersurface-orthogonal congruence. -/
-
-def NullEnergyCondition (S : Set ℝ) (ricci shear : ℝ → ℝ) : Prop :=
-  ∀ t ∈ S, 0 ≤ ricci t ∧ 0 ≤ shear t
-
-/-- A trapped surface: the outgoing null congruence orthogonal to the surface has
-negative initial expansion. -/
-
-def TrappedSurface (θ : ℝ → ℝ) : Prop :=
-  θ 0 < 0
-
-section
-
-variable {L : ℝ} {θ θ' ricci shear : ℝ → ℝ}
-
-/-- Under the null energy condition, the expansion is nonincreasing in the affine
-parameter. -/
-
-theorem expansion_antitoneOn (hR : RaychaudhuriOn (Set.Icc 0 L) θ θ' ricci shear)
-    (hE : NullEnergyCondition (Set.Icc 0 L) ricci shear) :
-    AntitoneOn θ (Set.Icc 0 L) := by
-  obtain ⟨hd, hray⟩ := hR
-  have hderiv : ∀ t ∈ Set.Icc (0 : ℝ) L, deriv θ t = θ' t := fun t ht => (hd t ht).deriv
-  refine antitoneOn_of_deriv_nonpos (convex_Icc 0 L)
-    (fun t ht => ((hd t ht).continuousAt).continuousWithinAt) (fun t ht => ?_) (fun t ht => ?_)
-  · rw [interior_Icc] at ht
-    exact ((hd t (Set.mem_Icc_of_Ioo ht)).differentiableAt).differentiableWithinAt
-  · rw [interior_Icc] at ht
-    have ht' : t ∈ Set.Icc (0 : ℝ) L := Set.mem_Icc_of_Ioo ht
-    obtain ⟨hric, hsh⟩ := hE t ht'
-    rw [hderiv t ht', hray t ht']
-    nlinarith [sq_nonneg (θ t)]
-
-/-- The expansion never exceeds its initial value; in particular, starting from a
-trapped surface it stays negative. -/
-
-theorem expansion_le_initial (hR : RaychaudhuriOn (Set.Icc 0 L) θ θ' ricci shear)
-    (hE : NullEnergyCondition (Set.Icc 0 L) ricci shear)
-    {t : ℝ} (ht : t ∈ Set.Icc 0 L) : θ t ≤ θ 0 := by
-  have h0 : (0 : ℝ) ∈ Set.Icc (0 : ℝ) L := ⟨le_refl 0, ht.1.trans ht.2⟩
-  exact expansion_antitoneOn hR hE h0 ht ht.1
-
-/-- **Raychaudhuri focusing.**  A hypersurface-orthogonal null geodesic congruence
-satisfying the null energy condition and starting from a trapped surface
-(`θ 0 < 0`) must develop a caustic: it cannot be defined on an affine interval
-`[0, L]` with `L ≥ 2 / |θ 0|`. -/
-
-theorem penrose_focusing (hL : 0 ≤ L)
-    (hR : RaychaudhuriOn (Set.Icc 0 L) θ θ' ricci shear)
-    (hE : NullEnergyCondition (Set.Icc 0 L) ricci shear) (hT : TrappedSurface θ) :
+theorem focusing_bound {θ θ' : ℝ → ℝ} {L : ℝ} (hL : 0 ≤ L)
+    (hderiv : ∀ s ∈ Icc (0 : ℝ) L, HasDerivAt θ (θ' s) s)
+    (hnec : ∀ s ∈ Icc (0 : ℝ) L, θ' s ≤ -(θ s) ^ 2 / 2)
+    (htrapped : θ 0 < 0) :
     L < 2 / (-θ 0) := by
-  have hd := hR.1
-  have hray := hR.2
-  -- the expansion is `≤ θ 0 < 0` throughout
-  have hneg : ∀ t ∈ Set.Icc (0 : ℝ) L, θ t < 0 := fun t ht =>
-    lt_of_le_of_lt (expansion_le_initial hR hE ht) hT
-  -- the auxiliary function `h t = -1/θ t + t/2` has nonpositive derivative
-  set f : ℝ → ℝ := fun t => -(θ t)⁻¹ + t / 2 with hf
-  have hfderiv : ∀ t ∈ Set.Icc (0 : ℝ) L,
-      HasDerivAt f (θ' t / (θ t) ^ 2 + 1 / 2) t := by
-    intro t ht
-    have hne : θ t ≠ 0 := ne_of_lt (hneg t ht)
-    have h1 : HasDerivAt (fun y => (θ y)⁻¹) (-θ' t / (θ t) ^ 2) t := (hd t ht).inv hne
-    have h2 : HasDerivAt (fun y : ℝ => y / 2) (1 / 2 : ℝ) t :=
-      (hasDerivAt_id t).div_const 2
-    have := h1.neg.add h2
-    simpa [hf, neg_div, div_eq_mul_inv] using this
-  have hfnonpos : ∀ t ∈ Set.Icc (0 : ℝ) L, θ' t / (θ t) ^ 2 + 1 / 2 ≤ 0 := by
-    intro t ht
-    obtain ⟨hric, hsh⟩ := hE t ht
-    have hsq : (0 : ℝ) < (θ t) ^ 2 := by
-      have h := hneg t ht
+  have hconv : Convex ℝ (Icc (0 : ℝ) L) := convex_Icc _ _
+  have hint : interior (Icc (0 : ℝ) L) ⊆ Icc (0 : ℝ) L := interior_subset
+  have hcont : ContinuousOn θ (Icc (0 : ℝ) L) := fun s hs =>
+    ((hderiv s hs).continuousAt).continuousWithinAt
+  -- `θ` is nonincreasing on `[0, L]`, hence stays negative.
+  have hanti : AntitoneOn θ (Icc (0 : ℝ) L) := by
+    refine antitoneOn_of_deriv_nonpos hconv hcont (fun s hs => ?_) (fun s hs => ?_)
+    · exact ((hderiv s (hint hs)).differentiableAt).differentiableWithinAt
+    · rw [(hderiv s (hint hs)).deriv]
+      have := hnec s (hint hs)
+      nlinarith [sq_nonneg (θ s)]
+  have hneg : ∀ s ∈ Icc (0 : ℝ) L, θ s ≤ θ 0 := fun s hs =>
+    hanti (left_mem_Icc.2 hL) hs hs.1
+  have hlt : ∀ s ∈ Icc (0 : ℝ) L, θ s < 0 := fun s hs => lt_of_le_of_lt (hneg s hs) htrapped
+  -- The function `s ↦ 1/θ s - s/2` is nondecreasing on `[0, L]`.
+  set g : ℝ → ℝ := fun s => (θ s)⁻¹ - s / 2 with hg
+  have hgderiv : ∀ s ∈ Icc (0 : ℝ) L,
+      HasDerivAt g (-(θ' s) / (θ s) ^ 2 - 1 / 2) s := by
+    intro s hs
+    have h1 : HasDerivAt (fun x => (θ x)⁻¹) (-(θ' s) / (θ s) ^ 2) s :=
+      (hderiv s hs).inv (ne_of_lt (hlt s hs))
+    have h2 : HasDerivAt (fun x : ℝ => x / 2) (1 / 2) s := by
+      simpa using (hasDerivAt_id s).div_const 2
+    exact h1.sub h2
+  have hmono : MonotoneOn g (Icc (0 : ℝ) L) := by
+    refine monotoneOn_of_deriv_nonneg hconv (fun s hs => ?_) (fun s hs => ?_) (fun s hs => ?_)
+    · exact ((hgderiv s hs).continuousAt).continuousWithinAt
+    · exact ((hgderiv s (hint hs)).differentiableAt).differentiableWithinAt
+    · rw [(hgderiv s (hint hs)).deriv]
+      have hs' := hint hs
+      have hne : θ s < 0 := hlt s hs'
+      have hsq : 0 < (θ s) ^ 2 := by nlinarith
+      have := hnec s hs'
+      rw [sub_nonneg, le_div_iff₀ hsq]
       nlinarith
-    have key : θ' t ≤ -(θ t) ^ 2 / 2 := by
-      rw [hray t ht]; linarith
-    have : θ' t / (θ t) ^ 2 ≤ -1 / 2 := by
-      rw [div_le_iff₀ hsq]; nlinarith
-    linarith
-  -- hence `f` is antitone on `[0, L]`
-  have hanti : AntitoneOn f (Set.Icc 0 L) := by
-    refine antitoneOn_of_deriv_nonpos (convex_Icc 0 L)
-      (fun t ht => ((hfderiv t ht).continuousAt).continuousWithinAt) (fun t ht => ?_)
-      (fun t ht => ?_)
-    · rw [interior_Icc] at ht
-      exact ((hfderiv t (Set.mem_Icc_of_Ioo ht)).differentiableAt).differentiableWithinAt
-    · rw [interior_Icc] at ht
-      have ht' : t ∈ Set.Icc (0 : ℝ) L := Set.mem_Icc_of_Ioo ht
-      rw [(hfderiv t ht').deriv]
-      exact hfnonpos t ht'
-  have h0 : (0 : ℝ) ∈ Set.Icc (0 : ℝ) L := ⟨le_refl 0, hL⟩
-  have hLmem : L ∈ Set.Icc (0 : ℝ) L := ⟨hL, le_refl L⟩
-  have hcmp : f L ≤ f 0 := hanti h0 hLmem hL
-  have hposL : 0 < -(θ L)⁻¹ := by
-    have h := inv_lt_zero.mpr (hneg L hLmem)
-    linarith
-  have h00 : f 0 = -(θ 0)⁻¹ := by simp [hf]
-  have hfL : f L = -(θ L)⁻¹ + L / 2 := rfl
-  have hkey : L / 2 < -(θ 0)⁻¹ := by
-    rw [h00, hfL] at hcmp; linarith
-  have hT' : θ 0 < 0 := hT
-  have hθ0 : 0 < -θ 0 := by linarith
-  have hinv : (-θ 0) * (-θ 0)⁻¹ = 1 := mul_inv_cancel₀ (ne_of_gt hθ0)
-  have hkey' : L / 2 < (-θ 0)⁻¹ := by
-    have : -(θ 0)⁻¹ = (-θ 0)⁻¹ := by field_simp
-    linarith [this ▸ hkey]
-  rw [lt_div_iff₀ hθ0]
-  nlinarith [hkey', hθ0, hinv]
+  have hkey : g 0 ≤ g L := hmono (left_mem_Icc.2 hL) (right_mem_Icc.2 hL) hL
+  have hL0 : θ L < 0 := hlt L (right_mem_Icc.2 hL)
+  have hinvL : (θ L)⁻¹ < 0 := inv_neg''.2 hL0
+  have hinv0 : (θ 0)⁻¹ < 0 := inv_neg''.2 htrapped
+  simp only [hg] at hkey
+  have hpos : 0 < -θ 0 := by linarith
+  rw [lt_div_iff₀ hpos]
+  have hne0 : θ 0 ≠ 0 := ne_of_lt htrapped
+  have h0 : (θ 0)⁻¹ * (-θ 0) = -1 := by
+    field_simp
+  nlinarith [hkey, hinvL, hpos, h0]
 
-end
+/-- **Penrose singularity theorem (focusing form).**
 
-/-- **Penrose singularity theorem (analytic core): geodesic incompleteness.**
+A spacetime containing a trapped surface (`θ 0 < 0` for the orthogonal null congruence) and
+satisfying the null energy condition — which through the Raychaudhuri equation gives
+`θ' ≤ -θ²/2` — has no affinely complete future null geodesic congruence orthogonal to the
+surface: the assumption that the expansion is defined for all affine parameters `s ≥ 0` is
+contradictory.  Hence the spacetime is null geodesically incomplete. -/
 
-A spacetime containing a trapped surface (`θ 0 < 0` for the outgoing null congruence
-orthogonal to it) and satisfying the null energy condition (`R_{ab} k^a k^b ≥ 0`)
-cannot be null geodesically complete: the hypersurface-orthogonal null congruence
-obeying the Raychaudhuri equation cannot be defined for all affine parameters
-`t ≥ 0`, since focusing to a caustic occurs by affine parameter `2 / |θ 0|`. -/
+theorem penrose_singularity {θ θ' : ℝ → ℝ}
+    (hderiv : ∀ s ∈ Ici (0 : ℝ), HasDerivAt θ (θ' s) s)
+    (hnec : ∀ s ∈ Ici (0 : ℝ), θ' s ≤ -(θ s) ^ 2 / 2)
+    (htrapped : θ 0 < 0) :
+    False := by
+  set L : ℝ := 2 / (-θ 0) with hLdef
+  have hpos : 0 < -θ 0 := by linarith
+  have hL : 0 ≤ L := by positivity
+  have hsub : Icc (0 : ℝ) L ⊆ Ici (0 : ℝ) := Icc_subset_Ici_self
+  have := focusing_bound hL (fun s hs => hderiv s (hsub hs)) (fun s hs => hnec s (hsub hs))
+    htrapped
+  exact absurd this (lt_irrefl L)
 
-theorem penrose_singularity {θ θ' ricci shear : ℝ → ℝ}
-    (hR : RaychaudhuriOn (Set.Ici 0) θ θ' ricci shear)
-    (hE : NullEnergyCondition (Set.Ici 0) ricci shear)
-    (hT : TrappedSurface θ) : False := by
-  set L : ℝ := 2 / (-θ 0) + 1 with hLdef
-  have hθ0 : 0 < -θ 0 := by
-    have := hT; unfold TrappedSurface at this; linarith
-  have hLpos : 0 < L := by
-    have : 0 < 2 / (-θ 0) := by positivity
-    linarith
-  have hsub : Set.Icc (0 : ℝ) L ⊆ Set.Ici (0 : ℝ) := fun t ht => ht.1
-  have hR' : RaychaudhuriOn (Set.Icc 0 L) θ θ' ricci shear :=
-    ⟨fun t ht => hR.1 t (hsub ht), fun t ht => hR.2 t (hsub ht)⟩
-  have hE' : NullEnergyCondition (Set.Icc 0 L) ricci shear := fun t ht => hE t (hsub ht)
-  have := penrose_focusing hLpos.le hR' hE' hT
-  rw [hLdef] at this
-  linarith
+/-- **The hypotheses are not vacuous, and the bound is sharp.**
 
-/-! ### Non-vacuity and sharpness
-
-The hypotheses above are consistent, and the focusing bound `L < 2 / |θ 0|` is sharp:
-the exact solution `θ t = 2 / (t - 2)` of the vacuum Raychaudhuri equation
-`θ' = -θ²/2` has `θ 0 = -1` and exists precisely on `[0, L]` for every `L < 2`. -/
-
-/-- A vacuum (`R_{ab}k^ak^b = 0`, shear-free) congruence with `θ 0 = -1` exists on
-`[0, L]` for every `L < 2`, showing that the hypotheses of `penrose_focusing` are
-satisfiable and that the bound `L < 2 / (-θ 0) = 2` cannot be improved. -/
+For every affine length `L < 1` there is a congruence expansion `θ s = 2 / (s - 1)` defined on
+`[0, L]` that saturates the Raychaudhuri–NEC inequality and starts trapped with `θ 0 = -2`,
+so that the focusing bound `L < 2 / |θ 0| = 1` of `Frontier.focusing_bound` cannot be
+improved. -/

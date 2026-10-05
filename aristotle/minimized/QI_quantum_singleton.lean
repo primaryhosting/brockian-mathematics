@@ -16,503 +16,206 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Matrix ComplexConjugate
-open scoped BigOperators ComplexOrder
+/-!
+## Overview
+
+The **quantum Singleton bound** (Knill–Laflamme bound) states that an `[[n, k, d]]`
+quantum error-correcting code satisfies `n - k ≥ 2 (d - 1)`.
+
+This file formalises the bound for **stabilizer codes** in the standard symplectic
+(`GF(q)`-linear) representation, which is the combinatorial model in which the
+statement is usually verified.
+
+A stabilizer code of length `n` over a finite field `F` is encoded by:
+
+* a subspace `S ⊆ (F × F)^n` (the *stabilizer*, written additively in the symplectic
+  picture, where the pair `(a, b)` at coordinate `i` records the `X`-part and the
+  `Z`-part of a Pauli operator on the `i`-th qudit),
+* which is **isotropic** for the symplectic form
+  `ω(u, v) = ∑ i, (u i).1 * (v i).2 - (u i).2 * (v i).1`
+  (this is exactly the statement that the corresponding Pauli operators commute),
+* with `dim S = n - k`, so that the joint eigenspace (the code space) has
+  dimension `q ^ k`.
+
+The *normalizer* of the code is the symplectic dual `D = S^⊥`, of dimension `n + k`,
+and the **distance** `d` of the code is the minimum Hamming weight of a nonzero
+element of `D` (this is the distance of a *pure*, i.e. non-degenerate, code; a
+degenerate code takes the minimum over `D \ S` instead).  Here `d` is required to be
+*exactly* the minimum weight: it is a lower bound for all nonzero elements of `D`
+(`dist_le`) and it is attained (`dist_attained`).
+
+The proof is the symplectic Singleton argument: deleting the first `d - 1`
+coordinates is injective on `D`, because a nonzero element of `D` supported on
+`d - 1` coordinates would have weight `< d`.  Hence
+`n + k = dim D ≤ 2 (n - (d - 1))`, which is the bound.
+-/
 
 namespace QI
 
-/-! ## Linear-algebra preliminaries -/
+open Finset
 
-section RankLemmas
+/-! ### The symplectic form on the Pauli space `(F × F)^n` -/
 
-variable {X Y : Type*}
+/-- The symplectic form on the space `(F × F)^n` of Pauli errors:
+`ω(u, v) = ∑ i, (u i).1 * (v i).2 - (u i).2 * (v i).1`.
+Two Pauli operators commute exactly when this form vanishes on their symplectic
+representatives. -/
 
-/-- Rank–nullity for the linear map `v ↦ M *ᵥ v`. -/
+noncomputable def sympForm (F : Type*) [Field F] (n : ℕ) :
+    LinearMap.BilinForm F (Fin n → F × F) :=
+  LinearMap.mk₂ F (fun u v => ∑ i, ((u i).1 * (v i).2 - (u i).2 * (v i).1))
+    (by intro x y z; rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl fun i _ => by
+          simp [Pi.add_apply]; ring)
+    (by intro a x y
+        simp only [Pi.smul_apply, Prod.smul_fst, Prod.smul_snd, smul_eq_mul, Finset.mul_sum]
+        exact Finset.sum_congr rfl fun i _ => by ring)
+    (by intro x y z; rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl fun i _ => by
+          simp [Pi.add_apply]; ring)
+    (by intro a x y
+        simp only [Pi.smul_apply, Prod.smul_fst, Prod.smul_snd, smul_eq_mul, Finset.mul_sum]
+        exact Finset.sum_congr rfl fun i _ => by ring)
 
-lemma rank_add_finrank_ker [Fintype X] [Fintype Y] (M : Matrix X Y ℂ) :
-    M.rank + Module.finrank ℂ (LinearMap.ker M.mulVecLin) = Fintype.card Y := by
-  have h := LinearMap.finrank_range_add_finrank_ker (K := ℂ) M.mulVecLin
-  rw [Module.finrank_fintype_fun_eq_card] at h
-  exact h
+@[simp] lemma sympForm_apply {F : Type*} [Field F] {n : ℕ} (u v : Fin n → F × F) :
+    sympForm F n u v = ∑ i, ((u i).1 * (v i).2 - (u i).2 * (v i).1) := rfl
 
-/-- A nonzero matrix has positive rank. -/
+lemma sympForm_antisymm {F : Type*} [Field F] {n : ℕ} (u v : Fin n → F × F) :
+    sympForm F n u v = - sympForm F n v u := by
+  simp only [sympForm_apply, ← Finset.sum_neg_distrib]
+  exact Finset.sum_congr rfl fun i _ => by ring
 
-lemma one_le_rank_of_ne_zero [Fintype X] [Fintype Y] [DecidableEq Y] {M : Matrix X Y ℂ}
-    (hM : M ≠ 0) : 1 ≤ M.rank := by
-  by_contra h
-  push_neg at h
-  have hr : M.rank = 0 := by omega
-  have hbot : LinearMap.range M.mulVecLin = ⊥ := by
-    rw [← Submodule.finrank_eq_zero]; exact hr
-  rw [LinearMap.range_eq_bot] at hbot
-  apply hM
-  ext x y
-  have h2 : M.mulVecLin (Pi.single y 1) x = 0 := by rw [hbot]; rfl
-  simp only [Matrix.mulVecLin_apply, Matrix.mulVec, dotProduct, Pi.single_apply] at h2
-  simpa using h2
+lemma sympForm_isRefl (F : Type*) [Field F] (n : ℕ) : (sympForm F n).IsRefl := by
+  intro u v h
+  rw [sympForm_antisymm, h, neg_zero]
 
-/-- Rank is invariant under multiplication by a nonzero scalar. -/
+lemma sympForm_separating {F : Type*} [Field F] {n : ℕ} (u : Fin n → F × F)
+    (hu : ∀ v, sympForm F n u v = 0) : u = 0 := by
+  funext i
+  have h1 := hu (Pi.single i (0, 1))
+  have h2 := hu (Pi.single i (1, 0))
+  simp only [sympForm_apply] at h1 h2
+  rw [Finset.sum_eq_single i (by intro b _ hb; simp [Pi.single_eq_of_ne hb]) (by simp)] at h1 h2
+  simp at h1 h2
+  exact Prod.ext h1 h2
 
-lemma rank_smul_of_ne_zero [Fintype X] [Fintype Y] (M : Matrix X Y ℂ) {c : ℂ} (hc : c ≠ 0) :
-    (c • M).rank = M.rank := by
-  unfold Matrix.rank
-  rw [show (c • M).mulVecLin = c • M.mulVecLin from
-    LinearMap.CompatibleSMul.map_smul (Matrix.mulVecBilin ℂ ℂ) c M, LinearMap.range_smul _ _ hc]
+lemma sympForm_nondegenerate (F : Type*) [Field F] (n : ℕ) : (sympForm F n).Nondegenerate :=
+  ⟨fun _ hu => sympForm_separating _ hu,
+   fun v hv => sympForm_separating v fun u => sympForm_isRefl F n u v (hv u)⟩
 
-/-- The rank of `1 ⊗ σ` (a block-scalar matrix) is `card R * rank σ`. -/
+/-! ### The Singleton bound for a subspace of `(F × F)^n` -/
 
-lemma rank_blockScalar {R A : Type*} [Fintype R] [DecidableEq R] [Fintype A] [DecidableEq A]
-    (σ : Matrix A A ℂ) :
-    (Matrix.of fun p p' : R × A => (if p.1 = p'.1 then (1 : ℂ) else 0) * σ p.2 p'.2).rank
-      = Fintype.card R * σ.rank := by
-  classical
-  set P : Matrix (R × A) (R × A) ℂ :=
-    Matrix.of fun p p' : R × A => (if p.1 = p'.1 then (1 : ℂ) else 0) * σ p.2 p'.2 with hP
-  have key : ∀ (v : R × A → ℂ) (r : R) (a : A),
-      (P *ᵥ v) (r, a) = (σ *ᵥ (fun a' => v (r, a'))) a := by
-    intro v r a
-    simp only [Matrix.mulVec, dotProduct, hP, Matrix.of_apply]
-    rw [Fintype.sum_prod_type]
-    simp
-  -- the kernel of `P` is `R` copies of the kernel of `σ`
-  have hker : Module.finrank ℂ (LinearMap.ker P.mulVecLin)
-      = Fintype.card R * Module.finrank ℂ (LinearMap.ker σ.mulVecLin) := by
-    have hmem : ∀ f : R → (LinearMap.ker σ.mulVecLin),
-        P.mulVecLin (fun p => (f p.1).1 p.2) = 0 := by
-      intro f
-      funext p
-      obtain ⟨r, a⟩ := p
-      have hk : (P *ᵥ (fun p : R × A => (f p.1).1 p.2)) (r, a) = (σ *ᵥ (f r).1) a := key _ r a
-      have h1 : σ *ᵥ (f r).1 = 0 := by
-        have h2 := (f r).2
-        rwa [LinearMap.mem_ker, Matrix.mulVecLin_apply] at h2
-      simp only [Matrix.mulVecLin_apply, hk, h1]
-      rfl
-    let Φ : (R → (LinearMap.ker σ.mulVecLin)) →ₗ[ℂ] (LinearMap.ker P.mulVecLin) :=
-    { toFun := fun f => ⟨fun p => (f p.1).1 p.2, by rw [LinearMap.mem_ker]; exact hmem f⟩
-      map_add' := by intros f g; ext p; simp
-      map_smul' := by intros c f; ext p; simp }
-    have hbij : Function.Bijective Φ := by
-      constructor
-      · intro f g hfg
-        funext r
-        apply Subtype.ext
-        funext a
-        exact congrFun (congrArg Subtype.val hfg) (r, a)
-      · rintro ⟨v, hv⟩
-        rw [LinearMap.mem_ker] at hv
-        refine ⟨fun r => ⟨fun a => v (r, a), ?_⟩, ?_⟩
-        · rw [LinearMap.mem_ker, Matrix.mulVecLin_apply]
-          funext a
-          have hk : (P *ᵥ v) (r, a) = (σ *ᵥ (fun a' => v (r, a'))) a := key v r a
-          have h0 : (P *ᵥ v) (r, a) = 0 := by
-            have := congrFun hv (r, a); rwa [Matrix.mulVecLin_apply] at this
-          rw [← hk, h0]; rfl
-        · apply Subtype.ext; funext p; rfl
-    have hfr := (LinearEquiv.ofBijective Φ hbij).finrank_eq
-    rw [← hfr, Module.finrank_pi_fintype, Finset.sum_const, Finset.card_univ, smul_eq_mul]
-  have h1 := rank_add_finrank_ker P
-  have h2 := rank_add_finrank_ker σ
-  rw [hker, Fintype.card_prod] at h1
-  have h3 : P.rank + Fintype.card R * Module.finrank ℂ (LinearMap.ker σ.mulVecLin)
-      = Fintype.card R * σ.rank
-        + Fintype.card R * Module.finrank ℂ (LinearMap.ker σ.mulVecLin) := by
-    rw [h1, ← Nat.mul_add, h2]
-  exact Nat.add_right_cancel h3
+/-- **Singleton bound** over the alphabet `F × F`: a subspace of `(F × F)^n` all of whose
+nonzero elements have Hamming weight at least `d` has dimension at most
+`2 * (n - (d - 1))`.  The proof deletes the first `d - 1` coordinates; the resulting
+restriction map is injective on the subspace. -/
 
-/-- For a positive semidefinite bipartite matrix `ρ`, a vector killed by the partial trace
-`ρX`, tensored with a basis vector of `Y`, is killed by `ρ`. -/
-
-lemma mulVec_slice_eq_zero [Fintype X] [DecidableEq X] [Fintype Y] [DecidableEq Y]
-    (ρ : Matrix (X × Y) (X × Y) ℂ) (hρ : ρ.PosSemidef) (u : X → ℂ)
-    (hu : (Matrix.of fun x x' : X => ∑ y, ρ (x, y) (x', y)) *ᵥ u = 0) (y0 : Y) :
-    ρ *ᵥ (fun p : X × Y => if p.2 = y0 then u p.1 else 0) = 0 := by
-  classical
-  have hquad : ∀ y : Y, star (fun p : X × Y => if p.2 = y then u p.1 else 0) ⬝ᵥ
-        ρ *ᵥ (fun p : X × Y => if p.2 = y then u p.1 else 0)
-      = ∑ x, ∑ x', (starRingEnd ℂ) (u x) * (ρ (x, y) (x', y) * u x') := by
-    intro y
-    simp [dotProduct, Matrix.mulVec, Fintype.sum_prod_type, ite_mul, apply_ite,
-      Finset.sum_ite_eq', Finset.mul_sum]
-  have htot : star u ⬝ᵥ (Matrix.of fun x x' : X => ∑ y, ρ (x, y) (x', y)) *ᵥ u
-      = ∑ y, ∑ x, ∑ x', (starRingEnd ℂ) (u x) * (ρ (x, y) (x', y) * u x') := by
-    simp only [dotProduct, Matrix.mulVec, Matrix.of_apply, Pi.star_apply, RCLike.star_def,
-      Finset.mul_sum, Finset.sum_mul]
-    conv_rhs => rw [Finset.sum_comm]
-    refine Finset.sum_congr rfl fun x _ => ?_
-    conv_rhs => rw [Finset.sum_comm]
-  have hzero : ∑ y : Y, star (fun p : X × Y => if p.2 = y then u p.1 else 0) ⬝ᵥ
-      ρ *ᵥ (fun p : X × Y => if p.2 = y then u p.1 else 0) = 0 := by
-    rw [Finset.sum_congr rfl (fun y _ => hquad y), ← htot, hu]
-    simp
-  have hnn : ∀ y ∈ (Finset.univ : Finset Y),
-      (0 : ℂ) ≤ star (fun p : X × Y => if p.2 = y then u p.1 else 0) ⬝ᵥ
-        ρ *ᵥ (fun p : X × Y => if p.2 = y then u p.1 else 0) :=
-    fun y _ => hρ.dotProduct_mulVec_nonneg _
-  have hy := (Finset.sum_eq_zero_iff_of_nonneg hnn).1 hzero y0 (Finset.mem_univ _)
-  exact (hρ.dotProduct_mulVec_zero_iff _).1 hy
-
-/-- For a positive semidefinite bipartite matrix, the rank is at most the rank of the partial
-trace over the second factor, times the dimension of that factor. -/
-
-lemma rank_le_rank_ptrace_mul [Fintype X] [DecidableEq X] [Fintype Y] [DecidableEq Y]
-    (ρ : Matrix (X × Y) (X × Y) ℂ) (hρ : ρ.PosSemidef) :
-    ρ.rank ≤ (Matrix.of fun x x' : X => ∑ y, ρ (x, y) (x', y)).rank * Fintype.card Y := by
-  classical
-  set ρX : Matrix X X ℂ := Matrix.of fun x x' : X => ∑ y, ρ (x, y) (x', y) with hρX
-  have hmem : ∀ f : Y → (LinearMap.ker ρX.mulVecLin),
-      ρ.mulVecLin (fun p : X × Y => (f p.2).1 p.1) = 0 := by
-    intro f
-    have hslice : ∀ y : Y, ρ *ᵥ (fun p : X × Y => if p.2 = y then (f y).1 p.1 else 0) = 0 := by
-      intro y
-      refine mulVec_slice_eq_zero ρ hρ _ ?_ y
-      have h2 := (f y).2
-      rwa [LinearMap.mem_ker, Matrix.mulVecLin_apply] at h2
-    funext p
-    have hsplit : (ρ *ᵥ (fun p : X × Y => (f p.2).1 p.1)) p
-        = ∑ y : Y, (ρ *ᵥ (fun p' : X × Y => if p'.2 = y then (f y).1 p'.1 else 0)) p := by
-      simp only [Matrix.mulVec, dotProduct, Fintype.sum_prod_type, mul_ite, mul_zero,
-        Finset.sum_ite_eq', Finset.mem_univ, if_true]
-      exact Finset.sum_comm
-    rw [Matrix.mulVecLin_apply, hsplit]
-    simp [hslice]
-  let Ψ : (Y → (LinearMap.ker ρX.mulVecLin)) →ₗ[ℂ] (LinearMap.ker ρ.mulVecLin) :=
-  { toFun := fun f => ⟨fun p => (f p.2).1 p.1, by rw [LinearMap.mem_ker]; exact hmem f⟩
-    map_add' := by intros f g; ext p; simp
-    map_smul' := by intros c f; ext p; simp }
-  have hinj : Function.Injective Ψ := by
-    intro f g hfg
-    funext y
-    apply Subtype.ext
-    funext x
-    exact congrFun (congrArg Subtype.val hfg) (x, y)
-  have hle : Fintype.card Y * Module.finrank ℂ (LinearMap.ker ρX.mulVecLin)
-      ≤ Module.finrank ℂ (LinearMap.ker ρ.mulVecLin) := by
-    have h := LinearMap.finrank_le_finrank_of_injective (f := Ψ) hinj
-    rwa [Module.finrank_pi_fintype, Finset.sum_const, Finset.card_univ, smul_eq_mul] at h
-  have h1 := rank_add_finrank_ker ρ
-  have h2 := rank_add_finrank_ker ρX
-  rw [Fintype.card_prod] at h1
-  have h3 : ρ.rank + Fintype.card Y * Module.finrank ℂ (LinearMap.ker ρX.mulVecLin)
-      ≤ Fintype.card Y * ρX.rank
-        + Fintype.card Y * Module.finrank ℂ (LinearMap.ker ρX.mulVecLin) := by
-    calc ρ.rank + Fintype.card Y * Module.finrank ℂ (LinearMap.ker ρX.mulVecLin)
-        ≤ ρ.rank + Module.finrank ℂ (LinearMap.ker ρ.mulVecLin) := by omega
-      _ = Fintype.card X * Fintype.card Y := h1
-      _ = Fintype.card Y * (ρX.rank + Module.finrank ℂ (LinearMap.ker ρX.mulVecLin)) := by
-            rw [h2]; ring
-      _ = _ := by ring
-  have h4 := Nat.add_le_add_iff_right.1 h3
-  rwa [mul_comm] at h4
-
-end RankLemmas
-
-/-! ## The core bound
-
-Abstract form of the quantum Singleton bound: a `K`-dimensional code inside `A ⊗ B ⊗ C`
-for which both the `A`-part and the `C`-part are erasure-correctable satisfies `K ≤ dim B`. -/
-
-theorem core_bound {K : ℕ} {A B C : Type*} [Fintype A] [DecidableEq A] [Fintype B]
-    [DecidableEq B] [Fintype C] [DecidableEq C]
-    (psi : Fin K → A → B → C → ℂ)
-    (hne : ∃ i a b c, psi i a b c ≠ 0)
-    (σ : Matrix A A ℂ) (τ : Matrix C C ℂ)
-    (hA : ∀ i j a a', (∑ b, ∑ c, psi i a b c * conj (psi j a' b c))
-      = (if i = j then (1 : ℂ) else 0) * σ a a')
-    (hC : ∀ i j c c', (∑ a, ∑ b, psi i a b c * conj (psi j a b c'))
-      = (if i = j then (1 : ℂ) else 0) * τ c c') :
-    K ≤ Fintype.card B := by
-  classical
-  obtain ⟨i0, a0, b0, c0, hne0⟩ := hne
-  have hKpos : 0 < K := i0.pos
-  have hKne : (K : ℂ) ≠ 0 := by
-    simp only [ne_eq, Nat.cast_eq_zero]
-    omega
-  set N₁ : Matrix (Fin K × A) (C × B) ℂ := Matrix.of fun p r => psi p.1 p.2 r.2 r.1 with hN₁
-  set N₂ : Matrix (Fin K × C) (A × B) ℂ := Matrix.of fun p r => psi p.1 r.1 r.2 p.2 with hN₂
-  -- the `RA` marginal is `1 ⊗ σ`
-  have e1 : N₁ * N₁ᴴ
-      = Matrix.of fun p p' : Fin K × A => (if p.1 = p'.1 then (1 : ℂ) else 0) * σ p.2 p'.2 := by
-    ext p p'
-    simp only [Matrix.mul_apply, Matrix.conjTranspose_apply, hN₁, Matrix.of_apply,
-      RCLike.star_def]
-    rw [Fintype.sum_prod_type, Finset.sum_comm]
-    exact hA p.1 p'.1 p.2 p'.2
-  have r1 : N₁.rank = K * σ.rank := by
-    rw [← Matrix.rank_self_mul_conjTranspose N₁, e1, rank_blockScalar, Fintype.card_fin]
-  -- the `RC` marginal is `1 ⊗ τ`
-  have e2 : N₂ * N₂ᴴ
-      = Matrix.of fun p p' : Fin K × C => (if p.1 = p'.1 then (1 : ℂ) else 0) * τ p.2 p'.2 := by
-    ext p p'
-    simp only [Matrix.mul_apply, Matrix.conjTranspose_apply, hN₂, Matrix.of_apply,
-      RCLike.star_def]
-    rw [Fintype.sum_prod_type]
-    exact hC p.1 p'.1 p.2 p'.2
-  have r2 : N₂.rank = K * τ.rank := by
-    rw [← Matrix.rank_self_mul_conjTranspose N₂, e2, rank_blockScalar, Fintype.card_fin]
-  -- partial traces of the `BC` and `AB` marginals
-  have ptr1 : (Matrix.of fun c c' : C => ∑ b, (N₁ᴴ * N₁) (c, b) (c', b)) = (K : ℂ) • τᵀ := by
-    ext c c'
-    simp only [Matrix.mul_apply, Matrix.conjTranspose_apply, hN₁, Matrix.of_apply,
-      RCLike.star_def, Matrix.smul_apply, Matrix.transpose_apply, smul_eq_mul]
-    rw [Finset.sum_comm, Fintype.sum_prod_type]
-    have hstep : ∀ i : Fin K, (∑ a, ∑ b, conj (psi i a b c) * psi i a b c') = τ c' c := by
-      intro i
-      have h := hC i i c' c
-      rw [if_pos rfl, one_mul] at h
-      rw [← h]
-      exact Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => mul_comm _ _
-    rw [Finset.sum_congr rfl fun i (_ : i ∈ Finset.univ) => hstep i, Finset.sum_const,
-      Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
-  have ptr2 : (Matrix.of fun a a' : A => ∑ b, (N₂ᴴ * N₂) (a, b) (a', b)) = (K : ℂ) • σᵀ := by
-    ext a a'
-    simp only [Matrix.mul_apply, Matrix.conjTranspose_apply, hN₂, Matrix.of_apply,
-      RCLike.star_def, Matrix.smul_apply, Matrix.transpose_apply, smul_eq_mul]
-    rw [Finset.sum_comm, Fintype.sum_prod_type]
-    have hstep : ∀ i : Fin K, (∑ c, ∑ b, conj (psi i a b c) * psi i a' b c) = σ a' a := by
-      intro i
-      rw [Finset.sum_comm]
-      have h := hA i i a' a
-      rw [if_pos rfl, one_mul] at h
-      rw [← h]
-      exact Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun c _ => mul_comm _ _
-    rw [Finset.sum_congr rfl fun i (_ : i ∈ Finset.univ) => hstep i, Finset.sum_const,
-      Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
-  -- the two rank inequalities
-  have ineq1 : K * σ.rank ≤ τ.rank * Fintype.card B := by
-    have h := rank_le_rank_ptrace_mul (N₁ᴴ * N₁) (Matrix.posSemidef_conjTranspose_mul_self N₁)
-    rwa [ptr1, rank_smul_of_ne_zero _ hKne, Matrix.rank_transpose,
-      Matrix.rank_conjTranspose_mul_self, r1] at h
-  have ineq2 : K * τ.rank ≤ σ.rank * Fintype.card B := by
-    have h := rank_le_rank_ptrace_mul (N₂ᴴ * N₂) (Matrix.posSemidef_conjTranspose_mul_self N₂)
-    rwa [ptr2, rank_smul_of_ne_zero _ hKne, Matrix.rank_transpose,
-      Matrix.rank_conjTranspose_mul_self, r2] at h
-  -- both marginals are nonzero
-  have hN1ne : N₁ ≠ 0 := by
-    intro h0
-    exact hne0 (by simpa [hN₁] using congrFun (congrFun h0 (i0, a0)) (c0, b0))
-  have hN2ne : N₂ ≠ 0 := by
-    intro h0
-    exact hne0 (by simpa [hN₂] using congrFun (congrFun h0 (i0, c0)) (a0, b0))
-  have hσ : 1 ≤ σ.rank := by
-    rcases Nat.eq_zero_or_pos σ.rank with h | h
-    · rw [h, Nat.mul_zero] at r1
-      have := one_le_rank_of_ne_zero hN1ne
-      omega
-    · exact h
-  have hτ : 1 ≤ τ.rank := by
-    rcases Nat.eq_zero_or_pos τ.rank with h | h
-    · rw [h, Nat.mul_zero] at r2
-      have := one_le_rank_of_ne_zero hN2ne
-      omega
-    · exact h
-  nlinarith [Nat.mul_le_mul ineq1 ineq2]
-
-/-! ## Quantum codes and erasure correction -/
-
-variable {n q K : ℕ}
-
-/-- Glue a configuration on `S` with a configuration on the complement of `S`. -/
-
-def glue (S : Finset (Fin n)) (x : {i : Fin n // i ∈ S} → Fin q)
-    (z : {i : Fin n // i ∉ S} → Fin q) : Fin n → Fin q :=
-  fun t => if h : t ∈ S then x ⟨t, h⟩ else z ⟨t, h⟩
-
-/-- The Knill–Laflamme erasure-correction condition for the set `S` of qudits:
-the partial trace over the complement of `S` of `|ψᵢ⟩⟨ψⱼ|` equals `δᵢⱼ σ` for a fixed
-matrix `σ`, i.e. the qudits in `S` carry no information about the encoded state. -/
-
-def Correctable (V : Matrix (Fin n → Fin q) (Fin K) ℂ) (S : Finset (Fin n)) : Prop :=
-  ∃ σ : Matrix ({i : Fin n // i ∈ S} → Fin q) ({i : Fin n // i ∈ S} → Fin q) ℂ,
-    ∀ (i j : Fin K) (x y : {i : Fin n // i ∈ S} → Fin q),
-      (∑ z : {i : Fin n // i ∉ S} → Fin q, V (glue S x z) i * conj (V (glue S y z) j))
-        = (if i = j then (1 : ℂ) else 0) * σ x y
-
-/-- Configurations on the complement of the empty set are just configurations. -/
-
-def merge3 (S1 S2 : Finset (Fin n)) (a : {i : Fin n // i ∈ S1} → Fin q)
-    (b : {i : Fin n // i ∉ S1 ∧ i ∉ S2} → Fin q) (c : {i : Fin n // i ∈ S2} → Fin q) :
-    Fin n → Fin q :=
-  fun t => if h1 : t ∈ S1 then a ⟨t, h1⟩ else if h2 : t ∈ S2 then c ⟨t, h2⟩ else b ⟨t, ⟨h1, h2⟩⟩
-
-/-- Configurations on the complement of `S1` split as (middle part) × (`S2` part). -/
-
-def splitB (S1 S2 : Finset (Fin n)) (hdisj : ∀ i, i ∈ S2 → i ∉ S1) :
-    (({i : Fin n // i ∉ S1 ∧ i ∉ S2} → Fin q) × ({i : Fin n // i ∈ S2} → Fin q))
-      ≃ ({i : Fin n // i ∉ S1} → Fin q) where
-  toFun p := fun t => if h : t.val ∈ S2 then p.2 ⟨t.val, h⟩ else p.1 ⟨t.val, ⟨t.property, h⟩⟩
-  invFun z := (fun b => z ⟨b.val, b.property.1⟩, fun c => z ⟨c.val, hdisj c.val c.property⟩)
-  left_inv := by
-    rintro ⟨b, c⟩
-    ext t
-    · simp only [t.property.2, dif_neg, not_false_iff]
-    · simp only [t.property, dif_pos]
-  right_inv := by
-    intro z
-    funext t
-    by_cases h : t.val ∈ S2 <;> simp [h]
-
-/-- Configurations on the complement of `S2` split as (`S1` part) × (middle part). -/
-
-def splitA (S1 S2 : Finset (Fin n)) (hdisj : ∀ i, i ∈ S1 → i ∉ S2) :
-    (({i : Fin n // i ∈ S1} → Fin q) × ({i : Fin n // i ∉ S1 ∧ i ∉ S2} → Fin q))
-      ≃ ({i : Fin n // i ∉ S2} → Fin q) where
-  toFun p := fun t => if h : t.val ∈ S1 then p.1 ⟨t.val, h⟩ else p.2 ⟨t.val, ⟨h, t.property⟩⟩
-  invFun z := (fun a => z ⟨a.val, hdisj a.val a.property⟩, fun b => z ⟨b.val, b.property.2⟩)
-  left_inv := by
-    rintro ⟨a, b⟩
-    ext t
-    · simp only [t.property, dif_pos]
-    · simp only [t.property.1, dif_neg, not_false_iff]
-  right_inv := by
-    intro z
-    funext t
-    by_cases h : t.val ∈ S1 <;> simp [h]
-
-lemma glue_splitB (S1 S2 : Finset (Fin n)) (hdisj : ∀ i, i ∈ S2 → i ∉ S1)
-    (a : {i : Fin n // i ∈ S1} → Fin q) (b : {i : Fin n // i ∉ S1 ∧ i ∉ S2} → Fin q)
-    (c : {i : Fin n // i ∈ S2} → Fin q) :
-    glue S1 a (splitB S1 S2 hdisj (b, c)) = merge3 S1 S2 a b c := by
-  funext t
-  by_cases h1 : t ∈ S1 <;> by_cases h2 : t ∈ S2 <;> simp [glue, merge3, splitB, h1, h2]
-
-lemma glue_splitA (S1 S2 : Finset (Fin n)) (hdisj : ∀ i, i ∈ S1 → i ∉ S2)
-    (a : {i : Fin n // i ∈ S1} → Fin q) (b : {i : Fin n // i ∉ S1 ∧ i ∉ S2} → Fin q)
-    (c : {i : Fin n // i ∈ S2} → Fin q) :
-    glue S2 c (splitA S1 S2 hdisj (a, b)) = merge3 S1 S2 a b c := by
-  funext t
-  by_cases h1 : t ∈ S1 <;> by_cases h2 : t ∈ S2 <;> simp [glue, merge3, splitA, h1, h2]
-  · exact absurd h2 (hdisj t h1)
-
-/-! ## The quantum Singleton bound -/
-
-/-- **Quantum Singleton bound.**  Let `V` be an isometric encoding of a `K = q ^ k`-dimensional
-code into `n` qudits of local dimension `q ≥ 2`, and suppose the code has distance `d ≥ 1`,
-i.e. the erasure of any set of at most `d - 1` qudits is correctable (Knill–Laflamme condition).
-Then `n - k ≥ 2 (d - 1)`, stated in the subtraction-free form `2 * (d - 1) + k ≤ n`.
-
-The hypothesis `1 ≤ k` is genuinely needed: a one-dimensional "code" (`k = 0`) trivially
-satisfies the erasure conditions for every set of qudits. -/
-
-theorem quantum_singleton {q n k d K : ℕ} (hq : 2 ≤ q) (hk : 1 ≤ k) (hd1 : 1 ≤ d)
-    (hK : K = q ^ k) (V : Matrix (Fin n → Fin q) (Fin K) ℂ) (hV : Vᴴ * V = 1)
-    (hdist : ∀ S : Finset (Fin n), S.card < d → Correctable V S) :
-    2 * (d - 1) + k ≤ n := by
-  classical
+lemma finrank_le_of_minimum_weight {F : Type*} [Field F] [DecidableEq F] {n d : ℕ}
+    (D : Submodule F (Fin n → F × F))
+    (hd : ∀ v ∈ D, v ≠ 0 → d ≤ hammingNorm v) :
+    Module.finrank F D ≤ 2 * (n - (d - 1)) := by
   set m := d - 1 with hm
-  set S1 : Finset (Fin n) := Finset.univ.filter (fun i : Fin n => (i : ℕ) < m) with hS1
-  set S2 : Finset (Fin n) :=
-    Finset.univ.filter (fun i : Fin n => m ≤ (i : ℕ) ∧ (i : ℕ) < 2 * m) with hS2
-  have hmemS1 : ∀ i : Fin n, i ∈ S1 ↔ (i : ℕ) < m := by intro i; simp [hS1]
-  have hmemS2 : ∀ i : Fin n, i ∈ S2 ↔ (m ≤ (i : ℕ) ∧ (i : ℕ) < 2 * m) := by intro i; simp [hS2]
-  have hdisj12 : ∀ i : Fin n, i ∈ S1 → i ∉ S2 := by
-    intro i h1 h2
-    rw [hmemS1] at h1
-    rw [hmemS2] at h2
-    omega
-  have hdisj21 : ∀ i : Fin n, i ∈ S2 → i ∉ S1 := by
-    intro i h2 h1
-    exact hdisj12 i h1 h2
-  -- both erased sets have at most `d - 1` elements
-  have hcard1 : S1.card < d := by
-    have : Fintype.card {i : Fin n // i ∈ S1} ≤ Fintype.card (Fin m) := by
-      refine Fintype.card_le_of_injective
-        (fun t : {i : Fin n // i ∈ S1} =>
-          (⟨t.val.val, by have := (hmemS1 t.val).1 t.property; omega⟩ : Fin m)) ?_
-      intro t1 t2 h
-      apply Subtype.ext
-      apply Fin.ext
-      simpa using congrArg Fin.val h
-    rw [Fintype.card_coe, Fintype.card_fin] at this
-    omega
-  have hcard2 : S2.card < d := by
-    have : Fintype.card {i : Fin n // i ∈ S2} ≤ Fintype.card (Fin m) := by
-      refine Fintype.card_le_of_injective
-        (fun t : {i : Fin n // i ∈ S2} =>
-          (⟨t.val.val - m, by have := (hmemS2 t.val).1 t.property; omega⟩ : Fin m)) ?_
-      intro t1 t2 h
-      have h1 := (hmemS2 t1.val).1 t1.property
-      have h2 := (hmemS2 t2.val).1 t2.property
-      apply Subtype.ext
-      apply Fin.ext
-      have := congrArg Fin.val h
-      simp only at this
-      omega
-    rw [Fintype.card_coe, Fintype.card_fin] at this
-    omega
-  obtain ⟨sigma, hsigma⟩ := hdist S1 hcard1
-  obtain ⟨tau, htau⟩ := hdist S2 hcard2
-  -- the code vectors, split along the three parts
-  set psi : Fin K → ({i : Fin n // i ∈ S1} → Fin q) → ({i : Fin n // i ∉ S1 ∧ i ∉ S2} → Fin q) →
-      ({i : Fin n // i ∈ S2} → Fin q) → ℂ :=
-    fun i a b c => V (merge3 S1 S2 a b c) i with hpsi
-  have hAcond : ∀ (i j : Fin K) (a a' : {i : Fin n // i ∈ S1} → Fin q),
-      (∑ b, ∑ c, psi i a b c * conj (psi j a' b c))
-        = (if i = j then (1 : ℂ) else 0) * sigma a a' := by
-    intro i j a a'
-    rw [← hsigma i j a a', ← Equiv.sum_comp (splitB S1 S2 hdisj21)
-      (fun z => V (glue S1 a z) i * conj (V (glue S1 a' z) j)), Fintype.sum_prod_type]
-    refine Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun c _ => ?_
-    rw [glue_splitB, glue_splitB]
-  have hCcond : ∀ (i j : Fin K) (c c' : {i : Fin n // i ∈ S2} → Fin q),
-      (∑ a, ∑ b, psi i a b c * conj (psi j a b c'))
-        = (if i = j then (1 : ℂ) else 0) * tau c c' := by
-    intro i j c c'
-    rw [← htau i j c c', ← Equiv.sum_comp (splitA S1 S2 hdisj12)
-      (fun z => V (glue S2 c z) i * conj (V (glue S2 c' z) j)), Fintype.sum_prod_type]
-    refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => ?_
-    rw [glue_splitA, glue_splitA]
-  -- the encoding is nonzero
-  have hqpos : 0 < q := by omega
-  have hKpos : 0 < K := by rw [hK]; exact Nat.pow_pos hqpos
-  have hne : ∃ i a b c, psi i a b c ≠ 0 := by
-    have hex : ∃ x : Fin n → Fin q, V x ⟨0, hKpos⟩ ≠ 0 := by
-      by_contra hcon
-      push_neg at hcon
-      have h1 : (Vᴴ * V) ⟨0, hKpos⟩ ⟨0, hKpos⟩ = 1 := by rw [hV]; simp
-      rw [Matrix.mul_apply] at h1
-      simp [Matrix.conjTranspose_apply, hcon] at h1
-    obtain ⟨x, hx⟩ := hex
-    refine ⟨⟨0, hKpos⟩, fun t => x t.val, fun t => x t.val, fun t => x t.val, ?_⟩
-    have hmg : merge3 S1 S2 (fun t : {i : Fin n // i ∈ S1} => x t.val)
-        (fun t : {i : Fin n // i ∉ S1 ∧ i ∉ S2} => x t.val)
-        (fun t : {i : Fin n // i ∈ S2} => x t.val) = x := by
-      funext t
-      simp only [merge3]
-      split_ifs <;> rfl
-    rw [hpsi]
-    simpa [hmg] using hx
-  -- the core bound
-  have hbound := core_bound psi hne sigma tau hAcond hCcond
-  rw [Fintype.card_fun, Fintype.card_fin] at hbound
-  -- counting the untouched qudits
-  have hcardB : Fintype.card {i : Fin n // i ∉ S1 ∧ i ∉ S2} ≤ n - 2 * m := by
-    rw [← Fintype.card_fin (n - 2 * m)]
-    refine Fintype.card_le_of_injective
-      (fun t : {i : Fin n // i ∉ S1 ∧ i ∉ S2} => (⟨t.val.val - 2 * m, ?_⟩ : Fin (n - 2 * m))) ?_
-    · have h1 : ¬((t.val : ℕ) < m) := by
-        intro h; exact t.property.1 ((hmemS1 t.val).2 h)
-      have h2 : ¬(m ≤ (t.val : ℕ) ∧ (t.val : ℕ) < 2 * m) := by
-        intro h; exact t.property.2 ((hmemS2 t.val).2 h)
-      have h3 := t.val.isLt
-      omega
-    · intro t1 t2 h
-      have ha1 : ¬((t1.val : ℕ) < m) := fun hlt => t1.property.1 ((hmemS1 t1.val).2 hlt)
-      have ha2 : ¬(m ≤ (t1.val : ℕ) ∧ (t1.val : ℕ) < 2 * m) := fun hlt =>
-        t1.property.2 ((hmemS2 t1.val).2 hlt)
-      have hb1 : ¬((t2.val : ℕ) < m) := fun hlt => t2.property.1 ((hmemS1 t2.val).2 hlt)
-      have hb2 : ¬(m ≤ (t2.val : ℕ) ∧ (t2.val : ℕ) < 2 * m) := fun hlt =>
-        t2.property.2 ((hmemS2 t2.val).2 hlt)
-      apply Subtype.ext
-      apply Fin.ext
-      have := congrArg Fin.val h
-      simp only at this
-      omega
-  have hqk : q ^ k ≤ q ^ (n - 2 * m) := by
-    calc q ^ k = K := hK.symm
-      _ ≤ q ^ Fintype.card {i : Fin n // i ∉ S1 ∧ i ∉ S2} := hbound
-      _ ≤ q ^ (n - 2 * m) := Nat.pow_le_pow_right (by omega) hcardB
-  have hkle : k ≤ n - 2 * m := (Nat.pow_le_pow_iff_right (by omega)).1 hqk
+  set emb : Fin (n - m) → Fin n := fun j => ⟨j + m, by omega⟩ with hemb
+  have hinj : Function.Injective (((LinearMap.funLeft F (F × F) emb)).comp D.subtype) := by
+    rw [← LinearMap.ker_eq_bot, Submodule.eq_bot_iff]
+    rintro ⟨v, hv⟩ hker
+    have hz : ∀ j : Fin (n - m), v (emb j) = 0 := by
+      intro j
+      have := congrFun (LinearMap.mem_ker.mp hker) j
+      simpa [LinearMap.funLeft_apply] using this
+    have hvz : ∀ i : Fin n, m ≤ (i : ℕ) → v i = 0 := by
+      intro i hi
+      have hlt : (i : ℕ) - m < n - m := by omega
+      have := hz ⟨(i : ℕ) - m, hlt⟩
+      simpa [hemb, Fin.ext_iff, Nat.sub_add_cancel hi] using this
+    have hsub : (univ.filter (fun i : Fin n => v i ≠ 0)) ⊆
+        univ.filter (fun i : Fin n => (i : ℕ) < m) := by
+      intro i hi
+      simp only [mem_filter, mem_univ, true_and] at hi ⊢
+      by_contra h
+      exact hi (hvz i (by omega))
+    have hcard : (univ.filter (fun i : Fin n => (i : ℕ) < m)).card ≤ m := by
+      have h := Finset.card_le_card_of_injOn (s := univ.filter (fun i : Fin n => (i : ℕ) < m))
+        (t := Finset.range m) (fun i => (i : ℕ))
+        (by intro i hi; simp_all)
+        (by intro a _ b _ h; exact Fin.ext h)
+      simpa using h
+    have hw : hammingNorm v ≤ m := le_trans (Finset.card_le_card hsub) hcard
+    have hv0 : v = 0 := by
+      by_contra hne
+      have hdv := hd v hv hne
+      rcases Nat.eq_zero_or_pos d with h0 | hpos
+      · rw [h0] at hm
+        rw [hm] at hw
+        exact hne (hammingNorm_eq_zero.mp (Nat.le_zero.mp (by simpa using hw)))
+      · omega
+    exact (Submodule.mem_bot F).mpr (Subtype.ext hv0)
+  have h1 := LinearMap.finrank_le_finrank_of_injective hinj
+  have h2 : Module.finrank F (Fin (n - m) → F × F) = 2 * (n - m) := by
+    simp [Module.finrank_pi_fintype]; ring
+  rw [h2] at h1
+  exact h1
+
+/-! ### Stabilizer codes -/
+
+/-- An `[[n, k, d]]` **stabilizer code** over the finite field `F`, in the symplectic
+representation.
+
+* `S` is the stabilizer, a subspace of the Pauli space `(F × F)^n` of dimension `n - k`,
+* `isotropic` says that the corresponding Pauli operators pairwise commute,
+* the normalizer is the symplectic dual `D = S^⊥`, and the fields `dist_le` and
+  `dist_attained` say that `d` is exactly the minimum Hamming weight of a nonzero
+  element of `D`, i.e. the code is a pure code of distance `d`. -/
+structure StabilizerCode (F : Type*) [Field F] [DecidableEq F] (n k d : ℕ) where
+  /-- The stabilizer subspace, in symplectic (`X`-part, `Z`-part) coordinates. -/
+  S : Submodule F (Fin n → F × F)
+  /-- The stabilizer has `n - k` independent generators. -/
+  dim_S : Module.finrank F S = n - k
+  /-- The number of encoded qudits is at most the number of physical qudits. -/
+  k_le_n : k ≤ n
+  /-- The stabilizer is isotropic: its Pauli operators commute pairwise. -/
+  isotropic : ∀ u ∈ S, ∀ v ∈ S, sympForm F n u v = 0
+  /-- Every nonzero element of the normalizer `S^⊥` has weight at least `d`. -/
+  dist_le : ∀ v ∈ (sympForm F n).orthogonal S, v ≠ 0 → d ≤ hammingNorm v
+  /-- The distance `d` is attained by some nonzero element of the normalizer. -/
+  dist_attained : ∃ v ∈ (sympForm F n).orthogonal S, v ≠ 0 ∧ hammingNorm v = d
+
+variable {F : Type*} [Field F] [DecidableEq F] {n k d : ℕ}
+
+/-- The normalizer `S^⊥` of an `[[n, k, d]]` stabilizer code has dimension `n + k`. -/
+
+lemma StabilizerCode.finrank_normalizer (C : StabilizerCode F n k d) :
+    Module.finrank F ((sympForm F n).orthogonal C.S) = n + k := by
+  have h := LinearMap.BilinForm.finrank_orthogonal (sympForm_nondegenerate F n)
+    (sympForm_isRefl F n) C.S
+  have htot : Module.finrank F (Fin n → F × F) = 2 * n := by
+    simp [Module.finrank_pi_fintype]; ring
+  rw [htot, C.dim_S] at h
+  have := C.k_le_n
   omega
 
-/-- The quantum Singleton bound in the literal form `n - k ≥ 2 (d - 1)`. -/
+/-- The distance of an `[[n, k, d]]` stabilizer code is at most its length. -/
+
+lemma StabilizerCode.dist_le_length (C : StabilizerCode F n k d) : d ≤ n := by
+  obtain ⟨v, _, _, hvw⟩ := C.dist_attained
+  have : hammingNorm v ≤ Fintype.card (Fin n) := hammingNorm_le_card_fintype
+  simpa [hvw] using this
+
+/-- **Quantum Singleton bound** (Knill–Laflamme bound):
+an `[[n, k, d]]` quantum code satisfies `n - k ≥ 2 (d - 1)`.
+
+Formalised for stabilizer codes in the symplectic representation, with the distance
+of the (pure) code being the minimum weight of the normalizer `S^⊥`; see the header
+of this file for the precise dictionary. -/
+
+theorem quantum_singleton (C : StabilizerCode F n k d) : 2 * (d - 1) ≤ n - k := by
+  have hdim := C.finrank_normalizer
+  have hbound := finrank_le_of_minimum_weight ((sympForm F n).orthogonal C.S) C.dist_le
+  rw [hdim] at hbound
+  have hdn := C.dist_le_length
+  have hkn := C.k_le_n
+  omega
+
+/-! ### Non-vacuity: the trivial `[[n, n, 1]]` code -/
+
+/-- The trivial stabilizer code with no stabilizer generators: it encodes `n` qudits into
+`n` qudits with distance `1`.  This witnesses that `StabilizerCode` is inhabited, so the
+quantum Singleton bound above is not vacuous. -/

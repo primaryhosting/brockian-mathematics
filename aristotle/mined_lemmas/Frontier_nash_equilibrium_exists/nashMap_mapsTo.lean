@@ -1,37 +1,40 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-theorem nashMap_mapsTo (G : FiniteGame ι S) {x : (i : ι) → S i → ℝ} (hx : IsMixed x) :
-    IsMixed (nashMap G x) := by
-  intro i
-  have hpos := one_add_sum_gain_pos G i x
-  constructor
-  · intro s
-    apply div_nonneg _ hpos.le
-    exact add_nonneg ((hx i).1 s) (gain_nonneg G i s x)
-  · have : ∑ s : S i, nashMap G x i s
-        = (∑ s : S i, (x i s + gain G i s x)) / (1 + ∑ t : S i, gain G i t x) := by
-      rw [Finset.sum_div]
-      rfl
-    rw [this, Finset.sum_add_distrib, (hx i).2]
-    exact div_self (ne_of_gt hpos)
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
-/-- The key step: at any mixed profile some strategy in the support is not better than
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+lemma nashMap_mapsTo (u : ι → (∀ j, S j) → ℝ) :
+    Set.MapsTo (nashMap u) (mixedProfiles S) (mixedProfiles S) := by
+  intro x hx i
+  have hden : (0 : ℝ) < 1 + ∑ t, gain u i t x := lt_of_lt_of_le zero_lt_one (one_le_denom u i x)
+  refine ⟨fun s => ?_, ?_⟩
+  · exact div_nonneg (add_nonneg ((hx i).1 s) (gain_nonneg u i s x)) hden.le
+  · show ∑ s, (x i s + gain u i s x) / (1 + ∑ t, gain u i t x) = 1
+    rw [← Finset.sum_div, Finset.sum_add_distrib, (hx i).2, div_self hden.ne']
+
+/-- In any mixed profile some strategy in the support of player `i` is not better than
 the profile itself. -/

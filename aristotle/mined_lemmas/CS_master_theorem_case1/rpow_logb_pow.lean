@@ -1,31 +1,44 @@
-/-
+import Mathlib
+
+/-!
 # Master Theorem Case 1
 Category: Computer Science
 Target: CS.master_theorem_case1
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
 
-/-!
-# Master Theorem Case 1
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Case 1 of the Master Theorem for divide-and-conquer recurrences:
-if `T(n) = a * T(n/b) + f(n)` with `f(n) = O(n^(log_b a - ε))` for some `ε > 0`,
-then `T(n) = Θ(n^(log_b a))`.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-As usual for the Master Theorem, the recurrence is analysed along the powers of `b`,
-i.e. we write `T k` for the value of the recurrence at `n = b ^ k`.
--/
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace CS
 
-/-- At `n = b ^ k`, the driving function `n ^ (log_b a)` equals `a ^ k`. -/
+/-- Commuting a natural power with a real power: `(b ^ k) ^ c = (b ^ c) ^ k`. -/
 
-theorem rpow_logb_pow (a b : ℝ) (ha : 0 < a) (hb : 1 < b) (k : ℕ) :
-    ((b : ℝ) ^ k) ^ Real.logb b a = a ^ k := by
-  have hb0 : (0 : ℝ) < b := lt_trans zero_lt_one hb
-  rw [← Real.rpow_natCast b k, ← Real.rpow_mul hb0.le, mul_comm,
-    Real.rpow_mul hb0.le, Real.rpow_logb hb0 (ne_of_gt hb) ha, Real.rpow_natCast]
+lemma rpow_logb_pow {a b : ℝ} (ha : 0 < a) (hb : 1 < b) (k : ℕ) :
+    ((b ^ k : ℝ)) ^ (Real.logb b a) = a ^ k := by
+  have hb0 : (0 : ℝ) < b := lt_trans one_pos hb
+  rw [pow_rpow_comm hb0.le, Real.rpow_logb hb0 hb.ne' ha]
 
-/-- At `n = b ^ k`, we have `n ^ (log_b a - ε) = a ^ k / (b ^ ε) ^ k`. -/
+/-- On the points `n = b ^ k`, the function `n ↦ n ^ (log_b a - ε)` equals
+`a ^ k * r ^ k` where `r = b ^ (-ε) < 1`. -/

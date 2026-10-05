@@ -23,16 +23,23 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Qft Unitary
+Category: Quantum Computing
+Target: QC.qft_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 namespace QC
 
-open Complex
+open Complex Finset
 
-/-- The `N × N` discrete Fourier transform matrix:
-`(dftMatrix N) j k = (1/√N) * exp (2πi jk / N)`. -/
+/-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
 noncomputable def dftMatrix (N : ℕ) : Matrix (Fin N) (Fin N) ℂ :=
-  Matrix.of fun j k =>
-    (Real.sqrt N : ℂ)⁻¹ *
-      Complex.exp (2 * (Real.pi : ℂ) * Complex.I * ((j : ℕ) * (k : ℕ) : ℕ) / (N : ℂ))
+  Matrix.of fun j k => omegaN N ^ ((j : ℕ) * (k : ℕ)) / (Real.sqrt N : ℂ)
 
 /-- The `n`-qubit quantum Fourier transform matrix, of size `2^n × 2^n`. -/

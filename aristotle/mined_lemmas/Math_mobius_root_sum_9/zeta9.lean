@@ -30,9 +30,6 @@ Target: Math.mobius_root_sum_9
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above uses a plain block comment rather than a module docstring `/-!`,
--- since Lean 4 requires `import` to precede any module docstring.)
-
 import Mathlib
 
 /-!
@@ -43,7 +40,7 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset Complex
+open scoped BigOperators
 
 namespace Math
 

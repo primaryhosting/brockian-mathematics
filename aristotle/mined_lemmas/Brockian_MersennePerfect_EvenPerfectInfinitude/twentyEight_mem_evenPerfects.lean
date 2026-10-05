@@ -23,6 +23,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Even Perfect Infinitude
+Category: Brockian Conjecture
+Target: Brockian.MersennePerfect.EvenPerfectInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -33,22 +41,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian
-namespace MersennePerfect
+/-!
+The infinitude of even perfect numbers is equivalent to the infinitude of Mersenne primes,
+which is a well-known open problem.  What is proved here is therefore the (unconditional)
+*reduction*: the set of even perfect numbers is infinite **iff** the set of exponents `p`
+with `2 ^ p - 1` prime is infinite.
 
-open ArithmeticFunction Finset
+The Euclid–Euler development below (`sigma_two_pow_eq_mersenne_succ`,
+`perfect_two_pow_mul_mersenne_of_prime`, `eq_two_pow_mul_prime_mersenne_of_even_perfect`,
+`even_and_perfect_iff`) follows the proof of Theorem 70 of the 100 theorems list as
+developed by Aaron Anderson in the Mathlib `Archive` (Apache 2.0); it is reproduced here
+because the `Archive` is not part of the importable `Mathlib` library.
+-/
+
+namespace Brockian.MersennePerfect
+
+open Nat ArithmeticFunction Finset
+
 open scoped sigma
 
-/-! ## The Euclid–Euler theorem
-
-The proofs in this section follow the classical Euclid–Euler argument (as formalized in
-`Archive/Wiedijk100Theorems/PerfectNumbers.lean` in mathlib, which is not available as an
-import here). -/
+/-! ## The Euclid–Euler theorem -/
 
 
-theorem twentyEight_mem_evenPerfects : (28 : ℕ) ∈ EvenPerfects := by
-  refine ⟨by decide, ?_⟩
-  rw [Nat.perfect_iff_sum_divisors_eq_two_mul (by norm_num)]
-  decide
+theorem twentyEight_mem_evenPerfects : 28 ∈ EvenPerfects :=
+  ⟨by decide, (Nat.perfect_iff_sum_properDivisors (by norm_num)).mpr (by decide)⟩
 
-/-- `2` is a Mersenne exponent: `2 ^ 2 - 1 = 3` is prime. -/
+end Brockian.MersennePerfect
+

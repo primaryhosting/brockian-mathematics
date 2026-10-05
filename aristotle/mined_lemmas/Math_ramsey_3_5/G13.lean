@@ -3,35 +3,65 @@ import Mathlib
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 100000
+set_option maxRecDepth 4000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
-namespace Math
+/-
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-! ## Cliques and independent sets inside a finite set of vertices -/
+import Mathlib
 
-section General
+/-!
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-variable {V : Type*} [DecidableEq V] {G : SimpleGraph V} {s t : Finset V} {n : ℕ} {v : V}
+open Finset SimpleGraph
 
-/-- `CliqueOn G s n` : the vertex set `s` contains a clique of `G` with `n` vertices. -/
+namespace Ramsey35
+
+variable {V : Type*} [DecidableEq V]
+
+/-! ### Basic clique helpers -/
+
+omit [DecidableEq V] in
+/-- A finset all of whose distinct pairs are non-adjacent is a clique in the complement. -/
 
 def G13 : SimpleGraph (Fin 13) where
-  Adj i j := adj13 i j
+  Adj i j := adjB i j = true
   symm := by
     intro i j h
-    rw [adj13_symm j i]; exact h
+    rw [adjB_symm]; exact h
   loopless := ⟨by
     intro i h
-    rw [adj13_irrefl i] at h
+    rw [adjB_irrefl] at h
     exact Bool.false_ne_true h⟩
 
+instance : DecidableRel G13.Adj := fun i j => inferInstanceAs (Decidable (adjB i j = true))
+
+set_option maxHeartbeats 1000000 in

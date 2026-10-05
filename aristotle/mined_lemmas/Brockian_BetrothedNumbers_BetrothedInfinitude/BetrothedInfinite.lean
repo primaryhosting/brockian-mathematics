@@ -23,37 +23,23 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Betrothed Infinitude
-Category: Brockian Conjecture
-Target: Brockian.BetrothedNumbers.BetrothedInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
 /-!
 # Betrothed Infinitude
 Category: Brockian Conjecture
 Target: Brockian.BetrothedNumbers.BetrothedInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` lines to precede any module docstring, so the header comment above is a
-plain block comment and is repeated here as the module docstring.)
 -/
-
-open ArithmeticFunction
 
 namespace Brockian.BetrothedNumbers
 
-/-- Two positive integers `m ≠ n` are *betrothed* (a quasi-amicable pair) when the sum of the
-divisors of each equals `m + n + 1`; equivalently, the sum of the divisors of each strictly
-between `1` and the number itself equals the other number. -/
+/-! ## Basic definitions
 
-def BetrothedInfinite : Prop := ∀ N : ℕ, ∃ m n : ℕ, N < m ∧ Betrothed m n
+Everything below is developed from first principles (no imports), so that the
+module docstring above can legally be the first thing in the file. -/
 
-/-! ## Small examples -/
+/-- The predicate selecting the positive divisors of `n`. -/
 
-set_option maxRecDepth 100000 in
+def BetrothedInfinite : Prop := ∀ N : Nat, ∃ m n : Nat, N < m ∧ Betrothed m n
+
+/-- The quasi-aliquot map has infinitely many points on `2`-cycles. -/

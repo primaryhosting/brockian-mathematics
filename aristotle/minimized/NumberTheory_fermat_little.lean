@@ -1,12 +1,11 @@
-/-
+import Mathlib
+/-!
 # Fermat Little
 Category: Frontier Wave 2 (deeper machinery)
 Target: NumberTheory.fermat_little
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real

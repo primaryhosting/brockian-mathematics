@@ -8,14 +8,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open ArithmeticFunction
-
 namespace Riemann.Mertens
 
-/-- The Mertens function `M n = ∑_{k=1}^{n} μ k`. -/
+open ArithmeticFunction
 
-private lemma moebius_four : moebius 4 = 0 := by
-  have h : (4 : ℕ) = 2 ^ 2 := by norm_num
-  rw [h, ArithmeticFunction.moebius_apply_prime_pow Nat.prime_two (by norm_num)]
+/-- The Mertens function `M n = ∑_{k=1}^{n} μ k`, where `μ` is the Möbius function. -/
+
+lemma moebius_four : moebius 4 = 0 := by
+  rw [show (4 : ℕ) = 2 ^ 2 by norm_num,
+    moebius_apply_prime_pow (by norm_num) (by norm_num)]
   norm_num
 

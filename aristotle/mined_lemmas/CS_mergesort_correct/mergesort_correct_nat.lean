@@ -1,3 +1,31 @@
+/-!
+# Mergesort Correct
+Category: Computer Science
+Target: CS.mergesort_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace CS
+
+universe u
+
+variable {α : Type u}
+
+/-- Split a list into two lists by alternately distributing its elements. -/
+
+theorem mergesort_correct_nat (l : List Nat) :
+    List.Pairwise (fun a b => a ≤ b) (mergesort (fun a b => decide (a ≤ b)) l) ∧
+      (mergesort (fun a b => decide (a ≤ b)) l).Perm l := by
+  have h := mergesort_correct (fun a b => decide (a ≤ b))
+    (by intro a b c hab hbc; simp only [decide_eq_true_eq] at *; omega)
+    (by intro a b; by_cases h : a ≤ b <;> simp [h] <;> omega) l
+  refine ⟨?_, h.2⟩
+  have := h.1
+  simpa using this
+
+end CS
+
 import Mathlib
 
 open scoped BigOperators
@@ -23,40 +51,3 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-import RequestProject.Mergesort
-
-/-!
-# Mergesort Correct — specializations
-
-Specializations of `CS.mergesort_correct` to a decidable total transitive relation,
-and in particular to `(· ≤ ·)` on `ℕ`.
--/
-
-namespace CS
-
-/-- Mergesort correctness for a decidable total transitive relation `r`. -/
-
-theorem mergesort_correct_nat (l : List ℕ) :
-    List.Pairwise (· ≤ ·) (l.mergeSort fun a b => decide (a ≤ b)) ∧
-      (l.mergeSort fun a b => decide (a ≤ b)).Perm l :=
-  mergesort_correct_rel (· ≤ ·) l
-
-end CS
-
-/-!
-# Mergesort Correct
-Category: Computer Science
-Target: CS.mergesort_correct
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-namespace CS
-
-/-- **Mergesort is correct**: for a transitive and total boolean comparison `le`,
-`List.mergeSort l le` is sorted with respect to `le` (i.e. `List.Pairwise`, which is
-by definition Mathlib's `List.Sorted`) and is a permutation of `l`.
-
-The two halves are exactly the library lemmas `List.pairwise_mergeSort`
-and `List.mergeSort_perm`. -/

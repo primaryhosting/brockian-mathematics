@@ -30,7 +30,6 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,26 +40,22 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open MeasureTheory SchwartzMap FourierTransform Laplacian LineDeriv
+namespace Brockian.Weyl.FreeLaplacian2
+
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-  [MeasurableSpace E] [BorelSpace E]
+lemma fourier_neg_laplacian_apply (f : 𝓢(V, ℂ)) (ξ : V) :
+    𝓕 (-(Δ f) : 𝓢(V, ℂ)) ξ = (multiplier ξ : ℂ) * 𝓕 f ξ := by
+  have h : 𝓕 (-(Δ f) : 𝓢(V, ℂ)) = -(𝓕 (Δ f : 𝓢(V, ℂ))) := by
+    change (fourierTransformCLM ℂ) _ = _
+    rw [map_neg]
+    rfl
+  rw [h]
+  simp [fourier_laplacian_apply]
 
-/-- The complex Hilbert space `L²(E)` of square integrable functions on a finite-dimensional
-real inner product space `E`, with respect to the Lebesgue (Haar) measure. -/
-abbrev L2Space (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-    [MeasurableSpace E] [BorelSpace E] : Type _ := ↥(Lp (α := E) ℂ 2 volume)
-
-/-- Schwartz functions viewed as elements of `L²(E)`. -/
-
-theorem fourier_neg_laplacian_apply (f : 𝓢(E, ℂ)) (ξ : E) :
-    𝓕 (-(Δ f)) ξ = (multiplier ξ : ℂ) * 𝓕 f ξ := by
-  rw [FourierTransform.fourier_neg, SchwartzMap.neg_apply, fourier_laplacian_apply]
-  ring
-
-/-- Pairing of an `L²` function against a Schwartz function, as an integral. -/

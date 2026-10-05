@@ -23,23 +23,39 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-import Brockian.SierpinskiCovering
-
 /-!
-# Sierpiński numbers: Mathlib-flavoured restatement
-
-`Brockian/SierpinskiCovering.lean` must be import-free (its mandated header comment has to
-precede everything, and Lean requires `import` to come first), so it develops the covering
-argument using only the core `Nat` API.  Here we restate its conclusions with the usual
-Mathlib vocabulary: `Nat.Prime`, `Odd`, and `Set.Infinite`.
+# Sierpinski Problem
+Category: Brockian Conjecture
+Target: Brockian.SierpinskiCovering.SierpinskiProblem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.SierpinskiCovering
+import Mathlib
 
-/-- A composite number is not prime. -/
+namespace Brockian
+namespace SierpinskiCovering
 
-theorem not_prime_78557 (n : ℕ) (hn : 1 ≤ n) : ¬ Nat.Prime (78557 * 2 ^ n + 1) :=
-  ((isSierpinskiNumber_iff 78557).mp isSierpinskiNumber_78557).2.2 n hn
+/-- A *Sierpiński number* is an odd natural number `k` such that `k * 2 ^ n + 1` is composite
+(never prime) for every `n ≥ 1`. -/
 
-/-- **Sierpiński's theorem.** The set of Sierpiński numbers is infinite. -/
+theorem not_prime_78557 (n : ℕ) : ¬ Nat.Prime (78557 * 2 ^ n + 1) := by
+  obtain ⟨p, hmem, hp36, hpr⟩ := covering_table (n % 36) (Nat.mod_lt _ (by norm_num))
+  have hdvd : p ∣ 78557 * 2 ^ n + 1 := by
+    have h := dvd_of_covering p (n % 36) (n / 36) hp36 hpr
+    rwa [Nat.div_add_mod' n 36, Nat.mul_comm (n / 36) 36] at h
+    -- (the rewrite turns `36 * (n / 36) + n % 36` into `n`)
+  have hple : p ≤ 73 := by
+    fin_cases hmem <;> norm_num
+  have hp1 : p ≠ 1 := by
+    fin_cases hmem <;> norm_num
+  intro hN
+  rcases hN.eq_one_or_self_of_dvd p hdvd with h | h
+  · exact hp1 h
+  · have h2 : (1 : ℕ) ≤ 2 ^ n := Nat.one_le_two_pow
+    have : 78557 * 2 ^ n + 1 ≥ 78558 := by nlinarith
+    omega
+
+/-- **The Sierpiński problem (Selfridge's covering).**  `78557` is a Sierpiński number:
+it is odd, and `78557 * 2 ^ n + 1` is composite for every `n ≥ 1`.  The proof uses the
+covering set of primes `{3, 5, 7, 13, 19, 37, 73}`, each dividing `2 ^ 36 - 1`. -/

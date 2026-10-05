@@ -1,10 +1,3 @@
-/-
-# Uhlmann Fidelity
-Category: Frontier Qi
-Target: QI.uhlmann_fidelity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -13,114 +6,96 @@ Category: Frontier Qi
 Target: QI.uhlmann_fidelity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-This file proves **Uhlmann's theorem**: for positive semidefinite states `ρ`, `σ` on `ℂ^n`,
-the fidelity `F(ρ, σ) = Tr √(√ρ σ √ρ)` is the *maximal* overlap `|⟪ψ, φ⟫|` taken over all
-purifications `ψ` of `ρ` and `φ` of `σ` in `ℂ^n ⊗ ℂ^n`, where a purification of `ρ` is a
-vector whose reduced density matrix (partial trace over the second factor) is `ρ`.
-
-Neither quantum fidelity nor purifications (nor even the polar decomposition of a matrix)
-are available in Mathlib, so everything is developed here from scratch:
-
-* `QI.abs_trace_conjTranspose_mul_le`: Cauchy–Schwarz/AM–GM for the Hilbert–Schmidt
-  inner product, `|Tr (Aᴴ B)| ≤ (‖A‖₂² + ‖B‖₂²) / 2`.
-* `QI.exists_unitary_polar`: the polar decomposition `M = √(M Mᴴ) U` with `U` unitary,
-  obtained by extending the isometry `√(M Mᴴ) x ↦ Mᴴ x` to a unitary of `ℂ^n`.
-* `QI.norm_trace_mul_unitary_le`: `|Tr (Q Y)| ≤ Tr Q` for `Q ≥ 0` and `Y` unitary.
-* `QI.uhlmann_fidelity_matrix` and `QI.uhlmann_fidelity`: Uhlmann's theorem, in matrix
-  form and in terms of purifying vectors.
 -/
 
-open scoped MatrixOrder ComplexOrder BigOperators
+/-!
+## Overview
+
+We work with finite-dimensional quantum systems, a state on `ℂⁿ` being described by a positive
+semidefinite matrix `ρ : Matrix n n ℂ`.  Its fidelity with a second state `σ` is
+
+`F(ρ, σ) = Tr √(√ρ σ √ρ)`,
+
+which is `QI.fidelity`.
+
+A *purification* of `ρ` in the doubled system `ℂⁿ ⊗ ℂⁿ` is a vector `u : n × n → ℂ` whose reduced
+density matrix (partial trace over the second factor) is `ρ`; this is `QI.reducedDensity`.
+`QI.uhlmann_fidelity` is Uhlmann's theorem: `F(ρ, σ)` is the *greatest* value of the overlap
+`|⟪u, v⟫|` as `u` ranges over the purifications of `ρ` and `v` over those of `σ`.
+
+The proof goes through the polar decomposition of a matrix (`QI.exists_unitary_polar`, proved
+here from scratch by extending a linear isometry defined on a subspace) and the variational
+characterisation of the trace norm (`QI.isGreatest_traceNorm`).
+-/
+
+open scoped InnerProductSpace MatrixOrder ComplexOrder BigOperators
 open Matrix
 
 namespace QI
 
-variable {n : Type*} [Fintype n] [DecidableEq n]
+/-! ### An auxiliary extension lemma for linear isometries -/
 
-/-! ## The Hilbert–Schmidt (Frobenius) inner product -/
-
-/-- The squared Frobenius (Hilbert–Schmidt) norm of a matrix. -/
+/-- If `f g : E →ₗ[ℂ] E` satisfy `‖g x‖ = ‖f x‖` for all `x`, then there is a linear isometry `V`
+of `E` with `V ∘ f = g`.  This is the key step in the polar decomposition. -/
 
 theorem exists_unitary_polar (M : Matrix n n ℂ) :
-    ∃ U : Matrix n n ℂ, U * Uᴴ = 1 ∧ M = CFC.sqrt (M * Mᴴ) * U := by
-  have hPSD : (M * Mᴴ).PosSemidef := Matrix.posSemidef_self_mul_conjTranspose M
+    ∃ U ∈ Matrix.unitaryGroup n ℂ, M = CFC.sqrt (M * Mᴴ) * U := by
+  set E := EuclideanSpace ℂ n
   set P := CFC.sqrt (M * Mᴴ) with hPdef
-  have hPP : P * P = M * Mᴴ := CFC.sqrt_mul_sqrt_self _ hPSD.nonneg
-  have hPH : Pᴴ = P := (CFC.sqrt_nonneg (M * Mᴴ)).posSemidef.isHermitian
-  set p := Matrix.toEuclideanLin P with hpdef
-  set m := Matrix.toEuclideanLin Mᴴ with hmdef
-  have hadjp : LinearMap.adjoint p = p := by
-    rw [hpdef, ← Matrix.toEuclideanLin_conjTranspose_eq_adjoint, hPH]
-  have hadjm : LinearMap.adjoint m = Matrix.toEuclideanLin M := by
-    rw [hmdef, ← Matrix.toEuclideanLin_conjTranspose_eq_adjoint, Matrix.conjTranspose_conjTranspose]
-  -- `√(M Mᴴ)` and `Mᴴ` have the same "length function", hence the same kernel
-  have hnorm : ∀ x, ‖p x‖ = ‖m x‖ := by
+  have hMM : (M * Mᴴ).PosSemidef := Matrix.posSemidef_self_mul_conjTranspose M
+  have hP : P.PosSemidef := (CFC.sqrt_nonneg (M * Mᴴ)).posSemidef
+  have hPP : P * P = M * Mᴴ := CFC.sqrt_mul_sqrt_self _ (ha := hMM.nonneg)
+  have hPh : Pᴴ = P := hP.isHermitian
+  set T := Matrix.toEuclideanCLM (𝕜 := ℂ) (n := n) with hT
+  set p : E →L[ℂ] E := T P with hp
+  set a : E →L[ℂ] E := T M with ha
+  have hTM : T Mᴴ = star a := by rw [ha, ← map_star, Matrix.star_eq_conjTranspose]
+  have hstar : star p * p = a * star a := by
+    rw [hp, ha, ← map_star, ← map_star, ← map_mul, ← map_mul]
+    congr 1
+    rw [Matrix.star_eq_conjTranspose, Matrix.star_eq_conjTranspose, hPh, hPP]
+  have hnormeq : ∀ x : E, ‖(star a) x‖ = ‖p x‖ := by
     intro x
-    have hcomp : p (p x) = Matrix.toEuclideanLin M (m x) := by
-      have h1 : Matrix.toEuclideanLin (P * P) = p.comp p := Matrix.toLpLin_mul 2 2 2 P P
-      have h2 : Matrix.toEuclideanLin (M * Mᴴ) = (Matrix.toEuclideanLin M).comp m :=
-        Matrix.toLpLin_mul 2 2 2 M Mᴴ
-      have h3 := hPP ▸ h1
-      rw [h2] at h3
-      exact congrArg (fun L => L x) h3.symm
-    have hinner : (inner (𝕜 := ℂ) (p x) (p x)) = inner (𝕜 := ℂ) (m x) (m x) := by
-      rw [← LinearMap.adjoint_inner_left p x (p x), hadjp, hcomp, ← hadjm,
-        LinearMap.adjoint_inner_left m x (m x)]
-    rw [norm_eq_sqrt_re_inner (𝕜 := ℂ), norm_eq_sqrt_re_inner (𝕜 := ℂ), hinner]
-  have hker : LinearMap.ker p = LinearMap.ker m := by
-    ext x
-    simp only [LinearMap.mem_ker]
+    have h1 : ⟪(star p * p) x, x⟫_ℂ = ⟪p x, p x⟫_ℂ := by
+      rw [ContinuousLinearMap.mul_apply, ContinuousLinearMap.star_eq_adjoint,
+        ContinuousLinearMap.adjoint_inner_left]
+    have h2 : ⟪(a * star a) x, x⟫_ℂ = ⟪(star a) x, (star a) x⟫_ℂ := by
+      rw [ContinuousLinearMap.mul_apply]
+      have h := ContinuousLinearMap.adjoint_inner_left (𝕜 := ℂ) (star a) x ((star a) x)
+      rw [ContinuousLinearMap.star_eq_adjoint] at h ⊢
+      rwa [ContinuousLinearMap.adjoint_adjoint] at h
+    have h3 : ⟪(star a) x, (star a) x⟫_ℂ = ⟪p x, p x⟫_ℂ := by rw [← h1, ← h2, hstar]
+    rw [inner_self_eq_norm_sq_to_K, inner_self_eq_norm_sq_to_K] at h3
+    have h4 : ‖(star a) x‖ ^ 2 = ‖p x‖ ^ 2 := by exact_mod_cast h3
+    nlinarith [norm_nonneg ((star a) x), norm_nonneg (p x)]
+  obtain ⟨V, hV⟩ := exists_linearIsometry_comp_eq (E := E) p.toLinearMap (star a).toLinearMap
+    (by intro x; exact hnormeq x)
+  simp only [ContinuousLinearMap.coe_coe] at hV
+  set e : E ≃ₗᵢ[ℂ] E := V.toLinearIsometryEquiv rfl with he
+  set u : E →L[ℂ] E := (e : E →L[ℂ] E) with hu
+  have hue : ∀ x, u x = V x := fun x =>
+    congrFun (LinearIsometry.coe_toLinearIsometryEquiv V rfl) x
+  have huu : u ∈ unitary (E →L[ℂ] E) := by
     constructor
-    · intro hx
-      exact norm_eq_zero.1 (by rw [← hnorm x, hx, norm_zero])
-    · intro hx
-      exact norm_eq_zero.1 (by rw [hnorm x, hx, norm_zero])
-  -- the isometry `P x ↦ Mᴴ x` on the range of `P`
-  set f₀ := Submodule.liftQ (LinearMap.ker p) m (le_of_eq hker) with hf₀
-  set f : LinearMap.range p →ₗ[ℂ] EuclideanSpace ℂ n :=
-    f₀.comp (p.quotKerEquivRange.symm : LinearMap.range p →ₗ[ℂ] _) with hfdef
-  have hfapp : ∀ x : EuclideanSpace ℂ n, f ⟨p x, ⟨x, rfl⟩⟩ = m x := by
-    intro x
-    have h1 : p.quotKerEquivRange.symm ⟨p x, ⟨x, rfl⟩⟩ = (LinearMap.ker p).mkQ x :=
-      LinearMap.quotKerEquivRange_symm_apply_image p x ⟨x, rfl⟩
-    simp only [hfdef, LinearMap.comp_apply, LinearEquiv.coe_coe, h1, hf₀,
-      Submodule.mkQ_apply, Submodule.liftQ_apply]
-  have hf : ∀ y : LinearMap.range p, ‖f y‖ = ‖y‖ := by
-    rintro ⟨y, hy⟩
-    obtain ⟨x, rfl⟩ := hy
-    rw [hfapp x]
-    exact (hnorm x).symm
-  set L : LinearMap.range p →ₗᵢ[ℂ] EuclideanSpace ℂ n := ⟨f, hf⟩ with hL
-  set g := L.extend with hgdef
-  have hg : ∀ x, g (p x) = m x := by
-    intro x
-    have h := L.extend_apply ⟨p x, ⟨x, rfl⟩⟩
-    rw [hgdef]
-    simpa [hL, hfapp x] using h
-  set G := Matrix.toEuclideanLin.symm g.toLinearMap with hGdef
-  have hGL : Matrix.toEuclideanLin G = g.toLinearMap := by
-    rw [hGdef, LinearEquiv.apply_symm_apply]
-  have hGP : G * P = Mᴴ := by
-    apply Matrix.toEuclideanLin.injective
-    rw [Matrix.toLpLin_mul 2 2 2 G P, ← hmdef]
-    refine LinearMap.ext fun x => ?_
-    simp only [LinearMap.comp_apply, hGL]
-    exact hg x
-  have hGG : Gᴴ * G = 1 := by
-    apply Matrix.toEuclideanLin.injective
-    rw [Matrix.toLpLin_mul 2 2 2 Gᴴ G, Matrix.toEuclideanLin_conjTranspose_eq_adjoint, hGL]
-    refine LinearMap.ext fun x => ?_
-    apply ext_inner_right ℂ
-    intro y
-    rw [LinearMap.comp_apply, LinearMap.adjoint_inner_left]
-    show inner ℂ (g x) (g y) = _
-    rw [g.inner_map_map]
-    simp
-  refine ⟨Gᴴ, ?_, ?_⟩
-  · rw [Matrix.conjTranspose_conjTranspose, hGG]
-  · have h := congrArg Matrix.conjTranspose hGP
-    rw [Matrix.conjTranspose_mul, hPH, Matrix.conjTranspose_conjTranspose] at h
-    exact h.symm
+    · ext x; simp [hu, LinearIsometryEquiv.star_eq_symm]
+    · ext x; simp [hu, LinearIsometryEquiv.star_eq_symm]
+  have hup : u * p = star a := by
+    ext x
+    rw [ContinuousLinearMap.mul_apply, hue, hV x]
+  set W : Matrix n n ℂ := T.symm u with hW
+  have hWu : W ∈ Matrix.unitaryGroup n ℂ := by
+    rw [Matrix.mem_unitaryGroup_iff', hW, ← map_star, ← map_mul, huu.1, map_one]
+  have hWP : W * P = Mᴴ := by
+    have h6 : W * P = T.symm (u * p) := by
+      rw [map_mul, hW, hp, T.symm_apply_apply]
+    rw [h6, hup, ← hTM, T.symm_apply_apply]
+  refine ⟨Wᴴ, ?_, ?_⟩
+  · rw [← Matrix.star_eq_conjTranspose]
+    exact Unitary.star_mem hWu
+  · have h7 := congrArg Matrix.conjTranspose hWP
+    rw [Matrix.conjTranspose_mul, hPh, Matrix.conjTranspose_conjTranspose] at h7
+    exact h7.symm
 
-/-- For a positive semidefinite `Q` and a unitary `Y`, `|Tr (Q Y)| ≤ Tr Q`. -/
+/-! ### Cauchy–Schwarz for the Frobenius inner product -/
+
+omit [DecidableEq n] in

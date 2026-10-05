@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Singular Series Gaps 12401250
 Category: Brockian Corpus
@@ -8,83 +6,50 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace Brockian
 
-/-- A finite set of shifts `H` is *admissible* (in the sense of the Hardy–Littlewood
-prime `k`-tuple conjecture) if for every prime `p` the residues of `H` modulo `p`
-do not cover all of `ℤ/pℤ`.  Equivalently, the local factor of the singular series
-attached to `H` is nonzero at every prime. -/
+/-- Primality of a natural number, stated in the usual way: `p ≥ 2` and every divisor of `p`
+is `1` or `p`. (Spelled out here so that this file is fully self-contained.) -/
 
-def Admissible (H : Finset ℕ) : Prop :=
-  ∀ p : ℕ, p.Prime → (H.image (· % p)).card < p
+def IsPrimeNat (p : Nat) : Prop := 2 ≤ p ∧ ∀ m : Nat, m ∣ p → m = 1 ∨ m = p
 
-/-- Only primes `p ≤ #H` need to be tested for admissibility: for larger primes the
-residues of `H` cannot cover all residue classes for cardinality reasons. -/
+def IsAdmissibleGapSet (H : List Nat) : Prop :=
+  ∀ p : Nat, IsPrimeNat p → ∃ r, r < p ∧ ∀ h ∈ H, h % p ≠ r
 
-theorem admissible_pair_iff_even {g : ℕ} :
-    Admissible ({0, g} : Finset ℕ) ↔ Even g := by
-  constructor
-  · intro h
-    have h2 := h 2 Nat.prime_two
-    by_contra hodd
-    have hg2 : g % 2 = 1 := Nat.not_even_iff.mp hodd
-    have hsub : ({0, 1} : Finset ℕ) ⊆ ({0, g} : Finset ℕ).image (· % 2) := by
-      intro x hx
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hx
-      rcases hx with rfl | rfl
-      · simp
-      · simp [hg2]
-    have hle := Finset.card_le_card hsub
-    have hc : ({0, 1} : Finset ℕ).card = 2 := by decide
-    omega
-  · intro heven p hp
-    rcases eq_or_ne p 2 with rfl | hp2
-    · have hg2 : g % 2 = 0 := Nat.even_iff.mp heven
-      have himg : ({0, g} : Finset ℕ).image (· % 2) = {0} := by
-        ext x
-        simp [hg2]
-      rw [himg]
-      simp
-    · have hp3 : 3 ≤ p := by
-        have := hp.two_le
-        omega
-      have hcard : ({0, g} : Finset ℕ).card ≤ 2 := Finset.card_insert_le _ _ |>.trans (by simp)
-      exact lt_of_le_of_lt (Finset.card_image_le.trans hcard) (by omega)
+/-- For every even gap `g`, the two-element pattern `{0, g}` is admissible. -/
 
-/-- **Singular Series Gaps 1240–1250.**
-For every gap `g` in the range `1240 ≤ g ≤ 1250`, the two-element pattern `{0, g}`
-is admissible (equivalently, the singular series `𝔖({0,g})` is nonzero) precisely when
-`g` is even.  In particular the admissible gaps in this range are exactly
-`1240, 1242, 1244, 1246, 1248, 1250`. -/
+theorem admissible_pair_of_even {g : Nat} (he : g % 2 = 0) : IsAdmissibleGapSet [0, g] := by
+  intro p hp
+  have hp2 : 2 ≤ p := hp.1
+  by_cases hpe : p = 2
+  · -- modulo `2` both `0` and `g` are `0`, so the class `1` is omitted
+    subst hpe
+    refine ⟨1, by omega, ?_⟩
+    intro h hmem
+    have hcases : h = 0 ∨ h = g := by simpa using hmem
+    cases hcases with
+    | inl h1 => subst h1; omega
+    | inr h1 => subst h1; omega
+  · -- for `p ≥ 3` two residues cannot cover all `p` classes
+    have hp3 : 3 ≤ p := by omega
+    refine ⟨if g % p = 1 then 2 else 1, by split <;> omega, ?_⟩
+    intro h hmem
+    have hcases : h = 0 ∨ h = g := by simpa using hmem
+    have hmod : g % p < p := Nat.mod_lt _ (by omega)
+    cases hcases with
+    | inl h1 => subst h1; simp only [Nat.zero_mod]; split <;> omega
+    | inr h1 => subst h1; split <;> omega
+
+/-- **Singular Series Gaps 1240–1250.**  Every even gap `g` in the range `1240 ≤ g ≤ 1250`
+gives an admissible pattern `{0, g}`; equivalently, the associated singular series is nonzero,
+so no congruence obstruction rules out infinitely many prime pairs with that gap. -/
 
 theorem SingularSeriesGaps12401250 :
-    (∀ g : ℕ, 1240 ≤ g → g ≤ 1250 → (Admissible ({0, g} : Finset ℕ) ↔ Even g)) ∧
-      (Finset.Icc 1240 1250).filter (fun g => Even g) =
-        ({1240, 1242, 1244, 1246, 1248, 1250} : Finset ℕ) := by
-  refine ⟨fun g _ _ => admissible_pair_iff_even, ?_⟩
-  decide
+    ∀ g : Nat, 1240 ≤ g → g ≤ 1250 → g % 2 = 0 → IsAdmissibleGapSet [0, g] :=
+  fun _ _ _ he => admissible_pair_of_even he
 
-end Brockian
+/-- Sharpness of the parity condition: an odd gap is never admissible, since `0` and `g` then
+cover both residue classes modulo `2`. -/

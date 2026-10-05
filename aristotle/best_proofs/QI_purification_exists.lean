@@ -1,32 +1,192 @@
 /-
-/-!
 # Purification Exists
 Category: Frontier Qi
 Target: QI.purification_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean requires `import` to be the first command, so the mandated header above is kept as a
--- plain comment and repeated as the module docstring below.)
 -/
 
 import Mathlib
 
-/-!
-# Purification Exists
-Category: Frontier Qi
-Target: QI.purification_exists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+set_option maxHeartbeats 1000000
+
+open scoped MatrixOrder ComplexOrder Kronecker InnerProductSpace
+open Matrix
+
+namespace QI
+
+variable {n m : ℕ}
+
+/-- The coefficient matrix of a vector `psi` of the tensor product `ℂ^n ⊗ ℂ^m`, whose
+coordinates are indexed by `Fin n × Fin m`. -/
+def coeffMatrix (psi : Fin n × Fin m → ℂ) : Matrix (Fin n) (Fin m) ℂ :=
+  Matrix.of fun i k => psi (i, k)
+
+/-- The partial trace over the ancilla factor `ℂ^m` of the pure state `|psi⟩⟨psi|`, where
+`psi` is a vector of `ℂ^n ⊗ ℂ^m`.  This is the *reduced state* of `psi` on the first
+factor. -/
+noncomputable def ptrace (psi : Fin n × Fin m → ℂ) : Matrix (Fin n) (Fin n) ℂ :=
+  Matrix.of fun i j => ∑ k, psi (i, k) * (starRingEnd ℂ) (psi (j, k))
+
+lemma ptrace_eq_mul_conjTranspose (psi : Fin n × Fin m → ℂ) :
+    ptrace psi = coeffMatrix psi * (coeffMatrix psi)ᴴ := by
+  ext i j
+  simp [ptrace, coeffMatrix, Matrix.mul_apply, Matrix.conjTranspose_apply]
+
+/-- If two `n × m` matrices have the same Gram matrix `A * Aᴴ`, then they differ by a
+unitary matrix acting on the right. -/
+theorem exists_unitary_of_mul_conjTranspose_eq (A B : Matrix (Fin n) (Fin m) ℂ)
+    (h : A * Aᴴ = B * Bᴴ) :
+    ∃ U : Matrix (Fin m) (Fin m) ℂ, U ∈ Matrix.unitaryGroup (Fin m) ℂ ∧ B = A * U := by
+  classical
+  set f : EuclideanSpace ℂ (Fin n) →ₗ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    Matrix.toEuclideanLin Aᴴ with hf
+  set g : EuclideanSpace ℂ (Fin n) →ₗ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    Matrix.toEuclideanLin Bᴴ with hg
+  -- The Gram matrix computes the inner products of the images.
+  have hgram : ∀ (C : Matrix (Fin n) (Fin m) ℂ) (x y : EuclideanSpace ℂ (Fin n)),
+      ⟪Matrix.toEuclideanLin Cᴴ x, Matrix.toEuclideanLin Cᴴ y⟫_ℂ
+        = ⟪x, Matrix.toEuclideanLin (C * Cᴴ) y⟫_ℂ := by
+    intro C x y
+    rw [Matrix.toLpLin_mul_same, Matrix.toEuclideanLin_conjTranspose_eq_adjoint,
+      LinearMap.adjoint_inner_left]
+    rfl
+  have hnorm : ∀ x, ‖f x‖ = ‖g x‖ := by
+    intro x
+    have hx : ⟪f x, f x⟫_ℂ = ⟪g x, g x⟫_ℂ := by rw [hf, hg, hgram, hgram, h]
+    rw [norm_eq_sqrt_re_inner (𝕜 := ℂ), norm_eq_sqrt_re_inner (𝕜 := ℂ), hx]
+  -- Hence `f x ↦ g x` is a well-defined isometry from the range of `f`.
+  have hkerle : LinearMap.ker f ≤ LinearMap.ker g := by
+    intro x hx
+    have hfx : f x = 0 := hx
+    have hgx : ‖g x‖ = 0 := by rw [← hnorm, hfx, norm_zero]
+    simpa [LinearMap.mem_ker] using norm_eq_zero.mp hgx
+  set L0 : (LinearMap.range f) →ₗ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    ((LinearMap.ker f).liftQ g hkerle) ∘ₗ
+      (f.quotKerEquivRange.symm : LinearMap.range f →ₗ[ℂ] _) with hL0def
+  have hL0 : ∀ x, L0 ⟨f x, LinearMap.mem_range_self f x⟩ = g x := by
+    intro x
+    rw [hL0def]
+    simp only [LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_coe,
+      LinearMap.quotKerEquivRange_symm_apply_image, Submodule.mkQ_apply,
+      Submodule.liftQ_apply]
+  have hL0norm : ∀ y : LinearMap.range f, ‖L0 y‖ = ‖y‖ := by
+    rintro ⟨y, hy⟩
+    obtain ⟨x, rfl⟩ := hy
+    rw [hL0, ← hnorm]
+    rfl
+  set L : (LinearMap.range f) →ₗᵢ[ℂ] EuclideanSpace ℂ (Fin m) :=
+    { toLinearMap := L0, norm_map' := hL0norm } with hLdef
+  -- Extend it to an isometry of the whole ancilla space.
+  set W := L.extend with hWdef
+  have hW : ∀ x, W (f x) = g x := by
+    intro x
+    have hx := L.extend_apply ⟨f x, LinearMap.mem_range_self f x⟩
+    rw [hWdef]
+    rw [show ((⟨f x, LinearMap.mem_range_self f x⟩ : LinearMap.range f) :
+      EuclideanSpace ℂ (Fin m)) = f x from rfl] at hx
+    rw [hx, hLdef]
+    exact hL0 x
+  -- The matrix of that isometry is unitary and conjugates `Aᴴ` into `Bᴴ`.
+  set U0 : Matrix (Fin m) (Fin m) ℂ := Matrix.toEuclideanLin.symm W.toLinearMap with hU0def
+  have hU0 : Matrix.toEuclideanLin U0 = W.toLinearMap := by
+    rw [hU0def, LinearEquiv.apply_symm_apply]
+  have hU0mem : U0 ∈ Matrix.unitaryGroup (Fin m) ℂ := by
+    rw [Matrix.mem_unitaryGroup_iff']
+    apply Matrix.toEuclideanLin.injective
+    rw [Matrix.toLpLin_mul_same, Matrix.toLpLin_one]
+    have hstar : (star U0 : Matrix (Fin m) (Fin m) ℂ) = U0ᴴ := rfl
+    rw [hstar, Matrix.toEuclideanLin_conjTranspose_eq_adjoint, hU0]
+    refine LinearMap.ext fun x => ?_
+    apply ext_inner_left ℂ
+    intro y
+    rw [LinearMap.comp_apply, LinearMap.adjoint_inner_right, LinearMap.id_apply]
+    exact W.inner_map_map y x
+  have hmat : U0 * Aᴴ = Bᴴ := by
+    apply Matrix.toEuclideanLin.injective
+    rw [Matrix.toLpLin_mul_same, hU0]
+    exact LinearMap.ext fun x => hW x
+  refine ⟨U0ᴴ, Unitary.star_mem hU0mem, ?_⟩
+  have hcT := congrArg Matrix.conjTranspose hmat
+  rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose,
+    Matrix.conjTranspose_conjTranspose] at hcT
+  exact hcT.symm
+
+/-- **Purification.**  Every mixed state `rho` on `ℂ^n` (a positive semidefinite matrix of
+trace one) admits a purification: a unit vector `psi` of `ℂ^n ⊗ ℂ^n` whose reduced state on
+the first factor is `rho`.  Moreover a purification is unique up to a unitary acting on the
+ancilla: any two vectors of `ℂ^n ⊗ ℂ^m` whose reduced state is `rho` are related by
+`1 ⊗ U` for some unitary `U` of the ancilla `ℂ^m`. -/
+theorem purification_exists (rho : Matrix (Fin n) (Fin n) ℂ)
+    (hpos : rho.PosSemidef) (htr : rho.trace = 1) :
+    (∃ psi : Fin n × Fin n → ℂ, ptrace psi = rho ∧ ∑ p, ‖psi p‖ ^ 2 = 1) ∧
+      (∀ (m : ℕ) (psi phi : Fin n × Fin m → ℂ), ptrace psi = rho → ptrace phi = rho →
+        ∃ U : Matrix (Fin m) (Fin m) ℂ, U ∈ Matrix.unitaryGroup (Fin m) ℂ ∧
+          phi = ((1 : Matrix (Fin n) (Fin n) ℂ) ⊗ₖ U) *ᵥ psi) := by
+  classical
+  constructor
+  · -- Existence: take the square root of `rho`.
+    set S : Matrix (Fin n) (Fin n) ℂ := CFC.sqrt rho with hS
+    have hSpos : S.PosSemidef := (CFC.sqrt_nonneg rho).posSemidef
+    have hSS : S * S = rho := CFC.sqrt_mul_sqrt_self rho hpos.nonneg
+    refine ⟨fun p => S p.1 p.2, ?_, ?_⟩
+    · have hc : coeffMatrix (fun p : Fin n × Fin n => S p.1 p.2) = S := rfl
+      rw [ptrace_eq_mul_conjTranspose, hc, hSpos.isHermitian.eq, hSS]
+    · have h1 : ((∑ p : Fin n × Fin n, ‖S p.1 p.2‖ ^ 2 : ℝ) : ℂ) = 1 := by
+        push_cast
+        rw [← htr, ← hSS, Matrix.trace]
+        simp only [Matrix.diag_apply, Matrix.mul_apply]
+        rw [Fintype.sum_prod_type]
+        refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun k _ => ?_
+        rw [← Complex.mul_conj' (S i k)]
+        congr 1
+        exact hSpos.isHermitian.apply k i
+      exact_mod_cast h1
+  · -- Uniqueness up to a unitary on the ancilla.
+    intro m psi phi hpsi hphi
+    have hgram : coeffMatrix psi * (coeffMatrix psi)ᴴ
+        = coeffMatrix phi * (coeffMatrix phi)ᴴ := by
+      rw [← ptrace_eq_mul_conjTranspose, ← ptrace_eq_mul_conjTranspose, hpsi, hphi]
+    obtain ⟨V, hV, hN⟩ :=
+      exists_unitary_of_mul_conjTranspose_eq (coeffMatrix psi) (coeffMatrix phi) hgram
+    refine ⟨Vᵀ, ?_, ?_⟩
+    · rw [Matrix.mem_unitaryGroup_iff']
+      have h1 : (star (Vᵀ) : Matrix (Fin m) (Fin m) ℂ) * Vᵀ = ((V * star V)ᵀ) := by
+        ext a b
+        simp [Matrix.mul_apply, Matrix.transpose_apply, Matrix.star_eq_conjTranspose,
+          Matrix.conjTranspose_apply, mul_comm]
+      rw [h1, Matrix.mem_unitaryGroup_iff.mp hV, Matrix.transpose_one]
+    · funext p
+      obtain ⟨i, k⟩ := p
+      rw [Matrix.mulVec]
+      simp only [dotProduct, Matrix.kroneckerMap_apply]
+      rw [Fintype.sum_prod_type]
+      have hrow : ∀ j : Fin n,
+          ∑ l : Fin m, (1 : Matrix (Fin n) (Fin n) ℂ) i j * Vᵀ k l * psi (j, l)
+            = (1 : Matrix (Fin n) (Fin n) ℂ) i j * ∑ l : Fin m, V l k * psi (j, l) := by
+        intro j
+        rw [Finset.mul_sum]
+        exact Finset.sum_congr rfl fun l _ => by simp [Matrix.transpose_apply]; ring
+      rw [Finset.sum_congr rfl fun j _ => hrow j, Finset.sum_eq_single i]
+      · have hcol : ∑ l : Fin m, V l k * psi (i, l) = (coeffMatrix psi * V) i k := by
+          simp only [Matrix.mul_apply, coeffMatrix, Matrix.of_apply]
+          exact Finset.sum_congr rfl fun l _ => by ring
+        rw [Matrix.one_apply_eq, one_mul, hcol, ← hN]
+        rfl
+      · intro j _ hj
+        rw [Matrix.one_apply_ne (Ne.symm hj), zero_mul]
+      · intro hi
+        exact absurd (Finset.mem_univ i) hi
+
+end QI
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped ComplexOrder
-open scoped MatrixOrder
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -36,183 +196,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
-
-namespace QI
-
-open Matrix
-
-section Defs
-
-variable {n m : Type*}
-
-/-- The matrix `n × m` representation of a vector `ψ` of the tensor product `H ⊗ K`,
-where `H` has orthonormal basis indexed by `n` and `K` has orthonormal basis indexed by `m`. -/
-noncomputable def toMat (psi : n × m → ℂ) : Matrix n m ℂ := Matrix.of fun i k => psi (i, k)
-
-/-- The reduced density matrix of the pure state `|ψ⟩⟨ψ|` on `H ⊗ K`, obtained by taking the
-partial trace over the ancilla space `K`:
-`(ρ_ψ) i j = ∑ k, ψ (i,k) * conj (ψ (j,k))`. -/
-noncomputable def reduced [Fintype m] (psi : n × m → ℂ) : Matrix n n ℂ :=
-  Matrix.of fun i j => ∑ k, psi (i, k) * starRingEnd ℂ (psi (j, k))
-
-theorem reduced_eq [Fintype m] (psi : n × m → ℂ) :
-    reduced psi = toMat psi * (toMat psi)ᴴ := by
-  ext i j
-  simp [reduced, toMat, Matrix.mul_apply, Matrix.conjTranspose_apply]
-
-/-- The squared norm of the vector `ψ` equals the trace of the corresponding reduced state. -/
-theorem sum_norm_sq_eq_trace [Fintype n] [Fintype m] (A : Matrix n m ℂ) :
-    ((∑ p : n × m, ‖A p.1 p.2‖ ^ 2 : ℝ) : ℂ) = (A * Aᴴ).trace := by
-  push_cast
-  rw [Matrix.trace, Fintype.sum_prod_type]
-  refine Finset.sum_congr rfl fun i _ => ?_
-  simp only [Matrix.diag_apply, Matrix.mul_apply, Matrix.conjTranspose_apply]
-  exact Finset.sum_congr rfl fun k _ => by rw [← Complex.mul_conj' (A i k)]; simp
-
-end Defs
-
-/-- If two linear maps `f g : E →ₗ[ℂ] F` into a finite dimensional inner product space have the
-same "length function" `‖f x‖ = ‖g x‖`, then `g` is obtained from `f` by composing with a linear
-isometry of `F`.  (This is the abstract form of the uniqueness of purifications.) -/
-theorem exists_isometry_comp_of_norm_eq {E F : Type*} [NormedAddCommGroup E]
-    [InnerProductSpace ℂ E] [NormedAddCommGroup F] [InnerProductSpace ℂ F]
-    [FiniteDimensional ℂ F] (f g : E →ₗ[ℂ] F) (h : ∀ x, ‖f x‖ = ‖g x‖) :
-    ∃ u : F →ₗᵢ[ℂ] F, ∀ x, u (f x) = g x := by
-  have hker : LinearMap.ker f ≤ LinearMap.ker g := by
-    intro x hx
-    have hx0 : f x = 0 := LinearMap.mem_ker.mp hx
-    have : ‖g x‖ = 0 := by rw [← h x, hx0, norm_zero]
-    exact LinearMap.mem_ker.mpr (norm_eq_zero.mp this)
-  set q : (E ⧸ LinearMap.ker f) →ₗ[ℂ] F := (LinearMap.ker f).liftQ g hker with hq
-  set e : (E ⧸ LinearMap.ker f) ≃ₗ[ℂ] (LinearMap.range f) := f.quotKerEquivRange with he
-  have hsymm : ∀ x : E, e.symm ⟨f x, LinearMap.mem_range_self f x⟩
-      = Submodule.Quotient.mk x := by
-    intro x
-    apply e.injective
-    rw [LinearEquiv.apply_symm_apply, he]
-    exact Subtype.ext (LinearMap.quotKerEquivRange_apply_mk f x).symm
-  set L₀ : (LinearMap.range f) →ₗ[ℂ] F := q ∘ₗ (e.symm : (LinearMap.range f) →ₗ[ℂ] _) with hL₀
-  have hval : ∀ x : E, L₀ ⟨f x, LinearMap.mem_range_self f x⟩ = g x := by
-    intro x
-    simp only [hL₀, LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_coe, hsymm x, hq]
-    exact (LinearMap.ker f).liftQ_apply g x
-  have hnorm : ∀ y : (LinearMap.range f), ‖L₀ y‖ = ‖(y : F)‖ := by
-    rintro ⟨y, x, rfl⟩
-    rw [hval x, ← h x]
-  refine ⟨(⟨L₀, hnorm⟩ : (LinearMap.range f) →ₗᵢ[ℂ] F).extend, fun x => ?_⟩
-  rw [(⟨L₀, hnorm⟩ : (LinearMap.range f) →ₗᵢ[ℂ] F).extend_apply
-      ⟨f x, LinearMap.mem_range_self f x⟩]
-  exact hval x
-
-/-- A linear isometry of `EuclideanSpace ℂ m` is given by multiplication by a unitary matrix. -/
-theorem exists_unitary_matrix_of_isometry {m : Type*} [Fintype m] [DecidableEq m]
-    (u : EuclideanSpace ℂ m →ₗᵢ[ℂ] EuclideanSpace ℂ m) :
-    ∃ U : Matrix m m ℂ, U ∈ Matrix.unitaryGroup m ℂ ∧
-      ∀ v : EuclideanSpace ℂ m, U *ᵥ v.ofLp = (u v).ofLp := by
-  set U : Matrix m m ℂ := Matrix.of fun i j => (u (EuclideanSpace.single j (1:ℂ))).ofLp i with hU
-  have hdecomp : ∀ v : EuclideanSpace ℂ m,
-      v = ∑ j, v.ofLp j • (EuclideanSpace.single j (1:ℂ)) := by
-    intro v
-    ext i
-    simp [Pi.single_apply, Finset.sum_ite_eq]
-  have hmul : ∀ v : EuclideanSpace ℂ m, U *ᵥ v.ofLp = (u v).ofLp := by
-    intro v
-    funext i
-    conv_rhs => rw [hdecomp v]
-    rw [map_sum]
-    simp [Matrix.mulVec, dotProduct, hU, mul_comm]
-  refine ⟨U, ?_, hmul⟩
-  have hstar : ∀ z : ℂ, star z = (starRingEnd ℂ) z := fun _ => rfl
-  rw [Matrix.mem_unitaryGroup_iff']
-  ext j k
-  have hinner := u.inner_map_map (EuclideanSpace.single j (1:ℂ)) (EuclideanSpace.single k (1:ℂ))
-  rw [EuclideanSpace.inner_single_left, EuclideanSpace.single_apply, PiLp.inner_apply] at hinner
-  simp only [RCLike.inner_apply] at hinner
-  simp only [Matrix.mul_apply, Matrix.star_apply, Matrix.one_apply, hU, Matrix.of_apply, hstar]
-  rw [Finset.sum_congr rfl fun x _ =>
-    mul_comm ((starRingEnd ℂ) ((u (EuclideanSpace.single j (1:ℂ))).ofLp x))
-      ((u (EuclideanSpace.single k (1:ℂ))).ofLp x), hinner]
-  simp
-
-/-- If `A Aᴴ = B Bᴴ` then the columns of `Aᴴ` and `Bᴴ` have the same lengths. -/
-theorem norm_toEuclideanLin_conjTranspose_eq {n m : Type*} [Fintype n] [DecidableEq n]
-    [Fintype m] (A B : Matrix n m ℂ) (h : A * Aᴴ = B * Bᴴ) (x : EuclideanSpace ℂ n) :
-    ‖Matrix.toEuclideanLin Aᴴ x‖ = ‖Matrix.toEuclideanLin Bᴴ x‖ := by
-  have key : ∀ C : Matrix n m ℂ,
-      (inner ℂ (Matrix.toEuclideanLin Cᴴ x) (Matrix.toEuclideanLin Cᴴ x) : ℂ)
-        = star (x.ofLp) ᵥ* (C * Cᴴ) ⬝ᵥ x.ofLp := by
-    intro C
-    rw [EuclideanSpace.inner_eq_star_dotProduct]
-    simp only [Matrix.toLpLin_apply, WithLp.ofLp_toLp]
-    rw [Matrix.star_mulVec, Matrix.conjTranspose_conjTranspose, dotProduct_comm,
-      dotProduct_mulVec, Matrix.vecMul_vecMul]
-  have h1 : (inner ℂ (Matrix.toEuclideanLin Aᴴ x) (Matrix.toEuclideanLin Aᴴ x) : ℂ)
-      = inner ℂ (Matrix.toEuclideanLin Bᴴ x) (Matrix.toEuclideanLin Bᴴ x) := by
-    rw [key A, key B, h]
-  rw [inner_self_eq_norm_sq_to_K, inner_self_eq_norm_sq_to_K] at h1
-  have h2 : ‖Matrix.toEuclideanLin Aᴴ x‖ ^ 2 = ‖Matrix.toEuclideanLin Bᴴ x‖ ^ 2 := by
-    exact_mod_cast h1
-  have h3 := congrArg Real.sqrt h2
-  simpa [Real.sqrt_sq (norm_nonneg _)] using h3
-
-/-- **Uniqueness of purifications up to an isometry on the ancilla**, in matrix form:
-if `A Aᴴ = B Bᴴ` then `B = A U` for some unitary `U` acting on the ancilla index. -/
-theorem exists_unitary_of_mul_conjTranspose_eq {n m : Type*} [Fintype n] [DecidableEq n]
-    [Fintype m] [DecidableEq m] (A B : Matrix n m ℂ) (h : A * Aᴴ = B * Bᴴ) :
-    ∃ U : Matrix m m ℂ, U ∈ Matrix.unitaryGroup m ℂ ∧ B = A * U := by
-  obtain ⟨u, hu⟩ := exists_isometry_comp_of_norm_eq (Matrix.toEuclideanLin Aᴴ)
-    (Matrix.toEuclideanLin Bᴴ) (norm_toEuclideanLin_conjTranspose_eq A B h)
-  obtain ⟨U₀, hU₀, hU₀mul⟩ := exists_unitary_matrix_of_isometry u
-  have hcomp : U₀ * Aᴴ = Bᴴ := by
-    ext i j
-    have hx := hu (WithLp.toLp 2 (Pi.single j (1 : ℂ)))
-    have h1 : U₀ *ᵥ (Aᴴ *ᵥ (Pi.single j (1 : ℂ))) = Bᴴ *ᵥ (Pi.single j (1 : ℂ)) := by
-      have := congrArg (fun w : EuclideanSpace ℂ m => w.ofLp) hx
-      simpa [Matrix.toLpLin_apply, hU₀mul] using this
-    have h2 := congrFun h1 i
-    rw [Matrix.mulVec_mulVec] at h2
-    simpa using h2
-  refine ⟨U₀ᴴ, ?_, ?_⟩
-  · exact Unitary.star_mem hU₀
-  · have := congrArg Matrix.conjTranspose hcomp
-    simpa [Matrix.conjTranspose_mul] using this.symm
-
-/-- **Purification exists and is unique up to an isometry on the ancilla.**
-
-For a mixed state `ρ` (a positive semidefinite matrix of trace one) on a finite dimensional
-Hilbert space `H` with orthonormal basis indexed by `n`:
-
-* there is a unit vector `ψ` of `H ⊗ H` whose reduced density matrix (partial trace over the
-  ancilla) is `ρ`;
-* any two purifications of `ρ` on a common ancilla space `K` (basis indexed by `m`) are related
-  by a unitary acting on the ancilla alone. -/
-theorem purification_exists {n : Type*} [Fintype n] [DecidableEq n] (rho : Matrix n n ℂ)
-    (hrho : rho.PosSemidef) (htr : rho.trace = 1) :
-    (∃ psi : n × n → ℂ, reduced psi = rho ∧ ∑ p : n × n, ‖psi p‖ ^ 2 = 1) ∧
-    (∀ (m : Type*) [Fintype m] [DecidableEq m] (psi₁ psi₂ : n × m → ℂ),
-        reduced psi₁ = rho → reduced psi₂ = rho →
-        ∃ U : Matrix m m ℂ, U ∈ Matrix.unitaryGroup m ℂ ∧
-          ∀ i k, psi₂ (i, k) = ∑ l, psi₁ (i, l) * U l k) := by
-  constructor
-  · -- Existence: the vector with matrix `√ρ` is a purification.
-    have hsq : (CFC.sqrt rho).PosSemidef := Matrix.nonneg_iff_posSemidef.mp (CFC.sqrt_nonneg rho)
-    have hmul : CFC.sqrt rho * (CFC.sqrt rho)ᴴ = rho := by
-      rw [hsq.1.eq, CFC.sqrt_mul_sqrt_self rho hrho.nonneg]
-    refine ⟨fun p => CFC.sqrt rho p.1 p.2, ?_, ?_⟩
-    · rw [reduced_eq]
-      simpa [toMat] using hmul
-    · have hcast : ((∑ p : n × n, ‖CFC.sqrt rho p.1 p.2‖ ^ 2 : ℝ) : ℂ) = 1 := by
-        rw [sum_norm_sq_eq_trace (CFC.sqrt rho), hmul, htr]
-      exact_mod_cast hcast
-  · -- Uniqueness up to a unitary on the ancilla.
-    intro m _ _ psi₁ psi₂ h₁ h₂
-    have hAB : toMat psi₁ * (toMat psi₁)ᴴ = toMat psi₂ * (toMat psi₂)ᴴ := by
-      rw [← reduced_eq, ← reduced_eq, h₁, h₂]
-    obtain ⟨U, hU, hBU⟩ := exists_unitary_of_mul_conjTranspose_eq _ _ hAB
-    refine ⟨U, hU, fun i k => ?_⟩
-    have := congrArg (fun M => M i k) hBU
-    simpa [toMat, Matrix.mul_apply] using this
-
-end QI
 

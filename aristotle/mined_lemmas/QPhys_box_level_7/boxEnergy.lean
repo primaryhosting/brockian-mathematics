@@ -18,13 +18,11 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace QPhys
 
-/-- Energy of the `n`-th stationary state of a particle of mass `m` in a
-one-dimensional infinite square well ("particle in a box") of width `L`,
-with reduced Planck constant `hbar`:
-`E n = n² π² ħ² / (2 m L²)`. -/
+/-- Energy levels of a particle of mass `m` in a one-dimensional infinite square well
+of width `L`:  `Eₙ = n² π² ħ² / (2 m L²)`. -/
 
-noncomputable def boxEnergy (hbar m L : ℝ) (n : ℕ) : ℝ :=
-  (n : ℝ) ^ 2 * Real.pi ^ 2 * hbar ^ 2 / (2 * m * L ^ 2)
+noncomputable def boxEnergy (ħ m L : ℝ) (n : ℕ) : ℝ :=
+  (n : ℝ) ^ 2 * Real.pi ^ 2 * ħ ^ 2 / (2 * m * L ^ 2)
 
-/-- For the infinite square well, the ratio of the seventh energy level to the
-ground-state energy is `7² = 49`. -/
+/-- For the one-dimensional infinite square well, the ratio of the seventh energy level
+to the ground-state energy is `7² = 49`. -/

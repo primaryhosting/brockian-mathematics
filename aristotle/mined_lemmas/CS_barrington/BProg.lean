@@ -1,53 +1,70 @@
-import Mathlib
-
-/-!
+/-
 # Barrington
 Category: Frontier Cs
 Target: CS.barrington
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above uses `/- -/` rather than `/-! -/` because Lean 4 requires all `import`
+-- commands to precede any module docstring.)
 
-/-
-Barrington's theorem: the Boolean functions computed by fan-in-two Boolean circuits of
-depth `d` are exactly the ones computed by width-5 permutation branching programs of
-length `4 ^ d` (up to a constant factor in the exponent / a logarithm in the length).
+import Mathlib
 
-We formalise the two quantitative directions:
+/-!
+## Barrington's theorem
 
-* `CS.exists_bprog`  : a circuit of depth `d` is simulated by a width-5 permutation
-  branching program of length at most `4 ^ d`  (the hard direction of Barrington's theorem);
-* `CS.exists_circuit`: a width-5 permutation branching program of length `L` is simulated
-  by a circuit of depth at most `4 * ⌈log₂ L⌉ + 6` (the easy direction).
+We formalise Barrington's theorem, which identifies the class `NC¹` (Boolean formulas of
+logarithmic depth) with the class of functions computed by *width-5 permutation branching
+programs* of polynomial length.
 
-Together (`CS.barrington`) these say `NC¹ = width-5 permutation branching programs`:
-logarithmic depth corresponds to polynomial length.
+* `CS.Formula n` are Boolean formulas in the variables `Fin n` built from `¬`, `∧`, `∨`.
+  Following the usual convention for Barrington's theorem, `Formula.depth` counts the
+  nesting depth of the binary gates (negations are free, since they can be pushed to the
+  leaves without changing the depth).
+* `CS.BProg n` is a *width-5 permutation branching program*: a list of instructions, each of
+  which reads one input bit and outputs one of two permutations of `Fin 5`, depending on the
+  value of that bit.  The value `BProg.eval P x` of the program on the input `x` is the
+  product of the permutations selected by the instructions.
+
+The two halves of `CS.barrington` are:
+
+1. every formula of depth `d` is computed by a width-5 permutation branching program of
+   length at most `4 ^ d`, with output the prescribed 5-cycle `σ` on accepted inputs and the
+   identity on rejected inputs (this is Barrington's construction);
+2. conversely, for every width-5 permutation branching program `P` of length `ℓ` and every
+   target permutation `σ`, the acceptance predicate `P.eval x = σ` is computed by a formula of
+   depth `O(log ℓ)` (a balanced divide-and-conquer evaluation of the product).
 -/
 
 namespace CS
 
-open Equiv
+open Equiv Equiv.Perm
 
-/-! ## Boolean circuits -/
+/-- The group of permutations of five points: the "width 5" of Barrington's theorem. -/
+abbrev W : Type := Equiv.Perm (Fin 5)
 
-/-- Boolean circuits with fan-in two `∧`/`∨` gates and `¬` gates, over the variables
-`x 0, x 1, …`. -/
-inductive Circuit where
-  | const : Bool → Circuit
-  | var : ℕ → Circuit
-  | not : Circuit → Circuit
-  | and : Circuit → Circuit → Circuit
-  | or : Circuit → Circuit → Circuit
-  deriving Inhabited
+/-! ### Boolean formulas -/
 
-/-- The Boolean function computed by a circuit. -/
+/-- Boolean formulas over the variables `Fin n`. -/
+inductive Formula (n : ℕ) where
+  | var : Fin n → Formula n
+  | neg : Formula n → Formula n
+  | conj : Formula n → Formula n → Formula n
+  | disj : Formula n → Formula n → Formula n
 
-theorem BProg.pre_ne_nil (g : Perm (Fin 5)) {P : BProg} (hP : P ≠ []) : P.pre g ≠ [] := by
+/-- The depth of a formula, counting binary gates only (negations are free). -/
+
+theorem BProg.eval_lmul {n : ℕ} (g : W) {P : BProg n} (h : P ≠ []) (x : Fin n → Bool) :
+    (BProg.lmul g P).eval x = g * P.eval x := by
   cases P with
-  | nil => exact absurd rfl hP
-  | cons t r => simp [BProg.pre]
+  | nil => exact absurd rfl h
+  | cons I P =>
+      show (Instr.val ⟨I.idx, g * I.p₀, g * I.p₁⟩ x) * P.eval x = g * (I.val x * P.eval x)
+      have : (Instr.val ⟨I.idx, g * I.p₀, g * I.p₁⟩ x) = g * I.val x := by
+        simp only [Instr.val]
+        cases x I.idx <;> simp
+      rw [this, mul_assoc]
 
-/-! ## The hard direction of Barrington's theorem -/
+/-! ### The commutator trick -/
 
-/-- Negation is free: prepending the constant `γ` to a program computing `f` with respect
-to `γ⁻¹` yields a program computing `¬f` with respect to `γ`. -/
+/-- The value of the commutator program `P Q P⁻¹ Q⁻¹`. -/

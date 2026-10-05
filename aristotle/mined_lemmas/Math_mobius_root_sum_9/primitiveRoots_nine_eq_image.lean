@@ -30,9 +30,6 @@ Target: Math.mobius_root_sum_9
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above uses a plain block comment rather than a module docstring `/-!`,
--- since Lean 4 requires `import` to precede any module docstring.)
-
 import Mathlib
 
 /-!
@@ -43,24 +40,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset Complex
+open scoped BigOperators
 
 namespace Math
 
 /-- A fixed primitive 9-th root of unity in `ℂ`. -/
 
-theorem primitiveRoots_nine_eq_image :
-    primitiveRoots 9 ℂ =
-      ((range 9).filter fun i => Nat.Coprime i 9).image fun i => zeta9 ^ i := by
+lemma primitiveRoots_nine_eq_image :
+    primitiveRoots 9 ℂ = ({1, 2, 4, 5, 7, 8} : Finset ℕ).image (fun k => zeta9 ^ k) := by
   have hζ := isPrimitiveRoot_zeta9
   ext x
-  simp only [mem_image, mem_filter, mem_range, mem_primitiveRoots (by norm_num : 0 < 9)]
+  simp only [mem_primitiveRoots (by norm_num : 0 < 9), Finset.mem_image, Finset.mem_insert,
+    Finset.mem_singleton]
   constructor
   · intro hx
-    rw [hζ.isPrimitiveRoot_iff] at hx
-    obtain ⟨i, hin, hi, H⟩ := hx
-    exact ⟨i, ⟨hin, hi⟩, H⟩
-  · rintro ⟨i, ⟨-, hi⟩, rfl⟩
-    exact hζ.pow_of_coprime i hi
+    obtain ⟨i, hi, rfl⟩ := hζ.eq_pow_of_pow_eq_one hx.pow_eq_one
+    have hcop : Nat.Coprime i 9 := (hζ.pow_iff_coprime (by norm_num) i).mp hx
+    refine ⟨i, ?_, rfl⟩
+    interval_cases i <;> revert hcop <;> decide
+  · rintro ⟨i, hi, rfl⟩
+    have hcop : Nat.Coprime i 9 := by
+      rcases hi with h | h | h | h | h | h <;> subst h <;> decide
+    exact hζ.pow_of_coprime i hcop
 
-/-- The sum of the primitive 9-th roots of unity equals `μ 9`. -/

@@ -7,60 +7,47 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on the header: Lean 4 requires every `import` line to precede all other commands,
-so the module docstring above sits immediately after `import Mathlib`.
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Content of this file.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-Hardy's nonlocality argument, in the "without inequalities" (logical) form.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-Two spacelike separated parties, Alice and Bob, each choose one of two dichotomic
-measurements (`1` or `2`) with outcomes in `{yes, no}`.  Hardy's four conditions are
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-  (H1)  P(a₁ = yes, b₁ = yes) = 0
-  (H2)  P(a₂ = yes, b₁ = no ) = 0
-  (H3)  P(a₁ = no , b₂ = yes) = 0
-  (H4)  P(a₂ = yes, b₂ = yes) > 0.
-
-*Local realism* (a local hidden-variable model) assigns, to each hidden state `λ`,
-definite outcomes for all four observables, and the observed probabilities are
-measures of the corresponding events on the hidden-variable space.  Conditions
-(H1)–(H3) then force `P(a₂ = yes, b₂ = yes) = 0`, contradicting (H4): the runs in
-which Alice measures `2`, Bob measures `2` and both obtain `yes` — a fraction
-`1/12` of such runs for the quantum state exhibited below — cannot be explained
-by any local hidden-variable model, *without any inequality being used*.
-
-Quantum mechanics realises (H1)–(H4): we exhibit two qubits in the state
-`|ψ⟩ ∝ |00⟩ + |01⟩ + |10⟩` together with the measurement vectors
-
-  a₁ = yes : |1⟩            a₁ = no  : |0⟩
-  a₂ = yes : |0⟩ - |1⟩
-  b₁ = yes : |1⟩            b₁ = no  : |0⟩
-  b₂ = yes : |0⟩ - |1⟩
-
-and check by the Born rule that the three Hardy probabilities vanish while
-P(a₂ = yes, b₂ = yes) = 1/12.
-
-(There is no Mathlib lemma for this statement; the quantum side is a direct
-Born-rule computation and the local-realism side is a short measure-theoretic
-argument built from `measure_mono_null` and `measure_union_null`.)
--/
+set_option grind.warning false
 
 namespace QI
 
 open MeasureTheory
 
-noncomputable section
+/-! ## The local hidden variable (local realism) side
 
-/-- A one-qubit vector. -/
-abbrev Qubit := Fin 2 → ℂ
+In a local hidden variable model every run of the experiment is described by a hidden
+variable `ω`, and the outcome of each of the two possible measurements on each side is a
+definite function of `ω`: `A₁, A₂ : Ω → Bool` for Alice and `B₁, B₂ : Ω → Bool` for Bob
+(locality: Alice's outcomes do not depend on Bob's setting and vice versa). -/
 
-/-- A two-qubit vector (an element of `ℂ² ⊗ ℂ²`, written in the product basis). -/
-abbrev TwoQubit := Fin 2 → Fin 2 → ℂ
+/-- **Hardy's no-go for local realism.**  If the three "Hardy constraints" hold with
+probability one, namely `P(A₁ = 1, B₂ = 1) = 0`, `P(A₂ = 1, B₁ = 1) = 0` and
+`P(A₂ = 0, B₂ = 0) = 0`, then the Hardy event `A₁ = 1, B₁ = 1` must have probability
+zero.  (The pointwise argument: if `A₁ ω = 1` and `B₁ ω = 1`, then `B₂ ω = 0` by the
+first constraint and `A₂ ω = 0` by the second, contradicting the third.) -/
 
-/-- Hermitian inner product on one-qubit vectors. -/
+noncomputable def prob (u v : Fin 2 → ℂ) (psi : Fin 2 → Fin 2 → ℂ) : ℝ :=
+  Complex.normSq (amp u v psi)
 
-def prob (φ ψ : TwoQubit) : ℝ := Complex.normSq (ip φ ψ) / (nsq φ * nsq ψ)
-
-/-- The Hardy state `|ψ⟩ ∝ |00⟩ + |01⟩ + |10⟩`. -/
+/-- The Hardy state `(|00⟩ + |01⟩ + |10⟩)/√3`. -/

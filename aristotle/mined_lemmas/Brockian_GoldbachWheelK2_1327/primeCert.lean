@@ -1,3 +1,5 @@
+import Mathlib
+
 /-!
 # Goldbach Wheel K 2 1327
 Category: Brockian Corpus
@@ -6,20 +8,25 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-This file is deliberately import-free: Lean 4 does not allow a module docstring
-(`/-! ... -/`) to precede the `import` commands, so the required header comment
-forces the development to be self-contained in core Lean.  The primality
-predicate is therefore spelled out explicitly (`2 ≤ p ∧ every divisor of p is 1
-or p`).  The companion file `RequestProject.GoldbachWheelK2_1327Mathlib`
-imports Mathlib and restates the result with `Nat.Prime`.
--/
+-- Note: Lean 4 requires all `import` commands to come before any other command,
+-- including module docstrings, so `import Mathlib` precedes the header above.
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 40000
 
 namespace Brockian
 
-/-- `noFacB n k = true` certifies that no `m` with `2 ≤ m ≤ k` and `m * m ≤ n` divides `n`.
-Trial divisions are skipped as soon as `m * m > n`, which keeps kernel evaluation cheap. -/
+/-- A kernel-friendly primality certificate: `n` has no divisor `d` with
+`2 ≤ d ≤ 52` and `d * d ≤ n`.  For `n < 53 ^ 2 = 2809` this is equivalent to
+primality of `n` (given `2 ≤ n`). -/
 
-def primeCert (n : Nat) : Bool := (2 ≤ n) && noFacB n 40
+def primeCert (n : ℕ) : Bool :=
+  (List.range' 2 51).all (fun d => decide (n < d * d) || decide (n % d ≠ 0))
 
-/-- A Goldbach certificate for `n`: some `p < n` passes `primeCert` and so does `n - p`. -/
+/-- Soundness of `primeCert` below `2809`. -/

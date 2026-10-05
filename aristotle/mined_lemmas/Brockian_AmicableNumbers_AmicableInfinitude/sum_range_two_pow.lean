@@ -34,32 +34,26 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 /-!
-# Amicable Infinitude
-Category: Brockian Conjecture
-Target: Brockian.AmicableNumbers.AmicableInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-Whether there are infinitely many amicable numbers is an open problem.  What is proved here
-is an unconditional formalisation of Thabit ibn Qurra's rule together with the resulting
-*conditional reduction*: if there are infinitely many Thabit indices `k` (i.e. indices for
-which `3·2^(k-1) - 1`, `3·2^k - 1` and `9·2^(2k-1) - 1` are all prime), then there are
-infinitely many amicable numbers.
+The infinitude of amicable numbers is a well-known open problem.  What is proved here is a
+*conditional reduction*: if Thabit ibn Qurra's rule produces amicable pairs for arbitrarily
+large parameters (i.e. there are arbitrarily large `m` for which the three Thabit numbers
+`3·2^m - 1`, `3·2^(m+1) - 1`, `9·2^(2m+1) - 1` are all prime), then there are infinitely many
+amicable numbers.  The Thabit construction itself is proved unconditionally
+(`Brockian.AmicableNumbers.isAmicablePair_thabit`), as is the classical example `(220, 284)`.
 -/
 
 namespace Brockian.AmicableNumbers
 
-open Finset ArithmeticFunction
+open ArithmeticFunction
 open scoped ArithmeticFunction.sigma
 
-/-- The sum of the proper divisors of `n` (the classical `s`-function). -/
+/-- `a` and `b` form an amicable pair: they are distinct and each one's proper divisors sum to
+the other, equivalently `σ a = σ b = a + b`. -/
 
-lemma sum_range_two_pow (n : ℕ) : ∑ j ∈ range (n + 1), 2 ^ j = 2 ^ (n + 1) - 1 := by
+private lemma sum_range_two_pow (n : ℕ) : (∑ k ∈ Finset.range n, 2 ^ k) + 1 = 2 ^ n := by
   induction n with
   | zero => simp
-  | succ k ih =>
-      rw [Finset.sum_range_succ, ih]
-      have : (1 : ℕ) ≤ 2 ^ (k + 1) := Nat.one_le_two_pow
-      have : (2 : ℕ) ^ (k + 1 + 1) = 2 ^ (k + 1) + 2 ^ (k + 1) := by ring
+  | succ n ih =>
+      rw [Finset.sum_range_succ, pow_succ]
       omega
 

@@ -8,14 +8,23 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open Complex (I)
-open Matrix
+/-!
+# Hückel theory for the cycle `C₁₉`
+
+We show that the spectrum of the adjacency matrix of the cycle graph `C₁₉`
+(the Hückel matrix of the annulene `C₁₉` in units where `α = 0`, `β = 1`)
+is exactly `{2 cos (2πk/19) : k = 0, …, 18}`.
+
+The proof diagonalizes the circulant adjacency matrix by the discrete Fourier matrix.
+-/
 
 namespace Chem
 
-/-- The primitive 19-th root of unity `exp (2πi/19)`. -/
+open Complex Matrix Finset
 
-theorem ee_zero : ee 0 = 1 := by simp [ee]
+instance : Fact (Nat.Prime 19) := ⟨by norm_num⟩
+
+/-- A primitive 19-th root of unity. -/
+
+lemma ee_zero : ee 0 = 1 := by simp [ee]
 

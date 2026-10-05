@@ -23,6 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Repunit Prime Infinitude
+Category: Brockian Conjecture
+Target: Brockian.RepunitPrimes.RepunitPrimeInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 /-!
 # Repunit Prime Infinitude
 Category: Brockian Conjecture
@@ -34,11 +44,9 @@ Provenance: Aristotle theorem prover (Harmonic)
 namespace Brockian
 namespace RepunitPrimes
 
-/-- The `n`-th base-ten repunit `R n = 1 + 10 + ⋯ + 10 ^ (n - 1)`, i.e. the natural number
-whose decimal expansion consists of `n` ones. -/
+/-- The `n`-th repunit: the base-ten number consisting of `n` digits `1`,
+i.e. `repunit n = (10 ^ n - 1) / 9`. -/
 
-theorem prime_repunit_two : Nat.Prime (repunit 2) := by
-  rw [repunit_two]; norm_num
+theorem prime_repunit_two : Nat.Prime (repunit 2) := by decide
 
-/-- **Conditional reduction, `Set.Infinite` form.**  If repunit primes occur with
-arbitrarily large index, then the set of repunit primes is infinite. -/
+/-- The set of repunit primes. -/

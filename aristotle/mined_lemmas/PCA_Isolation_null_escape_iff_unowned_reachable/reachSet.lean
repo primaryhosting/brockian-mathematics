@@ -1,50 +1,70 @@
 import Mathlib
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
-# A formal model of a pointer-capability isolation engine
-
-This file develops a small but complete formal model of the *isolation engine* used by a
-pointer-capability analysis (`PCA`).
-
-The model consists of
-
-* a finite object graph `Graph V`, given by a successor (reference) function `succ`,
-  an ownership predicate `owned` (`false` means the object is *unowned*, i.e. outside the
-  isolation domain) and a finite set of `roots` (the entry points of the domain);
-* an *inductive* specification of which objects are reachable from the roots (`Reachable`);
-* an *executable* fixpoint engine (`closure`, `reachSet`, `escapeSet`) that computes the
-  reachable set by saturation and reports the set of escaping objects.
-
-The main results are
-
-* `PCA.Isolation.mem_reachSet_iff` : the engine's reachable set is exactly the inductively
-  specified reachable set (soundness and completeness of the reachability engine);
-* `PCA.Isolation.mem_escapeSet_iff` : an object is reported as escaping iff it is reachable
-  and unowned;
-* `PCA.Isolation.null_escape_iff_unowned_reachable` : the engine reports no escape iff no
-  unowned object is reachable from the roots.
+# Null Escape Iff Unowned Reachable
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.null_escape_iff_unowned_reachable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+/-
+Note on imports.  The header comment above is a *module docstring*, which Lean
+parses as a command; consequently no `import` line may follow it.  The
+development below is therefore self-contained in core Lean.  The reachability
+relation `PCA.Isolation.Reaches` defined here is the reflexive-transitive
+closure of the reference relation, i.e. the exact analogue of Mathlib's
+`Relation.ReflTransGen`; the two directions of the main theorem correspond to
+the induction principles `Relation.ReflTransGen.head_induction_on` /
+`Relation.ReflTransGen.tail` there.  A Mathlib-based restatement, proved by
+transporting along an equivalence with `Relation.ReflTransGen`, is given in
+`RequestProject/PCA/IsolationMathlib.lean`.
+-/
+
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 
 namespace PCA.Isolation
 
-/-- A finite object graph together with an ownership predicate and a set of roots. -/
-structure Graph (V : Type*) where
-  /-- The objects directly referenced by an object. -/
-  succ : V → Finset V
-  /-- `owned v = true` means `v` belongs to the isolation domain. -/
-  owned : V → Bool
-  /-- Entry points of the isolation domain. -/
-  roots : Finset V
+universe u v
 
-variable {V : Type*} [DecidableEq V]
+variable {V : Type u} {D : Type v}
 
-/-- Specification: the objects reachable from the roots by following references. -/
-inductive Reachable (g : Graph V) : V → Prop
-  | root {v : V} (hv : v ∈ g.roots) : Reachable g v
-  | step {u v : V} (hu : Reachable g u) (huv : v ∈ g.succ u) : Reachable g v
+/-- Reflexive-transitive closure of the reference relation `edge`:
+`Reaches edge a b` holds when `b` can be reached from `a` by following a finite
+(possibly empty) chain of heap references. -/
+inductive Reaches (edge : V → V → Prop) : V → V → Prop
+  | refl (a : V) : Reaches edge a a
+  | tail {a b c : V} : Reaches edge a b → edge b c → Reaches edge a c
 
-/-- One saturation step of the engine: add all successors of the current set. -/
+/-- One expansion step of the isolation engine's worklist: keep everything already
+discovered and add every heap node directly referenced from a discovered node. -/
 
-def reachSet [Fintype V] (g : Graph V) : Finset V := closure g g.roots
+def reachSet (edge : V → V → Prop) (roots : Set V) : Set V :=
+  {w | ∃ r ∈ roots, Relation.ReflTransGen edge r w}
 
-/-- Soundness and completeness of the reachability engine. -/
+/-- The engine's iterative exploration computes exactly the reachable set,
+in Mathlib's `Set` language. -/

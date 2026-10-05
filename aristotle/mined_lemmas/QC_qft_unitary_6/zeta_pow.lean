@@ -1,40 +1,23 @@
+/-
+# Qft Unitary 6
+Category: Quantum Computing
+Target: QC.qft_unitary_6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 open scoped BigOperators
 open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-open scoped Matrix
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace QC
 
-/-- `QC.zeta N m = exp (2 π i m / N)`, the `m`-th power of the primitive `N`-th root of unity
-used to define the quantum Fourier transform. -/
+open Complex Matrix Finset
 
-lemma zeta_pow (N : ℕ) (m : ℤ) (l : ℕ) : zeta N m ^ l = zeta N (m * l) := by
-  induction l with
-  | zero => simp [zeta_zero]
-  | succ l ih =>
-      rw [pow_succ, ih, ← zeta_add]
-      congr 1
-      push_cast
-      ring
+/-- The primitive `n`-th root of unity `exp (2πi/n)`. -/
+
+lemma zeta_pow (n : ℕ) (m : ℕ) :
+    zeta n ^ m = Complex.exp (2 * Real.pi * Complex.I * m / n) := by
+  rw [zeta, ← Complex.exp_nat_mul]
+  ring_nf
 

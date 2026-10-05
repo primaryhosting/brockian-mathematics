@@ -1,5 +1,4 @@
 import Mathlib
-
 /-!
 # Gleason Theorem
 Category: Frontier Physics
@@ -8,62 +7,11 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
-
-(The `import Mathlib` line must precede this file's module documentation because Lean 4
-requires all `import` commands to come first; the required header comment is otherwise
-reproduced verbatim as the first block of the file.)
-
-Gleason's theorem states that every quantum measure (normalized, finitely additive probability
-assignment on the closed subspaces, i.e. a normalized frame function) on a complex Hilbert
-space of dimension at least `3` is of the form `P ↦ tr (rho P)` for a unique density operator
-`rho`.  Here the space is `EuclideanSpace ℂ (Fin n)` and operators are `n × n` complex matrices.
-
-What is formalized and proved in this file:
-
-* `Frontier.IsQuantumMeasure`, `Frontier.IsDensityOperator`, `Frontier.RepresentedBy`,
-  `Frontier.GleasonProperty` -- the statement of the theorem.
-* `Frontier.gleason_theorem` -- the *reduction*: a quantum measure that extends to a linear
-  functional on operators is given by a density operator (trace-duality plus positivity).
-* `Frontier.gleason_theorem_of_selfAdjoint_linear` -- the same with the more natural hypothesis
-  of a real-linear extension over the self-adjoint operators, via complexification
-  (`Frontier.hasLinearExtension_of_selfAdjoint`, `Frontier.hasSelfAdjointLinearExtension_iff`).
-* `Frontier.hasLinearExtension_iff_gleasonProperty` -- the linearity hypothesis is exactly
-  equivalent to the conclusion, so the reduction is lossless: all that is missing from a full
-  proof of Gleason's theorem is the (deep) fact that in dimension `≥ 3` every quantum measure
-  admits such an extension.
-* `Frontier.isQuantumMeasure_of_isDensityOperator` -- the converse direction.
-* `Frontier.representedBy_unique` -- uniqueness of the density operator.
-* `Frontier.gleason_dim_one` -- the base case `n = 1`, unconditionally.
-* `Frontier.gleason_fails_dim_two` -- sharpness: an explicit quantum measure on a qubit
-  (`Frontier.qubitMeasure`, built from the cubic `3a² - 2a³`) that comes from no density
-  operator, so the hypothesis `3 ≤ n` cannot be removed.
--/
-
 open scoped BigOperators
-open scoped Real
-open scoped Nat
 open scoped Classical
-open scoped Pointwise
 open scoped ComplexOrder
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+set_option maxHeartbeats 1000000
 
 namespace Frontier
 
@@ -71,44 +19,37 @@ open Matrix
 
 variable {n : ℕ}
 
-/-! ## Basic notions
+/-! ## Basic notions -/
 
-We model a complex Hilbert space of dimension `n` as `EuclideanSpace ℂ (Fin n)`, and the
-bounded operators on it as `Matrix (Fin n) (Fin n) ℂ`.  An *event* (a closed subspace) is
-recorded by its orthogonal projection. -/
-
-/-- An orthogonal projection: a self-adjoint idempotent matrix. -/
+/-- The rank-one (orthogonal) projection onto the line spanned by a unit vector `v`,
+written as the matrix `v vᴴ`. -/
 
 theorem gleason_dim_one (mu : Matrix (Fin 1) (Fin 1) ℂ → ℝ) (hmu : IsQuantumMeasure mu) :
-    GleasonProperty mu := by
-  refine ⟨1, ⟨Matrix.PosSemidef.one, by simp⟩, ?_⟩
-  intro P hP
-  have hentry : P 0 0 * P 0 0 = P 0 0 := by
-    have := congrFun (congrFun hP.2 0) 0
-    simpa [Matrix.mul_apply] using this
-  have hcases : P = 0 ∨ P = 1 := by
-    have hfac : P 0 0 * (P 0 0 - 1) = 0 := by linear_combination hentry
-    rcases mul_eq_zero.mp hfac with h | h
-    · left
-      ext i j
-      fin_cases i
-      fin_cases j
-      simpa using h
-    · right
-      ext i j
-      fin_cases i
-      fin_cases j
-      simpa [Matrix.one_apply] using sub_eq_zero.mp h
-  rcases hcases with h | h
-  · rw [h, mul_zero, Matrix.trace_zero, hmu.map_zero]
-    norm_num
-  · rw [h, mul_one, hmu.normalized]
-    simp
+    ∃ rho : Matrix (Fin 1) (Fin 1) ℂ, IsDensityOperator rho ∧
+      ∀ P : Matrix (Fin 1) (Fin 1) ℂ, IsProj P → ((mu P : ℝ) : ℂ) = (rho * P).trace :=
+  gleason_of_frameRepresentation frameRepresentation_one mu hmu
 
-/-! ## A weaker (more natural) form of the linearity hypothesis
+end Frontier
 
-Gleason's argument produces a functional that is only *real*-linear on the self-adjoint
-operators (the observables).  We show this suffices: such a functional complexifies to a
-`ℂ`-linear functional on all operators. -/
+import RequestProject.Gleason
+/-!
+# Failure of Gleason's theorem in dimension two
 
-/-- The self-adjoint "real part" of an operator. -/
+Gleason's theorem needs `dim ≥ 3`.  Here we build, in dimension two, an explicit quantum
+measure that does **not** come from a density operator.  Consequently
+`Frontier.FrameRepresentation 2` is false, so the hypothesis of `Frontier.gleason_theorem`
+genuinely encodes the dimension restriction.
+-/
+
+open scoped BigOperators
+open scoped Classical
+open scoped ComplexOrder
+
+set_option maxHeartbeats 1000000
+
+namespace Frontier
+
+open Matrix
+
+/-! ## Structure of projections in dimension two -/
+

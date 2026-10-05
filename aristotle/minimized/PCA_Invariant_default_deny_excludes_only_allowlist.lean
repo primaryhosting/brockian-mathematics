@@ -1,13 +1,3 @@
-/-
-# Default Deny Excludes Only Allowlist
-Category: Proof-Carrying Apps
-Target: PCA.Invariant.default_deny_excludes_only_allowlist
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
 /-!
 # Default Deny Excludes Only Allowlist
 Category: Proof-Carrying Apps
@@ -16,79 +6,68 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace PCA.Invariant
 
-set_option grind.warning false
+/-- Principals of the isolation engine: either a root principal, or a principal
+obtained by delegation from a parent principal. -/
+inductive Principal where
+  | root (name : String)
+  | delegate (parent : Principal) (name : String)
+  deriving DecidableEq
 
-namespace PCA
+/-- A policy assigns to each principal the allowlist of capabilities that this
+principal explicitly grants, as a decidable predicate on capabilities. -/
+abbrev Policy (Cap : Type) := Principal → Cap → Bool
 
-/-- The verdict returned by the isolation engine for a single request. -/
-inductive Verdict
-  | allow
-  | deny
-  deriving DecidableEq, Repr
+variable {Cap : Type}
 
-/-- A default-deny policy for requests of type `Req` is given by its allowlist:
-the set of requests that are explicitly permitted. Everything else is denied. -/
-structure Policy (Req : Type*) where
-  /-- The set of explicitly permitted requests. -/
-  allowlist : Set Req
+/-- The delegation chain of a principal: the principal itself together with all
+of its ancestors. -/
 
-variable {Req : Type*}
+def chain : Principal → List Principal
+  | .root n => [.root n]
+  | .delegate p n => .delegate p n :: chain p
 
-/-- The isolation engine's decision procedure: a request is allowed exactly when it
-appears on the allowlist, and is denied otherwise (default deny). -/
+/-- The decision procedure of the isolation engine.  Access is *denied by
+default*: it is granted only when the requested capability appears on the
+allowlist of the principal itself and, recursively, on the allowlist of the
+delegating parent (delegation attenuates). -/
 
-noncomputable def Policy.eval (P : Policy Req) (r : Req) : Verdict :=
-  if r ∈ P.allowlist then Verdict.allow else Verdict.deny
+def granted (pol : Policy Cap) : Principal → Cap → Bool
+  | .root n, c => pol (.root n) c
+  | .delegate p n, c => pol (.delegate p n) c && granted pol p c
 
-/-- The set of requests the engine permits. -/
+/-- The effective allowlist of a principal: the capabilities allowed by every
+principal on its delegation chain. -/
 
-def Policy.permitted (P : Policy Req) : Set Req := {r | P.eval r = Verdict.allow}
+def effectiveAllow (pol : Policy Cap) (pr : Principal) (c : Cap) : Prop :=
+  ∀ q ∈ chain pr, pol q c = true
 
-/-- The set of requests the engine blocks. -/
+/-- Soundness and completeness of the engine with respect to the effective
+allowlist: the engine grants exactly the effective allowlist. -/
 
-def Policy.blocked (P : Policy Req) : Set Req := {r | P.eval r = Verdict.deny}
+theorem granted_iff_effectiveAllow (pol : Policy Cap) (pr : Principal) (c : Cap) :
+    granted pol pr c = true ↔ effectiveAllow pol pr c := by
+  induction pr with
+  | root n => simp [granted, effectiveAllow, chain]
+  | delegate p n ih =>
+      simp only [granted, effectiveAllow, chain, Bool.and_eq_true, List.mem_cons,
+        forall_eq_or_imp] at *
+      constructor
+      · rintro ⟨h1, h2⟩
+        exact ⟨h1, ih.mp h2⟩
+      · rintro ⟨h1, h2⟩
+        exact ⟨h1, ih.mpr h2⟩
 
-@[simp]
+/-- **Default deny excludes only the allowlist.**  A request is denied by the
+isolation engine exactly when the requested capability is *not* in the effective
+allowlist of the requesting principal: nothing on the allowlist is ever denied,
+and everything off it is denied. -/
 
-theorem Policy.eval_eq_allow_iff (P : Policy Req) (r : Req) :
-    P.eval r = Verdict.allow ↔ r ∈ P.allowlist := by
-  unfold Policy.eval
-  split <;> simp_all
+theorem default_deny_excludes_only_allowlist (pol : Policy Cap) (pr : Principal) (c : Cap) :
+    granted pol pr c = false ↔ ¬ effectiveAllow pol pr c := by
+  rw [← granted_iff_effectiveAllow, Bool.not_eq_true]
 
-@[simp]
-
-theorem Policy.eval_eq_deny_iff (P : Policy Req) (r : Req) :
-    P.eval r = Verdict.deny ↔ r ∉ P.allowlist := by
-  unfold Policy.eval
-  split <;> simp_all
-
-namespace Invariant
-
-/-- **Soundness of default deny**: everything the engine permits is on the allowlist. -/
-
-theorem permitted_subset_allowlist (P : Policy Req) : P.permitted ⊆ P.allowlist := by
-  intro r hr
-  simpa [Policy.permitted] using hr
-
-/-- **Completeness of default deny**: everything on the allowlist is permitted. -/
+/-- The denied set is exactly the complement of the effective allowlist. -/

@@ -1,67 +1,51 @@
+/-
+# Shor Code Corrects
+Category: Frontier Qi
+Target: QI.shor_code_corrects
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
 # Shor Code Corrects
 Category: Frontier Qi
 Target: QI.shor_code_corrects
-Statement: The 9-qubit Shor code corrects an arbitrary single-qubit error.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
 
-We work with the state space of nine qubits, realized concretely as the space of
-complex-valued functions on the set `Bs` of computational basis states, where a basis
-state is an assignment of a bit to each of the nine qubits.  Qubits are indexed by
-`Qb = Fin 3 × Fin 3`: the first component is the index of one of the three blocks of the
-Shor code, the second is the position inside that block.
+open scoped BigOperators
 
-An *arbitrary single-qubit error* acting on qubit `q` is the operator `qop q M` attached to
-an arbitrary `2 × 2` complex matrix `M : Bool → Bool → ℂ` acting on qubit `q` and acting as
-the identity on all other qubits.  Every completely arbitrary (not necessarily unitary)
-one-qubit operation is of this form.
-
-The Shor codewords are
-
-  `cw false = (1/(2√2)) (|000⟩+|111⟩) ⊗ (|000⟩+|111⟩) ⊗ (|000⟩+|111⟩)`
-  `cw true  = (1/(2√2)) (|000⟩-|111⟩) ⊗ (|000⟩-|111⟩) ⊗ (|000⟩-|111⟩)`
-
-and the code space is their complex span.
-
-The theorem `QI.shor_code_corrects` states that
-
-* the two codewords are orthonormal, so the code space is a genuine two-dimensional
-  (one logical qubit) subspace; and
-* for **any** pair of single-qubit errors `E = qop q₁ M₁` and `F = qop q₂ M₂` there is a
-  scalar `c` with `⟪E x, F y⟫ = c ⟪x, y⟫` for all code vectors `x, y`.
-
-The second item is exactly the Knill–Laflamme error-correction condition
-`P E† F P = c_{EF} P` for the set of all single-qubit errors, i.e. the statement that the
-Shor code corrects an arbitrary single-qubit error.
--/
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 100000
 
 namespace QI
 
-open Finset
+/-! ## Basic types
 
-/-- Qubit labels: `(block, position in block)`. -/
-abbrev Qb := Fin 3 × Fin 3
+A computational basis state of one *block* of three qubits is a function `Fin 3 → Bool`;
+a computational basis state of the nine qubits of the Shor code is a function
+`Fin 3 → Blk`, i.e. three blocks of three qubits.  A qubit is addressed by a pair
+`q : Q = Fin 3 × Fin 3` (block index, position inside the block). -/
+
+/-- Computational basis states of one three-qubit block. -/
+abbrev Blk := Fin 3 → Bool
 
 /-- Computational basis states of the nine qubits. -/
-abbrev Bs := Qb → Bool
+abbrev Bas := Fin 3 → Blk
 
-/-- Labels for the eight basis states that occur in the Shor codewords: a bit per block. -/
-abbrev Sg := Fin 3 → Bool
+/-- Addresses of the nine qubits. -/
+abbrev Q := Fin 3 × Fin 3
 
-/-- The basis state in which all three qubits of block `i` carry the bit `s i`. -/
+/-- Bitwise `xor` on a block. -/
 
 lemma nrm_mul_nrm : nrm * nrm = 1 / 8 := by
-  have h : ((Real.sqrt 8)⁻¹ : ℝ) * ((Real.sqrt 8)⁻¹ : ℝ) = 1 / 8 := by
-    rw [← mul_inv, Real.mul_self_sqrt (by norm_num : (0:ℝ) ≤ 8)]
-    norm_num
-  calc nrm * nrm = ((((Real.sqrt 8)⁻¹ : ℝ) * ((Real.sqrt 8)⁻¹ : ℝ) : ℝ) : ℂ) := by
-        simp [nrm]
-    _ = 1 / 8 := by rw [h]; norm_num
+  have h2 : Real.sqrt 2 * Real.sqrt 2 = 2 := Real.mul_self_sqrt (by norm_num)
+  have hs : Real.sqrt 2 ≠ 0 := ne_of_gt (Real.sqrt_pos.mpr (by norm_num))
+  rw [nrm]
+  field_simp
+  nlinarith [h2]
 

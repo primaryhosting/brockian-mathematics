@@ -1,37 +1,28 @@
+/-
+# Huckel C 7
+Category: Chemistry
+Target: Chem.huckel_C7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-!
+# Huckel C 7
+Category: Chemistry
+Target: Chem.huckel_C7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Chem
 
-open Polynomial Matrix SimpleGraph
+open Complex
 
-/-- The adjacency matrix of the cycle graph `C₇` (the Hückel matrix of cycloheptatrienyl,
-with `α = 0`, `β = 1`), as a real `7 × 7` matrix. -/
+/-- The adjacency matrix of the cycle graph `C₇`, indexed by `ZMod 7`:
+vertices `i` and `j` are adjacent iff they differ by `1` modulo `7`. -/
 
-noncomputable def C7adj : Matrix (Fin 7) (Fin 7) ℝ := (SimpleGraph.cycleGraph 7).adjMatrix ℝ
+noncomputable def C7adj : Matrix (ZMod 7) (ZMod 7) ℂ :=
+  Matrix.of fun i j => if i - j = 1 ∨ j - i = 1 then 1 else 0
 
-section Aux
-
-/-- A primitive 7th root of unity. -/

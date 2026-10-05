@@ -1,13 +1,4 @@
-/-
-# Pentagon Pentagon Isotypic Higher N
-Category: Brockian Corpus
-Target: Brockian.PentagonPentagonIsotypicHigherN
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Pentagon Pentagon Isotypic Higher N
 Category: Brockian Corpus
@@ -18,45 +9,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 open scoped BigOperators
 open scoped Real
-open scoped Nat
 open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace Brockian
 
-/-! ## Setup
+variable {n : ℕ} [NeZero n]
 
-We model a function on the vertices of a regular `n`-gon as a function `ℤ → ℝ` which is
-`n`-periodic (the vertex labelled `j` is the vertex `j mod n`).  The dihedral group `D n`
-acts by the rotation `j ↦ j + 1` and the reflection `j ↦ -j`.
+/-- The `k`-th character of the vertex set `ZMod n` of the regular `n`-gon:
+`χ_k(j) = exp (2πi k j / n)`. -/
 
-The `k`-th *mode subspace* is the span of the two "Fourier" functions
-`j ↦ cos (2πkj/n)` and `j ↦ sin (2πkj/n)`.  For the pentagon (`n = 5`) the modes `k = 1, 2`
-are exactly the two two-dimensional isotypic components of the vertex representation of
-`D 5`; the results below establish the corresponding statements for arbitrary `n`. -/
+def ngonRot (n : ℕ) (f : ZMod n → ℂ) : ZMod n → ℂ := fun j => f (j + 1)
 
-/-- The cosine Fourier mode of index `k` on the vertices of the `n`-gon. -/
-
-def ngonRot : (ℤ → ℝ) →ₗ[ℝ] (ℤ → ℝ) where
-  toFun f := fun j => f (j + 1)
-  map_add' _ _ := rfl
-  map_smul' _ _ := rfl
-
-/-- The reflection of the `n`-gon, acting on vertex functions. -/
+/-- The reflection of the `n`-gon acting on functions on its vertices. -/

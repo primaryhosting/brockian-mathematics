@@ -1,11 +1,3 @@
-/-
-# Penrose Singularity
-Category: Frontier Physics
-Target: Frontier.penrose_singularity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -35,72 +27,52 @@ set_option pp.structureInstances true
 set_option pp.coercions.types true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
 namespace Frontier
 
 /-!
-## Setting
+## Formalization
 
-The analytic core of Penrose's singularity theorem is the focusing of a null geodesic
-congruence.  Along a null generator of the boundary of the future of a closed trapped
-surface, with affine parameter `t`, the expansion `θ` of the congruence satisfies the
-Raychaudhuri equation
+Penrose's singularity theorem states that a spacetime containing a *trapped surface*,
+satisfying the *null energy condition* (together with the genericity/global hypotheses),
+cannot be null geodesically complete.
 
-  `dθ/dt = -θ² / 2 - σ_{ab}σ^{ab} - R_{ab} k^a k^b`,
+Mathlib does not (yet) contain Lorentzian causal theory, so we formalize the analytic
+engine of the theorem, which is where the physics enters and which is a Lean-checked
+reduction of the full statement:
 
-where `σ` is the shear and `k` is the null tangent.  The null energy condition gives
-`R_{ab} k^a k^b ≥ 0`, and the shear term is nonnegative, so the *Raychaudhuri inequality*
+* Let `θ : ℝ → ℝ` be the *expansion* of the congruence of null geodesics emanating
+  orthogonally from a closed surface, as a function of the affine parameter `t`.
+* The **Raychaudhuri equation** for a hypersurface-orthogonal null congruence reads
+  `dθ/dt = -θ²/2 - σ_{ab}σ^{ab} - Ric(k,k)`.
+  The null energy condition gives `Ric(k,k) ≥ 0`, and the shear term satisfies
+  `σ_{ab}σ^{ab} ≥ 0`, so the physical input is exactly the differential inequality
+  `deriv θ t ≤ -(θ t)^2 / 2`   (hypothesis `hray` below).
+* The surface being **trapped** means the expansion is initially negative:
+  `θ 0 < 0`   (hypothesis `htrapped` below).
 
-  `dθ/dt ≤ -θ² / 2`
-
-holds.  That the surface is *trapped* means precisely that the initial expansion of the
-outgoing null congruence is negative: `θ 0 < 0`.
-
-The structure `NullGeneratorData L` below packages exactly this data on an affine
-interval `[0, L]`: the expansion along a null generator that is defined (and
-differentiable, with finite expansion) for affine parameter in `[0, L]`, satisfying the
-Raychaudhuri inequality, and emanating from a trapped surface.
-
-The theorem `Frontier.penrose_singularity` states that such a generator can only exist for
-affine length `L < 2 / |θ 0|`: the null geodesic congruence focuses to a conjugate point in
-finite affine parameter, so the generator cannot be extended, i.e. the spacetime is null
-geodesically incomplete (`Frontier.penrose_null_geodesic_incomplete`).
+`Frontier.focusing_length_bound` then shows that the congruence can only remain smooth
+(i.e. free of a focal point / caustic) for affine parameter `t < 2/|θ 0|`, and
+`Frontier.penrose_singularity` concludes that no such congruence can be complete,
+i.e. defined and smooth for all affine parameters `t ≥ 0`: geodesic incompleteness.
 -/
 
-/-- Data of a null geodesic generator, parametrized by affine parameter in `[0, L]`,
-issuing orthogonally from a closed trapped surface, in a spacetime satisfying the null
-energy condition.
+/-- Under the Raychaudhuri inequality the expansion is non-increasing: in particular a
+congruence that is initially converging (trapped) stays converging. -/
 
-* `expansion` is the expansion scalar `θ` of the null congruence;
-* `expansionDeriv` is its derivative with respect to the affine parameter;
-* `raychaudhuri` is the Raychaudhuri inequality `θ' ≤ -θ²/2`, which follows from the
-  Raychaudhuri equation together with the null energy condition and the nonnegativity of
-  the shear term;
-* `trapped` says that the surface is trapped: the initial expansion is negative. -/
-structure NullGeneratorData (L : ℝ) where
-  /-- The expansion scalar `θ` of the null congruence along the generator. -/
-  expansion : ℝ → ℝ
-  /-- The derivative of the expansion with respect to the affine parameter. -/
-  expansionDeriv : ℝ → ℝ
-  /-- The expansion is differentiable in the affine parameter on `[0, L]`
-  (in particular it stays finite there: no conjugate point occurs on `[0, L]`). -/
-  hasDeriv : ∀ t ∈ Set.Icc (0 : ℝ) L, HasDerivAt expansion (expansionDeriv t) t
-  /-- Raychaudhuri inequality, a consequence of the null energy condition. -/
-  raychaudhuri : ∀ t ∈ Set.Icc (0 : ℝ) L, expansionDeriv t ≤ -(expansion t) ^ 2 / 2
-  /-- Trapped surface condition: the initial expansion is negative. -/
-  trapped : expansion 0 < 0
+theorem expansion_neg {L : ℝ} {θ : ℝ → ℝ}
+    (hdiff : ∀ t ∈ Set.Icc (0 : ℝ) L, DifferentiableAt ℝ θ t)
+    (hray : ∀ t ∈ Set.Icc (0 : ℝ) L, deriv θ t ≤ -(θ t) ^ 2 / 2)
+    (htrapped : θ 0 < 0) :
+    ∀ t ∈ Set.Icc (0 : ℝ) L, θ t < 0 := by
+  intro t ht
+  have h0L : (0 : ℝ) ≤ L := ht.1.trans ht.2
+  have := expansion_antitone hdiff hray (Set.left_mem_Icc.mpr h0L) ht ht.1
+  linarith
 
-namespace NullGeneratorData
-
-variable {L : ℝ} (C : NullGeneratorData L)
-
-/-- The expansion is nonincreasing along the generator. -/
-
-theorem expansion_neg {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) L) : C.expansion t < 0 :=
-  lt_of_le_of_lt (C.antitoneOn_expansion ⟨le_refl 0, ht.1.trans ht.2⟩ ht ht.1) C.trapped
-
-/-- The auxiliary function `t ↦ 1 / θ t - t / 2`, which is nondecreasing by the
-Raychaudhuri inequality. -/
+/-- **Focusing / caustic bound.** A null geodesic congruence obeying the Raychaudhuri
+inequality (null energy condition plus non-negative shear) and starting from a trapped
+surface (`θ 0 < 0`) cannot stay regular for affine parameter length `2/|θ 0|`:
+its domain of smoothness satisfies `L < 2/|θ 0|`. -/

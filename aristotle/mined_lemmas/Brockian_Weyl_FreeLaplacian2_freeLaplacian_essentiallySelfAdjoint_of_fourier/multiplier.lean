@@ -30,7 +30,6 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,24 +40,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open MeasureTheory SchwartzMap FourierTransform Laplacian LineDeriv
+namespace Brockian.Weyl.FreeLaplacian2
+
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-  [MeasurableSpace E] [BorelSpace E]
+def multiplier {W : Type*} [NormedAddCommGroup W] (ξ : W) : ℝ := (2 * π) ^ 2 * ‖ξ‖ ^ 2
 
-/-- The complex Hilbert space `L²(E)` of square integrable functions on a finite-dimensional
-real inner product space `E`, with respect to the Lebesgue (Haar) measure. -/
-abbrev L2Space (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-    [MeasurableSpace E] [BorelSpace E] : Type _ := ↥(Lp (α := E) ℂ 2 volume)
-
-/-- Schwartz functions viewed as elements of `L²(E)`. -/
-
-def multiplier (ξ : E) : ℝ := 4 * π ^ 2 * ‖ξ‖ ^ 2
-
-/-- `IsFourierMul y w` says that on the Fourier side, `w` is obtained from `y` by multiplying
-with the Fourier multiplier `4π²‖ξ‖²` of the free Laplacian. -/

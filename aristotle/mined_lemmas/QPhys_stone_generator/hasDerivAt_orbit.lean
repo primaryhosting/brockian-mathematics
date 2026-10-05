@@ -4,9 +4,6 @@ Category: Quantum Physics
 Target: QPhys.stone_generator
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean does not allow a module docstring before the `import` line, so the header above is a
-plain block comment; the same header is repeated as a module docstring below.)
 -/
 import Mathlib
 
@@ -17,36 +14,48 @@ Target: QPhys.stone_generator
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 
-Stone's theorem: the infinitesimal generator of a strongly continuous one-parameter
-unitary group on a complex Hilbert space is self-adjoint (as an unbounded, i.e. partially
-defined, operator).
+## Contents
+
+Mathlib (as of this version) contains no form of Stone's theorem on one-parameter unitary
+groups, so the generator, its domain, and the proof of self-adjointness are developed here
+from scratch.  The Mathlib inputs used are the fundamental theorem of calculus for
+Banach-space valued interval integrals (`intervalIntegral.integral_hasDerivAt_right`,
+`intervalIntegral.integral_eq_sub_of_hasDerivAt`), the fact that continuous linear maps
+commute with interval integrals (`ContinuousLinearMap.intervalIntegral_comp_comm`),
+differentiability of the inner product (`HasDerivAt.inner`), and
+`Dense.eq_of_inner_right`.
 -/
 
 namespace QPhys
 
-open Filter Topology
+open Complex MeasureTheory intervalIntegral
+open scoped Classical
 
-noncomputable section
+section
 
-variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
-/-- The domain of the infinitesimal generator of a one-parameter group `U`:
-the set of vectors `x` for which the orbit map `t ↦ U t x` is differentiable at `0`. -/
+/-- The domain of the generator of a one-parameter group `U : ℝ → H →L[ℂ] H`:
+the set of vectors `x` for which `t ↦ U t x` is differentiable at `0`.  We write the
+derivative as `Complex.I • z`, so that `U t = exp (t • (I • A))`, i.e. `A` is the
+"physicist's" generator (`U t = exp (i t A)`). -/
 
-lemma hasDerivAt_orbit {x : H} (hx : x ∈ generatorDomain U) (s : ℝ) :
-    HasDerivAt (fun t : ℝ => U t x) (U s (orbitDeriv U x)) s := by
-  have h1 : HasDerivAt (fun t : ℝ => U (t - s) x) (orbitDeriv U x) s := by
-    have hg : HasDerivAt (fun u : ℝ => U u x) (orbitDeriv U x) (s - s) := by
-      simpa using hasDerivAt_orbit_zero U hx
-    exact HasDerivAt.comp_sub_const s s hg
-  have h2 : HasDerivAt (fun t : ℝ => U s (U (t - s) x)) (U s (orbitDeriv U x)) s :=
-    hasDerivAt_clm_apply (U s) h1
-  have h : (fun t : ℝ => U s (U (t - s) x)) = fun t : ℝ => U t x := by
-    funext t
-    rw [← hUadd]
-    ring_nf
-  rwa [h] at h2
+theorem hasDerivAt_orbit {x : H} (hx : x ∈ genDom U) (t : ℝ) :
+    HasDerivAt (fun s => U s x) (Complex.I • U t (gen U x)) t := by
+  have h1 : HasDerivAt (fun s => U s (U t x)) (Complex.I • gen U (U t x)) 0 :=
+    hasDerivAt_gen (U_mem_genDom hadd hx t).1
+  rw [(U_mem_genDom hadd hx t).2] at h1
+  have h2 : HasDerivAt (fun s : ℝ => s - t) 1 t := (hasDerivAt_id t).sub_const t
+  have h1' : HasDerivAt (fun s => U s (U t x)) (Complex.I • U t (gen U x)) (t - t) := by
+    rw [sub_self]; exact h1
+  have h3 := HasDerivAt.scomp (𝕜 := ℝ) (h := fun s : ℝ => s - t) (x := t) h1' h2
+  have key : ((fun s => U s (U t x)) ∘ fun s : ℝ => s - t) = fun s => U s x := by
+    funext s
+    simp only [Function.comp_apply]
+    rw [U_apply_U hadd, sub_add_cancel]
+  rw [key] at h3
+  simpa using h3
 
 omit [CompleteSpace H] in
-include hU0 hUnorm in
+include h0 hnorm in
 /-- The generator is symmetric. -/

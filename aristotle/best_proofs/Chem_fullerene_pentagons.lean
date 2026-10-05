@@ -10,54 +10,24 @@ namespace Chem
 
 /-- **Fullerene pentagon count.**
 
-Let a polyhedron have `V` vertices, `E` edges and `F` faces, of which `P` are pentagons and
-`H` are hexagons.  Assume:
+Consider a polyhedron with `V` vertices, `E` edges and `F` faces which
 
-* Euler's formula `V - E + F = 2`, stated subtraction-free as `V + F = E + 2`;
-* trivalence: every vertex meets exactly three edges, so `3 * V = 2 * E`;
-* every face is a pentagon or a hexagon: `F = P + H`, and counting edge-face incidences
-  (each edge lies on exactly two faces) gives `5 * P + 6 * H = 2 * E`.
+* satisfies Euler's formula `V - E + F = 2` (stated additively as `V + F = E + 2`);
+* is trivalent, i.e. every vertex lies on exactly three edges, so double counting
+  vertex–edge incidences gives `3 * V = 2 * E`;
+* has only pentagonal and hexagonal faces, say `p` pentagons and `h` hexagons, so
+  `F = p + h`, and double counting edge–face incidences gives `5 * p + 6 * h = 2 * E`.
 
-Then the polyhedron has exactly `12` pentagonal faces — the combinatorial reason why every
-fullerene molecule contains precisely twelve pentagonal rings.
-
-Proof: from `3V = 2E` and `V + F = E + 2` we get `3P + 3H = 3F = E + 6`, i.e. `6P + 6H = 2E + 12`,
-while `2E = 5P + 6H`; subtracting yields `P = 12`.  (The `omega` decision procedure for linear
-integer arithmetic performs exactly this elimination.)
--/
+Then it has exactly `12` pentagonal faces — the combinatorial reason a fullerene
+(e.g. C₆₀) always contains twelve five-membered rings. -/
 theorem fullerene_pentagons
-    (V E F P H : Nat)
+    (V E F p h : Nat)
     (euler : V + F = E + 2)
     (trivalent : 3 * V = 2 * E)
-    (faces : F = P + H)
-    (edge_face : 5 * P + 6 * H = 2 * E) :
-    P = 12 := by
+    (faces : F = p + h)
+    (edge_face : 5 * p + 6 * h = 2 * E) :
+    p = 12 := by
   omega
 
 end Chem
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 

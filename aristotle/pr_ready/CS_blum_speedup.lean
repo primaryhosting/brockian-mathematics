@@ -8,444 +8,7 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
-
-/-
-# Blum Speedup
-Category: Frontier Cs
-Target: CS.blum_speedup
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-(Note: Lean requires `import` to precede any module docstring, so the header above is a
-plain block comment; the same text is repeated as the module docstring below.)
--/
-
-
-/-!
-# Blum Speedup
-Category: Frontier Cs
-Target: CS.blum_speedup
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-## What is formalised here
-
-The statement "there are problems with no fastest algorithm" is formalised as follows.
-
-* `CS.BlumMeasure` is a Blum complexity measure on a programming system: an effective
-  numbering of the partial computable functions (`sem_partrec`, `sem_complete`) together with a
-  cost function satisfying Blum's two axioms, namely that the cost of a run is defined exactly
-  when the run converges (`cost_dom`) and that the graph of the cost function is computable
-  (`cost_decidable`).
-* `CS.blum` is such a measure. Its semantics is the standard one: a program is a pair `(c, k)`
-  of a code `c` in the standard system `Nat.Partrec.Code` and a *compression level* `k`, and it
-  computes the function computed by `c`. Its cost is the number of steps of `c` (the least fuel
-  making `Nat.Partrec.Code.evaln` converge) recorded on the scale of the `k`-th branch of the
-  Ackermann function; at level `0` this is exactly the step count (`CS.scaledCost_level_zero`),
-  and along any program the cost still tends to infinity (`CS.scaledCost_unbounded`).
-* `CS.hardProblem` is a `0-1` valued computable problem which is arbitrarily hard for the
-  standard step count: every algorithm for it exceeds any prescribed primitive recursive time
-  bound on infinitely many inputs (`CS.hardProblem_hard_of_primrec`).
-* `CS.blum_speedup` combines these: there is a Blum complexity measure and a (hard) decision
-  problem such that every algorithm for the problem is beaten, by any prescribed primitive
-  recursive factor and on almost every input, by another algorithm for the same problem.
-
-## Scope
-
-Blum's original speedup theorem is stronger in two respects: it holds for *every* Blum
-complexity measure (in particular for the standard step count) and for every total computable
-speedup factor, at the price of a much more delicate construction of the problem. What is proved
-here is the existential statement, for an explicitly constructed Blum measure and primitive
-recursive speedup factors; in that measure `CS.blum_no_fastest` shows that in fact no problem
-has a fastest algorithm.
--/
-
-set_option maxRecDepth 8000
-set_option maxHeartbeats 1000000
-
-namespace CS
-
-open Nat.Partrec Nat.Partrec.Code
-
-/-! ## Blum complexity measures -/
-
-/-- A *Blum complexity measure* on a programming system whose semantics is given by
-`sem : Prog → ℕ →. ℕ`.
-
-* `sem_partrec` says that the programming system is effective (there is a universal machine);
-* `sem_complete` says that every partial computable function is computed by some program
-  (so the system really is a programming system for the partial computable functions);
-* `cost_dom` is Blum's first axiom: the cost of a run is defined exactly when the run converges;
-* `cost_decidable` is Blum's second axiom: the graph of the cost function is computable. -/
-structure BlumMeasure (Prog : Type) [Primcodable Prog] where
-  /-- semantics: the partial function computed by a program -/
-  sem : Prog → ℕ →. ℕ
-  /-- the cost (running time) of a program on an input -/
-  cost : Prog → ℕ →. ℕ
-  sem_partrec : Partrec₂ sem
-  sem_complete : ∀ f : ℕ →. ℕ, Partrec f → ∃ p, sem p = f
-  cost_dom : ∀ p n, (cost p n).Dom ↔ (sem p n).Dom
-  cost_decidable : ∃ D : Prog × ℕ × ℕ → Bool, Computable D ∧
-      ∀ p n m, (D (p, n, m) = true ↔ m ∈ cost p n)
-
-variable {Prog : Type} [Primcodable Prog]
-
-/-- Program `q` beats program `p` by the factor `r`: on almost every input, applying `r` to the
-cost of `q` still does not exceed the cost of `p`. -/
-def BlumMeasure.SpeedsUp (M : BlumMeasure Prog) (r : ℕ → ℕ) (p q : Prog) : Prop :=
-  ∃ N, ∀ n, N ≤ n → ∀ a ∈ M.cost q n, ∀ b ∈ M.cost p n, r a ≤ b
-
-/-- The problem `f` has *no fastest algorithm*: every program for `f` is beaten, by any
-prescribed primitive recursive factor `r`, by another program for `f`. -/
-def BlumMeasure.NoFastestAlgorithm (M : BlumMeasure Prog) (f : ℕ →. ℕ) : Prop :=
-  ∀ p, M.sem p = f → ∀ r : ℕ → ℕ, Nat.Primrec r → ∃ q, M.sem q = f ∧ M.SpeedsUp r p q
-
-/-! ## Step counting for the standard programming system -/
-
-/-- `halts c n f = true` iff the code `c` converges on input `n` with fuel `f`. -/
-def halts (c : Code) (n f : ℕ) : Bool := (evaln f c n).isSome
-
-theorem halts_iff_exists {c : Code} {n f : ℕ} : halts c n f = true ↔ ∃ x, x ∈ evaln f c n := by
-  constructor
-  · intro h
-    obtain ⟨x, hx⟩ := Option.isSome_iff_exists.1 h
-    exact ⟨x, hx⟩
-  · rintro ⟨x, hx⟩
-    exact Option.isSome_iff_exists.2 ⟨x, hx⟩
-
-theorem halts_mono {c : Code} {n f₁ f₂ : ℕ} (h : f₁ ≤ f₂) (h1 : halts c n f₁ = true) :
-    halts c n f₂ = true := by
-  obtain ⟨x, hx⟩ := halts_iff_exists.1 h1
-  exact halts_iff_exists.2 ⟨x, evaln_mono h hx⟩
-
-theorem primrec_halts : Primrec fun x : (Code × ℕ) × ℕ => halts x.1.1 x.1.2 x.2 :=
-  Primrec.option_isSome.comp (primrec_evaln.comp
-    ((Primrec.snd.pair (Primrec.fst.comp Primrec.fst)).pair (Primrec.snd.comp Primrec.fst)))
-
-/-- The step count of `c` on `n`: the least fuel making the computation converge. -/
-noncomputable def stepCount (c : Code) (n : ℕ) : Part ℕ :=
-  Nat.rfind fun f => Part.some (halts c n f)
-
-theorem mem_stepCount {c : Code} {n s : ℕ} :
-    s ∈ stepCount c n ↔ halts c n s = true ∧ ∀ t < s, halts c n t = false := by
-  rw [stepCount, Nat.mem_rfind]
-  constructor
-  · rintro ⟨h1, h2⟩
-    exact ⟨(Part.mem_some_iff.1 h1).symm, fun t ht => (Part.mem_some_iff.1 (h2 ht)).symm⟩
-  · rintro ⟨h1, h2⟩
-    exact ⟨Part.mem_some_iff.2 h1.symm, fun {t} ht => Part.mem_some_iff.2 (h2 t ht).symm⟩
-
-theorem halts_iff_stepCount {c : Code} {n f : ℕ} :
-    halts c n f = true ↔ ∃ s ∈ stepCount c n, s ≤ f := by
-  classical
-  constructor
-  · intro h
-    have hex : ∃ t, halts c n t = true := ⟨f, h⟩
-    refine ⟨Nat.find hex, ?_, Nat.find_le h⟩
-    exact mem_stepCount.2 ⟨Nat.find_spec hex, fun t ht => by simpa using Nat.find_min hex ht⟩
-  · rintro ⟨s, hs, hsf⟩
-    exact halts_mono hsf (mem_stepCount.1 hs).1
-
-theorem stepCount_dom {c : Code} {n : ℕ} : (stepCount c n).Dom ↔ (eval c n).Dom := by
-  constructor
-  · intro h
-    obtain ⟨s, hs⟩ := Part.dom_iff_mem.1 h
-    obtain ⟨x, hx⟩ := halts_iff_exists.1 (mem_stepCount.1 hs).1
-    exact Part.dom_iff_mem.2 ⟨x, evaln_sound hx⟩
-  · intro h
-    obtain ⟨x, hx⟩ := Part.dom_iff_mem.1 h
-    obtain ⟨k, hk⟩ := evaln_complete.1 hx
-    obtain ⟨s, hs, _⟩ := halts_iff_stepCount.1 (halts_iff_exists.2 ⟨x, hk⟩)
-    exact Part.dom_iff_mem.2 ⟨s, hs⟩
-
-theorem input_lt_of_mem_stepCount {c : Code} {n s : ℕ} (h : s ∈ stepCount c n) : n < s := by
-  obtain ⟨x, hx⟩ := halts_iff_exists.1 (mem_stepCount.1 h).1
-  exact evaln_bound hx
-
-/-! ## A Blum measure with compression levels
-
-A program is a pair `(c, k)` consisting of a code `c` and a *compression level* `k`; it computes
-the same function as `c`, but its running time is recorded on the coarser scale given by the
-`k`-th branch `ack k` of the Ackermann function: the cost is the largest `y` with
-`ack k y ≤ steps`. Both Blum axioms hold for this measure. -/
-
-/-- The cost of the program `(c, k)` on input `n`. -/
-noncomputable def scaledCost (p : Code × ℕ) (n : ℕ) : Part ℕ :=
-  (stepCount p.1 n).map fun s => Nat.findGreatest (fun y => ack p.2 y ≤ s) s
-
-theorem findGreatest_ack_pos {k s : ℕ} (h : 0 < Nat.findGreatest (fun y => ack k y ≤ s) s) :
-    ack k (Nat.findGreatest (fun y => ack k y ≤ s) s) ≤ s := by
-  by_contra hc
-  rcases Classical.em (∃ n, 0 < n ∧ n ≤ s ∧ ack k n ≤ s) with ⟨n0, h0, h1, h2⟩ | hno
-  · exact hc (Nat.findGreatest_spec (P := fun y => ack k y ≤ s) h1 h2)
-  · have : Nat.findGreatest (fun y => ack k y ≤ s) s = 0 :=
-      Nat.findGreatest_eq_zero_iff.2 fun n hn hns hp => hno ⟨n, hn, hns, hp⟩
-    omega
-
-theorem lt_ack_findGreatest_succ {k s : ℕ} :
-    s < ack k (Nat.findGreatest (fun y => ack k y ≤ s) s + 1) := by
-  by_contra hc
-  push_neg at hc
-  have h1 : Nat.findGreatest (fun y => ack k y ≤ s) s + 1 ≤ s :=
-    le_trans (le_of_lt (lt_ack_right k _)) hc
-  have := Nat.le_findGreatest (P := fun y => ack k y ≤ s) h1 hc
-  omega
-
-theorem findGreatest_ack_eq {k s m : ℕ} :
-    Nat.findGreatest (fun y => ack k y ≤ s) s = m ↔ (m = 0 ∨ ack k m ≤ s) ∧ s < ack k (m + 1) := by
-  constructor
-  · rintro rfl
-    refine ⟨?_, lt_ack_findGreatest_succ⟩
-    rcases Nat.eq_zero_or_pos (Nat.findGreatest (fun y => ack k y ≤ s) s) with h | h
-    · exact Or.inl h
-    · exact Or.inr (findGreatest_ack_pos h)
-  · rintro ⟨h1, h2⟩
-    have hle : m ≤ Nat.findGreatest (fun y => ack k y ≤ s) s := by
-      rcases h1 with rfl | h1
-      · exact Nat.zero_le _
-      · exact Nat.le_findGreatest (le_trans (le_of_lt (lt_ack_right k m)) h1) h1
-    have hge : Nat.findGreatest (fun y => ack k y ≤ s) s ≤ m := by
-      rcases Nat.eq_zero_or_pos (Nat.findGreatest (fun y => ack k y ≤ s) s) with h | h
-      · omega
-      · have hp := findGreatest_ack_pos h
-        have h3 : ack k (Nat.findGreatest (fun y => ack k y ≤ s) s) < ack k (m + 1) :=
-          lt_of_le_of_lt hp h2
-        have := (ack_lt_iff_right (m := k)).1 h3
-        omega
-    omega
-
-theorem mem_scaledCost_eq {c : Code} {k n m : ℕ} :
-    m ∈ scaledCost (c, k) n ↔
-      ∃ s ∈ stepCount c n, Nat.findGreatest (fun y => ack k y ≤ s) s = m :=
-  Part.mem_map_iff _
-
-theorem mem_scaledCost {c : Code} {k n m : ℕ} :
-    m ∈ scaledCost (c, k) n ↔
-      ∃ s ∈ stepCount c n, (m = 0 ∨ ack k m ≤ s) ∧ s < ack k (m + 1) := by
-  rw [mem_scaledCost_eq]
-  constructor
-  · rintro ⟨s, hs, hfg⟩
-    exact ⟨s, hs, findGreatest_ack_eq.1 hfg⟩
-  · rintro ⟨s, hs, h⟩
-    exact ⟨s, hs, findGreatest_ack_eq.2 h⟩
-
-/-- The decision procedure witnessing Blum's second axiom for `scaledCost`. -/
-def costDecide (x : (Code × ℕ) × ℕ × ℕ) : Bool :=
-  halts x.1.1 x.2.1 (ack x.1.2 (x.2.2 + 1) - 1) &&
-    (x.2.2 == 0 || !halts x.1.1 x.2.1 (ack x.1.2 x.2.2 - 1))
-
-theorem computable_costDecide : Computable costDecide := by
-  have hc : Computable fun x : (Code × ℕ) × ℕ × ℕ => x.1.1 := Computable.fst.comp Computable.fst
-  have hn : Computable fun x : (Code × ℕ) × ℕ × ℕ => x.2.1 := Computable.fst.comp Computable.snd
-  have hk : Computable fun x : (Code × ℕ) × ℕ × ℕ => x.1.2 := Computable.snd.comp Computable.fst
-  have hm : Computable fun x : (Code × ℕ) × ℕ × ℕ => x.2.2 := Computable.snd.comp Computable.snd
-  have hA : Computable fun x : (Code × ℕ) × ℕ × ℕ => ack x.1.2 x.2.2 - 1 :=
-    Primrec.nat_sub.to_comp.comp (computable₂_ack.comp hk hm) (Computable.const 1)
-  have hB : Computable fun x : (Code × ℕ) × ℕ × ℕ => ack x.1.2 (x.2.2 + 1) - 1 :=
-    Primrec.nat_sub.to_comp.comp
-      (computable₂_ack.comp hk (Computable.succ.comp hm)) (Computable.const 1)
-  have hpA : Computable fun x : (Code × ℕ) × ℕ × ℕ => ((x.1.1, x.2.1), ack x.1.2 x.2.2 - 1) :=
-    (hc.pair hn).pair hA
-  have hpB : Computable fun x : (Code × ℕ) × ℕ × ℕ =>
-      ((x.1.1, x.2.1), ack x.1.2 (x.2.2 + 1) - 1) := (hc.pair hn).pair hB
-  have h1 := primrec_halts.to_comp.comp hpB
-  have h2 := primrec_halts.to_comp.comp hpA
-  have h3 : Computable fun x : (Code × ℕ) × ℕ × ℕ => (x.2.2 == 0) :=
-    ((Primrec.nat_casesOn (Primrec.snd.comp Primrec.snd) (Primrec.const true)
-      ((Primrec.const false).to₂)).of_eq (by intro x; cases h : x.2.2 <;> simp)).to_comp
-  have h4 := (Primrec.dom_bool (!·)).to_comp.comp h2
-  have h5 := (Primrec.dom_bool₂ (· || ·)).to_comp.comp h3 h4
-  exact (Primrec.dom_bool₂ (· && ·)).to_comp.comp h1 h5
-
-theorem costDecide_iff (p : Code × ℕ) (n m : ℕ) :
-    costDecide (p, n, m) = true ↔ m ∈ scaledCost p n := by
-  obtain ⟨c, k⟩ := p
-  rw [mem_scaledCost]
-  simp only [costDecide, Bool.and_eq_true, Bool.or_eq_true, beq_iff_eq, Bool.not_eq_true']
-  constructor
-  · rintro ⟨h1, h2⟩
-    obtain ⟨s, hs, hsle⟩ := halts_iff_stepCount.1 h1
-    have hpos : 0 < ack k (m + 1) := ack_pos _ _
-    refine ⟨s, hs, ?_, by omega⟩
-    rcases h2 with rfl | h2
-    · exact Or.inl rfl
-    · refine Or.inr ?_
-      by_contra hlt
-      push_neg at hlt
-      have hpos' : 0 < ack k m := ack_pos _ _
-      have : halts c n (ack k m - 1) = true :=
-        halts_mono (by omega) (mem_stepCount.1 hs).1
-      rw [h2] at this
-      exact Bool.false_ne_true this
-  · rintro ⟨s, hs, hc1, hc2⟩
-    have hhalt : halts c n s = true := (mem_stepCount.1 hs).1
-    have hpos : 0 < ack k (m + 1) := ack_pos _ _
-    refine ⟨halts_mono (by omega) hhalt, ?_⟩
-    rcases hc1 with rfl | hc1
-    · exact Or.inl rfl
-    · refine Or.inr ?_
-      by_contra hcon
-      have hcon' : halts c n (ack k m - 1) = true := by
-        simpa using hcon
-      obtain ⟨s', hs', hs'le⟩ := halts_iff_stepCount.1 hcon'
-      have hss : s' = s := Part.mem_unique hs' hs
-      subst hss
-      have := ack_pos k m
-      omega
-
-/-- The Blum complexity measure used below: the standard programming system of all partial
-computable functions, with programs carrying a compression level. -/
-noncomputable def blum : BlumMeasure (Code × ℕ) where
-  sem p := eval p.1
-  cost := scaledCost
-  sem_partrec := eval_part.comp (Computable.fst.comp Computable.fst) Computable.snd
-  sem_complete := fun f hf => by
-    obtain ⟨c, hc⟩ := exists_code.1 (Partrec.nat_iff.1 hf)
-    exact ⟨(c, 0), hc⟩
-  cost_dom := fun p n => stepCount_dom
-  cost_decidable := ⟨costDecide, computable_costDecide, fun p n m => costDecide_iff p n m⟩
-
-/-- In the measure `blum`, no program is fastest: every program for a problem is beaten,
-by any primitive recursive factor, by another program for the same problem. -/
-theorem blum_no_fastest (f : ℕ →. ℕ) : blum.NoFastestAlgorithm f := by
-  rintro ⟨c, k⟩ hp r hr
-  obtain ⟨m₀, hm₀⟩ := exists_lt_ack_of_nat_primrec hr
-  set k' := max k m₀ + 2 with hk'
-  refine ⟨(c, k'), hp, ⟨ack k' 1, ?_⟩⟩
-  intro n hn a ha b hb
-  obtain ⟨s, hs, ha1, ha2⟩ := mem_scaledCost.1 ha
-  obtain ⟨s', hs', hb1⟩ := mem_scaledCost_eq.1 hb
-  have hss : s' = s := Part.mem_unique hs' hs
-  rw [hss] at hb1
-  have hns : n < s := input_lt_of_mem_stepCount hs
-  have hane : a ≠ 0 := by
-    rintro rfl
-    rw [zero_add] at ha2
-    omega
-  have hacka : ack k' a ≤ s := by
-    rcases ha1 with h | h
-    · exact absurd h hane
-    · exact h
-  have hlt : ack k (ack m₀ a) < ack k' a := ack_ack_lt_ack_max_add_two k m₀ a
-  have hz : ack k (ack m₀ a) ≤ s := le_of_lt (lt_of_lt_of_le hlt hacka)
-  have hzs : ack m₀ a ≤ s := le_trans (le_of_lt (lt_ack_right k _)) hz
-  have : ack m₀ a ≤ Nat.findGreatest (fun y => ack k y ≤ s) s :=
-    Nat.le_findGreatest hzs hz
-  rw [hb1] at this
-  exact le_of_lt (lt_of_lt_of_le (hm₀ a) this)
-
-/-! ## The measure is not degenerate
-
-Two sanity checks on `blum`. First, at compression level `0` the cost is literally the number of
-steps (minus one), i.e. the standard step-counting measure is part of the system. Second, costs
-do not collapse: along any program, the cost tends to infinity, so the speedups above are not
-obtained by costs bottoming out at a fixed value. -/
-
-theorem scaledCost_level_zero {c : Code} {n s : ℕ} (hs : s ∈ stepCount c n) :
-    s - 1 ∈ scaledCost (c, 0) n := by
-  have hs1 : 1 ≤ s := by
-    have := input_lt_of_mem_stepCount hs
-    omega
-  refine mem_scaledCost.2 ⟨s, hs, ?_, ?_⟩
-  · rcases Nat.eq_zero_or_pos (s - 1) with h | h
-    · exact Or.inl h
-    · refine Or.inr ?_
-      rw [ack_zero]
-      omega
-  · rw [ack_zero]
-    omega
-
-theorem le_scaledCost {c : Code} {k N n : ℕ} (hn : ack k N ≤ n) {b : ℕ}
-    (hb : b ∈ scaledCost (c, k) n) : N ≤ b := by
-  obtain ⟨s, hs, hb1⟩ := mem_scaledCost_eq.1 hb
-  have hns : n < s := input_lt_of_mem_stepCount hs
-  have h1 : ack k N ≤ s := by omega
-  have h2 : N ≤ s := le_trans (le_of_lt (lt_ack_right k N)) h1
-  have := Nat.le_findGreatest (P := fun y => ack k y ≤ s) h2 h1
-  omega
-
-/-- Along any program, the cost tends to infinity. -/
-theorem scaledCost_unbounded (c : Code) (k N : ℕ) :
-    ∃ N', ∀ n, N' ≤ n → ∀ b ∈ scaledCost (c, k) n, N ≤ b :=
-  ⟨ack k N, fun _ hn _ hb => le_scaledCost hn hb⟩
-
-/-! ## An arbitrarily hard decision problem
-
-So that the main theorem is not about a trivially easy problem, we exhibit a decision problem
-which is hard for the *standard* step-counting measure: for any primitive recursive bound `t`,
-every algorithm for it exceeds `t` on infinitely many inputs. The problem diagonalises against
-the code `c` with index `i` on the inputs `n` with `n.unpair.1 = i`. -/
-
-/-- The code with index `i`. -/
-def codeOf (i : ℕ) : Code := Denumerable.ofNat Code i
-
-/-- A decision problem which no algorithm can solve within a primitive recursive time bound on
-all but finitely many inputs. -/
-def hardProblem (n : ℕ) : ℕ := 1 - ((evaln (ack n n) (codeOf n.unpair.1) n).getD 1)
-
-theorem hardProblem_le_one (n : ℕ) : hardProblem n ≤ 1 := Nat.sub_le _ _
-
-theorem computable_hardProblem : Computable hardProblem := by
-  have h1 : Computable fun n : ℕ => ack n n := computable₂_ack.comp Computable.id Computable.id
-  have h2 : Computable fun n : ℕ => codeOf n.unpair.1 :=
-    (Computable.ofNat Code).comp (Computable.fst.comp Computable.unpair)
-  have hp : Computable fun n : ℕ => ((ack n n, codeOf n.unpair.1), n) :=
-    (h1.pair h2).pair Computable.id
-  have h3 := primrec_evaln.to_comp.comp hp
-  have h4 := Primrec.option_getD.to_comp.comp h3 (Computable.const 1)
-  exact Primrec.nat_sub.to_comp.comp (Computable.const 1) h4
-
-/-- Every algorithm for `hardProblem` needs more than `ack n n` steps for infinitely many `n`. -/
-theorem hardProblem_hard {c : Code} (hc : eval c = fun n => Part.some (hardProblem n)) (N : ℕ) :
-    ∃ n, N ≤ n ∧ ∀ s ∈ stepCount c n, ack n n < s := by
-  refine ⟨Nat.pair (Encodable.encode c) N, Nat.right_le_pair _ _, ?_⟩
-  intro s hs
-  by_contra hle
-  push_neg at hle
-  set n := Nat.pair (Encodable.encode c) N with hn
-  have hcode : codeOf n.unpair.1 = c := by
-    simp [codeOf, hn, Denumerable.ofNat_encode]
-  have hhalt : halts c n (ack n n) = true := halts_mono hle (mem_stepCount.1 hs).1
-  obtain ⟨v, hv⟩ := halts_iff_exists.1 hhalt
-  have hval : v = hardProblem n := by
-    have hmem : v ∈ eval c n := evaln_sound hv
-    rw [hc] at hmem
-    simpa using hmem
-  have hdef : hardProblem n = 1 - v := by
-    have hev : evaln (ack n n) (codeOf n.unpair.1) n = some v := by rw [hcode]; exact hv
-    rw [hardProblem, hev]
-    rfl
-  omega
-
-/-- Every algorithm for `hardProblem` exceeds any prescribed primitive recursive time bound on
-infinitely many inputs. -/
-theorem hardProblem_hard_of_primrec (t : ℕ → ℕ) (ht : Nat.Primrec t) {c : Code}
-    (hc : eval c = fun n => Part.some (hardProblem n)) (N : ℕ) :
-    ∃ n, N ≤ n ∧ ∀ s ∈ stepCount c n, t n < s := by
-  obtain ⟨m, hm⟩ := exists_lt_ack_of_nat_primrec ht
-  obtain ⟨n, hn, h⟩ := hardProblem_hard hc (max N m)
-  refine ⟨n, le_trans (le_max_left _ _) hn, fun s hs => ?_⟩
-  have h1 := h s hs
-  have h2 : ack m n ≤ ack n n := ack_mono_left n (le_trans (le_max_right _ _) hn)
-  exact lt_of_lt_of_le (lt_of_lt_of_le (hm n) h2) (le_of_lt h1)
-
-/-! ## The main theorem -/
-
-/-- **Blum speedup**: there are problems with no fastest algorithm. -/
-theorem blum_speedup :
-    ∃ (M : BlumMeasure (Code × ℕ)) (f : ℕ → ℕ),
-      Computable f ∧ (∀ n, f n ≤ 1) ∧
-      (∃ p, M.sem p = fun n => Part.some (f n)) ∧
-      M.NoFastestAlgorithm (fun n => Part.some (f n)) ∧
-      ∀ t : ℕ → ℕ, Nat.Primrec t → ∀ c : Code, eval c = (fun n => Part.some (f n)) →
-        ∀ N, ∃ n, N ≤ n ∧ ∀ s ∈ stepCount c n, t n < s := by
-  refine ⟨blum, hardProblem, computable_hardProblem, hardProblem_le_one, ?_,
-    blum_no_fastest _, fun t ht c hc N => hardProblem_hard_of_primrec t ht hc N⟩
-  obtain ⟨c, hc⟩ := exists_code.1 (Partrec.nat_iff.1 computable_hardProblem.partrec)
-  exact ⟨(c, 0), hc⟩
-
-end CS
-
+import RequestProject.Blum.Cost
 
 open scoped BigOperators
 open scoped Real
@@ -469,4 +32,353 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+
+/-!
+# The Blum speedup construction
+
+We build, by the recursion theorem, a code `blumCode` computing a two-parameter family of
+functions `f i t` (`i` an index bound, `t` a patch threshold) with the following features.
+
+At stage `x`, the function `f i 0` diagonalises against every program `j ≥ i` which is
+*cheap at stage `x`*, meaning that `cost j x ≤ M j x + x` where `M j x` is the maximal cost of
+the programs `curry blumCode ⟨j+1, t⟩` (`t ≤ x`) on input `x`.  Each program is diagonalised
+against at the first stage at which it becomes cheap, so `f i 0` and `f 0 0` differ at only
+finitely many arguments; the parameter `t` lets one patch those finitely many arguments,
+so that `f (j+1) t = f 0 0` for a suitable `t`.
+-/
+
+set_option maxHeartbeats 1000000
+
+namespace CS
+
+open Nat.Partrec Nat.Partrec.Code Primrec
+
+/-! ### Generic form of the construction, parameterised by a cost function -/
+
+/-- Maximal cost, according to `cf`, of the auxiliary programs with parameters `(j+1, t)`,
+`t ≤ y`, on input `y`. -/
+def Mg (cf : ℕ → ℕ) (j y : ℕ) : ℕ :=
+  (List.range (y + 1)).foldr (fun t s => max (cf (Nat.pair (Nat.pair (j + 1) t) y)) s) 0
+
+/-- Program `j` is *cheap at stage `y`*: it converges on `y` within `Mg cf j y + y` steps. -/
+def critg (cf : ℕ → ℕ) (j y : ℕ) : Bool :=
+  (evaln (Mg cf j y + y) (Denumerable.ofNat Code j) y).isSome
+
+/-- The value that program `j` returns on input `y` (when it is cheap at stage `y`). -/
+def dvalg (cf : ℕ → ℕ) (j y : ℕ) : ℕ :=
+  (evaln (Mg cf j y + y) (Denumerable.ofNat Code j) y).getD 0
+
+/-- Program `j` is cancelled at stage `x`: `x` is the first stage `> j` at which `j` is cheap. -/
+def fcg (cf : ℕ → ℕ) (j x : ℕ) : Bool :=
+  decide (j < x) && critg cf j x &&
+    (List.range x).foldr (fun y b => (decide (y ≤ j) || !critg cf j y) && b) true
+
+/-- The diagonal value at stage `x` of the `i`-th function of the family. -/
+def Fg (cf : ℕ → ℕ) (i x : ℕ) : ℕ :=
+  1 + (List.range x).foldr
+      (fun j s => if decide (i ≤ j) && fcg cf j x then max (dvalg cf j x) s else s) 0
+
+/-! ### The fuel-bounded (computable) version -/
+
+/-- The least `k' ≤ k` such that `evaln k' e a` converges (and `0` if there is none). -/
+def costF (e : Code) (a : ℕ) : ℕ → ℕ
+  | 0 => 0
+  | k + 1 =>
+    if (evaln k e a).isSome then costF e a k
+    else if (evaln (k + 1) e a).isSome then k + 1 else 0
+
+/-- `Mg` computed with fuel `k`. -/
+def MF (e : Code) (k j y : ℕ) : ℕ := Mg (fun a => costF e a k) j y
+
+/-- `critg` computed with fuel `k`. -/
+def critF (e : Code) (k j y : ℕ) : Bool := critg (fun a => costF e a k) j y
+
+/-- `dvalg` computed with fuel `k`. -/
+def dvalF (e : Code) (k j y : ℕ) : ℕ := dvalg (fun a => costF e a k) j y
+
+/-- `fcg` computed with fuel `k`. -/
+def fcF (e : Code) (k j x : ℕ) : Bool := fcg (fun a => costF e a k) j x
+
+/-- `Fg` computed with fuel `k`. -/
+def FF (e : Code) (k i x : ℕ) : ℕ := Fg (fun a => costF e a k) i x
+
+/-- Fuel `k` suffices for all the recursive calls needed to compute the value at `(i, t, x)`. -/
+def okF (e : Code) (k i t x : ℕ) : Bool :=
+  if x < t then (evaln k e (Nat.pair (Nat.pair 0 0) x)).isSome
+  else (List.range (Nat.pair (Nat.pair x x) x + 1)).foldr (fun a b =>
+        ((!(decide (i + 1 ≤ a.unpair.1.unpair.1) && decide (a.unpair.1.unpair.1 ≤ x) &&
+              decide (a.unpair.2 ≤ x) && decide (a.unpair.1.unpair.2 ≤ a.unpair.2)))
+          || (evaln k e a).isSome) && b) true
+
+/-- One fuel-bounded attempt at computing the value of the construction on input `a`. -/
+def bigOpt (e : Code) (k a : ℕ) : Option ℕ :=
+  if okF e k a.unpair.1.unpair.1 a.unpair.1.unpair.2 a.unpair.2 then
+    some (if a.unpair.2 < a.unpair.1.unpair.2 then
+            (evaln k e (Nat.pair (Nat.pair 0 0) a.unpair.2)).getD 0
+          else FF e k a.unpair.1.unpair.1 a.unpair.2)
+  else none
+
+/-! ### Computability -/
+
+theorem costF_eq_rec (e : Code) (a k : ℕ) :
+    costF e a k = Nat.rec 0 (fun n IH => if (evaln n e a).isSome then IH
+      else if (evaln (n + 1) e a).isSome then n + 1 else 0) k := by
+  induction k with
+  | zero => rfl
+  | succ k ih => simp [costF, ih]
+
+theorem primrec_costF : Primrec₂ fun (p : Code × ℕ) (k : ℕ) => costF p.1 p.2 k := by
+  have hev : Primrec fun q : (Code × ℕ) × ℕ × ℕ => (evaln q.2.1 q.1.1 q.1.2).isSome :=
+    option_isSome.comp (primrec_evaln.comp
+      (((fst.comp snd).pair (fst.comp fst)).pair (snd.comp fst)))
+  have hev2 : Primrec fun q : (Code × ℕ) × ℕ × ℕ => (evaln (q.2.1 + 1) q.1.1 q.1.2).isSome :=
+    option_isSome.comp (primrec_evaln.comp
+      (((Primrec.succ.comp (fst.comp snd)).pair (fst.comp fst)).pair (snd.comp fst)))
+  have hg : Primrec₂ fun (p : Code × ℕ) (q : ℕ × ℕ) =>
+      if (evaln q.1 p.1 p.2).isSome then q.2
+      else if (evaln (q.1 + 1) p.1 p.2).isSome then q.1 + 1 else 0 :=
+    Primrec.ite (Primrec.primrecPred (by simpa using hev)) (snd.comp snd)
+      (Primrec.ite (Primrec.primrecPred (by simpa using hev2))
+        (Primrec.succ.comp (fst.comp snd)) (const 0))
+  exact (Primrec.nat_rec (f := fun _ : Code × ℕ => (0 : ℕ)) (const 0) hg).of_eq
+    (fun p k => (costF_eq_rec p.1 p.2 k).symm)
+
+theorem primrec_MF : Primrec fun p : (Code × ℕ) × ℕ × ℕ => MF p.1.1 p.1.2 p.2.1 p.2.2 := by
+  have hrange : Primrec fun p : (Code × ℕ) × ℕ × ℕ => List.range (p.2.2 + 1) :=
+    Primrec.list_range.comp (Primrec.succ.comp (snd.comp snd))
+  have hstep : Primrec₂ fun (p : (Code × ℕ) × ℕ × ℕ) (q : ℕ × ℕ) =>
+      max (costF p.1.1 (Nat.pair (Nat.pair (p.2.1 + 1) q.1) p.2.2) p.1.2) q.2 := by
+    have hcost : Primrec fun r : ((Code × ℕ) × ℕ × ℕ) × ℕ × ℕ =>
+        costF r.1.1.1 (Nat.pair (Nat.pair (r.1.2.1 + 1) r.2.1) r.1.2.2) r.1.1.2 :=
+      primrec_costF.comp
+        ((fst.comp (fst.comp fst)).pair
+          (Primrec₂.natPair.comp
+            (Primrec₂.natPair.comp (Primrec.succ.comp (fst.comp (snd.comp fst)))
+              (fst.comp snd))
+            (snd.comp (snd.comp fst))))
+        (snd.comp (fst.comp fst))
+    exact Primrec.nat_max.comp hcost (snd.comp snd)
+  exact Primrec.list_foldr hrange (const 0) hstep
+
+theorem primrec_evalnF : Primrec fun p : (Code × ℕ) × ℕ × ℕ =>
+    evaln (MF p.1.1 p.1.2 p.2.1 p.2.2 + p.2.2) (Denumerable.ofNat Code p.2.1) p.2.2 :=
+  primrec_evaln.comp
+    (((Primrec.nat_add.comp primrec_MF (snd.comp snd)).pair
+      ((Primrec.ofNat Code).comp (fst.comp snd))).pair (snd.comp snd))
+
+theorem primrec_critF : Primrec fun p : (Code × ℕ) × ℕ × ℕ => critF p.1.1 p.1.2 p.2.1 p.2.2 :=
+  option_isSome.comp primrec_evalnF
+
+theorem primrec_dvalF : Primrec fun p : (Code × ℕ) × ℕ × ℕ => dvalF p.1.1 p.1.2 p.2.1 p.2.2 :=
+  Primrec.option_getD.comp primrec_evalnF (const 0)
+
+theorem primrec_fcF : Primrec fun p : (Code × ℕ) × ℕ × ℕ => fcF p.1.1 p.1.2 p.2.1 p.2.2 := by
+  have hall : Primrec fun p : (Code × ℕ) × ℕ × ℕ =>
+      (List.range p.2.2).foldr
+        (fun y b => (decide (y ≤ p.2.1) || !critF p.1.1 p.1.2 p.2.1 y) && b) true := by
+    have hstep : Primrec₂ fun (p : (Code × ℕ) × ℕ × ℕ) (q : ℕ × Bool) =>
+        (decide (q.1 ≤ p.2.1) || !critF p.1.1 p.1.2 p.2.1 q.1) && q.2 := by
+      have hc : Primrec fun r : ((Code × ℕ) × ℕ × ℕ) × ℕ × Bool =>
+          critF r.1.1.1 r.1.1.2 r.1.2.1 r.2.1 :=
+        primrec_critF.comp ((fst.comp fst).pair ((fst.comp (snd.comp fst)).pair (fst.comp snd)))
+      exact Primrec.and.comp
+        (Primrec.or.comp
+          (PrimrecPred.decide (PrimrecRel.comp nat_le (fst.comp snd) (fst.comp (snd.comp fst))))
+          (Primrec.not.comp hc)) (snd.comp snd)
+    exact Primrec.list_foldr (Primrec.list_range.comp (snd.comp snd)) (const true) hstep
+  exact Primrec.and.comp (Primrec.and.comp
+    (PrimrecPred.decide (PrimrecRel.comp nat_lt (fst.comp snd) (snd.comp snd))) primrec_critF) hall
+
+theorem primrec_FF : Primrec fun p : (Code × ℕ) × ℕ × ℕ => FF p.1.1 p.1.2 p.2.1 p.2.2 := by
+  have hstep : Primrec₂ fun (p : (Code × ℕ) × ℕ × ℕ) (q : ℕ × ℕ) =>
+      if decide (p.2.1 ≤ q.1) && fcF p.1.1 p.1.2 q.1 p.2.2 then
+        max (dvalF p.1.1 p.1.2 q.1 p.2.2) q.2
+      else q.2 := by
+    have harg : Primrec fun r : ((Code × ℕ) × ℕ × ℕ) × ℕ × ℕ =>
+        ((r.1.1.1, r.1.1.2), (r.2.1, r.1.2.2)) :=
+      ((fst.comp (fst.comp fst)).pair (snd.comp (fst.comp fst))).pair
+        ((fst.comp snd).pair (snd.comp (snd.comp fst)))
+    have hfc : Primrec fun r : ((Code × ℕ) × ℕ × ℕ) × ℕ × ℕ => fcF r.1.1.1 r.1.1.2 r.2.1 r.1.2.2 :=
+      primrec_fcF.comp harg
+    have hdv : Primrec fun r : ((Code × ℕ) × ℕ × ℕ) × ℕ × ℕ =>
+        dvalF r.1.1.1 r.1.1.2 r.2.1 r.1.2.2 := primrec_dvalF.comp harg
+    have hcond : Primrec fun r : ((Code × ℕ) × ℕ × ℕ) × ℕ × ℕ =>
+        decide (r.1.2.1 ≤ r.2.1) && fcF r.1.1.1 r.1.1.2 r.2.1 r.1.2.2 :=
+      Primrec.and.comp
+        (PrimrecPred.decide (PrimrecRel.comp nat_le (fst.comp (snd.comp fst)) (fst.comp snd))) hfc
+    exact Primrec.ite (Primrec.primrecPred (by simpa using hcond))
+      (Primrec.nat_max.comp hdv (snd.comp snd)) (snd.comp snd)
+  exact Primrec.nat_add.comp (const 1)
+    (Primrec.list_foldr (Primrec.list_range.comp (snd.comp snd)) (const 0) hstep)
+
+theorem primrec_okF :
+    Primrec fun p : (Code × ℕ) × ℕ × ℕ × ℕ => okF p.1.1 p.1.2 p.2.1 p.2.2.1 p.2.2.2 := by
+  have hstep : Primrec₂ fun (p : (Code × ℕ) × ℕ × ℕ × ℕ) (q : ℕ × Bool) =>
+      ((!(decide (p.2.1 + 1 ≤ q.1.unpair.1.unpair.1) && decide (q.1.unpair.1.unpair.1 ≤ p.2.2.2) &&
+            decide (q.1.unpair.2 ≤ p.2.2.2) && decide (q.1.unpair.1.unpair.2 ≤ q.1.unpair.2)))
+        || (evaln p.1.2 p.1.1 q.1).isSome) && q.2 := by
+    have hq : Primrec fun r : ((Code × ℕ) × ℕ × ℕ × ℕ) × ℕ × Bool => r.2.1 := fst.comp snd
+    have hu1 : Primrec fun r : ((Code × ℕ) × ℕ × ℕ × ℕ) × ℕ × Bool => r.2.1.unpair.1.unpair.1 :=
+      fst.comp (Primrec.unpair.comp (fst.comp (Primrec.unpair.comp hq)))
+    have hu2 : Primrec fun r : ((Code × ℕ) × ℕ × ℕ × ℕ) × ℕ × Bool => r.2.1.unpair.1.unpair.2 :=
+      snd.comp (Primrec.unpair.comp (fst.comp (Primrec.unpair.comp hq)))
+    have hu3 : Primrec fun r : ((Code × ℕ) × ℕ × ℕ × ℕ) × ℕ × Bool => r.2.1.unpair.2 :=
+      snd.comp (Primrec.unpair.comp hq)
+    have hx : Primrec fun r : ((Code × ℕ) × ℕ × ℕ × ℕ) × ℕ × Bool => r.1.2.2.2 :=
+      snd.comp (snd.comp (snd.comp fst))
+    have hi : Primrec fun r : ((Code × ℕ) × ℕ × ℕ × ℕ) × ℕ × Bool => r.1.2.1 :=
+      fst.comp (snd.comp fst)
+    have hev : Primrec fun r : ((Code × ℕ) × ℕ × ℕ × ℕ) × ℕ × Bool =>
+        (evaln r.1.1.2 r.1.1.1 r.2.1).isSome :=
+      option_isSome.comp (primrec_evaln.comp
+        (((snd.comp (fst.comp fst)).pair (fst.comp (fst.comp fst))).pair hq))
+    exact Primrec.and.comp
+      (Primrec.or.comp (Primrec.not.comp (Primrec.and.comp (Primrec.and.comp (Primrec.and.comp
+        (PrimrecPred.decide (PrimrecRel.comp nat_le (Primrec.succ.comp hi) hu1))
+        (PrimrecPred.decide (PrimrecRel.comp nat_le hu1 hx)))
+        (PrimrecPred.decide (PrimrecRel.comp nat_le hu3 hx)))
+        (PrimrecPred.decide (PrimrecRel.comp nat_le hu2 hu3)))) hev) (snd.comp snd)
+  have hx : Primrec fun p : (Code × ℕ) × ℕ × ℕ × ℕ => p.2.2.2 := snd.comp (snd.comp snd)
+  have hbranch2 := Primrec.list_foldr
+      (f := fun p : (Code × ℕ) × ℕ × ℕ × ℕ =>
+        List.range (Nat.pair (Nat.pair p.2.2.2 p.2.2.2) p.2.2.2 + 1))
+      (Primrec.list_range.comp (Primrec.succ.comp
+        (Primrec₂.natPair.comp (Primrec₂.natPair.comp hx hx) hx))) (const true) hstep
+  have hbranch1 : Primrec fun p : (Code × ℕ) × ℕ × ℕ × ℕ =>
+      (evaln p.1.2 p.1.1 (Nat.pair (Nat.pair 0 0) p.2.2.2)).isSome :=
+    option_isSome.comp (primrec_evaln.comp
+      (((snd.comp fst).pair (fst.comp fst)).pair
+        (Primrec₂.natPair.comp (Primrec₂.natPair.comp (const 0) (const 0)) hx)))
+  exact Primrec.ite
+    (PrimrecRel.comp nat_lt (snd.comp (snd.comp snd)) (fst.comp (snd.comp snd)))
+    hbranch1 hbranch2
+
+theorem primrec_bigOpt : Primrec fun p : (Code × ℕ) × ℕ => bigOpt p.1.1 p.2 p.1.2 := by
+  have hi : Primrec fun p : (Code × ℕ) × ℕ => p.1.2.unpair.1.unpair.1 :=
+    fst.comp (Primrec.unpair.comp (fst.comp (Primrec.unpair.comp (snd.comp fst))))
+  have ht : Primrec fun p : (Code × ℕ) × ℕ => p.1.2.unpair.1.unpair.2 :=
+    snd.comp (Primrec.unpair.comp (fst.comp (Primrec.unpair.comp (snd.comp fst))))
+  have hx : Primrec fun p : (Code × ℕ) × ℕ => p.1.2.unpair.2 :=
+    snd.comp (Primrec.unpair.comp (snd.comp fst))
+  have hok : Primrec fun p : (Code × ℕ) × ℕ =>
+      okF p.1.1 p.2 p.1.2.unpair.1.unpair.1 p.1.2.unpair.1.unpair.2 p.1.2.unpair.2 :=
+    primrec_okF.comp (((fst.comp fst).pair snd).pair (hi.pair (ht.pair hx)))
+  have hv1 : Primrec fun p : (Code × ℕ) × ℕ =>
+      (evaln p.2 p.1.1 (Nat.pair (Nat.pair 0 0) p.1.2.unpair.2)).getD 0 :=
+    Primrec.option_getD.comp
+      (primrec_evaln.comp
+        ((snd.pair (fst.comp fst)).pair
+          (Primrec₂.natPair.comp (Primrec₂.natPair.comp (const 0) (const 0)) hx))) (const 0)
+  have hv2 : Primrec fun p : (Code × ℕ) × ℕ =>
+      FF p.1.1 p.2 p.1.2.unpair.1.unpair.1 p.1.2.unpair.2 :=
+    primrec_FF.comp (((fst.comp fst).pair snd).pair (hi.pair hx))
+  exact Primrec.ite (Primrec.primrecPred (by simpa using hok))
+    (Primrec.option_some.comp
+      (Primrec.ite (PrimrecRel.comp nat_lt hx ht) hv1 hv2)) (const none)
+
+theorem partrec_bigStep :
+    Partrec₂ fun (e : Code) (a : ℕ) => Nat.rfindOpt (fun k => bigOpt e k a) :=
+  Partrec.rfindOpt (f := fun (p : Code × ℕ) (k : ℕ) => bigOpt p.1 k p.2)
+    (Primrec.to_comp primrec_bigOpt)
+
+/-- The code produced by the recursion theorem: it computes the whole Blum family,
+including the self-referential cost comparisons. -/
+noncomputable def blumCode : Code := Classical.choose (fixed_point₂ partrec_bigStep)
+
+theorem blumCode_eval (a : ℕ) :
+    eval blumCode a = Nat.rfindOpt (fun k => bigOpt blumCode k a) :=
+  congrFun (Classical.choose_spec (fixed_point₂ partrec_bigStep)) a
+
+end CS
+
+
+/-!
+# A Blum complexity measure on Mathlib's partial recursive codes
+
+We use Mathlib's step-indexed interpreter `Nat.Partrec.Code.evaln` to define a
+complexity measure `CS.cost c n`: the least amount of fuel with which the code `c`
+returns a value on input `n`.
+-/
+
+namespace CS
+
+open Nat.Partrec Nat.Partrec.Code
+
+/-- The Blum complexity measure: `cost c n` is the least fuel `k` such that
+`evaln k c n` returns a value (and `0` if the computation never converges). -/
+noncomputable def cost (c : Code) (n : ℕ) : ℕ := sInf {k | (evaln k c n).isSome}
+
+theorem cost_le {c : Code} {n k : ℕ} (h : (evaln k c n).isSome) : cost c n ≤ k :=
+  Nat.sInf_le h
+
+theorem halts_iff {c : Code} {n : ℕ} : (eval c n).Dom ↔ ∃ k, (evaln k c n).isSome := by
+  constructor
+  · intro h
+    obtain ⟨k, hk⟩ := evaln_complete.1 (Part.get_mem h)
+    exact ⟨k, by rw [Option.mem_def] at hk; simp [hk]⟩
+  · rintro ⟨k, hk⟩
+    obtain ⟨x, hx⟩ := Option.isSome_iff_exists.1 hk
+    exact Part.dom_iff_mem.2 ⟨x, evaln_sound (by simpa using hx)⟩
+
+theorem isSome_evaln_cost {c : Code} {n : ℕ} (h : (eval c n).Dom) :
+    (evaln (cost c n) c n).isSome :=
+  Nat.sInf_mem (halts_iff.1 h)
+
+theorem isSome_evaln_of_cost_le {c : Code} {n k : ℕ} (h : (eval c n).Dom) (hk : cost c n ≤ k) :
+    (evaln k c n).isSome := by
+  obtain ⟨x, hx⟩ := Option.isSome_iff_exists.1 (isSome_evaln_cost h)
+  have : x ∈ evaln k c n := evaln_mono hk (by simpa using hx)
+  rw [Option.mem_def] at this
+  simp [this]
+
+theorem cost_le_iff {c : Code} {n k : ℕ} (h : (eval c n).Dom) :
+    cost c n ≤ k ↔ (evaln k c n).isSome :=
+  ⟨fun hk => isSome_evaln_of_cost_le h hk, fun hk => cost_le hk⟩
+
+theorem lt_cost_of_not_isSome {c : Code} {n k : ℕ} (h : (eval c n).Dom)
+    (hk : ¬ (evaln k c n).isSome) : k < cost c n := by
+  by_contra hc
+  exact hk (isSome_evaln_of_cost_le h (by omega))
+
+/-- The value computed with any sufficient amount of fuel is the value of the program. -/
+theorem evaln_getD_eq {c : Code} {n k v : ℕ} (h : eval c n = Part.some v)
+    (hk : (evaln k c n).isSome) : (evaln k c n).getD 0 = v := by
+  obtain ⟨x, hx⟩ := Option.isSome_iff_exists.1 hk
+  have hmem : x ∈ eval c n := evaln_sound (by simpa using hx)
+  rw [h] at hmem
+  simp [hx, Part.mem_some_iff.1 hmem]
+
+/-! ### Fuel bounds for `const`, `id` and `curry` -/
+
+theorem evaln_const (m x k : ℕ) (hx : x < k) (hm : m < k) :
+    evaln k (Code.const m) x = some m := by
+  induction m with
+  | zero =>
+    obtain ⟨k, rfl⟩ : ∃ k', k = k' + 1 := ⟨k - 1, by omega⟩
+    simp [Code.const, evaln, Nat.lt_succ_iff.1 hx]
+  | succ m ih =>
+    obtain ⟨k', rfl⟩ : ∃ k', k = k' + 1 := ⟨k - 1, by omega⟩
+    have hm' : m < k' + 1 := by omega
+    simp [Code.const, evaln, Nat.lt_succ_iff.1 hx, ih hm', Nat.lt_succ_iff.1 hm']
+
+theorem evaln_id {x k : ℕ} (hx : x < k) : evaln k Code.id x = some x := by
+  obtain ⟨k', rfl⟩ : ∃ k', k = k' + 1 := ⟨k - 1, by omega⟩
+  simp [Code.id, evaln, Nat.lt_succ_iff.1 hx, Seq.seq]
+
+theorem evaln_curry {e : Code} {a x k : ℕ} (hk : Nat.pair a x < k) :
+    evaln k (curry e a) x = evaln k e (Nat.pair a x) := by
+  obtain ⟨k', rfl⟩ : ∃ k', k = k' + 1 := ⟨k - 1, by omega⟩
+  have hx : x < k' + 1 := lt_of_le_of_lt (Nat.right_le_pair a x) hk
+  have ha : a < k' + 1 := lt_of_le_of_lt (Nat.left_le_pair a x) hk
+  simp [curry, evaln, Nat.lt_succ_iff.1 hx, evaln_const a x _ hx ha, evaln_id hx, Seq.seq]
+
+theorem cost_curry_le {e : Code} {a x : ℕ} (h : (eval e (Nat.pair a x)).Dom) :
+    cost (curry e a) x ≤ cost e (Nat.pair a x) := by
+  have hs : (evaln (cost e (Nat.pair a x)) e (Nat.pair a x)).isSome := isSome_evaln_cost h
+  obtain ⟨v, hv⟩ := Option.isSome_iff_exists.1 hs
+  have hb : Nat.pair a x < cost e (Nat.pair a x) := evaln_bound (by simpa using hv)
+  exact cost_le (by rw [evaln_curry hb]; simp [hv])
+
+end CS
 

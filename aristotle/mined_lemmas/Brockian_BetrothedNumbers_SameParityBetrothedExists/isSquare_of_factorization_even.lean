@@ -23,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Same Parity Betrothed Exists
+Category: Brockian Conjecture
+Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Same Parity Betrothed Exists
 Category: Brockian Conjecture
@@ -32,31 +41,28 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to be the very first command in a file, so the header module
--- docstring above sits immediately after the single `import Mathlib` line.)
-
-namespace Brockian
-namespace BetrothedNumbers
-
 open Finset
+open ArithmeticFunction
+open scoped ArithmeticFunction.sigma
 
-/-- The sum-of-divisors function `σ₁`. -/
+namespace Brockian.BetrothedNumbers
 
-theorem isSquare_of_factorization_even {n : ℕ} (hn : n ≠ 0)
+/-- `m` and `n` are *betrothed* (quasi-amicable) numbers: they are distinct and each one's
+sum of divisors equals `m + n + 1`. -/
+
+lemma isSquare_of_factorization_even {n : ℕ} (hn : n ≠ 0)
     (h : ∀ p, Even (n.factorization p)) : IsSquare n := by
-  have key : ∏ p ∈ n.primeFactors, p ^ n.factorization p = n := by
-    have := Nat.factorization_prod_pow_eq_self hn
-    rwa [Finsupp.prod, Nat.support_factorization] at this
   refine ⟨∏ p ∈ n.primeFactors, p ^ (n.factorization p / 2), ?_⟩
-  have h2 : (∏ p ∈ n.primeFactors, p ^ (n.factorization p / 2)) *
-      (∏ p ∈ n.primeFactors, p ^ (n.factorization p / 2))
-      = ∏ p ∈ n.primeFactors, p ^ n.factorization p := by
-    rw [← Finset.prod_mul_distrib]
-    refine Finset.prod_congr rfl fun p _ => ?_
+  rw [← Finset.prod_mul_distrib]
+  have key : ∀ p ∈ n.primeFactors, p ^ (n.factorization p / 2) * p ^ (n.factorization p / 2)
+      = p ^ (n.factorization p) := by
+    intro p _
     rw [← pow_add]
-    obtain ⟨k, hk⟩ := h p
     congr 1
+    obtain ⟨c, hc⟩ := h p
     omega
-  rw [h2, key]
+  rw [Finset.prod_congr rfl key]
+  exact (Nat.factorization_prod_pow_eq_self hn).symm.trans
+    (Nat.prod_factorization_eq_prod_primeFactors _)
 
-/-- A number with an odd number of divisors is a square. -/
+/-- For an odd number, an odd sum of divisors forces the number to be a square. -/

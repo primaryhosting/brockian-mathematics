@@ -33,31 +33,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-The twin prime conjecture is a famous open problem, so the target theorem
-`Brockian.TwinPrimes.TwinPrimeConjecture` is stated here as a *conditional reduction*:
-it derives the infinitude of twin primes from `ClementHypothesis`, a purely
-elementary (factorial/divisibility) statement.
-
-The mathematical content that is proved unconditionally is **Clement's theorem**:
-for `n ≥ 2`, the pair `(n, n+2)` consists of two primes if and only if
-
-`n * (n + 2) ∣ 4 * ((n - 1)! + 1) + n`.
-
-Consequently `ClementHypothesis` is *equivalent* to the twin prime conjecture
-(`twinPrime_iff_clementHypothesis`), so the reduction is faithful: no hidden
-strengthening of the conjecture is assumed.
--/
+open scoped Nat
 
 namespace Brockian.TwinPrimes
 
-open Nat Finset
+/-- **The Twin Prime Conjecture**: there are arbitrarily large primes `p` such that
+`p + 2` is also prime. -/
 
-/-- `n` starts a twin prime pair when both `n` and `n + 2` are prime. -/
+def TwinPrimeConjecture : Prop :=
+  ∀ n : ℕ, ∃ p : ℕ, n < p ∧ p.Prime ∧ (p + 2).Prime
 
-theorem TwinPrimeConjecture (h : ClementHypothesis) : {n : ℕ | IsTwinPrimePair n}.Infinite := by
-  apply Set.infinite_of_forall_exists_gt
-  intro a
-  obtain ⟨n, hN, hn2, hc⟩ := h (a + 1)
-  exact ⟨n, (clement hn2).mpr hc, by omega⟩
-
+/-- The set of twin primes (the smaller member of each twin pair). -/

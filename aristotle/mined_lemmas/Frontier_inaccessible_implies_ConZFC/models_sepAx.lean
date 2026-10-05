@@ -1,32 +1,42 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
-
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem models_sepAx (hsep : ∀ p : ZFSet.{u} → Prop, ∀ x ∈ A, ZFSet.sep p x ∈ A)
-    (k : ℕ) (φ : LSet.Formula (Fin k ⊕ Fin 1)) : (A : Type (u+1)) ⊨ sepAx k φ := by
-  rw [sepAx]; realize_simp; realize_simp
-  intro i x hx
+theorem models_sepAx (k : ℕ) (φ : setLang.{u + 1}.Formula (Fin k ⊕ Fin 1)) :
+    VClass P ⊨ sepAx k φ := by
   classical
-  refine ⟨ZFSet.sep (fun y => ∃ h : y ∈ A, φ.Realize (Sum.elim i fun _ => ⟨y, h⟩)) x,
-    hsep _ x hx, fun w hw => ?_⟩
+  rw [realize_sepAx]
+  rintro p ⟨a, ha⟩
+  refine ⟨⟨ZFSet.sep (fun w => ∃ hw : P w, φ.Realize (Sum.elim p (fun _ => ⟨w, hw⟩))) a,
+    h.sep _ ha⟩, ?_⟩
+  rintro ⟨z, hz⟩
+  simp only [mem'_VClass]
   rw [ZFSet.mem_sep]
-  exact and_congr_right fun _ => ⟨fun ⟨_, h⟩ => h, fun h => ⟨hw, h⟩⟩
+  refine and_congr_right fun hza => ⟨?_, ?_⟩
+  · rintro ⟨hw, hφ⟩
+    exact hφ
+  · intro hφ
+    exact ⟨hz, hφ⟩
 

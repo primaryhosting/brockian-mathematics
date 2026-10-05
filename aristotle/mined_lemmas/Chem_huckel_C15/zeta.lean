@@ -9,31 +9,34 @@ import Mathlib
 
 /-!
 # Huckel C 15
-
-Category: Chemistry.  Target: `Chem.huckel_C15`.
-
-The Hückel (adjacency) eigenvalues of the cycle graph `C₁₅` are `2 cos (2πk/15)`, `k = 0, …, 14`.
-
-The proof diagonalizes the adjacency matrix by the discrete Fourier matrix
-`U i k = ζ ^ (k * i)` with `ζ = exp (2πi/15)`, and then uses
-`spectrum.units_conjugate` together with `spectrum_diagonal`.
+Category: Chemistry
+Target: Chem.huckel_C15
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
 open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option grind.warning false
+
 namespace Chem
 
-open Complex Matrix SimpleGraph Finset
+open Finset SimpleGraph
 
 /-- A primitive 15-th root of unity. -/
 
 noncomputable def zeta : ℂ := Complex.exp (2 * Real.pi * Complex.I / 15)
 
-/-- The adjacency matrix of the cycle graph `C₁₅`, over `ℂ`. -/
+/-- The associated character on the integers: `W m = ζ ^ m`. -/

@@ -1,92 +1,106 @@
 import Mathlib
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
 /-!
-# Hadwiger Nelson 5
-Category: Frontier — Moonshot
-Target: Frontier.hadwiger_nelson_5
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Basic notions for the Hadwiger–Nelson problem
+
+We identify the Euclidean plane with `ℂ`.  A *proper* 4-colouring is a map
+`c : ℂ → Fin 4` such that no two points at distance exactly `1` receive the
+same colour.  We phrase the distance condition with `Complex.normSq` (the
+squared modulus) so that all verifications stay polynomial.
 -/
 
-/-
-NOTE ON THE HEADER: Lean 4 requires `import` commands to appear before any other
-command, and a module docstring `/-! ... -/` *is* a command.  The requested header
-comment is therefore reproduced verbatim immediately after the single `import` line.
--/
+namespace CNP
 
-namespace Frontier
+open Complex
 
-open Real
+/-- A proper 4-colouring of the plane. -/
 
-/-! ## The unit-distance graph of the Euclidean plane
+theorem perp_eq_or_neg {a1 a2 b1 b2 d1 d2 : ℝ}
+    (ha : a1 * d1 + a2 * d2 = 0) (hb : b1 * d1 + b2 * d2 = 0)
+    (hn : a1 ^ 2 + a2 ^ 2 = b1 ^ 2 + b2 ^ 2) (hd : d1 ^ 2 + d2 ^ 2 ≠ 0) :
+    (a1 = b1 ∧ a2 = b2) ∨ (a1 = -b1 ∧ a2 = -b2) := by
+  have hdet : a1 * b2 - a2 * b1 = 0 := by
+    rcases eq_or_ne d1 0 with h1 | h1
+    · have h2 : d2 ≠ 0 := fun h2 => hd (by rw [h1, h2]; ring)
+      have ea : a2 * d2 = 0 := by rw [h1] at ha; linarith
+      have eb : b2 * d2 = 0 := by rw [h1] at hb; linarith
+      have hz : d2 * (a1 * b2 - a2 * b1) = 0 := by linear_combination a1 * eb - b1 * ea
+      rcases mul_eq_zero.1 hz with h | h
+      · exact absurd h h2
+      · exact h
+    · have hz : d1 * (a1 * b2 - a2 * b1) = 0 := by linear_combination b2 * ha - a2 * hb
+      rcases mul_eq_zero.1 hz with h | h
+      · exact absurd h h1
+      · exact h
+  have key : ((a1 - b1) ^ 2 + (a2 - b2) ^ 2) * ((a1 + b1) ^ 2 + (a2 + b2) ^ 2) = 0 := by
+    linear_combination ((a1 ^ 2 + a2 ^ 2) - (b1 ^ 2 + b2 ^ 2)) * hn +
+      (4 * (a1 * b2 - a2 * b1)) * hdet
+  rcases mul_eq_zero.1 key with h | h
+  · left
+    have h1 : (a1 - b1) ^ 2 = 0 := by nlinarith [sq_nonneg (a1 - b1), sq_nonneg (a2 - b2)]
+    have h2 : (a2 - b2) ^ 2 = 0 := by nlinarith [sq_nonneg (a1 - b1), sq_nonneg (a2 - b2)]
+    constructor
+    · have := pow_eq_zero_iff (n := 2) (by norm_num) |>.1 h1; linarith
+    · have := pow_eq_zero_iff (n := 2) (by norm_num) |>.1 h2; linarith
+  · right
+    have h1 : (a1 + b1) ^ 2 = 0 := by nlinarith [sq_nonneg (a1 + b1), sq_nonneg (a2 + b2)]
+    have h2 : (a2 + b2) ^ 2 = 0 := by nlinarith [sq_nonneg (a1 + b1), sq_nonneg (a2 + b2)]
+    constructor
+    · have := pow_eq_zero_iff (n := 2) (by norm_num) |>.1 h1; linarith
+    · have := pow_eq_zero_iff (n := 2) (by norm_num) |>.1 h2; linarith
 
-We model the Euclidean plane as `ℂ`, whose metric `dist z w = ‖z - w‖` is exactly the
-Euclidean distance.  `planeGraph` is the unit-distance graph: two points are adjacent
-iff they are at distance `1`.  Its chromatic number is the *chromatic number of the
-plane*, the subject of the Hadwiger–Nelson problem.
--/
+/-- Given a segment `p q` of squared length 3, there are at most two points at squared
+distance 3 from both endpoints, and they are reflections of one another. -/
 
-/-- The unit-distance graph on the Euclidean plane (modelled as `ℂ`). -/
+theorem apex_unique {p q r s : ℂ} (hpq : normSq (p - q) = 3)
+    (hr1 : normSq (p - r) = 3) (hr2 : normSq (q - r) = 3)
+    (hs1 : normSq (p - s) = 3) (hs2 : normSq (q - s) = 3) :
+    r = s ∨ r = p + q - s := by
+  simp only [normSq_apply, Complex.sub_re, Complex.sub_im] at hpq hr1 hr2 hs1 hs2
+  have hA : (r.re - (p.re + q.re) / 2) * ((q.re - p.re) / 2) +
+      (r.im - (p.im + q.im) / 2) * ((q.im - p.im) / 2) = 0 := by
+    linear_combination hr1 / 4 - hr2 / 4
+  have hB : (s.re - (p.re + q.re) / 2) * ((q.re - p.re) / 2) +
+      (s.im - (p.im + q.im) / 2) * ((q.im - p.im) / 2) = 0 := by
+    linear_combination hs1 / 4 - hs2 / 4
+  have hN : (r.re - (p.re + q.re) / 2) ^ 2 + (r.im - (p.im + q.im) / 2) ^ 2 =
+      (s.re - (p.re + q.re) / 2) ^ 2 + (s.im - (p.im + q.im) / 2) ^ 2 := by
+    linear_combination hr1 / 2 + hr2 / 2 - hs1 / 2 - hs2 / 2
+  have hD : ((q.re - p.re) / 2) ^ 2 + ((q.im - p.im) / 2) ^ 2 ≠ 0 := by
+    have h : ((q.re - p.re) / 2) ^ 2 + ((q.im - p.im) / 2) ^ 2 = 3 / 4 := by
+      linear_combination hpq / 4
+    rw [h]; norm_num
+  rcases perp_eq_or_neg hA hB hN hD with ⟨e1, e2⟩ | ⟨e1, e2⟩
+  · left
+    exact Complex.ext (by linarith) (by linarith)
+  · right
+    refine Complex.ext ?_ ?_
+    · simp only [Complex.add_re, Complex.sub_re]; linarith
+    · simp only [Complex.add_im, Complex.sub_im]; linarith
 
-def planeGraph : SimpleGraph ℂ where
-  Adj z w := dist z w = 1
-  symm := by
-    intro z w h
-    rwa [dist_comm]
-  loopless := ⟨fun z h => zero_ne_one ((dist_self z).symm.trans h)⟩
-
-lemma planeGraph_colorable_iff (n : ℕ) :
-    planeGraph.Colorable n ↔ ∃ c : ℂ → Fin n, ∀ z w : ℂ, dist z w = 1 → c z ≠ c w := by
-  constructor
-  · rintro ⟨C⟩
-    exact ⟨C, fun z w h => C.valid h⟩
-  · rintro ⟨c, hc⟩
-    exact ⟨SimpleGraph.Coloring.mk c fun {z w} h => hc z w h⟩
-
-/-- If the plane admits no proper `n`-colouring, its chromatic number is `> n`. -/
-
-lemma succ_le_chromaticNumber_of_not_colorable {n : ℕ} (h : ¬ planeGraph.Colorable n) :
-    (n + 1 : ℕ∞) ≤ planeGraph.chromaticNumber := by
-  by_contra hc
-  push_neg at hc
-  refine h (SimpleGraph.chromaticNumber_le_iff_colorable.mp (Order.le_of_lt_succ ?_))
-  rwa [Order.succ_eq_add_one]
-
-/-! ## A convenient criterion for unit distance -/
-
-/-- Two complex numbers are at distance `1` as soon as the sum of the squares of the
-differences of their coordinates is `1`. -/
-
-def DeGreyWitness : Prop :=
-  ∃ S : Finset ℂ, ∀ c : ℂ → Fin 4, ∃ z ∈ S, ∃ w ∈ S, dist z w = 1 ∧ c z = c w
-
-/-- Given a finite non-`4`-colourable unit-distance graph, the whole plane is not
-`4`-colourable. -/
-
-theorem plane_not_colorable_four (h : DeGreyWitness) : ¬ planeGraph.Colorable 4 := by
-  obtain ⟨S, hS⟩ := h
-  rw [planeGraph_colorable_iff]
-  rintro ⟨c, hc⟩
-  obtain ⟨z, -, w, -, hzw, hcol⟩ := hS c
-  exact hc z w hzw hcol
-
-/-- **The chromatic number of the plane is at least `5`** (de Grey, 2018).
-
-The hypothesis `DeGreyWitness` is the finite combinatorial core of de Grey's theorem:
-the existence of a finite planar point set whose unit-distance graph has no proper
-`4`-colouring.  Everything else — the passage from that finite graph to the whole
-plane — is proved here. -/
-
-theorem hadwiger_nelson_5 (h : DeGreyWitness) : 5 ≤ planeGraph.chromaticNumber := by
-  have := succ_le_chromaticNumber_of_not_colorable (plane_not_colorable_four h)
-  simpa using this
-
-/-! ## The hypothesis is exactly right: a compactness (de Bruijn–Erdős) argument
-
-The finite witness assumed above is not merely sufficient, it is also necessary: if the
-whole plane needs at least five colours then already some finite subset does.  This is a
-compactness argument, proved here in the following general form. -/
-
-/-- **Compactness for graph colourings** (de Bruijn–Erdős).  If every finite set of
-vertices of a graph admits a proper `n`-colouring, then the whole graph is
-`n`-colourable. -/
+end CNP

@@ -1,60 +1,50 @@
+/-
+# Stone Generator
+Category: Quantum Physics
+Target: QPhys.stone_generator
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-!
-# Stone's theorem
-
-A strongly continuous one-parameter unitary group `U : ℝ → (H →L[ℂ] H)` on a complex Hilbert
-space `H` has a self-adjoint (in general unbounded) generator `A`, characterized by
-`d/dt (U t x) |_{t=0} = i • A x`.
+# Stone Generator
+Category: Quantum Physics
+Target: QPhys.stone_generator
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open scoped ComplexConjugate
 
 namespace QPhys
 
-open scoped InnerProductSpace
-open Complex (I)
+section Strong
 
-variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E] [FiniteDimensional ℂ E]
 
-/-- A strongly continuous one-parameter unitary group on a complex Hilbert space. -/
-structure IsUnitaryGroup (U : ℝ → (H →L[ℂ] H)) : Prop where
-  /-- Each `U t` is a unitary operator. -/
-  mem_unitary : ∀ t, U t ∈ unitary (H →L[ℂ] H)
-  /-- The group law. -/
-  map_add : ∀ s t : ℝ, U (s + t) = U s * U t
-  /-- Strong continuity. -/
-  strong_continuous : ∀ x : H, Continuous fun t => U t x
+/-- On a finite-dimensional space, strong continuity of a family of operators implies
+continuity in the operator norm. -/
 
-namespace IsUnitaryGroup
+theorem generator_comm (U : ℝ → A) (B : A) (hgroup : ∀ s t, U (s + t) = U s * U t)
+    (hone : U 0 = 1) (hB : ∀ t, HasDerivAt U (U t * B) t) (t : ℝ) : U t * B = B * U t := by
+  have h1 : HasDerivAt (fun r => U (t + r)) (U t * B) 0 := by
+    have := (hB 0).const_mul (U t)
+    rw [hone, one_mul] at this
+    exact this.congr_of_eventuallyEq (Filter.Eventually.of_forall fun r => hgroup t r)
+  have h2 : HasDerivAt (fun r => U (t + r)) (B * U t) 0 := by
+    have := (hB 0).mul_const (U t)
+    rw [hone, one_mul] at this
+    refine this.congr_of_eventuallyEq (Filter.Eventually.of_forall fun r => ?_)
+    rw [add_comm t r, hgroup r t]
+  exact h1.unique h2
 
-variable {U : ℝ → (H →L[ℂ] H)} (hU : IsUnitaryGroup U)
-include hU
+end BanachAlgebra
 
+section Generator
 
-theorem generator_comm (x : (generator U).domain) (t : ℝ) :
-    generator U ⟨U t (x : H), apply_mem_domain hU x t⟩ = U t (generator U x) :=
-  generator_apply_eq _ (hasDerivAt_comp_left hU x t)
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] [CompleteSpace E]
 
-/-- For `x` in the domain of the generator, `t ↦ U t x` is differentiable everywhere. -/
+/-- If a one-parameter unitary group has derivative `B` at `0` (in the strong sense),
+then `B` is skew-adjoint. -/

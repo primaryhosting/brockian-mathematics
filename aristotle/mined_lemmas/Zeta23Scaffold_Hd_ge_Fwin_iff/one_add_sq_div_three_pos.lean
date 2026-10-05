@@ -8,12 +8,23 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Hd Ge Fwin Iff
+Category: A Assembly
+Target: Zeta23Scaffold.Hd_ge_Fwin_iff
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace Zeta23Scaffold
 
-/-- The window function `H(λ) = 2 - 1/λ - λ/3`. -/
+/-- `Hwin lam = 2 - 1/lam - lam/3`. -/
 
 lemma one_add_sq_div_three_pos (lam : ℝ) : 0 < 1 + lam ^ 2 / 3 := by positivity
 
-/-- Key algebraic identity: after clearing the positive denominators `6λ` and `3 + λ²`,
-the difference `H_d(λ) - F(λ)` has numerator `(6λ - 3 - λ²)(λ² - 3λ + 3)`,
-while `H(λ)` has numerator `6λ - 3 - λ²`. -/
+/-- For `lam > 0`, the comparison `Fwin lam ≤ Hd lam` is equivalent to `0 ≤ Hwin lam`.
+
+Indeed `Hwin lam = (6*lam - 3 - lam^2) / (3*lam)` and
+`Hd lam - Fwin lam = (6*lam - 3 - lam^2) * (lam^2 - 3*lam + 3) / (6*lam*(3 + lam^2))`.
+Since `lam > 0` and `lam^2 - 3*lam + 3 = (lam - 3/2)^2 + 3/4 > 0`, both quantities have the
+sign of `6*lam - 3 - lam^2`. -/

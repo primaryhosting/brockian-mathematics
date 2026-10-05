@@ -1,0 +1,24 @@
+import Mathlib
+
+/-!
+# Repaired Witness Nonneg
+Category: Brockian Corpus
+Target: Zeta23Obstruction.repaired_witness_nonneg
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Zeta23Obstruction
+
+/-- The second factor of the repaired witness kernel is at least `9/10`, since
+`Real.cos ≤ 1`. -/
+
+theorem repaired_witness_factor_lower_bound (x : ℝ) :
+    (9 : ℝ) / 10 ≤ 1 - (1 / 10) * Real.cos (3 * Real.pi * x) := by
+  have h : Real.cos (3 * Real.pi * x) ≤ 1 := Real.cos_le_one _
+  linarith
+
+/-- The repaired obstruction witness kernel
+`(sin (π x) / (π x))^2 * (1 - (1/10) cos (3 π x))` is nonnegative for every real `x`.
+The first factor is a square, hence nonnegative (also at `x = 0`, where the quotient is
+junk-valued), and the second factor is at least `9/10 > 0`. -/

@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Chinese Remainder
+Category: Frontier Wave 2 (deeper machinery)
+Target: NumberTheory.chinese_remainder
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,22 +31,20 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Chinese Remainder
-Category: Frontier Wave 2 (deeper machinery)
-Target: NumberTheory.chinese_remainder
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace NumberTheory
 
-/-- The Chinese remainder ring isomorphism `ZMod (m * n) ≃+* ZMod m × ZMod n`
-for coprime naturals `m` and `n`. -/
+/-- **Chinese remainder theorem**: if `m` and `n` are coprime natural numbers, then
+`ZMod (m * n)` is isomorphic, as a ring, to `ZMod m × ZMod n`.
 
-theorem chineseRemainderEquiv_apply {m n : ℕ} (h : Nat.Coprime m n) (a : ℤ) :
-    chineseRemainderEquiv h (a : ZMod (m * n)) = ((a : ZMod m), (a : ZMod n)) := by
-  simp [chineseRemainderEquiv, ZMod.chineseRemainder, Prod.ext_iff]
+This is Mathlib's `ZMod.chineseRemainder`. -/
+
+theorem chineseRemainderEquiv_apply {m n : ℕ} (h : Nat.Coprime m n) (x : ZMod (m * n)) :
+    chineseRemainderEquiv h x = (ZMod.castHom (Dvd.intro n rfl) (ZMod m) x,
+      ZMod.castHom (Dvd.intro_left m rfl) (ZMod n) x) := by
+  ext <;> simp [chineseRemainderEquiv, ZMod.chineseRemainder]
 
 end NumberTheory
+
+#print axioms NumberTheory.chinese_remainder
+#print axioms NumberTheory.chineseRemainderEquiv_apply
 

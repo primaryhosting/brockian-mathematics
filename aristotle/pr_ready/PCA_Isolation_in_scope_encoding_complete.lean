@@ -28,6 +28,7 @@ Provenance: Aristotle theorem prover (Harmonic)
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -38,83 +39,78 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA
-namespace Isolation
+set_option pp.fullNames false
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-/-- A resource the isolation engine may be asked to mediate access to:
-a domain (the isolation boundary it lives behind) together with a path inside it. -/
-structure Resource where
-  domain : String
-  path : List String
-  deriving DecidableEq, Repr
+set_option grind.warning false
 
-/-- An isolation scope: a list of permitted domains together with a maximal path depth. -/
-structure Scope where
-  allowed : List String
-  maxDepth : Nat
-  deriving Repr
+namespace PCA.Isolation
 
-/-- A resource is *in scope* when its domain is permitted and its path is not too deep. -/
-def InScope (sc : Scope) (r : Resource) : Prop :=
-  r.domain ∈ sc.allowed ∧ r.path.length ≤ sc.maxDepth
+/-- A request made by a sandboxed app: a resource together with a write flag
+(`write = false` means read-only access). -/
+structure Request (R : Type*) where
+  resource : R
+  write : Bool
+  deriving DecidableEq
 
-instance (sc : Scope) (r : Resource) : Decidable (InScope sc r) := by
-  unfold InScope; infer_instance
+/-- A *scope* granted to a sandboxed app is the set of resources it may touch. -/
+abbrev Scope (R : Type*) := Set R
 
-/-- The engine's wire encoding: an in-scope resource is encoded as the flat token list
-`domain :: path`; an out-of-scope resource has no encoding at all. -/
-def encode (sc : Scope) (r : Resource) : Option (List String) :=
-  if InScope sc r then some (r.domain :: r.path) else none
+variable {R : Type*}
 
-/-- Decoding a token list back into a resource. The empty list is not a valid encoding. -/
-def decode : List String → Option Resource
-  | [] => none
-  | d :: p => some ⟨d, p⟩
+/-- A request is *in scope* when the resource it names belongs to the granted scope. -/
+def InScope (s : Scope R) (req : Request R) : Prop := req.resource ∈ s
 
-/-- Decoding inverts encoding on every value the encoder actually produces. -/
-theorem decode_encode (sc : Scope) (r : Resource) (c : List String)
-    (h : encode sc r = some c) : decode c = some r := by
-  unfold encode at h
-  by_cases hs : InScope sc r
-  · rw [if_pos hs] at h
-    -- `Option.some.inj` turns `some x = some y` into `x = y`.
-    obtain rfl := Option.some.inj h
-    cases r
-    rfl
-  · rw [if_neg hs] at h
-    exact absurd h (by simp)
+variable [Encodable R]
 
-/-- The encoder is defined exactly on the in-scope resources: it succeeds if and only if
-the resource is in scope, and in that case the encoding faithfully determines the resource.
+/-- The isolation engine's wire encoding of a request: the code of its resource
+paired with its write bit. -/
+def encodeRequest (req : Request R) : ℕ :=
+  Nat.pair (Encodable.encode req.resource) (cond req.write 1 0)
 
-This is the completeness (every in-scope resource is representable) and soundness
-(nothing out of scope is representable) statement for the isolation engine's model. -/
-theorem in_scope_encoding_complete (sc : Scope) (r : Resource) :
-    InScope sc r ↔ ∃ c, encode sc r = some c ∧ decode c = some r := by
-  constructor
-  · intro hs
-    refine ⟨r.domain :: r.path, ?_, ?_⟩
-    · simp [encode, if_pos hs]
-    · cases r; rfl
-  · rintro ⟨c, hc, -⟩
-    by_contra hs
-    rw [encode, if_neg hs] at hc
-    exact absurd hc (by simp)
+/-- The isolation engine's decoder, *relative to a granted scope*: a code is
+accepted only if it names a decodable resource lying inside the scope. -/
+def decodeRequest (s : Scope R) [DecidablePred (· ∈ s)] (n : ℕ) : Option (Request R) :=
+  (Encodable.decode (α := R) (Nat.unpair n).1).bind fun r =>
+    if r ∈ s then some ⟨r, decide ((Nat.unpair n).2 = 1)⟩ else none
 
-/-- Encoding is injective on in-scope resources: distinct in-scope resources never
-collide on the wire. -/
-theorem encode_injOn (sc : Scope) {r₁ r₂ : Resource} {c : List String}
-    (h₁ : encode sc r₁ = some c) (h₂ : encode sc r₂ = some c) : r₁ = r₂ := by
-  have d₁ := decode_encode sc r₁ c h₁
-  have d₂ := decode_encode sc r₂ c h₂
-  have : some r₁ = some r₂ := d₁ ▸ d₂ ▸ rfl
-  exact Option.some.inj this
+/-- **Completeness of the in-scope encoding.** Every request that lies inside the
+granted scope survives the engine's encode/decode round trip: no in-scope request
+is ever rejected or altered by the isolation boundary.
 
-/-- Out-of-scope resources have no encoding. -/
-theorem encode_eq_none_of_not_inScope (sc : Scope) (r : Resource) (h : ¬ InScope sc r) :
-    encode sc r = none := by
-  simp [encode, if_neg h]
+The key ingredient is Mathlib's `Encodable.encodek` (`decode (encode a) = some a`),
+together with `Nat.unpair_pair`. -/
+theorem in_scope_encoding_complete (s : Scope R) [DecidablePred (· ∈ s)]
+    (req : Request R) (h : InScope s req) :
+    decodeRequest s (encodeRequest req) = some req := by
+  obtain ⟨r, w⟩ := req
+  simp only [InScope] at h
+  simp only [decodeRequest, encodeRequest, Nat.unpair_pair, Encodable.encodek,
+    Option.bind_some, if_pos h, Option.some.injEq, Request.mk.injEq, true_and]
+  cases w <;> simp
 
-end Isolation
-end PCA
+/-- **Soundness of the in-scope decoder.** Anything the decoder accepts is a
+request that lies inside the granted scope. -/
+theorem decode_in_scope (s : Scope R) [DecidablePred (· ∈ s)] {n : ℕ} {req : Request R}
+    (h : decodeRequest s n = some req) : InScope s req := by
+  simp only [decodeRequest, Option.bind_eq_some_iff] at h
+  obtain ⟨r, -, hr⟩ := h
+  by_cases hs : r ∈ s
+  · simp only [if_pos hs, Option.some.injEq] at hr
+    subst hr
+    exact hs
+  · simp [hs] at hr
+
+/-- The decoder's accepted requests are exactly the in-scope requests: the
+isolation model is both sound and complete. -/
+theorem range_decodeRequest (s : Scope R) [DecidablePred (· ∈ s)] (req : Request R) :
+    (∃ n : ℕ, decodeRequest s n = some req) ↔ InScope s req :=
+  ⟨fun ⟨_, hn⟩ => decode_in_scope s hn, fun h => ⟨encodeRequest req,
+    in_scope_encoding_complete s req h⟩⟩
+
+end PCA.Isolation
 

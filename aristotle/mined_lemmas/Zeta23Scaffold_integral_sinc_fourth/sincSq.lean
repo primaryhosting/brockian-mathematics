@@ -1,4 +1,12 @@
+/-
+# Integral Sinc Fourth
+Category: C Integral
+Target: Zeta23Scaffold.integral_sinc_fourth
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
+
 /-!
 # Integral Sinc Fourth
 Category: C Integral
@@ -7,23 +15,25 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-The proof follows the classical Fourier-analytic route.  Writing `Λ` for the tent function
-`Λ x = max (1 - |x|) 0`, an elementary computation gives `𝓕 Λ ξ = (sin (π ξ) / (π ξ))²`.
-Fourier inversion then gives `𝓕 ((sin (π ·) / (π ·))²) = Λ`, and the multiplication formula
-`∫ 𝓕 f · g = ∫ f · 𝓕 g` yields
-`∫ (sin (π ξ) / (π ξ))⁴ dξ = ∫ Λ² = 2/3`.
-Rescaling `x = π ξ` produces `∫ (sin x / x)⁴ dx = 2 π / 3`.
--/
-
-open MeasureTheory Real Complex intervalIntegral
-open scoped FourierTransform
+open MeasureTheory Complex intervalIntegral
+open scoped FourierTransform Real
 
 namespace Zeta23Scaffold
 
-/-! ### The tent function and the squared sinc -/
+/-! ## Overview
 
-/-- The tent (triangle) function `x ↦ max (1 - |x|) 0`. -/
+We prove `∫ x : ℝ, (sin x / x) ^ 4 = 2 π / 3`.
 
-noncomputable def sincSq (ξ : ℝ) : ℝ := Real.sinc (π * ξ) ^ 2
+The strategy is the Fourier multiplication formula `∫ 𝓕 f · g = ∫ f · 𝓕 g`.
+Let `T` be the tent function `T x = max (1 - π |x|) 0`, supported in `[-1/π, 1/π]`.
+An explicit computation gives `𝓕 T ξ = sinc(ξ)^2 / π =: S ξ`, and Fourier inversion
+gives `𝓕 S = T` (both `T` and `S` are integrable, `T` is continuous, and `S` is even).
+Hence `∫ S^2 = ∫ 𝓕 T · S = ∫ T · 𝓕 S = ∫ T^2 = 2/(3π)`, and since
+`S^2 = sinc^4 / π^2` we get `∫ sinc^4 = 2π/3`.
+-/
 
+/-- The "tent" function `x ↦ max (1 - π|x|) 0`, supported on `[-1/π, 1/π]`. -/
+
+noncomputable def sincSq (x : ℝ) : ℝ := Real.sinc x ^ 2 / π
+
+/-- `x ↦ sinc(x)^2 / π`, complex valued. -/

@@ -1,14 +1,3 @@
-/-
-# Four Color Statement
-Category: Frontier — Moonshot
-Target: Frontier.four_color_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (The header above is repeated as a module docstring below: in Lean 4 a `/-! ... -/`
--- module docstring may not precede the `import` commands.)
-
 import Mathlib
 
 /-!
@@ -19,29 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Contents
-
-Mathlib has no notion of graph planarity, so this file supplies one:
-`Frontier.PlanarEmbedding` (a drawing of a graph in `ℝ × ℝ` with non-crossing arcs)
-and `Frontier.IsPlanar`.
-
-* `Frontier.FourColorStatement` — the Four Colour Theorem itself (Appel–Haken):
-  every planar graph is 4-colourable.  This is **not** proved here.
-* `Frontier.four_color_statement` — the Lean-checked reduction proved here: the
-  Four Colour Theorem for arbitrary (possibly infinite) planar graphs is
-  *equivalent* to its restriction to finite planar graphs.  The nontrivial
-  direction is de Bruijn–Erdős compactness, obtained from Mathlib's
-  `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom`, together with the fact
-  that planarity is hereditary (`Frontier.IsPlanar.of_injective`).
-* `Frontier.four_color_statement_fin` — a further reduction to graphs on `Fin n`.
-* `Frontier.colorable_four_of_card_le` — the base case: graphs on at most four
-  vertices are 4-colourable.
-* Sanity checks that the planarity definition has content:
-  `Frontier.isPlanar_bot`, `Frontier.isPlanar_top_fin_two` (positive examples) and
-  `Frontier.not_isPlanar_set_real` (a negative example).
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -50,7 +16,7 @@ open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
@@ -58,123 +24,142 @@ set_option autoImplicit false
 
 namespace Frontier
 
-universe u v
+open SimpleGraph
 
-/-- A *planar embedding* of a simple graph `G` in the Euclidean plane `ℝ × ℝ`:
-vertices are sent to distinct points, each edge is drawn as an arc (a continuous
-injective curve) joining the images of its endpoints, arcs pass through no vertex
-other than their own endpoints, and two arcs of distinct edges meet only in the
-images of vertices shared by the two edges. -/
-structure PlanarEmbedding {V : Type u} (G : SimpleGraph V) where
-  /-- The position of each vertex in the plane. -/
-  pos : V → ℝ × ℝ
-  /-- Distinct vertices get distinct positions. -/
-  pos_inj : Function.Injective pos
-  /-- The arc drawn for the edge `{u, v}`, parametrized by the unit interval. -/
-  arc : V → V → unitInterval → ℝ × ℝ
-  arc_cont : ∀ {a b : V}, G.Adj a b → Continuous (arc a b)
-  arc_inj : ∀ {a b : V}, G.Adj a b → Function.Injective (arc a b)
-  arc_zero : ∀ {a b : V}, G.Adj a b → arc a b 0 = pos a
-  arc_one : ∀ {a b : V}, G.Adj a b → arc a b 1 = pos b
-  /-- The two parametrizations of an edge trace out the same arc. -/
-  arc_symm : ∀ {a b : V}, G.Adj a b → Set.range (arc a b) = Set.range (arc b a)
-  /-- An arc meets no vertex other than its endpoints. -/
-  arc_avoid : ∀ {a b : V}, G.Adj a b → ∀ w : V, pos w ∈ Set.range (arc a b) → w = a ∨ w = b
-  /-- Arcs of distinct edges meet only at (positions of) common endpoints. -/
-  arc_disjoint : ∀ {a b c d : V}, G.Adj a b → G.Adj c d → s(a, b) ≠ s(c, d) →
-    Set.range (arc a b) ∩ Set.range (arc c d) ⊆ pos '' ({a, b} ∩ {c, d})
+/-! ## Minors and planarity -/
 
-/-- A graph is *planar* if it admits a planar embedding, i.e. it can be drawn in the
-plane with no crossing edges. -/
+/-- `IsMinor H G` says that `H` is a *minor* of `G`: there is a family of pairwise disjoint
+"branch sets" `B w ⊆ V`, one for each vertex `w` of `H`, each inducing a connected subgraph
+of `G`, such that adjacent vertices of `H` have branch sets joined by an edge of `G`. -/
 
-def IsPlanar {V : Type u} (G : SimpleGraph V) : Prop :=
-  Nonempty (PlanarEmbedding G)
+def IsMinor {W V : Type*} (H : SimpleGraph W) (G : SimpleGraph V) : Prop :=
+  ∃ B : W → Set V,
+    (∀ w₁ w₂, w₁ ≠ w₂ → Disjoint (B w₁) (B w₂)) ∧
+    (∀ w, (G.induce (B w)).Connected) ∧
+    (∀ w₁ w₂, H.Adj w₁ w₂ → ∃ a ∈ B w₁, ∃ b ∈ B w₂, G.Adj a b)
 
-/-- Planarity is inherited along injective adjacency-preserving maps: any graph that
-embeds into a planar graph (as a subgraph) is itself planar. -/
+/-- The complete graph `K₅`. -/
+abbrev K5 : SimpleGraph (Fin 5) := completeGraph (Fin 5)
 
-theorem IsPlanar.of_injective {V : Type u} {W : Type v} {G : SimpleGraph V}
-    {H : SimpleGraph W} (hG : IsPlanar G) (f : W → V) (hf : Function.Injective f)
-    (hadj : ∀ a b : W, H.Adj a b → G.Adj (f a) (f b)) : IsPlanar H := by
-  obtain ⟨E⟩ := hG
-  have key : ∀ a b c d : W, H.Adj a b → H.Adj c d → s(a, b) ≠ s(c, d) →
-      s(f a, f b) ≠ s(f c, f d) := by
-    intro a b c d _ _ hne heq
-    rw [Sym2.eq_iff] at heq
-    refine hne (Sym2.eq_iff.mpr ?_)
-    rcases heq with ⟨h1, h2⟩ | ⟨h1, h2⟩
-    · exact Or.inl ⟨hf h1, hf h2⟩
-    · exact Or.inr ⟨hf h1, hf h2⟩
-  refine ⟨{ pos := fun w => E.pos (f w)
-            pos_inj := E.pos_inj.comp hf
-            arc := fun a b => E.arc (f a) (f b)
-            arc_cont := fun h => E.arc_cont (hadj _ _ h)
-            arc_inj := fun h => E.arc_inj (hadj _ _ h)
-            arc_zero := fun h => E.arc_zero (hadj _ _ h)
-            arc_one := fun h => E.arc_one (hadj _ _ h)
-            arc_symm := fun h => E.arc_symm (hadj _ _ h)
-            arc_avoid := ?_
-            arc_disjoint := ?_ }⟩
-  · intro a b hab w hw
-    have := E.arc_avoid (hadj _ _ hab) (f w) hw
-    rcases this with h | h
-    · exact Or.inl (hf h)
-    · exact Or.inr (hf h)
-  · intro a b c d hab hcd hne
-    have hsub := E.arc_disjoint (hadj _ _ hab) (hadj _ _ hcd) (key a b c d hab hcd hne)
-    intro p hp
-    have hp' := hsub hp
-    obtain ⟨q, hq, hqp⟩ := hp'
-    have himg : ({f a, f b} : Set V) ∩ {f c, f d} = f '' (({a, b} : Set W) ∩ {c, d}) := by
-      rw [Set.image_inter hf]
-      simp [Set.image_insert_eq]
-    rw [himg] at hq
-    obtain ⟨w, hw, hwq⟩ := hq
-    exact ⟨w, hw, by show E.pos (f w) = p; rw [hwq, hqp]⟩
+/-- The complete bipartite graph `K₃,₃`. -/
+abbrev K33 : SimpleGraph (Fin 3 ⊕ Fin 3) := completeBipartiteGraph (Fin 3) (Fin 3)
 
-/-- Subgraphs (on the same vertex set) of a planar graph are planar. -/
+/-- A graph is *planar* when it has neither `K₅` nor `K₃,₃` as a minor.  By Wagner's theorem this
+is equivalent to embeddability in the plane; it is the combinatorial form of planarity used
+here. -/
 
-theorem IsPlanar.mono {V : Type u} {G H : SimpleGraph V} (hG : IsPlanar G) (h : H ≤ G) :
-    IsPlanar H :=
-  hG.of_injective id Function.injective_id fun _ _ hab => h hab
+def IsPlanar {V : Type*} (G : SimpleGraph V) : Prop :=
+  ¬ IsMinor K5 G ∧ ¬ IsMinor K33 G
 
-/-- Planarity is invariant under graph isomorphism. -/
+/-- Every graph is a minor of itself (take singleton branch sets). -/
 
-theorem IsPlanar.of_iso {V : Type u} {W : Type v} {G : SimpleGraph V} {H : SimpleGraph W}
-    (hG : IsPlanar G) (e : H ≃g G) : IsPlanar H :=
-  hG.of_injective e e.toEquiv.injective fun _ _ hab => e.map_adj_iff.mpr hab
+theorem IsMinor.refl {V : Type*} (G : SimpleGraph V) : IsMinor G G := by
+  refine ⟨fun v => {v}, ?_, ?_, ?_⟩
+  · intro a b hab
+    simpa using hab
+  · intro v
+    haveI : Nonempty ↥({v} : Set V) := ⟨⟨v, rfl⟩⟩
+    rw [SimpleGraph.induce_singleton_eq_top]
+    exact connected_top
+  · intro a b hab
+    exact ⟨a, rfl, b, rfl, hab⟩
 
-/-- Pulling a planar graph back along a bijection of vertex types keeps it planar. -/
+/-- Minors are inherited from induced subgraphs: a minor of `G.induce s` is a minor of `G`. -/
 
-theorem IsPlanar.comap {V : Type u} {W : Type v} {G : SimpleGraph V} (hG : IsPlanar G)
-    (e : W ≃ V) : IsPlanar (SimpleGraph.comap (⇑e.toEmbedding) G) :=
-  hG.of_injective (⇑e.toEmbedding) e.toEmbedding.injective fun _ _ hab => hab
+theorem IsMinor.of_induce {W V : Type*} {H : SimpleGraph W} {G : SimpleGraph V} {s : Set V}
+    (h : IsMinor H (G.induce s)) : IsMinor H G := by
+  obtain ⟨B, hdisj, hconn, hadj⟩ := h
+  refine ⟨fun w => Subtype.val '' (B w), ?_, ?_, ?_⟩
+  · intro w₁ w₂ hw
+    exact Set.disjoint_image_of_injective Subtype.val_injective (hdisj w₁ w₂ hw)
+  · intro w
+    have hsurj : Function.Surjective
+        (fun x : ↥(B w) => (⟨x.val.val, ⟨x.val, x.prop, rfl⟩⟩ : ↥(Subtype.val '' (B w)))) := by
+      rintro ⟨v, y, hy, rfl⟩
+      exact ⟨⟨y, hy⟩, rfl⟩
+    exact Connected.map (G := (G.induce s).induce (B w)) (H := G.induce (Subtype.val '' (B w)))
+      ⟨fun x => ⟨x.val.val, ⟨x.val, x.prop, rfl⟩⟩, fun {_ _} hab => hab⟩ hsurj (hconn w)
+  · intro w₁ w₂ hw
+    obtain ⟨a, ha, b, hb, hab⟩ := hadj w₁ w₂ hw
+    exact ⟨a.val, ⟨a, ha, rfl⟩, b.val, ⟨b, hb, rfl⟩, hab⟩
 
-/-- Colourability transfers back along a bijection of vertex types. -/
+/-- Planarity is inherited by induced subgraphs. -/
 
-def FourColorStatement : Prop :=
-  ∀ (V : Type u) (G : SimpleGraph V), IsPlanar G → G.Colorable 4
+theorem IsPlanar.induce {V : Type*} {G : SimpleGraph V} (hG : IsPlanar G) (s : Set V) :
+    IsPlanar (G.induce s) :=
+  ⟨fun h => hG.1 (IsMinor.of_induce h), fun h => hG.2 (IsMinor.of_induce h)⟩
 
-/-- The Four Colour Theorem restricted to graphs with finitely many vertices. -/
+/-! ## A compactness (De Bruijn–Erdős) argument -/
 
-def FiniteFourColorStatement : Prop :=
-  ∀ (V : Type u) (_ : Finite V) (G : SimpleGraph V), IsPlanar G → G.Colorable 4
+/-- **De Bruijn–Erdős**: for `n > 0`, a graph is `n`-colourable as soon as all of its finite
+induced subgraphs are.  The proof is a compactness argument in the space of all `Fin n`-valued
+vertex labellings. -/
 
-/-- **Base case.** Any graph on at most four vertices is 4-colourable (a fortiori,
-any planar one). -/
+theorem colorable_of_forall_finite_induce {V : Type} (G : SimpleGraph V) (n : ℕ) (hn : 0 < n)
+    (h : ∀ s : Finset V, (G.induce (s : Set V)).Colorable n) : G.Colorable n := by
+  classical
+  letI : TopologicalSpace (Fin n) := ⊥
+  haveI : DiscreteTopology (Fin n) := ⟨rfl⟩
+  set C : Finset V → Set (V → Fin n) :=
+    fun s => {f | ∀ a ∈ s, ∀ b ∈ s, G.Adj a b → f a ≠ f b} with hC
+  have hclosed : ∀ s, IsClosed (C s) := by
+    intro s
+    have hCs : C s = ⋂ a ∈ s, ⋂ b ∈ s, {f : V → Fin n | G.Adj a b → f a ≠ f b} := by
+      ext f; simp [hC]
+    rw [hCs]
+    refine isClosed_biInter fun a _ => isClosed_biInter fun b _ => ?_
+    by_cases hab : G.Adj a b
+    · have he : {f : V → Fin n | G.Adj a b → f a ≠ f b}
+          = (fun f : V → Fin n => (f a, f b)) ⁻¹' {p : Fin n × Fin n | p.1 ≠ p.2} := by
+        ext f; simp [hab]
+      rw [he]
+      exact IsClosed.preimage (by fun_prop) (isClosed_discrete _)
+    · have he : {f : V → Fin n | G.Adj a b → f a ≠ f b} = Set.univ := by ext f; simp [hab]
+      rw [he]
+      exact isClosed_univ
+  have hne : ∀ s, (C s).Nonempty := by
+    intro s
+    obtain ⟨c⟩ := h s
+    refine ⟨fun v => if hv : v ∈ s then c ⟨v, by simpa using hv⟩ else ⟨0, hn⟩, ?_⟩
+    intro a ha b hb hab
+    have ha' : a ∈ (s : Set V) := by simpa using ha
+    have hb' : b ∈ (s : Set V) := by simpa using hb
+    have hadj : (G.induce (s : Set V)).Adj ⟨a, ha'⟩ ⟨b, hb'⟩ := hab
+    simpa [ha, hb] using c.valid hadj
+  have hdir : Directed (· ⊇ ·) C := by
+    intro s t
+    refine ⟨s ∪ t, ?_, ?_⟩ <;> intro f hf a ha b hb hab <;>
+      exact hf a (by simp [ha]) b (by simp [hb]) hab
+  obtain ⟨f, hf⟩ := IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed C hdir hne
+    (fun s => (hclosed s).isCompact) hclosed
+  simp only [Set.mem_iInter] at hf
+  exact ⟨SimpleGraph.Coloring.mk f fun {a b} hab => hf {a, b} a (by simp) b (by simp) hab⟩
 
-theorem four_color_statement : FourColorStatement.{u} ↔ FiniteFourColorStatement.{u} := by
+/-! ## The four colour statement -/
+
+/-- The four colour statement restricted to finite graphs. -/
+
+def FourColorFinite : Prop :=
+  ∀ (V : Type) [Fintype V] (G : SimpleGraph V), IsPlanar G → G.Colorable 4
+
+/-- The four colour statement for arbitrary (possibly infinite) planar graphs. -/
+
+def FourColorAll : Prop :=
+  ∀ (V : Type) (G : SimpleGraph V), IsPlanar G → G.Colorable 4
+
+/-- **Four Color Statement (Lean-checked reduction to the finite case).**
+Every planar graph — of arbitrary cardinality — is 4-colourable **if and only if** every *finite*
+planar graph is 4-colourable.  The substantive direction is a compactness argument
+(De Bruijn–Erdős) combined with the fact that planarity, in Wagner's minor-free form, is
+inherited by induced subgraphs.  The finite case itself is the Appel–Haken theorem, which is
+taken here as the hypothesis `FourColorFinite`. -/
+
+theorem four_color_statement : FourColorFinite ↔ FourColorAll := by
   constructor
+  · intro h V G hG
+    refine colorable_of_forall_finite_induce G 4 (by norm_num) fun s => ?_
+    exact h ↥(s : Set V) (G.induce (s : Set V)) (hG.induce _)
   · intro h V _ G hG
     exact h V G hG
-  · intro h V G hG
-    refine SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom
-      (F := (⊤ : SimpleGraph (Fin 4))) ?_
-    intro G' hfin
-    haveI : Finite ↥G'.verts := hfin.to_subtype
-    have hplanar : IsPlanar G'.coe :=
-      hG.of_injective Subtype.val Subtype.val_injective
-        (fun a b hab => G'.adj_sub hab)
-    exact (h _ inferInstance _ hplanar).some
 
-/-- The Four Colour Theorem stated for graphs on the standard finite vertex sets `Fin n`. -/
+/-- Sanity check that `IsPlanar` is not degenerate: `K₅` is not planar. -/

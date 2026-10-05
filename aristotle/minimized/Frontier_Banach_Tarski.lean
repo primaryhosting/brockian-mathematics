@@ -1,271 +1,231 @@
 import Mathlib
 
 /-!
-# Abstract machinery for paradoxical decompositions
+# Arithmetic core for the freeness of two rotations of `SO(3)`
 
-This file develops the general theory needed for the Banach–Tarski paradox, on top of
-Mathlib's `Equidecomp` (equidecompositions for a group action).
+We consider the two rotations of `ℝ³`
+
+```
+σ = 1/3 * ![![1, -2√2, 0], ![2√2, 1, 0], ![0,0,3]]      (rotation about the z-axis)
+τ = 1/3 * ![![3, 0, 0], ![0, 1, -2√2], ![0, 2√2, 1]]    (rotation about the x-axis)
+```
+
+both by the angle `arccos (1/3)`.  Applying a word of length `n` in `σ^{±1}, τ^{±1}` to the
+vector `(1, 0, 1)` produces a vector of the form `3⁻ⁿ • (a, b√2, c)` with `a b c : ℤ`.
+This file contains the purely arithmetic heart of the matter: for a nonempty *reduced* word,
+the middle coordinate `b` is not divisible by `3`; in particular it is nonzero.
 -/
 
-open Set Function Pointwise
+namespace BanachTarski
 
-namespace BT
+/-- A letter: the first component selects the generator (`false` = `σ`, `true` = `τ`),
+the second component is the sign of the exponent (`true` = `+1`). -/
+abbrev Ltr := Bool × Bool
 
-variable {X G H : Type*} [Nonempty X] [Group G] [MulAction G X]
+/-- The action of a letter on the integer triple `(a, b, c)` representing the vector
+`3⁻ⁿ • (a, b√2, c)`; the factor `3⁻¹` is not recorded here. -/
 
-/-- Build an equidecomposition out of a function which is a bijection from `A` to `B` and
-moves every point of `A` by an element of a fixed finite set of group elements. -/
+def EqDecomp (G : Subgroup (Equiv.Perm X)) (A B : Set X) : Prop :=
+  ∃ (ι : Type) (_ : Finite ι) (P : ι → Set X) (g : ι → Equiv.Perm X),
+    (∀ i, g i ∈ G) ∧
+    Pairwise (Disjoint on P) ∧ (⋃ i, P i) = A ∧
+    Pairwise (Disjoint on fun i => g i '' P i) ∧ (⋃ i, g i '' P i) = B
 
-lemma O3.smul_apply (M : O3) (x : E) (i : Fin 3) :
-    (M • x) i = ∑ j, (M : Matrix (Fin 3) (Fin 3) ℝ) i j * x j := rfl
+/-- A set `E` is `G`-paradoxical if it has two disjoint subsets each equidecomposable to `E`. -/
 
-lemma O3.smul_eq (M : O3) (x : E) :
-    M • x = WithLp.toLp 2 ((M : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ WithLp.ofLp x) := rfl
+def Paradoxical (G : Subgroup (Equiv.Perm X)) (E : Set X) : Prop :=
+  ∃ A B : Set X, A ⊆ E ∧ B ⊆ E ∧ Disjoint A B ∧ EqDecomp G A E ∧ EqDecomp G B E
 
-lemma O3.mem_iff (M : O3) : (M : Matrix (Fin 3) (Fin 3) ℝ) * (M : Matrix (Fin 3) (Fin 3) ℝ)ᵀ = 1 :=
-  (Matrix.mem_orthogonalGroup_iff _ _).1 M.2
+namespace EqDecomp
 
-lemma O3.transpose_mul (M : O3) :
-    (M : Matrix (Fin 3) (Fin 3) ℝ)ᵀ * (M : Matrix (Fin 3) (Fin 3) ℝ) = 1 := by
-  have := (Matrix.mem_orthogonalGroup_iff' (Fin 3) ℝ).1 M.2
-  simpa using this
+variable {G H : Subgroup (Equiv.Perm X)} {A B C : Set X}
 
-noncomputable instance : MulAction O3 E where
-  one_smul x := by
-    ext i; simp
-  mul_smul M N x := by
-    ext i
-    simp only [O3.smul_apply, Submonoid.coe_mul]
-    simp [Matrix.mul_apply, Finset.sum_mul, Finset.mul_sum, mul_assoc]
-    exact Finset.sum_comm
+theorem mono (h : G ≤ H) (hAB : EqDecomp G A B) : EqDecomp H A B := by
+  obtain ⟨ι, hι, P, g, hg, h1, h2, h3, h4⟩ := hAB
+  exact ⟨ι, hι, P, g, fun i => h (hg i), h1, h2, h3, h4⟩
 
-lemma O3.coe_inv (M : O3) :
-    ((M⁻¹ : O3) : Matrix (Fin 3) (Fin 3) ℝ) = (M : Matrix (Fin 3) (Fin 3) ℝ)ᵀ := by
-  have h : ((M⁻¹ : O3) : Matrix (Fin 3) (Fin 3) ℝ) = star (M : Matrix (Fin 3) (Fin 3) ℝ) := rfl
-  rw [h]
-  ext i j
-  simp [Matrix.star_apply]
+theorem symm (hAB : EqDecomp G A B) : EqDecomp G B A := by
+  obtain ⟨ι, hι, P, g, hg, h1, h2, h3, h4⟩ := hAB
+  refine ⟨ι, hι, fun i => g i '' P i, fun i => (g i)⁻¹, fun i => inv_mem (hg i), h3, h4, ?_, ?_⟩
+  · intro i j hij
+    have : ∀ k, (g k)⁻¹ '' (g k '' P k) = P k := by
+      intro k
+      rw [← Set.image_comp]
+      simp
+    simpa [Function.onFun, this] using h1 hij
+  · have : ∀ k, (g k)⁻¹ '' (g k '' P k) = P k := by
+      intro k
+      rw [← Set.image_comp]
+      simp
+    simpa [this] using h2
 
-lemma O3.smul_sub (M : O3) (x y : E) : M • (x - y) = M • x - M • y := by
-  ext i
-  simp only [O3.smul_apply, PiLp.sub_apply, mul_sub]
-  exact Finset.sum_sub_distrib (f := fun j => (M : Matrix (Fin 3) (Fin 3) ℝ) i j * x j)
-    (g := fun j => (M : Matrix (Fin 3) (Fin 3) ℝ) i j * y j)
-
-/-- Orthogonal matrices preserve the Euclidean norm. -/
-
-lemma O3.norm_smul (M : O3) (x : E) : ‖M • x‖ = ‖x‖ := by
-  set a : Matrix (Fin 3) (Fin 3) ℝ := (M : Matrix (Fin 3) (Fin 3) ℝ) with ha
-  have h : ∀ j k : Fin 3, ∑ i, a i j * a i k = if j = k then 1 else 0 := by
-    intro j k
-    have := congrFun (congrFun (O3.transpose_mul M) j) k
-    simpa [Matrix.mul_apply, Matrix.one_apply, Matrix.transpose_apply] using this
-  rw [EuclideanSpace.norm_eq, EuclideanSpace.norm_eq]
-  congr 1
-  simp only [O3.smul_apply, Real.norm_eq_abs, sq_abs]
-  have h1 : ∀ i : Fin 3, (∑ j, a i j * x j) ^ 2 = ∑ j, ∑ k, (a i j * a i k) * (x j * x k) := by
-    intro i
-    rw [sq, Finset.sum_mul_sum]
-    exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => by ring
-  rw [Finset.sum_congr rfl fun i _ => h1 i, Finset.sum_comm]
-  have h2 : ∀ j : Fin 3, ∑ i, ∑ k, (a i j * a i k) * (x j * x k) = (x j) ^ 2 := by
-    intro j
-    rw [Finset.sum_comm]
-    have h3 : ∀ k : Fin 3,
-        ∑ i, (a i j * a i k) * (x j * x k) = (if j = k then 1 else 0) * (x j * x k) := by
-      intro k; rw [← h j k, Finset.sum_mul]
-    rw [Finset.sum_congr rfl fun k _ => h3 k]
-    simp [Finset.sum_ite_eq]
-    ring
-  rw [Finset.sum_congr rfl fun j _ => h2 j]
-
-lemma O3.smul_smul_real (M : O3) (r : ℝ) (x : E) : M • (r • x) = r • (M • x) := by
-  ext i
-  simp only [O3.smul_apply, PiLp.smul_apply, smul_eq_mul, Finset.mul_sum]
-  exact Finset.sum_congr rfl fun j _ => by ring
-
-lemma O3.smul_zero' (M : O3) : M • (0 : E) = 0 := by
-  ext i; simp
-
-/-- The group of isometries of Euclidean 3-space. -/
-abbrev Isom := E ≃ᵢ E
-
-instance : MulAction Isom E where
-  smul f x := f x
-  one_smul _ := rfl
-  mul_smul f g x := IsometryEquiv.mul_apply f g x
-
-lemma Isom.smul_def (f : Isom) (x : E) : f • x = f x := rfl
-
-/-- An orthogonal matrix, viewed as an isometry of `E`. -/
-
-noncomputable def O3.toIsomFun (M : O3) : E ≃ᵢ E where
-  toEquiv :=
-    { toFun := fun x => M • x
-      invFun := fun x => M⁻¹ • x
-      left_inv := fun x => by
-        show M⁻¹ • (M • x) = x
-        rw [← SemigroupAction.mul_smul, inv_mul_cancel, one_smul]
-      right_inv := fun x => by
-        show M • (M⁻¹ • x) = x
-        rw [← SemigroupAction.mul_smul, mul_inv_cancel, one_smul] }
-  isometry_toFun := by
-    refine Isometry.of_dist_eq fun x y => ?_
-    simp only [dist_eq_norm, ← O3.smul_sub, O3.norm_smul]
-
-@[simp] lemma O3.toIsomFun_apply (M : O3) (x : E) : O3.toIsomFun M x = M • x := rfl
-
-/-- The orthogonal group as a subgroup of the isometry group. -/
-
-noncomputable def O3.toIsom : O3 →* Isom where
-  toFun := O3.toIsomFun
-  map_one' := by
-    refine IsometryEquiv.ext fun x => ?_
-    show (1 : O3) • x = x
-    exact one_smul _ x
-  map_mul' M N := by
-    refine IsometryEquiv.ext fun x => ?_
-    show (M * N) • x = M • (N • x)
-    exact SemigroupAction.mul_smul M N x
-
-lemma O3.toIsom_smul (M : O3) (x : E) : (O3.toIsom M) • x = M • x := rfl
-
-end BT
-
-import RequestProject.Space
-
-/-!
-# Fixed points of a rotation
-
-A nontrivial rotation of `ℝ³` (an orthogonal matrix of determinant one) fixes only the two
-points where its axis meets the unit sphere. In particular its fixed points on the sphere
-form a countable (indeed, finite) set.
--/
-
-open Matrix Set Function
-
-namespace BT
-
-noncomputable def e2 : E := WithLp.toLp 2 ![0, 1, 0]
-
-noncomputable def rotY (t : ℝ) : Matrix (Fin 3) (Fin 3) ℝ :=
-  !![Real.cos t, 0, Real.sin t; 0, 1, 0; -Real.sin t, 0, Real.cos t]
-
-lemma rotY_mem (t : ℝ) : rotY t ∈ O3 := by
-  rw [Matrix.mem_orthogonalGroup_iff]
-  have h := Real.sin_sq_add_cos_sq t
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [rotY, Matrix.mul_apply, Fin.sum_univ_three] <;> nlinarith [h]
-
-/-- Rotation about the `y`-axis, as an element of the orthogonal group. -/
-
-noncomputable def RY (t : ℝ) : O3 := ⟨rotY t, rotY_mem t⟩
-
-lemma rotY_add (s t : ℝ) : rotY (s + t) = rotY s * rotY t := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [rotY, Matrix.mul_apply, Fin.sum_univ_three, Real.cos_add, Real.sin_add] <;> ring
-
-lemma RY_add (s t : ℝ) : RY (s + t) = RY s * RY t := by
-  apply Subtype.ext
-  simpa using rotY_add s t
-
-lemma RY_zero : RY 0 = 1 := by
-  apply Subtype.ext
-  ext i j
-  fin_cases i <;> fin_cases j <;> simp [rotY]
-
-lemma RY_pow (t : ℝ) (n : ℕ) : RY t ^ n = RY (n * t) := by
-  induction n with
-  | zero => rw [pow_zero, Nat.cast_zero, zero_mul, RY_zero]
-  | succ m ih =>
-      rw [pow_succ, ih, ← RY_add]
+theorem trans (hAB : EqDecomp G A B) (hBC : EqDecomp G B C) : EqDecomp G A C := by
+  obtain ⟨ι, hι, P, g, hg, hP, hPA, hgP, hgPB⟩ := hAB
+  obtain ⟨κ, hκ, Q, h, hh, hQ, hQB, hhQ, hhQC⟩ := hBC
+  refine ⟨ι × κ, inferInstance, fun p => P p.1 ∩ (g p.1) ⁻¹' Q p.2,
+    fun p => h p.2 * g p.1, fun p => mul_mem (hh p.2) (hg p.1), ?_, ?_, ?_, ?_⟩
+  · rintro ⟨i, j⟩ ⟨i', j'⟩ hne
+    simp only [Function.onFun]
+    by_cases hi : i = i'
+    · subst hi
+      have hjj : j ≠ j' := by
+        intro hj; exact hne (by simp [hj])
+      have := hQ hjj
+      simp only [Function.onFun] at this
+      apply Disjoint.mono inter_subset_right inter_subset_right
+      exact Set.disjoint_preimage _ this
+    · exact Disjoint.mono inter_subset_left inter_subset_left (hP hi)
+  · rw [← hPA]
+    apply Set.Subset.antisymm
+    · exact iUnion_subset fun p => (inter_subset_left).trans (subset_iUnion _ p.1)
+    · refine iUnion_subset fun i => ?_
+      intro x hx
+      have hgx : g i x ∈ B := by
+        rw [← hgPB]
+        exact mem_iUnion.2 ⟨i, ⟨x, hx, rfl⟩⟩
+      rw [← hQB] at hgx
+      obtain ⟨_, ⟨j, rfl⟩, hj⟩ := hgx
+      exact mem_iUnion.2 ⟨(i, j), hx, hj⟩
+  · rintro ⟨i, j⟩ ⟨i', j'⟩ hne
+    simp only [Function.onFun]
+    have himg : ∀ (i : ι) (j : κ), (h j * g i) '' (P i ∩ (g i) ⁻¹' Q j)
+        = h j '' ((g i '' P i) ∩ Q j) := by
+      intro i j
+      rw [Equiv.Perm.coe_mul, Set.image_comp]
       congr 1
-      push_cast
-      ring
+      rw [Set.image_inter (g i).injective, Set.image_preimage_eq _ (g i).surjective]
+    rw [himg, himg]
+    by_cases hj : j = j'
+    · subst hj
+      have hii : i ≠ i' := by
+        intro hi; exact hne (by simp [hi])
+      apply Set.disjoint_image_of_injective (h j).injective
+      have := hgP hii
+      simp only [Function.onFun] at this
+      exact Disjoint.mono inter_subset_left inter_subset_left this
+    · have := hhQ hj
+      simp only [Function.onFun] at this
+      exact Disjoint.mono (Set.image_mono inter_subset_right)
+        (Set.image_mono inter_subset_right) this
+  · have himg : ∀ (i : ι) (j : κ), (h j * g i) '' (P i ∩ (g i) ⁻¹' Q j)
+        = h j '' ((g i '' P i) ∩ Q j) := by
+      intro i j
+      rw [Equiv.Perm.coe_mul, Set.image_comp]
+      congr 1
+      rw [Set.image_inter (g i).injective, Set.image_preimage_eq _ (g i).surjective]
+    rw [← hhQC]
+    apply Set.Subset.antisymm
+    · refine iUnion_subset fun p => ?_
+      rw [himg]
+      exact (Set.image_mono inter_subset_right).trans (subset_iUnion _ p.2)
+    · refine iUnion_subset fun j => ?_
+      rintro _ ⟨y, hy, rfl⟩
+      have hyB : y ∈ B := by rw [← hQB]; exact mem_iUnion.2 ⟨j, hy⟩
+      rw [← hgPB] at hyB
+      obtain ⟨_, ⟨i, rfl⟩, hi⟩ := hyB
+      refine mem_iUnion.2 ⟨(i, j), ?_⟩
+      rw [himg]
+      exact ⟨y, ⟨hi, hy⟩, rfl⟩
 
-lemma RY_smul_apply (t : ℝ) (x : E) :
-    ((RY t • x) 0 = Real.cos t * x 0 + Real.sin t * x 2) ∧
-    ((RY t • x) 2 = -(Real.sin t) * x 0 + Real.cos t * x 2) := by
-  constructor <;>
-    simp [O3.smul_apply, rotY, Fin.sum_univ_three]
+/-- Equidecomposability of unions of two disjoint pairs of sets. -/
 
-/-- A rotation about the `y`-axis fixing a point off the `y`-axis is trivial. -/
+theorem congr {A' B' : Set X} (h : EqDecomp G A B) (hA : A = A') (hB : B = B') :
+    EqDecomp G A' B' := hA ▸ hB ▸ h
 
-lemma cos_eq_one_of_fixed {t : ℝ} {y : E} (hy : RY t • y = y) (hax : y 0 ≠ 0 ∨ y 2 ≠ 0) :
-    Real.cos t = 1 := by
-  obtain ⟨h0, h2⟩ := RY_smul_apply t y
-  have e0 : Real.cos t * y 0 + Real.sin t * y 2 = y 0 := by
-    rw [← h0, hy]
-  have e2 : -(Real.sin t) * y 0 + Real.cos t * y 2 = y 2 := by
-    rw [← h2, hy]
-  have hpyth := Real.sin_sq_add_cos_sq t
-  by_contra hcos
-  have hA : (Real.cos t - 1) * y 0 + Real.sin t * y 2 = 0 := by linarith
-  have hB : -(Real.sin t) * y 0 + (Real.cos t - 1) * y 2 = 0 := by linarith
-  have hne : (2 - 2 * Real.cos t) ≠ 0 := fun hc => hcos (by linarith)
-  have h1 : (2 - 2 * Real.cos t) * y 0 = 0 := by
-    linear_combination (Real.cos t - 1) * hA - Real.sin t * hB - y 0 * hpyth
-  have h2' : (2 - 2 * Real.cos t) * y 2 = 0 := by
-    linear_combination Real.sin t * hA + (Real.cos t - 1) * hB - y 2 * hpyth
-  rcases hax with h | h
-  · exact h ((mul_eq_zero.mp h1).resolve_left hne)
-  · exact h ((mul_eq_zero.mp h2').resolve_left hne)
+end EqDecomp
 
-/-- There is a rotation about the `y`-axis moving a given countable set, disjoint from the
-`y`-axis, completely off itself, together with all of its positive powers. -/
+/-- Transport a paradoxical decomposition along an equidecomposability. -/
 
-theorem exists_rotY_disjoint (D : Set E) (hD : D.Countable)
-    (hax : ∀ d ∈ D, d 0 ≠ 0 ∨ d 2 ≠ 0) :
-    ∃ t : ℝ, ∀ n : ℕ, 1 ≤ n → Disjoint ((RY t ^ n) • D) D := by
+theorem Paradoxical.of_eqDecomp {G : Subgroup (Equiv.Perm X)} {E F : Set X}
+    (hE : Paradoxical G E) (hEF : EqDecomp G E F) : Paradoxical G F := by
+  obtain ⟨A, B, hA, hB, hAB, hAE, hBE⟩ := hE
+  obtain ⟨ι, hι, P, g, hg, hP, hPE, hgP, hgPF⟩ := hEF
+  -- the bijection given by `hEF` maps `A` and `B` to disjoint subsets of `F`
   classical
-  -- for fixed data, the set of bad angles is countable
-  have key : ∀ (m : ℕ) (d d' : E), d ∈ D → d' ∈ D →
-      {t : ℝ | (RY t ^ (m + 1)) • d = d'}.Countable := by
-    intro m d d' _ hd'
-    rcases eq_empty_or_nonempty {t : ℝ | (RY t ^ (m + 1)) • d = d'} with h | ⟨t₀, ht₀⟩
-    · rw [h]; exact countable_empty
-    · refine Set.Countable.mono (s₂ := range fun k : ℤ => t₀ + k * (2 * Real.pi) / (m + 1)) ?_
-        (countable_range _)
-      intro t ht
-      simp only [mem_setOf_eq] at ht ht₀
-      rw [RY_pow] at ht ht₀
-      -- `d'` is fixed by the rotation by the difference of the angles
-      have hfix : RY ((m + 1 : ℕ) * t - (m + 1 : ℕ) * t₀) • d' = d' := by
-        have : RY ((m + 1 : ℕ) * t - (m + 1 : ℕ) * t₀) • (RY ((m + 1 : ℕ) * t₀) • d) =
-            RY ((m + 1 : ℕ) * t) • d := by
-          rw [← SemigroupAction.mul_smul, ← RY_add]
-          congr 2
-          ring
-        rw [ht₀] at this
-        rw [this, ht]
-      have hcos := cos_eq_one_of_fixed hfix (hax d' hd')
-      obtain ⟨k, hk⟩ := (Real.cos_eq_one_iff _).mp hcos
-      refine ⟨k, ?_⟩
-      have hm : ((m : ℝ) + 1) ≠ 0 := by positivity
-      have : ((m : ℝ) + 1) * t - ((m : ℝ) + 1) * t₀ = k * (2 * Real.pi) := by
-        push_cast at hk
-        linarith [hk]
-      field_simp
-      linarith [this]
-  set B : Set ℝ := ⋃ m : ℕ, ⋃ d ∈ D, ⋃ d' ∈ D, {t : ℝ | (RY t ^ (m + 1)) • d = d'} with hB
-  have hBc : B.Countable := by
-    refine countable_iUnion fun m => ?_
-    refine hD.biUnion fun d hd => ?_
-    exact hD.biUnion fun d' hd' => key m d d' hd hd'
-  obtain ⟨t, ht⟩ : ∃ t : ℝ, t ∉ B := by
-    by_contra hc
-    push_neg at hc
-    exact Cardinal.not_countable_real (by rwa [Set.eq_univ_iff_forall.mpr hc] at hBc)
-  refine ⟨t, fun n hn => ?_⟩
-  obtain ⟨m, rfl⟩ : ∃ m : ℕ, n = m + 1 := ⟨n - 1, by omega⟩
-  rw [Set.disjoint_left]
-  rintro x ⟨d, hd, rfl⟩ hx'
-  exact ht (by
-    rw [hB]
-    refine mem_iUnion.2 ⟨m, ?_⟩
-    refine mem_iUnion₂.2 ⟨d, hd, ?_⟩
-    exact mem_iUnion₂.2 ⟨(RY t ^ (m + 1)) • d, hx', rfl⟩)
+  set f : X → X := fun x => if h : ∃ i, x ∈ P i then g h.choose x else x with hf
+  have hfmem : ∀ (S : Set X), S ⊆ E → EqDecomp G S (f '' S) := by
+    intro S hS
+    refine ⟨ι, hι, fun i => P i ∩ S, g, hg, ?_, ?_, ?_, ?_⟩
+    · intro i j hij
+      exact Disjoint.mono inter_subset_left inter_subset_left (hP hij)
+    · rw [← Set.iUnion_inter, hPE, Set.inter_eq_right.2 hS]
+    · intro i j hij
+      exact Disjoint.mono (Set.image_mono inter_subset_left) (Set.image_mono inter_subset_left)
+        (hgP hij)
+    · apply Set.Subset.antisymm
+      · rintro x hx
+        obtain ⟨_, ⟨i, rfl⟩, y, ⟨hyP, hyS⟩, rfl⟩ := hx
+        refine ⟨y, hyS, ?_⟩
+        have hex : ∃ i, y ∈ P i := ⟨i, hyP⟩
+        simp only [hf, dif_pos hex]
+        have : hex.choose = i := by
+          by_contra hne
+          exact (hP hne).le_bot ⟨hex.choose_spec, hyP⟩
+        rw [this]
+      · rintro _ ⟨y, hyS, rfl⟩
+        have hex : ∃ i, y ∈ P i := by
+          have : y ∈ E := hS hyS
+          rw [← hPE] at this
+          exact mem_iUnion.1 this
+        simp only [hf, dif_pos hex]
+        exact mem_iUnion.2 ⟨hex.choose, ⟨y, ⟨hex.choose_spec, hyS⟩, rfl⟩⟩
+  have hinj : Set.InjOn f E := by
+    intro x hx y hy hxy
+    have hex : ∃ i, x ∈ P i := by rw [← hPE] at hx; exact mem_iUnion.1 hx
+    have hey : ∃ i, y ∈ P i := by rw [← hPE] at hy; exact mem_iUnion.1 hy
+    simp only [hf, dif_pos hex, dif_pos hey] at hxy
+    by_cases hij : hex.choose = hey.choose
+    · rw [hij] at hxy
+      exact (g hey.choose).injective hxy
+    · exfalso
+      have h1 : g hex.choose x ∈ g hex.choose '' P hex.choose := ⟨x, hex.choose_spec, rfl⟩
+      have h2 : g hey.choose y ∈ g hey.choose '' P hey.choose := ⟨y, hey.choose_spec, rfl⟩
+      rw [hxy] at h1
+      exact (hgP hij).le_bot ⟨h1, h2⟩
+  refine ⟨f '' A, f '' B, ?_, ?_, ?_, ?_, ?_⟩
+  · rw [← hgPF]
+    have := hfmem A hA
+    obtain ⟨-, -, -, -, -, -, -, -, hUnion⟩ := this
+    rw [← hUnion]
+    exact iUnion_mono fun i => Set.image_mono inter_subset_left
+  · rw [← hgPF]
+    have := hfmem B hB
+    obtain ⟨-, -, -, -, -, -, -, -, hUnion⟩ := this
+    rw [← hUnion]
+    exact iUnion_mono fun i => Set.image_mono inter_subset_left
+  · rw [Set.disjoint_iff_inter_eq_empty]
+    ext x
+    simp only [mem_inter_iff, mem_image, mem_empty_iff_false, iff_false]
+    rintro ⟨⟨a, ha, rfl⟩, ⟨b, hb, hba⟩⟩
+    have := hinj (hB hb) (hA ha) hba
+    subst this
+    exact hAB.le_bot ⟨ha, hb⟩
+  · exact ((hfmem A hA).symm.trans hAE).trans hEF
+  · exact ((hfmem B hB).symm.trans hBE).trans hEF
 
-end BT
+end BanachTarski
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false

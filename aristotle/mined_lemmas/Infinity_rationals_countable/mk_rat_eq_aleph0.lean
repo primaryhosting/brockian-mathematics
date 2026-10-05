@@ -5,21 +5,15 @@ Target: Infinity.rationals_countable
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above is a plain block comment rather than a module docstring `/-! ... -/`,
+-- since Lean 4 requires all commands, including module docstrings, to follow the imports.)
 
 import Mathlib
 
-/-!
-# Rationals Countable
-Category: Frontier — Set Theory
-Target: Infinity.rationals_countable
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Infinity
 
-/-- The rationals form a countable type (Mathlib instance `Rat.instCountable`,
-derived from `Encodable ℚ`). -/
+/-- The rationals are countable: `ℚ` is a `Countable` type.
+Closed by Mathlib's existing instance (`Rat.instCountable`/`Denumerable.rat`). -/
 
 theorem mk_rat_eq_aleph0 : Cardinal.mk ℚ = Cardinal.aleph0 := Cardinal.mkRat
 

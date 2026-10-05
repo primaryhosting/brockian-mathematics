@@ -5,8 +5,6 @@ Target: Frontier.erdos_discrepancy
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring, so the header above
--- is written as a plain comment and repeated as a module docstring after the import.)
 
 import Mathlib
 
@@ -18,70 +16,97 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Frontier
 
-/-- A sequence `f : ℕ → ℤ` is a `±1` sequence if `f n ∈ {1, -1}` for every `n ≥ 1`
-(the value `f 0` is irrelevant, since homogeneous arithmetic progressions only use
-indices `i * d` with `i, d ≥ 1`). -/
+/-- A `±1`-sequence: a function `f : ℕ → ℤ` taking only the values `1` and `-1`
+on the positive integers. -/
 
-def IsPMOne (f : ℕ → ℤ) : Prop := ∀ n, 1 ≤ n → f n = 1 ∨ f n = -1
+def PlusMinusOne (f : ℕ → ℤ) : Prop := ∀ n : ℕ, 1 ≤ n → f n = 1 ∨ f n = -1
 
-/-- The sum of `f` over the first `n` terms of the homogeneous arithmetic progression
-of common difference `d`, i.e. `f d + f (2d) + ⋯ + f (nd)`. -/
+/-- The discrepancy of `f` along the homogeneous arithmetic progression of common
+difference `d`, truncated at `n` terms: `|f d + f (2d) + ⋯ + f (nd)|`. -/
 
-def hapSum (f : ℕ → ℤ) (n d : ℕ) : ℤ := ∑ i ∈ Finset.Icc 1 n, f (i * d)
+def apSum (f : ℕ → ℤ) (d n : ℕ) : ℤ := ∑ i ∈ Finset.Icc 1 n, f (i * d)
 
-/-- The Erdős discrepancy problem (solved by Tao): every `±1` sequence has unbounded
-discrepancy along homogeneous arithmetic progressions.  This is the statement; the
-theorem `Frontier.erdos_discrepancy` below proves the base case `C = 1` of it, with
-an explicit bound on the length of the progression involved. -/
+/-- `HasDiscrepancyExceeding f C` says that the sequence `f` has some homogeneous
+arithmetic progression along which the partial sum exceeds `C` in absolute value. -/
 
-def ErdosDiscrepancyStatement : Prop :=
-  ∀ f : ℕ → ℤ, IsPMOne f → ∀ C : ℤ, ∃ n d : ℕ, 0 < n ∧ 0 < d ∧ C < |hapSum f n d|
+def HasDiscrepancyExceeding (f : ℕ → ℤ) (C : ℤ) : Prop :=
+  ∃ d n : ℕ, 0 < d ∧ 0 < n ∧ C < |apSum f d n|
 
-/-- **Erdős discrepancy, base case.**  Every `±1` sequence `f` admits a homogeneous
-arithmetic progression `d, 2d, …, nd` contained in `{1, …, 12}` along which the
-discrepancy is at least `2`; in particular the discrepancy of every `±1` sequence
-exceeds `1`.  (The bound `12` is sharp: there are `±1` sequences of length `11` all of
-whose homogeneous arithmetic progression sums lie in `{-1, 0, 1}`.) -/
+/-- The Erdős discrepancy problem (solved by Tao, 2015): every `±1` sequence has
+unbounded discrepancy along homogeneous arithmetic progressions.  This is stated
+here as a `Prop`-valued definition, recording the full statement; the theorem
+`Frontier.erdos_discrepancy` below establishes its first nontrivial instance
+`C = 1` (i.e. no `±1` sequence has discrepancy at most `1`). -/
 
-theorem erdos_discrepancy (f : ℕ → ℤ) (hf : IsPMOne f) :
-    ∃ n d : ℕ, 0 < n ∧ 0 < d ∧ n * d ≤ 12 ∧ 2 ≤ |hapSum f n d| := by
+theorem erdos_discrepancy_zero (f : ℕ → ℤ) (hf : PlusMinusOne f) :
+    HasDiscrepancyExceeding f 0 := by
+  refine ⟨1, 1, one_pos, one_pos, ?_⟩
+  have h := hf 1 le_rfl
+  simp only [apSum, Finset.Icc_self, Finset.sum_singleton, one_mul]
+  rcases h with h | h <;> rw [h] <;> norm_num
+
+/-- **Erdős discrepancy problem, base case `C = 1`.**
+Every `±1`-sequence `f : ℕ → ℤ` admits a homogeneous arithmetic progression
+`d, 2d, …, nd` (with `d, n ≥ 1`) along which the partial sum
+`f d + f (2d) + ⋯ + f (nd)` has absolute value greater than `1`.
+
+Equivalently: no `±1`-sequence has discrepancy at most `1` on homogeneous
+arithmetic progressions.  Only the first `12` terms of the sequence are needed,
+which is optimal (there are `±1` sequences of length `11` with discrepancy `1`). -/
+
+theorem erdos_discrepancy (f : ℕ → ℤ) (hf : PlusMinusOne f) :
+    ∃ d n : ℕ, 0 < d ∧ 0 < n ∧ 1 < |∑ i ∈ Finset.Icc 1 n, f (i * d)| := by
   by_contra hcon
   push_neg at hcon
-  have key : ∀ n d : ℕ, 0 < n → 0 < d → n * d ≤ 12 →
-      -1 ≤ hapSum f n d ∧ hapSum f n d ≤ 1 := by
-    intro n d hn hd hnd
-    have h := hcon n d hn hd hnd
-    have : |hapSum f n d| ≤ 1 := by omega
-    exact abs_le.mp this
-  have ha := hf 1 (by norm_num)
-  have hb := hf 2 (by norm_num)
-  have hc := hf 3 (by norm_num)
-  have hd := hf 4 (by norm_num)
-  have he := hf 5 (by norm_num)
-  have hff := hf 6 (by norm_num)
-  have hg := hf 7 (by norm_num)
-  have hh := hf 8 (by norm_num)
-  have hi := hf 9 (by norm_num)
-  have hj := hf 10 (by norm_num)
-  have hk := hf 11 (by norm_num)
-  have hl := hf 12 (by norm_num)
-  have s2 := key 2 1 (by norm_num) (by norm_num) (by norm_num)
-  have s4 := key 4 1 (by norm_num) (by norm_num) (by norm_num)
-  have s6 := key 6 1 (by norm_num) (by norm_num) (by norm_num)
-  have s8 := key 8 1 (by norm_num) (by norm_num) (by norm_num)
-  have s10 := key 10 1 (by norm_num) (by norm_num) (by norm_num)
-  have s12 := key 12 1 (by norm_num) (by norm_num) (by norm_num)
-  have t2 := key 2 2 (by norm_num) (by norm_num) (by norm_num)
-  have t4 := key 4 2 (by norm_num) (by norm_num) (by norm_num)
-  have t6 := key 6 2 (by norm_num) (by norm_num) (by norm_num)
-  have u4 := key 4 3 (by norm_num) (by norm_num) (by norm_num)
-  have v2 := key 2 4 (by norm_num) (by norm_num) (by norm_num)
-  have v3 := key 3 4 (by norm_num) (by norm_num) (by norm_num)
-  norm_num [hapSum, Finset.sum_Icc_succ_top] at s2 s4 s6 s8 s10 s12 t2 t4 t6 u4 v2 v3
+  -- All the relevant partial sums are bounded by `1` in absolute value.
+  have H : ∀ d n : ℕ, 0 < d → 0 < n → |∑ i ∈ Finset.Icc 1 n, f (i * d)| ≤ 1 := by
+    intro d n hd hn
+    exact hcon d n hd hn
+  have h32 := H 3 2 (by norm_num) (by norm_num)
+  have h34 := H 3 4 (by norm_num) (by norm_num)
+  have h62 := H 6 2 (by norm_num) (by norm_num)
+  have h18 := H 1 8 (by norm_num) (by norm_num)
+  have h110 := H 1 10 (by norm_num) (by norm_num)
+  have h24 := H 2 4 (by norm_num) (by norm_num)
+  have h26 := H 2 6 (by norm_num) (by norm_num)
+  rw [abs_le] at h32 h34 h62 h18 h110 h24 h26
+  norm_num [Finset.sum_Icc_succ_top] at h32 h34 h62 h18 h110 h24 h26
+  -- the values of `f` on `1, …, 12`
+  have v1 := hf 1 (by norm_num)
+  have v2 := hf 2 (by norm_num)
+  have v3 := hf 3 (by norm_num)
+  have v4 := hf 4 (by norm_num)
+  have v5 := hf 5 (by norm_num)
+  have v6 := hf 6 (by norm_num)
+  have v7 := hf 7 (by norm_num)
+  have v8 := hf 8 (by norm_num)
+  have v9 := hf 9 (by norm_num)
+  have v10 := hf 10 (by norm_num)
+  have v11 := hf 11 (by norm_num)
+  have v12 := hf 12 (by norm_num)
   omega
 
-/-- Reformulation of the base case: every `±1` sequence has discrepancy `> 1`, i.e. the
-statement `ErdosDiscrepancyStatement` holds for the constant `C = 1` (and hence for every
-`C ≤ 1`). -/
+/-- Restatement of the base case in terms of `HasDiscrepancyExceeding`. -/

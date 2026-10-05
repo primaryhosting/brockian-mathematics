@@ -6,50 +6,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option autoImplicit false
-set_option relaxedAutoImplicit false
+namespace PCA.Fix
 
-namespace PCA
+/-- A role name granted to a principal by the isolation engine. -/
+abbrev Role := String
 
-/-- Principals (subjects) of the isolation engine. -/
-abbrev Principal := Nat
+/-- A command that a principal may attempt to run. -/
+abbrev Cmd := String
 
-/-- Roles that principals may hold. -/
-abbrev Role := Nat
-
-/-- Resources that commands may touch. -/
-abbrev Resource := Nat
-
-/-- Actions a principal may attempt on a resource. -/
-inductive Action
-  | read
-  | write
-  | exec
-  deriving DecidableEq, Repr
-
-/-- A policy is a role-based grant table. -/
+/-- A policy of the isolation engine: which role may run which command. -/
 structure Policy where
-  grants : Role → Resource → Action → Bool
+  grants : Role → Cmd → Bool
 
-/-- Commands of the sandboxed application. -/
-inductive Cmd
-  | nop
-  | op (p : Principal) (r : Resource) (a : Action)
-  | seq (c₁ c₂ : Cmd)
-  deriving DecidableEq, Repr
-
-/-- A configuration of the isolation engine: a role assignment, the residual command,
-the currently installed policy, an audit epoch counter and an audit log. -/
+/-- A configuration of the isolation engine: the roles held by the current
+principal, the command under consideration, the active policy, and an audit log. -/
 structure Config where
-  roles : Principal → List Role
+  roles : List Role
   cmd : Cmd
   policy : Policy
-  epoch : Nat
-  log : List (Principal × Resource × Action)
+  log : List String
 
-/-- Installing a new policy: only the policy and the audit epoch counter change. -/
+/-- The command of a configuration is authorized when some held role grants it. -/
 
-def Config.authorizes (c : Config) (p : Principal) (r : Resource) (a : Action) : Bool :=
-  permits c.policy c.roles p r a
+def Config.authorized (c : Config) : Bool :=
+  c.roles.any (fun r => c.policy.grants r c.cmd)
 
-/-- Soundness and completeness of the decision procedure with respect to its specification. -/
+/-- Altering the policy: the engine installs the new policy and appends a fresh
+audit entry recording the new decision, leaving roles and command untouched. -/

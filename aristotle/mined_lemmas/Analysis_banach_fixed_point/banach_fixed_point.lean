@@ -31,18 +31,20 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-
 namespace Analysis
 
-/-- **Banach fixed-point theorem** (contraction mapping principle):
-a contraction `f` with constant `K` on a complete nonempty metric space has a
-unique fixed point, realized by `ContractingWith.fixedPoint`. -/
+/-- **Banach fixed-point theorem** (contraction mapping principle).
+A contraction `f` with constant `K` on a complete, nonempty metric space `X`
+has a fixed point, namely `ContractingWith.fixedPoint f hf`, and this fixed
+point is unique. -/
 
 theorem banach_fixed_point {X : Type*} [MetricSpace X] [CompleteSpace X] [Nonempty X]
     {K : NNReal} {f : X → X} (hf : ContractingWith K f) :
-    f (hf.fixedPoint f) = hf.fixedPoint f ∧ ∀ y : X, f y = y → y = hf.fixedPoint f := by
-  refine ⟨hf.fixedPoint_isFixedPt, fun y hy => ?_⟩
-  exact hf.fixedPoint_unique hy
+    (∃ x : X, f x = x) ∧
+      f (hf.fixedPoint f) = hf.fixedPoint f ∧
+      (∀ y : X, f y = y → y = hf.fixedPoint f) := by
+  refine ⟨⟨hf.fixedPoint f, hf.fixedPoint_isFixedPt⟩, hf.fixedPoint_isFixedPt,
+    fun y hy => hf.fixedPoint_unique hy⟩
 
 end Analysis
 

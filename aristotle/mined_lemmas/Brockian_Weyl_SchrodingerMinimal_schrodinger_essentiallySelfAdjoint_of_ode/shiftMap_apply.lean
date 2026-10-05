@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Schrodinger Essentially Self Adjoint Of Ode
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -8,65 +16,30 @@ open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxHeartbeats 40000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
-/-
-# Schrodinger Essentially Self Adjoint Of Ode
-Category: Brockian (Open Discharge)
-Target: Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Brockian.Weyl.SchrodingerMinimal
 
-import Mathlib
+open LinearPMap
 
-/-!
-# Schrodinger Essentially Self Adjoint Of Ode
-Category: Brockian (Open Discharge)
-Target: Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped LinearPMap ComplexConjugate
 
-/-!
-## Contents
-
-The first part of this file develops the abstract von Neumann / Weyl deficiency criterion for
-essential self-adjointness of a densely defined symmetric operator on a complex Hilbert space.
-
-The second part constructs the minimal Schrödinger operator `-d²/dx² + V` on `L²(ℝ)`, with domain
-the smooth compactly supported functions, and shows that it is essentially self-adjoint as soon as
-the differential equation `-u'' + V u = ± i u` has no nonzero solution in `L²(ℝ)` (understood in
-the distributional sense).
--/
-
-namespace Brockian.Weyl
-
-open LinearPMap Complex
-
-section Basic
-
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
 local notation "⟪" x ", " y "⟫" => inner ℂ x y
 
-/-- A partially defined operator `T` on a complex inner product space is *symmetric* if
-`⟪T x, y⟫ = ⟪x, T y⟫` for all `x, y` in its domain. -/
+/-- A densely defined operator `T` on a complex Hilbert space is *essentially self-adjoint* if
+its adjoint is self-adjoint; equivalently, `T` has a unique self-adjoint extension, namely the
+closure `T†† = T̄` of `T`. -/
 
-@[simp] theorem shiftMap_apply (A : E →ₗ.[ℂ] E) (c : ℝ) (x : A.domain) :
-    shiftMap A c x = A x + ((c : ℂ) * Complex.I) • (x : E) := rfl
+@[simp] theorem shiftMap_apply (T : H →ₗ.[ℂ] H) (z : ℂ) (x : T.domain) :
+    shiftMap T z x = T x + z • (x : H) := rfl
 
-/-- For a symmetric operator, `‖A x + c i x‖² = ‖A x‖² + c²‖x‖²`. -/
+/-- A vector is orthogonal to the range of `T + z` exactly when it solves the (weak) eigenvalue
+equation `T† v = conj (-z) • v`. -/

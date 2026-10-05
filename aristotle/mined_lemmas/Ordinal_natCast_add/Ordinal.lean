@@ -33,21 +33,14 @@ set_option grind.warning false
 
 namespace RequestProject
 
-/-- Finite-ordinal addition agrees with `Nat` addition:
+/-- Casting natural numbers into the ordinals is additive:
 `((m + n : ℕ) : Ordinal) = (m : Ordinal) + (n : Ordinal)`. -/
 
-theorem Ordinal.natCast_mul (m n : ℕ) :
-    ((m * n : ℕ) : Ordinal) = (m : Ordinal) * (n : Ordinal) := by
+theorem Ordinal.natCast_mul (m n : ℕ) : ((m * n : ℕ) : Ordinal) = (m : Ordinal) * (n : Ordinal) := by
   induction n with
   | zero => simp
   | succ k ih =>
-    have h : m * (k + 1) = m * k + m := by ring
-    rw [h, Ordinal.natCast_add, ih]
-    push_cast
-    rw [mul_add, mul_one]
+    rw [Nat.mul_succ, Nat.cast_add, ih, Nat.cast_succ, mul_add, mul_one]
 
 end RequestProject
-
-#print axioms RequestProject.Ordinal.natCast_add
-#print axioms RequestProject.Ordinal.natCast_mul
 

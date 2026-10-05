@@ -23,17 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Fortune Conjecture
-Category: Brockian Conjecture
-Target: Brockian.FortunateNumbers.FortuneConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean requires `import` lines to precede any module docstring, so the header above is a
--- plain comment and is repeated verbatim as the module docstring below.)
-
 import Mathlib
 
 /-!
@@ -46,26 +35,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.FortunateNumbers
 
-open Finset
+open Nat
 
-/-!
-## Setup
+/-- Existence of a "fortunate offset": for every `n` there is some `m > 1` such that
+`n# + m` is prime, where `n#` is the primorial of `n`.  This follows from Bertrand's
+postulate applied to `n# + 1`. -/
 
-For a bound `N`, `primorial N` (Mathlib's `primorial`, notation `N#`) is the product of all
-primes `≤ N`.  The *fortunate number* attached to `N` is the least `m ≥ 2` such that
-`N# + m` is prime.  Fortune's conjecture asserts that this number is always prime.
+theorem prime_dvd_primorial {q n : ℕ} (hq : Nat.Prime q) (hqn : q ≤ n) : q ∣ primorial n := by
+  refine Finset.dvd_prod_of_mem _ ?_
+  simp [Finset.mem_filter, Finset.mem_range, hq, Nat.lt_succ_of_le hqn]
 
-The conjecture is open.  What we prove here is the classical unconditional dichotomy
-(`fortunate_prime_or_sq_le`): the fortunate number is either prime or at least `(N+1)^2`,
-because none of its prime factors can be `≤ N`.  The named target
-`FortuneConjecture` is therefore the corresponding *conditional* statement: the fortunate
-number is prime as soon as it is smaller than `(N+1)^2`.
--/
-
-/-- Every prime `q ≤ N` divides the primorial `N#`. -/
-
-theorem prime_dvd_primorial {q N : ℕ} (hq : q.Prime) (hqN : q ≤ N) : q ∣ primorial N := by
-  refine Finset.dvd_prod_of_mem (fun p => p) ?_
-  simp [Finset.mem_filter, Finset.mem_range, hq, Nat.lt_succ_of_le hqN]
-
-/-- There is always some `m ≥ 2` with `N# + m` prime (by the infinitude of primes). -/
+/-- No prime `≤ n` divides the Fortunate number of `n`. -/

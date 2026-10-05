@@ -1,20 +1,21 @@
-/-
-# Singular Series Gaps 14501460 — Mathlib formulation
+import Mathlib
 
-Companion to `RequestProject/SingularSeriesGaps14501460.lean`.  The target theorem there is
-stated in plain core Lean (its file has to start with a fixed header comment, which forbids
-`import`s).  Here the same mathematical content is formalized in the idiomatic Mathlib way,
-with tuples as `Finset ℤ`, primality as `Nat.Prime`, and residues in `ZMod p`.
+/-!
+# Singular Series Gaps 14501460
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps14501460
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open scoped BigOperators
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 10000
 
 namespace Brockian
 
-/-- A finite set `H` of integers is *admissible* (in the sense of the Hardy–Littlewood
-prime `k`-tuple conjecture) when, for every prime `p`, the elements of `H` fail to cover
-all residue classes modulo `p`.  Equivalently, the singular series attached to `H` is
-nonzero. -/
+/-- The gap window: the integers of the range `[1450, 1460]`. -/
 
-def gapTuple : List Int := [1450, 1452, 1456, 1458]
+def gapTuple : Finset ℤ := gapWindow.filter fun n => Int.gcd n 210 = 1
 

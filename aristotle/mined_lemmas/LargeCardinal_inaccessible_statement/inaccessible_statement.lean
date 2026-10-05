@@ -1,11 +1,3 @@
-/-
-# Inaccessible Statement
-Category: Frontier Wave 2 (deeper machinery)
-Target: LargeCardinal.inaccessible_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,6 +7,9 @@ Target: LargeCardinal.inaccessible_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+-- Note: Lean 4 requires `import` lines to come first in a file, so the header
+-- comment above is placed immediately after the single `import Mathlib` line.
 
 open scoped BigOperators
 open scoped Real
@@ -43,8 +38,8 @@ namespace LargeCardinal
 
 /-- A cardinal `k` is *inaccessible* if it is uncountable, regular, and a strong limit. -/
 
-theorem inaccessible_statement.{u} :
-    (∃ k : Cardinal.{u}, Inaccessible k) ↔ (∃ k : Cardinal.{u}, Inaccessible k) :=
+theorem inaccessible_statement :
+    (∃ k : Cardinal.{0}, Inaccessible k) ↔ (∃ k : Cardinal.{0}, Inaccessible k) :=
   Iff.rfl
 
 end LargeCardinal

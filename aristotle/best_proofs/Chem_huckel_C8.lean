@@ -1,171 +1,133 @@
-/-
-# Huckel C 8
-Category: Chemistry
-Target: Chem.huckel_C8
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Huckel C 8
 Category: Chemistry
 Target: Chem.huckel_C8
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-The adjacency eigenvalues of the cycle graph `C₈` (the Hückel π-system of cyclooctatetraene)
-are `2 cos (2πk/8)` for `k = 0, …, 7`.  This is expressed as a complete factorisation of the
-characteristic polynomial of the adjacency matrix of `SimpleGraph.cycleGraph 8`.
-
-The proof diagonalises the adjacency matrix by the discrete Fourier matrix built from the
-primitive eighth root of unity `ω = (√2/2)(1 + i)`.
 -/
 
-open Matrix Complex Polynomial SimpleGraph
+open Complex Matrix Polynomial
 
 namespace Chem
 
-/-- The primitive eighth root of unity `exp (2πi/8) = (√2/2)(1 + i)`. -/
-noncomputable def om : ℂ := (Real.sqrt 2 / 2) + (Real.sqrt 2 / 2) * I
+/-- A primitive 8-th root of unity. -/
+noncomputable def zeta8 : ℂ := Complex.exp (2 * Real.pi * Complex.I / 8)
 
-lemma om_sq : om ^ 2 = I := by
-  have h : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
-  simp only [om]
-  apply Complex.ext <;> (simp [pow_two, Complex.add_re, Complex.mul_re]; try nlinarith [h])
+/-- The adjacency matrix of the cycle graph `C₈`: vertices are `Fin 8` with cyclic
+arithmetic, and `i` is adjacent to `i + 1` and `i - 1`. -/
+def C8adj : Matrix (Fin 8) (Fin 8) ℂ :=
+  fun i j => if j = i + 1 ∨ j = i - 1 then 1 else 0
 
-lemma om_pow8 : om ^ 8 = 1 := by
-  have h : om ^ 8 = (om ^ 2) ^ 4 := by ring
-  rw [h, om_sq]; simp [pow_succ, Complex.I_mul_I]
+/-- The `k`-th Hückel eigenvalue of `C₈`, namely `2 cos (2πk/8)`. -/
+noncomputable def C8eigen (k : Fin 8) : ℂ := 2 * Real.cos (2 * Real.pi * k / 8)
 
-lemma om_shift (n : ℕ) (h : 8 ≤ n) : om ^ n = om ^ (n - 8) := by
-  conv_lhs => rw [show n = (n - 8) + 8 by omega]
-  rw [pow_add, om_pow8, mul_one]
+/-- The discrete Fourier transform matrix, whose columns are the eigenvectors of `C8adj`. -/
+noncomputable def C8dft : Matrix (Fin 8) (Fin 8) ℂ :=
+  Matrix.vandermonde (fun j : Fin 8 => zeta8 ^ (j : ℕ))
 
-lemma om_reduce (n r q : ℕ) (h : n = r + 8 * q) : om ^ n = om ^ r := by
-  subst h; rw [pow_add, pow_mul, om_pow8, one_pow, mul_one]
+lemma zeta8_prim : IsPrimitiveRoot zeta8 8 := by
+  simpa [zeta8] using Complex.isPrimitiveRoot_exp 8 (by norm_num)
 
-lemma om3 : om ^ 3 = I * om := by rw [pow_succ, om_sq]
-lemma om4 : om ^ 4 = -1 := by rw [show (4 : ℕ) = 2 * 2 from rfl, pow_mul, om_sq, Complex.I_sq]
-lemma om5 : om ^ 5 = -om := by rw [pow_succ, om4]; ring
-lemma om6 : om ^ 6 = -I := by rw [show (6 : ℕ) = 2 + 4 from rfl, pow_add, om_sq, om4]; ring
-lemma om7 : om ^ 7 = -(I * om) := by
-  rw [show (7 : ℕ) = 3 + 4 from rfl, pow_add, om3, om4]; ring
+lemma zeta8_pow_eight : zeta8 ^ 8 = 1 := zeta8_prim.pow_eq_one
 
-/-- The (unnormalised) discrete Fourier matrix; its columns are the eigenvectors of the
-adjacency matrix of the cycle `C₈`. -/
-noncomputable def dft : Matrix (Fin 8) (Fin 8) ℂ := fun j k => om ^ (j.val * k.val)
+lemma zeta8_pow_eq (m : ℕ) :
+    zeta8 ^ m = Complex.exp ((2 * Real.pi * m / 8 : ℝ) * Complex.I) := by
+  rw [zeta8, ← Complex.exp_nat_mul]
+  congr 1
+  push_cast
+  ring
 
-/-- The inverse of `dft`. -/
-noncomputable def dftInv : Matrix (Fin 8) (Fin 8) ℂ :=
-  fun j k => (1 / 8 : ℂ) * om ^ (7 * (j.val * k.val))
+lemma exp_add_inv (x : ℝ) :
+    Complex.exp ((x : ℂ) * Complex.I) + (Complex.exp ((x : ℂ) * Complex.I))⁻¹
+      = 2 * (Real.cos x : ℂ) := by
+  rw [← Complex.exp_neg, ← neg_mul, Complex.exp_mul_I, Complex.exp_mul_I,
+    show ((-(x : ℂ))) = ((-x : ℝ) : ℂ) by push_cast; ring]
+  simp [Complex.ofReal_cos]
+  ring
 
-/-- The diagonal matrix of eigenvalues `ω^k + ω^(-k)`. -/
-noncomputable def eigDiag : Matrix (Fin 8) (Fin 8) ℂ :=
-  Matrix.diagonal fun k : Fin 8 => om ^ k.val + om ^ (7 * k.val)
+/-- The `k`-th eigenvalue expressed via the root of unity. -/
+lemma C8eigen_eq (k : Fin 8) :
+    C8eigen k = zeta8 ^ (k : ℕ) + (zeta8 ^ (k : ℕ))⁻¹ := by
+  rw [C8eigen, zeta8_pow_eq, exp_add_inv]
 
-set_option maxHeartbeats 4000000 in
-lemma dft_mul_dftInv : dft * dftInv = 1 := by
-  ext j l
-  fin_cases j <;> fin_cases l <;>
-    simp only [Matrix.mul_apply, Fin.sum_univ_eight, dft, dftInv, Matrix.one_apply] <;>
-    ring_nf <;>
-    norm_num [om_shift, om_sq, om3, om4, om5, om6, om7] <;>
-    try ring
+/-- The basic cyclic identity: for an 8-th root of unity `w`,
+`w^(i+1) + w^(i-1) = w^i * (w + w⁻¹)`, with exponents taken cyclically. -/
+lemma pow_cycle_ident (w : ℂ) (hw : w ^ 8 = 1) (i : Fin 8) :
+    w ^ ((i + 1 : Fin 8) : ℕ) + w ^ ((i - 1 : Fin 8) : ℕ) = w ^ (i : ℕ) * (w + w⁻¹) := by
+  have hinv : w⁻¹ = w ^ 7 := inv_eq_of_mul_eq_one_right (by linear_combination hw)
+  rw [hinv]
+  fin_cases i <;> norm_num [Fin.val_add, Fin.val_sub]
+  · linear_combination -hw
+  · linear_combination -w * hw
+  · linear_combination -w ^ 2 * hw
+  · linear_combination -w ^ 3 * hw
+  · linear_combination -w ^ 4 * hw
+  · linear_combination -w ^ 5 * hw
+  · linear_combination -(1 + w ^ 6) * hw
 
-set_option maxHeartbeats 4000000 in
-lemma dftInv_mul_dft : dftInv * dft = 1 := by
-  ext j l
-  fin_cases j <;> fin_cases l <;>
-    simp only [Matrix.mul_apply, Fin.sum_univ_eight, dft, dftInv, Matrix.one_apply] <;>
-    ring_nf <;>
-    norm_num [om_shift, om_sq, om3, om4, om5, om6, om7] <;>
-    try ring
+/-- Multiplying by the adjacency matrix of `C₈` picks out the two cyclic neighbours. -/
+lemma C8adj_sum (i : Fin 8) (f : Fin 8 → ℂ) :
+    ∑ l, C8adj i l * f l = f (i + 1) + f (i - 1) := by
+  simp only [C8adj]
+  fin_cases i <;>
+    simp +decide [Fin.sum_univ_eight, show (-1 : Fin 8) = 7 from by decide] <;> ring
 
-set_option maxHeartbeats 4000000 in
-lemma adj_mul_dft : ((cycleGraph 8).adjMatrix ℂ) * dft = dft * eigDiag := by
-  ext j l
-  fin_cases j <;> fin_cases l <;>
-    simp only [Matrix.mul_apply, Fin.sum_univ_eight, dft, eigDiag, Matrix.diagonal_apply,
-      SimpleGraph.adjMatrix_apply] <;>
-    norm_num +decide <;>
-    ring_nf <;>
-    norm_num [om_shift, om_sq, om3, om4, om5, om6, om7] <;>
-    try ring
-
-lemma adj_eq_conj : ((cycleGraph 8).adjMatrix ℂ) = dft * eigDiag * dftInv := by
-  rw [← adj_mul_dft, mul_assoc, dft_mul_dftInv, mul_one]
-
-lemma charpoly_adj_complex :
-    ((cycleGraph 8).adjMatrix ℂ).charpoly = eigDiag.charpoly := by
-  rw [adj_eq_conj, mul_assoc, Matrix.charpoly_mul_comm, mul_assoc, dftInv_mul_dft, mul_one]
-
-/-- The `k`-th eigenvalue `ω^k + ω^(-k)` equals `2 cos (2πk/8)`. -/
-lemma eig_entry (k : ℕ) (hk : k < 8) :
-    om ^ k + om ^ (7 * k) = ((2 * Real.cos (2 * Real.pi * k / 8) : ℝ) : ℂ) := by
-  interval_cases k
-  · rw [show (2 * Real.pi * ((0:ℕ):ℝ) / 8 : ℝ) = 0 by push_cast; ring, Real.cos_zero]
-    norm_num
-  · rw [show (2 * Real.pi * ((1:ℕ):ℝ) / 8 : ℝ) = Real.pi / 4 by push_cast; ring,
-      Real.cos_pi_div_four]
-    rw [show (7 * 1 : ℕ) = 7 from rfl, om7, pow_one, om]
-    push_cast
-    apply Complex.ext <;> (simp; try ring)
-  · rw [show (2 * Real.pi * ((2:ℕ):ℝ) / 8 : ℝ) = Real.pi / 2 by push_cast; ring,
-      Real.cos_pi_div_two]
-    rw [show (7 * 2 : ℕ) = 14 from rfl, om_reduce 14 6 1 rfl, om6, om_sq]
-    norm_num
-  · rw [show (2 * Real.pi * ((3:ℕ):ℝ) / 8 : ℝ) = Real.pi - Real.pi / 4 by push_cast; ring,
-      Real.cos_pi_sub, Real.cos_pi_div_four]
-    rw [show (7 * 3 : ℕ) = 21 from rfl, om_reduce 21 5 2 rfl, om5, om3, om]
-    push_cast
-    apply Complex.ext <;> (simp; try ring)
-  · rw [show (2 * Real.pi * ((4:ℕ):ℝ) / 8 : ℝ) = Real.pi by push_cast; ring, Real.cos_pi]
-    rw [show (7 * 4 : ℕ) = 28 from rfl, om_reduce 28 4 3 rfl, om4]
-    norm_num
-  · rw [show (2 * Real.pi * ((5:ℕ):ℝ) / 8 : ℝ) = Real.pi + Real.pi / 4 by push_cast; ring,
-      Real.cos_add, Real.cos_pi, Real.sin_pi, Real.cos_pi_div_four]
-    rw [show (7 * 5 : ℕ) = 35 from rfl, om_reduce 35 3 4 rfl, om5, om3, om]
-    push_cast
-    apply Complex.ext <;> (simp; try ring)
-  · rw [show (2 * Real.pi * ((6:ℕ):ℝ) / 8 : ℝ) = Real.pi + Real.pi / 2 by push_cast; ring,
-      Real.cos_add, Real.cos_pi, Real.sin_pi, Real.cos_pi_div_two]
-    rw [show (7 * 6 : ℕ) = 42 from rfl, om_reduce 42 2 5 rfl, om6, om_sq]
-    norm_num
-  · rw [show (2 * Real.pi * ((7:ℕ):ℝ) / 8 : ℝ) = 2 * Real.pi - Real.pi / 4 by push_cast; ring,
-      Real.cos_sub, Real.cos_two_pi, Real.sin_two_pi, Real.cos_pi_div_four]
-    rw [show (7 * 7 : ℕ) = 49 from rfl, om_reduce 49 1 6 rfl, om7, pow_one, om]
-    push_cast
-    apply Complex.ext <;> (simp; try ring)
-
-/-- Complex form: the characteristic polynomial of the adjacency matrix of `C₈` factors as
-`∏_{k=0}^{7} (X - 2 cos (2πk/8))`. -/
-theorem huckel_C8_complex :
-    ((cycleGraph 8).adjMatrix ℂ).charpoly =
-      ∏ k : Fin 8, (X - C ((2 * Real.cos (2 * Real.pi * k.val / 8) : ℝ) : ℂ)) := by
-  rw [charpoly_adj_complex, eigDiag, Matrix.charpoly_diagonal]
-  exact Finset.prod_congr rfl fun k _ => by rw [eig_entry k.val k.isLt]
-
-lemma adjMatrix_map :
-    ((cycleGraph 8).adjMatrix ℝ).map (algebraMap ℝ ℂ) = (cycleGraph 8).adjMatrix ℂ := by
+/-- The columns of the DFT matrix are eigenvectors of the adjacency matrix, with
+eigenvalues `2 cos (2πk/8)`. -/
+lemma C8adj_mul_dft : C8adj * C8dft = C8dft * Matrix.diagonal C8eigen := by
   ext i j
-  simp only [Matrix.map_apply, SimpleGraph.adjMatrix_apply]
-  split <;> simp
+  rw [Matrix.mul_apply, Matrix.mul_apply]
+  simp only [Matrix.diagonal_apply, mul_ite, mul_zero, Finset.sum_ite_eq', Finset.mem_univ,
+    if_true]
+  rw [C8adj_sum i (fun l => C8dft l j)]
+  simp only [C8dft, Matrix.vandermonde_apply, C8eigen_eq]
+  have key : ∀ m : ℕ, (zeta8 ^ m) ^ (j : ℕ) = (zeta8 ^ (j : ℕ)) ^ m := by
+    intro m
+    rw [← pow_mul, ← pow_mul, Nat.mul_comm]
+  rw [key, key, key]
+  exact pow_cycle_ident _ (by rw [← pow_mul, Nat.mul_comm, pow_mul, zeta8_pow_eight, one_pow]) i
 
-/-- **Hückel theory for cyclic C₈ (cyclooctatetraene).**
-The characteristic polynomial of the adjacency matrix of the cycle graph `C₈` is
-`∏_{k=0}^{7} (X - 2 cos (2πk/8))`; equivalently, the adjacency eigenvalues of `C₈` are exactly
-`2 cos (2πk/8)` for `k = 0, …, 7`, counted with multiplicity. -/
+lemma C8dft_isUnit : IsUnit C8dft := by
+  rw [Matrix.isUnit_iff_isUnit_det, isUnit_iff_ne_zero, C8dft]
+  refine Matrix.det_vandermonde_ne_zero_iff.mpr ?_
+  intro a b h
+  exact Fin.ext (zeta8_prim.pow_inj a.isLt b.isLt h)
+
+/-- `C8adj` is indeed the adjacency matrix of Mathlib's cycle graph on `8` vertices. -/
+lemma C8adj_eq_adjMatrix : C8adj = (SimpleGraph.cycleGraph 8).adjMatrix ℂ := by
+  ext i j
+  simp only [C8adj, SimpleGraph.adjMatrix_apply, SimpleGraph.cycleGraph_adj]
+  congr 1
+  revert i j
+  decide
+
+lemma C8adj_charpoly :
+    C8adj.charpoly = ∏ k : Fin 8, (X - C (2 * Real.cos (2 * Real.pi * k / 8) : ℂ)) := by
+  obtain ⟨u, hu⟩ := C8dft_isUnit
+  have hconj :
+      C8adj = u.val * Matrix.diagonal C8eigen * (u⁻¹ : (Matrix (Fin 8) (Fin 8) ℂ)ˣ).val := by
+    rw [Units.eq_mul_inv_iff_mul_eq, hu]
+    exact C8adj_mul_dft
+  rw [hconj, Matrix.charpoly_units_conj, Matrix.charpoly_diagonal]
+  rfl
+
+/-- **Hückel theory for cyclic C₈.** The characteristic polynomial of the adjacency
+matrix of the cycle graph `C₈` factors completely with roots `2 cos (2πk/8)`,
+`k = 0, …, 7`; that is, the adjacency eigenvalues of `C₈` are exactly
+`2 cos (2πk/8)` for `k = 0, …, 7` (counted with multiplicity). -/
 theorem huckel_C8 :
-    ((cycleGraph 8).adjMatrix ℝ).charpoly =
-      ∏ k : Fin 8, (X - C (2 * Real.cos (2 * Real.pi * k.val / 8))) := by
-  have hinj : Function.Injective (Polynomial.map (algebraMap ℝ ℂ)) :=
-    Polynomial.map_injective _ (algebraMap ℝ ℂ).injective
-  apply hinj
-  rw [← Matrix.charpoly_map, adjMatrix_map, huckel_C8_complex, Polynomial.map_prod]
-  exact Finset.prod_congr rfl fun k _ => by
-    simp [Polynomial.map_sub]
+    ((SimpleGraph.cycleGraph 8).adjMatrix ℂ).charpoly
+      = ∏ k : Fin 8, (X - C (2 * Real.cos (2 * Real.pi * k / 8) : ℂ)) := by
+  rw [← C8adj_eq_adjMatrix, C8adj_charpoly]
+
+/-- The multiset of eigenvalues (roots of the characteristic polynomial, with
+multiplicity) of the adjacency matrix of `C₈` is `{2 cos (2πk/8) : k = 0, …, 7}`. -/
+theorem huckel_C8_eigenvalues :
+    ((SimpleGraph.cycleGraph 8).adjMatrix ℂ).charpoly.roots
+      = (Finset.univ : Finset (Fin 8)).val.map
+          (fun k => (2 * Real.cos (2 * Real.pi * k / 8) : ℂ)) := by
+  rw [huckel_C8, Polynomial.roots_prod_X_sub_C]
 
 end Chem
 

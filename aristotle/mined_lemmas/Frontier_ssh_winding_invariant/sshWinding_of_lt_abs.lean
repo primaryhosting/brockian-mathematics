@@ -1,4 +1,20 @@
+/-
+# Ssh Winding Invariant
+Category: Frontier Physics
+Target: Frontier.ssh_winding_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Ssh Winding Invariant
+Category: Frontier Physics
+Target: Frontier.ssh_winding_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -25,27 +41,25 @@ set_option grind.warning false
 
 namespace Frontier
 
-open Complex Metric
+open Complex Metric intervalIntegral
 
-/-- The off-diagonal entry of the Bloch Hamiltonian of the Su–Schrieffer–Heeger (SSH) chain
-with intracell hopping `v` and intercell hopping `w`:
-`h(k) = v + w e^{i k}`.  The full Bloch Hamiltonian is `H(k) = Re h(k) • σₓ + Im h(k) • σ_y`,
-so the spectral gap is open exactly when `h(k) ≠ 0` for all `k`. -/
+/-- The off-diagonal entry of the Bloch Hamiltonian of the SSH (Su–Schrieffer–Heeger)
+model with intracell hopping `v` and intercell hopping `w`:
+`h v w k = v + w * exp (i k)`.  Chiral symmetry forces the Bloch Hamiltonian to have the
+form `![![0, h k], ![conj (h k), 0]]`, so the spectral gap is open exactly when `h k ≠ 0`
+for all `k`. -/
 
-theorem sshWinding_of_lt_abs (v w : ℝ) (hw : 0 ≤ w) (h : w < |v|) : sshWinding v w = 0 := by
-  have hne : ∀ z ∈ closedBall ((v : ℂ)) w, z ≠ 0 := by
+lemma sshWinding_of_lt_abs (v w : ℝ) (hw : 0 ≤ w) (h : w < |v|) : sshWinding v w = 0 := by
+  have hne : ∀ z ∈ Metric.closedBall ((v : ℂ)) w, z ≠ 0 := by
     intro z hz hz0
-    rw [mem_closedBall, dist_eq, hz0] at hz
-    have : |v| ≤ w := by simpa using hz
-    exact absurd h (not_lt.mpr this)
-  have hcont : ContinuousOn (fun z : ℂ => z⁻¹) (closedBall ((v : ℂ)) w) :=
-    fun z hz => (continuousAt_inv₀ (hne z hz)).continuousWithinAt
+    rw [Metric.mem_closedBall, Complex.dist_eq, hz0] at hz
+    simp only [zero_sub, norm_neg, Complex.norm_real, Real.norm_eq_abs] at hz
+    linarith
+  have hdiff : DifferentiableOn ℂ (fun z : ℂ => z⁻¹) (closure (Metric.ball ((v : ℂ)) w)) := by
+    intro z hz
+    exact (differentiableAt_inv (hne z (closure_ball_subset_closedBall hz))).differentiableWithinAt
   have hzero : (∮ z in C((v : ℂ), w), z⁻¹) = 0 :=
-    Complex.circleIntegral_eq_zero_of_differentiable_on_off_countable hw
-      (Set.countable_empty) hcont
-      (fun z hz => differentiableAt_inv_iff.mpr (hne z (ball_subset_closedBall hz.1)))
+    DiffContOnCl.circleIntegral_eq_zero hw hdiff.diffContOnCl
   rw [sshWinding_eq_circleIntegral, hzero, mul_zero]
 
-/-- **The SSH topological invariant.**  For `|v| ≠ w` (an open gap) the winding number of the
-Bloch loop `k ↦ v + w e^{ik}` around the origin is an integer, equal to `1` in the topological
-phase `|v| < w` and to `0` in the trivial phase `w < |v|`. -/
+/-- The winding integrand `h'(k) / h(k)` is `2π`-periodic in the quasimomentum. -/

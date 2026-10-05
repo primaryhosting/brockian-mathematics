@@ -1,4 +1,20 @@
+/-
+# Pcp Dinur
+Category: Frontier Cs
+Target: CS.pcp_dinur
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Pcp Dinur
+Category: Frontier Cs
+Target: CS.pcp_dinur
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,36 +39,25 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Pcp Dinur
-Category: Frontier Cs
-Target: CS.pcp_dinur
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
 namespace CS
 
-/-- A constraint graph: a finite multiset-free set of (directed) edges over `Fin numVerts`,
-together with a Boolean binary constraint attached to every edge, over the alphabet
-`Fin alphSize`. -/
-structure ConstraintGraph where
-  numVerts : ℕ
-  alphSize : ℕ
-  alph_pos : 0 < alphSize
-  edges : Finset (Fin numVerts × Fin numVerts)
-  edges_nonempty : edges.Nonempty
-  sat : Fin numVerts × Fin numVerts → Fin alphSize → Fin alphSize → Bool
+/-- A finite constraint satisfaction problem (CSP) instance: `numVars` variables taking
+values in an alphabet of size `alphabetSize`, together with a nonempty list of Boolean
+constraints on assignments. -/
+structure CSP where
+  numVars : ℕ
+  alphabetSize : ℕ
+  alphabet_pos : 0 < alphabetSize
+  constraints : List ((Fin numVars → Fin alphabetSize) → Bool)
+  constraints_ne : constraints ≠ []
 
-namespace ConstraintGraph
+namespace CSP
 
-variable (G : ConstraintGraph)
+/-- Assignments of the CSP `G`. -/
 
-/-- The number of edges (constraints) of `G`; the natural size measure. -/
-
-theorem unsat_le_one : G.unsat ≤ 1 := by
-  rw [unsat, div_le_one (by exact_mod_cast G.size_pos)]
-  exact_mod_cast G.minViolated_le_size
+theorem unsat_le_one (G : CSP) : G.unsat ≤ 1 := by
+  obtain ⟨a, ha⟩ := G.exists_unsat_eq
+  rw [ha]
+  rw [div_le_one (by exact_mod_cast G.size_pos)]
+  exact_mod_cast G.numFalsified_le_size a
 

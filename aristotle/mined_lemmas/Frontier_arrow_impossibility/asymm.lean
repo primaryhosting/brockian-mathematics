@@ -1,28 +1,3 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-
 # Arrow Impossibility
 Category: Frontier Mind
@@ -30,7 +5,6 @@ Target: Frontier.arrow_impossibility
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -43,21 +17,27 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Frontier
 
-/-! ## Rankings (strict total orders) -/
+open scoped Classical
 
-/-- A *ranking* of the alternatives `A` is a strict total order: an irreflexive,
-transitive and total (trichotomous) relation.  `r x y` means "`x` is strictly
-preferred to `y`". -/
-structure IsRanking {A : Type*} (r : A → A → Prop) : Prop where
-  irrefl : ∀ x, ¬ r x x
-  trans : ∀ {x y z}, r x y → r y z → r x z
-  total : ∀ x y, x ≠ y → r x y ∨ r y x
+/-- A strict preference relation on the set of alternatives `A`: a strict linear order,
+given by a transitive, trichotomous, irreflexive relation. -/
+structure StrictPref (A : Type*) where
+  lt : A → A → Prop
+  trans' : ∀ {x y z : A}, lt x y → lt y z → lt x z
+  trichotomous' : ∀ x y : A, lt x y ∨ x = y ∨ lt y x
+  irrefl' : ∀ x : A, ¬ lt x x
 
-namespace IsRanking
+namespace StrictPref
 
-variable {A : Type*} {r : A → A → Prop}
+variable {A : Type*}
 
 
-theorem asymm (h : IsRanking r) {x y : A} (hxy : r x y) : ¬ r y x := fun hyx =>
-  h.irrefl x (h.trans hxy hyx)
+theorem asymm (R : StrictPref A) {x y : A} (h : R.lt x y) : ¬ R.lt y x :=
+  fun h' => R.irrefl' x (R.trans' h h')
 
+end StrictPref
+
+variable {ι A : Type*}
+
+/-- A social welfare function is unanimous (Pareto) if it ranks `x` above `y` whenever
+every voter does. -/

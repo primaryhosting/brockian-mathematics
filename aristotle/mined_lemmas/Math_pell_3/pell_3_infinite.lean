@@ -1,11 +1,3 @@
-/-
-# Pell 3
-Category: Pure Mathematics
-Target: Math.pell_3
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,20 +7,6 @@ Target: Math.pell_3
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Math
-
-/-- **Pell's equation for `d = 3`**: `x² − 3·y² = 1` has a nontrivial integer solution,
-i.e. one with `y ≠ 0` (equivalently `x ≠ ±1`).  The fundamental solution is `(x, y) = (2, 1)`. -/
-
-theorem pell_3_infinite : {p : ℤ × ℤ | p.1 ^ 2 - 3 * p.2 ^ 2 = 1}.Infinite := by
-  refine Set.infinite_of_injective_forall_mem (f := pellSeq)
-    (fun m n h => pellSeq_snd_strictMono.injective (congrArg Prod.snd h))
-    (fun n => pellSeq_sol n)
-
-end Math
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -52,4 +30,22 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Math
+
+/-- The standard recursion generating solutions of `x² - 3y² = 1` from the
+fundamental solution `(2, 1)`: `(x, y) ↦ (2x + 3y, x + 2y)`. -/
+
+theorem pell_3_infinite :
+    {p : ℤ × ℤ | p.1 ^ 2 - 3 * p.2 ^ 2 = 1 ∧ 0 < p.1 ∧ 0 < p.2}.Infinite := by
+  apply Set.infinite_of_injective_forall_mem
+    (f := fun n : ℕ => pellSol n)
+  case hi =>
+    intro a b hab
+    exact pellSol_strictMono.injective (congrArg Prod.snd hab)
+  case hf =>
+    intro n
+    exact ⟨pellSol_spec n, (pellSol_pos n).1, (pellSol_pos n).2⟩
+
+end Math
 

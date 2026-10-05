@@ -8,43 +8,59 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+## Overview
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 400000
-set_option synthInstance.maxSize 128
+This file formalises the statement of the **Ten Martini Problem** (solved by A. Avila and
+S. Jitomirskaya): *for every nonzero coupling constant `λ`, every irrational frequency `α` and
+every phase `θ`, the spectrum of the almost Mathieu operator*
+`(H u) n = u (n+1) + u (n-1) + 2 λ cos (2π (θ + n α)) u n`
+*acting on `ℓ²(ℤ)` is a Cantor set.*
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+What is proved here, unconditionally:
 
-set_option grind.warning false
+* the almost Mathieu operator is constructed as a genuine bounded operator on `ℓ²(ℤ)`
+  (`Frontier.almostMathieu`), and is shown to be self-adjoint;
+* its real spectrum is nonempty, compact (hence closed) and contained in the interval
+  `[-(2 + 2|λ|), 2 + 2|λ|]`;
+* the elementary symmetries of the family: `α`-periodicity, `θ`-periodicity, the sign change
+  `λ ↦ -λ`, and the covariance `H_{λ,α,θ+α} = S H_{λ,α,θ} S⁻¹` under the shift, which gives
+  invariance of the spectrum along the orbit of `θ`;
+* the **base case `λ = 0`**: via explicit Weyl sequences of truncated plane waves, the spectrum of
+  the free discrete Laplacian is shown to contain the whole band `[-2, 2]`, so it is *not* a
+  Cantor set (`Frontier.not_isCantorSet_amoSpectrum_zero`).  This shows the hypothesis `λ ≠ 0`
+  cannot be dropped from the Ten Martini statement.
+
+The main theorem `Frontier.avila_ten_martini` is a Lean-checked *reduction*: it derives the full
+Ten Martini statement (`Frontier.TenMartiniProblem`) from the two deep analytic inputs — that the
+spectrum is nowhere dense and that it has no isolated points. All the remaining content of
+"being a Cantor set" (nonempty, compact, closed) is proved here from scratch.
+-/
+
+set_option synthInstance.maxHeartbeats 1000000
+set_option maxHeartbeats 1000000
 
 namespace Frontier
 
 noncomputable section
 
-/-! ## The Hilbert space `ℓ²(ℤ)` -/
+open scoped ComplexConjugate
 
-/-- The Hilbert space `ℓ²(ℤ; ℂ)` on which the almost Mathieu operator acts. -/
-abbrev Ell2 := lp (fun _ : ℤ => ℂ) 2
+/-- The Hilbert space `ℓ²(ℤ)` of square-summable complex sequences indexed by `ℤ`. -/
+abbrev ell2 := lp (fun _ : ℤ => ℂ) 2
 
-instance : Nontrivial Ell2 := by
-  refine ⟨lp.single 2 0 1, 0, ?_⟩
-  intro h
-  have := congrArg (fun f : Ell2 => (f : ℤ → ℂ) 0) h
-  simp at this
+/-! ### Basic `ℓ²` facts -/
 
 
-theorem amoPotential_bound (lam alpha theta : ℝ) (n : ℤ) :
-    ‖amoPotential lam alpha theta n‖ ≤ 2 * |lam| := by
-  rw [amoPotential, Complex.norm_real, Real.norm_eq_abs, abs_mul, abs_mul]
-  have h1 : |Real.cos (2 * Real.pi * (theta + n * alpha))| ≤ 1 := Real.abs_cos_le_one _
-  have h2 : |(2 : ℝ)| = 2 := by norm_num
-  rw [h2]
-  nlinarith [abs_nonneg lam, abs_nonneg (Real.cos (2 * Real.pi * (theta + n * alpha)))]
+lemma amoPotential_bound (lam alpha theta : ℝ) (n : ℤ) :
+    |amoPotential lam alpha theta n| ≤ 2 * |lam| := by
+  have h := Real.abs_cos_le_one (2 * Real.pi * (theta + n * alpha))
+  calc |amoPotential lam alpha theta n|
+      = (2 * |lam|) * |Real.cos (2 * Real.pi * (theta + n * alpha))| := by
+        simp [amoPotential, abs_mul, mul_assoc]
+    _ ≤ (2 * |lam|) * 1 := by
+        exact mul_le_mul_of_nonneg_left h (by positivity)
+    _ = 2 * |lam| := by ring
 
+/-- The **almost Mathieu operator** `H_{λ,α,θ}` on `ℓ²(ℤ)`:
+`(H u) n = u (n+1) + u (n-1) + 2 λ cos (2π (θ + n α)) u n`. -/

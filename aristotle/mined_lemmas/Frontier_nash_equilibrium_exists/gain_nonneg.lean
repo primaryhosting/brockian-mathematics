@@ -1,23 +1,32 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-theorem gain_nonneg (G : FiniteGame ι S) (i : ι) (s : S i) (x : (i : ι) → S i → ℝ) :
-    0 ≤ gain G i s x := le_max_left _ _
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+lemma gain_nonneg (u : ι → (∀ j, S j) → ℝ) (i : ι) (s : S i) (x : ∀ j, S j → ℝ) :
+    0 ≤ gain u i s x := le_max_left _ _
 

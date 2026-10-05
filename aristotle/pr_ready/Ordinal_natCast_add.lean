@@ -9,6 +9,18 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/- (Header kept verbatim below; Lean requires `import` before any module docstring,
+   so the `/-! ... -/` block is placed immediately after the imports.) -/
+
+
+/-!
+# Nat Cast Add
+Category: Frontier Wave 2 (deeper machinery)
+Target: Ordinal.natCast_add
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,34 +35,19 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-
-/-!
-# Nat Cast Add
-Category: Frontier Wave 2 (deeper machinery)
-Target: Ordinal.natCast_add
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 namespace Ordinal
 
-/-- Casting a sum of naturals into the ordinals agrees with ordinal addition.
-Closed by the general `Nat.cast_add` for an `AddMonoidWithOne`. -/
+/-- Finite-ordinal addition agrees with `Nat` addition:
+the cast of a sum of naturals is the sum of the casts.
+(This is `Nat.cast_add` for the `AddMonoidWithOne` structure on `Ordinal`.) -/
 theorem natCast_add (m n : ℕ) : ((m + n : ℕ) : Ordinal) = (m : Ordinal) + (n : Ordinal) :=
   Nat.cast_add m n
 
-/-- Casting a product of naturals into the ordinals agrees with ordinal multiplication.
-This is Mathlib's `Ordinal.natCast_mul`; `Nat.cast_mul` does not apply since `Ordinal` is not
-a `NonAssocSemiring`. -/
+/-- Finite-ordinal multiplication agrees with `Nat` multiplication:
+the cast of a product of naturals is the product of the casts.
+(Mathlib already provides this as `Ordinal.natCast_mul`.) -/
 theorem natCast_mul' (m n : ℕ) : ((m * n : ℕ) : Ordinal) = (m : Ordinal) * (n : Ordinal) :=
   Ordinal.natCast_mul m n
 

@@ -17,60 +17,59 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-/-!
-# Rice Extended
-Category: Frontier Cs
-Target: CS.rice_extended
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
+set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-open Nat.Partrec Nat.Partrec.Code
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace CS
 
-/-- **Rice's theorem** (extended / general form).
+open Nat.Partrec Nat.Partrec.Code
 
-Let `C` be an arbitrary *semantic* property of partial functions, i.e. a set
-`C : Set (ℕ →. ℕ)` of partial functions (so membership depends only on the
-function computed by a program, never on the program text).  Assume `C` is
-*nontrivial* for the class of partial recursive functions: some code `c₁` computes
-a function in `C`, and some code `c₀` computes a function not in `C`.
+/-- **Rice's theorem.**  Let `C` be any set of partial functions `ℕ →. ℕ` (a *semantic*
+property of programs: membership depends only on the computed function, not on the code).
+If the induced index set `{c | eval c ∈ C}` is nontrivial — some code computes a function
+in `C` and some code computes a function not in `C` — then that index set is not recursive,
+i.e. the predicate `fun c => eval c ∈ C` is not computable.
 
-Then the index set `{c | eval c ∈ C}` is not recursive (not decidable). -/
-theorem rice_extended (C : Set (ℕ →. ℕ)) (c₁ c₀ : Code)
-    (h₁ : eval c₁ ∈ C) (h₀ : eval c₀ ∉ C) :
+The proof is the standard one via Rogers' fixed point theorem: if the predicate were
+decidable, the computable map sending a code `c` to a fixed code `b ∉ C` when `eval c ∈ C`
+and to a fixed code `a ∈ C` otherwise would have a fixed point `c` with
+`eval (f c) = eval c`, which is contradictory in both cases. -/
+theorem rice_extended (C : Set (ℕ →. ℕ))
+    (h₁ : ∃ a : Code, eval a ∈ C) (h₂ : ∃ b : Code, eval b ∉ C) :
     ¬ ComputablePred (fun c : Code => eval c ∈ C) := by
   rintro ⟨inst, hcomp⟩
-  -- The "diagonal" program transformer: swap membership.
-  have hf : Computable fun c : Code => if eval c ∈ C then c₀ else c₁ := by
-    have := Computable.cond (c := fun c : Code => decide (eval c ∈ C))
-      hcomp (Computable.const c₀) (Computable.const c₁)
-    refine this.of_eq fun c => ?_
-    by_cases h : eval c ∈ C <;> simp [h]
-  obtain ⟨c, hc⟩ := fixed_point hf
+  obtain ⟨a, ha⟩ := h₁
+  obtain ⟨b, hb⟩ := h₂
+  have hf : Computable (fun c : Code => bif (decide (eval c ∈ C)) then b else a) :=
+    Computable.cond hcomp (Computable.const b) (Computable.const a)
+  obtain ⟨c, hc⟩ := Nat.Partrec.Code.fixed_point hf
   by_cases h : eval c ∈ C
-  · rw [if_pos h] at hc
-    exact h₀ (hc ▸ h)
-  · rw [if_neg h] at hc
-    exact h (hc ▸ h₁)
-
-/-- The index set of a nontrivial semantic property, viewed as a set of natural
-number indices, is not recursive. -/
-theorem rice_extended_nat (C : Set (ℕ →. ℕ)) (c₁ c₀ : Code)
-    (h₁ : eval c₁ ∈ C) (h₀ : eval c₀ ∉ C) :
-    ¬ ComputablePred (fun n : ℕ => eval (Denumerable.ofNat Code n) ∈ C) := by
-  intro h
-  refine rice_extended C c₁ c₀ h₁ h₀ ?_
-  have := ComputablePred.computable_iff.1 h
-  obtain ⟨g, hg, hgc⟩ := this
-  refine ComputablePred.computable_iff.2 ⟨fun c => g (Encodable.encode c), hg.comp
-    (Computable.encode), ?_⟩
-  funext c
-  simpa using congrFun hgc (Encodable.encode c)
+  · simp only [h, decide_true, cond_true] at hc
+    exact hb (hc ▸ h)
+  · simp only [h, decide_false, cond_false] at hc
+    exact h (hc ▸ ha)
 
 end CS
+
+#print axioms CS.rice_extended
 

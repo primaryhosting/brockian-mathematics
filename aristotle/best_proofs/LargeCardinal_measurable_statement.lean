@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Measurable Statement
 Category: Frontier Wave 2 (deeper machinery)
@@ -30,40 +31,33 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace LargeCardinal
-
-open Cardinal
 
 universe u
 
-/-- An ultrafilter `U` on a type `α` is *nonprincipal* if it contains no singleton,
-i.e. it is not the principal ultrafilter at any point. -/
-def IsNonprincipal {α : Type u} (U : Ultrafilter α) : Prop :=
-  ∀ x : α, ({x} : Set α) ∉ U
+namespace LargeCardinal
 
-/-- An ultrafilter `U` on a type `α` is *`c`-complete* if it is closed under
-intersections of fewer than `c` many of its members. -/
-def IsComplete {α : Type u} (c : Cardinal.{u}) (U : Ultrafilter α) : Prop :=
-  ∀ S : Set (Set α), #S < c →
-    (∀ s ∈ S, s ∈ U) → ⋂₀ S ∈ U
+/-- `IsMeasurable kappa` says that the cardinal `kappa` is a measurable cardinal:
+`kappa` is uncountable and there is a nonprincipal, `kappa`-complete ultrafilter on
+a type of cardinality `kappa` (namely `kappa.ord.ToType`).
 
-/-- A cardinal `c` is *measurable* if it is uncountable and there is a nonprincipal
-`c`-complete ultrafilter on a type of cardinality `c` (concretely, on `c.ord.ToType`). -/
-def IsMeasurableCardinal (c : Cardinal.{u}) : Prop :=
-  ℵ₀ < c ∧ ∃ U : Ultrafilter c.ord.ToType, IsNonprincipal U ∧ IsComplete c U
+Here `kappa`-completeness means: for every family `s` of fewer than `kappa` many sets,
+all belonging to the ultrafilter, the intersection `⋂₀ s` again belongs to it. -/
+def IsMeasurable (kappa : Cardinal.{u}) : Prop :=
+  Cardinal.aleph0 < kappa ∧
+    ∃ U : Ultrafilter kappa.ord.ToType,
+      (∀ x : kappa.ord.ToType, ({x} : Set kappa.ord.ToType) ∉ U) ∧
+      (∀ s : Set (Set kappa.ord.ToType),
+        Cardinal.mk s < kappa → (∀ t ∈ s, t ∈ U) → ⋂₀ s ∈ U)
 
-/-- The measurable-cardinal statement: there exists a measurable cardinal, i.e. a cardinal
-carrying a nonprincipal `κ`-complete ultrafilter. This is a large-cardinal axiom, strictly
-stronger than `Con(ZFC)`, and is *not* proved here. -/
-def MeasurableCardinalStatement : Prop :=
-  ∃ c : Cardinal.{u}, IsMeasurableCardinal c
+/-- The measurable-cardinal statement: there exists a measurable cardinal.
+This is a large-cardinal axiom; it is *not* provable in ZFC (it implies `Con(ZFC)`),
+so we only register the statement here. -/
+def MeasurableCardinalExists : Prop := ∃ kappa : Cardinal.{u}, IsMeasurable kappa
 
-/-- Self-equivalence of the measurable-cardinal statement. This merely registers the
-statement; it asserts nothing about the existence of measurable cardinals.
-(Closed by `Iff.rfl`, i.e. Mathlib's `Iff.refl`.) -/
+/-- The target: the self-equivalence of the measurable-cardinal statement.
+No existence claim is made. -/
 theorem measurable_statement :
-    MeasurableCardinalStatement.{u} ↔ MeasurableCardinalStatement.{u} :=
-  Iff.rfl
+    MeasurableCardinalExists.{u} ↔ MeasurableCardinalExists.{u} := Iff.rfl
 
 end LargeCardinal
 

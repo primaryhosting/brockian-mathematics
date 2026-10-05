@@ -1,27 +1,28 @@
-import Mathlib
-/-!
+/-
 # Ramsey 4 4
 Category: Pure Mathematics
 Target: Math.ramsey_4_4
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
-set_option maxHeartbeats 1000000
+open scoped BigOperators
 
-open scoped Classical
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 10000
 
-namespace Ramsey44
+namespace Math
 
-variable {V : Type*}
+open Finset SimpleGraph
 
-/-- `Arr G s p q` says that inside the vertex set `s` there is either a `p`-clique of `G`
-or a `q`-clique of the complement of `G` (i.e. an independent set of size `q`). -/
+/-- Extract four elements in increasing order from a four-element finset. -/
 
-lemma paley_no_indep {a b c d : ℕ} (ha : a < 17) (hb : b < a) (hc : c < b) (hd : d < c)
-    (h1 : paleyAdj a b = false) (h2 : paleyAdj a c = false) (h3 : paleyAdj a d = false)
-    (h4 : paleyAdj b c = false) (h5 : paleyAdj b d = false) (h6 : paleyAdj c d = false) :
-    False := by
-  have h := paley_all ha hb hc hd
-  simp [h1, h2, h3, h4, h5, h6] at h
+theorem paley_no_indep (s : Finset (Fin 17)) : ¬ paley17ᶜ.IsNClique 4 s := by
+  intro h
+  obtain ⟨a, b, c, d, hab, hbc, hcd, rfl⟩ := card_eq_four_sorted h.2
+  have hcl := h.1
+  refine paley_indep_check a b c d hab hbc hcd ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;>
+    · rw [← Bool.not_eq_true]
+      exact (hcl (by simp) (by simp) (by order)).2
 

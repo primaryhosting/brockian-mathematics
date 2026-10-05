@@ -1,11 +1,3 @@
-/-
-# Uhlmann Fidelity
-Category: Frontier Qi
-Target: QI.uhlmann_fidelity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -19,55 +11,34 @@ Provenance: Aristotle theorem prover (Harmonic)
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
+open scoped ComplexOrder
+open scoped MatrixOrder
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxHeartbeats 400000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-## Uhlmann's theorem
-
-We work with finite-dimensional quantum systems, states being described by density
-matrices (positive semidefinite matrices) on `ℂ^n`.
-
-A *purification* of a state `ρ` on `ℂ^n` by an ancilla system `ℂ^m` is a vector
-`ψ : n × m → ℂ` (i.e. an element of `ℂ^n ⊗ ℂ^m`) whose reduced state on the first
-factor, `Tr_2 |ψ⟩⟨ψ|`, is `ρ`.
-
-The *fidelity* of two states is `F(ρ, σ) = Tr √(√ρ σ √ρ)`.
-
-Uhlmann's theorem states that `F(ρ, σ)` is the maximum of `|⟨ψ, ψ₂⟩|` over all
-purifications `ψ` of `ρ` and `ψ₂` of `σ` (using an ancilla of the same dimension).
--/
 
 namespace QI
 
 open Matrix
-open scoped MatrixOrder ComplexOrder
+
+noncomputable section
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- The partial trace over the second (ancilla) factor of `ℂ^n ⊗ ℂ^m`. -/
+/-! ## Extending a partial isometry -/
 
-noncomputable def fidelity (ρ σ : Matrix n n ℂ) : ℝ :=
+/-- If `‖p x‖ = ‖m x‖` for all `x`, then the assignment `p x ↦ m x` extends to a global
+linear isometry `w` of the (finite dimensional) space, i.e. `w (p x) = m x` for all `x`. -/
+
+def fidelity (ρ σ : Matrix n n ℂ) : ℝ :=
   (CFC.sqrt (CFC.sqrt ρ * σ * CFC.sqrt ρ)).trace.re
 
-section Aux
-
-omit [DecidableEq n] in
-/-- The dot product `x⋆ ⬝ y` is the inner product of the corresponding Euclidean vectors. -/
+/-- Sanity check on the definition: `F(ρ, ρ) = tr ρ` (so `F(ρ, ρ) = 1` for a state `ρ`). -/

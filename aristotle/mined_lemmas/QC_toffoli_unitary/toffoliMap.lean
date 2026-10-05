@@ -23,17 +23,32 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Toffoli Unitary
+Category: Quantum Computing
+Target: QC.toffoli_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Toffoli Unitary
+Category: Quantum Computing
+Target: QC.toffoli_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace QC
 
-open Matrix
+/-- Computational basis states of three qubits. -/
+abbrev Q3 := Bool × Bool × Bool
 
-/-- The eight classical basis states of a three-qubit register. -/
-abbrev Q3 : Type := Fin 2 × Fin 2 × Fin 2
+/-- The classical action of the Toffoli (CCNOT) gate on basis states: the third bit is
+negated exactly when the first two bits are both `true`. -/
 
-/-- The Toffoli (CCNOT) action on classical basis states: the third (target) bit is
-flipped exactly when both control bits are `1`. -/
+def toffoliMap : Q3 → Q3 := fun x => (x.1, x.2.1, xor (x.1 && x.2.1) x.2.2)
 
-def toffoliMap (p : Q3) : Q3 :=
-  (p.1, p.2.1, if p.1 = 1 ∧ p.2.1 = 1 then p.2.2 + 1 else p.2.2)
-
-/-- The Toffoli action is an involution of the basis states. -/
+/-- The Toffoli action is an involution. -/

@@ -1,5 +1,4 @@
-import Mathlib
-/-!
+/-
 # Navier Stokes Regularity
 Category: Frontier — Moonshot
 Target: Frontier.navier_stokes_regularity
@@ -7,258 +6,155 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped ContDiff
-open MeasureTheory
+import Mathlib
+
+open scoped BigOperators
+open ContDiff
 
 namespace Frontier
 
-/-! ## Basic differential operators on `ℝ³` -/
-
-/-- The physical space `ℝ³`, as functions `Fin 3 → ℝ`. -/
+/-- The physical space `ℝ³`, modelled as `Fin 3 → ℝ`. -/
 abbrev Vec := Fin 3 → ℝ
 
 /-- The `i`-th partial derivative of a scalar field on `ℝ³`. -/
-noncomputable def partialD (f : Vec → ℝ) (i : Fin 3) (x : Vec) : ℝ :=
+noncomputable def partialDeriv (f : Vec → ℝ) (i : Fin 3) (x : Vec) : ℝ :=
   fderiv ℝ f x (Pi.single i 1)
 
-/-- The Laplacian `Δf = ∑ᵢ ∂ᵢ∂ᵢ f` of a scalar field on `ℝ³`. -/
+/-- The Laplacian `Δf = ∑ⱼ ∂ⱼ∂ⱼ f` of a scalar field on `ℝ³`. -/
 noncomputable def laplacian (f : Vec → ℝ) (x : Vec) : ℝ :=
-  ∑ i, partialD (partialD f i) i x
+  ∑ j, partialDeriv (partialDeriv f j) j x
 
-/-- The divergence `∇ · u = ∑ᵢ ∂ᵢ uᵢ` of a vector field on `ℝ³`. -/
-noncomputable def divergence (u : Vec → Vec) (x : Vec) : ℝ :=
-  ∑ i, partialD (fun y => u y i) i x
+/-- The divergence `∇ · v = ∑ᵢ ∂ᵢ vᵢ` of a vector field on `ℝ³`. -/
+noncomputable def divergence (v : Vec → Vec) (x : Vec) : ℝ :=
+  ∑ i, partialDeriv (fun y => v y i) i x
 
-/-- The `j`-th component of the convective term `(u · ∇) u`. -/
-noncomputable def convective (u : Vec → Vec) (x : Vec) (j : Fin 3) : ℝ :=
-  ∑ i, u x i * partialD (fun y => u y j) i x
+/-- `u` (a time dependent velocity field) together with `p` (a time dependent pressure)
+is a *global smooth solution* of the incompressible Navier–Stokes equations on `ℝ × ℝ³`
+with viscosity `ν`:
 
-/-- A time-dependent scalar field on `ℝ³` is smooth (jointly in time and space). -/
-def SmoothScalarField (p : ℝ → Vec → ℝ) : Prop :=
-  ContDiff ℝ ∞ fun q : ℝ × Vec => p q.1 q.2
-
-/-- A time-dependent vector field on `ℝ³` is smooth (jointly in time and space). -/
-def SmoothVectorField (u : ℝ → Vec → Vec) : Prop :=
-  ContDiff ℝ ∞ fun q : ℝ × Vec => u q.1 q.2
-
-/-! ## The incompressible Navier–Stokes equations -/
-
-/-- `IsNSSolution nu f u p` says that the velocity field `u` and pressure `p` solve the
-incompressible Navier–Stokes equations on `ℝ × ℝ³` with viscosity `nu` and external force `f`:
-
-* momentum:       `∂ₜuⱼ + ∑ᵢ uᵢ ∂ᵢ uⱼ = nu Δuⱼ - ∂ⱼ p + fⱼ`,
-* incompressible: `∇ · u = 0`. -/
-structure IsNSSolution (nu : ℝ) (f : ℝ → Vec → Vec) (u : ℝ → Vec → Vec)
-    (p : ℝ → Vec → ℝ) : Prop where
-  momentum : ∀ t x j, deriv (fun s => u s x j) t + convective (u t) x j
-      = nu * laplacian (fun y => u t y j) x - partialD (p t) j x + f t x j
+* `u` and `p` are `C^∞` jointly in time and space;
+* `u` is divergence free (incompressibility);
+* the momentum equation `∂ₜuᵢ + (u · ∇)uᵢ = ν Δuᵢ - ∂ᵢp` holds at every point of
+  space-time.
+-/
+structure IsGlobalSmoothSolution (ν : ℝ) (u : ℝ → Vec → Vec) (p : ℝ → Vec → ℝ) : Prop where
+  smooth_velocity : ContDiff ℝ ∞ (fun q : ℝ × Vec => u q.1 q.2)
+  smooth_pressure : ContDiff ℝ ∞ (fun q : ℝ × Vec => p q.1 q.2)
   incompressible : ∀ t x, divergence (u t) x = 0
+  momentum : ∀ t x i,
+    deriv (fun s => u s x i) t + ∑ j, u t x j * partialDeriv (fun y => u t y i) j x
+      = ν * laplacian (fun y => u t y i) x - partialDeriv (p t) i x
 
-/-- `GlobalRegular nu f u p` says that `(u, p)` is a globally defined, everywhere smooth
-solution of the Navier–Stokes equations with viscosity `nu` and force `f`. -/
-def GlobalRegular (nu : ℝ) (f : ℝ → Vec → Vec) (u : ℝ → Vec → Vec) (p : ℝ → Vec → ℝ) : Prop :=
-  SmoothVectorField u ∧ SmoothScalarField p ∧ IsNSSolution nu f u p
+/-- **Global regularity for the 3D incompressible Navier–Stokes equations** (the Clay
+Millennium Problem, here in its whole–space, force–free formulation): for every smooth,
+divergence-free initial velocity field `u₀` on `ℝ³` there exist a globally defined smooth
+velocity field `u` and pressure `p` solving the Navier–Stokes equations with viscosity `ν`
+and with initial datum `u₀`.
 
-/-- Rapid (Schwartz-type) decay of a vector field on `ℝ³`. -/
-def RapidlyDecaying (u₀ : Vec → Vec) : Prop :=
-  ∀ N : ℕ, ∃ C : ℝ, ∀ x : Vec, ‖u₀ x‖ ≤ C / (1 + ‖x‖) ^ N
+This `Prop` is the *statement* of the open problem; it is not asserted here.  The theorem
+`Frontier.navier_stokes_regularity` below proves an unconditional special case of it. -/
+def NavierStokesGlobalRegularity (ν : ℝ) : Prop :=
+  ∀ u₀ : Vec → Vec, ContDiff ℝ ∞ u₀ → (∀ x, divergence u₀ x = 0) →
+    ∃ (u : ℝ → Vec → Vec) (p : ℝ → Vec → ℝ),
+      IsGlobalSmoothSolution ν u p ∧ ∀ x, u 0 x = u₀ x
 
-/-- **The Navier–Stokes global regularity conjecture** (Clay Millennium Problem: existence
-and smoothness on `ℝ³`): for every positive viscosity and every smooth, divergence-free,
-rapidly decaying initial datum there exist a globally defined smooth velocity field and
-pressure, with no external force, solving the Navier–Stokes equations, attaining the initial
-datum, and having uniformly bounded kinetic energy.  This statement is open. -/
-def NavierStokesGlobalRegularity : Prop :=
-  ∀ nu : ℝ, 0 < nu → ∀ u₀ : Vec → Vec, ContDiff ℝ ∞ u₀ → (∀ x, divergence u₀ x = 0) →
-    RapidlyDecaying u₀ →
-      ∃ (u : ℝ → Vec → Vec) (p : ℝ → Vec → ℝ),
-        GlobalRegular nu (fun _ _ => 0) u p ∧ (∀ x, u 0 x = u₀ x) ∧
-        ∃ C : ℝ, ∀ t : ℝ, 0 ≤ t → ∫ x, ‖u t x‖ ^ 2 ≤ C
+section Auxiliary
 
-/-! ## Elementary properties of the differential operators -/
+variable {a : ℝ → Vec}
 
-@[simp] theorem partialD_const (c : ℝ) (i : Fin 3) (x : Vec) :
-    partialD (fun _ => c) i x = 0 := by
-  simp [partialD]
+/-- Coordinates of the derivative of a curve in `ℝ³`. -/
+lemma deriv_apply (ha : Differentiable ℝ a) (i : Fin 3) (t : ℝ) :
+    deriv (fun s => a s i) t = deriv a t i :=
+  ((hasDerivAt_pi.1 (ha t).hasDerivAt) i).deriv
 
-@[simp] theorem partialD_const_fun (c : ℝ) (i : Fin 3) :
-    partialD (fun _ => c) i = fun _ => (0 : ℝ) := by
-  funext x; simp
+/-- Partial derivatives of a spatially constant field vanish. -/
+@[simp] lemma partialDeriv_const (c : ℝ) (i : Fin 3) (x : Vec) :
+    partialDeriv (fun _ : Vec => c) i x = 0 := by
+  simp [partialDeriv]
 
-@[simp] theorem laplacian_const (c : ℝ) (x : Vec) : laplacian (fun _ => c) x = 0 := by
-  simp [laplacian]
+/-- The Laplacian of a spatially constant field vanishes. -/
+@[simp] lemma laplacian_const (c : ℝ) (x : Vec) :
+    laplacian (fun _ : Vec => c) x = 0 := by
+  have h : ∀ j, partialDeriv (fun _ : Vec => c) j = fun _ : Vec => (0 : ℝ) := by
+    intro j; funext y; exact partialDeriv_const c j y
+  simp [laplacian, h]
 
-/-! ## The base case: the zero flow -/
+/-- The gradient of the linear pressure `x ↦ -⟨c, x⟩`. -/
+lemma partialDeriv_linear_pressure (c : Vec) (i : Fin 3) (x : Vec) :
+    partialDeriv (fun y : Vec => -∑ k, c k * y k) i x = -c i := by
+  have h : (fun y : Vec => -∑ k, c k * y k)
+      = fun y => (-(∑ k, c k • (ContinuousLinearMap.proj k : Vec →L[ℝ] ℝ))) y := by
+    funext y; simp
+  rw [partialDeriv, h, ContinuousLinearMap.fderiv]
+  simp [Pi.single_apply, Finset.sum_ite_eq']
 
-/-- **Base case.** The identically zero velocity field, with zero pressure, is a global smooth
-solution of the Navier–Stokes equations with zero force, for every viscosity. -/
-theorem globalRegular_zero (nu : ℝ) :
-    GlobalRegular nu (fun _ _ => 0) (fun _ _ => 0) (fun _ _ => 0) := by
-  refine ⟨contDiff_const, contDiff_const, ?_, ?_⟩
-  · intro t x j
-    simp [convective, laplacian]
+/-- Sanity check on the definitions: the `j`-th partial derivative of the `i`-th coordinate
+function is `1` if `i = j` and `0` otherwise. -/
+lemma partialDeriv_coord (i j : Fin 3) (x : Vec) :
+    partialDeriv (fun y : Vec => y i) j x = if i = j then 1 else 0 := by
+  have h : (fun y : Vec => y i) = fun y => (ContinuousLinearMap.proj i : Vec →L[ℝ] ℝ) y := rfl
+  rw [partialDeriv, h, ContinuousLinearMap.fderiv]
+  simp [Pi.single_apply]
+
+/-- Sanity check on the definitions: the divergence of the identity vector field is `3`. -/
+lemma divergence_id (x : Vec) : divergence (fun y : Vec => y) x = 3 := by
+  simp [divergence, partialDeriv_coord]
+
+end Auxiliary
+
+/-- **Navier–Stokes regularity: the spatially uniform (base) case.**
+
+For every viscosity `ν` and every smooth curve `a : ℝ → ℝ³` there is a global smooth
+solution of the 3D incompressible Navier–Stokes equations whose velocity field is the
+spatially uniform flow `u(t, x) = a t`, with the linear pressure `p(t, x) = -⟨a'(t), x⟩`.
+In particular (taking `a` constant, e.g. `a = 0`) the initial value problem with any
+constant divergence-free initial datum — the rest state `u₀ = 0` in particular — has a
+globally smooth solution.
+
+This is an unconditional, Lean-checked instance of `NavierStokesGlobalRegularity ν`
+restricted to spatially uniform initial data; the general case is the open Millennium
+Problem, stated above as `NavierStokesGlobalRegularity`. -/
+theorem navier_stokes_regularity (ν : ℝ) (a : ℝ → Vec) (ha : ContDiff ℝ ∞ a) :
+    ∃ (u : ℝ → Vec → Vec) (p : ℝ → Vec → ℝ),
+      IsGlobalSmoothSolution ν u p ∧ ∀ x, u 0 x = a 0 := by
+  have hdiff : Differentiable ℝ a := (contDiff_infty_iff_deriv.1 ha).1
+  have hderiv : ContDiff ℝ ∞ (deriv a) := (contDiff_infty_iff_deriv.1 ha).2
+  refine ⟨fun t _ => a t, fun t x => -∑ k, deriv a t k * x k, ⟨?_, ?_, ?_, ?_⟩, fun _ => rfl⟩
+  · exact ha.comp contDiff_fst
+  · refine ContDiff.neg (ContDiff.sum fun k _ => ContDiff.mul ?_ ?_)
+    · exact (contDiff_apply ℝ ℝ k).comp (hderiv.comp contDiff_fst)
+    · exact (contDiff_apply ℝ ℝ k).comp contDiff_snd
   · intro t x
     simp [divergence]
+  · intro t x i
+    have hp : partialDeriv (fun y : Vec => -∑ k, deriv a t k * y k) i x = -deriv a t i :=
+      partialDeriv_linear_pressure (deriv a t) i x
+    simp only [hp, deriv_apply hdiff i t, partialDeriv_const, laplacian_const]
+    simp
 
-/-! ## Shear flows: a Lean-checked reduction to the linear heat equation -/
+/-- **Time translation invariance** (a Lean-checked reduction): global smooth solutions
+are preserved by shifting time, so solving the initial value problem at time `s` is
+equivalent to solving it at time `0`. -/
+theorem isGlobalSmoothSolution_timeShift {ν : ℝ} {u : ℝ → Vec → Vec} {p : ℝ → Vec → ℝ}
+    (h : IsGlobalSmoothSolution ν u p) (s : ℝ) :
+    IsGlobalSmoothSolution ν (fun t x => u (t + s) x) (fun t x => p (t + s) x) := by
+  have hshift : ContDiff ℝ ∞ (fun q : ℝ × Vec => (q.1 + s, q.2)) :=
+    (contDiff_fst.add contDiff_const).prodMk contDiff_snd
+  refine ⟨h.smooth_velocity.comp hshift, h.smooth_pressure.comp hshift, ?_, ?_⟩
+  · intro t x; exact h.incompressible (t + s) x
+  · intro t x i
+    have hd : deriv (fun r => u (r + s) x i) t = deriv (fun r => u r x i) (t + s) :=
+      deriv_comp_add_const (fun r => u r x i) s t
+    rw [hd]
+    exact h.momentum (t + s) x i
 
-/-- The shear (unidirectional) velocity field with profile `w`: `u = (w, 0, 0)`. -/
-noncomputable def shearField (w : ℝ → Vec → ℝ) : ℝ → Vec → Vec :=
-  fun t x j => if j = 0 then w t x else 0
-
-@[simp] theorem shearField_apply_zero (w : ℝ → Vec → ℝ) (t : ℝ) (x : Vec) :
-    shearField w t x 0 = w t x := by
-  simp [shearField]
-
-theorem shearField_apply_ne (w : ℝ → Vec → ℝ) (t : ℝ) (x : Vec) {j : Fin 3} (hj : j ≠ 0) :
-    shearField w t x j = 0 := by
-  simp [shearField, hj]
-
-theorem shearField_comp_zero (w : ℝ → Vec → ℝ) (t : ℝ) :
-    (fun y => shearField w t y 0) = w t := by
-  funext y; simp
-
-theorem shearField_comp_ne (w : ℝ → Vec → ℝ) (t : ℝ) {j : Fin 3} (hj : j ≠ 0) :
-    (fun y => shearField w t y j) = fun _ => (0 : ℝ) := by
-  funext y; simp [shearField, hj]
-
-theorem smooth_shearField {w : ℝ → Vec → ℝ} (hw : SmoothScalarField w) :
-    SmoothVectorField (shearField w) := by
-  rw [SmoothVectorField, contDiff_pi]
-  intro j
-  by_cases hj : j = 0
-  · subst hj
-    simpa [shearField] using hw
-  · simpa [shearField, hj] using (contDiff_const : ContDiff ℝ ∞ fun _ : ℝ × Vec => (0 : ℝ))
-
-/-- **A Lean-checked reduction.** For unidirectional (shear) flows `u = (w, 0, 0)` whose profile
-`w` does not depend on the streamwise coordinate `x₀`, the nonlinear term of Navier–Stokes
-vanishes identically, and the full nonlinear system with zero force and zero pressure reduces to
-the *linear* heat equation `∂ₜ w = nu Δ w`.  Consequently every global smooth solution of the
-heat equation produces a globally regular solution of the 3D incompressible Navier–Stokes
-equations.
-
-This is the target of this file: the Millennium-Prize statement itself is recorded above as
-`Frontier.NavierStokesGlobalRegularity` and remains open; here we prove the base case
-(`globalRegular_zero`) together with this reduction (and, below, a nontrivial instance of it). -/
-theorem navier_stokes_regularity (nu : ℝ) (w : ℝ → Vec → ℝ)
-    (hsmooth : SmoothScalarField w)
-    (hindep : ∀ t x, partialD (w t) 0 x = 0)
-    (hheat : ∀ t x, deriv (fun s => w s x) t = nu * laplacian (w t) x) :
-    GlobalRegular nu (fun _ _ => 0) (shearField w) (fun _ _ => 0) := by
-  refine ⟨smooth_shearField hsmooth, contDiff_const, ?_, ?_⟩
-  · intro t x j
-    by_cases hj : j = 0
-    · subst hj
-      have hconv : convective (shearField w t) x 0 = 0 := by
-        rw [convective, shearField_comp_zero]
-        refine Finset.sum_eq_zero ?_
-        intro i _
-        by_cases hi : i = 0
-        · subst hi; rw [hindep t x, mul_zero]
-        · rw [shearField_apply_ne w t x hi, zero_mul]
-      have hu : (fun s => shearField w s x 0) = fun s => w s x := by
-        funext s; simp
-      rw [hu, hconv, shearField_comp_zero]
-      simpa using hheat t x
-    · have h0 : (fun s => shearField w s x j) = fun _ => (0 : ℝ) := by
-        funext s; exact shearField_apply_ne w s x hj
-      have hconv : convective (shearField w t) x j = 0 := by
-        rw [convective, shearField_comp_ne w t hj]
-        simp
-      rw [h0, hconv, shearField_comp_ne w t hj]
-      simp
-  · intro t x
-    rw [divergence]
-    refine Finset.sum_eq_zero ?_
-    intro i _
-    by_cases hi : i = 0
-    · subst hi; rw [shearField_comp_zero]; exact hindep t x
-    · rw [shearField_comp_ne w t hi]; simp
-
-/-! ## A nontrivial instance of the reduction -/
-
-/-- Partial derivatives of a field of the form `x ↦ c * g x₁`. -/
-theorem partialD_comp_coord {g g' : ℝ → ℝ} (hg : ∀ u : ℝ, HasDerivAt g (g' u) u)
-    (c : ℝ) (i : Fin 3) (x : Vec) :
-    partialD (fun y : Vec => c * g (y 1)) i x = c * g' (x 1) * (if i = 1 then 1 else 0) := by
-  have h1 : HasFDerivAt (fun y : Vec => y 1) (ContinuousLinearMap.proj 1 : Vec →L[ℝ] ℝ) x :=
-    (ContinuousLinearMap.proj 1 : Vec →L[ℝ] ℝ).hasFDerivAt
-  have h2 : HasFDerivAt (fun y : Vec => g (y 1))
-      (g' (x 1) • (ContinuousLinearMap.proj 1 : Vec →L[ℝ] ℝ)) x :=
-    (hg (x 1)).comp_hasFDerivAt x h1
-  have h3 : HasFDerivAt (fun y : Vec => c * g (y 1))
-      ((c * g' (x 1)) • (ContinuousLinearMap.proj 1 : Vec →L[ℝ] ℝ)) x := by
-    rw [← smul_smul]; exact h2.const_mul c
-  rw [partialD, h3.fderiv]
-  simp [Pi.single_apply, eq_comm]
-
-/-- An explicit, nonzero shear profile: `w t x = exp (-nu t) * sin x₁`. -/
-noncomputable def exampleProfile (nu : ℝ) : ℝ → Vec → ℝ :=
-  fun t x => Real.exp (-nu * t) * Real.sin (x 1)
-
-theorem smooth_exampleProfile (nu : ℝ) : SmoothScalarField (exampleProfile nu) := by
-  have h1 : ContDiff ℝ ∞ fun q : ℝ × Vec => Real.exp (-nu * q.1) :=
-    Real.contDiff_exp.comp (contDiff_const.mul contDiff_fst)
-  have h2 : ContDiff ℝ ∞ fun q : ℝ × Vec => Real.sin (q.2 1) :=
-    Real.contDiff_sin.comp ((contDiff_apply ℝ ℝ (1 : Fin 3)).comp contDiff_snd)
-  exact h1.mul h2
-
-theorem partialD_exampleProfile_one (nu t : ℝ) :
-    partialD (exampleProfile nu t) 1 = fun x : Vec => Real.exp (-nu * t) * Real.cos (x 1) := by
-  funext x
-  have he : exampleProfile nu t = fun y : Vec => Real.exp (-nu * t) * Real.sin (y 1) := rfl
-  rw [he, partialD_comp_coord Real.hasDerivAt_sin]
-  simp
-
-theorem partialD_exampleProfile_ne (nu t : ℝ) {i : Fin 3} (hi : i ≠ 1) :
-    partialD (exampleProfile nu t) i = fun _ : Vec => (0 : ℝ) := by
-  funext x
-  have he : exampleProfile nu t = fun y : Vec => Real.exp (-nu * t) * Real.sin (y 1) := rfl
-  rw [he, partialD_comp_coord Real.hasDerivAt_sin]
-  simp [hi]
-
-theorem exampleProfile_indep (nu : ℝ) (t : ℝ) (x : Vec) :
-    partialD (exampleProfile nu t) 0 x = 0 := by
-  rw [partialD_exampleProfile_ne nu t (by decide : (0 : Fin 3) ≠ 1)]
-
-theorem laplacian_exampleProfile (nu t : ℝ) (x : Vec) :
-    laplacian (exampleProfile nu t) x = -exampleProfile nu t x := by
-  have key : partialD (partialD (exampleProfile nu t) 1) 1 x = -exampleProfile nu t x := by
-    rw [partialD_exampleProfile_one,
-      partialD_comp_coord (g' := fun u => -Real.sin u) (fun u => Real.hasDerivAt_cos u)]
-    simp [exampleProfile]
-  have h0 : partialD (partialD (exampleProfile nu t) 0) 0 x = 0 := by
-    rw [partialD_exampleProfile_ne nu t (by decide : (0 : Fin 3) ≠ 1)]; simp
-  have h2 : partialD (partialD (exampleProfile nu t) 2) 2 x = 0 := by
-    rw [partialD_exampleProfile_ne nu t (by decide : (2 : Fin 3) ≠ 1)]; simp
-  rw [laplacian, Fin.sum_univ_three, h0, h2, key]
-  ring
-
-theorem heat_exampleProfile (nu t : ℝ) (x : Vec) :
-    deriv (fun s => exampleProfile nu s x) t = nu * laplacian (exampleProfile nu t) x := by
-  have h : HasDerivAt (fun s => exampleProfile nu s x)
-      (-nu * Real.exp (-nu * t) * Real.sin (x 1)) t := by
-    have hexp : HasDerivAt (fun s : ℝ => Real.exp (-nu * s)) (Real.exp (-nu * t) * -nu) t := by
-      simpa using (((hasDerivAt_id t).const_mul (-nu)).exp)
-    simpa [exampleProfile, mul_comm, mul_assoc, mul_left_comm] using
-      hexp.mul_const (Real.sin (x 1))
-  rw [h.deriv, laplacian_exampleProfile, exampleProfile]
-  ring
-
-/-- The reduction is not vacuous: an explicit global smooth Navier–Stokes flow
-obtained from the shear reduction. -/
-theorem globalRegular_exampleShear (nu : ℝ) :
-    GlobalRegular nu (fun _ _ => 0) (shearField (exampleProfile nu)) (fun _ _ => 0) :=
-  navier_stokes_regularity nu (exampleProfile nu) (smooth_exampleProfile nu)
-    (exampleProfile_indep nu) (heat_exampleProfile nu)
-
-/-- The example flow is genuinely nonzero. -/
-theorem exampleShear_ne_zero (nu : ℝ) :
-    shearField (exampleProfile nu) 0 (fun _ => Real.pi / 2) ≠ 0 := by
-  intro h
-  have h0 := congrFun h 0
-  simp [shearField, exampleProfile] at h0
+/-- The rest state: for the zero initial velocity the incompressible Navier–Stokes
+equations have a global smooth solution (namely `u = 0`, `p = 0`). -/
+theorem navier_stokes_regularity_rest_state (ν : ℝ) :
+    ∃ (u : ℝ → Vec → Vec) (p : ℝ → Vec → ℝ),
+      IsGlobalSmoothSolution ν u p ∧ ∀ x, u 0 x = 0 := by
+  obtain ⟨u, p, hsol, hinit⟩ := navier_stokes_regularity ν (fun _ => 0) contDiff_const
+  exact ⟨u, p, hsol, hinit⟩
 
 end Frontier
 

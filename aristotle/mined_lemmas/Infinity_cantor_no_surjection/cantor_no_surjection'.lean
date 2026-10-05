@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Cantor No Surjection
 Category: Frontier — Set Theory
 Target: Infinity.cantor_no_surjection
@@ -6,19 +8,9 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-namespace Infinity
-
-/-- Key intermediate lemma: for any `f : X → Set X`, the diagonal set
-`{x | x ∉ f x}` is not in the range of `f`. -/
-
-theorem cantor_no_surjection' {X : Type*} (f : X → Set X) : ¬ Function.Surjective f :=
-  Function.cantor_surjective f
-
-end Infinity
-
-import Mathlib
+-- Note: Lean 4 requires `import` commands to precede every other command, including
+-- module docstrings (`/-! ... -/`), so the header block above is placed directly after
+-- the single `import Mathlib` line.
 
 open scoped BigOperators
 open scoped Real
@@ -42,4 +34,17 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Infinity
+
+/-- **Cantor's theorem**: for any type `X`, no function `f : X → Set X` is surjective.
+
+The proof considers the diagonal set `D = {i | i ∉ f i}`.  If `f` were surjective there
+would be some `j` with `f j = D`; splitting on whether `j ∈ f j` holds gives a
+contradiction in both branches. -/
+
+theorem cantor_no_surjection' {X : Type*} (f : X → Set X) : ¬ Function.Surjective f :=
+  fun hf => Function.cantor_surjective f hf
+
+end Infinity
 

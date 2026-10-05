@@ -1,26 +1,18 @@
+/-!
+# Huckel C 18
+Category: Chemistry
+Target: Chem.huckel_C18
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+open Complex Polynomial Matrix SimpleGraph
 
 namespace Chem
 
-open Complex Polynomial Matrix
-
 /-- The primitive 18-th root of unity `exp (2πi/18)`. -/
 
-lemma fin18_sub_one : ∀ i : Fin 18, (i - 1 : Fin 18) = i + 17 := by decide
+lemma fin18_sub_one (j : Fin 18) : j - 1 = j + 17 := by revert j; decide
 

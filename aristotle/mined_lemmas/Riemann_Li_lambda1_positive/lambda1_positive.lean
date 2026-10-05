@@ -8,21 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Riemann.Li
-
-/-- Positivity of Li's first coefficient `λ₁ = 1 + γ/2 - (1/2) log (4π)`:
-for real `g, L` with `0.577 ≤ g` and `L ≤ 2.532`, we have `0 < 1 + g/2 - L/2`.
-
-Instantiated with `g = γ` (Euler–Mascheroni, `γ ≥ 0.577`) and `L = log (4π) ≤ 2.532`,
-this gives `λ₁ > 0`. -/
-
-theorem lambda1_positive (g L : ℝ) (hg : (0.577 : ℝ) ≤ g) (hL : L ≤ (2.532 : ℝ)) :
-    0 < 1 + g / 2 - L / 2 := by
-  linarith
-
-end Riemann.Li
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -46,4 +31,18 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Riemann
+namespace Li
+
+/-- Positivity of Li's first coefficient `λ₁ = 1 + γ/2 - (1/2) log (4π)`:
+for all reals `g ≥ 0.577` and `L ≤ 2.532` we have `0 < 1 + g/2 - L/2`.
+Applied with `g = γ` (Euler–Mascheroni) and `L = log (4π)` this gives `λ₁ > 0`. -/
+
+theorem lambda1_positive (g L : ℝ) (hg : (0.577 : ℝ) ≤ g) (hL : L ≤ (2.532 : ℝ)) :
+    0 < 1 + g / 2 - L / 2 := by
+  linarith
+
+end Li
+end Riemann
 

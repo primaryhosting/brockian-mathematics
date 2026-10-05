@@ -34,11 +34,11 @@ set_option grind.warning false
 
 namespace Constellation
 
-/-- The prime triple `(5, 7, 11)` is a prime constellation of pattern `(0, 2, 6)`:
-`5`, `7`, `11` are all prime, `7 = 5 + 2` and `11 = 5 + 6`. -/
+/-- The triple `(5, 7, 11)` is a prime constellation of pattern `(0, 2, 6)`:
+each entry is prime, and the offsets from `5` are `0`, `2`, `6`. -/
 theorem admissible_triple :
-    Nat.Prime 5 ∧ Nat.Prime 7 ∧ Nat.Prime 11 ∧ 7 = 5 + 2 ∧ 11 = 5 + 6 :=
-  ⟨by norm_num, by norm_num, by norm_num, rfl, rfl⟩
+    Nat.Prime 5 ∧ Nat.Prime 7 ∧ Nat.Prime 11 ∧ (7 : ℕ) = 5 + 2 ∧ (11 : ℕ) = 5 + 6 := by
+  refine ⟨by norm_num, by norm_num, by norm_num, by norm_num, by norm_num⟩
 
 end Constellation
 

@@ -1,5 +1,48 @@
 import Mathlib
 
+/-!
+# Alkane Tree
+Category: Chemistry
+Target: Chem.alkane_tree
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped Classical
+
+namespace Chem
+
+/-- The carbon skeleton of an acyclic alkane with `n` carbon atoms: a simple graph on the
+`n` carbons which is connected (the molecule is one piece), acyclic (the alkane is acyclic,
+i.e. not a cycloalkane) and in which every carbon has at most `4` bonds (carbon is
+tetravalent). -/
+structure AlkaneSkeleton (n : ℕ) where
+  /-- The graph of carbon–carbon bonds. -/
+  G : SimpleGraph (Fin n)
+  /-- The skeleton is connected. -/
+  connected : G.Connected
+  /-- The skeleton is acyclic. -/
+  acyclic : G.IsAcyclic
+  /-- Carbon is tetravalent: at most four bonds at each carbon. -/
+  valence : ∀ v, G.degree v ≤ 4
+
+variable {n : ℕ}
+
+/-- The number of C–C bonds in the skeleton. -/
+
+def methane : AlkaneSkeleton 1 where
+  G := ⊥
+  connected := (SimpleGraph.IsTree.of_subsingleton (G := (⊥ : SimpleGraph (Fin 1)))).isConnected
+  acyclic := SimpleGraph.isAcyclic_bot
+  valence v := by simp
+
+example : methane.bonds + 1 = 1 ∧ methane.hydrogens = 4 :=
+  ⟨(alkane_tree methane).2.1, (alkane_tree methane).2.2⟩
+
+end Chem
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,46 +66,3 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Chem
-
-/-- A model of an acyclic (saturated) alkane `CₙH₂ₙ₊₂`.
-
-The atoms of the molecule are the elements of a (finite) type `V`, the covalent bonds are
-the edges of a simple graph `G` on `V`, and `C` is the set of carbon atoms (so `Cᶜ` is the
-set of hydrogen atoms).  The conditions say:
-
-* there is at least one carbon atom;
-* there are exactly `n` carbon atoms and exactly `2 * n + 2` hydrogen atoms;
-* carbon is tetravalent (four bonds) and hydrogen is monovalent (one bond);
-* the molecule is connected and acyclic, i.e. its bond graph is a tree.
--/
-structure IsAlkane {V : Type*} (G : SimpleGraph V) (C : Set V) (n : ℕ) : Prop where
-  /-- The molecule contains at least one carbon atom. -/
-  pos_carbon : 0 < n
-  /-- There are exactly `n` carbon atoms. -/
-  card_carbon : C.ncard = n
-  /-- There are exactly `2 * n + 2` hydrogen atoms. -/
-  card_hydrogen : Cᶜ.ncard = 2 * n + 2
-  /-- Carbon is tetravalent. -/
-  carbon_valence : ∀ v ∈ C, (G.neighborSet v).ncard = 4
-  /-- Hydrogen is monovalent. -/
-  hydrogen_valence : ∀ v ∉ C, (G.neighborSet v).ncard = 1
-  /-- The molecule is connected and contains no ring: its bond graph is a tree. -/
-  tree : G.IsTree
-
-/-- The carbon skeleton of a molecule: the graph induced on the set of carbon atoms,
-whose edges are exactly the carbon–carbon bonds. -/
-abbrev carbonSkeleton {V : Type*} (G : SimpleGraph V) (C : Set V) : SimpleGraph C :=
-  G.induce C
-
-/-- A monovalent atom has a subsingleton neighbourhood. -/
-
-def methane : SimpleGraph (Fin 5) where
-  Adj a b := a ≠ b ∧ (a = 0 ∨ b = 0)
-  symm := by rintro a b ⟨h1, h2⟩; exact ⟨h1.symm, h2.symm⟩
-  loopless := ⟨by rintro a ⟨h, -⟩; exact h rfl⟩
-
-instance : DecidableRel methane.Adj := fun a b => by
-  unfold methane; dsimp; infer_instance
-
-/-- The carbon atom of methane. -/

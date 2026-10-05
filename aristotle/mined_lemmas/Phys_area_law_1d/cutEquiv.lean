@@ -1,14 +1,11 @@
 import Mathlib
+
 /-!
 # Area Law 1 D
 Category: Frontier Phys
 Target: Phys.area_law_1d
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(The header block is required to be the first content of the file; Lean 4 requires
-`import` statements to precede every other command, including module docstrings, so the
-single `import Mathlib` line above is the only thing preceding it.)
 -/
 
 open scoped BigOperators
@@ -16,7 +13,6 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped ComplexOrder
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -37,11 +33,14 @@ set_option grind.warning false
 
 namespace Phys
 
-/-! ## Shannon entropy of a finite spectrum -/
+/-! ## Shannon entropy of a finite probability vector -/
 
-/-- Shannon (von Neumann) entropy of a finite family of probabilities. -/
+/-- The Shannon entropy `-∑ pᵢ log pᵢ` of a finite family of reals. -/
 
-def cutEquiv (N d L : ℕ) : Config N d ≃ LeftConfig N d L × RightConfig N d L :=
-  Equiv.piEquivPiSubtypeProd (fun i : Fin N => (i : ℕ) < L) (fun _ => Fin d)
+noncomputable def cutEquiv (d N x : ℕ) :
+    ((Fin N) → Fin d) ≃
+      (({i : Fin N // (i : ℕ) < x} → Fin d) × ({i : Fin N // ¬ (i : ℕ) < x} → Fin d)) :=
+  Equiv.piEquivPiSubtypeProd (fun i : Fin N => (i : ℕ) < x) (fun _ => Fin d)
 
-/-- A state of the chain viewed as a bipartite state across the cut at `L`. -/
+/-- The matricization (Schmidt matrix) of a state `psi` of the chain across the cut at `x`:
+rows are labelled by configurations of the left block, columns by those of the right block. -/

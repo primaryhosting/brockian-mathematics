@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Boundary Term Vanishes
 Category: Gate1 Operator
 Target: Brockian.DilationGenerator.boundary_term_vanishes
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -22,21 +22,25 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
-namespace Brockian
-namespace DilationGenerator
+namespace Brockian.DilationGenerator
 
-/-- If `tsupport f ⊆ Set.Ioi 0`, then `f` vanishes on a neighbourhood of `0`. -/
+/-- If `f` has compact support contained in `(0, ∞)`, then `f` vanishes on a whole
+neighbourhood of `0` in `ℝ`. -/
 
 theorem eventually_eq_zero_nhds_zero_of_tsupport_subset_Ioi
-    {f : ℝ → ℂ} (hf : tsupport f ⊆ Set.Ioi 0) :
-    ∀ᶠ x in nhds (0 : ℝ), f x = 0 := by
-  have hopen : IsOpen (tsupport f)ᶜ := (isClosed_tsupport f).isOpen_compl
-  have hmem : (0 : ℝ) ∈ (tsupport f)ᶜ := by
-    intro h
-    exact absurd (hf h) (by simp)
-  filter_upwards [hopen.mem_nhds hmem] with x hx
-  exact image_eq_zero_of_notMem_tsupport hx
+    {f : ℝ → ℂ} (hf0 : tsupport f ⊆ Set.Ioi 0) :
+    ∀ᶠ x : ℝ in nhds 0, f x = 0 := by
+  have hmem : (tsupport f)ᶜ ∈ nhds (0 : ℝ) :=
+    (isClosed_tsupport f).isOpen_compl.mem_nhds (fun h => by simpa using hf0 h)
+  filter_upwards [hmem] with x hx using image_eq_zero_of_notMem_tsupport hx
 
-/-- A compactly supported function vanishes eventually along `atTop`. -/
+/-- If `f` has compact support, then `f` vanishes eventually along `atTop`. -/

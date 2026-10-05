@@ -16,80 +16,55 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 100000
+
 namespace Brockian
 
-/-- The binary (`K = 2`) Goldbach property: `n` is a sum of two primes. -/
-def GoldbachK2 (n : ℕ) : Prop := ∃ p q, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n
+/-- `wheelWitnessK2` is a table of small "wheel" primes: entry `i` is the least prime `p`
+such that both `p` and `2 * i - p` are prime (and `0` for `i < 2`). -/
 
-/-- Convenience constructor: if `p` and `n - p` are prime and `p ≤ n`, then `n` is a sum of
-two primes. -/
-theorem goldbachK2_of_sub_prime (n p : ℕ) (hp : Nat.Prime p) (hq : Nat.Prime (n - p))
-    (hpn : p ≤ n) : GoldbachK2 n :=
-  ⟨p, n - p, hp, hq, by omega⟩
+def wheelWitnessK2 : List Nat :=
+ [
+  0, 0, 2, 3, 3, 3, 5, 3, 3, 5, 3, 3, 5, 3, 5, 7, 3, 3, 5, 7, 3, 5, 3, 3, 5, 3, 5, 7, 3, 5, 7,
+  3, 3, 5, 7, 3, 5, 3, 3, 5, 7, 3, 5, 3, 5, 7, 3, 5, 7, 19, 3, 5, 3, 3, 5, 3, 3, 5, 3, 5, 7,
+  13, 11, 13, 19, 3, 5, 3, 5, 7, 3, 3, 5, 7, 11, 11, 3, 3, 5, 7, 3, 5, 7, 3, 5, 3, 5, 7, 3, 5,
+  7, 3, 3, 5, 7, 11, 11, 3, 3, 5, 3, 3, 5, 7, 11, 11, 13, 3, 5, 7, 23, 11, 13, 3, 5, 3, 3, 5,
+  3, 5, 7, 3, 3, 5, 7, 11, 11, 3, 5, 7, 3, 5, 7, 3, 5, 7, 3, 3, 5, 7, 3, 5, 3, 3, 5, 7, 11, 11,
+  3, 5, 7, 19, 11, 13, 31, 3, 5, 3, 3, 5, 3, 5, 7, 13, 11, 13, 19, 3, 5, 7, 3, 5, 7, 29, 11, 3,
+  3, 5, 3, 5, 7, 3, 5, 7, 19, 3, 5, 7, 3, 5, 7, 3, 5, 3, 5, 7, 3, 5, 7, 19, 3, 5, 3, 5, 7, 13,
+  3, 5, 7, 17, 11, 3, 3, 5, 7, 11, 11, 3, 3, 5, 7, 3, 5, 3, 5, 7, 3, 5, 7, 19, 3, 5, 3, 3, 5,
+  3, 5, 7, 13, 11, 13, 3, 5, 7, 31, 3, 5, 3, 5, 7, 13, 3, 5, 3, 5, 7, 3, 5, 7, 19, 11, 13, 3,
+  3, 5, 7, 11, 11, 13, 17, 17, 19, 3, 5, 7, 3, 5, 7, 47, 11, 3, 5, 7, 3, 5, 7, 3, 3, 5, 7, 3,
+  5, 7, 17, 11, 3, 5, 7, 3, 5, 7, 3, 3, 5, 7, 3, 5, 7, 3, 5, 3, 3, 5, 7, 11, 11, 13, 3, 5, 7,
+  23, 11, 3, 3, 5, 3, 5, 7, 3, 5, 7, 3, 3, 5, 7, 11, 11, 13, 3, 5, 3, 5, 7, 3, 5, 7, 19, 3, 5,
+  7, 17, 11, 3, 5, 7, 19, 3, 5, 7, 17, 11, 3, 5, 7, 19, 3, 5, 7, 3, 5, 7, 3, 5, 3, 5, 7, 13, 3,
+  5, 7, 3, 5, 3, 5, 7, 13, 3, 5, 3, 5, 7, 13, 11, 13, 19, 3, 5, 7, 23, 11, 3, 5, 7, 19, 11, 13,
+  3, 3, 5, 7, 11, 11, 3, 3, 5, 3, 3, 5, 7, 11, 11, 3, 5, 7, 19, 11, 13, 31, 3, 5, 3, 3, 5, 3,
+  5, 7, 13, 11, 13, 19, 3, 5, 3, 3, 5, 3, 5, 7, 13, 11, 13, 19, 17, 19, 31, 3, 5, 3, 5, 7, 13,
+  3, 5, 7, 17, 11, 3, 5, 7, 19, 3, 5, 3, 5, 7, 3, 5, 7, 3, 5, 7, 43, 11, 13, 31, 3, 5, 3, 5, 7,
+  3, 5, 7, 3, 5, 7, 73, 3, 5, 7, 3, 5, 7, 23, 11, 13, 3, 5, 3, 5, 7, 3, 3, 5, 7, 11, 11, 3, 3,
+  5, 7, 3, 5, 7, 17, 11
+ ]
 
-set_option maxHeartbeats 4000000 in
+/-- The table entry attached to an even number `n`. -/
+
+theorem wheelWitnessK2_spec : ∀ i < 526, 2 ≤ i →
+    Nat.Prime (wheelWitnessK2.getD i 0) ∧ Nat.Prime (2 * i - wheelWitnessK2.getD i 0) ∧
+      wheelWitnessK2.getD i 0 ≤ 2 * i ∧ wheelWitnessK2.getD i 0 ≤ 73 := by decide
+
 /-- **Goldbach wheel, `K = 2`, modulus `1051`.**
-Every even number `n` with `4 ≤ n ≤ 1051` is a sum of two primes. -/
-theorem GoldbachWheelK2_1051 :
-    ∀ n : ℕ, 4 ≤ n → n ≤ 1051 → Even n → GoldbachK2 n := by
-  intro n h4 hub he
-  obtain ⟨m, hm⟩ := he
-  obtain ⟨k, rfl, hk⟩ : ∃ k, n = 2 * k + 4 ∧ k ≤ 523 := ⟨m - 2, by omega, by omega⟩
-  clear hm h4 hub
-  interval_cases k <;>
-    first
-      | ((refine goldbachK2_of_sub_prime _ 3 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 5 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 7 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 11 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 13 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 17 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 19 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 23 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 29 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 31 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 37 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 41 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 43 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 47 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 53 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 59 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 61 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 67 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 71 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 73 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 79 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 83 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 89 ?_ ?_ ?_ <;> norm_num); done)
-      | ((refine goldbachK2_of_sub_prime _ 97 ?_ ?_ ?_ <;> norm_num); done)
-      | (refine goldbachK2_of_sub_prime _ 2 ?_ ?_ ?_ <;> norm_num)
+Every even number `n` with `4 ≤ n ≤ 1051` is a sum of two primes, and moreover the smaller
+prime can always be taken from the wheel of primes below `74`. -/
 
-#print axioms Brockian.GoldbachWheelK2_1051
+theorem GoldbachWheelK2_1051 (n : Nat) (h4 : 4 ≤ n) (hn : n ≤ 1051) (he : Even n) :
+    ∃ p q : Nat, Nat.Prime p ∧ Nat.Prime q ∧ p ≤ 73 ∧ p + q = n := by
+  obtain ⟨m, hm⟩ := he
+  have hlt : n / 2 < 526 := by omega
+  have hge : 2 ≤ n / 2 := by omega
+  obtain ⟨hp, hq, hle, h73⟩ := wheelWitnessK2_spec (n / 2) hlt hge
+  exact ⟨wheelWitnessK2.getD (n / 2) 0, 2 * (n / 2) - wheelWitnessK2.getD (n / 2) 0,
+    hp, hq, h73, by omega⟩
 
 end Brockian
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-

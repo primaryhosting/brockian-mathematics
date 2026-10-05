@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Woodall Prime Infinitude
 Category: Brockian Conjecture
 Target: Brockian.CullenWoodall.WoodallPrimeInfinitude
@@ -33,9 +31,12 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.CullenWoodall
+import Mathlib
 
-/-- The `n`-th Woodall number `W n = n * 2 ^ n - 1` (natural subtraction; note `W 0 = 0`). -/
+namespace Brockian
+namespace CullenWoodall
 
-theorem woodall_zero : woodall 0 = 0 := rfl
+/-- The `n`-th Woodall number `W n = n * 2 ^ n - 1` (natural subtraction; `W 0 = 0`). -/
+
+@[simp] lemma woodall_zero : woodall 0 = 0 := rfl
 

@@ -1,54 +1,31 @@
 import Mathlib
+import RequestProject.KahnKalai.Iteration
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Kahn Kalai
+Category: Frontier Math
+Target: Math2.kahn_kalai
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-
-Covers, costs, and minimum fragments (Park–Pham).
+Expectation and threshold are within a log factor: a formalisation of the Park–Pham proof
+of the Kahn–Kalai conjecture.
 -/
-import Mathlib
-import RequestProject.KahnKalai.Measure
 
 open Finset
-open scoped Classical
 
 namespace Math2
 
-variable {α : Type*} [DecidableEq α]
+variable {α : Type*} [Fintype α] [DecidableEq α]
 
-/-! ## Covers and their costs -/
+/-- The `p`-biased measure of a family of subsets. -/
 
-/-- `G` is a cover of `H`: every member of `H` contains a member of `G`. -/
-
-lemma frag_subset {H : Finset (Finset α)} {S : Finset α} (hS : S ∈ H) (W : Finset α) :
-    frag H S W ⊆ S := by
-  obtain ⟨S', hS', hEq⟩ := Finset.mem_image.mp (frag_mem hS W)
-  rw [Finset.mem_filter] at hS'
-  rw [← hEq]
-  intro x hx
-  rw [Finset.mem_sdiff] at hx
-  rcases Finset.mem_union.mp (hS'.2 hx.1) with h | h
-  · exact absurd h hx.2
+lemma frag_subset {W S : Finset α} (hS : S ∈ H) : frag H W S ⊆ S := by
+  obtain ⟨S', _, hsub, heq⟩ := frag_spec H hS
+  rw [heq]
+  intro y hy
+  simp only [Finset.mem_sdiff] at hy
+  rcases Finset.mem_union.1 (hsub hy.1) with h | h
+  · exact absurd h hy.2
   · exact h
 
-/-- `W ∪ frag H S W` contains an edge of `H`. -/

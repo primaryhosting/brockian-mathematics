@@ -1,3 +1,11 @@
+/-
+# Balance Nullspace
+Category: Chemistry
+Target: Chem.balance_nullspace
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -14,80 +22,29 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Chem
 
-/-- A chemical reaction over `m` chemical elements and `n` chemical species.
+/-! ## A ℚ-linear functional that is positive on a finite family of positive reals -/
 
-`comp i e` is the number of atoms of element `e` in one formula unit of species `i`,
-and `isProduct i` says whether species `i` sits on the product side of the reaction
-(otherwise it is a reactant). -/
-structure Reaction (m n : ℕ) where
-  /-- `comp i e` = number of atoms of element `e` in one unit of species `i`. -/
-  comp : Fin n → Fin m → ℕ
-  /-- whether species `i` is on the product side. -/
-  isProduct : Fin n → Bool
+/-- Given finitely many *positive* real numbers `x s`, there is a `ℚ`-linear functional
+`f : ℝ →ₗ[ℚ] ℚ` which is positive on all of them.  (Such an `f` is a rational
+"approximation of the identity" on the `ℚ`-span of the `x s`.) -/
 
-variable {m n : ℕ}
+theorem balance_nullspace {Elem Species : Type*} [Fintype Species]
+    (R : Reaction Elem Species) :
+    R.Balances ↔ ∃ n : Species → ℤ, (∀ s, 0 < n s) ∧ (R.stoich).mulVec n = 0 :=
+  Matrix.exists_pos_int_nullVector_iff R.stoich
 
-/-- The stoichiometric matrix of a reaction: rows are elements, columns are species,
-the entry being the atom count of the element in the species, signed `+` for products
-and `-` for reactants. -/
+/-! ## A worked example: `2 H₂ + O₂ → 2 H₂O` -/
 
-theorem balance_nullspace (R : Reaction m n) :
-    R.Balances ↔ ∃ x : Fin n → ℤ, (∀ i, 0 < x i) ∧ R.stoich.mulVec x = 0 := by
-  constructor
-  · rintro ⟨x, hx, hbal⟩
-    refine ⟨x, hx, ?_⟩
-    funext e
-    have h := hbal e
-    simp only [Matrix.mulVec, Reaction.stoich, Matrix.of_apply, dotProduct, Pi.zero_apply]
-    rw [← Finset.sum_filter_add_sum_filter_not Finset.univ (fun i => R.isProduct i)]
-    have h1 : ∑ i ∈ Finset.univ.filter (fun i => R.isProduct i),
-        (if R.isProduct i then (1 : ℤ) else -1) * (R.comp i e : ℤ) * x i =
-        ∑ i ∈ Finset.univ.filter (fun i => R.isProduct i), x i * (R.comp i e : ℤ) := by
-      refine Finset.sum_congr rfl ?_
-      intro i hi
-      simp only [Finset.mem_filter] at hi
-      simp [hi.2]
-      ring
-    have h2 : ∑ i ∈ Finset.univ.filter (fun i => ¬ R.isProduct i),
-        (if R.isProduct i then (1 : ℤ) else -1) * (R.comp i e : ℤ) * x i =
-        -∑ i ∈ Finset.univ.filter (fun i => ¬ R.isProduct i), x i * (R.comp i e : ℤ) := by
-      rw [← Finset.sum_neg_distrib]
-      refine Finset.sum_congr rfl ?_
-      intro i hi
-      simp only [Finset.mem_filter] at hi
-      simp [hi.2]
-      ring
-    rw [h1, h2, h]
-    ring
-  · rintro ⟨x, hx, hker⟩
-    refine ⟨x, hx, ?_⟩
-    intro e
-    have h : ∑ i, R.stoich e i * x i = 0 := congrFun hker e
-    simp only [Reaction.stoich, Matrix.of_apply] at h
-    rw [← Finset.sum_filter_add_sum_filter_not Finset.univ (fun i => R.isProduct i)] at h
-    have h1 : ∑ i ∈ Finset.univ.filter (fun i => R.isProduct i),
-        (if R.isProduct i then (1 : ℤ) else -1) * (R.comp i e : ℤ) * x i =
-        ∑ i ∈ Finset.univ.filter (fun i => R.isProduct i), x i * (R.comp i e : ℤ) := by
-      refine Finset.sum_congr rfl ?_
-      intro i hi
-      simp only [Finset.mem_filter] at hi
-      simp [hi.2]
-      ring
-    have h2 : ∑ i ∈ Finset.univ.filter (fun i => ¬ R.isProduct i),
-        (if R.isProduct i then (1 : ℤ) else -1) * (R.comp i e : ℤ) * x i =
-        -∑ i ∈ Finset.univ.filter (fun i => ¬ R.isProduct i), x i * (R.comp i e : ℤ) := by
-      rw [← Finset.sum_neg_distrib]
-      refine Finset.sum_congr rfl ?_
-      intro i hi
-      simp only [Finset.mem_filter] at hi
-      simp [hi.2]
-      ring
-    rw [h1, h2] at h
-    linarith
-
-/-- Rational relaxation: an integer stoichiometric matrix has a strictly positive *integer*
-null vector iff it has a strictly positive *rational* one (clear denominators). -/
+/-- The formation of water from hydrogen and oxygen.  The species are `H₂`, `O₂`, `H₂O`
+(the first two being reactants), the elements are `H` and `O`. -/

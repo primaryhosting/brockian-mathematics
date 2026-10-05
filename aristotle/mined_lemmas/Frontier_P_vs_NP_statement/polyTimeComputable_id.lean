@@ -1,56 +1,53 @@
-import Mathlib
-
 /-!
-# The P vs NP statement
+# P Vs NP Statement
+Category: Frontier — Moonshot
+Target: Frontier.P_vs_NP_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-This file gives a self-contained formalization of the statement `P ≠ NP`, built from
-scratch on top of a concrete Turing machine model:
+/-
+A self-contained formalization of the P vs NP question in terms of time-bounded
+(deterministic and nondeterministic) single-tape Turing machines and polynomial-time
+many-one reducibility.
 
-* `Frontier.DTM`   : deterministic single-tape Turing machines over the alphabet `Option Bool`
-                     (`none` is the blank symbol), with a finite state set;
-* `Frontier.NTM`   : the nondeterministic variant;
-* `Frontier.P`     : languages decided by a deterministic machine in polynomial time;
-* `Frontier.NP`    : languages accepted by a nondeterministic machine in polynomial time;
-* `Frontier.PolyTimeComputable`, `Frontier.PolyReducible` (`≤p`) : polynomial-time computable
-  functions and polynomial-time many-one reducibility, together with `Frontier.NPHard` and
-  `Frontier.NPComplete`;
-* `Frontier.P_vs_NP_statement` : the proposition `P ≠ NP`.
+The development is elementary and depends on nothing beyond the Lean 4 prelude, so that
+the file can literally begin with the header comment above.
 
-`P_vs_NP_statement` is the famous open problem, so it is *stated*, not proved here.  What is
-proved here are the basic structural facts that make the statement meaningful: `P ⊆ NP`,
-the fact that `P ≠ NP` is equivalent to the existence of a language in `NP \ P`,
-reflexivity of `≤p`, and the fact that the trivial languages are in `P` (so the definitions
-are not vacuous).
+Main declarations:
+
+* `Frontier.Machine`             : single-tape Turing machine with finite control;
+* `Frontier.AcceptsWithin`       : acceptance within a given number of steps;
+* `Frontier.Deterministic`       : determinism of the transition relation;
+* `Frontier.DecidesInPolyTime`   : deciding a language within a polynomial time bound;
+* `Frontier.P`, `Frontier.NP`    : the two complexity classes;
+* `Frontier.PolyReducible`       : polynomial-time many-one reducibility `≤ₚ`;
+* `Frontier.NPComplete`          : NP-completeness;
+* `Frontier.P_vs_NP_statement`   : the statement of the P vs NP problem, in the form
+  `P ≠ NP ↔ ∃ L, L ∈ NP ∧ L ∉ P`.
 -/
 
 namespace Frontier
 
-/-! ## Words, languages, tapes -/
-
 /-- Words are finite binary strings. -/
-abbrev Word := List Bool
+abbrev Word : Type := List Bool
 
-/-- A language is a set of words. -/
-abbrev Language := Set Word
+/-- A language is a set of words, represented by its membership predicate. -/
+abbrev Language : Type := Word → Prop
 
-/-- The tape alphabet: `none` is the blank symbol. -/
-abbrev Alphabet := Option Bool
+/-- The direction in which the tape head moves in one step. -/
+inductive Dir : Type
+  | left : Dir
+  | right : Dir
+  | stay : Dir
 
-/-- A tape is a bi-infinite sequence of tape symbols. -/
-abbrev Tape := ℤ → Alphabet
-
-/-- Directions the head can move in one step. -/
-inductive Dir
-  | left
-  | right
-  | stay
-  deriving DecidableEq, Fintype
-
-/-- Moving a head position in a given direction. -/
+/-- The displacement of the head associated with a direction. -/
 
 theorem polyTimeComputable_id : PolyTimeComputable (fun x : Word => x) := by
-  refine ⟨Bool, inferInstance, trivialDTM true, 0, 0, ?_⟩
-  intro x
-  exact ⟨0, Nat.zero_le _, rfl, rfl, rfl⟩
+  refine ⟨trivialMachine true, ?_, 0, 0, ?_⟩
+  · intro q a q₁ w₁ d₁ q₂ w₂ d₂ h
+    exact h.elim
+  · intro x
+    exact ⟨0, Nat.le_refl _, initCfg _ x, rfl, rfl, fun i => rfl⟩
 
 /-- Polynomial-time reducibility is reflexive. -/

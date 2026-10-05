@@ -23,58 +23,26 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Hyperperfect Infinitude
 Category: Brockian Conjecture
 Target: Brockian.HyperperfectNumbers.HyperperfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above is a plain block comment rather than a `/-!` module docstring because Lean 4
--- does not allow any command, including a module docstring, to precede the `import` lines.)
-
-/-
-## Overview
-
-A positive integer `n` is *`k`-hyperperfect* (for `k ≥ 1`) when
-
-  `n = 1 + k * (σ(n) - n - 1)`,
-
-where `σ(n)` is the sum of all divisors of `n`; equivalently `σ(n) - n - 1` is the sum of
-the divisors of `n` other than `1` and `n`.  Taking `k = 1` recovers the perfect numbers.
-To avoid truncated natural subtraction the definition below is stated in the equivalent
-subtraction-free form `n + k * (n + 1) = 1 + k * σ(n)`.
-
-Whether there are infinitely many hyperperfect numbers is an open problem: already the case
-`k = 1` is the (open) question of whether there are infinitely many perfect numbers.  What is
-proved here is therefore a *conditional reduction* together with unconditional supporting
-results:
-
-* `Brockian.HyperperfectNumbers.isHyperperfect_mul` — an unconditional construction: whenever
-  `k ≥ 1` and both `k + 1` and `k² + k + 1` are prime, the number `(k + 1)(k² + k + 1)` is
-  `k`-hyperperfect.  (E.g. `k = 1, 2, 6` give `6`, `21`, `301`.)
-* `Brockian.HyperperfectNumbers.HyperperfectInfinitude` — the main target: if there are
-  arbitrarily large `k` with `k + 1` and `k² + k + 1` both prime (an instance of Bunyakovsky's
-  conjecture), then the set of hyperperfect numbers is infinite.
-* `Brockian.HyperperfectNumbers.hyperperfect_infinite_of_infinitely_many_mersenne_primes` — a
-  second, independent conditional reduction: infinitely many Mersenne primes also imply
-  infinitely many hyperperfect numbers (via the even perfect numbers, which are
-  `1`-hyperperfect).
--/
-
-import Mathlib
-
-open scoped ArithmeticFunction.sigma
-open ArithmeticFunction
 
 namespace Brockian.HyperperfectNumbers
 
-/-- `n` is `k`-hyperperfect: `k ≥ 1`, `n > 1` and `n = 1 + k * (σ n - n - 1)`, written in the
-subtraction-free form `n + k * (n + 1) = 1 + k * σ n`. -/
+open Finset
 
-theorem sigma_one_prime {p : ℕ} (hp : p.Prime) : σ 1 p = p + 1 := by
-  rw [sigma_one_apply, hp.divisors]
-  simp [Finset.sum_pair hp.one_lt.ne, Nat.add_comm]
+/-- `IsKHyperperfect k n` states that `n` is a `k`-hyperperfect number, i.e. `k > 0`, `n > 1` and
+`n = 1 + k * (σ n - n - 1)`, written here in the subtraction-free form
+`k * σ n + 1 = (k + 1) * n + k`. -/
 
-/-- **Unconditional construction.** If `k ≥ 1` and both `k + 1` and `k² + k + 1` are prime,
-then `(k + 1) * (k² + k + 1)` is `k`-hyperperfect. -/
+lemma sigma_one_prime {p : ℕ} (hp : p.Prime) : ArithmeticFunction.sigma 1 p = p + 1 := by
+  simp [ArithmeticFunction.sigma_one_apply, hp.divisors, Finset.sum_pair hp.one_lt.ne,
+    Nat.add_comm]
+
+/-- The divisor-sum of a prime power is the corresponding geometric sum. -/

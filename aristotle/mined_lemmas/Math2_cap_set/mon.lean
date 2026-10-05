@@ -1,42 +1,19 @@
-/-
-# Cap Set
-Category: Frontier Math
-Target: Math2.cap_set
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import Mathlib
+import RequestProject.CapExpand
 
 /-!
-# Cap Set
-Category: Frontier Math
-Target: Math2.cap_set
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# The Ellenberg–Gijswijt bound
 
-The cap-set bound: subsets of `𝔽₃ⁿ` with no three-term arithmetic progression have size
-`o(3ⁿ)`.  This is the Croot–Lev–Pach / Ellenberg–Gijswijt theorem, proved here by the
-polynomial method.
+Combining the slice-rank bound with the polynomial expansion gives
+`|A| ≤ 3 · #{exponent vectors of degree ≤ 2n/3}` for every 3AP-free `A ⊆ 𝔽₃ⁿ`.
 -/
 
+open scoped BigOperators
 open Finset
 
-namespace Math2
-namespace CapSet
+namespace CapSetAux
 
-instance factThree : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+/-- In `𝔽₃ⁿ`, a 3AP-free set contains no nontrivial triple summing to zero. -/
 
-/-- The field `𝔽₃`. -/
-abbrev F := ZMod 3
+def mon (a : Exp n) (x : Fin n → ZMod 3) : ZMod 3 := ∏ i, x i ^ (a i : ℕ)
 
-/-- The vector space `𝔽₃ⁿ`. -/
-abbrev V (n : ℕ) := Fin n → F
-
-/-- Exponent vectors of reduced monomials: each exponent is `0`, `1` or `2`. -/
-abbrev E (n : ℕ) := Fin n → Fin 3
-
-/-- Total degree of a reduced monomial. -/
-
-def mon {n : ℕ} (a : E n) : V n → F := fun x => ∏ i, (x i) ^ (a i : ℕ)
-
-/-- Exponent vectors of degree at most `d`. -/
+/-- The total degree of an exponent vector. -/

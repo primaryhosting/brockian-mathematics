@@ -30,29 +30,21 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Fibonacci
 
-/-- **Catalan's identity** (addition form, avoiding natural subtraction):
-for all `m r : ℕ`,
-`fib (m + r) ^ 2 - fib m * fib (m + 2 * r) = (-1) ^ m * fib r ^ 2` in `ℤ`.
+/-- A shifted form of d'Ocagne's identity, stated over `ℤ` and free of natural subtraction:
+`F (a + r + 1) * F a - F (a + 1) * F (a + r) = (-1) ^ (a + 1) * F r`. -/
 
-This is obtained from the integer-indexed Catalan identity in Mathlib,
-`Int.fib_add_sq_sub_fib_mul_fib_add_two_mul`. -/
+theorem catalan (n r : ℕ) (h : r ≤ n) :
+    (Nat.fib n : ℤ) ^ 2 - (Nat.fib (n - r) : ℤ) * Nat.fib (n + r)
+      = (-1) ^ (n - r) * (Nat.fib r : ℤ) ^ 2 := by
+  obtain ⟨m, rfl⟩ : ∃ m, n = m + r := ⟨n - r, by omega⟩
+  have h1 : m + r - r = m := by omega
+  have h2 : m + r + r = m + 2 * r := by ring
+  rw [h1, h2]
+  exact catalan_add m r
 
-theorem catalan (m r : ℕ) :
-    (Nat.fib (m + r) : ℤ) ^ 2 - (Nat.fib m : ℤ) * (Nat.fib (m + 2 * r) : ℤ)
-      = (-1) ^ m * (Nat.fib r : ℤ) ^ 2 := by
-  have h := Int.fib_add_sq_sub_fib_mul_fib_add_two_mul (m : ℤ) (r : ℤ)
-  simpa using h
+end Fibonacci
 
-/-- **Catalan's identity**, subtraction form: for `n r : ℕ` with `r ≤ n`,
-`fib n ^ 2 - fib (n - r) * fib (n + r) = (-1) ^ (n - r) * fib r ^ 2` in `ℤ`. -/

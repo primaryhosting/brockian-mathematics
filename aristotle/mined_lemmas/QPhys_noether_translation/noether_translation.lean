@@ -8,25 +8,40 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Noether Translation
+Category: Quantum Physics
+Target: QPhys.noether_translation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace QPhys
 
-/-- **Vanishing of the generalized force under translation invariance.**
-
-If the Lagrangian `L q v` is invariant under translations of the position variable,
-`L (q + a) v = L q v`, and `Lq q v` is its partial derivative with respect to the
-position, then this partial derivative vanishes identically. -/
+/-- If the Lagrangian is invariant under spatial translations, then its partial
+derivative with respect to position vanishes identically. -/
 
 theorem noether_translation
-    (L Lq Lv : ℝ → ℝ → ℝ) (q v : ℝ → ℝ)
-    (hinv : ∀ a x u, L (x + a) u = L x u)
-    (hLq : ∀ x u, HasDerivAt (fun y => L y u) (Lq x u) x)
+    (L Lq Lv : ℝ → ℝ → ℝ)
+    (hinv : ∀ a q v, L (q + a) v = L q v)
+    (hLq : ∀ q v, HasDerivAt (fun x => L x v) (Lq q v) q)
+    (q v p : ℝ → ℝ)
+    (hp : ∀ t, p t = Lv (q t) (v t))
     (hEL : ∀ t, HasDerivAt (fun s => Lv (q s) (v s)) (Lq (q t) (v t)) t) :
-    ∀ t s, Lv (q t) (v t) = Lv (q s) (v s) := by
-  have hzero : ∀ t, HasDerivAt (fun s => Lv (q s) (v s)) 0 t := by
+    ∀ t₁ t₂, p t₁ = p t₂ := by
+  have hzero : ∀ x y, Lq x y = 0 :=
+    lagrangian_translation_invariant_partial_pos_zero L Lq hinv hLq
+  have hderiv : ∀ t : ℝ, HasDerivAt (fun s => Lv (q s) (v s)) 0 t := by
     intro t
-    simpa [partial_pos_eq_zero_of_translation_invariant L Lq hinv hLq (q t) (v t)] using hEL t
-  exact is_const_of_deriv_eq_zero (fun t => (hzero t).differentiableAt)
-    (fun t => (hzero t).deriv)
+    have := hEL t
+    rwa [hzero (q t) (v t)] at this
+  have hdiff : Differentiable ℝ fun s => Lv (q s) (v s) := fun t =>
+    (hderiv t).differentiableAt
+  have hconst : ∀ t₁ t₂ : ℝ, Lv (q t₁) (v t₁) = Lv (q t₂) (v t₂) :=
+    is_const_of_deriv_eq_zero hdiff fun t => (hderiv t).deriv
+  intro t₁ t₂
+  rw [hp t₁, hp t₂]
+  exact hconst t₁ t₂
 
 end QPhys
 

@@ -6,17 +6,82 @@
 
 ## Summary
 
-- **CONDITIONAL**: 20
+- **CONDITIONAL**: 33
 - **CONJECTURE**: 38
-- **DEFINITION**: 642
+- **DEFINITION**: 644
 - **DISCHARGED**: 7
-- **PROVED**: 11242
+- **PROVED**: 12448
 - **UNVERIFIED**: 12
 
 ## Theorems
 
 | Register | Name | Axioms clean | AXLE | Env | Ledger |
 |---|---|---|---|---|---|
+| PROVED | `AdditiveComb.cauchy_davenport_Z5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `AdditiveComb.freiman_two_A` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `AdditiveComb.plunnecke_ruzsa_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `AdditiveComb.schur_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `AdditiveComb.schur_five_fin` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `AdditiveComb.sumset_Z5_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `AdditiveComb.sumset_lower_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Algebra.fundamental_theorem_of_algebra` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Analysis.banach_fixed_point` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Analysis.cauchy_schwarz` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Analysis.extreme_value` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Analysis.intermediate_value` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Analysis.stone_weierstrass` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AdmissibilityKTupleK4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConstellationLocalCountK3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CosTraceNorm1279` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CosTraceNorm1597` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CosTraceNorm2003` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CosTraceNorm2707` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CosTraceNorm3001` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CosTraceNorm3499` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CosTraceNorm4001` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.GoldbachWheelK2_1051` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.GoldbachWheelK2_1153` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.GoldbachWheelK2_1327` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PentagonPentagonCharacterMultiplicityExt` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PentagonPentagonEquivarianceGeneral` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PentagonPentagonIsotypicHigherN` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.SingularSeriesConvergenceRate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.SingularSeriesGaps12401250` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.SingularSeriesGaps13501360` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.SingularSeriesGaps14501460` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.SingularSeriesGaps16021610` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.SingularSeriesGaps7280` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.SingularSeriesGaps9098` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.boundary_term_vanishes` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.card_fiber_eq_card_stabilizer` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.card_orbits` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.compl_good_set` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.constLocalCount_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.const_of_transitive_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.constellationLocalCount_ge` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.coprime_sameParity_twentyOne_primeFactors` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.countBelow_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.countMultiples_eq_div` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.count_interval_tendsto` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.eVariationOn_sub_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.eq_of_invariant_of_pretransitive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.exists_residue_not_hit` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.gwPrimes947_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.haar_eq_volume` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.isBetrothedPair_iff_nontrivial_twoCycle` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.localCount_compl_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.localCount_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.localCount_filter_eq_compl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.localCount_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.mellin_log_unitary` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.mem_constellation_iff_three` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.mem_unitaryDivisors` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.prime_of_mem_wheelPrimes1153` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.spectralParameter_isReal_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.two_mul_T` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.volume_circ_univ` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.weight_const_of_transitive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.zetaN_isPrimitiveRoot` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.AbundantClosure.abundant_of_perfect_dvd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.AbundantClosure.abundant_of_six_dvd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.AbundantClosure.deficient_of_dvd_deficient` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -70,6 +135,7 @@
 | PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_all_residues_mod_seven` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_eleven_dilated_residues` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_five_consecutive_mod_five` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_residueImage_univ` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_thirteen_scattered_residues` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_zero_two_four` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.nu_eq_of_injOn_card_ge` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
@@ -120,6 +186,15 @@
 | PROVED | `Brockian.AliquotStructure.semiperfect_mul_right` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.AliquotStructure.semiperfect_of_perfect` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.AliquotStructure.sigma_eq_aliquot_add_self` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.almost_perfect_16` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.almost_perfect_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.almost_perfect_32` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.almost_perfect_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.almost_perfect_64` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.almost_perfect_8` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.almost_perfect_pow2_examples` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.deficient_pow2_16` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AlmostPerfect.not_almost_perfect_6` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.AmicableNumbers.Amicable` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.AmicableNumbers.AmicableInfinitude` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.AmicableNumbers.aliquot` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -128,6 +203,7 @@
 | PROVED | `Brockian.AmicableNumbers.amicable_2620_2924` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.AmicableNumbers.amicable_not_perfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.AmicableNumbers.amicable_symm` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.AmicableNumbers.isAmicablePair_symm` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.AmicableNumbers.perfect_iff_aliquot_fixed` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.AndricaConjecture.AndricaConjecture` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.AndricaConjecture.AndricaInt` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -138,6 +214,7 @@
 | PROVED | `Brockian.AndricaConjecture.andrica_2_3` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.AndricaConjecture.andrica_7_11` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.AndricaConjecture.andrica_89_97` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ArithmeticFiber.mapsTo_orthogonal_of_annihilates` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Automorphism.C5` | ✓ | verified | lean-4.32.2 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.act` | ✓ | verified | lean-4.32.2 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.dihedralHom` | ✓ | verified | lean-4.32.2 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
@@ -168,8 +245,16 @@
 | PROVED | `Brockian.BetrothedNumbers.betrothed_140_195_opposite_parity` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BetrothedNumbers.betrothed_48_75` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BetrothedNumbers.betrothed_48_75_opposite_parity` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_5775_6128` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BetrothedNumbers.betrothed_ne` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BetrothedNumbers.betrothed_symm` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.coprime_pair_four_primeFactors` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.density_zero_reduction` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.isBetrothed_48_75` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.no_pair_of_mersenne_and_shifted_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.primePower_member_structure` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.sigmaOne_eq_sigma` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.Dynamics.thabit_balance_identity` | ✓ | verified | lean-4.32.2 |  |
 | CONJECTURE | `Brockian.BrocardGap.BrocardGapConjecture` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.BrocardGap.ConsecutivePrimes` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.BrocardGap.FourPrimesBetweenSquares` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -178,8 +263,15 @@
 | PROVED | `Brockian.BrocardGap.brocard_3_5` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardGap.brocard_5_7` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardGap.brocard_7_11` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardGap.isBrownPair_four` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.BrocardGapReduction.BrocardGapConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardGapReduction.four_primes_of_oppermann` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardGapReduction.nth_prime_one` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardGapReduction.succ_nth_prime_ge` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardGapReduction.three_le_nth_prime` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | CONJECTURE | `Brockian.BrocardProblem.BrocardConjecture` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.BrocardProblem.BrownPair` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardProblem.brocard_known_solutions` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardProblem.brown_4_5` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardProblem.brown_5_11` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardProblem.brown_7_71` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -187,6 +279,13 @@
 | PROVED | `Brockian.BrocardProblem.brown_m_odd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardProblem.no_brown_8_9_10` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardProblem.not_square_between` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardProblem.sq_inj` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.BrocardProblemReduction.BrocardConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardProblemReduction.brocard_le_seven` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardProblemReduction.factorial_le_of_abc` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardProblemReduction.finite_of_factorial_le` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardProblemReduction.radical_brocard_le` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.BrocardProblemReduction.radical_factorial_le` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | DEFINITION | `Brockian.C5SpectralMultiplicities.c5DistinctEigs` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.c5DistinctEigs_card` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | DEFINITION | `Brockian.C5SpectralMultiplicities.c5LapMode` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
@@ -238,6 +337,10 @@
 | PROVED | `Brockian.CarmichaelKorselt.korselt_561` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CarmichaelKorselt.korselt_odd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CarmichaelKorselt.sqfree_prod3` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.CarmichaelKorseltReduction.ThreePrimeCarmichaelInfinitude` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.CarmichaelKorseltReduction.isCarmichael_chernick` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.CarmichaelKorseltReduction.isCarmichael_of_korselt` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.CarmichaelKorseltReduction.pow_modEq_self_of_sub_one_dvd` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | PROVED | `Brockian.Cassini.cassini` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.CatalanClosed.succ_mul_catalan_eq_choose` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.Cayley.IsForest` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
@@ -294,6 +397,25 @@
 | PROVED | `Brockian.Cayley.tree_parent_injective` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.Cayley.uncut` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.Cayley.uncut_cut` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Characters5.charSum_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.conj_e` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.dirichlet_sum_eq_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.e_add` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.e_eq_stdAddChar` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.e_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.isPrimitiveRoot_omega` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.norm_e` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.norm_omega` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.omega_pow_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.parseval` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.parseval_core` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.prim` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.rayIndicator_eq_charSum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.rayIndicator_zmod_eq_charSum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.raySum_eq_charSum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.sum_e` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.sum_e_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Characters5.sum_omega_pow` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.CharactersQ.additive_orthogonality` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.CharactersQ.additive_orthogonality_sub` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.CharactersQ.fourier_apply` | ✓ | verified | lean-4.32.2 |  |
@@ -316,6 +438,28 @@
 | PROVED | `Brockian.CollatzPartial.reaches1_pow_two` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CollatzPartial.reaches1_two_mul` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CollatzPartial.trivial_cycle` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ConeLine.T_add_ten_mod_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.T_mod_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.cousin_prime_roads` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.fib_uniform_mod5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.mod_five_ne_zero_of_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.mod_five_ne_zero_of_prime_gt_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.not_dvd_five_of_prime_gt_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.quadruplet_visits_all_active_rays` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.ray_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.sexy_prime_roads` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.sophie_germain_avoids_ray2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.square_mod5_emod_mem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.square_mod5_mem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.square_mod5_mem_finset` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.square_mod5_mem_int` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.square_ray_primes_mod20` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.stride_ray_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.stride_ray_walk_classification` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.triangular_mod5_mem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.triplet_two_patterns` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.walk_list` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConeLine.walk_map` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Connectivity.cos_2pi_5` | ✓ | verified | lean-4.32.2 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | PROVED | `Brockian.Connectivity.lambda2_eq` | ✓ | verified | lean-4.32.2 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | DEFINITION | `Brockian.Connectivity.laplacianEigs5` | ✓ | verified | lean-4.32.2 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
@@ -428,6 +572,54 @@
 | PROVED | `Brockian.ConstellationSpectrumEnvelope.pathBlockCharpoly_root_mem` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationWheel.admissibleU_squarefree` | ✓ | verified | lean-4.32.2 | Brockian constellation-sieve brick 3; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationWheel.twin_wheel_count` | ✓ | verified | lean-4.32.2 | Brockian constellation-sieve brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConvSplit.moebius_delta_split` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConvSplit.truncLE_add_truncGT` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConvSplit.truncLE_mul_add_truncGT_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ConvSplit.vonMangoldt_split` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.admissible_image_add_const` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.admissible_image_neg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.coprime_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.eleven_dvd_of_palindrome_even_digits` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.erdosStraus_of_even` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.erdosStraus_of_mod_three_eq_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.evaluation_normal_0100` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.even_of_odd_geom_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.even_of_sq_add_one_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.exists_prime_mod_four_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.firstNinePrimeOffsets_not_admissible` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_coprime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_not_dvd_base_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_odd_of_even_base` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_unique` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.four_not_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.gcd_sq_add_one_succ_dvd_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.goldbachReps_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.heldout_true_000` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.hyperperfect_one_iff_perfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.hyperperfect_pos_of_hyperperfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.idemp_implies_double_idemp` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.imp_A1` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.landau_iff_even_infinite` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.landau_iff_unbounded` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.left_proj_imp_idem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_admissible_of_all_residues_mod_seven` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_admissible_of_five_consecutive_mod_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_giugaNumber_prime_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_isSquare_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_quasiperfect_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_semiperfect_of_aliquot_lt` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.odd_prime_dvd_sq_add_one_mod_four` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.problem_normal_0166` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.problem_normal_0355` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.problem_normal_0765` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.residueImage_subset` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.semiperfect_mul_right` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.semiperfect_of_perfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.sigma1_two_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.sigma_eq_aliquot_add_self` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.squarefree_of_lehmerProperty` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.three_not_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.zumkeller_two_mul_of_odd_zumkeller` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Core.Ray` | ✓ | verified | lean-4.32.2 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.binet_formula` | ✓ | verified | lean-4.32.2 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.cos_2pi_5` | ✓ | verified | lean-4.32.2 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
@@ -2062,6 +2254,9 @@
 | PROVED | `Brockian.Equidistribution.configCount_twenty_five_two_two` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic_exists` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Equidistribution.integrable_of_continuousMap` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Equidistribution.integral_fourier` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Equidistribution.integral_fourier_ne_zero` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Equidistribution.prime_pair_config_admissible` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.totalConfigCount` | ✓ | verified | lean-4.32.2 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.DeviationBound.FiniteRangeErrorBudget` | ✓ | verified | lean-4.32.2 |  |
@@ -2088,8 +2283,10 @@
 | PROVED | `Brockian.EquidistributionBVReduction.admissible_reflection_symmetry` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionBVReduction.bv_shape_consistent` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionBVReduction.configCount_density_of_BV` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionBVReduction.configCount_eq_mul` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionBVReduction.configCount_over_main_tendsto` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionBVReduction.geom_avg_tendsto` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionBVReduction.total_over_main_tendsto` | ✓ | verified | lean-4.32.2 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | DEFINITION | `Brockian.EquidistributionUniformity.IterTransitive` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | DEFINITION | `Brockian.EquidistributionUniformity.PreservesAdmissible` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
@@ -2097,6 +2294,7 @@
 | CONDITIONAL | `Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionUniformity.equidistribution_three` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionUniformity.iterate_mem_admissible` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.measure_singleton_eq_of_transitive` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | DEFINITION | `Brockian.EquidistributionUniformity.reflect` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionUniformity.reflect_affine` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionUniformity.reflect_five_fixes_four` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
@@ -2110,6 +2308,7 @@
 | PROVED | `Brockian.EquidistributionUniformity.sing_iterate` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionUniformity.sing_uniform_of_transitive` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionUniformity.sing_uniform_three` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.singleton_measure_eq_of_transitive` | ✓ | verified | lean-4.32.2 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | DEFINITION | `Brockian.EquidistributionUniformityClosure.AffineStabilizesForbiddenFive` | ✓ | verified | lean-4.32.2 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
 | DEFINITION | `Brockian.EquidistributionUniformityClosure.affineMapFive` | ✓ | verified | lean-4.32.2 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_classification` | ✓ | verified | lean-4.32.2 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
@@ -2137,6 +2336,16 @@
 | PROVED | `Brockian.ErdosStraus.erdosStraus_of_covered` | ✓ | verified | lean-4.32.2 | open-territory swarm; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStraus.erdosStraus_of_dvd` | ✓ | verified | lean-4.32.2 | open-territory swarm; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStraus.erdosStraus_of_prime_case` | ✓ | verified | lean-4.32.2 | open-territory swarm; AXLE @4.32 |
+| CONDITIONAL | `Brockian.ErdosStrausReduction.ErdosStrausConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_of_dvd` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_of_even` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_of_mod_24_ne_one` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_of_mod_eight_eq_five` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_of_mod_four_eq_three` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_of_mod_three_eq_two` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_of_three_dvd` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_three` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.ErdosStrausReduction.solvable_two` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_covered` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_covered_ext` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_dvd_five` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -2162,6 +2371,7 @@
 | PROVED | `Brockian.ErdosSzekeres.one_mem_incSequencesTo` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.ErdosSzekeres.paired` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.ErdosSzekeres.paired_injective` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.EvenPerfectLastDigit.perfect_two_pow_mul_odd` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.EvenPerfectMod9.eq_two_pow_mul_odd_main` | ✓ | verified | lean-4.32.2 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
 | PROVED | `Brockian.EvenPerfectMod9.eq_two_pow_mul_prime_mersenne_of_even_perfect_main` | ✓ | verified | lean-4.32.2 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
 | PROVED | `Brockian.EvenPerfectMod9.even_euclid_euler_mod9` | ✓ | verified | lean-4.32.2 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
@@ -2187,7 +2397,21 @@
 | PROVED | `Brockian.FermatNumbers.fermat_6_not_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FermatNumbers.fermat_coprime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FermatNumbers.fermat_eq_fermatNumber` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.FermatNumbersReduction.FermatPrimeBeyondFour` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.FermatNumbersReduction.fermatNumber_mod_four` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.FermatNumbersReduction.fermatNumber_mod_three` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.FermatNumbersReduction.pepin_at_four` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.FermatNumbersReduction.pepin_converse` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.FermatNumbersReduction.pepin_iff` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | PROVED | `Brockian.FibGcd.fib_gcd` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Figurate.figurate_values` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Figurate.hex2_eq_pent2_add` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Figurate.hex2_eq_tri2_odd` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Figurate.hex2_succ` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Figurate.pent2_decomp` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Figurate.pent2_succ` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Figurate.tri2_succ` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Figurate.two_sq_eq_tri2_pair` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.2 |  |
@@ -2217,6 +2441,9 @@
 | PROVED | `Brockian.FortunateNumbers.primorial_3` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FortunateNumbers.primorial_5` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FortunateNumbers.primorial_7` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.FortunateNumbersReduction.FortuneConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.FortunateNumbersReduction.not_dvd_of_prime_le` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.FortunateNumbersReduction.prime_of_prime_primorial_add_of_le_sq` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | PROVED | `Brockian.FranklinFixedPoint.downMs_upPart` | ✓ | verified | lean-4.32.2 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
 | PROVED | `Brockian.FranklinFixedPoint.downOverlap_stair` | ✓ | verified | lean-4.32.2 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
 | PROVED | `Brockian.FranklinFixedPoint.downPart_largest` | ✓ | verified | lean-4.32.2 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
@@ -2319,6 +2546,10 @@
 | PROVED | `Brockian.FreshmanDream.freshman_dream` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.FrobeniusAbove.frobenius_above` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle ab22201e; AXLE @4.32 |
 | PROVED | `Brockian.FrobeniusMcNugget.frobenius_not_representable` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle 11b14535; AXLE @4.32 |
+| PROVED | `Brockian.Frontier.Collatz.iterate_two_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Frontier.Collatz.reaches1_27` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Frontier.Collatz.reaches1_two_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Frontier.Collatz.step_two_pow` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.2 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.cycExt` | ✓ | verified | lean-4.32.2 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.primRoot` | ✓ | verified | lean-4.32.2 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
@@ -2397,6 +2628,9 @@
 | PROVED | `Brockian.GilbreathConjecture.gilbreath_row8_head` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.GilbreathConjecture.gilbreath_row9_head` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.GilbreathConjecture.primes25` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.GilbreathConjectureReduction.GilbreathConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.GilbreathConjectureReduction.cleanWindow_succ` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.GilbreathConjectureReduction.head_of_cleanWindow` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | DEFINITION | `Brockian.GiugaNumbers.GiugaNumber` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.GiugaNumbers.giugaNumber_squarefree` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.GiugaNumbers.giugaNumber_three_primes` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -3517,6 +3751,7 @@
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_four` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_six` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldbachSchema.integral_chr` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | DEFINITION | `Brockian.GoldbachSelectionRule.admissibleUnits` | ✓ | verified | lean-4.32.2 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
 | PROVED | `Brockian.GoldbachSelectionRule.admissibleUnits_card` | ✓ | verified | lean-4.32.2 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
 | PROVED | `Brockian.GoldbachSelectionRule.admissibleUnits_card_totient` | ✓ | verified | lean-4.32.2 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
@@ -3577,6 +3812,234 @@
 | PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_charpoly_components` | ✓ | verified | lean-4.32.2 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
 | PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_eq_zero_of_components_ne` | ✓ | verified | lean-4.32.2 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
 | PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_reindex_components` | ✓ | verified | lean-4.32.2 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_140` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_270` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_28` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_examples` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_mean_140` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_mean_270` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_mean_28` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.harmonic_mean_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HarmonicDivisor.not_harmonic_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.aead_roundtrip` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.auth_required` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.cDec_cEnc` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.cMac_inj2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.concrete_roundtrip` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.concrete_tamper_rejected` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.replay_rejected` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.tamper_rejected` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.AEAD.xor_left_cancel` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.alloc_preserves_wf` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.alloc_run_from` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.availability_guarantee` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.can_reach_reservation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.free_preserves_wf` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.no_cross_subject_dos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.run_preserves_wf` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.step_preserves_wf` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Availability.total_within_cap` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.badSys_rejected` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.checkIsolation_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.goodSys_passes` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.goodSys_wellIsolated` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable_into` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.names_only_permitted` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.no_cross_domain_cap` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.secret_cannot_reach_app` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.secret_isolated` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapDLIsolation.secret_unreachable_from_app` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapabilityIntegrity.grant_blocked_off_policy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapabilityIntegrity.grant_can_progress` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapabilityIntegrity.integrity_confinement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapabilityIntegrity.integrity_is_nontrivial` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapabilityIntegrity.step_added_in_policy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CapabilityIntegrity.step_preserves` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ChaChaQR.QR_injective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ChaChaQR.QR_left_inverse` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ChaChaQR.rotr_rotl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ConstantTime.condMove_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ConstantTime.condMove_no_leak` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ConstantTime.ct_trace_noninterference` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ConstantTime.exec_pub_trace_inv` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ConstantTime.leaky_program_leaks` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ConstantTime.step_pub_obs` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CryptoIdioms.ct_select_false` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CryptoIdioms.ct_select_true` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CryptoIdioms.mask_select_identity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CryptoIdioms.otp_involution` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.CryptoIdioms.xor_swap` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.cswapBit_false` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.cswapBit_involution` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.cswapBit_true` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.neg_mask_valid_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.controlled_release_no_declassify` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.delimited_release` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.high_write_no_low_effect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.high_write_not_declassified_invisible` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.no_declassify_noninterference` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.run_delim` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.run_low_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.step_delim` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Declassification.step_low_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.hmac_key_pad_difference` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.hmac_pad_xor_const` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.sha256_ch_spec_eq_impl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.sha256_compress_add_assoc` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.sha256_maj_spec_eq_impl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.IPCConfinement.ipc_confinement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.IPCConfinement.no_channel_no_delivery` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.IPCConfinement.nonvacuity_authorized_delivers` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.IPCConfinement.nonvacuity_no_channel` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.IPCConfinement.nonvacuity_unauthorized_noop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.IPCConfinement.stepIPC_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.IPCConfinement.unauth_send_noop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.badState_insecure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.badState_unreachable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_authorized_grant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_authorized_send` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_authorized_write` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_bad_cap_blocked` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_bad_send_blocked` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_bad_write_blocked` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_grant_preserves_secure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_reachable_secure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.demo_write_preserves_secure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.initState_secure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.kernel_security` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.kernel_security_ext` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.kstepExt_preserves` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.kstep_preserves` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.reachable_writes_authorized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.recv_preserves_all` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_antisymm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_l_not_bot` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_l_r_incomparable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_refl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_trans` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.local_respect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.noninterference` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.run_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.step_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.LatticeNoninterference.viewEq_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.cross_key_rejects` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.forged_reveals_tag` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.forgery_reveals_tag` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.mac_determines_tag` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.no_forgery` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.verify_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.verify_reject` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MAC.verify_sound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MemorySeparation.cross_subject_isolation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MemorySeparation.demoAuth_disjoint` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MemorySeparation.frame` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MemorySeparation.frame_general` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MemorySeparation.memory_separation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MemorySeparation.run_filtered_indep` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.MemorySeparation.unauth_write_noop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.complete_path` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.inclusion_complete` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.inclusion_sound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.list_nil_or_concat` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.member_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.root_binding` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.tamper_detected` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.verifyPath_append` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Merkle.verifyPath_left_injective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Noninterference.local_respect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Noninterference.noninterference` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Noninterference.output_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Noninterference.run_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Noninterference.step_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.drains_to_quiescent` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.filter_setReadyPair` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.iterateRendezvous_succ` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.matched_pair_rendezvous` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.no_deadlock` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.pick_spec` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.progress_core` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.quiescent_of_blockedCount_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.rcvr_spec` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.recvCount_step_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.recvCount_step_ne` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.rendezvous_progress` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.sendCount_step_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.sendCount_step_ne` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.sndr_ne_rcvr` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.sndr_spec` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.stepRendezvous_pos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.wellFormed_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Progress.wellMatched_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Refinement.forward_simulation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Refinement.forward_simulation_needs_Inv` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Refinement.refinement_run` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Refinement.safeA_run` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Refinement.safeA_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Refinement.safeC_of_safeA` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Refinement.safety_transported` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `Brockian.HighAssurance.RefinementChain.Sim` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.chain_needs_Nodup` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.chain_run` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.invMid_compat` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.safeA_run` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.safeA_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.safeC_of_chain` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.safety_transported_chain` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.RefinementChain.three_levels_distinct_but_coupled` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.derive_derivedFrom` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.derive_live` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.descendant_of_derivedFrom` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.descendant_refl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.no_residual_authority` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.revoke_idempotent` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.revoke_monotone` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.revoke_preserves_unrelated` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.revoke_removes_descendants` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.upReach_refl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Revocation.upReach_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.SMTMirror.auth_write_updates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.SMTMirror.default_deny_denies` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.SMTMirror.unauth_write_frame` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.SMTMirror.xor_otp_involution` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.firstRunnable_isSome` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.firstRunnable_spec` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.no_starvation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nonrunnable_never_current` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_blocked_never_current` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_blocked_skipped` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_cycle_1` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_cycle_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_cycle_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_cycle_wrap` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_no_starvation_general` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_starve_1` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_starve_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.nv_starve_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.progress` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.schedInv_of_current_none` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.sched_safety` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.sched_safety_run` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Scheduler.work_conserving` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.Sigma0_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.Sigma1_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.sigma0_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.sigma1_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.authority_confined` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.closure_is_strict_over_approximation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.confinement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.confinement_of_coloring` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.confinement_witness` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.left_mem_verts` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.mem_tgClosure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.off_closure_unreachable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.reachable_subset_tgClosure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.right_mem_verts` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.subset_tgClosure` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.take_propagates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.tgClosure_closed` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.TakeGrant.tgDerivable_monochromatic` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HockeyStick.hockey_stick` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.HolonomyConjugacy.K` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HolonomyConjugacy.all_close_at_30` | ✓ | verified | lean-4.32.2 |  |
@@ -3590,6 +4053,15 @@
 | PROVED | `Brockian.HolonomyFaithful.holonomy_faithful` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HolonomyFaithful.holonomy_injective_via_loop` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HolonomyFaithful.order_classifies` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyHomomorphism.loop_hom_bundle` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyHomomorphism.loop_homomorphism` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyHomomorphism.loop_identity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyHomomorphism.loop_translates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyIsomorphism.holonomy_group_iso` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyIsomorphism.holonomy_iso_onto_translations` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyIsomorphism.loop_injective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyIsomorphism.loop_probe` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyIsomorphism.loop_probe_injective` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.HyperperfectNumbers.Hyperperfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectAllK` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectInfinitude` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -3599,8 +4071,14 @@
 | PROVED | `Brockian.HyperperfectNumbers.hyperperfect_2_2133` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.HyperperfectNumbers.hyperperfect_6_301` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.HyperperfectNumbers.hyperperfect_one_iff_sigma_two_mul` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.isKHyperperfect_one_iff_perfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.HyperperfectNumbers.not_hyperperfect_2_6` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.HyperperfectNumbers.sigma1` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.sigma_eq_sigmaOne` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.HyperperfectNumbersReduction.HyperperfectInfinitude` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.HyperperfectNumbersReduction.isHyperperfect_mul_of_prime` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.HyperperfectNumbersReduction.le_mul_of_prime` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.HyperperfectNumbersReduction.sigma_one_mul_of_primes` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | PROVED | `Brockian.KorseltCarmichael.korselt_carmichael` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
 | PROVED | `Brockian.KorseltCarmichael.pow_modEq_self_of_prime_sub_one_dvd` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
 | PROVED | `Brockian.KorseltCarmichael.squarefree_dvd_of_prime_dvd` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
@@ -3619,6 +4097,12 @@
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_6` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_even_of_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_mod_two_of_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.LandauNSquaredPlusOneReduction.LandauFourthConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.LandauNSquaredPlusOneReduction.eval_X_sq_add_one` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.LandauNSquaredPlusOneReduction.irreducible_X_sq_add_one` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.LandauNSquaredPlusOneReduction.leadingCoeff_X_sq_add_one` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.LandauNSquaredPlusOneReduction.natDegree_X_sq_add_one` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.LandauNSquaredPlusOneReduction.no_fixed_prime_divisor` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | PROVED | `Brockian.LandauProblem.coprime_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.LandauProblem.even_of_sq_add_one_prime` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.LandauProblem.exists_prime_mod_four_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
@@ -3646,6 +4130,7 @@
 | PROVED | `Brockian.LegendreConjecture.legendre_9` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LegendreError.legendre_sieve_error` | ✓ | verified | lean-4.32.2 | Tao-guided sieve wave 2; Aristotle dbcb784d, AXLE-verified @lean-4.32.0 |
 | PROVED | `Brockian.LegendreSieve.legendre_sieve` | ✓ | verified | lean-4.32.2 | Tao-guided sieve wave; Aristotle 06a22f46, independently AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.LegendreThreeSquare.QF_conj` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.LehmerTotient.Lehmer` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_odd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_squarefree` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -3689,6 +4174,26 @@
 | PROVED | `Brockian.MersennePerfect.perfect_8128` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.MersennePerfect.perfect_two_pow_mul_mersenne_of_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.MersennePerfect.sigma_two_pow_eq_mersenne_succ` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.MersennePerfectReduction.EvenPerfectInfinitude` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| CONDITIONAL | `Brockian.MersennePerfectReduction.MersennePrimeInfinitude` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.eq_two_pow_mul_odd` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.eq_two_pow_mul_prime_mersenne_of_even_perfect` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.euclidMap_injective` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.euclidMap_strictMono` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.euclidPerfect_injOn` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.euclidPerfect_mem_evenPerfects` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.euclidPerfect_strictMonoOn` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.evenPerfect_infinite_of_mersenne_infinite` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.evenPerfects_eq_image` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.evenPerfects_subset_image` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.even_and_perfect_iff` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.even_two_pow_mul_mersenne_of_prime` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.mersenne_infinite_of_evenPerfect_infinite` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.mersenne_succ_pos` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.ne_zero_of_prime_mersenne` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.perfect_two_pow_mul_mersenne_of_prime` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.sigma_two_pow_eq_mersenne_succ` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.MersennePerfectReduction.six_mem_evenPerfects` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | PROVED | `Brockian.MetallicFamily.H3_ground_metallic` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.MetallicFamily.inv_metallicMean_eq_sub` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.MetallicFamily.metallicConj_sq` | ✓ | verified | lean-4.32.2 |  |
@@ -3767,10 +4272,14 @@
 | PROVED | `Brockian.MsE2Irrational.tail_exp_neg_one` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsE2Irrational.tail_exp_one` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsE2Irrational.tail_key` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsErdosAnning.quad_three_roots` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.MsEulerPentagonal.restricted_true` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.MsFrobeniusGeneral.exists_mod_solution` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsFrobeniusGeneral.exists_small_mul_add` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsFrobeniusGeneral.frobenius_three` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsFrobeniusGeneral.two_gen_rep` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsFrobeniusGroup.sol_eq_solEq_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.MsGaussLucas.gauss_lucas` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.MsGaussSum.conj_stdAddChar` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsGaussSum.exp_eq_stdAddChar` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsGaussSum.gauss_sum_abs_sq` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -3842,7 +4351,9 @@
 | PROVED | `Brockian.MsProth.two_pow_dvd_prime_sub_one` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsQrTwo.two_is_qr_iff` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsSchurInequality.schur_inequality` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsSchurInequality.schur_ordered` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsSchurInequality.schur_sorted` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsStewart.stewart` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.MsThue.thue_lemma` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsThue.thue_pigeonhole` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsVanDerWaerden.lineConst` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -3889,6 +4400,11 @@
 | PROVED | `Brockian.NonabelianHolonomy.nonabelian_holonomy_separates` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.NonabelianHolonomy.order_by_conjugacy` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.NonabelianHolonomy.residue_marginal_indep` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianOrderHolonomy.holonomy_noncommutative` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianOrderHolonomy.loop_holonomy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianOrderHolonomy.nonabelian_order_separation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianOrderHolonomy.order_dependent` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianOrderHolonomy.residue_marginal_indep` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_partition` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_powerset` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_oddDistincts_le_distincts` | ✓ | verified | lean-4.32.2 |  |
@@ -3964,6 +4480,7 @@
 | DEFINITION | `Brockian.PalindromicPrimes.IsPalindrome` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PalindromicPrimes.PalindromicPrime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.PalindromicPrimes.PalindromicPrimeInfinitude` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.alternatingSum_append` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PalindromicPrimes.eleven_dvd_one_add_odd_pow` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PalindromicPrimes.eleven_unique_even_palindromic_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PalindromicPrimes.even_digit_palindrome_dvd_11` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -4161,12 +4678,63 @@
 | PROVED | `Brockian.PerfectTotient.pt_81` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PerfectTotient.pt_9` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PerfectTotient.totientSumAux` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PhaseDepthClassification.cohomologous_iff_totalDepth_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthClassification.cohomologous_of_totalDepth_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthClassification.sum_coboundary` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthClassification.totalDepth_eq_of_cohomologous` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCohomologyComplete.coboundary_of_sum_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.cycle_length_bridge` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.phase_depth_key` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.rho_iterate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.rho_minimalPeriod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.rho_period` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_5k` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_bijective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_injective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_iterate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_minimalPeriod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_no_fixedPoints` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_period` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sum_shift` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.act_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.act_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.d5_covariance` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.d5_pm_class_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.totalDepth_rotation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.blockCyclic_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.circulant_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.cycleType_of_uniform_minimalPeriod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.cycleType_permCongr` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.cycleType_standardForm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.det_one_sub_smul_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.det_one_sub_smul_eq_of_cycleType` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.phase_depth_det_identity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.eigenvalue_norm_eq_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.eigenvalue_pow_orderOf` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.finite_RH` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.phase_depth_eigenvalue_norm_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.phase_depth_finite_RH` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.phase_depth_transferMatrix_finite_order` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.transferMatrix_pow_orderOf_eq_one` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthNoGo.Cohomologous` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthNoGo.coboundary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthNoGo.sum_coboundary` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthNoGo.totalDepth` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthNoGo.totalDepth_const` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthNoGo.totalDepth_eq_of_cohomologous` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_iff_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_iff_hol_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_of_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_refl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_stdLabel_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_symm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_trans` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_trivialize` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.hol_eq_prod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.hol_gauge` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthTorus.PhaseDepth` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | DEFINITION | `Brockian.PhaseDepthTorus.TwinAdmissibleAt` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.compatible_closure` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
@@ -4192,6 +4760,22 @@
 | PROVED | `Brockian.PhaseDepthTorus.twin_start_admissible` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.twin_survivors` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.winding_coprime` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTraceFormula.periodic_card_eq_orbit_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceFormula.permMatrix_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceFormula.trace_pow_eq_orbit_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceFormula.trace_pow_eq_periodic_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_eq_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_five_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.transferMatrix_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTransfer.numPeriodic_eq_zero_of_not_dvd` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTransfer.numPeriodic_five_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTransfer.transfer_fst_iterate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTransfer.transfer_iterate_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTransfer.transfer_iterate_five_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTransfer.transfer_no_fixed_of_not_dvd` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthZeta.blockCyclic_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthZeta.circulant_det` | ✓ | verified | lean-4.32.2 |  |
 | CONJECTURE | `Brockian.PolignacPrimes.PolignacConjecture` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PolignacPrimes.PrimeGapPair` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.cousin_13` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -4213,6 +4797,14 @@
 | PROVED | `Brockian.PolignacPrimes.sexy_5` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.sexy_7` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.sexy_same_mod_six` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.PolignacPrimesReduction.PolignacConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.PolignacPrimesReduction.admissible` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.PolignacPrimesReduction.bigPrime_dvd_modulus` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.PolignacPrimesReduction.bigPrime_dvd_shift_add` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.PolignacPrimesReduction.bigPrime_inj` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.PolignacPrimesReduction.bigPrime_prime` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.PolignacPrimesReduction.lt_bigPrime` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.PolignacPrimesReduction.modulus_pos` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | DEFINITION | `Brockian.PracticalNumbers.Practical` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.PracticalNumbers.PracticalTwinInfinitude` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PracticalNumbers.not_practical_10` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -4221,6 +4813,17 @@
 | PROVED | `Brockian.PracticalNumbers.practical_28` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PracticalNumbers.practical_6` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PracticalNumbers.practical_pow_two` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PrimitiveRoot.primitive_roots_examples` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PrimitiveRoot.three_not_primroot_mod11` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PrimitiveRoot.three_order6_mod7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PrimitiveRoot.three_pow6_mod7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PrimitiveRoot.two_order10_mod11` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PrimitiveRoot.two_order3_mod7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PrimitiveRoot.two_pow10_mod11` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ProductHolonomy.holonomy_after_loop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ProductHolonomy.order_is_lcm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ProductHolonomy.product_holonomy_separates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ProductHolonomy.residue_marginal_indep` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PseudoprimesBaseTwo.A` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.PseudoprimesBaseTwo.B` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.PseudoprimesBaseTwo.N` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -11008,6 +11611,7 @@
 | PROVED | `Brockian.SingularSeriesBridge.localFactor_twinGap_odd_pos` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.SophieGermain.SophieGermain` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.SophieGermain.SophieGermainInfinitude` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SophieGermain.a4_add_4b4_not_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SophieGermain.sg_11` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SophieGermain.sg_2` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SophieGermain.sg_23` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -11084,6 +11688,7 @@
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_64` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_two_pow_iff_mersenne_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_two_pow_of_mersenne_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SylvesterSchur.piCount_le_self` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.TotientMoebius.totient_eq_sum_moebius` | ✓ | verified | lean-4.32.2 | Tao-guided sieve wave 2; Aristotle 85669593, AXLE-verified @lean-4.32.0 |
 | PROVED | `Brockian.TotientStructure.gauss_sum_totient` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.TotientStructure.totient_eq_sub_one_iff_prime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -11111,6 +11716,8 @@
 | DEFINITION | `Brockian.TripleAdmissibility.tripleAdmissibleCount` | ✓ | verified | lean-4.32.2 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
 | PROVED | `Brockian.TripleAdmissibility.tripleAdmissibleCount_mul_of_coprime` | ✓ | verified | lean-4.32.2 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
 | PROVED | `Brockian.TripleAdmissibility.tripleAdmissible_chineseRemainder_iff` | ✓ | verified | lean-4.32.2 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
+| PROVED | `Brockian.TruncatedConvolution.truncLE_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.TruncatedConvolution.truncLE_mul_apply` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Turan.turan` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimeConstant.isAdmissible_twinOffsets` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin` | ✓ | verified | lean-4.32.2 |  |
@@ -11154,6 +11761,15 @@
 | PROVED | `Brockian.TwinPrimes.twin_71` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_form_6k` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_middle_div_six` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| CONDITIONAL | `Brockian.TwinPrimesReduction.TwinPrimeConjecture` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.isTwinPrime_eleven` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.isTwinPrime_five` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.isTwinPrime_seventeen` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.isTwinPrime_three` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.twinForms_admissible` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.twinForms_pos` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.twinPrimeStatement_of_not_summable` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
+| PROVED | `Brockian.TwinPrimesReduction.twin_mod_six` | ✓ | verified | lean-4.32.2 | Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched) |
 | DEFINITION | `Brockian.TwoSeamHolonomy.K` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.TwoSeamHolonomy.composite_order` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.TwoSeamHolonomy.holonomy_composes` | ✓ | verified | lean-4.32.2 |  |
@@ -11171,6 +11787,7 @@
 | PROVED | `Brockian.TwoSquaresUnique.two_squares_unique` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | CONJECTURE | `Brockian.UnitaryPerfect.SixthUnitaryPerfectExists` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.UnitaryPerfect.UnitaryPerfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.UnitaryPerfect.mem_unitaryDivisors` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.UnitaryPerfect.not_unitaryPerfect_28` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.UnitaryPerfect.unitaryDivisorSum` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.UnitaryPerfect.unitaryDivisorSum_eq_sigma_6` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -11178,6 +11795,13 @@
 | PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_60` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_90` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Vandermonde.vandermonde` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Vaughan.truncGT_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Vaughan.truncLE_add_truncGT` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Vaughan.truncLE_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Vaughan.vaughan_identity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.VaughanSplit.truncLE_add_truncGT` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.VaughanSplit.vonMangoldt_eq_truncLE_mul_add_truncGT_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.VonMangoldtPointwise.vonMangoldt_eq_sum_moebius_mul_log` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.WeirdNumbers.Abundant` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.WeirdNumbers.OddWeirdExists` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.WeirdNumbers.Semiperfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -11196,6 +11820,7 @@
 | PROVED | `Brockian.Weyl.wronskian_const_one_witness` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.wronskian_isConst` | ✓ | verified | lean-4.32.2 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| PROVED | `Brockian.Weyl.BoundedVTarget.dirichletPotential_solution_zero` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Weyl.Bridge.IsL2Solution` | ✓ | verified | lean-4.32.2 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
 | PROVED | `Brockian.Weyl.Bridge.coeff_ne_zero` | ✓ | verified | lean-4.32.2 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
 | PROVED | `Brockian.Weyl.Bridge.continuous_y` | ✓ | verified | lean-4.32.2 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
@@ -11331,6 +11956,7 @@
 | PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_potential` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_schwartz` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_schwartz_D2` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.DeficiencyODE.norm_subI_sq` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.DeficiencyODE.reduced_gate1_status` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | CONDITIONAL | `Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitCircleRadius` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
@@ -11342,6 +11968,7 @@
 | PROVED | `Brockian.Weyl.Dichotomy.radius_tendsto_zero_of_atTop` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | PROVED | `Brockian.Weyl.Dichotomy.tendsto_atTop_of_monotone_not_bddAbove` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | DEFINITION | `Brockian.Weyl.Dichotomy.weylRadius` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.DichotomyTarget.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Weyl.Disk.Acoef` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | DEFINITION | `Brockian.Weyl.Disk.Pcoef` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.boundary_L2_identity` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
@@ -11959,7 +12586,13 @@
 | PROVED | `Brockian.Zsygmondy.zsygmondy_primitive_prime` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | CONJECTURE | `Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | DEFINITION | `Brockian.ZumkellerNumbers.Zumkeller` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.geom_sum_lt_two_mul_pow` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.isSquare_of_factorization_even` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime_pow` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.odd_of_dvd_odd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.sum_range_testBit` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.two_mul_le_sigma_of_zumkeller` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_sigma_even` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_six` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_thirty` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -11978,3 +12611,591 @@
 | PROVED | `Brockian.ZumkellerStructure.zumkeller_of_perfect` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.ZumkellerStructure.zumkeller_two_mul_of_odd_zumkeller` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.ZumkellerStructure.zumkeller_two_pow_mul_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `BrockianFrontier.Gilbreath.gilbreath_rows_9_16` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `BrockianFrontier.PathSpectrum.H4_eigenvalue_golden` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `BrockianFrontier.PentagonSpectrum.C5_golden_eigenvalue` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `BrockianFrontier.SieveK5.nu_le_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `BrockianFrontier.SingularSeries.localFactor_pos_of_lt` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `BrockianSieve.legendre_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Alg3.cramer_solve` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.An4.ftc` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.BSieve3.lf_pos_eight` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.BSpec3.P7_eigen_center` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.CS2.no_universal_decider` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Comb3.sum_range_id` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Crypto2.otp_bij` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Geo2.apollonius` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Graph2.degree_sum_edges` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.IT3.entropy_term_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.NT4.order_dvd_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Phys3.spin_comm_xy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Prob2b.markov_ineq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.QI4.swap_involutive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.SetT.zorn` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.Topo2.continuous_image_compact` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.Alg4.crt_ring` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.An5.abel_summation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.BCon.twin_adm_count_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.BD5.dihedral5_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.BSieve4.nu_lt_nine` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.BSpec4.P8_eigen_center` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.Comb4.stirling_second_recurrence` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.Graph3.complete_edges` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.LinAlg.gram_schmidt_orthonormal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.Meas.measure_mono` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.NT5.legendre_euler` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.Phys4.number_op_diag` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.Prob3.chebyshev_ineq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.QC5.phase_kickback` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.QI5.toffoli_involutive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.RA6.cont_add` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C3.Topo3.closed_inter_compact` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.Alg5.cayley_hamilton_field` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.An6.taylor_zeroth` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.BChar.dihedral_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.BM3.pentagonal_pentagon_area` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.BS5.lf_pos_ten` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.BSp5.P9_eigen_center` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.Comb5.inclusion_exclusion_three` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.G4.empty_graph_no_edges` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.Geo3.inner_self_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.IT4.log_le_sub` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.LA2.transpose_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.NT6.quadratic_reciprocity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.Phys5.comm_yz` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.Prob4.am_qm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.RA7.abs_triangle` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.ST2.powerset_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.Alg6.ker_normal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.An7.continuous_polynomial` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.BS6.nu_lt_of_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.BSp6.P10_symm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.C6.sum_range_succ_id` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.NT7.even_perfect_form` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.Ph6.spin_total_sq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C5.QI7.ghz_norm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.Alg7.subgroup_mul_mem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.An8.deriv_cos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.BD6.golden_pow4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.BS7.adm_37` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.BSp7.C8_trace` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.C7.sum_sq_formula` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.Geo4.norm_nonneg_v` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.IT5.log_mul_pos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.NT8.sum_totient_divisors` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.P5.prob_sum_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.QC7.xyz_eq_i` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C6.T4.union_open` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.ackermann_total` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.binary_search_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.cantor_powerset` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.card_leaves_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.computablePred_code_of_indexSet` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.dfa_complement_regular` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.dijkstra_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.euclid_gcd_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.halting_undecidable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.hilbert10_undecidable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.impagliazzo_wigderson` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.insertion_sort_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.knaster_tarski` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.ladner` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.master_theorem_case1` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.nisan_wigderson_prg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.numE_pos_rat` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.pcp_dinur` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.pcp_pigeon_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.pcp_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.pigeonhole_hash` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.pumping_regular` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.recursion_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.rice_extended` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.rice_nontrivial` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.run_mem_labels` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.sorting_lb_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.sorting_lb_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.sorting_lb_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.time_hierarchy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.upren_comp` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Cardinal.continuum_eq_two_pow_aleph0` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Cardinal.exists_fixed_point_of_isNormal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chebyshev.psi_two_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.C3adj_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.C4Adj_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.alkane_tree` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.arrhenius_monotone` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.balance_nullspace` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.benzene_D6h_irreps` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.dof_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.entropy_concave` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.euler_polyhedron` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.finrank_intensiveVars` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.fullerene_pentagons` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.gibbs_phase_rule` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.handshake_valence` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.huckel_C18` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.huckel_C20` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.huckel_C4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.huckel_C5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.huckel_C6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.huckel_C7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.huckel_C9` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.invariant_zpow_smul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.leChatelier_sign` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.molecular_orbital_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.natAbs_sub_le_walk_length` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.point_group_finite_O3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.polya_isomer_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.starGraph_connected` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.wiener_path_formula` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.zeta_isPrimitiveRoot` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Combinatorics.pigeonhole` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Constellation.admissible_triple` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Constellation.quadruplet_11_13_17_19` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `D5Structure.phi_squared` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Fibonacci.catalan` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Fibonacci.consecutive_coprime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Fibonacci.dOcagne` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Fibonacci.divides` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Fibonacci.gcd` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Fibonacci.sum_first_n` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Fibonacci.zeckendorf_small` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.ContainsAP.mono_set` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Gale_Stewart_open` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Goedel_second_incompleteness` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Goodstein_terminates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Hydra_Kirby_Paris` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Loeb_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Paris_Harrington` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Q₁_eq_neg_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.RH_iff_riemannHypothesis` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Tarski_undefinability` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.asymptotic_freedom_sign` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.bcs_gap_binding` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.berryFlux_const` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.conjC_conjC` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.coulombEnergy_one_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.erdosDiscrepancyStatement_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.erdosDiscrepancy_iff_no_uniform_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.hapSum_parity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.higgsPotentialC_eq_higgsPotential` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.higgs_mass_toy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.infinite_iff_exists_gt` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.infinite_ramsey` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.inner_self_apply_eq_ofReal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.isCCC_of_separableSpace` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.isingPartition_pos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.loeb_no_self_trust` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.lowerSpinor_norm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.measure_mul_le_measure_inter_of_subset` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.nirenberg_gagliardo` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.no_communication` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.noether_conservation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.not_isPrimitiveRootMod_of_isSquare` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.pow_natCard_abelianization_eq_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.riemannZeta_eq_zero_of_isTrivialZero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.self_nonprediction` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.ssh_winding_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.sum_centeredIndicator` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.sum_three_cubes_42` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.sup_le_half_integral_abs_deriv` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.szemerediFinitary_three` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.szemeredi_regularity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.trivialZero_of_re_nonpos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.wigderson_expander_mixing` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.AlgebraLogic.lagrange` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.AnalysisCalculus.am_gm_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.BrockianNextLevel.excluded_residue_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.BrockianSieveDeep.nu_le_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.CombinatoricsGraph.handshake` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.CryptoComplexity.otp_bijective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.InformationTheory.entropy_term_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.PhysicsQM.pauli_sq_X` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Sensitivity.flipAt_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Spectral.cycle_gap_vanishes` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Spectral.isPrimitiveRoot_zeta` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Spectral.weightedAvg_add` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Goldbach.instance_100` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Goldbach.instance_1000` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Goldbach.ternary_statement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `GroupTheory.cayley` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `GroupTheory.lagrange` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `GroupTheory.sylow_exists` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.aleph0_add_aleph0` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.cantor_no_injection_from_powerset` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.cantor_no_surjection` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.cardinal_lt_power` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.countable_nat` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.nat_countable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.rationals_countable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.reals_uncountable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Infinity.schroeder_bernstein` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `LargeCardinal.inaccessible_statement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `LargeCardinal.measurable_statement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `LargeSieve.fourier_sq_sum_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `LinearRecurrence.casoratian_step` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS.Algebra.lagrange_subgroup` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS.Analysis.intermediate_value` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS.Combinatorics.ramsey_finite` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS.Foundations.fundamental_theorem_of_algebra` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS.Inequalities.cauchy_schwarz` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS.LogicQuantum.schroeder_bernstein` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.Algebra2.orbit_stabilizer` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.Analysis2.squeeze` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.BSpec2.P6_eigen_center` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.CSLogic.cantor_diagonal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.Geometry.law_of_cosines` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.IT2.entropy_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.NT2.chinese_remainder` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.Prob2.am_gm_three` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.Probability.markov_finite` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS2.QI3.cnot_involutive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.baire_category` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.bertrand_postulate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.bolzano_weierstrass` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_10` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_11` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_12` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_13` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_14` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_15` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_8` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cassini_9` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.catalan_closed` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.cauchy_group` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.chinese_remainder` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.coprime_filter_nine` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.fermat_little` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.fta_algebra` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.halls_marriage` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.heine_borel` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.inclusion_exclusion` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.isPrimitiveRoot_zeta5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.ivt` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.lagrange_four_squares` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.lagrange_subgroup` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mean_value` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_1` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_10` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_11` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_12` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_8` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.mobius_root_sum_9` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_10` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_11` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_13` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pell_8` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pigeon_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.primitiveRoots_two_complex` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.quadratic_reciprocity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.ramsey_3_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.ramsey_4_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.sum_two_squares` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_101` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_109` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_113` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_113_fermat` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_13` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_17` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_29` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_37` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_41` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_53` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_61` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_73` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_89` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_97` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.weierstrass_approx` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.wilson_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.belyi_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.cap_set` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.chern_gauss_bonnet` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.class_number_formula` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.donsker_invariance` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.erdos_ko_rado` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.gromov_nonsqueezing` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.hironaka_resolution` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.kervaire_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.kruskal_katona` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.ratner` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.sato_tate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math2.sunflower_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.bezout` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.bezout_nat` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.chinese_remainder` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.euler_totient` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.fermat_little` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.infinitude_primes_4k3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.odd_prime_sub_one_div_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.quadratic_reciprocity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NumberTheory.wilson` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NymanBeurling.finite_distance_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `NymanBeurling.sq_sub_sq_nonneg_of_sq_le_sq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `OddZumkeller.geom_sum_mul_pred_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Ordinal.aleph_fixed_point_statement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Ordinal.epsilon0_fixed_point` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Ordinal.natCast_add` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Ordinal.omega_add_omega` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Ordinal.omega_le_omega_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.canAccess_mono` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.default_deny` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.escape_monotone` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.forgedWrite_not_authorized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.in_scope_encoding_sound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.leak_iff_escape_when_out_of_scope` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.no_clean_proved_with_escape` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.no_escape_no_leak` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.owner_only_isolated` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.priv_is_escape` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.step_change_imp_member` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.tightening_refines` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.unowned_is_hole` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.with_check_true_admits_forge` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `PCA.Cert.Artifact` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Cert.ed25519_verify_complete` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Cert.ed25519_verify_sound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Cert.ed25519_verify_unique` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Cert.reprove_eq_certify` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Cert.reprove_matches_iff_untampered` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Cert.reprove_ne_of_tampered` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Coverage.bail_on_unrecognized_is_sound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Fix.alterPolicy_alterPolicy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Fix.alterPolicy_self` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Fix.alter_policy_preserves_roles_and_cmd` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Fix.granted_alterPolicy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Invariant.default_deny_excludes_only_allowlist` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Invariant.rls_off_implies_no_row_protection` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Isolation.disjunction_split_preserves_semantics` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Isolation.evalF_bigOr` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Isolation.in_scope_encoding_complete` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Isolation.no_clean_proved_with_escape` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Isolation.null_escape_iff_unowned_reachable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Isolation.priv_escape_monotone` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.Isolation.tightened_predicate_refines_original` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.WriteIntegrity.foldl_step_preserves_foreign` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.WriteIntegrity.foreign_owner_stable` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.WriteIntegrity.member_check_prevents_cross_tenant_write` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.WriteIntegrity.rawWrite_can_cross_tenant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.WriteIntegrity.step_of_authorized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.WriteIntegrity.upd_of_ne` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.WriteIntegrity.with_check_true_admits_forge` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phenomenology.mereology_partialorder` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.area_law_1d` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.bekensteinHawking_eq_bekensteinBoundValue` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.bekenstein_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.bkt_transition` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.bloch_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.crooks_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.goldstone` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.hawking_temperature` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.hellmann_feynman` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.jarzynski_equality` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.kochen_specker_18` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.landauer_principle` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.lieb_schultz_mattis` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.mem_tensorIntertwiners` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.negMulLog_le_sub` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.virial_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Phys.wigner_eckart` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Primes.bertrand` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Primes.infinitude` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Primes.reciprocal_sum_diverges` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `ProvabilityStructure.imp_self_thm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.bell_orthonormal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.cnot_unitary_involutive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.density_matrix_unitary_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.deutsch_correct` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.exists_norm_eq_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.ghz2_normalized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.ghz4_normalized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.ghz5_normalized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.ghz6_normalized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.ghz7_normalized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.ghz8_normalized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.ghz_nonlocal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.hadamard_XZ` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.hadamard_involutive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.kraus_trace_preserving` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.no_cloning` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.omega4_eq_I` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.omegaRoot_ne_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.omega_primitive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.pauli_basis` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.pure_state_zero_entropy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qftMatrix_unitary` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qftOmega_prim` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qftZeta_ne_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary_7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qft_unitary_8` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.robertson_uncertainty` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.swap_test_overlap` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.teleportation_identity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.tens_add_left` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.toffoli_unitary` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.apply_entry_eq_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.apply_entry_eq_sum_choi` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.choi_jamiolkowski` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.gottesman_knill` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.grover_optimal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.hardy_paradox` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.inner_kron` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.inner_tens_tens` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.monogamy_ckw` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.no_deleting` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.ptraceSnd_outer` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.ptrace_pureProj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.purification_exists` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.rho_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.schmidt_decomposition` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.shor_code_corrects` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.shor_period` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.simon_algorithm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.steane_code` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.stinespring` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.tangle_of_singular_values` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.ten3_ofLp` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.threshold_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QI.uhlmann_fidelity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.apply_eq_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.apply_eq_sum_eigen` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.box_level_1` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.box_level_2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.box_level_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.box_level_4` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.box_level_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.box_level_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.box_level_7` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.commuting_simultaneous` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.conjTranspose_smul_of_isHermitian` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.conj_expect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.conj_expectation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.dLdq_eq_zero_of_translationInvariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.ehrenfest` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.expectation_im_eq_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.expectation_real` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.fourier_isometry_L2` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.heisenberg_uncertainty` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.hermitian_real_spectrum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.inner_basis_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.inner_comm_diff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.inner_self_apply_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.inner_self_eq_expect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.inner_shift_sub_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.inner_shift_symm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.noether_translation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.norm_sq_eq_sum_eigencoords` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.norm_sq_eq_sum_repr_sq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.norm_toLp_two_sq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.parseval_fourier` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.pauli_exclusion_antisym` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.variational_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.variational_bound_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QuantumInfoII.clifford_HXH` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `RequestProject.omega_pow_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.det_eq_mertens_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.det_eq_mertens_6` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.distance_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.euler_product_term_ne_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.functional_equation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.gram_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.mertens_four` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.ne_zero_re_gt_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.psi_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.rank_trace_c_general` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.simple_zero_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.test_pair_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.BaezDuarte.distance_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.HardyZ.gram_positivity_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Li.lambda1_positive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Li.lambda2_positive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Li.lambda3_positive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Mertens.value_at_ten` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Method.integrality_three_halves` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Method.rank_trace_c3_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Nicolas.primorial_phi_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Redheffer.R_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Redheffer.det_eq_mertens_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Redheffer.det_eq_mertens_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Redheffer.mertens_four` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Redheffer.mertens_sum_four` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Robin.exceeds_bound_at_5040` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Robin.sigma_5040` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Robin.sigma_one_sixteen` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Weil.gram5_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Zeta.trivial_zero_neg_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Zeta.value_at_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.Zeta.value_at_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.functional.completed_symmetry_half` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.zeta.ne_zero_re_gt_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `RiemannScaffold.riemannXi_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `SetTheory.wellordering` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `SetTheory.zorn` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Topology.baire_category` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Topology.bolzano_weierstrass` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Topology.heine_borel_interval` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Topology.heine_cantor` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Twin.conjecture_statement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Twin.pair_10007_10009` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Twin.pair_11_13` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Core.posIndex_conj_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Core.posIndex_of_isHermitian` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Core.rank_trace_ineq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Core.sylvester_finrank_le_posIndex` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Core.vonNeumann_trace_ineq_hermitian` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.charge_nonneg_of_termwiseBound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.coeff_pos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.damage_cost_exponent_law` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.exp_eighteen_ge` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.repaired_witness_neg_at_deep_point` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.repaired_witness_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.sq_factor_lower_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.subclass_obstruction_statement` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Obstruction.tent_combination_neg_on_band` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.eigenvalue_cauchy_schwarz_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.qf_add` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.eigenvalue_cauchy_schwarz_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.integrality_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.quadForm_eq_complex` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.quadratic_form_eq_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.sq_ge_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.sq_ge_linear_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.sum_bilinear_le_of_mem_doublyStochastic` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.sum_doublyStochastic_mul_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.sylvester_hermitian_finrank` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.toEuclideanLin_eigenvectorBasis` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.vonNeumann_trace_ineq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.LinAlg.weyl_posIndexAbove` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.Hd_ge_Fwin_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.Hwin_nonneg_iff_threshold` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.assembly_window_constants` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.christoffel_inverse_form` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.hankelM_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.hankel_christoffel_13_18` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.m2_at_one_assembly` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.psiCubic_eq_one_of_small` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.psiCubic_le_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Scaffold.rung_glue_constant_upgrade` | ✓ | verified | lean-4.32.2 |  |

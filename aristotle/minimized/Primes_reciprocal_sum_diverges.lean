@@ -1,4 +1,11 @@
 import Mathlib
+/-!
+# Reciprocal Sum Diverges
+Category: Frontier — Prime Numbers
+Target: Primes.reciprocal_sum_diverges
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,22 +30,15 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
-# Reciprocal Sum Diverges
-Category: Frontier — Prime Numbers
-Target: Primes.reciprocal_sum_diverges
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Primes
 
-/-- **Euler**: the series of reciprocals of the primes diverges, i.e. the family
+/-- **Euler**: the sum of the reciprocals of the primes diverges, i.e. the family
 `p ↦ 1 / p` indexed by the primes is not summable. -/
+theorem reciprocal_sum_diverges : ¬ Summable (fun p : Nat.Primes => (1 : ℝ) / (p : ℕ)) := by
+  intro h
+  exact not_summable_one_div_on_primes
+    ((summable_subtype_iff_indicator (s := {p : ℕ | Nat.Prime p})
+      (f := fun n : ℕ => (1 : ℝ) / n)).mp h)
 
-theorem reciprocal_sum_diverges : ¬ Summable (fun p : Nat.Primes ↦ (1 / p : ℝ)) :=
-  Nat.Primes.not_summable_one_div
+end Primes
 
-/-- The same statement phrased as a sum over the naturals, where the non-primes contribute `0`. -/

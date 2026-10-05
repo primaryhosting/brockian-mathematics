@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Carleson
 Category: Frontier Math
 Target: Math2.carleson
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -28,19 +28,19 @@ namespace Math2
 
 open MeasureTheory Filter Topology AddCircle
 
-variable {T : ℝ} [hT : Fact (0 < T)]
+/-- The `N`-th symmetric partial sum of the Fourier series of `f : AddCircle T → ℂ`,
+i.e. `∑_{|n| ≤ N} (fourierCoeff f n) * e^{2πinx/T}`. -/
 
-/-- The symmetric partial sum of the Fourier series of `f` at `x`:
-`∑_{n = -N}^{N} (fourierCoeff f n) e^{2πinx/T}`. -/
-
-lemma coeFn_finset_sum_Lp {α : Type*} {m : MeasurableSpace α} {μ : Measure α} {ι : Type*}
-    (s : Finset ι) (F : ι → Lp ℂ 2 μ) :
-    ((∑ i ∈ s, F i : Lp ℂ 2 μ) : α → ℂ) =ᵐ[μ] fun x => ∑ i ∈ s, (F i : α → ℂ) x := by
+lemma coeFn_finset_sum_Lp {ι : Type*} (s : Finset ι) (F : ι → Lp ℂ 2 (@haarAddCircle T hT)) :
+    ⇑(∑ i ∈ s, F i) =ᵐ[@haarAddCircle T hT] fun x => ∑ i ∈ s, (F i) x := by
   classical
   induction s using Finset.induction with
-  | empty => simpa using Lp.coeFn_zero ℂ 2 μ
-  | insert i s hi ih =>
-      filter_upwards [Lp.coeFn_add (F i) (∑ j ∈ s, F j), ih] with x hx hx2
-      rw [Finset.sum_insert hi, Finset.sum_insert hi, hx, Pi.add_apply, hx2]
+  | empty => simpa using (Lp.coeFn_zero ℂ 2 (@haarAddCircle T hT))
+  | insert a s ha ih =>
+      rw [Finset.sum_insert ha]
+      filter_upwards [Lp.coeFn_add (F a) (∑ i ∈ s, F i), ih] with x hx hx'
+      rw [hx]
+      simp only [Pi.add_apply, hx', Finset.sum_insert ha]
 
-/-- The `L²`-partial sum agrees almost everywhere with the pointwise partial sum. -/
+/-- The `Lp`-valued partial sum of the Fourier series agrees a.e. with the explicit
+pointwise partial sum. -/

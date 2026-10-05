@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Perfect Totient Infinitude
 Category: Brockian Conjecture
 Target: Brockian.PerfectTotient.PerfectTotientInfinitude
@@ -33,20 +31,21 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to precede all other commands, so the required
--- header block appears immediately after the single import.)
+import Mathlib
+
+/-!
+# Perfect Totient Infinitude
+
+Infinitely many perfect totient numbers: every power `3 ^ (k+1)` is one.
+-/
 
 namespace Brockian.PerfectTotient
 
-/-- `totientSum n` is the sum of the iterated totients
-`φ(n) + φ(φ(n)) + ⋯ + 1` of `n` (the iteration stopping when the value `1` is
-reached, and that final `1` being included in the sum).  By convention
-`totientSum 0 = totientSum 1 = 0`. -/
+/-- `totientIterSum n` is the sum of the iterated totients of `n`, i.e.
+`φ(n) + φ(φ(n)) + φ(φ(φ(n))) + ⋯`, the iteration stopping once the value `1` is reached
+(the terminal `1` is included in the sum, as is standard). -/
 
-theorem isPerfectTotient_three_pow (k : ℕ) : IsPerfectTotient (3 ^ (k + 1)) := by
-  refine ⟨?_, totientSum_three_pow k⟩
-  calc 2 ≤ 3 ^ 1 := by norm_num
-  _ ≤ 3 ^ (k + 1) := Nat.pow_le_pow_right (by norm_num) (by omega)
+lemma isPerfectTotient_three_pow (k : ℕ) : IsPerfectTotient (3 ^ (k + 1)) :=
+  ⟨by positivity, totientIterSum_three_pow k⟩
 
-/-- **Infinitude of perfect totient numbers**: there are arbitrarily large
-perfect totient numbers. -/
+/-- **Perfect Totient Infinitude**: there are infinitely many perfect totient numbers. -/

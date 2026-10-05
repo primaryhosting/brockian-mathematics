@@ -5,6 +5,8 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the header above is
+-- therefore a plain block comment, and is repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -16,26 +18,47 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
 open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Euclidean 3-space as `ℝ × ℝ × ℝ`
+open Real intervalIntegral
 
-We use the plain product type and equip it with an explicit dot product and cross
-product, so that all differential-geometric quantities below are literally the
-classical ones. -/
+/-! ## Vector algebra in `ℝ³`
 
-/-- Ambient space `ℝ³`. -/
-abbrev E3 := ℝ × ℝ × ℝ
+We use `ℝ × ℝ × ℝ` as a model of `ℝ³` together with explicitly defined dot product,
+cross product and Euclidean norm.  (The ambient `Prod` norm of Mathlib is the sup norm,
+so we never use `‖·‖`; note that the notion of (Fréchet/one-variable) derivative does
+not depend on the choice of an equivalent norm, so `deriv` below is the usual derivative
+of an `ℝ³`-valued function.) -/
 
-/-- The Euclidean dot product on `ℝ³`. -/
+/-- Euclidean dot product on `ℝ³`. -/
 
-theorem areaElt_eq (R r u v : ℝ) (hr : 0 < r) (hD : 0 < R + r * Real.cos u) :
-    areaElt R r u v = r * (R + r * Real.cos u) := by
-  have : firstE R r u v * firstG R r u v - firstF R r u v ^ 2
-      = (r * (R + r * Real.cos u)) ^ 2 := by
-    rw [firstE_eq, firstF_eq, firstG_eq]; ring
-  rw [areaElt, this, Real.sqrt_sq (by positivity)]
+lemma areaElt_eq {R r u v : ℝ} (hr : 0 < r) (hR : r < R) :
+    areaElt R r u v = r * (R + r * cos u) := by
+  have hp := radial_pos (u := u) hr hR
+  rw [areaElt, formE_eq, formF_eq, formG_eq]
+  rw [show r ^ 2 * (R + r * cos u) ^ 2 - (0:ℝ) ^ 2 = (r * (R + r * cos u)) ^ 2 by ring]
+  exact Real.sqrt_sq (mul_pos hr hp).le
 
-/-- The pointwise Willmore integrand `H² dA` of the torus of revolution. -/
+
+/-! ## The Willmore energy of a torus of revolution
+
+We now compute `∫∫ H² dA` over the torus.  The key analytic ingredient is the explicit
+antiderivative of `u ↦ 1/(R + r cos u)`. -/
+
+/-- An explicit antiderivative of `u ↦ 1/(R + r cos u)`, globally smooth on `ℝ`. -/

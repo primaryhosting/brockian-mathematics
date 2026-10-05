@@ -23,31 +23,35 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Equidistribution Of Transitive Symmetry
 Category: Brockian (Literature Discharge)
 Target: Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Note: the header is a plain block comment rather than a module docstring, because in Lean 4 a
-module docstring may not appear before the `import` line.)
 -/
 
-import Mathlib
+open scoped BigOperators
+open scoped Classical
 
 namespace Brockian
 namespace EquidistributionUniformity
 
-/-- A real-valued weight function invariant under a transitive group action is constant. -/
+open Finset
 
-theorem equidistribution_of_isPretransitive {G X : Type*} [Group G] [Fintype X]
-    [MulAction G X] [MulAction.IsPretransitive G X]
-    (w : X → ℝ) (hinv : ∀ (g : G) (x : X), w (g • x) = w x)
-    (hsum : ∑ x, w x = 1) :
-    ∀ x : X, w x = 1 / (Fintype.card X : ℝ) :=
+variable {G X : Type*} [Group G] [Fintype G] [MulAction G X] [Fintype X] [DecidableEq X]
+
+omit [Fintype X] in
+/-- All fibers of the orbit map `g ↦ g • x` have the same cardinality, namely that of the
+stabilizer fiber `{g | g • x = x}`, provided the point `y` lies in the orbit of `x`. -/
+
+theorem equidistribution_of_isPretransitive [MulAction.IsPretransitive G X]
+    (x : X) (S : Finset X) :
+    #{g : G | g • x ∈ S} * Fintype.card X = S.card * Fintype.card G :=
   equidistribution_of_transitive_symmetry
-    (fun x y => MulAction.exists_smul_eq G x y) w hinv hsum
+    (fun a b => MulAction.exists_smul_eq G a b) x S
 
 end EquidistributionUniformity
 end Brockian

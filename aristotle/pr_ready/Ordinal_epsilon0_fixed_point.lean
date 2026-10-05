@@ -9,14 +9,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
+-- Note: Lean 4 requires `import` lines to come first in a file, so the required
+-- header comment appears immediately below the import.
+/-!
 # Epsilon 0 Fixed Point
 Category: Frontier Wave 2 (deeper machinery)
 Target: Ordinal.epsilon0_fixed_point
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 
 open scoped BigOperators
 open scoped Real
@@ -38,22 +39,17 @@ namespace Ordinal
 
 open scoped Ordinal
 
-/-- `ε₀` is a fixed point of ordinal `ω`-exponentiation: `ω ^ ε₀ = ε₀`.
-
-This is the `o = 0` instance of Mathlib's `Ordinal.omega0_opow_epsilon`, which states that every
-value `ε_ o` of the epsilon function is a fixed point of `ω ^ ⬝`. -/
-theorem epsilon0_fixed_point : (ω : Ordinal) ^ ε₀ = ε₀ :=
+/-- `ε₀` is a fixed point of ordinal `ω`-exponentiation: `ω ^ ε₀ = ε₀`. -/
+theorem epsilon0_fixed_point : Ordinal.omega0 ^ Ordinal.epsilon 0 = Ordinal.epsilon 0 :=
   omega0_opow_epsilon 0
 
-/-- `ε₀` is the *least* fixed point of `ω ^ ⬝`: any ordinal `o` with `ω ^ o ≤ o` satisfies
-`ε₀ ≤ o`. Together with `Ordinal.epsilon0_fixed_point` this characterizes `ε₀`. -/
-theorem epsilon0_least_fixed_point {o : Ordinal} (h : (ω : Ordinal) ^ o = o) : ε₀ ≤ o :=
-  epsilon_zero_le_of_omega0_opow_le h.le
-
-/-- `ε₀` is the least element of the set of fixed points of `ω ^ ⬝`. -/
-theorem isLeast_epsilon0_fixed_point :
-    IsLeast {o : Ordinal | (ω : Ordinal) ^ o = o} ε₀ :=
-  ⟨epsilon0_fixed_point, fun _ h ↦ epsilon0_least_fixed_point h⟩
+/-- `ε₀` is the *least* ordinal fixed by `ω`-exponentiation. -/
+theorem epsilon0_least_fixed_point (o : Ordinal)
+    (ho : Ordinal.omega0 ^ o = o) : Ordinal.epsilon 0 ≤ o :=
+  epsilon_zero_le_of_omega0_opow_le ho.le
 
 end Ordinal
+
+#print axioms Ordinal.epsilon0_fixed_point
+#print axioms Ordinal.epsilon0_least_fixed_point
 

@@ -33,32 +33,36 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- A **broadcast (global-workspace) operator** on a state lattice `S`:
-a map `ignite : S → S` sending a coalition of active contents to the contents that
-become globally available after one broadcast step, required to be `Monotone`
-(more active content in, no less active content out). -/
-structure Broadcast (S : Type*) [CompleteLattice S] where
-  /-- One global broadcast step. -/
-  ignite : S → S
-  /-- Broadcasting is monotone in the current workspace content. -/
-  mono : Monotone ignite
+/-- A *global workspace* on a finite state lattice `α`: a broadcast operator
+`broadcast : α → α` which is monotone (broadcasting from a larger workspace
+content yields a larger workspace content). -/
+structure GlobalWorkspace (α : Type*) [Lattice α] [OrderBot α] [Finite α] where
+  /-- The broadcast (global-workspace) operator. -/
+  broadcast : α → α
+  /-- Broadcasting is monotone. -/
+  mono : Monotone broadcast
 
-variable {S : Type*} [CompleteLattice S]
+/-- `m` is a least fixed point of `f`: it is a fixed point, and it is below
+every fixed point of `f`. -/
 
-/-- A state is a *workspace fixpoint* when broadcasting it changes nothing:
-the global workspace is stable / self-sustaining. -/
+theorem global_workspace_fixpoint {α : Type*} [Lattice α] [OrderBot α] [Finite α]
+    (W : GlobalWorkspace α) :
+    ∃ m : α, IsLeastFixedPoint W.broadcast m ∧ ∃ n : ℕ, m = W.broadcast^[n] ⊥ := by
+  obtain ⟨n, hn⟩ := exists_iterate_bot_fixed W.mono
+  refine ⟨W.broadcast^[n] ⊥, ⟨hn, ?_⟩, ⟨n, rfl⟩⟩
+  intro x hx
+  exact iterate_bot_le_of_fixed W.mono hx n
 
-theorem global_workspace_fixpoint [Finite S] (B : Broadcast S) :
-    ∃ s : S, IsWorkspaceFixpoint B s ∧
-      (∀ t : S, IsWorkspaceFixpoint B t → s ≤ t) ∧
-      ∃ n : ℕ, s = B.ignite^[n] ⊥ := by
-  obtain ⟨n, hn⟩ := exists_iterate_bot_stabilizes B
-  refine ⟨B.ignite^[n] ⊥, ?_, ?_, ⟨n, rfl⟩⟩
-  · have : B.ignite (B.ignite^[n] (⊥ : S)) = B.ignite^[n + 1] ⊥ :=
-      (Function.iterate_succ_apply' B.ignite n ⊥).symm
-    exact this.trans hn
-  · intro t ht
-    exact iterate_bot_le_fixpoint B ht n
+/-- The hypotheses are satisfiable: powersets of a finite type of "contents"
+form a finite state lattice, and e.g. the operator adjoining a fixed broadcast
+content is monotone. -/
+example (k : ℕ) (c : Fin k) :
+    ∃ m : Set (Fin k),
+      IsLeastFixedPoint (fun s : Set (Fin k) => insert c s) m ∧
+        ∃ n : ℕ, m = (fun s : Set (Fin k) => insert c s)^[n] ⊥ :=
+  global_workspace_fixpoint
+    { broadcast := fun s => insert c s
+      mono := fun _ _ h => Set.insert_subset_insert h }
 
-/-- The state produced by `global_workspace_fixpoint` is exactly the Knaster–Tarski
-least fixed point `OrderHom.lfp` of the broadcast operator. -/
+end Frontier
+

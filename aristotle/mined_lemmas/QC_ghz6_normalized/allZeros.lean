@@ -1,32 +1,22 @@
+/-
+# Ghz 6 Normalized
+Category: Quantum Computing
+Target: QC.ghz6_normalized
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace QC
 
-/-- The computational-basis label of `|000000⟩`. -/
+/-- The computational basis of a 6-qubit system is indexed by bit strings
+`Fin 6 → Fin 2`; states live in the Hilbert space `EuclideanSpace ℂ (Fin 6 → Fin 2)`
+(a 64-dimensional complex inner product space). -/
+abbrev Qubits6 := EuclideanSpace ℂ (Fin 6 → Fin 2)
+
+/-- The all-zeros bit string `000000`. -/
 
 def allZeros : Fin 6 → Fin 2 := fun _ => 0
 
-/-- The computational-basis label of `|111111⟩`. -/
+/-- The all-ones bit string `111111`. -/

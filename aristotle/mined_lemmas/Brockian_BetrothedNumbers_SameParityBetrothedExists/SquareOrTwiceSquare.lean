@@ -23,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Same Parity Betrothed Exists
+Category: Brockian Conjecture
+Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Same Parity Betrothed Exists
 Category: Brockian Conjecture
@@ -32,17 +41,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- (Lean requires `import` to be the very first command in a file, so the header module
--- docstring above sits immediately after the single `import Mathlib` line.)
-
-namespace Brockian
-namespace BetrothedNumbers
-
 open Finset
+open ArithmeticFunction
+open scoped ArithmeticFunction.sigma
 
-/-- The sum-of-divisors function `σ₁`. -/
+namespace Brockian.BetrothedNumbers
 
-def SquareOrTwiceSquare (n : ℕ) : Prop := IsSquare n ∨ ∃ k, n = 2 * k ^ 2
+/-- `m` and `n` are *betrothed* (quasi-amicable) numbers: they are distinct and each one's
+sum of divisors equals `m + n + 1`. -/
 
-/-- Sanity check: `(48, 75)` is the smallest betrothed pair (`σ(48) = σ(75) = 124 = 48+75+1`).
-Note that its two members have opposite parity, as in every known betrothed pair. -/
+def SquareOrTwiceSquare (n : ℕ) : Prop :=
+  ∃ a : ℕ, n = a ^ 2 ∨ n = 2 * a ^ 2
+
+/-- Parity of a geometric-type sum with odd ratio. -/

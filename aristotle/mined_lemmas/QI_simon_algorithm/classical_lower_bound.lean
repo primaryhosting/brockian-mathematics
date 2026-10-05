@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Simon Algorithm
+Category: Frontier Qi
+Target: QI.simon_algorithm
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,108 +31,77 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Simon Algorithm
-Category: Frontier Qi
-Target: QI.simon_algorithm
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Simon Algorithm
-Category: Frontier Qi
-Target: QI.simon_algorithm
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-set_option autoImplicit false
-set_option maxHeartbeats 1000000
-
-open scoped BigOperators
-
 namespace QI
 
-/-! ## Basic setup: the group `(ZMod 2)^n` -/
+/-! ## The Boolean cube as an `𝔽₂`-vector space -/
 
-/-- The domain of Simon's problem: bit strings of length `n`, viewed as the
-elementary abelian group `(ZMod 2)^n` under bitwise XOR (= addition). -/
-abbrev Vec (n : ℕ) := Fin n → ZMod 2
-
-variable {n : ℕ}
+/-- `n`-bit strings, viewed as the elementary abelian 2-group `(ℤ/2)ⁿ`;
+addition is bitwise XOR. -/
+abbrev V (n : ℕ) : Type := Fin n → ZMod 2
 
 
-theorem classical_lower_bound (hn : 2 ≤ n) (T : DTree n) (d : ℕ) (hd : DTree.DepthLE T d)
-    (hcorrect : ∀ (s : Vec n) (f : Vec n → ℕ), IsSimon s f → T.run f = s) :
-    2 ^ ((n - 1) / 2) ≤ d := by
-  classical
-  by_contra hlt
-  push_neg at hlt
-  set S : Finset (Vec n) := T.queries enc with hSdef
-  have hcard : S.card ≤ d := DTree.card_queries_le hd enc
-  set D : Finset (Vec n) :=
-    insert 0 (insert (T.run enc) ((S ×ˢ S).image (fun p => p.1 + p.2))) with hD
-  have hDcard : D.card ≤ d * d + 2 := by
-    have h1 : ((S ×ˢ S).image (fun p : Vec n × Vec n => p.1 + p.2)).card ≤ d * d := by
-      refine le_trans Finset.card_image_le ?_
-      rw [Finset.card_product]
-      exact Nat.mul_le_mul hcard hcard
-    calc D.card ≤ (insert (T.run enc) ((S ×ˢ S).image (fun p => p.1 + p.2))).card + 1 :=
-          Finset.card_insert_le _ _
-      _ ≤ (((S ×ˢ S).image (fun p => p.1 + p.2)).card + 1) + 1 :=
-          Nat.add_le_add_right (Finset.card_insert_le _ _) 1
-      _ ≤ d * d + 2 := by omega
-  have hlt2 : d * d + 2 < 2 ^ n := by
-    have h1 : d + 1 ≤ 2 ^ ((n - 1) / 2) := hlt
-    have h3 : (2 : ℕ) ^ ((n - 1) / 2) * 2 ^ ((n - 1) / 2) ≤ 2 ^ (n - 1) := by
-      rw [← pow_add]
-      exact Nat.pow_le_pow_right (by norm_num) (by omega)
-    have h4 : (2 : ℕ) ^ n = 2 * 2 ^ (n - 1) := by
-      rw [← pow_succ']
-      congr 1
+lemma classical_lower_bound {n d : ℕ} (T : DTree n d) (hn : 1 ≤ n) (hT : Solves T) :
+    2 ^ (n / 2) ≤ d := by
+  by_contra hcon
+  push_neg at hcon
+  set Q : Finset (V n) := T.queries (id : V n → V n) with hQdef
+  have hQcard : Q.card ≤ d := DTree.card_queries_le T id
+  set bad : Finset (V n) := insert 0 (Q.offDiag.image (fun p => p.1 + p.2)) with hbaddef
+  -- the set of shifts excluded by the queries is too small to exhaust the cube
+  have hmm : 2 ^ (n / 2) * 2 ^ (n / 2) ≤ 2 ^ n := by
+    rw [← pow_add]
+    exact Nat.pow_le_pow_right (by norm_num) (by omega)
+  have htwo : 2 ≤ 2 ^ n := by
+    calc (2 : ℕ) = 2 ^ 1 := by norm_num
+      _ ≤ 2 ^ n := Nat.pow_le_pow_right (by norm_num) hn
+  have hbadcard : bad.card < 2 ^ n := by
+    have h1 : bad.card ≤ 1 + (Q.card * Q.card - Q.card) := by
+      refine le_trans (Finset.card_insert_le _ _) ?_
+      have h2 := Finset.card_image_le (s := Q.offDiag) (f := fun p : V n × V n => p.1 + p.2)
+      rw [Finset.offDiag_card] at h2
       omega
-    have h5 : (2 : ℕ) ^ 1 ≤ 2 ^ (n - 1) := Nat.pow_le_pow_right (by norm_num) (by omega)
-    have h6 : (d + 1) * (d + 1) ≤ 2 ^ (n - 1) := le_trans (Nat.mul_le_mul h1 h1) h3
-    rw [h4]
-    nlinarith [h6, h5]
-  have hDlt : D.card < Fintype.card (Vec n) := by
-    rw [card_vec]; omega
-  obtain ⟨s, hs⟩ : ∃ s : Vec n, s ∉ D := by
-    by_contra hc
-    push_neg at hc
-    have hu : D = Finset.univ := Finset.eq_univ_of_forall hc
-    rw [hu, Finset.card_univ] at hDlt
-    exact lt_irrefl _ hDlt
+    rcases Nat.eq_zero_or_pos Q.card with h0 | h0
+    · rw [h0] at h1
+      simp at h1
+      omega
+    · have hle : Q.card * Q.card ≤ d * d := Nat.mul_le_mul hQcard hQcard
+      have hlt : d * d < 2 ^ (n / 2) * 2 ^ (n / 2) := Nat.mul_lt_mul'' hcon hcon
+      have hself : Q.card ≤ Q.card * Q.card := Nat.le_mul_of_pos_left _ h0
+      omega
+  obtain ⟨s, hsbad⟩ : ∃ s : V n, s ∉ bad := by
+    by_contra hall
+    push_neg at hall
+    have hsub : (Finset.univ : Finset (V n)) ⊆ bad := fun x _ => hall x
+    have := Finset.card_le_card hsub
+    have hcard : (Finset.univ : Finset (V n)).card = 2 ^ n := by simp
+    omega
   have hs0 : s ≠ 0 := by
-    intro e; exact hs (by rw [e, hD]; exact Finset.mem_insert_self _ _)
-  have hsout : s ≠ T.run enc := by
-    intro e
-    exact hs (by rw [e, hD]; exact Finset.mem_insert_of_mem (Finset.mem_insert_self _ _))
-  have hSsum : ∀ x ∈ S, ∀ y ∈ S, x ≠ y → x + y ≠ s := by
-    intro x hx y hy _ e
-    refine hs ?_
-    rw [hD]
-    refine Finset.mem_insert_of_mem (Finset.mem_insert_of_mem ?_)
-    exact Finset.mem_image.2 ⟨(x, y), Finset.mem_product.2 ⟨hx, hy⟩, e⟩
-  have hsimon : IsSimon s (advFn S s) := advFn_isSimon hs0 hSsum
-  have hagree : ∀ x ∈ T.queries enc, enc x = advFn S s x := by
-    intro x hx
-    exact (advFn_agree (S := S) (s := s) (hSdef ▸ hx)).symm
-  have hrun : T.run (advFn S s) = T.run enc := (T.run_congr enc (advFn S s) hagree).1
-  exact hsout (by rw [← hcorrect s _ hsimon, hrun])
+    intro h
+    exact hsbad (by rw [hbaddef, h]; exact Finset.mem_insert_self _ _)
+  have hQfree : ∀ a ∈ Q, a + s ∉ Q := by
+    intro a ha hb
+    refine hsbad ?_
+    have hne : a ≠ a + s := fun h => hs0 (left_eq_add.mp h)
+    have hmem : (a, a + s) ∈ Q.offDiag := Finset.mem_offDiag.mpr ⟨ha, hb, hne⟩
+    have hsum : a + (a + s) = s := by
+      rw [← add_assoc, add_self_cube, zero_add]
+    rw [hbaddef]
+    refine Finset.mem_insert_of_mem ?_
+    exact Finset.mem_image.mpr ⟨(a, a + s), hmem, hsum⟩
+  obtain ⟨i0, hi0⟩ : ∃ i : Fin n, s i = 1 := by
+    by_contra hcon2
+    push_neg at hcon2
+    refine hs0 (funext fun i => ?_)
+    rcases zmod2_cases (s i) with h | h
+    · exact h
+    · exact absurd h (hcon2 i)
+  have hrun : T.run (adversaryOracle Q s i0) = T.run id :=
+    DTree.run_congr T id (adversaryOracle Q s i0)
+      (fun x hx => adversaryOracle_mem Q s i0 hx)
+  rw [hT.1 id Function.injective_id,
+    hT.2 (adversaryOracle Q s i0) s hs0 (adversaryOracle_isShift Q s i0 hi0 hQfree)] at hrun
+  exact Bool.noConfusion hrun
 
-/-! ## Main theorem -/
-
-/-- **Simon's problem.**
-
-*Quantum upper bound*: for every Simon function `f` with secret `s` (over `n ≥ 2`
-bits) there are `n - 1` outcomes `y`, each of which occurs with nonzero amplitude in
-the state produced by a single quantum query (`amp`), such that `s` is the unique
-nonzero vector orthogonal to all of them.  So `O(n)` quantum queries determine `s`.
-
-*Classical lower bound*: every deterministic classical query algorithm (decision
-tree) that outputs the secret of every Simon function must make at least
-`2 ^ ((n-1)/2) = Ω(2^{n/2})` queries. -/
+/-- **Non-vacuity of the classical lower bound.**  Simon's problem really is solvable by a
+deterministic query algorithm: here, for `n = 1`, by querying both points of the cube and
+comparing the answers. -/

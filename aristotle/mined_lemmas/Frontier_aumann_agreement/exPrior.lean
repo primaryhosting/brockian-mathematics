@@ -33,10 +33,8 @@ set_option grind.warning false
 
 namespace Frontier
 
-variable {Ω : Type*} [DecidableEq Ω]
+/-- The conditional probability of the event `E` given the (information) cell `C`,
+computed from the weight function `p`. -/
 
-/-- The prior probability of a (finite) event `S`, computed from the point masses `p`. -/
+noncomputable def exPrior : Fin 4 → ℝ := fun _ => 1 / 4
 
-noncomputable def exPrior : Fin 4 → ℝ := fun _ => 1/4
-
-/-- Agent 1 learns whether the state is in `{0,1}` or in `{2,3}`. -/

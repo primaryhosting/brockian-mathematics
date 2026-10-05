@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Artin Primitive Root
 Category: Frontier — Prime Numbers
@@ -32,15 +33,12 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- `a : ℤ` is a *primitive root* modulo `p` when the image of `a` in `ZMod p` has
-multiplicative order exactly `p - 1`, i.e. it generates the group of units of `ZMod p`. -/
+/-- `a : ℤ` is a *primitive root* modulo the prime `p` when its residue generates the
+multiplicative group `(ZMod p)ˣ`, i.e. when the multiplicative order of `a` in `ZMod p`
+equals `p - 1`. -/
 
 theorem isPrimitiveRootMod_two_eleven : IsPrimitiveRootMod 2 11 := by
-  unfold IsPrimitiveRootMod
-  norm_num
-  rw [orderOf_eq_iff (by norm_num)]
-  exact ⟨by decide, by decide⟩
+  rw [IsPrimitiveRootMod, orderOf_eq_iff (by norm_num)]
+  refine ⟨by decide, by decide⟩
 
-/-! ### The excluded cases really have to be excluded -/
-
-/-- If `a` is a perfect square then `a` can only be a primitive root modulo `2`. -/
+/-- `2` is a primitive root modulo `13`. -/

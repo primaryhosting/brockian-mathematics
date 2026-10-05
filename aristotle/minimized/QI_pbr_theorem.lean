@@ -30,7 +30,6 @@ Target: QI.pbr_theorem
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -39,124 +38,68 @@ Category: Frontier Qi
 Target: QI.pbr_theorem
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+This file formalises the Pusey–Barrett–Rudolph (PBR) theorem: in any ontological
+(hidden-variable) model reproducing the quantum predictions, under the
+*preparation independence* assumption, the probability distributions over ontic
+states associated with two distinct (non-orthogonal) quantum preparations cannot
+overlap.  Equivalently, the quantum state is *ontic* rather than *epistemic*.
+
+Two ingredients are given.
+
+* `QI.pbr_orthogonality` : the quantum input.  The four (unnormalised) PBR
+  measurement vectors on `ℂ² ⊗ ℂ²` are pairwise orthogonal and each of them is
+  orthogonal to exactly one of the four product preparations `|0⟩|0⟩`,
+  `|0⟩|+⟩`, `|+⟩|0⟩`, `|+⟩|+⟩`.  Hence a quantum model predicts probability `0`
+  for outcome `(i,j)` on preparation `(i,j)`.
+
+* `QI.pbr_theorem` : the ontological conclusion.  Given an ontological model
+  with response functions summing to one, preparation independence (the ontic
+  state of two independently prepared systems is distributed according to the
+  product measure) and the above zero predictions, any common component `q • ν`
+  of the two preparation distributions must be trivial, i.e. `q = 0`.
 -/
 
 namespace QI
 
-open Finset
+open MeasureTheory
+open scoped ENNReal
 
-/-! ## The quantum ingredients
+/-! ## The quantum input: the PBR measurement -/
 
-We work with two qubits, i.e. with `ℂ⁴` indexed by `Fin 4`, where the index `2*a + b`
-stands for the product basis vector `|a⟩ ⊗ |b⟩`.
--/
+/-- Hermitian inner product on `ℂ⁴ = ℂ² ⊗ ℂ²`, whose index set is `Fin 2 × Fin 2`. -/
 
-/-- The inner product on `ℂ⁴` (conjugate-linear in the first argument). -/
+theorem pbr_theorem {Λ : Type*} [MeasurableSpace Λ]
+    (μ : Fin 2 → Measure Λ) [∀ i, IsProbabilityMeasure (μ i)]
+    (ξ : Fin 2 × Fin 2 → Λ × Λ → ℝ≥0∞) (hmeas : ∀ k, Measurable (ξ k))
+    (hnorm : ∀ x, ∑ k : Fin 2 × Fin 2, ξ k x = 1)
+    (hborn : ∀ i j : Fin 2, ∫⁻ x, ξ (i, j) x ∂((μ i).prod (μ j)) = 0)
+    (ν : Measure Λ) [IsProbabilityMeasure ν] (q : ℝ≥0)
+    (hoverlap : ∀ i : Fin 2, (q : ℝ≥0∞) • ν ≤ μ i) : q = 0 := by
+  by_contra hq
+  have hq0 : ((q : ℝ≥0∞)) ≠ 0 := by simpa using hq
+  -- Each outcome has zero probability on the "overlap" product preparation.
+  have key : ∀ k : Fin 2 × Fin 2, ∫⁻ x, ∫⁻ y, ξ k (x, y) ∂ν ∂ν = 0 := by
+    rintro ⟨i, j⟩
+    have h1 : ∫⁻ x, ∫⁻ y, ξ (i, j) (x, y) ∂(μ j) ∂(μ i) = 0 := by
+      rw [← lintegral_prod _ (hmeas (i, j)).aemeasurable]
+      exact hborn i j
+    have h2 : ∫⁻ x, ∫⁻ y, ξ (i, j) (x, y) ∂((q : ℝ≥0∞) • ν) ∂((q : ℝ≥0∞) • ν)
+        ≤ ∫⁻ x, ∫⁻ y, ξ (i, j) (x, y) ∂(μ j) ∂(μ i) :=
+      lintegral_mono' (hoverlap i) (fun _ => lintegral_mono' (hoverlap j) le_rfl)
+    rw [h1, lintegral_smul_measure] at h2
+    simp only [lintegral_smul_measure] at h2
+    have h3 : (q : ℝ≥0∞) * ((q : ℝ≥0∞) * ∫⁻ x, ∫⁻ y, ξ (i, j) (x, y) ∂ν ∂ν) = 0 :=
+      le_antisymm h2 (zero_le _)
+    simpa [hq0] using h3
+  -- But the response functions sum to one, so the total is one.
+  have hone : ∫⁻ x, ∫⁻ y, (∑ k : Fin 2 × Fin 2, ξ k (x, y)) ∂ν ∂ν = 1 := by
+    simp [hnorm]
+  rw [show (fun x : Λ => ∫⁻ y, (∑ k : Fin 2 × Fin 2, ξ k (x, y)) ∂ν)
+        = fun x : Λ => ∑ k : Fin 2 × Fin 2, ∫⁻ y, ξ k (x, y) ∂ν from
+      funext fun x => lintegral_finset_sum _ (fun k _ => (hmeas k).comp measurable_prodMk_left),
+    lintegral_finset_sum _
+      (fun k _ => (hmeas k).lintegral_prod_right' (μ := ν))] at hone
+  simp [key] at hone
 
-noncomputable def ip (u v : Fin 4 → ℂ) : ℂ := ∑ i, (starRingEnd ℂ) (u i) * v i
-
-/-- `1/√2`, as a complex number. -/
-
-noncomputable def rt : ℂ := ((Real.sqrt 2)⁻¹ : ℝ)
-
-noncomputable def phi : Fin 2 → Fin 2 → (Fin 4 → ℂ)
-  | 0, 0 => ![1, 0, 0, 0]
-  | 0, 1 => ![rt, rt, 0, 0]
-  | 1, 0 => ![rt, 0, rt, 0]
-  | 1, 1 => ![1/2, 1/2, 1/2, 1/2]
-
-/-- The four vectors of the entangled PBR measurement:
-`ξ₀ = (|0⟩|1⟩+|1⟩|0⟩)/√2`, `ξ₁ = (|0⟩|−⟩+|1⟩|+⟩)/√2`,
-`ξ₂ = (|+⟩|1⟩+|−⟩|0⟩)/√2`, `ξ₃ = (|+⟩|−⟩+|−⟩|+⟩)/√2`. -/
-
-noncomputable def xi : Fin 4 → (Fin 4 → ℂ)
-  | 0 => ![0, rt, rt, 0]
-  | 1 => ![1/2, -(1/2), 1/2, 1/2]
-  | 2 => ![1/2, 1/2, -(1/2), 1/2]
-  | 3 => ![rt, 0, 0, -rt]
-
-/-- The preparation pair excluded by outcome `i`: outcome `i = 2a+b` has probability zero
-on the preparation `|ψ_a⟩ ⊗ |ψ_b⟩`. -/
-
-def pa : Fin 4 → Fin 2
-  | 0 => 0 | 1 => 0 | 2 => 1 | 3 => 1
-
-def pb : Fin 4 → Fin 2
-  | 0 => 0 | 1 => 1 | 2 => 0 | 3 => 1
-
-/-- The PBR measurement is an orthonormal basis of `ℂ⁴`: the vectors are pairwise
-orthogonal and of unit norm. -/
-
-theorem born_zero (i : Fin 4) : ip (xi i) (phi (pa i) (pb i)) = 0 := by
-  fin_cases i <;> simp [ip, xi, phi, pa, pb, Fin.sum_univ_four]
-
-/-! ## Ontological models with preparation independence -/
-
-/-- An ontological model for the two preparations `|0⟩` and `|+⟩` of a qubit, together
-with a response function for the PBR measurement on two independently prepared systems.
-
-* `mu a` is the probability distribution over ontic states `Λ` prepared by `|ψ_a⟩`;
-* `P l₁ l₂` is the probability distribution over the four measurement outcomes when the
-  joint ontic state of the two systems is `(l₁, l₂)`;
-* `born` says the model reproduces the quantum predictions, where **preparation
-  independence** is encoded in the product measure `mu a l₁ * mu b l₂`. -/
-structure OntologicalModel (Λ : Type) [Fintype Λ] where
-  mu : Fin 2 → Λ → ℝ
-  mu_nonneg : ∀ a l, 0 ≤ mu a l
-  mu_sum : ∀ a, ∑ l, mu a l = 1
-  P : Λ → Λ → Fin 4 → ℝ
-  P_nonneg : ∀ l₁ l₂ i, 0 ≤ P l₁ l₂ i
-  P_sum : ∀ l₁ l₂, ∑ i, P l₁ l₂ i = 1
-  born : ∀ a b i, ∑ l₁, ∑ l₂, mu a l₁ * mu b l₂ * P l₁ l₂ i =
-    Complex.normSq (ip (xi i) (phi a b))
-
-variable {Λ : Type} [Fintype Λ]
-
-/-- If an outcome has average probability zero for a product preparation, then it has
-probability zero at every pair of ontic states in the product of the supports. -/
-
-lemma zero_on_support (M : OntologicalModel Λ) (a b : Fin 2) (i : Fin 4)
-    (h : Complex.normSq (ip (xi i) (phi a b)) = 0) (l₁ l₂ : Λ)
-    (h₁ : 0 < M.mu a l₁) (h₂ : 0 < M.mu b l₂) : M.P l₁ l₂ i = 0 := by
-  have hsum := M.born a b i
-  rw [h] at hsum
-  have hnn : ∀ x ∈ (univ : Finset Λ), 0 ≤ ∑ y, M.mu a x * M.mu b y * M.P x y i := by
-    intro x _
-    exact sum_nonneg fun y _ =>
-      mul_nonneg (mul_nonneg (M.mu_nonneg a x) (M.mu_nonneg b y)) (M.P_nonneg x y i)
-  have h1 : ∑ y, M.mu a l₁ * M.mu b y * M.P l₁ y i = 0 :=
-    (sum_eq_zero_iff_of_nonneg hnn).mp hsum l₁ (mem_univ l₁)
-  have hnn2 : ∀ y ∈ (univ : Finset Λ), 0 ≤ M.mu a l₁ * M.mu b y * M.P l₁ y i := fun y _ =>
-    mul_nonneg (mul_nonneg (M.mu_nonneg a l₁) (M.mu_nonneg b y)) (M.P_nonneg l₁ y i)
-  have h2 : M.mu a l₁ * M.mu b l₂ * M.P l₁ l₂ i = 0 :=
-    (sum_eq_zero_iff_of_nonneg hnn2).mp h1 l₂ (mem_univ l₂)
-  have := mul_pos h₁ h₂
-  rcases mul_eq_zero.mp h2 with h' | h'
-  · exact absurd h' (ne_of_gt this)
-  · exact h'
-
-/-- **Pusey–Barrett–Rudolph theorem.**  In any ontological model that reproduces the
-quantum predictions for the PBR measurement on two independently prepared systems
-(preparation independence), the distributions over ontic states associated with the two
-distinct pure states `|0⟩` and `|+⟩` have disjoint supports: no ontic state is compatible
-with both preparations.  In other words, the quantum state is *ontic*, not merely
-epistemic. -/
-
-theorem pbr_theorem (M : OntologicalModel Λ) (l : Λ) :
-    ¬ (0 < M.mu 0 l ∧ 0 < M.mu 1 l) := by
-  rintro ⟨h0, h1⟩
-  have hall : ∀ a : Fin 2, 0 < M.mu a l := by
-    intro a; fin_cases a
-    · exact h0
-    · exact h1
-  have key : ∀ i : Fin 4, M.P l l i = 0 := by
-    intro i
-    have hz : Complex.normSq (ip (xi i) (phi (pa i) (pb i))) = 0 := by
-      rw [born_zero i]; simp
-    exact zero_on_support M (pa i) (pb i) i hz l l (hall _) (hall _)
-  have := M.P_sum l l
-  rw [show ∑ i, M.P l l i = 0 from sum_eq_zero fun i _ => key i] at this
-  norm_num at this
-
-/-- The Born probabilities of the PBR measurement sum to one on every product
-preparation (the measurement is a complete measurement). -/
+end QI

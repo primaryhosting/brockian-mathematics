@@ -1,37 +1,71 @@
-import RequestProject.Tseitin
+import RequestProject.Encode
 
 /-!
-# The Cook–Levin theorem: SAT is NP-complete
+# The class NP, via polynomial-size verifier circuits
 
-We work with languages of bit strings, `L : List Bool → Prop`.
+A language `L ⊆ {0,1}*` is in `NP` when there is a family of Boolean circuits
+`circ n`, of size polynomial in `n`, such that `x ∈ L` iff some setting of the
+"free" inputs (the inputs of index `≥ |x|`, i.e. the witness) makes `circ |x|`
+accept the string `x`.
 
-Membership in NP is expressed by a *verifier*: a family of Boolean circuits
-(straight-line programs) `V.ckt n`, of size polynomial in `n`, which takes an input
-`x` of length `n` together with a witness `w` of polynomially bounded length
-`V.wit n`, and accepts or rejects.  A string `x` is in the language iff some witness
-is accepted.
-
-* **SAT ∈ NP** (`sat_mem_NP`): a formula `F` is satisfiable iff there is a witness
-  bit string `w` of length `numVars F` such that the (explicitly cost-instrumented)
-  evaluator accepts, and that evaluation costs at most `2 * cnfSize F + 1` steps,
-  i.e. linear time.
-
-* **SAT is NP-hard** (`cook_levin_hardness`): for every verifier `V` and input `x`,
-  the explicitly constructed formula `cookReduction V x` — obtained by the Tseitin
-  transformation of the verifier circuit with the bits of `x` hard-wired — is
-  satisfiable iff `x` belongs to the language of `V`; and its size is polynomially
-  bounded in `|x|`, the construction being computable in linear time in the size of
-  the circuit.
-
-Both halves are combined in `cook_levin`.
+Note that no bound on the witness has to be imposed: a circuit of size `s` reads
+at most `s` of its inputs, so the witness is automatically of polynomial length.
 -/
 
 namespace Frontier
 
-/-- The assignment described by a list of bits (missing bits default to `false`). -/
+/-- A polynomial-size verifier-circuit family witnessing that `L` is in `NP`. -/
+structure NPVerifier (L : List Bool → Prop) where
+  /-- The verifier circuit for inputs of length `n`. -/
+  circ : ℕ → Circuit
+  /-- Coefficient of the polynomial size bound. -/
+  coeff : ℕ
+  /-- Exponent of the polynomial size bound. -/
+  exponent : ℕ
+  /-- The circuit family has polynomial size. -/
+  size_le : ∀ n, (circ n).length ≤ coeff * (n + 1) ^ exponent
+  /-- `x ∈ L` iff some witness makes the verifier accept. -/
+  spec : ∀ x : List Bool, L x ↔ ∃ w : ℕ → Bool, evalC (circ x.length) (extend x w) = true
 
-def Gate.inpLT (n : ℕ) : Gate → Prop
-  | .inp i => i < n
-  | _ => True
+end Frontier
 
-/-- A straight-line program is well-formed if every gate refers only to earlier wires. -/
+import Mathlib
+
+/-!
+# Basic objects: CNF formulas and Boolean circuits
+
+This file sets up the two computational objects used in the Cook–Levin development:
+
+* CNF formulas over natural-number variables, and their satisfiability;
+* Boolean circuits, presented as straight-line programs with *relative*
+  back-references (a gate at position `i` may refer to the gate `d` steps
+  before it).  Out-of-range references evaluate to `false`, so evaluation is
+  total and no well-formedness side condition is ever needed.
+* Boolean *expressions* (trees) together with a compiler into circuits.  This
+  is only used as a convenient way of building concrete circuits.
+-/
+
+namespace Frontier
+
+/-! ### CNF formulas -/
+
+/-- A literal is a variable index together with the polarity it is asserted with. -/
+abbrev Lit := ℕ × Bool
+
+/-- A clause is a disjunction of literals. -/
+abbrev Clause := List Lit
+
+/-- A CNF formula is a conjunction of clauses. -/
+abbrev CNF := List Clause
+
+/-- Is the literal `l` true under the assignment `a`? -/
+
+def Gate.val (g : Gate) (x : ℕ → Bool) (acc : List Bool) : Bool :=
+  match g with
+  | .inp i => x i
+  | .cst b => b
+  | .neg d => !(acc.getD d false)
+  | .conj d e => (acc.getD d false) && (acc.getD e false)
+  | .disj d e => (acc.getD d false) || (acc.getD e false)
+
+/-- Run a circuit, accumulating computed values (most recent first). -/

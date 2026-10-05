@@ -1,33 +1,25 @@
 import Mathlib
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# The cumulative hierarchy and inaccessible cardinals
+
+This file defines the von Neumann cumulative hierarchy `Frontier.cumul o` inside `ZFSet`,
+characterizes its members by rank, and proves the two facts about an inaccessible cardinal `κ`
+that are needed to see that `V_κ` is a model of ZFC:
+
+* `Frontier.card_lt_of_rank_lt`: a set of rank `< κ.ord` has cardinality `< κ`;
+* `Frontier.rank_range_lt`: `V_κ` is closed under images of small families (replacement).
 -/
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-universe u
+open Ordinal Cardinal
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order
+/-- The von Neumann cumulative hierarchy `V_o`, as a `ZFSet`. -/
 
-/-! ## The first-order language of set theory -/
+noncomputable def axFound : setLang.Sentence :=
+  allQ ((exQ (memF vz (up vz))).imp
+    (exQ ((memF vz (up vz)) ⊓
+      (allQ ((memF vz (up vz)).imp (Formula.not (memF vz (up (up vz)))))))))
 
-/-- The relation symbols of the language of set theory: a single binary symbol `∈`. -/
-inductive memRelSym : ℕ → Type
-  | mem : memRelSym 2
-
-/-- The first-order language of set theory: no function symbols, one binary relation `∈`. -/
-
-def axFound : setLang.Sentence :=
-  ∀' ((∃' (memF (&1) (&0))) ⟹
-    ∃' ((memF (&1) (&0)) ⊓ ∀' ∼((memF (&2) (&1)) ⊓ (memF (&2) (&0)))))
-
-/-- Choice, in the form: for every set `x` of nonempty, pairwise disjoint sets there is a set
-meeting each element of `x` in exactly one point. -/
+/-- Choice: every family of nonempty, pairwise disjoint sets admits a selector. -/

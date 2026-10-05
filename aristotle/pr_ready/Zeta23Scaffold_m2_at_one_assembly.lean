@@ -17,7 +17,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -43,16 +42,15 @@ set_option grind.warning false
 
 namespace Zeta23Scaffold
 
-/-- The normalized sine kernel `S u = sin (π u) / (π u)`. -/
+/-- The (normalized) sine kernel `S u = sin (π u) / (π u)`. -/
 noncomputable def S (u : ℝ) : ℝ := Real.sin (Real.pi * u) / (Real.pi * u)
 
 /--
-Conditional assembly of the second moment at one:
-`m₂(1) = 1 + ∫ S² - ∫ S⁴ = 4/3`, given the two sinc integrals as hypotheses.
+Conditional assembly of the second moment of the sine process at one:
+`m₂(1) = 1 + ∫ S² - ∫ S⁴ = 4/3`.
 
-The two integral values are taken as explicit hypotheses (not axioms); the
-pair-correlation derivation `1 - S(u)^2` for the sine process is not claimed here.
--/
+The two sinc integrals are taken as explicit hypotheses (never as axioms), and the
+pair-correlation derivation itself is *not* claimed here. -/
 theorem m2_at_one_assembly
     (hS2 : ∫ u : ℝ, (S u) ^ 2 = 1)
     (hS4 : ∫ u : ℝ, (S u) ^ 4 = 2 / 3) :

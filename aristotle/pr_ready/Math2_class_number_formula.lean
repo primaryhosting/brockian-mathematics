@@ -16,40 +16,31 @@ Target: Math2.class_number_formula
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean requires `import` commands to precede any module docstring, so the header above
+-- is written as a plain block comment; its text is unchanged.)
 
 
-/-!
-# Class Number Formula
-Category: Frontier Math
-Target: Math2.class_number_formula
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators Real Nat Classical Pointwise
 
 open Filter Topology NumberField NumberField.InfinitePlace NumberField.Units
-
-open scoped Real
 
 namespace Math2
 
 /--
-**The analytic (Dirichlet) class number formula.**
+**The analytic class number formula.**
 
-For a number field `K`, the Dedekind zeta function `ζ_K` has a simple pole at `s = 1`, with
-residue
-
-`(2 ^ r₁ * (2π) ^ r₂ * Reg K * h K) / (w K * √|disc K|)`,
-
-where `r₁` is the number of real places, `r₂` the number of complex places, `Reg K` the regulator,
-`h K` the class number, `w K` the number of roots of unity in `K`, and `disc K` the discriminant.
-
-This is stated as the limit of `(s - 1) * ζ_K s` as `s → 1⁺` along the reals.
+For a number field `K`, the Dedekind zeta function `ζ_K` has a simple pole at `s = 1`
+whose residue is
+`(2 ^ r₁ * (2 π) ^ r₂ * Reg_K * h_K) / (w_K * √|d_K|)`,
+where `r₁` (resp. `r₂`) is the number of real (resp. complex) places of `K`, `Reg_K` is the
+regulator, `h_K` the class number, `w_K` the number of roots of unity in `K`, and `d_K` the
+discriminant.
 -/
 theorem class_number_formula (K : Type*) [Field K] [NumberField K] :
     Tendsto (fun s : ℝ ↦ (s - 1) * dedekindZeta K s) (𝓝[>] 1)
       (𝓝 (((2 ^ nrRealPlaces K * (2 * π) ^ nrComplexPlaces K * regulator K * classNumber K) /
-        (torsionOrder K * Real.sqrt |discr K|) : ℝ) : ℂ)) :=
-  tendsto_sub_one_mul_dedekindZeta_nhdsGT K
+        (torsionOrder K * Real.sqrt |(discr K : ℝ)|) : ℝ) : ℂ)) := by
+  simpa only [dedekindZeta_residue_def] using tendsto_sub_one_mul_dedekindZeta_nhdsGT K
 
 end Math2
 

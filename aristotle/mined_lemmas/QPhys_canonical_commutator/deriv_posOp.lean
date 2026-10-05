@@ -7,7 +7,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
-
 /-!
 # Canonical Commutator
 Category: Quantum Physics
@@ -18,15 +17,20 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace QPhys
 
-open Complex SchwartzMap
+open Complex
 
-/-- The position operator `X`, acting on complex-valued functions of a real variable
-by multiplication with the coordinate: `(X f)(x) = x * f(x)`. -/
+/-- The position operator `x̂`, acting on a function `ℝ → ℂ` by pointwise multiplication
+by the (complexified) coordinate. -/
 
-theorem deriv_posOp (f : 𝓢(ℝ, ℂ)) (x : ℝ) :
-    deriv (posOp (f : ℝ → ℂ)) x = f x + (x : ℂ) * deriv (f : ℝ → ℂ) x :=
-  (hasDerivAt_posOp f x).deriv
+lemma deriv_posOp (f : SchwartzMap ℝ ℂ) (x : ℝ) :
+    deriv (posOp (f : ℝ → ℂ)) x = f x + (x : ℂ) * deriv (f : ℝ → ℂ) x := by
+  have h1 : HasDerivAt (fun y : ℝ => (y : ℂ)) 1 x := by
+    simpa using Complex.ofRealCLM.hasDerivAt (x := x)
+  have h2 : HasDerivAt (f : ℝ → ℂ) (deriv (f : ℝ → ℂ) x) x :=
+    (SchwartzMap.differentiable f x).hasDerivAt
+  have := h1.mul h2
+  simpa [posOp, mul_comm, add_comm] using this.deriv
 
-/-- **Canonical commutation relation.** On Schwartz space, with the momentum operator
-`P = -i ℏ d/dx` and the position operator `(X f)(x) = x f(x)`, one has
-`[X, P] f = i ℏ f`. -/
+/-- **Canonical commutation relation.** For every Schwartz function `f : 𝓢(ℝ, ℂ)`, with the
+position operator `x̂ f = x · f` and the momentum operator `p̂ = -i ℏ d/dx`, one has
+`[x̂, p̂] f = i ℏ f` pointwise. -/

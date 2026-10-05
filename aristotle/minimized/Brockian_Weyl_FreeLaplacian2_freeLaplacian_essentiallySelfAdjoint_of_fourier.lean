@@ -30,12 +30,7 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
-
--- Note: Lean requires `import` commands to come before any module docstring `/-! ... -/`, so the
--- required header appears verbatim at the very top of the file as a block comment and is repeated
--- here, after the import, as the module docstring.
 
 /-!
 # Free Laplacian Essentially Self Adjoint Of Fourier
@@ -45,44 +40,52 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace Brockian.Weyl.FreeLaplacian2
 
-/-!
-The free Laplacian `-Δ`, defined on the Schwartz space `𝓢(ℝ^d, ℂ)` regarded as a dense
-subspace of `L²(ℝ^d, ℂ)`, is essentially self-adjoint.
-
-The proof follows the classical "basic criterion" of von Neumann/Weyl:
-
-* an abstract criterion (`essentiallySelfAdjoint_of_dense_shift_ranges`): a densely defined
-  symmetric operator whose deficiency ranges `Ran (T ± i)` are dense is essentially
-  self-adjoint;
-* the Fourier transform turns `-Δ` on Schwartz space into multiplication by
-  `ξ ↦ 4π²‖ξ‖²` (`fourier_negLaplacianS`), and dividing a smooth compactly supported
-  function by `4π²‖ξ‖² ± i` (which never vanishes) produces again a smooth compactly
-  supported function.  Since smooth compactly supported functions are dense in `L²` and
-  the Fourier transform is unitary on `L²` (Plancherel), the deficiency ranges are dense.
--/
-
-open MeasureTheory SchwartzMap Filter LinearPMap
-open scoped FourierTransform ComplexInnerProductSpace LinearPMap Laplacian LineDeriv Topology
-  ContDiff
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-/-! ## An abstract criterion for essential self-adjointness -/
+def multiplier {W : Type*} [NormedAddCommGroup W] (ξ : W) : ℝ := (2 * π) ^ 2 * ‖ξ‖ ^ 2
 
-section Abstract
+lemma fourier_laplacian_apply (f : 𝓢(V, ℂ)) (ξ : V) :
+    𝓕 (Δ f : 𝓢(V, ℂ)) ξ = (-(multiplier ξ) : ℝ) * 𝓕 f ξ := by
+  classical
+  set b := stdOrthonormalBasis ℝ V with hb
+  have hstep : ∀ (g : 𝓢(V, ℂ)) (m : V) (x : V),
+      𝓕 (∂_{m} g) x = (2 * π * Complex.I * (inner ℝ x m)) * 𝓕 g x := by
+    intro g m x
+    rw [SchwartzMap.fourier_lineDerivOp_eq]
+    have hm : (fun y : V => (inner ℝ y m : ℝ)).HasTemperateGrowth := by fun_prop
+    simp [hm]
+    ring
+  rw [SchwartzMap.laplacian_eq_sum b]
+  have hsum : 𝓕 (∑ i, ∂_{b i} (∂_{b i} f) : 𝓢(V, ℂ))
+      = ∑ i, 𝓕 (∂_{b i} (∂_{b i} f) : 𝓢(V, ℂ)) := by
+    change (fourierTransformCLM ℂ) _ = _
+    rw [map_sum]
+    rfl
+  rw [hsum, SchwartzMap.sum_apply]
+  have key : ∀ i, 𝓕 (∂_{b i} (∂_{b i} f) : 𝓢(V, ℂ)) ξ
+      = (-((2 * π) ^ 2 * (inner ℝ ξ (b i) : ℝ) ^ 2 : ℝ) : ℂ) * 𝓕 f ξ := by
+    intro i
+    rw [hstep, hstep]
+    push_cast
+    ring_nf
+    simp [Complex.I_sq]
+  have hnorm : ∑ i, (inner ℝ ξ (b i) : ℝ) ^ 2 = ‖ξ‖ ^ 2 := b.sum_sq_inner_left ξ
+  simp_rw [key]
+  rw [← Finset.sum_mul]
+  congr 1
+  simp only [multiplier]
+  push_cast
+  rw [Finset.sum_neg_distrib, ← Finset.mul_sum]
+  norm_cast
+  rw [hnorm]
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] [CompleteSpace E]
-
-/-- The operator `T + c` on the domain of the partially defined operator `T`. -/
-
-theorem fourier_lineDeriv_apply (f : 𝓢(Euc d, ℂ)) (m ξ : Euc d) :
-    (𝓕 (∂_{m} f)) ξ = (2 * Real.pi * Complex.I) * ((inner ℝ ξ m : ℝ) : ℂ) * (𝓕 f) ξ := by
-  rw [SchwartzMap.fourier_lineDerivOp_eq]
-  have htg : (inner ℝ · m : Euc d → ℝ).HasTemperateGrowth := by fun_prop
-  simp [SchwartzMap.smulLeftCLM_apply_apply htg]
-  ring_nf
-
-/-- The Fourier transform turns `-Δ` into multiplication by `4π²‖ξ‖²`. -/
+/-- The Fourier transform diagonalizes the free Laplacian: the Fourier transform of `-Δ f`
+is the pointwise product of the multiplier `(2π)²‖ξ‖²` with the Fourier transform of `f`. -/

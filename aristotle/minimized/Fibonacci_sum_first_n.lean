@@ -1,12 +1,11 @@
-/-
+import Mathlib
+/-!
 # Sum First N
 Category: Fibonacci
 Target: Fibonacci.sum_first_n
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 namespace Fibonacci
 
@@ -16,9 +15,9 @@ theorem sum_first_n (n : ℕ) :
   induction n with
   | zero => simp
   | succ k ih =>
-    rw [Finset.sum_range_succ, ih, Nat.fib_add_two]
-    have : 1 ≤ Nat.fib (k + 1) := Nat.fib_pos.mpr (Nat.succ_pos k)
-    omega
+      rw [Finset.sum_range_succ, ih, Nat.fib_add_two]
+      have h : 1 ≤ Nat.fib (k + 1) := Nat.fib_pos.mpr (Nat.succ_pos k)
+      omega
 
 end Fibonacci
 

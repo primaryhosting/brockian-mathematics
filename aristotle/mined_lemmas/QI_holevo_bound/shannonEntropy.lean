@@ -5,7 +5,6 @@ Target: QI.holevo_bound
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -14,38 +13,18 @@ Category: Frontier Qi
 Target: QI.holevo_bound
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-## Contents
-
-* `QI.log_sum_le`, `QI.klDiv_stochastic_le`, `QI.classical_holevo`: the classical core, namely the
-  log-sum inequality, the data-processing inequality for the Kullback–Leibler divergence, and the
-  resulting data-processing inequality for mutual information.
-* `QI.vonNeumannEntropy`, `QI.IsState`, `QI.IsPOVM`, `QI.outcomeProb`, `QI.holevoChi`,
-  `QI.measuredInfo`, `QI.accessibleInfo`: the quantum-information definitions.
-* `QI.holevo_bound`: for an ensemble of density matrices measured by an arbitrary POVM, the
-  mutual information between the ensemble label and the measurement outcome is at most the
-  Holevo quantity `χ`.
-* `QI.accessibleInfo_le_holevoChi`: the same statement for the supremum over POVMs.
-
-## Scope
-
-The ensemble is assumed to consist of *commuting* density matrices: they are given as
-`ρ x = U * diagonal (r x) * Uᴴ` for one fixed unitary `U` and probability vectors `r x`.  The
-measurement, on the other hand, is a completely arbitrary POVM, so the argument is not a purely
-classical one: the POVM has to be turned into a stochastic matrix via `i ↦ (Uᴴ (E y) U) i i`.
-The fully general (non-commuting) Holevo bound needs monotonicity of the *quantum* relative
-entropy under measurement, which is not available in Mathlib.
 -/
-
-open Finset
 
 namespace QI
 
-/-! ## Classical information-theoretic core -/
+open Matrix Finset ComplexOrder
 
-/-- Shannon entropy of a finite (sub)probability vector, with the convention `0 * log 0 = 0`. -/
+/-! ## Classical information quantities -/
 
-noncomputable def shannonEntropy {ι : Type*} [Fintype ι] (a : ι → ℝ) : ℝ :=
-  ∑ i, Real.negMulLog (a i)
+variable {ι X I Y : Type*}
 
-/-- Kullback–Leibler divergence of two finite (sub)probability vectors. -/
+/-- Shannon entropy of a finite (sub)probability vector, `H(p) = -∑ p i log (p i)`. -/
+
+noncomputable def shannonEntropy [Fintype ι] (p : ι → ℝ) : ℝ := ∑ i, Real.negMulLog (p i)
+
+/-- Mutual information of a joint distribution `r` on `X × Y`. -/

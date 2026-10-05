@@ -1,0 +1,21 @@
+/-!
+# Quadruplet 11 13 17 19
+Category: Frontier — Prime Numbers
+Target: Constellation.quadruplet_11_13_17_19
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Constellation
+
+/-- Primality of a natural number: `n` is at least `2` and its only divisors are `1` and `n`.
+
+This file is required to begin with the header comment above, which Lean parses as a module
+documentation command; consequently no `import` line may follow it, so the development below is
+carried out with the Lean core library only, and primality is spelled out explicitly here
+(this predicate is equivalent to Mathlib's `Nat.Prime`). -/
+
+theorem isPrime_nineteen : IsPrime 19 := isPrime_of_bounded 19 (by decide) (by decide)
+
+/-- `(11, 13, 17, 19)` is a prime quadruplet of pattern `(0, 2, 6, 8)`: all four numbers are
+prime, and `13 = 11 + 2`, `17 = 11 + 6`, `19 = 11 + 8`. -/

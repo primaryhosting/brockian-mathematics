@@ -1,4 +1,20 @@
+/-
+# Omega Add Omega
+Category: Frontier Wave 2 (deeper machinery)
+Target: Ordinal.omega_add_omega
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Omega Add Omega
+Category: Frontier Wave 2 (deeper machinery)
+Target: Ordinal.omega_add_omega
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,35 +30,18 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-import Mathlib
-
-/-!
-# Omega Add Omega
-Category: Frontier Wave 2 (deeper machinery)
-Target: Ordinal.omega_add_omega
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 namespace Ordinal
 
 /-- Ordinal arithmetic: `ω + ω = ω * 2`.
 
-In current Mathlib the ordinal `ω` is denoted `Ordinal.omega0` (`Ordinal.omega` is the
-`ω_·` indexing order embedding), so the statement is phrased with `omega0`. -/
+(In current Mathlib the first infinite ordinal is named `Ordinal.omega0`, written `ω`.) -/
+theorem omega_add_omega : Ordinal.omega0 + Ordinal.omega0 = Ordinal.omega0 * 2 := by
+  have h2 : (2 : Ordinal) = 1 + 1 := by norm_num
+  rw [h2, mul_add, mul_one]
 
-theorem omega_add_omega : omega0 + omega0 = omega0 * 2 := by
-  have h2 : (2 : Ordinal) = Order.succ 1 := by
-    rw [Order.succ_eq_add_one]; norm_num
-  rw [h2, mul_succ, mul_one]
+end Ordinal
 
-/-- Restatement in terms of `Ordinal.omega 0`, which equals `ω`. -/
+#print axioms Ordinal.omega_add_omega
+

@@ -24,6 +24,7 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
+
 /-!
 # Equidistribution Of BV Uniform
 Category: Brockian (Literature Discharge)
@@ -32,36 +33,47 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Finset MeasureTheory
-open scoped Topology BigOperators Classical
+open Filter Finset MeasureTheory Set
+open scoped Topology
 
-namespace Brockian
-namespace EquidistributionBVReduction
+namespace Brockian.EquidistributionBVReduction
 
-/-- The number of indices `n < N` for which the fractional part of `x n` lies in `[a, b)`. -/
+/-- The frequency with which the fractional parts of the first `N` terms of the sequence `x`
+land in the interval `[a, b)`. -/
 
-lemma lower_sum_le_integral (hg : Monotone g) {K : ℕ} (hK : 0 < K) :
-    ∑ i ∈ Finset.range K, g ((i : ℝ) / K) / K ≤ ∫ t in (0:ℝ)..1, g t := by
-  have hKpos : (0 : ℝ) < K := by exact_mod_cast hK
-  have hsum : ∑ i ∈ Finset.range K, ∫ t in ((i : ℝ) / K)..(((i : ℝ) + 1) / K), g t =
-      ∫ t in (0:ℝ)..1, g t := by
-    have := intervalIntegral.sum_integral_adjacent_intervals
-      (a := fun i : ℕ => (i : ℝ) / K) (f := g) (μ := volume) (n := K)
-      (fun k _ => hg.intervalIntegrable)
-    simpa [Nat.cast_add, Nat.cast_one, div_self (ne_of_gt hKpos)] using this
+lemma lower_sum_le_integral (hg : MonotoneOn g (Set.Icc (0 : ℝ) 1)) {k : ℕ} (hk : 0 < k) :
+    ∑ j ∈ Finset.range k, g ((j : ℝ) / k) / k ≤ ∫ t in (0 : ℝ)..1, g t := by
+  have hk0 : (0:ℝ) < k := by exact_mod_cast hk
+  set a : ℕ → ℝ := fun j => (j : ℝ) / k with ha
+  have hmem : ∀ j : ℕ, j ≤ k → a j ∈ Set.Icc (0:ℝ) 1 := by
+    intro j hj
+    refine ⟨by positivity, ?_⟩
+    rw [ha]; dsimp only; rw [div_le_one hk0]; exact_mod_cast hj
+  have hle : ∀ j : ℕ, a j ≤ a (j+1) := by
+    intro j; rw [ha]; dsimp only; gcongr; linarith
+  have hsub : ∀ j, j < k → Set.uIcc (a j) (a (j+1)) ⊆ Set.Icc (0:ℝ) 1 := by
+    intro j hj
+    rw [Set.uIcc_of_le (hle j)]
+    exact Set.Icc_subset_Icc (hmem j hj.le).1 (hmem (j+1) hj).2
+  have hint : ∀ j < k, IntervalIntegrable g MeasureTheory.volume (a j) (a (j+1)) :=
+    fun j hj => (hg.mono (hsub j hj)).intervalIntegrable
+  have hsum : ∑ j ∈ Finset.range k, ∫ t in (a j)..(a (j+1)), g t = ∫ t in (0:ℝ)..1, g t := by
+    rw [intervalIntegral.sum_integral_adjacent_intervals hint]
+    have h0 : a 0 = 0 := by simp [ha]
+    have h1 : a k = 1 := by rw [ha]; field_simp
+    rw [h0, h1]
   rw [← hsum]
-  refine Finset.sum_le_sum (fun i _ => ?_)
-  have hle : (i : ℝ) / K ≤ ((i : ℝ) + 1) / K := by
-    rw [div_le_div_iff_of_pos_right hKpos]; linarith
-  have hmono : ∫ t in ((i : ℝ) / K)..(((i : ℝ) + 1) / K), g ((i : ℝ) / K) ≤
-      ∫ t in ((i : ℝ) / K)..(((i : ℝ) + 1) / K), g t :=
-    intervalIntegral.integral_mono_on hle intervalIntegrable_const
-      hg.intervalIntegrable (fun t ht => hg ht.1)
-  calc g ((i : ℝ) / K) / K
-      = ∫ _t in ((i : ℝ) / K)..(((i : ℝ) + 1) / K), g ((i : ℝ) / K) := by
-        rw [intervalIntegral.integral_const, smul_eq_mul,
-          show ((i : ℝ) + 1) / K - (i : ℝ) / K = 1 / K by rw [div_sub_div_same]; norm_num]
-        ring
-    _ ≤ _ := hmono
+  refine Finset.sum_le_sum (fun j hj => ?_)
+  have hjk := Finset.mem_range.mp hj
+  have hdiff : a (j+1) - a j = 1/k := by rw [ha]; push_cast; field_simp; ring
+  have hconst : ∫ _t in (a j)..(a (j+1)), g (a j) = g (a j) * (1/k) := by
+    rw [intervalIntegral.integral_const, hdiff, smul_eq_mul]; ring
+  have hmain := intervalIntegral.integral_mono_on (μ := MeasureTheory.volume) (hle j)
+    (intervalIntegrable_const (c := g (a j))) (hint j hjk)
+    (fun t ht => hg (hmem j hjk.le)
+      (hsub j hjk (by rw [Set.uIcc_of_le (hle j)]; exact ht)) ht.1)
+  rw [hconst] at hmain
+  calc g ((j:ℝ)/k) / k = g (a j) * (1/k) := by rw [ha]; ring
+    _ ≤ _ := hmain
 
-/-- The upper Riemann sum of a monotone function overestimates its integral. -/
+/-- The integral of a monotone function is at most its upper Riemann sum. -/

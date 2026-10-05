@@ -1,4 +1,13 @@
+/-
+# Huckel C 18
+Category: Chemistry
+Target: Chem.huckel_C18
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Huckel C 18
 Category: Chemistry
@@ -7,13 +16,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open Complex
+
 namespace Chem
 
-open Complex Matrix
+/-- A primitive 18-th root of unity. -/
 
-/-- The adjacency matrix of the cycle graph `C₁₈`, with vertices indexed by `ZMod 18`:
-two vertices are adjacent iff they differ by `1` modulo `18`. -/
+noncomputable def W : Matrix (Fin 18) (Fin 18) ℂ := fun k l => (18 : ℂ)⁻¹ * ch (-(k * l))
 
-noncomputable def w (m : ZMod 18) : ℂ := ZMod.stdAddChar m
-
-/-- The (unnormalised) discrete Fourier matrix. -/
+/-- The Hückel eigenvalues of `C₁₈`. -/

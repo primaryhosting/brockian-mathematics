@@ -9,77 +9,92 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 /-!
-## Overview
-
-Scholze's tilting construction attaches to a perfectoid field `(K, v)` of residue
-characteristic `p` a perfectoid field `K^♭` of characteristic `p`.  Concretely, if `𝒪`
-denotes the ring of integers of `K`, one forms the perfection of `𝒪 / p`,
-
-  `𝒪^♭ = lim (𝒪/p, x ↦ x ^ p)`,
-
-and `K^♭` is its fraction field; its multiplicative monoid is `lim (K, x ↦ x ^ p)`.  The
-*tilting equivalence* then states that `K ↦ K^♭` induces an equivalence between perfectoid
-`K`-algebras and perfectoid `K^♭`-algebras, and in particular an isomorphism of absolute
-Galois groups `Gal(K̄/K) ≃ Gal(K̄^♭/K^♭)`.
-
-Mathlib already contains the construction of the tilt (`Perfection`, `ModP`, `PreTilt`,
-`Tilt` in `Mathlib/RingTheory/Perfection.lean`), following
-[Scholze, *Perfectoid spaces*].  This file adds:
-
-* `Frontier.IsPerfectoidField` — the axioms for `(K, v)` to be a perfectoid field with
-  residue characteristic `p`: the (rank ≤ 1) valuation `v` is non-discrete, with a
-  pseudo-uniformizer `w` satisfying `v p ≤ v w ^ p < v w < 1`, and Frobenius is surjective
-  on `𝒪_K / p`;
-* `Frontier.IsPerfectoidField.perfectRing` — in characteristic `p`, a perfectoid field is
-  a perfect field;
-* `Frontier.preTiltEquivSelf` — for a perfect ring `O` of characteristic `p`, the ring
-  `PreTilt O p = lim (O/p, x ↦ x^p)` is canonically isomorphic to `O` itself
-  (in characteristic `p` one has `O/p = O`, and the perfection of a perfect ring is the
-  ring itself);
-* `Frontier.val_preTiltEquivSelf` — that isomorphism is an isometry: the valuation Scholze's
-  construction puts on the tilt corresponds to the original valuation `v`;
-* `Frontier.tiltRingEquiv` — the induced isomorphism `K^♭ ≃+* K` on fraction fields;
-* `Frontier.scholze_perfectoid_tilt` — **the main statement**: for a perfectoid field `K`
-  of characteristic `p`, tilting is canonically the identity, `K^♭ ≃+* K`.  This is the
-  base case of Scholze's tilting equivalence (for a general perfectoid field the tilt is a
-  perfectoid field of characteristic `p`, and tilting it again changes nothing);
-* `Frontier.tilt_algebraicClosure_zmod` — a concrete instance of the isomorphism, for the
-  algebraic closure of `ZMod p`.
-
-Completeness of `K` is not needed for the characteristic `p` statement, so it is not
-imposed; it is of course part of the definition of a perfectoid field in general, and is
-what makes the mixed characteristic construction work.
+# Scholze Perfectoid Tilt
+Category: Frontier — Fields Medal Work
+Target: Frontier.scholze_perfectoid_tilt
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
 open scoped NNReal
+open Function
 
 namespace Frontier
 
-section Perfection
+universe u w
 
-variable (O : Type*) [CommRing O] [Nontrivial O] (p : ℕ) [Fact p.Prime] [CharP O p]
+/-!
+## Perfectoid fields and the tilting correspondence
 
-/-- In characteristic `p` the element `p = 0` is not a unit, which is the hypothesis under
-which Mathlib's `ModP` and `PreTilt` have their ring structure. -/
-instance fact_not_isUnit_natCast : Fact (¬ IsUnit (p : O)) :=
-  ⟨by
-    rw [show ((p : O)) = 0 from mod_cast CharP.cast_eq_zero O p]
-    exact not_isUnit_zero⟩
+A *perfectoid field* is a complete non-archimedean valued field `(K, v)` of rank one whose value
+group is non-discrete, whose residue characteristic is a prime `p`, and for which the Frobenius
+`x ↦ x ^ p` is surjective on `O/p`, where `O ⊆ K` is the ring of integers.
 
-/-- In characteristic `p` we have `O / p = O`. -/
+Scholze's tilting construction attaches to such a field the *tilt*
+`K♭ = Frac (lim_{x ↦ x^p} O/p)` (`Valuation.Tilt` in Mathlib), a perfectoid field of
+characteristic `p`, and the tilting equivalence asserts that `L ↦ L♭` is an equivalence between
+perfectoid extensions of `K` and perfectoid extensions of `K♭`; in particular it is fully
+faithful and conservative on isomorphism classes.
 
-noncomputable def trivialValuation (K : Type*) [Field K] : Valuation K ℝ≥0 where
+The theorem `Frontier.scholze_perfectoid_tilt` below establishes the base case of this
+correspondence, namely the case of characteristic `p`: there the tilt of a perfectoid field is
+canonically isomorphic to the field itself, and consequently two characteristic-`p` perfectoid
+fields are isomorphic if and only if their tilts are.
+-/
+
+/-- A *perfectoid field* (Scholze). `K` is a field equipped with a rank-one valuation
+`v : K → ℝ≥0` with ring of integers `O`, such that
+
+* the valuation is non-discrete (there is an element of valuation strictly between `0` and `1`);
+* `K` is complete for its uniform structure;
+* the residue characteristic is `p`, i.e. `p` is not a unit of `O`;
+* the Frobenius `x ↦ x ^ p` on `O/p` is surjective (the perfectoid condition).
+-/
+structure IsPerfectoidField (p : ℕ) (K : Type u) [Field K] [UniformSpace K]
+    (v : Valuation K ℝ≥0) (O : Type w) [CommRing O] [Algebra O K] : Prop where
+  /-- `p` is a prime number. -/
+  prime : p.Prime
+  /-- `O` is the ring of integers of `v`. -/
+  integers : v.Integers O
+  /-- The valuation is non-discrete: some element has valuation different from `0` and `1`. -/
+  nondiscrete : ∃ x : K, v x ≠ 0 ∧ v x ≠ 1
+  /-- `K` is complete. -/
+  complete : CompleteSpace K
+  /-- The residue characteristic is `p`. -/
+  residue_char : ¬ IsUnit (p : O)
+  /-- Frobenius is surjective on `O/p`: the perfectoid condition. -/
+  frobenius_surjective : Surjective (fun x : ModP O p => x ^ p)
+
+section Auxiliary
+
+variable {p : ℕ} [hp : Fact p.Prime]
+variable {K : Type u} [Field K] {v : Valuation K ℝ≥0}
+variable {O : Type w} [CommRing O] [Algebra O K]
+
+omit hp in
+/-- The ring of integers of a valuation on a field has that field as fraction field. -/
+
+noncomputable def trivialValuation (F : Type u) [Field F] : Valuation F ℝ≥0 where
   toFun x := if x = 0 then 0 else 1
   map_zero' := by simp
   map_one' := by simp
-  map_mul' x y := by
-    by_cases hx : x = 0 <;> by_cases hy : y = 0 <;> simp [hx, hy]
+  map_mul' x y := by by_cases hx : x = 0 <;> by_cases hy : y = 0 <;> simp [hx, hy]
   map_add_le_max' x y := by
-    by_cases hx : x = 0
-    · simp [hx]
-    by_cases hy : y = 0
-    · simp [hy]
-    by_cases hxy : x + y = 0 <;> simp [hx, hy, hxy]
+    by_cases hx : x = 0 <;> by_cases hy : y = 0 <;> by_cases hxy : x + y = 0 <;> simp_all
 
-/-- A concrete non-vacuous instance of the characteristic `p` tilting isomorphism: the tilt
-of `𝔽̄_p` (a perfect field of characteristic `p`) is `𝔽̄_p` itself. -/

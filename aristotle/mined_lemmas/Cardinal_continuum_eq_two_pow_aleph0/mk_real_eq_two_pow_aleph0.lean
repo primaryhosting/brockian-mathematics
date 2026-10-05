@@ -36,14 +36,11 @@ namespace Cardinal
 
 /-- The cardinality of the continuum equals `2 ^ ℵ₀`.
 
-This is the symmetric form of Mathlib's `Cardinal.two_power_aleph0`
-(`2 ^ ℵ₀ = 𝔠`), from `Mathlib/SetTheory/Cardinal/Continuum.lean`. -/
+In Mathlib `Cardinal.continuum` is *defined* as `2 ^ ℵ₀`, so this is the
+identity witnessed by `Cardinal.two_power_aleph0`. -/
 
-theorem mk_real_eq_two_pow_aleph0 : #ℝ = 2 ^ Cardinal.aleph0 := by
-  rw [mk_real, continuum_eq_two_pow_aleph0]
+theorem mk_real_eq_two_pow_aleph0 :
+    Cardinal.mk ℝ = 2 ^ Cardinal.aleph0 :=
+  le_antisymm mk_real_le_two_pow_aleph0 two_pow_aleph0_le_mk_real
 
-end Cardinal
-
-#print axioms Cardinal.continuum_eq_two_pow_aleph0
-#print axioms Cardinal.mk_real_eq_two_pow_aleph0
-
+/-- Consequently `#ℝ = 𝔠`. -/

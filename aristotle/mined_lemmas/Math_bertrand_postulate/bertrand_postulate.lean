@@ -1,11 +1,12 @@
 /-
+/-!
 # Bertrand Postulate
 Category: Pure Mathematics
 Target: Math.bertrand_postulate
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
+-/
 import Mathlib
 
 /-!
@@ -14,7 +15,25 @@ Category: Pure Mathematics
 Target: Math.bertrand_postulate
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Lean requires `import` commands to precede every module docstring, so the
+requested header appears both as the literal first block of the file and as the
+module docstring below.)
 -/
+
+set_option autoImplicit false
+
+namespace Math
+
+/-- **Bertrand's postulate**: for every `n ≥ 1` there is a prime `p` with `n < p ≤ 2 * n`. -/
+
+theorem bertrand_postulate (n : ℕ) (hn : 1 ≤ n) :
+    ∃ p : ℕ, Nat.Prime p ∧ n < p ∧ p ≤ 2 * n :=
+  Nat.exists_prime_lt_and_le_two_mul n (Nat.one_le_iff_ne_zero.mp hn)
+
+end Math
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -38,14 +57,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Math
-
-/-- **Bertrand's postulate**: for every `n ≥ 1` there exists a prime `p` with `n < p ≤ 2 * n`. -/
-
-theorem bertrand_postulate (n : ℕ) (hn : 1 ≤ n) :
-    ∃ p : ℕ, Nat.Prime p ∧ n < p ∧ p ≤ 2 * n :=
-  Nat.exists_prime_lt_and_le_two_mul n (Nat.one_le_iff_ne_zero.mp hn)
-
-end Math
 

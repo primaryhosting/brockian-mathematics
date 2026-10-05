@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
 # Member Check Prevents Cross Tenant Write
 Category: Proof-Carrying Apps
@@ -6,59 +31,21 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option autoImplicit false
+
 namespace PCA
 namespace WriteIntegrity
 
-/-! ## The isolation engine's model
+universe u v w x
 
-We model a multi-tenant write path.  A static environment records which
-principals are members of which tenants, and which tenant owns each resource.
-The engine's only guard before performing a write is a *member check*: the
-actor must be a member of the tenant that owns the targeted resource.
+variable {Tenant : Type u} {User : Type v} {Res : Type w} {Val : Type x}
 
-The main theorem says this single check is enough to guarantee tenant
-isolation for writes: along an arbitrary trace of write requests, if no actor
-appearing in the trace is a member of tenant `t`, then every resource owned by
-`t` retains its original value. -/
+/-- A store maps each resource to its current value. -/
+abbrev Store (Res : Type w) (Val : Type x) : Type (max w x) := Res → Val
 
-/-- Tenant identifiers. -/
-abbrev TenantId := Nat
-/-- Principal (user) identifiers. -/
-abbrev UserId := Nat
-/-- Resource identifiers. -/
-abbrev ResourceId := Nat
-/-- Stored values. -/
-abbrev Value := Nat
+/-- Pointwise update of a store. -/
 
-/-- Static environment: tenant membership of principals, tenant ownership of
-resources. -/
-structure Env where
-  /-- `member u t` holds when principal `u` is a member of tenant `t`. -/
-  member : UserId → TenantId → Bool
-  /-- `owner r` is the tenant that owns resource `r`. -/
-  owner : ResourceId → TenantId
+def run [DecidableEq Res] (pol : Policy Tenant User Res)
+    (trace : List (Request User Res Val)) (st : Store Res Val) : Store Res Val :=
+  trace.foldl (fun s r => step pol r s) st
 
-/-- Mutable state of the store. -/
-structure State where
-  /-- Current value of each resource. -/
-  store : ResourceId → Value
-
-/-- A write request: a principal asks to set a resource to a value. -/
-structure WriteReq where
-  /-- The principal issuing the request. -/
-  actor : UserId
-  /-- The resource being written. -/
-  target : ResourceId
-  /-- The value to be written. -/
-  val : Value
-
-/-- Declarative access-control policy: a write of `r` by `u` is permitted
-exactly when `u` is a member of the tenant owning `r`. -/
-
-def run (E : Env) (s : State) : List WriteReq → State
-  | [] => s
-  | q :: qs => run E (step E s q) qs
-
-/-! ## Soundness and completeness of the guard -/
-
-/-- The guard is sound and complete for the declarative policy. -/

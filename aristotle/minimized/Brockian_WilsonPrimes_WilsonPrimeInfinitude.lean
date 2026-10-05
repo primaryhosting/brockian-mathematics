@@ -23,7 +23,9 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Wilson Prime Infinitude
 Category: Brockian Conjecture
 Target: Brockian.WilsonPrimes.WilsonPrimeInfinitude
@@ -31,41 +33,40 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-/-!
-# Wilson Prime Infinitude
-
-Category: Brockian Conjecture.  Target: `Brockian.WilsonPrimes.WilsonPrimeInfinitude`.
-
-Note: the header block above is kept as an ordinary comment because Lean requires `import`
-commands to precede every other command, including module docstrings.
--/
+namespace Brockian.WilsonPrimes
 
 open Nat
 
-namespace Brockian.WilsonPrimes
+/-- A *Wilson prime* is a prime `p` such that `p ^ 2` divides `(p - 1)! + 1`.
+By Wilson's theorem, every prime `p` satisfies `p ∣ (p - 1)! + 1`; a Wilson prime
+is one for which the stronger, squared divisibility holds. -/
 
-/-- A *Wilson prime* is a prime `p` such that `p ^ 2 ∣ (p - 1)! + 1`.
-(By Wilson's theorem every prime satisfies `p ∣ (p - 1)! + 1`; a Wilson prime is one for
-which the stronger congruence modulo `p ^ 2` holds.) -/
+def WilsonPrime (p : ℕ) : Prop := p.Prime ∧ p ^ 2 ∣ (p - 1)! + 1
 
-def IsWilsonPrime (p : ℕ) : Prop := p.Prime ∧ p ^ 2 ∣ (p - 1)! + 1
+instance (p : ℕ) : Decidable (WilsonPrime p) := by
+  unfold WilsonPrime; infer_instance
 
-/-- **Wilson's theorem**, in the divisibility form `p ∣ (p - 1)! + 1`.
-This is an immediate consequence of `ZMod.wilsons_lemma`. -/
+/-- The set of Wilson primes. -/
 
-theorem IsWilsonPrime.prime {p : ℕ} (h : IsWilsonPrime p) : p.Prime := h.1
+def wilsonPrimeSet : Set ℕ := {p | WilsonPrime p}
 
-/-- `5` is a Wilson prime: `5 ^ 2 = 25 ∣ 4! + 1 = 25`. -/
+lemma WilsonPrime.prime {p : ℕ} (h : WilsonPrime p) : p.Prime := h.1
 
-theorem WilsonPrimeInfinitude
-    (h : ∀ N : ℕ, ∃ p, N < p ∧ IsWilsonPrime p) :
-    {p : ℕ | IsWilsonPrime p}.Infinite := by
-  apply Set.infinite_of_forall_exists_gt
-  intro a
-  obtain ⟨p, hlt, hp⟩ := h a
-  exact ⟨p, hp, hlt⟩
+lemma WilsonPrime.sq_dvd {p : ℕ} (h : WilsonPrime p) : p ^ 2 ∣ (p - 1)! + 1 := h.2
 
-/-- The converse of the reduction: infinitude of the set of Wilson primes implies that
-Wilson primes are unbounded.  Hence the two formulations are equivalent. -/
+/-- Wilson's theorem, in divisibility form: every prime `p` divides `(p - 1)! + 1`. -/
+
+theorem WilsonPrimeInfinitude :
+    (∀ N : ℕ, ∃ p, N < p ∧ WilsonPrime p) ↔ wilsonPrimeSet.Infinite := by
+  constructor
+  · intro h
+    apply Set.infinite_of_not_bddAbove
+    rintro ⟨N, hN⟩
+    obtain ⟨p, hp, hpW⟩ := h N
+    exact absurd (hN (show p ∈ wilsonPrimeSet from hpW)) (by omega)
+  · intro hinf N
+    obtain ⟨p, hpW, hp⟩ := hinf.exists_gt N
+    exact ⟨p, hp, hpW⟩
+
+/-- Consequence of the reduction: if there are arbitrarily large primes `p` with
+`p ^ 2 ∣ (p - 1)! + 1`, then the set of Wilson primes is infinite. -/

@@ -5,7 +5,6 @@ Target: Brockian.DilationGenerator.symmetric_on_core
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 open scoped BigOperators
@@ -22,85 +21,92 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 namespace DilationGenerator
 
-open MeasureTheory Complex
+open MeasureTheory
 
-/-- The auxiliary "boundary" function `x ↦ i · x · f x · conj (g x)`, whose derivative is
-exactly the difference of the two integrands. -/
-private noncomputable def bdry (f g : ℝ → ℂ) : ℝ → ℂ :=
-  fun x => Complex.I * (x : ℂ) * f x * (starRingEnd ℂ) (g x)
+/-- The auxiliary function `x ↦ x · f x · conj (g x)`, whose derivative packages the
+integration-by-parts identity for the Berry–Keating dilation generator. -/
+private noncomputable def aux (f g : ℝ → ℂ) : ℝ → ℂ :=
+  fun x => (x : ℂ) * f x * starRingEnd ℂ (g x)
 
 
 theorem symmetric_on_core (f g : ℝ → ℂ)
-    (hf : ContDiff ℝ (⊤ : ℕ∞) f) (hg : ContDiff ℝ (⊤ : ℕ∞) g)
-    (hfc : HasCompactSupport f) (_hgc : HasCompactSupport g)
-    (_hfs : tsupport f ⊆ Set.Ioi 0) (_hgs : tsupport g ⊆ Set.Ioi 0) :
+    (hf : ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) f) (hg : ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) g)
+    (hfc : HasCompactSupport f) (hgc : HasCompactSupport g)
+    (_hfs : tsupport f ⊆ Set.Ioi (0 : ℝ)) (_hgs : tsupport g ⊆ Set.Ioi (0 : ℝ)) :
     ∫ x in Set.Ioi (0 : ℝ),
-        (Complex.I * ((1 / 2) * f x + (x : ℂ) * deriv f x)) * (starRingEnd ℂ) (g x)
+        (Complex.I * ((1 / 2) * f x + (x : ℂ) * deriv f x)) * starRingEnd ℂ (g x)
       = ∫ x in Set.Ioi (0 : ℝ),
-        f x * (starRingEnd ℂ) (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x)) := by
-  -- derivative of the boundary function
-  have hderiv : ∀ x : ℝ, deriv (bdry f g) x =
-      Complex.I * (f x * (starRingEnd ℂ) (g x)
-        + (x : ℂ) * (deriv f x * (starRingEnd ℂ) (g x)
-          + f x * (starRingEnd ℂ) (deriv g x))) :=
-    fun x => (hasDerivAt_bdry hf hg x).deriv
-  -- smoothness of the pieces
-  have hconjg : ContDiff ℝ (⊤ : ℕ∞) (fun y : ℝ => (starRingEnd ℂ) (g y)) :=
-    (Complex.conjCLE : ℂ ≃L[ℝ] ℂ).toContinuousLinearMap.contDiff.of_le le_top |>.comp hg
-  have hcd : ContDiff ℝ (1 : ℕ) (bdry f g) := by
-    have : ContDiff ℝ (⊤ : ℕ∞) (bdry f g) := by
-      exact ((contDiff_const.mul Complex.ofRealCLM.contDiff).mul hf).mul hconjg
-    exact this.of_le (by exact_mod_cast le_top)
-  have hcs : HasCompactSupport (bdry f g) := by
-    have h1 : HasCompactSupport (fun x : ℝ => Complex.I * (x : ℂ) * f x) :=
-      HasCompactSupport.mul_left (f' := f) hfc
-    exact HasCompactSupport.mul_right (f := fun x : ℝ => Complex.I * (x : ℂ) * f x) h1
-  have hzero : ∫ x in Set.Ioi (0 : ℝ), deriv (bdry f g) x = 0 := by
-    rw [hcs.integral_Ioi_deriv_eq hcd 0]
-    simp [bdry]
-  -- integrability of the right-hand integrand and of the derivative
-  have hRHScont : Continuous
-      (fun x : ℝ => f x * (starRingEnd ℂ) (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x))) := by
-    have hcontg' : Continuous (deriv g) := hg.continuous_deriv (by exact_mod_cast le_top)
-    have hcf : Continuous f := hf.continuous
-    have hcg : Continuous g := hg.continuous
-    fun_prop
-  have hRHScs : HasCompactSupport
-      (fun x : ℝ => f x * (starRingEnd ℂ) (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x))) :=
-    HasCompactSupport.mul_right hfc
-  have hRHSint : IntegrableOn
-      (fun x : ℝ => f x * (starRingEnd ℂ) (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x)))
-      (Set.Ioi (0 : ℝ)) :=
-    (hRHScont.integrable_of_hasCompactSupport hRHScs).integrableOn
-  have hDint : IntegrableOn (deriv (bdry f g)) (Set.Ioi (0 : ℝ)) :=
-    ((hcd.continuous_deriv le_rfl).integrable_of_hasCompactSupport hcs.deriv).integrableOn
-  have hsplit : ∀ x : ℝ,
-      (Complex.I * ((1 / 2) * f x + (x : ℂ) * deriv f x)) * (starRingEnd ℂ) (g x)
-        = f x * (starRingEnd ℂ) (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x))
-          + deriv (bdry f g) x := by
+        f x * starRingEnd ℂ (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x)) := by
+  set A : ℝ → ℂ := fun x =>
+    (Complex.I * ((1 / 2) * f x + (x : ℂ) * deriv f x)) * starRingEnd ℂ (g x) with hA
+  set B : ℝ → ℂ := fun x =>
+    f x * starRingEnd ℂ (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x)) with hB
+  -- continuity of the ingredients
+  have hfcont : Continuous f := hf.continuous
+  have hgcont : Continuous g := hg.continuous
+  have hf'cont : Continuous (deriv f) := by
+    have h : ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) (deriv f) := ContDiff.deriv' hf
+    exact h.continuous
+  have hg'cont : Continuous (deriv g) := by
+    have h : ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) (deriv g) := ContDiff.deriv' hg
+    exact h.continuous
+  have hAcont : Continuous A := by
+    apply Continuous.mul
+    · exact continuous_const.mul ((continuous_const.mul hfcont).add
+        (Complex.continuous_ofReal.mul hf'cont))
+    · exact Complex.continuous_conj.comp hgcont
+  have hBcont : Continuous B := by
+    apply Continuous.mul hfcont
+    exact Complex.continuous_conj.comp (continuous_const.mul
+      ((continuous_const.mul hgcont).add (Complex.continuous_ofReal.mul hg'cont)))
+  -- compact support
+  have hAcs : HasCompactSupport A := by
+    refine HasCompactSupport.intro (K := tsupport g) hgc ?_
+    intro x hx
+    simp [hA, image_eq_zero_of_notMem_tsupport hx]
+  have hBcs : HasCompactSupport B := by
+    refine HasCompactSupport.intro (K := tsupport f) hfc ?_
+    intro x hx
+    simp [hB, image_eq_zero_of_notMem_tsupport hx]
+  have hAint : IntegrableOn A (Set.Ioi (0 : ℝ)) :=
+    (hAcont.integrable_of_hasCompactSupport hAcs).integrableOn
+  have hBint : IntegrableOn B (Set.Ioi (0 : ℝ)) :=
+    (hBcont.integrable_of_hasCompactSupport hBcs).integrableOn
+  -- integral of the derivative of the auxiliary function
+  have hkey : ∫ x in Set.Ioi (0 : ℝ), deriv (aux f g) x = 0 := by
+    have := HasCompactSupport.integral_Ioi_deriv_eq (contDiff_aux hf hg)
+      (hasCompactSupport_aux (g := g) hfc) 0
+    simpa [aux] using this
+  -- pointwise identity
+  have hpoint : ∀ x : ℝ, A x - B x = Complex.I * deriv (aux f g) x := by
     intro x
-    rw [hderiv x]
-    simp only [map_mul, map_add, map_one, map_div₀, map_ofNat, Complex.conj_I,
+    have hd : deriv (aux f g) x =
+        f x * starRingEnd ℂ (g x) +
+          (x : ℂ) * (deriv f x * starRingEnd ℂ (g x) + f x * starRingEnd ℂ (deriv g x)) :=
+      (hasDerivAt_aux hf hg x).deriv
+    rw [hd, hA, hB]
+    simp only [map_mul, map_add, map_one, map_ofNat, map_div₀, Complex.conj_I,
       Complex.conj_ofReal]
     ring
-  calc ∫ x in Set.Ioi (0 : ℝ),
-        (Complex.I * ((1 / 2) * f x + (x : ℂ) * deriv f x)) * (starRingEnd ℂ) (g x)
-      = ∫ x in Set.Ioi (0 : ℝ),
-          (f x * (starRingEnd ℂ) (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x))
-            + deriv (bdry f g) x) := by
-        simp only [hsplit]
-    _ = (∫ x in Set.Ioi (0 : ℝ),
-          f x * (starRingEnd ℂ) (Complex.I * ((1 / 2) * g x + (x : ℂ) * deriv g x)))
-        + ∫ x in Set.Ioi (0 : ℝ), deriv (bdry f g) x := integral_add hRHSint hDint
-    _ = _ := by rw [hzero, add_zero]
+  rw [← sub_eq_zero, ← integral_sub hAint hBint]
+  calc ∫ x in Set.Ioi (0 : ℝ), (A x - B x)
+      = ∫ x in Set.Ioi (0 : ℝ), Complex.I * deriv (aux f g) x :=
+        integral_congr_ae (Filter.Eventually.of_forall hpoint)
+    _ = Complex.I * ∫ x in Set.Ioi (0 : ℝ), deriv (aux f g) x := integral_const_mul _ _
+    _ = 0 := by rw [hkey, mul_zero]
 
 end DilationGenerator
 end Brockian
-
-#print axioms Brockian.DilationGenerator.symmetric_on_core
 

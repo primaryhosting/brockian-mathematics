@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Wilson Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.WilsonPrimes.WilsonPrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,14 +33,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Nat
-
 namespace Brockian.WilsonPrimes
 
-/-- A *Wilson prime* is a prime `p` such that `p ^ 2 ∣ (p - 1)! + 1`, i.e. the congruence
-of Wilson's theorem holds modulo `p ^ 2` and not merely modulo `p`. -/
+open Nat
 
-theorem wilsonPrime_563 : WilsonPrime 563 :=
-  ⟨by norm_num, by decide⟩
+/-- A *Wilson prime* is a prime `p` such that `p ^ 2` divides `(p - 1)! + 1`.
+By Wilson's theorem, every prime `p` satisfies `p ∣ (p - 1)! + 1`; a Wilson prime
+is one for which the stronger, squared divisibility holds. -/
 
-/-- The three known Wilson primes are indeed Wilson primes. -/
+lemma wilsonPrime_563 : WilsonPrime 563 := by
+  refine ⟨by norm_num, ?_⟩
+  decide
+
+/-- There exists at least one Wilson prime, so the statement below is not vacuous. -/

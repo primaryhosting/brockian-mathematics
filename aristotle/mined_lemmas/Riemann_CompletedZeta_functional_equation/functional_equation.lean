@@ -1,11 +1,3 @@
-/-
-# Functional Equation
-Category: Riemann Program
-Target: Riemann.CompletedZeta.functional_equation
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,21 +7,6 @@ Target: Riemann.CompletedZeta.functional_equation
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Riemann.CompletedZeta
-
-/-- The functional equation of the completed Riemann zeta function:
-`Λ(1 - s) = Λ(s)` for all `s : ℂ`. -/
-
-theorem functional_equation (s : ℂ) :
-    completedRiemannZeta (1 - s) = completedRiemannZeta s :=
-  completedRiemannZeta_one_sub s
-
-end Riemann.CompletedZeta
-
-#print axioms Riemann.CompletedZeta.functional_equation
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -53,4 +30,16 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+
+namespace Riemann.CompletedZeta
+
+/-- The functional equation for the completed Riemann zeta function:
+`Λ(1 - s) = Λ(s)` for all `s : ℂ`. -/
+
+theorem functional_equation (s : ℂ) :
+    completedRiemannZeta (1 - s) = completedRiemannZeta s :=
+  completedRiemannZeta_one_sub s
+
+end Riemann.CompletedZeta
 

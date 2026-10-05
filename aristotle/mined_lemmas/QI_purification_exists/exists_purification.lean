@@ -4,7 +4,6 @@ import Mathlib
 # Purification Exists
 Category: Frontier Qi
 Target: QI.purification_exists
-Statement: Every mixed state has a purification, unique up to isometry on the ancilla.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
@@ -14,30 +13,36 @@ open scoped MatrixOrder ComplexOrder
 
 namespace QI
 
-/-!
-## Setting
+section Defs
 
-A state of a finite dimensional quantum system with basis indexed by `n` is a positive
-semidefinite matrix `ρ : Matrix n n ℂ` of trace one.
+variable {n m : Type*}
 
-A vector of the composite system `H ⊗ K`, where `K` is an ancilla with basis indexed by `m`,
-is encoded by its matrix of coefficients `A : Matrix n m ℂ`, i.e. `A` encodes
-`∑ i, ∑ j, A i j • (e i ⊗ f j)`.  With this encoding the reduced density matrix
-(the partial trace over the ancilla) of the pure state `|A⟩⟨A|` is exactly `A * Aᴴ`, and the
-squared norm of the vector is `∑ i, ∑ j, ‖A i j‖ ^ 2 = trace (A * Aᴴ)`.
+/-- The density matrix `|ψ⟩⟨ψ|` of a state vector `ψ` of a composite system whose
+product basis is indexed by `n × m`. -/
 
-Consequently `A` purifies `ρ` exactly when `A * Aᴴ = ρ`, and an isometry `K → K'` of ancillas
-acting on the second tensor factor sends the vector `A` to `A * W`, where `W : Matrix m m' ℂ`
-satisfies `W * Wᴴ = 1`.
--/
+theorem exists_purification [Fintype n] [DecidableEq n] {ρ : Matrix n n ℂ}
+    (hρ : ρ.PosSemidef) (htr : ρ.trace = 1) :
+    ∃ ψ : n × n → ℂ, IsPurification ρ ψ ∧ ∑ p, ‖ψ p‖ ^ 2 = 1 := by
+  obtain ⟨B, hB⟩ := CStarAlgebra.nonneg_iff_eq_star_mul_self.mp hρ.nonneg
+  set A : Matrix n n ℂ := Bᴴ with hA
+  have hAA : A * Aᴴ = ρ := by simpa [hA, Matrix.star_eq_conjTranspose] using hB.symm
+  refine ⟨fun p => A p.1 p.2, ?_, ?_⟩
+  · rw [isPurification_iff]
+    have : coeffMatrix (fun p : n × n => A p.1 p.2) = A := rfl
+    rw [this, hAA]
+  · have htrace : ((∑ p : n × n, ‖A p.1 p.2‖ ^ 2 : ℝ) : ℂ) = ρ.trace := by
+      rw [← hAA]
+      rw [Matrix.trace]
+      push_cast
+      rw [Fintype.sum_prod_type]
+      refine Finset.sum_congr rfl fun i _ => ?_
+      rw [Matrix.diag_apply, Matrix.mul_apply]
+      refine Finset.sum_congr rfl fun j _ => ?_
+      rw [Matrix.conjTranspose_apply, RCLike.star_def, Complex.mul_conj]
+      simp [Complex.normSq_eq_norm_sq]
+    rw [htr] at htrace
+    exact_mod_cast htrace
 
-/-- `A` is a purification of the state `ρ`: the reduced density matrix (partial trace over the
-ancilla) of the pure state given by the vector with coefficient matrix `A` equals `ρ`. -/
-
-theorem exists_purification {n : Type*} [Fintype n] [DecidableEq n] {ρ : Matrix n n ℂ}
-    (hρ : ρ.PosSemidef) : IsPurification ρ (CFC.sqrt ρ) := by
-  have hherm : (CFC.sqrt ρ)ᴴ = CFC.sqrt ρ := (CFC.sqrt_nonneg ρ).posSemidef.isHermitian
-  rw [IsPurification, hherm]
-  exact CFC.sqrt_mul_sqrt_self ρ (by exact hρ.nonneg)
-
-/-- A purification of a state of trace one is a unit vector. -/
+/-- **Uniqueness of purifications up to a unitary on the ancilla.** Any two purifications of
+the same state `ρ`, using the same ancilla, are related by a unitary acting on the ancilla
+alone. -/

@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Shor Code Corrects
 Category: Frontier Qi
@@ -7,32 +8,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on the header: Lean 4 requires `import` commands to be the very first commands in a
-file, and `/-! ... -/` is a module doc-comment *command*, not a comment token.  The
-required header block is therefore placed immediately after the single `import Mathlib`
-line, which is the closest legal position to the top of the file.
--/
+open ComplexConjugate
 
 namespace QI
 
-open Finset
+/-! ## The 9-qubit Hilbert space -/
 
-noncomputable section
+/-- Labels for the computational basis of 9 qubits. -/
+abbrev Q := Fin 9 → Bool
 
-/-! ## The 9-qubit state space -/
+/-- The state space of 9 qubits, `ℂ^(2^9)` with its standard Hermitian inner product. -/
+abbrev H := EuclideanSpace ℂ Q
 
-/-- Qubit labels: three blocks of three qubits. -/
-abbrev Qb := Fin 3 × Fin 3
+/-- Flip the `i`-th bit of a basis label. -/
 
-/-- Computational basis labels for 9 qubits. -/
-abbrev Cfg := Qb → Bool
+def sgnc (k : Bool) (t : T) : ℂ := if k && par t then -1 else 1
 
-/-- The state space of 9 qubits, `ℂ^(2^9)`. -/
-abbrev H := Cfg → ℂ
-
-/-- Hermitian inner product, conjugate linear in the first argument. -/
-
-def sgnc (c : Fin 3 → Bool) : ℂ := ∏ b : Fin 3, sg (c b)
-
-/-- Normalisation `1/(2√2)`. -/

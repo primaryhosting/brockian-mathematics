@@ -30,55 +30,54 @@ Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`, so the
--- requested header is repeated verbatim as the module docstring just below the import.)
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment rather than a `/-!` module docstring.)
 
 import Mathlib
 
 /-!
-# Fermat Prime Beyond Four
-Category: Brockian Conjecture
-Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+## Overview
 
-/-!
-## Contents
+The `n`-th Fermat number is `Fₙ = 2 ^ 2 ^ n + 1`.  The numbers `F₀, …, F₄` are prime, and no
+further Fermat prime is known; whether some `Fₙ` with `n > 4` is prime is a famous open problem.
 
-`Nat.fermatNumber n = 2 ^ (2 ^ n) + 1` is Mathlib's definition of the `n`-th Fermat number.
-The numbers `F₀, …, F₄` are prime and no further Fermat prime is known; whether some `Fₙ` with
-`n > 4` is prime is a well-known open problem.
+This file contains:
 
-Accordingly, the target theorem `FermatPrimeBeyondFour` is stated and proved here as an
-unconditional *reduction*: a Fermat prime with index `n > 4` exists if and only if some `Fₙ`
-with `n > 4` passes **Pépin's test** `3 ^ ((Fₙ - 1) / 2) ≡ -1 (mod Fₙ)`.
-
-The `←` direction is Mathlib's `Nat.pepin_primality`
-(`Mathlib/NumberTheory/Fermat.lean`), which is the "existing lemma that nearly closes this".
-The `→` direction (`pepin_of_prime`) is proved here from quadratic reciprocity, in the form of
-`ZMod.exists_sq_eq_prime_iff_of_mod_four_eq_one`, together with Euler's criterion in the form
-`legendreSym.eq_pow`.
-
-Unconditional companion facts (`F₄ = 65537` is prime, `F₅` is composite) are proved at the end.
+* `Brockian.FermatNumbers.fermat` — the Fermat numbers;
+* `Brockian.FermatNumbers.prime_of_pepin` — the sufficiency half of Pépin's test;
+* `Brockian.FermatNumbers.pepin_of_prime` — the necessity half of Pépin's test;
+* `Brockian.FermatNumbers.FermatPrimeBeyondFour` — the main result: an unconditional
+  *Lean-checked reduction* of the open conjecture "there is a Fermat prime beyond `F₄`" to a
+  purely modular-arithmetic statement (Pépin's criterion);
+* verified data: `F₀, …, F₄` are prime, and `F₅`, `F₆` are composite.
 -/
 
 namespace Brockian.FermatNumbers
 
-open Nat
+/-- The `n`-th Fermat number `Fₙ = 2 ^ 2 ^ n + 1`. -/
 
-/-- For `n ≥ 1`, the Fermat number `Fₙ = 2 ^ (2 ^ n) + 1` is `1` modulo `4`. -/
+theorem pepin_of_prime (n : ℕ) (hn : 1 ≤ n) (hp : Nat.Prime (fermat n)) :
+    (3 : ZMod (fermat n)) ^ (2 ^ (2 ^ n - 1)) = -1 := by
+  haveI : Fact (Nat.Prime (fermat n)) := ⟨hp⟩
+  have hdiv : fermat n / 2 = 2 ^ (2 ^ n - 1) := by
+    rw [fermat, pow_two_pow_split]
+    omega
+  have hleg : legendreSym (fermat n) 3 = -1 := by
+    have h1 : legendreSym 3 ((fermat n : ℕ) : ℤ) = legendreSym (fermat n) ((3:ℕ) : ℤ) :=
+      legendreSym.quadratic_reciprocity_one_mod_four (fermat_mod_four n hn) (by norm_num)
+    have h2 : legendreSym 3 ((fermat n : ℕ) : ℤ) = legendreSym 3 (((fermat n : ℕ) : ℤ) % 3) :=
+      legendreSym.mod 3 _
+    have h3 : ((fermat n : ℕ) : ℤ) % 3 = 2 := by
+      have := fermat_mod_three n hn
+      omega
+    rw [h3] at h2
+    have h4 : legendreSym 3 2 = -1 := by decide
+    push_cast at h1
+    rw [h4] at h2
+    omega
+  have hpow := legendreSym.eq_pow (fermat n) 3
+  rw [hleg, hdiv] at hpow
+  push_cast at hpow
+  exact hpow.symm
 
-theorem pepin_of_prime (n : ℕ) (hn : 1 ≤ n) (hp : (Nat.fermatNumber n).Prime) :
-    (3 : ZMod (Nat.fermatNumber n)) ^ (2 ^ (2 ^ n - 1)) = -1 := by
-  haveI : Fact (Nat.fermatNumber n).Prime := ⟨hp⟩
-  have hl : legendreSym (Nat.fermatNumber n) 3 = -1 :=
-    (legendreSym.eq_neg_one_iff _).mpr (by push_cast; exact not_isSquare_three n hn hp)
-  have h := legendreSym.eq_pow (p := Nat.fermatNumber n) 3
-  rw [hl, fermatNumber_div_two] at h
-  push_cast at h
-  exact h.symm
-
-/-- **Pépin's test** (full equivalence), for `n ≥ 1`: the Fermat number `Fₙ = 2 ^ (2 ^ n) + 1`
-is prime if and only if `3 ^ ((Fₙ - 1) / 2) ≡ -1 (mod Fₙ)`.
-The `←` direction is `Nat.pepin_primality` from Mathlib. -/
+/-- **Pépin's test** for `n ≥ 1`: `Fₙ` is prime iff `3 ^ ((Fₙ - 1) / 2) = -1` in `ZMod Fₙ`. -/
