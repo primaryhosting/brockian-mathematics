@@ -23,34 +23,32 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+
+/-!
 # Landauer Principle
 Category: Frontier Phys
 Target: Phys.landauer_principle
-Statement: Erasing one bit dissipates at least kT ln 2 of heat (Landauer).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
 
 namespace Phys
 
 open Finset
 
-/-- Gibbs/Shannon entropy `S(p) = -k ∑ᵢ pᵢ log pᵢ` of a probability distribution `p`
-on a finite state space, measured with Boltzmann constant `k`
-(the convention `0 * log 0 = 0` is automatic since `Real.log 0 = 0`). -/
+/-- Shannon entropy (in nats) of a finite probability vector `p`. -/
 
-theorem landauer_principle (k T Q : ℝ) (hT : 0 < T)
-    (hSecondLaw : 0 ≤ Q / T + (entropy k bitErased - entropy k bitUniform)) :
+theorem landauer_principle
+    (k T Q ΔS_env : ℝ) (hT : 0 < T)
+    (hClausius : ΔS_env = Q / T)
+    (hSecondLaw :
+      0 ≤ k * (shannonEntropy ![(1 : ℝ), 0] - shannonEntropy ![(1 : ℝ) / 2, 1 / 2])
+            + ΔS_env) :
     k * T * Real.log 2 ≤ Q := by
-  rw [entropy_bitErased, entropy_bitUniform] at hSecondLaw
-  have h : k * Real.log 2 ≤ Q / T := by linarith
-  calc k * T * Real.log 2 = (k * Real.log 2) * T := by ring
-    _ ≤ (Q / T) * T := by nlinarith
-    _ = Q := by field_simp
-
-#print axioms Phys.landauer_principle
+  have h := landauer_general k T Q ΔS_env (shannonEntropy ![(1 : ℝ) / 2, 1 / 2])
+    (shannonEntropy ![(1 : ℝ), 0]) hT hClausius hSecondLaw
+  rwa [shannonEntropy_fair_bit, shannonEntropy_erased_bit, sub_zero] at h
 
 end Phys
 

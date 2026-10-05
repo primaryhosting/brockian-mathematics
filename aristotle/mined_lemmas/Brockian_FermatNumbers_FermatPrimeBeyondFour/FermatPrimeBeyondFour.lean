@@ -30,54 +30,40 @@ Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`, so the
--- requested header is repeated verbatim as the module docstring just below the import.)
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment rather than a `/-!` module docstring.)
 
 import Mathlib
 
 /-!
-# Fermat Prime Beyond Four
-Category: Brockian Conjecture
-Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+## Overview
 
-/-!
-## Contents
+The `n`-th Fermat number is `Fₙ = 2 ^ 2 ^ n + 1`.  The numbers `F₀, …, F₄` are prime, and no
+further Fermat prime is known; whether some `Fₙ` with `n > 4` is prime is a famous open problem.
 
-`Nat.fermatNumber n = 2 ^ (2 ^ n) + 1` is Mathlib's definition of the `n`-th Fermat number.
-The numbers `F₀, …, F₄` are prime and no further Fermat prime is known; whether some `Fₙ` with
-`n > 4` is prime is a well-known open problem.
+This file contains:
 
-Accordingly, the target theorem `FermatPrimeBeyondFour` is stated and proved here as an
-unconditional *reduction*: a Fermat prime with index `n > 4` exists if and only if some `Fₙ`
-with `n > 4` passes **Pépin's test** `3 ^ ((Fₙ - 1) / 2) ≡ -1 (mod Fₙ)`.
-
-The `←` direction is Mathlib's `Nat.pepin_primality`
-(`Mathlib/NumberTheory/Fermat.lean`), which is the "existing lemma that nearly closes this".
-The `→` direction (`pepin_of_prime`) is proved here from quadratic reciprocity, in the form of
-`ZMod.exists_sq_eq_prime_iff_of_mod_four_eq_one`, together with Euler's criterion in the form
-`legendreSym.eq_pow`.
-
-Unconditional companion facts (`F₄ = 65537` is prime, `F₅` is composite) are proved at the end.
+* `Brockian.FermatNumbers.fermat` — the Fermat numbers;
+* `Brockian.FermatNumbers.prime_of_pepin` — the sufficiency half of Pépin's test;
+* `Brockian.FermatNumbers.pepin_of_prime` — the necessity half of Pépin's test;
+* `Brockian.FermatNumbers.FermatPrimeBeyondFour` — the main result: an unconditional
+  *Lean-checked reduction* of the open conjecture "there is a Fermat prime beyond `F₄`" to a
+  purely modular-arithmetic statement (Pépin's criterion);
+* verified data: `F₀, …, F₄` are prime, and `F₅`, `F₆` are composite.
 -/
 
 namespace Brockian.FermatNumbers
 
-open Nat
-
-/-- For `n ≥ 1`, the Fermat number `Fₙ = 2 ^ (2 ^ n) + 1` is `1` modulo `4`. -/
+/-- The `n`-th Fermat number `Fₙ = 2 ^ 2 ^ n + 1`. -/
 
 theorem FermatPrimeBeyondFour :
-    (∃ n, 4 < n ∧ (Nat.fermatNumber n).Prime) ↔
-      (∃ n, 4 < n ∧ (3 : ZMod (Nat.fermatNumber n)) ^ (2 ^ (2 ^ n - 1)) = -1) := by
+    FermatPrimeBeyondFourConjecture ↔
+      ∃ n, 4 < n ∧ (3 : ZMod (fermat n)) ^ (2 ^ (2 ^ n - 1)) = -1 := by
   constructor
   · rintro ⟨n, hn, hp⟩
     exact ⟨n, hn, pepin_of_prime n (by omega) hp⟩
   · rintro ⟨n, hn, h⟩
-    exact ⟨n, hn, Nat.pepin_primality n h⟩
+    exact ⟨n, hn, prime_of_pepin n h⟩
 
-/-! ### Unconditional facts about small Fermat numbers -/
+/-! ### Verified data: the five known Fermat primes, and two composite Fermat numbers -/
 
-/-- `F₄ = 65537` is prime; in particular there is a Fermat prime whose *value* exceeds `4`. -/

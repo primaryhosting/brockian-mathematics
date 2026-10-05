@@ -23,18 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Collatz Conjecture
-Category: Brockian Conjecture
-Target: Brockian.CollatzPartial.CollatzConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean 4 requires `import` to precede any module docstring, so the header above is a
--- plain comment and is repeated verbatim as the module docstring below.)
-
-import Mathlib
-
 /-!
 # Collatz Conjecture
 Category: Brockian Conjecture
@@ -43,10 +31,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.CollatzPartial
+/-
+This file is deliberately self-contained (it uses only the Lean 4 core library),
+so that the header comment above can appear at the very top of the file:
+Lean does not permit a module docstring to precede `import` commands.
+-/
 
-/-- One step of the Collatz map: `n ↦ n / 2` if `n` is even, `n ↦ 3 * n + 1` if `n` is odd. -/
+namespace Brockian
+namespace CollatzPartial
 
-def ReachesOne (n : ℕ) : Prop := ∃ k : ℕ, collatz^[k] n = 1
+/-- The Collatz step: `n ↦ n / 2` if `n` is even, `n ↦ 3 * n + 1` if `n` is odd. -/
 
-/-- Orbits of positive numbers stay positive. -/
+def ReachesOne (n : Nat) : Prop := ∃ k : Nat, iter collatz k n = 1
+
+/-- The Collatz *descent* property: every integer `> 1` eventually iterates to a strictly
+smaller value. -/

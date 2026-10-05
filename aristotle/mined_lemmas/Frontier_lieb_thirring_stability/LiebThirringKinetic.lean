@@ -1,3 +1,10 @@
+/-
+# Lieb Thirring Stability
+Category: Frontier Physics
+Target: Frontier.lieb_thirring_stability
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -31,22 +38,43 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+## Lieb–Thirring and stability of matter
+
+The Lieb–Thirring kinetic energy inequality states that, for an antisymmetric `N`-particle
+wave function in three dimensions with one-particle density `ρ`, the kinetic energy obeys
+
+  `T ≥ K ∫ ρ(x) ^ (5/3) dx`
+
+with a constant `K > 0` that is *independent of the particle number* `N`.  Stability of
+matter is deduced from this by combining it with the electrostatic (one-body) energy
+`- ∫ V ρ` via the Thomas–Fermi bound: the resulting energy functional is bounded below by
+`- C(K) ∫ V ^ (5/2)`, again uniformly in `N`.
+
+This file formalizes that deduction — the Lieb–Thirring ⇒ stability reduction — in a
+discretized (quadrature) form, in which integrals are replaced by finite weighted sums
+`∑ i ∈ s, w i * f i` with nonnegative weights `w`.  The Lieb–Thirring kinetic bound is a
+hypothesis (`Frontier.LiebThirringKinetic`), and everything else is proved:
+
+* `Frontier.thomas_fermi_pointwise`  : the pointwise Young/Thomas–Fermi inequality
+  `V * t ≤ K * t ^ (5/3) + tfConst K * V ^ (5/2)`;
+* `Frontier.thomas_fermi_pointwise_sharp` : the constant `tfConst K` in it is optimal;
+* `Frontier.lieb_thirring_stability` : the resulting lower bound on the energy;
+* `Frontier.lieb_thirring_stability_uniform_in_particle_number` : the same bound, stated
+  for a density normalized to `N` particles, with a right-hand side that does not depend
+  on `N` — this uniformity is the content of stability of matter.
+-/
+
 namespace Frontier
 
-open MeasureTheory
+/-- The Thomas–Fermi constant associated with a Lieb–Thirring constant `K`:
+`tfConst K = (2/5) * (3/5) ^ (3/2) * K ^ (-3/2)`.  It is the sharp constant in
+`V * t ≤ K * t ^ (5/3) + tfConst K * V ^ (5/2)` (see `thomas_fermi_pointwise`), i.e.
 
-/-! ## Basic objects -/
+  `min_{t ≥ 0} (K * t ^ (5/3) - V * t) = - tfConst K * V ^ (5/2)`. -/
 
-/-- Physical space `ℝ^d`, with its Euclidean structure and Lebesgue measure. -/
-abbrev Space (d : ℕ) := EuclideanSpace ℝ (Fin d)
+def LiebThirringKinetic {ι : Type*} (K : ℝ) (s : Finset ι) (w ρ : ι → ℝ) (T : ℝ) : Prop :=
+  K * ∑ i ∈ s, w i * ρ i ^ (5 / 3 : ℝ) ≤ T
 
-/-- Negative part `t⁻ = max (-t) 0` of a real number. -/
-
-def LiebThirringKinetic (d : ℕ) (K : ℝ) : Prop :=
-  ∀ (n : ℕ) (u : Fin n → Space d → ℝ),
-    AdmissibleFamily u →
-    Integrable (fun x => density u x ^ ((1 : ℝ) + 2 / d)) →
-    K * (∫ x, density u x ^ ((1 : ℝ) + 2 / d)) ≤ kineticEnergy u
-
-/-- The kinetic-energy constant produced by the Legendre duality argument from a
-Lieb–Thirring eigenvalue constant `L` in dimension `d`. -/
+/-- The energy of a state with kinetic energy `T` and one-particle density `ρ` in the
+attractive one-body potential `-V`. -/

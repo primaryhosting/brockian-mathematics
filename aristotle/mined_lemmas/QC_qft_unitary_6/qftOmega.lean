@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Qft Unitary 6
 Category: Quantum Computing
 Target: QC.qft_unitary_6
@@ -8,13 +6,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
 namespace QC
 
-open Complex Finset Matrix
+open Complex Matrix Finset
 
-/-- The primitive `n`-th root of unity `exp(2πi/n)` used in the quantum Fourier transform. -/
+/-- The primitive `64`-th root of unity `exp (2πi/64)` used by the 6-qubit QFT. -/
 
-noncomputable def qftOmega (n : ℕ) : ℂ := Complex.exp (2 * Real.pi * Complex.I / n)
+noncomputable def qftOmega : ℂ := Complex.exp (2 * Real.pi * Complex.I / 64)
 
-/-- The `n`-dimensional quantum Fourier transform matrix,
-`F j k = ω^(j*k) / √n` with `ω = exp(2πi/n)`. -/
+/-- The 6-qubit quantum Fourier transform matrix, of size `2^6 = 64`:
+its `(j,k)` entry is `ω^(j*k) / √64 = ω^(j*k) / 8` with `ω = exp (2πi/64)`. -/

@@ -1,9 +1,9 @@
 {
   "id": "quantum-free-laplacian-plancherel",
   "domain": "quantum",
-  "title": "Free Laplacian Plancherel / Fourier multiplier scaffold",
-  "statement": "Formal and analytic control of free −Δ on L²(ℝⁿ) via Fourier multipliers / Plancherel. Supports quantum kinetic energy term in Gate-1 style models.",
-  "status": "proved_spectral_definition",
+  "title": "Fourier-defined free Laplacian essential self-adjointness",
+  "statement": "Prove essential self-adjointness of the Fourier-defined free Laplacian obtained by unitary conjugation of maximal multiplication by ξ² on L²(ℝ). This scoped card does not claim identification with the pre-existing Schwartz-core −D² operator or oscillator essential self-adjointness.",
+  "status": "proved",
   "source": {
     "citation": "Brockian FreeLaplacianPlancherel / WeylFreeLaplacian",
     "external_status": "partial"
@@ -22,7 +22,7 @@
     },
     {
       "kind": "lean_theorem",
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint",
+      "name": "Brockian.Weyl.MaximalMultiplication.fourierDefinedFreeLaplacian_essentiallySelfAdjoint",
       "path": "Brockian/WeylMaximalMultiplication.lean"
     }
   ],
@@ -44,7 +44,9 @@
     {
       "ts": "2026-08-03T00:00:00Z",
       "mode": "formalize",
-      "result": "proved_spectral_definition",
+      "result": "proved",
+      "axle_verified": true,
+      "axioms_clean": true,
       "note": "Constructed maximal multiplication by xi^2 with explicit nonreal resolvents, proved ESA, and transferred it through Mathlib Plancherel. AXLE 4.32 and axiom probes clean.",
       "agent": "codex",
       "artifacts": [
@@ -53,8 +55,8 @@
     }
   ],
   "ledger_refs": [
-    "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_essentiallySelfAdjoint",
-    "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint"
+    "Brockian.Weyl.MaximalMultiplication.quadraticMaximal_essentiallySelfAdjoint",
+    "Brockian.Weyl.MaximalMultiplication.fourierDefinedFreeLaplacian_essentiallySelfAdjoint"
   ],
   "priority": 72
 }

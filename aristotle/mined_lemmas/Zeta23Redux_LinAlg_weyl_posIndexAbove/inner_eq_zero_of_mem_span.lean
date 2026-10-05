@@ -1,28 +1,3 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-
 # Weyl Pos Index Above
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
@@ -35,44 +10,45 @@ import Mathlib
 
 /-!
 # Weyl Pos Index Above
-
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
-
-Target: `Zeta23Redux.LinAlg.weyl_posIndexAbove`
-
-For a Hermitian matrix `A` over `ℂ` of size `Fin d` we define
-
-* `posIndex hA`, the number of strictly positive eigenvalues of `A`;
-* `posIndexAbove hA θ`, the number of eigenvalues of `A` strictly above `θ`.
-
-The main result `weyl_posIndexAbove` is Weyl's monotonicity statement: if all eigenvalues of a
-Hermitian perturbation `E` are bounded in absolute value by `θ`, then
-`posIndexAbove (A + E) θ ≤ posIndex A`.
-
-The proof is the Courant–Fischer/interlacing argument in its subspace form: the span of the
-eigenvectors of `A + E` with eigenvalue `> θ` intersects trivially the span of the eigenvectors of
-`A` with eigenvalue `≤ 0`, because on the first subspace the quadratic form of `A + E` is `> θ‖x‖²`
-while on the second one it is `≤ 0 + θ‖x‖²`.  Comparing dimensions gives the claim.
+Target: Zeta23Redux.LinAlg.weyl_posIndexAbove
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 1000000
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 40000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Zeta23Redux.LinAlg
 
-open Matrix Finset
+open Matrix
 
 variable {d : ℕ}
 
 /-- The number of strictly positive eigenvalues of a Hermitian matrix. -/
 
-lemma inner_eq_zero_of_mem_span {ι : Type*} (f : ι → EuclideanSpace ℂ (Fin d))
-    (v x : EuclideanSpace ℂ (Fin d)) (hx : x ∈ Submodule.span ℂ (Set.range f))
-    (hv : ∀ j, inner ℂ v (f j) = 0) : inner ℂ v x = 0 := by
-  induction hx using Submodule.span_induction with
-  | mem y hy => obtain ⟨j, rfl⟩ := hy; exact hv j
-  | zero => simp
-  | add y z _ _ hy hz => rw [inner_add_right, hy, hz, add_zero]
-  | smul a y _ hy => rw [inner_smul_right, hy, mul_zero]
+lemma inner_eq_zero_of_mem_span {ι : Type*} [Fintype ι] (b : OrthonormalBasis ι ℂ
+    (EuclideanSpace ℂ (Fin d))) (s : Finset ι) {x : EuclideanSpace ℂ (Fin d)}
+    (hx : x ∈ Submodule.span ℂ (b '' (s : Set ι))) {i : ι} (hi : i ∉ s) :
+    inner ℂ (b i) x = 0 := by
+  have hle : Submodule.span ℂ (b '' (s : Set ι)) ≤
+      LinearMap.ker (innerSL ℂ (b i) : EuclideanSpace ℂ (Fin d) →L[ℂ] ℂ).toLinearMap := by
+    rw [Submodule.span_le]
+    rintro _ ⟨j, hj, rfl⟩
+    have hne : i ≠ j := by rintro rfl; exact hi hj
+    simpa using b.orthonormal.2 hne
+  simpa using hle hx
 
-/-- The span of a subfamily of the eigenvector basis has dimension the size of the subfamily. -/
+/-- On the span of eigenvectors with eigenvalues above `θ`, the quadratic form dominates
+`θ ‖x‖²` strictly. -/

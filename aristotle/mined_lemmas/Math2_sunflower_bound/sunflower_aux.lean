@@ -1,4 +1,5 @@
-/-
+import Mathlib
+/-!
 # Sunflower Bound
 Category: Frontier Math
 Target: Math2.sunflower_bound
@@ -6,194 +7,163 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-/-!
-The header block above is kept verbatim, except that it is written as an ordinary comment
-(`/- ... -/`) rather than a module docstring (`/-! ... -/`), since Lean 4 does not allow a
-module docstring to precede the `import` line.
-
-This file proves the sunflower lemma: a family of more than `w ! * (r-1) ^ w` sets of size `w`
-contains a sunflower with `r` petals (`Math2.sunflower_bound`), together with the weaker but
-tidier bound `(r * w) ^ w` (`Math2.sunflower_bound_pow`). The bound obtained here is the
-classical Erdős–Rado one; the Alweiss–Lovett–Wu–Zhang improvement to `(C r log w) ^ w` is not
-formalized.
--/
-
 open scoped BigOperators
+open scoped Real
 open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Math2
 
 variable {α : Type*} [DecidableEq α]
 
-/-- A family `S` of finite sets is a *sunflower* (or *Δ-system*) with core `core` when the
-core is contained in every member of `S` and any two distinct members of `S` intersect
-exactly in `core`. -/
+/-- A family `S` of finite sets is a *sunflower with core `K`* if any two distinct members
+of `S` meet exactly in `K`. -/
 
-theorem sunflower_aux (k : ℕ) :
-    ∀ (w : ℕ) (F : Finset (Finset α)), (∀ A ∈ F, A.card = w) → w ! * k ^ w < F.card →
-      ∃ S ⊆ F, ∃ core : Finset α, S.card = k + 1 ∧ IsSunflower S core := by
+theorem sunflower_aux (r : ℕ) (hr : 2 ≤ r) :
+    ∀ (w : ℕ) (F : Finset (Finset α)), (∀ A ∈ F, A.card = w) →
+      Nat.factorial w * (r - 1) ^ w < F.card →
+      ∃ S ⊆ F, ∃ K : Finset α, S.card = r ∧ IsSunflower S K := by
+  classical
   intro w
   induction w with
   | zero =>
-    intro F hw hcard
+    intro F hF hcard
     exfalso
     have hsub : F ⊆ {∅} := by
       intro A hA
-      simp [Finset.card_eq_zero.mp (hw A hA)]
-    have := Finset.card_le_card hsub
-    simp at this hcard
+      have := hF A hA
+      simp [Finset.card_eq_zero.1 this]
+    have h2 := Finset.card_le_card hsub
+    simp only [Nat.factorial_zero, pow_zero, mul_one, Finset.card_singleton] at hcard h2
     omega
-  | succ w ih =>
-    intro F hw hcard
-    classical
-    -- the collection of pairwise disjoint subfamilies of `F`
-    set D : Finset (Finset (Finset α)) :=
-      F.powerset.filter (fun S => ∀ A ∈ S, ∀ B ∈ S, A ≠ B → A ∩ B = ∅) with hD
-    have hDne : D.Nonempty := ⟨∅, by simp [hD]⟩
-    obtain ⟨T, hTD, hTmax⟩ := Finset.exists_max_image D Finset.card hDne
-    rw [hD, Finset.mem_filter, Finset.mem_powerset] at hTD
-    obtain ⟨hTF, hTdisj⟩ := hTD
-    by_cases hbig : k + 1 ≤ T.card
-    · -- many pairwise disjoint sets: a sunflower with empty core
-      obtain ⟨S, hST, hScard⟩ := Finset.exists_subset_card_eq hbig
-      exact ⟨S, hST.trans hTF, ∅, hScard, fun A _ => Finset.empty_subset A,
-        fun A hA B hB hAB => hTdisj A (hST hA) B (hST hB) hAB⟩
-    · -- otherwise every member of `F` meets the small set `Y`
-      push_neg at hbig
-      have hTcard : T.card ≤ k := by omega
-      set Y : Finset α := T.biUnion id with hY
-      have hmeet : ∀ A ∈ F, ∃ y ∈ Y, y ∈ A := by
+  | succ n ih =>
+    intro F hF hcard
+    obtain ⟨P, hPF, hPD, hcover⟩ := exists_maximal_disjoint_subfamily F
+    by_cases hPr : r ≤ P.card
+    · obtain ⟨S, hSP, hScard⟩ := Finset.exists_subset_card_eq hPr
+      exact ⟨S, hSP.trans hPF, ∅, hScard, fun A hA B hB hAB =>
+        hPD A (hSP hA) B (hSP hB) hAB⟩
+    · push_neg at hPr
+      set Y : Finset α := P.biUnion id with hYdef
+      have hYcard : Y.card ≤ (r - 1) * (n + 1) := by
+        have h1 : Y.card ≤ ∑ A ∈ P, (id A).card := Finset.card_biUnion_le
+        have h2 : ∑ A ∈ P, (id A).card = P.card * (n + 1) := by
+          simp only [id_eq]
+          rw [Finset.sum_congr rfl (fun A hA => hF A (hPF hA)), Finset.sum_const,
+            smul_eq_mul]
+        have : P.card ≤ r - 1 := by omega
+        calc Y.card ≤ P.card * (n + 1) := by rw [← h2]; exact h1
+          _ ≤ (r - 1) * (n + 1) := Nat.mul_le_mul_right _ this
+      have hFsub : F ⊆ Y.biUnion (fun y => F.filter (fun A => y ∈ A)) := by
         intro A hA
-        by_contra hcon
-        push_neg at hcon
-        have hAne : A ≠ ∅ := by
-          intro h
-          have := hw A hA
-          rw [h] at this
-          simp at this
-        have hdisj : ∀ B ∈ T, A ∩ B = ∅ := by
-          intro B hB
-          ext x
-          simp only [Finset.mem_inter, Finset.notMem_empty, iff_false, not_and]
-          intro hxA hxB
-          exact hcon x (by simp [hY]; exact ⟨B, hB, hxB⟩) hxA
-        have hAT : A ∉ T := by
-          intro hAT
-          exact hAne (by simpa using hdisj A hAT)
-        have : insert A T ∈ D := by
-          rw [hD, Finset.mem_filter, Finset.mem_powerset]
-          refine ⟨Finset.insert_subset hA hTF, ?_⟩
-          intro X hX Z hZ hXZ
-          rcases Finset.mem_insert.mp hX with hXA | hXT
-          · rcases Finset.mem_insert.mp hZ with hZA | hZT
-            · exact absurd (hXA.trans hZA.symm) hXZ
-            · rw [hXA]; exact hdisj Z hZT
-          · rcases Finset.mem_insert.mp hZ with hZA | hZT
-            · rw [hZA, Finset.inter_comm]; exact hdisj X hXT
-            · exact hTdisj X hXT Z hZT hXZ
-        have := hTmax _ this
-        rw [Finset.card_insert_of_notMem hAT] at this
-        omega
-      have hYcard : Y.card ≤ k * (w + 1) := by
-        calc Y.card ≤ ∑ B ∈ T, (id B).card := Finset.card_biUnion_le
-          _ = ∑ B ∈ T, (w + 1) := Finset.sum_congr rfl (fun B hB => hw B (hTF hB))
-          _ = T.card * (w + 1) := by simp [Finset.sum_const]
-          _ ≤ k * (w + 1) := Nat.mul_le_mul_right _ hTcard
-      -- pigeonhole: some element lies in many members of `F`
-      have hFsum : F.card ≤ ∑ y ∈ Y, (F.filter (fun A => y ∈ A)).card := by
-        calc F.card ≤ (Y.biUnion (fun y => F.filter (fun A => y ∈ A))).card := by
-              apply Finset.card_le_card
-              intro A hA
-              obtain ⟨y, hyY, hyA⟩ := hmeet A hA
-              exact Finset.mem_biUnion.mpr ⟨y, hyY, Finset.mem_filter.mpr ⟨hA, hyA⟩⟩
-          _ ≤ _ := Finset.card_biUnion_le
-      have hex : ∃ y ∈ Y, w ! * k ^ w < (F.filter (fun A => y ∈ A)).card := by
-        by_contra hcon
-        push_neg at hcon
-        have h1 : ∑ y ∈ Y, (F.filter (fun A => y ∈ A)).card ≤ Y.card * (w ! * k ^ w) := by
-          calc ∑ y ∈ Y, (F.filter (fun A => y ∈ A)).card ≤ ∑ _y ∈ Y, (w ! * k ^ w) :=
-                Finset.sum_le_sum (fun y hy => hcon y hy)
-            _ = Y.card * (w ! * k ^ w) := by simp [Finset.sum_const, mul_comm]
-        have h2 : Y.card * (w ! * k ^ w) ≤ (w + 1)! * k ^ (w + 1) := by
-          calc Y.card * (w ! * k ^ w) ≤ (k * (w + 1)) * (w ! * k ^ w) :=
-                Nat.mul_le_mul_right _ hYcard
-            _ = (w + 1)! * k ^ (w + 1) := by
-                rw [Nat.factorial_succ]; ring
-        omega
-      obtain ⟨y, hyY, hy⟩ := hex
-      -- pass to the link of `y`
-      set G : Finset (Finset α) := F.filter (fun A => y ∈ A) with hG
-      set F' : Finset (Finset α) := G.image (fun A => A.erase y) with hF'
-      have hinj : Set.InjOn (fun A => A.erase y) (G : Set (Finset α)) := by
+        have hAne : A.Nonempty := by
+          rw [← Finset.card_pos, hF A hA]; omega
+        obtain ⟨B, hB, hAB⟩ := hcover A hA hAne
+        obtain ⟨y, hy⟩ := hAB
+        rw [Finset.mem_inter] at hy
+        refine Finset.mem_biUnion.2 ⟨y, ?_, ?_⟩
+        · exact Finset.mem_biUnion.2 ⟨B, hB, hy.2⟩
+        · exact Finset.mem_filter.2 ⟨hA, hy.1⟩
+      have hFcard : F.card ≤ ∑ y ∈ Y, (F.filter (fun A => y ∈ A)).card :=
+        (Finset.card_le_card hFsub).trans Finset.card_biUnion_le
+      have hFpos : 0 < F.card := by omega
+      have hYne : Y.Nonempty := by
+        rcases Finset.card_pos.1 hFpos with ⟨A, hA⟩
+        have hAne : A.Nonempty := by
+          rw [← Finset.card_pos, hF A hA]; omega
+        obtain ⟨B, hB, hAB⟩ := hcover A hA hAne
+        obtain ⟨y, hy⟩ := hAB
+        rw [Finset.mem_inter] at hy
+        exact ⟨y, Finset.mem_biUnion.2 ⟨B, hB, hy.2⟩⟩
+      obtain ⟨y₀, hy₀Y, hy₀max⟩ :=
+        Finset.exists_max_image Y (fun y => (F.filter (fun A => y ∈ A)).card) hYne
+      set c : ℕ := (F.filter (fun A => y₀ ∈ A)).card with hcdef
+      have hsum : ∑ y ∈ Y, (F.filter (fun A => y ∈ A)).card ≤ Y.card * c :=
+        Finset.sum_le_card_nsmul _ _ c (fun y hy => hy₀max y hy)
+      have hkey : F.card ≤ (r - 1) * (n + 1) * c :=
+        hFcard.trans (hsum.trans (Nat.mul_le_mul_right _ hYcard))
+      have hclt : Nat.factorial n * (r - 1) ^ n < c := by
+        have hexp : Nat.factorial (n + 1) * (r - 1) ^ (n + 1)
+            = (r - 1) * (n + 1) * (Nat.factorial n * (r - 1) ^ n) := by
+          rw [Nat.factorial_succ, pow_succ]; ring
+        rw [hexp] at hcard
+        have hlt : (r - 1) * (n + 1) * (Nat.factorial n * (r - 1) ^ n)
+            < (r - 1) * (n + 1) * c := lt_of_lt_of_le hcard hkey
+        exact Nat.lt_of_mul_lt_mul_left hlt
+      set G : Finset (Finset α) :=
+        (F.filter (fun A => y₀ ∈ A)).image (fun A => A.erase y₀) with hGdef
+      have hinj : Set.InjOn (fun A => A.erase y₀) (F.filter (fun A => y₀ ∈ A) : Set (Finset α)) := by
         intro A hA B hB hAB
-        simp only [hG, Finset.coe_filter, Set.mem_setOf_eq] at hA hB
-        have := congrArg (insert y) hAB
+        simp only [Finset.coe_filter, Set.mem_setOf_eq] at hA hB
+        have := congrArg (insert y₀) hAB
         simpa [Finset.insert_erase hA.2, Finset.insert_erase hB.2] using this
-      have hF'card : F'.card = G.card := Finset.card_image_of_injOn hinj
-      have hF'w : ∀ B ∈ F', B.card = w := by
+      have hGcard : G.card = c := by
+        rw [hGdef, Finset.card_image_of_injOn hinj]
+      have hGprop : ∀ B ∈ G, y₀ ∉ B ∧ insert y₀ B ∈ F ∧ B.card = n := by
         intro B hB
-        rw [hF', Finset.mem_image] at hB
+        rw [hGdef, Finset.mem_image] at hB
         obtain ⟨A, hA, rfl⟩ := hB
-        rw [hG, Finset.mem_filter] at hA
-        rw [Finset.card_erase_of_mem hA.2, hw A hA.1]
-        omega
-      obtain ⟨S', hS'F', c, hS'card, hS'core, hS'sun⟩ := ih F' hF'w (by rw [hF'card]; exact hy)
-      have hyS' : ∀ B ∈ S', y ∉ B := by
-        intro B hB
-        have := hS'F' hB
-        rw [hF', Finset.mem_image] at this
-        obtain ⟨A, _, rfl⟩ := this
-        simp
-      refine ⟨S'.image (insert y), ?_, insert y c, ?_, ?_, ?_⟩
+        rw [Finset.mem_filter] at hA
+        refine ⟨Finset.notMem_erase _ _, ?_, ?_⟩
+        · rw [Finset.insert_erase hA.2]; exact hA.1
+        · rw [Finset.card_erase_of_mem hA.2, hF A hA.1]
+          omega
+      obtain ⟨S', hS'G, K, hS'card, hS'flower⟩ :=
+        ih G (fun B hB => (hGprop B hB).2.2) (by rw [hGcard]; exact hclt)
+      refine ⟨S'.image (insert y₀), ?_, insert y₀ K, ?_, ?_⟩
       · intro X hX
         rw [Finset.mem_image] at hX
         obtain ⟨B, hB, rfl⟩ := hX
-        have := hS'F' hB
-        rw [hF', Finset.mem_image] at this
-        obtain ⟨A, hA, rfl⟩ := this
-        rw [hG, Finset.mem_filter] at hA
-        rw [Finset.insert_erase hA.2]
-        exact hA.1
+        exact (hGprop B (hS'G hB)).2.1
       · rw [Finset.card_image_of_injOn, hS'card]
-        intro B hB C hC hBC
-        have hB' := hyS' B hB
-        have hC' := hyS' C hC
-        have := congrArg (fun s => Finset.erase s y) hBC
-        simpa [Finset.erase_insert hB', Finset.erase_insert hC'] using this
-      · intro X hX
-        rw [Finset.mem_image] at hX
-        obtain ⟨B, hB, rfl⟩ := hX
-        exact Finset.insert_subset_insert y (hS'core B hB)
+        intro A hA B hB hAB
+        have hyA : y₀ ∉ A := (hGprop A (hS'G hA)).1
+        have hyB : y₀ ∉ B := (hGprop B (hS'G hB)).1
+        have := congrArg (fun s => Finset.erase s y₀) hAB
+        simpa [Finset.erase_insert hyA, Finset.erase_insert hyB] using this
       · intro X hX Z hZ hXZ
         rw [Finset.mem_image] at hX hZ
-        obtain ⟨B, hB, rfl⟩ := hX
-        obtain ⟨C, hC, rfl⟩ := hZ
-        have hBC : B ≠ C := by rintro rfl; exact hXZ rfl
-        ext x
+        obtain ⟨A, hA, rfl⟩ := hX
+        obtain ⟨B, hB, rfl⟩ := hZ
+        have hAB : A ≠ B := by
+          intro h; exact hXZ (by rw [h])
+        have hcore : A ∩ B = K := hS'flower A hA B hB hAB
+        ext z
         simp only [Finset.mem_inter, Finset.mem_insert]
         constructor
-        · rintro ⟨hx1, hx2⟩
-          rcases hx1 with rfl | hx1
-          · left; rfl
-          · rcases hx2 with rfl | hx2
-            · left; rfl
-            · right
-              have : x ∈ B ∩ C := Finset.mem_inter.mpr ⟨hx1, hx2⟩
-              rwa [hS'sun B hB C hC hBC] at this
-        · rintro (rfl | hx)
+        · rintro ⟨hz1, hz2⟩
+          rcases hz1 with rfl | hz1
+          · exact Or.inl rfl
+          · rcases hz2 with rfl | hz2
+            · exact Or.inl rfl
+            · exact Or.inr (by rw [← hcore]; exact Finset.mem_inter.2 ⟨hz1, hz2⟩)
+        · rintro (rfl | hz)
           · exact ⟨Or.inl rfl, Or.inl rfl⟩
-          · rw [← hS'sun B hB C hC hBC] at hx
-            exact ⟨Or.inr (Finset.mem_inter.mp hx).1, Or.inr (Finset.mem_inter.mp hx).2⟩
+          · rw [← hcore, Finset.mem_inter] at hz
+            exact ⟨Or.inr hz.1, Or.inr hz.2⟩
 
-/-- **The sunflower bound (Erdős–Rado sunflower lemma).**
+/-- **Sunflower bound (Erdős–Rado sunflower lemma).**
+If `F` is a `w`-uniform family of finite sets with more than `w! * (r-1)^w` members, then `F`
+contains a sunflower with `r` petals: a subfamily `S ⊆ F` of exactly `r` sets, together with a
+core `K`, such that any two distinct members of `S` intersect exactly in `K`.
 
-If `F` is a family of sets each of size exactly `w` and `F` has more than `w ! * (r-1)^w`
-members, then `F` contains a sunflower with `r` petals: a subfamily `S ⊆ F` of `r` sets and a
-`core` contained in each of them such that any two distinct members of `S` meet exactly in
-`core`.
-
-Note on the bound: this is the classical Erdős–Rado bound `w ! (r-1)^w`. The
-Alweiss–Lovett–Wu–Zhang improvement replaces it by `(C r log w)^w`; that improvement is *not*
-formalized here. -/
+Note: the bound proved here is the classical Erdős–Rado bound `w! * (r-1)^w`, not the
+asymptotically stronger Alweiss–Lovett–Wu–Zhang bound. -/

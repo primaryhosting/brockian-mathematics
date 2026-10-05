@@ -8,39 +8,38 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-NOTE ON THE HEADER: Lean 4 requires `import` to be the first command of a file, so the
-module docstring above is placed directly after `import Mathlib` (a `/-! ... -/` block
-before the import is a parse error).
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
 set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Math2
 
-universe u v w
+/-- A finite simple graph, presented as a simple graph on the vertex set `Fin n`. -/
+structure FinGraph where
+  /-- The number of vertices. -/
+  n : ℕ
+  /-- The adjacency structure. -/
+  adj : SimpleGraph (Fin n)
 
-open SimpleGraph
+namespace FinGraph
 
-/-! ## The minor relation -/
+/-- The graph obtained from `H` by contracting the edge `{a, b}`: the vertex `b` is deleted and
+its neighbourhood is added to that of `a`. -/
 
-/-- `IsMinor H G` says that `H` is a minor of `G`: there is a family of pairwise disjoint,
-nonempty, connected *branch sets* `B w ⊆ V(G)`, indexed by the vertices `w` of `H`, such
-that adjacent vertices of `H` have an edge of `G` between their branch sets. -/
+theorem robertson_seymour : WellQuasiOrderedByMinors ↔ FiniteObstructionSets :=
+  ⟨finiteObstructionSets_of_wqo, wqo_of_finiteObstructionSets⟩
 
-theorem robertson_seymour {V : ℕ → Type u} (G : ∀ i, SimpleGraph (V i))
-    (hG : ∀ i, IsPathCycleForest (G i)) :
-    ∃ i j, i < j ∧ IsMinor (G i) (G j) := by
-  choose l hl using hG
-  have hpwo :
-      {L : List Comp | ∀ x ∈ L, x ∈ (Set.univ : Set Comp)}.PartiallyWellOrderedOn
-        (List.SublistForall₂ Comp.le) :=
-    Set.PartiallyWellOrderedOn.partiallyWellOrderedOn_sublistForall₂ Comp.le
-      comp_partiallyWellOrderedOn
-  obtain ⟨i, j, hij, hsub⟩ := hpwo.exists_lt (f := l) (by simp)
-  exact ⟨i, j, hij,
-    IsMinor.congr (hl i).some (hl j).some.symm (forest_isMinor_of_sublistForall₂ hsub)⟩
-
-/-- **Well-quasi-ordering by minors for linear forests**, a special case of
-`Math2.robertson_seymour`. -/
+/-- Unconditional special case: the graphs on at most `K` vertices are well-quasi-ordered
+(indeed, already quasi-ordered by subgraph embedding) by the minor relation. -/

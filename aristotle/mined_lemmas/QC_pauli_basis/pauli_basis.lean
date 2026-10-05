@@ -8,14 +8,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
 namespace QC
 
-open Matrix
-
-/-- The identity Pauli matrix `I`. -/
+/-- The 2×2 identity (Pauli `I`). -/
 
 theorem pauli_basis :
-    LinearIndependent ℂ pauli ∧ Submodule.span ℂ (Set.range pauli) = ⊤ :=
-  ⟨pauli_linearIndependent, pauli_span⟩
+    LinearIndependent ℂ pauli ∧ Submodule.span ℂ (Set.range pauli) = ⊤ ∧
+      ∃ B : Module.Basis (Fin 4) ℂ (Matrix (Fin 2) (Fin 2) ℂ), ⇑B = pauli :=
+  ⟨pauli_linearIndependent, pauli_span, pauliBasis, coe_pauliBasis⟩
 
-/-- The basis of `Matrix (Fin 2) (Fin 2) ℂ` given by the Pauli matrices. -/
+end QC
+

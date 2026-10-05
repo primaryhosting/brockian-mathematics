@@ -1,0 +1,32 @@
+/-
+# Wigner Eckart
+Category: Frontier Phys
+Target: Phys.wigner_eckart
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Wigner Eckart
+Category: Frontier Phys
+Target: Phys.wigner_eckart
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped TensorProduct
+open Representation
+
+namespace Phys
+
+variable {k G U V W : Type*} [Field k] [Group G]
+  [AddCommGroup U] [Module k U] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W]
+
+/-- The space of intertwining (`G`-equivariant) linear maps between two representations,
+as a subspace of all linear maps. -/
+
+def trivialRep : Representation ℂ Γ ℂ := 1
+
+/-- For the one-dimensional trivial representations of any group the multiplicity-one
+hypothesis of `Phys.wigner_eckart` holds. -/

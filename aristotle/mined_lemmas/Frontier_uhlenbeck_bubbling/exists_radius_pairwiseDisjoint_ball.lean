@@ -13,7 +13,6 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped ENNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -35,72 +34,55 @@ set_option grind.warning false
 /-!
 # Uhlenbeck Bubbling
 
-This file formalizes the *bubbling* (energy concentration) part of Uhlenbeck compactness for
-Yang–Mills connections, in the measure-theoretic form in which it is used.
+Concentration–compactness ("bubbling") for a sequence of Yang–Mills energy measures.
 
-A sequence of connections `A n` on a bundle over a Riemannian manifold `X` gives rise to the
-sequence of *energy measures* `mu n = |F_{A n}|² dvol`, and a uniform energy bound
-`mu n X ≤ E < ∞` is the standing hypothesis of Uhlenbeck's theorem.  The analytic heart of the
-theorem (ε-regularity) provides a threshold `eps > 0` below which the connections converge
-smoothly, so that failure of compactness is confined to the *bubble set*: those points where
-every ball eventually carries at least `eps` of energy.
+Uhlenbeck's compactness theorem is built on two pillars: an `ε`-regularity theorem (a
+connection with small local curvature energy is, after a gauge change, controlled in
+every Sobolev norm) and the *bubbling* mechanism, which says that a sequence of
+connections with uniformly bounded Yang–Mills energy `Λ` can fail to have small local
+energy only at **finitely many** points, at most `Λ / ε₀` of them, where `ε₀` is the
+threshold of the `ε`-regularity theorem.
 
-The results proved here are the quantization/counting half of the statement, which is the part
-that is purely about the energy measures:
-
-* `Frontier.uhlenbeck_bubbling` : the bubble set is **finite** and
-  `eps * (number of bubbles) ≤ E`;
-* `Frontier.uhlenbeck_bubbling_ncard_le` : hence at most `E / eps` bubbles;
-* `Frontier.bubbleSet_eq_empty_of_energy_lt` : **base case / removable singularity**, if the
-  total energy stays below the ε-regularity threshold, no bubbling occurs at all;
-* `Frontier.bubbleSet_const` : for a single limiting energy measure, bubble points are exactly
-  the atoms of mass at least `eps` — bubbling is concentration of energy in atoms;
-* `Frontier.bubbleSet_const_eq_empty_of_noAtoms` : a non-atomic limiting energy measure has no
-  bubbles (removable singularity for the limit);
-* `Frontier.uhlenbeck_bubbling_energyDensity` : the same statement phrased directly for
-  curvature energy densities `|F_{A n}|²` integrated against the volume measure.
+This file formalizes the second pillar in the generality in which it is actually used —
+i.e. as a statement about the energy measures `μ n = |F_{A_n}|² dvol` alone — and proves
+it: the bubbling set is finite, energy is quantized on it (`#bubbles · ε ≤ Λ`), and off
+the bubbling set the small-energy hypothesis of `ε`-regularity is available on a fixed
+ball along a subsequence.
 -/
 
 namespace Frontier
 
 open MeasureTheory Filter Metric Set
+open scoped ENNReal Topology
 
-section Separation
+variable {X : Type*} [MetricSpace X] [MeasurableSpace X] [BorelSpace X]
 
-variable {X : Type*} [MetricSpace X]
+/-- The **bubbling set** (energy concentration set) at level `ε` of a sequence of energy
+measures `μ n`.
 
-/-- A finite set of points in a metric space can be surrounded by pairwise disjoint balls
-of a common positive radius. -/
+In the Yang–Mills setting `μ n` is the energy measure `|F_{A_n}|² dvol` of a sequence of
+connections `A_n`, and `ε` is the `ε`-regularity threshold `ε₀` of Uhlenbeck's theorem.
+A point `x` lies in the bubbling set when, at *every* scale `r > 0`, at least `ε` of the
+energy asymptotically concentrates in the ball `B(x, r)`: these are exactly the points at
+which a bubble can form, i.e. the points where `ε`-regularity may fail. -/
 
-lemma exists_radius_pairwiseDisjoint_ball (T : Finset X) :
-    ∃ r : ℝ, 0 < r ∧ (↑T : Set X).PairwiseDisjoint (fun x => Metric.ball x r) := by
-  classical
-  set P : Finset (X × X) := (T ×ˢ T).filter (fun p => p.1 ≠ p.2) with hP
-  have hmem : ∀ x y : X, x ∈ T → y ∈ T → x ≠ y → (x, y) ∈ P := by
-    intro x y hx hy hxy
-    simp [hP, Finset.mem_filter, Finset.mem_product, hx, hy, hxy]
-  rcases P.eq_empty_or_nonempty with hemp | hne
-  · refine ⟨1, one_pos, ?_⟩
-    intro x hx y hy hxy
-    have hmemP := hmem x y hx hy hxy
-    rw [hemp] at hmemP
-    exact absurd hmemP (Finset.notMem_empty _)
-  · obtain ⟨p, hpP, hpmin⟩ := P.exists_min_image (fun p => dist p.1 p.2) hne
-    have hp : p.1 ≠ p.2 := by
-      have hpP' := hpP
-      simp only [hP, Finset.mem_filter] at hpP'
-      exact hpP'.2
-    have hpos : 0 < dist p.1 p.2 := dist_pos.mpr hp
-    refine ⟨dist p.1 p.2 / 2, by linarith, ?_⟩
-    intro x hx y hy hxy
-    have hxy' := hpmin (x, y) (hmem x y hx hy hxy)
-    exact Metric.ball_disjoint_ball (by simpa using by linarith [hxy'])
+lemma exists_radius_pairwiseDisjoint_ball (s : Finset X) :
+    ∃ r : ℝ, 0 < r ∧ ∀ x ∈ s, ∀ y ∈ s, x ≠ y → Disjoint (ball x r) (ball y r) := by
+  obtain ⟨C, hC, hCs⟩ := (s.finite_toSet).relatively_discrete
+  set D : ℝ≥0∞ := min C 1 with hD
+  have hD0 : D ≠ 0 := by simp [hD, hC.ne']
+  have hDtop : D ≠ ⊤ := by simp [hD]
+  have hpos : 0 < D.toReal := ENNReal.toReal_pos hD0 hDtop
+  refine ⟨D.toReal / 2, by linarith, ?_⟩
+  intro x hx y hy hxy
+  refine Metric.ball_disjoint_ball ?_
+  have h1 : D ≤ edist x y := le_trans (min_le_left _ _) (hCs x hx y hy hxy)
+  have h2 : D.toReal ≤ dist x y := by
+    have := ENNReal.toReal_mono (by simp [edist_dist]) h1
+    simpa [edist_dist, ENNReal.toReal_ofReal dist_nonneg] using this
+  linarith
 
-end Separation
-
-section Bubbles
-
-variable {X : Type*} [MetricSpace X] [MeasurableSpace X] [OpensMeasurableSpace X]
-
-/-- If finitely many balls of radius `r` centred at points of `T` are pairwise disjoint and
-each carries at least energy `eps`, then `eps * #T` is at most the total energy. -/
+omit [BorelSpace X] in
+/-- Off the bubbling set, the energy in some fixed small ball drops below the threshold `ε`
+along a subsequence: this is precisely the hypothesis of Uhlenbeck's `ε`-regularity
+theorem. -/

@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Pentagon Pentagon Isotypic Higher N
 Category: Brockian Corpus
 Target: Brockian.PentagonPentagonIsotypicHigherN
@@ -6,54 +8,65 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+-- Note: Lean 4 requires every `import` to precede any module docstring, so the header
+-- comment above sits immediately after the single `import Mathlib` line.
 
-/-!
-The `D₅` pentagon results are generalized here to an arbitrary regular `n`-gon.
+open scoped BigOperators
+open scoped Real
+open scoped Classical
 
-The dihedral group `DihedralGroup n` acts on the vertex set `ZMod n` of the regular
-`n`-gon by rotations (`r i • x = x - i`) and reflections (`sr i • x = i - x`).  This action
-is transitive, hence the trivial isotypic component of the associated complex permutation
-representation `ZMod n → ℂ` — i.e. the space of invariant vectors — is the line spanned by
-the all-ones vector, and in particular is one dimensional.  Specializing `n = 5` recovers
-the pentagon statement.
--/
+set_option maxHeartbeats 1000000
 
 namespace Brockian
 
-open DihedralGroup
+/-- The vertex space of the regular `n`-gon: complex-valued functions on the vertex
+set `ZMod n`.  The dihedral group `D_n` acts on it through the rotation `ngonShift`
+and the reflection `ngonRefl`. -/
+abbrev NGon (n : ℕ) : Type := ZMod n → ℂ
 
-/-- The action of the dihedral group of order `2n` on the vertices `ZMod n`
-of the regular `n`-gon: `r i` rotates and `sr i` reflects. -/
-instance ngonAction (n : ℕ) : MulAction (DihedralGroup n) (ZMod n) where
-  smul g x := match g with
-    | r i => x - i
-    | sr i => i - x
-  one_smul x := by change x - 0 = x; ring
-  mul_smul g h x := by
-    cases g <;> cases h <;> (show _ = _; simp [HSMul.hSMul]; ring)
+/-- Rotation of the `n`-gon by `t` vertices, acting on functions by translation. -/
 
+theorem PentagonPentagonIsotypicHigherN :
+    (∀ (n : ℕ) [NeZero n] (j : ZMod n),
+        (∀ t : ZMod n, ∀ f ∈ ngonIsotypic n j, ngonShift n t f ∈ ngonIsotypic n j) ∧
+        (∀ f ∈ ngonIsotypic n j, ngonRefl n f ∈ ngonIsotypic n j) ∧
+        (∀ f ∈ ngonIsotypic n j, ngonAdj n f = ((ngonEigen n j : ℝ) : ℂ) • f) ∧
+        (j ≠ -j →
+          LinearIndependent ℂ ![⇑(ngonChar n j), ⇑(ngonChar n (-j))] ∧
+          Module.finrank ℂ (ngonIsotypic n j) = 2))
+    ∧ ngonEigen 5 1 = (Real.sqrt 5 - 1) / 2
+    ∧ ngonEigen 5 2 = -(1 + Real.sqrt 5) / 2 :=
+  ⟨fun _ _ j =>
+      ⟨fun t _ hf => ngonIsotypic_shift_mem j t hf,
+       fun _ hf => ngonIsotypic_refl_mem j hf,
+       fun _ hf => ngonAdj_isotypic j hf,
+       fun hj => ⟨ngonChar_linearIndependent j hj, ngonIsotypic_finrank j hj⟩⟩,
+    ngonEigen_five_one, ngonEigen_five_two⟩
 
-theorem PentagonPentagonIsotypicHigherN (n : ℕ) :
-    trivialIsotypic n = Submodule.span ℂ {Function.const (ZMod n) (1 : ℂ)} ∧
-      Module.finrank ℂ (trivialIsotypic n) = 1 := by
-  have hspan : trivialIsotypic n = Submodule.span ℂ {Function.const (ZMod n) (1 : ℂ)} := by
-    apply le_antisymm
-    · intro f hf
-      rw [Submodule.mem_span_singleton]
-      refine ⟨f 0, ?_⟩
-      funext x
-      obtain ⟨g, hg⟩ := MulAction.exists_smul_eq (DihedralGroup n) (0 : ZMod n) x
-      simp only [Pi.smul_apply, Function.const_apply, smul_eq_mul, mul_one]
-      rw [← hg, hf g 0]
-    · rw [Submodule.span_le]
-      rintro f rfl g x
-      rfl
-  refine ⟨hspan, ?_⟩
-  rw [hspan]
-  apply finrank_span_singleton
-  intro h
-  have := congrFun h 0
-  simp at this
+end Brockian
 
-/-- The pentagon case `n = 5`, recovered as a special case. -/
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+

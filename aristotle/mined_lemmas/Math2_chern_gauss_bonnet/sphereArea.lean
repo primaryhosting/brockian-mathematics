@@ -1,13 +1,4 @@
-/-
-# Chern Gauss Bonnet
-Category: Frontier Math
-Target: Math2.chern_gauss_bonnet
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Chern Gauss Bonnet
 Category: Frontier Math
@@ -30,25 +21,57 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
+set_option pp.fullNames false
 set_option pp.structureInstances true
-set_option pp.coercions.types true
+set_option pp.coercions.types false
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
 namespace Math2
 
-open Finset MeasureTheory Metric Module Real Set
+open MeasureTheory intervalIntegral Set
 
-/-! ## The Pfaffian of the curvature form of the unit round sphere -/
+/-!
+## Scope of this formalization
 
-section Pfaffian
+The Chern-Gauss-Bonnet theorem states that for a closed oriented Riemannian manifold
+`M` of even dimension `d`, the integral over `M` of the Euler form built from the
+curvature (the Pfaffian of the curvature two-form, suitably normalized) equals the
+Euler characteristic of `M`.
 
-variable {V : Type*} [AddCommGroup V] [Module ℝ V]
+Mathlib currently contains none of the ingredients of the general smooth statement:
+there is no curvature tensor of a Riemannian metric, no Pfaffian, no integration of
+differential forms over manifolds, and no Euler characteristic of a manifold. What is
+formalized here, from scratch and in every detail, is the classical
+Gauss-Bonnet-Chern (Hopf) form of the theorem,
 
-/-- First index of the `i`-th pair `(2i, 2i+1)`. -/
+`∫_M K dV = (1/2) · vol(S^d) · χ(M)`,
 
-noncomputable def sphereArea (m : ℕ) : ℝ :=
-  (volume : Measure (EuclideanSpace ℝ (Fin (2 * m + 1)))).toSphere.real Set.univ
+where `K` is the Gauss-Kronecker curvature (the determinant of the shape operator),
+for the closed hypersurfaces of revolution `M ⊆ ℝ^{d+1}` of even dimension `d`. For a
+hypersurface, the Gauss equation expresses the curvature operator in terms of the
+shape operator, and the Pfaffian of the resulting curvature form is exactly
+`K` divided by the universal constant `(1/2) · vol(S^d)`, so this is the
+Chern-Gauss-Bonnet theorem for these manifolds. Both topological types that occur are
+treated: the spherical one, `M ≅ S^d` with `χ(M) = 2` (`Math2.chern_gauss_bonnet`),
+and the toroidal one, `M ≅ S¹ × S^{d-1}` with `χ(M) = 0`
+(`Math2.chern_gauss_bonnet_torus`). That the dimension is even is essential, see
+`Math2.chern_gauss_bonnet_fails_odd_dim`.
+
+## The volume of the unit spheres
+
+`sphereArea k` is the `k`-dimensional volume of the unit sphere `Sᵏ ⊆ ℝ^{k+1}`.
+It is defined by the classical recursion obtained by slicing `S^{k+1}` into the
+parallels `{(sin t · ω, cos t) | ω ∈ Sᵏ}`, `t ∈ [0, π]`, whose `k`-volume is
+`sin t ^ k · sphereArea k`; the base case is `S⁰ = {-1, 1}`, of `0`-volume `2`.
+-/
+
+/-- `sphereArea k` is the `k`-dimensional volume of the unit sphere `Sᵏ ⊆ ℝ^{k+1}`. -/
+
+noncomputable def sphereArea : ℕ → ℝ
+  | 0 => 2
+  | (k + 1) => sphereArea k * ∫ u in (0:ℝ)..Real.pi, Real.sin u ^ k
 

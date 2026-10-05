@@ -1,4 +1,11 @@
 import Mathlib
+/-!
+# Heine Cantor
+Category: Frontier Wave 2 (deeper machinery)
+Target: Topology.heine_cantor
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,27 +30,13 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-
-/-!
-# Heine Cantor
-Category: Frontier Wave 2 (deeper machinery)
-Target: Topology.heine_cantor
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace Topology
 
-/-- **Heine–Cantor theorem**: a continuous map from a compact uniform space to a
+/-- **Heine–Cantor theorem**: a continuous map from a compact uniform space to any
 uniform space is uniformly continuous. -/
 
 theorem heine_cantor {X : Type*} {Y : Type*} [UniformSpace X] [UniformSpace Y]
     [CompactSpace X] {f : X → Y} (hf : Continuous f) : UniformContinuous f :=
   CompactSpace.uniformContinuous_of_continuous hf
 
-end Topology
-
-namespace Topology
-
-/-- Metric-space form of Heine–Cantor: a continuous function on a compact metric space
-is uniformly continuous, in the `ε`-`δ` sense. -/
+/-- Local version: a map continuous on a compact set is uniformly continuous on it. -/

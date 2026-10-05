@@ -6,38 +6,60 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Lean requires every `import` command to come before any other command, and this file is
--- required to begin with the module docstring above; the development below is therefore
--- self-contained and uses only Lean 4 core (no imports are needed for it).
+/-
+Formalization notes.
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+The Kervaire invariant problem asks in which dimensions `n` there exists a closed
+framed `n`-manifold of Kervaire invariant one (equivalently, in which stems the
+class `θ_j` of the stable homotopy groups of spheres exists).  The relevant
+results are:
+
+* Browder's theorem: such a manifold can only exist when `n = 2 ^ j - 2` for
+  some `j ≥ 2`;
+* explicit constructions in dimensions `2, 6, 14, 30, 62` and `126`;
+* the Hill–Hopkins–Ravenel theorem: for `j ≥ 8`, i.e. in dimensions
+  `2 ^ j - 2 ≥ 254`, no such manifold exists.
+
+These three inputs are deep results of differential topology and stable homotopy
+theory whose proofs are far outside the scope of the current Lean mathematical
+library, so they are carried here as explicit hypotheses on an abstract predicate
+`K : Nat → Prop` ("dimension `n` carries a framed manifold of Kervaire invariant
+one"), stated exactly as in the literature.  The theorem `kervaire_invariant`
+below is the resulting classification:
+
+  the Kervaire invariant is nonzero exactly in dimensions 2, 6, 14, 30, 62, 126.
+
+To make clear that this is not a vacuous statement,
+`kervaire_hypotheses_consistent` exhibits a predicate satisfying all of the
+hypotheses, and `kervaire_dimensions_iff` records the purely arithmetic core:
+`{2, 6, 14, 30, 62, 126}` is exactly the set of numbers of the form `2 ^ j - 2`
+with `2 ≤ j ≤ 7`.
+
+The file uses only Lean 4 core (it is part of a Mathlib-based project, but the
+required header comment must precede any `import`, so no imports are used).
+-/
 
 namespace Math2
 
-/-- The dimensions in which the Kervaire invariant can be nonzero:
-`2, 6, 14, 30, 62, 126`, i.e. the numbers `2 ^ j - 2` for `2 ≤ j ≤ 7`. -/
+/-- The six exceptional dimensions in which the Kervaire invariant is nonzero. -/
 
 theorem kervaire_invariant
-    (KervaireOne : Nat → Prop)
-    (browder : ∀ n, KervaireOne n → ∃ j : Nat, 2 ≤ j ∧ n + 2 = 2 ^ j)
-    (hhr : ∀ n, KervaireOne n → n ≤ 126) :
-    ∀ n, KervaireOne n → KervaireDimension n := by
-  intro n hn
-  obtain ⟨j, hj2, hj⟩ := browder n hn
-  have hle : n ≤ 126 := hhr n hn
-  have h128 : (2 : Nat) ^ j ≤ 128 := by rw [← hj]; omega
-  -- Hence `j ≤ 7`, since `2 ^ 8 = 256 > 128`.
-  have hj7 : j ≤ 7 := by
-    cases Nat.lt_or_ge j 8 with
-    | inl h => omega
-    | inr h =>
-        have h256 : (2 : Nat) ^ 8 ≤ 2 ^ j := Nat.pow_le_pow_right (by decide) h
-        exact absurd (Nat.le_trans h256 h128) (by decide)
-  -- With `2 ≤ j ≤ 7`, the equation `n + 2 = 2 ^ j` pins `n` down to one of the six values.
-  have hcases : j = 2 ∨ j = 3 ∨ j = 4 ∨ j = 5 ∨ j = 6 ∨ j = 7 := by omega
-  rcases hcases with rfl | rfl | rfl | rfl | rfl | rfl <;>
-    simp only [KervaireDimension] <;> simp at hj <;> omega
+    (K : Nat → Prop)
+    (browder : ∀ n, K n → ∃ j : Nat, 2 ≤ j ∧ n = 2 ^ j - 2)
+    (hill_hopkins_ravenel : ∀ j : Nat, 8 ≤ j → ¬ K (2 ^ j - 2))
+    (h2 : K 2) (h6 : K 6) (h14 : K 14) (h30 : K 30) (h62 : K 62) (h126 : K 126) :
+    ∀ n, K n ↔ KervaireDimension n := by
+  intro n
+  constructor
+  · intro hn
+    obtain ⟨j, hj2, rfl⟩ := browder n hn
+    have hj7 : j ≤ 7 := by
+      rcases Nat.lt_or_ge j 8 with h | h
+      · omega
+      · exact absurd hn (hill_hopkins_ravenel j h)
+    exact (kervaire_dimensions_iff _).2 ⟨j, hj2, hj7, rfl⟩
+  · rintro (rfl | rfl | rfl | rfl | rfl | rfl) <;> assumption
 
-end Math2
-
+/-- The hypotheses of `kervaire_invariant` are consistent: they are satisfied by
+the predicate `KervaireDimension` itself.  In particular the classification above
+is not vacuous. -/

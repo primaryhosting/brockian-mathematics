@@ -1,11 +1,4 @@
-/-
-# Reingold Sl L
-Category: Frontier Cs
-Target: CS.reingold_sl_l
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-import RequestProject.Reingold.Machine
+import Mathlib
 
 /-!
 # Reingold Sl L
@@ -15,54 +8,55 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## What is formalised here
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Undirected `s`-`t` connectivity (`USTCON`) is decided in logarithmic space.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-The machine model is the one of `CS.Solver`: a deterministic machine whose whole memory
-is one configuration out of a finite configuration space `State`, which reads the
-adjacency matrix of the `n`-vertex input graph one bit at a time (in each configuration
-it queries one entry and branches on the answer) and which is started in a
-configuration determined by the two distinguished vertices.  Using `O(log n)` bits of
-memory means `Fintype.card State ≤ c * n ^ c` for a constant `c` that does not depend
-on `n`.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-`CS.reingold_sl_l` states, and proves, that USTCON is solved by such machines: there is
-a single constant `c` (here `c = 100`) such that for every `n` there is a machine with
-at most `c * n ^ c` configurations deciding connectivity on all `n`-vertex undirected
-graphs.  The machine is built from a universal traversal sequence of length `O(n⁷)`,
-whose existence is proved from scratch in `CS.exists_uts`: the transition operator of
-the lazy `2n`-regular walk attached to a graph is shown to be symmetric and positive
-semidefinite, to have spectral gap at least `1/(4n³)` on each connected component
-(`CS.gap`), hence to reach any prescribed vertex of the component with probability at
-least `1/(2n)` after `8n⁴` steps (`CS.hit_prob`), and a union bound over all graphs and
-all pairs of vertices produces a single label sequence that works for all of them.
-
-*Scope.*  The machine family produced here is described by a single constant `c` and one
-machine per input size; the construction of the traversal sequence is by the
-probabilistic method, so the family is not exhibited as a *uniformly computable* one.
-Reingold's theorem `SL = L` is the strengthening in which the machine family is
-uniformly computable; that statement is spelled out below as `CS.SLeqL` and is *not*
-proved in this file.
--/
+set_option grind.warning false
 
 namespace CS
 
-/-- **Undirected `s`-`t` connectivity in logarithmic space.**
+/-! ## A model of bounded-memory (space-bounded) computation
 
-There is a constant `c` such that, for every number of vertices `n ≥ 1`, undirected
-`s`-`t` connectivity on `n`-vertex graphs is decided by a machine which reads the
-adjacency matrix one bit at a time and whose configuration space has at most `c * n ^ c`
-elements, i.e. which uses `O(log n)` bits of memory.
+A `Alg Q Ans In Out` is a deterministic algorithm which
 
-See the module documentation for the precise scope of this statement: the uniform
-(`SL = L`) form of the theorem is stated as `CS.SLeqL` below and is not proved here. -/
+* has a finite set `S` of memory configurations,
+* starts, on input `x : In`, in configuration `init x`,
+* in each configuration either *halts* with an output in `Out`, or issues a query `q : Q`
+  about its (read-only) input and moves to a new configuration determined by the answer.
 
-def Outputs (s t : Fin n) (b : Bool) : Prop :=
-  ∃ k, (∀ j < k, M.out (M.run A s t j) = none) ∧ M.out (M.run A s t k) = some b
+The *space* used by the algorithm is `Nat.log 2 (card A)`, so "logarithmic space" means
+`A.card ≤ p n` for a polynomial `p`.  This is the standard configuration-counting
+characterisation of deterministic logarithmic space: a machine with a read-only input and
+`c * log n` bits of work memory has polynomially many configurations, and conversely.
+-/
 
-end Solver
+structure Alg (Q Ans In Out : Type) where
+  /-- The finite set of memory configurations. -/
+  S : Type
+  /-- Finiteness of the configuration space. -/
+  fin : Fintype S
+  /-- Initial configuration on a given input. -/
+  init : In → S
+  /-- In each configuration, either query the input and continue, or halt with an output. -/
+  trans : S → ((Q × (Ans → S)) ⊕ Out)
 
-/-- A solver is correct if, on every symmetric adjacency matrix and every pair of
-vertices, it halts and its output bit says whether the two vertices are connected. -/
+namespace Alg
+
+variable {Q Ans In Out : Type}
+
+/-- The number of memory configurations; `Nat.log 2` of it is the space used. -/
+
+def Outputs (A : Alg Q Ans In Out) (o : Q → Ans) (x : In) (y : Out) : Prop :=
+  ∃ k, A.out (A.iter o k (A.init x)) = some y
+

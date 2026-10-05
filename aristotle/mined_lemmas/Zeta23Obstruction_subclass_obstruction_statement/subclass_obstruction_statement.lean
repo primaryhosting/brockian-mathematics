@@ -1,3 +1,10 @@
+/-
+# Subclass Obstruction Statement
+Category: Brockian Conjecture
+Target: Zeta23Obstruction.subclass_obstruction_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -7,7 +14,6 @@ Target: Zeta23Obstruction.subclass_obstruction_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 
 open scoped BigOperators
 open scoped Real
@@ -34,56 +40,45 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- A *deep-pair configuration*: two distinct "deep points" carrying strictly positive
-species weights.  This is the abstract finite-dimensional model of the configuration data
-a fixed-kernel certificate is tested against. -/
-structure DeepPairConfig where
-  /-- The (strictly positive) per-species weights. -/
-  weight : Fin 2 → ℝ
-  /-- The deep points at which the fixed kernel is evaluated. -/
-  deep : Fin 2 → ℝ
-  weight_pos : ∀ i, 0 < weight i
-  deep_distinct : deep 0 ≠ deep 1
+/-- A **configuration** of deep points: finitely many species, each carrying a real
+"deep point" `pt i` and a strictly positive weight `wt i`. -/
+structure DeepConfig where
+  /-- number of species -/
+  n : ℕ
+  /-- the deep point attached to each species -/
+  pt : Fin n → ℝ
+  /-- the (strictly positive) weight attached to each species -/
+  wt : Fin n → ℝ
+  /-- positivity of the weights -/
+  wt_pos : ∀ i : Fin n, 0 < wt i
 
-/-- The *pointwise discard* step of the certificate chain: each species' contribution is
-discarded separately, so the chain's bound requires each term `weight i * R (deep i)` to be
-nonnegative. -/
+/-- The **linear charge** of a configuration relative to a fixed kernel `R`:
+the linear functional `c ↦ ∑ᵢ wᵢ · R(zᵢ)` obtained by per-species linear charging. -/
 
-theorem subclass_obstruction_statement (R : ℝ → ℝ) :
-    (∃ z : ℝ, R z < 0) ↔
-      ∃ c : DeepPairConfig, ¬ TermwiseBound R c ∧ charge R c < 0 := by
-  constructor
-  · rintro ⟨z, hz⟩
-    set b : ℝ := R (z + 1) with hb
-    have hden : 0 < -R z := by linarith
-    have hnum : (0 : ℝ) < 1 + |b| := by positivity
-    set w : ℝ := (1 + |b|) / (-R z) with hw
-    have hwpos : 0 < w := div_pos hnum hden
-    have hkey : w * R z = -(1 + |b|) := by
-      rw [hw, div_mul_eq_mul_div, div_eq_iff (ne_of_gt hden)]
-      ring
-    refine ⟨⟨![w, 1], ![z, z + 1], ?_, ?_⟩, ?_, ?_⟩
-    · intro i
-      fin_cases i
-      · simpa using hwpos
-      · norm_num
-    · simp
+theorem subclass_obstruction_statement
+    (R σ : ℝ → ℝ) (hRσ : ∀ x : ℝ, R (σ x) = R x)
+    (z : ℝ) (hz : R z < 0) :
+    (∀ (a b : ℝ) (ha : 0 < a) (hb : 0 < b),
+        ¬ TermwiseNonneg R (deepPair σ z a b ha hb) ∧
+          charge R (deepPair σ z a b ha hb) < 0) ∧
+      ¬ CertificateValid R σ := by
+  have key : ∀ (a b : ℝ) (ha : 0 < a) (hb : 0 < b),
+      ¬ TermwiseNonneg R (deepPair σ z a b ha hb) ∧
+        charge R (deepPair σ z a b ha hb) < 0 := by
+    intro a b ha hb
+    have hcharge : charge R (deepPair σ z a b ha hb) = a * R z + b * R z := by
+      simp [charge, deepPair, Fin.sum_univ_two, hRσ]
+    constructor
     · intro h
-      have h0 := h 0
-      simp only [Matrix.cons_val_zero] at h0
-      rw [hkey] at h0
-      linarith
-    · have habs : b ≤ |b| := le_abs_self b
-      simp only [charge, Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
-        one_mul]
-      rw [hkey, ← hb]
-      linarith
-  · rintro ⟨c, -, hcharge⟩
-    by_contra hcon
-    push_neg at hcon
-    have : 0 ≤ charge R c :=
-      Finset.sum_nonneg fun i _ => mul_nonneg (c.weight_pos i).le (hcon _)
-    linarith
+      have h0 := h ⟨0, by norm_num [deepPair]⟩
+      simp [deepPair] at h0
+      nlinarith
+    · rw [hcharge]
+      nlinarith
+  refine ⟨key, ?_⟩
+  intro hvalid
+  exact (key 1 1 one_pos one_pos).1 (hvalid z 1 1 one_pos one_pos)
 
-end Zeta23Obstruction
-
+/-- Strengthening: the obstruction is not special to the two-species pair.  *Any*
+configuration that charges some species at a point where the fixed kernel is negative
+already breaks the termwise bound, whatever the (positive) weights are. -/

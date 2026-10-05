@@ -34,17 +34,11 @@ set_option grind.warning false
 
 namespace Topology
 
-/-- **Heine–Cantor theorem**: a continuous map from a compact uniform space to any
+/-- **Heine–Cantor theorem**: a continuous map from a compact uniform space to a
 uniform space is uniformly continuous. -/
-theorem heine_cantor {X Y : Type*} [UniformSpace X] [UniformSpace Y] [CompactSpace X]
-    {f : X → Y} (hf : Continuous f) : UniformContinuous f :=
+theorem heine_cantor {X : Type*} {Y : Type*} [UniformSpace X] [UniformSpace Y]
+    [CompactSpace X] {f : X → Y} (hf : Continuous f) : UniformContinuous f :=
   CompactSpace.uniformContinuous_of_continuous hf
-
-/-- Local version: a map continuous on a compact set is uniformly continuous on it. -/
-theorem heine_cantor_on {X Y : Type*} [UniformSpace X] [UniformSpace Y]
-    {s : Set X} (hs : IsCompact s) {f : X → Y} (hf : ∀ x ∈ s, ContinuousWithinAt f s x) :
-    UniformContinuousOn f s :=
-  hs.uniformContinuousOn_of_continuous hf
 
 end Topology
 

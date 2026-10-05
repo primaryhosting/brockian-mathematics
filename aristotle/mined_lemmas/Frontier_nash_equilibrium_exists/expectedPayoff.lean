@@ -1,24 +1,37 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
-
-/-!
-# Minimax for two player zero sum finite games
--/
+import Mathlib
 
 open scoped BigOperators
+open Set Function
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+/-! ## Finite games in normal form
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+A finite game in normal form consists of a finite set of players `I`, for each player a finite
+nonempty set of pure strategies `S i`, and a payoff function `u i : (∀ j, S j) → ℝ`.
 
-noncomputable def expectedPayoff (G : FiniteGame ι S) (i : ι) (x : (i : ι) → S i → ℝ) : ℝ :=
-  ∑ s : ((i : ι) → S i), (∏ j, x j (s j)) * G.payoff i s
+A *mixed strategy* for player `i` is an element of `stdSimplex ℝ (S i)`, and a *mixed strategy
+profile* is an element of the product of these simplices. -/
 
-/-- The expected payoff of player `i` when he deviates to the pure strategy `s`. -/
+section Game
+
+variable {I : Type} [Fintype I] [DecidableEq I]
+  (S : I → Type) [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+  (u : I → (∀ i, S i) → ℝ)
+
+/-- The set of mixed strategy profiles of a finite game. -/
+
+noncomputable def expectedPayoff (x : ∀ i, S i → ℝ) (k : I) : ℝ :=
+  ∑ p : (∀ i, S i), (∏ j, x j (p j)) * u k p
+
+/-- `x` is a (mixed strategy) Nash equilibrium: it is a mixed strategy profile, and no player
+can strictly increase their expected payoff by unilaterally deviating to another mixed
+strategy. -/

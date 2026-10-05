@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Molecular Orbital Count
 Category: Chemistry
 Target: Chem.molecular_orbital_count
@@ -8,47 +6,24 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Chem
-
-/-- **LCAO dimension preservation.**
-
-A linear combination of atomic orbitals (LCAO) built from `n` linearly independent
-atomic orbitals `atomicOrbital : Fin n → V` spans the space of molecular orbitals,
-which has dimension exactly `n`: the number of molecular orbitals obtained equals
-the number of atomic orbitals used.
-
-The key Mathlib ingredient is `finrank_span_eq_card`. -/
-theorem molecular_orbital_count
-    {K V : Type*} [DivisionRing K] [AddCommGroup V] [Module K V]
-    (n : ℕ) (atomicOrbital : Fin n → V)
-    (hindep : LinearIndependent K atomicOrbital) :
-    Module.finrank K (Submodule.span K (Set.range atomicOrbital)) = n := by
-  simpa using finrank_span_eq_card hindep
-
-end Chem
-
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+namespace Chem
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+/-- The space of molecular orbitals obtained by the LCAO (Linear Combination of Atomic
+Orbitals) method from a family `ao` of `n` atomic orbitals: it is the space of all linear
+combinations `∑ i, c i • ao i` of the atomic orbitals, i.e. their span. -/
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+def lcaoSpan (n : ℕ) (ao : Fin n → V) : Submodule K V :=
+  Submodule.span K (Set.range ao)
 
-set_option grind.warning false
+/-- Every molecular orbital is a linear combination of the atomic orbitals, and conversely. -/
 
+theorem molecular_orbital_count (n : ℕ) (ao : Fin n → V) (h : LinearIndependent K ao) :
+    Module.finrank K (lcaoSpan (K := K) n ao) = n := by
+  rw [lcaoSpan, finrank_span_eq_card h, Fintype.card_fin]
+
+/-- The `n` molecular orbitals themselves: a basis of the LCAO space indexed by `Fin n`,
+so the molecular orbitals are in bijection with the atomic orbitals. -/

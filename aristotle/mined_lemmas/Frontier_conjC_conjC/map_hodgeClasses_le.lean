@@ -1,0 +1,89 @@
+/-
+# Hodge Statement
+Category: Frontier — Moonshot
+Target: Frontier.hodge_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Hodge Statement
+Category: Frontier — Moonshot
+Target: Frontier.hodge_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped TensorProduct
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+/-!
+## The setting
+
+Mathlib does not (yet) contain the theory of smooth projective complex varieties,
+singular cohomology with its Hodge decomposition, or the cycle class map.  We therefore
+formalize the Hodge conjecture in the standard *linear-algebra* form it takes once the
+geometric input is available:
+
+* `V` plays the role of the singular cohomology group `H^{2p}(X, ℚ)` of a smooth
+  projective complex variety `X`;
+* `ℂ ⊗[ℚ] V` is its complexification `H^{2p}(X, ℂ)`;
+* a `HodgeStructure V w` is a Hodge decomposition of weight `w` on `V`, i.e. a
+  bigrading `H^{a,b}` of `ℂ ⊗[ℚ] V` concentrated in bidegrees with `a + b = w`
+  and exchanged by complex conjugation;
+* `hodgeClasses H p` is the ℚ-subspace of *Hodge classes*: rational classes whose
+  image in the complexification lies in the `(p,p)` piece;
+* an `AlgebraicClasses H p` is a subspace `A` of classes of algebraic cycles; the
+  geometric fact that algebraic cycle classes are Hodge classes is recorded as the
+  field `alg_le_hodge`.
+
+The Hodge conjecture then reads: `hodgeClasses H p ≤ A`, i.e. every Hodge class is a
+rational combination of classes of algebraic cycles.
+-/
+
+section Conjugation
+
+variable (V : Type) [AddCommGroup V] [Module ℚ V]
+
+/-- Complex conjugation on the complexification `ℂ ⊗[ℚ] V`, as a `ℚ`-linear map. -/
+
+theorem map_hodgeClasses_le {w w' : ℤ} {H : HodgeStructure V w} {H' : HodgeStructure V' w'}
+    {f : V →ₗ[ℚ] V'} (hf : IsHodgeMorphism H H' f) (p : ℤ) :
+    (hodgeClasses H p).map f ≤ hodgeClasses H' p := by
+  rintro _ ⟨v, hv, rfl⟩
+  have h1 : (1 : ℂ) ⊗ₜ[ℚ] v ∈ H.F p p := hv
+  have h2 := hf p p h1
+  have h3 : (LinearMap.lTensor ℂ f) ((1 : ℂ) ⊗ₜ[ℚ] v) = (1 : ℂ) ⊗ₜ[ℚ] f v := by
+    simp
+  rw [Submodule.mem_comap, h3] at h2
+  exact h2
+
+/-- **Reduction along a morphism.**  If `f` is a morphism of Hodge structures whose image
+already contains all Hodge classes of the target, and if it carries algebraic classes to
+algebraic classes, then the Hodge conjecture for the source implies it for the target.
+This is the linear-algebra content of the standard reduction of the Hodge conjecture along
+correspondences (e.g. along a resolution or a hyperplane section). -/

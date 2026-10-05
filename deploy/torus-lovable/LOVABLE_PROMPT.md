@@ -105,3 +105,40 @@ If the site still shows hard-coded “53 theorems / 41 proved / dual Lean+Rocq v
 - Do not rebuild the Lean registry in the browser.
 - Do not merge Mathlib/Physlib index counts until those sources appear in the JSON `source` facet.
 - Do not call AXLE from the frontend.
+
+---
+
+## 4. The Brockian System lab (2026-08-21)
+
+Add a **"The Brockian System"** page (route `/labs/brockian-system`, and a card in
+the Observatory/Labs index). Render every claim in
+`public/labs/brockian-system.manifest.json` through `<VerifiedClaim claim=… theorem=…/>`,
+in manifest order — it reads as a narrative from the mod-5 structure of the number
+line, through the depth-holonomy no-go (now complete in both directions), the D5
+character layer, Vaughan's identity (Bombieri–Vinogradov Layer 4), to the honest
+conditional frontier.
+
+Honesty is enforced by the component, not by you:
+- The 9 `PROVED` claims render green Verified badges.
+- The 3 `CONDITIONAL` claims (Twin⇐Dickson, Brocard⇐ABC, Euclid–Euler equivalence)
+  MUST render as the distinct **open / not-a-proof** state — never green. The manifest
+  labels them "CONDITIONAL:" in the claim text; keep that prefix visible.
+Do NOT invent extra PROVED rows. Do NOT upgrade any conditional to verified.
+
+## 5. Viewpoint — "The Black Swan"
+
+Add a **Viewpoints** section (or a single page at `/viewpoint/the-black-swan`) that
+renders `public/viewpoints/the-black-swan.md`.
+
+This is EDITORIAL, not a lab. It must be visually and semantically distinct from the
+verified labs:
+- Show the front-matter `honesty` disclaimer prominently at the top ("This is a
+  viewpoint … not a verified claim … nothing here should render a green badge").
+- Do NOT attach VerifiedClaim badges to anything in this essay. It is argument, not
+  proof. No green Verified styling anywhere on the page.
+- Render the markdown (front-matter `title`/`subtitle`/`date` as the header; body as
+  prose). Twelve numbered ideas plus the bounded/unbounded framing.
+
+The point of the firewall is that a reader can always tell three states apart:
+**verified** (green, theorem-backed), **conditional/conjecture** (open, explicitly not
+a proof), and **viewpoint** (editorial, no badge at all). This viewpoint is the third.

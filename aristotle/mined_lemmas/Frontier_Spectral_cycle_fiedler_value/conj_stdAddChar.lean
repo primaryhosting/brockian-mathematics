@@ -1,14 +1,11 @@
-/-
+import Mathlib
+/-!
 # Cycle Fiedler Value
-Category: Frontier Spectral
+Category: Frontier — Spectral Geometry
 Target: Frontier.Spectral.cycle_fiedler_value
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the mandated
--- header above is written as a plain block comment; its text is verbatim.)
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -28,17 +25,14 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Finset Complex ZMod Matrix
+open Finset ZMod
 
-/-! ## The Laplacian of the cycle graph -/
+/-- The Laplacian matrix of the cycle graph `C n` on the vertex set `ZMod n`:
+diagonal entries `2` (each vertex has degree `2`), and `-1` in position `(i, j)`
+whenever `j = i + 1` or `j = i - 1`. -/
 
-/-- The Laplacian matrix of the cycle graph `C n`, with vertex set `ZMod n`:
-`2` on the diagonal, `-1` between neighbours `i` and `i ± 1`, `0` elsewhere. -/
-
-lemma conj_stdAddChar (m : ZMod n) :
-    (starRingEnd ℂ) (stdAddChar m) = stdAddChar (-m) := by
-  rw [← Complex.inv_eq_conj (norm_stdAddChar m)]
-  have h : (stdAddChar m : ℂ) * stdAddChar (-m) = 1 := by
-    rw [← AddChar.map_add_eq_mul]; simp
-  exact inv_eq_of_mul_eq_one_right h
+lemma conj_stdAddChar (z : ZMod N) :
+    (starRingEnd ℂ) (ZMod.stdAddChar z) = ZMod.stdAddChar (-z) := by
+  rw [AddChar.map_neg_eq_inv, ← Complex.inv_eq_conj, ZMod.stdAddChar_apply]
+  exact Circle.norm_coe _
 

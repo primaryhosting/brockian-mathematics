@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Damage Cost Exponent Law
 Category: Brockian Corpus
 Target: Zeta23Obstruction.damage_cost_exponent_law
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,16 +33,12 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- The exponential coefficient `4π(A-1)` is positive when the bandwidth `A` exceeds `1`. -/
+/-- The exponential coefficient `4 * π * (A - 1)` is strictly positive when `A > 1`. -/
 
 theorem coeff_pos {A : ℝ} (hA : 1 < A) : 0 < 4 * Real.pi * (A - 1) := by
   have hpi : 0 < Real.pi := Real.pi_pos
-  have : 0 < A - 1 := by linarith
+  have hA' : 0 < A - 1 := by linarith
   positivity
 
-/--
-**Damage Cost Exponent Law.**
-For any bandwidth `A > 1`, the rescaled deep-pair damage/cost ratio
-`y ↦ exp (4π(A-1)y)` is strictly increasing and unbounded above:
-for every `C > 0` there is some `y > 0` with `exp (4π(A-1)y) > C`.
--/
+/-- **Damage cost exponent law.** For any bandwidth `A > 1`, the rescaled deep-pair
+damage/cost ratio `y ↦ exp (4π(A-1)y)` is strictly increasing and unbounded above. -/

@@ -16,6 +16,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option autoImplicit false
+
+namespace Twin
+
+/-- The twin prime conjecture, *stated only*: for every `N : ℕ` there is a prime `p > N`
+such that `p + 2` is also prime. -/
+
+theorem conjecture_statement : TwinPrimeConj ↔ TwinPrimeConj := Iff.rfl
+
+end Twin
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -38,13 +51,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Twin
-
-/-- The twin prime conjecture: there are arbitrarily large primes `p` such that
-`p + 2` is also prime. This is only *stated*, not proved. -/
-
-theorem conjecture_statement : TwinPrimeConj ↔ TwinPrimeConj := Iff.rfl
-
-end Twin
 

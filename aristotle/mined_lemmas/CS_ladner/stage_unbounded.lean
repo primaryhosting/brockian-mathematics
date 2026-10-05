@@ -1,4 +1,4 @@
-/-!
+/-
 # Ladner
 Category: Frontier Cs
 Target: CS.ladner
@@ -6,41 +6,46 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-## What is proved here
+import Mathlib
 
-Ladner's theorem: if `P ≠ NP`, then there is an `NP`-intermediate language, i.e.
-a language that lies in `NP`, is not in `P`, and is not `NP`-complete.
+set_option maxHeartbeats 1000000
+set_option autoImplicit false
 
-Since Lean's mathematical library contains no model of resource-bounded
-computation, the theorem is formulated over an abstract `CS.Framework`: a
-bundle of the standard structural facts about the classes `P`, `NP`, about the
-class `FP` of polynomial-time computable functions, and about the effective
-enumerations of polynomial-time deciders and transducers.  Every field of
-`CS.Framework` is a well-known true statement of complexity theory.
+/-!
+# Ladner's theorem
 
-The proof is the usual delayed diagonalisation ("blowing holes in a hard
-language"): starting from `L₀ ∈ NP \ P`, the language `holed = L₀ ∩ {x | the
-stage at |x| is even}` is built, where the stage function is advanced by one
-whenever a counterexample to the current requirement (either "the i-th
-polynomial-time decider decides `holed`" or "the i-th polynomial-time function
-reduces `L₀` to `holed`") turns up.  All of the mathematical content, namely
-that the stage function must be unbounded and that consequently `holed` is
-`NP`-intermediate, is proved here.
+This file formalises Ladner's theorem: if `P ≠ NP`, then there is an `NP`-intermediate
+language, i.e. a language that lies in `NP`, is not in `P`, and is not `NP`-complete.
 
-The single further assumption, `CS.Effectivity`, is the formal counterpart of
-the standard informal step "the stage function can be computed in polynomial
-time if it is advanced only as fast as a polynomial-time budget allows": it
-asserts that the diagonalisation can be run along a slow schedule for which the
-resulting set of hole lengths is polynomial-time decidable.  It says nothing
-about the diagonalisation behaviour of the stage function, which is what is
-proved below.
+Since Mathlib contains no development of time-bounded computation, the classes `P`, `NP` and the
+polynomial time computable functions are packaged into an abstract structure `CS.Setting`, whose
+fields are the standard, model independent facts used in Ladner's proof:
 
-This file is deliberately independent of `Mathlib` (it uses only the Lean 4 core
-prelude), so that the module docstring above can literally be the first thing in
-the file.  A companion file `RequestProject/Main.lean` uses `Mathlib` to exhibit
-a concrete `CS.Framework`, showing that the axioms bundled in `CS.Framework` are
-consistent.
+* `P` is contained in `NP`;
+* `P` and the polynomial time functions come with enumerations `Mdec`, `Redf` (recursive
+  presentability of `P`);
+* `P` is closed under finite variations, contains the empty language, and is closed downwards
+  under polynomial time many-one reductions;
+* `NP` is closed under intersection with a language in `P`;
+* `holeEff`: for `A` in `NP`, the hole pattern of the delayed diagonalisation, i.e. the set of
+  lengths `n` at which the stage function `CS.stage` is even, is decidable in polynomial time.
+
+Only the last field depends on the machine model: it is the statement that Ladner's clocked
+delayed diagonalisation can be carried out in polynomial time.  Everything else -- the
+construction of the stage function, the case analysis on whether it is bounded, and the
+verification of the three requirements on the resulting language -- is proved here.
+
+The construction is Ladner's blowing-holes argument.  Given `A` in `NP` but not in `P` we build
+a nondecreasing stage function `stage A Mdec Redf : ℕ → ℕ`, increasing it by one exactly when the
+current requirement is met by some short string, and set
+`ladnerLang s A x = A x && (stage (x.length) is even)`.  If the stage function were bounded it
+would be eventually equal to some `k`: for even `k = 2 * i` the `i`-th polynomial time decider
+would decide `ladnerLang s A`, which is then a finite variant of `A`, so `A` would be in `P`;
+for odd `k = 2 * i + 1` the language `ladnerLang s A` would be finite (hence in `P`) while the
+`i`-th polynomial time function reduces `A` to it, so again `A` would be in `P`.  Hence the
+stage function is unbounded, and every even (resp. odd) stage is eventually left, which
+diagonalises against every polynomial time decider (resp. against every polynomial time
+reduction of `A` to `ladnerLang s A`).
 -/
 
 namespace CS
@@ -48,56 +53,61 @@ namespace CS
 /-- Binary strings. -/
 abbrev Str := List Bool
 
-/-- Languages, i.e. sets of binary strings. -/
-abbrev Lang := Str → Prop
+/-- A language is a decision predicate on binary strings. -/
+abbrev Lang := Str → Bool
 
-/--
-An abstract complexity-theoretic framework.
+/-- `holed A t` is the language `A` with "holes" punched into it: a string `x` of length `n`
+is kept only when the stage value `t n` is even. -/
 
-The fields record the standard (true) structural facts about the classes `P`,
-`NP` and about the class `FP` of polynomial-time computable functions, together
-with effective enumerations `dec` of the `P`-languages and `fn` of the
-polynomial-time functions.
--/
-structure Framework where
-  /-- The class of polynomial-time decidable languages. -/
-  P : Lang → Prop
-  /-- The class of languages decidable in nondeterministic polynomial time. -/
-  NP : Lang → Prop
-  /-- The class of polynomial-time computable string functions. -/
-  FP : (Str → Str) → Prop
-  /-- An enumeration of (clocked) polynomial-time deciders. -/
-  dec : Nat → Str → Bool
-  /-- An enumeration of (clocked) polynomial-time transducers. -/
-  fn : Nat → Str → Str
-  /-- Every enumerated decider decides a language in `P`. -/
-  dec_mem : ∀ i, P (fun x => dec i x = true)
-  /-- Every language in `P` is decided by some enumerated decider. -/
-  dec_complete : ∀ L, P L → ∃ i, ∀ x, (dec i x = true ↔ L x)
-  /-- Every enumerated transducer is a polynomial-time function. -/
-  fn_mem : ∀ i, FP (fn i)
-  /-- Every polynomial-time function occurs in the enumeration. -/
-  fn_complete : ∀ g, FP g → ∃ i, ∀ x, fn i x = g x
-  /-- `P ⊆ NP`. -/
-  P_subset_NP : ∀ L, P L → NP L
-  /-- The empty language is in `P`. -/
-  P_empty : P (fun _ => False)
-  /-- `NP` is closed under intersection with `P`-languages. -/
-  NP_inter_P : ∀ L H, NP L → P H → NP (fun x => L x ∧ H x)
-  /-- `P` is closed under changing membership on strings of bounded length. -/
-  P_of_agree : ∀ (L M : Lang) (N : Nat), P L → (∀ x : Str, N ≤ x.length → (M x ↔ L x)) → P M
-  /-- `P` is closed downwards under polynomial-time many-one reductions. -/
-  P_of_reduction :
-    ∀ (L M : Lang) (g : Str → Str), FP g → (∀ x, L x ↔ M (g x)) → P M → P L
+lemma stage_unbounded : ∀ N, ∃ n, N < stage A s.Mdec s.Redf n := by
+  classical
+  by_contra hcon
+  push_neg at hcon
+  obtain ⟨B, hB⟩ := hcon
+  set st := stage A s.Mdec s.Redf with hstdef
+  have hbdd : BddAbove (Set.range st) := ⟨B, by rintro _ ⟨n, rfl⟩; exact hB n⟩
+  have hne : (Set.range st).Nonempty := ⟨st 0, ⟨0, rfl⟩⟩
+  obtain ⟨N, hN⟩ : ∃ N, st N = sSup (Set.range st) := Nat.sSup_mem hne hbdd
+  set k := sSup (Set.range st) with hk
+  have hle : ∀ n, st n ≤ k := fun n => le_csSup hbdd ⟨n, rfl⟩
+  have heq : ∀ n, N ≤ n → st n = k := fun n hn =>
+    le_antisymm (hle n) (hN ▸ stage_mono hn)
+  have hnw : ∀ n, N ≤ n → ¬ wit A s.Mdec s.Redf st n := by
+    intro n hn
+    refine not_wit_of_stage_eq ?_
+    rw [← hstdef, heq (n + 1) (by omega), heq n hn]
+  by_cases hpar : k % 2 = 0
+  · have hdec : ∀ x : Str, s.Mdec (k / 2) x = holed A st x := by
+      intro x
+      obtain ⟨n, hn, hx, -⟩ := exists_log_ge N x.length 0
+      have hw := hnw n hn
+      unfold wit at hw
+      rw [heq n hn, if_pos hpar] at hw
+      push_neg at hw
+      exact hw x hx
+    have hLP : ladnerLang s A ∈ s.P := by
+      have hfun : s.Mdec (k / 2) = ladnerLang s A := funext hdec
+      rw [← hfun]
+      exact s.Mdec_mem _
+    refine hAP (s.P_variant _ hLP A N ?_)
+    intro x hx
+    show A x = (A x && decide (st x.length % 2 = 0))
+    rw [heq x.length hx]
+    simp [hpar]
+  · have hred : ∀ x : Str, A x = holed A st (s.Redf (k / 2) x) := by
+      intro x
+      obtain ⟨n, hn, hx, hy⟩ := exists_log_ge N x.length (s.Redf (k / 2) x).length
+      have hw := hnw n hn
+      unfold wit at hw
+      rw [heq n hn, if_neg hpar] at hw
+      push_neg at hw
+      exact hw x hx hy
+    have hLP : ladnerLang s A ∈ s.P := by
+      refine s.P_variant _ s.P_empty _ N ?_
+      intro x hx
+      show (A x && decide (st x.length % 2 = 0)) = false
+      rw [heq x.length hx]
+      simp [hpar]
+    exact hAP (s.P_red A (ladnerLang s A) ⟨s.Redf (k / 2), s.Redf_mem _, hred⟩ hLP)
 
-/-- Polynomial-time many-one reducibility. -/
-
-theorem stage_unbounded (hsl : SlowSchedule s) (hL₀ : ¬ F.P L₀) (j : Nat) :
-    ∃ n, j ≤ stage F L₀ s n := by
-  rcases stage_unbounded_or_const (F := F) (L₀ := L₀) hsl.2.1 with h | ⟨N, k, hconst⟩
-  · exact h j
-  · by_cases hk : k % 2 = 0
-    · exact (not_eventually_const_even hsl hL₀ hk hconst).elim
-    · exact (not_eventually_const_odd hsl hL₀ (by omega) hconst).elim
-
-/-- The holed language is not in `P`. -/
+include hAP in

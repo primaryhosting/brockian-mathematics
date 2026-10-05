@@ -1,4 +1,3 @@
-import Mathlib
 /-!
 # Artin Primitive Root
 Category: Frontier — Prime Numbers
@@ -7,37 +6,21 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+import Mathlib
 
 namespace Frontier
 
-/-- `a : ℤ` is a *primitive root* modulo `p` when the image of `a` in `ZMod p` has
-multiplicative order exactly `p - 1`, i.e. it generates the group of units of `ZMod p`. -/
+/-- `IsPrimitiveRootMod a p` says that the integer `a` is a primitive root modulo `p`, i.e.
+the residue of `a` generates the multiplicative group `(ZMod p)ˣ`, which for a prime `p`
+amounts to the multiplicative order of `a` in `ZMod p` being exactly `p - 1`. -/
 
-theorem isPrimitiveRootMod_two_three : IsPrimitiveRootMod 2 3 := by
-  unfold IsPrimitiveRootMod
-  norm_num
-  rw [orderOf_eq_iff (by norm_num)]
-  exact ⟨by decide, by decide⟩
+lemma isPrimitiveRootMod_two_three : IsPrimitiveRootMod 2 3 := by
+  have h : ((2 : ℤ) : ZMod 3) = (2 : ZMod 3) := cast_two 3
+  show orderOf ((2 : ℤ) : ZMod 3) = 3 - 1
+  rw [h]
+  apply orderOf_eq_of_pow_and_pow_div_prime (by norm_num) (by decide)
+  intro q hq hdvd
+  have hq2 : q ≤ 2 := Nat.le_of_dvd (by norm_num) hdvd
+  have hq1 : 2 ≤ q := hq.two_le
+  interval_cases q <;> revert hdvd <;> decide
 

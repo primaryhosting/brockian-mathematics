@@ -9,25 +9,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Cardinal Lt Power
-Category: Frontier — Set Theory
-Target: Infinity.cardinal_lt_power
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
-namespace Infinity
-
-/-- Cantor's theorem in cardinal form: every cardinal is strictly less than `2 ^ c`.
-This is `Cardinal.cantor` in Mathlib. -/
-theorem cardinal_lt_power (c : Cardinal) : c < 2 ^ c :=
-  Cardinal.cantor c
-
-end Infinity
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -42,12 +23,11 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace Infinity
 
-set_option grind.warning false
+/-- Cantor's theorem for cardinals: every cardinal `c` satisfies `c < 2 ^ c`. -/
+theorem cardinal_lt_power (c : Cardinal) : c < 2 ^ c :=
+  Cardinal.cantor c
+
+end Infinity
 

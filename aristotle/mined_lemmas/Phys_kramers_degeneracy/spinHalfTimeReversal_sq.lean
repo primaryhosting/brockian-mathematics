@@ -4,22 +4,9 @@ import Mathlib
 # Kramers Degeneracy
 Category: Frontier Phys
 Target: Phys.kramers_degeneracy
-Statement: A time-reversal-invariant half-integer-spin system has doubly degenerate levels (Kramers).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-namespace Phys
-
-/-- A vector and its image under an antiunitary time-reversal operator squaring to `-1`
-are linearly independent (the algebraic heart of Kramers' theorem). -/
-
-theorem spinHalfTimeReversal_sq (p : ℂ × ℂ) :
-    spinHalfTimeReversal (spinHalfTimeReversal p) = -p := by
-  simp [spinHalfTimeReversal, Prod.ext_iff]
-
-end Phys
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -44,3 +31,36 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+namespace Phys
+
+/-! ## Setup
+
+A quantum system is modelled by a complex vector space `V` (the space of states),
+a `ℂ`-linear Hamiltonian `A : V →ₗ[ℂ] V`, and a *time-reversal* operator `T`, which is
+**antilinear** (conjugate-linear), i.e. a semilinear map for the ring homomorphism
+`starRingEnd ℂ` (complex conjugation).
+
+Half-integer spin is encoded by the relation `T ∘ T = -1`, and time-reversal invariance
+of the dynamics by the commutation relation `T ∘ A = A ∘ T`.
+
+Kramers' theorem: every (real) energy level of such a system is at least doubly degenerate.
+-/
+
+section
+
+variable {V : Type*} [AddCommGroup V] [Module ℂ V]
+
+/-- An antilinear (conjugate-linear) endomorphism of a complex vector space. -/
+abbrev Antilinear (V : Type*) [AddCommGroup V] [Module ℂ V] := V →ₛₗ[starRingEnd ℂ] V
+
+/-- For a complex number `c`, the quantity `conj c * c + 1` is never zero: its real part
+is `‖c‖ ^ 2 + 1 > 0`. -/
+
+lemma spinHalfTimeReversal_sq (v : Fin 2 → ℂ) :
+    spinHalfTimeReversal (spinHalfTimeReversal v) = -v := by
+  funext i
+  fin_cases i <;> simp [spinHalfTimeReversal]
+
+/-- The hypotheses of Kramers' theorem are satisfiable, and the conclusion is nontrivial:
+for the spin-1/2 system with Hamiltonian `A = 1` (energy level `μ = 1`) the assumptions hold
+and the level indeed has degeneracy exactly `2`. -/

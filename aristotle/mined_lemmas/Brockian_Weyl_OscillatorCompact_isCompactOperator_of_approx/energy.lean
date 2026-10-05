@@ -1,0 +1,17 @@
+/-
+  CompactCriterion.lean — an abstract compactness criterion: an operator whose
+  unit-ball image is uniformly approximable by finite-dimensional subspaces is
+  a compact operator.
+-/
+import Mathlib
+
+open Metric Filter
+
+namespace Brockian.Weyl.OscillatorCompact
+
+/-- An operator whose closed-unit-ball image is uniformly approximable by
+finite-dimensional subspaces is a compact operator. -/
+
+noncomputable def energy (g : SchwartzMap ℝ ℂ) : ℝ :=
+  (∫ x : ℝ, ‖deriv (g : ℝ → ℂ) x‖ ^ 2) + ∫ x : ℝ, x ^ 2 * ‖g x‖ ^ 2
+

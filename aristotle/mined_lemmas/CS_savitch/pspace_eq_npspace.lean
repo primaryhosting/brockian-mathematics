@@ -2,106 +2,75 @@
 # Savitch
 Category: Frontier Cs
 Target: CS.savitch
-Statement: NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` commands to precede every declaration, including module
-docstrings, so the header above is a plain block comment.)
 -/
-import Mathlib
+
 import RequestProject.Savitch.Model
-import RequestProject.Savitch.Walk
-import RequestProject.Savitch.Sim
-import RequestProject.Savitch.Semantics
-import RequestProject.Savitch.Space
+import RequestProject.Savitch.Reach
+import RequestProject.Savitch.Interp
+import RequestProject.Savitch.BigStep
+import RequestProject.Savitch.Invariant
+import RequestProject.Savitch.Encode
 
 /-!
-The space-bounded machine model, the classes `CS.NSPACE`, `CS.DSPACE`,
-`CS.PSPACE` and `CS.NPSPACE`, and the simulator used in the proof are defined in
-the files `RequestProject/Savitch/*.lean`.
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-A machine reads its input through a head whose position is determined by its
-memory value, and it works in space `g` if on inputs of length `n` all reachable
-memory values lie in a set of at most `2 ^ g n` values depending only on `n`
-(the standard correspondence between `s` tape cells and `2 ^ O(s)`
-configurations).  The classes `NSPACE g` and `DSPACE g` are closed under
-constant factors by definition, as usual for space classes.
+/-!
+## Statement
 
-Savitch's theorem is proved for space bounds `f` with `n + 1 ≤ 2 ^ f n`
-(i.e. `f n ≥ log₂ (n+1)`), the standard hypothesis `f (n) ≥ log n`.
+`NSPACE(f) ⊆ DSPACE(f²)`, and consequently `PSPACE = NPSPACE` (Savitch's theorem).
+
+The model of computation is the standard configuration-graph model, set up in
+`RequestProject.Savitch.Model`: configurations are natural numbers (binary strings), a machine
+runs in space `f` on input `x` if all configurations reachable on `x` are `< 2 ^ f |x|`, and
+one step may depend on the current configuration together with the single input symbol scanned
+by the input head, whose position is determined by the configuration.  The initial
+configuration may depend on the input length (the usual assumption that the space bound is
+constructible).  No computability assumption is imposed on the transition functions.
+
+The deterministic simulator is built explicitly: it performs the depth-first evaluation of
+Savitch's divide-and-conquer recursion, its states are recursion stacks of depth at most `s`,
+each frame holding boundedly many numbers `< 2 ^ s`, and the whole state is encoded as a
+natural number `< 2 ^ (42 * (s + 1) ^ 2)`.  Hence a nondeterministic machine running in space
+`f` is simulated deterministically in space `42 * (f + 1) ^ 2`.
 -/
 
 namespace CS
 
-/-- **Savitch's theorem**: a language recognized by a nondeterministic machine in
-space `f` (with `f n ≥ log₂ (n + 1)`) is recognized by a deterministic machine in
-space `O(f²)`, i.e. `NSPACE f ⊆ DSPACE (f²)`. -/
+open Classical
 
-theorem PSPACE_eq_NPSPACE : PSPACE = NPSPACE := by
+variable {Γ : Type}
+
+/-! ### Deterministic machines are nondeterministic machines -/
+
+/-- A deterministic machine, viewed as a nondeterministic one. -/
+
+theorem pspace_eq_npspace : PSPACE Γ = NPSPACE Γ := by
   apply Set.eq_of_subset_of_subset
-  · rintro L ⟨k, hk⟩
-    exact ⟨k, DSPACE_subset_NSPACE _ hk⟩
-  · rintro L ⟨k, hk⟩
-    have hmono : L ∈ NSPACE (fun n => (n + 1) ^ (k + 1)) := by
-      refine NSPACE_mono (fun n => ?_) hk
-      exact Nat.pow_le_pow_right (by omega) (by omega)
-    have hf : ∀ n, n + 1 ≤ 2 ^ ((n + 1) ^ (k + 1)) := by
-      intro n
-      refine le_trans (le_of_lt Nat.lt_two_pow_self) (Nat.pow_le_pow_right (by omega) ?_)
-      exact Nat.le_self_pow (by omega) _
-    have hd := savitch (fun n => (n + 1) ^ (k + 1)) hf hmono
-    refine ⟨2 * (k + 1), ?_⟩
-    have hfun : (fun n => ((n + 1) ^ (k + 1)) ^ 2) = (fun n : ℕ => (n + 1) ^ (2 * (k + 1))) := by
-      funext n
-      rw [← pow_mul, Nat.mul_comm]
-    rwa [hfun] at hd
+  · rintro L ⟨c, k, hL⟩
+    exact ⟨c, k, DSPACE_subset_NSPACE _ hL⟩
+  · rintro L ⟨c, k, hL⟩
+    refine ⟨42 * (c + 1) ^ 2, 2 * k, ?_⟩
+    refine DSPACE_mono ?_ (savitch (fun n => c * (n + 1) ^ k) hL)
+    intro n
+    have h1 : c * (n + 1) ^ k + 1 ≤ (c + 1) * (n + 1) ^ k := by
+      have : 1 ≤ (n + 1) ^ k := Nat.one_le_pow _ _ (by omega)
+      nlinarith
+    calc 42 * (c * (n + 1) ^ k + 1) ^ 2
+        ≤ 42 * ((c + 1) * (n + 1) ^ k) ^ 2 := by
+          exact Nat.mul_le_mul_left 42 (Nat.pow_le_pow_left h1 2)
+      _ = 42 * (c + 1) ^ 2 * (n + 1) ^ (2 * k) := by
+          rw [mul_pow, ← pow_mul]; ring_nf
 
-end CS
+/-! ### Non-degeneracy of the model
 
-import Mathlib
+The following two lemmas record that the space measure is meaningful: with zero space, i.e.
+a single configuration, only the two trivial languages can be recognised. -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-
-# The Savitch predicate computes reachability
-
-`CY n k a b` (the value computed by the simulator) holds exactly when `b` is
-reachable from `a` in at most `2 ^ k` steps of `N`, using only intermediate
-configurations from the candidate list.  Combined with the elementary distance
-bound this shows that the simulator accepts exactly when `N` accepts.
--/
-import Mathlib
-import RequestProject.Savitch.Model
-import RequestProject.Savitch.Walk
-import RequestProject.Savitch.Sim
-
-namespace CS
-
-attribute [local instance] Classical.propDecidable
-
-noncomputable section
-
-variable {N : Machine} {S : ℕ → Finset N.Mem} {g : ℕ → ℕ} {x : List Bool}
-
+/-- A nondeterministic machine with a single configuration recognises only `∅` or everything. -/

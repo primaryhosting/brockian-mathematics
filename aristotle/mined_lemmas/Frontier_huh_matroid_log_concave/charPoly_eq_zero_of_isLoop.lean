@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Huh Matroid Log Concave
+Category: Frontier — Fields Medal Work
+Target: Frontier.huh_matroid_log_concave
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -14,67 +22,31 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-# Log-concavity of the characteristic polynomial of a matroid (base case)
-
-The Adiprasito–Huh–Katz theorem states that the coefficients `w₀, w₁, …, w_r` of the
-characteristic polynomial of a matroid form a log-concave sequence in absolute value,
-i.e. `|w_{k+1}|² ≥ |w_k| · |w_{k+2}|`.
-
-Here we formalise the Whitney rank-generating definition of the characteristic polynomial
-of a matroid on a finite ground type, and prove the base case of the theorem: the free
-(Boolean) matroid `U_{n,n}` on an `n`-element ground set, whose characteristic polynomial
-is `(X - 1)^n`, so that the absolute values of its coefficients are the binomial
-coefficients `C(n, k)`, which are log-concave.
--/
 
 namespace Frontier
 
-open Polynomial Finset Matroid
+open Finset Polynomial
 
-/-- The `ℕ`-valued rank function of a matroid. -/
+variable {α : Type*}
 
-theorem charPoly_eq_zero_of_isLoop {α : Type*} [Fintype α] (M : Matroid α) {e : α}
-    (he : M.IsLoop e) : charPoly M = 0 := by
-  unfold charPoly
-  refine Finset.sum_involution (fun S _ => if e ∈ S then S.erase e else insert e S)
-    (fun S _ => ?_) (fun S _ _ => ?_) (fun S _ => Finset.mem_univ _) (fun S _ => ?_)
-  · by_cases hS : e ∈ S
-    · simp only [hS, if_true]
-      have hcoe : ((S : Set α)) = insert e ((S.erase e : Finset α) : Set α) := by
-        rw [← Finset.coe_insert, Finset.insert_erase hS]
-      have hrk : natRk M (S : Set α) = natRk M ((S.erase e : Finset α) : Set α) := by
-        rw [hcoe]; exact natRk_insert_of_isLoop M he _
-      have hpos : 0 < S.card := Finset.card_pos.mpr ⟨e, hS⟩
-      have hcard : S.card = (S.erase e).card + 1 := by
-        rw [Finset.card_erase_of_mem hS]; omega
-      rw [hrk, hcard, pow_succ]
-      ring
-    · simp only [hS, if_false]
-      have hrk : natRk M ((insert e S : Finset α) : Set α) = natRk M (S : Set α) := by
-        rw [Finset.coe_insert]; exact natRk_insert_of_isLoop M he _
-      have hcard : (insert e S).card = S.card + 1 := Finset.card_insert_of_notMem hS
-      rw [hrk, hcard, pow_succ]
-      ring
-  · by_cases hS : e ∈ S
-    · simp only [hS, if_true]
-      intro h
-      exact Finset.notMem_erase e S (by rw [h]; exact hS)
-    · simp only [hS, if_false]
-      intro h
-      exact hS (h ▸ Finset.mem_insert_self e S)
-  · by_cases hS : e ∈ S
-    · simp [hS, Finset.insert_erase hS]
-    · simp [hS, Finset.erase_insert hS]
+/-- The natural-number rank function of a matroid. -/
 
-/-- A matroid with a loop trivially has log-concave characteristic polynomial coefficients,
-since they all vanish. -/
+theorem charPoly_eq_zero_of_isLoop (M : Matroid α) (E : Finset α) (e : α) (heE : e ∈ E)
+    (he : M.IsLoop e) : charPoly M E = 0 := by
+  classical
+  have hins : ∀ S : Set α, M.eRk (insert e S) = M.eRk S := fun S => by
+    rw [← M.eRk_insert_closure_eq e S, Set.insert_eq_self.2 (he.mem_closure S), M.eRk_closure_eq]
+  have hE : E = insert e (E.erase e) := (Finset.insert_erase heE).symm
+  rw [charPoly, show E.powerset = (insert e (E.erase e)).powerset from by rw [← hE],
+    Finset.sum_powerset_insert (Finset.notMem_erase e E), ← Finset.sum_add_distrib]
+  refine Finset.sum_eq_zero fun t ht => ?_
+  have het : e ∉ t := fun h => (Finset.notMem_erase e E) (Finset.mem_powerset.mp ht h)
+  have hcard : (insert e t).card = t.card + 1 := Finset.card_insert_of_notMem het
+  have hrank : natRank M ((insert e t : Finset α) : Set α) = natRank M (t : Set α) := by
+    rw [natRank, natRank, Finset.coe_insert, hins]
+  rw [hcard, hrank, pow_succ]
+  ring
+
+/-- A matroid with a loop also satisfies the log-concavity conclusion (its characteristic
+polynomial is identically zero). -/

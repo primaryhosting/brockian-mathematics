@@ -6,58 +6,41 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+/-
+The statement "no consistent recursively axiomatized theory extending `PA` proves its own
+consistency" is formalized here in the standard abstract (Hilbert–Bernays–Löb) way.
 
-We formalize Gödel's second incompleteness theorem in its standard abstract
-(Hilbert–Bernays–Löb) form: *no consistent theory `T` whose provability predicate
-satisfies the derivability conditions proves its own consistency*.
+For a recursively axiomatized theory `T ⊇ PA` one has an arithmetized provability predicate
+`Pr_T(⌜·⌝)`, written here as the modality `□`.  The two ingredients supplied by the
+arithmetization are:
 
-The arithmetization of syntax is packaged in the usual way.  For a recursively
-axiomatized theory `T` extending `PA`, Gödel numbering yields a provability
-formula `Pr_T(⌜·⌝)` in the language of `T`, and the Hilbert–Bernays–Löb
-derivability conditions hold:
+* the *derivability conditions*: `T ⊢ a → T ⊢ □a` (necessitation), `T ⊢ □(a → b) → (□a → □b)`
+  (distribution) and `T ⊢ □a → □□a` (provable Σ₁-completeness);
+* the *diagonal lemma*: there is a sentence `G` with `T ⊢ G ↔ ¬□G`.
 
-* `D1` : `T ⊢ φ  ⟹  T ⊢ Pr_T(⌜φ⌝)`               (formalized soundness of proofs)
-* `D2` : `T ⊢ Pr_T(⌜φ → ψ⌝) → (Pr_T(⌜φ⌝) → Pr_T(⌜ψ⌝))`   (internal modus ponens)
-* `D3` : `T ⊢ Pr_T(⌜φ⌝) → Pr_T(⌜Pr_T(⌜φ⌝)⌝)`     (formalized `D1`)
+Both are packaged below: the derivability conditions as the inference system `Prov`, and the
+diagonal lemma as an explicit hypothesis `hdiag` of the main theorem.  Everything else — the
+implication from consistency of `T` to the unprovability of the consistency statement
+`Con_T = ¬□⊥` — is proved here from scratch inside the calculus.
 
-together with closure of `T ⊢ ·` under propositional logic, and the diagonal
-lemma, which produces a Gödel sentence `G` with `T ⊢ G ↔ ¬Pr_T(⌜G⌝)`.
-
-`ProvabilitySystem` below is exactly this data: a language of formulas built from
-`⊥`, `→` and the unary provability operator `box` (`box φ` denotes
-`Pr_T(⌜φ⌝)`), a deducibility predicate `Thm` closed under propositional
-tautologies and modus ponens, and the three derivability conditions.  The
-consistency statement of `T` is the formula `Con := ¬ box ⊥`, i.e.
-`¬Pr_T(⌜0=1⌝)`.
-
-The main theorem `Frontier.Goedel_second_incompleteness` states: if `T` is
-consistent and `G` is a Gödel fixed point, then `T ⊬ Con`.  We also record the
-first incompleteness theorem `Frontier.Goedel_first_incompleteness`
-(`T ⊬ G`) and Löb's theorem, from which the second incompleteness theorem
-follows as well.
+`Prov A` is a *sublogic* of provability in any classical theory `T` whose axiom set is `A`
+(all of its axioms and rules are correct for `T ⊢ ·` and `Pr_T`), so the unprovability
+conclusion transfers to such theories.
 -/
 
 namespace Frontier
 
-/-- Formulas of the language of a theory, presented in the modal (provability
-logic) signature: propositional atoms, falsity, implication, and the unary
-provability operator `box p`, which stands for the arithmetized statement
-"`p` is provable in `T`". -/
-inductive Formula : Type
-  | atom : Nat → Formula
-  | bot : Formula
-  | imp : Formula → Formula → Formula
-  | box : Formula → Formula
+/-- Sentences of the language: falsity, implication, and the provability modality `□`. -/
+inductive Fml : Type
+  | bot : Fml
+  | imp : Fml → Fml → Fml
+  | box : Fml → Fml
   deriving DecidableEq
 
-namespace Formula
+namespace Fml
 
-/-- Negation, `¬p := p → ⊥`. -/
+/-- Negation, `¬a := a → ⊥`. -/
 
-def Con : Formula := neg (box bot)
+def Con : Fml := Fml.neg (box bot)
 
-variable {T : ProvabilitySystem}
-
-/-- Transitivity of provable implication (a propositional consequence). -/
+/-- A theory is consistent if it does not derive falsity. -/

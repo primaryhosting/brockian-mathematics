@@ -1,27 +1,19 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+/-!
+# Mergesort Correct
+Category: Computer Science
+Target: CS.mergesort_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace CS
 
-variable {α : Type*} [LinearOrder α]
+universe u
 
-/-- Merge two lists, assumed sorted, into one list. -/
+variable {α : Type u}
 
-@[simp] theorem merge_nil_left (l : List α) : merge [] l = l := by
-  cases l <;> simp [merge]
+/-- Split a list into two lists by alternately distributing its elements. -/
+
+@[simp] theorem merge_nil_left (le : α → α → Bool) (ys : List α) : merge le [] ys = ys := by
+  cases ys <;> simp [merge]
 

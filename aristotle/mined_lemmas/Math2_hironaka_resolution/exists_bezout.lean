@@ -1,4 +1,20 @@
+/-
+# Hironaka Resolution
+Category: Frontier Math
+Target: Math2.hironaka_resolution
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Hironaka Resolution
+Category: Frontier Math
+Target: Math2.hironaka_resolution
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,38 +30,24 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-import Mathlib
-
-/-!
-# Hironaka Resolution
-Category: Frontier Math
-Target: Math2.hironaka_resolution
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 namespace Math2
 
-variable (k : Type*) [Field k]
+open MvPolynomial
 
-/-- The affine plane curve `C_{a,b} : y^a = x^b` over a field `k`.
-For `a, b ≥ 2` coprime this is the standard quasi-homogeneous plane curve singularity
-(for `(a,b) = (2,3)` it is the cuspidal cubic `y² = x³`). -/
+variable {k : Type*} [Field k]
 
-lemma exists_bezout {a b : ℕ} (hab : Nat.Coprime a b) :
-    ∃ u v : ℤ, u * (a : ℤ) + v * (b : ℤ) = 1 := by
-  have h : IsCoprime (a : ℤ) (b : ℤ) := Int.isCoprime_iff_gcd_eq_one.2 (by simpa using hab)
-  obtain ⟨u, v, huv⟩ := h
-  exact ⟨u, v, huv⟩
+/-- The affine plane curve `C_{p,q} : y^p = x^q`, as a polynomial in two variables. -/
 
-/-- Bézout recovery: a nonzero element is recovered from its `a`-th and `b`-th powers
-when `a` and `b` are coprime. -/
+lemma exists_bezout {p q : ℕ} (h : Nat.Coprime p q) : ∃ a b : ℤ, a * p + b * q = 1 := by
+  refine ⟨Nat.gcdA p q, Nat.gcdB p q, ?_⟩
+  have := Nat.gcd_eq_gcd_ab p q
+  rw [h] at this
+  push_cast at this ⊢
+  linarith [this]
+
+section
+
+variable {p q : ℕ}
+

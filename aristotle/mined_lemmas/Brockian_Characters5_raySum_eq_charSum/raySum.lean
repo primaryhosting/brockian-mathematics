@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Ray Sum Eq Char Sum
 Category: Characters
 Target: Brockian.Characters5.raySum_eq_charSum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -24,12 +24,14 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-namespace Brockian.Characters5
+namespace Brockian
+namespace Characters5
 
 /-- A primitive fifth root of unity. -/
 noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
-/-- The additive character `e` of `ZMod 5` with values in `ℂ`, `e x = ω ^ x.val`. -/
+/-- The standard additive character of `ZMod 5` valued in `ℂ`. -/
 
-noncomputable def raySum (S : Finset ℕ) (r : ZMod 5) : ℕ := (S.filter fun n : ℕ => (n : ZMod 5) = r).card
+noncomputable def raySum (S : Finset ℕ) (r : ZMod 5) : ℕ :=
+  (S.filter fun n : ℕ => (n : ZMod 5) = r).card
 

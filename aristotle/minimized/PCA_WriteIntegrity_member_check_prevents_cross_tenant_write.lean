@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
 # Member Check Prevents Cross Tenant Write
 Category: Proof-Carrying Apps
@@ -6,130 +31,85 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on imports: Lean requires `import` commands to precede every other command,
-including module documentation, so the mandated header above rules out an
-`import Mathlib` line.  The development below therefore only uses Lean core.
-The one Mathlib fact it needs is the pointwise-update lemma
-`Function.update_of_ne : a ≠ b → Function.update f b v a = f a`; it is reproved
-here for the local `PCA.WriteIntegrity.upd` as `upd_of_ne`.
--/
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
 namespace PCA
 namespace WriteIntegrity
 
-/-! ## The isolation model
+universe u v w x
 
-A multi-tenant store maps resource identifiers to records.  Every stored record
-carries the tenant that owns it together with a payload.  A write request names
-a principal, a resource, the tenant under which the principal claims to act, and
-the payload to be stored.
+/-- A tenancy policy for the isolation engine: every resource belongs to exactly
+one tenant, and each principal is a member of some collection of tenants. -/
+structure Policy (Principal : Type u) (Resource : Type v) (Tenant : Type w) where
+  /-- The (unique) tenant owning a given resource. -/
+  tenantOf : Resource → Tenant
+  /-- Membership relation between principals and tenants. -/
+  member : Principal → Tenant → Prop
 
-The *reference monitor* accepts a request only when
-
-* the principal is a member of the tenant it claims to act for, and
-* if the resource already exists, it is owned by exactly that tenant.
-
-The main theorem states that under this guard no write can ever touch a record
-owned by a tenant the acting principal does not belong to. -/
-
-universe u v w z
-
-variable {Res : Type u} {Tenant : Type v} {Prin : Type w} {Val : Type z}
-
-/-- A stored record: the owning tenant together with the payload. -/
-structure Record (Tenant : Type v) (Val : Type z) where
-  /-- The tenant owning the record. -/
-  tenant : Tenant
-  /-- The stored payload. -/
-  value : Val
-
-/-- A store maps resource identifiers to records (`none` = the resource is absent). -/
-abbrev Store (Res : Type u) (Tenant : Type v) (Val : Type z) := Res → Option (Record Tenant Val)
-
-/-- A write request. -/
-structure WriteReq (Res : Type u) (Tenant : Type v) (Prin : Type w) (Val : Type z) where
+/-- A write request: a principal asking to store `value` at `target`. -/
+structure Write (Principal : Type u) (Resource : Type v) (Value : Type x) where
   /-- The principal issuing the write. -/
-  principal : Prin
-  /-- The tenant the principal claims to act for. -/
-  tenant : Tenant
-  /-- The resource to be written. -/
-  resource : Res
-  /-- The payload to be written. -/
-  value : Val
+  actor : Principal
+  /-- The resource being written. -/
+  target : Resource
+  /-- The value to be written. -/
+  value : Value
 
-/-- The membership relation of the isolation engine: `mem p t` means principal
-`p` belongs to tenant `t`. -/
-abbrev Memberships (Prin : Type w) (Tenant : Type v) := Prin → Tenant → Prop
+variable {Principal : Type u} {Resource : Type v} {Tenant : Type w} {Value : Type x}
 
-/-- Pointwise update of a store at a single resource. -/
+/-- Point update of a store, i.e. `Function.update` specialised to the
+non-dependent stores used here (kept local so that this module is
+dependency-free; it agrees with `Function.update` from Mathlib). -/
 
-def upd [DecidableEq Res] (st : Store Res Tenant Val) (x : Res)
-    (v : Option (Record Tenant Val)) : Store Res Tenant Val :=
-  fun y => if y = x then v else st y
-
-theorem upd_of_ne [DecidableEq Res] (st : Store Res Tenant Val) (x y : Res)
-    (v : Option (Record Tenant Val)) (h : y ≠ x) : upd st x v y = st y := by
-  simp [upd, h]
-
-/-- The reference monitor's decision: the principal must be a member of the
-claimed tenant, and an already existing resource must belong to that tenant. -/
-
-def Authorized (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
-    (r : WriteReq Res Tenant Prin Val) : Prop :=
-  mem r.principal r.tenant ∧ ∀ rec, st r.resource = some rec → rec.tenant = r.tenant
-
-/-- The raw (unguarded) effect of a write request on the store. -/
-
-def rawWrite [DecidableEq Res] (st : Store Res Tenant Val)
-    (r : WriteReq Res Tenant Prin Val) : Store Res Tenant Val :=
-  upd st r.resource (some ⟨r.tenant, r.value⟩)
-
-/-- One step of the guarded engine: perform the write only if it is authorized,
-otherwise leave the store untouched. -/
-
-noncomputable def step [DecidableEq Res] (mem : Memberships Prin Tenant)
-    (st : Store Res Tenant Val) (r : WriteReq Res Tenant Prin Val) : Store Res Tenant Val :=
+noncomputable def update (st : Resource → Value) (a : Resource) (v : Value) :
+    Resource → Value :=
   open Classical in
-  if Authorized mem st r then rawWrite st r else st
+  fun r => if r = a then v else st r
 
-/-- A resource is *foreign* to a principal when it currently stores a record
-owned by a tenant the principal is not a member of. -/
+@[simp]
 
-def Foreign (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
-    (p : Prin) (x : Res) : Prop :=
-  ∃ rec, st x = some rec ∧ ¬ mem p rec.tenant
+theorem update_of_ne {st : Resource → Value} {a r : Resource} (h : r ≠ a) (v : Value) :
+    update st a v r = st r := by
+  classical
+  simp [update, h]
 
-/-! ## Main theorem -/
+/-- The isolation engine's guard: a write is authorized exactly when the actor is
+a member of the tenant owning the targeted resource. -/
 
-/-- **Member check prevents cross-tenant writes.**
+def Authorized (P : Policy Principal Resource Tenant)
+    (w : Write Principal Resource Value) : Prop :=
+  P.member w.actor (P.tenantOf w.target)
 
-If the reference monitor's membership check is in force, then a single guarded
-step never alters any resource that is foreign to the acting principal: the
-store's contents at such a resource are exactly what they were before. -/
+/-- The state transition performed by the engine on a write request: the store is
+updated at the target if and only if the member check succeeds; otherwise the
+write is dropped. -/
 
-theorem member_check_prevents_cross_tenant_write [DecidableEq Res]
-    (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
-    (r : WriteReq Res Tenant Prin Val) (x : Res)
-    (hx : Foreign mem st r.principal x) :
-    step mem st r x = st x := by
-  obtain ⟨rec, hrec, hnot⟩ := hx
-  unfold step
-  split
-  · rename_i hauth
-    obtain ⟨hmem, howner⟩ := hauth
-    have hne : x ≠ r.resource := by
-      rintro rfl
-      exact hnot ((howner rec hrec) ▸ hmem)
-    exact upd_of_ne st r.resource x _ hne
-  · rfl
+noncomputable def applyWrite (P : Policy Principal Resource Tenant)
+    (st : Resource → Value) (w : Write Principal Resource Value) : Resource → Value :=
+  open Classical in
+  if Authorized P w then update st w.target w.value else st
 
-/-! ## Corollaries and sharpness -/
+/-- **Soundness of the member check (no cross-tenant writes).**
+No resource belonging to a tenant of which the actor is *not* a member can be
+modified by the engine: such a request is either rejected by the member check, or
+it targets a resource in a tenant the actor does belong to, hence a *different*
+resource, and point updates leave other points fixed. -/
 
-/-- The record stored at a foreign resource is unchanged by a guarded step. -/
+theorem member_check_prevents_cross_tenant_write
+    (P : Policy Principal Resource Tenant) (st : Resource → Value)
+    (w : Write Principal Resource Value) (r : Resource)
+    (hr : ¬ P.member w.actor (P.tenantOf r)) :
+    applyWrite P st w r = st r := by
+  classical
+  unfold applyWrite
+  by_cases h : Authorized P w
+  · have hne : r ≠ w.target := by
+      intro hEq
+      subst hEq
+      exact hr h
+    rw [if_pos h]
+    exact update_of_ne hne _
+  · rw [if_neg h]
+
+/-- **Completeness of the member check.** A same-tenant (hence authorized) write
+does take effect at its target. -/

@@ -1,29 +1,10 @@
-/-
-# Integral Sinc Fourth
-Category: C Integral
-Target: Zeta23Scaffold.integral_sinc_fourth
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
-
 /-!
 # Integral Sinc Fourth
 Category: C Integral
 Target: Zeta23Scaffold.integral_sinc_fourth
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-We prove `∫ x : ℝ, (sin x / x) ^ 4 = 2 * π / 3`.
-
-The argument is the classical Fourier-analytic one.  Let `tent` be the triangle function
-`t ↦ max (1 - |t|) 0`.  Its Fourier transform is `ξ ↦ sinc (π ξ) ^ 2`.  The multiplication
-(Parseval) formula `∫ 𝓕 f * g = ∫ f * 𝓕 g`, applied with `f = tent` and `g = 𝓕 tent`,
-together with Fourier inversion (`𝓕 (𝓕 tent) = tent ∘ neg`), gives
-
-`∫ sinc (π ξ) ^ 4 dξ = ∫ tent ^ 2 = 2 / 3`,
-
-and a change of variables `x = π ξ` yields the result.
 -/
 
 open scoped BigOperators
@@ -44,19 +25,45 @@ set_option grind.warning false
 
 namespace Zeta23Scaffold
 
-open MeasureTheory FourierTransform Real Complex
+open scoped FourierTransform
+open MeasureTheory Real Complex
 
-/-- The tent (triangle) function, supported on `[-1, 1]`. -/
+/-! ## The tent function and its Fourier transform -/
 
-lemma integral_sinc_pi_pow_four : ∫ ξ : ℝ, (Real.sinc (π * ξ)) ^ 4 = 2 / 3 := by
-  have h : ∀ ξ : ℝ, sincSq ξ * sincSq ξ = (((Real.sinc (π * ξ)) ^ 4 : ℝ) : ℂ) := by
-    intro ξ
-    simp only [sincSq]
+/-- The tent (triangle) function, supported on `[-1,1]`. -/
+
+lemma integral_sinc_pi_pow_four : ∫ ξ : ℝ, Real.sinc (π * ξ) ^ 4 = 2 / 3 := by
+  set g : ℝ → ℂ := fun ξ => ((Real.sinc (π * ξ) ^ 2 : ℝ) : ℂ) with hgdef
+  have hFt : 𝓕 tentC = g := funext fourier_tentC
+  have hgint : Integrable g := integrable_sincSq
+  have hFtint : Integrable (𝓕 tentC) := by rw [hFt]; exact hgint
+  have hinv : ∀ x : ℝ, 𝓕 g x = tentC x := by
+    intro x
+    have h1 : 𝓕⁻ (𝓕 tentC) = tentC :=
+      continuous_tentC.fourierInv_fourier_eq integrable_tentC hFtint
+    have h2 : 𝓕⁻ (𝓕 tentC) (-x) = 𝓕 (𝓕 tentC) x := by
+      rw [fourierInv_eq_fourier_neg, neg_neg]
+    rw [← hFt, ← h2, h1]
+    simp [tentC, tent_neg]
+  have hmul : ∫ ξ : ℝ, 𝓕 tentC ξ * g ξ = ∫ x : ℝ, tentC x * 𝓕 g x := by
+    simpa using VectorFourier.integral_fourierIntegral_smul_eq_flip (L := innerₗ ℝ)
+      (V := ℝ) (W := ℝ) Real.continuous_fourierChar (by fun_prop) integrable_tentC hgint
+  rw [hFt] at hmul
+  simp_rw [hinv] at hmul
+  have hL : ∫ ξ : ℝ, g ξ * g ξ = ((∫ ξ : ℝ, Real.sinc (π * ξ) ^ 4 : ℝ) : ℂ) := by
+    rw [← integral_complex_ofReal]
+    congr 1
+    funext ξ
+    rw [hgdef]
     push_cast
     ring
-  have := integral_sincSq_sq
-  simp only [h] at this
-  rw [integral_complex_ofReal] at this
-  exact_mod_cast this
+  have hR : ∫ x : ℝ, tentC x * tentC x = ((2 / 3 : ℝ) : ℂ) := by
+    rw [← integral_tent_sq, ← integral_complex_ofReal]
+    congr 1
+    funext x
+    simp only [tentC]
+    push_cast
+    ring
+  rw [hL, hR] at hmul
+  exact_mod_cast hmul
 
-/-- `∫ (sin x / x) ^ 4 dx = 2 π / 3`. -/

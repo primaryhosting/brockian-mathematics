@@ -1,3 +1,298 @@
+/-
+# Simon Algorithm
+Category: Frontier Qi
+Target: QI.simon_algorithm
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (The requested header is reproduced above as a plain block comment: Lean 4 does not allow a
+-- module docstring `/-! ... -/` to precede the `import` lines.)
+
+import Mathlib
+
+/-!
+## Simon's problem
+
+Simon's problem: a function `f` on `n`-bit strings is promised to be two-to-one with
+`f x = f y ↔ y = x ∨ y = x + s` for a hidden nonzero secret `s`; the task is to find `s`.
+
+This file formalises the two information-theoretic facts behind the statement
+"Simon's problem takes `O(n)` quantum queries but `Ω(2^(n/2))` classical queries":
+
+* **Quantum side.** Each run of Simon's quantum subroutine returns a uniformly random
+  vector `y` in the hyperplane `s^⊥`. We show that `n` such vectors always suffice:
+  for every nonzero `s` there is a set `Y` of at most `n` vectors orthogonal to `s`
+  such that `s` is the unique nonzero vector orthogonal to all of `Y`. Hence `O(n)`
+  quantum queries pin down the secret.
+
+* **Classical side.** A classical algorithm only learns something about `s` when two of
+  its queries collide. We show that a query set `Q` that is guaranteed to contain a
+  collision for *every* possible secret must satisfy `2 ^ n ≤ Q.card ^ 2`, i.e.
+  `Q.card ≥ 2 ^ (n / 2)`. Moreover, if `Q.card ^ 2 + 3 ≤ 2 ^ n`, then there are two
+  *different* secrets whose Simon functions agree on `Q` up to a global relabelling of
+  the output values, so no classical algorithm making those queries can tell them apart.
+-/
+
+namespace QI
+
+open Finset
+
+/-- `n`-bit strings, viewed as vectors over the field with two elements. -/
+abbrev Bits (n : ℕ) := Fin n → ZMod 2
+
+/-- The mod-2 inner product of two bit strings. -/
+def dotp {n : ℕ} (x y : Bits n) : ZMod 2 := ∑ i, x i * y i
+
+/-- A concrete Simon function with secret `s`, where `j` is a position with `s j = 1`:
+its fibers are exactly the pairs `{x, x + s}`. -/
+def simonFun {n : ℕ} (s : Bits n) (j : Fin n) (x : Bits n) : Bits n :=
+  fun i => x i + x j * s i
+
+/-! ### Basic arithmetic over `ZMod 2` -/
+
+private lemma zmod2_cases (a : ZMod 2) : a = 0 ∨ a = 1 := by revert a; decide
+
+private lemma zmod2_add_self (a : ZMod 2) : a + a = 0 := by revert a; decide
+
+private lemma zmod2_eq_of_add_eq_zero {a b : ZMod 2} (h : a + b = 0) : a = b := by
+  revert a b; decide
+
+private lemma zmod2_ne_iff {a b : ZMod 2} (h : a ≠ b) : b = a + 1 := by
+  revert a b; decide
+
+private lemma zmod2_add_mul (a b c : ZMod 2) : a + c + (b + 1) * c = a + b * c := by
+  revert a b c; decide
+
+lemma exists_pivot {n : ℕ} {s : Bits n} (hs : s ≠ 0) : ∃ j, s j = 1 := by
+  by_contra h
+  push_neg at h
+  exact hs (funext fun i => by rcases zmod2_cases (s i) with h0 | h1
+                               · exact h0
+                               · exact absurd h1 (h i))
+
+/-! ### The Simon function -/
+
+/-- The fibers of `simonFun s j` are exactly the pairs `{x, x + s}`: it is a genuine
+Simon function with secret `s`. -/
+theorem simonFun_eq_iff {n : ℕ} {s : Bits n} {j : Fin n} (hsj : s j = 1) (x y : Bits n) :
+    simonFun s j x = simonFun s j y ↔ (y = x ∨ y = x + s) := by
+  constructor
+  · intro h
+    have h' : ∀ i, x i + x j * s i = y i + y j * s i := fun i => congrFun h i
+    by_cases hj : x j = y j
+    · left
+      funext i
+      have hi := h' i
+      rw [hj] at hi
+      exact (add_right_cancel hi).symm
+    · right
+      have hyj : y j = x j + 1 := zmod2_ne_iff hj
+      funext i
+      have hi := h' i
+      rw [hyj] at hi
+      simp only [Pi.add_apply]
+      revert hi
+      generalize x i = a
+      generalize y i = b
+      generalize x j = c
+      generalize s i = d
+      revert a b c d
+      decide
+  · rintro (rfl | rfl)
+    · rfl
+    · funext i
+      show x i + x j * s i = (x + s) i + (x + s) j * s i
+      simp only [Pi.add_apply, hsj]
+      rw [zmod2_add_mul]
+
+/-! ### Quantum side: `n` measurement outcomes determine the secret -/
+
+/-- Given a nonzero secret `s`, there is a set `Y` of at most `n` vectors, all orthogonal to
+`s`, such that `s` is the only nonzero vector orthogonal to every element of `Y`.
+Since Simon's quantum subroutine returns uniformly random elements of `s^⊥`, this says that
+`O(n)` quantum queries suffice to determine `s`. -/
+theorem simon_quantum_queries {n : ℕ} {s : Bits n} (hs : s ≠ 0) :
+    ∃ Y : Finset (Bits n), Y.card ≤ n ∧ (∀ y ∈ Y, dotp y s = 0) ∧
+      ∀ t : Bits n, (∀ y ∈ Y, dotp y t = 0) → t = 0 ∨ t = s := by
+  classical
+  obtain ⟨j, hj⟩ := exists_pivot hs
+  set v : Fin n → Bits n :=
+    fun i k => (if k = i then 1 else 0) + s i * (if k = j then 1 else 0) with hv
+  have hdot : ∀ (i : Fin n) (t : Bits n), dotp (v i) t = t i + s i * t j := by
+    intro i t
+    simp [hv, dotp, add_mul, Finset.sum_add_distrib, ite_mul]
+  refine ⟨(Finset.univ.erase j).image v, ?_, ?_, ?_⟩
+  · refine le_trans Finset.card_image_le ?_
+    simp [Finset.card_erase_of_mem]
+  · intro y hy
+    simp only [Finset.mem_image] at hy
+    obtain ⟨i, -, rfl⟩ := hy
+    rw [hdot, hj, mul_one, zmod2_add_self]
+  · intro t ht
+    have key : ∀ i : Fin n, i ≠ j → t i = s i * t j := by
+      intro i hi
+      have := ht (v i) (Finset.mem_image_of_mem v (Finset.mem_erase.2 ⟨hi, Finset.mem_univ i⟩))
+      rw [hdot] at this
+      exact zmod2_eq_of_add_eq_zero this
+    rcases zmod2_cases (t j) with h0 | h1
+    · left
+      funext i
+      by_cases hi : i = j
+      · subst hi; simpa using h0
+      · simpa [h0] using key i hi
+    · right
+      funext i
+      by_cases hi : i = j
+      · subst hi; rw [h1, hj]
+      · simpa [h1] using key i hi
+
+/-! ### Classical side -/
+
+private lemma bits_add_cancel {n : ℕ} (x s : Bits n) : x + (x + s) = s := by
+  have hxx : x + x = 0 := funext fun i => zmod2_add_self (x i)
+  rw [← add_assoc, hxx, zero_add]
+
+/-- A secret that is ruled out by a collision inside the query set `Q` is a sum of two
+distinct elements of `Q`. -/
+lemma collision_secret_mem_image {n : ℕ} (Q : Finset (Bits n)) {s : Bits n}
+    (h : ∃ x ∈ Q, ∃ y ∈ Q, x ≠ y ∧ y = x + s) :
+    s ∈ Q.offDiag.image (fun p : Bits n × Bits n => p.1 + p.2) := by
+  classical
+  obtain ⟨x, hx, y, hy, hxy, rfl⟩ := h
+  exact Finset.mem_image.2 ⟨(x, x + s), Finset.mem_offDiag.2 ⟨hx, hy, hxy⟩, bits_add_cancel x s⟩
+
+lemma card_collision_secrets_le {n : ℕ} (Q : Finset (Bits n)) :
+    (Q.offDiag.image (fun p : Bits n × Bits n => p.1 + p.2)).card ≤ Q.card * Q.card - Q.card := by
+  classical
+  exact le_trans Finset.card_image_le (le_of_eq (Finset.offDiag_card Q))
+
+private lemma card_univ_bits (n : ℕ) : (Finset.univ : Finset (Bits n)).card = 2 ^ n := by
+  simp
+
+/-- Any set of queries which is guaranteed to reveal a collision for every possible secret
+must have size at least `2 ^ (n / 2)`. -/
+theorem simon_classical_lower_bound {n : ℕ} (hn : 1 ≤ n) (Q : Finset (Bits n))
+    (h : ∀ s : Bits n, s ≠ 0 → ∃ x ∈ Q, ∃ y ∈ Q, x ≠ y ∧ y = x + s) :
+    2 ^ n ≤ Q.card ^ 2 := by
+  classical
+  have hsub : (Finset.univ : Finset (Bits n)).erase 0 ⊆
+      Q.offDiag.image (fun p : Bits n × Bits n => p.1 + p.2) := fun s hs =>
+    collision_secret_mem_image Q (h s (Finset.mem_erase.1 hs).1)
+  have hcard := Finset.card_le_card hsub
+  rw [Finset.card_erase_of_mem (Finset.mem_univ _), card_univ_bits] at hcard
+  have hle := card_collision_secrets_le Q
+  have h2 : 2 ≤ 2 ^ n := by
+    calc 2 = 2 ^ 1 := by norm_num
+    _ ≤ 2 ^ n := Nat.pow_le_pow_right (by norm_num) hn
+  have hqq : Q.card ≤ Q.card * Q.card := by
+    rcases Nat.eq_zero_or_pos Q.card with h0 | h0
+    · simp [h0]
+    · exact Nat.le_mul_of_pos_left _ h0
+  rcases Nat.eq_zero_or_pos Q.card with h0 | h0
+  · exfalso
+    rw [h0] at hle
+    simp only [Nat.mul_zero, Nat.zero_sub, Nat.le_zero] at hle
+    omega
+  · rw [pow_two]
+    generalize Q.card * Q.card = m at hqq hle ⊢
+    generalize (2 : ℕ) ^ n = p at hcard h2 ⊢
+    omega
+
+/-- A partial bijection between two sets on which `f` and `g` are injective extends to a
+permutation of the whole (finite) type. -/
+theorem exists_perm_of_injOn {α : Type*} [DecidableEq α] [Fintype α] (Q : Finset α)
+    (f g : α → α) (hf : Set.InjOn f Q) (hg : Set.InjOn g Q) :
+    ∃ π : α ≃ α, ∀ x ∈ Q, π (f x) = g x := by
+  classical
+  have hbij : ∀ (h : α → α), Set.InjOn h Q →
+      Function.Bijective (fun x : {x // x ∈ Q} =>
+        (⟨h x.1, Finset.mem_image_of_mem h x.2⟩ : {a // a ∈ Q.image h})) := by
+    intro h hh
+    constructor
+    · rintro ⟨x, hx⟩ ⟨y, hy⟩ hxy
+      simp only [Subtype.mk.injEq] at hxy
+      exact Subtype.ext (hh (by simpa using hx) (by simpa using hy) hxy)
+    · rintro ⟨a, ha⟩
+      obtain ⟨x, hx, rfl⟩ := Finset.mem_image.1 ha
+      exact ⟨⟨x, hx⟩, rfl⟩
+  let F := Equiv.ofBijective _ (hbij f hf)
+  let G := Equiv.ofBijective _ (hbij g hg)
+  refine ⟨(F.symm.trans G).extendSubtype, ?_⟩
+  intro x hx
+  have hfx : f x ∈ Q.image f := Finset.mem_image_of_mem f hx
+  rw [Equiv.extendSubtype_apply_of_mem _ _ hfx]
+  have hsymm : F.symm ⟨f x, hfx⟩ = ⟨x, hx⟩ := by
+    apply F.injective
+    simp only [Equiv.apply_symm_apply, F, Equiv.ofBijective_apply]
+  simp [Equiv.trans_apply, hsymm, G, Equiv.ofBijective_apply]
+
+/-- Classical indistinguishability: if the query set `Q` satisfies `Q.card ^ 2 + 3 ≤ 2 ^ n`,
+then there are two distinct nonzero secrets whose Simon functions agree on `Q` after a global
+relabelling `π` of the output values. A classical algorithm making the queries in `Q` therefore
+cannot determine the secret. -/
+theorem simon_classical_indistinguishable {n : ℕ} (Q : Finset (Bits n))
+    (hQ : Q.card ^ 2 + 3 ≤ 2 ^ n) :
+    ∃ s₁ s₂ : Bits n, ∃ j₁ j₂ : Fin n, s₁ ≠ 0 ∧ s₂ ≠ 0 ∧ s₁ ≠ s₂ ∧ s₁ j₁ = 1 ∧ s₂ j₂ = 1 ∧
+      ∃ π : Bits n ≃ Bits n, ∀ x ∈ Q, π (simonFun s₁ j₁ x) = simonFun s₂ j₂ x := by
+  classical
+  set G := ((Finset.univ : Finset (Bits n)).erase 0).filter
+      (fun s => ∀ x ∈ Q, ∀ y ∈ Q, x ≠ y → y ≠ x + s) with hGdef
+  have hsub : (Finset.univ : Finset (Bits n)).erase 0 ⊆
+      G ∪ Q.offDiag.image (fun p : Bits n × Bits n => p.1 + p.2) := by
+    intro s hs
+    by_cases hgood : ∀ x ∈ Q, ∀ y ∈ Q, x ≠ y → y ≠ x + s
+    · exact Finset.mem_union_left _ (Finset.mem_filter.2 ⟨hs, hgood⟩)
+    · push_neg at hgood
+      obtain ⟨x, hx, y, hy, hxy, hyx⟩ := hgood
+      exact Finset.mem_union_right _ (collision_secret_mem_image Q ⟨x, hx, y, hy, hxy, hyx⟩)
+  have hcard := Finset.card_le_card hsub
+  rw [Finset.card_erase_of_mem (Finset.mem_univ _), card_univ_bits] at hcard
+  have hunion := Finset.card_union_le G (Q.offDiag.image (fun p : Bits n × Bits n => p.1 + p.2))
+  have hB := card_collision_secrets_le Q
+  have hGcard : 1 < G.card := by
+    rw [pow_two] at hQ
+    generalize Q.card * Q.card = m at hQ hB
+    generalize (2 : ℕ) ^ n = p at hQ hcard
+    omega
+  obtain ⟨s₁, hs₁, s₂, hs₂, hne⟩ := Finset.one_lt_card.1 hGcard
+  rw [hGdef, Finset.mem_filter, Finset.mem_erase] at hs₁ hs₂
+  obtain ⟨⟨hs₁0, -⟩, hgood₁⟩ := hs₁
+  obtain ⟨⟨hs₂0, -⟩, hgood₂⟩ := hs₂
+  obtain ⟨j₁, hj₁⟩ := exists_pivot hs₁0
+  obtain ⟨j₂, hj₂⟩ := exists_pivot hs₂0
+  have hinj : ∀ (s : Bits n) (j : Fin n), s j = 1 → (∀ x ∈ Q, ∀ y ∈ Q, x ≠ y → y ≠ x + s) →
+      Set.InjOn (simonFun s j) Q := by
+    intro s j hj hgood x hx y hy hxy
+    by_cases hxy' : x = y
+    · exact hxy'
+    · exfalso
+      rcases (simonFun_eq_iff hj x y).1 hxy with h | h
+      · exact hxy' h.symm
+      · exact hgood x (by simpa using hx) y (by simpa using hy) hxy' h
+  obtain ⟨π, hπ⟩ :=
+    exists_perm_of_injOn Q (simonFun s₁ j₁) (simonFun s₂ j₂)
+      (hinj s₁ j₁ hj₁ hgood₁) (hinj s₂ j₂ hj₂ hgood₂)
+  exact ⟨s₁, s₂, j₁, j₂, hs₁0, hs₂0, hne, hj₁, hj₂, π, hπ⟩
+
+/-- **Simon's problem**: `O(n)` quantum queries suffice, while `Ω(2 ^ (n / 2))` classical
+queries are necessary. -/
+theorem simon_algorithm (n : ℕ) (hn : 1 ≤ n) :
+    (∀ s : Bits n, s ≠ 0 → ∃ Y : Finset (Bits n), Y.card ≤ n ∧
+        (∀ y ∈ Y, dotp y s = 0) ∧
+        ∀ t : Bits n, (∀ y ∈ Y, dotp y t = 0) → t = 0 ∨ t = s) ∧
+    (∀ Q : Finset (Bits n),
+        (∀ s : Bits n, s ≠ 0 → ∃ x ∈ Q, ∃ y ∈ Q, x ≠ y ∧ y = x + s) → 2 ^ n ≤ Q.card ^ 2) ∧
+    (∀ Q : Finset (Bits n), Q.card ^ 2 + 3 ≤ 2 ^ n →
+        ∃ s₁ s₂ : Bits n, ∃ j₁ j₂ : Fin n, s₁ ≠ 0 ∧ s₂ ≠ 0 ∧ s₁ ≠ s₂ ∧ s₁ j₁ = 1 ∧ s₂ j₂ = 1 ∧
+          ∃ π : Bits n ≃ Bits n, ∀ x ∈ Q, π (simonFun s₁ j₁ x) = simonFun s₂ j₂ x) :=
+  ⟨fun _ hs => simon_quantum_queries hs,
+   fun Q hQ => simon_classical_lower_bound hn Q hQ,
+   fun Q hQ => simon_classical_indistinguishable Q hQ⟩
+
+end QI
+
+#print axioms QI.simon_algorithm
+
 import Mathlib
 
 open scoped BigOperators
@@ -23,470 +318,3 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Simon Algorithm
-Category: Frontier Qi
-Target: QI.simon_algorithm
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Simon Algorithm
-Category: Frontier Qi
-Target: QI.simon_algorithm
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-set_option autoImplicit false
-set_option maxHeartbeats 1000000
-
-open scoped BigOperators
-
-namespace QI
-
-/-! ## Basic setup: the group `(ZMod 2)^n` -/
-
-/-- The domain of Simon's problem: bit strings of length `n`, viewed as the
-elementary abelian group `(ZMod 2)^n` under bitwise XOR (= addition). -/
-abbrev Vec (n : ℕ) := Fin n → ZMod 2
-
-variable {n : ℕ}
-
-lemma zmod2_cases (a : ZMod 2) : a = 0 ∨ a = 1 := by revert a; decide
-
-lemma zmod2_add_self (a : ZMod 2) : a + a = 0 := by revert a; decide
-
-@[simp] lemma vec_add_self (x : Vec n) : x + x = 0 := by
-  funext i; exact zmod2_add_self _
-
-@[simp] lemma vec_add_add_cancel (x s : Vec n) : x + s + s = x := by
-  rw [add_assoc, vec_add_self, add_zero]
-
-lemma vec_eq_iff_add {x y s : Vec n} : x + y = s ↔ y = x + s := by
-  constructor
-  · intro h; rw [← h, ← add_assoc, vec_add_self, zero_add]
-  · intro h; rw [h, ← add_assoc, vec_add_self, zero_add]
-
-lemma vec_shift {x y s : Vec n} (h : x + s = y) : x = y + s := by
-  rw [← h, vec_add_add_cancel]
-
-/-- The `ZMod 2`-valued inner product. -/
-
-def dot (x y : Vec n) : ZMod 2 := ∑ i, x i * y i
-
-lemma dot_add_left (x y z : Vec n) : dot (x + y) z = dot x z + dot y z := by
-  simp only [dot, Pi.add_apply, add_mul]
-  exact Finset.sum_add_distrib
-
-/-! ## The Simon promise -/
-
-/-- `f` is a Simon function with secret `s`: `s ≠ 0` and `f x = f y` exactly when
-`x = y` or `x ⊕ y = s`. Equivalently, `f` is two-to-one with period `s`. -/
-
-def IsSimon {Y : Type*} (s : Vec n) (f : Vec n → Y) : Prop :=
-  s ≠ 0 ∧ ∀ x y : Vec n, f x = f y ↔ (x = y ∨ x + y = s)
-
-lemma IsSimon.period {Y : Type*} {s : Vec n} {f : Vec n → Y} (h : IsSimon s f)
-    (x : Vec n) : f (x + s) = f x := by
-  refine (h.2 _ _).2 (Or.inr ?_)
-  rw [add_comm x s, add_assoc, vec_add_self, add_zero]
-
-/-! ## Quantum part: one query of Simon's algorithm -/
-
-/-- The character `(-1)^a` of `ZMod 2`. -/
-
-noncomputable def chi (a : ZMod 2) : ℂ := if a = 0 then 1 else -1
-
-lemma chi_ne_zero (a : ZMod 2) : chi a ≠ 0 := by
-  rcases zmod2_cases a with h | h <;> simp [chi, h]
-
-lemma chi_add (a b : ZMod 2) : chi (a + b) = chi a * chi b := by
-  have h : (1 + 1 : ZMod 2) = 0 := by decide
-  rcases zmod2_cases a with ha | ha <;> rcases zmod2_cases b with hb | hb <;>
-    simp [ha, hb, h]
-
-/-- The amplitude of the basis state `|y⟩|z⟩` in the state
-`(1/2^n) ∑_{x,y} (-1)^{x·y} |y⟩|f(x)⟩`, i.e. the state obtained from `|0⟩|0⟩` by
-Hadamard transforming the first register, applying one oracle query to `f`, and
-Hadamard transforming the first register again. -/
-
-noncomputable def amp {Y : Type*} [DecidableEq Y] (f : Vec n → Y) (y : Vec n) (z : Y) : ℂ :=
-  (1 / 2 ^ n) * ∑ x : Vec n, chi (dot x y) * (if f x = z then 1 else 0)
-
-/-- **Simon's interference identity.** If `y` is not orthogonal to the secret `s`,
-then the amplitude of every outcome `(y, z)` vanishes: the measurement of the first
-register always returns a vector orthogonal to `s`. -/
-
-theorem amp_of_dot_eq_zero {Y : Type*} [DecidableEq Y] {s : Vec n} {f : Vec n → Y}
-    (h : IsSimon s f) {y : Vec n} (hy : dot s y = 0) (x₀ : Vec n) :
-    amp f y (f x₀) = (1 / 2 ^ n) * (2 * chi (dot x₀ y)) := by
-  classical
-  have hne : x₀ ≠ x₀ + s := by
-    intro e
-    apply h.1
-    have h5 : x₀ + x₀ = s := vec_eq_iff_add.mpr e
-    rw [vec_add_self] at h5
-    exact h5.symm
-  have hfib : ∀ x : Vec n, chi (dot x y) * (if f x = f x₀ then (1 : ℂ) else 0)
-      = if x ∈ ({x₀, x₀ + s} : Finset (Vec n)) then chi (dot x y) else 0 := by
-    intro x
-    by_cases hx : f x = f x₀
-    · rcases (h.2 x x₀).1 hx with h1 | h1
-      · simp [h1]
-      · have h2 : x = x₀ + s := vec_eq_iff_add.mp (by rw [add_comm]; exact h1)
-        rw [if_pos hx, if_pos (show x ∈ ({x₀, x₀ + s} : Finset (Vec n)) by simp [h2]), mul_one]
-    · have hx1 : x ≠ x₀ := fun e => hx (by rw [e])
-      have hx2 : x ≠ x₀ + s := by
-        intro e
-        exact hx (by rw [e]; exact h.period x₀)
-      simp [hx, hx1, hx2]
-  have hsum : ∑ x : Vec n, chi (dot x y) * (if f x = f x₀ then (1 : ℂ) else 0)
-      = 2 * chi (dot x₀ y) := by
-    simp only [hfib]
-    rw [Finset.sum_ite_mem, Finset.univ_inter, Finset.sum_pair hne]
-    rw [dot_add_left, chi_add, show chi (dot s y) = 1 by simp [chi, hy]]
-    ring
-  rw [amp, hsum]
-
-/-! ### `n - 1` well chosen outcomes determine the secret -/
-
-/-- The vectors used in the analysis: for `i ≠ j` (where `s j = 1`),
-`simonBasis s j i = e_i + s_i · e_j` is orthogonal to `s`. -/
-
-def simonBasis (s : Vec n) (j i : Fin n) : Vec n :=
-  fun k => (if k = i then 1 else 0) + (if k = j then s i else 0)
-
-lemma dot_simonBasis (t s : Vec n) (j i : Fin n) :
-    dot t (simonBasis s j i) = t i + t j * s i := by
-  simp only [dot, simonBasis, mul_add]
-  rw [Finset.sum_add_distrib]
-  congr 1 <;> simp
-
-lemma dot_simonBasis_self {s : Vec n} {j : Fin n} (hj : s j = 1) (i : Fin n) :
-    dot s (simonBasis s j i) = 0 := by
-  rw [dot_simonBasis, hj, one_mul, zmod2_add_self]
-
-/-- **Quantum upper bound (query count).** For any Simon function with secret `s`
-there are `n - 1` measurement outcomes, each occurring with nonzero amplitude, whose
-orthogonality constraints pin down `s` uniquely among nonzero vectors. Hence `n - 1`
-quantum queries suffice to determine `s`. -/
-
-theorem quantum_upper_bound {Y : Type*} [DecidableEq Y] {s : Vec n} {f : Vec n → Y}
-    (h : IsSimon s f) :
-    ∃ B : Finset (Vec n), B.card = n - 1 ∧
-      (∀ y ∈ B, ∃ z : Y, amp f y z ≠ 0) ∧
-      (∀ t : Vec n, (∀ y ∈ B, dot t y = 0) → t = 0 ∨ t = s) := by
-  obtain ⟨j, hj0⟩ : ∃ j, s j ≠ 0 := by
-    by_contra hc
-    push_neg at hc
-    exact h.1 (funext hc)
-  have hj : s j = 1 := (zmod2_cases (s j)).resolve_left hj0
-  classical
-  refine ⟨(Finset.univ.erase j).image (simonBasis s j), ?_, ?_, ?_⟩
-  · rw [Finset.card_image_of_injOn, Finset.card_erase_of_mem (Finset.mem_univ j),
-      Finset.card_univ, Fintype.card_fin]
-    intro a ha b _ hab
-    have h1 : simonBasis s j a a = simonBasis s j b a := by rw [hab]
-    have haj : a ≠ j := Finset.ne_of_mem_erase (Finset.mem_coe.mp ha)
-    by_contra hne
-    simp [simonBasis, haj, hne] at h1
-  · intro y hy
-    simp only [Finset.mem_image] at hy
-    obtain ⟨i, _, rfl⟩ := hy
-    refine ⟨f 0, ?_⟩
-    rw [amp_of_dot_eq_zero h (dot_simonBasis_self hj i) 0]
-    have h1 := chi_ne_zero (dot (0 : Vec n) (simonBasis s j i))
-    have h2 : ((2 : ℂ) ^ n) ≠ 0 := pow_ne_zero n two_ne_zero
-    exact mul_ne_zero (one_div_ne_zero h2) (mul_ne_zero two_ne_zero h1)
-  · intro t ht
-    have key : ∀ i, i ≠ j → t i = t j * s i := by
-      intro i hi
-      have hd := ht (simonBasis s j i)
-        (Finset.mem_image_of_mem _ (Finset.mem_erase.2 ⟨hi, Finset.mem_univ i⟩))
-      rw [dot_simonBasis] at hd
-      have h3 : t i + (t j * s i + t j * s i) = t j * s i := by
-        rw [← add_assoc, hd, zero_add]
-      rwa [zmod2_add_self, add_zero] at h3
-    rcases zmod2_cases (t j) with h0 | h1
-    · left
-      funext k
-      by_cases hk : k = j
-      · simp [hk, h0]
-      · simp [key k hk, h0]
-    · right
-      funext k
-      by_cases hk : k = j
-      · simp [hk, h1, hj]
-      · simp [key k hk, h1]
-
-/-! ## Classical part: deterministic decision trees -/
-
-/-- A deterministic classical query algorithm: a decision tree whose internal nodes
-query the oracle at a point of `Vec n` and branch on the (natural number) answer,
-and whose leaves output a candidate secret. -/
-inductive DTree (n : ℕ) : Type
-  | leaf (out : Vec n) : DTree n
-  | node (q : Vec n) (k : ℕ → DTree n) : DTree n
-
-namespace DTree
-
-/-- The output of the tree on the oracle `f`. -/
-
-def run (f : Vec n → ℕ) : DTree n → Vec n
-  | .leaf out => out
-  | .node q k => run f (k (f q))
-
-/-- The set of points queried along the computation path on the oracle `f`. -/
-
-def queries (f : Vec n → ℕ) : DTree n → Finset (Vec n)
-  | .leaf _ => ∅
-  | .node q k => insert q (queries f (k (f q)))
-
-/-- `DepthLE T d` says every computation path of `T` makes at most `d` queries. -/
-inductive DepthLE : DTree n → ℕ → Prop
-  | leaf (out : Vec n) (d : ℕ) : DepthLE (.leaf out) d
-  | node (q : Vec n) (k : ℕ → DTree n) (d : ℕ) (h : ∀ m, DepthLE (k m) d) :
-      DepthLE (.node q k) (d + 1)
-
-lemma card_queries_le {T : DTree n} {d : ℕ} (hd : DepthLE T d) (f : Vec n → ℕ) :
-    (T.queries f).card ≤ d := by
-  induction hd with
-  | leaf out d => simp [queries]
-  | node q k d h ih =>
-      have hle := ih (f q)
-      calc (queries f (.node q k)).card
-          ≤ (queries f (k (f q))).card + 1 := by
-            simpa [queries] using Finset.card_insert_le q (queries f (k (f q)))
-        _ ≤ d + 1 := by omega
-
-/-- If two oracles agree on all points queried along the path of the first, the tree
-behaves identically on both. -/
-
-lemma run_congr (T : DTree n) (f g : Vec n → ℕ) (h : ∀ x ∈ T.queries f, f x = g x) :
-    T.run g = T.run f ∧ T.queries g = T.queries f := by
-  induction T with
-  | leaf out => simp [run, queries]
-  | node q k ih =>
-      have hq : f q = g q := h q (by simp [queries])
-      have h' : ∀ x ∈ (k (f q)).queries f, f x = g x := by
-        intro x hx
-        exact h x (by simp [queries, hx])
-      obtain ⟨h1, h2⟩ := ih (f q) h'
-      constructor
-      · show run g (k (g q)) = run f (k (f q))
-        rw [← hq]; exact h1
-      · show insert q ((k (g q)).queries g) = insert q ((k (f q)).queries f)
-        rw [← hq, h2]
-
-end DTree
-
-/-! ### The adversary function -/
-
-/-- A fixed injective encoding of `Vec n` into `ℕ`. -/
-
-noncomputable def enc (x : Vec n) : ℕ := ((Fintype.equivFin (Vec n)) x : ℕ)
-
-lemma enc_injective : Function.Injective (enc : Vec n → ℕ) := by
-  intro a b hab
-  exact (Fintype.equivFin (Vec n)).injective (Fin.val_injective hab)
-
-lemma enc_lt (x : Vec n) : enc x < Fintype.card (Vec n) := (Fintype.equivFin (Vec n) x).isLt
-
-/-- Given a finite set `S` of already-queried points, no two of which differ by `s`,
-this is a Simon function with secret `s` whose values on `S` are the reference
-values `enc`. -/
-
-noncomputable def advFn (S : Finset (Vec n)) (s : Vec n) : Vec n → ℕ := fun x =>
-  if x ∈ S then enc x
-  else if x + s ∈ S then enc (x + s)
-  else Fintype.card (Vec n) + enc (if enc x ≤ enc (x + s) then x else x + s)
-
-lemma advFn_agree {S : Finset (Vec n)} {s : Vec n} {x : Vec n} (hx : x ∈ S) :
-    advFn S s x = enc x := by
-  classical
-  simp [advFn, hx]
-
-lemma advFn_isSimon {S : Finset (Vec n)} {s : Vec n} (hs : s ≠ 0)
-    (hS : ∀ x ∈ S, ∀ y ∈ S, x ≠ y → x + y ≠ s) : IsSimon s (advFn S s) := by
-  classical
-  have hne : ∀ x : Vec n, x ≠ x + s := by
-    intro x e
-    apply hs
-    have h5 : x + x = s := vec_eq_iff_add.mpr e
-    rw [vec_add_self] at h5
-    exact h5.symm
-  have hnotboth : ∀ x : Vec n, x ∈ S → x + s ∉ S := by
-    intro x hx hxs
-    exact hS x hx (x + s) hxs (hne x) (by rw [← add_assoc, vec_add_self, zero_add])
-  set rep : Vec n → Vec n := fun x => if enc x ≤ enc (x + s) then x else x + s with hrep
-  have hrep_mem : ∀ x : Vec n, rep x = x ∨ rep x = x + s := by
-    intro x; by_cases hc : enc x ≤ enc (x + s) <;> simp [hrep, hc]
-  have hrep_shift : ∀ x : Vec n, rep (x + s) = rep x := by
-    intro x
-    have hxx : enc x ≠ enc (x + s) := fun e => hne x (enc_injective e)
-    have hxx' : enc x < enc (x + s) ∨ enc (x + s) < enc x := by omega
-    by_cases hc : enc x ≤ enc (x + s)
-    · have hc' : ¬ enc (x + s) ≤ enc x := by omega
-      simp [hrep, hc, hc', vec_add_add_cancel]
-    · have hc' : enc (x + s) ≤ enc x := by omega
-      simp [hrep, hc, hc', vec_add_add_cancel]
-  have hsmall : ∀ x : Vec n, (x ∈ S ∨ x + s ∈ S) →
-      ∃ w ∈ S, (w = x ∨ w = x + s) ∧ advFn S s x = enc w := by
-    intro x hx
-    by_cases h1 : x ∈ S
-    · exact ⟨x, h1, Or.inl rfl, by simp [advFn, h1]⟩
-    · have h2 : x + s ∈ S := hx.resolve_left h1
-      exact ⟨x + s, h2, Or.inr rfl, by simp [advFn, h1, h2]⟩
-  have hbig : ∀ x : Vec n, x ∉ S → x + s ∉ S →
-      advFn S s x = Fintype.card (Vec n) + enc (rep x) := by
-    intro x h1 h2; simp [advFn, h1, h2, hrep]
-  have hfin : ∀ a b : Vec n, (a = b ∨ a = b + s) → (a = b ∨ a + b = s) := by
-    intro a b hab
-    rcases hab with h | h
-    · exact Or.inl h
-    · exact Or.inr (by rw [add_comm]; exact vec_eq_iff_add.mpr h)
-  refine ⟨hs, ?_⟩
-  intro x y
-  constructor
-  · intro hxy
-    refine hfin x y ?_
-    by_cases hx : x ∈ S ∨ x + s ∈ S
-    · obtain ⟨w, _, hw, hwv⟩ := hsmall x hx
-      by_cases hy : y ∈ S ∨ y + s ∈ S
-      · obtain ⟨w', _, hw', hw'v⟩ := hsmall y hy
-        have hww : w = w' := enc_injective (by rw [← hwv, ← hw'v, hxy])
-        subst hww
-        rcases hw with h1 | h1 <;> rcases hw' with h2 | h2
-        · exact Or.inl (h1 ▸ h2)
-        · exact Or.inr (h1 ▸ h2)
-        · exact Or.inr (vec_shift (h1 ▸ h2))
-        · exact Or.inl (add_right_cancel (h1 ▸ h2 : x + s = y + s))
-      · push_neg at hy
-        have hyv := hbig y hy.1 hy.2
-        rw [hwv, hyv] at hxy
-        exact absurd hxy (by have := enc_lt w; omega)
-    · push_neg at hx
-      have hxv := hbig x hx.1 hx.2
-      by_cases hy : y ∈ S ∨ y + s ∈ S
-      · obtain ⟨w', _, _, hw'v⟩ := hsmall y hy
-        rw [hxv, hw'v] at hxy
-        exact absurd hxy (by have := enc_lt w'; omega)
-      · push_neg at hy
-        have hyv := hbig y hy.1 hy.2
-        rw [hxv, hyv] at hxy
-        have hrr : rep x = rep y := enc_injective (by omega)
-        rcases hrep_mem x with h1 | h1 <;> rcases hrep_mem y with h2 | h2
-        · exact Or.inl (by rw [← h1, hrr, h2])
-        · exact Or.inr (by rw [← h1, hrr, h2])
-        · exact Or.inr (vec_shift (by rw [← h1, hrr, h2]))
-        · exact Or.inl (add_right_cancel (by rw [← h1, hrr, h2] : x + s = y + s))
-  · intro hxy
-    rcases hxy with rfl | hxy
-    · rfl
-    · have hy : y = x + s := vec_eq_iff_add.mp hxy
-      subst hy
-      by_cases h1 : x ∈ S
-      · have h2 : x + s ∉ S := hnotboth x h1
-        have h3 : x + s + s ∈ S := by rwa [vec_add_add_cancel]
-        simp [advFn, h1, h2, vec_add_add_cancel]
-      · by_cases h2 : x + s ∈ S
-        · simp [advFn, h1, h2]
-        · have h3 : x + s + s ∉ S := by rwa [vec_add_add_cancel]
-          rw [hbig (x + s) h2 h3, hbig x h1 h2, hrep_shift x]
-
-/-! ### The classical lower bound -/
-
-lemma card_vec (n : ℕ) : Fintype.card (Vec n) = 2 ^ n := by
-  simp
-
-/-- **Classical lower bound.** Any deterministic classical algorithm that solves
-Simon's problem for all Simon functions with `n ≥ 2` must make at least
-`2 ^ ((n-1)/2)` queries on some computation path. -/
-
-theorem classical_lower_bound (hn : 2 ≤ n) (T : DTree n) (d : ℕ) (hd : DTree.DepthLE T d)
-    (hcorrect : ∀ (s : Vec n) (f : Vec n → ℕ), IsSimon s f → T.run f = s) :
-    2 ^ ((n - 1) / 2) ≤ d := by
-  classical
-  by_contra hlt
-  push_neg at hlt
-  set S : Finset (Vec n) := T.queries enc with hSdef
-  have hcard : S.card ≤ d := DTree.card_queries_le hd enc
-  set D : Finset (Vec n) :=
-    insert 0 (insert (T.run enc) ((S ×ˢ S).image (fun p => p.1 + p.2))) with hD
-  have hDcard : D.card ≤ d * d + 2 := by
-    have h1 : ((S ×ˢ S).image (fun p : Vec n × Vec n => p.1 + p.2)).card ≤ d * d := by
-      refine le_trans Finset.card_image_le ?_
-      rw [Finset.card_product]
-      exact Nat.mul_le_mul hcard hcard
-    calc D.card ≤ (insert (T.run enc) ((S ×ˢ S).image (fun p => p.1 + p.2))).card + 1 :=
-          Finset.card_insert_le _ _
-      _ ≤ (((S ×ˢ S).image (fun p => p.1 + p.2)).card + 1) + 1 :=
-          Nat.add_le_add_right (Finset.card_insert_le _ _) 1
-      _ ≤ d * d + 2 := by omega
-  have hlt2 : d * d + 2 < 2 ^ n := by
-    have h1 : d + 1 ≤ 2 ^ ((n - 1) / 2) := hlt
-    have h3 : (2 : ℕ) ^ ((n - 1) / 2) * 2 ^ ((n - 1) / 2) ≤ 2 ^ (n - 1) := by
-      rw [← pow_add]
-      exact Nat.pow_le_pow_right (by norm_num) (by omega)
-    have h4 : (2 : ℕ) ^ n = 2 * 2 ^ (n - 1) := by
-      rw [← pow_succ']
-      congr 1
-      omega
-    have h5 : (2 : ℕ) ^ 1 ≤ 2 ^ (n - 1) := Nat.pow_le_pow_right (by norm_num) (by omega)
-    have h6 : (d + 1) * (d + 1) ≤ 2 ^ (n - 1) := le_trans (Nat.mul_le_mul h1 h1) h3
-    rw [h4]
-    nlinarith [h6, h5]
-  have hDlt : D.card < Fintype.card (Vec n) := by
-    rw [card_vec]; omega
-  obtain ⟨s, hs⟩ : ∃ s : Vec n, s ∉ D := by
-    by_contra hc
-    push_neg at hc
-    have hu : D = Finset.univ := Finset.eq_univ_of_forall hc
-    rw [hu, Finset.card_univ] at hDlt
-    exact lt_irrefl _ hDlt
-  have hs0 : s ≠ 0 := by
-    intro e; exact hs (by rw [e, hD]; exact Finset.mem_insert_self _ _)
-  have hsout : s ≠ T.run enc := by
-    intro e
-    exact hs (by rw [e, hD]; exact Finset.mem_insert_of_mem (Finset.mem_insert_self _ _))
-  have hSsum : ∀ x ∈ S, ∀ y ∈ S, x ≠ y → x + y ≠ s := by
-    intro x hx y hy _ e
-    refine hs ?_
-    rw [hD]
-    refine Finset.mem_insert_of_mem (Finset.mem_insert_of_mem ?_)
-    exact Finset.mem_image.2 ⟨(x, y), Finset.mem_product.2 ⟨hx, hy⟩, e⟩
-  have hsimon : IsSimon s (advFn S s) := advFn_isSimon hs0 hSsum
-  have hagree : ∀ x ∈ T.queries enc, enc x = advFn S s x := by
-    intro x hx
-    exact (advFn_agree (S := S) (s := s) (hSdef ▸ hx)).symm
-  have hrun : T.run (advFn S s) = T.run enc := (T.run_congr enc (advFn S s) hagree).1
-  exact hsout (by rw [← hcorrect s _ hsimon, hrun])
-
-/-! ## Main theorem -/
-
-/-- **Simon's problem.**
-
-*Quantum upper bound*: for every Simon function `f` with secret `s` (over `n ≥ 2`
-bits) there are `n - 1` outcomes `y`, each of which occurs with nonzero amplitude in
-the state produced by a single quantum query (`amp`), such that `s` is the unique
-nonzero vector orthogonal to all of them.  So `O(n)` quantum queries determine `s`.
-
-*Classical lower bound*: every deterministic classical query algorithm (decision
-tree) that outputs the secret of every Simon function must make at least
-`2 ^ ((n-1)/2) = Ω(2^{n/2})` queries. -/
-
-theorem simon_algorithm (n : ℕ) (hn : 2 ≤ n) :
-    (∀ (s : Vec n) (f : Vec n → Vec n), IsSimon s f →
-        ∃ B : Finset (Vec n), B.card = n - 1 ∧
-          (∀ y ∈ B, ∃ z : Vec n, amp f y z ≠ 0) ∧
-          (∀ t : Vec n, (∀ y ∈ B, dot t y = 0) → t = 0 ∨ t = s)) ∧
-    (∀ (T : DTree n) (d : ℕ), DTree.DepthLE T d →
-        (∀ (s : Vec n) (f : Vec n → ℕ), IsSimon s f → T.run f = s) →
-        2 ^ ((n - 1) / 2) ≤ d) :=
-  ⟨fun _ _ hf => quantum_upper_bound hf, fun T d hd hc => classical_lower_bound hn T d hd hc⟩
-
-end QI

@@ -33,30 +33,20 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-## Overview
-
-Whether there are infinitely many base-ten palindromic primes is an open problem, so the
-unconditional statement is out of reach.  What is proved here is an unconditional *reduction*
-of that question, resting on a genuine intermediate theorem:
-
-* every base-ten palindrome with an **even** number of digits is divisible by `11`
-  (`Brockian.PalindromicPrimes.eleven_dvd_of_isPalindrome_of_even_length`);
-* consequently `11` is the **only** palindromic prime with an even number of digits
-  (`Brockian.PalindromicPrimes.evenLengthPalindromicPrimes_eq`);
-* hence the palindromic primes are infinite **iff** the palindromic primes with an odd number
-  of digits are infinite (`Brockian.PalindromicPrimes.PalindromicPrimeInfinitude`).
-
-So the Brockian conjecture may be attacked entirely inside the odd-digit-length case, with no
-loss of generality.
--/
-
 namespace Brockian.PalindromicPrimes
 
-open scoped Nat
+/-- `n` is a palindrome in base `b` if its list of base-`b` digits is equal to its reverse. -/
 
-/-- `n` is a base-ten palindrome: its list of decimal digits equals its own reversal. -/
+def palindromicPrimes : Set ℕ := {p | Nat.Prime p ∧ IsPalindrome 10 p}
 
-def palindromicPrimes : Set ℕ := {p | Nat.Prime p ∧ IsPalindrome p}
+/-!
+## The main reduction
 
-/-- The set of base-ten palindromic primes having an odd number of decimal digits. -/
+Whether `palindromicPrimes` is infinite is a well-known open problem.  The theorem below is
+the (unconditional) reduction of that statement to the statement that palindromic primes are
+unbounded, i.e. that for every bound there is a larger palindromic prime.
+-/
+
+/-- **Reduction of the palindromic prime infinitude conjecture.**
+The set of base-10 palindromic primes is infinite if and only if for every `N` there is a
+palindromic prime larger than `N`. -/

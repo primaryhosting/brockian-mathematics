@@ -23,15 +23,25 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace QPhys
+/-
+# Bc H Special
+Category: Quantum Physics
+Target: QPhys.bcH_special
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
 
 open NormedSpace
 
+namespace QPhys
+
 variable {𝔸 : Type*} [NormedRing 𝔸] [NormedAlgebra ℝ 𝔸] [CompleteSpace 𝔸]
 
-/-- In a Banach algebra, `exp (x + y) = exp x * exp y` for commuting `x`, `y`. -/
+/-- `exp` turns sums of commuting elements into products (specialization of
+`NormedSpace.exp_add_of_commute_of_mem_ball` to a real Banach algebra). -/
 
 theorem exp_mul_exp_neg (x : 𝔸) : exp x * exp (-x) = 1 := by
-  rw [← exp_add_of_commute' (Commute.neg_right (Commute.refl x))]
-  simp
+  rw [← exp_add_comm (Commute.refl x).neg_right]; simp
 

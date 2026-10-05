@@ -41,10 +41,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.RepunitPrimes
+namespace Brockian
+namespace RepunitPrimes
 
-/-- The `n`-th base-ten repunit: the number `11…1` with `n` digits equal to `1`. -/
+open Finset
+
+/-- The `n`-th repunit: the number written with `n` copies of the digit `1` in base ten,
+i.e. `repunit n = (10 ^ n - 1) / 9 = ∑_{i < n} 10 ^ i`. -/
 
 lemma repunit_two : repunit 2 = 11 := rfl
 
-/-- Splitting a repunit: `R (a + b) = R a + 10 ^ a * R b`. -/

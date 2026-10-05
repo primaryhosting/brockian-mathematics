@@ -30,7 +30,6 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -41,33 +40,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped Real
-open MeasureTheory SchwartzMap FourierTransform Laplacian LineDeriv
+namespace Brockian.Weyl.FreeLaplacian2
+
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-  [MeasurableSpace E] [BorelSpace E]
-
-/-- The complex Hilbert space `L²(E)` of square integrable functions on a finite-dimensional
-real inner product space `E`, with respect to the Lebesgue (Haar) measure. -/
-abbrev L2Space (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
-    [MeasurableSpace E] [BorelSpace E] : Type _ := ↥(Lp (α := E) ℂ 2 volume)
-
-/-- Schwartz functions viewed as elements of `L²(E)`. -/
-
-theorem freeLaplacian_apply (f : 𝓢(E, ℂ)) (h : toL2 f ∈ (freeLaplacian (E := E)).domain) :
-    freeLaplacian ⟨toL2 f, h⟩ = toL2 (-(Δ f)) := by
-  show ((toL2 (E := E)).toLinearMap ∘ₗ (-(laplacianCLM ℂ E 𝓢(E, ℂ))).toLinearMap)
-      ((LinearEquiv.ofInjective (toL2 (E := E)).toLinearMap injective_toL2).symm
-        ⟨toL2 f, h⟩) = _
-  have hf : (LinearEquiv.ofInjective (toL2 (E := E)).toLinearMap injective_toL2).symm
-      ⟨toL2 f, h⟩ = f := by
-    apply (LinearEquiv.ofInjective (toL2 (E := E)).toLinearMap injective_toL2).injective
-    simp
+lemma freeLaplacian_apply (f : 𝓢(V, ℂ)) :
+    (freeLaplacian V) ⟨toL2 V f, mem_domain_freeLaplacian V f⟩ = toL2 V (-(Δ f)) := by
+  have h : (LinearEquiv.ofInjective (toL2 V) (toL2_injective V)).symm
+      ⟨toL2 V f, mem_domain_freeLaplacian V f⟩ = f := by
+    apply (LinearEquiv.symm_apply_eq _).2
     exact Subtype.ext rfl
-  rw [hf]
-  simp [laplacianCLM_eq]
+  show (toL2 V ∘ₗ (-(laplacianCLM ℂ V 𝓢(V, ℂ)).toLinearMap))
+      ((LinearEquiv.ofInjective (toL2 V) (toL2_injective V)).symm
+        ⟨toL2 V f, mem_domain_freeLaplacian V f⟩) = _
+  rw [h]
+  simp only [LinearMap.coe_comp, Function.comp_apply, LinearMap.neg_apply,
+    ContinuousLinearMap.coe_coe, SchwartzMap.laplacianCLM_eq, toL2_apply, map_neg]
 

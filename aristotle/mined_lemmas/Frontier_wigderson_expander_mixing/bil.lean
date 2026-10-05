@@ -1,4 +1,20 @@
+/-
+# Wigderson Expander Mixing
+Category: Frontier Abel
+Target: Frontier.wigderson_expander_mixing
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Wigderson Expander Mixing
+Category: Frontier Abel
+Target: Frontier.wigderson_expander_mixing
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -25,11 +41,12 @@ set_option grind.warning false
 
 namespace Frontier
 
-section Mixing
+/-- The bilinear form `u ↦ v ↦ ∑ᵢ ∑ⱼ uᵢ Mᵢⱼ vⱼ` attached to a matrix `M`. -/
 
-variable {V : Type*} [Fintype V]
+noncomputable def bil {V : Type*} [Fintype V] (M : Matrix V V ℝ) (u v : V → ℝ) : ℝ :=
+  ∑ i, ∑ j, u i * M i j * v j
 
-/-- The bilinear form associated with a weight matrix `A : V → V → ℝ`. -/
+section
 
-noncomputable def bil (A : V → V → ℝ) (f g : V → ℝ) : ℝ := ∑ u, ∑ v, f u * A u v * g v
+variable {V : Type*} [Fintype V] (M : Matrix V V ℝ)
 

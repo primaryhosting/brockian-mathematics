@@ -1,0 +1,66 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Finset SimpleGraph
+
+namespace Ramsey35
+
+variable {V : Type*} [DecidableEq V]
+
+/-! ### Basic clique helpers -/
+
+omit [DecidableEq V] in
+/-- A finset all of whose distinct pairs are non-adjacent is a clique in the complement. -/
+
+lemma compl_isNClique_insert (G : SimpleGraph V) {v : V} {t : Finset V} {k : ℕ}
+    (hvt : v ∉ t) (hnadj : ∀ w ∈ t, ¬ G.Adj v w) (ht : Gᶜ.IsNClique k t) :
+    Gᶜ.IsNClique (k + 1) (insert v t) := by
+  refine ⟨?_, ?_⟩
+  · rw [Finset.coe_insert]
+    refine SimpleGraph.IsClique.insert ht.1 ?_
+    intro b hb hbv
+    exact (SimpleGraph.compl_adj G v b).2 ⟨hbv, hnadj b hb⟩
+  · rw [Finset.card_insert_of_notMem hvt, ht.2]
+
+/-! ### The handshake parity lemma, relativised to a finset -/
+

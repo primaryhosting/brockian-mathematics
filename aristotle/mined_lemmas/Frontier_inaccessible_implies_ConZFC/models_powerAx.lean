@@ -1,30 +1,39 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
-
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem models_powerAx (hA : A.IsTransitive) (hpow : ∀ x ∈ A, x.powerset ∈ A) :
-    (A : Type (u+1)) ⊨ powerAx := by
-  rw [powerAx]; realize_simp
-  intro a ha
-  refine ⟨a.powerset, hpow a ha, fun w hw => ?_⟩
+theorem models_powerAx : VClass P ⊨ powerAx.{u + 1} := by
+  rw [realize_powerAx]
+  rintro ⟨a, ha⟩
+  refine ⟨⟨a.powerset, h.powerset ha⟩, ?_⟩
+  rintro ⟨z, hz⟩
+  simp only [mem'_VClass]
   rw [ZFSet.mem_powerset]
-  exact ⟨fun hsub y _ hyw => hsub hyw, fun h y hyw => h y (hA w hw hyw) hyw⟩
+  constructor
+  · rintro hsub ⟨t, ht⟩ htz
+    exact hsub htz
+  · intro hall t htz
+    exact hall ⟨t, h.mem_trans hz htz⟩ htz
 

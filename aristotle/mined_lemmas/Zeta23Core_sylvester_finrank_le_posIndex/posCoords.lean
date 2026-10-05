@@ -30,10 +30,13 @@ open Matrix
 
 variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- The positive index (number of positive eigenvalues) of a Hermitian matrix. -/
+/-- The positive index of inertia of a Hermitian matrix: the number of indices `i` such that
+the `i`-th eigenvalue is positive (i.e. the number of positive eigenvalues, counted with
+multiplicity). -/
 
 noncomputable def posCoords {A : Matrix n n 𝕜} (hA : A.IsHermitian) :
     (n → 𝕜) →ₗ[𝕜] ({i : n // 0 < hA.eigenvalues i} → 𝕜) :=
   (LinearMap.funLeft 𝕜 𝕜 (Subtype.val : {i : n // 0 < hA.eigenvalues i} → n)).comp
     (Matrix.mulVecLin (star (hA.eigenvectorUnitary : Matrix n n 𝕜)))
 
+@[simp]

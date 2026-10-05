@@ -1,4 +1,20 @@
+/-
+# Spectral Theorem Finite
+Category: Quantum Physics
+Target: QPhys.spectral_theorem_finite
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Spectral Theorem Finite
+Category: Quantum Physics
+Target: QPhys.spectral_theorem_finite
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -15,49 +31,45 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace QPhys
 
-/-- If `A = U * diagonal d * Uᴴ` with `Uᴴ * U = 1`, then the `i`-th column of `U` is an
-eigenvector of `A` with eigenvalue `d i`. -/
+/-- **Finite-dimensional spectral theorem.**
+Every Hermitian matrix `A` over `ℂ` (indexed by a finite type `n`) is unitarily
+diagonalizable with *real* eigenvalues: there is a unitary matrix `U`
+(`Uᴴ * U = 1` and `U * Uᴴ = 1`) and a real-valued function `d : n → ℝ` with
+
+* `A = U * diagonal (fun i => (d i : ℂ)) * Uᴴ`,
+* each `d i` is an eigenvalue of `A`, with the `i`-th column of `U` as an
+  eigenvector, and
+* the spectrum of `A` is exactly the (real) set of values of `d`. -/
 
 theorem spectral_theorem_finite {n : Type*} [Fintype n] [DecidableEq n]
     (A : Matrix n n ℂ) (hA : A.IsHermitian) :
     ∃ (U : Matrix n n ℂ) (d : n → ℝ),
-      U ∈ Matrix.unitaryGroup n ℂ ∧
-      Uᴴ * A * U = Matrix.diagonal (fun i => (d i : ℂ)) ∧
-      A = U * Matrix.diagonal (fun i => (d i : ℂ)) * Uᴴ ∧
-      (∀ i : n, A *ᵥ (fun k => U k i) = (d i : ℂ) • (fun k => U k i)) ∧
+      Uᴴ * U = 1 ∧ U * Uᴴ = 1 ∧
+      A = U * Matrix.diagonal (fun i => ((d i : ℝ) : ℂ)) * Uᴴ ∧
+      (∀ i, A *ᵥ (fun j => U j i) = ((d i : ℝ) : ℂ) • (fun j => U j i)) ∧
       spectrum ℂ A = (fun r : ℝ => (r : ℂ)) '' Set.range d := by
   classical
-  refine ⟨(hA.eigenvectorUnitary : Matrix n n ℂ), hA.eigenvalues,
-    (hA.eigenvectorUnitary).2, ?_, ?_, ?_, ?_⟩
-  · have h := hA.conjStarAlgAut_star_eigenvectorUnitary
-    rw [Unitary.conjStarAlgAut_star_apply] at h
-    simpa [Matrix.star_eq_conjTranspose, Function.comp_def] using h
-  · have h := hA.spectral_theorem
-    rw [Unitary.conjStarAlgAut_apply] at h
-    simpa [Matrix.star_eq_conjTranspose, Function.comp_def] using h
-  · have h : A = (hA.eigenvectorUnitary : Matrix n n ℂ) *
-        Matrix.diagonal (fun i => ((hA.eigenvalues i : ℝ) : ℂ)) *
-        (hA.eigenvectorUnitary : Matrix n n ℂ)ᴴ := by
-      have h := hA.spectral_theorem
-      rw [Unitary.conjStarAlgAut_apply] at h
-      simpa [Matrix.star_eq_conjTranspose, Function.comp_def] using h
-    have hU : (hA.eigenvectorUnitary : Matrix n n ℂ)ᴴ *
-        (hA.eigenvectorUnitary : Matrix n n ℂ) = 1 := by
-      have := (hA.eigenvectorUnitary).2
-      rw [Matrix.mem_unitaryGroup_iff'] at this
-      simpa [Matrix.star_eq_conjTranspose] using this
-    exact fun i => col_isEigenvector_of_diagonalization A _ _ hU h i
-  · simpa [Function.comp_def] using hA.spectrum_eq_image_range
+  refine ⟨(hA.eigenvectorUnitary : Matrix n n ℂ), hA.eigenvalues, ?_, ?_, ?_, ?_, ?_⟩
+  · simpa [Matrix.star_eq_conjTranspose] using
+      (Unitary.star_mul_self_of_mem hA.eigenvectorUnitary.2)
+  · simpa [Matrix.star_eq_conjTranspose] using
+      (Unitary.mul_star_self_of_mem hA.eigenvectorUnitary.2)
+  · have := hA.spectral_theorem
+    rw [Unitary.conjStarAlgAut_apply] at this
+    simpa [Matrix.star_eq_conjTranspose, Function.comp_def, mul_assoc] using this
+  · intro i
+    have hcol : Matrix.col (hA.eigenvectorUnitary : Matrix n n ℂ) i
+        = ⇑(hA.eigenvectorBasis i) := Matrix.IsHermitian.eigenvectorUnitary_col_eq hA i
+    have h := hA.mulVec_eigenvectorBasis i
+    have hfun : (fun j => (hA.eigenvectorUnitary : Matrix n n ℂ) j i)
+        = ⇑(hA.eigenvectorBasis i) := hcol
+    rw [hfun, h]
+    ext j
+    simp [Complex.real_smul]
+  · have := hA.spectrum_eq_image_range
+    simpa using this
 
 end QPhys
 

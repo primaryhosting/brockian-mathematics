@@ -23,27 +23,44 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-import Brockian.LegendreConjecture
+import Brockian.LegendreConjectureExtras
+#print axioms Brockian.LegendreConjecture.LegendreConjecture
+#print axioms Brockian.LegendreConjecture.legendre_of_le_forty
+#print axioms Brockian.LegendreConjecture.IsPrimeNat_iff_prime
+#print axioms Brockian.LegendreConjecture.exists_prime_between_sq_and_two_sq
+#print axioms Brockian.LegendreConjecture.legendre_of_shortInterval
 
 /-!
-# Legendre Conjecture — Mathlib companion
+# Legendre Conjecture
+Category: Brockian Conjecture
+Target: Brockian.LegendreConjecture.LegendreConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-This module connects the self-contained statements of `Brockian.LegendreConjecture`
-(which, by design, imports nothing so that the required header comment can sit at the
-very top of that file) with Mathlib's `Nat.Prime`, and records some unconditional
-partial results towards Legendre's conjecture.
+/-
+This file is deliberately self-contained (no `import` lines), so that the header
+comment above can literally be the first thing in the file: Lean 4 requires all
+`import` commands to precede every other piece of syntax except plain comments,
+and a module doc comment `/-! ... -/` counts as syntax.
+
+Mathlib-based companion results (in particular the identification of the
+primality predicate used here with `Nat.Prime`, and Bertrand's postulate as an
+unconditional partial result) live in `Brockian/LegendreConjectureExtras.lean`,
+which imports this module.
 -/
 
 namespace Brockian.LegendreConjecture
 
-/-- The self-contained primality predicate used in `Brockian.LegendreConjecture`
-agrees with Mathlib's `Nat.Prime`. -/
+/-- Primality of a natural number, spelled out by trial division:
+`p` is prime iff `2 ≤ p` and no `d` with `2 ≤ d < p` divides `p`.
+This is proved equivalent to Mathlib's `Nat.Prime` in
+`Brockian/LegendreConjectureExtras.lean`. -/
 
 def LegendreStatement : Prop :=
-  ∀ n : Nat, 1 ≤ n → ∃ p : Nat, IsPrime p ∧ n ^ 2 < p ∧ p < (n + 1) ^ 2
+  ∀ n : Nat, 0 < n → ∃ p : Nat, IsPrimeNat p ∧ n ^ 2 < p ∧ p < (n + 1) ^ 2
 
-/-- A short prime gap hypothesis: for every `x ≥ 1` there is a prime in the interval
-`(x, x + √x]`, where `√x` is expressed by an auxiliary `m` with `m * m ≤ x`.
-This is itself an open problem — it is far beyond what is currently known
-unconditionally, and it is slightly stronger than Legendre's conjecture. -/
+/-- A short-interval prime hypothesis: whenever `1 ≤ m` and `m ^ 2 ≤ x`, the interval
+`(x, x + m]` contains a prime; i.e. every interval `(x, x + √x]` contains a prime.
+This is weaker than Cramér's conjecture, and stronger than anything currently known
+unconditionally. -/

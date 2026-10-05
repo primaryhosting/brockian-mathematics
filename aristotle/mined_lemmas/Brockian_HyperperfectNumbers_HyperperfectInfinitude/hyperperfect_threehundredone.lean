@@ -30,51 +30,31 @@ Target: Brockian.HyperperfectNumbers.HyperperfectInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above is a plain block comment rather than a `/-!` module docstring because Lean 4
--- does not allow any command, including a module docstring, to precede the `import` lines.)
-
-/-
-## Overview
-
-A positive integer `n` is *`k`-hyperperfect* (for `k ≥ 1`) when
-
-  `n = 1 + k * (σ(n) - n - 1)`,
-
-where `σ(n)` is the sum of all divisors of `n`; equivalently `σ(n) - n - 1` is the sum of
-the divisors of `n` other than `1` and `n`.  Taking `k = 1` recovers the perfect numbers.
-To avoid truncated natural subtraction the definition below is stated in the equivalent
-subtraction-free form `n + k * (n + 1) = 1 + k * σ(n)`.
-
-Whether there are infinitely many hyperperfect numbers is an open problem: already the case
-`k = 1` is the (open) question of whether there are infinitely many perfect numbers.  What is
-proved here is therefore a *conditional reduction* together with unconditional supporting
-results:
-
-* `Brockian.HyperperfectNumbers.isHyperperfect_mul` — an unconditional construction: whenever
-  `k ≥ 1` and both `k + 1` and `k² + k + 1` are prime, the number `(k + 1)(k² + k + 1)` is
-  `k`-hyperperfect.  (E.g. `k = 1, 2, 6` give `6`, `21`, `301`.)
-* `Brockian.HyperperfectNumbers.HyperperfectInfinitude` — the main target: if there are
-  arbitrarily large `k` with `k + 1` and `k² + k + 1` both prime (an instance of Bunyakovsky's
-  conjecture), then the set of hyperperfect numbers is infinite.
-* `Brockian.HyperperfectNumbers.hyperperfect_infinite_of_infinitely_many_mersenne_primes` — a
-  second, independent conditional reduction: infinitely many Mersenne primes also imply
-  infinitely many hyperperfect numbers (via the even perfect numbers, which are
-  `1`-hyperperfect).
--/
 
 import Mathlib
 
-open scoped ArithmeticFunction.sigma
-open ArithmeticFunction
+/-!
+# Hyperperfect Infinitude
+
+A number `n > 1` is *`k`-hyperperfect* when `n = 1 + k * (σ(n) - n - 1)`, and
+*hyperperfect* when it is `k`-hyperperfect for some `k ≥ 1` (the case `k = 1` is exactly
+perfection).  Whether there are infinitely many hyperperfect numbers is open.
+
+This file gives a Lean-checked conditional reduction: `HyperperfectInfinitude` shows that
+the infinitude of the prime family `{p prime : p² - p + 1 prime}` implies the infinitude of
+hyperperfect numbers, via the construction `p * (p² - p + 1)`, which is `(p-1)`-hyperperfect.
+Unconditional instances `6, 21, 301, 2041` are recorded at the end.
+-/
 
 namespace Brockian.HyperperfectNumbers
 
-/-- `n` is `k`-hyperperfect: `k ≥ 1`, `n > 1` and `n = 1 + k * (σ n - n - 1)`, written in the
-subtraction-free form `n + k * (n + 1) = 1 + k * σ n`. -/
+open Finset
 
-theorem hyperperfect_threehundredone : Hyperperfect 301 :=
-  ⟨6, by simpa using isHyperperfect_mul (k := 6) (by norm_num) (by norm_num) (by norm_num)⟩
+/-- The sum-of-divisors function `σ(n) = ∑_{d ∣ n} d`. -/
 
-/-- **Main conditional theorem.**  If there are arbitrarily large `k` such that both `k + 1`
-and `k ^ 2 + k + 1` are prime (a special case of Bunyakovsky's conjecture), then there are
-infinitely many hyperperfect numbers. -/
+theorem hyperperfect_threeHundredOne : Hyperperfect 301 := by
+  have h := hyperperfect_mul_of_prime (p := 7) (by norm_num) (by norm_num)
+  norm_num at h
+  exact h
+
+/-- `2041` is `12`-hyperperfect. -/

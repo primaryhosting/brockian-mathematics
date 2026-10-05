@@ -5,98 +5,134 @@ Target: CS.barrington
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above uses `/- -/` rather than `/-! -/` because Lean 4 requires all `import`
+-- commands to precede any module docstring.)
 
 import Mathlib
 
 /-!
-# Barrington
-Category: Frontier Cs
-Target: CS.barrington
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+## Barrington's theorem
+
+We formalise Barrington's theorem, which identifies the class `NC¹` (Boolean formulas of
+logarithmic depth) with the class of functions computed by *width-5 permutation branching
+programs* of polynomial length.
+
+* `CS.Formula n` are Boolean formulas in the variables `Fin n` built from `¬`, `∧`, `∨`.
+  Following the usual convention for Barrington's theorem, `Formula.depth` counts the
+  nesting depth of the binary gates (negations are free, since they can be pushed to the
+  leaves without changing the depth).
+* `CS.BProg n` is a *width-5 permutation branching program*: a list of instructions, each of
+  which reads one input bit and outputs one of two permutations of `Fin 5`, depending on the
+  value of that bit.  The value `BProg.eval P x` of the program on the input `x` is the
+  product of the permutations selected by the instructions.
+
+The two halves of `CS.barrington` are:
+
+1. every formula of depth `d` is computed by a width-5 permutation branching program of
+   length at most `4 ^ d`, with output the prescribed 5-cycle `σ` on accepted inputs and the
+   identity on rejected inputs (this is Barrington's construction);
+2. conversely, for every width-5 permutation branching program `P` of length `ℓ` and every
+   target permutation `σ`, the acceptance predicate `P.eval x = σ` is computed by a formula of
+   depth `O(log ℓ)` (a balanced divide-and-conquer evaluation of the product).
 -/
-
-/-!
-## Overview
-
-We formalise Barrington's theorem in the following form.
-
-* A Boolean function family `f n : (Fin n → Bool) → Bool` is *in NC¹* (`CS.InNC1`) when it is
-  computed by Boolean formulas (constants, `¬`, fan-in-two `∧`, `∨`) of depth `O(log n)`.
-  A formula of depth `d` has at most `2 ^ d` leaves, so this is the usual class of
-  logarithmic-depth fan-in-two circuits / polynomial-size formulas.
-* A *width-5 permutation branching program* (`CS.Prog`) is a finite sequence of instructions,
-  each of which queries one input variable and applies one of two permutations of the five
-  states `Fin 5`; the program computes the ordered product of these permutations, and accepts
-  an input when the image of the start state `0` lies in a designated set of accepting states.
-  `CS.InW5BP` asks for such programs of polynomial length.
-
-The main theorem `CS.barrington` states that the two classes coincide. The two directions are
-proved with explicit resource bounds: a formula of depth `d` is turned into a program of length
-at most `4 ^ d` (`CS.exists_prog`, via the 5-cycle commutator construction `CS.exists_comp`),
-and a program of length at most `2 ^ k` is simulated by a formula of depth at most `4 * k + 4`
-(`CS.progFormula_eval`, `CS.progFormula_depth`, via a balanced divide-and-conquer evaluation of
-the product of the instruction permutations).
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
 
 namespace CS
 
-/-! ## Boolean formulas (the NC¹ side) -/
+open Equiv Equiv.Perm
 
-/-- Boolean formulas over variables indexed by `α`, with constants, negation and
-fan-in-two conjunction and disjunction. -/
-inductive Formula (α : Type*) where
-  | const : Bool → Formula α
-  | var : α → Formula α
-  | not : Formula α → Formula α
-  | and : Formula α → Formula α → Formula α
-  | or : Formula α → Formula α → Formula α
-  deriving Inhabited
+/-- The group of permutations of five points: the "width 5" of Barrington's theorem. -/
+abbrev W : Type := Equiv.Perm (Fin 5)
 
-namespace Formula
+/-! ### Boolean formulas -/
 
-variable {α : Type*}
+/-- Boolean formulas over the variables `Fin n`. -/
+inductive Formula (n : ℕ) where
+  | var : Fin n → Formula n
+  | neg : Formula n → Formula n
+  | conj : Formula n → Formula n → Formula n
+  | disj : Formula n → Formula n → Formula n
 
-/-- The Boolean function computed by a formula. -/
+/-- The depth of a formula, counting binary gates only (negations are free). -/
 
-lemma exists_prog (n : ℕ) (F : Formula (Fin n)) :
-    ∃ P : Prog (Fin n), P.length ≤ 4 ^ F.depth ∧ ∀ x, P.accepts x = F.eval x := by
-  cases n with
-  | zero =>
-      refine ⟨⟨[], if F.eval (fun i => i.elim0) then Finset.univ else ∅⟩,
-        by simp [Prog.length], ?_⟩
+theorem exists_prog {n : ℕ} (F : Formula n) :
+    ∀ σ : W, σ.cycleType = {5} →
+      ∃ P : BProg n, P ≠ [] ∧ P.length ≤ 4 ^ F.depth ∧
+        ∀ x, P.eval x = if F.eval x then σ else 1 := by
+  induction F with
+  | var i =>
+      intro σ _
+      refine ⟨[⟨i, 1, σ⟩], by simp, by simp [Formula.depth], ?_⟩
       intro x
-      have hx : x = (fun i => i.elim0) := Subsingleton.elim _ _
-      subst hx
-      by_cases hF : F.eval (fun i : Fin 0 => i.elim0) = true <;>
-        simp [Prog.accepts, Prog.perm, hF]
-  | succ m =>
-      obtain ⟨l, -, hlen, hc⟩ :=
-        exists_comp (⟨0, Nat.succ_pos m⟩ : Fin (m + 1)) F gamma0 isFive_gamma0
-      refine ⟨⟨l, {gamma0 0}⟩, hlen, ?_⟩
+      simp only [BProg.eval_cons, BProg.eval_nil, mul_one, Instr.val, Formula.eval]
+      cases x i <;> simp
+  | neg F ih =>
+      intro σ hσ
+      obtain ⟨Q, hQne, hQlen, hQ⟩ := ih σ⁻¹ (by rw [cycleType_inv]; exact hσ)
+      refine ⟨BProg.lmul σ Q, BProg.lmul_ne_nil σ hQne, by simpa [Formula.depth] using hQlen, ?_⟩
       intro x
-      have hz : ¬ (0 : Fin 5) = gamma0 0 := by decide
-      by_cases hF : F.eval x = true
-      · simp [Prog.accepts, Prog.perm, hc x, hF]
-      · simp only [Bool.not_eq_true] at hF
-        simp [Prog.accepts, Prog.perm, hc x, hF, hz]
+      rw [BProg.eval_lmul σ hQne, hQ]
+      simp only [Formula.eval]
+      cases F.eval x <;> simp
+  | conj F G ihF ihG =>
+      intro σ hσ
+      obtain ⟨P, hPne, hPlen, hP⟩ := ihF sigma0 sigma0_cycleType
+      obtain ⟨Q, hQne, hQlen, hQ⟩ := ihG tau0 tau0_cycleType
+      have key := comm_prog hP hQ
+      obtain ⟨R, hRlen, hRne, hR⟩ :=
+        relabel key (isConj_iff_cycleType_eq.2 (by rw [comm_cycleType, hσ]))
+      refine ⟨R, hRne (by simp [hPne]), ?_, hR⟩
+      rw [hRlen]
+      have h1 : P.length ≤ 4 ^ (max F.depth G.depth) :=
+        hPlen.trans (Nat.pow_le_pow_right (by norm_num) (le_max_left _ _))
+      have h2 : Q.length ≤ 4 ^ (max F.depth G.depth) :=
+        hQlen.trans (Nat.pow_le_pow_right (by norm_num) (le_max_right _ _))
+      have : (P ++ Q ++ P.inv ++ Q.inv).length = 2 * (P.length + Q.length) := by
+        simp [BProg.length_inv]; ring
+      rw [this]
+      show 2 * (P.length + Q.length) ≤ 4 ^ (max F.depth G.depth + 1)
+      rw [pow_succ]
+      omega
+  | disj F G ihF ihG =>
+      intro σ hσ
+      -- programs for the negations
+      obtain ⟨P0, hP0ne, hP0len, hP0⟩ := ihF sigma0⁻¹ (by rw [cycleType_inv]; exact sigma0_cycleType)
+      obtain ⟨Q0, hQ0ne, hQ0len, hQ0⟩ := ihG tau0⁻¹ (by rw [cycleType_inv]; exact tau0_cycleType)
+      set P := BProg.lmul sigma0 P0 with hPdef
+      set Q := BProg.lmul tau0 Q0 with hQdef
+      have hPne : P ≠ [] := BProg.lmul_ne_nil _ hP0ne
+      have hQne : Q ≠ [] := BProg.lmul_ne_nil _ hQ0ne
+      have hP : ∀ x, P.eval x = if (!F.eval x) then sigma0 else 1 := by
+        intro x
+        rw [hPdef, BProg.eval_lmul sigma0 hP0ne, hP0]
+        cases F.eval x <;> simp
+      have hQ : ∀ x, Q.eval x = if (!G.eval x) then tau0 else 1 := by
+        intro x
+        rw [hQdef, BProg.eval_lmul tau0 hQ0ne, hQ0]
+        cases G.eval x <;> simp
+      have key := comm_prog hP hQ
+      obtain ⟨R, hRlen, hRne, hR⟩ :=
+        relabel key (isConj_iff_cycleType_eq.2
+          (by rw [comm_cycleType, cycleType_inv]; exact hσ.symm))
+      have hRne' : R ≠ [] := hRne (by simp [hPne])
+      refine ⟨BProg.lmul σ R, BProg.lmul_ne_nil σ hRne', ?_, ?_⟩
+      · rw [BProg.length_lmul, hRlen]
+        have h1 : P.length ≤ 4 ^ (max F.depth G.depth) := by
+          rw [hPdef, BProg.length_lmul]
+          exact hP0len.trans (Nat.pow_le_pow_right (by norm_num) (le_max_left _ _))
+        have h2 : Q.length ≤ 4 ^ (max F.depth G.depth) := by
+          rw [hQdef, BProg.length_lmul]
+          exact hQ0len.trans (Nat.pow_le_pow_right (by norm_num) (le_max_right _ _))
+        have : (P ++ Q ++ P.inv ++ Q.inv).length = 2 * (P.length + Q.length) := by
+          simp [BProg.length_inv]; ring
+        rw [this]
+        show 2 * (P.length + Q.length) ≤ 4 ^ (max F.depth G.depth + 1)
+        rw [pow_succ]
+        omega
+      · intro x
+        rw [BProg.eval_lmul σ hRne', hR]
+        simp only [Formula.eval]
+        cases F.eval x <;> cases G.eval x <;> simp
 
-/-! ## The converse: simulating branching programs by shallow formulas -/
+/-! ### The converse: evaluating a branching program by a shallow formula -/
 
-/-- A balanced disjunction of five formulas. -/
+/-- The constantly false formula (of depth 1). -/

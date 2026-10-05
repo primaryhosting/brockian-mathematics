@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Sixth Unitary Perfect Exists
-Category: Brockian Conjecture
-Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,36 +31,19 @@ Category: Brockian Conjecture
 Target: Brockian.UnitaryPerfect.SixthUnitaryPerfectExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(The header block above is repeated as a plain comment on the very first line of the
-file; Lean requires `import` commands to precede any module docstring.)
-
-## Contents
-
-A *unitary divisor* of `n` is a divisor `d` with `gcd d (n / d) = 1`, and `n` is
-*unitary perfect* when the sum `σ*(n)` of its unitary divisors equals `2 n`.
-Exactly five unitary perfect numbers are known
-(`6`, `60`, `90`, `87360`, `146361946186458562560000`), and whether a sixth one
-exists is an open problem; consequently the target statement here is a
-*conditional reduction* rather than an unconditional existence proof.
-
-We develop:
-
-* `sigmaStar_mul_of_coprime`: `σ*` is multiplicative on coprime arguments;
-* `sigmaStar_prime_pow`: `σ*(p ^ a) = p ^ a + 1`;
-* verification that each of the five known numbers is unitary perfect;
-* `not_isUnitaryPerfect_of_odd`: there is no odd unitary perfect number;
-* `SixthUnitaryPerfectExists`: if some unitary perfect number exceeds the largest
-  known one, then a unitary perfect number outside the known five exists.
 -/
 
-namespace Brockian.UnitaryPerfect
+set_option maxRecDepth 8000
 
 open Finset
 
-/-- The unitary divisors of `n`: divisors `d` of `n` with `gcd d (n / d) = 1`. -/
+namespace Brockian.UnitaryPerfect
+
+/-! ## Unitary divisors and the unitary divisor sum -/
+
+/-- The unitary divisors of `n`: the divisors `d` of `n` with `d` coprime to `n / d`. -/
 
 theorem isUnitaryPerfect_fifth : IsUnitaryPerfect 146361946186458562560000 :=
-  ⟨by norm_num, by rw [sigmaStar_fifth]⟩
+  ⟨by norm_num, by norm_num [usigma_fifth]⟩
 
-/-- Splitting off the largest power of the smallest prime factor. -/
+/-- All five numbers of `knownUnitaryPerfect` really are unitary perfect. -/

@@ -1,73 +1,3 @@
-/-
-# Abel Ruffini Deg 5
-Category: Pure Mathematics
-Target: Math.abel_ruffini_deg5
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Archive.Wiedijk100Theorems.AbelRuffini
-
-/-!
-# Abel Ruffini Deg 5
-
-The quintic is not solvable by radicals: there is a degree-`5` irreducible polynomial over `ℚ`
-whose Galois group is not solvable (indeed its Galois group acts on the five complex roots as the
-full symmetric group `S₅`), and hence none of whose complex roots is expressible by radicals.
-
-The witness is `X ^ 5 - 4 * X + 2`, which is Eisenstein at `2` and has exactly three real roots.
-
-The main input is Mathlib's Archive development of the Abel-Ruffini theorem
-(`Archive/Wiedijk100Theorems/AbelRuffini.lean`, by Thomas Browning), which provides
-`AbelRuffini.gal_Phi`, `AbelRuffini.irreducible_Phi` and `AbelRuffini.complex_roots_Phi`,
-together with `solvableByRad.isSolvable'` and `Equiv.Perm.not_solvable` from Mathlib proper.
--/
-
-namespace Math
-
-open Polynomial
-
-attribute [local instance] Polynomial.Gal.splits_ℚ_ℂ
-
-/-- The witness polynomial `X ^ 5 - 4 * X + 2 : ℚ[X]`. -/
-noncomputable def quinticWitness : ℚ[X] := X ^ 5 - C 4 * X + C 2
-
-theorem quinticWitness_eq : quinticWitness = AbelRuffini.Φ ℚ 4 2 := by
-  simp [quinticWitness, AbelRuffini.Φ]
-
-/-- **Abel-Ruffini theorem in degree 5.** The general quintic is not solvable by radicals:
-the irreducible rational quintic `X ^ 5 - 4 * X + 2` has non-solvable Galois group (its Galois
-group acts on the five complex roots as the full symmetric group), and consequently none of its
-complex roots -- which exist -- is solvable by radicals over `ℚ`. -/
-theorem abel_ruffini_deg5 :
-    ∃ p : ℚ[X], p.natDegree = 5 ∧ Irreducible p ∧
-      Function.Bijective (Gal.galActionHom p ℂ) ∧
-      ¬ IsSolvable p.Gal ∧
-      (∃ x : ℂ, aeval x p = 0) ∧
-      (∀ x : ℂ, aeval x p = 0 → ¬ IsSolvableByRad ℚ x) := by
-  refine ⟨quinticWitness, ?_, ?_, ?_, ?_, ?_, ?_⟩
-  · rw [quinticWitness_eq]; exact AbelRuffini.natDegree_Phi 4 2
-  · rw [quinticWitness_eq]
-    exact AbelRuffini.irreducible_Phi 4 2 2 Nat.prime_two (by norm_num) (by norm_num) (by norm_num)
-  · rw [quinticWitness_eq]
-    exact AbelRuffini.gal_Phi 4 2 (by norm_num)
-      (AbelRuffini.irreducible_Phi 4 2 2 Nat.prime_two (by norm_num) (by norm_num) (by norm_num))
-  · rw [quinticWitness_eq]
-    have h_irred := AbelRuffini.irreducible_Phi 4 2 2 Nat.prime_two (by norm_num) (by norm_num) (by norm_num)
-    intro h
-    refine Equiv.Perm.not_solvable _ (le_of_eq ?_)
-      (solvable_of_surjective (AbelRuffini.gal_Phi 4 2 (by norm_num) h_irred).2)
-    rw_mod_cast [Cardinal.mk_fintype, AbelRuffini.complex_roots_Phi 4 2 h_irred.separable]
-  · obtain ⟨x, hx⟩ := (IsAlgClosed.splits (AbelRuffini.Φ ℂ 4 2)).exists_eval_eq_zero
-      (by simp [AbelRuffini.degree_Phi])
-    rw [← AbelRuffini.map_Phi 4 2 (algebraMap ℚ ℂ), eval_map] at hx
-    exact ⟨x, by rwa [quinticWitness_eq]⟩
-  · intro x hx
-    rw [quinticWitness_eq] at hx
-    exact AbelRuffini.not_solvable_by_rad' x hx
-
-end Math
-
 import Mathlib
 
 open scoped BigOperators
@@ -92,4 +22,43 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+import Archive.Wiedijk100Theorems.AbelRuffini
+/-!
+# Abel Ruffini Deg 5
+Category: Pure Mathematics
+Target: Math.abel_ruffini_deg5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Polynomial AbelRuffini
+
+open scoped Polynomial
+
+attribute [local instance] Polynomial.Gal.splits_ℚ_ℂ
+
+/-- **Abel–Ruffini for the quintic.**
+
+There is a monic quintic polynomial over `ℚ` (namely `X ^ 5 - 4 * X + 2`) which is irreducible,
+whose Galois group is *not* solvable, which has a complex root, and none of whose complex roots
+is solvable by radicals.  Hence the general quintic equation cannot be solved by radicals.
+
+The ingredients are Mathlib's `solvableByRad.isSolvable'`,
+`Polynomial.Gal.galActionHom_bijective_of_prime_degree'` and `Equiv.Perm.not_solvable`,
+packaged in `Archive.Wiedijk100Theorems.AbelRuffini`. -/
+theorem Math.abel_ruffini_deg5 :
+    ∃ p : ℚ[X], p.Monic ∧ p.natDegree = 5 ∧ Irreducible p ∧ ¬ IsSolvable p.Gal ∧
+      (∃ x : ℂ, aeval x p = 0) ∧ ∀ x : ℂ, aeval x p = 0 → ¬ IsSolvableByRad ℚ x := by
+  have h_irred : Irreducible (Φ ℚ 4 2) := irreducible_Phi 4 2 2 Nat.prime_two (by norm_num)
+    (by norm_num) (by decide)
+  refine ⟨Φ ℚ 4 2, monic_Phi 4 2, natDegree_Phi 4 2, h_irred, ?_, ?_, ?_⟩
+  · intro h
+    refine Equiv.Perm.not_solvable _ (le_of_eq ?_)
+      (solvable_of_surjective (gal_Phi 4 2 (by norm_num) h_irred).2)
+    rw_mod_cast [Cardinal.mk_fintype, complex_roots_Phi 4 2 h_irred.separable]
+  · obtain ⟨x, hx⟩ := (IsAlgClosed.splits (Φ ℂ 4 2)).exists_eval_eq_zero (by simp [degree_Phi])
+    rw [← map_Phi 4 2 (algebraMap ℚ ℂ), eval_map] at hx
+    exact ⟨x, hx⟩
+  · exact fun x hx => not_solvable_by_rad' x hx
 

@@ -5,6 +5,8 @@ Target: Frontier.lieb_thirring_stability
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above is a plain block comment: in Lean 4 a module docstring `/-! ... -/`
+-- may not precede the `import` lines; it is repeated as a docstring below.)
 
 import Mathlib
 
@@ -21,6 +23,7 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped ENNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -33,9 +36,9 @@ set_option autoImplicit false
 set_option pp.fullNames true
 set_option pp.structureInstances true
 set_option pp.coercions.types true
+set_option pp.piBinderTypes true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
@@ -43,32 +46,62 @@ namespace Frontier
 
 open MeasureTheory
 
-/-! ## The pointwise (Young) inequality underlying stability -/
+/-!
+## Stability of matter from the Lieb–Thirring kinetic energy inequality
 
-/-- The Lieb–Thirring stability constant appearing in the bound
-`Kc * a ^ (5/3) - t * a ≥ - ltConst Kc * t ^ (5/2)`. -/
+The Lieb–Thirring inequality states that for an antisymmetric normalized `N`-fermion wave
+function `Ψ` in three dimensions, with one-body density `ρ_Ψ`, the kinetic energy obeys
 
-theorem lieb_thirring_stability
-    {Kc b V : ℝ} {N : ℕ} {ψ : Fin N → Space → ℂ} {W : Space → ℝ}
-    (hKc : 0 < Kc) (hb : 0 ≤ b)
-    (hLT : LiebThirringKineticInequality Kc)
-    (hadm : Admissible ψ)
-    (hW : ∀ x, 0 ≤ W x)
-    (hρint : Integrable (fun x => (density ψ x) ^ (5 / 3 : ℝ)))
-    (hWρint : Integrable (fun x => W x * density ψ x))
-    (hWint : Integrable (fun x => (W x) ^ (5 / 2 : ℝ)))
-    (hV : -(b * ∫ x, W x * density ψ x) ≤ V) :
-    -(ltConst Kc * b ^ (5 / 2 : ℝ) * ∫ x, (W x) ^ (5 / 2 : ℝ))
-      ≤ (∑ i, kineticEnergy (ψ i)) + V :=
-  energy_lower_bound_of_LT (μ := volume) hKc hb (density_nonneg ψ) hW hρint hWρint hWint
-    (hLT N ψ hadm) hV
+  `T(Ψ) ≥ K ∫ ρ_Ψ ^ (5/3)`
 
-/-! ## The base case `N = 1` of the Lieb–Thirring kinetic inequality
+for a universal constant `K > 0`.  Together with an electrostatic (Thomas–Fermi type) lower
+bound for the Coulomb interaction of the electrons with `M` nuclei,
 
-For a single particle the Lieb–Thirring inequality reduces to the Sobolev inequality
-`‖ψ‖_6 ≤ C ‖∇ψ‖_2` combined with the Hölder interpolation
-`‖ψ‖_{10/3}^{10/3} ≤ ‖ψ‖_2^{4/3} ‖ψ‖_6^2`. We prove this base case unconditionally,
-for `C¹` wave functions with compact support. -/
+  `W(Ψ) ≥ - A ∫ ρ_Ψ ^ (4/3) - B * M`,
 
-/-- The operator norm of the derivative is dominated by the Euclidean length of the
-gradient. -/
+it implies *stability of matter of the second kind*: the total energy is bounded below by a
+constant times the number of particles,
+
+  `T(Ψ) + W(Ψ) ≥ - (A ^ 2 / (4 K)) * N - B * M`,
+
+where `N = ∫ ρ_Ψ` is the number of electrons.
+
+This file formalizes that implication as a Lean-checked reduction: the two physical input
+bounds are taken as hypotheses (they are the analytic inputs of the theory), and the linear
+lower bound on the energy is derived.  The mathematical content of the reduction is the
+Cauchy–Schwarz interpolation `∫ ρ^(4/3) ≤ (∫ ρ^(5/3))^(1/2) (∫ ρ)^(1/2)` followed by
+completing the square, which is exactly the argument of Lieb and Thirring.
+-/
+
+/-- **Interpolation step.** For a nonnegative density `ρ` with `ρ` and `ρ ^ (5/3)` integrable,
+Cauchy–Schwarz (Hölder with exponents `2, 2` applied to `ρ ^ (5/6) · ρ ^ (1/2)`) gives
+`∫ ρ ^ (4/3) ≤ (∫ ρ ^ (5/3)) ^ (1/2) * (∫ ρ) ^ (1/2)`. -/
+
+theorem lieb_thirring_stability {α : Type*} [MeasurableSpace α] {μ : Measure α}
+    {ρ : α → ℝ} (hρ0 : 0 ≤ᵐ[μ] ρ) (hρm : AEStronglyMeasurable ρ μ)
+    (hρ1 : Integrable ρ μ) (hρ53 : Integrable (fun x => ρ x ^ (5 / 3 : ℝ)) μ)
+    {N M K A B T W : ℝ} (hK : 0 < K) (hA : 0 ≤ A)
+    (hN : ∫ x, ρ x ∂μ = N)
+    (hT : K * ∫ x, ρ x ^ (5 / 3 : ℝ) ∂μ ≤ T)
+    (hW : -(A * ∫ x, ρ x ^ (4 / 3 : ℝ) ∂μ) - B * M ≤ W) :
+    -(A ^ 2 / (4 * K)) * N - B * M ≤ T + W := by
+  set t : ℝ := ∫ x, ρ x ^ (5 / 3 : ℝ) ∂μ with ht
+  have ht0 : 0 ≤ t := by
+    refine integral_nonneg_of_ae ?_
+    filter_upwards [hρ0] with x hx using Real.rpow_nonneg hx _
+  have hN0 : 0 ≤ N := by
+    rw [← hN]
+    exact integral_nonneg_of_ae hρ0
+  have hCS : ∫ x, ρ x ^ (4 / 3 : ℝ) ∂μ ≤ t ^ (1 / 2 : ℝ) * N ^ (1 / 2 : ℝ) := by
+    have := integral_rpow_four_thirds_le hρ0 hρm hρ1 hρ53
+    rwa [hN] at this
+  have hquad := thomas_fermi_quadratic_bound (K := K) (A := A) (t := t) (n := N) hK ht0 hN0
+  have hWle : -(A * (t ^ (1 / 2 : ℝ) * N ^ (1 / 2 : ℝ))) - B * M ≤ W := by
+    refine le_trans ?_ hW
+    have : A * ∫ x, ρ x ^ (4 / 3 : ℝ) ∂μ ≤ A * (t ^ (1 / 2 : ℝ) * N ^ (1 / 2 : ℝ)) :=
+      mul_le_mul_of_nonneg_left hCS hA
+    linarith
+  linarith
+
+end Frontier
+

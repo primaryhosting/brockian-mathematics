@@ -35,17 +35,13 @@ import Mathlib
 
 namespace Brockian.PalindromicPrimes
 
-/-- A natural number is *palindromic* (in base 10) when its list of base-10 digits
-is equal to its own reversal. -/
+/-- `n` is a palindrome in base `b` if its list of base-`b` digits is equal to its reverse. -/
 
-theorem eq_eleven_of_palindromic_prime_even_length {p : ℕ} (hp : p ∈ palindromicPrimes)
-    (hlen : Even (Nat.digits 10 p).length) : p = 11 := by
-  obtain ⟨hprime, hpal⟩ := hp
-  have h11 : 11 ∣ p := eleven_dvd_of_palindrome_even_length hpal hlen
-  rcases hprime.eq_one_or_self_of_dvd 11 h11 with h | h
-  · omega
+theorem eq_eleven_of_palindromic_prime_even_length {p : ℕ} (hp : Nat.Prime p)
+    (hpal : IsPalindrome 10 p) (hlen : Even (Nat.digits 10 p).length) : p = 11 := by
+  have h11 : 11 ∣ p := eleven_dvd_of_isPalindrome_even_length hpal hlen
+  rcases (Nat.Prime.eq_one_or_self_of_dvd hp 11 h11) with h | h
+  · norm_num at h
   · exact h.symm
 
-/-! ## There are arbitrarily large palindromes -/
-
-/-- The digit list `[1, 0, 0, …, 0, 1]` (with `k` interior zeros). -/
+/-- Every palindromic prime other than `11` has an odd number of digits. -/

@@ -8,18 +8,32 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
 namespace Chem
 
-open Finset
+/-- A chemical reaction with stoichiometric matrix `A` (rows indexed by chemical elements,
+columns indexed by chemical species, entry `A i j` = number of atoms of element `i` in one
+molecule of species `j`, counted with sign for reactants/products) *balances* if one can assign
+strictly positive amounts `x j` to the species so that every element is conserved,
+i.e. `A.mulVec x = 0`. -/
 
-variable {m n : ℕ}
+def Balances {m n : ℕ} (A : Matrix (Fin m) (Fin n) ℚ) : Prop :=
+  ∃ x : Fin n → ℚ, (∀ j, 0 < x j) ∧ A.mulVec x = 0
 
-/-- `Balances A x` says that the (signed) stoichiometric coefficient vector `x` balances the
-reaction whose stoichiometric matrix is `A`: for every element `i` (row of `A`), the total
-number of atoms of that element created minus destroyed is zero. -/
-
-def Balances (A : Matrix (Fin m) (Fin n) ℤ) (x : Fin n → ℤ) : Prop :=
-  ∀ i, ∑ j, A i j * x j = 0
-
-/-- A reaction is *balanceable* if some vector of strictly positive integer coefficients
-balances it. -/
+/-- Any finite family of rationals admits a common positive integer denominator:
+there is `d > 0` such that `d * x j` is an integer for every `j`. -/

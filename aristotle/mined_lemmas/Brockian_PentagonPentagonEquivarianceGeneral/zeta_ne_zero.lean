@@ -30,19 +30,23 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Brockian
 
-/-- The primitive `n`-th root of unity `exp (2 π i / n)`, the basic rotation of a regular
-`n`-gon inscribed in the unit circle of `ℂ`. -/
+open Complex
 
-lemma zeta_ne_zero : zeta n ≠ 0 := Complex.exp_ne_zero _
+/-! ## The regular `n`-gon and its dihedral symmetries
+
+We realize the regular `n`-gon in the complex plane as the set of `n`-th roots of unity,
+indexed by `ZMod n`.  The dihedral group `DihedralGroup n` acts on the index set `ZMod n`
+combinatorially (`r i` rotates the labels by `i`, `sr i` reflects them) and on the plane `ℂ`
+geometrically (`r i` is multiplication by `ζ ^ i`, `sr i` is that rotation followed by complex
+conjugation).  The main theorem states that the vertex map is equivariant for these two actions,
+for every `n ≥ 1`; the classical pentagon (`D₅`) statement is the special case `n = 5`.
+-/
+
+/-- The primitive `n`-th root of unity `exp (2 π i / n)`. -/
+
+lemma zeta_ne_zero (n : ℕ) : zeta n ≠ 0 := Complex.exp_ne_zero _
 

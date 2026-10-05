@@ -1,29 +1,6 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-
+/-!
 # Huckel C 12
 Category: Chemistry
 Target: Chem.huckel_C12
@@ -31,41 +8,36 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
+open scoped BigOperators
+open scoped Real
 
-open scoped BigOperators Real
-open Polynomial Matrix
+set_option maxHeartbeats 1000000
 
 namespace Chem
 
-/-- A primitive 12-th root of unity. -/
+open Complex Polynomial Matrix Finset
 
-lemma adj_mul_dft : adjC12 * dftC12 = dftC12 * Matrix.diagonal eigC12 := by
-  ext i k
-  have hne : i + 1 ≠ i - 1 := by revert i; decide
-  have hsucc : (i + 1).val = (i.val + 1) % 12 := by simp [Fin.val_add]
-  have hpred : (i - 1).val = (i.val + 11) % 12 := by revert i; decide
-  rw [Matrix.mul_apply, Matrix.mul_diagonal]
-  rw [show (∑ j, adjC12 i j * dftC12 j k)
-      = ∑ j, (if j = i + 1 ∨ j = i - 1 then (1 : ℂ) else 0) * dftC12 j k from rfl,
-    sum_two_ite _ _ hne]
-  have e1 : dftC12 (i + 1) k = om ^ (i.val * k.val + k.val) := by
-    rw [dftC12, hsucc]
-    refine om_pow_congr ?_
-    have h1 : ((i.val + 1) % 12) * k.val ≡ (i.val + 1) * k.val [MOD 12] :=
-      (Nat.mod_modEq (i.val + 1) 12).mul_right k.val
-    have h2 : (i.val + 1) * k.val = i.val * k.val + k.val := by ring
-    rw [h2] at h1
-    exact h1
-  have e2 : dftC12 (i - 1) k = om ^ (i.val * k.val + (12 - k.val)) := by
-    rw [dftC12, hpred]
-    refine om_pow_congr ?_
-    have h1 : ((i.val + 11) % 12) * k.val ≡ (i.val + 11) * k.val [MOD 12] :=
-      (Nat.mod_modEq (i.val + 11) 12).mul_right k.val
-    have h2 : (i.val + 11) * k.val = i.val * k.val + 11 * k.val := by ring
-    have h3 : i.val * k.val + 11 * k.val ≡ i.val * k.val + (12 - k.val) [MOD 12] := by
-      unfold Nat.ModEq; omega
-    exact h1.trans (h2 ▸ h3)
-  rw [e1, e2, dftC12, ← om_add_inv k, pow_add, pow_add]
+/-- The primitive 12-th root of unity `exp(2πi/12)`. -/
+
+lemma adj_mul_dft : adjC12 * dft12 = dft12 * Matrix.diagonal (fun k => ((muC12 k : ℝ) : ℂ)) := by
+  ext i l
+  rw [Matrix.mul_apply, Matrix.mul_apply]
+  have hL : ∑ j : ZMod 12, adjC12 i j * dft12 j l
+      = zeta12 ((i + 1) * l) + zeta12 ((i - 1) * l) := by
+    simp only [adj_apply_split, dft12, add_mul, ite_mul, one_mul, zero_mul]
+    rw [Finset.sum_add_distrib, Finset.sum_ite_eq' Finset.univ (i+1) (fun j => zeta12 (j * l)),
+      Finset.sum_ite_eq' Finset.univ (i-1) (fun j => zeta12 (j * l))]
+    simp
+  have hR : ∑ j : ZMod 12, dft12 i j * Matrix.diagonal (fun k => ((muC12 k : ℝ) : ℂ)) j l
+      = zeta12 (i * l) * ((muC12 l : ℝ) : ℂ) := by
+    simp [Matrix.diagonal, dft12]
+  have e1 : zeta12 ((i + 1) * l) = zeta12 (i * l) * zeta12 l := by
+    rw [show (i + 1) * l = i * l + l by ring, zeta12_add]
+  have e2 : zeta12 ((i - 1) * l) = zeta12 (i * l) * zeta12 (-l) := by
+    rw [show (i - 1) * l = i * l + -l by ring, zeta12_add]
+  rw [hL, hR, ← zeta12_add_neg l, e1, e2]
   ring
 
+/-- **Hückel theory for the cycle `C₁₂`.**  The characteristic polynomial of the adjacency
+matrix of the cycle graph `C₁₂` factors as `∏_{k=0}^{11} (X - 2 cos(2πk/12))`; i.e. the
+adjacency eigenvalues of `C₁₂` are exactly `2 cos(2πk/12)` for `k = 0, …, 11`. -/

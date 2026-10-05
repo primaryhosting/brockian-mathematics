@@ -1,20 +1,95 @@
-import RequestProject.Main
+/-
+# Aumann Agreement
+Category: Frontier Mind
+Target: Frontier.aumann_agreement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-! Sanity checks for `Frontier.aumann_agreement`: the hypotheses are satisfiable by a
-concrete example with two genuinely different information partitions. -/
+import Mathlib
 
-example : (1 : ℝ) = 1 :=
-  Frontier.aumann_agreement (Ω := Bool) (fun _ => (1 : ℝ) / 2) Finset.univ
-    (fun _ => Finset.univ) (fun ω => {ω})
-    (fun _ => Finset.mem_univ _) (fun _ _ _ => rfl)
-    (fun _ => Finset.mem_singleton_self _)
-    (fun _ _ h => by simp only [Finset.mem_singleton] at h; subst h; rfl)
-    Finset.univ (fun _ _ => Finset.subset_univ _) (fun _ _ => Finset.subset_univ _)
-    (by norm_num [Frontier.prob, Fintype.sum_bool]) 1 1
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
-    (fun _ _ => by norm_num [Frontier.prob, Fintype.sum_bool])
+namespace Frontier
+
+open Finset
+
+/-- **Aggregation lemma (sure-thing principle).**
+
+If the common-knowledge event `C` is partitioned into the information cells of an agent
+(the cells are the fibres of `f` inside `C`, indexed by `I`), and on every cell the
+conditional probability of `E` equals `q`, then the conditional probability of `E`
+on all of `C` is again `q`.
+
+Here `μ : Ω → ℝ` is the (common) prior weight function, the numerator
+`∑ x ∈ S, if x ∈ E then μ x else 0` is the mass of `E ∩ S`, and the denominator
+`∑ x ∈ S, μ x` is the mass of `S`; a statement `num = q * den` is the (denominator-free)
+form of "the posterior of `E` given `S` is `q`". -/
+theorem posterior_constant_on_cells
+    {Ω ι : Type*} [DecidableEq ι]
+    (μ : Ω → ℝ) (E C : Finset Ω) [DecidablePred (· ∈ E)]
+    (f : Ω → ι) (I : Finset ι) (hf : ∀ x ∈ C, f x ∈ I) (q : ℝ)
+    (h : ∀ i ∈ I, (∑ x ∈ C with f x = i, if x ∈ E then μ x else 0)
+          = q * ∑ x ∈ C with f x = i, μ x) :
+    (∑ x ∈ C, if x ∈ E then μ x else 0) = q * ∑ x ∈ C, μ x := by
+  rw [← Finset.sum_fiberwise_of_maps_to hf (fun x => if x ∈ E then μ x else 0),
+      ← Finset.sum_fiberwise_of_maps_to hf μ, Finset.mul_sum]
+  exact Finset.sum_congr rfl h
+
+/-- **Aumann's agreement theorem (base case).**
+
+Two agents share a common prior `μ` on a finite state space and consider an event `E`.
+Let `C` be a common-knowledge event at the actual state: `C` is a union of cells of agent
+1's information partition (the fibres of `f`, indexed by `I`) and also a union of cells of
+agent 2's information partition (the fibres of `g`, indexed by `K`) — i.e. `C` is a member
+of the meet of the two partitions.
+
+Assume it is common knowledge that agent 1's posterior of `E` is `q₁` and agent 2's is `q₂`;
+formally, on every cell of agent 1 inside `C` the posterior of `E` equals `q₁` (hypothesis
+`h₁`, written in the denominator-free form `mass (E ∩ cell) = q₁ * mass cell`), and likewise
+for agent 2 with `q₂`.
+
+Then, provided `C` has positive prior mass, `q₁ = q₂`: the agents cannot agree to disagree. -/
+theorem aumann_agreement
+    {Ω ι κ : Type*} [DecidableEq ι] [DecidableEq κ]
+    (μ : Ω → ℝ) (E C : Finset Ω) [DecidablePred (· ∈ E)]
+    (f : Ω → ι) (g : Ω → κ) (I : Finset ι) (K : Finset κ)
+    (hf : ∀ x ∈ C, f x ∈ I) (hg : ∀ x ∈ C, g x ∈ K)
+    (q₁ q₂ : ℝ)
+    (h₁ : ∀ i ∈ I, (∑ x ∈ C with f x = i, if x ∈ E then μ x else 0)
+          = q₁ * ∑ x ∈ C with f x = i, μ x)
+    (h₂ : ∀ j ∈ K, (∑ x ∈ C with g x = j, if x ∈ E then μ x else 0)
+          = q₂ * ∑ x ∈ C with g x = j, μ x)
+    (hC : 0 < ∑ x ∈ C, μ x) :
+    q₁ = q₂ := by
+  have e₁ := posterior_constant_on_cells μ E C f I hf q₁ h₁
+  have e₂ := posterior_constant_on_cells μ E C g K hg q₂ h₂
+  have : q₁ * (∑ x ∈ C, μ x) = q₂ * ∑ x ∈ C, μ x := by rw [← e₁, ← e₂]
+  exact mul_right_cancel₀ (ne_of_gt hC) this
+
+/-- Sanity check (non-vacuity): the hypotheses of `aumann_agreement` are simultaneously
+satisfiable with two *genuinely different* information partitions.
+
+Four equally likely states `0,1,2,3`; the event is `E = {0,3}`. Agent 1 observes `x / 2`
+(cells `{0,1}`, `{2,3}`), agent 2 observes `x % 2` (cells `{0,2}`, `{1,3}`). Every cell of
+every agent contains exactly one state of `E`, so both posteriors are `1/2`, and the theorem
+returns that common value. -/
+example : (1 / 2 : ℝ) = 1 / 2 :=
+  aumann_agreement (Ω := Fin 4) (fun _ => 1) {0, 3} univ
+    (fun x => x.val / 2) (fun x => x.val % 2) {0, 1} {0, 1}
+    (by intro x _; fin_cases x <;> decide) (by intro x _; fin_cases x <;> decide)
+    (1 / 2) (1 / 2)
+    (by
+      intro i hi
+      fin_cases hi <;>
+        · rw [Finset.sum_filter, Finset.sum_filter, Fin.sum_univ_four, Fin.sum_univ_four]
+          norm_num; decide)
+    (by
+      intro j hj
+      fin_cases hj <;>
+        · rw [Finset.sum_filter, Finset.sum_filter, Fin.sum_univ_four, Fin.sum_univ_four]
+          norm_num; decide)
+    (by norm_num)
+
+end Frontier
 
 import Mathlib
 
@@ -41,88 +116,3 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Frontier
-
-/-- The prior probability (mass) that the common prior `p` assigns to a finite event `s`. -/
-
-noncomputable def prob {Ω : Type*} (p : Ω → ℝ) (s : Finset Ω) : ℝ := ∑ x ∈ s, p x
-
-theorem prob_inter_of_posterior_const
-    {Ω : Type*} [DecidableEq Ω] (p : Ω → ℝ) (E : Finset Ω) (I : Ω → Finset Ω)
-    (hself : ∀ ω, ω ∈ I ω) (hcell : ∀ ω ω' : Ω, ω' ∈ I ω → I ω' = I ω) (q : ℝ) :
-    ∀ C : Finset Ω, (∀ ω ∈ C, I ω ⊆ C) →
-      (∀ ω ∈ C, prob p (E ∩ I ω) = q * prob p (I ω)) →
-      prob p (E ∩ C) = q * prob p C := by
-  intro C
-  induction C using Finset.strongInduction with
-  | _ C ih =>
-    intro hclosed hpost
-    rcases C.eq_empty_or_nonempty with rfl | ⟨ω, hω⟩
-    · simp
-    · have hA : I ω ⊆ C := hclosed ω hω
-      have hωA : ω ∈ I ω := hself ω
-      have hsub : C \ I ω ⊂ C := by
-        refine Finset.ssubset_iff_of_subset (Finset.sdiff_subset) |>.2 ⟨ω, hω, ?_⟩
-        simp [hωA]
-      -- disjointness: any cell meeting `I ω` equals `I ω`
-      have hdisj : ∀ ω' ∈ C \ I ω, I ω' ⊆ C \ I ω := by
-        intro ω' hω'
-        rw [Finset.mem_sdiff] at hω'
-        intro x hx
-        rw [Finset.mem_sdiff]
-        refine ⟨hclosed ω' hω'.1 hx, ?_⟩
-        intro hxA
-        have h1 : I x = I ω' := hcell ω' x hx
-        have h2 : I x = I ω := hcell ω x hxA
-        have h3 : I ω' = I ω := by rw [← h1, h2]
-        exact hω'.2 (h3 ▸ hself ω')
-      have hrec := ih (C \ I ω) hsub hdisj
-        (fun ω' hω' => hpost ω' (Finset.sdiff_subset hω'))
-      have hsum : prob p (C \ I ω) + prob p (I ω) = prob p C := Finset.sum_sdiff hA
-      have hEsub : E ∩ I ω ⊆ E ∩ C := Finset.inter_subset_inter_left hA
-      have hEeq : (E ∩ C) \ (E ∩ I ω) = E ∩ (C \ I ω) := by
-        ext x
-        simp only [Finset.mem_sdiff, Finset.mem_inter]
-        tauto
-      have hEsum : prob p ((E ∩ C) \ (E ∩ I ω)) + prob p (E ∩ I ω) = prob p (E ∩ C) :=
-        Finset.sum_sdiff hEsub
-      rw [hEeq] at hEsum
-      rw [← hEsum, hrec, hpost ω hω, ← hsum]
-      ring
-
-/-- **Aumann's agreement theorem** (finite, base case): two agents with a common prior `p` who
-have common knowledge of their posterior probabilities of an event `E` must assign the same
-posterior probability to `E`.
-
-Here `I₁`, `I₂` are the agents' information partitions (`hself`/`hcell` say each `I i ω` is the
-cell of a partition containing `ω`), and `C` is a common-knowledge event at the state of
-interest: it is a union of cells of both partitions. Common knowledge that agent `i`'s posterior
-is `qᵢ` says exactly that the posterior is `qᵢ` on every cell of agent `i` inside `C`.
-The conclusion is that the two posteriors coincide: the agents cannot agree to disagree. -/
-
-theorem aumann_agreement
-    {Ω : Type*} [DecidableEq Ω] (p : Ω → ℝ) (E : Finset Ω) (I₁ I₂ : Ω → Finset Ω)
-    (h₁self : ∀ ω, ω ∈ I₁ ω) (h₁cell : ∀ ω ω' : Ω, ω' ∈ I₁ ω → I₁ ω' = I₁ ω)
-    (h₂self : ∀ ω, ω ∈ I₂ ω) (h₂cell : ∀ ω ω' : Ω, ω' ∈ I₂ ω → I₂ ω' = I₂ ω)
-    (C : Finset Ω) (hC₁ : ∀ ω ∈ C, I₁ ω ⊆ C) (hC₂ : ∀ ω ∈ C, I₂ ω ⊆ C)
-    (hCpos : 0 < prob p C)
-    (q₁ q₂ : ℝ)
-    (hcell₁pos : ∀ ω ∈ C, 0 < prob p (I₁ ω)) (hcell₂pos : ∀ ω ∈ C, 0 < prob p (I₂ ω))
-    (hpost₁ : ∀ ω ∈ C, prob p (E ∩ I₁ ω) / prob p (I₁ ω) = q₁)
-    (hpost₂ : ∀ ω ∈ C, prob p (E ∩ I₂ ω) / prob p (I₂ ω) = q₂) :
-    q₁ = q₂ := by
-  have key : ∀ (I : Ω → Finset Ω) (q : ℝ), (∀ ω, ω ∈ I ω) →
-      (∀ ω ω' : Ω, ω' ∈ I ω → I ω' = I ω) → (∀ ω ∈ C, I ω ⊆ C) →
-      (∀ ω ∈ C, 0 < prob p (I ω)) →
-      (∀ ω ∈ C, prob p (E ∩ I ω) / prob p (I ω) = q) →
-      prob p (E ∩ C) = q * prob p C := by
-    intro I q hself hcell hclosed hposcell hpost
-    refine prob_inter_of_posterior_const p E I hself hcell q C hclosed ?_
-    intro ω hω
-    exact (div_eq_iff (ne_of_gt (hposcell ω hω))).1 (hpost ω hω)
-  have e₁ := key I₁ q₁ h₁self h₁cell hC₁ hcell₁pos hpost₁
-  have e₂ := key I₂ q₂ h₂self h₂cell hC₂ hcell₂pos hpost₂
-  have : q₁ * prob p C = q₂ * prob p C := by rw [← e₁, ← e₂]
-  exact mul_right_cancel₀ (ne_of_gt hCpos) this
-
-end Frontier

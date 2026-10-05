@@ -8,14 +8,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# No Pair Of Mersenne And Shifted Prime
-Category: Frontier — Betrothed Numbers
-Target: Brockian.BetrothedNumbers.no_pair_of_mersenne_and_shifted_prime
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -30,36 +22,52 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
-open ArithmeticFunction
 open scoped ArithmeticFunction.sigma
 
-namespace Brockian.BetrothedNumbers
+namespace Brockian
+namespace BetrothedNumbers
 
-/-- `n` and `m` form a *betrothed* (quasi-amicable) pair: they are distinct positive integers
-whose sums of divisors both equal `n + m + 1`. -/
+/-- Two natural numbers `m` and `n` form a *betrothed* (quasi-amicable) pair when the sum of
+divisors of each of them equals `m + n + 1`. -/
 
 theorem unique_partner {k p m : ℕ} (hk : 2 ≤ k) (hp : p.Prime) (hodd : Odd p)
     (h : IsBetrothedPair (2 ^ k * p) m) : m = (2 ^ k - 1) * (p + 2) := by
-  obtain ⟨-, -, -, hn, -⟩ := h
-  rw [sigma_one_two_pow_mul_odd_prime hp hodd] at hn
-  have hA : 4 ≤ 2 ^ k := by
+  obtain ⟨h1, -⟩ := h
+  rw [sigma_one_two_pow_mul_odd_prime hp hodd] at h1
+  have hQ : 2 ^ (k + 1) = 2 * 2 ^ k := by ring
+  have hk4 : 4 ≤ 2 ^ k := by
     calc (4 : ℕ) = 2 ^ 2 := by norm_num
     _ ≤ 2 ^ k := Nat.pow_le_pow_right (by norm_num) hk
-  obtain ⟨B, hB⟩ : ∃ B, 2 ^ k = B + 1 := ⟨2 ^ k - 1, by omega⟩
-  rw [hB] at hn ⊢
-  have hn' : 2 * (B * p) + 2 * B + p + 1 = B * p + p + m + 1 := by
-    have : (2 * (B + 1) - 1) * (p + 1) = 2 * (B * p) + 2 * B + p + 1 := by
-      have : 2 * (B + 1) - 1 = 2 * B + 1 := by omega
-      rw [this]; ring
-    rw [this] at hn
-    calc 2 * (B * p) + 2 * B + p + 1 = (B + 1) * p + m + 1 := hn
-    _ = B * p + p + m + 1 := by ring
-  have : m = B * p + 2 * B := by omega
-  rw [this]
-  simp only [Nat.add_sub_cancel]
-  ring
+  set Q : ℕ := 2 ^ k with hQdef
+  have hexp : (2 * Q - 1) * (p + 1) = 2 * Q * p + 2 * Q - p - 1 := by
+    cases Nat.exists_eq_add_of_le (show 1 ≤ 2 * Q by omega) with
+    | intro c hc =>
+        have : 2 * Q = c + 1 := by omega
+        rw [this]
+        simp only [Nat.add_sub_cancel]
+        ring_nf
+        omega
+  have hexp2 : (Q - 1) * (p + 2) = Q * p + 2 * Q - p - 2 := by
+    cases Nat.exists_eq_add_of_le (show 1 ≤ Q by omega) with
+    | intro c hc =>
+        have : Q = c + 1 := by omega
+        rw [this]
+        simp only [Nat.add_sub_cancel]
+        ring_nf
+        omega
+  rw [hQ, hexp] at h1
+  rw [hexp2]
+  have hQp : Q ≤ Q * p := Nat.le_mul_of_pos_right _ hp.pos
+  omega
 
-/-- **Target.** Let `k ≥ 2` and let `p` be an odd prime.  If both `2 ^ k - 1` and `p + 2` are
-prime, then no number forms a betrothed pair with `2 ^ k * p`. -/
+/-- **Target.** Let `k ≥ 2` and let `p` be an odd prime such that both `2 ^ k - 1` and `p + 2`
+are prime.  Then no natural number forms a betrothed pair with `2 ^ k * p`. -/

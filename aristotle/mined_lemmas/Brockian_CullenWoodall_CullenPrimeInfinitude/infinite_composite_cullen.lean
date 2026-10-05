@@ -24,39 +24,39 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 import Mathlib
+
 /-!
 # Cullen Prime Infinitude
 Category: Brockian Conjecture
 Target: Brockian.CullenWoodall.CullenPrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(The header comment is placed immediately after `import Mathlib` because Lean 4
+requires `import` commands to precede every other command, including module
+docstrings; the header text itself is verbatim.)
 -/
 
-/-
-The infinitude of Cullen primes (i.e. primes of the form `C n = n * 2 ^ n + 1`) is an
-open problem, so what is proved here is a *Lean-checked conditional reduction*
-together with unconditional partial results:
-
-* `prime_cullen_of_proth_witness` : a Proth-type primality criterion for Cullen numbers
-  (sufficiency, proved from scratch via orders in `ZMod q`);
-* `exists_proth_witness_of_prime_cullen` : the converse (necessity);
-* `CullenPrimeInfinitude` : if for arbitrarily large `n` the Cullen number `C n` has a
-  Proth witness, then infinitely many Cullen numbers are prime;
-* `cullen_prime_infinitude_iff` : the reduction is in fact an equivalence;
-* `dvd_cullen_of_prime_mod_eight`, `infinite_composite_cullen` : unconditionally,
-  infinitely many Cullen numbers are composite.
--/
+set_option maxHeartbeats 1000000
 
 namespace Brockian.CullenWoodall
 
 /-- The `n`-th Cullen number `C n = n * 2 ^ n + 1`. -/
 
-theorem infinite_composite_cullen : {n : ℕ | ¬ Nat.Prime (cullen n)}.Infinite := by
-  refine Set.infinite_of_forall_exists_gt (fun N => ?_)
-  obtain ⟨p, hpN, hp, hmod⟩ :=
-    Nat.forall_exists_prime_gt_and_modEq (2 * N + 1) (q := 8) (a := 3) (by norm_num) (by decide)
-  have hmod8 : p % 8 = 3 := by simpa [Nat.ModEq] using hmod
-  exact ⟨(p + 1) / 2, not_prime_cullen_of_prime_mod_eight p hp (Or.inl hmod8), by omega⟩
+theorem infinite_composite_cullen : {n : ℕ | ¬ (cullen n).Prime}.Infinite := by
+  apply Set.infinite_of_forall_exists_gt
+  intro a
+  obtain ⟨p, hpa, hp⟩ := Nat.exists_infinite_primes (a + 5)
+  exact ⟨p - 2, not_prime_cullen_sub_two hp (by omega), by omega⟩
 
-end Brockian.CullenWoodall
+/-!
+## Reformulation of the Cullen prime infinitude conjecture
 
+The conjecture that infinitely many Cullen numbers are prime is open.  The theorem
+below is a Lean-checked *reduction*: it derives the infinitude of Cullen primes from
+the (equivalent, but more directly attackable) statement that arbitrarily large
+Cullen numbers have no prime factor below their square root.
+-/
+
+/-- The sieve-style hypothesis: arbitrarily large Cullen numbers have no prime factor
+`p` with `p * p ≤ C n`. -/

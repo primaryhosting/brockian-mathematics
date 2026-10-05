@@ -31,25 +31,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-The header module docstring above must be the very first thing in this file, so the
-file carries no `import` line (Lean requires imports to precede any command).  The
-development below is therefore written against Lean core only.  The companion file
-`Brockian/SierpinskiCoveringMathlib.lean` imports Mathlib and restates the main
-result with Mathlib's `Nat.Prime`.
-
-Statement proved here: `78557` is a Sierpiński number, i.e. `78557 * 2 ^ n + 1` is
-composite for every natural number `n`.  The proof uses the classical covering set
-of primes `{3, 5, 7, 13, 19, 37, 73}`: the multiplicative order of `2` modulo each of
-them divides `36`, and for each residue `r < 36` one of these primes divides
-`78557 * 2 ^ r + 1`.
--/
+import Mathlib
 
 namespace Brockian
 namespace SierpinskiCovering
 
-/-- Primality predicate for natural numbers (core-Lean version of `Nat.Prime`). -/
+/-- A *Sierpiński number* is an odd natural number `k` such that `k * 2 ^ n + 1` is composite
+(never prime) for every `n ≥ 1`. -/
 
-def coveringPrimes : List Nat := [3, 5, 7, 13, 19, 37, 73]
+def coveringPrimes : List ℕ := [3, 5, 7, 13, 19, 37, 73]
 
-/-- For each prime `p` of the covering set, `2 ^ 36 ≡ 1 (mod p)`. -/
+/-- Periodicity step: if `p` divides `2 ^ 36 - 1` and `p` divides `78557 * 2 ^ r + 1`,
+then `p` divides `78557 * 2 ^ (36 * q + r) + 1`. -/

@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Sylvester Hermitian Finrank
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
@@ -7,6 +5,7 @@ Target: Zeta23Redux.LinAlg.sylvester_hermitian_finrank
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -31,79 +30,74 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Zeta23Redux.LinAlg
-
 open Matrix
 
-/-- The positive index of a Hermitian matrix: the number of its strictly positive
-eigenvalues (counted with multiplicity, i.e. as a cardinality of indices). -/
-noncomputable def posIndex {d : ℕ} {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.IsHermitian) : ℕ :=
-  (Finset.univ.filter fun i => 0 < hA.eigenvalues i).card
+namespace Zeta23Redux.LinAlg
 
-/-- Diagonalization of the Hermitian form attached to `A`: writing `y = U* x` for the
-eigenvector unitary `U` of `A`, the real quadratic form `x ↦ Re (xᴴ A x)` becomes the
-weighted sum of squares `∑ i, λ i * ‖y i‖²`. -/
-theorem hermitian_form_eq_sum_eigenvalues {d : ℕ} {A : Matrix (Fin d) (Fin d) ℂ}
-    (hA : A.IsHermitian) (x : Fin d → ℂ) :
+variable {d : ℕ} {A : Matrix (Fin d) (Fin d) ℂ}
+
+/-- The positive index of inertia of a Hermitian matrix: the number of strictly positive
+eigenvalues (counted with multiplicity, i.e. as a cardinality of an index subtype). -/
+noncomputable def posIndex (hA : A.IsHermitian) : ℕ :=
+  Fintype.card {i // 0 < hA.eigenvalues i}
+
+/-- Diagonalisation of the Hermitian form `x ↦ Re (star x ⬝ᵥ A *ᵥ x)`: in the coordinates
+`y = U* x` given by the unitary of eigenvectors of `A`, the form is `∑ i, λ i * ‖y i‖ ^ 2`. -/
+lemma quad_eq (hA : A.IsHermitian) (x : Fin d → ℂ) :
     (star x ⬝ᵥ A *ᵥ x).re
       = ∑ i, hA.eigenvalues i *
-          Complex.normSq ((star (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) *ᵥ x) i) := by
+          ‖(star (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) *ᵥ x) i‖ ^ 2 := by
   set U : Matrix (Fin d) (Fin d) ℂ := (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) with hU
-  set y : Fin d → ℂ := star U *ᵥ x with hy
-  have hAe : A = U * Matrix.diagonal (RCLike.ofReal ∘ hA.eigenvalues) * star U := by
+  set y := star U *ᵥ x with hy
+  have hAx : A *ᵥ x
+      = U *ᵥ ((diagonal (RCLike.ofReal ∘ hA.eigenvalues) : Matrix (Fin d) (Fin d) ℂ) *ᵥ y) := by
     conv_lhs => rw [hA.spectral_theorem, Unitary.conjStarAlgAut_apply]
-  have h1 : A *ᵥ x = U *ᵥ (Matrix.diagonal (RCLike.ofReal ∘ hA.eigenvalues) *ᵥ y) := by
-    conv_lhs => rw [hAe]
-    rw [hy, Matrix.mulVec_mulVec, Matrix.mulVec_mulVec]
-  have h2 : star x ᵥ* U = star y := by
+    rw [hy, ← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
+  have hstar : star x ᵥ* U = star y := by
     rw [hy, Matrix.star_mulVec]
-    simp [Matrix.star_eq_conjTranspose]
-  rw [h1, Matrix.dotProduct_mulVec, h2]
-  simp only [dotProduct, Matrix.mulVec_diagonal, Function.comp_apply, Complex.re_sum]
+    simp [hU, Matrix.star_eq_conjTranspose]
+  rw [hAx, Matrix.dotProduct_mulVec, hstar]
+  have hsum : (star y ⬝ᵥ (diagonal (RCLike.ofReal ∘ hA.eigenvalues) : Matrix (Fin d) (Fin d) ℂ) *ᵥ y)
+      = ∑ i, (starRingEnd ℂ) (y i) * ((hA.eigenvalues i : ℂ) * y i) := by
+    simp [dotProduct, Matrix.mulVec_diagonal]
+  rw [hsum, Complex.re_sum]
   refine Finset.sum_congr rfl fun i _ => ?_
-  have hre : ((RCLike.ofReal (hA.eigenvalues i) : ℂ)).re = hA.eigenvalues i := rfl
-  have him : ((RCLike.ofReal (hA.eigenvalues i) : ℂ)).im = 0 := rfl
-  simp only [Pi.star_apply, Complex.normSq_apply, Complex.mul_re, Complex.mul_im,
-    Complex.star_def, Complex.conj_re, Complex.conj_im, hre, him]
+  rw [← Complex.normSq_eq_norm_sq]
+  simp [Complex.mul_re, Complex.normSq_apply]
   ring
 
-/-- **Sylvester's law of inertia** (Hermitian version, the inequality direction used in the
-paper): if the Hermitian form `x ↦ Re (xᴴ A x)` of a Hermitian matrix `A` is positive definite
-on a complex subspace `W` of `Fin d → ℂ`, then `finrank W ≤ posIndex A`, the number of
-strictly positive eigenvalues of `A`. -/
-theorem sylvester_hermitian_finrank {d : ℕ} {A : Matrix (Fin d) (Fin d) ℂ}
-    (hA : A.IsHermitian) (W : Submodule ℂ (Fin d → ℂ))
+/-- **Sylvester's law of inertia** (Hermitian case, the direction used in the paper):
+if the Hermitian form `x ↦ Re (star x ⬝ᵥ A *ᵥ x)` attached to a Hermitian matrix `A` is
+positive definite on a complex subspace `W ≤ (Fin d → ℂ)`, then
+`finrank W ≤ posIndex A`, the number of strictly positive eigenvalues of `A`. -/
+theorem sylvester_hermitian_finrank (hA : A.IsHermitian)
+    (W : Submodule ℂ (Fin d → ℂ))
     (hW : ∀ x ∈ W, x ≠ 0 → 0 < (star x ⬝ᵥ A *ᵥ x).re) :
     Module.finrank ℂ W ≤ posIndex hA := by
-  classical
   set U : Matrix (Fin d) (Fin d) ℂ := (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) with hU
-  set S : Finset (Fin d) := Finset.univ.filter fun i => 0 < hA.eigenvalues i with hS
-  -- the linear map sending `x ∈ W` to the coordinates, in the eigenbasis, indexed by `S`
-  set f : W →ₗ[ℂ] (S → ℂ) :=
-    (LinearMap.funLeft ℂ ℂ (Subtype.val : {i // i ∈ S} → Fin d)).comp
-      ((Matrix.mulVecLin (star U)).comp W.subtype) with hf
-  have hinj : Function.Injective f := by
-    rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
-    rintro ⟨x, hx⟩ hfx
-    have hzero : ∀ i ∈ S, (star U *ᵥ x) i = 0 := by
+  -- The map sending `x ∈ W` to the coordinates of `U* x` indexed by the positive eigenvalues.
+  set L : W →ₗ[ℂ] ({i // 0 < hA.eigenvalues i} → ℂ) :=
+    ((LinearMap.funLeft ℂ ℂ (fun i : {i // 0 < hA.eigenvalues i} => (i : Fin d))).comp
+      (Matrix.mulVecLin (star U))).comp W.subtype with hL
+  have hinj : Function.Injective L := by
+    rw [← LinearMap.ker_eq_bot, Submodule.eq_bot_iff]
+    rintro ⟨x, hx⟩ hker
+    have hzero : ∀ i : Fin d, 0 < hA.eigenvalues i → (star U *ᵥ x) i = 0 := by
       intro i hi
-      have := congrFun (Subtype.ext_iff.mp hfx) ⟨i, hi⟩
-      simpa [hf, LinearMap.funLeft_apply] using congrFun hfx ⟨i, hi⟩
-    have hle : (star x ⬝ᵥ A *ᵥ x).re ≤ 0 := by
-      rw [hermitian_form_eq_sum_eigenvalues hA x]
+      have := congrFun (LinearMap.mem_ker.mp hker) ⟨i, hi⟩
+      simpa [hL, LinearMap.funLeft_apply] using this
+    by_contra hne
+    have hx0 : x ≠ 0 := fun h => hne (Subtype.ext h)
+    have hpos := hW x hx hx0
+    rw [quad_eq hA x] at hpos
+    have hle : ∑ i, hA.eigenvalues i * ‖(star U *ᵥ x) i‖ ^ 2 ≤ 0 := by
       refine Finset.sum_nonpos fun i _ => ?_
-      by_cases hi : i ∈ S
-      · simp [hzero i hi]
-      · have hlam : hA.eigenvalues i ≤ 0 := by
-          simp only [hS, Finset.mem_filter, Finset.mem_univ, true_and, not_lt] at hi
-          exact hi
-        exact mul_nonpos_of_nonpos_of_nonneg hlam (Complex.normSq_nonneg _)
-    have hx0 : x = 0 := by
-      by_contra hne
-      exact absurd hle (not_le.mpr (hW x hx hne))
-    exact Subtype.ext hx0
-  have := LinearMap.finrank_le_finrank_of_injective (f := f) hinj
-  simpa [posIndex, hS, Module.finrank_fintype_fun_eq_card, Fintype.card_coe] using this
+      rcases lt_or_ge 0 (hA.eigenvalues i) with h | h
+      · simp [hzero i h]
+      · exact mul_nonpos_of_nonpos_of_nonneg h (by positivity)
+    exact absurd hpos (not_lt.mpr hle)
+  have hrank := LinearMap.finrank_le_finrank_of_injective hinj
+  simpa [posIndex, Module.finrank_fintype_fun_eq_card] using hrank
 
 end Zeta23Redux.LinAlg
 

@@ -1,0 +1,550 @@
+{
+  "attestation_by": "Claude Code (local independent verifier acting on Harmonic-Aristotle submission bundle)",
+  "attestation_date": "2026-08-29",
+  "program": "Phenomenological Mathematics",
+  "submission_scope": "Waves 16-29 formal corpus",
+  "toolchain_pinned": "leanprover/lean4:v4.32.0",
+  "toolchain_available_locally": "leanprover/lean4:v4.32.0 (elan; matches pin)",
+  "file_count": 32,
+  "identity_verification": {
+    "match": 32,
+    "mismatch": 0,
+    "verdict": "ALL 32 SOURCES IDENTITY-VERIFIED AGAINST MANIFEST SHA-256"
+  },
+  "forbidden_construct_scan": {
+    "sorry": 0,
+    "admit": 0,
+    "native_decide": 0,
+    "user_axiom_decls": 0,
+    "verdict": "CLEAN \u2014 no sorry / admit / native_decide / user-added axiom in any submitted source"
+  },
+  "compile_verification": {
+    "status": "DEFERRED",
+    "reason": "host RAM exhausted (~60MB free, heavy swap thrash); lean cannot load Init. User elected deliver-static-now / defer-compile.",
+    "scope_pending": "14 wave modules + 14 axiom audits + 4 aggregate/final-audit roots = 32 files",
+    "planned": "off-peak sequential `lean -o` build under LEAN_PATH with #print axioms reproduction"
+  },
+  "axiom_footprint_vendor_claimed": {
+    "note": "Reproduced from shipped *.AxiomAudit.out. NOT an independent result \u2014 pending local compile.",
+    "audited_declarations": 181,
+    "no_axiom": 111,
+    "propext_only": 70,
+    "non_standard_axioms": 0,
+    "non_standard_list": []
+  },
+  "constitutive_firewall": "A passing Lean build establishes consequences of the submitted formal models only. It does NOT establish historical fidelity, empirical adequacy, standards conformance, interoperability, production safety, governance legitimacy, priority, or novelty.",
+  "files": [
+    {
+      "path": "BookFour.lean",
+      "role": "aggregate",
+      "sha256_submitted": "163e9e6567cf695ca51a54108d0e26255c176c9b6fd337f1e22156ec5b331023",
+      "sha256_recomputed": "163e9e6567cf695ca51a54108d0e26255c176c9b6fd337f1e22156ec5b331023",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "BookFourFinalAudit.lean",
+      "role": "aggregate_axiom_audit",
+      "sha256_submitted": "bb7dfe2aba8607290f04383abf40b5ed74136d951b3146b79c6d7aec270e86fc",
+      "sha256_recomputed": "bb7dfe2aba8607290f04383abf40b5ed74136d951b3146b79c6d7aec270e86fc",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "BookThree.lean",
+      "role": "aggregate",
+      "sha256_submitted": "4517528039d6ce4b1624942a67fa66560043708e73e33c6940c8b4b1203cc4c2",
+      "sha256_recomputed": "4517528039d6ce4b1624942a67fa66560043708e73e33c6940c8b4b1203cc4c2",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "BookThreeFinalAudit.lean",
+      "role": "aggregate_axiom_audit",
+      "sha256_submitted": "56382d0c730ce00bc2a852fcf0e81c0a478da2552424d346ad0d22d0426c3fe6",
+      "sha256_recomputed": "56382d0c730ce00bc2a852fcf0e81c0a478da2552424d346ad0d22d0426c3fe6",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave16.lean",
+      "role": "wave",
+      "sha256_submitted": "8920fe9fe6437487b58e68d9683b438a8107dd8ec96203441cf47ac006497465",
+      "sha256_recomputed": "8920fe9fe6437487b58e68d9683b438a8107dd8ec96203441cf47ac006497465",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave16AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "0fbb271bdaf44f54274181ebbef77bf5bd809031fdd5d0766cb27b0add3b34dc",
+      "sha256_recomputed": "0fbb271bdaf44f54274181ebbef77bf5bd809031fdd5d0766cb27b0add3b34dc",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave17.lean",
+      "role": "wave",
+      "sha256_submitted": "8ef6db35ea95eadf6a0b0e4d7feafab0e9deb7af42aa9071bf8b170d52ef2b58",
+      "sha256_recomputed": "8ef6db35ea95eadf6a0b0e4d7feafab0e9deb7af42aa9071bf8b170d52ef2b58",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave17AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "3982687f094723d5dd4982ee3a829949dccb6fd6d33de9beb7cccabc532cfef6",
+      "sha256_recomputed": "3982687f094723d5dd4982ee3a829949dccb6fd6d33de9beb7cccabc532cfef6",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave18.lean",
+      "role": "wave",
+      "sha256_submitted": "7013e31a6e9d9b0c51f5b9bc2fad19ba8b5def0d32bc66fba8e0d4a59200ac9d",
+      "sha256_recomputed": "7013e31a6e9d9b0c51f5b9bc2fad19ba8b5def0d32bc66fba8e0d4a59200ac9d",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave18AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "f8bb33a1c5a1b382ec47b32b2f11b22fa12d71cbb6cebb33d30c13044b0dd02d",
+      "sha256_recomputed": "f8bb33a1c5a1b382ec47b32b2f11b22fa12d71cbb6cebb33d30c13044b0dd02d",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave19.lean",
+      "role": "wave",
+      "sha256_submitted": "d4ba1a11177453df413a9fb141dea82f63969fca67fe25f39ad420ee931a1365",
+      "sha256_recomputed": "d4ba1a11177453df413a9fb141dea82f63969fca67fe25f39ad420ee931a1365",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave19AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "6939af6e9c7ddfd90dbdf74ac2a7b97c90a7372718bec6b9193c056439fd4a2a",
+      "sha256_recomputed": "6939af6e9c7ddfd90dbdf74ac2a7b97c90a7372718bec6b9193c056439fd4a2a",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave20.lean",
+      "role": "wave",
+      "sha256_submitted": "73f3db4c8f01b6dacfaf0407337ef7bd81927032c9e5d843df2a72a97f46cdc6",
+      "sha256_recomputed": "73f3db4c8f01b6dacfaf0407337ef7bd81927032c9e5d843df2a72a97f46cdc6",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave20AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "71e2612c1fc7abc908c87819ce35860b209d7c2e354f6fc898b326ad5c6f78ca",
+      "sha256_recomputed": "71e2612c1fc7abc908c87819ce35860b209d7c2e354f6fc898b326ad5c6f78ca",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave21.lean",
+      "role": "wave",
+      "sha256_submitted": "ebf1d13619a2f2b8a62d343e23521bf04dc68ebacac29913dcb7eb0d7ceed03e",
+      "sha256_recomputed": "ebf1d13619a2f2b8a62d343e23521bf04dc68ebacac29913dcb7eb0d7ceed03e",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave21AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "db19d61a73a8e878c31a01104eaac13b9580093b31660eea4f3c5d8f7a5ce4a1",
+      "sha256_recomputed": "db19d61a73a8e878c31a01104eaac13b9580093b31660eea4f3c5d8f7a5ce4a1",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave22.lean",
+      "role": "wave",
+      "sha256_submitted": "284b0b61cd1ac4c61e548f5be1ee17cf017240d44e39f9eac1a14b13ecedca45",
+      "sha256_recomputed": "284b0b61cd1ac4c61e548f5be1ee17cf017240d44e39f9eac1a14b13ecedca45",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave22AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "7ed4b9536874f53819e92e72d13c606822a38fae053dd9a92ebec072f54b1aeb",
+      "sha256_recomputed": "7ed4b9536874f53819e92e72d13c606822a38fae053dd9a92ebec072f54b1aeb",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave23.lean",
+      "role": "wave",
+      "sha256_submitted": "1c19c1461f151c562d9d02e7625950ae963bfc588734183444384a9431042e73",
+      "sha256_recomputed": "1c19c1461f151c562d9d02e7625950ae963bfc588734183444384a9431042e73",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave23AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "e8a3410514a4e8a6108d3f1b658928b89b6af6c77a8de3478bd6e623ea914c74",
+      "sha256_recomputed": "e8a3410514a4e8a6108d3f1b658928b89b6af6c77a8de3478bd6e623ea914c74",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave24.lean",
+      "role": "wave",
+      "sha256_submitted": "29224937240ab83563d926f79bac99c27fa05f20aea99ad3d8f130bd0b84f9cb",
+      "sha256_recomputed": "29224937240ab83563d926f79bac99c27fa05f20aea99ad3d8f130bd0b84f9cb",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave24AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "20a64449c529f7b877637ba1d34df058e562764ddcd6dc082b63beb99f1806f7",
+      "sha256_recomputed": "20a64449c529f7b877637ba1d34df058e562764ddcd6dc082b63beb99f1806f7",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave25.lean",
+      "role": "wave",
+      "sha256_submitted": "f1f6e4e58a129439ddcecde478f8b522e540211ebf56180f4543009dfd253205",
+      "sha256_recomputed": "f1f6e4e58a129439ddcecde478f8b522e540211ebf56180f4543009dfd253205",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave25AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "5cb041a24763066c292d9493d7cb822cd4ae76f3ee71203954fc03d76533ffdc",
+      "sha256_recomputed": "5cb041a24763066c292d9493d7cb822cd4ae76f3ee71203954fc03d76533ffdc",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave26.lean",
+      "role": "wave",
+      "sha256_submitted": "feb32d080cc1b32a0184a4d971418657478509f117a798ad2ef6388a78824c05",
+      "sha256_recomputed": "feb32d080cc1b32a0184a4d971418657478509f117a798ad2ef6388a78824c05",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave26AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "02ad92563d99a53c9448136381c2c6323c10c972ffce9a11541be6dc0b5f5e04",
+      "sha256_recomputed": "02ad92563d99a53c9448136381c2c6323c10c972ffce9a11541be6dc0b5f5e04",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave27.lean",
+      "role": "wave",
+      "sha256_submitted": "95afbd494b5a6445cf49763739bcbabcbe1de0a249b65d0892e20fedae160f6e",
+      "sha256_recomputed": "95afbd494b5a6445cf49763739bcbabcbe1de0a249b65d0892e20fedae160f6e",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave27AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "113290724fc328cb660965d37ef09de933c29275e4ef8d1359813a16672f33ad",
+      "sha256_recomputed": "113290724fc328cb660965d37ef09de933c29275e4ef8d1359813a16672f33ad",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave28.lean",
+      "role": "wave",
+      "sha256_submitted": "4a90eec6e2d43fce0de6a7017f46b80d70c9138feb9ad3d4b874ca5a20fdb4e9",
+      "sha256_recomputed": "4a90eec6e2d43fce0de6a7017f46b80d70c9138feb9ad3d4b874ca5a20fdb4e9",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave28AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "58492b6ee1480e58cbe0ccb8a6ce6713e7d5cda295a4e5ee054de8fba11e013a",
+      "sha256_recomputed": "58492b6ee1480e58cbe0ccb8a6ce6713e7d5cda295a4e5ee054de8fba11e013a",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave29.lean",
+      "role": "wave",
+      "sha256_submitted": "917330a3a7cddcb4b10cff7e438048901c7d4067490741f8aad99e0467d83c94",
+      "sha256_recomputed": "917330a3a7cddcb4b10cff7e438048901c7d4067490741f8aad99e0467d83c94",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    },
+    {
+      "path": "Wave29AxiomAudit.lean",
+      "role": "wave_axiom_audit",
+      "sha256_submitted": "972ac2bfd39edb7c34e2a8061295c3c853315c01eb3f4bc43485f6e677891f93",
+      "sha256_recomputed": "972ac2bfd39edb7c34e2a8061295c3c853315c01eb3f4bc43485f6e677891f93",
+      "identity": "MATCH",
+      "forbidden_scan": {
+        "sorry": 0,
+        "admit": 0,
+        "native_decide": 0,
+        "user_axiom_decls": 0
+      },
+      "compile_result": "DEFERRED_MEMORY_CONSTRAINED",
+      "statement_preservation": "UNCHANGED (byte-identical to submission)",
+      "modification": "none"
+    }
+  ]
+}

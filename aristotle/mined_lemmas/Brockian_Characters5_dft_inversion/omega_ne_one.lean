@@ -1,3 +1,11 @@
+/-
+# Dft Inversion
+Category: Characters
+Target: Brockian.Characters5.dft_inversion
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -22,18 +30,24 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option grind.warning false
+
 namespace Brockian.Characters5
 
-/-- The primitive fifth root of unity. -/
+/-- A primitive fifth root of unity. -/
 
-lemma omega_ne_one : omega ≠ 1 := by
+lemma omega_ne_one : ω ≠ 1 := by
+  rw [omega]
   intro h
-  rw [omega, Complex.exp_eq_one_iff] at h
+  rw [Complex.exp_eq_one_iff] at h
   obtain ⟨n, hn⟩ := h
-  have h5 : (5 : ℂ) * n = 1 := by
-    field_simp at hn
-    linear_combination -hn
-  have : ((5 * n : ℤ) : ℂ) = ((1 : ℤ) : ℂ) := by push_cast; linear_combination h5
-  have h5' : (5 : ℤ) * n = 1 := by exact_mod_cast this
-  omega
+  have hpi : (Real.pi : ℂ) ≠ 0 := by exact_mod_cast Real.pi_ne_zero
+  have hI : Complex.I ≠ 0 := Complex.I_ne_zero
+  have h2 : (2 * (Real.pi : ℂ) * Complex.I) * (1 - n * 5) = 0 := by
+    ring_nf; ring_nf at hn; linear_combination 5 * hn
+  rcases mul_eq_zero.1 h2 with h | h
+  · simp [hpi, hI] at h
+  · have h1 : (1 : ℂ) = n * 5 := sub_eq_zero.mp h
+    have h1' : (1 : ℤ) = n * 5 := by exact_mod_cast h1
+    omega
 

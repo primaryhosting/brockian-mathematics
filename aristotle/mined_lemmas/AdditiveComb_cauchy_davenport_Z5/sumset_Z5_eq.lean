@@ -1,3 +1,11 @@
+/-
+# Cauchy Davenport Z 5
+Category: Frontier Wave 2 (deeper machinery)
+Target: AdditiveComb.cauchy_davenport_Z5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -7,7 +15,6 @@ Target: AdditiveComb.cauchy_davenport_Z5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 
 open scoped BigOperators
 open scoped Real
@@ -27,13 +34,12 @@ set_option grind.warning false
 
 namespace AdditiveComb
 
-/-- The sumset `{0,1} + {0,2} = {0,1,2,3}` in `ZMod 5`. -/
+/-- The sumset `{0,1} + {0,2}` in `ZMod 5` is `{0,1,2,3}`. -/
 
 theorem sumset_Z5_eq :
     (({0, 1} : Finset (ZMod 5)) + ({0, 2} : Finset (ZMod 5)))
       = ({0, 1, 2, 3} : Finset (ZMod 5)) := by
   decide
 
-/-- Cauchy–Davenport, concrete instance in `ZMod 5`: for `A = {0,1}` and `B = {0,2}`,
-the sumset `A + B = {0,1,2,3}` has cardinality `4`, which is at least
-`min 5 (|A| + |B| - 1) = min 5 3 = 3`. -/
+/-- Cauchy–Davenport, concrete instance: in `ZMod 5`, for `A = {0,1}` and `B = {0,2}`,
+the sumset `A + B = {0,1,2,3}` has cardinality `4`. -/

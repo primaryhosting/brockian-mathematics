@@ -9,42 +9,28 @@ present (skipped otherwise — never handles a key it doesn't have). Slow (lake)
 on the small deduped best_proofs set, resumable, capped per run.
 """
 import glob
-import hashlib
 import json
 import os
 import pathlib
 import re
 import subprocess
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
+sys.path.insert(0, str(REPO))
+from engine.verify import ALLOWED_AXIOMS as SAFE  # noqa: E402
+from engine.verify import content_hash, normalize, qualified_decls  # noqa: E402
+
 BEST = ROOT / "best_proofs"
 STATE = ROOT / "cross_check.json"
-SAFE = {"propext", "Classical.choice", "Quot.sound"}
-DECL = re.compile(r"^\s*(?:theorem|lemma)\s+([A-Za-z_][\w']*)", re.M)
 TIMEOUT = int(os.environ.get("CROSS_TIMEOUT", "1500"))
 MAX = int(os.environ.get("CROSS_MAX", "20"))
 
 
-def normalize(content: str) -> str:
-    """Match the exact normalization used by axle_verify."""
-    imports, body = [], []
-    for line in content.splitlines():
-        if line.strip().startswith("import "):
-            if line.strip() not in imports:
-                imports.append(line.strip())
-        else:
-            body.append(line)
-    return "\n".join(imports + [""] + body)
-
-
-def content_hash(content: str) -> str:
-    return hashlib.sha256(normalize(content).encode()).hexdigest()[:16]
-
-
 def axioms_of(leanfile):
     text = normalize(open(leanfile, errors="ignore").read())
-    names = DECL.findall(text)
+    names = qualified_decls(text)  # fully-qualified: bare names fail at end-of-file
     if not names:
         return None, "no theorem/lemma found"
     tmp = leanfile.with_suffix(".axck.lean")

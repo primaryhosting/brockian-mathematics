@@ -9,378 +9,259 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Shor Code Corrects
+Category: Frontier Qi
+Target: QI.shor_code_corrects
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- (The header comment above uses `/- ... -/` rather than `/-! ... -/`: Lean requires all
+-- `import` lines to precede any module docstring, so a `/-!` block cannot open the file.)
+
+
+open scoped BigOperators
+
 /-!
-## Overview
+# The 9-qubit Shor code corrects an arbitrary single-qubit error
 
-We work with the state space of nine qubits, realized concretely as the space of
-complex-valued functions on the set `Bs` of computational basis states, where a basis
-state is an assignment of a bit to each of the nine qubits.  Qubits are indexed by
-`Qb = Fin 3 × Fin 3`: the first component is the index of one of the three blocks of the
-Shor code, the second is the position inside that block.
+The 9 qubits are grouped into three blocks of three, so a computational basis state of the
+register is an element of `Cfg = Blk × Blk × Blk` with `Blk = Bool × Bool × Bool`, and a state
+vector is a function `Cfg → ℂ` of amplitudes.
 
-An *arbitrary single-qubit error* acting on qubit `q` is the operator `qop q M` attached to
-an arbitrary `2 × 2` complex matrix `M : Bool → Bool → ℂ` acting on qubit `q` and acting as
-the identity on all other qubits.  Every completely arbitrary (not necessarily unitary)
-one-qubit operation is of this form.
+The logical codewords are
 
-The Shor codewords are
+* `|0_L⟩ = (|000⟩ + |111⟩)^{⊗3} / (2√2)`,
+* `|1_L⟩ = (|000⟩ - |111⟩)^{⊗3} / (2√2)`.
 
-  `cw false = (1/(2√2)) (|000⟩+|111⟩) ⊗ (|000⟩+|111⟩) ⊗ (|000⟩+|111⟩)`
-  `cw true  = (1/(2√2)) (|000⟩-|111⟩) ⊗ (|000⟩-|111⟩) ⊗ (|000⟩-|111⟩)`
-
-and the code space is their complex span.
-
-The theorem `QI.shor_code_corrects` states that
-
-* the two codewords are orthonormal, so the code space is a genuine two-dimensional
-  (one logical qubit) subspace; and
-* for **any** pair of single-qubit errors `E = qop q₁ M₁` and `F = qop q₂ M₂` there is a
-  scalar `c` with `⟪E x, F y⟫ = c ⟪x, y⟫` for all code vectors `x, y`.
-
-The second item is exactly the Knill–Laflamme error-correction condition
-`P E† F P = c_{EF} P` for the set of all single-qubit errors, i.e. the statement that the
-Shor code corrects an arbitrary single-qubit error.
+An arbitrary single-qubit error acting on qubit `j` of block `k` is given by an arbitrary
+`2 × 2` complex matrix `A : Bool → Bool → ℂ` (no linearity, unitarity or normalization is
+assumed).  The main theorem `QI.shor_code_corrects` establishes the Knill–Laflamme
+error-correction conditions
+`⟨c_a | A† B | c_b⟩ = δ_{a b} · α(A, B)`
+for all pairs of single-qubit operators `A`, `B` placed at arbitrary (possibly different) qubits.
+Note that `⟨c_a | A† B | c_b⟩ = ⟨A c_a , B c_b⟩`, which is the form used below.  Since every
+single-qubit error operator is one of these and error channels are linear, these conditions are
+exactly the statement that the code corrects an arbitrary single-qubit error.
 -/
 
 namespace QI
 
-open Finset
+/-- Computational basis states of one 3-qubit block. -/
+abbrev Blk := Bool × Bool × Bool
 
-/-- Qubit labels: `(block, position in block)`. -/
-abbrev Qb := Fin 3 × Fin 3
+/-- Computational basis states of the 9-qubit register, grouped into three blocks. -/
+abbrev Cfg := Blk × Blk × Blk
 
-/-- Computational basis states of the nine qubits. -/
-abbrev Bs := Qb → Bool
+/-- Read qubit `j` of a block. -/
+def getQ (v : Blk) : Fin 3 → Bool
+  | 0 => v.1
+  | 1 => v.2.1
+  | 2 => v.2.2
 
-/-- Labels for the eight basis states that occur in the Shor codewords: a bit per block. -/
-abbrev Sg := Fin 3 → Bool
+/-- Overwrite qubit `j` of a block. -/
+def setQ (v : Blk) : Fin 3 → Bool → Blk
+  | 0, p => (p, v.2.1, v.2.2)
+  | 1, p => (v.1, p, v.2.2)
+  | 2, p => (v.1, v.2.1, p)
 
-/-- The basis state in which all three qubits of block `i` carry the bit `s i`. -/
-def rep (s : Sg) : Bs := fun p => s p.1
+/-- Read block `k` of the register. -/
+def getB (w : Cfg) : Fin 3 → Blk
+  | 0 => w.1
+  | 1 => w.2.1
+  | 2 => w.2.2
 
-/-- The (unnormalized) Hermitian inner product on nine-qubit states. -/
-noncomputable def ip (x y : Bs → ℂ) : ℂ := ∑ b : Bs, (starRingEnd ℂ) (x b) * y b
+/-- Overwrite block `k` of the register. -/
+def setB (w : Cfg) : Fin 3 → Blk → Cfg
+  | 0, u => (u, w.2.1, w.2.2)
+  | 1, u => (w.1, u, w.2.2)
+  | 2, u => (w.1, w.2.1, u)
 
-/-- The operator acting by the `2 × 2` matrix `M` on qubit `q` and trivially elsewhere.
-This is the general form of an arbitrary single-qubit error on qubit `q`. -/
-noncomputable def qop (q : Qb) (M : Bool → Bool → ℂ) (v : Bs → ℂ) : Bs → ℂ :=
-  fun b => ∑ a : Bool, M (b q) a * v (Function.update b q a)
+/-- Amplitudes of the unnormalized block states `|000⟩ + |111⟩` (for `a = false`) and
+`|000⟩ - |111⟩` (for `a = true`). -/
+noncomputable def blk (a : Bool) : Blk → ℂ := fun v =>
+  if v = (false, false, false) then 1
+  else if v = (true, true, true) then (if a then -1 else 1) else 0
 
-/-- `(-1)^b`. -/
-def sgn (b : Bool) : ℂ := if b then -1 else 1
+/-- The product state over the three blocks with block amplitudes `g₁`, `g₂`, `g₃`. -/
+noncomputable def tri (g₁ g₂ g₃ : Blk → ℂ) : Cfg → ℂ :=
+  fun w => g₁ w.1 * g₂ w.2.1 * g₃ w.2.2
 
-/-- Sign of the basis state `rep s` in the codeword `cw κ`. -/
-def sg (κ : Bool) (s : Sg) : ℂ := if κ then sgn (s 0) * sgn (s 1) * sgn (s 2) else 1
+/-- The normalization constant of the Shor codewords. -/
+noncomputable def nrm : ℂ := ((1 / (2 * Real.sqrt 2) : ℝ) : ℂ)
 
-/-- Normalization constant `1/(2√2)` of the Shor codewords. -/
-noncomputable def nrm : ℂ := ((Real.sqrt 8)⁻¹ : ℝ)
+/-- The two logical codewords of the 9-qubit Shor code:
+`|0_L⟩ = (|000⟩+|111⟩)^{⊗3}/(2√2)` and `|1_L⟩ = (|000⟩-|111⟩)^{⊗3}/(2√2)`. -/
+noncomputable def cw (a : Bool) : Cfg → ℂ := fun w => nrm * tri (blk a) (blk a) (blk a) w
 
-/-- The two Shor codewords `|0_L⟩` (`κ = false`) and `|1_L⟩` (`κ = true`). -/
-noncomputable def cw (κ : Bool) : Bs → ℂ :=
-  fun b => ∑ s : Sg, (nrm * sg κ s) * (if rep s = b then 1 else 0)
+/-- The Hermitian inner product on the 9-qubit state space. -/
+noncomputable def ip (f g : Cfg → ℂ) : ℂ := ∑ w : Cfg, (starRingEnd ℂ) (f w) * g w
 
-/-- The Shor code space: the complex span of the two codewords. -/
-def codeSpace : Set (Bs → ℂ) := {x | ∃ α β : ℂ, x = fun b => α * cw false b + β * cw true b}
+/-- The Hermitian inner product on the state space of a single block. -/
+noncomputable def ipB (g h : Blk → ℂ) : ℂ := ∑ v : Blk, (starRingEnd ℂ) (g v) * h v
 
-/-! ### Basic facts about the normalization and the signs -/
+/-- The single-qubit operator `A` applied at qubit `j` of a block. -/
+noncomputable def actQ (A : Bool → Bool → ℂ) (j : Fin 3) (g : Blk → ℂ) : Blk → ℂ :=
+  fun v => ∑ p : Bool, A (getQ v j) p * g (setQ v j p)
 
-lemma cw_eq (κ : Bool) :
-    cw κ = fun b => ∑ s : Sg, (nrm * sg κ s) * (if rep s = b then 1 else 0) := rfl
+/-- The single-qubit operator `A` applied at qubit `j` of block `k` of the 9-qubit register. -/
+noncomputable def act (A : Bool → Bool → ℂ) (k j : Fin 3) (f : Cfg → ℂ) : Cfg → ℂ :=
+  fun w => ∑ p : Bool, A (getQ (getB w k) j) p * f (setB w k (setQ (getB w k) j p))
 
-lemma conj_nrm : (starRingEnd ℂ) nrm = nrm := Complex.conj_ofReal _
+/-! ### Basic algebraic lemmas -/
 
-lemma nrm_mul_nrm : nrm * nrm = 1 / 8 := by
-  have h : ((Real.sqrt 8)⁻¹ : ℝ) * ((Real.sqrt 8)⁻¹ : ℝ) = 1 / 8 := by
-    rw [← mul_inv, Real.mul_self_sqrt (by norm_num : (0:ℝ) ≤ 8)]
-    norm_num
-  calc nrm * nrm = ((((Real.sqrt 8)⁻¹ : ℝ) * ((Real.sqrt 8)⁻¹ : ℝ) : ℝ) : ℂ) := by
-        simp [nrm]
-    _ = 1 / 8 := by rw [h]; norm_num
+lemma act_const_mul (A : Bool → Bool → ℂ) (k j : Fin 3) (c : ℂ) (f : Cfg → ℂ) :
+    act A k j (fun w => c * f w) = fun w => c * act A k j f w := by
+  funext w
+  simp only [act, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun p _ => by ring
 
-lemma conj_sgn (b : Bool) : (starRingEnd ℂ) (sgn b) = sgn b := by
-  cases b <;> simp [sgn]
+lemma ip_const_mul (c d : ℂ) (f g : Cfg → ℂ) :
+    ip (fun w => c * f w) (fun w => d * g w) = (starRingEnd ℂ) c * d * ip f g := by
+  simp only [ip, map_mul, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun w _ => by ring
 
-lemma conj_sg (κ : Bool) (s : Sg) : (starRingEnd ℂ) (sg κ s) = sg κ s := by
-  cases κ <;> simp [sg, conj_sgn]
+/-- The inner product of two product states factors over the three blocks. -/
+lemma ip_tri (g₁ g₂ g₃ h₁ h₂ h₃ : Blk → ℂ) :
+    ip (tri g₁ g₂ g₃) (tri h₁ h₂ h₃) = ipB g₁ h₁ * ipB g₂ h₂ * ipB g₃ h₃ := by
+  have hip : ip (tri g₁ g₂ g₃) (tri h₁ h₂ h₃)
+      = ∑ v₁ : Blk, ∑ v₂ : Blk, ∑ v₃ : Blk,
+        ((starRingEnd ℂ) (g₁ v₁) * h₁ v₁) *
+          (((starRingEnd ℂ) (g₂ v₂) * h₂ v₂) * ((starRingEnd ℂ) (g₃ v₃) * h₃ v₃)) := by
+    rw [ip, Fintype.sum_prod_type]
+    refine Finset.sum_congr rfl fun v₁ _ => ?_
+    rw [Fintype.sum_prod_type]
+    refine Finset.sum_congr rfl fun v₂ _ => Finset.sum_congr rfl fun v₃ _ => ?_
+    simp only [tri, map_mul]; ring
+  rw [hip, ipB, ipB, ipB, mul_assoc, Finset.sum_mul_sum, Finset.sum_mul_sum]
+  refine Finset.sum_congr rfl fun v₁ _ => Finset.sum_congr rfl fun v₂ _ => ?_
+  rw [Finset.mul_sum]
 
-lemma sg_mul_self (κ : Bool) (s : Sg) : sg κ s * sg κ s = 1 := by
-  cases κ
-  · simp [sg]
-  · rcases Bool.dichotomy (s 0) with h0 | h0 <;> rcases Bool.dichotomy (s 1) with h1 | h1 <;>
-      rcases Bool.dichotomy (s 2) with h2 | h2 <;> simp [sg, sgn, h0, h1, h2]
+lemma act_tri_zero (A : Bool → Bool → ℂ) (j : Fin 3) (g₁ g₂ g₃ : Blk → ℂ) :
+    act A 0 j (tri g₁ g₂ g₃) = tri (actQ A j g₁) g₂ g₃ := by
+  funext w
+  simp only [act, tri, actQ, getB, setB, Finset.sum_mul]
+  exact Finset.sum_congr rfl fun p _ => by ring
 
-lemma sg_mul_sg_of_ne {κ lam : Bool} (h : κ ≠ lam) (s : Sg) : sg κ s * sg lam s = sg true s := by
-  cases κ <;> cases lam <;> simp_all [sg]
+lemma act_tri_one (A : Bool → Bool → ℂ) (j : Fin 3) (g₁ g₂ g₃ : Blk → ℂ) :
+    act A 1 j (tri g₁ g₂ g₃) = tri g₁ (actQ A j g₂) g₃ := by
+  funext w
+  simp only [act, tri, actQ, getB, setB, Finset.sum_mul, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun p _ => by ring
 
-/-! ### Expansion of sums over the eight code basis labels -/
+lemma act_tri_two (A : Bool → Bool → ℂ) (j : Fin 3) (g₁ g₂ g₃ : Blk → ℂ) :
+    act A 2 j (tri g₁ g₂ g₃) = tri g₁ g₂ (actQ A j g₃) := by
+  funext w
+  simp only [act, tri, actQ, getB, setB, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun p _ => by ring
 
-/-- The equivalence between triples of bits and bit-assignments to the three blocks. -/
-def sgEquiv : (Bool × Bool × Bool) ≃ Sg where
-  toFun p := ![p.1, p.2.1, p.2.2]
-  invFun s := (s 0, s 1, s 2)
-  left_inv p := by simp
-  right_inv s := by funext i; fin_cases i <;> rfl
+/-! ### Block-level computations -/
 
-lemma sum_Sg (F : Sg → ℂ) : ∑ s : Sg, F s = ∑ p : Bool × Bool × Bool, F ![p.1, p.2.1, p.2.2] :=
-  (Equiv.sum_comp sgEquiv F).symm
+/-- The two block states are orthogonal and both have squared norm `2`. -/
+lemma ipB_blk (a b : Bool) : ipB (blk a) (blk b) = if a = b then 2 else 0 := by
+  cases a <;> cases b <;> simp [ipB, blk, Fintype.sum_prod_type] <;> norm_num
 
-/-- The key cancellation: summing the sign of `|1_L⟩` against any function of the bits of at
-most two of the three blocks gives zero, because the remaining block is summed freely. -/
-lemma sum_sg_true_zero (F : Bool → Bool → ℂ) (i₁ i₂ : Fin 3) :
-    ∑ s : Sg, sg true s * F (s i₁) (s i₂) = 0 := by
-  rw [sum_Sg]
-  fin_cases i₁ <;> fin_cases i₂ <;>
-    simp [Fintype.sum_prod_type, sg, sgn] <;> ring
+/-- A single-qubit operator acting on the left block state gives the same overlap with
+either logical value: the identity part contributes and the `Z` part is killed by
+orthogonality. -/
+lemma ipB_actQ_left (A : Bool → Bool → ℂ) (j : Fin 3) :
+    ipB (actQ A j (blk true)) (blk true) = ipB (actQ A j (blk false)) (blk false) := by
+  fin_cases j <;> simp [ipB, blk, actQ, getQ, setQ, Fintype.sum_prod_type]
 
-/-! ### Combinatorics of the basis states involved -/
+lemma ipB_actQ_right (B : Bool → Bool → ℂ) (j : Fin 3) :
+    ipB (blk true) (actQ B j (blk true)) = ipB (blk false) (actQ B j (blk false)) := by
+  fin_cases j <;> simp [ipB, blk, actQ, getQ, setQ, Fintype.sum_prod_type]
 
-lemma rep_inj (s t : Sg) : rep s = rep t ↔ s = t := by decide +kernel +revert
+set_option maxHeartbeats 1000000 in
+/-- Two single-qubit operators inside the same block give the same overlap for either
+logical value. -/
+lemma ipB_actQ_both (A B : Bool → Bool → ℂ) (j₁ j₂ : Fin 3) :
+    ipB (actQ A j₁ (blk true)) (actQ B j₂ (blk true))
+      = ipB (actQ A j₁ (blk false)) (actQ B j₂ (blk false)) := by
+  fin_cases j₁ <;> fin_cases j₂ <;> simp [ipB, blk, actQ, getQ, setQ, Fintype.sum_prod_type]
 
-set_option maxRecDepth 100000 in
-/-- Two basis states obtained from code basis states by resetting the *same* qubit agree iff
-the code basis states and the reset values agree. -/
-lemma update_eq_update_same (q : Qb) (s t : Sg) (z w : Bool) :
-    Function.update (rep s) q z = Function.update (rep t) q w ↔ (z = w ∧ s = t) := by
-  decide +kernel +revert
+/-! ### The Knill–Laflamme conditions -/
 
-set_option maxRecDepth 100000 in
-/-- Two basis states obtained from code basis states by resetting two *different* qubits agree
-iff the code basis states agree and the reset values are the original ones.  This uses that
-each block contains three qubits, so any two qubits leave a qubit of every block untouched. -/
-lemma update_eq_update_diff (q₁ q₂ : Qb) (h : q₁ ≠ q₂) (s t : Sg) (z w : Bool) :
-    Function.update (rep s) q₁ z = Function.update (rep t) q₂ w ↔
-      (w = rep s q₂ ∧ s = t ∧ z = rep t q₁) := by
-  revert h; decide +kernel +revert
+private lemma fin3_cases : ∀ k : Fin 3, k = 0 ∨ k = 1 ∨ k = 2 := by decide
 
-/-! ### Inner products of states given as combinations of basis states -/
+/-- Knill–Laflamme conditions for the unnormalized codewords. -/
+lemma ip_act_tri_blk (A B : Bool → Bool → ℂ) (k₁ j₁ k₂ j₂ : Fin 3) (a b : Bool) :
+    ip (act A k₁ j₁ (tri (blk a) (blk a) (blk a))) (act B k₂ j₂ (tri (blk b) (blk b) (blk b)))
+      = if a = b then ip (act A k₁ j₁ (tri (blk false) (blk false) (blk false)))
+                        (act B k₂ j₂ (tri (blk false) (blk false) (blk false))) else 0 := by
+  rcases fin3_cases k₁ with h₁ | h₁ | h₁ <;> rcases fin3_cases k₂ with h₂ | h₂ | h₂ <;>
+    subst h₁ <;> subst h₂ <;>
+    simp only [act_tri_zero, act_tri_one, act_tri_two, ip_tri] <;>
+    cases a <;> cases b <;>
+    simp [ipB_blk, ipB_actQ_left, ipB_actQ_right, ipB_actQ_both]
 
-lemma ip_of_spread {I J : Type} [Fintype I] [Fintype J]
-    (f : I → ℂ) (g : J → ℂ) (u : I → Bs) (u' : J → Bs) :
-    ip (fun b => ∑ i, f i * (if u i = b then 1 else 0))
-       (fun b => ∑ j, g j * (if u' j = b then 1 else 0))
-    = ∑ i, ∑ j, (starRingEnd ℂ) (f i) * g j * (if u i = u' j then 1 else 0) := by
-  have h : ∀ b : Bs, (starRingEnd ℂ) (∑ i, f i * (if u i = b then 1 else 0)) *
-      (∑ j, g j * (if u' j = b then 1 else 0))
-      = ∑ i, ∑ j, (starRingEnd ℂ) (f i) * g j *
-          ((if u i = b then 1 else 0) * (if u' j = b then 1 else 0)) := by
-    intro b
-    have h1 : (starRingEnd ℂ) (∑ i, f i * (if u i = b then 1 else 0))
-        = ∑ i, (starRingEnd ℂ) (f i) * (if u i = b then 1 else 0) := by
-      simp only [map_sum, map_mul, apply_ite, map_one, map_zero]
-    rw [h1, Finset.sum_mul_sum]
-    exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by ring
-  simp only [ip, h]
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl fun i _ => ?_
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl fun j _ => ?_
-  rw [← Finset.mul_sum]
-  congr 1
-  simp [Finset.sum_ite_eq]
+lemma nrm_mul_self : (starRingEnd ℂ) nrm * nrm = 1 / 8 := by
+  have h2 : Real.sqrt 2 * Real.sqrt 2 = 2 := Real.mul_self_sqrt (by norm_num)
+  have : (1 / (2 * Real.sqrt 2) : ℝ) * (1 / (2 * Real.sqrt 2) : ℝ) = 1 / 8 := by
+    field_simp
+    nlinarith [h2, Real.sqrt_nonneg 2]
+  rw [nrm, Complex.conj_ofReal, ← Complex.ofReal_mul, this]
+  norm_num
 
-/-- Acting by a single-qubit error on a combination of the code basis states again produces a
-combination of basis states, indexed by a code basis label together with the new value of the
-affected qubit. -/
-lemma qop_spread (q : Qb) (M : Bool → Bool → ℂ) (f : Sg → ℂ) :
-    qop q M (fun b => ∑ s : Sg, f s * (if rep s = b then 1 else 0))
-    = fun b => ∑ p : Sg × Bool, (f p.1 * M p.2 (rep p.1 q)) *
-        (if Function.update (rep p.1) q p.2 = b then 1 else 0) := by
-  funext b
-  rw [Fintype.sum_prod_type]
-  simp only [qop, Finset.mul_sum]
-  conv_lhs => rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl fun s _ => ?_
-  by_cases hA : ∀ x, x ≠ q → rep s x = b x
-  · have e1 : ∀ a : Bool, (rep s = Function.update b q a) ↔ (rep s q = a) := by
-      intro a
-      rw [Function.eq_update_iff]
-      exact ⟨fun h => h.1, fun h => ⟨h, hA⟩⟩
-    have e2 : ∀ z : Bool, (Function.update (rep s) q z = b) ↔ (z = b q) := by
-      intro z
-      rw [Function.update_eq_iff]
-      exact ⟨fun h => h.1, fun h => ⟨h, fun x hx => hA x hx⟩⟩
-    simp only [e1, e2, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq, Finset.sum_ite_eq',
-      Finset.mem_univ, if_true]
-    ring
-  · push_neg at hA
-    obtain ⟨x, hx, hxb⟩ := hA
-    have e1 : ∀ a : Bool, ¬ (rep s = Function.update b q a) := fun a h =>
-      hxb (by rw [h, Function.update_of_ne hx])
-    have e2 : ∀ z : Bool, ¬ (Function.update (rep s) q z = b) := fun z h =>
-      hxb (by rw [← h, Function.update_of_ne hx])
-    simp only [e1, e2, if_false, mul_zero, Finset.sum_const_zero]
+/-! ### The codewords are orthonormal -/
 
-/-! ### Orthonormality of the codewords -/
-
-theorem ip_cw_cw (κ lam : Bool) : ip (cw κ) (cw lam) = if κ = lam then 1 else 0 := by
-  have h : ip (cw κ) (cw lam)
-      = ∑ s : Sg, ∑ t : Sg, (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg lam t) *
-          (if rep s = rep t then 1 else 0) := by
-    rw [cw_eq κ, cw_eq lam, ip_of_spread]
-  rw [h]
-  simp only [rep_inj, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
-  by_cases hk : κ = lam
-  · subst hk
-    have : ∀ s : Sg, (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg κ s) = 1 / 8 := by
-      intro s
-      have := sg_mul_self κ s
-      calc (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg κ s)
-          = (sg κ s * sg κ s) * (nrm * nrm) := by
-            simp only [map_mul, conj_nrm, conj_sg]; ring
-        _ = 1 / 8 := by rw [this, one_mul, nrm_mul_nrm]
-    simp only [this]
-    rw [sum_Sg]
-    simp
-  · have : ∀ s : Sg, (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg lam s)
-        = sg true s * ((nrm * nrm) * (fun _ _ : Bool => (1:ℂ)) (s 0) (s 0)) := by
-      intro s
-      calc (starRingEnd ℂ) (nrm * sg κ s) * (nrm * sg lam s)
-          = (sg κ s * sg lam s) * (nrm * nrm) := by
-            simp only [map_mul, conj_nrm, conj_sg]; ring
-        _ = sg true s * ((nrm * nrm) * 1) := by rw [sg_mul_sg_of_ne hk s]; ring
-    simp only [this, if_neg hk]
-    exact sum_sg_true_zero (fun _ _ => (nrm * nrm) * 1) 0 0
-
-/-! ### The Knill–Laflamme computation -/
-
-lemma ip_qop_expand (q₁ q₂ : Qb) (M₁ M₂ : Bool → Bool → ℂ) (κ lam : Bool) :
-    ip (qop q₁ M₁ (cw κ)) (qop q₂ M₂ (cw lam))
-    = ∑ p : Sg × Bool, ∑ p' : Sg × Bool,
-        (starRingEnd ℂ) (nrm * sg κ p.1 * M₁ p.2 (rep p.1 q₁)) *
-        (nrm * sg lam p'.1 * M₂ p'.2 (rep p'.1 q₂)) *
-        (if Function.update (rep p.1) q₁ p.2 = Function.update (rep p'.1) q₂ p'.2 then 1 else 0) := by
-  rw [cw_eq κ, cw_eq lam, qop_spread, qop_spread, ip_of_spread]
-
-/-- Both errors act on the same qubit. -/
-lemma ip_qop_same (q : Qb) (M₁ M₂ : Bool → Bool → ℂ) (κ lam : Bool) :
-    ip (qop q M₁ (cw κ)) (qop q M₂ (cw lam))
-    = ∑ s : Sg, ∑ z : Bool, (starRingEnd ℂ) (nrm * sg κ s * M₁ z (s q.1)) *
-        (nrm * sg lam s * M₂ z (s q.1)) := by
-  rw [ip_qop_expand]
-  simp only [Fintype.sum_prod_type, update_eq_update_same, ite_and, mul_ite, mul_one, mul_zero,
-    Finset.sum_ite_eq, Finset.mem_univ, if_true]
-  rfl
-
-/-- The errors act on two different qubits. -/
-lemma ip_qop_diff (q₁ q₂ : Qb) (h : q₁ ≠ q₂) (M₁ M₂ : Bool → Bool → ℂ) (κ lam : Bool) :
-    ip (qop q₁ M₁ (cw κ)) (qop q₂ M₂ (cw lam))
-    = ∑ s : Sg, (starRingEnd ℂ) (nrm * sg κ s * M₁ (s q₁.1) (s q₁.1)) *
-        (nrm * sg lam s * M₂ (s q₂.1) (s q₂.1)) := by
-  rw [ip_qop_expand]
-  simp only [Fintype.sum_prod_type, update_eq_update_diff q₁ q₂ h, ite_and, mul_ite, mul_one,
-    mul_zero, Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, if_true]
-  rfl
-
-/-- The diagonal Knill–Laflamme matrix elements do not depend on the logical basis state. -/
-theorem ip_qop_diag (q₁ q₂ : Qb) (M₁ M₂ : Bool → Bool → ℂ) (κ : Bool) :
-    ip (qop q₁ M₁ (cw κ)) (qop q₂ M₂ (cw κ))
-      = ip (qop q₁ M₁ (cw false)) (qop q₂ M₂ (cw false)) := by
-  have key : ∀ (s : Sg) (A B : ℂ), (starRingEnd ℂ) (nrm * sg κ s * A) * (nrm * sg κ s * B)
-      = (starRingEnd ℂ) (nrm * sg false s * A) * (nrm * sg false s * B) := by
-    intro s A B
-    have h1 := sg_mul_self κ s
-    calc (starRingEnd ℂ) (nrm * sg κ s * A) * (nrm * sg κ s * B)
-        = (sg κ s * sg κ s) * ((starRingEnd ℂ) nrm * (starRingEnd ℂ) A * (nrm * B)) := by
-          simp only [map_mul, conj_sg]; ring
-      _ = (starRingEnd ℂ) nrm * (starRingEnd ℂ) A * (nrm * B) := by rw [h1, one_mul]
-      _ = (starRingEnd ℂ) (nrm * sg false s * A) * (nrm * sg false s * B) := by
-          simp only [sg, map_mul, map_one, if_neg (Bool.false_ne_true)]; ring
-  by_cases hq : q₁ = q₂
-  · subst hq
-    rw [ip_qop_same, ip_qop_same]
-    exact Finset.sum_congr rfl fun s _ => Finset.sum_congr rfl fun z _ => key s _ _
-  · rw [ip_qop_diff q₁ q₂ hq, ip_qop_diff q₁ q₂ hq]
-    exact Finset.sum_congr rfl fun s _ => key s _ _
-
-/-- The off-diagonal Knill–Laflamme matrix elements vanish. -/
-theorem ip_qop_offdiag (q₁ q₂ : Qb) (M₁ M₂ : Bool → Bool → ℂ) {κ lam : Bool} (h : κ ≠ lam) :
-    ip (qop q₁ M₁ (cw κ)) (qop q₂ M₂ (cw lam)) = 0 := by
-  by_cases hq : q₁ = q₂
-  · subst hq
-    rw [ip_qop_same]
-    have : ∀ s : Sg, (∑ z : Bool, (starRingEnd ℂ) (nrm * sg κ s * M₁ z (s q₁.1)) *
-        (nrm * sg lam s * M₂ z (s q₁.1)))
-        = sg true s * (fun x y : Bool => ∑ z : Bool, (starRingEnd ℂ) (nrm * M₁ z x) *
-            (nrm * M₂ z y)) (s q₁.1) (s q₁.1) := by
-      intro s
-      rw [Finset.mul_sum]
-      refine Finset.sum_congr rfl fun z _ => ?_
-      calc (starRingEnd ℂ) (nrm * sg κ s * M₁ z (s q₁.1)) * (nrm * sg lam s * M₂ z (s q₁.1))
-          = (sg κ s * sg lam s) * ((starRingEnd ℂ) (nrm * M₁ z (s q₁.1)) *
-              (nrm * M₂ z (s q₁.1))) := by
-            simp only [map_mul, conj_sg]; ring
-        _ = sg true s * ((starRingEnd ℂ) (nrm * M₁ z (s q₁.1)) * (nrm * M₂ z (s q₁.1))) := by
-            rw [sg_mul_sg_of_ne h s]
-    rw [Finset.sum_congr rfl fun s _ => this s]
-    exact sum_sg_true_zero
-      (fun x y : Bool => ∑ z : Bool, (starRingEnd ℂ) (nrm * M₁ z x) * (nrm * M₂ z y)) q₁.1 q₁.1
-  · rw [ip_qop_diff q₁ q₂ hq]
-    have : ∀ s : Sg, (starRingEnd ℂ) (nrm * sg κ s * M₁ (s q₁.1) (s q₁.1)) *
-        (nrm * sg lam s * M₂ (s q₂.1) (s q₂.1))
-        = sg true s * (fun x y : Bool => (starRingEnd ℂ) (nrm * M₁ x x) * (nrm * M₂ y y))
-            (s q₁.1) (s q₂.1) := by
-      intro s
-      calc (starRingEnd ℂ) (nrm * sg κ s * M₁ (s q₁.1) (s q₁.1)) *
-            (nrm * sg lam s * M₂ (s q₂.1) (s q₂.1))
-          = (sg κ s * sg lam s) * ((starRingEnd ℂ) (nrm * M₁ (s q₁.1) (s q₁.1)) *
-              (nrm * M₂ (s q₂.1) (s q₂.1))) := by
-            simp only [map_mul, conj_sg]; ring
-        _ = sg true s * ((starRingEnd ℂ) (nrm * M₁ (s q₁.1) (s q₁.1)) *
-              (nrm * M₂ (s q₂.1) (s q₂.1))) := by rw [sg_mul_sg_of_ne h s]
-    rw [Finset.sum_congr rfl fun s _ => this s]
-    exact sum_sg_true_zero
-      (fun x y : Bool => (starRingEnd ℂ) (nrm * M₁ x x) * (nrm * M₂ y y)) q₁.1 q₂.1
-
-/-! ### Linearity -/
-
-lemma qop_lin (q : Qb) (M : Bool → Bool → ℂ) (α β : ℂ) (x y : Bs → ℂ) :
-    qop q M (fun b => α * x b + β * y b) = fun b => α * qop q M x b + β * qop q M y b := by
-  funext b
-  simp only [qop, Finset.mul_sum]
-  rw [← Finset.sum_add_distrib]
-  exact Finset.sum_congr rfl fun a _ => by ring
-
-lemma ip_lin (α β γ δ : ℂ) (x y u v : Bs → ℂ) :
-    ip (fun b => α * x b + β * y b) (fun b => γ * u b + δ * v b)
-      = (starRingEnd ℂ) α * γ * ip x u + (starRingEnd ℂ) α * δ * ip x v
-        + (starRingEnd ℂ) β * γ * ip y u + (starRingEnd ℂ) β * δ * ip y v := by
-  simp only [ip, map_add, map_mul, Finset.mul_sum, ← Finset.sum_add_distrib]
-  exact Finset.sum_congr rfl fun b _ => by ring
-
-/-! ### Main theorem -/
-
-/-- The codewords lie in the code space, so the statement below is not vacuous. -/
-lemma cw_mem_codeSpace (κ : Bool) : cw κ ∈ codeSpace := by
-  cases κ
-  · exact ⟨1, 0, by funext b; ring⟩
-  · exact ⟨0, 1, by funext b; ring⟩
+theorem shor_codewords_orthonormal (a b : Bool) :
+    ip (cw a) (cw b) = if a = b then 1 else 0 := by
+  have h : ip (cw a) (cw b)
+      = (starRingEnd ℂ) nrm * nrm * ip (tri (blk a) (blk a) (blk a))
+          (tri (blk b) (blk b) (blk b)) := by
+    rw [show cw a = fun w => nrm * tri (blk a) (blk a) (blk a) w from rfl,
+        show cw b = fun w => nrm * tri (blk b) (blk b) (blk b) w from rfl, ip_const_mul]
+  rw [h, nrm_mul_self, ip_tri, ipB_blk]
+  cases a <;> cases b <;> norm_num
 
 /-- **The 9-qubit Shor code corrects an arbitrary single-qubit error.**
+For arbitrary single-qubit operators `A`, `B` acting on arbitrary (possibly different) qubits
+`(k₁, j₁)` and `(k₂, j₂)` of the register, the Knill–Laflamme error-correction conditions hold
+for the two logical codewords: `⟨A c_a, B c_b⟩ = ⟨c_a | A† B | c_b⟩ = δ_{ab} · α` with the
+constant `α` independent of the logical state `a`.  Since an arbitrary single-qubit error is a
+linear combination of such operators, this is exactly the statement that the code corrects an
+arbitrary single-qubit error (equivalently, a recovery channel exists). -/
+theorem shor_code_corrects (k₁ j₁ k₂ j₂ : Fin 3) (A B : Bool → Bool → ℂ) :
+    ∃ α : ℂ, ∀ a b : Bool,
+      ip (act A k₁ j₁ (cw a)) (act B k₂ j₂ (cw b)) = if a = b then α else 0 := by
+  have hred : ∀ a b : Bool, ip (act A k₁ j₁ (cw a)) (act B k₂ j₂ (cw b))
+      = (starRingEnd ℂ) nrm * nrm *
+          ip (act A k₁ j₁ (tri (blk a) (blk a) (blk a)))
+            (act B k₂ j₂ (tri (blk b) (blk b) (blk b))) := by
+    intro a b
+    rw [show cw a = fun w => nrm * tri (blk a) (blk a) (blk a) w from rfl,
+        show cw b = fun w => nrm * tri (blk b) (blk b) (blk b) w from rfl,
+        act_const_mul, act_const_mul, ip_const_mul]
+  refine ⟨ip (act A k₁ j₁ (cw false)) (act B k₂ j₂ (cw false)), fun a b => ?_⟩
+  rw [hred, hred, ip_act_tri_blk]
+  by_cases hab : a = b
+  · simp [hab]
+  · simp [hab]
 
-The first conjunct says that the two Shor codewords are orthonormal, so that the code space
-is a two-dimensional subspace encoding one logical qubit.
+/-! ### A sanity check: the identity error -/
 
-The second conjunct is the Knill–Laflamme error-correction condition for the set of all
-single-qubit errors: for arbitrary qubits `q₁, q₂` and arbitrary (not necessarily unitary)
-one-qubit operations `M₁, M₂` there is a scalar `c` such that
-`⟪(M₁ on q₁) x, (M₂ on q₂) y⟫ = c ⟪x, y⟫` for all vectors `x, y` of the code space; i.e.
-`P E† F P = c P` for all single-qubit errors `E`, `F`.  This is precisely the necessary and
-sufficient condition for the existence of a recovery operation undoing an arbitrary error on
-any single one of the nine qubits. -/
-theorem shor_code_corrects :
-    (∀ κ lam : Bool, ip (cw κ) (cw lam) = if κ = lam then 1 else 0) ∧
-    (∀ (q₁ q₂ : Qb) (M₁ M₂ : Bool → Bool → ℂ), ∃ c : ℂ,
-      ∀ x ∈ codeSpace, ∀ y ∈ codeSpace,
-        ip (qop q₁ M₁ x) (qop q₂ M₂ y) = c * ip x y) := by
-  refine ⟨ip_cw_cw, fun q₁ q₂ M₁ M₂ => ⟨ip (qop q₁ M₁ (cw false)) (qop q₂ M₂ (cw false)), ?_⟩⟩
-  rintro x ⟨α, β, rfl⟩ y ⟨γ, δ, rfl⟩
-  rw [qop_lin, qop_lin, ip_lin, ip_lin]
-  rw [ip_qop_diag q₁ q₂ M₁ M₂ true,
-    ip_qop_offdiag q₁ q₂ M₁ M₂ (κ := false) (lam := true) (by decide),
-    ip_qop_offdiag q₁ q₂ M₁ M₂ (κ := true) (lam := false) (by decide)]
-  simp only [ip_cw_cw, Bool.false_eq_true, Bool.true_eq_false, if_true, if_false, mul_zero,
-    add_zero, mul_one]
-  ring
+lemma setQ_getQ (v : Blk) (j : Fin 3) : setQ v j (getQ v j) = v := by
+  fin_cases j <;> simp [setQ, getQ]
+
+lemma setB_getB (w : Cfg) (k : Fin 3) : setB w k (getB w k) = w := by
+  fin_cases k <;> simp [setB, getB]
+
+/-- Applying the identity operator at any qubit does nothing. -/
+lemma act_id (k j : Fin 3) (f : Cfg → ℂ) :
+    act (fun p q => if p = q then 1 else 0) k j f = f := by
+  funext w
+  simp only [act, ite_mul, one_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+  rw [setQ_getQ, setB_getB]
+
+/-- Non-vacuity check: for the identity error the Knill-Laflamme constant is `1`, so the
+statement of `shor_code_corrects` is not vacuous. -/
+theorem shor_code_identity_error (k j : Fin 3) (a : Bool) :
+    ip (act (fun p q => if p = q then 1 else 0) k j (cw a))
+      (act (fun p q => if p = q then 1 else 0) k j (cw a)) = 1 := by
+  rw [act_id, shor_codewords_orthonormal]
+  simp
 
 end QI
 

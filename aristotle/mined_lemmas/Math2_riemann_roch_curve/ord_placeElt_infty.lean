@@ -1,71 +1,31 @@
-/-
-# Riemann Roch Curve
-Category: Frontier Math
-Target: Math2.riemann_roch_curve
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+import RequestProject.Places
+
+/-!
+# Divisors, Riemann–Roch spaces and their dimensions on the projective line
+
+* `Math2.Divisor K` : divisors on `ℙ¹_K`, i.e. finitely supported `ℤ`-valued functions on the
+  set of closed points;
+* `Math2.deg D` : the degree of a divisor;
+* `Math2.riemannRochSpace D` : the Riemann–Roch space `L(D) = {f : ord_v f ≥ -D v for all v}`;
+* `Math2.ell D` : its dimension `ℓ(D)` over `K`.
+
+The main result of this file is `Math2.ell_eq`: `ℓ(D) = max (deg D + 1) 0`.
 -/
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Classical
-
-set_option maxHeartbeats 1000000
-set_option synthInstance.maxHeartbeats 400000
-set_option maxRecDepth 4000
 
 open Polynomial
 
-/-!
-# Riemann–Roch for a smooth projective curve
-
-Mathlib (as of this development) contains no Riemann–Roch theorem, no theory of divisors on
-curves, no sheaf cohomology of curves and no Serre duality, so the whole set-up below is built
-from scratch on top of Mathlib's theory of the rational function field `RatFunc k` and of
-polynomials.
-
-We work with the smooth projective curve `ℙ¹_k` over an arbitrary field `k`, described through
-its function field `k(X) = RatFunc k`:
-
-* its closed points (`Math2.Place`) are the monic irreducible polynomials together with the
-  point at infinity;
-* `Math2.ord` is the normalized valuation (order of vanishing) at a closed point;
-* `Math2.Divisor` is the group of divisors, `Math2.degDiv` the degree of a divisor
-  (each point counted with the degree of its residue field);
-* `Math2.RRSpace D` is the Riemann–Roch space `L(D) = {f ≠ 0 : div f + D ≥ 0} ∪ {0}` and
-  `Math2.ell D = ℓ(D)` its dimension over `k`;
-* `Math2.canonicalDivisor` is the canonical divisor `-2·∞` and `Math2.genus` the genus `0`.
-
-The main result `Math2.riemann_roch_curve` is the Riemann–Roch formula
-`ℓ(D) - ℓ(K - D) = deg D + 1 - g`, valid for every divisor `D`.
--/
+noncomputable section
 
 namespace Math2
 
-/-!
-## The smooth projective curve
+variable {K : Type*} [Field K]
 
-We work with the projective line `ℙ¹_k` over an arbitrary field `k`, presented through its
-function field `k(X) = RatFunc k`.  Its closed points (places of the function field) are the
-monic irreducible polynomials (the finite closed points) together with the point at infinity.
--/
+/-- The degree of a closed point of `ℙ¹_K`: the degree of the corresponding monic irreducible
+polynomial, resp. `1` for the point at infinity. -/
 
-variable {k : Type*} [Field k]
-
-/-- A closed point of the projective line `ℙ¹_k`: either a monic irreducible polynomial
-(a finite closed point) or `none`, the point at infinity. -/
-abbrev Place (k : Type*) [Field k] := Option {p : k[X] // p.Monic ∧ Irreducible p}
-
-/-- A divisor on `ℙ¹_k`: a finitely supported formal `ℤ`-combination of closed points. -/
-abbrev Divisor (k : Type*) [Field k] := Place k →₀ ℤ
-
-/-! ### Order functions (normalized valuations) at the closed points -/
-
-
-lemma ord_placeElt_infty (P : Place k) :
-    ord none (placeElt P) = -degPlace P + (if P = none then 1 else 0) := by
-  cases P with
-  | none => simp [placeElt, ord, degPlace, RatFunc.intDegree_one]
-  | some p => simp [placeElt, ord, degPlace, RatFunc.intDegree_polynomial]
+theorem ord_placeElt_infty (v : Place K) :
+    ord (none : Place K) (placeElt v) = -degPlace v + (if v = none then 1 else 0) := by
+  cases v with
+  | none => simp [placeElt]
+  | some p => simp [placeElt, ord_polynomial_infty]
 

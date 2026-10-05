@@ -24,68 +24,54 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 /-!
-# A formal model of a policy-controlled isolation engine (`PCA`)
-
-This file develops a small but complete formal model of an *isolation engine*:
-a component that decides whether a command may be executed on behalf of a set of
-roles under a capability policy, and, if so, produces the sandbox in which the
-command is to be run.
-
-The main results are
-
-* `PCA.run_allow_iff` : soundness **and** completeness of the engine with respect
-  to the declarative specification `PCA.Permits`;
-* `PCA.run_sound`, `PCA.run_complete`, `PCA.run_deny_iff` : the two directions and
-  the corresponding characterisation of denials;
-* `PCA.allow_least_privilege` : the produced sandbox carries exactly the
-  capabilities the command needs, and every one of them is actually granted;
-* `PCA.run_congr` : the verdict only depends on the grants for the roles of the
-  request and the capabilities needed by the command (an isolation / non-interference
-  property);
-* `PCA.Fix.alter_policy_preserves_roles_and_cmd` and the surrounding lemmas: the
-  policy-repair operation changes nothing but the policy, only ever adds grants,
-  adds only grants that are needed, and does repair the request.
+# Alter Policy Preserves Roles And Cmd
+Category: Proof-Carrying Apps
+Target: PCA.Fix.alter_policy_preserves_roles_and_cmd
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace PCA
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 
-/-- Capabilities that a command may require and a policy may grant. -/
-inductive Cap where
-  | read | write | net | exec
-  deriving DecidableEq, Repr
+namespace PCA.Fix
 
-/-- Principals are identified by a numeric role identifier. -/
-abbrev Role := ℕ
+/-! ## The isolation engine's model
 
-/-- A policy records, for every role and capability, whether the capability is granted. -/
-structure Policy where
-  grants : Role → Cap → Bool
+An *app* is a tree of isolation scopes.  Each internal node carries a *policy*, which
+restricts the ambient authority available to the subtree below it; each leaf carries a
+*request*, consisting of the role under which the leaf runs and the command it wishes to
+issue.  The isolation engine permits an app under an ambient policy exactly when every leaf
+request is allowed by the ambient policy conjoined with all the policies guarding it. -/
 
-/-- A policy `p` is weaker than `q` if every grant of `p` is also a grant of `q`. -/
+/-- A role identifier. -/
+abbrev Role := Nat
 
-def Policy.le (p q : Policy) : Prop := ∀ ρ c, p.grants ρ c = true → q.grants ρ c = true
+/-- A command identifier. -/
+abbrev Cmd := Nat
 
-/-- A command, together with the capabilities it needs in order to run. -/
-structure Cmd where
-  name : String
-  needs : List Cap
-  deriving DecidableEq, Repr
-
-/-- A request to the engine: the roles of the caller, the command, and the policy in force. -/
-structure Request where
-  roles : List Role
+/-- A request: a command issued under a given role. -/
+structure Req where
+  role : Role
   cmd : Cmd
-  policy : Policy
+  deriving DecidableEq
 
-/-- The isolated environment a command is executed in: the capabilities handed to it. -/
-structure Sandbox where
-  caps : List Cap
-  deriving DecidableEq, Repr
+/-- A policy decides, for each role/command pair, whether the command is allowed. -/
+abbrev Policy := Role → Cmd → Bool
 
-/-- The possible answers of the engine. -/
-inductive Verdict where
-  | allow (s : Sandbox)
-  | deny (missing : Cap)
-  deriving DecidableEq, Repr
+/-- The always-permissive policy. -/
 
-/-- A capability is granted to a request when some role of the caller has it. -/
+@[simp] theorem Policy.inter_top (p : Policy) : Policy.inter p Policy.top = p := by
+  funext ro cm
+  simp [Policy.inter, Policy.top]
+
+/-- An app: a tree of isolation scopes with requests at the leaves. -/
+inductive App where
+  | leaf (r : Req) : App
+  | node (p : Policy) (cs : List App) : App
+
+namespace App
+
+/-- Structural induction principle for `App`.  (`App` is a nested inductive type, so this is
+derived by hand from the raw recursor.) -/
+@[elab_as_elim]

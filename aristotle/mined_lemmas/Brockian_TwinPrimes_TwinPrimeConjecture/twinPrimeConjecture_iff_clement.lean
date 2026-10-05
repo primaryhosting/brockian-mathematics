@@ -30,51 +30,28 @@ Target: Brockian.TwinPrimes.TwinPrimeConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` to precede any module docstring, so the header above is
--- repeated as the module docstring immediately after the import.)
 
 import Mathlib
 
-/-!
-# Twin Prime Conjecture
-Category: Brockian Conjecture
-Target: Brockian.TwinPrimes.TwinPrimeConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open Nat
+open scoped Nat
 
 namespace Brockian.TwinPrimes
 
-/-! ## The statement
-
-The twin prime conjecture asserts that there are arbitrarily large primes `p` such that
-`p + 2` is also prime.  This is a famous open problem, so it is not proved here; instead
-we give an unconditional, Lean-checked *equivalent reformulation* (Clement's criterion,
-derived from Wilson's theorem — `Nat.prime_iff_fac_equiv_neg_one` in Mathlib), which
-turns the conjecture into a single divisibility statement about factorials, together with
-some unconditional partial results.
--/
-
-/-- `n` and `n + 2` are both prime. -/
+/-- **The Twin Prime Conjecture**: there are arbitrarily large primes `p` such that
+`p + 2` is also prime. -/
 
 theorem twinPrimeConjecture_iff_clement :
-    TwinPrimeConjecture ↔
-      ∀ N : ℕ, ∃ k : ℕ, N < k ∧
-        (2 * k + 1) * (2 * k + 3) ∣ 4 * ((2 * k)! + 1) + (2 * k + 1) := by
+    TwinPrimeConjecture ↔ ∀ N : ℕ, ∃ n : ℕ, N < n ∧ n * (n + 2) ∣ 4 * ((n - 1)! + 1) + n := by
   constructor
   · intro h N
-    obtain ⟨p, hp, hpp⟩ := h (2 * N + 3)
-    have hodd : p % 2 = 1 := Nat.odd_iff.mp (hpp.1.odd_of_ne_two (by omega))
-    obtain ⟨k, hk⟩ : ∃ k, p = 2 * k + 1 := ⟨p / 2, by omega⟩
-    refine ⟨k, by omega, ?_⟩
-    rw [← clement k (by omega), ← hk]
-    exact hpp
+    obtain ⟨p, hp, hp1, hp2⟩ := h N
+    exact ⟨p, hp, (clement_criterion hp1.one_lt).mp ⟨hp1, hp2⟩⟩
   · intro h N
-    obtain ⟨k, hk, hdvd⟩ := h (N + 1)
-    exact ⟨2 * k + 1, by omega, (clement k (by omega)).mpr hdvd⟩
+    obtain ⟨n, hn, hd⟩ := h (max N 1)
+    have hn1 : 1 < n := lt_of_le_of_lt (le_max_right N 1) hn
+    obtain ⟨hp, hq⟩ := (clement_criterion hn1).mpr hd
+    exact ⟨n, lt_of_le_of_lt (le_max_left N 1) hn, hp, hq⟩
 
-/-! ## Unconditional partial results -/
+/-! ## An unconditional partial result -/
 
-/-- `(3, 5)` is a twin prime pair, so twin primes exist. -/
+/-- Every twin prime pair beyond `(3,5)` has its smaller member congruent to `5` mod `6`. -/

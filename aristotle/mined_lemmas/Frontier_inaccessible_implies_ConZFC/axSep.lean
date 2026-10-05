@@ -1,36 +1,27 @@
 import Mathlib
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# The cumulative hierarchy and inaccessible cardinals
+
+This file defines the von Neumann cumulative hierarchy `Frontier.cumul o` inside `ZFSet`,
+characterizes its members by rank, and proves the two facts about an inaccessible cardinal `κ`
+that are needed to see that `V_κ` is a model of ZFC:
+
+* `Frontier.card_lt_of_rank_lt`: a set of rank `< κ.ord` has cardinality `< κ`;
+* `Frontier.rank_range_lt`: `V_κ` is closed under images of small families (replacement).
 -/
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-universe u
+open Ordinal Cardinal
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order
+/-- The von Neumann cumulative hierarchy `V_o`, as a `ZFSet`. -/
 
-/-! ## The first-order language of set theory -/
+noncomputable def axSep (n : ℕ) (φ : setLang.Formula (Fin n ⊕ Unit)) : setLang.Sentence :=
+  Formula.iAlls (Fin n)
+    (Formula.relabel Sum.inr
+      (allQ (exQ (allQ ((memF vz (up vz)).iff
+        ((memF vz (up (up vz))) ⊓ (Formula.relabel (sepRel n) φ)))))))
 
-/-- The relation symbols of the language of set theory: a single binary symbol `∈`. -/
-inductive memRelSym : ℕ → Type
-  | mem : memRelSym 2
-
-/-- The first-order language of set theory: no function symbols, one binary relation `∈`. -/
-
-noncomputable def axSep {n : ℕ} (φ : setLang.BoundedFormula (Empty ⊕ Fin n) 2) : setLang.Sentence :=
-  Formula.iAlls (Fin n) (∀' ∃' ∀' ((memF (&2) (&1)) ⇔ ((memF (&2) (&0)) ⊓ φ.liftAt 1 1)))
-
-/-- The replacement schema. For a formula `φ` whose free variables are `n` parameters together
-with three bound variables, standing for the ambient set `x`, the element `z` and the value `w`,
-this is the sentence
-`∀ params, ∀ x, (∀ z ∈ x, ∃! w, φ) → ∃ y, ∀ z ∈ x, ∀ w, φ → w ∈ y`,
-i.e. the image of `x` under the class function defined by `φ` is contained in a set. Together
-with separation this gives the usual form of replacement. -/
+/-- Relabelling of a replacement formula `φ(x, y, p⃗)` into the scope of `a, x, y, y'`,
+sending `y` to the variable `y`. -/

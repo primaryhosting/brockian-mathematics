@@ -1,4 +1,13 @@
+/-
+# Shor Code Corrects
+Category: Frontier Qi
+Target: QI.shor_code_corrects
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Shor Code Corrects
 Category: Frontier Qi
@@ -7,51 +16,64 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on the header: Lean 4 requires `import` commands to be the very first commands in a
-file, and `/-! ... -/` is a module doc-comment *command*, not a comment token.  The
-required header block is therefore placed immediately after the single `import Mathlib`
-line, which is the closest legal position to the top of the file.
--/
+
+open scoped BigOperators
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 100000
 
 namespace QI
 
-open Finset
+/-! ## Basic types
 
-noncomputable section
+A computational basis state of one *block* of three qubits is a function `Fin 3 → Bool`;
+a computational basis state of the nine qubits of the Shor code is a function
+`Fin 3 → Blk`, i.e. three blocks of three qubits.  A qubit is addressed by a pair
+`q : Q = Fin 3 × Fin 3` (block index, position inside the block). -/
 
-/-! ## The 9-qubit state space -/
+/-- Computational basis states of one three-qubit block. -/
+abbrev Blk := Fin 3 → Bool
 
-/-- Qubit labels: three blocks of three qubits. -/
-abbrev Qb := Fin 3 × Fin 3
+/-- Computational basis states of the nine qubits. -/
+abbrev Bas := Fin 3 → Blk
 
-/-- Computational basis labels for 9 qubits. -/
-abbrev Cfg := Qb → Bool
+/-- Addresses of the nine qubits. -/
+abbrev Q := Fin 3 × Fin 3
 
-/-- The state space of 9 qubits, `ℂ^(2^9)`. -/
-abbrev H := Cfg → ℂ
+/-- Bitwise `xor` on a block. -/
 
-/-- Hermitian inner product, conjugate linear in the first argument. -/
+lemma ip_pauli_pauli (x z x' z' : Bas) (u v : Bas → ℂ) :
+    ip (PauliOp x z u) (PauliOp x' z' v)
+      = (sgnb (bxorb z z') x : ℂ) * ip u (PauliOp (bxorb x x') (bxorb z z') v) := by
+  set w := bxorb z z' with hw
+  set Φ : Bas → ℂ :=
+    fun b => (sgnb w b : ℂ) * ((starRingEnd ℂ) (u (bxorb x b)) * v (bxorb x' b)) with hΦ
+  have hL : ip (PauliOp x z u) (PauliOp x' z' v) = ∑ b : Bas, Φ b := by
+    simp only [ip, PauliOp, hΦ]
+    refine Finset.sum_congr rfl fun b _ => ?_
+    have hs : ((sgnb w b : ℤ) : ℂ) = ((sgnb z b : ℤ) : ℂ) * ((sgnb z' b : ℤ) : ℂ) := by
+      rw [hw, ← sgnb_mul]; push_cast; ring
+    rw [map_mul, hs]
+    simp only [map_intCast]
+    ring
+  have hre : ∑ b : Bas, Φ b = ∑ b : Bas, Φ (bxorb x b) :=
+    (Fintype.sum_equiv (xorEquiv x) (fun b => Φ (bxorb x b)) Φ (fun _ => rfl)).symm
+  have hval : ∀ b : Bas, Φ (bxorb x b)
+      = (sgnb w x : ℂ) * ((sgnb w b : ℂ) * ((starRingEnd ℂ) (u b) * v (bxorb (bxorb x x') b))) := by
+    intro b
+    have h1 : bxorb x (bxorb x b) = b := bxorb_involutive x b
+    have h2 : bxorb x' (bxorb x b) = bxorb (bxorb x x') b := bxorb_left_comm x x' b
+    have h3 : ((sgnb w (bxorb x b) : ℤ) : ℂ) = ((sgnb w x : ℤ) : ℂ) * ((sgnb w b : ℤ) : ℂ) := by
+      rw [sgnb_xor_arg]; push_cast; ring
+    simp only [hΦ, h1, h2, h3]
+    ring
+  rw [hL, hre]
+  simp only [hval]
+  rw [← Finset.mul_sum]
+  congr 1
+  simp only [ip, PauliOp]
+  exact Finset.sum_congr rfl fun b _ => by ring
 
-lemma ip_Pauli_Pauli (u1 w1 u2 w2 : Cfg) (x y : H) :
-    ip (Pauli u1 w1 x) (Pauli u2 w2 y)
-      = zph w1 (xr u1 u2) * ip x (Pauli (xr u1 u2) (xr w1 w2) y) := by
-  have hz : ∀ t : Cfg, (starRingEnd ℂ) (zph w1 t) = zph w1 t := by
-    intro t
-    simp only [zph, map_prod]
-    exact Finset.prod_congr rfl fun q _ => by cases (w1 q && t q) <;> simp [sg]
-  simp only [ip, Pauli_apply, Finset.mul_sum]
-  -- reindex `v ↦ xr v u1`
-  rw [← Equiv.sum_comp (Equiv.mk (fun v => xr v u1) (fun v => xr v u1)
-      (fun v => by simp [xr_xr]) (fun v => by simp [xr_xr]))]
-  refine Finset.sum_congr rfl fun t _ => ?_
-  simp only [Equiv.coe_fn_mk, xr_xr, map_mul, hz]
-  have h1 : xr (xr t u1) u2 = xr t (xr u1 u2) := by
-    funext q; simp [xr]
-  rw [h1]
-  have h2 : zph w2 (xr t (xr u1 u2)) = zph w2 t * zph w2 (xr u1 u2) := zph_xor_right _ _ _
-  linear_combination ((starRingEnd ℂ) (x t) * y (xr t (xr u1 u2))) * zph_shift w1 w2 t (xr u1 u2)
+/-! ## Arbitrary single-qubit errors -/
 
-/-! ## Block-constant configurations -/
-
-/-- A configuration is *block constant* if it is constant on each block of three qubits. -/
+/-- Change the value of the qubit `q` in the basis state `b` to `v`. -/

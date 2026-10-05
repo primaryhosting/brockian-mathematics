@@ -1,3 +1,11 @@
+/-
+# Huckel C 16
+Category: Chemistry
+Target: Chem.huckel_C16
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -7,7 +15,7 @@ open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
+set_option maxRecDepth 10000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
@@ -18,10 +26,16 @@ set_option grind.warning false
 
 namespace Chem
 
-/-- A primitive 16-th root of unity. -/
+open Polynomial Matrix
 
-lemma adj_iff (i j : Fin 16) :
-    (SimpleGraph.cycleGraph 16).Adj i j ↔ (j = i + 1 ∨ j = i - 1) := by
-  revert i j
-  decide
+/-! ### The shift matrices
 
+`U n` is the matrix of the `n`-fold cyclic shift on `Fin 16`; the adjacency matrix of the
+cycle graph `C₁₆` is `U 1 + U 15`. -/
+
+/-- The matrix of the `n`-fold cyclic shift of `Fin 16`. -/
+
+theorem adj_iff : ∀ i j : Fin 16, (SimpleGraph.cycleGraph 16).Adj i j ↔
+    ((j : ℕ) = ((i : ℕ) + 1) % 16 ∨ (j : ℕ) = ((i : ℕ) + 15) % 16) := by decide
+
+/-- The adjacency matrix of the cycle graph `C₁₆` is the sum of the two cyclic shifts. -/

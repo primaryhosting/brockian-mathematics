@@ -1,11 +1,3 @@
-/-
-# Singular Series Gaps 9098
-Category: Brockian Corpus
-Target: Brockian.SingularSeriesGaps9098
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -15,6 +7,7 @@ Target: Brockian.SingularSeriesGaps9098
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 
 open scoped BigOperators
 open scoped Real
@@ -41,87 +34,87 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- A finite set of integers is *admissible* (in the sense of the Hardy–Littlewood
-prime `k`-tuples conjecture) when, for every prime `p`, it misses at least one
-residue class modulo `p`.  Equivalently, the singular series attached to the tuple
-is nonzero. -/
-def AdmissibleSet (H : Finset ℤ) : Prop :=
-  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ x ∈ H, (x : ZMod p) ≠ r
+/-- A finite set of integers `H` (a *gap pattern*) is **admissible** when, for every prime `p`,
+the reductions of the elements of `H` modulo `p` omit at least one residue class.  This is
+exactly the condition under which the singular series attached to `H` is nonzero. -/
+def Admissible (H : Finset ℤ) : Prop :=
+  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r
 
-/-- Admissibility is invariant under translation of the tuple. -/
-theorem admissibleSet_map_addLeft {H : Finset ℤ} (hH : AdmissibleSet H) (a : ℤ) :
-    AdmissibleSet (H.image (fun x => a + x)) := by
-  intro p hp
-  obtain ⟨r, hr⟩ := hH p hp
-  refine ⟨(a : ZMod p) + r, ?_⟩
-  intro x hx
-  simp only [Finset.mem_image] at hx
-  obtain ⟨y, hy, rfl⟩ := hx
-  have := hr y hy
-  push_cast
-  simpa using this
+/-- For a prime `p` exceeding the size of `H`, the residues of `H` cannot cover `ZMod p`. -/
+theorem exists_residue_not_hit_of_card_lt (H : Finset ℤ) (p : ℕ) (hp : p.Prime)
+    (hcard : H.card < p) : ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
+  haveI : NeZero p := ⟨hp.ne_zero⟩
+  by_contra hcon
+  push_neg at hcon
+  have hsub : (Finset.univ : Finset (ZMod p)) ⊆ H.image (fun h : ℤ => (h : ZMod p)) := by
+    intro r _
+    obtain ⟨h, hh, hval⟩ := hcon r
+    exact Finset.mem_image.2 ⟨h, hh, hval⟩
+  have hle : (Finset.univ : Finset (ZMod p)).card ≤ H.card :=
+    le_trans (Finset.card_le_card hsub) (Finset.card_image_le)
+  rw [Finset.card_univ, ZMod.card] at hle
+  omega
 
-/-- Only the primes `p ≤ #H` need to be checked for admissibility: for larger primes
-the pigeonhole principle supplies a missing residue class. -/
-theorem admissibleSet_of_small_primes {H : Finset ℤ}
-    (h : ∀ p : ℕ, p.Prime → p ≤ H.card → ∃ r : ZMod p, ∀ x ∈ H, (x : ZMod p) ≠ r) :
-    AdmissibleSet H := by
-  intro p hp
-  by_cases hle : p ≤ H.card
-  · exact h p hp hle
-  · push_neg at hle
-    haveI : NeZero p := ⟨hp.ne_zero⟩
-    have hcard : (H.image (fun x : ℤ => (x : ZMod p))).card < Finset.univ.card (α := ZMod p) := by
-      have h1 : (H.image (fun x : ℤ => (x : ZMod p))).card ≤ H.card := Finset.card_image_le
-      have h2 : Finset.univ.card (α := ZMod p) = p := by
-        simp [ZMod.card p]
-      omega
-    have : ∃ r : ZMod p, r ∉ H.image (fun x : ℤ => (x : ZMod p)) := by
-      by_contra hcon
-      push_neg at hcon
-      have : Finset.univ ⊆ H.image (fun x : ℤ => (x : ZMod p)) := fun r _ => hcon r
-      have := Finset.card_le_card this
-      omega
-    obtain ⟨r, hr⟩ := this
-    refine ⟨r, ?_⟩
-    intro x hx hcontra
-    exact hr (Finset.mem_image.mpr ⟨x, hx, hcontra⟩)
+/-- **Reformulation of admissibility**: only the primes `p ≤ |H|` need to be tested. -/
+theorem admissible_iff_small_primes (H : Finset ℤ) :
+    Admissible H ↔
+      ∀ p : ℕ, p.Prime → p ≤ H.card → ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
+  constructor
+  · intro hH p hp _
+    exact hH p hp
+  · intro hH p hp
+    by_cases hle : p ≤ H.card
+    · exact hH p hp hle
+    · exact exists_residue_not_hit_of_card_lt H p hp (by omega)
 
-/-- The `9`-tuple of shifts studied here: an admissible pattern of `9` integers of
-diameter `30`. -/
-def gapPattern9098 : Finset ℤ := {0, 2, 6, 8, 12, 18, 20, 26, 30}
+/-- Singular Series Gaps 9098.
 
-theorem gapPattern9098_card : gapPattern9098.card = 9 := by decide
+Two statements about admissible gap patterns:
 
-theorem gapPattern9098_admissible : AdmissibleSet gapPattern9098 := by
-  apply admissibleSet_of_small_primes
-  intro p hp hle
-  rw [gapPattern9098_card] at hle
-  interval_cases p
-  · exact absurd hp (by decide)
-  · exact absurd hp (by decide)
-  · exact ⟨1, by decide⟩
-  · exact ⟨1, by decide⟩
-  · exact absurd hp (by decide)
-  · exact ⟨4, by decide⟩
-  · exact absurd hp (by decide)
-  · exact ⟨3, by decide⟩
-  · exact absurd hp (by decide)
-  · exact absurd hp (by decide)
-
-/-- **Singular Series Gaps 9098.**
-The `9`-element pattern `{0, 2, 6, 8, 12, 18, 20, 26, 30}` of diameter `30` is admissible,
-and so is every one of its integer translates; consequently the whole family of gap
-ranges `{a, a+2, a+6, a+8, a+12, a+18, a+20, a+26, a+30}` consists of admissible
-`9`-tuples, each of which has nonvanishing singular series. -/
+1. admissibility of a pattern `H` only has to be checked at the primes `p ≤ |H|`;
+2. consequently, the two-element pattern `{0, d}` is admissible exactly when the gap `d`
+   is even — giving the full range of admissible gaps for pairs.
+-/
 theorem SingularSeriesGaps9098 :
-    gapPattern9098.card = 9 ∧
-    (∀ x ∈ gapPattern9098, (0 : ℤ) ≤ x ∧ x ≤ 30) ∧
-    AdmissibleSet gapPattern9098 ∧
-    ∀ a : ℤ, AdmissibleSet (gapPattern9098.image (fun x => a + x)) := by
-  refine ⟨gapPattern9098_card, by decide, gapPattern9098_admissible, ?_⟩
-  intro a
-  exact admissibleSet_map_addLeft gapPattern9098_admissible a
+    (∀ H : Finset ℤ, Admissible H ↔
+        ∀ p : ℕ, p.Prime → p ≤ H.card → ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r) ∧
+    (∀ d : ℤ, Admissible ({0, d} : Finset ℤ) ↔ Even d) := by
+  refine ⟨admissible_iff_small_primes, fun d => ?_⟩
+  constructor
+  · intro hH
+    obtain ⟨r, hr⟩ := hH 2 Nat.prime_two
+    by_contra hodd
+    obtain ⟨k, hk⟩ := Int.not_even_iff_odd.mp hodd
+    have hd : ((d : ZMod 2)) = 1 := by
+      have hk2 : ((d : ZMod 2)) = 2 * (k : ZMod 2) + 1 := by
+        rw [hk]; push_cast; ring
+      have h20 : (2 : ZMod 2) = 0 := rfl
+      rw [hk2, h20]; ring
+    have h1 : ((0 : ℤ) : ZMod 2) = 0 := by norm_num
+    have hr0 := hr 0 (by simp)
+    have hr1 := hr d (by simp)
+    rw [h1] at hr0
+    rw [hd] at hr1
+    clear hr hd hk h1 hodd
+    revert r
+    decide
+  · intro hd
+    have hcard : ({0, d} : Finset ℤ).card ≤ 2 := Finset.card_insert_le _ _ |>.trans (by simp)
+    refine (admissible_iff_small_primes _).2 ?_
+    intro p hp hple
+    have hp2 : p = 2 := by
+      have := hp.two_le
+      omega
+    subst hp2
+    refine ⟨1, ?_⟩
+    have hd0 : ((d : ZMod 2)) = 0 := by
+      rw [ZMod.intCast_zmod_eq_zero_iff_dvd]
+      exact_mod_cast hd.two_dvd
+    intro h hh
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hh
+    rcases hh with rfl | rfl
+    · norm_num
+    · rw [hd0]; decide
 
 end Brockian
 

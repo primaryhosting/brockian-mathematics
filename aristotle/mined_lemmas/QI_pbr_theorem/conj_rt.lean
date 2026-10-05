@@ -1,28 +1,3 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-
 # Pbr Theorem
 Category: Frontier Qi
@@ -30,6 +5,8 @@ Target: QI.pbr_theorem
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean requires `import` to precede any module docstring, so the required
+-- header appears above as a plain comment and again below as a docstring.)
 
 import Mathlib
 
@@ -41,17 +18,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Classical
+
+set_option maxHeartbeats 1000000
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
 namespace QI
 
-open Finset
+noncomputable section
 
 /-! ## The quantum ingredients
 
-We work with two qubits, i.e. with `ℂ⁴` indexed by `Fin 4`, where the index `2*a + b`
-stands for the product basis vector `|a⟩ ⊗ |b⟩`.
--/
+We work with two qubits, i.e. with the space of functions `Fin 2 × Fin 2 → ℂ`,
+equipped with the standard Hermitian inner product. -/
 
-/-- The inner product on `ℂ⁴` (conjugate-linear in the first argument). -/
+/-- The standard Hermitian inner product on the two-qubit space. -/
 
-@[simp] lemma conj_rt : (starRingEnd ℂ) rt = rt := Complex.conj_ofReal _
+lemma conj_rt : (starRingEnd ℂ) rt = rt := by
+  simp [rt, ← Complex.ofReal_inv]
 
+/-- The qubit state `|0⟩`. -/

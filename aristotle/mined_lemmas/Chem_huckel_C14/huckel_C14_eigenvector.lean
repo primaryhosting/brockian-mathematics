@@ -8,6 +8,41 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open Finset SimpleGraph Matrix
+
+namespace Chem
+
+/-! ### Arithmetic in `Fin 14`
+
+`Fin 14` carries the modular `+`, `-`, `*` and `-·` operations used by
+`SimpleGraph.cycleGraph_adj`, but no `CommRing` instance is available for the numeral `14`,
+so the handful of ring identities we need are checked by decision procedure. -/
+
+section Fin14
+
+
+theorem huckel_C14_eigenvector (k : Fin 14) :
+    (fun j : Fin 14 => zeta (j * k)) ≠ 0 ∧
+      ((cycleGraph 14).adjMatrix ℂ).mulVec (fun j : Fin 14 => zeta (j * k))
+        = (2 * Real.cos (2 * Real.pi * (k : ℕ) / 14) : ℂ) • fun j : Fin 14 => zeta (j * k) := by
+  constructor
+  · intro h
+    have h0 : zeta ((0 : Fin 14) * k) = 0 := congrFun h 0
+    rw [zero_mul, zeta_zero] at h0
+    exact one_ne_zero h0
+  · funext j
+    have hcol : ((cycleGraph 14).adjMatrix ℂ).mulVec (fun j : Fin 14 => zeta (j * k)) j
+        = (A14 * P14) j k := by
+      simp [Matrix.mulVec, Matrix.mul_apply, A14, P14, dotProduct]
+    rw [hcol, A_mul_P, Matrix.mul_apply]
+    have hR : ∑ l : Fin 14, P14 j l * Matrix.diagonal lam l k = P14 j k * lam k := by
+      simp [Matrix.diagonal_apply, mul_ite, Finset.sum_ite_eq']
+    rw [hR, P14, lam, Pi.smul_apply, smul_eq_mul, mul_comm]
+
+end Chem
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -30,33 +65,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Chem
-
-open scoped Matrix
-
-/-! ### A primitive 14-th root of unity and the associated character -/
-
-/-- A primitive 14-th root of unity. -/
-
-theorem huckel_C14_eigenvector (k : Fin 14) :
-    (fun j : Fin 14 => Fm j k) ≠ 0 ∧
-      (SimpleGraph.cycleGraph 14).adjMatrix ℂ *ᵥ (fun j : Fin 14 => Fm j k) =
-        ((2 * Real.cos (2 * Real.pi * (k : ℕ) / 14) : ℝ) : ℂ) • (fun j : Fin 14 => Fm j k) := by
-  constructor
-  · intro h
-    have h0 : Fm 0 k = 0 := congrFun h 0
-    rw [Fm] at h0
-    exact ee_ne_zero _ h0
-  · funext j
-    have h := congrFun (congrFun adj_mul_Fm j) k
-    simp only [Matrix.mul_apply] at h
-    simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul]
-    rw [h]
-    simp only [Dm, Matrix.diagonal_apply, mul_ite, mul_zero, Finset.sum_ite_eq',
-      Finset.mem_univ, if_true]
-    rw [lam]
-    ring
-
-end Chem
 

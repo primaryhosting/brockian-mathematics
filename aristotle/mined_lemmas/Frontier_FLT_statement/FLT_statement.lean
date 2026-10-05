@@ -1,3 +1,37 @@
+-- (Lean 4 requires `import` lines to precede any module docstring, so the required
+-- header comment appears immediately below the import.)
+import Mathlib
+
+/-!
+# FLT Statement
+Category: Frontier — Prime Numbers
+Target: Frontier.FLT_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option autoImplicit false
+
+namespace Frontier
+
+/-- Fermat's Last Theorem for a fixed exponent `n`, stated with *positive* integers:
+there are no `x, y, z > 0` with `x ^ n + y ^ n = z ^ n`. -/
+
+theorem FLT_statement (hprimes : ∀ p : ℕ, p.Prime → 5 ≤ p → FLTFor p) : FLT := by
+  intro n hn
+  obtain hdvd | ⟨p, hp, hdvd, hpodd⟩ :=
+    Nat.four_dvd_or_exists_odd_prime_and_dvd_of_two_lt hn
+  · exact FLTFor_of_dvd hdvd FLT_four
+  · refine FLTFor_of_dvd hdvd ?_
+    rcases eq_or_ne p 3 with rfl | hp3
+    · exact FLT_three
+    · refine hprimes p hp ?_
+      have h2 := hp.two_le
+      rcases hpodd with ⟨k, hk⟩
+      omega
+
+end Frontier
+
 import Mathlib
 
 open scoped BigOperators
@@ -22,34 +56,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-/-
-# FLT Statement
-Category: Frontier — Prime Numbers
-Target: Frontier.FLT_statement
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-namespace Frontier
-
-/-- The statement of Fermat's Last Theorem in explicit positive-integer form:
-`x ^ n + y ^ n = z ^ n` has no solution in positive integers when `n > 2`. -/
-
-theorem FLT_statement :
-    FLTClaim ↔ ∀ p : ℕ, p.Prime → Odd p → FermatLastTheoremFor p := by
-  rw [FLTClaim_iff_FermatLastTheorem]
-  constructor
-  · intro h p hp hodd
-    have hp2 : p ≠ 2 := by rintro rfl; exact absurd hodd (by decide)
-    have hp2' := hp.two_le
-    exact h p (by omega)
-  · intro h n hn
-    rcases four_dvd_or_odd_prime_dvd hn with h4 | ⟨p, hp, hodd, hpn⟩
-    · exact FermatLastTheoremFor.mono h4 fermatLastTheoremFour
-    · exact FermatLastTheoremFor.mono hpn (h p hp hodd)
-
-end Frontier
 

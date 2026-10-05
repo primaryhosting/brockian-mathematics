@@ -1,4 +1,4 @@
-/-
+/-!
 # Constellation Local Count K 3
 Category: Brockian Corpus
 Target: Brockian.ConstellationLocalCountK3
@@ -33,37 +33,21 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- The local count of a constellation (`k`-tuple of shifts) `H` modulo `p`: the number of
-residues `n` such that none of the shifted values `n + h`, `h ∈ H`, is divisible by `p`.
-This is the quantity `p - ν_H(p)` appearing in the singular series of the Hardy–Littlewood
-prime `k`-tuple heuristic. -/
+/-- The *local count* `ν_p(H)` of a finite tuple `H` of integers at a modulus `p`:
+the number of distinct residue classes modulo `p` occupied by the members of `H`. -/
 
-theorem ConstellationLocalCountK3 (p : ℕ) [Fact (Nat.Prime p)] (a b c : ZMod p)
-    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
-    (Finset.univ.filter
-        (fun n : ZMod p => (n + a) * (n + b) * (n + c) ≠ 0)).card = p - 3 := by
-  haveI : NeZero p := ⟨(Fact.out (p := Nat.Prime p)).ne_zero⟩
-  have hset :
-      (Finset.univ.filter (fun n : ZMod p => (n + a) * (n + b) * (n + c) ≠ 0)) =
-        (Finset.univ.filter (fun n : ZMod p => ∀ h ∈ ({a, b, c} : Finset (ZMod p)), n + h ≠ 0)) := by
-    ext n
-    simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_insert,
-      Finset.mem_singleton, mul_ne_zero_iff]
-    constructor
-    · rintro ⟨⟨h1, h2⟩, h3⟩ h (rfl | rfl | rfl) <;> assumption
-    · intro h
-      exact ⟨⟨h a (Or.inl rfl), h b (Or.inr (Or.inl rfl))⟩, h c (Or.inr (Or.inr rfl))⟩
-  have hcard : ({a, b, c} : Finset (ZMod p)).card = 3 := by
-    rw [Finset.card_insert_of_notMem (by simp [hab, hac]),
-      Finset.card_insert_of_notMem (by simp [hbc]), Finset.card_singleton]
-  have := constellationLocalCount_eq p ({a, b, c} : Finset (ZMod p))
-  rw [constellationLocalCount, hcard] at this
-  rw [hset, this]
+theorem ConstellationLocalCountK3 (H : Finset ℤ) (hH : H.card = 3) :
+    Admissible H ↔ (localCount 2 H < 2 ∧ localCount 3 H < 3) := by
+  constructor
+  · intro h
+    exact ⟨h 2 Nat.prime_two, h 3 Nat.prime_three⟩
+  · rintro ⟨h2, h3⟩ p hp
+    rcases eq_or_ne p 2 with rfl | hp2
+    · exact h2
+    rcases eq_or_ne p 3 with rfl | hp3
+    · exact h3
+    have h5 : 5 ≤ p := five_le_of_prime_ne hp hp2 hp3
+    exact localCount_lt_of_card_lt (by omega : H.card < p)
 
-/-- Sanity check: mod `5`, the shifts `0, 1, 2` leave exactly `5 - 3 = 2` admissible residues. -/
-example : (Finset.univ.filter
-    (fun n : ZMod 5 => (n + 0) * (n + 1) * (n + 2) ≠ 0)).card = 5 - 3 :=
-  @ConstellationLocalCountK3 5 ⟨by norm_num⟩ 0 1 2 (by decide) (by decide) (by decide)
-
-end Brockian
-
+/-- Contrapositive form: a triple fails to be an admissible constellation exactly when it
+covers all residues mod `2` or all residues mod `3`. -/

@@ -1,34 +1,55 @@
+/-
+# Dijkstra Correct
+Category: Computer Science
+Target: CS.dijkstra_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
 # Dijkstra Correct
 Category: Computer Science
 Target: CS.dijkstra_correct
-Statement: Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+/-!
+We formalize Dijkstra's algorithm on a finite directed graph whose edge weights are
+elements of `ℝ≥0∞` (`ENNReal`).  Using `ℝ≥0∞` encodes exactly the two features of the
+setting Dijkstra's algorithm requires: weights are **nonnegative**, and a weight of `⊤`
+models a missing edge (so unreachable vertices get distance `⊤`).
 
-open scoped ENNReal
+`CS.gdist w s v` is the true shortest-path distance: the infimum of the costs of all
+walks from `s` to `v`.  `CS.dijkstra w s` is the output of the algorithm (the classical
+loop: repeatedly select an unvisited vertex of minimal tentative distance, mark it
+visited, and relax all of its outgoing edges).  The main theorem `CS.dijkstra_correct`
+states that these agree.
+-/
 
 namespace CS
 
+open Finset
+open scoped ENNReal
+
+section Defs
+
 variable {V : Type*}
 
-/-! ## Walks, their costs, and shortest-path distances
+/-- `ReachesVia w S s v c` means: there is a walk from `s` to `v` of total weight `c`
+all of whose vertices, except possibly the final one, lie in `S`. -/
+inductive ReachesVia (w : V → V → ℝ≥0∞) (S : Finset V) (s : V) : V → ℝ≥0∞ → Prop
+  | refl : ReachesVia w S s s 0
+  | step {u v c} (hu : u ∈ S) (h : ReachesVia w S s u c) :
+      ReachesVia w S s v (c + w u v)
 
-A weighted directed graph on the vertex type `V` is given by a weight function
-`w : V → V → ℝ≥0∞`.  Values in `ℝ≥0∞` are automatically nonnegative (this is the
-"nonnegative weights" hypothesis), and `w u v = ⊤` encodes the absence of an edge
-from `u` to `v`.
+/-- The infimum of the weights of walks from `s` to `v` with all intermediate vertices
+in `S`. -/
 
-A walk starting at `s` is described by the list `l` of the vertices it visits after `s`. -/
+noncomputable def gdist [Fintype V] (w : V → V → ℝ≥0∞) (s v : V) : ℝ≥0∞ :=
+  distVia w Finset.univ s v
 
-/-- The endpoint of the walk that starts at `s` and visits the vertices of `l` in order. -/
+/-! ### Basic facts about `distVia` -/
 
-noncomputable def gdist (w : V → V → ℝ≥0∞) (s t : V) : ℝ≥0∞ :=
-  ⨅ l : List V, ⨅ _ : endpt s l = t, cost w s l
-
-/-- The shortest-path distance from `s` to `t` among walks all of whose vertices, except
-the endpoint `t`, lie in `S`. -/

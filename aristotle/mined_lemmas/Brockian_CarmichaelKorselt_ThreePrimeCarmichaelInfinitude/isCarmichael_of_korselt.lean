@@ -33,43 +33,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian
-namespace CarmichaelKorselt
+namespace Brockian.CarmichaelKorselt
 
-/-- A *Carmichael number*: a composite `n > 1` which is a Fermat pseudoprime to every base,
-i.e. `a ^ n ≡ a [MOD n]` for all `a`. -/
+/-- A *Carmichael number*: a composite `n > 1` such that `a ^ (n - 1) ≡ 1 [MOD n]` for every
+`a` coprime to `n` (i.e. a Fermat pseudoprime to every admissible base). -/
 
-theorem isCarmichael_of_korselt {p q r : ℕ} (hp : p.Prime) (hq : q.Prime) (hr : r.Prime)
-    (hpq : p < q) (hqr : q < r)
-    (hp1 : p - 1 ∣ p * q * r - 1) (hq1 : q - 1 ∣ p * q * r - 1)
-    (hr1 : r - 1 ∣ p * q * r - 1) : IsCarmichael (p * q * r) := by
-  set n := p * q * r with hn
-  have hp2 := hp.two_le
-  have hq2 := hq.two_le
-  have hr2 := hr.two_le
-  have hpqr : 1 < n := by
-    have : 1 < p * q := by nlinarith
-    calc 1 < p * q := this
-      _ ≤ p * q * r := Nat.le_mul_of_pos_right _ (by omega)
-  have hcop_pq : Nat.Coprime p q := (Nat.coprime_primes hp hq).mpr (by omega)
-  have hcop_pr : Nat.Coprime p r := (Nat.coprime_primes hp hr).mpr (by omega)
-  have hcop_qr : Nat.Coprime q r := (Nat.coprime_primes hq hr).mpr (by omega)
-  refine ⟨hpqr, ?_, ?_⟩
-  · intro hprime
-    have hdvd : p ∣ n := ⟨q * r, by rw [hn]; ring⟩
-    rcases hprime.eq_one_or_self_of_dvd p hdvd with h | h
-    · omega
-    · have : p * (q * r) = p * 1 := by rw [← mul_assoc, ← hn, h, mul_one]
-      have := Nat.eq_of_mul_eq_mul_left (by omega) this
-      nlinarith
-  · intro a
-    have hmp := pow_modEq_self_of_sub_one_dvd hp (by omega) hp1 a
-    have hmq := pow_modEq_self_of_sub_one_dvd hq (by omega) hq1 a
-    have hmr := pow_modEq_self_of_sub_one_dvd hr (by omega) hr1 a
-    have hpq' : a ^ n ≡ a [MOD p * q] :=
-      (Nat.modEq_and_modEq_iff_modEq_mul hcop_pq).mp ⟨hmp, hmq⟩
-    have hcop : Nat.Coprime (p * q) r := Nat.Coprime.mul hcop_pr hcop_qr
-    exact (Nat.modEq_and_modEq_iff_modEq_mul hcop).mp ⟨hpq', hmr⟩
+theorem isCarmichael_of_korselt {n : ℕ} (h1 : 1 < n) (hnp : ¬ n.Prime) (hsq : Squarefree n)
+    (hk : ∀ p ∈ n.primeFactors, (p - 1) ∣ (n - 1)) : IsCarmichael n := by
+  refine ⟨h1, hnp, fun a ha => ?_⟩
+  have ha0 : a ≠ 0 := by
+    rintro rfl
+    rw [Nat.coprime_zero_left] at ha
+    omega
+  have hpow : 1 ≤ a ^ (n - 1) := Nat.one_le_pow _ _ (Nat.pos_of_ne_zero ha0)
+  have hdvd : n ∣ a ^ (n - 1) - 1 := by
+    refine dvd_of_squarefree_of_forall_prime_dvd hsq ?_
+    · intro p hp
+      have hprime : p.Prime := Nat.prime_of_mem_primeFactors hp
+      have hpn : p ∣ n := Nat.dvd_of_mem_primeFactors hp
+      have hap : Nat.Coprime a p := Nat.Coprime.coprime_dvd_right hpn ha
+      obtain ⟨t, ht⟩ := hk p hp
+      have hfermat : a ^ (p - 1) ≡ 1 [MOD p] := by
+        have := Nat.ModEq.pow_totient hap
+        rwa [Nat.totient_prime hprime] at this
+      have : a ^ (n - 1) ≡ 1 [MOD p] := by
+        calc a ^ (n - 1) = (a ^ (p - 1)) ^ t := by rw [← pow_mul, ← ht]
+          _ ≡ 1 ^ t [MOD p] := hfermat.pow t
+          _ = 1 := one_pow t
+      exact (Nat.modEq_iff_dvd' hpow).mp this.symm
+  exact ((Nat.modEq_iff_dvd' hpow).mpr hdvd).symm
 
-/-- Chernick numbers: for `k ≥ 1`, if `6k+1`, `12k+1`, `18k+1` are all prime then their
-product is a Carmichael number with exactly three (distinct) prime factors. -/
+/-- The three prime factors in Chernick's construction are pairwise distinct (for `k ≥ 1`). -/

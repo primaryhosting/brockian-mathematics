@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Tightened Predicate Refines Original
-Category: Proof-Carrying Apps
-Target: PCA.Isolation.tightened_predicate_refines_original
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,29 +23,47 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-!
+# Tightened Predicate Refines Original
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.tightened_predicate_refines_original
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace PCA.Isolation
 
-variable {S A : Type*}
+universe u
 
-/-- The state reached from `s` by executing the finite action trace `l`
-under the transition function `step`. -/
+/-- Syntax of the isolation engine's access predicates over a state type `σ`.
 
-theorem tightened_predicate_refines_original (step : S → A → S) (P : S → Prop) :
-    (∀ (n : ℕ) (s : S), tighten step P n s → P s) ∧
-    (∀ (n : ℕ) (s : S), tighten step P (n + 1) s → tighten step P n s) ∧
-    (∀ s : S, (∀ n : ℕ, tighten step P n s) ↔ ∀ l : List A, P (run step s l)) := by
-  refine ⟨?_, ?_, ?_⟩
-  · intro n s hs
-    simpa using (tighten_iff_forall_traces step P n s).mp hs [] (by simp)
-  · intro n s hs
-    refine (tighten_iff_forall_traces step P n s).mpr fun l hl => ?_
-    exact (tighten_iff_forall_traces step P (n + 1) s).mp hs l (hl.trans (Nat.le_succ n))
-  · intro s
-    constructor
-    · intro h l
-      exact (tighten_iff_forall_traces step P l.length s).mp (h l.length) l le_rfl
-    · intro h n
-      exact (tighten_iff_forall_traces step P n s).mpr fun l _ => h l
+An `AccessPred σ` describes when a request in state `s : σ` is permitted.
+The language is monotone (no negation): `grant` always permits, `deny` never
+permits, `atom p` consults a primitive check `p`, and `both`/`either` are
+conjunction and disjunction of sub-policies. -/
+inductive AccessPred (σ : Type u) : Type u
+  | grant : AccessPred σ
+  | deny : AccessPred σ
+  | atom : (σ → Prop) → AccessPred σ
+  | both : AccessPred σ → AccessPred σ → AccessPred σ
+  | either : AccessPred σ → AccessPred σ → AccessPred σ
 
-end PCA.Isolation
+namespace AccessPred
 
+/-- Denotational semantics of an access predicate: the set of states it permits. -/
+
+theorem tightened_predicate_refines_original {σ : Type u} (g p : AccessPred σ) :
+    Refines (tighten g p) p := by
+  intro s
+  induction p with
+  | grant => intro _; exact trivial
+  | deny => intro hs; exact hs
+  | atom q => intro hs; exact hs.1
+  | both a b iha ihb => intro hs; exact ⟨iha hs.1, ihb hs.2⟩
+  | either a b iha ihb =>
+      rintro (h | h)
+      · exact Or.inl (iha h)
+      · exact Or.inr (ihb h)
+
+/-- **The guard is enforced.** Every state permitted by the tightened policy
+also satisfies the guard `g`. -/

@@ -9,9 +9,7 @@ Provenance: Aristotle theorem prover (Harmonic)
 namespace Math
 
 /-- The Fibonacci sequence, `fib 0 = 0`, `fib 1 = 1`, `fib (n+2) = fib n + fib (n+1)`.
-This agrees with Mathlib's `Nat.fib` (see `Math.fib_eq_natFib` in `Cassini15Mathlib.lean`);
-it is defined here because a module docstring must be the first command in a Lean file,
-which precludes an `import` in this file. -/
+This agrees with Mathlib's `Nat.fib` (see `Math.fib_eq_nat_fib` in `Cassini15Mathlib.lean`). -/
 
 def fib : Nat → Nat
   | 0 => 0

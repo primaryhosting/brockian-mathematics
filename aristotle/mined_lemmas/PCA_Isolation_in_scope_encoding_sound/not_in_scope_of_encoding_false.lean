@@ -6,48 +6,43 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- This development needs no Mathlib import: every lemma used
--- (`List.isPrefixOf_iff_prefix`, `List.any_eq_true`, `decidable_of_iff`)
--- is available in the Lean 4 core library, and the required header comment
--- must be the first thing in the file (Lean forbids `import` after a `/-! -/`
--- module docstring).
+/-
+Note on imports: Lean requires `import` commands to precede every other
+command in a file, including module docstrings.  Since the mandated header
+above must be the very first text in the file, this development is written so
+that it needs nothing beyond Lean's built-in `Init` library (the prefix API on
+lists), and therefore has no `import` line.  The Mathlib-based project settings
+of the original template are not needed here.
+-/
 
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-/-! ## The isolation model
+/-- A resource name in the isolation engine's model: a hierarchical path,
+given as the list of its segments (e.g. `["home", "user", "docs"]`). -/
+abbrev Path : Type := List String
 
-A *resource* is identified by a hierarchical path (a list of path components).
-A *scope* granted to an application is a path prefix: holding the scope `s`
-authorises access to every resource whose path extends `s.root`.
-
-The isolation engine of a proof-carrying app does not reason with the
-propositional predicate directly; it evaluates a decidable *encoding*
-(a `Bool`-valued function) built from `List.isPrefixOf` / `List.any`.
-The theorems below state that this encoding is sound and complete with
-respect to the intended semantics. -/
-
-/-- A resource path: a list of hierarchical components. -/
-abbrev Path := List String
-
-/-- A capability scope: everything below `root` is authorised. -/
+/-- A *scope* of an isolated component: a list of permitted roots (`allow`)
+together with a list of forbidden roots (`deny`).  A resource is governed by a
+root exactly when the root is a path-prefix of the resource, and denial takes
+precedence over permission. -/
 structure Scope where
-  root : Path
-  deriving DecidableEq
+  /-- Roots under which access is granted. -/
+  allow : List Path
+  /-- Roots under which access is revoked, overriding `allow`. -/
+  deny : List Path
+  deriving Repr
 
-/-- Semantics of a single scope: `s` covers `p` when `s.root` is a prefix of `p`. -/
+/-- The declarative (specification-level) meaning of "resource `r` lies in scope `s`":
+some allowed root governs `r`, and no denied root governs `r`. -/
 
-theorem not_in_scope_of_encoding_false (pol : Policy) (p : Path)
-    (h : inScopeB pol p = false) : ¬ InScope pol p := by
-  intro hp
-  have := (in_scope_encoding_sound pol p).2 hp
-  simp [h] at this
+theorem not_in_scope_of_encoding_false (s : Scope) (r : Path)
+    (h : encodeInScope s r = false) : ¬ InScope s r := by
+  intro hs
+  rw [in_scope_encoding_complete s r hs] at h
+  exact Bool.noConfusion h
 
-/-- The semantic predicate is decidable, with the engine's encoding as decision
-procedure. -/
-instance (pol : Policy) (p : Path) : Decidable (InScope pol p) :=
-  decidable_of_iff _ (in_scope_encoding_sound pol p)
-
-/-- The empty policy grants nothing: total isolation. -/
+/-- Denial has absolute priority: a resource governed by a denied root is never
+in scope, whatever the `allow` list says. -/

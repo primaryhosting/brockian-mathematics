@@ -1,3 +1,81 @@
+/-
+# Huckel C 8
+Category: Chemistry
+Target: Chem.huckel_C8
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Huckel C 8
+Category: Chemistry
+Target: Chem.huckel_C8
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Chem
+
+/-- The adjacency matrix of the cycle graph `C₈`, indexed by `ZMod 8`
+(vertex `i` is adjacent to `i + 1` and `i - 1`), with complex entries. -/
+
+theorem huckel_C8 (μ : ℂ) :
+    (∃ v : ZMod 8 → ℂ, v ≠ 0 ∧ C8adj.mulVec v = μ • v) ↔
+      ∃ k : ℕ, k < 8 ∧ μ = ((2 * Real.cos (2 * Real.pi * (k : ℝ) / 8) : ℝ) : ℂ) := by
+  constructor
+  · rintro ⟨v, hv0, hv⟩
+    have hroot := huckel_C8_root μ v hv0 hv
+    have hs2 : ((Real.sqrt 2 : ℝ) : ℂ) ^ 2 = 2 := by
+      norm_cast
+      exact Real.sq_sqrt (by norm_num)
+    rcases mul_eq_zero.mp hroot with h | h4
+    · rcases mul_eq_zero.mp h with h0 | h2
+      · -- μ = 0, k = 2
+        refine ⟨2, by norm_num, ?_⟩
+        rw [h0]
+        have : (2 * Real.pi * ((2 : ℕ) : ℝ) / 8 : ℝ) = Real.pi / 2 := by push_cast; ring
+        rw [this, Real.cos_pi_div_two]
+        norm_num
+      · -- μ² = 2
+        have : (μ - ((Real.sqrt 2 : ℝ) : ℂ)) * (μ + ((Real.sqrt 2 : ℝ) : ℂ)) = 0 := by
+          linear_combination h2 - hs2
+        rcases mul_eq_zero.mp this with hp | hm
+        · refine ⟨1, by norm_num, ?_⟩
+          have hμ : μ = ((Real.sqrt 2 : ℝ) : ℂ) := by linear_combination hp
+          rw [hμ]
+          norm_cast
+          have hpi : (2 * Real.pi * 1 / 8 : ℝ) = Real.pi / 4 := by ring
+          rw [hpi, Real.cos_pi_div_four]
+          ring
+        · refine ⟨3, by norm_num, ?_⟩
+          have hμ : μ = -((Real.sqrt 2 : ℝ) : ℂ) := by linear_combination hm
+          rw [hμ]
+          norm_cast
+          have hpi : (2 * Real.pi * 3 / 8 : ℝ) = Real.pi - Real.pi / 4 := by ring
+          rw [hpi, Real.cos_pi_sub, Real.cos_pi_div_four]
+          ring
+    · -- μ² = 4
+      have : (μ - 2) * (μ + 2) = 0 := by linear_combination h4
+      rcases mul_eq_zero.mp this with hp | hm
+      · refine ⟨0, by norm_num, ?_⟩
+        have hμ : μ = 2 := by linear_combination hp
+        rw [hμ]
+        norm_num
+      · refine ⟨4, by norm_num, ?_⟩
+        have hμ : μ = -2 := by linear_combination hm
+        rw [hμ]
+        have : (2 * Real.pi * ((4 : ℕ) : ℝ) / 8 : ℝ) = Real.pi := by push_cast; ring
+        rw [this, Real.cos_pi]
+        norm_num
+  · rintro ⟨k, hk, rfl⟩
+    refine ⟨fun j => om ((k : ZMod 8) * j), ?_, huckel_C8_eigenvector k hk⟩
+    intro h
+    have h0 := congrFun h 0
+    simp [om_zero] at h0
+
+end Chem
+
 import Mathlib
 
 open scoped BigOperators
@@ -14,66 +92,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
-namespace Chem
-
-open Matrix
-
-/-- The adjacency matrix (Hückel matrix, with `α = 0`, `β = 1`) of the cycle graph `C₈`. -/
-
-theorem huckel_C8 (μ : ℝ) :
-    (∃ v : Fin 8 → ℝ, v ≠ 0 ∧ C8adj *ᵥ v = μ • v) ↔
-      ∃ k : ℕ, k < 8 ∧ μ = 2 * Real.cos (2 * Real.pi * (k : ℝ) / 8) := by
-  constructor
-  · rintro ⟨v, hv0, hv⟩
-    have h : ∀ i : Fin 8, v (i - 1) + v (i + 1) = μ * v i := by
-      intro i
-      rw [← C8adj_mulVec, hv]
-      rfl
-    have hne : ¬ (v 0 = 0 ∧ v 1 = 0 ∧ v 2 = 0 ∧ v 3 = 0 ∧ v 4 = 0 ∧ v 5 = 0 ∧ v 6 = 0 ∧
-        v 7 = 0) := by
-      rintro ⟨a0, a1, a2, a3, a4, a5, a6, a7⟩
-      refine hv0 (funext fun i => ?_)
-      fin_cases i
-      · exact a0
-      · exact a1
-      · exact a2
-      · exact a3
-      · exact a4
-      · exact a5
-      · exact a6
-      · exact a7
-    have hroot : μ ^ 5 - 6 * μ ^ 3 + 8 * μ = 0 :=
-      quintic_root_of_cyclic_relation μ (v 0) (v 1) (v 2) (v 3) (v 4) (v 5) (v 6) (v 7)
-        (h 0) (h 1) (h 2) (h 3) (h 4) (h 5) (h 6) (h 7) hne
-    have hfac : μ * ((μ ^ 2 - 2) * (μ ^ 2 - 4)) = 0 := by linarith [hroot, sq_nonneg μ]
-    have h2 : Real.sqrt 2 * Real.sqrt 2 = 2 := sqrt_two_sq
-    rcases mul_eq_zero.1 hfac with hμ | hrest
-    · exact ⟨2, by norm_num, by rw [cos_val_2, hμ]⟩
-    rcases mul_eq_zero.1 hrest with hμ | hμ
-    · have : (μ - Real.sqrt 2) * (μ + Real.sqrt 2) = 0 := by nlinarith [hμ, h2]
-      rcases mul_eq_zero.1 this with h' | h'
-      · exact ⟨1, by norm_num, by rw [cos_val_1]; linarith⟩
-      · exact ⟨3, by norm_num, by rw [cos_val_3]; linarith⟩
-    · have : (μ - 2) * (μ + 2) = 0 := by nlinarith [hμ]
-      rcases mul_eq_zero.1 this with h' | h'
-      · exact ⟨0, by norm_num, by rw [cos_val_0]; linarith⟩
-      · exact ⟨4, by norm_num, by rw [cos_val_4]; linarith⟩
-  · rintro ⟨k, hk, rfl⟩
-    interval_cases k
-    · rw [cos_val_0]; exact eigen_two
-    · rw [cos_val_1]; exact eigen_sqrt_two
-    · rw [cos_val_2]; exact eigen_zero
-    · rw [cos_val_3]; exact eigen_neg_sqrt_two
-    · rw [cos_val_4]; exact eigen_neg_two
-    · rw [cos_val_5]; exact eigen_neg_sqrt_two
-    · rw [cos_val_6]; exact eigen_zero
-    · rw [cos_val_7]; exact eigen_sqrt_two
-
-/-! ### The characteristic polynomial, i.e. the eigenvalues with multiplicities
-
-We diagonalise the adjacency matrix over `ℂ` using the discrete Fourier (Vandermonde) matrix
-built from a primitive `8`-th root of unity. -/
-
-/-- A primitive eighth root of unity. -/

@@ -1,12 +1,11 @@
-import Mathlib
-
-/-!
+/-
 # M 2 At One Assembly
 Category: C Integral
 Target: Zeta23Scaffold.m2_at_one_assembly
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -31,10 +30,9 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-
 namespace Zeta23Scaffold
 
-/-- The normalized sine kernel `S u = sin (π u) / (π u)`. -/
+/-- The (normalized) sine kernel `S u = sin (π u) / (π u)`. -/
 
 theorem m2_at_one_assembly
     (hS2 : ∫ u : ℝ, (S u) ^ 2 = 1)
@@ -44,6 +42,4 @@ theorem m2_at_one_assembly
   norm_num
 
 end Zeta23Scaffold
-
-#print axioms Zeta23Scaffold.m2_at_one_assembly
 

@@ -5,51 +5,45 @@ Target: QC.qft_unitary_6
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
-
-/-!
-# Qft Unitary 6
-Category: Quantum Computing
-Target: QC.qft_unitary_6
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 
 open scoped BigOperators
 open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace QC
 
-/-- The primitive `N`-th root of unity `exp (2πi/N)`. -/
+open Complex Matrix Finset
 
-theorem qft_unitary (N : ℕ) (hN : N ≠ 0) :
-    qftMatrix N ∈ Matrix.unitaryGroup (Fin N) ℂ := by
-  rw [Matrix.mem_unitaryGroup_iff', Matrix.star_eq_conjTranspose]
+/-- The primitive `n`-th root of unity `exp (2πi/n)`. -/
+
+theorem qft_unitary (n : ℕ) (hn : n ≠ 0) : qftMatrix n ∈ Matrix.unitaryGroup (Fin n) ℂ := by
+  rw [Matrix.mem_unitaryGroup_iff]
   ext k l
-  rw [Matrix.mul_apply, Matrix.one_apply]
-  simp only [Matrix.conjTranspose_apply, RCLike.star_def]
-  exact qft_orthogonality N hN k l
+  rw [Matrix.mul_apply]
+  simp only [Matrix.star_apply, qftMatrix_apply, Matrix.one_apply]
+  have hnR : (0 : ℝ) ≤ (n : ℝ) := Nat.cast_nonneg n
+  have hc : ((1 / Real.sqrt n : ℝ) : ℂ) * ((1 / Real.sqrt n : ℝ) : ℂ) = ((n : ℂ))⁻¹ := by
+    rw [← Complex.ofReal_mul]
+    rw [div_mul_div_comm, one_mul, Real.mul_self_sqrt hnR]
+    push_cast
+    ring
+  have hstep : ∀ x : Fin n,
+      ((1 / Real.sqrt n : ℝ) : ℂ) * zeta n ^ ((k : ℕ) * (x : ℕ)) *
+          star (((1 / Real.sqrt n : ℝ) : ℂ) * zeta n ^ ((l : ℕ) * (x : ℕ)))
+        = (((1 / Real.sqrt n : ℝ) : ℂ) * ((1 / Real.sqrt n : ℝ) : ℂ)) *
+            (zeta n ^ ((k : ℕ) * (x : ℕ)) * (zeta n ^ ((l : ℕ) * (x : ℕ)))⁻¹) := by
+    intro x
+    rw [star_mul']
+    rw [show star (((1 / Real.sqrt n : ℝ) : ℂ)) = ((1 / Real.sqrt n : ℝ) : ℂ) from
+      Complex.conj_ofReal _]
+    rw [show star (zeta n ^ ((l : ℕ) * (x : ℕ))) = (zeta n ^ ((l : ℕ) * (x : ℕ)))⁻¹ from
+      conj_zeta_pow n _]
+    ring
+  rw [Finset.sum_congr rfl (fun x _ => hstep x), ← Finset.mul_sum, hc,
+    qft_row_orthogonality n hn k l]
+  have hn' : (n : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hn
+  by_cases hkl : k = l
+  · simp [hkl, inv_mul_cancel₀ hn']
+  · simp [hkl]
 
 /-- The 6-qubit QFT matrix (of size `2^6 = 64`) is unitary. -/

@@ -13,7 +13,6 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped ENNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -26,36 +25,43 @@ set_option autoImplicit false
 set_option grind.warning false
 
 /-!
-## Scope of the formalization
+# Donsker Invariance
+Category: Frontier Math
+Target: Math2.donsker_invariance
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-Mathlib (at the pinned version) contains neither Brownian motion nor weak convergence of measures
-on `C[0,1]`, so the full functional form of Donsker's invariance principle cannot be *stated*
-against existing definitions. What is formalized here is the invariance principle at the level of
-the second-order structure of the process: for an arbitrary sequence of independent, centred,
-unit-variance, square-integrable increments, the diffusively rescaled walk
-`W_n(t) = (X_0 + ⋯ + X_{⌊nt⌋-1})/√n` has
+Donsker's invariance principle states that the diffusively rescaled random walk built from
+i.i.d. centered increments of unit variance converges in law, as a process, to Brownian motion.
 
-* covariance `E[W_n(s) W_n(t)] → min s t` (`Math2.donsker_invariance`),
-* increment variance `E[(W_n(t) - W_n(s))²] → t - s` (`Math2.donsker_increment_variance`),
-* asymptotically uncorrelated increments over disjoint intervals
-  (`Math2.donsker_increments_uncorrelated`),
+Mathlib currently contains neither Brownian motion, nor weak convergence on the Skorokhod space,
+nor the central limit theorem, so the functional statement cannot be phrased.  What is proved
+here is the *second-order (moment) form* of the invariance principle, which is the part of the
+statement that can be expressed with the available theory:
 
-which are exactly the covariance structure of standard Brownian motion, and are independent of the
-law of the increments (whence "invariance"). The hypotheses are shown to be non-vacuous in
-`Math2.donsker_hypotheses_satisfiable`, using the simple symmetric random walk.
+* the rescaled walk `W_n(t) = S_{⌊n t⌋} / √n` is centered;
+* its covariance converges to the Brownian covariance, `E[W_n(s) W_n(t)] → min s t`;
+* its increments have the Brownian variance in the limit, `E[(W_n(t) - W_n(s))²] → t - s`;
+* its increments over disjoint time intervals are exactly independent.
+
+All the limits depend only on the first two moments of the increments and not on their law —
+this is the *invariance* content of the principle, isolated in
+`Math2.donsker_invariance_law_independent`.
 -/
 
 namespace Math2
 
 open MeasureTheory ProbabilityTheory Filter Topology
 
-variable {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {X : ℕ → Ω → ℝ}
+/-- The diffusively rescaled random walk built from the increments `X`:
+`rescaledWalk X n t ω = (X 0 + ⋯ + X (⌊n t⌋ - 1)) / √n`.
+This is the piecewise-constant process appearing in Donsker's invariance principle. -/
 
-/-- The rescaled (Donsker) random walk built from the increments `X`:
-`rescaledWalk X n t ω = (X 0 ω + ⋯ + X (⌊n t⌋₊ - 1) ω) / √n`.
-This is the classical diffusive rescaling of the partial-sum process. -/
-
-noncomputable def rescaledWalk (X : ℕ → Ω → ℝ) (n : ℕ) (t : ℝ) (ω : Ω) : ℝ :=
+noncomputable def rescaledWalk {Ω : Type*} (X : ℕ → Ω → ℝ) (n : ℕ) (t : ℝ) (ω : Ω) : ℝ :=
   (∑ i ∈ Finset.range ⌊(n : ℝ) * t⌋₊, X i ω) / Real.sqrt n
 
-/-- For independent, centred increments, distinct increments are uncorrelated. -/
+section Moments
+
+variable {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {X : ℕ → Ω → ℝ}
+
+/-- Distinct increments are uncorrelated; an increment has second moment `1`. -/

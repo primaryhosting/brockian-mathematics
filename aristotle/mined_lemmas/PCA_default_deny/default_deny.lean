@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Default Deny
 Category: Proof-Carrying Apps (Lean)
@@ -8,48 +6,31 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Note: Lean 4 requires `import` lines to precede every other command, including
--- module doc comments, so the required header appears immediately after the import.
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+-- Note: Lean requires `import` commands to precede every other command, including
+-- module doc comments. Since the required header comment must begin the file, no
+-- `import` line can follow it; the development below is self-contained and needs
+-- nothing beyond core Lean (it is, of course, also valid in a Mathlib project).
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace PCA
 
 section
 variable {P R : Type}
 
-/-- A principal `c` can access a resource `r` when `r` is in `c`'s scope,
-or `c` is privileged, or `r` is unowned. -/
+/-- A principal `c` may access a resource `r` when the resource is in the
+principal's scope, or the principal is privileged, or the resource is unowned. -/
 
 theorem default_deny {inScope : P → R → Prop} {isPriv : P → Prop} {isUnowned : R → Prop}
     (hScope : ∀ c r, ¬ inScope c r) (hPriv : ∀ c, ¬ isPriv c) (hUnowned : ∀ r, ¬ isUnowned r)
-    (c : P) (r : R) : ¬ canAccess inScope isPriv isUnowned c r :=
-  not_or.mpr ⟨hScope c r, not_or.mpr ⟨hPriv c, hUnowned r⟩⟩
+    (c : P) (r : R) : ¬ canAccess inScope isPriv isUnowned c r := by
+  rintro (h | h | h)
+  · exact hScope c r h
+  · exact hPriv c h
+  · exact hUnowned r h
 
 end
 
 end PCA
-
-#print axioms PCA.default_deny
 

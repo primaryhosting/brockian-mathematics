@@ -1,34 +1,3 @@
-import RequestProject.AlterPolicy
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-#print axioms PCA.Fix.alter_policy_preserves_roles_and_cmd
-#print axioms PCA.Fix.authorized_alter_policy_grant
-#print axioms PCA.Fix.authorized_of_extends
-#print axioms PCA.Fix.grant_extends
-
 /-!
 # Alter Policy Preserves Roles And Cmd
 Category: Proof-Carrying Apps
@@ -37,47 +6,34 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on file layout: Lean requires `import` commands to be the very first
-commands of a file, so this module is deliberately self-contained (it needs
-nothing beyond the Lean 4 core library). It is imported by `RequestProject.Main`,
-which is built against Mathlib.
--/
+namespace PCA.Fix
 
-namespace PCA
+/-- A role name granted to a principal by the isolation engine. -/
+abbrev Role := String
 
-/-- Roles recognised by the isolation engine. -/
-inductive Role
-  | admin
-  | operator
-  | reader
-  deriving DecidableEq, Repr
+/-- A command that a principal may attempt to run. -/
+abbrev Cmd := String
 
-/-- Commands an application may attempt to run inside the sandbox. -/
-inductive Cmd
-  | read
-  | write
-  | exec
-  | net
-  deriving DecidableEq, Repr
-
-/-- An isolation policy: which `(role, command)` pairs are permitted. -/
+/-- A policy of the isolation engine: which role may run which command. -/
 structure Policy where
-  allow : Role → Cmd → Bool
-  deriving Inhabited
+  grants : Role → Cmd → Bool
 
-/-- A request presented to the isolation engine: the command to run, the roles
-held by the caller, and the policy in force. -/
-structure Request where
-  cmd : Cmd
+/-- A configuration of the isolation engine: the roles held by the current
+principal, the command under consideration, the active policy, and an audit log. -/
+structure Config where
   roles : List Role
+  cmd : Cmd
   policy : Policy
+  log : List String
 
-/-- A request is authorized when some role held by the caller is permitted to
-run the requested command under the request's policy. -/
+/-- The command of a configuration is authorized when some held role grants it. -/
 
-def alterPolicy (r : Request) (f : Policy → Policy) : Request :=
-  { r with policy := f r.policy }
+def alterPolicy (f : Policy → Policy) (c : Config) : Config :=
+  let p' := f c.policy
+  { roles := c.roles
+    cmd := c.cmd
+    policy := p'
+    log := (if c.roles.any (fun r => p'.grants r c.cmd) then "allow" else "deny") :: c.log }
 
-/-- **Target.** Altering the policy of a request preserves both the roles held
-by the caller and the command being requested. -/
+/-- **Main result.** Altering the policy preserves both the roles held by the
+principal and the command under consideration. -/

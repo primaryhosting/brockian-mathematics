@@ -1,122 +1,106 @@
 import Mathlib
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import RequestProject.QI.Basic
+
 /-!
-# Strong Subadditivity
-Category: Frontier Qi
-Target: QI.strong_subadditivity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# The matrix geometric mean
+
+For positive definite matrices `A`, `B` we define the geometric mean
+`gmean A B = A^(1/2) (A^(-1/2) B A^(-1/2))^(1/2) A^(1/2)`, and prove:
+
+* `gmean_block`: the block matrix `[[A, gmean A B], [gmean A B, B]]` is positive semidefinite;
+* `gmean_max`: it is the largest hermitian `X` with `[[A, X], [X, B]] ⪰ 0`;
+* `gmean_mono`: monotonicity in both arguments;
+* `gmean_superadd`: superadditivity (equivalent to joint concavity);
+* `gmean_of_commute`: `gmean A B = A^(1/2) B^(1/2)` when `A` and `B` commute.
 -/
 
-set_option maxHeartbeats 4000000
-set_option maxRecDepth 4000
-
-open scoped BigOperators ComplexOrder
+open scoped MatrixOrder ComplexOrder Matrix.Norms.L2Operator
 open Matrix
 
 namespace QI
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-! ## Part I: Functional calculus for Hermitian matrices -/
+/-- The geometric mean of two positive definite matrices. -/
+noncomputable def gmean (A B : Matrix n n ℂ) : Matrix n n ℂ :=
+  CFC.sqrt A * CFC.sqrt ((CFC.sqrt A)⁻¹ * B * (CFC.sqrt A)⁻¹) * CFC.sqrt A
 
-theorem diag_fun_commute {W : Matrix n n ℂ} {μ ν : n → ℝ} (f : ℝ → ℝ)
-    (h : W * diagonal (fun i => ((μ i : ℝ) : ℂ)) = diagonal (fun i => ((ν i : ℝ) : ℂ)) * W) :
-    W * diagonal (fun i => ((f (μ i) : ℝ) : ℂ)) = diagonal (fun i => ((f (ν i) : ℝ) : ℂ)) * W := by
-  ext i j
-  have hij : W i j * (μ j : ℂ) = W i j * (ν i : ℂ) := by
-    have := congrFun (congrFun h i) j
-    simpa [Matrix.mul_diagonal, Matrix.diagonal_mul, mul_comm] using this
-  simp only [Matrix.mul_diagonal, Matrix.diagonal_mul]
-  rcases eq_or_ne (W i j) 0 with hw | hw
-  · simp [hw]
-  · have h3 : μ j = ν i := by exact_mod_cast mul_left_cancel₀ hw hij
-    rw [h3, mul_comm]
+theorem sqrt_posDef {A : Matrix n n ℂ} (hA : A.PosDef) : (CFC.sqrt A).PosDef :=
+  hA.isStrictlyPositive.sqrt.posDef
 
-/-- Functional calculus is independent of the chosen spectral decomposition. -/
-theorem conj_diag_congr {U V : Matrix n n ℂ} {μ ν : n → ℝ} (f : ℝ → ℝ)
-    (hU : U ∈ unitaryGroup n ℂ) (hV : V ∈ unitaryGroup n ℂ)
-    (h : U * diagonal (fun i => ((μ i : ℝ) : ℂ)) * star U
-       = V * diagonal (fun i => ((ν i : ℝ) : ℂ)) * star V) :
-    U * diagonal (fun i => ((f (μ i) : ℝ) : ℂ)) * star U
-      = V * diagonal (fun i => ((f (ν i) : ℝ) : ℂ)) * star V := by
-  have hUs : star U * U = 1 := mem_unitaryGroup_iff'.mp hU
-  have hUs' : U * star U = 1 := mem_unitaryGroup_iff.mp hU
-  have hVs : star V * V = 1 := mem_unitaryGroup_iff'.mp hV
-  have hVs' : V * star V = 1 := mem_unitaryGroup_iff.mp hV
-  obtain ⟨W, hWs, hWs', hVW⟩ :
-      ∃ W : Matrix n n ℂ, star W * W = 1 ∧ W * star W = 1 ∧ V * W = U := by
-    refine ⟨star V * U, ?_, ?_, ?_⟩
-    · rw [Matrix.star_mul, star_star]
-      simp only [Matrix.mul_assoc]
-      rw [← Matrix.mul_assoc V (star V) U, hVs', Matrix.one_mul, hUs]
-    · rw [Matrix.star_mul, star_star]
-      simp only [Matrix.mul_assoc]
-      rw [← Matrix.mul_assoc U (star U) V, hUs', Matrix.one_mul, hVs]
-    · rw [← Matrix.mul_assoc, hVs', Matrix.one_mul]
-  have cV' : ∀ X : Matrix n n ℂ, star V * (V * X) = X := fun X => by
-    rw [← Matrix.mul_assoc, hVs, Matrix.one_mul]
-  have key : W * diagonal (fun i => ((μ i : ℝ) : ℂ)) * star W
-      = diagonal (fun i => ((ν i : ℝ) : ℂ)) := by
-    have h2 := congrArg (fun X => star V * X * V) h
-    simp only [← hVW, Matrix.star_mul, Matrix.mul_assoc, cV', hVs, Matrix.mul_one] at h2 ⊢
-    exact h2
-  have hcomm : W * diagonal (fun i => ((μ i : ℝ) : ℂ))
-      = diagonal (fun i => ((ν i : ℝ) : ℂ)) * W := by
-    have h5 := congrArg (fun X => X * W) key
-    simp only [Matrix.mul_assoc, hWs, Matrix.mul_one] at h5 ⊢
-    exact h5
-  have hcomm2 := diag_fun_commute f hcomm
-  have hkey2 : W * diagonal (fun i => ((f (μ i) : ℝ) : ℂ)) * star W
-      = diagonal (fun i => ((f (ν i) : ℝ) : ℂ)) := by
-    have h6 := congrArg (fun X => X * star W) hcomm2
-    simp only [Matrix.mul_assoc, hWs', Matrix.mul_one] at h6 ⊢
-    exact h6
-  simp only [← hVW, Matrix.star_mul, Matrix.mul_assoc]
-  rw [← hkey2]
-  simp only [Matrix.mul_assoc]
+theorem sqrt_mul_sqrt {A : Matrix n n ℂ} (hA : A.PosSemidef) :
+    CFC.sqrt A * CFC.sqrt A = A :=
+  CFC.sqrt_mul_sqrt_self A hA.nonneg
 
-omit [Fintype n] [DecidableEq n] in
-theorem star_ofReal_fun (μ : n → ℝ) :
-    (star fun i => ((μ i : ℝ) : ℂ)) = fun i => ((μ i : ℝ) : ℂ) := by
-  ext i; simp
+/-- `A ≤ |A|` for a hermitian matrix. -/
+theorem self_le_abs {Y : Matrix n n ℂ} (hY : Y.IsHermitian) : Y ≤ CFC.abs Y := by
+  have hsa : IsSelfAdjoint Y := hY
+  have h := CFC.abs_sub_self Y hsa
+  have h2 : (0 : Matrix n n ℂ) ≤ 2 • Y⁻ := by
+    have := CFC.negPart_nonneg Y
+    positivity
+  rw [← sub_nonneg]
+  rw [h]
+  exact h2
 
-theorem isHermitian_of_spectral {M U : Matrix n n ℂ} {μ : n → ℝ}
-    (hM : M = U * diagonal (fun i => ((μ i : ℝ) : ℂ)) * star U) : M.IsHermitian := by
-  unfold Matrix.IsHermitian
-  rw [hM]
-  simp [Matrix.conjTranspose_mul, Matrix.mul_assoc, diagonal_conjTranspose,
-    Matrix.star_eq_conjTranspose, star_ofReal_fun]
+theorem abs_eq_sqrt {Y : Matrix n n ℂ} (hY : Y.IsHermitian) :
+    CFC.abs Y = CFC.sqrt (Y * Y) := by
+  have hsa : IsSelfAdjoint Y := hY
+  rw [CFC.abs, hsa.star_eq]
 
-theorem spectral_decomp {M : Matrix n n ℂ} (h : M.IsHermitian) :
-    M = (h.eigenvectorUnitary : Matrix n n ℂ) *
-      diagonal (fun i => ((h.eigenvalues i : ℝ) : ℂ)) *
-      star (h.eigenvectorUnitary : Matrix n n ℂ) := by
-  simpa [Unitary.conjStarAlgAut, Function.comp_def] using h.spectral_theorem
+/-- The key consequence of operator monotonicity of the square root:
+if `Y` is hermitian with `Y * Y ≤ C`, then `Y ≤ √C`. -/
+theorem le_sqrt_of_sq_le {Y C : Matrix n n ℂ} (hY : Y.IsHermitian) (h : Y * Y ≤ C) :
+    Y ≤ CFC.sqrt C := by
+  calc Y ≤ CFC.abs Y := self_le_abs hY
+  _ = CFC.sqrt (Y * Y) := abs_eq_sqrt hY
+  _ ≤ CFC.sqrt C := CFC.monotone_sqrt h
 
-/-- Functional calculus for Hermitian matrices: `hfun f M` applies the real function `f`
-to the eigenvalues of `M` (junk value `0` if `M` is not Hermitian). -/
-noncomputable def hfun (f : ℝ → ℝ) (M : Matrix n n ℂ) : Matrix n n ℂ :=
-  if h : M.IsHermitian then
-    (h.eigenvectorUnitary : Matrix n n ℂ) * diagonal (fun i => ((f (h.eigenvalues i) : ℝ) : ℂ)) *
-      star (h.eigenvectorUnitary : Matrix n n ℂ)
-  else 0
+end QI
 
-/-- `hfun` computed from an arbitrary spectral decomposition. -/
-theorem hfun_spec (f : ℝ → ℝ) {M U : Matrix n n ℂ} {μ : n → ℝ}
-    (hU : U ∈ unitaryGroup n ℂ)
-    (hM : M = U * diagonal (fun i => ((μ i : ℝ) : ℂ)) * star U) :
-    hfun f M = U * diagonal (fun i => ((f (μ i) : ℝ) : ℂ)) * star U := by
-  have hHerm : M.IsHermitian := isHermitian_of_spectral hM
-  rw [hfun, dif_pos hHerm]
-  refine (conj_diag_congr f (hHerm.eigenvectorUnitary).2 hU ?_).symm
-  rw [← spectral_decomp hHerm, hM]
+import Mathlib
 
-/-- The matrix logarithm of a Hermitian matrix (with the convention `log 0 = 0`). -/
-noncomputable def logm (M : Matrix n n ℂ) : Matrix n n ℂ := hfun Real.log M
+/-!
+# Basic setup for the quantum information development
 
-/-- The von Neumann entropy `S(ρ) = -Tr(ρ log ρ)`. -/
-noncomputable def entropy (M : Matrix n n ℂ) : ℝ := -(Matrix.trace (M * logm M)).re
+We equip `Matrix n n ℂ` with the C⋆-algebra structure coming from the L2 operator norm, and
+with the Loewner order coming from `MatrixOrder`.  This gives access to the continuous
+functional calculus API (`CFC.sqrt`, `CFC.rpow`, `CFC.log`, `CFC.monotone_sqrt`, ...).
+-/
+
+open scoped MatrixOrder ComplexOrder Matrix.Norms.L2Operator
+open Matrix
+
+noncomputable instance Matrix.instCStarAlgebraL2 {n : Type*} [Fintype n] [DecidableEq n] :
+    CStarAlgebra (Matrix n n ℂ) := { }
+
+namespace QI
+
+theorem le_iff_posSemidef {n : Type*} {A B : Matrix n n ℂ} : A ≤ B ↔ (B - A).PosSemidef := Iff.rfl
 
 end QI
 

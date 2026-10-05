@@ -41,10 +41,11 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.RepunitPrimes
+namespace Brockian
+namespace RepunitPrimes
 
-/-- The `n`-th base-ten repunit: the number `11…1` with `n` digits equal to `1`. -/
+/-- The `n`-th repunit: the base-ten number consisting of `n` digits `1`,
+i.e. `repunit n = (10 ^ n - 1) / 9`. -/
 
 def repunitPrimes : Set ℕ := {p | p.Prime ∧ ∃ n, p = repunit n}
 
-/-- The repunit prime `R 2 = 11`; in particular `repunitPrimes` is nonempty. -/

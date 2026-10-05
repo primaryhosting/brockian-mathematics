@@ -1,10 +1,3 @@
-/-
-# Uhlmann Fidelity
-Category: Frontier Qi
-Target: QI.uhlmann_fidelity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
 
 /-!
@@ -13,37 +6,38 @@ Category: Frontier Qi
 Target: QI.uhlmann_fidelity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-This file proves **Uhlmann's theorem**: for positive semidefinite states `ρ`, `σ` on `ℂ^n`,
-the fidelity `F(ρ, σ) = Tr √(√ρ σ √ρ)` is the *maximal* overlap `|⟪ψ, φ⟫|` taken over all
-purifications `ψ` of `ρ` and `φ` of `σ` in `ℂ^n ⊗ ℂ^n`, where a purification of `ρ` is a
-vector whose reduced density matrix (partial trace over the second factor) is `ρ`.
-
-Neither quantum fidelity nor purifications (nor even the polar decomposition of a matrix)
-are available in Mathlib, so everything is developed here from scratch:
-
-* `QI.abs_trace_conjTranspose_mul_le`: Cauchy–Schwarz/AM–GM for the Hilbert–Schmidt
-  inner product, `|Tr (Aᴴ B)| ≤ (‖A‖₂² + ‖B‖₂²) / 2`.
-* `QI.exists_unitary_polar`: the polar decomposition `M = √(M Mᴴ) U` with `U` unitary,
-  obtained by extending the isometry `√(M Mᴴ) x ↦ Mᴴ x` to a unitary of `ℂ^n`.
-* `QI.norm_trace_mul_unitary_le`: `|Tr (Q Y)| ≤ Tr Q` for `Q ≥ 0` and `Y` unitary.
-* `QI.uhlmann_fidelity_matrix` and `QI.uhlmann_fidelity`: Uhlmann's theorem, in matrix
-  form and in terms of purifying vectors.
 -/
 
-open scoped MatrixOrder ComplexOrder BigOperators
+/-!
+## Overview
+
+We work with finite-dimensional quantum systems, a state on `ℂⁿ` being described by a positive
+semidefinite matrix `ρ : Matrix n n ℂ`.  Its fidelity with a second state `σ` is
+
+`F(ρ, σ) = Tr √(√ρ σ √ρ)`,
+
+which is `QI.fidelity`.
+
+A *purification* of `ρ` in the doubled system `ℂⁿ ⊗ ℂⁿ` is a vector `u : n × n → ℂ` whose reduced
+density matrix (partial trace over the second factor) is `ρ`; this is `QI.reducedDensity`.
+`QI.uhlmann_fidelity` is Uhlmann's theorem: `F(ρ, σ)` is the *greatest* value of the overlap
+`|⟪u, v⟫|` as `u` ranges over the purifications of `ρ` and `v` over those of `σ`.
+
+The proof goes through the polar decomposition of a matrix (`QI.exists_unitary_polar`, proved
+here from scratch by extending a linear isometry defined on a subspace) and the variational
+characterisation of the trace norm (`QI.isGreatest_traceNorm`).
+-/
+
+open scoped InnerProductSpace MatrixOrder ComplexOrder BigOperators
 open Matrix
 
 namespace QI
 
-variable {n : Type*} [Fintype n] [DecidableEq n]
+/-! ### An auxiliary extension lemma for linear isometries -/
 
-/-! ## The Hilbert–Schmidt (Frobenius) inner product -/
-
-/-- The squared Frobenius (Hilbert–Schmidt) norm of a matrix. -/
+/-- If `f g : E →ₗ[ℂ] E` satisfy `‖g x‖ = ‖f x‖` for all `x`, then there is a linear isometry `V`
+of `E` with `V ∘ f = g`.  This is the key step in the polar decomposition. -/
 
 noncomputable def fidelity (ρ σ : Matrix n n ℂ) : ℝ :=
   (CFC.sqrt (CFC.sqrt ρ * σ * CFC.sqrt ρ)).trace.re
 
-/-- Sanity check: the fidelity of a state with itself is its trace (so `F(ρ, ρ) = 1`
-for a density matrix `ρ`). -/

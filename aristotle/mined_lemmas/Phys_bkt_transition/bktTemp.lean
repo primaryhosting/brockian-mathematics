@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Bkt Transition
 Category: Frontier Phys
 Target: Phys.bkt_transition
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,8 +33,13 @@ set_option grind.warning false
 
 namespace Phys
 
-/-- Energy cost of a single vortex of core size `a` in a 2D XY system of linear
-size `R` with spin stiffness `J`:  `E = π J log (R / a)`. -/
+/-! ## The two–dimensional XY model -/
 
-noncomputable def bktTemp (J kB : ℝ) : ℝ := Real.pi * J / (2 * kB)
+/-- Sites of the two-dimensional square lattice `ℤ²`. -/
+abbrev Site : Type := ℤ × ℤ
+
+/-- The XY-model Hamiltonian `H(θ) = -J ∑_{⟨xy⟩} cos (θ x - θ y)` for a finite collection
+of nearest-neighbour bonds. -/
+
+noncomputable def bktTemp (J : ℝ) : ℝ := Real.pi * J / 2
 

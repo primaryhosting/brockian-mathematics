@@ -9,6 +9,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Boundary Term Vanishes
+Category: Gate1 Operator
+Target: Brockian.DilationGenerator.boundary_term_vanishes
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -28,48 +37,45 @@ set_option grind.warning false
 namespace Brockian
 namespace DilationGenerator
 
-/-- If the closed support of `f : ℝ → ℂ` is contained in `(0, ∞)`, then `f` vanishes on a
-neighbourhood of `0`. -/
-theorem eventually_eq_zero_nhds_zero {f : ℝ → ℂ} (hf : tsupport f ⊆ Set.Ioi (0 : ℝ)) :
-    ∀ᶠ x in nhds (0 : ℝ), f x = 0 := by
-  have h0 : (0 : ℝ) ∉ tsupport f := fun h => by simpa using hf h
-  have hmem : (tsupport f)ᶜ ∈ nhds (0 : ℝ) :=
-    (isClosed_tsupport f).isOpen_compl.mem_nhds h0
-  filter_upwards [hmem] with x hx using image_eq_zero_of_notMem_tsupport hx
+/-- A function with compact support contained in `(0, ∞)` vanishes on a neighbourhood
+of `0` (indeed on the whole of `(-∞, a)` for some `a > 0`). -/
+theorem eventually_eq_zero_near_zero {f : ℝ → ℂ} (hf : HasCompactSupport f)
+    (hsupp : tsupport f ⊆ Set.Ioi 0) : ∃ a > 0, ∀ x < a, f x = 0 := by
+  rcases Set.eq_empty_or_nonempty (tsupport f) with h | h
+  · exact ⟨1, one_pos, fun x _ => image_eq_zero_of_notMem_tsupport (by simp [h])⟩
+  · refine ⟨sInf (tsupport f), hsupp (hf.sInf_mem h), fun x hx => ?_⟩
+    refine image_eq_zero_of_notMem_tsupport (fun hmem => ?_)
+    exact absurd (csInf_le hf.bddBelow hmem) (not_le.mpr hx)
 
-/-- A compactly supported function vanishes eventually at `+∞`. -/
+/-- A function with compact support vanishes far out to the right. -/
 theorem eventually_eq_zero_atTop {f : ℝ → ℂ} (hf : HasCompactSupport f) :
-    ∀ᶠ x in Filter.atTop, f x = 0 := by
-  obtain ⟨R, hR⟩ := hf.isCompact.bddAbove
-  filter_upwards [Filter.eventually_gt_atTop R] with x hx
-  refine image_eq_zero_of_notMem_tsupport (fun hmem => ?_)
-  exact absurd (hR hmem) (not_le.mpr hx)
+    ∃ b, ∀ x > b, f x = 0 := by
+  obtain ⟨b, hb⟩ := hf.bddAbove
+  refine ⟨b, fun x hx => image_eq_zero_of_notMem_tsupport (fun hmem => ?_)⟩
+  exact absurd (hb hmem) (not_le.mpr hx)
 
-/-- **Boundary term vanishes.** For `f, g : ℝ → ℂ` with compact support contained in `(0, ∞)`,
-the boundary expression `x * f x * conj (g x)` tends to `0` both as `x → 0⁺` and as `x → +∞`.
-
-The hypotheses `hg` and `hg0` on `g` are kept as part of the requested statement, even though the
-proof only needs the corresponding hypotheses on `f`. -/
+/-- **Boundary term vanishes.**  For `f, g : ℝ → ℂ` with compact support contained in
+`(0, ∞)`, the boundary expression `x * f x * conj (g x)` tends to `0` both as `x → 0⁺`
+and as `x → ∞`.  Both limits hold because the expression is identically zero outside a
+compact subset of `(0, ∞)`.  The hypotheses on `g` are kept because they are part of the
+requested statement, although the argument only needs those on `f`. -/
 theorem boundary_term_vanishes {f g : ℝ → ℂ}
     (hf : HasCompactSupport f) (hg : HasCompactSupport g)
-    (hf0 : tsupport f ⊆ Set.Ioi (0 : ℝ)) (hg0 : tsupport g ⊆ Set.Ioi (0 : ℝ)) :
+    (hfs : tsupport f ⊆ Set.Ioi 0) (hgs : tsupport g ⊆ Set.Ioi 0) :
     Filter.Tendsto (fun x : ℝ => (x : ℂ) * f x * (starRingEnd ℂ) (g x))
-        (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds 0) ∧
+        (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) ∧
       Filter.Tendsto (fun x : ℝ => (x : ℂ) * f x * (starRingEnd ℂ) (g x))
         Filter.atTop (nhds 0) := by
+  obtain ⟨a, ha, hazero⟩ := eventually_eq_zero_near_zero hf hfs
+  obtain ⟨b, hbzero⟩ := eventually_eq_zero_atTop hf
   constructor
-  · have h : ∀ᶠ x : ℝ in nhdsWithin (0 : ℝ) (Set.Ioi 0),
-        (x : ℂ) * f x * (starRingEnd ℂ) (g x) = 0 := by
-      filter_upwards [nhdsWithin_le_nhds (eventually_eq_zero_nhds_zero hf0)] with x hx
-      simp [hx]
-    exact Filter.Tendsto.congr' (Filter.EventuallyEq.symm h) tendsto_const_nhds
-  · have h : ∀ᶠ x : ℝ in Filter.atTop, (x : ℂ) * f x * (starRingEnd ℂ) (g x) = 0 := by
-      filter_upwards [eventually_eq_zero_atTop hf] with x hx
-      simp [hx]
-    exact Filter.Tendsto.congr' (Filter.EventuallyEq.symm h) tendsto_const_nhds
+  · refine Filter.Tendsto.congr' ?_ (tendsto_const_nhds (x := (0 : ℂ)))
+    filter_upwards [nhdsWithin_le_nhds (Iio_mem_nhds ha)] with x hx
+    simp [hazero x hx]
+  · refine Filter.Tendsto.congr' ?_ (tendsto_const_nhds (x := (0 : ℂ)))
+    filter_upwards [Filter.eventually_gt_atTop b] with x hx
+    simp [hbzero x hx]
 
 end DilationGenerator
 end Brockian
-
-#print axioms Brockian.DilationGenerator.boundary_term_vanishes
 

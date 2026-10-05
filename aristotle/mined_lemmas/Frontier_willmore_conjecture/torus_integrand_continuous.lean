@@ -5,7 +5,6 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -30,9 +29,9 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
+set_option pp.fullNames false
 set_option pp.structureInstances true
-set_option pp.coercions.types true
+set_option pp.coercions.types false
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
@@ -41,17 +40,17 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Basic vector algebra in `ℝ³` -/
+open Real
 
-/-- Euclidean three-space, as a triple of reals. -/
-abbrev R3 := ℝ × ℝ × ℝ
+/-! ## Partial derivatives of functions of two real variables -/
 
-/-- The standard inner product on `ℝ³`. -/
+/-- Partial derivative with respect to the first variable. -/
 
-lemma torus_integrand_continuous {R r : ℝ} (hr : 0 < r) (hR : r < R) :
-    Continuous (fun u : ℝ => (R + 2 * r * Real.cos u) ^ 2 / (R + r * Real.cos u)) := by
-  apply Continuous.div
-  · fun_prop
-  · fun_prop
-  · intro u; exact ne_of_gt (torus_radius_pos hr hR u)
+lemma torus_integrand_continuous (hr : 0 < r) (hR : r < R) :
+    Continuous (fun u : ℝ => (R + 2 * r * cos u) ^ 2 / (4 * r * (R + r * cos u))) := by
+  apply Continuous.div (by fun_prop) (by fun_prop)
+  intro x
+  have hw : 0 < R + r * cos x := by nlinarith [Real.neg_one_le_cos x, Real.cos_le_one x]
+  positivity
 
+/-- The integral of the Willmore integrand over one period in `u`. -/

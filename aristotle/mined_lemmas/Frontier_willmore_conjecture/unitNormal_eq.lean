@@ -5,6 +5,8 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the header above is
+-- therefore a plain block comment, and is repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -16,26 +18,42 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
 open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Euclidean 3-space as `ℝ × ℝ × ℝ`
+open Real intervalIntegral
 
-We use the plain product type and equip it with an explicit dot product and cross
-product, so that all differential-geometric quantities below are literally the
-classical ones. -/
+/-! ## Vector algebra in `ℝ³`
 
-/-- Ambient space `ℝ³`. -/
-abbrev E3 := ℝ × ℝ × ℝ
+We use `ℝ × ℝ × ℝ` as a model of `ℝ³` together with explicitly defined dot product,
+cross product and Euclidean norm.  (The ambient `Prod` norm of Mathlib is the sup norm,
+so we never use `‖·‖`; note that the notion of (Fréchet/one-variable) derivative does
+not depend on the choice of an equivalent norm, so `deriv` below is the usual derivative
+of an `ℝ³`-valued function.) -/
 
-/-- The Euclidean dot product on `ℝ³`. -/
+/-- Euclidean dot product on `ℝ³`. -/
 
-theorem unitNormal_eq (R r u v : ℝ) (hr : 0 < r) (hD : 0 < R + r * Real.cos u) :
-    unitNormal R r u v =
-      (-(Real.cos u * Real.cos v), -(Real.cos u * Real.sin v), -Real.sin u) := by
-  have hne : r * (R + r * Real.cos u) ≠ 0 := by positivity
-  rw [unitNormal, nrm3_normalVec R r u v hr hD, normalVec_eq]
-  simp only [Prod.mk.injEq]
-  refine ⟨?_, ?_, ?_⟩ <;> field_simp
+lemma unitNormal_eq {R r u v : ℝ} (hr : 0 < r) (hR : r < R) :
+    unitNormal R r u v = (-(cos u * cos v), -(cos u * sin v), -sin u) := by
+  have hp := radial_pos (u := u) hr hR
+  have hne : r * (R + r * cos u) ≠ 0 := ne_of_gt (mul_pos hr hp)
+  rw [unitNormal, nrm3_cross hr hR, cross_Xu_Xv]
+  refine Prod.ext ?_ (Prod.ext ?_ ?_) <;>
+    · simp only [Prod.smul_fst, Prod.smul_snd, smul_eq_mul]
+      field_simp
 

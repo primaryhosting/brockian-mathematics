@@ -39,19 +39,13 @@ Category: Brockian Conjecture
 Target: Brockian.BetrothedNumbers.BetrothedInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` lines to precede any module docstring, so the header comment above is a
-plain block comment and is repeated here as the module docstring.)
 -/
-
-open ArithmeticFunction
 
 namespace Brockian.BetrothedNumbers
 
-/-- Two positive integers `m ≠ n` are *betrothed* (a quasi-amicable pair) when the sum of the
-divisors of each equals `m + n + 1`; equivalently, the sum of the divisors of each strictly
-between `1` and the number itself equals the other number. -/
+/-- The sum-of-divisors function `σ₁ n = ∑_{d ∣ n} d` (with the convention `σ₁ 0 = 0`). -/
 
 def Betrothed (m n : ℕ) : Prop :=
-  0 < m ∧ 0 < n ∧ m ≠ n ∧ sigma 1 m = m + n + 1 ∧ sigma 1 n = m + n + 1
+  m ≠ n ∧ sigmaOne m = m + n + 1 ∧ sigmaOne n = m + n + 1
 
+/-- The set of betrothed pairs. -/

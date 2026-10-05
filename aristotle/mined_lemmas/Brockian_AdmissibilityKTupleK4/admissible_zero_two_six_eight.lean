@@ -1,4 +1,21 @@
+/-
+# Admissibility Ktuple K 4
+Category: Brockian Corpus
+Target: Brockian.AdmissibilityKTupleK4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Admissibility Ktuple K 4
+Category: Brockian Corpus
+Target: Brockian.AdmissibilityKTupleK4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 
 open scoped BigOperators
 open scoped Real
@@ -25,19 +42,17 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- A `k`-tuple of integers `h : Fin k → ℤ` is *admissible* (in the sense of the
-Hardy–Littlewood prime `k`-tuple conjecture) if for every prime `p` the values
-`h 0, …, h (k-1)` do not cover every residue class modulo `p`. -/
+/-- A finite set of integers `H` (thought of as a tuple of shifts `h₁ < ⋯ < h_k`) is
+*admissible* if for every prime `p` the elements of `H` do not cover all residue classes
+modulo `p`; equivalently, some residue class mod `p` is missed by `H`.  This is the
+classical admissibility condition from the Hardy–Littlewood prime `k`-tuple conjecture. -/
 
-theorem admissible_zero_two_six_eight :
-    Admissible ![(0 : ℤ), 2, 6, 8] := by
-  rw [AdmissibilityKTupleK4]
+theorem admissible_zero_two_six_eight : Admissible ({0, 2, 6, 8} : Finset ℤ) := by
+  have hcard : ({0, 2, 6, 8} : Finset ℤ).card = 4 := by decide
+  rw [AdmissibilityKTupleK4 _ hcard]
   constructor
   · exact ⟨1, by decide⟩
   · exact ⟨1, by decide⟩
 
-#print axioms AdmissibilityKTupleK4
-#print axioms admissible_zero_two_six_eight
-
-end Brockian
-
+/-- Tuple form of the criterion: for an injective `4`-tuple `h : Fin 4 → ℤ`, admissibility of
+its range is equivalent to missing a residue class modulo `2` and modulo `3`. -/

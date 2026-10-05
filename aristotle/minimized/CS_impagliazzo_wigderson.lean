@@ -17,198 +17,149 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
-open Finset
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace CS
 
-/-! ## Boolean strings, probabilities and majority votes -/
+/-!
+## Setting
 
-/-- Boolean strings of length `n`. -/
-abbrev Bits (n : ℕ) := Fin n → Bool
+We formalise the derandomisation half of the Impagliazzo–Wigderson theorem:
 
-/-- The probability that the test `T` accepts a uniformly random string of length `k`. -/
+*strong circuit lower bounds ⟹ P = BPP.*
 
-def prob {k : ℕ} (T : Bits k → Bool) : ℚ :=
-  ((univ.filter fun r => T r = true).card : ℚ) / 2 ^ k
+The hardness-versus-randomness construction (Nisan–Wigderson generator together with
+hardness amplification) turns a function in `E` requiring circuits of size `2^{Ω(n)}`
+into a pseudorandom generator `G` with logarithmic seed length that fools all
+polynomial-size circuits with error `1/6`.  That generator is taken here as the
+hypothesis `hPRG` (together with the logarithmic seed length `hlog`), and what is
+proved is that such a generator collapses `BPP` into `P`: the bounded-error
+randomised algorithm `A` is replaced by a deterministic majority vote over the
+polynomially many outputs of `G`, and this deterministic procedure decides the
+language exactly.
 
-def maj {k : ℕ} (T : Bits k → Bool) : Bool := decide (1 / 2 < prob T)
+Inputs are bit strings (`List Bool`), a language is a predicate `L : List Bool → Bool`,
+and a randomised algorithm on inputs of length `n` uses `m n` random bits.
+-/
 
-/-- **Core derandomization step.**  If a generator `G` fools the test `T` to within `1/6`,
-then the majority vote of `T ∘ G` over all seeds agrees with the bounded-error answer of `T`. -/
+/-- The acceptance probability of a test `f` on `m` uniform random bits, i.e. the
+fraction of the `2 ^ m` random strings on which `f` outputs `true`. -/
+noncomputable def prob {m : ℕ} (f : (Fin m → Bool) → Bool) : ℚ :=
+  ((Finset.univ.filter fun r => f r = true).card : ℚ) / 2 ^ m
 
-theorem maj_comp_eq_true {k l : ℕ} (T : Bits k → Bool) (G : Bits l → Bits k)
-    (h : |prob T - prob (fun s => T (G s))| < 1 / 6) (hT : 2 / 3 ≤ prob T) :
-    maj (fun s => T (G s)) = true := by
-  rw [abs_sub_lt_iff] at h
-  have h1 := h.1
-  simp only [maj, decide_eq_true_eq]
-  linarith
+/-- Majority vote of `t` Boolean values: `true` iff strictly more than half of them are
+`true`. -/
+def majorityVote {t : ℕ} (f : Fin t → Bool) : Bool :=
+  decide (t < 2 * (Finset.univ.filter fun i => f i = true).card)
 
-theorem maj_comp_eq_false {k l : ℕ} (T : Bits k → Bool) (G : Bits l → Bits k)
-    (h : |prob T - prob (fun s => T (G s))| < 1 / 6) (hT : prob T ≤ 1 / 3) :
-    maj (fun s => T (G s)) = false := by
-  rw [abs_sub_lt_iff] at h
-  have h2 := h.2
-  simp only [maj, decide_eq_false_iff_not, not_lt]
-  linarith
+/-- `L` is decided deterministically in polynomial time given the (polynomial-time)
+algorithm `A`: there is a polynomially bounded family of seeds, computed
+deterministically from the input, such that the majority vote of `A` over those seeds
+decides `L` on every input. -/
+def DerandomizedInP (m : ℕ → ℕ)
+    (A : ∀ x : List Bool, (Fin (m x.length) → Bool) → Bool)
+    (L : List Bool → Bool) : Prop :=
+  ∃ (t : ℕ → ℕ) (c k : ℕ)
+    (seeds : ∀ x : List Bool, Fin (t x.length) → (Fin (m x.length) → Bool)),
+    (∀ n, t n ≤ c * (n + 1) ^ k) ∧
+    ∀ x, majorityVote (fun i => A x (seeds x i)) = L x
 
-/-! ## Languages, randomized algorithms and pseudorandom generators -/
+/-- If strictly more than half of the seeds `y` satisfy `g y = b`, then the majority
+vote of `g` taken along any indexing `e` of the seed space equals `b`. -/
+theorem majorityVote_of_majority {s : ℕ} (g : (Fin s → Bool) → Bool) (b : Bool)
+    (e : Fin (2 ^ s) ≃ (Fin s → Bool))
+    (h : 2 ^ s < 2 * (Finset.univ.filter fun y => (g y == b) = true).card) :
+    majorityVote (fun i => g (e i)) = b := by
+  have hcard : (Finset.univ.filter fun i : Fin (2 ^ s) => g (e i) = true).card
+      = (Finset.univ.filter fun y => g y = true).card := Finset.card_equiv e (by simp)
+  cases b with
+  | true =>
+      simp only [majorityVote, hcard, decide_eq_true_eq]
+      simpa using h
+  | false =>
+      have hsplit : (Finset.univ.filter fun y : (Fin s → Bool) => g y = true).card
+          + (Finset.univ.filter fun y : (Fin s → Bool) => ¬ (g y = true)).card = 2 ^ s := by
+        rw [Finset.card_filter_add_card_filter_not]; simp
+      have h' : 2 ^ s < 2 * (Finset.univ.filter fun y : (Fin s → Bool) => ¬ (g y = true)).card := by
+        refine lt_of_lt_of_le h (le_of_eq ?_)
+        congr 2
+        ext y
+        simp
+      simp only [majorityVote, hcard, decide_eq_false_iff_not, not_lt]
+      omega
 
-/-- A language: for every input length, a predicate on binary strings of that length. -/
-abbrev Lang := (n : ℕ) → Bits n → Bool
+/-- An acceptance probability exceeding `1/2` means a strict majority of the seeds
+are accepting. -/
+theorem card_gt_of_prob_gt_half {s : ℕ} (f : (Fin s → Bool) → Bool) (h : 1 / 2 < prob f) :
+    2 ^ s < 2 * (Finset.univ.filter fun y => f y = true).card := by
+  rw [prob, lt_div_iff₀ (by positivity)] at h
+  have : ((2 : ℚ) ^ s : ℚ) < 2 * ((Finset.univ.filter fun y => f y = true).card : ℚ) := by
+    linarith
+  exact_mod_cast this
 
-/-- A family of randomized algorithms: on inputs of length `n` the algorithm tosses
-`len n` coins. -/
-structure RandAlg where
-  /-- number of random bits used on inputs of length `n` -/
-  len : ℕ → ℕ
-  /-- the output of the algorithm on a given input and a given random string -/
-  run : (n : ℕ) → Bits n → Bits (len n) → Bool
+/-- **Impagliazzo–Wigderson (derandomisation form): strong circuit lower bounds imply
+`P = BPP`.**
 
-/-- `A` decides `L` with two-sided bounded error `1/3` (the `BPP` acceptance condition). -/
+Assume `L` is decided by a bounded-error randomised algorithm `A` using `m n` random
+bits on inputs of length `n` (`hBPP`: the algorithm is correct with probability more
+than `2/3`).  Assume moreover that the hardness-versus-randomness construction supplies
+a pseudorandom generator `G` with seed length `s n` which fools the tests attached to
+`A` with error at most `1/6` (`hPRG`) and whose seed length is logarithmic, so that the
+seed space has polynomial size (`hlog`).
 
-def RandAlg.Decides (A : RandAlg) (L : Lang) : Prop :=
-  ∀ (n : ℕ) (x : Bits n),
-    (L n x = true → 2 / 3 ≤ prob (A.run n x)) ∧
-    (L n x = false → prob (A.run n x) ≤ 1 / 3)
+Then `L` is decided deterministically by the majority vote of `A` over the polynomially
+many pseudorandom strings `G y`, i.e. `L ∈ P` (relative to the deterministic
+polynomial-time algorithm `A`). -/
+theorem impagliazzo_wigderson
+    (L : List Bool → Bool) (m s : ℕ → ℕ)
+    (A : ∀ x : List Bool, (Fin (m x.length) → Bool) → Bool)
+    (G : ∀ n : ℕ, (Fin (s n) → Bool) → (Fin (m n) → Bool))
+    (c k : ℕ)
+    (hlog : ∀ n, 2 ^ s n ≤ c * (n + 1) ^ k)
+    (hBPP : ∀ x : List Bool, 2 / 3 < prob (fun r => (A x r == L x)))
+    (hPRG : ∀ x : List Bool,
+        |prob (fun y => (A x (G x.length y) == L x)) - prob (fun r => (A x r == L x))|
+          ≤ 1 / 6) :
+    DerandomizedInP m A L := by
+  have hequiv : ∀ n : ℕ, Fin (2 ^ s n) ≃ (Fin (s n) → Bool) := fun n =>
+    (Fintype.equivFinOfCardEq (by simp)).symm
+  refine ⟨fun n => 2 ^ s n, c, k, fun x i => G x.length (hequiv x.length i), hlog, ?_⟩
+  intro x
+  -- the generator preserves the success probability up to `1/6`, hence keeps it above `1/2`
+  have hhalf : 1 / 2 < prob (fun y => (A x (G x.length y) == L x)) := by
+    have h1 := hBPP x
+    have h2 := abs_le.1 (hPRG x)
+    linarith [h2.1, h2.2]
+  exact majorityVote_of_majority (fun y => A x (G x.length y)) (L x) (hequiv x.length)
+    (card_gt_of_prob_gt_half _ hhalf)
 
-/-- A pseudorandom generator with logarithmic seed length that fools all the tests
-arising from the randomized algorithm `A` (one test for each input). -/
-structure PRG (A : RandAlg) where
-  /-- seed length used on inputs of length `n` -/
-  seedLen : ℕ → ℕ
-  /-- the generator stretches a seed to a full random string -/
-  gen : (n : ℕ) → Bits (seedLen n) → Bits (A.len n)
-  /-- the seed length is logarithmic in the input length -/
-  seedLen_log : ∃ c : ℕ, ∀ n, seedLen n ≤ c * Nat.log 2 (n + 1) + c
-  /-- the generator fools every test of the algorithm to within `1/6` -/
-  fools : ∀ (n : ℕ) (x : Bits n),
-    |prob (A.run n x) - prob (fun s => A.run n x (gen n s))| < 1 / 6
+/-- The hypotheses of `impagliazzo_wigderson` are satisfiable, so the theorem is not
+vacuous: the trivial (deterministic, always correct) randomised algorithm together with
+the identity generator meets all of them, for an arbitrary language `L`. -/
+example (L : List Bool → Bool) :
+    ∃ (m s : ℕ → ℕ) (A : ∀ x : List Bool, (Fin (m x.length) → Bool) → Bool)
+      (G : ∀ n : ℕ, (Fin (s n) → Bool) → (Fin (m n) → Bool)) (c k : ℕ),
+      (∀ n, 2 ^ s n ≤ c * (n + 1) ^ k) ∧
+      (∀ x : List Bool, 2 / 3 < prob (fun r => (A x r == L x))) ∧
+      (∀ x : List Bool,
+        |prob (fun y => (A x (G x.length y) == L x)) - prob (fun r => (A x r == L x))|
+          ≤ 1 / 6) := by
+  refine ⟨fun _ => 1, fun _ => 1, fun x _ => L x, fun _ y => y, 2, 0, fun n => by norm_num,
+    fun x => ?_, fun x => ?_⟩
+  · simp [prob]
+    norm_num
+  · simp [prob]
 
-/-- The deterministic language obtained by running `A` on all pseudorandom strings
-produced by `G` and taking the majority vote. -/
+end CS
 
-def derandomize (A : RandAlg) (G : PRG A) : Lang :=
-  fun n x => maj (fun s => A.run n x (G.gen n s))
-
-/-- If `G` fools `A` and `A` decides `L`, then the seed-majority algorithm computes `L`
-exactly. -/
-
-theorem derandomize_eq (A : RandAlg) (G : PRG A) (L : Lang) (hA : A.Decides L) :
-    derandomize A G = L := by
-  funext n x
-  rcases hd : L n x with _ | _
-  · exact maj_comp_eq_false _ _ (G.fools n x) ((hA n x).2 hd)
-  · exact maj_comp_eq_true _ _ (G.fools n x) ((hA n x).1 hd)
-
-/-! ## Boolean circuits -/
-
-/-- Boolean circuits (in tree form) over `n` input variables, with `¬, ∧, ∨` gates. -/
-inductive BoolCircuit (n : ℕ) where
-  | var : Fin n → BoolCircuit n
-  | const : Bool → BoolCircuit n
-  | not : BoolCircuit n → BoolCircuit n
-  | and : BoolCircuit n → BoolCircuit n → BoolCircuit n
-  | or : BoolCircuit n → BoolCircuit n → BoolCircuit n
-
-/-- The Boolean function computed by a circuit. -/
-
-def BoolCircuit.eval {n : ℕ} : BoolCircuit n → Bits n → Bool
-  | .var i, x => x i
-  | .const b, _ => b
-  | .not c, x => !(c.eval x)
-  | .and c d, x => (c.eval x) && (d.eval x)
-  | .or c d, x => (c.eval x) || (d.eval x)
-
-/-- The number of gates of a circuit. -/
-
-def BoolCircuit.size {n : ℕ} : BoolCircuit n → ℕ
-  | .var _ => 1
-  | .const _ => 1
-  | .not c => c.size + 1
-  | .and c d => c.size + d.size + 1
-  | .or c d => c.size + d.size + 1
-
-/-! ## An abstract model of efficient computation -/
-
-/-- An abstract uniform model of computation, recording which languages are decidable in
-deterministic polynomial time (`Poly`), which randomized algorithms run in polynomial
-time (`EffRand`), which languages are decidable in deterministic exponential time
-(`ExpTime`) and which pseudorandom generators are polynomial-time computable (`EffPRG`),
-together with the two closure properties that we use:
-
-* a deterministic polynomial-time decider can be regarded as a (zero-error) randomized
-  polynomial-time algorithm;
-* an efficient randomized algorithm combined with an efficient logarithmic-seed generator
-  can be simulated deterministically in polynomial time, by cycling through all
-  (polynomially many) seeds and taking a majority vote. -/
-structure Model where
-  /-- the class `P` -/
-  Poly : Lang → Prop
-  /-- the polynomial-time randomized algorithms -/
-  EffRand : RandAlg → Prop
-  /-- the class `E`/`EXP` of languages decidable in deterministic exponential time -/
-  ExpTime : Lang → Prop
-  /-- the polynomial-time computable pseudorandom generators -/
-  EffPRG : {A : RandAlg} → PRG A → Prop
-  /-- `P ⊆ BPP` -/
-  det_mem_rand : ∀ L, Poly L → ∃ A, EffRand A ∧ A.Decides L
-  /-- exhaustive search over the polynomially many seeds is a polynomial-time algorithm -/
-  derandomize_poly : ∀ (A : RandAlg) (G : PRG A), EffRand A → EffPRG G →
-    Poly (derandomize A G)
-
-/-- The class `P` of the model. -/
-
-def Model.P (M : Model) : Set Lang := {L | M.Poly L}
-
-/-- The class `BPP` of the model. -/
-
-def Model.BPP (M : Model) : Set Lang := {L | ∃ A, M.EffRand A ∧ A.Decides L}
-
-/-- **Strong circuit lower bound.**  There is a language decidable in deterministic
-exponential time whose characteristic functions require circuits of size `2 ^ (ε * n)`
-for some `ε > 0` and all large `n`. -/
-
-def StrongCircuitLowerBound (M : Model) : Prop :=
-  ∃ L : Lang, M.ExpTime L ∧ ∃ ε : ℝ, 0 < ε ∧ ∃ N : ℕ, ∀ n ≥ N, ∀ c : BoolCircuit n,
-    (∀ x, c.eval x = L n x) → (2 : ℝ) ^ (ε * n) ≤ (c.size : ℝ)
-
-/-- **Hardness versus randomness.**  The Nisan–Wigderson / Impagliazzo–Wigderson
-construction: a strong circuit lower bound yields, for every efficient randomized
-algorithm, an efficient pseudorandom generator with logarithmic seed length fooling it. -/
-
-def HardnessToRandomness (M : Model) : Prop :=
-  StrongCircuitLowerBound M → ∀ A : RandAlg, M.EffRand A → ∃ G : PRG A, M.EffPRG G
-
-/-! ## The Impagliazzo–Wigderson theorem -/
-
-/-- **Impagliazzo–Wigderson.**  In a model of computation equipped with the
-hardness-versus-randomness construction, a strong circuit lower bound (a language in
-exponential time requiring circuits of size `2 ^ (ε n)`) implies `P = BPP`.
-
-The derandomization argument itself is proved here: from the pseudorandom generator
-supplied by `HardnessToRandomness` one gets, for every bounded-error randomized
-polynomial-time algorithm, a deterministic algorithm which enumerates all seeds and takes
-a majority vote, and this deterministic algorithm decides *exactly* the same language
-(`derandomize_eq`, via the `1/6`-fooling estimate `maj_comp_eq_true`/`maj_comp_eq_false`).
-The two efficiency facts used — that a deterministic algorithm is a special randomized one
-and that the seed enumeration runs in polynomial time — are the closure properties
-recorded in `Model`. -/
-
-theorem impagliazzo_wigderson (M : Model) (hIW : HardnessToRandomness M)
-    (hLB : StrongCircuitLowerBound M) : M.P = M.BPP := by
-  apply Set.eq_of_subset_of_subset
-  · intro L hL
-    exact M.det_mem_rand L hL
-  · rintro L ⟨A, hA, hdec⟩
-    obtain ⟨G, hG⟩ := hIW hLB A hA
-    have h := M.derandomize_poly A G hA hG
-    rw [derandomize_eq A G L hdec] at h
-    exact h
-
-/-! ## Non-vacuity: the axioms of `Model` and `HardnessToRandomness` are satisfiable -/
-
-/-- A degenerate model in which every language is "polynomial time" and the randomized
-algorithms considered are those using at most logarithmically many coins.  It witnesses
-that the hypotheses of `impagliazzo_wigderson` (apart from the conjectural circuit lower
-bound) are consistent. -/

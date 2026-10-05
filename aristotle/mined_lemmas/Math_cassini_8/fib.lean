@@ -1,26 +1,20 @@
-/-!
-# Cassini 8
-Category: Pure Mathematics
-Target: Math.cassini_8
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+import Mathlib
+import RequestProject.Main
 
-/-
-Note: Lean requires `import` commands to precede every other command in a file,
-including module doc comments, so this file (whose first token must be the header
-above) is kept self-contained and uses only Lean core. The Fibonacci numbers are
-therefore defined here; `Math.fib` agrees with Mathlib's `Nat.fib`
-(`fib 0 = 0`, `fib 1 = 1`, `fib (n+2) = fib n + fib (n+1)`).
+/-!
+# Bridge to Mathlib's `Nat.fib`
+
+`Math.fib` (defined in `RequestProject.Main` without imports, as required by the
+file header there) agrees with Mathlib's `Nat.fib`, so `Math.cassini_8` is a
+statement about the usual Fibonacci numbers.
 -/
 
 namespace Math
 
-/-- The Fibonacci sequence: `fib 0 = 0`, `fib 1 = 1`, `fib (n+2) = fib n + fib (n+1)`. -/
 
 def fib : Nat → Nat
   | 0 => 0
   | 1 => 1
   | n + 2 => fib n + fib (n + 1)
 
-/-- `F(7) = 13`, `F(8) = 21`, `F(9) = 34`. -/
+/-- Cassini's identity at `n = 8`: `F(7) * F(9) - F(8)^2 = (-1)^8`. -/

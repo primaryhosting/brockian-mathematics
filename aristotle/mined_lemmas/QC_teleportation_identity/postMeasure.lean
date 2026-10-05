@@ -30,13 +30,13 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option grind.warning false
-
 namespace QC
 
-/-- Bit flip on a single (qu)bit index. -/
+open Complex Finset
 
-noncomputable def postMeasure (psi : Fin 2 → ℂ) (i j : Fin 2) (c : Fin 2) : ℂ :=
-  2 * ∑ a : Fin 2, ∑ b : Fin 2, star (bellBasis i j a b) * initialState psi a b c
+/-- The scalar `1/√2`, the normalization constant of the Bell states. -/
 
-/-- The Pauli `X` gate. -/
+noncomputable def postMeasure (psi : Bool → ℂ) (a b : Bool) (k : Bool) : ℂ :=
+  2 * ∑ i : Bool, ∑ j : Bool, (starRingEnd ℂ) (bell a b i j) * inputState psi i j k
+
+/-- Bob's correction, applying the Pauli operator `Z^a X^b` to his qubit. -/

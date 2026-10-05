@@ -33,13 +33,20 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Qft Unitary
+Category: Quantum Computing
+Target: QC.qft_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 namespace QC
 
-open Complex Finset Matrix
+open Complex Finset
 
 /-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
-noncomputable def qftMatrix (N : ℕ) : Matrix (Fin N) (Fin N) ℂ :=
-  fun j k => omegaN N ^ ((j : ℕ) * (k : ℕ)) / Real.sqrt N
+noncomputable def qftMatrix (n : ℕ) : Matrix (Fin (2 ^ n)) (Fin (2 ^ n)) ℂ :=
+  dftMatrix (2 ^ n)
 
-/-- The `n`-qubit quantum Fourier transform matrix, acting on the `2 ^ n` basis states. -/

@@ -1,37 +1,52 @@
 import Mathlib
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import RequestProject.QI.Basic
+
 /-!
-# Strong Subadditivity
-Category: Frontier Qi
-Target: QI.strong_subadditivity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# The matrix geometric mean
+
+For positive definite matrices `A`, `B` we define the geometric mean
+`gmean A B = A^(1/2) (A^(-1/2) B A^(-1/2))^(1/2) A^(1/2)`, and prove:
+
+* `gmean_block`: the block matrix `[[A, gmean A B], [gmean A B, B]]` is positive semidefinite;
+* `gmean_max`: it is the largest hermitian `X` with `[[A, X], [X, B]] ⪰ 0`;
+* `gmean_mono`: monotonicity in both arguments;
+* `gmean_superadd`: superadditivity (equivalent to joint concavity);
+* `gmean_of_commute`: `gmean A B = A^(1/2) B^(1/2)` when `A` and `B` commute.
 -/
 
-set_option maxHeartbeats 4000000
-set_option maxRecDepth 4000
-
-open scoped BigOperators ComplexOrder
+open scoped MatrixOrder ComplexOrder Matrix.Norms.L2Operator
 open Matrix
 
 namespace QI
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-! ## Part I: Functional calculus for Hermitian matrices -/
+/-- The geometric mean of two positive definite matrices. -/
 
-noncomputable def hfun (f : ℝ → ℝ) (M : Matrix n n ℂ) : Matrix n n ℂ :=
-  if h : M.IsHermitian then
-    (h.eigenvectorUnitary : Matrix n n ℂ) * diagonal (fun i => ((f (h.eigenvalues i) : ℝ) : ℂ)) *
-      star (h.eigenvectorUnitary : Matrix n n ℂ)
-  else 0
-
-/-- `hfun` computed from an arbitrary spectral decomposition. -/
-
-noncomputable def logm (M : Matrix n n ℂ) : Matrix n n ℂ := hfun Real.log M
-
-/-- The von Neumann entropy `S(ρ) = -Tr(ρ log ρ)`. -/
-
-noncomputable def entropy (M : Matrix n n ℂ) : ℝ := -(Matrix.trace (M * logm M)).re
+theorem le_iff_posSemidef {n : Type*} {A B : Matrix n n ℂ} : A ≤ B ↔ (B - A).PosSemidef := Iff.rfl
 
 end QI

@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Sophie Germain Infinitude
-Category: Brockian Conjecture
-Target: Brockian.SophieGermain.SophieGermainInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -43,11 +35,8 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Brockian.SophieGermain
 
-/-- A *Sophie Germain prime* is a prime `p` such that `2 * p + 1` is also prime. -/
+/-- `p` is a Sophie Germain prime if both `p` and `2 * p + 1` are prime. -/
 
 def IsSophieGermainPrime (p : ℕ) : Prop := p.Prime ∧ (2 * p + 1).Prime
-
-instance (p : ℕ) : Decidable (IsSophieGermainPrime p) := by
-  unfold IsSophieGermainPrime; infer_instance
 
 /-- The set of Sophie Germain primes. -/

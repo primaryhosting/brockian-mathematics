@@ -1,5 +1,4 @@
-import Mathlib
-/-!
+/-
 # Gibbs Phase Rule
 Category: Chemistry
 Target: Chem.gibbs_phase_rule
@@ -7,46 +6,68 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+import Mathlib
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+/-!
+# Gibbs Phase Rule
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+Category: Chemistry.  Target: `Chem.gibbs_phase_rule`.
 
-set_option grind.warning false
+## Modelling
+
+For a heterogeneous system with `C` chemical components distributed over `P` phases, the
+*intensive* state of the system is a triple `(T, p, x)` consisting of
+
+* the temperature `T` and the pressure `p` (2 variables), and
+* the mole fractions `x j i` of component `i` in phase `j` (`P * C` variables),
+
+so the state space `Chem.StateSpace C P = ℝ × ℝ × (Fin P → Fin C → ℝ)` has
+`variableCount C P = 2 + P * C` dimensions.
+
+The equilibrium conditions are
+
+* the normalisation `∑ i, x j i = 1` of the mole fractions in each of the `P` phases, and
+* the equality of the chemical potential of each of the `C` components between consecutive
+  phases, which gives `C * (P - 1)` equations,
+
+so the constraint space `Chem.ConstraintSpace C P = (Fin P → ℝ) × (Fin (P - 1) → Fin C → ℝ)`
+has `constraintCount C P = P + C * (P - 1)` dimensions.
+
+Linearising the equilibrium conditions, they are described by a linear map
+`L : StateSpace C P →ₗ[ℝ] ConstraintSpace C P`, and the (physical) assumption that the
+conditions are *independent* is exactly the surjectivity of `L`.  The set of states realising
+a prescribed value `c` of the constraints is then an affine subspace, namely a coset of
+`ker L`, and its dimension is the number of degrees of freedom.  The theorem
+`Chem.gibbs_phase_rule` computes that dimension to be `F = C - P + 2`.
+
+`Chem.gibbs_phase_rule_coords` is the same statement written in flat coordinates
+`Fin (variableCount C P) → ℝ` and `Fin (constraintCount C P) → ℝ`, and
+`Chem.exists_surjective_constraintMap` shows the hypotheses are satisfiable (whenever
+`1 ≤ P ≤ C + 2`), so the theorem is not vacuous.
+
+`Chem.gibbs_phase_rule_nonlinear` upgrades the count to genuinely nonlinear equilibrium
+conditions: near a regular equilibrium state, the implicit function theorem parametrises the
+equilibrium set by `C - P + 2` real parameters.  Consequences of the count are
+`Chem.phase_count_le` (`P ≤ C + 2`), `Chem.gibbs_invariant_point` (`P = C + 2` forces a unique
+state) and `Chem.gibbs_infinite_of_phases_lt` (`P < C + 2` gives a continuum of states), and
+`Chem.onePhaseRuleMap` and `Chem.triplePointMap` are explicit constraint maps realising the
+classical cases `F = 1` (coexistence curve) and `F = 0` (triple point).
+-/
 
 namespace Chem
 
-/-! ## An affine dimension count for linear systems -/
+open Module Filter Topology
 
-/-- For a surjective linear map `f`, the solution set of `f v = b` is nonempty and its
-direction (the vector span of the solution set) is exactly `ker f`. -/
+/-- Number of intensive variables: temperature, pressure and the `P * C` mole fractions. -/
 
-theorem finrank_constraintSpace (C P : ℕ) :
-    Module.finrank ℝ ((Fin P → ℝ) × (Fin (P - 1) → Fin C → ℝ)) = P + (P - 1) * C := by
-  rw [Module.finrank_prod, finrank_matrix_space, Module.finrank_fintype_fun_eq_card,
-    Fintype.card_fin]
+@[simp] lemma finrank_constraintSpace (C P : ℕ) :
+    finrank ℝ (ConstraintSpace C P) = constraintCount C P := by
+  rw [finrank_prod, Module.finrank_pi, Module.finrank_pi_fintype ℝ]
+  simp [constraintCount, mul_comm]
 
-/-! ## The Gibbs phase rule -/
+/-! ### Generic linear algebra -/
 
-/-- **Gibbs phase rule.**  Consider a system of `C` components distributed over `P ≥ 1`
-phases.  Its intensive state is described by temperature, pressure and the mole fractions
-`x j i` of component `i` in phase `j`.  The equilibrium conditions are:
+variable {V W : Type*} [AddCommGroup V] [Module ℝ V] [AddCommGroup W] [Module ℝ W]
 
-* normalization: `∑ i, x j i = 1` for each phase `j`;
-* equality of the chemical potentials of each component across the phases, encoded as a
-  linear map `equil : PhaseState C P →ₗ[ℝ] (Fin (P-1) → Fin C → ℝ)`, giving `(P-1) * C`
-  conditions.
-
-Under the nondegeneracy hypothesis that these constraints are independent (the combined
-constraint map is surjective), the set of equilibrium states is a nonempty affine subspace
-whose dimension — the number `F` of degrees of freedom — satisfies `F + P = C + 2`,
-i.e. `F = C - P + 2`. -/
+/-- The solution set of an inhomogeneous linear system with surjective matrix is a coset of
+the kernel; in particular it is a nonempty affine subspace. -/

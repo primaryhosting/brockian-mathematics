@@ -1,0 +1,77 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Counting Diverges Of Exists
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+open Filter Set Topology
+
+set_option maxHeartbeats 1000000
+
+namespace Brockian.Weyl.WeylLawTarget
+
+/-- The Weyl counting function of a set `S ⊆ ℝ` (thought of as a spectrum):
+`countingFn S t` is the number of points of `S` that are `≤ t`. -/
+noncomputable def countingFn (S : Set ℝ) (t : ℝ) : ℕ := (S ∩ Set.Iic t).ncard
+
+/-- A spectrum is *locally finite* if only finitely many of its points lie below
+any given threshold. -/
+def LocallyFiniteBelow (S : Set ℝ) : Prop := ∀ t : ℝ, (S ∩ Set.Iic t).Finite
+
+/-- If a locally finite spectrum `S` contains arbitrarily large finite families of points,
+then its Weyl counting function diverges to `+∞`. -/
+theorem counting_diverges_of_exists (S : Set ℝ) (hloc : LocallyFiniteBelow S)
+    (hexists : ∀ n : ℕ, ∃ F : Finset ℝ, ↑F ⊆ S ∧ n ≤ F.card) :
+    Filter.Tendsto (countingFn S) Filter.atTop Filter.atTop := by
+  refine Filter.tendsto_atTop.2 fun n => ?_
+  obtain ⟨F, hFS, hFcard⟩ := hexists n
+  -- Every point of `F` lies below some threshold `T`.
+  obtain ⟨T, hT⟩ : ∃ T : ℝ, ∀ x ∈ F, x ≤ T := by
+    rcases F.eq_empty_or_nonempty with rfl | hne
+    · exact ⟨0, by simp⟩
+    · exact ⟨F.max' hne, fun x hx => F.le_max' x hx⟩
+  filter_upwards [Filter.eventually_ge_atTop T] with t ht
+  have hsub : (F : Set ℝ) ⊆ S ∩ Set.Iic t := by
+    intro x hx
+    exact ⟨hFS hx, le_trans (hT x (by simpa using hx)) ht⟩
+  have hle := Set.ncard_le_ncard hsub (hloc t)
+  rw [Set.ncard_coe_finset] at hle
+  exact hFcard.trans hle
+
+end Brockian.Weyl.WeylLawTarget
+

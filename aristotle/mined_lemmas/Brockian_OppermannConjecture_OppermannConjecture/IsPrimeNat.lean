@@ -23,27 +23,8 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Oppermann Conjecture
-Category: Brockian Conjecture
-Target: Brockian.OppermannConjecture.OppermannConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
-namespace Brockian.OppermannConjecture
+def IsPrimeNat (p : Nat) : Prop := 2 ≤ p ∧ ∀ m : Nat, m ∣ p → m = 1 ∨ m = p
 
-/-- Primality of a natural number, stated from first principles (this file is self-contained
-and imports nothing beyond Lean's prelude, so that the header comment above can literally be
-the first thing in the file). -/
-
-def IsPrimeNat (p : Nat) : Prop := 2 ≤ p ∧ ∀ d, d ∣ p → d = 1 ∨ d = p
-
-instance : DecidablePred IsPrimeNat := fun p => by
-  unfold IsPrimeNat
-  exact decidable_of_iff (2 ≤ p ∧ ∀ d < p + 1, d ∣ p → d = 1 ∨ d = p)
-    ⟨fun ⟨h1, h2⟩ => ⟨h1, fun d hd => h2 d (Nat.lt_succ_of_le (Nat.le_of_dvd (by omega) hd)) hd⟩,
-     fun ⟨h1, h2⟩ => ⟨h1, fun d _ hd => h2 d hd⟩⟩
-
-/-- **Oppermann's conjecture** (statement form): for every `n ≥ 2` there is a prime strictly
-between `n * (n - 1)` and `n * n`, and a prime strictly between `n * n` and `n * (n + 1)`. -/
+/-- Trial division of `p` by the candidates `k, k+1, …`, stopping as soon as the candidate
+exceeds `√p`.  The last argument is a fuel bounding the number of candidates tried. -/

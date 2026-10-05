@@ -5,9 +5,9 @@ Target: Frontier.landau_levels
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean requires `import` to be the first command, so the header above is a plain block
+-- comment; the same text is repeated below as the module docstring.)
 
--- (Lean requires `import` to precede any module doc-comment, so the header above is
--- reproduced verbatim as a module doc-comment immediately after the import.)
 import Mathlib
 
 /-!
@@ -45,20 +45,27 @@ namespace Frontier
 
 open Polynomial
 
-/-! ## Hermite polynomials over `ℝ` -/
+/-! ### Hermite polynomials: the Hermite differential equation
 
-/-- The (probabilists') Hermite polynomials, with real coefficients. -/
+Mathlib provides `Polynomial.hermite : ℕ → ℤ[X]` (the *probabilists'* Hermite polynomials)
+together with `Polynomial.hermite_succ`, but not the Hermite ODE, which we derive here. -/
 
-lemma hasDerivAt_polyGauss (p : Polynomial ℝ) (t : ℝ) :
-    HasDerivAt (fun u : ℝ => eval u p * Real.exp (-(u ^ 2 / 4)))
-      (eval t (gDeriv p) * Real.exp (-(t ^ 2 / 4))) t := by
-  have h1 : HasDerivAt (fun u : ℝ => eval u p) (eval t (derivative p)) t := p.hasDerivAt t
-  have h2 : HasDerivAt (fun u : ℝ => -(u ^ 2 / 4)) (-(t / 2)) t := by
-    have := ((hasDerivAt_pow 2 t).div_const 4).neg
-    simpa using this
-  have h3 := h2.exp
-  have := h1.mul h3
-  convert this using 1
-  simp [gDeriv]
+/-- The Hermite differential equation `He_n'' = X * He_n' - n * He_n`. -/
+
+theorem hasDerivAt_polyGauss (q : ℝ[X]) (a b x0 t : ℝ) :
+    HasDerivAt (polyGauss q a b x0)
+      ((a * (derivative q).eval (a * (t - x0)) - 2 * b * (t - x0) * q.eval (a * (t - x0)))
+        * Real.exp (-(b * (t - x0) ^ 2))) t := by
+  have h1 : HasDerivAt (fun s : ℝ => a * (s - x0)) a t := by
+    simpa using ((hasDerivAt_id t).sub_const x0).const_mul a
+  have h2 : HasDerivAt (fun s : ℝ => q.eval (a * (s - x0)))
+      ((derivative q).eval (a * (t - x0)) * a) t := by
+    simpa [Function.comp_def] using HasDerivAt.comp t (q.hasDerivAt (a * (t - x0))) h1
+  have h3 : HasDerivAt (fun s : ℝ => -(b * (s - x0) ^ 2)) (-(b * (2 * (t - x0)))) t := by
+    have := (((hasDerivAt_id t).sub_const x0).pow 2).const_mul b
+    simpa using this.neg
+  have h5 := h2.mul h3.exp
+  unfold polyGauss
+  convert h5 using 1
   ring
 

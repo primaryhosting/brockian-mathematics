@@ -30,54 +30,62 @@ Target: QPhys.bcH_special
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
-
-/-!
-# Bc H Special
-Category: Quantum Physics
-Target: QPhys.bcH_special
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-namespace QPhys
 
 open NormedSpace
 
+namespace QPhys
+
 variable {𝔸 : Type*} [NormedRing 𝔸] [NormedAlgebra ℝ 𝔸] [CompleteSpace 𝔸]
 
-/-- Exponential of a sum of commuting elements of a real Banach algebra. -/
+/-- `exp` turns sums of commuting elements into products (specialization of
+`NormedSpace.exp_add_of_commute_of_mem_ball` to a real Banach algebra). -/
 
-theorem exp_smul_mul_eq {A B : 𝔸} (hA : Commute A (A * B - B * A)) (t : ℝ) :
-    exp (t • A) * B = (B + t • (A * B - B * A)) * exp (t • A) := by
-  set C := A * B - B * A with hC
+theorem exp_smul_mul_eq (X Y : 𝔸) (h : Commute Y (Y * X - X * Y)) (t : ℝ) :
+    exp (t • Y) * X = (X + t • (Y * X - X * Y)) * exp (t • Y) := by
+  set D := Y * X - X * Y with hD
+  have hcomm : ∀ s : ℝ, Commute (exp (s • Y)) D := fun s => (h.smul_left s).exp_left
+  have hexpY : ∀ s : ℝ, Commute Y (exp (s • Y)) := fun s =>
+    ((Commute.refl Y).smul_right s).exp_right
+  have hexpnY : ∀ s : ℝ, Commute Y (exp (s • (-Y))) := fun s =>
+    (((Commute.refl Y).neg_right).smul_right s).exp_right
+  have hinv : ∀ s : ℝ, exp (s • Y) * exp (s • (-Y)) = 1 := by
+    intro s
+    rw [← exp_add_comm (((Commute.refl Y).neg_right.smul_right s).smul_left s)]
+    simp
+  have hinv' : ∀ s : ℝ, exp (s • (-Y)) * exp (s • Y) = 1 := by
+    intro s
+    rw [← exp_add_comm (((Commute.refl Y).neg_left.smul_right s).smul_left s)]
+    simp
   have hderiv : ∀ s : ℝ,
-      HasDerivAt (fun s : ℝ => exp (s • (-A)) * ((B + s • C) * exp (s • A))) 0 s := by
-    intro t
-    have h1 : HasDerivAt (fun s : ℝ => exp (s • (-A))) (exp (t • (-A)) * (-A)) t :=
-      hasDerivAt_exp_smul_const (-A) t
-    have h2 : HasDerivAt (fun s : ℝ => B + s • C) C t := by
-      simpa using ((hasDerivAt_id t).smul_const C).const_add B
-    have h3 : HasDerivAt (fun s : ℝ => exp (s • A)) (exp (t • A) * A) t :=
-      hasDerivAt_exp_smul_const A t
-    have h := h1.mul (h2.mul h3)
-    convert h using 1
-    simp only [Pi.mul_apply]
-    set E := exp (t • A)
-    set F := exp (t • (-A))
-    have e1 : E * A = A * E := ((Commute.refl A).smul_left t).exp_left
-    have e2 : C * (E * A) = A * (C * E) := by rw [e1, ← mul_assoc, ← hA.eq, mul_assoc]
-    have key : F * (-A) * ((B + t • C) * E) + F * (C * E + (B + t • C) * (E * A))
-        = F * ((-(A * B) + B * A + C) * E) + t • (F * (C * (E * A)) - F * (A * (C * E))) := by
-      rw [e1]; noncomm_ring; module
-    rw [key, e2, hC]; simp
-  have hconst := is_const_of_deriv_eq_zero
-    (f := fun s : ℝ => exp (s • (-A)) * ((B + s • C) * exp (s • A)))
-    (fun s => (hderiv s).differentiableAt) (fun s => (hderiv s).deriv) t 0
-  simp only [zero_smul, exp_zero, one_mul, mul_one] at hconst
-  have h2 := congrArg (fun x => exp (t • A) * x) hconst
-  simp only [← mul_assoc, exp_smul_mul_exp_neg_smul A t, one_mul] at h2
-  simpa using h2.symm
+      HasDerivAt (fun u : ℝ => exp (u • Y) * X * exp (u • (-Y)) - u • D) 0 s := by
+    intro s
+    have h1 : HasDerivAt (fun u : ℝ => exp (u • Y)) (Y * exp (s • Y)) s :=
+      hasDerivAt_exp_smul_const' Y s
+    have h2 : HasDerivAt (fun u : ℝ => exp (u • (-Y))) (exp (s • (-Y)) * (-Y)) s :=
+      hasDerivAt_exp_smul_const (-Y) s
+    have h4 := ((h1.mul_const X).mul h2).sub ((hasDerivAt_id s).smul_const D)
+    convert h4 using 1
+    have e1 : Y * exp (s • Y) = exp (s • Y) * Y := (hexpY s).eq
+    have e2 : exp (s • (-Y)) * (-Y) = (-Y) * exp (s • (-Y)) := ((hexpnY s).neg_left).eq.symm
+    have e3 : exp (s • Y) * D = D * exp (s • Y) := (hcomm s).eq
+    have expand : Y * exp (s • Y) * X * exp (s • (-Y))
+        + exp (s • Y) * X * (exp (s • (-Y)) * (-Y)) - (1 : ℝ) • D
+        = exp (s • Y) * D * exp (s • (-Y)) - D := by
+      rw [e1, e2, hD, one_smul]; noncomm_ring
+    rw [expand, e3, mul_assoc, hinv s, mul_one, sub_self]
+  have key : ∀ s : ℝ, exp (s • Y) * X * exp (s • (-Y)) - s • D = X := by
+    intro s
+    have hc := is_const_of_deriv_eq_zero
+      (f := fun u : ℝ => exp (u • Y) * X * exp (u • (-Y)) - u • D)
+      (fun u => (hderiv u).differentiableAt) (fun u => (hderiv u).deriv) s 0
+    simpa using hc
+  have h6 : exp (t • Y) * X * exp (t • (-Y)) = X + t • D := sub_eq_iff_eq_add.mp (key t)
+  calc exp (t • Y) * X = exp (t • Y) * X * exp (t • (-Y)) * exp (t • Y) := by
+        rw [mul_assoc (exp (t • Y) * X), hinv' t, mul_one]
+    _ = (X + t • D) * exp (t • Y) := by rw [h6]
 
-/-- The auxiliary function `t ↦ exp (-(t²/2) C) exp (-t (A+B)) exp (tA) exp (tB)`
-has vanishing derivative when the commutator `C = AB - BA` is central. -/
+/-- **Baker–Campbell–Hausdorff, special case.** If the commutator `[A, B] = A * B - B * A`
+commutes with both `A` and `B` (in particular, if it is central), then
+`exp A * exp B = exp (A + B + ½ [A, B])`. -/

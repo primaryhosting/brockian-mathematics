@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Insertion Sort Correct
 Category: Computer Science
@@ -8,44 +6,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+universe u
 
 namespace CS
 
-/-- **Insertion sort is correct**: for a decidable, total, transitive relation `r`,
-`List.insertionSort r l` is sorted with respect to `r` and is a permutation of `l`.
+/-- `orderedInsert r a l` inserts `a` into `l` in front of the first element
+`b` of `l` with `r a b`. -/
 
-Both halves come directly from Mathlib (`Mathlib/Data/List/Sort.lean`):
-`List.pairwise_insertionSort` and `List.perm_insertionSort`. -/
-
-theorem insertion_sort_correct_nat (l : List ℕ) :
-    List.Pairwise (· ≤ ·) (List.insertionSort (· ≤ ·) l) ∧
-      (List.insertionSort (· ≤ ·) l).Perm l :=
-  insertion_sort_correct (· ≤ ·) l
+theorem insertion_sort_correct_nat (l : List Nat) :
+    Sorted (· ≤ ·) (insertionSort (· ≤ ·) l) ∧ (insertionSort (· ≤ ·) l).Perm l :=
+  insertion_sort_correct (· ≤ ·) (fun x y => Nat.le_total x y)
+    (fun _ _ _ h₁ h₂ => Nat.le_trans h₁ h₂) l
 
 end CS
-
-#print axioms CS.insertion_sort_correct
 

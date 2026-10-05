@@ -4,18 +4,36 @@ import Mathlib
 # Deutsch Jozsa
 Category: Frontier Qi
 Target: QI.deutsch_jozsa
-Statement: Deutsch–Jozsa decides constant-vs-balanced with one query.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+
+set_option maxHeartbeats 1000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
 namespace QI
 
-open Finset
+/-! ## Setup
 
-/-- The sign `(-1)^b` attached to a boolean. -/
+We model the Deutsch–Jozsa algorithm on `n` query bits.  A computational basis
+state is an element of `Fin n → Bool`, and a (pure) state of the query register
+is a function `(Fin n → Bool) → ℂ` of amplitudes. -/
 
-def IsBalanced {n : ℕ} (f : (Fin n → Bool) → Bool) : Prop :=
-  2 * (univ.filter fun x => f x = true).card = 2 ^ n
+variable {n : ℕ}
 
-/-- The all-zeros bit string, i.e. the outcome the algorithm looks for. -/
+/-- The sign `(-1)^b` attached to a Boolean value. -/
+
+def IsBalanced (f : (Fin n → Bool) → Bool) : Prop :=
+  2 * (Finset.univ.filter (fun x : Fin n → Bool => f x = true)).card = 2 ^ n
+
+/-! ## The standard XOR oracle and phase kickback -/
+
+/-- The standard oracle `U_f |x, b⟩ = |x, b ⊕ f x⟩`, acting on amplitudes. -/

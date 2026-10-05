@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Erdos Straus Conjecture
 Category: Brockian Conjecture
 Target: Brockian.ErdosStraus.ErdosStrausConjecture
@@ -33,43 +31,38 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-`ErdosStrausConjecture` is a well-known open problem, so this file does not prove it
-outright.  What is proved here, unconditionally and axiom-cleanly, is:
-
-* `solvable_of_dvd`: solvability passes from a divisor to any positive multiple;
-* explicit parametric solutions for `n` even, `3 ∣ n`, `n ≡ 3 (mod 4)`, `n ≡ 2 (mod 3)`
-  and `n ≡ 5 (mod 8)`;
-* `solvable_of_mod_24_ne_one`: the conjecture holds for every `n ≥ 2` with `n % 24 ≠ 1`;
-* `erdosStrausConjecture_iff_primes`: the conjecture is *equivalent* to its special case
-  for primes `p ≡ 1 (mod 24)`.
--/
+import Mathlib
 
 namespace Brockian.ErdosStraus
 
-/-- `Solvable n` says that `4 / n` can be written as a sum of three (not necessarily
-distinct) positive unit fractions. -/
+/-- `ErdosStrausSolvable n` says that `4 / n` is a sum of three unit fractions with
+positive natural denominators. -/
 
-theorem solvable_of_dvd {d n : ℕ} (hd : d ∣ n) (hn : 0 < n) (h : Solvable d) : Solvable n := by
-  obtain ⟨m, rfl⟩ := hd
-  obtain ⟨x, y, z, hx, hy, hz, hxyz⟩ := h
-  have hm : 0 < m := by
-    rcases Nat.eq_zero_or_pos m with rfl | hm
-    · simp at hn
-    · exact hm
-  have hd0 : 0 < d := by
-    rcases Nat.eq_zero_or_pos d with rfl | hd0
-    · simp at hn
-    · exact hd0
-  refine ⟨x * m, y * m, z * m, by positivity, by positivity, by positivity, ?_⟩
-  have hxQ : (x : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hx.ne'
-  have hyQ : (y : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hy.ne'
-  have hzQ : (z : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hz.ne'
-  have hmQ : (m : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hm.ne'
-  have key : (1 : ℚ) / (x * m) + 1 / (y * m) + 1 / (z * m)
-      = ((1 : ℚ) / x + 1 / y + 1 / z) / m := by
-    field_simp
+theorem solvable_of_dvd {d n : ℕ} (hn : 0 < n) (hdvd : d ∣ n)
+    (hs : ErdosStrausSolvable d) : ErdosStrausSolvable n := by
+  obtain ⟨c, rfl⟩ := hdvd
+  obtain ⟨x, y, z, hx, hy, hz, hxyz⟩ := hs
+  have hd : 0 < d := by
+    rcases Nat.eq_zero_or_pos d with h | h
+    · simp [h] at hn
+    · exact h
+  have hc : 0 < c := by
+    rcases Nat.eq_zero_or_pos c with h | h
+    · simp [h] at hn
+    · exact h
+  refine ⟨x * c, y * c, z * c, by positivity, by positivity, by positivity, ?_⟩
+  have hd' : (d : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hd.ne'
+  have hc' : (c : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hc.ne'
+  have hx' : (x : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hx.ne'
+  have hy' : (y : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hy.ne'
+  have hz' : (z : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hz.ne'
   push_cast
-  rw [key, ← hxyz, div_div]
+  have key : (1 : ℚ) / (x * c) + 1 / (y * c) + 1 / (z * c)
+      = (1 / c) * ((1 : ℚ) / x + 1 / y + 1 / z) := by
+    field_simp
+  rw [key, hxyz]
+  field_simp
 
-/-- `4 / 2 = 1/1 + 1/2 + 1/2`. -/
+/-! ### Solvable residue classes -/
+
+/-- `4 / n` is a sum of three unit fractions whenever `n` is even. -/

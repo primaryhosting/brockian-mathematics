@@ -8,32 +8,19 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
-
-set_option grind.warning false
 
 namespace Frontier
 
-open Filter
+open Filter Set
 
-section RamseyConstruction
+open Classical in
+/-- Choice of an element of a set of naturals (junk value `0` when empty). -/
 
-/-- Pick an element of a set of naturals (junk value `0` if the set is empty). -/
-
-noncomputable def ramseySets : ℕ → Set ℕ
+noncomputable def ramseySets (g : ℕ → ℕ → Bool) (c : Bool) (A : Set ℕ) : ℕ → Set ℕ
   | 0 => A
-  | n + 1 => ramseySets n ∩ {m | c (pick (ramseySets n)) m = k ∧ pick (ramseySets n) < m}
+  | k + 1 =>
+      {m ∈ ramseySets g c A k |
+        pickElem (ramseySets g c A k) < m ∧ g (pickElem (ramseySets g c A k)) m = c}
 
-/-- The monochromatic sequence. -/
+/-- The monochromatic sequence itself. -/

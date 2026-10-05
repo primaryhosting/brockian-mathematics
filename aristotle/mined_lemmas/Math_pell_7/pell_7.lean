@@ -8,6 +8,26 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-!
+# Pell 7
+Category: Pure Mathematics
+Target: Math.pell_7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Math
+
+/-- The Pell equation `x² - 7·y² = 1` has a nontrivial integer solution,
+i.e. one with `y ≠ 0`: taking `x = 8`, `y = 3` gives `64 - 63 = 1`. -/
+
+theorem pell_7 : ∃ x y : ℤ, x ^ 2 - 7 * y ^ 2 = 1 ∧ y ≠ 0 :=
+  ⟨8, 3, by norm_num, by norm_num⟩
+
+end Math
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,15 +51,3 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Math
-
-/-- The Pell equation `x² - 7·y² = 1` has a nontrivial integer solution,
-i.e. one with `y ≠ 0` (equivalently, `x ≠ ±1`).  Witness: `(x, y) = (8, 3)`,
-since `8² - 7·3² = 64 - 63 = 1`. -/
-
-theorem pell_7 : ∃ x y : ℤ, x ^ 2 - 7 * y ^ 2 = 1 ∧ y ≠ 0 :=
-  ⟨8, 3, by norm_num, by norm_num⟩
-
-/-- The same statement, obtained instead from Mathlib's general solvability theorem
-for Pell's equation, `Pell.exists_of_not_isSquare`, applied to `d = 7`
-(which is positive and not a perfect square). -/

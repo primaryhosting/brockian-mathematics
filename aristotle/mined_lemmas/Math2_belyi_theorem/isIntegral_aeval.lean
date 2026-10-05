@@ -1,77 +1,29 @@
-/-
-# Belyi Theorem
-Category: Frontier Math
-Target: Math2.belyi_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
+import RequestProject.BelyiPoly
 
 /-!
-# Belyi Theorem
-Category: Frontier Math
-Target: Math2.belyi_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Belyi polynomials for finite sets of rational points
+
+A polynomial `f ∈ ℚ[X]` is *Belyi* if it is non-constant and all of its finite critical values
+(computed over `ℂ`) lie in `{0, 1}`; viewed as a map `ℙ¹ → ℙ¹` such an `f` is ramified only
+above `{0, 1, ∞}`.
+
+The main result of this file is `Math2.exists_belyiPolynomial_of_rat`: for every finite set of
+rational numbers there is a Belyi polynomial taking each of them to `0` or `1`.
 -/
 
-/-!
-## What is formalized here
-
-Belyi's theorem is formalized in its genus-zero (polynomial) form, which is the arithmetic heart
-of the theorem: the "curve" is the projective line together with a finite set `S` of marked
-complex points, and a Belyi map is given by a polynomial `f ∈ ℚ[X]` — viewed as a map
-`ℙ¹ → ℙ¹` defined over `ℚ` for which `∞` is totally ramified over `∞`.
-
-`Math2.belyi_theorem` states that the marked points are defined over `ℚ̄` (i.e. all elements of
-`S` are algebraic over `ℚ`) if and only if there is a nonconstant such `f` which maps `S` into
-`{0, 1}` and all of whose critical values lie in `{0, 1}`, i.e. which is unramified outside
-`{0, 1, ∞}`.
-
-The easy direction is elementary. The hard direction is Belyi's algorithm, carried out here in
-two stages:
-
-* `Math2.stageA`: composing with minimal polynomials, one finds a nonconstant `f ∈ ℚ[X]` for
-  which the images of the marked points and all critical values are rational. Termination is
-  measured by `Math2.muA`, a sum of factorials of the degrees of the algebraic numbers involved.
-* `Math2.stageB`: a finite set of rationals is collapsed into `{0, 1}` by repeatedly composing
-  with the polynomials `c · x^m (1-x)^n` (after an affine change of coordinates), each step
-  strictly decreasing the number of relevant rational values.
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+set_option maxRecDepth 8000
 
 namespace Math2
 
-open Polynomial IntermediateField
+open Polynomial
 
-noncomputable section
+/-- `f` is a Belyi polynomial: non-constant, with all finite critical values in `{0, 1}`. -/
 
-/-! ## Critical points and critical values -/
+lemma isIntegral_aeval {s : ℂ} (hs : IsIntegral ℚ s) (Q : ℚ[X]) : IsIntegral ℚ (aeval s Q) := by
+  have hfin : FiniteDimensional ℚ ℚ⟮s⟯ := adjoin.finiteDimensional hs
+  have hmem : aeval s Q ∈ ℚ⟮s⟯ :=
+    IntermediateField.algebra_adjoin_le_adjoin ℚ {s} (Polynomial.aeval_mem_adjoin_singleton ℚ s)
+  have h : IsIntegral ℚ (⟨aeval s Q, hmem⟩ : ℚ⟮s⟯) := IsIntegral.of_finite ℚ _
+  exact h.map (IntermediateField.val ℚ⟮s⟯)
 
-/-- The critical points in `ℂ` of a polynomial with rational coefficients. -/
-
-lemma isIntegral_aeval {z : ℂ} (hz : IsAlgebraic ℚ z) (p : ℚ[X]) :
-    IsIntegral ℚ (aeval z p) := by
-  haveI : FiniteDimensional ℚ ℚ⟮z⟯ := adjoin.finiteDimensional hz.isIntegral
-  have hmem : (aeval z p) ∈ ℚ⟮z⟯ :=
-    (IntermediateField.algebra_adjoin_le_adjoin ℚ {z})
-      (Polynomial.aeval_mem_adjoin_singleton ℚ (p := p) z)
-  have h1 : IsIntegral ℚ (⟨aeval z p, hmem⟩ : ℚ⟮z⟯) := Algebra.IsIntegral.isIntegral _
-  exact h1.map (ℚ⟮z⟯.val)
-
+/-- A polynomial expression in an algebraic number has degree at most that of the number. -/

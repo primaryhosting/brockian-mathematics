@@ -8,74 +8,41 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-## Overview
-
-Chen's theorem (1973) states that every sufficiently large even number can be written as
-`p + q` where `p` is prime and `q` has at most two prime factors (counted with multiplicity),
-i.e. `q` is prime or a product of two primes.
-
-Mathlib does not contain Chen's theorem (nor Goldbach's conjecture, nor any sieve machinery
-strong enough to derive it), so the unconditional statement is out of reach here. What this
-file contains is:
-
-* a faithful formalization of the statement (`Frontier.ChenStatement`);
-* an explicit, kernel-checked **base case**: every even `n` with `4 ≤ n ≤ 200` has a Chen
-  representation (`Frontier.Chen_base`);
-* a **Lean-checked reduction**: the binary Goldbach conjecture implies Chen's statement
-  (`Frontier.Chen_theorem`), with the explicit threshold `N = 4`.
--/
-
 namespace Frontier
 
-/-- `AlmostPrime2 q` means that `q` has at most two prime factors, counted with
-multiplicity (i.e. `Ω q ≤ 2`): `q` is `1`, a prime, or a product of two primes. -/
+/-- `AtMostTwoPrimeFactors q` says that `q` is a product of at most two primes,
+i.e. `q = 1`, or `q` is prime, or `q` is a product of two (not necessarily distinct)
+primes.  Equivalently (see `atMostTwoPrimeFactors_iff_bigOmega_le_two`), the number of
+prime factors of `q`, counted with multiplicity, is at most `2`.  These are the
+"almost primes" `P₂` appearing in Chen's theorem. -/
 
-def AlmostPrime2 (q : ℕ) : Prop := q.primeFactorsList.length ≤ 2
+def AtMostTwoPrimeFactors (q : ℕ) : Prop :=
+  q = 1 ∨ q.Prime ∨ ∃ a b : ℕ, a.Prime ∧ b.Prime ∧ q = a * b
 
-/-- A prime has exactly one prime factor, hence at most two. -/
+/-- `ChenRepresentation n` says that `n` can be written as `p + q` with `p` prime and `q`
+having at most two prime factors. -/
 
-theorem AlmostPrime2.of_prime {q : ℕ} (hq : Nat.Prime q) : AlmostPrime2 q := by
-  simp [AlmostPrime2, Nat.primeFactorsList_prime hq]
+def ChenRepresentation (n : ℕ) : Prop :=
+  ∃ p q : ℕ, p.Prime ∧ AtMostTwoPrimeFactors q ∧ n = p + q
 
-/-- A product of two primes has exactly two prime factors. -/
+/-- The statement of Chen's theorem: every sufficiently large even number is the sum of a
+prime and a number with at most two prime factors. -/
 
-theorem AlmostPrime2.of_prime_mul {a b : ℕ} (ha : Nat.Prime a) (hb : Nat.Prime b) :
-    AlmostPrime2 (a * b) := by
-  have h : (a * b).primeFactorsList.length = 2 := by
-    have := Nat.perm_primeFactorsList_mul ha.ne_zero hb.ne_zero
-    have hlen := this.length_eq
-    simp [hlen, Nat.primeFactorsList_prime ha, Nat.primeFactorsList_prime hb]
-  simp [AlmostPrime2, h]
-
-/-- `ChenRepr n` : `n` is the sum of a prime and a number with at most two prime factors. -/
-
-def ChenRepr (n : ℕ) : Prop := ∃ p q : ℕ, Nat.Prime p ∧ AlmostPrime2 q ∧ n = p + q
-
-/-- Chen's theorem, as a proposition: every sufficiently large even number has a
-representation `p + q` with `p` prime and `q` having at most two prime factors. -/
-
-def ChenStatement : Prop := ∃ N : ℕ, ∀ n : ℕ, N ≤ n → Even n → ChenRepr n
+def ChenStatement : Prop :=
+  ∃ N : ℕ, ∀ n : ℕ, N ≤ n → Even n → ChenRepresentation n
 
 /-- The binary Goldbach conjecture: every even number `≥ 4` is a sum of two primes. -/
 
-def GoldbachEven : Prop :=
-  ∀ n : ℕ, 4 ≤ n → Even n → ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ n = p + q
+def GoldbachConjecture : Prop :=
+  ∀ n : ℕ, 4 ≤ n → Even n → ∃ p q : ℕ, p.Prime ∧ q.Prime ∧ n = p + q
 
-/-- A Goldbach representation is in particular a Chen representation. -/
+/-! ### `AtMostTwoPrimeFactors` is the usual condition `Ω(q) ≤ 2` -/
 
-theorem ChenRepr.of_two_primes {n p q : ℕ} (hp : Nat.Prime p) (hq : Nat.Prime q)
-    (h : n = p + q) : ChenRepr n :=
-  ⟨p, q, hp, AlmostPrime2.of_prime hq, h⟩
-
-set_option maxRecDepth 10000 in
-set_option maxHeartbeats 1000000 in
-/-- Kernel-checked Goldbach verification for all even `n` with `4 ≤ n ≤ 200`. -/
-
-theorem Chen_theorem (hG : GoldbachEven) : ChenStatement := by
+theorem Chen_theorem : GoldbachConjecture → ChenStatement := by
+  intro hG
   refine ⟨4, fun n hn he => ?_⟩
   obtain ⟨p, q, hp, hq, hpq⟩ := hG n hn he
-  exact ChenRepr.of_two_primes hp hq hpq
+  exact ⟨p, q, hp, Or.inr (Or.inl hq), hpq⟩
 
 end Frontier
 

@@ -1,14 +1,11 @@
-/-
+import Mathlib
+/-!
 # Cycle Fiedler Value
-Category: Frontier Spectral
+Category: Frontier — Spectral Geometry
 Target: Frontier.Spectral.cycle_fiedler_value
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the mandated
--- header above is written as a plain block comment; its text is verbatim.)
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -28,15 +25,14 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Finset Complex ZMod Matrix
+open Finset ZMod
 
-/-! ## The Laplacian of the cycle graph -/
+/-- The Laplacian matrix of the cycle graph `C n` on the vertex set `ZMod n`:
+diagonal entries `2` (each vertex has degree `2`), and `-1` in position `(i, j)`
+whenever `j = i + 1` or `j = i - 1`. -/
 
-/-- The Laplacian matrix of the cycle graph `C n`, with vertex set `ZMod n`:
-`2` on the diagonal, `-1` between neighbours `i` and `i ± 1`, `0` elsewhere. -/
+lemma sum_shift {M : Type*} [AddCommMonoid M] (f : ZMod n → M) (a : ZMod n) :
+    ∑ i : ZMod n, f (i + a) = ∑ i : ZMod n, f i :=
+  Equiv.sum_comp (Equiv.addRight a) f
 
-lemma sum_shift {n : ℕ} [NeZero n] {M : Type*} [AddCommMonoid M] (f : ZMod n → M) :
-    ∑ j : ZMod n, f (j + 1) = ∑ j : ZMod n, f j :=
-  Fintype.sum_equiv (Equiv.addRight (1 : ZMod n)) _ _ (fun _ => rfl)
-
-/-- Unnormalised discrete Fourier transform on `ZMod n`. -/
+/-- The Laplacian quadratic form of the cycle is the sum of squared edge differences. -/

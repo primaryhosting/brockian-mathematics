@@ -1,53 +1,51 @@
-/-
-# Aks Primes In P
-Category: Frontier Cs
-Target: CS.aks_primes_in_p
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 import Mathlib
-import RequestProject.AKS.Algorithm
-import RequestProject.AKS.Cost
 
-/-!
-# Aks Primes In P
-Category: Frontier Cs
-Target: CS.aks_primes_in_p
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
 set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-namespace CS
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-/-- **PRIMES is in P** (Agrawal–Kayal–Saxena).
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-`AKS.aksBool : ℕ → Bool` is an explicit, fully computable implementation of the AKS primality
-test.  On input `n` it checks that `n ≥ 2`, that `n` is not a perfect power, that no `a ≤ r`
-shares a nontrivial factor with `n`, and — unless `n ≤ r` — that the congruences
-`(X + a)^n = X^n + a` hold in `(ZMod n)[X]/(X^r - 1)` for all `1 ≤ a ≤ ℓ`, where `r = AKS.rAlg n`
-is the least modulus for which the multiplicative order of `n` exceeds `(bit length)^4` and
-`ℓ = AKS.ellAlg n`.  The congruences are evaluated by repeated squaring in a computable
-coefficient-vector model of the quotient ring.
+set_option grind.warning false
 
-`AKS.aksI : ℕ → Bool × ℕ` is the same algorithm instrumented with a counter: it is a structural
-copy of every function involved, threading a count of the primitive operations performed
-(see `RequestProject/AKS/Cost.lean` for the cost assigned to each leaf primitive: `r * r`
-coefficient multiplications for one cyclic convolution, `bits n` for one `Nat.gcd`, and so on).
-Costs are therefore measured in arithmetic operations on numbers of `O(log n)` bits, not in
-bit operations.
+import RequestProject.AKS.Defs
 
-The statement below records:
+/-!
+# Introspective exponents
 
-* **the instrumented algorithm computes the same answer** as the plain one;
-* **correctness**: `AKS.aksBool` decides primality exactly;
-* **polynomial running time**: on every input `n ≥ 2` the algorithm performs at most
-  `(bit length of n) ^ 45` primitive operations;
-* **polynomial size of the parameters**: `r ≤ 2 · (bit length)^12` and `ℓ ≤ 4 · (bit length)^7 + 2`.
+Fix a prime `p` and let `F = AlgebraicClosure (ZMod p)`.  A natural number `m` is
+*introspective* for a polynomial `f ∈ 𝔽ₚ[X]` (relative to `r`) if `f(z)^m = f(z^m)` for every
+`r`-th root of unity `z ∈ F`.  This is the key notion in the AKS correctness proof.
 -/
 
-theorem intro_one (f : (ZMod p)[X]) : Intro p r 1 f := by
-  simp [Intro]
+open Polynomial
 
-/-- `X^r - 1` divides `X^(m*r) - 1`. -/
+namespace CS
+namespace AKS
+
+/-- The algebraic closure of `𝔽ₚ`, the field in which the AKS argument takes place. -/
+abbrev AC (p : ℕ) [Fact p.Prime] := AlgebraicClosure (ZMod p)
+
+variable {p : ℕ} [Fact p.Prime]
+
+/-- `m` is introspective for `f`: `f(z)^m = f(z^m)` for all `r`-th roots of unity `z`. -/
+
+lemma intro_one (r : ℕ) (f : (ZMod p)[X]) : Intro p r 1 f := by
+  intro z _
+  simp
+

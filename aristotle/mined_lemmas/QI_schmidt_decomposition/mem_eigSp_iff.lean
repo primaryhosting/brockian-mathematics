@@ -5,9 +5,8 @@ Target: QI.schmidt_decomposition
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
--- (The banner above is repeated as a module docstring below; Lean does not allow a
--- `/-! ... -/` module docstring to precede the `import` line.)
+-- (Lean requires `import` to precede any module docstring, so the header above is a plain
+-- comment and is repeated as the module docstring below.)
 
 import Mathlib
 
@@ -19,18 +18,35 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Finset ComplexConjugate
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace QI
 
-variable {A B : Type*} [Fintype A] [Fintype B] [DecidableEq B]
+open scoped ComplexConjugate
 
-/-- A family of vectors `u k : A → ℂ` (`k : ι`) is orthonormal for the standard
-Hermitian inner product on `ℂ^A`. -/
+variable {m n : ℕ}
 
-theorem mem_eigSp_iff {R : Matrix A A ℂ} {t : ℂ} {x : A → ℂ} :
-    x ∈ eigSp R t ↔ ∀ i, ∑ i', R i i' * x i' = t * x i := by
-  simp [eigSp, funext_iff, Matrix.mulVec, dotProduct]
+/-- The amplitude matrix of a bipartite pure state, i.e. its coordinates in the product basis. -/
 
-omit [DecidableEq B] in
-/-- Contraction of two expansions in an orthonormal family. -/
+lemma mem_eigsp_iff (ψ : EuclideanSpace ℂ (Fin m × Fin n)) (s : ℝ) (v : Fin m → ℂ) :
+    v ∈ eigsp ψ s ↔ ∀ p, ∑ p', rho ψ p p' * v p' = (s : ℂ) ^ 2 * v p := by
+  simp only [eigsp, LinearMap.mem_ker, LinearMap.sub_apply, LinearMap.smul_apply,
+    Matrix.mulVecLin_apply, LinearMap.id_apply, sub_eq_zero, funext_iff, Matrix.mulVec,
+    dotProduct, Pi.smul_apply, smul_eq_mul]
+
+/-! ### Uniqueness -/
+

@@ -1,4 +1,4 @@
-/-
+/-!
 # Church Rosser Beta Diamond
 Category: Computer Science
 Target: CS.church_rosser_beta_diamond
@@ -6,24 +6,17 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-set_option maxHeartbeats 1000000
-set_option autoImplicit false
-
 namespace CS
 
 /-- Untyped λ-terms in de Bruijn representation. -/
-inductive Lam where
-  | var : ℕ → Lam
-  | app : Lam → Lam → Lam
-  | lam : Lam → Lam
+inductive Term : Type
+  | var : Nat → Term
+  | app : Term → Term → Term
+  | lam : Term → Term
   deriving DecidableEq
 
-namespace Lam
+namespace Term
 
-/-- Lifting a renaming under a binder. -/
+/-- Lift a renaming under a binder. -/
 
-theorem cd_app_lam (t s : Lam) :
-    cd (.app (.lam t) s) = subst (beta (cd s)) (cd t) := rfl
-
+@[simp] theorem cd_app_lam (a b : Term) : cd (app (lam a) b) = subst1 (cd a) (cd b) := rfl

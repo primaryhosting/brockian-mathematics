@@ -30,12 +30,7 @@ Target: Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fou
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
-
--- Note: Lean requires `import` commands to come before any module docstring `/-! ... -/`, so the
--- required header appears verbatim at the very top of the file as a block comment and is repeated
--- here, after the import, as the module docstring.
 
 /-!
 # Free Laplacian Essentially Self Adjoint Of Fourier
@@ -45,39 +40,16 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace Brockian.Weyl.FreeLaplacian2
 
-/-!
-The free Laplacian `-Δ`, defined on the Schwartz space `𝓢(ℝ^d, ℂ)` regarded as a dense
-subspace of `L²(ℝ^d, ℂ)`, is essentially self-adjoint.
-
-The proof follows the classical "basic criterion" of von Neumann/Weyl:
-
-* an abstract criterion (`essentiallySelfAdjoint_of_dense_shift_ranges`): a densely defined
-  symmetric operator whose deficiency ranges `Ran (T ± i)` are dense is essentially
-  self-adjoint;
-* the Fourier transform turns `-Δ` on Schwartz space into multiplication by
-  `ξ ↦ 4π²‖ξ‖²` (`fourier_negLaplacianS`), and dividing a smooth compactly supported
-  function by `4π²‖ξ‖² ± i` (which never vanishes) produces again a smooth compactly
-  supported function.  Since smooth compactly supported functions are dense in `L²` and
-  the Fourier transform is unitary on `L²` (Plancherel), the deficiency ranges are dense.
--/
-
-open MeasureTheory SchwartzMap Filter LinearPMap
-open scoped FourierTransform ComplexInnerProductSpace LinearPMap Laplacian LineDeriv Topology
-  ContDiff
+open MeasureTheory SchwartzMap Real LineDeriv
+open scoped FourierTransform InnerProductSpace Laplacian
 
 noncomputable section
 
-namespace Brockian.Weyl.FreeLaplacian2
+/-- A densely defined operator `A` on a Hilbert space is *essentially self-adjoint* if its
+adjoint is self-adjoint (equivalently, if the closure `A** = A*` of `A` is self-adjoint). -/
 
-/-! ## An abstract criterion for essential self-adjointness -/
-
-section Abstract
-
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] [CompleteSpace E]
-
-/-- The operator `T + c` on the domain of the partially defined operator `T`. -/
-
-theorem mem_domain_freeLaplacian (f : 𝓢(Euc d, ℂ)) : toL2 d f ∈ (freeLaplacian d).domain :=
+lemma mem_domain_freeLaplacian (f : 𝓢(V, ℂ)) : toL2 V f ∈ (freeLaplacian V).domain :=
   ⟨f, rfl⟩
 

@@ -1,3 +1,12 @@
+/-
+# Barrington
+Category: Frontier Cs
+Target: CS.barrington
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean does not permit a module docstring `/-! ... -/` before `import`; the header above is
+-- reproduced verbatim as the module docstring immediately after the import.)
 import Mathlib
 
 /-!
@@ -8,43 +17,33 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Barrington's theorem: the Boolean functions computed by fan-in-two Boolean circuits of
-depth `d` are exactly the ones computed by width-5 permutation branching programs of
-length `4 ^ d` (up to a constant factor in the exponent / a logarithm in the length).
-
-We formalise the two quantitative directions:
-
-* `CS.exists_bprog`  : a circuit of depth `d` is simulated by a width-5 permutation
-  branching program of length at most `4 ^ d`  (the hard direction of Barrington's theorem);
-* `CS.exists_circuit`: a width-5 permutation branching program of length `L` is simulated
-  by a circuit of depth at most `4 * ⌈log₂ L⌉ + 6` (the easy direction).
-
-Together (`CS.barrington`) these say `NC¹ = width-5 permutation branching programs`:
-logarithmic depth corresponds to polynomial length.
--/
+set_option maxHeartbeats 1000000
 
 namespace CS
 
 open Equiv
 
-/-! ## Boolean circuits -/
+/-! ## Boolean formulas (the `NC¹` side)
 
-/-- Boolean circuits with fan-in two `∧`/`∨` gates and `¬` gates, over the variables
-`x 0, x 1, …`. -/
-inductive Circuit where
-  | const : Bool → Circuit
-  | var : ℕ → Circuit
-  | not : Circuit → Circuit
-  | and : Circuit → Circuit → Circuit
-  | or : Circuit → Circuit → Circuit
-  deriving Inhabited
+A `Formula n` is a fan-in-two Boolean formula over the variables `x 0, …, x (n-1)`.
+Logarithmic-depth formulas are exactly (non-uniform) `NC¹`. -/
 
-/-- The Boolean function computed by a circuit. -/
+/-- Fan-in-two Boolean formulas over `n` variables. -/
+inductive Formula (n : ℕ) : Type
+  | const : Bool → Formula n
+  | var : Fin n → Formula n
+  | not : Formula n → Formula n
+  | and : Formula n → Formula n → Formula n
+  | or : Formula n → Formula n → Formula n
 
-def Computes (P : BProg) (γ : Perm (Fin 5)) (f : (ℕ → Bool) → Bool) : Prop :=
-  ∀ x, P.eval x = if f x then γ else 1
+namespace Formula
 
-/-! ## Five-cycles in `S₅` -/
+variable {n : ℕ}
 
-/-- A fixed five-cycle. -/
+/-- The Boolean function computed by a formula. -/
+
+lemma Computes.congr {n : ℕ} {P : BP n} {σ : Perm5} {f g : (Fin n → Bool) → Bool}
+    (h : Computes P σ f) (hfg : ∀ x, f x = g x) : Computes P σ g := by
+  intro x; rw [h x, hfg x]
+
+/-- `σ` is a 5-cycle in `S₅`. -/

@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Ray Sum Eq Char Sum
 Category: Characters
 Target: Brockian.Characters5.raySum_eq_charSum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -24,20 +24,23 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-namespace Brockian.Characters5
+namespace Brockian
+namespace Characters5
 
 /-- A primitive fifth root of unity. -/
 noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 
-/-- The additive character `e` of `ZMod 5` with values in `ℂ`, `e x = ω ^ x.val`. -/
+/-- The standard additive character of `ZMod 5` valued in `ℂ`. -/
 
 theorem raySum_eq_charSum (S : Finset ℕ) (r : ZMod 5) :
-    ((raySum S r : ℕ) : ℂ)
-      = (1 / 5 : ℂ) * ∑ a : ZMod 5, ∑ n ∈ S, e (a * ((n : ZMod 5) - r)) := by
-  have hcard : ((raySum S r : ℕ) : ℂ) = ∑ n ∈ S, if (n : ZMod 5) = r then (1 : ℂ) else 0 := by
-    rw [raySum, ← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul, mul_one]
-  rw [hcard, Finset.sum_comm, Finset.mul_sum]
-  exact Finset.sum_congr rfl fun n _ => rayIndicator_eq_charSum n r
+    ((raySum S r : ℕ) : ℂ) = (1 / 5 : ℂ) * ∑ a : ZMod 5, ∑ n ∈ S, e (a * ((n : ZMod 5) - r)) := by
+  have hcard : raySum S r = ∑ n ∈ S, if (n : ZMod 5) = r then 1 else 0 :=
+    Finset.card_filter (fun n : ℕ => (n : ZMod 5) = r) S
+  rw [hcard, Nat.cast_sum, Finset.sum_comm, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun n _ => ?_
+  rw [← rayIndicator_eq_charSum n r]
+  split <;> simp
 
-end Brockian.Characters5
+end Characters5
+end Brockian
 

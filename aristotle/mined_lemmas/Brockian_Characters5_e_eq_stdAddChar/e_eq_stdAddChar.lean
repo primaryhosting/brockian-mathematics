@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# E Eq Std Add Char
-Category: Characters
-Target: Brockian.Characters5.e_eq_stdAddChar
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,17 +23,30 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# E Eq Std Add Char
+Category: Characters
+Target: Brockian.Characters5.e_eq_stdAddChar
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Classical
+
 namespace Brockian.Characters5
 
-/-- The primitive fifth root of unity `ω = exp(2πi/5)`. -/
+/-- The primitive fifth root of unity used for the five-ray wheel. -/
 
 theorem e_eq_stdAddChar (k : ZMod 5) : e k = ZMod.stdAddChar (N := 5) k := by
-  rw [ZMod.stdAddChar_apply, ZMod.toCircle_apply, e, omega, ← Complex.exp_nat_mul]
+  rw [ZMod.stdAddChar_apply, ZMod.toCircle_apply]
+  simp only [e, omega, ← Complex.exp_nat_mul]
   congr 1
   push_cast
   ring
 
 end Brockian.Characters5
-
-#print axioms Brockian.Characters5.e_eq_stdAddChar
 

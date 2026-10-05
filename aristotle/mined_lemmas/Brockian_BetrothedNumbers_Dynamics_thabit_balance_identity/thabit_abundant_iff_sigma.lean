@@ -1,24 +1,39 @@
 import Mathlib
-import RequestProject.ThabitBalanceIdentity
+import RequestProject.ThabitBalance
 
 /-!
-# Thabit Balance Identity — Mathlib interface
+# Bridge to Mathlib's `σ₁`
 
-This file connects the self-contained divisor-sum `sigmaOne` used in
-`RequestProject.ThabitBalanceIdentity` with Mathlib's `ArithmeticFunction.sigma 1`, and restates
-the Thabit balance identity and the deficient/perfect/abundant comparisons in Mathlib terms.
+The target file `ThabitBalance.lean` is import-free (its header comment must be the very first
+thing in the file, which precludes an `import` command), so it uses its own elementary
+sum-of-divisors function `sigmaOne`.  Here we prove that `sigmaOne` agrees with Mathlib's
+`ArithmeticFunction.sigma 1`, and restate the balance identity together with the
+deficient/perfect/abundant comparisons in Mathlib's language.
+-/
+
+open scoped ArithmeticFunction.sigma
+
+namespace Brockian.BetrothedNumbers.Dynamics
+
+
+theorem thabit_abundant_iff_sigma {k p m : Nat}
+    (hshape : m + (p + 2) = 2 ^ k * (p + 2))
+    (hsigma : σ 1 m + (p + 1) = 2 ^ (k + 1) * (p + 1)) :
+    2 * m < σ 1 m ↔ 2 ^ (k + 1) < p + 3 := by
+  have h := thabit_balance_identity_sigma hshape hsigma
+  omega
+
+end Brockian.BetrothedNumbers.Dynamics
+
+/-!
+# Thabit Balance Identity
+Category: Frontier — Betrothed Numbers
+Target: Brockian.BetrothedNumbers.Dynamics.thabit_balance_identity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 namespace Brockian.BetrothedNumbers.Dynamics
 
-open ArithmeticFunction
-
-/-- `sigmaOne` is Mathlib's sum-of-divisors function `σ₁`. -/
-
-theorem thabit_abundant_iff_sigma {k p m : ℕ} (hm : m = (2 ^ k - 1) * (p + 2))
-    (hs : sigma 1 m = m + 2 ^ k * p + 1) :
-    2 * m < sigma 1 m ↔ 2 ^ (k + 1) < p + 3 := by
-  have hid := thabit_balance_identity_sigma hm hs
-  omega
-
-/-- The betrothed pair `(48, 75)`: `σ(75) = 75 + 48 + 1`, of Thabit type with `k = 4`, `p = 3`. -/
+/-- Auxiliary accumulator: `sigmaAux m n` is the sum of the divisors of `m` that are `≤ n`
+(only positive divisors contribute). -/

@@ -1,0 +1,44 @@
+import Mathlib
+
+/-!
+# Rank Trace Ineq
+Category: Zeta-23 §3 Linear Algebra (re-derivation)
+Target: Zeta23Redux.LinAlg.rank_trace_ineq
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Zeta23Redux.LinAlg
+
+open Matrix
+open scoped ComplexOrder
+
+variable {d : ℕ}
+
+/-! ## Basic real-valued trace functionals -/
+
+/-- The real part of the trace. -/
+
+lemma psd_diag_norm {W : Matrix (Fin d) (Fin d) ℂ} (hW : W.PosSemidef) (i : Fin d) :
+    ‖W i i‖ = (W i i).re := by
+  have him : (W i i).im = 0 := ((Complex.le_def.mp hW.diag_nonneg).2).symm
+  have hre : 0 ≤ (W i i).re := psd_diag_re_nonneg hW i
+  rw [← Complex.abs_re_eq_norm.mpr him, abs_of_nonneg hre]
+
+/-! ## The scalar inequality -/
+
+/-- The elementary scalar estimate underlying the rank-trace inequality. -/

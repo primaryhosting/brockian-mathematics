@@ -6,19 +6,33 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace PCA.WriteIntegrity
+set_option autoImplicit false
 
-/-- A write request submitted to the isolation engine: a claimed author, a
-payload, and an integrity token that is supposed to certify the pair. -/
+namespace PCA
+namespace WriteIntegrity
+
+/-- A write request issued by an actor against a storage target, carrying a
+capability token that is supposed to justify the write. -/
 structure Write where
-  author : Nat
-  payload : Nat
+  /-- The principal issuing the write. -/
+  actor : Nat
+  /-- The storage object being written. -/
+  target : Nat
+  /-- The capability token presented with the write. -/
   token : Nat
-  deriving DecidableEq
+deriving DecidableEq, Repr
 
-/-- The integrity token that a genuine author would attach to a write. -/
+/-- A write-integrity policy: each target has an owner, and each actor has a
+set of valid capability tokens. -/
+structure Policy where
+  /-- Owner of each target. -/
+  owner : Nat → Nat
+  /-- Which tokens are valid for a given actor. -/
+  validToken : Nat → Nat → Bool
 
-def Accepts (check : Write → Bool) (w : Write) : Prop := check w = true
+/-- A write is authorized when it is issued by the owner of the target and
+carries a token valid for that actor. -/
 
-/-- A *forgery* for a policy is an inauthentic write that the policy
-nonetheless admits. -/
+def Accepts (chk : Check) (w : Write) : Prop := chk w = true
+
+/-- Write-integrity soundness: every accepted write is authorized by the policy. -/

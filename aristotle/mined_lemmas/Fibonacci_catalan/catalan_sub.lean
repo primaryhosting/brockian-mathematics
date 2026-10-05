@@ -16,6 +16,23 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace Fibonacci
+
+/-- Cassini's identity: `F(m+1)^2 - F(m) * F(m+2) = (-1)^m`, over `ℤ`. -/
+
+theorem catalan_sub (n r : ℕ) (h : r ≤ n) :
+    (Nat.fib n : ℤ) ^ 2 - (Nat.fib (n - r) : ℤ) * (Nat.fib (n + r) : ℤ)
+      = (-1) ^ (n - r) * (Nat.fib r : ℤ) ^ 2 := by
+  obtain ⟨m, rfl⟩ : ∃ m, n = m + r := ⟨n - r, by omega⟩
+  have hm : m + r - r = m := by omega
+  have hn : m + r + r = m + 2 * r := by ring
+  rw [hm, hn]
+  exact catalan m r
+
+end Fibonacci
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -38,25 +55,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Fibonacci
-
-/-- **Catalan's identity** (addition form, avoiding natural subtraction):
-for all `m r : ℕ`,
-`fib (m + r) ^ 2 - fib m * fib (m + 2 * r) = (-1) ^ m * fib r ^ 2` in `ℤ`.
-
-This is obtained from the integer-indexed Catalan identity in Mathlib,
-`Int.fib_add_sq_sub_fib_mul_fib_add_two_mul`. -/
-
-theorem catalan_sub {n r : ℕ} (h : r ≤ n) :
-    (Nat.fib n : ℤ) ^ 2 - (Nat.fib (n - r) : ℤ) * (Nat.fib (n + r) : ℤ)
-      = (-1) ^ (n - r) * (Nat.fib r : ℤ) ^ 2 := by
-  obtain ⟨m, rfl⟩ : ∃ m : ℕ, n = m + r := ⟨n - r, by omega⟩
-  have hm : m + r - r = m := by omega
-  rw [hm]
-  have h2 : m + r + r = m + 2 * r := by ring
-  rw [h2]
-  exact catalan m r
-
-end Fibonacci
 

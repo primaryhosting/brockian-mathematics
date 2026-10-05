@@ -1,3 +1,11 @@
+/-
+# Dft Inversion
+Category: Characters
+Target: Brockian.Characters5.dft_inversion
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -24,12 +32,9 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-namespace Brockian
-namespace Characters5
+namespace Brockian.Characters5
 
 /-- A primitive fifth root of unity. -/
-noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
-
 
 noncomputable def e (k : ZMod 5) : ℂ := ω ^ k.val
 

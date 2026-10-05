@@ -4,57 +4,44 @@ Category: Chemistry
 Target: Chem.huckel_C20
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: Lean 4 does not permit a module docstring `/-! ... -/` before the `import`
+line, so the required header appears here as an ordinary block comment.)
 -/
+
 import Mathlib
-
-/-!
-# Huckel C 20
-Category: Chemistry
-Target: Chem.huckel_C20
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
 
 namespace Chem
 
-open Polynomial Matrix
+open Complex Matrix
 
-/-! ### The 20-th root of unity and the characters of `Fin 20` -/
+/-! ### The primitive 20-th root of unity and the associated character -/
 
 /-- The primitive 20-th root of unity `exp (2πi/20)`. -/
 
 theorem huckel_C20 :
-    ((SimpleGraph.cycleGraph 20).adjMatrix ℂ).charpoly
-      = ∏ k : Fin 20,
-          (Polynomial.X - Polynomial.C ((2 * Real.cos (2 * Real.pi * (k : ℕ) / 20) : ℝ) : ℂ)) := by
-  obtain ⟨U, hU⟩ := isUnit_Fmat
-  have hA : (SimpleGraph.cycleGraph 20).adjMatrix ℂ = (U : Matrix (Fin 20) (Fin 20) ℂ) * Dmat *
-      ((U⁻¹ : (Matrix (Fin 20) (Fin 20) ℂ)ˣ) : Matrix (Fin 20) (Fin 20) ℂ) := by
-    have h1 : (SimpleGraph.cycleGraph 20).adjMatrix ℂ * (U : Matrix (Fin 20) (Fin 20) ℂ)
-        = (U : Matrix (Fin 20) (Fin 20) ℂ) * Dmat := by
-      rw [hU]; exact adj_mul_Fmat
-    calc (SimpleGraph.cycleGraph 20).adjMatrix ℂ
-        = (SimpleGraph.cycleGraph 20).adjMatrix ℂ * (U : Matrix (Fin 20) (Fin 20) ℂ) *
-            ((U⁻¹ : (Matrix (Fin 20) (Fin 20) ℂ)ˣ) : Matrix (Fin 20) (Fin 20) ℂ) := by
-          rw [mul_assoc, ← Units.val_mul, mul_inv_cancel, Units.val_one, mul_one]
-      _ = _ := by rw [h1]
-  rw [hA, Matrix.charpoly_units_conj U Dmat, Dmat, Matrix.charpoly_diagonal]
+    spectrum ℂ ((SimpleGraph.cycleGraph 20).adjMatrix ℂ) =
+      {z : ℂ | ∃ k : ℕ, k < 20 ∧ z = (2 * Real.cos (2 * Real.pi * k / 20) : ℝ)} := by
+  rw [← adjC20_eq_cycleGraph]
+  obtain ⟨u, hu⟩ := isUnit_dftMat
+  have hconj : adjC20 = (u : Matrix (ZMod 20) (ZMod 20) ℂ) * diagC20
+      * ((u⁻¹ : (Matrix (ZMod 20) (ZMod 20) ℂ)ˣ) : Matrix (ZMod 20) (ZMod 20) ℂ) := by
+    have h : adjC20 * (u : Matrix (ZMod 20) (ZMod 20) ℂ)
+        = (u : Matrix (ZMod 20) (ZMod 20) ℂ) * diagC20 := by
+      rw [hu]; exact adj_mul_dft
+    rw [← h, mul_assoc, u.mul_inv, mul_one]
+  rw [hconj, spectrum.units_conjugate, diagC20, spectrum_diagonal]
+  ext z
+  simp only [Set.mem_range, Set.mem_setOf_eq]
+  constructor
+  · rintro ⟨k, rfl⟩
+    exact ⟨k.val, ZMod.val_lt k, by push_cast; ring⟩
+  · rintro ⟨k, hk, rfl⟩
+    refine ⟨(k : ZMod 20), ?_⟩
+    rw [ZMod.val_natCast_of_lt hk]
+    push_cast
+    ring
 
-/-- The spectrum of the adjacency matrix of `C₂₀` is exactly the set of Hückel eigenvalues
-`2·cos(2πk/20)`, `k = 0, …, 19`. -/
+/-- The explicit Hückel eigenvectors of `C₂₀`: the `k`-th Fourier mode
+`j ↦ exp (2πi jk/20)` is an eigenvector of the adjacency matrix with eigenvalue
+`2 cos (2πk/20)`. -/

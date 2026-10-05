@@ -1,39 +1,56 @@
-/-
+import Mathlib
+
+/-!
 # Master Theorem Case 1
 Category: Computer Science
 Target: CS.master_theorem_case1
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
 
-/-!
-# Master Theorem Case 1
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Case 1 of the Master Theorem for divide-and-conquer recurrences:
-if `T(n) = a * T(n/b) + f(n)` with `f(n) = O(n^(log_b a - ε))` for some `ε > 0`,
-then `T(n) = Θ(n^(log_b a))`.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-As usual for the Master Theorem, the recurrence is analysed along the powers of `b`,
-i.e. we write `T k` for the value of the recurrence at `n = b ^ k`.
--/
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace CS
 
-/-- At `n = b ^ k`, the driving function `n ^ (log_b a)` equals `a ^ k`. -/
+/-- Commuting a natural power with a real power: `(b ^ k) ^ c = (b ^ c) ^ k`. -/
 
-theorem rpow_logb_sub_pow (a b ε : ℝ) (ha : 0 < a) (hb : 1 < b) (k : ℕ) :
-    ((b : ℝ) ^ k) ^ (Real.logb b a - ε) = a ^ k / ((b : ℝ) ^ ε) ^ k := by
-  have hb0 : (0 : ℝ) < b := lt_trans zero_lt_one hb
-  have hbk : (0 : ℝ) < (b : ℝ) ^ k := pow_pos hb0 k
-  rw [Real.rpow_sub hbk, rpow_logb_pow a b ha hb k]
+lemma rpow_logb_sub_pow {a b eps : ℝ} (ha : 0 < a) (hb : 1 < b) (k : ℕ) :
+    ((b ^ k : ℝ)) ^ (Real.logb b a - eps) = a ^ k * ((b : ℝ) ^ (-eps)) ^ k := by
+  have hb0 : (0 : ℝ) < b := lt_trans one_pos hb
+  rw [pow_rpow_comm hb0.le, ← mul_pow]
   congr 1
-  rw [← Real.rpow_natCast b k, ← Real.rpow_mul hb0.le, mul_comm,
-    Real.rpow_mul hb0.le, Real.rpow_natCast]
+  rw [sub_eq_add_neg, Real.rpow_add hb0, Real.rpow_logb hb0 hb.ne' ha]
 
-/-- **Master Theorem, Case 1.**  Consider a divide-and-conquer recurrence
-`T(n) = a * T(n / b) + f(n)` with `a ≥ 1`, `b > 1`, driving function `f ≥ 0`
-satisfying `f(x) ≤ C * x ^ (log_b a - ε)` for some `ε > 0` (i.e. `f(n) = O(n^(log_b a - ε))`).
-Then `T(n) = Θ(n ^ (log_b a))`: there are positive constants `c₁, c₂` with
-`c₁ * n ^ (log_b a) ≤ T(n) ≤ c₂ * n ^ (log_b a)` for all `n = b ^ k`.
-Here `T k` denotes the value of the recurrence at `n = b ^ k`. -/
+/-- **Master theorem, Case 1** (on the exact powers of `b`).
+
+Let `T` satisfy the divide-and-conquer recurrence `T(n) = a·T(n/b) + f(n)`, written here
+along the powers of `b`: `T k` stands for `T (b ^ k)` and `f k` for `f (b ^ k)`, so the
+recurrence reads `T (k+1) = a * T k + f (k+1)`.
+
+Assume `a ≥ 1`, `b > 1`, the driving function `f` is nonnegative and satisfies the
+`O(n ^ (log_b a - ε))` bound `f (b ^ k) ≤ C * (b ^ k) ^ (log_b a - ε)` with `ε > 0`, and
+`T (b ^ 0) > 0`.
+
+Then `T (b ^ k) = Θ((b ^ k) ^ (log_b a))`: there are positive constants `c₁, c₂` with
+`c₁ * n ^ (log_b a) ≤ T n ≤ c₂ * n ^ (log_b a)` for all `n = b ^ k`. -/

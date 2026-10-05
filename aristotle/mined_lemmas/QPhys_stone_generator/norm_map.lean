@@ -1,64 +1,46 @@
+/-
+# Stone Generator
+Category: Quantum Physics
+Target: QPhys.stone_generator
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-!
-# Stone's theorem
+# Stone's theorem: the generator of a strongly continuous one-parameter unitary group
 
-A strongly continuous one-parameter unitary group `U : ℝ → (H →L[ℂ] H)` on a complex Hilbert
-space `H` has a self-adjoint (in general unbounded) generator `A`, characterized by
-`d/dt (U t x) |_{t=0} = i • A x`.
+Let `H` be a complex Hilbert space and let `U : ℝ → H →L[ℂ] H` be a strongly continuous
+one-parameter unitary group, i.e. `U 0 = 1`, `U (s + t) = U s * U t`, every `U t` is unitary,
+and `t ↦ U t x` is continuous for every `x`.
+
+The *generator* of `U` is the (in general unbounded) operator `A` whose domain consists of the
+vectors `x` for which `t ↦ U t x` is differentiable at `0`, and which is given there by
+`A x = -I • (d/dt)|_{t = 0} (U t x)`, so that formally `U t = exp (I * t * A)`.
+
+The main result, `QPhys.stone_generator`, is that `A` is self-adjoint as a partially defined
+operator (`LinearPMap`).
+
+The proof follows the classical argument:
+
+* `A` is symmetric, by differentiating `t ↦ ⟪U t x, U t y⟫`;
+* `A ± I` are surjective, using the resolvent `x ↦ ∫ t in Ioi 0, exp (-t) • U t x`;
+* consequently the domain of `A` is dense, and every symmetric operator with `A ± I` surjective
+  is self-adjoint.
 -/
+
+open MeasureTheory Set
 
 namespace QPhys
 
-open scoped InnerProductSpace
-open Complex (I)
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+/-- The domain of the (infinitesimal) generator of a one-parameter family `U : ℝ → H →L[ℂ] H`:
+the set of vectors `x` for which `t ↦ U t x` is differentiable at `0`. -/
 
-/-- A strongly continuous one-parameter unitary group on a complex Hilbert space. -/
-structure IsUnitaryGroup (U : ℝ → (H →L[ℂ] H)) : Prop where
-  /-- Each `U t` is a unitary operator. -/
-  mem_unitary : ∀ t, U t ∈ unitary (H →L[ℂ] H)
-  /-- The group law. -/
-  map_add : ∀ s t : ℝ, U (s + t) = U s * U t
-  /-- Strong continuity. -/
-  strong_continuous : ∀ x : H, Continuous fun t => U t x
-
-namespace IsUnitaryGroup
-
-variable {U : ℝ → (H →L[ℂ] H)} (hU : IsUnitaryGroup U)
-include hU
-
-
-theorem norm_map (t : ℝ) (x : H) : ‖U t x‖ = ‖x‖ := by
+theorem norm_map (hU : IsUnitaryGroup U) (t : ℝ) (x : H) : ‖U t x‖ = ‖x‖ := by
   have h := hU.inner_map_map t x x
-  have : (‖U t x‖ : ℝ) ^ 2 = ‖x‖ ^ 2 := by
-    rw [← inner_self_eq_norm_sq (𝕜 := ℂ), ← inner_self_eq_norm_sq (𝕜 := ℂ)]
-    exact_mod_cast congrArg Complex.re h
-  have h1 : (0:ℝ) ≤ ‖U t x‖ := norm_nonneg _
-  have h2 : (0:ℝ) ≤ ‖x‖ := norm_nonneg _
-  nlinarith [this]
+  rw [inner_self_eq_norm_sq_to_K, inner_self_eq_norm_sq_to_K] at h
+  have h' : (‖U t x‖ : ℝ) ^ 2 = (‖x‖ : ℝ) ^ 2 := by exact_mod_cast h
+  nlinarith [norm_nonneg (U t x), norm_nonneg x]
 

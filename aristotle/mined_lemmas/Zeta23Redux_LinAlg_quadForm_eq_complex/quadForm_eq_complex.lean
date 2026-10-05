@@ -1,52 +1,62 @@
 import Mathlib
+
 /-!
-# Sylvester Hermitian Finrank
-Category: Zeta-23 §3 Linear Algebra (re-derivation)
-Target: Zeta23Redux.LinAlg.sylvester_hermitian_finrank
+# Quad Form Eq Complex
+Category: Linalg
+Target: Zeta23Redux.LinAlg.quadForm_eq_complex
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
+open scoped Real
+open scoped Nat
 open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Zeta23Redux.LinAlg
 
 open Matrix
 
-variable {d : ℕ} {A : Matrix (Fin d) (Fin d) ℂ}
+/-- The coordinates of a vector `x` in the eigenbasis of a Hermitian matrix `A`, i.e.
+`x` expressed via the unitary matrix of eigenvectors of `A`. -/
 
-/-- The positive index of inertia of a Hermitian matrix: the number of strictly positive
-eigenvalues (counted with multiplicity, i.e. over the index set of the matrix). -/
+theorem quadForm_eq_complex {n : Type*} [Fintype n] [DecidableEq n] {A : Matrix n n ℂ}
+    (hA : A.IsHermitian) (x : n → ℂ) :
+    star x ⬝ᵥ A *ᵥ x =
+      ∑ i, (hA.eigenvalues i : ℂ) * ((‖eigencoord hA x i‖ : ℂ) ^ 2) := by
+  set U : Matrix n n ℂ := (hA.eigenvectorUnitary : Matrix n n ℂ) with hU
+  set y : n → ℂ := eigencoord hA x with hy
+  have hyx : y = star U *ᵥ x := rfl
+  have hstar : star y = star x ᵥ* U := by
+    rw [hyx, Matrix.star_mulVec]
+    simp [hU, Matrix.star_eq_conjTranspose]
+  calc star x ⬝ᵥ A *ᵥ x
+      = star x ⬝ᵥ (U * diagonal (RCLike.ofReal ∘ hA.eigenvalues) * star U) *ᵥ x := by
+        rw [← spectral_decomp hA]
+    _ = star y ⬝ᵥ (diagonal (RCLike.ofReal ∘ hA.eigenvalues)) *ᵥ y := by
+        rw [hstar, hyx, Matrix.mulVec_mulVec, Matrix.dotProduct_mulVec,
+          Matrix.dotProduct_mulVec, Matrix.vecMul_vecMul, mul_assoc]
+    _ = ∑ i, (hA.eigenvalues i : ℂ) * ((‖y i‖ : ℂ) ^ 2) := by
+        rw [dotProduct]
+        refine Finset.sum_congr rfl fun i _ => ?_
+        rw [Matrix.mulVec_diagonal]
+        have hz : (starRingEnd ℂ) (y i) * y i = ((‖y i‖ : ℂ)) ^ 2 := by
+          rw [mul_comm, Complex.mul_conj]
+          norm_cast
+          exact Complex.normSq_eq_norm_sq (y i)
+        simp only [Pi.star_apply, Function.comp_apply]
+        rw [show star (y i) = (starRingEnd ℂ) (y i) from rfl, ← mul_assoc,
+          mul_comm _ ((RCLike.ofReal (hA.eigenvalues i) : ℂ)), mul_assoc, hz]
+        norm_num
 
-lemma quadForm_eq_complex (hA : A.IsHermitian) (x : Fin d → ℂ) :
-    star x ⬝ᵥ A *ᵥ x = ((∑ i, hA.eigenvalues i * ‖eigCoord hA x i‖ ^ 2 : ℝ) : ℂ) := by
-  have hinner : star x ⬝ᵥ A *ᵥ x
-      = inner ℂ (WithLp.toLp 2 x : EuclideanSpace ℂ (Fin d)) (WithLp.toLp 2 (A *ᵥ x)) := by
-    rw [EuclideanSpace.inner_eq_star_dotProduct]; simp [dotProduct_comm]
-  have hY : ∀ i : Fin d, inner ℂ (hA.eigenvectorBasis i)
-      (WithLp.toLp 2 (A *ᵥ x) : EuclideanSpace ℂ (Fin d))
-      = (hA.eigenvalues i : ℂ) * eigCoord hA x i := by
-    intro i
-    rw [EuclideanSpace.inner_eq_star_dotProduct, dotProduct_comm, dotProduct_mulVec,
-      show star (⇑(hA.eigenvectorBasis i) : Fin d → ℂ)
-          ᵥ* A = star (A *ᵥ (⇑(hA.eigenvectorBasis i) : Fin d → ℂ)) by rw [star_mulVec, hA.eq],
-      hA.mulVec_eigenvectorBasis]
-    simp [eigCoord, star_smul, smul_dotProduct]
-  have hX : ∀ i : Fin d, inner ℂ (WithLp.toLp 2 x : EuclideanSpace ℂ (Fin d))
-      (hA.eigenvectorBasis i) = starRingEnd ℂ (eigCoord hA x i) := by
-    intro i
-    rw [EuclideanSpace.inner_eq_star_dotProduct]
-    simp [eigCoord, star_dotProduct, dotProduct_comm]
-  rw [hinner, ← (hA.eigenvectorBasis).sum_inner_mul_inner]
-  push_cast
-  refine Finset.sum_congr rfl fun i _ => ?_
-  rw [hX, hY]
-  have h : (starRingEnd ℂ) (eigCoord hA x i) * eigCoord hA x i
-      = ((‖eigCoord hA x i‖ : ℝ) : ℂ) ^ 2 := by
-    rw [mul_comm, Complex.mul_conj]
-    norm_cast
-    exact Complex.normSq_eq_norm_sq _
-  linear_combination (hA.eigenvalues i : ℂ) * h
+end Zeta23Redux.LinAlg
 
-/-- Diagonalization of the Hermitian quadratic form in eigenvector coordinates (real part). -/

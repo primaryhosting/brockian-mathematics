@@ -23,37 +23,39 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
+import Mathlib
+import Archive.Wiedijk100Theorems.PerfectNumbers
+
+/-!
 # Mersenne Prime Infinitude
 Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.MersennePrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` lines to precede any module docstring `/-! ... -/`, so the
--- header above is written as a plain block comment; its text is otherwise verbatim.)
-import Mathlib
-import Archive.Wiedijk100Theorems.PerfectNumbers
 
 /-!
 The infinitude of Mersenne primes is a famous open problem, so what is established here is a
-Lean-checked **conditional reduction**: the set of Mersenne primes is infinite **if and only if**
-the set of even perfect numbers is infinite.  The main target
-`Brockian.MersennePerfect.MersennePrimeInfinitude` is the substantive direction: from the
-infinitude of even perfect numbers one obtains infinitely many primes `p` with `2 ^ p - 1` prime.
+*Lean-checked reduction*: the statement is shown to be equivalent to the infinitude of even
+perfect numbers, via the Euclid–Euler correspondence `p ↦ 2 ^ (p - 1) * (2 ^ p - 1)`.
 
-The bridge is the Euclid–Euler theorem (available in Mathlib's archive as
-`Theorems100.Nat.even_and_perfect_iff`).
+The target declaration `Brockian.MersennePerfect.MersennePrimeInfinitude` is therefore a
+conditional theorem: *if* there are infinitely many even perfect numbers, *then* there are
+infinitely many Mersenne primes.  The converse implication, and the resulting equivalence, are
+also proved, as is a contrapositive/boundedness reformulation.
 -/
 
 namespace Brockian.MersennePerfect
 
-/-- `p` is a *Mersenne exponent* when `mersenne p = 2 ^ p - 1` is prime. -/
+open scoped Nat
 
-theorem evenPerfects_subset_image :
-    evenPerfects ⊆ (fun k : ℕ => 2 ^ k * mersenne (k + 1)) '' {k : ℕ | MersenneExponent (k + 1)} := by
-  intro n hn
-  obtain ⟨k, hk, rfl⟩ := evenPerfect_iff.1 hn
-  exact ⟨k, hk, rfl⟩
+/-- The set of exponents `p` for which `2 ^ p - 1` is a (Mersenne) prime.  Such a `p` is
+automatically prime itself (see `mersenneExponents_eq`). -/
 
-/-- Conversely, the Euclid map sends shifted Mersenne exponents to even perfect numbers. -/
+theorem evenPerfects_subset_image : evenPerfects ⊆ euclidMap '' mersenneExponents := by
+  rintro n ⟨hev, hperf⟩
+  obtain ⟨k, hpr, rfl⟩ :=
+    Theorems100.Nat.eq_two_pow_mul_prime_mersenne_of_even_perfect hev hperf
+  exact ⟨k + 1, hpr, by simp [euclidMap, mersenne_eq]⟩
+
+/-- The even perfect numbers are exactly the images of the Mersenne exponents. -/

@@ -30,37 +30,20 @@ Target: Brockian.PracticalNumbers.PracticalTwinInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any doc-comment command, so the header above is written as a
--- plain block comment; its text is verbatim as requested.)
 
 import Mathlib
 
-/-!
-The main result of this file is `Brockian.PracticalNumbers.PracticalTwinInfinitude`:
-there are infinitely many `n` such that both `n` and `n + 2` are practical numbers.
-
-The proof is completely explicit. We show that for every `t`, the pair
-`(2 * (3 ^ 2 ^ t - 1), 2 * 3 ^ 2 ^ t)` is a pair of practical numbers differing by `2`
-(e.g. `(4, 6)`, `(16, 18)`, `(160, 162)`, `(13120, 13122)`, ...).
-
-The engine is the classical closure property `IsPractical.mul`: if `n` is practical and
-`0 < m ≤ σ n + 1`, then `n * m` is practical. Iterating it along the factorisation
-`3 ^ 2 ^ t - 1 = 2 * (3 ^ 2 ^ 0 + 1) * (3 ^ 2 ^ 1 + 1) * ⋯ * (3 ^ 2 ^ (t-1) + 1)`
-(realised here as a simple induction on `t`) yields practicality of `2 * (3 ^ 2 ^ t - 1)`,
-while practicality of `2 * 3 ^ a` is an even simpler induction.
--/
+open Finset
 
 namespace Brockian.PracticalNumbers
 
-open Finset
+/-- A positive natural number `n` is *practical* when every `m ≤ n` can be written as a sum
+of distinct divisors of `n`. -/
 
-/-- `n` is a *practical number* if it is positive and every `k ≤ n` can be written as a sum of
-distinct divisors of `n`. -/
-
-theorem practical_one : IsPractical 1 := by
+lemma practical_one : Practical 1 := by
   refine ⟨one_pos, ?_⟩
-  intro k hk
-  interval_cases k
+  intro m hm
+  interval_cases m
   · exact ⟨∅, by simp⟩
   · exact ⟨{1}, by simp⟩
 

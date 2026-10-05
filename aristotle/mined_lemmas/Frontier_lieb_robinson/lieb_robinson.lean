@@ -1,16 +1,4 @@
-/-
-# Lieb Robinson
-Category: Frontier Physics
-Target: Frontier.lieb_robinson
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (The header above is a plain block comment because Lean 4 requires `import` commands to
--- precede every other command, including module doc-strings.)
-
 import Mathlib
-
 /-!
 # Lieb Robinson
 Category: Frontier Physics
@@ -44,50 +32,78 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- Spin configurations of a chain of `N` sites (each site carries a qubit). -/
-abbrev Config (N : ℕ) := Fin N → Fin 2
+section Basic
 
-/-- Observables of the spin chain: linear operators on the `2^N`-dimensional Hilbert space,
-represented as matrices indexed by spin configurations. -/
-abbrev SpinOp (N : ℕ) := Matrix (Config N) (Config N) ℂ
+variable {A : Type*} [NormedRing A] [NormedAlgebra ℝ A]
 
-/-- `Supported S M` says that the observable `M` acts only on the sites in `S`, i.e.
-`M = M₀ ⊗ 1` with `M₀` acting on the sites of `S`.  Concretely, matrix elements vanish
-unless the configurations agree off `S`, and they depend only on the restrictions to `S`. -/
+/-- The inner derivation (adjoint action) `ad H x = H * x - x * H`. -/
 
-theorem lieb_robinson {N : ℕ} {ι : Type*} (s : Finset ι) (h : ι → SpinOp N)
-    (X : ι → Set (Fin N)) (hloc : ∀ i ∈ s, Supported (X i) (h i))
-    (hdiam : ∀ i ∈ s, ∀ a ∈ X i, ∀ b ∈ X i, |(a : ℤ) - (b : ℤ)| ≤ 1)
-    (A B : SpinOp N) (x y : Fin N) (hA : Supported {x} A) (hB : Supported {y} B)
-    (K : ℕ) (hK : (K : ℤ) < |(x : ℤ) - (y : ℤ)|) (t : ℂ) :
-    Commute (∑ m ∈ Finset.range (K + 1), (t ^ m / (m ! : ℂ)) • adPow (∑ i ∈ s, h i) m A) B := by
-  have hball : ∀ m ∈ Finset.range (K + 1),
-      Supported {j : Fin N | |(j : ℤ) - (x : ℤ)| ≤ (K : ℤ)}
-        ((t ^ m / (m ! : ℂ)) • adPow (∑ i ∈ s, h i) m A) := by
-    intro m hm
-    have hmK : (m : ℤ) ≤ (K : ℤ) := by
-      exact_mod_cast Nat.lt_succ_iff.mp (Finset.mem_range.mp hm)
-    refine supported_smul _ (supported_mono ?_ (supported_adPow s h X hloc hdiam hA m))
-    intro j hj
-    have hjm := nbhdIter_singleton_subset x m hj
-    simp only [Set.mem_setOf_eq] at hjm ⊢
-    linarith
-  have hsum := supported_sum (Finset.range (K + 1)) _ hball
-  have hdisj : Disjoint {j : Fin N | |(j : ℤ) - (x : ℤ)| ≤ (K : ℤ)} ({y} : Set (Fin N)) := by
-    rw [Set.disjoint_singleton_right]
-    simp only [Set.mem_setOf_eq]
-    intro hy
-    rw [abs_sub_comm] at hK
-    linarith
-  exact commute_of_disjoint hdisj hsum hB
+theorem lieb_robinson
+    {A : Type*} [NormedRing A] [NormedAlgebra ℝ A] [CompleteSpace A]
+    (loc : ℤ → ℤ → A → Prop)
+    (loc_mono : ∀ {p q p' q' : ℤ} {x : A}, p' ≤ p → q ≤ q' → loc p q x → loc p' q' x)
+    (loc_comm : ∀ {p q p' q' : ℤ} {x y : A}, q < p' → loc p q x → loc p' q' y → x * y = y * x)
+    (loc_zero : ∀ p q : ℤ, loc p q 0)
+    (loc_add : ∀ {p q : ℤ} {x y : A}, loc p q x → loc p q y → loc p q (x + y))
+    (loc_neg : ∀ {p q : ℤ} {x : A}, loc p q x → loc p q (-x))
+    (loc_mul : ∀ {p q : ℤ} {x y : A}, loc p q x → loc p q y → loc p q (x * y))
+    (Λ : Finset ℤ) (hh : ℤ → A) (H : A) (hH : H = ∑ z ∈ Λ, hh z)
+    (hhloc : ∀ z ∈ Λ, loc z (z + 1) (hh z))
+    (a b : A) (pa qa pb qb : ℤ) (d : ℕ)
+    (ha : loc pa qa a) (hb : loc pb qb b) (hd : qa + d ≤ pb) (t : ℝ) :
+    ‖tau H t a * b - b * tau H t a‖
+      ≤ 2 * ‖a‖ * ‖b‖ * ((2 * ‖H‖ * |t|) ^ d / (d ! : ℝ)) * Real.exp (2 * ‖H‖ * |t|) := by
+  rw [tau_commutator_eq H t a b]
+  set x : ℝ := 2 * ‖H‖ * |t| with hxdef
+  set C : ℝ := 2 * ‖a‖ * ‖b‖ with hCdef
+  have hx0 : (0:ℝ) ≤ x := by rw [hxdef]; positivity
+  have hC0 : (0:ℝ) ≤ C := by rw [hCdef]; positivity
+  set g : ℕ → A := fun n => (t ^ n / (n ! : ℝ)) • ((ad H)^[n] a * b - b * (ad H)^[n] a)
+    with hgdef
+  set M : ℕ → ℝ := fun n => if n < d then 0 else C * (x ^ n / (n ! : ℝ)) with hMdef
+  have hgle : ∀ n : ℕ, ‖g n‖ ≤ C * (x ^ n / (n ! : ℝ)) := fun n => norm_term_le H t a b n
+  have hgzero : ∀ n : ℕ, n < d → g n = 0 := by
+    intro n hn
+    have hloc := adPow_loc loc loc_mono loc_comm loc_zero loc_add loc_neg loc_mul Λ hh H hH
+      hhloc ha n
+    have hlt : qa + (n : ℤ) < pb := by
+      have hnd : (n : ℤ) < (d : ℤ) := by exact_mod_cast hn
+      omega
+    have hcomm := loc_comm hlt hloc hb
+    simp [hgdef, hcomm]
+  have hMle : ∀ n : ℕ, ‖g n‖ ≤ M n := by
+    intro n
+    by_cases hn : n < d
+    · simp [hMdef, hn, hgzero n hn]
+    · simpa [hMdef, hn] using hgle n
+  have hMsummable : Summable M := by
+    refine Summable.of_nonneg_of_le (fun n => ?_) (fun n => ?_)
+      ((Real.summable_pow_div_factorial x).mul_left C)
+    · by_cases hn : n < d
+      · simp [hMdef, hn]
+      · simp only [hMdef, hn, if_false]
+        positivity
+    · by_cases hn : n < d
+      · simp only [hMdef, hn, if_true]
+        positivity
+      · simp [hMdef, hn]
+  have hgsummable : Summable (fun n : ℕ => ‖g n‖) :=
+    Summable.of_nonneg_of_le (fun n => norm_nonneg _) hMle hMsummable
+  have hMsum : ∑' n : ℕ, M n ≤ C * ((x ^ d / (d ! : ℝ)) * Real.exp x) := by
+    have hsplit := hMsummable.sum_add_tsum_nat_add d
+    have hz : ∑ i ∈ Finset.range d, M i = 0 := by
+      refine Finset.sum_eq_zero (fun i hi => ?_)
+      simp [hMdef, Finset.mem_range.mp hi]
+    have hshift : (fun k : ℕ => M (k + d)) = fun k : ℕ => C * (x ^ (k + d) / (((k + d)!) : ℝ)) := by
+      funext k
+      simp [hMdef]
+    rw [← hsplit, hz, zero_add, hshift, tsum_mul_left]
+    exact mul_le_mul_of_nonneg_left (tsum_exp_tail_le hx0 d) hC0
+  calc ‖∑' n : ℕ, g n‖
+      ≤ ∑' n : ℕ, ‖g n‖ := norm_tsum_le_tsum_norm hgsummable
+    _ ≤ ∑' n : ℕ, M n := hgsummable.tsum_le_tsum hMle hMsummable
+    _ ≤ C * ((x ^ d / (d ! : ℝ)) * Real.exp x) := hMsum
+    _ = C * (x ^ d / (d ! : ℝ)) * Real.exp x := by ring
 
-/-!
-## Non-vacuity
+end Frontier
 
-The hypotheses of `lieb_robinson` are satisfied by a genuine nearest-neighbour spin chain:
-the Pauli `X` operators are nonzero observables supported on a single site, and the
-`XX`-chain Hamiltonian `∑ ⟨p,q⟩ nearest neighbours, X_p X_q` is a sum of terms supported on
-sets of sites of diameter at most one.
--/
-
-/-- The Pauli `X` operator at site `k` (spin flip at `k`, identity elsewhere). -/

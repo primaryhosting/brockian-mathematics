@@ -8,77 +8,56 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Von Neumann Trace Ineq
+Category: Zeta-23 §3 Linear Algebra (re-derivation)
+Target: Zeta23Redux.LinAlg.vonNeumann_trace_ineq
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+open Finset Matrix
 
 namespace Zeta23Redux.LinAlg
 
-open Matrix Finset
+/-- **Rearrangement against a doubly stochastic matrix.** If `S` is doubly stochastic and
+`mu`, `nu` are both antitone, then the bilinear form `∑ i j, mu i * S i j * nu j` is at most
+the aligned sum `∑ i, mu i * nu i`.  Proved via Birkhoff's theorem plus the rearrangement
+inequality. -/
 
-section Core
-
-variable {d : ℕ}
-
-/-- Two antitone real sequences monovary. -/
-
-lemma sum_mul_doublyStochastic_le {mu nu : Fin d → ℝ} (hmu : Antitone mu) (hnu : Antitone nu)
-    {S : Matrix (Fin d) (Fin d) ℝ} (hS : S ∈ doublyStochastic ℝ (Fin d)) :
-    ∑ i, ∑ j, mu i * nu j * S i j ≤ ∑ i, mu i * nu i := by
+theorem sum_mul_doublyStochastic_le {d : ℕ} {S : Matrix (Fin d) (Fin d) ℝ}
+    (hS : S ∈ doublyStochastic ℝ (Fin d)) {mu nu : Fin d → ℝ}
+    (hmu : Antitone mu) (hnu : Antitone nu) :
+    ∑ i, ∑ j, mu i * S i j * nu j ≤ ∑ i, mu i * nu i := by
+  have hmn : Monovary mu nu := by
+    intro i j hij
+    have : j < i := by
+      by_contra h
+      exact absurd (hnu (not_lt.mp h)) (not_le.mpr hij)
+    exact hmu this.le
   obtain ⟨w, hw0, hw1, hwS⟩ := exists_eq_sum_perm_of_mem_doublyStochastic hS
-  have hentry : ∀ i j, S i j = ∑ σ : Equiv.Perm (Fin d), w σ * (σ.permMatrix ℝ i j) := by
-    intro i j
-    rw [← hwS]
-    simp [Matrix.sum_apply, smul_eq_mul]
-  have hperm : ∀ σ : Equiv.Perm (Fin d),
-      ∑ i, ∑ j, mu i * nu j * (σ.permMatrix ℝ i j) = ∑ i, mu i * nu (σ i) := by
+  have key : ∀ σ : Equiv.Perm (Fin d),
+      ∑ i, ∑ j, mu i * (σ.permMatrix ℝ) i j * nu j ≤ ∑ i, mu i * nu i := by
     intro σ
-    refine Finset.sum_congr rfl fun i _ => ?_
-    have h : ∀ j : Fin d, mu i * nu j * (σ.permMatrix ℝ i j)
-        = if j = σ i then mu i * nu j else 0 := by
-      intro j
-      by_cases hj : j = σ i
-      · subst hj; simp [Equiv.Perm.permMatrix, PEquiv.toMatrix_apply, Equiv.toPEquiv_apply]
-      · simp [Equiv.Perm.permMatrix, PEquiv.toMatrix_apply, Equiv.toPEquiv_apply,
-          Ne.symm hj, hj]
-    rw [Finset.sum_congr rfl fun j _ => h j, Finset.sum_ite_eq' Finset.univ (σ i)]
-    simp
-  calc ∑ i, ∑ j, mu i * nu j * S i j
-      = ∑ i, ∑ j, ∑ σ : Equiv.Perm (Fin d), w σ * (mu i * nu j * (σ.permMatrix ℝ i j)) := by
-        refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
-        rw [hentry i j, Finset.mul_sum]
-        exact Finset.sum_congr rfl fun σ _ => by ring
-    _ = ∑ i, ∑ σ : Equiv.Perm (Fin d), ∑ j, w σ * (mu i * nu j * (σ.permMatrix ℝ i j)) :=
-        Finset.sum_congr rfl fun i _ => Finset.sum_comm
-    _ = ∑ σ : Equiv.Perm (Fin d), ∑ i, ∑ j, w σ * (mu i * nu j * (σ.permMatrix ℝ i j)) :=
-        Finset.sum_comm
-    _ = ∑ σ : Equiv.Perm (Fin d), w σ * ∑ i, ∑ j, mu i * nu j * (σ.permMatrix ℝ i j) := by
-        simp [Finset.mul_sum]
-    _ = ∑ σ : Equiv.Perm (Fin d), w σ * ∑ i, mu i * nu (σ i) :=
-        Finset.sum_congr rfl fun σ _ => by rw [hperm σ]
-    _ ≤ ∑ σ : Equiv.Perm (Fin d), w σ * ∑ i, mu i * nu i := by
-        refine Finset.sum_le_sum fun σ _ => ?_
-        exact mul_le_mul_of_nonneg_left
-          ((monovary_of_antitone hmu hnu).sum_mul_comp_perm_le_sum_mul) (hw0 σ)
+    have hrow : ∀ i, ∑ j, mu i * (σ.permMatrix ℝ) i j * nu j = mu i * nu (σ i) := by
+      intro i
+      simp [Equiv.Perm.permMatrix, PEquiv.toMatrix_apply, Equiv.toPEquiv_apply]
+    rw [Finset.sum_congr rfl fun i _ => hrow i]
+    simpa using hmn.sum_smul_comp_perm_le_sum_smul (σ := σ)
+  calc ∑ i, ∑ j, mu i * S i j * nu j
+      = ∑ σ : Equiv.Perm (Fin d), w σ * ∑ i, ∑ j, mu i * (σ.permMatrix ℝ) i j * nu j := by
+        rw [← hwS]
+        simp only [Matrix.sum_apply, smul_apply, smul_eq_mul, Finset.mul_sum, Finset.sum_mul]
+        rw [Finset.sum_congr rfl fun i (_ : i ∈ Finset.univ) =>
+            Finset.sum_comm (s := (Finset.univ : Finset (Fin d)))
+              (t := (Finset.univ : Finset (Equiv.Perm (Fin d))))
+              (f := fun j σ => mu i * (w σ * (σ.permMatrix ℝ) i j) * nu j),
+          Finset.sum_comm]
+        exact Finset.sum_congr rfl fun σ _ => Finset.sum_congr rfl fun i _ =>
+          Finset.sum_congr rfl fun j _ => by ring
+    _ ≤ ∑ σ : Equiv.Perm (Fin d), w σ * ∑ i, mu i * nu i :=
+        Finset.sum_le_sum fun σ _ => mul_le_mul_of_nonneg_left (key σ) (hw0 σ)
     _ = ∑ i, mu i * nu i := by rw [← Finset.sum_mul, hw1, one_mul]
 
-end Core
-
-section Spectral
-
-variable {d : ℕ}
-
-/-- Spectral theorem for Hermitian matrices, with the eigenvalues listed in an arbitrary
-(permuted) order. -/
+/-- The trace of `diagonal a * W * diagonal b * Wᴴ` is the real number
+`∑ i j, a i * b j * ‖W i j‖ ^ 2`. -/

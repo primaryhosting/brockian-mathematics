@@ -8,29 +8,27 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped Classical
+/-!
+# Mordell Finite Generation
+Category: Frontier — Prime Numbers
+Target: Frontier.Mordell_finite_generation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Frontier
 
-/-! ## The multiplication-by-`m` subgroup and its quotient -/
-
-/-- Multiplication by `m` as an endomorphism of an additive commutative group. -/
+/-- The doubling endomorphism `P ↦ 2 • P` of an additive commutative group. -/
 
 def MordellWeilStatement : Prop :=
-  ∀ (E : WeierstrassCurve ℚ), E.IsElliptic → AddGroup.FG E.toAffine.Point
+  ∀ (W : WeierstrassCurve ℚ) [W.IsElliptic], AddGroup.FG (RationalPoints W)
 
-/-- **Mordell's theorem, reduced to weak Mordell–Weil plus the theory of heights.**
+/-- **Mordell's theorem, as a Lean-checked reduction.**
 
-Let `E` be an elliptic curve over `ℚ` and let `h` be a height function on the group `E(ℚ)`
-of rational points satisfying the three standard properties of the (logarithmic) canonical
-height:
+Assume:
 
-* for each fixed `Q ∈ E(ℚ)` there is a constant `C` with `h (P + Q) ≤ 2 * h P + C`;
-* there is a constant `C` with `4 * h P ≤ h (2 • P) + C`;
-* for each `C`, only finitely many points have height at most `C` (Northcott property).
+* (canonical/naive height machinery) every elliptic curve over `ℚ` carries a height function
+  on its group of rational points satisfying the Weil height axioms `IsWeilHeight`, and
+* (weak Mordell–Weil) for every elliptic curve over `ℚ` the quotient `E(ℚ) / 2 E(ℚ)` is finite.
 
-If moreover the weak Mordell–Weil group `E(ℚ)/2E(ℚ)` is finite, then `E(ℚ)` is a
-finitely generated abelian group.
-
-(The hypothesis that `E` is elliptic is kept for faithfulness to the statement; the argument
-itself only uses the group structure on the set of nonsingular rational points.) -/
+Then the group of rational points of every elliptic curve over `ℚ` is finitely generated. -/

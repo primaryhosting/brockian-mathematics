@@ -1,0 +1,49 @@
+import Mathlib
+
+/-!
+# Banach Fixed Point
+Category: Frontier Wave 2 (deeper machinery)
+Target: Analysis.banach_fixed_point
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Analysis
+
+/-- **Banach fixed-point theorem** (contraction mapping principle).
+A contraction `f` with contraction constant `K < 1` on a nonempty complete metric space
+has a unique fixed point, namely `ContractingWith.fixedPoint f hf`. -/
+theorem banach_fixed_point {X : Type*} [MetricSpace X] [CompleteSpace X] [Nonempty X]
+    {K : NNReal} {f : X → X} (hf : ContractingWith K f) :
+    ∃ x : X, f x = x ∧ ∀ y : X, f y = y → y = x := by
+  refine ⟨ContractingWith.fixedPoint f hf, hf.fixedPoint_isFixedPt, ?_⟩
+  intro y hy
+  exact hf.fixedPoint_unique hy
+
+end Analysis
+
+#print axioms Analysis.banach_fixed_point
+

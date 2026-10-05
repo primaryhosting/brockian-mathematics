@@ -22,75 +22,86 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+open MeasureTheory
+
+namespace Frontier
 
 /-!
 ## Overview
 
-Margulis' superrigidity theorem says, informally:
+Margulis' superrigidity theorem says that a linear representation of an irreducible lattice `Γ`
+in a higher-rank semisimple group `G` is, up to passing to a subgroup of finite index, the
+restriction of a continuous representation of the ambient group `G`.
 
-> Let `G` be a connected semisimple Lie group of real rank at least `2`, with finite centre and
-> no compact factors, and let `Γ ≤ G` be an irreducible lattice.  Let `H` be a connected,
-> centre-free, (topologically) simple, non-compact Lie group and let `f : Γ → H` be a group
-> homomorphism whose image is unbounded (and Zariski dense).  Then `f` is the restriction of a
-> continuous homomorphism `G → H`.
+This file
 
-This file formalises the *statement* in topological-group language
-(`Frontier.MargulisSuperrigidityStatement`), and proves several Lean-checked pieces of it:
+* sets up the general notion of *extending a homomorphism defined on a subgroup to a continuous
+  homomorphism of the ambient topological group* (`Frontier.ExtendsTo`, `Frontier.Superrigid`,
+  `Frontier.VirtuallySuperrigid`);
+* records elementary structural facts about this notion (the base case `Frontier.superrigid_top`,
+  behaviour under composition and products, uniqueness of extensions, the reduction to the closure
+  of the image, and the vanishing of superrigid homomorphisms into abelian targets);
+* states Margulis superrigidity for the concrete higher-rank family `SL(n, ℝ)`, `n ≥ 3`, with a
+  genuine (polynomial) definition of Zariski density of the image
+  (`Frontier.MargulisSuperrigiditySL`);
+* proves, as `Frontier.margulis_superrigidity`, the Lean-checked reduction of that statement to
+  the statement in which one is allowed first to replace the lattice by an arbitrary subgroup of
+  finite index — the standard normalisation step at the start of the proof.
 
-* an unconditional **base case** (`Frontier.superrigid_of_discrete_top`): when the lattice is all
-  of `G` (so that `G` is discrete), every homomorphism extends continuously; together with
-  `Frontier.superrigid_of_subsingleton_target` these are the degenerate instances of the theorem;
-* the **semisimple-to-simple reduction** (`Frontier.margulis_superrigidity`): superrigidity for a
-  target which is a product of two simple factors follows from superrigidity for each factor.
-  This is the first reduction step in Margulis' proof, and here it is checked by Lean;
-* two structural facts about the conclusion: uniqueness of a continuous extension on a dense
-  subgroup (`Frontier.extension_unique_of_dense`) and invariance of superrigidity under
-  isomorphism of the target as a topological group (`Frontier.superrigid_of_topGroupEquiv`).
-
-The deep analytic input (the case of a single simple target) is carried as an explicit hypothesis
-of `Frontier.margulis_superrigidity`, never as an axiom.
-
-Conventions and caveats about the formalisation:
-
-* "real rank at least `n`" is approximated by the existence of a closed embedding of the
-  `n`-dimensional split torus `(ℝ^n, +)` as a subgroup (`Frontier.HasSplitRankAtLeast`); this is
-  the split-torus characterisation of the rank, without the requirement that the torus consist of
-  `ℝ`-diagonalisable elements, which is not expressible without algebraic-group machinery.
-* "simple Lie group" is rendered by purely topological conditions
-  (`Frontier.IsSimpleTarget`): connected, locally compact, Hausdorff, non-compact, centre-free and
-  with no closed normal subgroups other than `⊥` and `⊤`.
-* irreducibility of the lattice is rendered by: `Γ · N` is dense for every closed normal subgroup
-  `N ≠ ⊥` (`Frontier.IsIrreducibleLattice`).
+The deep analytic content of Margulis' theorem (the construction of a measurable equivariant map
+to a boundary, and its algebraicity) is *not* proved here: it is isolated in the hypothesis of
+`Frontier.margulis_superrigidity`.
 -/
 
-universe u v
-
-namespace Frontier
+/-! ## The extension property -/
 
 section Defs
 
-variable {G : Type*} [Group G] [TopologicalSpace G]
+variable {G H : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
 
-/-- `Γ` is a **lattice** in `G`: it is discrete and admits a fundamental domain of finite measure
-for the (Haar) measure `μ`. -/
+/-- `Φ : G →* H` is a continuous extension of the homomorphism `ρ : Γ →* H` defined on the
+subgroup `Γ ≤ G`. -/
+structure ExtendsTo (Γ : Subgroup G) (ρ : Γ →* H) (Φ : G →* H) : Prop where
+  /-- The extension is continuous on the ambient group. -/
+  continuous : Continuous Φ
+  /-- The extension restricts to `ρ` on `Γ`. -/
+  eqOn : ∀ γ : Γ, Φ (γ : G) = ρ γ
 
-def Superrigid (Γ : Subgroup G) (H : Type*) [Group H] [TopologicalSpace H] : Prop :=
-  ∀ f : Γ →* H, HasUnboundedImage Γ f → ExtendsToContinuous Γ f
+/-- The homomorphism `ρ : Γ →* H` is *superrigid*: it extends to a continuous homomorphism
+`G →* H`. -/
 
-end Defs
+theorem Superrigid.eq_one_of_commGroup {A : Type*} [CommGroup A] [TopologicalSpace A]
+    {Γ : Subgroup G} {ρ : Γ →* A} (h : Superrigid Γ ρ) (hG : commutator G = ⊤) : ρ = 1 := by
+  obtain ⟨Φ, _, hΦe⟩ := h
+  have hker : commutator G ≤ Φ.ker := by
+    rw [commutator_eq_closure]
+    refine Subgroup.closure_le _ |>.2 ?_
+    rintro x ⟨a, b, rfl⟩
+    simp [MonoidHom.mem_ker, commutatorElement_def]
+  ext γ
+  have : Φ (γ : G) = 1 := hker (hG ▸ Subgroup.mem_top _)
+  simpa [hΦe γ] using this
 
-section BaseCases
+end Structural
 
-variable {G : Type*} [Group G] [TopologicalSpace G] {H : Type*} [Group H] [TopologicalSpace H]
+/-! ## Lattices -/
 
-/-- **Base case**: if `Γ = ⊤` is a lattice in `G` — equivalently, if `G` is discrete — then every
-homomorphism `Γ → H` extends to a continuous homomorphism on `G`, so superrigidity holds
-(trivially, and with no rank assumption). -/
+/-- `Γ` is a *lattice* in the topological group `G` with respect to the (Haar) measure `μ`: it is
+a discrete subgroup admitting a fundamental domain of finite measure. -/
+structure IsLatticeIn {G : Type*} [Group G] [TopologicalSpace G] [MeasurableSpace G]
+    (μ : Measure G) (Γ : Subgroup G) : Prop where
+  /-- A lattice is a discrete subgroup. -/
+  discrete : DiscreteTopology Γ
+  /-- A lattice has a fundamental domain of finite volume. -/
+  finite_covolume : ∃ F : Set G, IsFundamentalDomain Γ F μ ∧ μ F < ⊤
+
+/-! ## The higher-rank groups `SL(n, ℝ)` and Zariski density -/
+
+/-- The special linear group `SL(n, ℝ)`.  For `n ≥ 3` this is a connected simple Lie group of real
+rank `n - 1 ≥ 2`, the basic example to which Margulis superrigidity applies. -/
+abbrev SLR (n : ℕ) : Type := Matrix.SpecialLinearGroup (Fin n) ℝ
+
+/-- The tuple of matrix entries of an element of `SL(m, ℝ)`, i.e. its coordinates as a point of
+the affine space in which the algebraic group `SL_m` sits. -/

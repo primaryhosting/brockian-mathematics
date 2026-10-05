@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Threshold Theorem
+Category: Frontier Qi
+Target: QI.threshold_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,36 +31,17 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Threshold Theorem
-Category: Frontier Qi
-Target: QI.threshold_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Threshold Theorem
-Category: Frontier Qi
-Target: QI.threshold_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace QI
 
-open Filter Topology
+/-- The logical error rate of a fault-tolerant scheme built by `k`-fold concatenation of a
+distance-3 (single-error-correcting) code, starting from physical error rate `p`.
 
-/-- `logicalErrorRate c p k` is the failure probability of a logical gate protected by `k`
-levels of code concatenation, in the standard recursive model of fault tolerance:
-a level-`0` (unencoded) gate fails with probability `p`, and a level-`(k+1)` gate fails only if
-at least two of its level-`k` constituent blocks fail, which happens with probability at most
-`c * (level-k failure rate)^2`, where `c` counts the malignant pairs of fault locations in the
-fault-tolerant gadget. -/
+One level of concatenation replaces each gate by a fault-tolerant gadget which fails only if at
+least two of its constituent locations fail; with `C` the number of malignant pairs of locations
+in a gadget, the standard level-reduction estimate gives
+`p_{k+1} = C * p_k ^ 2`. -/
 
-noncomputable def logicalErrorRate (c p : ℝ) : ℕ → ℝ
+noncomputable def logicalErrorRate (C p : ℝ) : ℕ → ℝ
   | 0 => p
-  | k + 1 => c * (logicalErrorRate c p k) ^ 2
+  | (k + 1) => C * (logicalErrorRate C p k) ^ 2
 

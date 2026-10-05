@@ -44,6 +44,78 @@ class AttemptFacts:
     attempt_results: list[str] = field(default_factory=list)
 
 
+@dataclass(frozen=True)
+class RegistryEvidence:
+    """Aggregate theorem-registry evidence for one problem card."""
+
+    ref_count: int
+    axle_verified: bool
+    axioms_clean: bool
+    missing_refs: tuple[str, ...] = ()
+    unverified_refs: tuple[str, ...] = ()
+
+
+def registry_evidence_for_cards(
+    cards: list[Any], registry_payload: dict[str, Any]
+) -> dict[str, RegistryEvidence]:
+    """Join card ``ledger_refs`` against theorem names in a registry payload.
+
+    Evidence is deliberately all-or-nothing: every listed reference must exist,
+    be in the theorem-level PROVED register, have an AXLE ``verified`` verdict,
+    and pass the registry axiom audit.  Cards without references are omitted so
+    their explicitly recorded attempt evidence can still be used.
+    """
+    theorem_rows = registry_payload.get("theorems")
+    if not isinstance(theorem_rows, list):
+        raise ValueError("theorem registry must contain a 'theorems' array")
+
+    by_name: dict[str, dict[str, Any]] = {}
+    for row in theorem_rows:
+        if not isinstance(row, dict) or not isinstance(row.get("name"), str):
+            continue
+        name = row["name"]
+        if name in by_name:
+            raise ValueError(f"duplicate theorem registry name: {name}")
+        by_name[name] = row
+
+    evidence_by_id: dict[str, RegistryEvidence] = {}
+    for card in cards:
+        refs = list(getattr(card, "ledger_refs", None) or [])
+        if not refs:
+            continue
+
+        missing: list[str] = []
+        unverified: list[str] = []
+        axle_verified = True
+        axioms_clean = True
+        for ref in refs:
+            row = by_name.get(ref)
+            if row is None:
+                missing.append(ref)
+                axle_verified = False
+                axioms_clean = False
+                continue
+            verification = row.get("verification") or {}
+            axle = verification.get("axle") or {}
+            ref_axle_verified = (
+                row.get("register") == "PROVED" and axle.get("verdict") == "verified"
+            )
+            ref_axioms_clean = verification.get("axioms_ok") is True
+            if not ref_axle_verified or not ref_axioms_clean:
+                unverified.append(ref)
+            axle_verified = axle_verified and ref_axle_verified
+            axioms_clean = axioms_clean and ref_axioms_clean
+
+        evidence_by_id[card.id] = RegistryEvidence(
+            ref_count=len(refs),
+            axle_verified=axle_verified,
+            axioms_clean=axioms_clean,
+            missing_refs=tuple(missing),
+            unverified_refs=tuple(unverified),
+        )
+    return evidence_by_id
+
+
 def derive_problem_register(f: AttemptFacts) -> str:
     """Compute register from facts. Precedence is intentional and unit-tested.
 
@@ -71,8 +143,15 @@ def derive_problem_register(f: AttemptFacts) -> str:
     if f.latest_result == "refuted" or "refuted" in results_set:
         return "REFUTED"
 
-    # PROVED only via formal independent verification — never from status alone
-    if f.backend in ("lean_axle", "hybrid") and f.lean_axle_verified is True and f.axioms_clean:
+    # PROVED only via a formal proof claim plus independent verification.  This
+    # prevents a few verified component refs from promoting a still-partial card.
+    proof_claimed = f.status_field == "proved" or f.latest_result == "proved"
+    if (
+        proof_claimed
+        and f.backend in ("lean_axle", "hybrid")
+        and f.lean_axle_verified is True
+        and f.axioms_clean
+    ):
         return "PROVED"
     if f.latest_result == "proved" and f.lean_axle_verified is not True:
         # Attempt claimed proved without AXLE → not PROVED
@@ -139,6 +218,17 @@ def facts_from_card(card: Any) -> AttemptFacts:
     notes = (getattr(card, "notes", "") or "").lower()
     status = getattr(card, "status", "open")
 
+    axle_verified: Optional[bool] = None
+    axioms_clean = False
+    for attempt in reversed(attempts):
+        if not isinstance(attempt, dict) or "axle_verified" not in attempt:
+            continue
+        observed = attempt.get("axle_verified")
+        if isinstance(observed, bool):
+            axle_verified = observed
+            axioms_clean = attempt.get("axioms_clean") is True
+            break
+
     has_scaffold = status == "scaffolded" or any(
         t.get("kind") in ("lean_def", "lean_theorem") for t in (getattr(card, "formal_targets", None) or [])
         if isinstance(t, dict)
@@ -157,8 +247,8 @@ def facts_from_card(card: Any) -> AttemptFacts:
         status_field=status,
         latest_result=latest_result,
         backend=backend,
-        lean_axle_verified=None,  # filled by attempt hooks / registry join
-        axioms_clean=False,
+        lean_axle_verified=axle_verified,
+        axioms_clean=axioms_clean,
         has_scaffold=has_scaffold and status in ("scaffolded", "partial", "open", "conditional"),
         has_compute_cert=has_compute,
         distill_pass=status == "distilled" or latest_result == "distilled",
@@ -171,15 +261,23 @@ def facts_from_card(card: Any) -> AttemptFacts:
     )
 
 
-def summarize_ledger(cards: list[Any], axle_by_id: Optional[dict[str, bool]] = None) -> list[dict[str, Any]]:
+def summarize_ledger(
+    cards: list[Any],
+    registry_by_id: Optional[dict[str, RegistryEvidence]] = None,
+) -> list[dict[str, Any]]:
     """Produce ledger rows for all cards."""
-    axle_by_id = axle_by_id or {}
+    registry_by_id = registry_by_id or {}
     rows = []
     for card in cards:
         facts = facts_from_card(card)
-        if card.id in axle_by_id:
-            facts.lean_axle_verified = axle_by_id[card.id]
-            facts.axioms_clean = True
+        evidence = registry_by_id.get(card.id)
+        verification_source = "attempt" if facts.lean_axle_verified is not None else None
+        if evidence is not None:
+            # Registry refs are authoritative when present.  Missing or stale
+            # refs must override a historical attempt's success marker.
+            facts.lean_axle_verified = evidence.axle_verified
+            facts.axioms_clean = evidence.axioms_clean
+            verification_source = "registry"
         reg = derive_problem_register(facts)
         rows.append(
             {
@@ -194,6 +292,14 @@ def summarize_ledger(cards: list[Any], axle_by_id: Optional[dict[str, bool]] = N
                 "backend": facts.backend,
                 "attempts": len(getattr(card, "attempts", None) or []),
                 "tags": getattr(card, "tags", None) or [],
+                "verification": {
+                    "source": verification_source,
+                    "axle_verified": facts.lean_axle_verified,
+                    "axioms_clean": facts.axioms_clean,
+                    "registry_ref_count": evidence.ref_count if evidence else 0,
+                    "missing_registry_refs": list(evidence.missing_refs) if evidence else [],
+                    "unverified_registry_refs": list(evidence.unverified_refs) if evidence else [],
+                },
             }
         )
     # sort: priority desc, difficulty asc, id

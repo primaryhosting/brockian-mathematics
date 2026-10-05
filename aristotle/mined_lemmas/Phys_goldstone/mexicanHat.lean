@@ -1,4 +1,13 @@
+/-
+# Goldstone
+Category: Frontier Phys
+Target: Phys.goldstone
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Goldstone
 Category: Frontier Phys
@@ -7,20 +16,40 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Phys
 
-/-- **Goldstone's theorem** (classical field-theory / mechanical form).
+section Goldstone
 
-Setting: `V : E → ℝ` is a potential on a real normed space `E`, invariant under a
-one-parameter family `g : ℝ → (E ≃L[ℝ] E)` of continuous linear symmetries
-(`hinv : ∀ t x, V (g t x) = V x`).  The vacuum `v` minimises `V` (`hmin`).
-The symmetry is *spontaneously broken*: the orbit `t ↦ g t v` of the vacuum moves,
-i.e. it has a nonzero velocity `w ≠ 0` at `t = 0`.
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
-Conclusion: the mass matrix, i.e. the Hessian `fderiv ℝ (fderiv ℝ V) v` of the potential
-at the vacuum, annihilates the nonzero vector `w`.  Thus there is a massless mode
-(a Goldstone boson): a nonzero fluctuation direction with vanishing mass term. -/
+/-- **Noether / infinitesimal invariance.**  If the potential `V` is invariant under a
+one-parameter family of field transformations `Φ t` whose infinitesimal generator at `t = 0`
+is the continuous linear map `A`, then the gradient of `V` is everywhere orthogonal to the
+direction of the symmetry flow: `dV_x (A x) = 0`. -/
 
-noncomputable def mexicanHat : ℂ → ℝ := fun z => (‖z‖ ^ 2 - 1) ^ 2
+noncomputable def mexicanHat : ℝ × ℝ → ℝ := fun p => (p.1 ^ 2 + p.2 ^ 2 - 1) ^ 2
 
-/-- The one-parameter rotation group acting on `ℂ`. -/
+/-- The rotation flow on `ℝ²`, a continuous global symmetry of `mexicanHat`. -/

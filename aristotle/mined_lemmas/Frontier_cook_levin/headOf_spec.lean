@@ -1,0 +1,40 @@
+/-!
+# Cook Levin
+Category: Frontier — Moonshot
+Target: Frontier.cook_levin
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+This development is deliberately self-contained (it uses no `import`, so that the module
+docstring above can literally be the first thing in the file).  The definitions of `Lit`,
+`Clause`, `CNF`, `Clause.eval` and `CNF.eval` below mirror `Std.Sat.Literal`,
+`Std.Sat.CNF.Clause`, `Std.Sat.CNF`, `Std.Sat.CNF.Clause.eval` and `Std.Sat.CNF.eval`
+from the Lean standard library.
+-/
+
+namespace Frontier
+
+/-! ## Propositional formulas in conjunctive normal form -/
+
+/-- A literal: a variable together with the sign with which it occurs. -/
+abbrev Lit (V : Type) := V × Bool
+
+/-- A clause is a disjunction of literals. -/
+abbrev Clause (V : Type) := List (Lit V)
+
+/-- A CNF formula is a conjunction of clauses. -/
+abbrev CNF (V : Type) := List (Clause V)
+
+/-- Value of a clause under an assignment. -/
+
+theorem headOf_spec {t : Nat} (ht : t ≤ T) :
+    headOf A T t ≤ T ∧ A (vH t (headOf A T t)) = true := by
+  obtain ⟨i, hi, hiA⟩ := ex_head hsat ht
+  have h := pick_spec (p := fun i => A (vH t i)) (n := T + 1) ⟨i, by omega, hiA⟩
+  refine ⟨?_, h.2⟩
+  have he : headOf A T t = pick (fun i => A (vH t i)) (T + 1) := rfl
+  have := h.1
+  omega
+

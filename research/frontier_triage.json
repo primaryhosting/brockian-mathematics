@@ -1,0 +1,1512 @@
+{
+  "generated_by": "scripts/frontier_triage.py",
+  "frontier_targets_total": 60,
+  "targets_recommended_go": 17,
+  "rung_counts": {
+    "open": 12,
+    "literature": 8
+  },
+  "targets": [
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "source_file": "Brockian/WeylLawTarget.lean",
+      "conditional_rung": "open",
+      "statement": "theorem counting_diverges_of_candidate (c : WeylLawCandidate H) :\n    Tendsto c.N_op atTop atTop",
+      "statement_found": true,
+      "difficulty_score": -19.6,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 8,
+      "recommended_premises": [
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_WeylLawMatch",
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_matches_rvm",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff_iff_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_iff_eigenvalueCountingAsymptotic",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_diff",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate",
+        "Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "source_file": "Brockian/WeylSchrodingerMinimal.lean",
+      "conditional_rung": "open",
+      "statement": "theorem schrodinger_essentiallySelfAdjoint_of_ode\n    (V : ℝ → ℝ) (hVc : Continuous V) (M : ℝ) (hV : ∀ x, |V x| ≤ M)\n    (hode : deficiencyRepresentsODE_of_adjoint_eigenvector V hVc M hV) :\n    EssentiallySelfAdjoint (schrodingerPMap V hVc M hV)",
+      "statement_found": true,
+      "difficulty_score": -17.38,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 17,
+      "recommended_premises": [
+        "Brockian.Weyl.SchrodingerMinimal.D2_apply",
+        "Brockian.Weyl.SchrodingerMinimal.Lconj_apply",
+        "Brockian.Weyl.SchrodingerMinimal.coeFn_schwartzToL2",
+        "Brockian.Weyl.SchrodingerMinimal.coreMap_apply",
+        "Brockian.Weyl.SchrodingerMinimal.coreMap_symm",
+        "Brockian.Weyl.SchrodingerMinimal.inner_toLp",
+        "Brockian.Weyl.SchrodingerMinimal.isSelfAdjoint_potentialMulCLM",
+        "Brockian.Weyl.SchrodingerMinimal.kinetic_symm"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "source_file": "Brockian/WeylLawTarget.lean",
+      "conditional_rung": "open",
+      "statement": "theorem counting_diverges_of_exists (h : WeylLawCandidateExists H) :\n    ∃ N_op : ℝ → ℝ, Tendsto N_op atTop atTop",
+      "statement_found": true,
+      "difficulty_score": -16.18,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 8,
+      "recommended_premises": [
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_WeylLawMatch",
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_matches_rvm",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff_iff_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_iff_eigenvalueCountingAsymptotic",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_diff",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate",
+        "Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_WeylLawMatch",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "source_file": "Brockian/WeylLawTarget.lean",
+      "conditional_rung": "open",
+      "statement": "theorem counting_diverges_of_discrete_and_WeylLawMatch\n    {T : H →ₗ.[ℂ] H}\n    (_hdisc : DiscreteSpectrumCandidate T)\n    {N_op N_model : ℝ → ℝ}\n    (hmodel : Tendsto N_model atTop atTop)\n    (hmatch : WeylLawMatch N_op N_model) :\n    Tendsto N_op atTop atTop",
+      "statement_found": true,
+      "difficulty_score": -13.5,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 8,
+      "recommended_premises": [
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_WeylLawMatch",
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_matches_rvm",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff_iff_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_iff_eigenvalueCountingAsymptotic",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_diff",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate",
+        "Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Equidistribution.equidistribution_of_asymptotic",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Equidistribution",
+      "source_file": "Brockian/EquidistributionSchema.lean",
+      "conditional_rung": "open",
+      "statement": "theorem equidistribution_of_asymptotic\n    {q : ℕ} [NeZero q] {g : ℕ} (hq : 2 < q)\n    (H : PrimePairAsymptotic q g)\n    {a : ZMod q} (ha : a ∈ admissibleResidues q (g : ZMod q)) :\n    Tendsto (fun N => (configCount N q g a : ℝ) / (totalConfigCount N q g : ℝ))\n      atTop (nhds (1 / ((q : ℝ) - 2)))",
+      "statement_found": true,
+      "difficulty_score": -12.53,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.Equidistribution.asymptotic_shape_consistent",
+        "Brockian.Equidistribution.configCount_twelve_five_two_one",
+        "Brockian.Equidistribution.configCount_twenty_five_two_two",
+        "Brockian.Equidistribution.prime_pair_config_admissible"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Equidistribution.equidistribution_of_asymptotic_exists",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Equidistribution",
+      "source_file": "Brockian/EquidistributionSchema.lean",
+      "conditional_rung": "open",
+      "statement": "theorem equidistribution_of_asymptotic_exists\n    {q : ℕ} [NeZero q] {g : ℕ} (hq : 2 < q)\n    (h : AsymptoticExists q g)\n    {a : ZMod q} (ha : a ∈ admissibleResidues q (g : ZMod q)) :\n    Tendsto (fun N => (configCount N q g a : ℝ) / (totalConfigCount N q g : ℝ))\n      atTop (nhds (1 / ((q : ℝ) - 2)))",
+      "statement_found": true,
+      "difficulty_score": -12.43,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.Equidistribution.asymptotic_shape_consistent",
+        "Brockian.Equidistribution.configCount_twelve_five_two_one",
+        "Brockian.Equidistribution.configCount_twenty_five_two_two",
+        "Brockian.Equidistribution.prime_pair_config_admissible"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.total_over_main_tendsto",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.EquidistributionBVReduction",
+      "source_file": "Brockian/EquidistributionBVReduction.lean",
+      "conditional_rung": "literature",
+      "statement": "lemma total_over_main_tendsto {q : ℕ} [NeZero q] {g : ℕ}\n    (H : BVPrimePairAsymptotic q g) :\n    Tendsto (fun N => (totalConfigCount N q g : ℝ) / H.mainTerm N) atTop\n      (nhds (∑ b ∈ admissibleResidues q (g : ZMod q), H.sing b))",
+      "statement_found": true,
+      "difficulty_score": -10.2,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 2,
+      "recommended_premises": [
+        "Brockian.EquidistributionBVReduction.admissible_reflection_symmetry",
+        "Brockian.EquidistributionBVReduction.bv_shape_consistent"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.configCount_over_main_tendsto",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.EquidistributionBVReduction",
+      "source_file": "Brockian/EquidistributionBVReduction.lean",
+      "conditional_rung": "literature",
+      "statement": "lemma configCount_over_main_tendsto {q : ℕ} [NeZero q] {g : ℕ}\n    (H : BVPrimePairAsymptotic q g) {a : ZMod q}\n    (ha : a ∈ admissibleResidues q (g : ZMod q)) :\n    Tendsto (fun N => (configCount N q g a : ℝ) / H.mainTerm N) atTop (nhds (H.sing a))",
+      "statement_found": true,
+      "difficulty_score": -9.75,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 2,
+      "recommended_premises": [
+        "Brockian.EquidistributionBVReduction.admissible_reflection_symmetry",
+        "Brockian.EquidistributionBVReduction.bv_shape_consistent"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "source_file": "Brockian/WeylFreeLaplacian2.lean",
+      "conditional_rung": "open",
+      "statement": "theorem freeLaplacian_essentiallySelfAdjoint_of_fourier\n    (U : K ≃ₗᵢ[ℂ] H) {M : K →ₗ.[ℂ] K} {S : H →ₗ.[ℂ] H}\n    (hMdom : Dense (M.domain : Set K)) (hM : EssentiallySelfAdjoint M)\n    (hdom : S.domain = M.domain.map U.toLinearMap)\n    (hact : ∀ (y : S.domain) (x : M.domain), (y : H) = U (x : K) → S y = U (M x)) :\n    EssentiallySelfAdjoint S",
+      "statement_found": true,
+      "difficulty_score": -9.38,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 10,
+      "recommended_premises": [
+        "Brockian.Weyl.FreeLaplacian2.conjCLM_essentiallySelfAdjoint",
+        "Brockian.Weyl.FreeLaplacian2.conjCLM_toPMap_essentiallySelfAdjoint_iff",
+        "Brockian.Weyl.FreeLaplacian2.dense_map_iff",
+        "Brockian.Weyl.FreeLaplacian2.essentiallySelfAdjoint_transfer",
+        "Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_diagonal",
+        "Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_multCLM",
+        "Brockian.Weyl.FreeLaplacian2.multCLM_essentiallySelfAdjoint",
+        "Brockian.Weyl.FreeLaplacian2.rangeSMulSub_image"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.EquidistributionUniformity",
+      "source_file": "Brockian/EquidistributionUniformity.lean",
+      "conditional_rung": "literature",
+      "statement": "theorem equidistribution_of_transitive_symmetry {q : ℕ} [NeZero q] {g : ℕ} (hq : 2 < q)\n    (H : BVPrimePairAsymptotic q g) {σ : ZMod q → ZMod q}\n    (hpres : PreservesAdmissible (g : ZMod q) σ)\n    (hinv : SingInvariant H σ)\n    (htrans : IterTransitive (g : ZMod q) σ)\n    {a : ZMod q} (ha : a ∈ admissibleResidues q (g : ZMod q)) :\n    Tendsto (fun N => (configCount N q g a : ℝ) / (totalConfigCount N q g : ℝ)) atTop\n      (nhds (1 / ((q : ℝ) - 2)))",
+      "statement_found": true,
+      "difficulty_score": -9.18,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 13,
+      "recommended_premises": [
+        "Brockian.EquidistributionUniformity.equidistribution_three",
+        "Brockian.EquidistributionUniformity.iterate_mem_admissible",
+        "Brockian.EquidistributionUniformity.reflect_affine",
+        "Brockian.EquidistributionUniformity.reflect_five_fixes_four",
+        "Brockian.EquidistributionUniformity.reflect_five_four_orbit",
+        "Brockian.EquidistributionUniformity.reflect_five_swaps_one",
+        "Brockian.EquidistributionUniformity.reflect_five_swaps_two",
+        "Brockian.EquidistributionUniformity.reflect_involutive"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.DeficiencyODE",
+      "source_file": "Brockian/WeylDeficiencyRegularity.lean",
+      "conditional_rung": "literature",
+      "statement": "theorem schrodinger_essentiallySelfAdjoint_of_weakRegularity\n    (V : ℝ → ℝ) (hVc : Continuous V) (M : ℝ) (hV : ∀ x, |V x| ≤ M)\n    (hreg : WeakSolutionRegularity V) :\n    EssentiallySelfAdjoint (schrodingerPMap V hVc M hV)",
+      "statement_found": true,
+      "difficulty_score": -8.43,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.Weyl.DeficiencyODE.coeFn_potentialMul",
+        "Brockian.Weyl.DeficiencyODE.inner_g_potential",
+        "Brockian.Weyl.DeficiencyODE.inner_g_schwartz",
+        "Brockian.Weyl.DeficiencyODE.inner_g_schwartz_D2"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.DeficiencyODE",
+      "source_file": "Brockian/WeylDeficiencyRegularity.lean",
+      "conditional_rung": "literature",
+      "statement": "theorem deficiencyRepresentsODE_of_weakRegularity\n    (V : ℝ → ℝ) (hVc : Continuous V) (M : ℝ) (hV : ∀ x, |V x| ≤ M)\n    (hreg : WeakSolutionRegularity V) :\n    Brockian.Weyl.SchrodingerESA.DeficiencyRepresentsODE (schrodingerPMap V hVc M hV) V",
+      "statement_found": true,
+      "difficulty_score": -7.9,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.Weyl.DeficiencyODE.coeFn_potentialMul",
+        "Brockian.Weyl.DeficiencyODE.inner_g_potential",
+        "Brockian.Weyl.DeficiencyODE.inner_g_schwartz",
+        "Brockian.Weyl.DeficiencyODE.inner_g_schwartz_D2"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.configCount_density_of_BV",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.EquidistributionBVReduction",
+      "source_file": "Brockian/EquidistributionBVReduction.lean",
+      "conditional_rung": "literature",
+      "statement": "theorem configCount_density_of_BV {q : ℕ} [NeZero q] {g : ℕ} (hq : 2 < q)\n    (H : BVPrimePairAsymptotic q g) {a : ZMod q}\n    (ha : a ∈ admissibleResidues q (g : ZMod q)) :\n    Tendsto (fun N => (configCount N q g a : ℝ) / (totalConfigCount N q g : ℝ)) atTop\n      (nhds (H.sing a / ∑ b ∈ admissibleResidues q (g : ZMod q), H.sing b))",
+      "statement_found": true,
+      "difficulty_score": -7.62,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 2,
+      "recommended_premises": [
+        "Brockian.EquidistributionBVReduction.admissible_reflection_symmetry",
+        "Brockian.EquidistributionBVReduction.bv_shape_consistent"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.sing_uniform_of_transitive",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.EquidistributionUniformity",
+      "source_file": "Brockian/EquidistributionUniformity.lean",
+      "conditional_rung": "literature",
+      "statement": "theorem sing_uniform_of_transitive {q : ℕ} [NeZero q] {g : ℕ}\n    (H : BVPrimePairAsymptotic q g) {σ : ZMod q → ZMod q}\n    (hpres : PreservesAdmissible (g : ZMod q) σ)\n    (hinv : SingInvariant H σ)\n    (htrans : IterTransitive (g : ZMod q) σ) :\n    ∀ a ∈ admissibleResidues q (g : ZMod q),\n      ∀ b ∈ admissibleResidues q (g : ZMod q), H.sing a = H.sing b",
+      "statement_found": true,
+      "difficulty_score": -7.55,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 13,
+      "recommended_premises": [
+        "Brockian.EquidistributionUniformity.equidistribution_three",
+        "Brockian.EquidistributionUniformity.iterate_mem_admissible",
+        "Brockian.EquidistributionUniformity.reflect_affine",
+        "Brockian.EquidistributionUniformity.reflect_five_fixes_four",
+        "Brockian.EquidistributionUniformity.reflect_five_four_orbit",
+        "Brockian.EquidistributionUniformity.reflect_five_swaps_one",
+        "Brockian.EquidistributionUniformity.reflect_five_swaps_two",
+        "Brockian.EquidistributionUniformity.reflect_involutive"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.FreeLaplacianPlancherel",
+      "source_file": "Brockian/FreeLaplacianPlancherel.lean",
+      "conditional_rung": "open",
+      "statement": "theorem freeLaplacian_essentiallySelfAdjoint_via_plancherel\n    {M S : L2R →ₗ.[ℂ] L2R}\n    (hMdom : Dense (M.domain : Set L2R))\n    (hM : EssentiallySelfAdjoint M)\n    (hdom : S.domain = M.domain.map (fourierL2).toLinearMap)\n    (hact : ∀ (y : S.domain) (x : M.domain),\n      (y : L2R) = fourierL2 (x : L2R) → S y = fourierL2 (M x)) :\n    EssentiallySelfAdjoint S",
+      "statement_found": true,
+      "difficulty_score": -6.43,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 3,
+      "recommended_premises": [
+        "Brockian.FreeLaplacianPlancherel.essentiallySelfAdjoint_fourierConj",
+        "Brockian.FreeLaplacianPlancherel.fourierL2_inner_map",
+        "Brockian.FreeLaplacianPlancherel.fourierL2_norm_map"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.ZumkellerNumbers",
+      "source_file": "Brockian/ZumkellerNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def OddZumkellerFrom3Structure : Prop",
+      "statement_found": true,
+      "difficulty_score": -3.58,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 9,
+      "recommended_premises": [
+        "Brockian.ZumkellerNumbers.not_zumkeller_prime",
+        "Brockian.ZumkellerNumbers.zumkeller_sigma_even",
+        "Brockian.ZumkellerNumbers.zumkeller_six",
+        "Brockian.ZumkellerNumbers.zumkeller_thirty",
+        "Brockian.ZumkellerNumbers.zumkeller_twelve",
+        "Brockian.ZumkellerNumbers.zumkeller_twenty",
+        "Brockian.ZumkellerNumbers.zumkeller_twentyeight",
+        "Brockian.ZumkellerNumbers.zumkeller_twentyfour"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.EquidistributionBVReduction",
+      "source_file": "Brockian/EquidistributionBVReduction.lean",
+      "conditional_rung": "literature",
+      "statement": "theorem equidistribution_of_BV_uniform {q : ℕ} [NeZero q] {g : ℕ} (hq : 2 < q)\n    (H : BVPrimePairAsymptotic q g)\n    (huniform : ∀ a ∈ admissibleResidues q (g : ZMod q),\n      ∀ b ∈ admissibleResidues q (g : ZMod q), H.sing a = H.sing b)\n    {a : ZMod q} (ha : a ∈ admissibleResidues q (g : ZMod q)) :\n    Tendsto (fun N => (configCount N q g a : ℝ) / (totalConfigCount N q g : ℝ)) atTop\n      (nhds (1 / ((q : ℝ) - 2)))",
+      "statement_found": true,
+      "difficulty_score": -1.45,
+      "hard_problem_flags": [],
+      "rung_cascade_size": 8,
+      "nearby_proved_count": 2,
+      "recommended_premises": [
+        "Brockian.EquidistributionBVReduction.admissible_reflection_symmetry",
+        "Brockian.EquidistributionBVReduction.bv_shape_consistent"
+      ],
+      "recommendation": "go"
+    },
+    {
+      "name": "Brockian.GoldbachSchema.goldbach_from_spectral_model",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.GoldbachSchema",
+      "source_file": "Brockian/GoldbachSchema.lean",
+      "conditional_rung": "open",
+      "statement": "theorem goldbach_from_spectral_model (M : SpectralModel) {n : ℕ}\n    (hn : M.N₀ < n) (hev : Even n) : HasGoldbachRep n",
+      "statement_found": true,
+      "difficulty_score": 981.95,
+      "hard_problem_flags": [
+        "goldbach"
+      ],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 6,
+      "recommended_premises": [
+        "Brockian.GoldbachSchema.goldbachCount_four",
+        "Brockian.GoldbachSchema.goldbachCount_ten",
+        "Brockian.GoldbachSchema.hasGoldbachRep_eight",
+        "Brockian.GoldbachSchema.hasGoldbachRep_four",
+        "Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos",
+        "Brockian.GoldbachSchema.hasGoldbachRep_six"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.GoldbachSchema.goldbach_beyond_of_model",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.GoldbachSchema",
+      "source_file": "Brockian/GoldbachSchema.lean",
+      "conditional_rung": "open",
+      "statement": "theorem goldbach_beyond_of_model {N : ℕ} (h : SpectralModelBeyond N)\n    {n : ℕ} (hn : N < n) (hev : Even n) : HasGoldbachRep n",
+      "statement_found": true,
+      "difficulty_score": 982.17,
+      "hard_problem_flags": [
+        "goldbach"
+      ],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 6,
+      "recommended_premises": [
+        "Brockian.GoldbachSchema.goldbachCount_four",
+        "Brockian.GoldbachSchema.goldbachCount_ten",
+        "Brockian.GoldbachSchema.hasGoldbachRep_eight",
+        "Brockian.GoldbachSchema.hasGoldbachRep_four",
+        "Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos",
+        "Brockian.GoldbachSchema.hasGoldbachRep_six"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.RiemannScaffold.RH_of_BrockianSystem",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.RiemannScaffold",
+      "source_file": "Brockian/RiemannScaffold.lean",
+      "conditional_rung": "open",
+      "statement": "theorem RH_of_BrockianSystem {H : Type*}\n    [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]\n    (B : BrockianSystem H) : RiemannHypothesis",
+      "statement_found": true,
+      "difficulty_score": 983.9,
+      "hard_problem_flags": [
+        "_rh",
+        "rh_",
+        "riemann"
+      ],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial",
+        "Brockian.RiemannScaffold.RiemannHypothesis_of_forall_xi_zero",
+        "Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero",
+        "Brockian.RiemannScaffold.symmetric_eigenvalue_im_zero"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm",
+      "kind": "theorem",
+      "register": "CONDITIONAL",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "source_file": "Brockian/WeylLawTarget.lean",
+      "conditional_rung": "open",
+      "statement": "theorem counting_diverges_of_discrete_and_rvm\n    {T : H →ₗ.[ℂ] H}\n    (_hdisc : DiscreteSpectrumCandidate T)\n    {N_op : ℝ → ℝ}\n    (hmatch : MatchesRiemannVonMangoldt N_op) :\n    Tendsto N_op atTop atTop",
+      "statement_found": true,
+      "difficulty_score": 985.12,
+      "hard_problem_flags": [
+        "riemann"
+      ],
+      "rung_cascade_size": 12,
+      "nearby_proved_count": 8,
+      "recommended_premises": [
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_WeylLawMatch",
+        "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_matches_rvm",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff_iff_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_iff_eigenvalueCountingAsymptotic",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_diff",
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_eigenvalueCountingMatchesNT",
+        "Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate",
+        "Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.PolignacPrimes.PolignacConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.PolignacPrimes",
+      "source_file": "Brockian/PolignacPrimes.lean",
+      "conditional_rung": null,
+      "statement": "def PolignacConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 991.23,
+      "hard_problem_flags": [
+        "polignac"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 19,
+      "recommended_premises": [
+        "Brockian.PolignacPrimes.cousin_13",
+        "Brockian.PolignacPrimes.cousin_19",
+        "Brockian.PolignacPrimes.cousin_3",
+        "Brockian.PolignacPrimes.cousin_37",
+        "Brockian.PolignacPrimes.cousin_43",
+        "Brockian.PolignacPrimes.cousin_67",
+        "Brockian.PolignacPrimes.cousin_7",
+        "Brockian.PolignacPrimes.cousin_79"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.PalindromicPrimeInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.PalindromicPrimes",
+      "source_file": "Brockian/PalindromicPrimes.lean",
+      "conditional_rung": null,
+      "statement": "def PalindromicPrimeInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 992.42,
+      "hard_problem_flags": [
+        "infinitude",
+        "palindromicprime"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 17,
+      "recommended_premises": [
+        "Brockian.PalindromicPrimes.eleven_dvd_one_add_odd_pow",
+        "Brockian.PalindromicPrimes.eleven_unique_even_palindromic_prime",
+        "Brockian.PalindromicPrimes.even_digit_palindrome_dvd_11",
+        "Brockian.PalindromicPrimes.even_len_palindrome_dvd_11_examples",
+        "Brockian.PalindromicPrimes.even_palindrome_dvd_11",
+        "Brockian.PalindromicPrimes.not_palindromic_13",
+        "Brockian.PalindromicPrimes.palindromic_101",
+        "Brockian.PalindromicPrimes.palindromic_11"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.RuthAaronInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.RuthAaronPairs",
+      "source_file": "Brockian/RuthAaronPairs.lean",
+      "conditional_rung": null,
+      "statement": "def RuthAaronInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 993.25,
+      "hard_problem_flags": [
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 15,
+      "recommended_premises": [
+        "Brockian.RuthAaronPairs.not_ruthAaron_6",
+        "Brockian.RuthAaronPairs.ruthAaron_125",
+        "Brockian.RuthAaronPairs.ruthAaron_5",
+        "Brockian.RuthAaronPairs.ruthAaron_714",
+        "Brockian.RuthAaronPairs.ruthAaron_77",
+        "Brockian.RuthAaronPairs.sopfr_125",
+        "Brockian.RuthAaronPairs.sopfr_126",
+        "Brockian.RuthAaronPairs.sopfr_5"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.MersennePerfect.EvenPerfectInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.MersennePerfect",
+      "source_file": "Brockian/MersennePerfect.lean",
+      "conditional_rung": null,
+      "statement": "def EvenPerfectInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 993.3,
+      "hard_problem_flags": [
+        "evenperfectinfinitude",
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 15,
+      "recommended_premises": [
+        "Brockian.MersennePerfect.eq_two_pow_mul_odd",
+        "Brockian.MersennePerfect.eq_two_pow_mul_prime_mersenne_of_even_perfect",
+        "Brockian.MersennePerfect.even_two_pow_mul_mersenne_of_prime",
+        "Brockian.MersennePerfect.infinitude_equiv",
+        "Brockian.MersennePerfect.mersenne_2_prime",
+        "Brockian.MersennePerfect.mersenne_3_prime",
+        "Brockian.MersennePerfect.mersenne_5_prime",
+        "Brockian.MersennePerfect.mersenne_7_prime"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.MersennePerfect.MersennePrimeInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.MersennePerfect",
+      "source_file": "Brockian/MersennePerfect.lean",
+      "conditional_rung": null,
+      "statement": "def MersennePrimeInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 993.35,
+      "hard_problem_flags": [
+        "infinitude",
+        "mersenne"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 15,
+      "recommended_premises": [
+        "Brockian.MersennePerfect.eq_two_pow_mul_odd",
+        "Brockian.MersennePerfect.eq_two_pow_mul_prime_mersenne_of_even_perfect",
+        "Brockian.MersennePerfect.even_two_pow_mul_mersenne_of_prime",
+        "Brockian.MersennePerfect.infinitude_equiv",
+        "Brockian.MersennePerfect.mersenne_2_prime",
+        "Brockian.MersennePerfect.mersenne_3_prime",
+        "Brockian.MersennePerfect.mersenne_5_prime",
+        "Brockian.MersennePerfect.mersenne_7_prime"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.LegendreConjecture.LegendreConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.LegendreConjecture",
+      "source_file": "Brockian/LegendreConjecture.lean",
+      "conditional_rung": null,
+      "statement": "def LegendreConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 994.23,
+      "hard_problem_flags": [
+        "legendre"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 13,
+      "recommended_premises": [
+        "Brockian.LegendreConjecture.bertrand_holds",
+        "Brockian.LegendreConjecture.legendre_1",
+        "Brockian.LegendreConjecture.legendre_10",
+        "Brockian.LegendreConjecture.legendre_11",
+        "Brockian.LegendreConjecture.legendre_12",
+        "Brockian.LegendreConjecture.legendre_2",
+        "Brockian.LegendreConjecture.legendre_3",
+        "Brockian.LegendreConjecture.legendre_4"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.GilbreathConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.GilbreathConjecture",
+      "source_file": "Brockian/GilbreathConjecture.lean",
+      "conditional_rung": null,
+      "statement": "def GilbreathConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 994.75,
+      "hard_problem_flags": [
+        "gilbreath"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 12,
+      "recommended_premises": [
+        "Brockian.GilbreathConjecture.gilbreath_row10_head",
+        "Brockian.GilbreathConjecture.gilbreath_row1_eq",
+        "Brockian.GilbreathConjecture.gilbreath_row1_head",
+        "Brockian.GilbreathConjecture.gilbreath_row1_head?",
+        "Brockian.GilbreathConjecture.gilbreath_row2_head",
+        "Brockian.GilbreathConjecture.gilbreath_row3_head",
+        "Brockian.GilbreathConjecture.gilbreath_row4_head",
+        "Brockian.GilbreathConjecture.gilbreath_row5_head"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "source_file": "Brockian/LandauNSquaredPlusOne.lean",
+      "conditional_rung": null,
+      "statement": "def LandauFourthConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 994.83,
+      "hard_problem_flags": [
+        "landau"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 12,
+      "recommended_premises": [
+        "Brockian.LandauNSquaredPlusOne.nsq_1",
+        "Brockian.LandauNSquaredPlusOne.nsq_10",
+        "Brockian.LandauNSquaredPlusOne.nsq_14",
+        "Brockian.LandauNSquaredPlusOne.nsq_16",
+        "Brockian.LandauNSquaredPlusOne.nsq_2",
+        "Brockian.LandauNSquaredPlusOne.nsq_20",
+        "Brockian.LandauNSquaredPlusOne.nsq_24",
+        "Brockian.LandauNSquaredPlusOne.nsq_26"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.FermatNumbers.FermatPrimeBeyondFour",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.FermatNumbers",
+      "source_file": "Brockian/FermatNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def FermatPrimeBeyondFour : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.3,
+      "hard_problem_flags": [
+        "fermatprime"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 11,
+      "recommended_premises": [
+        "Brockian.FermatNumbers.fermat_0_prime",
+        "Brockian.FermatNumbers.fermat_1_prime",
+        "Brockian.FermatNumbers.fermat_2_prime",
+        "Brockian.FermatNumbers.fermat_3_prime",
+        "Brockian.FermatNumbers.fermat_4_prime",
+        "Brockian.FermatNumbers.fermat_5_eq",
+        "Brockian.FermatNumbers.fermat_5_not_prime",
+        "Brockian.FermatNumbers.fermat_6_eq"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.CullenWoodall.CullenPrimeInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.CullenWoodall",
+      "source_file": "Brockian/CullenWoodall.lean",
+      "conditional_rung": null,
+      "statement": "def CullenPrimeInfinitude  : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.33,
+      "hard_problem_flags": [
+        "cullen",
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 11,
+      "recommended_premises": [
+        "Brockian.CullenWoodall.cullen_1_prime",
+        "Brockian.CullenWoodall.cullen_2_not_prime",
+        "Brockian.CullenWoodall.cullen_3_not_prime",
+        "Brockian.CullenWoodall.cullen_odd",
+        "Brockian.CullenWoodall.cullen_sub_woodall",
+        "Brockian.CullenWoodall.woodall_2_prime",
+        "Brockian.CullenWoodall.woodall_3_prime",
+        "Brockian.CullenWoodall.woodall_4_not_prime"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.CullenWoodall.WoodallPrimeInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.CullenWoodall",
+      "source_file": "Brockian/CullenWoodall.lean",
+      "conditional_rung": null,
+      "statement": "def WoodallPrimeInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.33,
+      "hard_problem_flags": [
+        "infinitude",
+        "woodall"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 11,
+      "recommended_premises": [
+        "Brockian.CullenWoodall.cullen_1_prime",
+        "Brockian.CullenWoodall.cullen_2_not_prime",
+        "Brockian.CullenWoodall.cullen_3_not_prime",
+        "Brockian.CullenWoodall.cullen_odd",
+        "Brockian.CullenWoodall.cullen_sub_woodall",
+        "Brockian.CullenWoodall.woodall_2_prime",
+        "Brockian.CullenWoodall.woodall_3_prime",
+        "Brockian.CullenWoodall.woodall_4_not_prime"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.CollatzPartial.CollatzConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.CollatzPartial",
+      "source_file": "Brockian/CollatzPartial.lean",
+      "conditional_rung": null,
+      "statement": "def CollatzConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.7,
+      "hard_problem_flags": [
+        "collatz"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 10,
+      "recommended_premises": [
+        "Brockian.CollatzPartial.collatz_four",
+        "Brockian.CollatzPartial.collatz_one",
+        "Brockian.CollatzPartial.collatz_two",
+        "Brockian.CollatzPartial.collatz_two_mul",
+        "Brockian.CollatzPartial.descent_mod4_one",
+        "Brockian.CollatzPartial.reaches1_mul_pow_two",
+        "Brockian.CollatzPartial.reaches1_one",
+        "Brockian.CollatzPartial.reaches1_pow_two"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.OppermannConjecture.OppermannConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.OppermannConjecture",
+      "source_file": "Brockian/OppermannConjecture.lean",
+      "conditional_rung": null,
+      "statement": "def OppermannConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.75,
+      "hard_problem_flags": [
+        "oppermann"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 10,
+      "recommended_premises": [
+        "Brockian.OppermannConjecture.oppermannUpper_imp_legendre",
+        "Brockian.OppermannConjecture.oppermann_10",
+        "Brockian.OppermannConjecture.oppermann_2",
+        "Brockian.OppermannConjecture.oppermann_3",
+        "Brockian.OppermannConjecture.oppermann_4",
+        "Brockian.OppermannConjecture.oppermann_5",
+        "Brockian.OppermannConjecture.oppermann_6",
+        "Brockian.OppermannConjecture.oppermann_7"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.TwinPrimes.TwinPrimeConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.TwinPrimes",
+      "source_file": "Brockian/TwinPrimes.lean",
+      "conditional_rung": null,
+      "statement": "def TwinPrimeConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.75,
+      "hard_problem_flags": [
+        "twinprime"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 10,
+      "recommended_premises": [
+        "Brockian.TwinPrimes.twin_11",
+        "Brockian.TwinPrimes.twin_17",
+        "Brockian.TwinPrimes.twin_29",
+        "Brockian.TwinPrimes.twin_3",
+        "Brockian.TwinPrimes.twin_41",
+        "Brockian.TwinPrimes.twin_5",
+        "Brockian.TwinPrimes.twin_59",
+        "Brockian.TwinPrimes.twin_71"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.RepunitPrimes.RepunitPrimeInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.RepunitPrimes",
+      "source_file": "Brockian/RepunitPrimes.lean",
+      "conditional_rung": null,
+      "statement": "def RepunitPrimeInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.83,
+      "hard_problem_flags": [
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 10,
+      "recommended_premises": [
+        "Brockian.RepunitPrimes.prime_of_repunit_prime",
+        "Brockian.RepunitPrimes.repunit_1_not_prime",
+        "Brockian.RepunitPrimes.repunit_2_prime",
+        "Brockian.RepunitPrimes.repunit_3_not_prime",
+        "Brockian.RepunitPrimes.repunit_4_not_prime",
+        "Brockian.RepunitPrimes.repunit_5_not_prime",
+        "Brockian.RepunitPrimes.repunit_6_not_prime",
+        "Brockian.RepunitPrimes.repunit_dvd_of_dvd"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.SophieGermain.SophieGermainInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.SophieGermain",
+      "source_file": "Brockian/SophieGermain.lean",
+      "conditional_rung": null,
+      "statement": "def SophieGermainInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.85,
+      "hard_problem_flags": [
+        "infinitude",
+        "sophiegermain"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 10,
+      "recommended_premises": [
+        "Brockian.SophieGermain.sg_11",
+        "Brockian.SophieGermain.sg_2",
+        "Brockian.SophieGermain.sg_23",
+        "Brockian.SophieGermain.sg_29",
+        "Brockian.SophieGermain.sg_3",
+        "Brockian.SophieGermain.sg_41",
+        "Brockian.SophieGermain.sg_5",
+        "Brockian.SophieGermain.sg_53"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.PerfectTotient.PerfectTotientInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.PerfectTotient",
+      "source_file": "Brockian/PerfectTotient.lean",
+      "conditional_rung": null,
+      "statement": "def PerfectTotientInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 995.88,
+      "hard_problem_flags": [
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 10,
+      "recommended_premises": [
+        "Brockian.PerfectTotient.not_pt_4",
+        "Brockian.PerfectTotient.pt_111",
+        "Brockian.PerfectTotient.pt_15",
+        "Brockian.PerfectTotient.pt_183",
+        "Brockian.PerfectTotient.pt_243",
+        "Brockian.PerfectTotient.pt_27",
+        "Brockian.PerfectTotient.pt_3",
+        "Brockian.PerfectTotient.pt_39"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.FortunateNumbers.FortuneConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.FortunateNumbers",
+      "source_file": "Brockian/FortunateNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def FortuneConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 996.2,
+      "hard_problem_flags": [
+        "fortune"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 9,
+      "recommended_premises": [
+        "Brockian.FortunateNumbers.fortunate_2",
+        "Brockian.FortunateNumbers.fortunate_210",
+        "Brockian.FortunateNumbers.fortunate_30",
+        "Brockian.FortunateNumbers.fortunate_6",
+        "Brockian.FortunateNumbers.fortunate_values_prime",
+        "Brockian.FortunateNumbers.primorial_2",
+        "Brockian.FortunateNumbers.primorial_3",
+        "Brockian.FortunateNumbers.primorial_5"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.QuasiperfectExists",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.QuasiperfectNumbers",
+      "source_file": "Brockian/QuasiperfectNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def QuasiperfectExists : Prop",
+      "statement_found": true,
+      "difficulty_score": 996.23,
+      "hard_problem_flags": [
+        "open_existence"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 9,
+      "recommended_premises": [
+        "Brockian.QuasiperfectNumbers.almostPerfect_1",
+        "Brockian.QuasiperfectNumbers.almostPerfect_16",
+        "Brockian.QuasiperfectNumbers.almostPerfect_2",
+        "Brockian.QuasiperfectNumbers.almostPerfect_pow_two",
+        "Brockian.QuasiperfectNumbers.not_quasiperfect_of_almostPerfect",
+        "Brockian.QuasiperfectNumbers.not_quasiperfect_of_perfectσ",
+        "Brockian.QuasiperfectNumbers.perfectσ_28",
+        "Brockian.QuasiperfectNumbers.perfectσ_6"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.OddSuperperfectExists",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.SuperperfectNumbers",
+      "source_file": "Brockian/SuperperfectNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def OddSuperperfectExists : Prop",
+      "statement_found": true,
+      "difficulty_score": 996.8,
+      "hard_problem_flags": [
+        "open_existence"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 8,
+      "recommended_premises": [
+        "Brockian.SuperperfectNumbers.sigma1_prime",
+        "Brockian.SuperperfectNumbers.sigma_two_pow",
+        "Brockian.SuperperfectNumbers.six_not_superperfect",
+        "Brockian.SuperperfectNumbers.superperfect_16",
+        "Brockian.SuperperfectNumbers.superperfect_2",
+        "Brockian.SuperperfectNumbers.superperfect_4",
+        "Brockian.SuperperfectNumbers.superperfect_64",
+        "Brockian.SuperperfectNumbers.superperfect_two_pow_of_mersenne_prime"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.HyperperfectAllK",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.HyperperfectNumbers",
+      "source_file": "Brockian/HyperperfectNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def HyperperfectAllK : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.17,
+      "hard_problem_flags": [
+        "hyperperfect"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 7,
+      "recommended_premises": [
+        "Brockian.HyperperfectNumbers.hyperperfect_1_28",
+        "Brockian.HyperperfectNumbers.hyperperfect_1_6",
+        "Brockian.HyperperfectNumbers.hyperperfect_2_21",
+        "Brockian.HyperperfectNumbers.hyperperfect_2_2133",
+        "Brockian.HyperperfectNumbers.hyperperfect_6_301",
+        "Brockian.HyperperfectNumbers.hyperperfect_one_iff_sigma_two_mul",
+        "Brockian.HyperperfectNumbers.not_hyperperfect_2_6"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.BrocardProblem.BrocardConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.BrocardProblem",
+      "source_file": "Brockian/BrocardProblem.lean",
+      "conditional_rung": null,
+      "statement": "def BrocardConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.2,
+      "hard_problem_flags": [
+        "brocard"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 7,
+      "recommended_premises": [
+        "Brockian.BrocardProblem.brown_4_5",
+        "Brockian.BrocardProblem.brown_5_11",
+        "Brockian.BrocardProblem.brown_7_71",
+        "Brockian.BrocardProblem.brown_factorization",
+        "Brockian.BrocardProblem.brown_m_odd",
+        "Brockian.BrocardProblem.no_brown_8_9_10",
+        "Brockian.BrocardProblem.not_square_between"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.BetrothedInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.BetrothedNumbers",
+      "source_file": "Brockian/BetrothedNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def BetrothedInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.25,
+      "hard_problem_flags": [
+        "betrothedinfinitude",
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 7,
+      "recommended_premises": [
+        "Brockian.BetrothedNumbers.betrothed_1050_1925",
+        "Brockian.BetrothedNumbers.betrothed_140_195",
+        "Brockian.BetrothedNumbers.betrothed_140_195_opposite_parity",
+        "Brockian.BetrothedNumbers.betrothed_48_75",
+        "Brockian.BetrothedNumbers.betrothed_48_75_opposite_parity",
+        "Brockian.BetrothedNumbers.betrothed_ne",
+        "Brockian.BetrothedNumbers.betrothed_symm"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.ErdosStraus.ErdosStrausConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.ErdosStraus",
+      "source_file": "Brockian/ErdosStraus.lean",
+      "conditional_rung": null,
+      "statement": "def ErdosStrausConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.3,
+      "hard_problem_flags": [
+        "erdosstraus"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 7,
+      "recommended_premises": [
+        "Brockian.ErdosStraus.erdosStraus_dvd_three",
+        "Brockian.ErdosStraus.erdosStraus_even",
+        "Brockian.ErdosStraus.erdosStraus_mod3_two",
+        "Brockian.ErdosStraus.erdosStraus_mod4_three",
+        "Brockian.ErdosStraus.erdosStraus_of_covered",
+        "Brockian.ErdosStraus.erdosStraus_of_dvd",
+        "Brockian.ErdosStraus.erdosStraus_of_prime_case"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.HyperperfectInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.HyperperfectNumbers",
+      "source_file": "Brockian/HyperperfectNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def HyperperfectInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.33,
+      "hard_problem_flags": [
+        "hyperperfect",
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 7,
+      "recommended_premises": [
+        "Brockian.HyperperfectNumbers.hyperperfect_1_28",
+        "Brockian.HyperperfectNumbers.hyperperfect_1_6",
+        "Brockian.HyperperfectNumbers.hyperperfect_2_21",
+        "Brockian.HyperperfectNumbers.hyperperfect_2_2133",
+        "Brockian.HyperperfectNumbers.hyperperfect_6_301",
+        "Brockian.HyperperfectNumbers.hyperperfect_one_iff_sigma_two_mul",
+        "Brockian.HyperperfectNumbers.not_hyperperfect_2_6"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.SameParityBetrothedExists",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.BetrothedNumbers",
+      "source_file": "Brockian/BetrothedNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def SameParityBetrothedExists : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.4,
+      "hard_problem_flags": [
+        "open_existence"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 7,
+      "recommended_premises": [
+        "Brockian.BetrothedNumbers.betrothed_1050_1925",
+        "Brockian.BetrothedNumbers.betrothed_140_195",
+        "Brockian.BetrothedNumbers.betrothed_140_195_opposite_parity",
+        "Brockian.BetrothedNumbers.betrothed_48_75",
+        "Brockian.BetrothedNumbers.betrothed_48_75_opposite_parity",
+        "Brockian.BetrothedNumbers.betrothed_ne",
+        "Brockian.BetrothedNumbers.betrothed_symm"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.WeirdNumbers.OddWeirdExists",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.WeirdNumbers",
+      "source_file": "Brockian/WeirdNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def OddWeirdExists : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.62,
+      "hard_problem_flags": [
+        "open_existence"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 6,
+      "recommended_premises": [
+        "Brockian.WeirdNumbers.twelve_abundant",
+        "Brockian.WeirdNumbers.twelve_not_weird",
+        "Brockian.WeirdNumbers.twelve_semiperfect",
+        "Brockian.WeirdNumbers.twenty_not_weird",
+        "Brockian.WeirdNumbers.weird_70",
+        "Brockian.WeirdNumbers.weird_836"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.AndricaConjecture.AndricaConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.AndricaConjecture",
+      "source_file": "Brockian/AndricaConjecture.lean",
+      "conditional_rung": null,
+      "statement": "def AndricaConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.7,
+      "hard_problem_flags": [
+        "andrica"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 6,
+      "recommended_premises": [
+        "Brockian.AndricaConjecture.andricaInt_iff_sqrt",
+        "Brockian.AndricaConjecture.andrica_113_127",
+        "Brockian.AndricaConjecture.andrica_23_29",
+        "Brockian.AndricaConjecture.andrica_2_3",
+        "Brockian.AndricaConjecture.andrica_7_11",
+        "Brockian.AndricaConjecture.andrica_89_97"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.OddHarmonicExists",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.OreHarmonicNumbers",
+      "source_file": "Brockian/OreHarmonicNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def OddHarmonicExists : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.7,
+      "hard_problem_flags": [
+        "oddharmonic",
+        "open_existence"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 6,
+      "recommended_premises": [
+        "Brockian.OreHarmonicNumbers.harmonic_140",
+        "Brockian.OreHarmonicNumbers.harmonic_270",
+        "Brockian.OreHarmonicNumbers.harmonic_28",
+        "Brockian.OreHarmonicNumbers.harmonic_496",
+        "Brockian.OreHarmonicNumbers.harmonic_6",
+        "Brockian.OreHarmonicNumbers.not_harmonic_4"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.AmicableNumbers.AmicableInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.AmicableNumbers",
+      "source_file": "Brockian/AmicableNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def AmicableInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.73,
+      "hard_problem_flags": [
+        "amicableinfinitude",
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 6,
+      "recommended_premises": [
+        "Brockian.AmicableNumbers.amicable_1184_1210",
+        "Brockian.AmicableNumbers.amicable_220_284",
+        "Brockian.AmicableNumbers.amicable_2620_2924",
+        "Brockian.AmicableNumbers.amicable_not_perfect",
+        "Brockian.AmicableNumbers.amicable_symm",
+        "Brockian.AmicableNumbers.perfect_iff_aliquot_fixed"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.PracticalNumbers.PracticalTwinInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.PracticalNumbers",
+      "source_file": "Brockian/PracticalNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def PracticalTwinInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 997.85,
+      "hard_problem_flags": [
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 6,
+      "recommended_premises": [
+        "Brockian.PracticalNumbers.not_practical_10",
+        "Brockian.PracticalNumbers.practical_12",
+        "Brockian.PracticalNumbers.practical_20",
+        "Brockian.PracticalNumbers.practical_28",
+        "Brockian.PracticalNumbers.practical_6",
+        "Brockian.PracticalNumbers.practical_pow_two"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.BrocardGap.BrocardGapConjecture",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.BrocardGap",
+      "source_file": "Brockian/BrocardGapConjecture.lean",
+      "conditional_rung": null,
+      "statement": "def BrocardGapConjecture : Prop",
+      "statement_found": true,
+      "difficulty_score": 998.27,
+      "hard_problem_flags": [
+        "brocard"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 5,
+      "recommended_premises": [
+        "Brockian.BrocardGap.brocard_11_13",
+        "Brockian.BrocardGap.brocard_13_17",
+        "Brockian.BrocardGap.brocard_3_5",
+        "Brockian.BrocardGap.brocard_5_7",
+        "Brockian.BrocardGap.brocard_7_11"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.SixthUnitaryPerfectExists",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.UnitaryPerfect",
+      "source_file": "Brockian/UnitaryPerfect.lean",
+      "conditional_rung": null,
+      "statement": "def SixthUnitaryPerfectExists : Prop",
+      "statement_found": true,
+      "difficulty_score": 998.4,
+      "hard_problem_flags": [
+        "open_existence"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 5,
+      "recommended_premises": [
+        "Brockian.UnitaryPerfect.not_unitaryPerfect_28",
+        "Brockian.UnitaryPerfect.unitaryDivisorSum_eq_sigma_6",
+        "Brockian.UnitaryPerfect.unitaryPerfect_6",
+        "Brockian.UnitaryPerfect.unitaryPerfect_60",
+        "Brockian.UnitaryPerfect.unitaryPerfect_90"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.CarmichaelKorselt",
+      "source_file": "Brockian/CarmichaelKorselt.lean",
+      "conditional_rung": null,
+      "statement": "def ThreePrimeCarmichaelInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 998.52,
+      "hard_problem_flags": [
+        "carmichael",
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 5,
+      "recommended_premises": [
+        "Brockian.CarmichaelKorselt.korselt_1105",
+        "Brockian.CarmichaelKorselt.korselt_1729",
+        "Brockian.CarmichaelKorselt.korselt_561",
+        "Brockian.CarmichaelKorselt.korselt_odd",
+        "Brockian.CarmichaelKorselt.sqfree_prod3"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.RieselCovering.RieselProblem",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.RieselCovering",
+      "source_file": "Brockian/RieselCovering.lean",
+      "conditional_rung": null,
+      "statement": "def RieselProblem : Prop",
+      "statement_found": true,
+      "difficulty_score": 998.6,
+      "hard_problem_flags": [
+        "riesel"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.RieselCovering.composite_of",
+        "Brockian.RieselCovering.covering_table",
+        "Brockian.RieselCovering.riesel_509203",
+        "Brockian.RieselCovering.two_pow_periodic"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.SierpinskiCovering.SierpinskiProblem",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.SierpinskiCovering",
+      "source_file": "Brockian/SierpinskiCovering.lean",
+      "conditional_rung": null,
+      "statement": "def SierpinskiProblem : Prop",
+      "statement_found": true,
+      "difficulty_score": 998.7,
+      "hard_problem_flags": [
+        "sierpinski"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.SierpinskiCovering.composite_of",
+        "Brockian.SierpinskiCovering.covering_table",
+        "Brockian.SierpinskiCovering.sierpinski_78557",
+        "Brockian.SierpinskiCovering.two_pow_periodic"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.WilsonPrimes.WilsonPrimeInfinitude",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.WilsonPrimes",
+      "source_file": "Brockian/WilsonPrimes.lean",
+      "conditional_rung": null,
+      "statement": "def WilsonPrimeInfinitude : Prop",
+      "statement_found": true,
+      "difficulty_score": 998.8,
+      "hard_problem_flags": [
+        "infinitude"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 4,
+      "recommended_premises": [
+        "Brockian.WilsonPrimes.prime_dvd_factorial_add_one",
+        "Brockian.WilsonPrimes.seven_not_wilson",
+        "Brockian.WilsonPrimes.wilson_13",
+        "Brockian.WilsonPrimes.wilson_5"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.GiugaNumbers.OddGiugaExists",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.GiugaNumbers",
+      "source_file": "Brockian/GiugaNumbers.lean",
+      "conditional_rung": null,
+      "statement": "def OddGiugaExists : Prop",
+      "statement_found": true,
+      "difficulty_score": 999.12,
+      "hard_problem_flags": [
+        "giuga",
+        "oddgiuga",
+        "open_existence"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 3,
+      "recommended_premises": [
+        "Brockian.GiugaNumbers.giugaNumber_squarefree",
+        "Brockian.GiugaNumbers.giuga_30",
+        "Brockian.GiugaNumbers.giuga_858"
+      ],
+      "recommendation": "no-go"
+    },
+    {
+      "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
+      "kind": "conjecture",
+      "register": "CONJECTURE",
+      "module": "Brockian.GoldbachComb",
+      "source_file": "Brockian/GoldbachComb.lean",
+      "conditional_rung": null,
+      "statement": "def GoldbachCovarianceTransfer : Prop",
+      "statement_found": true,
+      "difficulty_score": 999.42,
+      "hard_problem_flags": [
+        "goldbach"
+      ],
+      "rung_cascade_size": 0,
+      "nearby_proved_count": 3,
+      "recommended_premises": [
+        "Brockian.GoldbachComb.gCount_centered",
+        "Brockian.GoldbachComb.gCount_eq",
+        "Brockian.GoldbachComb.local_covariance"
+      ],
+      "recommendation": "no-go"
+    }
+  ]
+}

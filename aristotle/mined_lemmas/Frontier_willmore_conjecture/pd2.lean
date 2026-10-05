@@ -5,7 +5,6 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
 /-!
@@ -30,9 +29,9 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
+set_option pp.fullNames false
 set_option pp.structureInstances true
-set_option pp.coercions.types true
+set_option pp.coercions.types false
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
@@ -41,14 +40,11 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Basic vector algebra in `ℝ³` -/
+open Real
 
-/-- Euclidean three-space, as a triple of reals. -/
-abbrev R3 := ℝ × ℝ × ℝ
+/-! ## Partial derivatives of functions of two real variables -/
 
-/-- The standard inner product on `ℝ³`. -/
+/-- Partial derivative with respect to the first variable. -/
 
-noncomputable def pd2 (X : ℝ → ℝ → R3) : ℝ → ℝ → R3 := fun u v =>
-  (deriv (fun t => (X u t).1) v, deriv (fun t => (X u t).2.1) v, deriv (fun t => (X u t).2.2) v)
+noncomputable def pd2 (f : ℝ → ℝ → ℝ) : ℝ → ℝ → ℝ := fun u v => deriv (fun t => f u t) v
 
-/-- The area element `√(EG - F²) = ‖X_u × X_v‖` of a parametrized surface. -/

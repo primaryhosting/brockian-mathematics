@@ -1,11 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Von Neumann Trace Ineq Hermitian
 Category: Brockian Corpus
 Target: Zeta23Core.vonNeumann_trace_ineq_hermitian
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -18,27 +19,20 @@ set_option maxRecDepth 4000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
 set_option grind.warning false
 
 namespace Zeta23Core
 
 open Matrix Finset
 
-variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
+/-- Two antitone functions on a linear order monovary. -/
 
-/-- The matrix of squared absolute values of the entries of a unitary matrix is doubly
-stochastic. -/
+theorem monovary_of_antitone {ι : Type*} [LinearOrder ι] {f g : ι → ℝ}
+    (hf : Antitone f) (hg : Antitone g) : Monovary f g := by
+  intro i j hij
+  rcases le_total j i with h | h
+  · exact hf h
+  · exact absurd (hg h) (not_le.2 hij)
 
-lemma monovary_of_antitone {N : ℕ} {a b : Fin N → ℝ} (ha : Antitone a) (hb : Antitone b) :
-    Monovary a b := by
-  intro i j h
-  rcases le_total i j with hij | hij
-  · exact absurd (hb hij) (not_le.2 h)
-  · exact ha hij
-
-/-- Rearrangement bound for a doubly stochastic weight matrix: a doubly stochastic average of
-the products of two families of reals is at most the sum of the products of their decreasing
-rearrangements. -/
+/-- A bilinear pairing against a doubly stochastic matrix, with monovarying weights, is bounded
+by the "diagonal" pairing.  This is the rearrangement step in the von Neumann trace inequality. -/

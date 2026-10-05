@@ -1,72 +1,83 @@
-import Mathlib
+/-
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-import Mathlib
-import RequestProject.Savitch.Enc
+import RequestProject.Savitch.Model
+import RequestProject.Savitch.Reach
+import RequestProject.Savitch.Interp
+import RequestProject.Savitch.BigStep
+import RequestProject.Savitch.Invariant
+import RequestProject.Savitch.Encode
 
 /-!
-# The Savitch simulator and its correctness
+# Savitch
+Category: Frontier Cs
+Target: CS.savitch
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-We build, from a nondeterministic machine `M` and a recursion depth `K`, a
-deterministic machine `savitchDM M K` which decides, by Savitch's recursive midpoint
-search, whether the sink vertex `none` of the configuration graph of `M` is reachable
-from the start vertex within `2 ^ K` steps.  If `cV M ≤ 2 ^ K` this is exactly
-acceptance by `M`.
+/-!
+## Statement
+
+`NSPACE(f) ⊆ DSPACE(f²)`, and consequently `PSPACE = NPSPACE` (Savitch's theorem).
+
+The model of computation is the standard configuration-graph model, set up in
+`RequestProject.Savitch.Model`: configurations are natural numbers (binary strings), a machine
+runs in space `f` on input `x` if all configurations reachable on `x` are `< 2 ^ f |x|`, and
+one step may depend on the current configuration together with the single input symbol scanned
+by the input head, whose position is determined by the configuration.  The initial
+configuration may depend on the input length (the usual assumption that the space bound is
+constructible).  No computability assumption is imposed on the transition functions.
+
+The deterministic simulator is built explicitly: it performs the depth-first evaluation of
+Savitch's divide-and-conquer recursion, its states are recursion stacks of depth at most `s`,
+each frame holding boundedly many numbers `< 2 ^ s`, and the whole state is encoded as a
+natural number `< 2 ^ (42 * (s + 1) ^ 2)`.  Hence a nondeterministic machine running in space
+`f` is simulated deterministically in space `42 * (f + 1) ^ 2`.
 -/
 
 namespace CS
-namespace Savitch
 
-variable {Sigma : Type}
+open Classical
 
+variable {Γ : Type}
 
-theorem DMachine.toNMachine_accepts (D : DMachine Sigma) (x : List Sigma) :
-    D.toNMachine.Accepts x ↔ D.Accepts x := by
-  constructor
-  · rintro ⟨s, hs, hacc⟩
-    have key : ∀ a b : D.S, Relation.ReflTransGen (D.toNMachine.edge x) a b →
-        ∃ k, (D.move x)^[k] a = b := by
-      intro a b h
-      induction h with
-      | refl => exact ⟨0, rfl⟩
-      | tail _ hstep ih =>
-        obtain ⟨k, hk⟩ := ih
-        refine ⟨k + 1, ?_⟩
-        rw [Function.iterate_succ_apply', hk]
-        exact hstep.symm
-    obtain ⟨k, hk⟩ := key _ _ hs
-    refine ⟨k, ?_⟩
-    have hk' : (D.move x)^[k] D.start = s := hk
-    rw [hk']
-    exact hacc
-  · rintro ⟨k, hk⟩
-    refine ⟨(D.move x)^[k] D.start, ?_, hk⟩
-    clear hk
-    induction k with
+/-! ### Deterministic machines are nondeterministic machines -/
+
+/-- A deterministic machine, viewed as a nondeterministic one. -/
+
+theorem DMachine.reachable_toNMachine (M : DMachine Γ) (x : List Γ) :
+    M.toNMachine.Reachable x = M.Reachable x := by
+  apply Set.eq_of_subset_of_subset
+  · intro c hc
+    simp only [NMachine.Reachable, Set.mem_setOf_eq] at hc
+    induction hc with
+    | refl => exact ⟨0, rfl⟩
+    | @tail d e _ hde ih =>
+        obtain ⟨t, ht⟩ := ih
+        simp only [NMachine.stepRel, DMachine.toNMachine] at hde
+        by_cases hres : M.result d = none
+        · rw [if_pos hres] at hde
+          refine ⟨t + 1, ?_⟩
+          rw [DMachine.run, ht, if_pos hres]
+          exact (Set.mem_singleton_iff.mp hde).symm
+        · rw [if_neg hres] at hde
+          simp at hde
+  · rintro c ⟨t, rfl⟩
+    simp only [NMachine.Reachable, Set.mem_setOf_eq]
+    induction t with
     | zero => exact Relation.ReflTransGen.refl
-    | succ k ih =>
-      rw [Function.iterate_succ_apply']
-      exact ih.tail rfl
+    | succ t ih =>
+        by_cases hres : M.result (M.run x t) = none
+        · refine ih.tail ?_
+          simp only [NMachine.stepRel, DMachine.toNMachine]
+          rw [if_pos hres, DMachine.run, if_pos hres]
+          rfl
+        · rw [DMachine.run, if_neg hres]
+          exact ih
 

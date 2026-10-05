@@ -5,6 +5,8 @@ Target: Frontier.willmore_conjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 does not allow a module docstring `/-! ... -/` before `import`; the header above is
+-- therefore a plain block comment, and is repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -16,28 +18,45 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
 open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Euclidean 3-space as `ℝ × ℝ × ℝ`
+open Real intervalIntegral
 
-We use the plain product type and equip it with an explicit dot product and cross
-product, so that all differential-geometric quantities below are literally the
-classical ones. -/
+/-! ## Vector algebra in `ℝ³`
 
-/-- Ambient space `ℝ³`. -/
-abbrev E3 := ℝ × ℝ × ℝ
+We use `ℝ × ℝ × ℝ` as a model of `ℝ³` together with explicitly defined dot product,
+cross product and Euclidean norm.  (The ambient `Prod` norm of Mathlib is the sup norm,
+so we never use `‖·‖`; note that the notion of (Fréchet/one-variable) derivative does
+not depend on the choice of an equivalent norm, so `deriv` below is the usual derivative
+of an `ℝ³`-valued function.) -/
 
-/-- The Euclidean dot product on `ℝ³`. -/
+/-- Euclidean dot product on `ℝ³`. -/
 
-theorem meanCurv_eq (R r u v : ℝ) (hr : 0 < r) (hD : 0 < R + r * Real.cos u) :
-    meanCurv R r u v = (R + 2 * r * Real.cos u) / (2 * r * (R + r * Real.cos u)) := by
-  have hne : r ≠ 0 := ne_of_gt hr
-  have hDne : R + r * Real.cos u ≠ 0 := ne_of_gt hD
-  simp only [meanCurv, firstE_eq, firstF_eq, firstG_eq, secondE_eq R r u v hr hD,
-    secondF_eq R r u v hr hD, secondG_eq R r u v hr hD]
-  field_simp
+lemma meanCurv_eq {R r u v : ℝ} (hr : 0 < r) (hR : r < R) :
+    meanCurv R r u v = (R + 2 * r * cos u) / (2 * r * (R + r * cos u)) := by
+  have hp := radial_pos (u := u) hr hR
+  rw [meanCurv, forme_eq hr hR, formf_eq hr hR, formg_eq hr hR, formE_eq, formF_eq, formG_eq]
+  have h1 : 2 * (r ^ 2 * (R + r * cos u) ^ 2 - (0:ℝ) ^ 2) ≠ 0 := by
+    have : (0:ℝ) < 2 * (r ^ 2 * (R + r * cos u) ^ 2 - (0:ℝ) ^ 2) := by nlinarith [mul_pos hr hp]
+    exact ne_of_gt this
+  have h2 : 2 * r * (R + r * cos u) ≠ 0 := by positivity
+  rw [div_eq_div_iff h1 h2]
   ring
 
-/-- The area element of the torus of revolution: `dA = r (R + r cos u) du dv`. -/
+/-- The classical formula for the area element of a torus of revolution. -/

@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Bloch Sphere Bijection
-Category: Quantum Computing
-Target: QC.bloch_sphere_bijection
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,30 +14,41 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+import Mathlib
+/-!
+# Bloch Sphere Bijection
+Category: Quantum Computing
+Target: QC.bloch_sphere_bijection
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Complex
 
 namespace QC
 
-/-- A pure qubit state: a unit vector `(a, b)` in `ℂ²`. -/
+/-- A pure state of a qubit: a unit vector `(a, b)` in `ℂ²`. -/
 structure Qubit where
   a : ℂ
   b : ℂ
-  norm_eq : ‖a‖ ^ 2 + ‖b‖ ^ 2 = 1
+  unit : normSq a + normSq b = 1
 
-/-- A point of the 2-sphere `S² ⊆ ℝ³`. -/
-@[ext]
-structure Sphere2 where
-  x : ℝ
-  y : ℝ
-  z : ℝ
-  norm_eq : x ^ 2 + y ^ 2 + z ^ 2 = 1
-
+/-- Two pure qubit states are equivalent when they differ by a global phase. -/
 
 lemma phaseEq_symm {v w : Qubit} (h : PhaseEq v w) : PhaseEq w v := by
-  obtain ⟨c, hc, ha, hb⟩ := h
-  have hc0 : c ≠ 0 := by
-    intro h0; rw [h0] at hc; simp at hc
-  refine ⟨c⁻¹, by simp [hc], ?_, ?_⟩
-  · rw [ha]; field_simp
-  · rw [hb]; field_simp
+  obtain ⟨z, hz, ha, hb⟩ := h
+  have hz0 : z ≠ 0 := by
+    intro h0; rw [h0] at hz; simp at hz
+  refine ⟨z⁻¹, by simp [hz], ?_, ?_⟩
+  · rw [ha, ← mul_assoc, inv_mul_cancel₀ hz0, one_mul]
+  · rw [hb, ← mul_assoc, inv_mul_cancel₀ hz0, one_mul]
 

@@ -1,7 +1,3 @@
-import Mathlib
--- (Lean 4 requires `import` commands to precede any module docstring, so the required
--- header comment is reproduced verbatim immediately below.)
-
 /-!
 # Aronszajn Tree Exists
 Category: Frontier — Set Theory
@@ -10,56 +6,35 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Ordinal Set Cardinal
-open scoped Ordinal
+import Mathlib
 
-namespace Aronszajn
+open Ordinal Cardinal
 
-/-! ## Countable ordinals -/
+#check @Ordinal.omega1
+#check @Ordinal.lt_omega1_iff_countable
 
-/-- An ordinal is countable (i.e. its set of predecessors is countable) iff it is `< ω₁`. -/
+import Mathlib
 
-noncomputable def cs (α : Ordinal.{0}) : ℕ → Ordinal.{0} :=
-  open Classical in
-  if h : ∃ g : ℕ → Ordinal.{0}, ∀ ξ < α, ∃ n, ξ ≤ g n ∧ g n < α then h.choose else fun _ => 0
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-/-- `Good α ξ n` says that stage `cs α n` is below `α` and reaches at least `ξ`. -/
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-def Good (α ξ : Ordinal.{0}) (n : ℕ) : Prop := ξ ≤ cs α n ∧ cs α n < α
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-noncomputable def kk (α ξ : Ordinal.{0}) : ℕ :=
-  open Classical in
-  if h : ∃ n, Good α ξ n then Nat.find h else 0
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-lemma kk_spec {α ξ : Ordinal.{0}} (h : ∃ n, Good α ξ n) : Good α ξ (kk α ξ) := by
-  classical
-  rw [kk, dif_pos h]; exact Nat.find_spec h
+set_option grind.warning false
 
-noncomputable def ee : Ordinal.{0} → Ordinal.{0} → ℕ
-  | α => fun ξ =>
-    open Classical in
-    if _h : ∃ n : ℕ, Good α ξ n then max (ee (cs α (kk α ξ)) ξ) (kk α ξ) else 0
-  termination_by α => α
-  decreasing_by exact (kk_spec _h).2
-
-noncomputable def rest (x : Ordinal.{0} → ℕ) (γ : Ordinal.{0}) : Ordinal.{0} → ℕ :=
-  fun ξ => if ξ < γ then x ξ else 0
-
-def Nice (β : Ordinal.{0}) (x : Ordinal.{0} → ℕ) : Prop :=
-  β < ω₁ ∧ (∀ ξ, β ≤ ξ → x ξ = 0) ∧ ∃ α, β ≤ α ∧ α < ω₁ ∧ ∀ ξ < β, x ξ = ee α ξ
-
-/-- The Aronszajn tree. -/
-
-def Tree : Type 1 := {p : Ordinal.{0} × (Ordinal.{0} → ℕ) // Nice p.1 p.2}
-
-namespace Tree
-
-/-- The level of a node. -/
-
-def lvl (a : Tree) : Ordinal.{0} := a.1.1
-
-/-- The function attached to a node. -/
-
-lemma exists_lvl_eq {β : Ordinal.{0}} (hβ : β < ω₁) : ∃ a : Tree, lvl a = β := by
-  refine ⟨⟨(β, rest (ee β) β), hβ, fun ξ hξ => if_neg (not_lt.2 hξ), β, le_rfl, hβ,
-    fun ξ hξ => if_pos hξ⟩, rfl⟩

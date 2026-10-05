@@ -1,11 +1,3 @@
-/-
-# Alkane Tree
-Category: Chemistry
-Target: Chem.alkane_tree
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -17,57 +9,44 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
-
-set_option grind.warning false
 
 namespace Chem
 
-/-- **The carbon skeleton of an acyclic alkane `CₙH₂ₙ₊₂` is a tree with `n - 1` C–C bonds.**
+/-- **The carbon skeleton of an acyclic alkane is a tree with `n - 1` C–C bonds.**
 
-We model a saturated hydrocarbon as follows.
+The carbon skeleton is modelled as a finite simple graph `G` on the set of carbon atoms:
+`G.Adj u v` means there is a C–C bond between `u` and `v`.  The chemical hypotheses are
 
-* `V` is the (finite) set of carbon atoms, `n = #V`;
-* `G` is the *carbon skeleton*: `G.Adj u v` means there is a C–C single bond between `u` and `v`
-  (a simple graph, so no multiple bonds and no self bonds — the molecule is saturated);
-* the molecule is one connected piece: `G.Connected`;
-* `hyd v` is the number of hydrogen atoms bonded to the carbon `v`, and each carbon is
-  tetravalent: `hyd v + G.degree v = 4`;
-* the molecular formula is `CₙH₂ₙ₊₂`: the total number of hydrogens is `2 * n + 2`.
+* `hconn`  : the molecule is a single connected species;
+* `hacyc`  : the molecule is acyclic (no rings);
+* `hdeg`   : carbon is tetravalent, so each carbon has at most four C–C bonds;
 
-Under these hypotheses the skeleton has exactly `n - 1` C–C bonds and is a tree
-(connected and acyclic — in particular the molecule really is *acyclic*, which for alkanes
-is a consequence of the formula rather than an extra assumption). -/
-theorem alkane_tree {V : Type*} [Fintype V] (G : SimpleGraph V) [DecidableRel G.Adj]
-    (n : ℕ) (hn : Fintype.card V = n) (hconn : G.Connected)
-    (hyd : V → ℕ) (hval : ∀ v, hyd v + G.degree v = 4)
-    (hH : ∑ v, hyd v = 2 * n + 2) :
-    G.edgeFinset.card = n - 1 ∧ G.IsTree := by
-  classical
-  -- Sum the tetravalence relation over all carbons: `∑ hyd + ∑ degree = 4n`.
-  have hsum : (∑ v, hyd v) + ∑ v, G.degree v = 4 * n := by
+Writing `n = Fintype.card V` for the number of carbons, we conclude:
+
+1. the skeleton is a tree;
+2. it has exactly `n - 1` C–C bonds (stated as `edges + 1 = n` to avoid truncated subtraction);
+3. the number of hydrogens, each carbon carrying `4 - (number of C–C bonds at it)` of them,
+   is `2n + 2`, i.e. the molecular formula is `CₙH₂ₙ₊₂`.
+-/
+theorem alkane_tree {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V)
+    [DecidableRel G.Adj] (hconn : G.Connected) (hacyc : G.IsAcyclic)
+    (hdeg : ∀ v : V, G.degree v ≤ 4) :
+    G.IsTree ∧ G.edgeFinset.card + 1 = Fintype.card V ∧
+      ∑ v : V, (4 - G.degree v) = 2 * Fintype.card V + 2 := by
+  have htree : G.IsTree := ⟨hconn, hacyc⟩
+  have hcard : G.edgeFinset.card + 1 = Fintype.card V := htree.card_edgeFinset
+  refine ⟨htree, hcard, ?_⟩
+  have hsum : (∑ v : V, (4 - G.degree v)) + ∑ v : V, G.degree v = 4 * Fintype.card V := by
     rw [← Finset.sum_add_distrib]
-    simp [hval, hn, Finset.sum_const, mul_comm]
-  -- Handshake lemma: `∑ degree = 2 * #edges`.
-  have hdeg : ∑ v, G.degree v = 2 * G.edgeFinset.card :=
+    have : ∀ v ∈ (Finset.univ : Finset V), (4 - G.degree v) + G.degree v = 4 := fun v _ =>
+      Nat.sub_add_cancel (hdeg v)
+    rw [Finset.sum_congr rfl this, Finset.sum_const, Finset.card_univ, smul_eq_mul,
+      Nat.mul_comm]
+  have hhand : ∑ v : V, G.degree v = 2 * G.edgeFinset.card :=
     G.sum_degrees_eq_twice_card_edges
-  rw [hH, hdeg] at hsum
-  have hcard : G.edgeFinset.card + 1 = n := by omega
-  refine ⟨by omega, ?_⟩
-  rw [SimpleGraph.isTree_iff_connected_and_card]
-  refine ⟨hconn, ?_⟩
-  rwa [Nat.card_eq_fintype_card, ← SimpleGraph.edgeFinset_card, Nat.card_eq_fintype_card, hn]
+  omega
 
 end Chem
 

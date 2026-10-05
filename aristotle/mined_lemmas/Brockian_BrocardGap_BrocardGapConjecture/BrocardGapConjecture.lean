@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Brocard Gap Conjecture
 Category: Brockian Conjecture
 Target: Brockian.BrocardGap.BrocardGapConjecture
@@ -33,45 +31,43 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+import Mathlib
 
-Brocard's problem asks for the solutions of `n ! + 1 = m ^ 2`.  The only known
-solutions are `n = 4, 5, 7` (with `m = 5, 11, 71`), and it is conjectured that
-there are no others; in *gap* form the conjecture states that the distance from
-`n ! + 1` to the nearest perfect square is positive (indeed large) for all
-`n ≥ 8`.  This is an open problem.
-
-This file contains:
-
-* `Brockian.BrocardGap.brocardGap`, the distance from `n ! + 1` to the nearest
-  perfect square, and the characterisation `brocardGap_pos_iff`;
-* `Brockian.BrocardGap.ABC`, the `abc` conjecture (in radical form);
-* `Brockian.BrocardGap.BrocardGapConjecture`, a Lean-checked **conditional
-  reduction**: the `abc` conjecture implies that the Brocard gap is positive for
-  all sufficiently large `n` (this is Overholt's argument);
-* `Brockian.BrocardGap.brocardGap_pos_of_mem_Icc`, an unconditional verification
-  of the gap positivity for `8 ≤ n ≤ 200`;
-* `Brockian.BrocardGap.brocard_iff_pronic`, the elementary reformulation of
-  Brocard's equation as `n ! = 4 * a * (a + 1)`.
--/
+open scoped Nat
 
 namespace Brockian.BrocardGap
 
-open Nat Finset
+/-! ### Elementary facts about perfect squares -/
 
-/-- The radical of a natural number: the product of its distinct prime factors. -/
+/-- If `k` lies strictly between two consecutive squares, it is not a square. -/
 
-theorem BrocardGapConjecture (habc : ABC) : ∃ N : ℕ, ∀ n : ℕ, N ≤ n → 0 < brocardGap n := by
-  obtain ⟨D, hD⟩ := factorial_le_of_abc habc
-  obtain ⟨N, hN⟩ := exists_factorial_gt 4096 D
-  refine ⟨N, fun n hn => ?_⟩
-  rw [brocardGap_pos_iff]
-  intro m hm
-  have h1 := hD n m hm
-  have h2 := hN n hn
-  linarith
+theorem BrocardGapConjecture (H : BrocardGapHypothesis) (n m : ℕ) :
+    n ! + 1 = m ^ 2 ↔ (n = 4 ∧ m = 5) ∨ (n = 5 ∧ m = 11) ∨ (n = 7 ∧ m = 71) := by
+  constructor
+  · intro h
+    rcases lt_or_ge n 8 with hn | hn
+    · interval_cases n
+      · exact absurd h (not_sq_of_between (a := 1) (by norm_num [Nat.factorial])
+          (by norm_num [Nat.factorial]) m)
+      · exact absurd h (not_sq_of_between (a := 1) (by norm_num [Nat.factorial])
+          (by norm_num [Nat.factorial]) m)
+      · exact absurd h (not_sq_of_between (a := 1) (by norm_num [Nat.factorial])
+          (by norm_num [Nat.factorial]) m)
+      · exact absurd h (not_sq_of_between (a := 2) (by norm_num [Nat.factorial])
+          (by norm_num [Nat.factorial]) m)
+      · exact Or.inl ⟨rfl, eq_of_sq_eq (a := 5) (by rw [← h]; norm_num [Nat.factorial])⟩
+      · exact Or.inr (Or.inl ⟨rfl,
+          eq_of_sq_eq (a := 11) (by rw [← h]; norm_num [Nat.factorial])⟩)
+      · exact absurd h (not_sq_of_between (a := 26) (by norm_num [Nat.factorial])
+          (by norm_num [Nat.factorial]) m)
+      · exact Or.inr (Or.inr ⟨rfl,
+          eq_of_sq_eq (a := 71) (by rw [← h]; norm_num [Nat.factorial])⟩)
+    · rcases le_or_gt 21 n with hn21 | hn21
+      · exact absurd h (H n m hn21)
+      · exact absurd h (brocardGap_verified_upTo_twenty n m hn (by omega))
+  · rintro (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩) <;> norm_num [Nat.factorial]
 
-/-! ### Unconditional facts -/
+/-! ### A reformulation: Brocard solutions correspond to pronic factorials -/
 
-/-- If `N` lies strictly between two consecutive squares it is not a square. -/
+/-- For `n ≥ 2`, `n ! + 1` is a perfect square if and only if `n !` is four times a
+pronic number `a * (a + 1)`. -/

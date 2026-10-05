@@ -1,80 +1,88 @@
-/-
+/- (Lean 4 requires `import` to be the first command, so this header is a plain block comment.)
 # Chern Gauss Bonnet
 Category: Frontier Math
 Target: Math2.chern_gauss_bonnet
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
-/-!
-# Chern Gauss Bonnet
-Category: Frontier Math
-Target: Math2.chern_gauss_bonnet
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped ContDiff
 
-## What is formalized here
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-The Chern–Gauss–Bonnet theorem states that for a closed oriented Riemannian manifold `M`
-of even dimension `2n`, the integral over `M` of the Euler form (the Pfaffian of the
-curvature form, normalized by `(2π)^n`) equals the Euler characteristic of `M`.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-Mathlib currently contains no Riemann curvature tensor, no Pfaffian, no de Rham
-cohomology of manifolds and no Euler characteristic of manifolds, so all the objects
-entering the statement are built here from scratch:
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-* `Math2.eulerDensity n R` is the Chern–Gauss–Bonnet integrand attached to an algebraic
-  curvature tensor `R` written in an orthonormal frame of a `2n`-dimensional tangent
-  space, namely
-  `1 / ((8π)^n n!) * ∑_{σ,τ} sgn σ · sgn τ · ∏_i R (σ i₀) (σ i₁) (τ i₀) (τ i₁)`.
-  `Math2.eulerDensity_dim_two` checks that for `n = 1` this is exactly the classical
-  Gauss–Bonnet integrand `K / (2π)`.
-* `Math2.roundCurvature n` is the Riemann curvature tensor of the unit round sphere
-  `S^{2n}` in an orthonormal frame, `R a b c d = δₐᶜ δ_bd - δ_ad δ_bc`.
-* the manifold is the unit sphere `S^{2n} ⊆ ℝ^{2n+1}` and its Riemannian measure is
-  Mathlib's surface measure `MeasureTheory.Measure.toSphere` obtained from Lebesgue
-  measure by the polar coordinate decomposition.
-
-The main theorem `Math2.chern_gauss_bonnet` proves the Chern–Gauss–Bonnet identity for
-this family of closed even-dimensional manifolds, for every `n : ℕ`: the integral of
-the Euler form over `S^{2n}` equals `2 = χ(S^{2n})`. The two ingredients are a purely
-combinatorial evaluation of the Pfaffian sum for constant curvature one
-(`Math2.sum_sign_prod_roundCurvature`, equal to `2^n (2n)!`) and the exact value of the
-surface measure of `S^{2n}` (`Math2.sphere_measureReal_univ`).
--/
-
-open scoped Nat Real
-open MeasureTheory Metric Equiv
+set_option grind.warning false
 
 namespace Math2
 
-/-- Index type of an orthonormal frame of a `2 * n`-dimensional Euclidean space:
-it has cardinality `2 * n`, and is organized as `n` ordered pairs, which is the
-form in which the indices enter the Pfaffian. -/
-abbrev Frame (n : ℕ) := Fin n × Bool
+open MeasureTheory
 
-/-- The Chern–Gauss–Bonnet integrand (the Euler form, or Pfaffian of the curvature
-form, divided by `(2π)^n`) of an algebraic curvature tensor `R` given in an
-orthonormal frame of a `2 * n`-dimensional Riemannian manifold:
-`e = 1 / ((8π)^n n!) * ∑_{σ,τ} sgn σ · sgn τ · ∏_i R (σ i₀) (σ i₁) (τ i₀) (τ i₁)`.
-For `n = 1` this is the classical `K / (2π)`. -/
+/-! ## Conformal metrics on the plane
 
-theorem chern_gauss_bonnet (n : ℕ) :
-    ∫ _p : sphere (0 : EuclideanSpace ℝ (Fin (2 * n + 1))) 1,
-      eulerDensity n (roundCurvature n) ∂volume.toSphere = 2 := by
-  rw [integral_const, sphere_measureReal_univ, eulerDensity_roundCurvature, smul_eq_mul]
-  have hpos : (0 : ℝ) < ((2 * n - 1)‼ : ℝ) := by exact_mod_cast Nat.doubleFactorial_pos _
-  have hfac : (0 : ℝ) < (n ! : ℝ) := by exact_mod_cast n.factorial_pos
-  have hpi : (0 : ℝ) < π := Real.pi_pos
-  have hcast : ((2 * n)! : ℝ) = 2 ^ n * (n ! : ℝ) * ((2 * n - 1)‼ : ℝ) := by
-    exact_mod_cast congrArg (fun m : ℕ => (m : ℝ)) (factorial_two_mul_eq n)
-  rw [hcast]
-  have h4 : ((4 : ℝ) * π) ^ n = 2 ^ n * 2 ^ n * π ^ n := by
-    rw [show (4 : ℝ) * π = 2 * (2 * π) by ring, mul_pow, mul_pow]
-    ring
-  rw [h4, pow_succ]
-  have h2n : (0 : ℝ) < 2 ^ n := by positivity
-  field_simp
+We work with a smooth conformal factor `F : ℝ² → ℝ` and the Riemannian metric
+`g = e^{2F} (dx² + dy²)`.  Its Gauss curvature is `K = -e^{-2F} Δ F` and its area element is
+`e^{2F} dx dy`, so that the curvature density `K · e^{2F}` is exactly `-Δ F`.
+-/
 
+/-- Partial derivative in the `x`-direction of a function on the plane. -/
+
+theorem chern_gauss_bonnet (F : ℝ × ℝ → ℝ) (hF : ContDiff ℝ ∞ F)
+    (hx : ∀ p : ℝ × ℝ, F (p.1 + 1, p.2) = F p)
+    (hy : ∀ p : ℝ × ℝ, F (p.1, p.2 + 1) = F p) :
+    ∫ x in (0:ℝ)..1, ∫ y in (0:ℝ)..1, gaussCurvature F (x, y) * areaDensity F (x, y)
+      = 2 * Real.pi * (0 : ℝ) := by
+  have hcontXX : Continuous (dX (dX F)) := (contDiff_dX (contDiff_dX hF)).continuous
+  have hcontYY : Continuous (dY (dY F)) := (contDiff_dY (contDiff_dY hF)).continuous
+  have inner : ∀ x : ℝ, ∫ y in (0:ℝ)..1, gaussCurvature F (x, y) * areaDensity F (x, y)
+      = ∫ y in (0:ℝ)..1, -dX (dX F) (x, y) := by
+    intro x
+    have h1 : IntervalIntegrable (fun y : ℝ => -dX (dX F) (x, y)) volume 0 1 :=
+      ((hcontXX.comp (by fun_prop)).neg).intervalIntegrable 0 1
+    have h2 : IntervalIntegrable (fun y : ℝ => -dY (dY F) (x, y)) volume 0 1 :=
+      ((hcontYY.comp (by fun_prop)).neg).intervalIntegrable 0 1
+    calc ∫ y in (0:ℝ)..1, gaussCurvature F (x, y) * areaDensity F (x, y)
+        = ∫ y in (0:ℝ)..1, (-dX (dX F) (x, y) + -dY (dY F) (x, y)) := by
+          simp only [gaussCurvature_mul_areaDensity]
+      _ = (∫ y in (0:ℝ)..1, -dX (dX F) (x, y)) + ∫ y in (0:ℝ)..1, -dY (dY F) (x, y) :=
+          intervalIntegral.integral_add h1 h2
+      _ = ∫ y in (0:ℝ)..1, -dX (dX F) (x, y) := by
+          have hzero : ∫ y in (0:ℝ)..1, -dY (dY F) (x, y) = 0 := by
+            rw [intervalIntegral.integral_neg, integral_dY_dY_eq_zero hF hy x, neg_zero]
+          rw [hzero, add_zero]
+  calc ∫ x in (0:ℝ)..1, ∫ y in (0:ℝ)..1, gaussCurvature F (x, y) * areaDensity F (x, y)
+      = ∫ x in (0:ℝ)..1, ∫ y in (0:ℝ)..1, -dX (dX F) (x, y) := by
+        simp only [inner]
+    _ = ∫ y in (0:ℝ)..1, ∫ x in (0:ℝ)..1, -dX (dX F) (x, y) :=
+        swap_unit_square (fun p => -dX (dX F) p) hcontXX.neg
+    _ = 2 * Real.pi * (0 : ℝ) := by
+        have hzero : ∀ y : ℝ, ∫ x in (0:ℝ)..1, -dX (dX F) (x, y) = 0 := by
+          intro y
+          rw [intervalIntegral.integral_neg, integral_dX_dX_eq_zero hF hx y, neg_zero]
+        simp [hzero]
+
+/-! ## Sanity check: the round sphere
+
+Stereographic projection identifies `S² ∖ {pt}` with `ℝ²`, and transports the round metric of the
+unit sphere to the conformal metric `e^{2F}(dx²+dy²)` with `F = log 2 - log (1 + x² + y²)`.
+We check that the definitions above indeed return Gauss curvature identically `1` for this
+conformal factor, which is the defining property of the unit round sphere. -/
+
+/-- The conformal factor of the round unit sphere in stereographic coordinates. -/

@@ -9,190 +9,151 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace Chem
-
-open Matrix Polynomial Complex
-
-/-- The cyclic shift permutation matrix on `Fin 15`: `shift i j = 1` iff `i - 1 = j`. -/
-def shift : Matrix (Fin 15) (Fin 15) ℂ :=
-  (1 : Matrix (Fin 15) (Fin 15) ℂ).submatrix (fun i => i - 1) id
-
-lemma shift_apply (i j : Fin 15) : shift i j = if i - 1 = j then 1 else 0 := by
-  simp [shift, Matrix.one_apply]
-
-lemma submatrix_one_mul (f g : Fin 15 → Fin 15) :
-    ((1 : Matrix (Fin 15) (Fin 15) ℂ).submatrix f id) *
-        ((1 : Matrix (Fin 15) (Fin 15) ℂ).submatrix g id)
-      = (1 : Matrix (Fin 15) (Fin 15) ℂ).submatrix (g ∘ f) id := by
-  ext i j
-  simp only [Matrix.mul_apply, Matrix.submatrix_apply, Matrix.one_apply, id, Function.comp_apply]
-  rw [Finset.sum_eq_single (f i)]
-  · simp
-  · intro b _ hb; simp [Ne.symm hb]
-  · simp
-
-private lemma ofNat_succ (m : ℕ) : Fin.ofNat 15 (m + 1) = Fin.ofNat 15 m + 1 := by
-  ext; simp [Fin.ofNat, Fin.add_def]
-
-lemma shift_pow (m : ℕ) :
-    shift ^ m = (1 : Matrix (Fin 15) (Fin 15) ℂ).submatrix (fun i => i - Fin.ofNat 15 m) id := by
-  induction m with
-  | zero =>
-      have h : (fun i : Fin 15 => i - Fin.ofNat 15 0) = id := by
-        funext i; show i - 0 = i; simp
-      rw [pow_zero, h, Matrix.submatrix_id_id]
-  | succ m ih =>
-      rw [pow_succ, ih, shift, submatrix_one_mul]
-      congr 1
-      funext i
-      simp only [Function.comp_apply, ofNat_succ]
-      abel
-
-lemma shift_pow_apply (m : ℕ) (i j : Fin 15) :
-    (shift ^ m) i j = if i - Fin.ofNat 15 m = j then 1 else 0 := by
-  rw [shift_pow]; simp [Matrix.one_apply]
-
-lemma shift_pow_fifteen : shift ^ 15 = 1 := by
-  have h : (fun i : Fin 15 => i - Fin.ofNat 15 15) = id := by
-    funext i; show i - 0 = i; simp
-  rw [shift_pow, h, Matrix.submatrix_id_id]
-
-/-- The adjacency matrix of `C₁₅` is `S + S¹⁴ = S + S⁻¹` for the cyclic shift `S`. -/
-lemma adjMatrix_eq : (SimpleGraph.cycleGraph 15).adjMatrix ℂ = shift + shift ^ 14 := by
-  ext i j
-  rw [SimpleGraph.adjMatrix_apply, Matrix.add_apply, shift_apply, shift_pow_apply]
-  have h14 : Fin.ofNat 15 14 = 14 := rfl
-  rw [h14]
-  simp only [SimpleGraph.cycleGraph_adj]
-  by_cases h1 : i - 1 = j <;> by_cases h2 : i - 14 = j <;> simp [h1, h2] <;> omega
-
-lemma shift_mulVec (v : Fin 15 → ℂ) (i : Fin 15) : (shift *ᵥ v) i = v (i - 1) := by
-  simp only [Matrix.mulVec, dotProduct]
-  rw [Finset.sum_eq_single (i - 1)]
-  · simp [shift_apply]
-  · intro b _ hb; simp [shift_apply, Ne.symm hb]
-  · simp
-
-lemma smul_one_mulVec (c : ℂ) (v : Fin 15 → ℂ) (i : Fin 15) :
-    ((c • (1 : Matrix (Fin 15) (Fin 15) ℂ)) *ᵥ v) i = c * v i := by
-  simp [Matrix.mulVec, dotProduct, Matrix.one_apply, Finset.sum_ite_eq]
-
-/-- Every 15-th root of unity is an eigenvalue of the cyclic shift matrix:
-the vector `i ↦ ν ^ i` is an eigenvector for the eigenvalue `ν¹⁴ = ν⁻¹`. -/
-lemma root_mem_spectrum_shift {ν : ℂ} (hν : ν ^ 15 = 1) : ν ^ 14 ∈ spectrum ℂ shift := by
-  have hmod : ∀ a : ℕ, ν ^ a = ν ^ (a % 15) := by
-    intro a
-    conv_lhs => rw [← Nat.div_add_mod a 15]
-    rw [pow_add, pow_mul, hν, one_pow, one_mul]
-  rw [spectrum.mem_iff]
-  intro h
-  rw [Matrix.isUnit_iff_isUnit_det, isUnit_iff_ne_zero] at h
-  apply h
-  rw [← Matrix.exists_mulVec_eq_zero_iff]
-  refine ⟨fun i => ν ^ (i.val), ?_, ?_⟩
-  · intro hzero
-    have h0 := congrFun hzero 0
-    simp at h0
-  · funext i
-    have hshift := shift_mulVec (fun i : Fin 15 => ν ^ (i.val)) i
-    simp only [Matrix.sub_mulVec, Pi.sub_apply, Algebra.algebraMap_eq_smul_one,
-      smul_one_mulVec, hshift, Pi.zero_apply]
-    rw [← pow_add, hmod (14 + i.val), hmod ((i - 1 : Fin 15)).val]
-    have hval : ((i - 1 : Fin 15)).val = (i.val + 14) % 15 := by omega
-    rw [hval, Nat.mod_mod_of_dvd _ (dvd_refl 15), sub_eq_zero]
-    congr 1
-
-/-- The spectrum of the cyclic shift matrix is exactly the set of 15-th roots of unity. -/
-lemma spectrum_shift : spectrum ℂ shift = {ν : ℂ | ν ^ 15 = 1} := by
-  ext ν
-  constructor
-  · intro hv
-    have h := spectrum.pow_mem_pow shift 15 hv
-    rw [shift_pow_fifteen, spectrum.one_eq] at h
-    simpa using h
-  · intro (hv : ν ^ 15 = 1)
-    have h14 : (ν ^ 14) ^ 15 = 1 := by
-      rw [← pow_mul, mul_comm, pow_mul, hv, one_pow]
-    have := root_mem_spectrum_shift h14
-    rwa [← pow_mul, show 14 * 14 = 15 * 13 + 1 by norm_num, pow_add, pow_mul, hv, one_pow, one_mul,
-      pow_one] at this
-
-/-- `exp (2πi/15)` is a 15-th root of unity. -/
-lemma exp_pow_fifteen : (Complex.exp (2 * Real.pi * Complex.I / 15)) ^ 15 = 1 := by
-  rw [← Complex.exp_nat_mul]
-  push_cast
-  rw [show (15 : ℂ) * (2 * (Real.pi : ℂ) * Complex.I / 15) = 2 * (Real.pi : ℂ) * Complex.I by ring]
-  exact Complex.exp_two_pi_mul_I
-
-/-- For `ν = exp (2πik/15)` one has `ν + ν¹⁴ = ν + ν⁻¹ = 2 cos (2πk/15)`. -/
-lemma add_pow_fourteen_eq_two_cos (k : ℕ) :
-    (Complex.exp (2 * Real.pi * Complex.I / 15)) ^ k
-        + ((Complex.exp (2 * Real.pi * Complex.I / 15)) ^ k) ^ 14
-      = ((2 * Real.cos (2 * Real.pi * k / 15) : ℝ) : ℂ) := by
-  set θ : ℂ := ((2 * Real.pi * k / 15 : ℝ) : ℂ) with hθ
-  have hw : (Complex.exp (2 * Real.pi * Complex.I / 15)) ^ k = Complex.exp (θ * Complex.I) := by
-    rw [← Complex.exp_nat_mul]
-    congr 1
-    rw [hθ]
-    push_cast
-    ring
-  have hne : (Complex.exp (2 * Real.pi * Complex.I / 15)) ^ k ≠ 0 := by
-    simp [Complex.exp_ne_zero]
-  have h14 : ((Complex.exp (2 * Real.pi * Complex.I / 15)) ^ k) ^ 14
-      = ((Complex.exp (2 * Real.pi * Complex.I / 15)) ^ k)⁻¹ := by
-    field_simp
-    rw [← pow_mul, mul_comm k 15, pow_mul, exp_pow_fifteen, one_pow]
-  rw [h14, hw, ← Complex.exp_neg, ← neg_mul, ← Complex.two_cos, hθ]
-  push_cast
-  ring
-
-/-- **Hückel spectrum of `C₁₅`.**  The eigenvalues of the adjacency matrix of the cycle graph
-`C₁₅` are exactly the numbers `2 cos (2πk/15)` for `k = 0, …, 14`. -/
-theorem huckel_C15 :
-    spectrum ℂ ((SimpleGraph.cycleGraph 15).adjMatrix ℂ) =
-      Set.range fun k : Fin 15 => ((2 * Real.cos (2 * Real.pi * k / 15) : ℝ) : ℂ) := by
-  have hp : (SimpleGraph.cycleGraph 15).adjMatrix ℂ = aeval shift (X + X ^ 14 : ℂ[X]) := by
-    simp [adjMatrix_eq]
-  have hdeg : 0 < (X + X ^ 14 : ℂ[X]).degree := by
-    have h : (X + X ^ 14 : ℂ[X]).degree = 14 := by compute_degree!
-    rw [h]; decide
-  rw [hp, spectrum.map_polynomial_aeval_of_degree_pos shift _ hdeg, spectrum_shift]
-  have hprim := Complex.isPrimitiveRoot_exp 15 (by norm_num)
-  ext μ
-  constructor
-  · rintro ⟨ν, hν, rfl⟩
-    obtain ⟨k, hk, rfl⟩ := hprim.eq_pow_of_pow_eq_one hν
-    refine ⟨⟨k, hk⟩, ?_⟩
-    simpa using (add_pow_fourteen_eq_two_cos k).symm
-  · rintro ⟨k, rfl⟩
-    refine ⟨(Complex.exp (2 * Real.pi * Complex.I / 15)) ^ (k : ℕ), ?_, ?_⟩
-    · show _ ^ 15 = 1
-      rw [← pow_mul, mul_comm (k : ℕ) 15, pow_mul, exp_pow_fifteen, one_pow]
-    · simpa using add_pow_fourteen_eq_two_cos (k : ℕ)
-
-end Chem
+/-
+# Huckel C 15
+Category: Chemistry
+Target: Chem.huckel_C15
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
-open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+set_option maxHeartbeats 1000000
 
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
+namespace Chem
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+open SimpleGraph Matrix
 
-set_option grind.warning false
+/-- A primitive 15-th root of unity. -/
+noncomputable def zeta : ℂ := Complex.exp (2 * Real.pi * Complex.I / 15)
+
+lemma zeta_primitive : IsPrimitiveRoot zeta 15 := by
+  simpa [zeta] using Complex.isPrimitiveRoot_exp 15 (by norm_num)
+
+lemma zeta_pow_15 : zeta ^ 15 = 1 := zeta_primitive.pow_eq_one
+
+lemma zeta_pow_mod (c : ℕ) : zeta ^ c = zeta ^ (c % 15) := by
+  conv_lhs => rw [← Nat.div_add_mod c 15]
+  rw [pow_add, pow_mul, zeta_pow_15, one_pow, one_mul]
+
+lemma zeta_pow_congr {a b : ℕ} (h : a ≡ b [MOD 15]) : zeta ^ a = zeta ^ b := by
+  rw [zeta_pow_mod a, zeta_pow_mod b, show a % 15 = b % 15 from h]
+
+/-- The Fourier (Vandermonde) matrix `U i k = ζ^(i k)` that diagonalizes the cycle. -/
+noncomputable def U : Matrix (Fin 15) (Fin 15) ℂ :=
+  Matrix.vandermonde (fun i : Fin 15 => zeta ^ (i : ℕ))
+
+lemma U_apply (i k : Fin 15) : U i k = zeta ^ ((i : ℕ) * (k : ℕ)) := by
+  rw [U, Matrix.vandermonde_apply, ← pow_mul]
+
+lemma U_det_ne_zero : U.det ≠ 0 := by
+  rw [U, Matrix.det_vandermonde_ne_zero_iff]
+  intro i j hij
+  exact Fin.ext (zeta_primitive.pow_inj i.isLt j.isLt hij)
+
+/-- The `k`-th Hückel eigenvalue `2 cos (2πk/15)`. -/
+noncomputable def eig (k : Fin 15) : ℂ := ((2 * Real.cos (2 * Real.pi * (k : ℕ) / 15) : ℝ) : ℂ)
+
+lemma eig_eq (k : Fin 15) : zeta ^ (k : ℕ) + zeta ^ (14 * (k : ℕ)) = eig k := by
+  have hz : zeta ^ (k : ℕ) = Complex.exp (((2 * Real.pi * (k : ℕ) / 15 : ℝ) : ℂ) * Complex.I) := by
+    rw [zeta, ← Complex.exp_nat_mul]
+    congr 1
+    push_cast
+    ring
+  have hz' : zeta ^ (14 * (k : ℕ)) =
+      Complex.exp (-((2 * Real.pi * (k : ℕ) / 15 : ℝ) : ℂ) * Complex.I) := by
+    rw [zeta, ← Complex.exp_nat_mul]
+    have h : ((14 * (k : ℕ) : ℕ) : ℂ) * (2 * Real.pi * Complex.I / 15)
+        = -((2 * Real.pi * (k : ℕ) / 15 : ℝ) : ℂ) * Complex.I
+          + ((k : ℕ) : ℂ) * (2 * Real.pi * Complex.I) := by
+      push_cast; ring
+    rw [h, Complex.exp_add, Complex.exp_nat_mul_two_pi_mul_I, mul_one]
+  rw [hz, hz', ← Complex.two_cos, eig, Complex.ofReal_mul, Complex.ofReal_cos]
+  norm_num
+
+/-- The diagonal matrix of the Hückel eigenvalues. -/
+noncomputable def D : Matrix (Fin 15) (Fin 15) ℂ := Matrix.diagonal eig
+
+lemma fin15_add_one_val (i : Fin 15) : ((i + 1 : Fin 15) : ℕ) = ((i : ℕ) + 1) % 15 := by
+  simp [Fin.add_def]
+
+lemma fin15_sub_one_val (i : Fin 15) : ((i - 1 : Fin 15) : ℕ) = ((i : ℕ) + 14) % 15 := by
+  simp [Fin.sub_def]
+  omega
+
+lemma adjMatrix_mul_apply (i k : Fin 15) :
+    ((cycleGraph 15).adjMatrix ℂ * U) i k = U (i - 1) k + U (i + 1) k := by
+  have hne : (i - 1 : Fin 15) ≠ i + 1 := by
+    intro h
+    have h2 : ((i - 1 : Fin 15) : ℕ) = ((i + 1 : Fin 15) : ℕ) := by rw [h]
+    rw [fin15_sub_one_val, fin15_add_one_val] at h2
+    omega
+  have h1 : ((cycleGraph 15).adjMatrix ℂ * U) i k =
+      ((cycleGraph 15).adjMatrix ℂ *ᵥ (fun j => U j k)) i := by
+    simp [Matrix.mul_apply, Matrix.mulVec, dotProduct]
+  rw [h1, SimpleGraph.adjMatrix_mulVec_apply]
+  have h2 : (cycleGraph 15).neighborFinset i = {i - 1, i + 1} :=
+    @SimpleGraph.cycleGraph_neighborFinset 13 i
+  rw [h2, Finset.sum_pair hne]
+
+/-- The Fourier matrix diagonalizes the adjacency matrix of the 15-cycle. -/
+lemma adj_mul_U : (cycleGraph 15).adjMatrix ℂ * U = U * D := by
+  ext i k
+  rw [adjMatrix_mul_apply, U_apply, U_apply, D, Matrix.mul_diagonal, U_apply, ← eig_eq]
+  have e1 : zeta ^ (((i - 1 : Fin 15) : ℕ) * (k : ℕ))
+      = zeta ^ ((i : ℕ) * (k : ℕ) + 14 * (k : ℕ)) := by
+    apply zeta_pow_congr
+    rw [fin15_sub_one_val]
+    calc ((i : ℕ) + 14) % 15 * (k : ℕ)
+        ≡ ((i : ℕ) + 14) * (k : ℕ) [MOD 15] := Nat.ModEq.mul_right _ (Nat.mod_modEq _ _)
+      _ = (i : ℕ) * (k : ℕ) + 14 * (k : ℕ) := by ring
+  have e2 : zeta ^ (((i + 1 : Fin 15) : ℕ) * (k : ℕ))
+      = zeta ^ ((i : ℕ) * (k : ℕ) + (k : ℕ)) := by
+    apply zeta_pow_congr
+    rw [fin15_add_one_val]
+    calc ((i : ℕ) + 1) % 15 * (k : ℕ)
+        ≡ ((i : ℕ) + 1) * (k : ℕ) [MOD 15] := Nat.ModEq.mul_right _ (Nat.mod_modEq _ _)
+      _ = (i : ℕ) * (k : ℕ) + (k : ℕ) := by ring
+  rw [e1, e2, pow_add, pow_add]
+  ring
+
+/-- **Hückel theory for the C₁₅ ring.**  The spectrum (set of eigenvalues) of the adjacency
+matrix of the cycle graph `C₁₅` is exactly `{2 cos (2πk/15) : k = 0, …, 14}`. -/
+theorem huckel_C15 :
+    spectrum ℂ ((cycleGraph 15).adjMatrix ℂ) =
+      Set.range (fun k : Fin 15 => ((2 * Real.cos (2 * Real.pi * (k : ℕ) / 15) : ℝ) : ℂ)) := by
+  have hU : IsUnit U.det := isUnit_iff_ne_zero.mpr U_det_ne_zero
+  let u : (Matrix (Fin 15) (Fin 15) ℂ)ˣ :=
+    ⟨U, U⁻¹, Matrix.mul_nonsing_inv U hU, Matrix.nonsing_inv_mul U hU⟩
+  have hA : (cycleGraph 15).adjMatrix ℂ
+      = (u : Matrix (Fin 15) (Fin 15) ℂ) * D * ((u⁻¹ : (Matrix (Fin 15) (Fin 15) ℂ)ˣ) :
+        Matrix (Fin 15) (Fin 15) ℂ) := by
+    show (cycleGraph 15).adjMatrix ℂ = U * D * U⁻¹
+    calc (cycleGraph 15).adjMatrix ℂ
+        = (cycleGraph 15).adjMatrix ℂ * U * U⁻¹ := by
+          rw [Matrix.mul_assoc, Matrix.mul_nonsing_inv U hU, Matrix.mul_one]
+      _ = U * D * U⁻¹ := by rw [adj_mul_U]
+  rw [hA, spectrum.units_conjugate, D, spectrum_diagonal]
+  rfl
+
+/-- The explicit Hückel molecular orbitals of C₁₅: the vector `j ↦ ζ^(jk)` is an eigenvector
+of the adjacency matrix with eigenvalue `2 cos (2πk/15)`. -/
+theorem huckel_C15_eigenvector (k : Fin 15) :
+    (cycleGraph 15).adjMatrix ℂ *ᵥ (fun j : Fin 15 => zeta ^ ((j : ℕ) * (k : ℕ)))
+      = ((2 * Real.cos (2 * Real.pi * (k : ℕ) / 15) : ℝ) : ℂ) •
+          (fun j : Fin 15 => zeta ^ ((j : ℕ) * (k : ℕ))) := by
+  funext i
+  have hcol : (fun j : Fin 15 => zeta ^ ((j : ℕ) * (k : ℕ))) = fun j => U j k := by
+    funext j; rw [U_apply]
+  have h1 : ((cycleGraph 15).adjMatrix ℂ *ᵥ (fun j : Fin 15 => U j k)) i
+      = ((cycleGraph 15).adjMatrix ℂ * U) i k := by
+    simp [Matrix.mul_apply, Matrix.mulVec, dotProduct]
+  rw [hcol, Pi.smul_apply, smul_eq_mul, h1, adj_mul_U, D, Matrix.mul_diagonal, U_apply, eig]
+  ring
+
+end Chem
 

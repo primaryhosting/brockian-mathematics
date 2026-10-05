@@ -1,89 +1,45 @@
-import Mathlib
-
+import RequestProject.Main
 /-!
-# Gleason Theorem
-Category: Frontier Physics
-Target: Frontier.gleason_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Gleason's theorem fails in dimension two
+
+This file complements `RequestProject/Main.lean`.  It constructs an explicit quantum measure on
+the projection lattice of `ℂ²` which does not come from any density operator, showing that the
+dimension hypothesis `3 ≤ N` in Gleason's theorem cannot be dropped.
+
+The measure is the two-valued "lexicographic sign" measure: in dimension two the only nontrivial
+orthogonality relation between projections is `Q = 1 - P` for a rank-one projection `P`, so any
+function on rank-one projections satisfying `f P + f (1 - P) = 1` is finitely additive.
 -/
 
-/-!
-## Overview
-
-(The `import Mathlib` line must precede this file's module documentation because Lean 4
-requires all `import` commands to come first; the required header comment is otherwise
-reproduced verbatim as the first block of the file.)
-
-Gleason's theorem states that every quantum measure (normalized, finitely additive probability
-assignment on the closed subspaces, i.e. a normalized frame function) on a complex Hilbert
-space of dimension at least `3` is of the form `P ↦ tr (rho P)` for a unique density operator
-`rho`.  Here the space is `EuclideanSpace ℂ (Fin n)` and operators are `n × n` complex matrices.
-
-What is formalized and proved in this file:
-
-* `Frontier.IsQuantumMeasure`, `Frontier.IsDensityOperator`, `Frontier.RepresentedBy`,
-  `Frontier.GleasonProperty` -- the statement of the theorem.
-* `Frontier.gleason_theorem` -- the *reduction*: a quantum measure that extends to a linear
-  functional on operators is given by a density operator (trace-duality plus positivity).
-* `Frontier.gleason_theorem_of_selfAdjoint_linear` -- the same with the more natural hypothesis
-  of a real-linear extension over the self-adjoint operators, via complexification
-  (`Frontier.hasLinearExtension_of_selfAdjoint`, `Frontier.hasSelfAdjointLinearExtension_iff`).
-* `Frontier.hasLinearExtension_iff_gleasonProperty` -- the linearity hypothesis is exactly
-  equivalent to the conclusion, so the reduction is lossless: all that is missing from a full
-  proof of Gleason's theorem is the (deep) fact that in dimension `≥ 3` every quantum measure
-  admits such an extension.
-* `Frontier.isQuantumMeasure_of_isDensityOperator` -- the converse direction.
-* `Frontier.representedBy_unique` -- uniqueness of the density operator.
-* `Frontier.gleason_dim_one` -- the base case `n = 1`, unconditionally.
-* `Frontier.gleason_fails_dim_two` -- sharpness: an explicit quantum measure on a qubit
-  (`Frontier.qubitMeasure`, built from the cubic `3a² - 2a³`) that comes from no density
-  operator, so the hypothesis `3 ≤ n` cannot be removed.
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
 open scoped Classical
-open scoped Pointwise
 open scoped ComplexOrder
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace Frontier
 
 open Matrix
 
-variable {n : ℕ}
+/-! ## Structure of projections in dimension two -/
 
-/-! ## Basic notions
+/-- The Cayley–Hamilton identity for `2 × 2` matrices. -/
 
-We model a complex Hilbert space of dimension `n` as `EuclideanSpace ℂ (Fin n)`, and the
-bounded operators on it as `Matrix (Fin n) (Fin n) ℂ`.  An *event* (a closed subspace) is
-recorded by its orthogonal projection. -/
+lemma IsQuantumMeasure.sum {μ : Matrix (Fin N) (Fin N) ℂ → ℝ} (hμ : IsQuantumMeasure μ)
+    {ι : Type*} (s : Finset ι) (P : ι → Matrix (Fin N) (Fin N) ℂ)
+    (hP : ∀ i ∈ s, IsProj (P i)) (horth : ∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i * P j = 0) :
+    μ (∑ i ∈ s, P i) = ∑ i ∈ s, μ (P i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simpa using hμ.map_zero
+  | insert a s ha ih =>
+      have hmem : ∀ i ∈ s, i ∈ insert a s := fun i hi => Finset.mem_insert_of_mem hi
+      rw [Finset.sum_insert ha, Finset.sum_insert ha, ← ih (fun i hi => hP i (hmem i hi))
+        (fun i hi j hj hij => horth i (hmem i hi) j (hmem j hj) hij)]
+      refine hμ.additive _ _ (hP a (Finset.mem_insert_self a s))
+        (isProj_sum s P (fun i hi => hP i (hmem i hi))
+          (fun i hi j hj hij => horth i (hmem i hi) j (hmem j hj) hij)) ?_
+      rw [Matrix.mul_sum]
+      refine Finset.sum_eq_zero fun i hi => ?_
+      exact horth a (Finset.mem_insert_self a s) i (hmem i hi) (by rintro rfl; exact ha hi)
 
-/-- An orthogonal projection: a self-adjoint idempotent matrix. -/
+/-! ## Spectral decomposition into rank-one projections -/
 
-lemma IsQuantumMeasure.map_zero {mu : Matrix (Fin n) (Fin n) ℂ → ℝ} (hmu : IsQuantumMeasure mu) :
-    mu 0 = 0 := by
-  have h := hmu.additive 0 0 isProjection_zero isProjection_zero (by simp)
-  simp only [add_zero] at h
-  linarith
-
-/-- **Base case: dimension one.**  In dimension `1` Gleason's conclusion holds unconditionally
-(the only projections are `0` and `1`). -/
+/-- The vectors of an orthonormal basis of `ℂ^N` are orthonormal for the dot product. -/

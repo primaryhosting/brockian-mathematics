@@ -1,4 +1,20 @@
+/-
+# Ham Sandwich
+Category: Frontier Physics
+Target: Frontier.ham_sandwich
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Ham Sandwich
+Category: Frontier Physics
+Target: Frontier.ham_sandwich
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,39 +39,32 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# The Ham–Sandwich theorem
-
-The Ham–Sandwich theorem states that any `n` finite measures on `ℝⁿ` can be simultaneously
-bisected by a single affine hyperplane.  Here a hyperplane is described by a nonzero normal
-vector `v` and a level `c`, and "bisecting" a measure `μ` means that each of the two closed
-half-spaces `{x | ⟪v, x⟫ ≤ c}` and `{x | c ≤ ⟪v, x⟫}` carries at least half of the total mass
-of `μ`.
-
-The general statement is recorded as `Frontier.HamSandwich n`.  The full theorem for arbitrary
-`n` rests on the Borsuk–Ulam theorem, which is not available in Mathlib.  We prove here the base
-case `n = 1` (`Frontier.ham_sandwich`), together with a genuinely more general statement
-(`Frontier.bisect_one_measure`): a *single* finite measure on `ℝⁿ` can be bisected by a
-hyperplane with any prescribed normal direction.  Both rest on the existence of a median of a
-real random variable (`Frontier.exists_median`).
--/
-
 namespace Frontier
 
 open MeasureTheory Filter Set Topology
+open scoped ENNReal
 
-/-- A hyperplane with normal vector `v` and level `c` bisects the measure `μ` if each of the two
-closed half-spaces it bounds carries at least half of the total mass of `μ`. -/
+/-!
+## Step 1: existence of a median for a finite measure on `ℝ`
 
-theorem ham_sandwich : HamSandwich 1 := by
+A *median* of a finite measure `ν` on `ℝ` is a point `c` such that both closed half-lines
+`Iic c` and `Ici c` carry at least half of the total mass.  This is the one-dimensional
+form of "bisection by a hyperplane"; it is obtained by taking `c` to be the infimum of the
+set of points where the cumulative distribution function has reached half of the total mass.
+-/
+
+/-- **Existence of a median.**  Every finite measure `ν` on `ℝ` admits a point `c` such that
+each of the two closed half-lines determined by `c` carries at least half of the total mass. -/
+
+theorem ham_sandwich : HamSandwichProperty 1 := by
   intro μ hμ
-  refine ⟨EuclideanSpace.single (0 : Fin 1) (1 : ℝ), ?_, ?_⟩
-  · intro h
-    have := congrFun (congrArg (fun y : EuclideanSpace ℝ (Fin 1) => (y : Fin 1 → ℝ)) h) 0
-    simp [EuclideanSpace.single_apply] at this
-  · haveI := hμ 0
-    obtain ⟨c, hc⟩ := bisect_one_measure (μ 0) (EuclideanSpace.single (0 : Fin 1) (1 : ℝ))
-    exact ⟨c, fun i => by simpa [Subsingleton.elim i 0] using hc⟩
+  haveI : IsFiniteMeasure (μ 0) := hμ 0
+  obtain ⟨v, c, hv, h1, h2⟩ := exists_bisecting_hyperplane (n := 1) Nat.one_pos (μ 0)
+  refine ⟨v, c, hv, ?_⟩
+  intro i
+  have : i = 0 := Subsingleton.elim _ _
+  subst this
+  exact ⟨h1, h2⟩
 
-end Frontier
-
+/-- If the bisecting hyperplane is itself null for `μ`, the bisection is exact: each closed
+half-space carries exactly half of the total mass. -/

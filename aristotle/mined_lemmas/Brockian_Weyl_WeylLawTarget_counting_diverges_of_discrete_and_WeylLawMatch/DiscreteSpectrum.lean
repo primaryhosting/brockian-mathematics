@@ -33,14 +33,22 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Filter Topology Set
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 800000
 
 namespace Brockian.Weyl.WeylLawTarget
 
+open Filter Set
+
 /-- The eigenvalue counting function of a spectrum `S ⊆ ℝ`:
-`counting S Λ` is the number of points of `S` that are `≤ Λ`. -/
+`counting S Λ` is the number of spectral points `≤ Λ`. -/
 
 def DiscreteSpectrum (S : Set ℝ) : Prop := ∀ Λ : ℝ, (S ∩ Set.Iic Λ).Finite
 
-/-- `S` *matches a Weyl law* with constant `C > 0` and dimension exponent `d > 0`
-if its counting function is asymptotic to `C * Λ ^ (d / 2)` as `Λ → ∞`. -/
+/-- Weyl-law matching with constant `C` in dimension `d`:
+`counting S Λ / Λ ^ (d / 2) → C` as `Λ → ∞`. -/

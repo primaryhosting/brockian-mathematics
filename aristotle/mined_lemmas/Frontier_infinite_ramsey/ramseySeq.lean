@@ -1,37 +1,31 @@
+/-!
+# Infinite Ramsey
+Category: Frontier — Set Theory
+Target: Frontier.infinite_ramsey
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-!
+Mathlib (as of this version) contains no infinite Ramsey theorem — searching for `Ramsey`
+turns up only `Mathlib/Combinatorics/Hindman.lean` and `Mathlib/Combinatorics/HalesJewett.lean`,
+where the word occurs in comments.  So we prove it from scratch, using the classical
+ultrafilter argument based on `Filter.hyperfilter`.
+-/
 
 namespace Frontier
 
-variable (c : ℕ → ℕ → Bool)
+open Filter Set
 
-open Classical in
-/-- The colour chosen at a stage of the Ramsey construction: `true` if the set of elements of
-`S` above `sInf S` that are joined to `sInf S` in colour `true` is infinite, `false` otherwise. -/
+noncomputable section
 
-noncomputable def ramseySeq : ℕ → Set ℕ
-  | 0 => Set.univ
-  | n + 1 => ramseyNext c (ramseySeq n)
+/-- A choice of element of a set of naturals (junk value `0` for the empty set). -/
 
+private def ramseySeq : ℕ → Set ℕ
+  | 0 => {n | ufColor C n = c0}
+  | k + 1 =>
+      (ramseySeq k) ∩ Ioi (pick (ramseySeq k)) ∩ {m | C (pick (ramseySeq k)) m = c0}
+
+/-- The `k`-th element of the monochromatic set. -/

@@ -30,12 +30,7 @@ Target: Brockian.BrocardProblem.BrocardConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean does not allow a module docstring `/-! ... -/` before `import`, so the
--- required header appears above as a block comment and is repeated verbatim as
--- the module docstring immediately after the imports.)
-
 import Mathlib
-import Brockian.BrocardData
 
 /-!
 # Brocard Conjecture
@@ -43,51 +38,39 @@ Category: Brockian Conjecture
 Target: Brockian.BrocardProblem.BrocardConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+Brocard's problem asks for all solutions of the Diophantine equation
+`n ! + 1 = m ^ 2`.  The three known solutions are `n = 4, 5, 7` (with
+`m = 5, 11, 71`), and *Brocard's conjecture* asserts that there are no
+others.  The problem is open.
+
+This file contains:
+
+* the exact determination of all solutions with `n ≤ 7` (unconditional);
+* an elementary **equivalent reformulation**: for `n ≥ 2`, `n ! + 1` is a
+  square if and only if `n !` is four times a pronic number,
+  `n ! = 4 * k * (k + 1)`;
+* a **Wilson-prime obstruction** (unconditional): if `n + 1` is prime and
+  `n ! + 1` is a square, then `n + 1` is a Wilson prime, i.e.
+  `(n+1)^2 ∣ n ! + 1`;
+* an unconditional verification that there is no solution with `8 ≤ n ≤ 100`
+  (in particular none at the Wilson prime `13`, i.e. `n = 12`);
+* the target theorem `BrocardConjecture`, a **conditional reduction**: the
+  full conjecture follows from the reformulated statement
+  `∀ n ≥ 101, ∀ k, n ! ≠ 4 * k * (k + 1)`, which is itself equivalent to the
+  conjecture for `n ≥ 101`.
 -/
 
-/-!
-## What is proved here
+namespace Brockian
+namespace BrocardProblem
 
-Brocard's problem asks for all solutions in natural numbers of
+open Nat
 
-$$ n! + 1 = m^2 . $$
+/-- `IsBrocardSolution n m` says that `(n, m)` solves Brocard's equation
+`n ! + 1 = m ^ 2`. -/
 
-The known solutions are `(n, m) = (4, 5), (5, 11), (7, 71)`, and *Brocard's
-conjecture* asserts that there are no others.  This is an open problem; a search
-of Mathlib turns up no result about the equation `n! + 1 = m²`, so nothing in the
-library closes or nearly closes it.  The main library input used below is
-`primorial_le_4_pow` (`n# ≤ 4 ^ n`).
-
-Accordingly this file contains:
-
-* `brocard_no_solution_below` : an **unconditional**, kernel-verified check that
-  the only solutions with `n ≤ 1000` are the three known ones;
-* `BrocardConjecture` : the **conditional reduction** — the full conjecture (as
-  an exact classification of all solutions) follows from the statement that
-  there is no solution with `n > 1000`;
-* `brocard_finitely_many_of_abc` : a second, independent conditional result —
-  the `abc` conjecture (in the explicit `ε = 1/2`, `ℕ`-valued form
-  `c ^ 2 ≤ K * rad (a * b * c) ^ 3`) implies that Brocard's equation has only
-  finitely many solutions, i.e. there is a bound beyond which there is none;
-* `BrocardConjecture_of_abc_of_bound` : combining the two.
--/
-
-namespace Brockian.BrocardProblem
-
-open Finset
-
-/-! ### Elementary square lemmas -/
-
-/-- A number strictly between two consecutive squares is not a square. -/
-
-theorem eq_of_sq_eq_sq {a b : ℕ} (h : a ^ 2 = b ^ 2) : a = b :=
+theorem eq_of_sq_eq_sq {m a : ℕ} (h : m ^ 2 = a ^ 2) : m = a :=
   Nat.pow_left_injective (by norm_num) h
 
-/-! ### Unconditional verification for `n ≤ 1000` -/
+/-! ### The three known solutions -/
 
-/-- **Unconditional partial result.**  The only solutions of `n! + 1 = m ^ 2`
-with `n ≤ 1000` are `(4, 5)`, `(5, 11)` and `(7, 71)`.
-
-The computational content is `Brockian.brocard_gap_data`, a kernel-checked
-verification that for each `n < 1001` other than `4, 5, 7` the number `n! + 1`
-lies strictly between two consecutive squares. -/

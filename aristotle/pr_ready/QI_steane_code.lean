@@ -10,192 +10,131 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-
-# Steane Code
-Category: Frontier Qi
-Target: QI.steane_code
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (The header above uses `/-` rather than `/-!` only because Lean 4 requires every
--- `import` to precede any module docstring; the text is otherwise verbatim.)
-
-
-/-!
-# Steane Code
-Category: Frontier Qi
-Target: QI.steane_code
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 10000
 
 namespace QI
 
-/-! ## The binary field and the Hamming parity-check matrix -/
+/-! ## Setup
 
-/-- The two-element field `GF(2)`. -/
-abbrev F2 := ZMod 2
+The Steane code is the `[[7,1,3]]` CSS code built from the classical `[7,4,3]` Hamming
+code `C = ker H`, whose parity–check matrix `H` has as columns the seven nonzero
+vectors of `Bit³`.
 
-/-- Column `i` of the parity-check matrix of the `[7,4,3]` Hamming code: the binary
-expansion of `i + 1`.  The seven columns are exactly the seven nonzero vectors of
-`GF(2)³`, which is what makes the code single-error correcting. -/
-def hcol (i : Fin 7) (r : Fin 3) : F2 := if Nat.testBit (i.val + 1) r.val then 1 else 0
+A Pauli error on `7` qubits is, up to an irrelevant global phase, described by its
+symplectic (X-part, Z-part) representation: a pair of bits at every qubit.  The
+error syndrome of such an error is the pair of classical Hamming syndromes of its
+X-part and of its Z-part (the X-part is detected by the three Z-type stabilizer
+generators and the Z-part by the three X-type generators, both given by the rows
+of `H`).
 
-/-- The columns of the parity-check matrix are pairwise distinct. -/
-theorem hcol_injective : Function.Injective hcol := by decide
+"Correcting any single-qubit error" is then the statement that a decoder exists which
+recovers the error *exactly* from its syndrome, for every error supported on at most
+one qubit.  This is precisely non-degenerate correctability of the single-qubit error
+set (the Knill–Laflamme conditions for a stabilizer code reduce to this combinatorial
+statement).
+-/
 
-/-- No column of the parity-check matrix is zero. -/
-theorem hcol_ne_zero (i : Fin 7) : hcol i ≠ 0 := by revert i; decide
+/-- Bits, i.e. elements of `GF(2)`. -/
+abbrev Bit := ZMod 2
 
-/-! ## Pauli errors in the symplectic (binary) representation
+/-- Parity–check matrix of the classical `[7,4,3]` Hamming code: the `j`-th column is
+the binary expansion of `j + 1`. -/
+def H : Fin 3 → Fin 7 → Bit :=
+  ![![1, 0, 1, 0, 1, 0, 1],
+    ![0, 1, 1, 0, 0, 1, 1],
+    ![0, 0, 0, 1, 1, 1, 1]]
 
-A Pauli operator on 7 qubits is written, up to phase, as `X^x Z^z` with
-`x, z : Fin 7 → GF(2)`.  Composition is addition of the vectors and commutation is
-governed by the symplectic form below; this is the standard binary representation of
-the Pauli group used in stabilizer theory. -/
+/-- A Pauli error on 7 qubits, in symplectic representation: at each qubit a pair
+`(x, z)` of bits, standing for the Pauli operator `X^x Z^z` on that qubit. -/
+abbrev PauliError := Fin 7 → Bit × Bit
 
-/-- A Pauli operator on the seven qubits, up to phase, in binary symplectic form. -/
-structure Pauli where
-  /-- The `X`-part of the Pauli operator. -/
-  x : Fin 7 → F2
-  /-- The `Z`-part of the Pauli operator. -/
-  z : Fin 7 → F2
+/-- The error syndrome: the Hamming syndrome of the X-part together with the Hamming
+syndrome of the Z-part. -/
+def syndrome (E : PauliError) : (Fin 3 → Bit) × (Fin 3 → Bit) :=
+  (fun k => ∑ j, H k j * (E j).1, fun k => ∑ j, H k j * (E j).2)
 
-/-- Decidable equality of Paulis, defined component-wise so that it reduces well in the
-kernel (the auto-derived instance gets stuck on `Eq.rec`). -/
-instance : DecidableEq Pauli := fun P Q =>
-  decidable_of_iff (P.x = Q.x ∧ P.z = Q.z) (by cases P; cases Q; simp)
+/-- The Pauli error acting as `p` on qubit `i` and trivially elsewhere. -/
+def single (i : Fin 7) (p : Bit × Bit) : PauliError := fun j => if j = i then p else (0, 0)
 
-instance : Fintype Pauli :=
-  Fintype.ofEquiv ((Fin 7 → F2) × (Fin 7 → F2))
-    { toFun := fun p => ⟨p.1, p.2⟩
-      invFun := fun P => (P.x, P.z)
-      left_inv := fun _ => rfl
-      right_inv := fun _ => rfl }
+/-- An error is a *single-qubit* error if it is supported on at most one qubit. -/
+def SingleQubit (E : PauliError) : Prop := ∃ i : Fin 7, ∀ j, j ≠ i → E j = (0, 0)
 
-/-- The symplectic form on Pauli operators: `sympl P Q = 0` exactly when `P` and `Q`
-commute, and `sympl P Q = 1` exactly when they anticommute. -/
-def sympl (P Q : Pauli) : F2 := ∑ i, (P.x i * Q.z i + P.z i * Q.x i)
+/-! ## Classical CSS ingredients -/
 
-/-- The single-qubit Pauli supported at site `i` with `X`-exponent `a`. -/
-def ind (i : Fin 7) (a : F2) : Fin 7 → F2 := fun k => if k = i then a else 0
+/-- Membership in the classical Hamming code `C = ker H`. -/
+def InHamming (v : Fin 7 → Bit) : Prop := ∀ k, ∑ j, H k j * v j = 0
 
-/-- An error is a *single-qubit error* when its support is contained in one qubit. -/
-def Pauli.SingleQubit (E : Pauli) : Prop := ∃ i : Fin 7, ∀ k : Fin 7, k ≠ i → E.x k = 0 ∧ E.z k = 0
+instance (v : Fin 7 → Bit) : Decidable (InHamming v) :=
+  inferInstanceAs (Decidable (∀ k, ∑ j, H k j * v j = 0))
 
-/-- A single-qubit error is precisely one of the form `X^a Z^b` acting at a single site. -/
-theorem singleQubit_iff (E : Pauli) :
-    E.SingleQubit ↔ ∃ i : Fin 7, E = ⟨ind i (E.x i), ind i (E.z i)⟩ := by
-  constructor
-  · rintro ⟨i, hi⟩
-    refine ⟨i, ?_⟩
-    obtain ⟨x, z⟩ := E
-    have hx : x = ind i (x i) := by
-      funext k
-      by_cases h : k = i
-      · subst h; simp [ind]
-      · simpa [ind, h] using (hi k h).1
-    have hz : z = ind i (z i) := by
-      funext k
-      by_cases h : k = i
-      · subst h; simp [ind]
-      · simpa [ind, h] using (hi k h).2
-    exact Pauli.mk.injEq .. ▸ ⟨hx, hz⟩
-  · rintro ⟨i, hE⟩
-    refine ⟨i, fun k hk => ?_⟩
-    constructor <;> rw [hE] <;> simp [ind, hk]
+/-- Hamming weight of a binary word. -/
+def wt (v : Fin 7 → Bit) : ℕ := (Finset.univ.filter fun j => v j ≠ 0).card
 
-/-! ## The Steane code stabilizer -/
+/-- The Hamming code `C = ker H` has minimum distance `3`. -/
+theorem hamming_min_distance :
+    ∀ v : Fin 7 → Bit, InHamming v → v ≠ (fun _ => 0) → 3 ≤ wt v := by decide
 
-/-- The three `Z`-type stabilizer generators of the Steane code, given by the rows of the
-Hamming parity-check matrix. -/
-def stabZ (r : Fin 3) : Pauli := ⟨0, fun i => hcol i r⟩
+/-- The distance `3` is attained, so the minimum distance is exactly `3`. -/
+theorem hamming_distance_attained :
+    ∃ v : Fin 7 → Bit, InHamming v ∧ v ≠ (fun _ => 0) ∧ wt v = 3 := by decide
 
-/-- The three `X`-type stabilizer generators of the Steane code, given by the rows of the
-Hamming parity-check matrix. -/
-def stabX (r : Fin 3) : Pauli := ⟨fun i => hcol i r, 0⟩
+/-- Self-orthogonality of `H`: `H Hᵀ = 0`.  Equivalently `C^⊥ ⊆ C`, which is the CSS
+condition making the X-type and Z-type stabilizer generators commute. -/
+theorem css_dual_containment : ∀ k l : Fin 3, ∑ j, H k j * H l j = 0 := by decide
 
-/-- The six generators pairwise commute, so they do generate an abelian stabilizer group:
-this is the CSS condition `H Hᵀ = 0` for the (self-orthogonal) Hamming code. -/
-theorem stab_commute :
-    (∀ r s : Fin 3, sympl (stabX r) (stabZ s) = 0) ∧
-    (∀ r s : Fin 3, sympl (stabX r) (stabX s) = 0) ∧
-    (∀ r s : Fin 3, sympl (stabZ r) (stabZ s) = 0) := by
-  refine ⟨?_, ?_, ?_⟩ <;> decide
+/-- Every row of `H` is itself a codeword; together with `css_dual_containment` this is
+the statement `C^⊥ ⊆ C`. -/
+theorem rows_mem_hamming (k : Fin 3) : InHamming (H k) := fun l => by
+  simpa [mul_comm] using css_dual_containment l k
 
-/-! ## Syndromes and decoding -/
+/-! ## Distinctness of single-qubit syndromes -/
 
-/-- The parity check `H v` of a binary vector. -/
-def synd (v : Fin 7 → F2) : Fin 3 → F2 := fun r => ∑ i, hcol i r * v i
+/-- Distinct single-qubit Pauli errors have distinct syndromes: the Steane code is a
+non-degenerate code correcting one error. -/
+theorem syndrome_single_injective :
+    ∀ (i j : Fin 7) (p q : Bit × Bit),
+      syndrome (single i p) = syndrome (single j q) → single i p = single j q := by decide
 
-/-- The error syndrome of a Pauli error: the list of commutation relations with the six
-stabilizer generators, i.e. the two Hamming syndromes of the `X`- and `Z`-parts. -/
-def syndrome (E : Pauli) : (Fin 3 → F2) × (Fin 3 → F2) := (synd E.x, synd E.z)
+/-- Any single-qubit error is of the form `single i p`. -/
+theorem SingleQubit.exists_single {E : PauliError} (h : SingleQubit E) :
+    ∃ (i : Fin 7) (p : Bit × Bit), E = single i p := by
+  obtain ⟨i, hi⟩ := h
+  refine ⟨i, E i, funext fun j => ?_⟩
+  by_cases hj : j = i
+  · simp [single, hj]
+  · simp [single, hj, hi j hj]
 
-/-- The syndrome really is the measured commutation data: the `Z`-type generators detect
-the `X`-part of the error. -/
-theorem syndrome_fst (E : Pauli) (r : Fin 3) : sympl (stabZ r) E = (syndrome E).1 r := by
-  simp [sympl, stabZ, syndrome, synd]
+/-- The syndrome map is injective on single-qubit errors. -/
+theorem syndrome_injOn {E F : PauliError} (hE : SingleQubit E) (hF : SingleQubit F)
+    (h : syndrome E = syndrome F) : E = F := by
+  obtain ⟨i, p, rfl⟩ := hE.exists_single
+  obtain ⟨j, q, rfl⟩ := hF.exists_single
+  exact syndrome_single_injective i j p q h
 
-/-- The `X`-type generators detect the `Z`-part of the error. -/
-theorem syndrome_snd (E : Pauli) (r : Fin 3) : sympl (stabX r) E = (syndrome E).2 r := by
-  simp [sympl, stabX, syndrome, synd]
+/-! ## Main theorem -/
 
-/-- The Hamming decoder: a syndrome `s` points at the unique column of the parity-check
-matrix equal to it (and at no qubit at all when `s = 0`). -/
-def locate (s : Fin 3 → F2) : Fin 7 → F2 := fun i => if hcol i = s then 1 else 0
-
-/-- The Steane decoder: run the Hamming decoder on each of the two syndromes. -/
-def decode (s : (Fin 3 → F2) × (Fin 3 → F2)) : Pauli := ⟨locate s.1, locate s.2⟩
-
-/-- Correctness of the decoder on the single-site errors `X^a Z^b`. -/
-theorem decode_ind (i : Fin 7) (a b : F2) :
-    decode (syndrome ⟨ind i a, ind i b⟩) = ⟨ind i a, ind i b⟩ := by
-  revert i a b; decide
-
-/-- **The decoder recovers every single-qubit error.**  For any Pauli error `E` acting on
-at most one of the seven qubits, applying the Steane decoder to the measured syndrome
-returns `E` itself, so applying `decode (syndrome E)` undoes the error exactly. -/
-theorem steane_decode_correct (E : Pauli) (hE : E.SingleQubit) : decode (syndrome E) = E := by
-  obtain ⟨i, hi⟩ := (singleQubit_iff E).1 hE
-  rw [hi]
-  exact decode_ind i (E.x i) (E.z i)
+/-- The decoder: given a syndrome, return the (unique, by `syndrome_injOn`) single-qubit
+error producing it, if there is one. -/
+noncomputable def decoder (s : (Fin 3 → Bit) × (Fin 3 → Bit)) : PauliError :=
+  @dite _ (∃ E : PauliError, SingleQubit E ∧ syndrome E = s) (Classical.propDecidable _)
+    (fun h => h.choose) (fun _ => fun _ => (0, 0))
 
 /-- **The 7-qubit Steane code corrects any single-qubit error.**
 
-Two single-qubit Pauli errors that produce the same syndrome (the same commutation
-pattern with the six CSS stabilizer generators of the code) are equal; equivalently, the
-explicit decoder `decode` recovers the error exactly from its syndrome
-(`steane_decode_correct`).  This is the Knill–Laflamme correctability condition for the
-stabilizer code: distinct correctable errors are distinguished by the measured syndrome,
-so a recovery operation exists. -/
+There is a decoder `dec`, taking an error syndrome to a Pauli error, which recovers
+*exactly* the error that occurred, for every Pauli error supported on at most one of
+the seven qubits.  Applying `dec (syndrome E)` as a recovery operation therefore undoes
+`E` on the nose. -/
 theorem steane_code :
-    (∀ E : Pauli, E.SingleQubit → decode (syndrome E) = E) ∧
-    (∀ E F : Pauli, E.SingleQubit → F.SingleQubit → syndrome E = syndrome F → E = F) := by
-  refine ⟨steane_decode_correct, fun E F hE hF h => ?_⟩
-  rw [← steane_decode_correct E hE, ← steane_decode_correct F hF, h]
+    ∃ dec : (Fin 3 → Bit) × (Fin 3 → Bit) → PauliError,
+      ∀ E : PauliError, SingleQubit E → dec (syndrome E) = E := by
+  refine ⟨decoder, fun E hE => ?_⟩
+  have hex : ∃ F : PauliError, SingleQubit F ∧ syndrome F = syndrome E := ⟨E, hE, rfl⟩
+  rw [decoder, dif_pos hex]
+  obtain ⟨hF, hFs⟩ := hex.choose_spec
+  exact syndrome_injOn hF hE hFs
 
 end QI
 

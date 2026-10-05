@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Fortune Conjecture
-Category: Brockian Conjecture
-Target: Brockian.FortunateNumbers.FortuneConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -41,42 +33,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
-
-Let `n#` denote the primorial of `n` (the product of all primes `≤ n`).  The *fortunate number*
-`fortunate n` is the smallest integer `m > 1` such that `n# + m` is prime.  Reo Fortune
-conjectured that `fortunate n` is always prime; this is an open problem.
-
-What is proved here:
-
-* `Brockian.FortunateNumbers.lt_of_prime_dvd_fortunate` (unconditional): every prime factor of
-  `fortunate n` is strictly larger than `n`.  Indeed, a prime `q ≤ n` divides `n#`, so if `q`
-  also divided `m` it would divide `n# + m`, which is prime and larger than `q`.
-* `Brockian.FortunateNumbers.fortunate_prime_of_le_sq` (unconditional): consequently, if
-  `fortunate n ≤ n ^ 2` then `fortunate n` is prime, since a composite number has a prime factor
-  whose square is at most the number itself.
-* `Brockian.FortunateNumbers.FortuneConjecture` (conditional reduction): Fortune's conjecture
-  follows from the size bound `fortunate n ≤ n ^ 2` for all `n ≥ 2`.  The cases `n = 0, 1` are
-  handled unconditionally (there `fortunate n = 2`).
-
-Some concrete values are also computed and verified (`fortunate 2 = 3`, `fortunate 3 = 5`,
-`fortunate 5 = 7`), which shows in particular that the hypothesis of `FortuneConjecture` is not
-vacuous in the small cases.
--/
-
-namespace Brockian
-namespace FortunateNumbers
+namespace Brockian.FortunateNumbers
 
 open Nat
 
-/-- The set of offsets `m > 1` for which `n# + m` is prime. -/
+/-- Existence of a "fortunate offset": for every `n` there is some `m > 1` such that
+`n# + m` is prime, where `n#` is the primorial of `n`.  This follows from Bertrand's
+postulate applied to `n# + 1`. -/
 
 theorem fortunate_two : fortunate 2 = 3 := by
-  have hp : primorial 2 = 2 := by decide
-  have hle : fortunate 2 ≤ 3 := fortunate_le (by norm_num) (by rw [hp]; norm_num)
-  have h1 : 1 < fortunate 2 := one_lt_fortunate 2
-  have h2 := prime_primorial_add_fortunate 2
-  rw [hp] at h2
-  interval_cases h : (fortunate 2) <;> revert h2 <;> norm_num
+  have h : primorial 2 = 2 := by decide
+  rw [fortunate, Nat.find_eq_iff]
+  refine ⟨⟨by norm_num, by rw [h]; norm_num⟩, ?_⟩
+  intro m hm
+  interval_cases m <;> norm_num [h]
 

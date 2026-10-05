@@ -30,48 +30,26 @@ Target: Brockian.TwinPrimes.TwinPrimeConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` to precede any module docstring, so the header above is
--- repeated as the module docstring immediately after the import.)
 
 import Mathlib
 
-/-!
-# Twin Prime Conjecture
-Category: Brockian Conjecture
-Target: Brockian.TwinPrimes.TwinPrimeConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open Nat
+open scoped Nat
 
 namespace Brockian.TwinPrimes
 
-/-! ## The statement
+/-- **The Twin Prime Conjecture**: there are arbitrarily large primes `p` such that
+`p + 2` is also prime. -/
 
-The twin prime conjecture asserts that there are arbitrarily large primes `p` such that
-`p + 2` is also prime.  This is a famous open problem, so it is not proved here; instead
-we give an unconditional, Lean-checked *equivalent reformulation* (Clement's criterion,
-derived from Wilson's theorem — `Nat.prime_iff_fac_equiv_neg_one` in Mathlib), which
-turns the conjecture into a single divisibility statement about factorials, together with
-some unconditional partial results.
--/
-
-/-- `n` and `n + 2` are both prime. -/
-
-theorem twinPrimeConjecture_iff_infinite :
-    TwinPrimeConjecture ↔ {p : ℕ | IsTwinPrimePair p}.Infinite := by
+theorem twinPrimeConjecture_iff_infinite : TwinPrimeConjecture ↔ twinPrimes.Infinite := by
   constructor
   · intro h
-    apply Set.infinite_of_not_bddAbove
-    rintro ⟨N, hN⟩
-    obtain ⟨p, hp, hpp⟩ := h N
-    exact absurd (hN hpp) (by omega)
-  · intro h N
-    obtain ⟨p, hp, hpN⟩ := h.exists_gt N
-    exact ⟨p, hpN, hp⟩
+    refine Set.infinite_of_forall_exists_gt ?_
+    intro a
+    obtain ⟨p, hp, hp1, hp2⟩ := h a
+    exact ⟨p, Set.mem_setOf_eq ▸ ⟨hp1, hp2⟩, hp⟩
+  · intro h n
+    obtain ⟨p, hp, hpn⟩ := h.exists_gt n
+    exact ⟨p, hpn, hp.1, hp.2⟩
 
-/-! ## Wilson's theorem, in divisibility form -/
-
-/-- **Wilson's theorem** as a divisibility statement: for `n ≠ 1`, `n` is prime iff
-`n ∣ (n-1)! + 1`. -/
+/-- Contrapositive form: the twin prime conjecture fails exactly when some bound `N`
+cuts off all twin primes. -/

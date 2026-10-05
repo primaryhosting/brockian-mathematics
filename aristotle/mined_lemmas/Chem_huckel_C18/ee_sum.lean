@@ -1,43 +1,26 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+/-!
+# Huckel C 18
+Category: Chemistry
+Target: Chem.huckel_C18
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Chem
 
-open Complex Polynomial Matrix
+open Complex Real Matrix Finset
 
-/-- The primitive 18-th root of unity `exp (2πi/18)`. -/
+/-- A primitive 18-th root of unity. -/
 
-lemma ee_sum (d : ℤ) :
-    (∑ k : Fin 18, ee ((k : ℕ) * d)) = if (18 : ℤ) ∣ d then 18 else 0 := by
-  split_ifs with h
-  · have h1 : ∀ k : Fin 18, ee ((k : ℕ) * d) = 1 := by
-      intro k
-      rw [ee_congr (b := 0) (by simpa using Dvd.dvd.mul_left h _), ee]
-      simp
-    simp [h1]
-  · have hx : ee d ≠ 1 := ee_ne_one h
-    have h18 : (ee d) ^ (18 : ℕ) = 1 := by
-      rw [← ee_pow]
-      exact (ee_congr (b := 0) (by simp)).trans (by simp [ee])
-    have hsum : (∑ k : Fin 18, ee ((k : ℕ) * d)) = ∑ i ∈ Finset.range 18, (ee d) ^ i := by
-      rw [Fin.sum_univ_eq_sum_range (fun i => ee ((i : ℕ) * d))]
-      exact Finset.sum_congr rfl fun i _ => ee_pow i d
-    rw [hsum, geom_sum_eq hx, h18]
-    simp
+lemma ee_sum (c : ZMod 18) : ∑ j : ZMod 18, ee (j * c) = if c = 0 then 18 else 0 := by
+  have hstep : ∑ j : ZMod 18, ee (j * c) = ∑ i ∈ Finset.range 18, (ee c) ^ i := by
+    rw [← Fin.sum_univ_eq_sum_range]
+    exact Finset.sum_congr rfl (fun x _ => ee_mul x c)
+  rw [hstep]
+  by_cases hc : c = 0
+  · simp [hc, ee_zero]
+  · rw [if_neg hc, geom_sum_eq (ee_ne_one c hc), ee_pow_18, sub_self, zero_div]
 
-/-- The (unnormalized) discrete Fourier matrix of size 18. -/
+/-- `ee k + ee (-k) = 2 cos (2πk/18)`. -/

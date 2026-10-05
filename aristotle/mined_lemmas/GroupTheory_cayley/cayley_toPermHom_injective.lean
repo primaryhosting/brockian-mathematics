@@ -7,19 +7,15 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Note: Lean 4 requires `import` commands to precede any other command, including
--- module doc comments, so the required header appears immediately after the import.
-
 namespace GroupTheory
 
 /-- **Cayley's theorem**: every group embeds into the symmetric group on its
-underlying set.  The embedding is the left regular representation
-`g ↦ (x ↦ g * x)`, which is an injective group homomorphism
-`G →* Equiv.Perm G`. -/
+underlying set.  The embedding is the left regular representation, sending `g`
+to the permutation `x ↦ g * x`. -/
 
 theorem cayley_toPermHom_injective (G : Type*) [Group G] :
     Function.Injective (MulAction.toPermHom G G) :=
-  fun _ _ h => MulAction.toPerm_injective h
+  fun _ _ h => by simpa using congrArg (fun e : Equiv.Perm G => e 1) h
 
 end GroupTheory
 

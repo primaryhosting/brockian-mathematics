@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Grover Optimal
 Category: Frontier Qi
@@ -6,48 +7,61 @@ Target: QI.grover_optimal
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean 4 requires `import` to be the first command of a module, so the header
--- module docstring above is placed immediately after the single `import Mathlib` line.)
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 /-!
-## The BBBV lower bound for unstructured search
+## The BBBV lower bound for unstructured quantum search
 
 We formalise the Bennett–Bernstein–Brassard–Vazirani hybrid argument: any quantum
-algorithm that finds a marked item among `N` possibilities with success probability
-at least `2/3` must make `Ω(√N)` queries to the oracle.
+algorithm that makes `T` queries to a phase oracle marking an unknown element `x`
+of a search space `κ` of size `N`, and that identifies `x` with probability at
+least `2/3`, must satisfy `T ≥ √N / 25`.  In particular `T = Ω(√N)`, so Grover's
+algorithm, which uses `O(√N)` queries, is optimal up to a constant factor.
 
-**The model.**  The workspace is the finite dimensional Hilbert space
-`QState N W = EuclideanSpace ℂ (Fin N × Fin W)`: an index register holding one of the
-`N` candidate items, tensored with an arbitrary `W`-dimensional workspace.
-For a marked item `x : Fin N`, the (phase) oracle `oracle x` flips the sign of every
-basis vector whose index register equals `x`; it is a norm preserving linear map.
-An algorithm consists of a unit initial state `psi0` and an arbitrary sequence
-`U : ℕ → QState N W →ₗᵢ[ℂ] QState N W` of linear isometries (in particular every
-unitary is allowed).  With oracle `x` the state after `t` queries is
-`runOracle U psi0 x t`, and `runFree U psi0 t` is the corresponding oracle-free run.
-The algorithm answers by measuring the index register of its final state, so its
-success probability on input `x` is `‖proj x (runOracle U psi0 x T)‖ ^ 2`.
+The computational model:
 
-**The result** (`QI.grover_optimal`): if `6 ≤ N` and the algorithm succeeds with
-probability at least `2/3` on *every* marked item `x`, then `√N / 20 ≤ T`.
-Since Grover's algorithm achieves `O(√N)` queries, this is optimal up to constants.
+* the algorithm works on a finite dimensional Hilbert space `EuclideanSpace ℂ ι`,
+  whose basis vectors are indexed by `ι` (query register together with an arbitrary
+  workspace);
+* `Q x ⊆ ι` is the set of basis vectors on which the oracle for the marked element
+  `x` flips the phase; different marked elements flip disjoint sets of basis states
+  (a basis state queries at most one index);
+* the algorithm alternates arbitrary unitaries `U 0, U 1, …` with oracle calls,
+  starting from an arbitrary unit vector `psi0`;
+* the answer is read off by measuring: `Ans x ⊆ ι` is the set of basis states on
+  which the algorithm outputs `x`, and these sets are pairwise disjoint.
 -/
 
 namespace QI
 
 open Finset
 
-/-- The state space of the search algorithm: an `N`-dimensional index register
-tensored with a `W`-dimensional workspace. -/
-abbrev QState (N W : ℕ) := EuclideanSpace ℂ (Fin N × Fin W)
+noncomputable section
 
-variable {N W : ℕ}
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
-/-- Orthogonal projection onto the subspace where the index register holds `x`. -/
+/-- The state space of the algorithm: amplitudes indexed by the basis `ι`. -/
+abbrev St (ι : Type*) [Fintype ι] := EuclideanSpace ℂ ι
 
-lemma oracle_sub (x : Fin N) (v w : QState N W) :
-    oracle x (v - w) = oracle x v - oracle x w := by
-  ext p
-  by_cases h : p.1 = x <;> simp [h]
-  ring
+/-- Restriction of a state to the coordinates in `S` (orthogonal projection). -/
 
+lemma oracle_sub (S : Finset ι) (v w : St ι) : oracle S v - oracle S w = oracle S (v - w) := by
+  ext i; by_cases hi : i ∈ S <;> simp [oracle, hi] <;> ring
+
+/-- The oracle disturbs a state exactly in proportion to the amplitude it carries on
+the queried coordinates. -/

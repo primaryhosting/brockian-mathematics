@@ -1,5 +1,3 @@
-import Brockian.RuthAaronPairs
-
 import Mathlib
 
 open scoped BigOperators
@@ -25,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Ruth Aaron Infinitude
 Category: Brockian Conjecture
 Target: Brockian.RuthAaronPairs.RuthAaronInfinitude
@@ -35,37 +31,45 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
 /-!
 ## Overview
 
-A *Ruth–Aaron pair* is a pair of consecutive integers `(n, n+1)` with the same sum of prime
-factors counted with multiplicity, e.g. `(714, 715)`: `714 = 2·3·7·17`, `715 = 5·11·13`, and
-`2 + 3 + 7 + 17 = 29 = 5 + 11 + 13`.  Whether there are infinitely many such pairs is a
-well-known open problem (Erdős).
+A *Ruth–Aaron pair* is a pair of consecutive positive integers `(n, n+1)` whose sums of prime
+factors, counted with multiplicity, agree:  `sopfr n = sopfr (n+1)`.  The first examples are
+`(5,6)`, `(8,9)`, `(15,16)`, `(77,78)`, `(125,126)` and the famous `(714,715)`.
 
-This file contains:
+Whether there are infinitely many Ruth–Aaron pairs is an open problem (Erdős conjectured that
+there are).  Accordingly, this file develops the theory and proves a *conditional reduction*:
+Ruth–Aaron infinitude follows from a hypothesis asserting only the primality of two explicit
+numbers, with no reference to sums of prime factors of the resulting pair.
 
-* a definition of `sopfr` (sum of prime factors with multiplicity) and of `IsRuthAaron`;
-* unconditional verifications that `5, 8, 77, 714` are Ruth–Aaron numbers;
-* an unconditional *construction*: `isRuthAaron_of_prime_pair`, producing a Ruth–Aaron pair out
-  of any `B ≥ 2` for which the two integers `B·d − 1` and `(B+1)·d − 1` are prime, where
-  `d = sopfr (B+1) − sopfr B > 0`;
-* the resulting conditional infinitude theorem `RuthAaronInfinitude`, and a further reduction
-  `ruthAaronInfinitude_of_primeQuadruple` of the required hypothesis to a Schinzel Hypothesis H
-  statement for one explicit quadruple of polynomials.
+The reduction rests on the following exact identity.  Write `Δ c = sopfr (c+1) - sopfr c`, put
 
-So the deliverable is a Lean-checked *conditional reduction*: Ruth–Aaron infinitude follows from
-a prime `k`-tuple conjecture, not from anything Ruth–Aaron specific.
+  `p = 1 + (c+1) * Δ c`,  `q = 1 + c * Δ c`,  `n = c * p`.
+
+Then, purely algebraically, `n + 1 = (c+1) * q`, and since `sopfr` is completely additive,
+
+  `sopfr n = sopfr c + p`,  `sopfr (n+1) = sopfr (c+1) + q = sopfr c + Δ c + q = sopfr c + p`,
+
+so `(n, n+1)` is a Ruth–Aaron pair *whenever `p` and `q` are both prime*.  Thus the sum-of-prime-
+factors condition disappears entirely, and only a two-fold primality condition remains.
+
+For instance `c = 1` gives `Δ = 2`, `q = 3`, `p = 5`, `n = 5`, the pair `(5,6)`; and `c = 12`
+gives `Δ = 6`, `q = 73`, `p = 79`, `n = 948 = 2^2·3·79` with `949 = 13·73`, both of
+sum-of-prime-factors `86`.
 -/
 
 namespace Brockian.RuthAaronPairs
 
+open scoped Nat
+
 /-- `sopfr n` is the sum of the prime factors of `n`, counted with multiplicity
-(`sopfr 0 = sopfr 1 = 0`). -/
+(with the convention `sopfr 0 = sopfr 1 = 0`). -/
 
 def PrimePairHypothesis : Prop :=
-  ∀ N : ℕ, ∃ B d : ℕ, N < B ∧ 1 ≤ d ∧ sopfr B + d = sopfr (B + 1) ∧
-    Nat.Prime (B * d - 1) ∧ Nat.Prime ((B + 1) * d - 1)
+  ∀ N : ℕ, ∃ c, N < c ∧ Nat.Prime (1 + (c + 1) * sopfrExcess c) ∧
+    Nat.Prime (1 + c * sopfrExcess c)
 
-/-- **Ruth–Aaron infinitude, conditionally.** Under `PrimePairHypothesis`, there are infinitely
-many Ruth–Aaron numbers, i.e. infinitely many `n` with `sopfr n = sopfr (n + 1)`. -/
+/-- Each witness of Hypothesis (P) produces a Ruth–Aaron pair larger than the witness. -/

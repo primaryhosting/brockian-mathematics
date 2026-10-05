@@ -33,6 +33,21 @@ ATTACK_MODES = (
     "distill",
     "decompose",
     "dual_prover",
+    "harvest",
+    "repair",
+)
+EXTERNAL_STATUSES = ("open", "solved", "partial", "unknown", "withdrawn")
+ATTEMPT_RESULTS = (
+    "open",
+    "scaffold",
+    "partial",
+    "conditional",
+    "proved",
+    "refuted",
+    "distilled",
+    "failed",
+    "blocked",
+    "literature",
 )
 
 # Pipeline root: pipeline/
@@ -96,6 +111,25 @@ def validate_card(data: dict[str, Any]) -> list[str]:
     for mode in data.get("attack_modes") or []:
         if mode not in ATTACK_MODES:
             errs.append(f"invalid attack_mode: {mode}")
+    source = data.get("source") or {}
+    if not isinstance(source, dict):
+        errs.append("source must be an object")
+    elif source.get("external_status") not in (None, *EXTERNAL_STATUSES):
+        errs.append(f"invalid source.external_status: {source.get('external_status')}")
+    attempts = data.get("attempts") or []
+    if not isinstance(attempts, list):
+        errs.append("attempts must be an array")
+    else:
+        for index, attempt in enumerate(attempts):
+            if not isinstance(attempt, dict):
+                errs.append(f"attempts[{index}] must be an object")
+                continue
+            result = attempt.get("result")
+            if result not in ATTEMPT_RESULTS:
+                errs.append(f"invalid attempts[{index}].result: {result}")
+            for field_name in ("axle_verified", "axioms_clean"):
+                if field_name in attempt and not isinstance(attempt[field_name], bool):
+                    errs.append(f"attempts[{index}].{field_name} must be boolean")
     pid = data.get("id", "")
     if isinstance(pid, str) and (len(pid) < 2 or not pid[0].isalnum()):
         errs.append(f"invalid id: {pid}")
@@ -119,7 +153,7 @@ def save_card(card: ProblemCard, path: Optional[Path | str] = None) -> Path:
     data = card.to_dict()
     errs = validate_card(data)
     if errs:
-        raise ValueError(f"cannot save invalid card: " + "; ".join(errs))
+        raise ValueError("cannot save invalid card: " + "; ".join(errs))
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return path
 

@@ -8,47 +8,66 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-Cardy–Smirnov theory says that the scaling limit of crossing probabilities for critical
-site percolation on the triangular lattice is *conformally invariant*, and that in the
-reference domain — Carleson's equilateral triangle — the limiting crossing probability is
-the linear (barycentric) function, so that the crossing probability between the side `AB`
-and the sub-segment `CX` of the side `CA` equals `|CX| / |CA|`.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-This file formalizes the two structural halves of that statement and proves them:
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-* **Conformal invariance / reduction.** The conformal modulus of a configuration of four
-  marked boundary points is the cross-ratio; it is invariant under Möbius transformations,
-  hence any crossing functional that is a function of the modulus is conformally invariant.
-  This is the reduction step: the whole Cardy–Smirnov formula is determined by its value on
-  one reference configuration.
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-* **Base case (Carleson's equilateral triangle).** The three Cardy–Smirnov functions
-  `smirnovA, smirnovB, smirnovC` attached to the equilateral triangle with vertices
-  `A = 0`, `B = 1`, `C = 1/2 + i √3 / 2` are harmonic on the whole plane, sum to `1`,
-  take the value `1` at their own vertex and vanish on the opposite side, and satisfy
-  Cardy's formula `smirnovA X = |CX| / |CA|` for `X` on the side `CA`.
-
-The probabilistic input of Smirnov's theorem (existence of the scaling limit for critical
-site percolation on the triangular lattice) is *not* formalized here; what is formalized
-and proved is the conformal-invariance reduction together with the closed form of the
-limit in the reference triangle.
--/
+set_option grind.warning false
 
 namespace Frontier
 
-open Complex
+/-!
+## Setting
 
-/-! ### The conformal modulus of four marked boundary points -/
+Smirnov's theorem (conjectured by Cardy, proved by Smirnov in 2001) states that the
+crossing probabilities of critical site percolation on the triangular lattice converge,
+in the scaling limit, to a conformally invariant limit given by Cardy's formula.
 
-/-- The cross-ratio of four points of the plane.  For a Jordan domain with four marked
-boundary points this is the conformal modulus of the configuration. -/
+A *conformal quadrilateral* is a simply connected Jordan domain together with four marked
+boundary points; the crossing event is "there is an open path joining the boundary arc
+`ab` to the boundary arc `cd`".  By the Riemann mapping theorem every such quadrilateral is
+conformally equivalent to the upper half-plane `ℍ` with four marked points on the real
+line, and the conformal maps of `ℍ` to itself are exactly the real Möbius transformations
+of positive determinant.  Consequently:
 
-noncomputable def crossingProb (F : ℂ → ℝ) (z₁ z₂ z₃ z₄ : ℂ) : ℝ :=
-  F (crossRatio z₁ z₂ z₃ z₄)
+*conformal invariance of the scaling limit* is **equivalent** to the statement that the
+limiting crossing probability, viewed as a function of four marked points of `∂ℍ = ℝ`,
+is invariant under the real Möbius group, i.e. that it is a function of the cross-ratio
+alone — the *conformal modulus* of the quadrilateral.
 
-/-- **Conformal invariance of crossing probabilities.**  Any crossing functional that is a
-function of the conformal modulus takes the same value on a configuration and on its image
-under a Möbius transformation. -/
+This file carries out that reduction in full and proves it, together with the
+Cardy–Smirnov base case: the self-dual (symmetric) quadrilateral has crossing
+probability exactly `1/2`.
+
+The percolation input that we keep as a hypothesis is precisely the one supplied by
+Smirnov's theorem: the limiting crossing probability is `Φ (cross-ratio)` for a universal
+profile `Φ` satisfying the colour-swap (duality) relation `Φ x + Φ (1 - x) = 1`.
+In Carleson's normalisation of Cardy's formula (the equilateral-triangle picture),
+`Φ` is the identity function, which is recorded below as `carleson_isCardyProfile`.
+-/
+
+/-- The cross-ratio of four points of `∂ℍ = ℝ`; this is the conformal modulus of the
+conformal quadrilateral with these four marked boundary points. -/
+
+noncomputable def crossingProb (Φ : ℝ → ℝ) (a b c d : ℝ) : ℝ := Φ (crossRatio a b c d)
+
+/-- The defining property of the universal Cardy–Smirnov profile: the colour-swap
+(self-duality) relation of critical percolation, which exchanges a quadrilateral with
+its dual, i.e. the modulus `x` with `1 - x`. -/

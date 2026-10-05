@@ -1,0 +1,104 @@
+/-!
+# Pell 5
+Category: Pure Mathematics
+Target: Math.pell_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Math
+
+/-- **Pell's equation for `d = 5`.** The equation `x² - 5·y² = 1` has a nontrivial
+integer solution, i.e. one with `y ≠ 0` (so that `x ≠ ±1`): take `(x, y) = (9, 4)`,
+since `9² - 5·4² = 81 - 80 = 1`. -/
+theorem pell_5 : ∃ x y : Int, x ^ 2 - 5 * y ^ 2 = 1 ∧ y ≠ 0 :=
+  ⟨9, 4, by decide, by decide⟩
+
+end Math
+
+import Mathlib
+import RequestProject.Pell5
+import RequestProject.Pell5Infinite
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+
+import Mathlib
+import RequestProject.Pell5
+
+/-!
+# Pell 5 — infinitely many solutions
+
+A strengthening of `Math.pell_5`: the Pell equation `x² - 5·y² = 1` has infinitely many
+integer solutions, obtained by iterating the fundamental solution `(9, 4)`.
+-/
+
+namespace Math
+
+/-- Iterates of the fundamental solution `(9, 4)` of `x² - 5·y² = 1`, under the
+multiplication `(a, b) ↦ (9a + 20b, 4a + 9b)` coming from `(9 + 4√5)·(a + b√5)`. -/
+def pellSeq5 : ℕ → ℤ × ℤ
+  | 0 => (9, 4)
+  | n + 1 => (9 * (pellSeq5 n).1 + 20 * (pellSeq5 n).2,
+      4 * (pellSeq5 n).1 + 9 * (pellSeq5 n).2)
+
+/-- Every iterate solves the Pell equation `x² - 5·y² = 1`. -/
+theorem pellSeq5_isSolution (n : ℕ) :
+    (pellSeq5 n).1 ^ 2 - 5 * (pellSeq5 n).2 ^ 2 = 1 := by
+  induction n with
+  | zero => decide
+  | succ n ih =>
+    simp only [pellSeq5]
+    nlinarith [ih]
+
+/-- The iterates grow: the `n`-th one has first coordinate at least `1` and second
+coordinate at least `n + 4`. -/
+theorem pellSeq5_grows (n : ℕ) :
+    1 ≤ (pellSeq5 n).1 ∧ (n : ℤ) + 4 ≤ (pellSeq5 n).2 := by
+  induction n with
+  | zero => exact ⟨by decide, by decide⟩
+  | succ n ih =>
+    obtain ⟨h1, h2⟩ := ih
+    refine ⟨?_, ?_⟩ <;> simp only [pellSeq5] <;> push_cast <;> omega
+
+/-- **Pell's equation for `d = 5` has infinitely many solutions.** For every bound `N`
+there is a solution of `x² - 5·y² = 1` with `y > N`. -/
+theorem pell_5_infinitely_many (N : ℤ) :
+    ∃ x y : ℤ, x ^ 2 - 5 * y ^ 2 = 1 ∧ N < y := by
+  refine ⟨(pellSeq5 N.toNat).1, (pellSeq5 N.toNat).2, pellSeq5_isSolution _, ?_⟩
+  have h := (pellSeq5_grows N.toNat).2
+  have : N ≤ (N.toNat : ℤ) := Int.self_le_toNat N
+  omega
+
+/-- The set of nontrivial solutions of `x² - 5·y² = 1` is infinite. -/
+theorem pell_5_solutions_infinite :
+    {p : ℤ × ℤ | p.1 ^ 2 - 5 * p.2 ^ 2 = 1}.Infinite := by
+  apply Set.infinite_of_not_bddAbove
+  rintro ⟨⟨a, b⟩, hb⟩
+  obtain ⟨x, y, hxy, hy⟩ := pell_5_infinitely_many b
+  have := hb (show (x, y) ∈ {p : ℤ × ℤ | p.1 ^ 2 - 5 * p.2 ^ 2 = 1} from hxy)
+  exact absurd this.2 (by omega)
+
+end Math
+

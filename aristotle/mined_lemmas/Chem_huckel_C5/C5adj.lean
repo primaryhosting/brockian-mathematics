@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Huckel C 5
 Category: Chemistry
 Target: Chem.huckel_C5
@@ -8,28 +6,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+import Mathlib
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
+open Matrix Real
 
 namespace Chem
 
-open Matrix Complex
+/-- The adjacency matrix of the cycle graph `C₅` (the Hückel matrix of cyclopentadienyl
+with `α = 0`, `β = 1`), with vertices `0,1,2,3,4` arranged in a pentagon. -/
 
-/-- Adjacency matrix of the cycle graph `C₅` (the Hückel matrix of the cyclopentadienyl
-π-system in units where the Coulomb integral `α = 0` and the resonance integral `β = 1`). -/
+noncomputable def C5adj : Matrix (Fin 5) (Fin 5) ℝ :=
+  !![0,1,0,0,1; 1,0,1,0,0; 0,1,0,1,0; 0,0,1,0,1; 1,0,0,1,0]
 
-noncomputable def C5adj : Matrix (Fin 5) (Fin 5) ℂ :=
-  !![0, 1, 0, 0, 1;
-     1, 0, 1, 0, 0;
-     0, 1, 0, 1, 0;
-     0, 0, 1, 0, 1;
-     1, 0, 0, 1, 0]
-
-/-- For every `k`, the number `2 cos(2πk/5)` is an eigenvalue of `C5adj`, with
-eigenvector `(ω^j)_{j<5}` where `ω = exp(2πik/5)`. -/
+set_option maxHeartbeats 2000000 in
+/-- The characteristic identity `A⁵ = 5A³ - 5A + 2I` satisfied by the adjacency matrix
+of `C₅` (Cayley–Hamilton for the characteristic polynomial `x⁵ - 5x³ + 5x - 2`). -/

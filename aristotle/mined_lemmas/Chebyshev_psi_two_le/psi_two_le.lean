@@ -1,3 +1,11 @@
+/-
+# Psi Two Le
+Category: Frontier Wave 2 (deeper machinery)
+Target: Chebyshev.psi_two_le
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -22,26 +30,23 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Chebyshev
 
 open ArithmeticFunction
 
-/-- Λ(4) = log 2, since 4 = 2². -/
+/-- `Λ 4 = log 2`, since `4 = 2 ^ 2` is a prime power with smallest prime factor `2`. -/
 
-theorem psi_two_le :
-    ∑ n ∈ Finset.Icc 1 4, ArithmeticFunction.vonMangoldt n = Real.log 12 := by
-  rw [sum_vonMangoldt_Icc_four]
-  have h12 : (12 : ℝ) = 2 ^ 2 * 3 := by norm_num
-  rw [h12, Real.log_mul (by positivity) (by norm_num), Real.log_pow]
-  push_cast
+theorem psi_two_le : ∑ n ∈ Finset.Icc 1 4, Λ n = Real.log 12 := by
+  rw [show Finset.Icc 1 4 = ({1, 2, 3, 4} : Finset ℕ) from rfl]
+  simp [vonMangoldt_apply_one, vonMangoldt_apply_prime Nat.prime_two,
+    vonMangoldt_apply_prime Nat.prime_three, vonMangoldt_four]
+  rw [show (12 : ℝ) = 2 * 2 * 3 by norm_num, Real.log_mul (by norm_num) (by norm_num),
+    Real.log_mul (by norm_num) (by norm_num)]
   ring
 
 end Chebyshev
+
+#print axioms Chebyshev.psi_two_le
 

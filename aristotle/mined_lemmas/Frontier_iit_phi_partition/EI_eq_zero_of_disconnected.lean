@@ -1,4 +1,19 @@
+/-
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
+
+/-!
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -14,36 +29,50 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Frontier
 
-/-! ## Gibbs' inequality (nonnegativity of relative entropy) -/
+/-! ## Systems
 
-/-- Gibbs' inequality on a finite index type: the relative entropy (Kullback–Leibler
-divergence) of two probability distributions is nonnegative, provided `p` is absolutely
-continuous with respect to `q`. -/
+A (discrete, finite) system consists of a finite set `ι` of elements, each of which can be
+in one of finitely many states `Q`; a global state of the system is a function `ι → Q`.
+The dynamics are given by a transition probability matrix (TPM): for every current global
+state `s`, a probability distribution `prob s` over next global states. -/
 
-theorem EI_eq_zero_of_disconnected (M : System V S) {A : Finset V}
-    (hA : M.Disconnected A) (s : V → S) : M.EI A s = 0 := by
-  refine Finset.sum_eq_zero fun s' _ => ?_
-  rw [M.cutProb_eq_prob_of_disconnected hA s s']
-  rcases eq_or_ne (M.prob s s') 0 with h | h
-  · simp [h]
-  · simp [div_self h]
+/-- A transition probability matrix on the global state space `ι → Q`. -/
+structure TPM (ι Q : Type) [Fintype ι] [DecidableEq ι] [Fintype Q] where
+  /-- `prob s u` is the probability that the system moves from state `s` to state `u`. -/
+  prob : (ι → Q) → (ι → Q) → ℝ
+  /-- Probabilities are nonnegative. -/
+  nonneg : ∀ s u, 0 ≤ prob s u
+  /-- For each current state, the next-state probabilities sum to one. -/
+  normalized : ∀ s, ∑ u, prob s u = 1
 
-end System
+variable {ι Q : Type} [Fintype ι] [DecidableEq ι] [Fintype Q]
+
+/-- The elements on one side of the bipartition determined by `S`. -/
+abbrev Part (S : Finset ι) : Type := {i : ι // i ∈ S}
+
+/-- The elements on the other side of the bipartition determined by `S`. -/
+abbrev CoPart (S : Finset ι) : Type := {i : ι // i ∉ S}
+
+/-- Restriction of a global state to the `S`-part of the system. -/
+
+lemma EI_eq_zero_of_disconnected (T : TPM ι Q) (S : Finset ι) (h : Disconnected T S) :
+    EI T S = 0 := by
+  rw [EI]
+  rw [Finset.sum_congr rfl fun s _ => ei_eq_zero_of_disconnected T S h s]
+  simp
+
+/-! ## Main theorem -/
 
 /-- **Integrated information vanishes for a disconnected system.**
 
-`Φ`, defined as the minimum over all bipartitions `{A, Aᶜ}` of the system of the effective
-information `EI` (the relative entropy between the actual next-state distribution and the
-distribution obtained after cutting the connections between the two parts), is equal to `0`
-whenever the system splits into two non-interacting subsystems. -/
+`Φ` is defined as the minimum, over all nontrivial bipartitions `(S, Sᶜ)` of the system, of the
+effective information `EI` generated across that bipartition — the Kullback–Leibler divergence
+between the system's actual next-state distribution and the product of the next-state
+distributions of the two parts, averaged over current states with the uniform prior.
+
+If the system is disconnected, i.e. there is a nontrivial bipartition along which its dynamics
+factorize (neither side has any causal influence on the other), then `Φ = 0`. -/

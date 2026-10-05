@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Threshold Theorem
+Category: Frontier Qi
+Target: QI.threshold_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,43 +31,18 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Threshold Theorem
-Category: Frontier Qi
-Target: QI.threshold_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Threshold Theorem
-Category: Frontier Qi
-Target: QI.threshold_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace QI
 
-open Filter Topology
+/-- The logical error rate of a fault-tolerant scheme built by `k`-fold concatenation of a
+distance-3 (single-error-correcting) code, starting from physical error rate `p`.
 
-/-- `logicalErrorRate c p k` is the failure probability of a logical gate protected by `k`
-levels of code concatenation, in the standard recursive model of fault tolerance:
-a level-`0` (unencoded) gate fails with probability `p`, and a level-`(k+1)` gate fails only if
-at least two of its level-`k` constituent blocks fail, which happens with probability at most
-`c * (level-k failure rate)^2`, where `c` counts the malignant pairs of fault locations in the
-fault-tolerant gadget. -/
+One level of concatenation replaces each gate by a fault-tolerant gadget which fails only if at
+least two of its constituent locations fail; with `C` the number of malignant pairs of locations
+in a gadget, the standard level-reduction estimate gives
+`p_{k+1} = C * p_k ^ 2`. -/
 
-theorem logicalErrorRate_eq (c p : ℝ) (hc : c ≠ 0) (k : ℕ) :
-    logicalErrorRate c p k = (c * p) ^ (2 ^ k) / c := by
-  rw [← c_mul_logicalErrorRate c p k]
+lemma logicalErrorRate_eq (C p : ℝ) (hC : C ≠ 0) (k : ℕ) :
+    logicalErrorRate C p k = (C * p) ^ (2 ^ k) / C := by
+  rw [← mul_logicalErrorRate C p k]
   field_simp
 
-/-- **Threshold theorem** (error-suppression form).  Let `c > 0` be the constant counting
-malignant fault pairs of the fault-tolerant gadgets, so that the concatenation recursion is
-`p ↦ c * p ^ 2`, and let `p ≥ 0` be the physical error rate.  If `p` lies *below the threshold*
-`p_th = 1 / c`, then the logical error rate of a computation protected by `k` levels of
-concatenation can be made smaller than any prescribed accuracy `ε > 0` by taking `k` large
-enough: fault-tolerant quantum computation to arbitrary accuracy is possible. -/

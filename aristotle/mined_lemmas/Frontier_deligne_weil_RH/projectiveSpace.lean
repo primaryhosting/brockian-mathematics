@@ -5,16 +5,7 @@ Target: Frontier.deligne_weil_RH
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
-
-/-!
-# Deligne Weil RH
-Category: Frontier — Fields Medal Work
-Target: Frontier.deligne_weil_RH
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -41,68 +32,52 @@ set_option grind.warning false
 
 namespace Frontier
 
-open Filter Metric
-
-/-!
-## The zeta datum of a variety over a finite field
-
-Mathlib has no étale cohomology, so we formalize the *shape* of the Weil conjectures at
-the level of the numerical data they concern: for a `d`-dimensional variety `X` over `𝔽_q`
-one has Betti numbers `b i`, inverse roots `α i j` of the characteristic polynomials
-`P i` of Frobenius on the `i`-th cohomology group, and point counts
-`N n = #X(𝔽_{q^n})` linked by the Grothendieck–Lefschetz trace formula.
-
-The Riemann hypothesis part of the Weil conjectures (Deligne, 1974) is the assertion that
-every inverse root occurring in degree `i` has archimedean absolute value `q ^ (i / 2)`.
--/
-
-/-- Numerical zeta-function data attached to a `dim`-dimensional variety over `𝔽_q`:
-Betti numbers, the inverse roots of Frobenius in each cohomological degree, the point
-counts over the extensions `𝔽_{q ^ n}`, and the Lefschetz trace formula relating them. -/
-structure WeilDatum where
-  /-- the cardinality of the base field -/
+/-- Cohomological data attached to a variety over a finite field `𝔽_q`:
+the inverse roots (Frobenius eigenvalues) on each cohomology group, together with the
+point counts over the extensions `𝔽_{q^m}`, linked by the Grothendieck–Lefschetz trace
+formula. -/
+structure WeilVariety where
+  /-- Cardinality of the base field. -/
   q : ℕ
-  /-- the base field is a genuine finite field -/
-  hq : 1 < q
-  /-- the dimension of the variety -/
+  /-- The base field has at least two elements. -/
+  hq : 2 ≤ q
+  /-- Dimension of the variety. -/
   dim : ℕ
-  /-- the Betti numbers -/
-  betti : ℕ → ℕ
-  /-- the inverse roots of Frobenius acting on the `i`-th cohomology group -/
-  root : (i : ℕ) → Fin (betti i) → ℂ
-  /-- `pointCount n` is the number of `𝔽_{q ^ n}`-points -/
-  pointCount : ℕ → ℕ
-  /-- cohomology vanishes above degree `2 * dim` -/
-  betti_vanishing : ∀ i, 2 * dim < i → betti i = 0
-  /-- the Grothendieck–Lefschetz trace formula -/
-  lefschetz : ∀ n : ℕ, 1 ≤ n →
-    (pointCount n : ℂ) =
-      ∑ i ∈ Finset.range (2 * dim + 1), (-1 : ℂ) ^ i * ∑ j, (root i j) ^ n
+  /-- Multiset of inverse roots of Frobenius acting on the `i`-th cohomology group. -/
+  frobRoots : ℕ → Multiset ℂ
+  /-- `count m` is the number of `𝔽_{q^m}`-rational points. -/
+  count : ℕ → ℕ
+  /-- Cohomology vanishes above degree `2 * dim`. -/
+  vanishing : ∀ i, 2 * dim < i → frobRoots i = 0
+  /-- Grothendieck–Lefschetz trace formula. -/
+  trace : ∀ m, 1 ≤ m →
+    (count m : ℂ) =
+      ∑ i ∈ Finset.range (2 * dim + 1),
+        (-1) ^ i * (((frobRoots i).map (fun a => a ^ m)).sum)
 
-/-- The Riemann hypothesis for a zeta datum: every inverse root of Frobenius in
-cohomological degree `i` has absolute value `q ^ (i / 2)` (Deligne's theorem, for the
-data coming from a smooth projective variety). -/
+/-- The Riemann hypothesis for a variety over a finite field: every inverse root of
+Frobenius on the `i`-th cohomology group has archimedean absolute value `q ^ (i / 2)`. -/
 
-def projectiveSpace (q : ℕ) (hq : 1 < q) (d : ℕ) : WeilDatum where
+def projectiveSpace (q n : ℕ) (hq : 2 ≤ q) : WeilVariety where
   q := q
   hq := hq
-  dim := d
-  betti := fun i => if (Even i ∧ i ≤ 2 * d) then 1 else 0
-  root := fun i _ => (q : ℂ) ^ (i / 2)
-  pointCount := fun n => ∑ i ∈ Finset.range (d + 1), q ^ (n * i)
-  betti_vanishing := by
+  dim := n
+  frobRoots := fun i => if i % 2 = 0 ∧ i ≤ 2 * n then {((q : ℂ)) ^ (i / 2)} else 0
+  count := fun m => ∑ k ∈ Finset.range (n + 1), q ^ (k * m)
+  vanishing := by
     intro i hi
-    have : ¬ (Even i ∧ i ≤ 2 * d) := by omega
+    have : ¬ (i % 2 = 0 ∧ i ≤ 2 * n) := by omega
     simp [this]
-  lefschetz := by
-    intro n _
-    push_cast
-    rw [← projSum q n d]
-    refine Finset.sum_congr rfl (fun i hi => ?_)
-    have hile : i ≤ 2 * d := by
-      have := Finset.mem_range.1 hi; omega
-    by_cases he : Even i
-    · simp [he, hile]
-    · simp [he]
+  trace := by
+    intro m _
+    have hcast : ((∑ k ∈ Finset.range (n + 1), q ^ (k * m) : ℕ) : ℂ)
+        = ∑ k ∈ Finset.range (n + 1), ((q : ℂ) ^ (k * m)) := by push_cast; ring
+    rw [hcast, ← sum_projective_range q n m]
+    refine Finset.sum_congr rfl ?_
+    intro i hi
+    have hi' : i ≤ 2 * n := by
+      simpa [Nat.lt_succ_iff] using Finset.mem_range.mp hi
+    by_cases h : i % 2 = 0 <;> simp [h, hi']
 
-/-- **Base case of the Weil Riemann hypothesis: projective space.** -/
+/-- The `count` function of `projectiveSpace q n` is the actual number of rational points of
+`n`-dimensional projective space over a field with `q ^ m` elements. -/

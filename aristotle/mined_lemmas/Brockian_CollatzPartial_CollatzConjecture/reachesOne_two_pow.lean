@@ -23,18 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Collatz Conjecture
-Category: Brockian Conjecture
-Target: Brockian.CollatzPartial.CollatzConjecture
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean 4 requires `import` to precede any module docstring, so the header above is a
--- plain comment and is repeated verbatim as the module docstring below.)
-
-import Mathlib
-
 /-!
 # Collatz Conjecture
 Category: Brockian Conjecture
@@ -43,17 +31,17 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.CollatzPartial
+/-
+This file is deliberately self-contained (it uses only the Lean 4 core library),
+so that the header comment above can appear at the very top of the file:
+Lean does not permit a module docstring to precede `import` commands.
+-/
 
-/-- One step of the Collatz map: `n ↦ n / 2` if `n` is even, `n ↦ 3 * n + 1` if `n` is odd. -/
+namespace Brockian
+namespace CollatzPartial
 
-theorem reachesOne_two_pow (k : ℕ) : ReachesOne (2 ^ k) := by
-  induction k with
-  | zero => simpa using reachesOne_one
-  | succ k ih =>
-      have : (2:ℕ) ^ (k + 1) = 2 * 2 ^ k := by ring
-      rw [this]
-      exact reachesOne_two_mul ih
+/-- The Collatz step: `n ↦ n / 2` if `n` is even, `n ↦ 3 * n + 1` if `n` is odd. -/
 
-/-- A fuel-based decision procedure: `reachesOneCheck f n = true` witnesses that `n`
-reaches `1` within `f` steps. -/
+theorem reachesOne_two_pow (m : Nat) : ReachesOne (2 ^ m) := ⟨m, iter_two_pow m⟩
+
+/-- An even number `> 1` descends in one step. -/

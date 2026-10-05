@@ -8,62 +8,47 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-The Gaussian correlation inequality (conjectured by Das Gupta–Eaton–Olkin–Perlman–Savage–Sobel,
-proved by Thomas Royen in 2014) states that for a centred Gaussian measure `μ` on `ℝⁿ` and two
-symmetric convex sets `K`, `L`,
-`μ (K ∩ L) ≥ μ K * μ L`.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-Mathlib (as of the pinned version) contains no form of this inequality: a search for
-`gaussian_correlation` and related names returns nothing, and there is no lemma relating the
-measure of an intersection of convex sets to the product of the measures. What Mathlib does
-provide, and what we use here, is the theory of Gaussian measures
-(`ProbabilityTheory.gaussianReal`, `ProbabilityTheory.IsGaussian`), convexity, and the general
-measure-theoretic API.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-This file therefore:
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-* formalises the general statement as `Frontier.GaussianCorrelation E`;
-* proves the base case, dimension one, as `Frontier.gaussian_correlation`
-  (in fact in the stronger form `Frontier.correlation_real`, valid for *any* probability measure
-  on `ℝ`, since two symmetric convex subsets of `ℝ` are automatically nested);
-* proves a Lean-checked reduction, `Frontier.GaussianCorrelation.of_continuousLinearEquiv`,
-  saying that the statement only depends on the space up to continuous linear isomorphism, and
-  deduces the dimension-one case for `Fin 1 → ℝ` and for `EuclideanSpace ℝ (Fin 1)`;
-* proves the "independent blocks" case in arbitrary dimension,
-  `Frontier.correlation_prod_of_independent_blocks`, where the inequality holds with equality.
-
-The full theorem in dimension `≥ 2` (Royen's proof) is not formalised here.
--/
-
-open MeasureTheory ProbabilityTheory Set
-open scoped ENNReal NNReal
+set_option grind.warning false
 
 namespace Frontier
 
-/-!
-## The statement
--/
+open MeasureTheory
 
-/-- The Gaussian correlation inequality for the real normed space `E`: for every symmetric
-(equivalently, centred) Gaussian measure `μ` on `E` and all symmetric convex measurable sets
-`K`, `L`, one has `μ K * μ L ≤ μ (K ∩ L)`.
+/-! ## The standard Gaussian measure and the statement of the inequality -/
 
-Symmetry of a set `S` is expressed as `∀ x ∈ S, -x ∈ S`, and centredness of `μ` as invariance
-under `x ↦ -x`. -/
+/-- The standard Gaussian (probability) measure on `ℝ ^ n`, realised as the `n`-fold product
+of the one-dimensional standard Gaussian `N(0,1)`. -/
 
-theorem gaussianReal_correlation (v : ℝ≥0) {K L : Set ℝ}
-    (hKm : MeasurableSet K) (hLm : MeasurableSet L) (hKc : Convex ℝ K) (hLc : Convex ℝ L)
-    (hKs : ∀ x ∈ K, -x ∈ K) (hLs : ∀ x ∈ L, -x ∈ L) :
-    gaussianReal 0 v K * gaussianReal 0 v L ≤ gaussianReal 0 v (K ∩ L) :=
-  gaussian_correlation (gaussianReal 0 v) inferInstance
-    (by rw [gaussianReal_map_neg]; norm_num) K L hKm hLm hKc hLc hKs hLs
+theorem gaussianReal_correlation {A B : Set ℝ} (hAc : Convex ℝ A) (hAs : ∀ x ∈ A, -x ∈ A)
+    (hBc : Convex ℝ B) (hBs : ∀ x ∈ B, -x ∈ B) :
+    ProbabilityTheory.gaussianReal 0 1 A * ProbabilityTheory.gaussianReal 0 1 B
+      ≤ ProbabilityTheory.gaussianReal 0 1 (A ∩ B) := by
+  rcases symmetricConvexReal_nested hAc hAs hBc hBs with h | h
+  · exact measure_mul_le_measure_inter_of_subset _ h
+  · rw [mul_comm, Set.inter_comm]
+    exact measure_mul_le_measure_inter_of_subset _ h
 
-/-!
-## A reduction: invariance under continuous linear isomorphisms
--/
+/-! ## Transfer from `Fin 1 → ℝ` to `ℝ` -/
 
-/-- The Gaussian correlation inequality only depends on the underlying space up to continuous
-linear isomorphism: if it holds on `F` and `e : E ≃L[ℝ] F`, then it holds on `E`. -/
+/-- The coordinate description of a subset of `Fin 1 → ℝ`. -/

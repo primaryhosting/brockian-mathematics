@@ -1,33 +1,37 @@
 import Mathlib
 
 /-!
-# `Brockian.CosTraceNorm2707` : trace-norm bounds for cosine Gram matrices
-
-For a family of angles `x : Fin n → ℝ` we consider the *cosine matrix*
-`C i j = cos (x i - x j)`.  It is the Gram matrix of the unit vectors
-`(cos (x i), sin (x i))` in the plane, hence positive semidefinite of rank at most `2`,
-and all its diagonal entries equal `1`.
-
-The main results are:
-
-* `Brockian.cosMatrix_posSemidef` : `C` is positive semidefinite;
-* `Brockian.traceNorm_of_posSemidef` : for a positive semidefinite matrix the trace norm
-  (the sum of the absolute values of the eigenvalues) equals the trace;
-* `Brockian.CosTraceNorm2707` : the trace norm of `C` equals `n`;
-* derived trace-norm bounds: bounds on the quadratic and bilinear forms of `C`,
-  and the general inequality `|trace A| ≤ ‖A‖₁` for Hermitian `A`.
+# Cos Trace Norm 2707
+Category: Brockian Corpus
+Target: Brockian.CosTraceNorm2707
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
 namespace Brockian
 
-variable {n : ℕ}
+open Matrix
 
-/-- The cosine Gram matrix of a family of angles: `C i j = cos (x i - x j)`. -/
+variable {n : ℕ} {A : Matrix (Fin n) (Fin n) ℂ}
 
-lemma cosMatrix_isHermitian (x : Fin n → ℝ) : (cosMatrix x).IsHermitian := by
-  ext i j
-  simp [Matrix.conjTranspose_apply, ← Real.cos_neg (x j - x i)]
+/-- The matrix `cos A` for a Hermitian matrix `A`, defined through the spectral theorem
+(`Matrix.IsHermitian.spectral_theorem`): conjugate the diagonal matrix of the cosines of the
+eigenvalues of `A` by the unitary matrix of eigenvectors of `A`. -/
 
-/-- The bilinear form of the cosine matrix splits into a cosine and a sine part. -/
+theorem cosMatrix_isHermitian (hA : A.IsHermitian) : (cosMatrix hA).IsHermitian := by
+  rw [Matrix.IsHermitian, ← Matrix.star_eq_conjTranspose, cosMatrix, ← map_star,
+    star_diagonal_cos hA]
+
+/-- Unfolded form of `cosMatrix`: it is the conjugation `U * diag(cos λ) * U*`. -/

@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Tent Combination Neg On Band
 Category: Brockian Corpus
 Target: Zeta23Obstruction.tent_combination_neg_on_band
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -22,10 +22,19 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace Zeta23Obstruction
 
-/-- The Fourier tent profile `T a = max 0 (1 - |a|)`. -/
+/-- The unit tent profile `T a = max 0 (1 - |a|)`. -/
 
 noncomputable def T : ℝ → ℝ := fun a => max 0 (1 - |a|)
 
-/-- The tent is nonnegative. -/
+/-- The tent profile is nonnegative. -/

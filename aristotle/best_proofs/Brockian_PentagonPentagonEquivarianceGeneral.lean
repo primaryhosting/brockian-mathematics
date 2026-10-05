@@ -5,6 +5,8 @@ Target: Brockian.PentagonPentagonEquivarianceGeneral
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above uses `/-` rather than `/-!` because Lean 4 does not allow a module
+-- docstring to precede the `import` commands; the text is otherwise verbatim.)
 
 import Mathlib
 
@@ -22,160 +24,111 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 
-/-- The `k`-th vertex of the regular `n`-gon inscribed in the unit circle of `ℂ`,
-indexed by `k : ZMod n`. -/
-noncomputable def ngonVertex (n : ℕ) (k : ZMod n) : ℂ :=
-  Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (k.val : ℂ) / (n : ℂ))
+open DihedralGroup
 
-/-- The natural action of the dihedral group `DihedralGroup n` on the vertex indices
-`ZMod n` of a regular `n`-gon: the rotation `r i` shifts indices, the reflection `sr i`
-reverses them. -/
-def ngonIndexAction (n : ℕ) : DihedralGroup n → ZMod n → ZMod n
-  | .r i, k => k - i
-  | .sr i, k => i - k
+/-!
+## The dihedral action on the vertices of the `n`-gon
 
-/-- The geometric action of `DihedralGroup n` on the plane `ℂ`: rotations act by
-multiplication by a root of unity, reflections by a rotated complex conjugation. -/
-noncomputable def ngonPlaneAction (n : ℕ) : DihedralGroup n → ℂ → ℂ
-  | .r i, z => ngonVertex n (-i) * z
-  | .sr i, z => ngonVertex n i * (starRingEnd ℂ) z
+We label the vertices of the regular `n`-gon by `ZMod n`.  With Mathlib's multiplication
+convention on `DihedralGroup n` (`r i * sr j = sr (j - i)`), the natural *left* action of the
+symmetry group on the vertex set is given by
 
-section Lemmas
+* `r i • x = x - i`   (rotation),
+* `sr i • x = i - x`  (reflection).
+-/
 
-variable {n : ℕ}
+/-- The action of a symmetry of the regular `n`-gon on its vertex set `ZMod n`. -/
+def ngonAct {n : ℕ} : DihedralGroup n → ZMod n → ZMod n
+  | r i, x => x - i
+  | sr i, x => i - x
 
-/-- Two natural numbers congruent mod `n` give the same `n`-th root of unity. -/
-lemma exp_nat_congr (hn : 0 < n) {a b : ℕ} (h : (a : ZMod n) = (b : ZMod n)) :
-    Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (a : ℂ) / (n : ℂ)) =
-      Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (b : ℂ) / (n : ℂ)) := by
-  have hn' : (n : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hn.ne'
-  have hmod : a ≡ b [MOD n] := (ZMod.natCast_eq_natCast_iff a b n).mp h
-  obtain ⟨c, hc⟩ := (Nat.modEq_iff_dvd (n := n) (a := a) (b := b)).mp hmod
-  have hac : (b : ℂ) - (a : ℂ) = (n : ℂ) * (c : ℂ) := by
-    exact_mod_cast congrArg (fun t : ℤ => (t : ℂ)) hc
-  rw [Complex.exp_eq_exp_iff_exists_int]
-  refine ⟨-c, ?_⟩
-  have key : (2 * (Real.pi : ℂ) * Complex.I * (a : ℂ)) / (n : ℂ)
-      = (2 * (Real.pi : ℂ) * Complex.I * (b : ℂ)
-          + ((-c : ℤ) : ℂ) * (2 * (Real.pi : ℂ) * Complex.I) * (n : ℂ)) / (n : ℂ) := by
-    congr 1
-    push_cast
-    linear_combination (-2 * (Real.pi : ℂ) * Complex.I) * hac
-  rw [key, add_div, mul_div_assoc, mul_div_assoc]
-  field_simp
+/-- The symmetry group of the `n`-gon acts on the vertex set `ZMod n`. -/
+instance ngonMulAction (n : ℕ) : MulAction (DihedralGroup n) (ZMod n) where
+  smul := ngonAct
+  one_smul x := by
+    show ngonAct (r (0 : ZMod n)) x = x
+    simp [ngonAct]
+  mul_smul g h x := by
+    show ngonAct (g * h) x = ngonAct g (ngonAct h x)
+    cases g with
+    | r i => cases h with
+      | r j => simp [ngonAct]; ring
+      | sr j => simp [ngonAct]; ring
+    | sr i => cases h with
+      | r j => simp [ngonAct]; ring
+      | sr j => simp [ngonAct]; ring
 
-lemma ngonVertex_eq_exp_ofReal (n : ℕ) (k : ZMod n) :
-    ngonVertex n k = Complex.exp (((2 * Real.pi * (k.val : ℝ) / (n : ℝ) : ℝ) : ℂ) * Complex.I) := by
-  unfold ngonVertex
-  congr 1
-  push_cast
-  ring
+@[simp] lemma r_smul {n : ℕ} (i x : ZMod n) : (r i : DihedralGroup n) • x = x - i := rfl
 
-@[simp] lemma norm_ngonVertex (n : ℕ) (k : ZMod n) : ‖ngonVertex n k‖ = 1 := by
-  rw [ngonVertex_eq_exp_ofReal]
-  exact Complex.norm_exp_ofReal_mul_I _
+@[simp] lemma sr_smul {n : ℕ} (i x : ZMod n) : (sr i : DihedralGroup n) • x = i - x := rfl
 
-lemma ngonVertex_ne_zero (n : ℕ) (k : ZMod n) : ngonVertex n k ≠ 0 := by
-  intro h
-  have := norm_ngonVertex n k
-  rw [h] at this
-  simp at this
+/-- **Pentagon equivariance, general `n`-gon version.**
 
-@[simp] lemma ngonVertex_zero (n : ℕ) : ngonVertex n 0 = 1 := by
-  unfold ngonVertex
-  simp
+A self-map `f` of the vertex set `ZMod n` of the regular `n`-gon commutes with the whole
+symmetry group `DihedralGroup n` if and only if it is the translation by a `2`-torsion
+element `c` of `ZMod n`.
 
-lemma ngonVertex_add (hn : 0 < n) (a b : ZMod n) :
-    ngonVertex n (a + b) = ngonVertex n a * ngonVertex n b := by
-  haveI : NeZero n := ⟨hn.ne'⟩
-  have hcast : (((a + b).val : ℕ) : ZMod n) = ((a.val + b.val : ℕ) : ZMod n) := by
-    push_cast [ZMod.natCast_zmod_val]
-    ring
-  have h1 : ngonVertex n (a + b)
-      = Complex.exp (2 * (Real.pi : ℂ) * Complex.I * ((a.val + b.val : ℕ) : ℂ) / (n : ℂ)) :=
-    exp_nat_congr hn hcast
-  rw [h1]
-  unfold ngonVertex
-  rw [← Complex.exp_add]
-  congr 1
-  push_cast
-  ring
-
-lemma ngonVertex_neg (hn : 0 < n) (a : ZMod n) :
-    ngonVertex n (-a) = (starRingEnd ℂ) (ngonVertex n a) := by
-  have h1 : ngonVertex n (-a) * ngonVertex n a = 1 := by
-    rw [← ngonVertex_add hn]
-    simp
-  rw [← Complex.inv_eq_conj (norm_ngonVertex n a)]
-  exact eq_inv_of_mul_eq_one_left h1
-
-lemma ngonVertex_sub (hn : 0 < n) (a b : ZMod n) :
-    ngonVertex n (a - b) = ngonVertex n a * (starRingEnd ℂ) (ngonVertex n b) := by
-  rw [sub_eq_add_neg, ngonVertex_add hn, ngonVertex_neg hn]
-
-end Lemmas
-
-/-- **Pentagon pentagon equivariance, general `n`-gon version.**
-
-For every `n > 0`, the dihedral group `DihedralGroup n` acts both on the vertex index set
-`ZMod n` of a regular `n`-gon and on the plane `ℂ` (rotations by `n`-th roots of unity,
-reflections by conjugation composed with a rotation), and the vertex map
-`k ↦ ngonVertex n k` intertwines the two actions.  The vertices all lie on the unit circle.
-
-Specialising to `n = 5` recovers the `D₅` pentagon representation statement. -/
-theorem PentagonPentagonEquivarianceGeneral (n : ℕ) (hn : 0 < n) :
-    (∀ k : ZMod n, ngonIndexAction n 1 k = k) ∧
-    (∀ g h : DihedralGroup n, ∀ k : ZMod n,
-        ngonIndexAction n (g * h) k = ngonIndexAction n g (ngonIndexAction n h k)) ∧
-    (∀ z : ℂ, ngonPlaneAction n 1 z = z) ∧
-    (∀ g h : DihedralGroup n, ∀ z : ℂ,
-        ngonPlaneAction n (g * h) z = ngonPlaneAction n g (ngonPlaneAction n h z)) ∧
-    (∀ g : DihedralGroup n, ∀ k : ZMod n,
-        ngonPlaneAction n g (ngonVertex n k) = ngonVertex n (ngonIndexAction n g k)) ∧
-    (∀ k : ZMod n, ‖ngonVertex n k‖ = 1) := by
-  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
-  · intro k
-    rw [DihedralGroup.one_def]
-    simp [ngonIndexAction]
-  · rintro (i | i) (j | j) k <;>
-      simp [ngonIndexAction, DihedralGroup.r_mul_r, DihedralGroup.r_mul_sr,
-        DihedralGroup.sr_mul_r, DihedralGroup.sr_mul_sr] <;> ring
-  · intro z
-    rw [DihedralGroup.one_def]
-    simp [ngonPlaneAction]
-  · rintro (i | i) (j | j) z
-    · simp only [DihedralGroup.r_mul_r, ngonPlaneAction, neg_add]
-      rw [ngonVertex_add hn]
+For `n = 5` (the pentagon) — indeed for any odd `n` — the only such `c` is `0`, so the only
+equivariant self-map is the identity; for even `n` there is exactly one further equivariant map,
+the antipodal map `x ↦ x + n / 2`. -/
+theorem PentagonPentagonEquivarianceGeneral {n : ℕ} (f : ZMod n → ZMod n) :
+    (∀ (g : DihedralGroup n) (x : ZMod n), f (g • x) = g • f x) ↔
+      ∃ c : ZMod n, c + c = 0 ∧ ∀ x, f x = x + c := by
+  constructor
+  · intro h
+    refine ⟨f 0, ?_, ?_⟩
+    · -- reflection through the vertex `0` forces `f 0` to be `2`-torsion
+      have h0 := h (sr 0) 0
+      simp only [sr_smul, zero_sub, neg_zero] at h0
+      -- `f 0 = -f 0`
+      have : f 0 = -f 0 := h0
+      linear_combination (norm := ring_nf) this
+    · intro x
+      -- rotations force `f` to be a translation
+      have hx := h (r (-x)) 0
+      simp only [r_smul, zero_sub, neg_neg] at hx
+      rw [hx]
       ring
-    · simp only [DihedralGroup.r_mul_sr, ngonPlaneAction]
-      rw [show j - i = j + -i by ring, ngonVertex_add hn]
-      ring
-    · simp only [DihedralGroup.sr_mul_r, ngonPlaneAction]
-      rw [ngonVertex_add hn, ngonVertex_neg hn, map_mul, Complex.conj_conj]
-      ring
-    · simp only [DihedralGroup.sr_mul_sr, ngonPlaneAction]
-      rw [show -(j - i) = i + -j by ring, ngonVertex_add hn, ngonVertex_neg hn, map_mul,
-        Complex.conj_conj]
-      ring
-  · rintro (i | i) k
-    · simp only [ngonPlaneAction, ngonIndexAction]
-      rw [show k - i = -i + k by ring, ngonVertex_add hn]
-    · simp only [ngonPlaneAction, ngonIndexAction]
-      rw [ngonVertex_sub hn]
-  · intro k
-    exact norm_ngonVertex n k
+  · rintro ⟨c, hc, hf⟩ g x
+    cases g with
+    | r i => simp only [r_smul, hf]; ring
+    | sr i =>
+        simp only [sr_smul, hf]
+        linear_combination (norm := ring_nf) hc
 
-/-- The original pentagon (`D₅`) case, obtained from the general theorem. -/
-theorem PentagonPentagonEquivariance :
-    (∀ g : DihedralGroup 5, ∀ k : ZMod 5,
-        ngonPlaneAction 5 g (ngonVertex 5 k) = ngonVertex 5 (ngonIndexAction 5 g k)) ∧
-    (∀ k : ZMod 5, ‖ngonVertex 5 k‖ = 1) :=
-  ⟨(PentagonPentagonEquivarianceGeneral 5 (by norm_num)).2.2.2.2.1,
-    (PentagonPentagonEquivarianceGeneral 5 (by norm_num)).2.2.2.2.2⟩
+/-- Specialisation to odd `n`: the identity is the only equivariant self-map of the vertex
+set of the regular `n`-gon. -/
+theorem ngon_equivariance_odd {n : ℕ} (hn : Odd n) (f : ZMod n → ZMod n)
+    (h : ∀ (g : DihedralGroup n) (x : ZMod n), f (g • x) = g • f x) :
+    ∀ x, f x = x := by
+  obtain ⟨c, hc, hf⟩ := (PentagonPentagonEquivarianceGeneral f).1 h
+  have hc0 : c = 0 := by
+    have h2 : (2 : ZMod n) * c = 0 := by linear_combination (norm := ring_nf) hc
+    have : IsUnit (2 : ZMod n) := by
+      have hcop : Nat.Coprime 2 n := Nat.coprime_two_left.mpr hn
+      simpa using (ZMod.isUnit_iff_coprime 2 n).2 (by simpa [Nat.Coprime] using hcop)
+    obtain ⟨u, hu⟩ := this
+    have := congrArg (fun z => (↑u⁻¹ : ZMod n) * z) h2
+    simpa [← hu, ← mul_assoc, ← Units.val_mul] using this
+  intro x
+  simp [hf, hc0]
+
+/-- The pentagon case (`n = 5`), recovering the original `D₅` statement. -/
+theorem PentagonEquivariance (f : ZMod 5 → ZMod 5)
+    (h : ∀ (g : DihedralGroup 5) (x : ZMod 5), f (g • x) = g • f x) :
+    ∀ x, f x = x :=
+  ngon_equivariance_odd (by decide) f h
 
 end Brockian
 

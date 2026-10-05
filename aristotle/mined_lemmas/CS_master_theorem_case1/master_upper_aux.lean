@@ -1,82 +1,83 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Master Theorem Case 1
+Category: Computer Science
+Target: CS.master_theorem_case1
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+/-
+Note on file layout: Lean 4 requires `import` commands to be the very first commands of a
+module, so the header module docstring above is placed immediately after the import.
+-/
 
 namespace CS
 
-/-- `((b:ℝ)^k) ^ (log_b a) = a ^ k` (outer exponent is a real power). -/
+open Real
 
-lemma master_upper_aux (ha : 0 < a) (hb : 2 ≤ b) (he : 0 < e) (hC : 0 ≤ C)
-    (hf : ∀ n : ℕ, 1 ≤ n → f n ≤ C * (n : ℝ) ^ (Real.logb b a - e))
-    (hrec : ∀ k : ℕ, T (b ^ (k + 1)) = a * T (b ^ k) + f (b ^ (k + 1))) (k : ℕ) :
-    T (b ^ k) ≤ (T 1 + (C * ((b : ℝ) ^ (-e)) / (1 - (b : ℝ) ^ (-e)))
-      * (1 - ((b : ℝ) ^ (-e)) ^ k)) * a ^ k := by
-  have hb1 : (1 : ℝ) < (b : ℕ) := by exact_mod_cast hb.trans_lt' one_lt_two
-  set r : ℝ := (b : ℝ) ^ (-e) with hr
-  have hr0 : 0 < r := Real.rpow_pos_of_pos (lt_trans zero_lt_one hb1) _
-  have hr1 : r < 1 := by
-    rw [hr]
-    exact Real.rpow_lt_one_of_one_lt_of_neg hb1 (by linarith)
-  set D : ℝ := C * r / (1 - r) with hD
-  have hDnn : 0 ≤ D := by
-    apply div_nonneg (mul_nonneg hC hr0.le)
+section
+
+variable {a b C ε : ℝ} {T f : ℕ → ℝ}
+
+/-- On exact powers of `b`, `(b^k)^(log_b a) = a^k`. -/
+
+lemma master_upper_aux (ha : 0 < a) (hb : 1 < b) (hC : 0 ≤ C) (hε : 0 < ε)
+    (hrec : ∀ k, T (k + 1) = a * T k + f (k + 1))
+    (hfO : ∀ k, f k ≤ C * (b ^ (k : ℝ)) ^ (Real.logb b a - ε)) (k : ℕ) :
+    T k ≤ a ^ k * (T 0 + C / (1 - b ^ (-ε)) * (1 - (b ^ (-ε)) ^ k)) := by
+  have hb0 : (0:ℝ) < b := lt_trans zero_lt_one hb
+  set d : ℝ := b ^ (-ε) with hd
+  have hd0 : 0 < d := Real.rpow_pos_of_pos hb0 _
+  have hd1 : d < 1 := by
+    rw [hd]
+    apply Real.rpow_lt_one_of_one_lt_of_neg hb
     linarith
-  have h1r : (1 : ℝ) - r ≠ 0 := by linarith
-  have hDeq : D * (1 - r) = C * r := by
-    rw [hD, div_mul_cancel₀ _ h1r]
+  set B : ℝ := C / (1 - d) with hB
+  have hB0 : 0 ≤ B := div_nonneg hC (by linarith)
+  have hkey : C * d ≤ B * (1 - d) := by
+    rw [hB, div_mul_cancel₀]
+    · nlinarith
+    · linarith
   induction k with
   | zero => simp
-  | succ k ih =>
-      have hfb : f (b ^ (k + 1)) ≤ C * a ^ (k + 1) * r ^ (k + 1) :=
-        f_pow_bound ha hb hf (k + 1)
-      have hstep : T (b ^ (k + 1)) = a * T (b ^ k) + f (b ^ (k + 1)) := hrec k
-      have hmul : a * T (b ^ k) ≤ a * ((T 1 + D * (1 - r ^ k)) * a ^ k) :=
+  | succ n ih =>
+      have hfb : f (n + 1) ≤ C * (a ^ (n+1) * d ^ (n+1)) := by
+        have := hfO (n + 1)
+        rwa [rpow_logb_sub_pow ha hb (n+1)] at this
+      have hdn : 0 < d ^ n := pow_pos hd0 n
+      have han : (0:ℝ) < a ^ (n+1) := pow_pos ha _
+      have h2 : a * (a ^ n * (T 0 + B * (1 - d ^ n))) + f (n+1)
+          ≤ a ^ (n+1) * (T 0 + B * (1 - d ^ (n+1))) := by
+        have hstep : C * d ^ (n+1) ≤ B * d ^ n - B * d ^ (n+1) := by
+          have : (C * d) * d ^ n ≤ (B * (1 - d)) * d ^ n :=
+            mul_le_mul_of_nonneg_right hkey hdn.le
+          calc C * d ^ (n+1) = (C * d) * d ^ n := by ring
+            _ ≤ (B * (1 - d)) * d ^ n := this
+            _ = B * d ^ n - B * d ^ (n+1) := by ring
+        have := mul_le_mul_of_nonneg_left hstep han.le
+        calc a * (a ^ n * (T 0 + B * (1 - d ^ n))) + f (n+1)
+            ≤ a * (a ^ n * (T 0 + B * (1 - d ^ n))) + C * (a ^ (n+1) * d ^ (n+1)) := by
+              linarith [hfb]
+          _ = a ^ (n+1) * (T 0 + B * (1 - d ^ n)) + a ^ (n+1) * (C * d ^ (n+1)) := by
+              ring
+          _ ≤ a ^ (n+1) * (T 0 + B * (1 - d ^ n)) + a ^ (n+1) * (B * d ^ n - B * d ^ (n+1)) := by
+              linarith [this]
+          _ = a ^ (n+1) * (T 0 + B * (1 - d ^ (n+1))) := by ring
+      have h3 : a * T n ≤ a * (a ^ n * (T 0 + B * (1 - d ^ n))) :=
         mul_le_mul_of_nonneg_left ih ha.le
-      have hak : (0 : ℝ) < a ^ (k + 1) := pow_pos ha _
-      have key : (T 1 + D * (1 - r ^ k)) * a ^ (k + 1) + C * a ^ (k + 1) * r ^ (k + 1)
-          ≤ (T 1 + D * (1 - r ^ (k + 1))) * a ^ (k + 1) := by
-        have : C * r ^ (k + 1) ≤ D * (1 - r ^ (k+1)) - D * (1 - r ^ k) := by
-          have h2 : D * (1 - r ^ (k+1)) - D * (1 - r ^ k) = D * (1 - r) * r ^ k := by
-            ring
-          rw [h2, hDeq]
-          exact le_of_eq (by ring)
-        nlinarith [hak, this]
-      calc T (b ^ (k + 1)) = a * T (b ^ k) + f (b ^ (k + 1)) := hstep
-        _ ≤ a * ((T 1 + D * (1 - r ^ k)) * a ^ k) + C * a ^ (k + 1) * r ^ (k + 1) := by
-              linarith
-        _ = (T 1 + D * (1 - r ^ k)) * a ^ (k + 1) + C * a ^ (k + 1) * r ^ (k + 1) := by ring
-        _ ≤ (T 1 + D * (1 - r ^ (k + 1))) * a ^ (k + 1) := key
+      rw [hrec n]
+      linarith
 
 end
 
-/--
-**Master theorem, case 1.**
+/-- **Master theorem, case 1** (on exact powers of `b`).
 
-Let `T` satisfy the divide-and-conquer recurrence `T(n) = a·T(n/b) + f(n)` on the exact
-powers of `b` (i.e. `T (b^(k+1)) = a · T (b^k) + f (b^(k+1))`), with `a > 0`, `b ≥ 2`,
-`f ≥ 0` and `T 1 > 0`.  If `f(n) = O(n^{log_b a − ε})` for some `ε > 0` — here witnessed
-explicitly by the bound `f n ≤ C · n^{log_b a − ε}` for all `n ≥ 1` — then
-`T(n) = Θ(n^{log_b a})`, i.e. there are positive constants `c₁, c₂` with
-`c₁ · n^{log_b a} ≤ T(n) ≤ c₂ · n^{log_b a}` for all `n = b^k`.
--/
+Let `T` satisfy the divide-and-conquer recurrence `T(b^(k+1)) = a * T(b^k) + f(b^(k+1))`
+with `a > 0`, `b > 1`, `T(1) > 0`, and a nonnegative driving term `f` satisfying
+`f(n) ≤ C * n^(log_b a - ε)` for some `ε > 0` (i.e. `f(n) = O(n^(log_b a - ε))`).
+Then `T(n) = Θ(n^(log_b a))`: there are positive constants `c₁, c₂` with
+`c₁ * n^(log_b a) ≤ T(n) ≤ c₂ * n^(log_b a)` for all `n = b^k`.
+
+Here `T` and `f` are indexed by the exponent `k`, i.e. `T k` stands for `T(b^k)`. -/

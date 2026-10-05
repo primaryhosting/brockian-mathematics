@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Total Over Main Tendsto
+Category: Brockian (Literature Discharge)
+Target: Brockian.EquidistributionBVReduction.total_over_main_tendsto
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -14,34 +22,20 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
-/-
-# Total Over Main Tendsto
-Category: Brockian (Literature Discharge)
-Target: Brockian.EquidistributionBVReduction.total_over_main_tendsto
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Brockian
+namespace EquidistributionBVReduction
 
-import Mathlib
+open Filter Finset
 
-open scoped BigOperators
-open Filter Topology
+/-- The `N`-th equidistributed sample sum of `f`: the total of the values of `f` at the
+`N` equidistributed sample points `0/N, 1/N, …, (N-1)/N` of the unit interval. -/
 
-namespace Brockian.EquidistributionBVReduction
+noncomputable def main (f : ℝ → ℝ) (N : ℕ) : ℝ := (N : ℝ) * ∫ x in (0:ℝ)..1, f x
 
-/-- The *main term* of the equidistribution / bounded-variation reduction: the
-expected value `N * I` of the first `N` sampled values, where `I` is the mean
-(integral) of the sampled function. -/
+section Monotone
 
-noncomputable def main (I : ℝ) (N : ℕ) : ℝ := (N : ℝ) * I
+variable {p : ℝ → ℝ}
 
-/-- The *total*: the actual sum `∑_{n < N} f n` of the first `N` sampled values. -/
+/-- Each subinterval of the uniform partition of `[0,1]` into `N` pieces lies in `[0,1]`. -/

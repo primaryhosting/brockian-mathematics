@@ -1,8 +1,4 @@
-import RequestProject.Paradoxical
-
-/-!
-# Banach Tarski: a free group of rotations of `ℝ³`
--/
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -18,122 +14,169 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace Frontier
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-open Set Function
+set_option grind.warning false
 
-/-! ## A free group of rotations of `ℝ³`
+import Mathlib
 
-Following the classical argument, the two rotations by `arccos (3/5)` about the `z`- and the
-`x`-axis generate a free subgroup of `SO(3)`.  Freeness is proved by a `5`-adic argument:
-a nonempty reduced word of length `n`, applied to the integral vector `(1,0,2)` and rescaled
-by `5 ^ n`, gives an integral vector which is nonzero modulo `5`.
+/-!
+# Rotations of three dimensional Euclidean space
+
+Explicit rotations about the `z`- and `x`-axes, the cross product, and the fact that a
+nontrivial rotation fixes at most two points of the unit sphere.
 -/
 
-namespace FreeRotations
+open scoped RealInnerProductSpace
 
-open Matrix
+namespace BT
 
-/-- The special orthogonal group of `ℝ³`. -/
-abbrev SO3 := Matrix.specialOrthogonalGroup (Fin 3) ℝ
+/-- Three dimensional Euclidean space. -/
+abbrev E3 := EuclideanSpace ℝ (Fin 3)
 
-instance : Fact (Nat.Prime 5) := ⟨by norm_num⟩
+/-- A vector of `E3` given by its three coordinates. -/
 
-
-theorem isParadoxical_of_freeAction (Y : Set X)
-    (hYinv : ∀ (h : H) {x : X}, x ∈ Y → h • x ∈ Y)
-    (hfree : ∀ (h : H) {x : X}, x ∈ Y → h • x = x → h = 1)
-    (hpar : IsParadoxical H (Set.univ : Set H)) : IsParadoxical H Y := by
+theorem isParadoxical_of_freeAction {X G : Type*} [Group G] [MulAction G X]
+    (φ : F →* G) (E : Set X)
+    (hinv : ∀ (w : F) {x : X}, x ∈ E → φ w • x ∈ E)
+    (hfree : ∀ (w : F) {x : X}, x ∈ E → w ≠ 1 → φ w • x ≠ x) :
+    IsParadoxical G E := by
   classical
-  -- a choice of orbit representatives
-  obtain ⟨rep, hrep_ex, hrep_smul⟩ :
-      ∃ rep : X → X, (∀ x : X, ∃ h : H, x = h • rep x) ∧ (∀ (h : H) (x : X), rep (h • x) = rep x) := by
-    refine ⟨fun x => Quotient.out (Quotient.mk (MulAction.orbitRel H X) x), ?_, ?_⟩
-    · intro x
-      have h0 : (MulAction.orbitRel H X) (Quotient.out (Quotient.mk (MulAction.orbitRel H X) x)) x :=
-        Quotient.mk_out (s := MulAction.orbitRel H X) x
-      rw [MulAction.orbitRel_apply] at h0
-      obtain ⟨h, hh⟩ := h0
-      exact ⟨h⁻¹, by simp [← hh]⟩
-    · intro h x
-      exact congrArg Quotient.out (Quotient.sound
-        (show (MulAction.orbitRel H X) (h • x) x from (MulAction.orbitRel_apply).2 ⟨h, rfl⟩))
-  choose elem helem using hrep_ex
-  have hrep_eq : ∀ x : X, rep x = (elem x)⁻¹ • x := fun x =>
-    eq_inv_smul_iff.mpr (helem x).symm
-  have hrep_mem : ∀ {x : X}, x ∈ Y → rep x ∈ Y := by
-    intro x hx; rw [hrep_eq]; exact hYinv _ hx
-  -- the key equivariance property of the coefficient function `elem`
-  have key : ∀ (h : H) {x : X}, x ∈ Y → elem (h • x) = h * elem x := by
-    intro h x hx
-    have h1 : h • x = elem (h • x) • rep x := by
-      conv_lhs => rw [helem (h • x)]
-      rw [hrep_smul]
-    have h2 : h • x = (h * elem x) • rep x := by
-      conv_lhs => rw [helem x]
-      rw [mul_smul]
-    have h3 : ((elem (h • x))⁻¹ * (h * elem x)) • rep x = rep x := by
-      rw [mul_smul, ← h2, inv_smul_eq_iff]
-      exact h1
-    have h4 : (elem (h • x))⁻¹ * (h * elem x) = 1 := hfree _ (hrep_mem hx) h3
-    have h5 := congrArg (fun z => elem (h • x) * z) h4
-    simpa [← mul_assoc] using h5.symm
-  -- the main construction
-  have main : ∀ f : Equidecomp H H, f.target = Set.univ →
-      IsEquidecomposable H {x | x ∈ Y ∧ elem x ∈ f.source} Y := by
-    intro f hft
-    have hmapY : ∀ {x : X}, x ∈ Y → ∀ c : H, c • x ∈ Y := fun hx c => hYinv c hx
-    have hsrc : ∀ y : X, f.toPartialEquiv.symm (elem y) ∈ f.source := fun y =>
-      f.toPartialEquiv.map_target (by rw [hft]; trivial)
-    set F : X → X := fun x => (f (elem x) * (elem x)⁻¹) • x with hF
-    set Fi : X → X := fun x => (f.toPartialEquiv.symm (elem x) * (elem x)⁻¹) • x with hFi
-    have hFel : ∀ {x : X}, x ∈ Y → elem (F x) = f (elem x) := by
-      intro x hx
-      have := key (f (elem x) * (elem x)⁻¹) hx
-      rw [hF]
-      simpa [mul_assoc] using this
-    have hFiel : ∀ {y : X}, y ∈ Y → elem (Fi y) = f.toPartialEquiv.symm (elem y) := by
-      intro y hy
-      have := key (f.toPartialEquiv.symm (elem y) * (elem y)⁻¹) hy
-      rw [hFi]
-      simpa [mul_assoc] using this
-    refine ⟨⟨⟨F, Fi, {x | x ∈ Y ∧ elem x ∈ f.source}, Y, ?_, ?_, ?_, ?_⟩, ?_⟩, rfl, rfl⟩
-    · rintro x ⟨hx, -⟩; exact hmapY hx _
-    · intro y hy
-      exact ⟨hmapY hy _, by rw [hFiel hy]; exact hsrc y⟩
-    · rintro x ⟨hx, hxs⟩
-      have h1 : Fi (F x) = (f.toPartialEquiv.symm (elem (F x)) * (elem (F x))⁻¹) • F x := rfl
-      rw [h1, hFel hx, f.toPartialEquiv.left_inv hxs, hF]
-      simp only [← mul_smul]
-      group
-      simp
-    · intro y hy
-      have h1 : F (Fi y) = (f (elem (Fi y)) * (elem (Fi y))⁻¹) • Fi y := rfl
-      rw [h1, hFiel hy, f.toPartialEquiv.right_inv (by rw [hft]; trivial), hFi]
-      simp only [← mul_smul]
-      group
-      simp
-    · refine ⟨f.witness, ?_⟩
-      rintro x ⟨-, hxs⟩
-      obtain ⟨g, hg, hgx⟩ := f.isDecompOn (elem x) hxs
-      refine ⟨g, hg, ?_⟩
-      show F x = g • x
-      rw [hF]
-      simp only [hgx, smul_eq_mul, mul_inv_cancel_right]
-  obtain ⟨A₁, A₂, -, -, hdisj, ⟨f₁, hf₁s, hf₁t⟩, ⟨f₂, hf₂s, hf₂t⟩⟩ := hpar
-  refine ⟨{x | x ∈ Y ∧ elem x ∈ f₁.source}, {x | x ∈ Y ∧ elem x ∈ f₂.source},
-    fun x hx => hx.1, fun x hx => hx.1, ?_, main f₁ hf₁t, main f₂ hf₂t⟩
-  rw [Set.disjoint_left]
-  rintro x ⟨-, hx₁⟩ ⟨-, hx₂⟩
-  rw [hf₁s] at hx₁
-  rw [hf₂s] at hx₂
-  exact (Set.disjoint_left.1 hdisj hx₁) hx₂
+  -- the orbit equivalence relation
+  let s : Setoid X :=
+    { r := fun x y => ∃ w : F, φ w • x = y
+      iseqv :=
+        { refl := fun x => ⟨1, by simp⟩
+          symm := by
+            rintro x y ⟨w, rfl⟩
+            exact ⟨w⁻¹, by rw [map_inv, inv_smul_smul]⟩
+          trans := by
+            rintro x y z ⟨w₁, rfl⟩ ⟨w₂, rfl⟩
+            exact ⟨w₂ * w₁, by rw [map_mul, mul_smul]⟩ } }
+  set rep : X → X := fun x => (Quotient.mk s x).out with hrep_def
+  have hrep_rel : ∀ x : X, ∃ w : F, φ w • rep x = x := by
+    intro x
+    exact Quotient.exact (Quotient.out_eq (Quotient.mk s x))
+  have hrep_eq : ∀ x y : X, (∃ w : F, φ w • x = y) → rep x = rep y := by
+    intro x y h
+    simp only [hrep_def]
+    congr 1
+    exact Quotient.sound h
+  set ww : X → F := fun x => (hrep_rel x).choose with hww_def
+  have hww : ∀ x : X, φ (ww x) • rep x = x := fun x => (hrep_rel x).choose_spec
+  have hrepE : ∀ {x : X}, x ∈ E → rep x ∈ E := by
+    intro x hx
+    obtain ⟨w, hw⟩ := hrep_rel x
+    have hx' : rep x = φ w⁻¹ • x := by
+      conv_rhs => rw [← hw]
+      rw [map_inv, inv_smul_smul]
+    rw [hx']
+    exact hinv _ hx
+  have huniq : ∀ {m : X}, m ∈ E → ∀ u v : F, φ u • m = φ v • m → u = v := by
+    intro m hm u v huv
+    have h1 : φ (v⁻¹ * u) • m = m := by
+      rw [map_mul, mul_smul, huv, map_inv, inv_smul_smul]
+    by_contra hne
+    exact hfree (v⁻¹ * u) hm (fun h0 => hne (inv_mul_eq_one.mp h0).symm) h1
+  have hww_smul : ∀ (u : F) {x : X}, x ∈ E → ww (φ u • x) = u * ww x := by
+    intro u x hx
+    have h1 : rep (φ u • x) = rep x := (hrep_eq x (φ u • x) ⟨u, rfl⟩).symm
+    have h2 : φ (ww (φ u • x)) • rep x = φ u • x := by
+      rw [← h1]; exact hww _
+    have h3 : φ (u * ww x) • rep x = φ u • x := by rw [map_mul, mul_smul, hww x]
+    exact huniq (hrepE hx) _ _ (h2.trans h3.symm)
+  -- pieces of `E` indexed by subsets of the free group
+  set P : Set F → Set X := fun S => {x | x ∈ E ∧ ww x ∈ S} with hP_def
+  have hP_sub : ∀ S, P S ⊆ E := fun S x hx => hx.1
+  have hP_smul : ∀ (u : F) (S : Set F), φ u • P S = P (u • S) := by
+    intro u S
+    ext y
+    constructor
+    · rintro ⟨x, ⟨hxE, hxS⟩, rfl⟩
+      refine ⟨hinv _ hxE, ?_⟩
+      rw [hww_smul u hxE]
+      exact ⟨ww x, hxS, rfl⟩
+    · rintro ⟨hyE, v, hvS, hv⟩
+      have hv' : u * v = ww y := hv
+      refine ⟨φ u⁻¹ • y, ⟨hinv _ hyE, ?_⟩, ?_⟩
+      · rw [hww_smul u⁻¹ hyE, ← hv']
+        simpa using hvS
+      · show φ u • (φ u⁻¹ • y) = y
+        rw [map_inv, smul_inv_smul]
+  have hP_disj : ∀ S T : Set F, Disjoint S T → Disjoint (P S) (P T) := by
+    intro S T hST
+    rw [Set.disjoint_left]
+    rintro x ⟨-, hxS⟩ ⟨-, hxT⟩
+    exact (hST.le_bot ⟨hxS, hxT⟩ : ww x ∈ (⊥ : Set F))
+  obtain ⟨A, B, C, D, hcover, hAB, hCD, hABCD, hcovA, hdisA, hcovC, hdisC⟩ :=
+    exists_paradoxical_partition
+  refine ⟨P A ∪ P B, P C ∪ P D, ?_, ?_, ?_, ?_⟩
+  · -- the two parts cover `E`
+    apply Set.Subset.antisymm
+    · rintro x ((hx | hx) | (hx | hx)) <;> exact hx.1
+    · intro x hx
+      rcases hcover (ww x) with h | h | h | h
+      · exact Or.inl (Or.inl ⟨hx, h⟩)
+      · exact Or.inl (Or.inr ⟨hx, h⟩)
+      · exact Or.inr (Or.inl ⟨hx, h⟩)
+      · exact Or.inr (Or.inr ⟨hx, h⟩)
+  · -- the two parts are disjoint
+    rw [Set.disjoint_left]
+    rintro x hx hx'
+    have h1 : ww x ∈ A ∪ B := by
+      rcases hx with h | h
+      · exact Or.inl h.2
+      · exact Or.inr h.2
+    have h2 : ww x ∈ C ∪ D := by
+      rcases hx' with h | h
+      · exact Or.inl h.2
+      · exact Or.inr h.2
+    exact (hABCD.le_bot ⟨h1, h2⟩ : ww x ∈ (⊥ : Set F))
+  · -- first part is equidecomposable with `E`
+    refine Equidecomposable.ofTwoPieces (1 : G) (φ ga) (hP_disj _ _ hAB) ?_ ?_
+    · rw [MulAction.one_smul, hP_smul]
+      exact hP_disj _ _ hdisA
+    · rw [MulAction.one_smul, hP_smul]
+      apply Set.Subset.antisymm
+      · intro x hx
+        rcases hcovA (ww x) with h | h
+        · exact Or.inl ⟨hx, h⟩
+        · exact Or.inr ⟨hx, h⟩
+      · rintro x (hx | hx) <;> exact hx.1
+  · -- second part is equidecomposable with `E`
+    refine Equidecomposable.ofTwoPieces (1 : G) (φ gb) (hP_disj _ _ hCD) ?_ ?_
+    · rw [MulAction.one_smul, hP_smul]
+      exact hP_disj _ _ hdisC
+    · rw [MulAction.one_smul, hP_smul]
+      apply Set.Subset.antisymm
+      · intro x hx
+        rcases hcovC (ww x) with h | h
+        · exact Or.inl ⟨hx, h⟩
+        · exact Or.inr ⟨hx, h⟩
+      · rintro x (hx | hx) <;> exact hx.1
 
-end Transfer
+end BT
 
-/-! ## Basic properties of equidecomposability -/
+import Mathlib
 
-section Algebra
+/-!
+# Equidecomposability and paradoxical sets
 
-variable {G X : Type*} [Group G] [MulAction G X]
+Basic definitions and API used in the formalization of the Banach–Tarski paradox.
+-/
+
+open Set Pointwise
+
+namespace BT
+
+/-- The isometry group of a metric space acts on the space. -/
+instance isometryEquivAction (M : Type*) [PseudoEMetricSpace M] : MulAction (M ≃ᵢ M) M where
+  smul g x := g x
+  one_smul _ := rfl
+  mul_smul _ _ _ := rfl
 

@@ -30,6 +30,7 @@ Target: Brockian.GoldbachSchema.goldbach_beyond_of_model
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
@@ -38,17 +39,29 @@ Category: Brockian (Open Discharge)
 Target: Brockian.GoldbachSchema.goldbach_beyond_of_model
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+## Scope of what is proved here
+
+* `goldbach_beyond_of_model` is proved unconditionally (no hypothesis beyond the model datum):
+  given a *model* certifying Goldbach's conjecture on a finite initial range `[4, N]`, the full
+  conjecture is equivalent to its "beyond `N`" form.
+* A model for `N = 400` (`model400`) is constructed and proved by kernel computation, so
+  `goldbach_iff_beyond_400` is likewise unconditional.
+* Goldbach's conjecture itself (`Goldbach`) is *not* proved here; it is an open problem, and
+  nothing in this file asserts it.  Everything stated is either unconditional or explicitly
+  conditional on `Goldbach` (see `ternary_of_goldbach`).
 -/
 
-
-set_option maxRecDepth 10000
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 100000
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 
 namespace Brockian.GoldbachSchema
 
-/-- `IsGoldbach n` says that `n` is a sum of two primes. -/
+/-- `IsGoldbach n` : the natural number `n` is a sum of two primes. -/
 
-def IsGoldbach (n : ℕ) : Prop := ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n
+def IsGoldbach (n : ℕ) : Prop :=
+  ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n
 
-/-- A *Goldbach model beyond `B`*: every even number that is at least `B` is a sum of two
-primes.  This is the "model" input of the schema: it captures the asymptotic half of
-Goldbach's conjecture, leaving the initial segment to be verified. -/
+/-- Goldbach's conjecture: every even number `n ≥ 4` is a sum of two primes. -/

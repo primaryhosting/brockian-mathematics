@@ -23,6 +23,13 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Equidistribution Of Asymptotic Exists
+Category: Brockian (Open Discharge)
+Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -31,19 +38,23 @@ Category: Brockian (Open Discharge)
 Target: Brockian.Equidistribution.equidistribution_of_asymptotic_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+This file constructs an explicit sequence in `[0, 1)` whose empirical distribution is
+asymptotically the uniform one: for every subinterval `[a, b) ⊆ [0, 1)` the proportion of
+the first `N` terms lying in `[a, b)` converges to `b - a`.
+
+The construction is the "triangular block" sequence
+`0/1 ; 0/2, 1/2 ; 0/3, 1/3, 2/3 ; 0/4, …` .
 -/
 
-open scoped BigOperators
-open scoped Classical
+open Filter Topology
 
 namespace Brockian.Equidistribution
 
-/-- A sequence `u : ℕ → ℝ` is *asymptotically equidistributed mod 1* if for every
-subinterval `[a, b) ⊆ [0, 1]` the asymptotic density of the set of indices `n` with
-`Int.fract (u n) ∈ [a, b)` exists and equals the length `b - a` of the interval. -/
+/-- Triangular numbers: `tri k = 0 + 1 + ⋯ + k`. -/
 
 lemma le_tri (k : ℕ) : k ≤ tri k := by
-  induction k with
-  | zero => simp [tri]
-  | succ n ih => rw [tri_succ]; omega
+  cases k with
+  | zero => simp
+  | succ k => rw [tri_succ]; omega
 

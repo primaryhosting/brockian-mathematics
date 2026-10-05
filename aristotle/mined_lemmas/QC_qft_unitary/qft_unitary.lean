@@ -14,43 +14,58 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Qft Unitary
+Category: Quantum Computing
+Target: QC.qft_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 namespace QC
 
 open Complex Finset
 
-/-- The `n`-qubit quantum Fourier transform matrix, of size `2 ^ n × 2 ^ n`:
-`(QFT)_{j,k} = (1 / √(2^n)) * exp (2 π i j k / 2^n)`. -/
+/-- The primitive `N`-th root of unity `exp (2 π i / N)`. -/
 
 theorem qft_unitary (n : ℕ) : qft n ∈ Matrix.unitaryGroup (Fin (2 ^ n)) ℂ := by
-  have hN : 0 < 2 ^ n := Nat.two_pow_pos n
-  have hNR : (0 : ℝ) ≤ ((2 ^ n : ℕ) : ℝ) := by positivity
-  have hsq : ((Real.sqrt ((2 ^ n : ℕ) : ℝ) : ℂ))⁻¹ * ((Real.sqrt ((2 ^ n : ℕ) : ℝ) : ℂ))⁻¹
-      = (((2 ^ n : ℕ) : ℂ))⁻¹ := by
-    rw [← mul_inv]
-    congr 1
-    rw [← Complex.ofReal_mul, Real.mul_self_sqrt hNR]
-    push_cast
-    ring
-  have hNc : ((2 ^ n : ℕ) : ℂ) ≠ 0 := by
-    exact_mod_cast Nat.cast_ne_zero.mpr hN.ne'
+  have hN : (2 ^ n : ℕ) ≠ 0 := by positivity
+  set N := 2 ^ n with hNdef
+  have hNC : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hN
   rw [Matrix.mem_unitaryGroup_iff]
   ext j l
   rw [Matrix.mul_apply, Matrix.one_apply]
-  have hstep : ∀ k : Fin (2 ^ n), qft n j k * (star (qft n)) k l
-      = ((Real.sqrt ((2 ^ n : ℕ) : ℝ) : ℂ))⁻¹ * ((Real.sqrt ((2 ^ n : ℕ) : ℝ) : ℂ))⁻¹ *
-        (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * ((j : ℕ) : ℂ) * ((k : ℕ) : ℂ) /
-            ((2 ^ n : ℕ) : ℂ)) *
-          (starRingEnd ℂ)
-            (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * ((l : ℕ) : ℂ) * ((k : ℕ) : ℂ) /
-              ((2 ^ n : ℕ) : ℂ)))) := by
+  have key : ∀ k : Fin N, qft n j k * (star (qft n)) k l
+      = (omegaN N ^ (j : ℕ) * (omegaN N ^ (l : ℕ))⁻¹) ^ (k : ℕ) / (N : ℂ) := by
     intro k
-    simp only [Matrix.star_eq_conjTranspose, Matrix.conjTranspose_apply, qft, map_mul,
-      Complex.conj_ofReal, map_inv₀, Complex.star_def, map_mul]
-    ring
-  rw [Finset.sum_congr rfl (fun k _ => hstep k), ← Finset.mul_sum, qft_row_sum n j l, hsq]
+    have hstar : (star (qft n)) k l = (starRingEnd ℂ) (qft n l k) := rfl
+    rw [hstar]
+    simp only [qft, dftMatrix, Matrix.of_apply]
+    rw [map_div₀, map_pow, conj_omegaN, Complex.conj_ofReal, div_mul_div_comm,
+      sqrt_mul_sqrt N, pow_mul_inv_pow_pow]
+  rw [Finset.sum_congr rfl (fun k _ => key k), ← Finset.sum_div,
+    Fin.sum_univ_eq_sum_range
+      (fun k => (omegaN N ^ (j : ℕ) * (omegaN N ^ (l : ℕ))⁻¹) ^ k) N]
   by_cases hjl : j = l
-  · rw [if_pos hjl, if_pos hjl, inv_mul_cancel₀ hNc]
-  · rw [if_neg hjl, if_neg hjl, mul_zero]
+  · subst hjl
+    have hone : ∀ k ∈ Finset.range N, (omegaN N ^ (j : ℕ) * (omegaN N ^ (j : ℕ))⁻¹) ^ k = 1 := by
+      intro k _
+      rw [mul_inv_cancel₀ (pow_ne_zero _ (omegaN_ne_zero N)), one_pow]
+    rw [Finset.sum_congr rfl hone]
+    simp [hNC]
+  · rw [sum_pow_eq_zero hN hjl]
+    simp [hjl]
 
 end QC
 

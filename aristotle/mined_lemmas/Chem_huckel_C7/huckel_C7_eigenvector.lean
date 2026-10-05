@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Huckel C 7
 Category: Chemistry
 Target: Chem.huckel_C7
@@ -6,50 +8,37 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
-
-/-!
-## Hückel theory for the cycle `C₇`
-
-In Hückel molecular orbital theory the (reduced) Hamiltonian of a conjugated
-cyclic polyene `Cₙ` is the adjacency matrix of the cycle graph `Cₙ`, and the
-orbital energies are `α + β λ` where `λ` runs over the adjacency eigenvalues.
-For `n = 7` (the cycloheptatrienyl system) the eigenvalues are
-`2 cos (2πk/7)`, `k = 0, …, 6`.
-
-The proof diagonalises the adjacency matrix by the discrete Fourier
-(Vandermonde) matrix built from `ω = exp (2πi/7)`.
--/
-
 namespace Chem
 
-open Matrix Polynomial SimpleGraph
+/-- Adjacency matrix of the cycle graph `C₇`, with vertices indexed by `ZMod 7`:
+vertex `i` is adjacent to `i + 1` and to `i - 1`. -/
 
-/-- The primitive 7-th root of unity `ω = exp (2πi/7)`. -/
+lemma huckel_C7_eigenvector (k : ℕ) :
+    ∃ v : ZMod 7 → ℂ, v ≠ 0 ∧
+      C7adj.mulVec v = (2 * Real.cos (2 * Real.pi * k / 7) : ℂ) • v := by
+  set y : ℂ := zeta7 ^ k with hy_def
+  have hy7 : y ^ 7 = 1 := by
+    rw [hy_def, ← pow_mul, mul_comm, pow_mul, zeta7_pow_seven, one_pow]
+  have hy0 : y ≠ 0 := by
+    intro h
+    rw [h] at hy7
+    simp at hy7
+  refine ⟨fun i => y ^ i.val, ?_, ?_⟩
+  · intro hcon
+    simpa using congrFun hcon 0
+  · funext i
+    have hval1 : ((1 : ZMod 7)).val = 1 := rfl
+    have hnext : y ^ ((i + 1 : ZMod 7)).val = y ^ i.val * y := by
+      rw [pow_val_add hy7 i 1, hval1, pow_one]
+    have hprev : y ^ ((i - 1 : ZMod 7)).val = y ^ i.val * y⁻¹ := by
+      have h2 : y ^ ((i - 1 : ZMod 7) + 1).val = y ^ ((i - 1 : ZMod 7)).val * y := by
+        rw [pow_val_add hy7 (i - 1) 1, hval1, pow_one]
+      rw [sub_add_cancel] at h2
+      rw [h2, mul_inv_cancel_right₀ hy0]
+    rw [C7adj_mulVec]
+    simp only [Pi.smul_apply, smul_eq_mul]
+    rw [hnext, hprev, ← zeta7_pow_add_inv k]
+    ring
 
-theorem huckel_C7_eigenvector (k : Fin 7) :
-    ((cycleGraph 7).adjMatrix ℂ) *ᵥ (fun j : Fin 7 => (om ^ (k : ℕ)) ^ (j : ℕ))
-      = ((2 * Real.cos (2 * Real.pi * k / 7) : ℝ) : ℂ) •
-          (fun j : Fin 7 => (om ^ (k : ℕ)) ^ (j : ℕ)) := by
-  funext i
-  have h := congrFun (congrFun adj_mul_V i) k
-  rw [Matrix.mul_apply, Matrix.mul_diagonal, V_apply] at h
-  simpa [Matrix.mulVec, dotProduct, V_apply, huckelVal, mul_comm] using h
-
-/-- The set of adjacency eigenvalues (roots of the characteristic polynomial) of
-`C₇` is exactly `{2 cos (2πk/7) : k = 0, …, 6}`. -/
+/-- **Hückel theory for the C₇ cycle.**  The eigenvalues of the adjacency matrix of the
+cycle graph `C₇` are exactly the numbers `2 cos (2πk/7)`, `k = 0, …, 6`. -/

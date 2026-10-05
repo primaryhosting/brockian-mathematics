@@ -1,12 +1,3 @@
-/-
-/-!
-# Rank Trace Ineq
-Category: Brockian Corpus
-Target: Zeta23Core.rank_trace_ineq
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--/
 import Mathlib
 
 /-!
@@ -15,37 +6,36 @@ Category: Brockian Corpus
 Target: Zeta23Core.rank_trace_ineq
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-Rank–trace inequality (preprint Lemma 3.2):
-`c·tr P − (c²/4)·r + 2c·tr Q − c²·b ≤ ‖P+Q‖_F²`,
-for `P` positive semidefinite of rank at most `r`, `Q` Hermitian with at most `b` positive
-eigenvalues, and `c > 0`.
-
-The proof does not use von Neumann's trace inequality; instead it uses the two orthogonal
-projections `Pi` (onto the positive spectral subspace of `Q`) and `R` (onto the range of the
-compression `(1 - Pi) P (1 - Pi)`), and the elementary estimate `0 ≤ ‖S - M‖_F²` for
-`S = P + Q` and `M = c·Pi + (c/2)·R`.
 -/
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
+open scoped ComplexOrder
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Core
 
 open Matrix
-open scoped ComplexOrder
 
 variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
 
-/-! ## Basic notions -/
+/-- The real part of the trace of a matrix. -/
 
-/-- The squared Frobenius norm of a matrix, `‖M‖_F² = Re tr(Mᴴ M)`. -/
-
-theorem eigenvectorUnitary_conjTranspose_mul (hM : M.IsHermitian) :
-    (hM.eigenvectorUnitary : Matrix n n 𝕜)ᴴ * (hM.eigenvectorUnitary : Matrix n n 𝕜) = 1 :=
-  Matrix.mem_unitaryGroup_iff'.mp hM.eigenvectorUnitary.2
+lemma eigenvectorUnitary_conjTranspose_mul (hA : A.IsHermitian) :
+    ((hA.eigenvectorUnitary : Matrix n n 𝕜))ᴴ * (hA.eigenvectorUnitary : Matrix n n 𝕜) = 1 := by
+  have h := hA.eigenvectorUnitary.2
+  rw [Matrix.mem_unitaryGroup_iff'] at h
+  simpa [Matrix.star_eq_conjTranspose] using h
 

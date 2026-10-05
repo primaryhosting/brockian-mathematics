@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Ray Sum Eq Char Sum
 Category: Characters
 Target: Brockian.Characters5.raySum_eq_charSum
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -22,26 +22,12 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace Brockian
 namespace Characters5
 
-/-- A primitive fifth root of unity. -/
-noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
+/-- The primitive fifth root of unity `ω = exp (2 π i / 5)`. -/
 
-/-- The additive character of `ZMod 5` given by `x ↦ ω ^ x`. -/
+lemma geom_sum_omega : 1 + omega + omega ^ 2 + omega ^ 3 + omega ^ 4 = 0 := by
+  have h := isPrimitiveRoot_omega.geom_sum_eq_zero (by norm_num)
+  simpa [Finset.sum_range_succ, add_assoc] using h
 
-theorem geom_sum_omega : 1 + ω + ω ^ 2 + ω ^ 3 + ω ^ 4 = 0 := by
-  have h := (Complex.isPrimitiveRoot_exp 5 (by norm_num)).geom_sum_eq_zero (by norm_num)
-  simp [Finset.sum_range_succ, ω] at h ⊢
-  linear_combination h
-
-/-- Orthogonality of the characters of `ZMod 5`. -/

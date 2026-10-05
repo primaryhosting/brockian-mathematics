@@ -23,6 +23,13 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Erdos Straus Conjecture
+Category: Brockian Conjecture
+Target: Brockian.ErdosStraus.ErdosStrausConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -33,24 +40,12 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-`ErdosStrausConjecture` is a well-known open problem, so this file does not prove it
-outright.  What is proved here, unconditionally and axiom-cleanly, is:
-
-* `solvable_of_dvd`: solvability passes from a divisor to any positive multiple;
-* explicit parametric solutions for `n` even, `3 ∣ n`, `n ≡ 3 (mod 4)`, `n ≡ 2 (mod 3)`
-  and `n ≡ 5 (mod 8)`;
-* `solvable_of_mod_24_ne_one`: the conjecture holds for every `n ≥ 2` with `n % 24 ≠ 1`;
-* `erdosStrausConjecture_iff_primes`: the conjecture is *equivalent* to its special case
-  for primes `p ≡ 1 (mod 24)`.
--/
-
 namespace Brockian.ErdosStraus
 
-/-- `Solvable n` says that `4 / n` can be written as a sum of three (not necessarily
-distinct) positive unit fractions. -/
+/-- `Solvable n` says that `4 / n` can be written as a sum of three unit fractions
+with positive natural denominators. -/
 
 theorem solvable_three : Solvable 3 :=
   ⟨1, 4, 12, by norm_num, by norm_num, by norm_num, by norm_num⟩
 
-/-- Every even `n > 0` is solvable. -/
+/-- The identity `4/(4k+3) = 1/(k+1) + 1/(2(4k+3)(k+1)) + 1/(2(4k+3)(k+1))`. -/

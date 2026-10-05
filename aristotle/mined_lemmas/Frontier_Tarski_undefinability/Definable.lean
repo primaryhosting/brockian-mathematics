@@ -5,8 +5,8 @@ Target: Frontier.Tarski_undefinability
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above is a plain block comment because Lean requires `import` before any
--- module docstring `/-! ... -/`.)
+-- (The header above uses `/- -/` rather than `/-! -/` because Lean 4 requires
+-- module doc comments to appear *after* the `import` lines.)
 
 import Mathlib
 
@@ -14,31 +14,46 @@ import Mathlib
 ## Overview
 
 We formalize Tarski's undefinability theorem: the set of (Gödel numbers of) true
-sentences of arithmetic is not itself definable by an arithmetical formula.
+arithmetical sentences is not definable by any arithmetical formula.
 
 Everything is built from scratch:
 
-* `Frontier.Tm` — terms of the language of arithmetic (variables, numerals, `+`, `*`);
-* `Frontier.Fm` — formulas (equations, negation, conjunction, existential quantification);
-* `Frontier.Tm.eval`, `Frontier.Fm.Sat` — the standard-model semantics over `ℕ`;
-* `Frontier.Fm.freeVars` — free variables, so that "sentence" is meaningful;
-* `Frontier.Fm.enc` — an injective Gödel numbering;
-* `Frontier.TruthSet` — the set of Gödel numbers of true sentences of arithmetic;
-* `Frontier.Definable` — definability of a set of naturals by an arithmetical formula.
+* `Frontier.Tarski.Trm` : terms of the language of arithmetic `(0, S, +, ·)`,
+  with variables indexed by `ℕ`;
+* `Frontier.Tarski.Fml` : formulas, built from equations by negation,
+  conjunction, universal quantification, and a *parameter* constructor
+  `Fml.subst n φ`, which denotes `φ` with the numeral `n` substituted for the
+  variable `v₀` (this constructor is eliminable, see `Fml.purify`);
+* `Frontier.Tarski.Fml.Sat` : the standard satisfaction relation in the
+  structure `ℕ`;
+* `Frontier.Tarski.Fml.code` : an injective Gödel numbering
+  (`Frontier.Tarski.Fml.code_injective`);
+* `Frontier.Tarski.TruthSet` : the set of codes of true sentences;
+* `Frontier.Tarski.Definable` : the sets of naturals definable by a formula.
 
-The main theorem `Frontier.Tarski_undefinability` states `¬ Definable TruthSet`.
+The main theorem is `Frontier.Tarski_undefinability : ¬ Definable TruthSet`.
 -/
 
 namespace Frontier
+namespace Tarski
 
-/-! ### A polynomial pairing function -/
+/-! ## Syntax -/
 
-/-- A polynomial (twice-Cantor) pairing function on `ℕ`. -/
+/-- Terms of the language of arithmetic, with variables indexed by `ℕ`. -/
+inductive Trm : Type
+  | var : ℕ → Trm
+  | zero : Trm
+  | succ : Trm → Trm
+  | add : Trm → Trm → Trm
+  | mul : Trm → Trm → Trm
+  deriving DecidableEq
+
+namespace Trm
+
+/-- Value of a term under an assignment `ρ` of naturals to the variables. -/
 
 def Definable (S : Set ℕ) : Prop :=
-  ∃ θ : Fm, θ.freeVars ⊆ {0} ∧
-    ∀ n : ℕ, (θ.Sat (Function.update (fun _ => 0) 0 n) ↔ n ∈ S)
+  ∃ T : Fml, T.fv ⊆ {0} ∧ ∀ n : ℕ, ((Fml.subst n T).TrueIn ↔ n ∈ S)
 
-/-! ### The diagonalisation machinery -/
-
-/-- `subFm φ c` is the formula `∃ x₀ (x₀ = c ∧ φ)`, i.e. `φ` with `x₀` set to `c`. -/
+/-- The term `5 * (x₀ * x₀ + x₀ + x₀) + 4`, which computes the Gödel number of
+the diagonal sentence `subst e ψ` from the Gödel number `e` of `ψ`. -/

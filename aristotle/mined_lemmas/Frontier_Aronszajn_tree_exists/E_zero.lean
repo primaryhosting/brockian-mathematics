@@ -5,16 +5,25 @@ Target: Frontier.Aronszajn_tree_exists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
-open Ordinal Set Cardinal
-open scoped Classical
+/-!
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-namespace Frontier
+open Ordinal Cardinal Set
 
-/-- The first uncountable ordinal `ω₁`. -/
+namespace Aronszajn
 
-theorem E_zero (x : Ordinal) : E 0 x = 0 := by
-  rw [E_eq]; unfold Estep; rw [dif_pos rfl]
+/-! ## Cofinal `ω`-sequences in countable limit ordinals -/
+
+/-- `c` is a nondecreasing `ω`-indexed sequence, starting at `0`, cofinal in `l`. -/
+
+@[simp] theorem E_zero (ξ : Ordinal) : E 0 ξ = 0 := by
+  unfold E
+  rw [Ordinal.limitRecOn_zero]
 

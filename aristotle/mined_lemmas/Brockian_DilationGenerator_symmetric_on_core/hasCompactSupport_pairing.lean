@@ -22,26 +22,35 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Brockian
 namespace DilationGenerator
 
-/-- The pointwise product `x ↦ x · f x · conj (g x)`, whose derivative encodes the
-integration-by-parts identity for the Berry–Keating dilation generator. -/
+open MeasureTheory
 
-theorem hasCompactSupport_pairing {f g : ℝ → ℂ} (hfc : HasCompactSupport f) :
+/-- The auxiliary function `x ↦ x · f(x) · conj(g(x))`, whose derivative is exactly the
+integrand appearing in the difference of the two sides of the symmetry identity. -/
+
+theorem hasCompactSupport_pairing {f g : ℝ → ℂ} (hf : HasCompactSupport f) :
     HasCompactSupport (pairing f g) := by
-  have h1 : HasCompactSupport (fun x : ℝ => f x * starRingEnd ℂ (g x)) :=
-    hfc.mul_right
-  exact h1.mul_left
+  refine HasCompactSupport.intro hf (fun x hx => ?_)
+  simp [pairing, image_eq_zero_of_notMem_tsupport hx]
 
-/-- The integral over `(0, ∞)` of the derivative of `pairing f g` vanishes: the boundary
-term at `0` is killed by the factor `x`, and the one at `+∞` by compact support. -/
+/-- **Symmetry of the Berry–Keating dilation generator on the smooth compactly supported
+core of `(0, ∞)`.**
+
+For `f, g` smooth with compact support contained in `(0, ∞)`, the operator
+`A f = i · ((1/2) f + x f')` satisfies `⟪A f, g⟫ = ⟪f, A g⟫`, i.e.
+
+`∫_{(0,∞)} (A f)(x) · conj (g x) = ∫_{(0,∞)} f x · conj ((A g)(x))`.
+
+The proof is integration by parts: the difference of the two integrands equals
+`i · d/dx (x · f(x) · conj(g(x)))`, and the integral of this exact derivative over `(0, ∞)`
+vanishes because the primitive is compactly supported and vanishes at `0`.
+
+This is symmetry on the core only; no self-adjointness claim is made.
+
+Note: the support hypotheses `tsupport f ⊆ (0,∞)` and `tsupport g ⊆ (0,∞)` are kept because
+they are part of the requested statement, but the proof does not need them (the boundary term
+at `0` vanishes automatically since the primitive carries a factor of `x`). -/

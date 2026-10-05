@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Primorial Phi Shadow
+Category: Riemann Program
+Target: Riemann.Nicolas.primorial_phi_shadow
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,23 +31,18 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Primorial Phi Shadow
-Category: Riemann Program
-Target: Riemann.Nicolas.primorial_phi_shadow
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Riemann
+namespace Nicolas
 
-namespace Riemann.Nicolas
+/-- **Primorial phi shadow.** The monotone shadow of Nicolas' criterion: the real
+logarithm is monotone on the positive reals, i.e. for all reals `a b` with
+`0 < a` and `a ≤ b` we have `Real.log a ≤ Real.log b`. -/
 
-/-- Monotone shadow of Nicolas' criterion: `Real.log` is monotone on the positives.
-This is the engine of the inequality chain comparing `N/φ(N)` with `e^γ log log N`
-along primorials. Closed by `Real.log_le_log`. -/
+theorem primorial_phi_shadow :
+    ∀ a b : ℝ, 0 < a → a ≤ b → Real.log a ≤ Real.log b := by
+  intro a b ha hab
+  exact Real.log_le_log ha hab
 
-theorem primorial_phi_shadow (a b : ℝ) (ha : 0 < a) (hab : a ≤ b) :
-    Real.log a ≤ Real.log b :=
-  Real.log_le_log ha hab
-
-end Riemann.Nicolas
+end Nicolas
+end Riemann
 

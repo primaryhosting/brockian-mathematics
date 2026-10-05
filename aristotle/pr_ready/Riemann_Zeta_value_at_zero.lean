@@ -42,10 +42,9 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Riemann.Zeta
 
-/-- The Riemann zeta function at `0` equals `-1/2`.
-
-This follows immediately from Mathlib's `riemannZeta_zero : riemannZeta 0 = -1 / 2`. -/
-theorem value_at_zero : riemannZeta 0 = -1 / 2 := riemannZeta_zero
+/-- The Riemann zeta function takes the value `-1/2` at `0`. -/
+theorem value_at_zero : riemannZeta 0 = -1 / 2 := by
+  rw [riemannZeta_zero]
 
 end Riemann.Zeta
 

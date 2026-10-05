@@ -1,11 +1,3 @@
-/-
-# Rank Trace Ineq
-Category: Zeta-23 §3 Linear Algebra (re-derivation)
-Target: Zeta23Redux.LinAlg.rank_trace_ineq
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -23,18 +15,26 @@ open scoped Classical
 open scoped Pointwise
 open scoped ComplexOrder
 
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-namespace Zeta23Redux
-namespace LinAlg
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-open Matrix Finset
+set_option grind.warning false
 
-variable {n : Type*} [Fintype n] [DecidableEq n]
+namespace Zeta23Redux.LinAlg
 
-/-- The real part of the trace of a complex matrix. -/
+open Matrix Unitary
 
-lemma rtrace_mul_comm (X Y : Matrix n n ℂ) : rtrace (X * Y) = rtrace (Y * X) := by
-  rw [rtrace, rtrace, Matrix.trace_mul_comm]
+variable {d : ℕ}
+
+/-! ## Basic real-valued trace functionals -/
+
+/-- The real part of the trace of a matrix. -/
+
+lemma rtrace_mul_comm (X Y : Matrix (Fin d) (Fin d) ℂ) : rtrace (X * Y) = rtrace (Y * X) := by
+  unfold rtrace; rw [Matrix.trace_mul_comm]
 

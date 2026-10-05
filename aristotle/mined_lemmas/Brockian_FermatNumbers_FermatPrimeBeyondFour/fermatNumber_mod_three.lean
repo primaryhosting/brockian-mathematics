@@ -23,16 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Fermat Prime Beyond Four
-Category: Brockian Conjecture
-Target: Brockian.FermatNumbers.FermatPrimeBeyondFour
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
--- (Lean 4 requires `import` lines to precede any module docstring `/-! ... -/`, so the
--- requested header is repeated verbatim as the module docstring just below the import.)
-
 import Mathlib
 
 /-!
@@ -43,36 +33,21 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Contents
-
-`Nat.fermatNumber n = 2 ^ (2 ^ n) + 1` is Mathlib's definition of the `n`-th Fermat number.
-The numbers `F₀, …, F₄` are prime and no further Fermat prime is known; whether some `Fₙ` with
-`n > 4` is prime is a well-known open problem.
-
-Accordingly, the target theorem `FermatPrimeBeyondFour` is stated and proved here as an
-unconditional *reduction*: a Fermat prime with index `n > 4` exists if and only if some `Fₙ`
-with `n > 4` passes **Pépin's test** `3 ^ ((Fₙ - 1) / 2) ≡ -1 (mod Fₙ)`.
-
-The `←` direction is Mathlib's `Nat.pepin_primality`
-(`Mathlib/NumberTheory/Fermat.lean`), which is the "existing lemma that nearly closes this".
-The `→` direction (`pepin_of_prime`) is proved here from quadratic reciprocity, in the form of
-`ZMod.exists_sq_eq_prime_iff_of_mod_four_eq_one`, together with Euler's criterion in the form
-`legendreSym.eq_pow`.
-
-Unconditional companion facts (`F₄ = 65537` is prime, `F₅` is composite) are proved at the end.
--/
-
 namespace Brockian.FermatNumbers
 
-open Nat
+private instance factPrimeThree : Fact (Nat.Prime 3) := ⟨by norm_num⟩
 
-/-- For `n ≥ 1`, the Fermat number `Fₙ = 2 ^ (2 ^ n) + 1` is `1` modulo `4`. -/
+/-- The Pépin condition for the `n`-th Fermat number `Fₙ = 2 ^ 2 ^ n + 1`:
+`3 ^ ((Fₙ - 1) / 2) = -1` in `ZMod Fₙ`. -/
 
 lemma fermatNumber_mod_three (n : ℕ) (hn : 1 ≤ n) : Nat.fermatNumber n % 3 = 2 := by
-  obtain ⟨k, hk⟩ : ∃ k, 2 ^ n = 2 * k := ⟨2 ^ (n - 1), by rw [← pow_succ']; congr 1; omega⟩
-  rw [Nat.fermatNumber, hk, pow_mul]
-  have h : (2 ^ 2) ^ k % 3 = 1 := by rw [Nat.pow_mod]; norm_num
-  omega
+  obtain ⟨k, hk⟩ : ∃ k, 2 ^ n = 2 * k := ⟨2 ^ (n - 1), by
+    rw [show (2 : ℕ) * 2 ^ (n - 1) = 2 ^ (n - 1 + 1) by ring]
+    congr 1
+    omega⟩
+  have h : (2 : ℕ) ^ 2 ^ n % 3 = 1 := by
+    rw [hk, pow_mul, show (2 : ℕ) ^ 2 = 3 + 1 by norm_num]
+    simpa using Nat.pow_mod (3 + 1) k 3
+  simp [Nat.fermatNumber, Nat.add_mod, h]
 
-/-- `(Fₙ - 1) / 2 = Fₙ / 2 = 2 ^ (2 ^ n - 1)`. -/
+/-- `3` is a quadratic non-residue modulo a prime Fermat number `Fₙ` with `n ≥ 1`. -/

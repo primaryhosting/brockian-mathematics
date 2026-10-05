@@ -1,19 +1,9 @@
-/-
-# Kruskal Katona
-Category: Frontier Math
-Target: Math2.kruskal_katona
-Statement: The Kruskal–Katona theorem on shadows of set systems.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
 # Kruskal Katona
 Category: Frontier Math
 Target: Math2.kruskal_katona
-Statement: The Kruskal–Katona theorem on shadows of set systems.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
@@ -37,21 +27,21 @@ set_option grind.warning false
 namespace Math2
 
 open Finset
-open Finset.Colex
 
 variable {n : ℕ}
 
-/-- The (lower) shadow of a family of finite sets: all sets obtained from a member of the
-family by deleting a single element. -/
+/-- The shadow of a family `𝒜` of finite sets: all the sets obtained from a member of `𝒜` by
+deleting one element. -/
 
 theorem kruskal_katona_lovasz {r k i : ℕ} {𝒜 : Finset (Finset (Fin n))}
-    (hir : i ≤ r) (hrk : r ≤ k) (hkn : k ≤ n) (h𝒜 : ∀ A ∈ 𝒜, A.card = r)
-    (hcard : k.choose r ≤ 𝒜.card) :
-    k.choose (r - i) ≤ (shadow^[i] 𝒜).card := by
-  have hfun : (shadow : Finset (Finset (Fin n)) → Finset (Finset (Fin n))) = Finset.shadow :=
-    funext shadow_eq
-  rw [hfun]
-  exact Finset.kruskal_katona_lovasz_form hir hrk hkn (fun A hA => h𝒜 A hA) hcard
+    (hir : i ≤ r) (hrk : r ≤ k) (hkn : k ≤ n)
+    (h𝒜 : ∀ s ∈ 𝒜, #s = r) (hcard : k.choose r ≤ #𝒜) :
+    k.choose (r - i) ≤ #(shadowIter i 𝒜) := by
+  rw [shadowIter_eq]
+  exact Finset.kruskal_katona_lovasz_form hir hrk hkn (fun s hs => h𝒜 s hs) hcard
 
 end Math2
+
+#print axioms Math2.kruskal_katona
+#print axioms Math2.kruskal_katona_lovasz
 

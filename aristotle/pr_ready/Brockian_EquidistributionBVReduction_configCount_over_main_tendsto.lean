@@ -40,68 +40,67 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+
+open scoped BigOperators
+open scoped Classical
 open Filter Topology
 
-namespace Brockian.EquidistributionBVReduction
+namespace Brockian
+namespace EquidistributionBVReduction
 
-/-- The number of "configurations" below `N` in the arithmetic progression
-`a mod q`, i.e. the cardinality of `{n < N | n ≡ a [MOD q]}`. -/
-def configCount (q a N : ℕ) : ℕ :=
-  {n ∈ Finset.range N | n ≡ a [MOD q]}.card
+/-- The set of *configurations* of level `N` occurring in a Bombieri–Vinogradov style
+reduction: pairs `(q, a)` consisting of a modulus `1 ≤ q ≤ N` together with a residue
+class `a` modulo `q`. -/
+def configSet (N : ℕ) : Finset (ℕ × ℕ) :=
+  (Finset.Icc 1 N).biUnion fun q => {q} ×ˢ Finset.range q
 
-/-- The expected main term for `configCount q a N`, namely `N / q`. -/
-noncomputable def mainTerm (q N : ℕ) : ℝ := (N : ℝ) / (q : ℝ)
+/-- The number of configurations of level `N`. -/
+def configCount (N : ℕ) : ℕ := (configSet N).card
 
-/-- Exact evaluation of `configCount`, from `Nat.count_modEq_card`. -/
-theorem configCount_eq (q a N : ℕ) (hq : 0 < q) :
-    configCount q a N = N / q + (if a % q < N % q then 1 else 0) := by
-  have h : configCount q a N = Nat.count (fun x => x ≡ a [MOD q]) N := by
-    rw [Nat.count_eq_card_filter_range]
-    rfl
-  rw [h, Nat.count_modEq_card N hq a]
+/-- The main term for the number of configurations of level `N`, namely `N ^ 2 / 2`. -/
+noncomputable def mainTerm (N : ℕ) : ℝ := (N : ℝ) ^ 2 / 2
 
-/-- Two-sided bound: `q * configCount q a N` differs from `N` by at most `q`. -/
-theorem abs_mul_configCount_sub_le (q a N : ℕ) (hq : 0 < q) :
-    |(q : ℝ) * (configCount q a N : ℝ) - (N : ℝ)| ≤ (q : ℝ) := by
-  have hdm : q * (N / q) + N % q = N := Nat.div_add_mod N q
-  have hmod : N % q < q := Nat.mod_lt _ hq
-  have hle : q * configCount q a N ≤ N + q ∧ N ≤ q * configCount q a N + q := by
-    rw [configCount_eq q a N hq, Nat.mul_add]
-    by_cases hc : a % q < N % q <;> simp [hc] <;> omega
-  obtain ⟨h1, h2⟩ := hle
-  have h1' : ((q * configCount q a N : ℕ) : ℝ) ≤ ((N + q : ℕ) : ℝ) := Nat.cast_le.2 h1
-  have h2' : ((N : ℕ) : ℝ) ≤ ((q * configCount q a N + q : ℕ) : ℝ) := Nat.cast_le.2 h2
-  push_cast at h1' h2'
-  rw [abs_le]
-  constructor <;> linarith
+/-- The configuration count of level `N` is the Gauss sum `∑_{q ≤ N} q`. -/
+theorem configCount_eq_sum (N : ℕ) : configCount N = ∑ q ∈ Finset.Icc 1 N, q := by
+  unfold configCount configSet
+  rw [Finset.card_biUnion]
+  · simp
+  · intro x _ y _ hxy
+    simp only [Finset.disjoint_left, Finset.mem_product, Finset.mem_singleton, Finset.mem_range]
+    rintro ⟨a, b⟩ ⟨rfl, -⟩ ⟨h, -⟩
+    exact hxy h
 
-/-- **Equidistribution of an arithmetic progression, ratio form.**
-The number of `n < N` with `n ≡ a [MOD q]`, divided by the main term `N / q`,
-tends to `1` as `N → ∞`. -/
-theorem configCount_over_main_tendsto (q a : ℕ) (hq : 0 < q) :
-    Tendsto (fun N : ℕ => (configCount q a N : ℝ) / mainTerm q N) atTop (𝓝 1) := by
-  have hq' : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq
-  -- the error term `q / N` tends to `0`
-  have herr : Tendsto (fun N : ℕ => (q : ℝ) / (N : ℝ)) atTop (𝓝 0) := by
-    simpa [div_eq_mul_inv] using
-      ((tendsto_natCast_atTop_atTop (R := ℝ)).inv_tendsto_atTop.const_mul (q : ℝ))
-  rw [Metric.tendsto_atTop] at herr ⊢
-  intro ε hε
-  obtain ⟨N₀, hN₀⟩ := herr ε hε
-  refine ⟨max N₀ 1, fun N hN => ?_⟩
-  have hN1 : 1 ≤ N := le_trans (le_max_right N₀ 1) hN
-  have hNR : (0 : ℝ) < (N : ℝ) := by exact_mod_cast hN1
-  have hb := abs_mul_configCount_sub_le q a N hq
-  have key : (configCount q a N : ℝ) / mainTerm q N - 1
-      = ((q : ℝ) * (configCount q a N : ℝ) - (N : ℝ)) / (N : ℝ) := by
-    rw [mainTerm, div_div_eq_mul_div]
-    field_simp
-  have hdist : dist ((configCount q a N : ℝ) / mainTerm q N) 1 ≤ (q : ℝ) / (N : ℝ) := by
-    rw [Real.dist_eq, key, abs_div, abs_of_pos hNR]
-    gcongr
-  have h2 := hN₀ N (le_trans (le_max_left N₀ 1) hN)
-  rw [Real.dist_eq, sub_zero, abs_of_nonneg (by positivity)] at h2
-  linarith
+/-- Closed form: `2 * configCount N = N * (N + 1)`. -/
+theorem two_mul_configCount (N : ℕ) : 2 * configCount N = N * (N + 1) := by
+  rw [configCount_eq_sum]
+  induction N with
+  | zero => simp
+  | succ n ih =>
+    rw [Finset.sum_Icc_succ_top (by omega), Nat.mul_add, ih]
+    ring
 
-end Brockian.EquidistributionBVReduction
+/-- For `N ≥ 1` the ratio of the configuration count to the main term is `1 + 1 / N`. -/
+theorem configCount_div_mainTerm (N : ℕ) (hN : 1 ≤ N) :
+    (configCount N : ℝ) / mainTerm N = 1 + 1 / (N : ℝ) := by
+  have hN0 : (N : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr (by omega)
+  have h : (2 : ℝ) * configCount N = (N : ℝ) * (N + 1) := by
+    exact_mod_cast congrArg (fun n : ℕ => (n : ℝ)) (two_mul_configCount N)
+  unfold mainTerm
+  field_simp
+  nlinarith [h]
+
+/-- **Config count over main term tends to one.**
+The number of Bombieri–Vinogradov configurations of level `N`, divided by the main
+term `N ^ 2 / 2`, tends to `1` as `N → ∞`. -/
+theorem configCount_over_main_tendsto :
+    Tendsto (fun N : ℕ => (configCount N : ℝ) / mainTerm N) atTop (𝓝 1) := by
+  have h : Tendsto (fun N : ℕ => 1 + 1 / (N : ℝ)) atTop (𝓝 1) := by
+    simpa using (tendsto_const_nhds (x := (1 : ℝ)) (f := atTop (α := ℕ))).add
+      tendsto_one_div_atTop_nhds_zero_nat
+  refine h.congr' ?_
+  filter_upwards [Filter.eventually_ge_atTop 1] with N hN
+  exact (configCount_div_mainTerm N hN).symm
+
+end EquidistributionBVReduction
+end Brockian
 

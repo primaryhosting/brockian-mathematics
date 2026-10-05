@@ -1,13 +1,4 @@
-/-
-# Ssh Winding Invariant
-Category: Frontier Physics
-Target: Frontier.ssh_winding_invariant
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
 /-!
 # Ssh Winding Invariant
 Category: Frontier Physics
@@ -15,6 +6,37 @@ Target: Frontier.ssh_winding_invariant
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open Complex Metric Set
+open scoped Real Topology
+
+namespace Frontier
+
+/-- The off-diagonal entry of the Bloch Hamiltonian of the SSH (Su–Schrieffer–Heeger) chain
+with intracell hopping `v` and intercell hopping `w`:
+`h v w k = v + w * exp (I * k)`. -/
+
+theorem ssh_winding_invariant (v w : ℝ) (hw : 0 ≤ w) :
+    (|v| ≠ w → ∃ n : ℤ, sshWinding v w = (n : ℂ)) ∧
+    (|v| < w → sshWinding v w = 1) ∧
+    (w < |v| → sshWinding v w = 0) ∧
+    (∀ v' w' : ℝ, 0 ≤ w' →
+      ((|v| < w ∧ |v'| < w') ∨ (w < |v| ∧ w' < |v'|)) →
+        sshWinding v w = sshWinding v' w') := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro hne
+    rcases lt_or_gt_of_ne hne with h | h
+    · exact ⟨1, by simpa using sshWinding_topological h⟩
+    · exact ⟨0, by simpa using sshWinding_trivial hw h⟩
+  · exact fun h => sshWinding_topological h
+  · exact fun h => sshWinding_trivial hw h
+  · rintro v' w' hw' (⟨h1, h2⟩ | ⟨h1, h2⟩)
+    · rw [sshWinding_topological h1, sshWinding_topological h2]
+    · rw [sshWinding_trivial hw h1, sshWinding_trivial hw' h2]
+
+end Frontier
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -38,24 +60,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Frontier
-
-open Complex intervalIntegral
-
-/-- Off-diagonal entry of the Bloch Hamiltonian of the SSH (Su–Schrieffer–Heeger) chain,
-with intracell hopping `v` and intercell hopping `w`:
-`h(k) = v + w e^{i k}`. Chiral symmetry makes the Bloch Hamiltonian
-`[[0, h(k)], [conj h(k), 0]]`, so the topology is entirely carried by `h`. -/
-
-theorem ssh_winding_invariant (v w : ℂ) :
-    (‖w‖ < ‖v‖ → sshWinding v w = 0) ∧ (‖v‖ < ‖w‖ → sshWinding v w = 1) ∧
-      (‖w‖ ≠ ‖v‖ → ∃ n : ℤ, sshWinding v w = (n : ℂ)) := by
-  refine ⟨sshWinding_eq_zero_of_norm_lt v w, sshWinding_eq_one_of_norm_lt v w, ?_⟩
-  intro hne
-  rcases lt_or_gt_of_ne hne with hlt | hgt
-  · exact ⟨0, by rw [sshWinding_eq_zero_of_norm_lt v w hlt]; norm_num⟩
-  · exact ⟨1, by rw [sshWinding_eq_one_of_norm_lt v w hgt]; norm_num⟩
-
-end Frontier
 

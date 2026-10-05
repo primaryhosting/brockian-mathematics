@@ -1,51 +1,29 @@
+/-
+# Bell Theorem
+Category: Frontier Physics
+Target: Frontier.bell_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
-# Bell's theorem (CHSH form)
-
-We formalise a *local hidden variable* (LHV) model: a probability space `(Λ, μ)` of hidden
-variables together with response functions `A i : Λ → ℝ` for Alice's two settings `i : Bool`
-and `B j : Λ → ℝ` for Bob's two settings `j : Bool`, each taking values in `[-1, 1]`.
-Locality is built into the shape of the model: `A i x` does not depend on Bob's setting `j`
-and `B j x` does not depend on Alice's setting `i`; the only shared resource is `x`.
-
-The correlation predicted by such a model for settings `(i, j)` is `∫ x, A i x * B j x ∂μ`.
-
-* `Frontier.LocalHiddenVariableModel.chsh_abs_le_two` : every LHV model satisfies the CHSH
-  inequality `|E(0,0) + E(0,1) + E(1,0) - E(1,1)| ≤ 2`.
-* `Frontier.bell_theorem` : no LHV model reproduces the quantum-mechanical singlet
-  correlations at the optimal CHSH settings (all equal to `√2/2` except the last, `-√2/2`),
-  whose CHSH value is Tsirelson's bound `2√2 > 2`.
+# Bell Theorem
+Category: Frontier Physics
+Target: Frontier.bell_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Frontier
 
 open MeasureTheory
 
-/-- A local hidden variable model with two measurement settings per party.
-The hidden variable ranges over a probability space `(Λ, μ)`; Alice's outcome for setting
-`i : Bool` is `A i x` and Bob's outcome for setting `j : Bool` is `B j x`, both in `[-1,1]`. -/
-structure LocalHiddenVariableModel (Λ : Type*) [MeasurableSpace Λ] where
-  /-- The distribution of the hidden variable. -/
-  μ : Measure Λ
-  /-- `μ` is a probability measure. -/
-  isProbabilityMeasure : IsProbabilityMeasure μ
-  /-- Alice's response function for each of her two settings. -/
-  A : Bool → Λ → ℝ
-  /-- Bob's response function for each of his two settings. -/
-  B : Bool → Λ → ℝ
-  A_meas : ∀ i, AEStronglyMeasurable (A i) μ
-  B_meas : ∀ j, AEStronglyMeasurable (B j) μ
-  A_bdd : ∀ i x, |A i x| ≤ 1
-  B_bdd : ∀ j x, |B j x| ≤ 1
+namespace Frontier
 
-namespace LocalHiddenVariableModel
+/-- Pointwise CHSH inequality: for outcomes in `[-1, 1]`, the CHSH combination is
+bounded by `2`. -/
 
-variable {Λ : Type*} [MeasurableSpace Λ] (M : LocalHiddenVariableModel Λ)
+noncomputable def corr (M : LHVModel Ω) (i j : Fin 2) : ℝ :=
+  ∫ ω, (if i = 0 then M.A₁ ω else M.A₂ ω) * (if j = 0 then M.B₁ ω else M.B₂ ω) ∂M.μ
 
-attribute [instance] LocalHiddenVariableModel.isProbabilityMeasure
-
-/-- The correlation predicted by the model for the pair of settings `(i, j)`. -/
-
-noncomputable def corr (i j : Bool) : ℝ := ∫ x, M.A i x * M.B j x ∂M.μ
-
+/-- The CHSH combination of the four correlations of a local hidden-variable model. -/

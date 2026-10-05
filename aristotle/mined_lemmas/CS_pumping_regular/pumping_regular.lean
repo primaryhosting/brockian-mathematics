@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Pumping Regular
 Category: Computer Science
 Target: CS.pumping_regular
-Verification: pending
+Verification: verified (builds, axiom-clean: propext, Classical.choice, Quot.sound)
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -26,29 +26,24 @@ set_option grind.warning false
 
 namespace CS
 
-namespace Aux
+/-- The `n`-fold concatenation `b ++ b ++ ... ++ b` of a word with itself. -/
+abbrev pow {α : Type*} (b : List α) (n : ℕ) : List α := (List.replicate n b).flatten
 
-variable {T : Type*}
+/-- Any power of `b` lies in the Kleene star of the singleton language `{b}`. -/
 
-/-- `List.replicate i y` flattened is a member of the Kleene star of `{y}`. -/
-
-theorem pumping_regular {T : Type} {L : Language T} (hL : L.IsRegular) :
-    ∃ p : ℕ, 0 < p ∧ ∀ w ∈ L, p ≤ w.length →
-      ∃ x y z : List T, w = x ++ y ++ z ∧ y ≠ [] ∧ (x ++ y).length ≤ p ∧
-        ∀ i : ℕ, x ++ (List.replicate i y).flatten ++ z ∈ L := by
+theorem pumping_regular {α : Type*} {L : Language α} (hL : L.IsRegular) :
+    ∃ p : ℕ, 0 < p ∧ ∀ x ∈ L, p ≤ x.length →
+      ∃ a b c : List α, x = a ++ b ++ c ∧ b ≠ [] ∧ a.length + b.length ≤ p ∧
+        ∀ n : ℕ, a ++ CS.pow b n ++ c ∈ L := by
   obtain ⟨σ, hσ, M, rfl⟩ := hL
-  have hne : Nonempty σ := ⟨M.start⟩
-  refine ⟨Fintype.card σ, Fintype.card_pos, ?_⟩
-  intro w hw hlen
-  obtain ⟨x, y, z, hxyz, hle, hy, hsub⟩ := M.pumping_lemma hw hlen
-  refine ⟨x, y, z, hxyz, hy, ?_, ?_⟩
-  · simpa [List.length_append] using hle
-  · intro i
-    refine hsub ?_
-    rw [Language.mem_mul]
-    refine ⟨x ++ (List.replicate i y).flatten, ?_, z, Set.mem_singleton _, by simp⟩
-    rw [Language.mem_mul]
-    exact ⟨x, Set.mem_singleton _, _, Aux.flatten_replicate_mem_kstar y i, rfl⟩
+  refine ⟨Fintype.card σ, Fintype.card_pos_iff.mpr ⟨M.start⟩, ?_⟩
+  intro x hx hlen
+  obtain ⟨a, b, c, hsplit, hab, hbne, hsub⟩ := M.pumping_lemma hx hlen
+  refine ⟨a, b, c, hsplit, hbne, hab, ?_⟩
+  intro n
+  apply hsub
+  refine ⟨a ++ CS.pow b n, ⟨a, Set.mem_singleton _, CS.pow b n, CS.pow_mem_kstar b n, rfl⟩,
+    c, Set.mem_singleton _, rfl⟩
 
 end CS
 

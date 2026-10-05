@@ -6,61 +6,51 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
 set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+set_option relaxedAutoImplicit false
 
 namespace PCA.Isolation
 
-/-! ## The model
+/-! ## The abstract model
 
-We model the isolation engine of a proof-carrying app as follows.
+An *isolation engine* mediates every access an application makes to a resource.
+Resources are addressed by hierarchical paths (`List String`), and every access
+is performed in one of two modes.  A *policy* is a list of capabilities, each of
+which grants one mode on a whole subtree of the resource hierarchy.
 
-* A *capability* (`Cap`) is one of a fixed set of permissions.
-* A *resource* (`Resource`) is a path, i.e. a list of interned symbol identifiers.
-* A *scope* (`Scope`) grants a list of capabilities on every resource lying under
-  a given root path.
-* A request `(c, r)` is *in scope* when `c` is granted and `r` lies under the root.
+The engine does not scan the policy list at access time; instead the policy is
+*encoded* once into a prefix tree (`Trie`) which the engine then walks.  The
+results below relate the declarative notion `InScope` with the operational
+notion `engineAccepts` computed on the encoded policy. -/
 
-Requests crossing the isolation boundary are serialised to a bitstring by
-`encodeReq` (a self-delimiting unary encoding) and the engine's runtime check is
-the boolean function `checkToken`, which decodes the bitstring and re-checks the
-scope condition.
-
-The two main results are:
-
-* `PCA.Isolation.in_scope_encoding_complete` — *completeness*: every in-scope
-  request has its encoding accepted by the runtime check;
-* `PCA.Isolation.in_scope_encoding_sound` — *soundness*: the runtime check only
-  accepts encodings of in-scope requests.
--/
-
-/-- The capabilities the isolation engine can grant. -/
-inductive Cap
-  | read
-  | write
-  | net
+/-- Access modes mediated by the isolation engine. -/
+inductive Mode where
+  | read : Mode
+  | write : Mode
   deriving DecidableEq, Repr
 
-/-- Numeric code of a capability, used by the wire format. -/
+/-- A capability grants `mode` on every resource at or below the path `root`. -/
+structure Capability where
+  root : List String
+  mode : Mode
+  deriving DecidableEq, Repr
 
-theorem in_scope_encoding_sound (s : Scope) (c : Cap) (r : Resource)
-    (h : checkToken s (encodeReq c r) = true) : inScope s c r := by
-  simp only [checkToken, encodeReq, decodeNats_encodeNats, Cap.ofCode_code,
-    Bool.and_eq_true, decide_eq_true_eq] at h
-  exact ⟨h.1, h.2⟩
+/-- An access request: a resource path together with the mode of access. -/
+structure Request where
+  path : List String
+  mode : Mode
+  deriving DecidableEq, Repr
 
-/-- The runtime check is exactly the scope predicate. -/
+/-- A policy is a list of capabilities. -/
+abbrev Policy := List Capability
+
+/-- The declarative (model-level) notion of being in scope: some capability of
+the policy grants the requested mode on a prefix of the requested path. -/
+
+theorem in_scope_encoding_sound (p : Policy) (r : Request) (h : engineAccepts p r = true) :
+    InScope p r := by
+  rcases permits_encodeFrom_elim p r.path r.mode Trie.empty h with h1 | ⟨c, hc, hm, hpre⟩
+  · exact absurd h1 (by simp)
+  · exact ⟨c, hc, hm, hpre⟩
+
+/-- The encoded isolation engine decides exactly the declarative scope relation. -/

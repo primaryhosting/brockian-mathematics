@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-
 # Ramsey 3 5
 Category: Pure Mathematics
@@ -5,6 +30,7 @@ Target: Math.ramsey_3_5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
@@ -13,40 +39,38 @@ Category: Pure Mathematics
 Target: Math.ramsey_3_5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` to come first in a file, so the header above the import is a plain
-block comment and this is the module docstring with the same content.)
-
-Mathlib does not contain Ramsey numbers, so the whole development is built here:
-the recursion `R(3,t+1) ≤ t + R(3,t)`, the parity refinement giving `R(3,4) ≤ 9`,
-hence `R(3,5) ≤ 14`, and the circulant graph `C₁₃(1,5)` witnessing `R(3,5) > 13`.
 -/
 
-set_option maxHeartbeats 2000000
+open Finset SimpleGraph
 
 namespace Math
 
-open Finset
-
 /-! ## The Ramsey property -/
 
-/-- `RamseyProp n s t` says that every simple graph on `n` vertices contains either a clique
-of size `s` or an independent set of size `t` (equivalently, a clique of size `t` in the
-complement).  `R(s,t)` is the least `n` with this property. -/
+/-- `RamseyProp n s t` says: every simple graph on `n` vertices contains either a clique of
+size `s`, or an independent set of size `t` (a clique of size `t` in the complement).
+Equivalently, every 2-colouring of the edges of `K n` has a red `K s` or a blue `K t`. -/
 
-theorem even_sum_symm {W : Type} (f : W → W → ℕ) (hs : ∀ x y, f x y = f y x)
-    (hd : ∀ x, f x x = 0) (A : Finset W) : Even (∑ v ∈ A, ∑ w ∈ A, f v w) := by
-  induction A using Finset.cons_induction with
+lemma even_sum_symm (f : V → V → ℕ) (hs : ∀ x y, f x y = f y x) (hd : ∀ x, f x x = 0)
+    (A : Finset V) : Even (∑ v ∈ A, ∑ u ∈ A, f v u) := by
+  classical
+  induction A using Finset.induction_on with
   | empty => simp
-  | cons a B ha ih =>
-      simp only [Finset.sum_cons]
-      have key : f a a + ∑ w ∈ B, f a w + ∑ x ∈ B, (f x a + ∑ w ∈ B, f x w)
-           = 2 * (∑ w ∈ B, f a w) + ∑ x ∈ B, ∑ w ∈ B, f x w := by
-        rw [Finset.sum_add_distrib, hd]
-        have hswap : ∑ x ∈ B, f x a = ∑ x ∈ B, f a x := Finset.sum_congr rfl (fun x _ => hs x a)
-        rw [hswap]; ring
-      rw [key]
+  | insert a A ha ih =>
+      rw [Finset.sum_insert ha]
+      have h1 : ∑ u ∈ insert a A, f a u = ∑ u ∈ A, f a u := by
+        rw [Finset.sum_insert ha, hd a, zero_add]
+      have h2 : ∀ v ∈ A, ∑ u ∈ insert a A, f v u = f v a + ∑ u ∈ A, f v u := by
+        intro v _
+        rw [Finset.sum_insert ha]
+      rw [h1, Finset.sum_congr rfl h2, Finset.sum_add_distrib]
+      have h3 : ∑ v ∈ A, f v a = ∑ u ∈ A, f a u := by
+        exact Finset.sum_congr rfl (fun v _ => hs v a)
+      rw [h3]
+      have : ∑ u ∈ A, f a u + (∑ u ∈ A, f a u + ∑ v ∈ A, ∑ u ∈ A, f v u)
+          = 2 * (∑ u ∈ A, f a u) + ∑ v ∈ A, ∑ u ∈ A, f v u := by ring
+      rw [this]
       exact (even_two_mul _).add ih
 
-/-- `R(3,4) ≤ 9`.  The naive recursion only gives `10`; a parity argument (there is no
-`3`-regular graph on `9` vertices) improves the bound to `9`. -/
+variable {G : SimpleGraph V} [DecidableRel G.Adj]
+

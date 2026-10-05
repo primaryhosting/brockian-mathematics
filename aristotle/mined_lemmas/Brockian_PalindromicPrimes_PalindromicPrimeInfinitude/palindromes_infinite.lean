@@ -23,7 +23,20 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Palindromic Prime Infinitude
+Category: Brockian Conjecture
+Target: Brockian.PalindromicPrimes.PalindromicPrimeInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: Lean 4 requires `import` commands to precede every other command, including
+module docstrings, so the header above is a plain block comment `/- ... -/`; the same
+text is repeated as the module docstring `/-! ... -/` immediately after the import.)
+-/
+
 import Mathlib
+
 /-!
 # Palindromic Prime Infinitude
 Category: Brockian Conjecture
@@ -32,36 +45,26 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on file layout: Lean 4 requires `import` commands to be the very first commands
-in a module, so the module header above is placed immediately after `import Mathlib`;
-putting it before the import is rejected by the Lean parser.
-
-Status of the mathematics.
-
-Whether there are infinitely many base-10 palindromic primes is an open problem: no
-unconditional proof is known.  This file therefore contains
-
-* the exact definitions (`IsPalindrome`, `PalindromicPrime`, `palindromicPrimes`);
-* unconditional results: there are infinitely many palindromes, concrete palindromic
-  primes exist, and every palindromic prime other than `11` has an odd number of
-  decimal digits (an even-length decimal palindrome is always divisible by `11`);
-* the target theorem `PalindromicPrimeInfinitude` as a Lean-checked *conditional
-  reduction*: infinitude of palindromic primes follows from the hypothesis that
-  palindromic primes with arbitrarily many decimal digits exist.  The reverse
-  implication is proved as well, so the reduction is an equivalence.
--/
-
 namespace Brockian.PalindromicPrimes
 
 open Nat
 
-/-- A natural number is a (base-10) palindrome if its list of decimal digits
-reads the same forwards and backwards. -/
+/-- `IsPalindromic b n` says that the base-`b` digit expansion of `n` reads the same
+forwards and backwards. -/
 
-theorem palindromes_infinite : {n : ℕ | IsPalindrome n}.Infinite :=
-  Set.infinite_of_injective_forall_mem repunit_injective isPalindrome_repunit
+theorem palindromes_infinite : {n : ℕ | IsPalindromic 10 n}.Infinite := by
+  apply Set.infinite_of_forall_exists_gt
+  intro a
+  have hd : Nat.digits 10 (Nat.ofDigits 10 (padList a)) = padList a :=
+    Nat.digits_ofDigits 10 (by norm_num) _ (padList_lt a) (padList_getLast a)
+  refine ⟨Nat.ofDigits 10 (padList a), ?_, ?_⟩
+  · show IsPalindromic 10 _
+    rw [IsPalindromic, hd, padList_reverse]
+  · have hlen : a < (Nat.digits 10 (Nat.ofDigits 10 (padList a))).length := by
+      rw [hd, padList_length]; omega
+    have hle := (Nat.lt_digits_length_iff (b := 10) (by norm_num)
+      (Nat.ofDigits 10 (padList a))).1 hlen
+    calc a < 10 ^ a := Nat.lt_pow_self (by norm_num)
+      _ ≤ _ := hle
 
-/-! ### Even-length palindromes are divisible by 11 -/
-
-/-- A base-10 palindrome with an even number of digits is divisible by `11`. -/
+/-- Every base-10 palindrome with an even number of digits is divisible by `11`. -/

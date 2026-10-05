@@ -31,6 +31,9 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+-- (The header above uses `/-` rather than `/-!` because Lean 4 does not permit a module
+-- docstring to precede the `import` block; the text is otherwise verbatim.)
+
 import Mathlib
 
 /-!
@@ -41,22 +44,20 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian
-namespace CarmichaelKorselt
+namespace Brockian.CarmichaelKorselt
 
-/-- A *Carmichael number*: a composite `n > 1` which is a Fermat pseudoprime to every base,
-i.e. `n ∣ a ^ n - a` for all integers `a`. -/
+/-- `n` is a Carmichael number: it is composite, yet `a ^ n ≡ a [ZMOD n]` for every integer `a`. -/
 
-theorem prime_dvd_pow_sub_self {p n t : ℕ} (hp : p.Prime) (hn : n = 1 + (p - 1) * t) (a : ℤ) :
-    (p : ℤ) ∣ a ^ n - a := by
-  haveI := Fact.mk hp
-  have key : ((a ^ n - a : ℤ) : ZMod p) = 0 := by
-    push_cast
-    subst hn
-    set b : ZMod p := (a : ZMod p) with hb
-    rcases eq_or_ne b 0 with h | h
-    · simp [h, pow_add]
-    · rw [pow_add, pow_one, pow_mul, ZMod.pow_card_sub_one_eq_one h, one_pow, mul_one, sub_self]
-  exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp key
+theorem prime_dvd_pow_sub_self {p n : ℕ} (hp : p.Prime) (hn : 1 ≤ n)
+    (hd : (p - 1) ∣ (n - 1)) (a : ℤ) : (p : ℤ) ∣ a ^ n - a := by
+  haveI : Fact p.Prime := ⟨hp⟩
+  obtain ⟨t, ht⟩ := hd
+  have hn' : n = (p - 1) * t + 1 := by omega
+  have key : ((a : ZMod p)) ^ n = (a : ZMod p) := by
+    by_cases h0 : (a : ZMod p) = 0
+    · rw [h0, zero_pow (by omega)]
+    · rw [hn', pow_add, pow_one, pow_mul, ZMod.pow_card_sub_one_eq_one h0, one_pow, one_mul]
+  have hzero : ((a ^ n - a : ℤ) : ZMod p) = 0 := by push_cast; rw [key]; ring
+  exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ p).mp hzero
 
-/-- The expansion `(6k+1)(12k+1)(18k+1) = 1 + 36k(36k² + 11k + 1)`. -/
+/-- Korselt's criterion (sufficiency) for a product of three distinct primes. -/

@@ -1,13 +1,5 @@
 import Mathlib
 
-/-!
-# Cos Trace Norm 2003
-Category: Brockian Corpus
-Target: Brockian.CosTraceNorm2003
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,26 +14,51 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
+import Mathlib
 /-!
-Key Mathlib ingredients used below:
-* `Matrix.IsHermitian.trace_eq_sum_eigenvalues` — the trace of a Hermitian matrix is the sum
-  of its eigenvalues;
-* `Matrix.posSemidef_conjTranspose_mul_self` — Gram matrices `Bᴴ * B` are positive semidefinite;
-* `Matrix.PosSemidef.eigenvalues_nonneg` — eigenvalues of a PSD matrix are nonnegative.
+# Cos Trace Norm 2003
+Category: Brockian Corpus
+Target: Brockian.CosTraceNorm2003
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (Lean 4 requires the `import` line to precede any module doc comment, so the
+-- header block above appears immediately after the single required import.)
+
+open scoped BigOperators
+open scoped Real
 
 namespace Brockian
 
 open Matrix
 
+/-! ## The trace norm of a Hermitian matrix -/
+
+section Defs
+
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- The trace norm (nuclear norm, Schatten 1-norm) of a Hermitian real matrix:
-the sum of the absolute values of its eigenvalues. -/
+/-- The trace norm (Schatten 1-norm) of a Hermitian matrix: the sum of the absolute
+values of its eigenvalues. -/
 
-noncomputable def hermTraceNorm {A : Matrix n n ℝ} (hA : A.IsHermitian) : ℝ :=
+noncomputable def hermTraceNorm {A : Matrix n n ℂ} (hA : A.IsHermitian) : ℝ :=
   ∑ i, |hA.eigenvalues i|
 
-/-- The trace norm dominates the absolute value of the trace. -/
+end Defs
+
+/-! ## Rank-one projections -/
+
+section RankOne
+
+variable {n : Type*} [Fintype n]
+
+/-- The rank-one orthogonal projection onto the line spanned by a unit vector `u`. -/

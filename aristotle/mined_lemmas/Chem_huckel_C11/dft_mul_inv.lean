@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Huckel C 11
 Category: Chemistry
 Target: Chem.huckel_C11
@@ -8,24 +6,29 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Complex Matrix Polynomial Finset
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open Complex Polynomial
 
 namespace Chem
 
-/-- A primitive 11th root of unity. -/
+/-- A primitive 11-th root of unity. -/
 
-lemma dft_mul_inv : dftMatrix * dftMatrixInv = 1 := by
-  ext j k
+lemma dft_mul_inv : dftMat * dftMatInv = 1 := by
+  ext a b
   rw [Matrix.mul_apply]
-  have hterm : ∀ l : Fin 11,
-      dftMatrix j l * dftMatrixInv l k = (11 : ℂ)⁻¹ * ee (l * (j - k)) := by
-    intro l
-    simp only [dftMatrix, dftMatrixInv]
-    rw [show ee (j * l) * ((11 : ℂ)⁻¹ * ee (-(l * k)))
-        = (11 : ℂ)⁻¹ * (ee (j * l) * ee (-(l * k))) by ring, ← ee_add, fin11_ring1]
-  rw [Finset.sum_congr rfl fun l _ => hterm l, ← Finset.mul_sum, sum_ee, Matrix.one_apply]
-  by_cases hjk : j = k
-  · subst hjk; simp
-  · rw [if_neg (sub_ne_zero_of_ne hjk), if_neg hjk, mul_zero]
+  have : ∀ j : Fin 11, dftMat a j * dftMatInv j b = (11 : ℂ)⁻¹ * echar (j * (a - b)) := by
+    intro j
+    simp only [dftMat, dftMatInv, Matrix.of_apply]
+    have hidx : j * (a - b) = a * j + -(j * b) := by revert a b j; decide
+    rw [hidx, echar_add]
+    ring
+  rw [Finset.sum_congr rfl (fun j _ => this j), ← Finset.mul_sum, sum_echar]
+  by_cases hab : a = b
+  · subst hab
+    simp
+  · have : a - b ≠ 0 := sub_ne_zero_of_ne hab
+    simp [this, hab]
 
-/-- The adjacency matrix of `C₁₁` is diagonalized by the discrete Fourier transform. -/

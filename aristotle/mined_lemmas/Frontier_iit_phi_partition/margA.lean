@@ -7,6 +7,14 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 import Mathlib
 
+/-!
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -25,11 +33,33 @@ set_option grind.warning false
 
 namespace Frontier
 
-variable {V : Type*} [Fintype V] [DecidableEq V]
+/-! ## Systems
 
-/-- The restriction of a global state `x` to the part `A` of the system. -/
+A (discrete, finite) system consists of a finite set `ι` of elements, each of which can be
+in one of finitely many states `Q`; a global state of the system is a function `ι → Q`.
+The dynamics are given by a transition probability matrix (TPM): for every current global
+state `s`, a probability distribution `prob s` over next global states. -/
 
-noncomputable def margA (f : (V → Bool) → (V → Bool)) (A : Finset V) (a : ↥A → Bool) : ℝ :=
-  ∑ b : ↥Aᶜ → Bool, jointProb f A a b
+/-- A transition probability matrix on the global state space `ι → Q`. -/
+structure TPM (ι Q : Type) [Fintype ι] [DecidableEq ι] [Fintype Q] where
+  /-- `prob s u` is the probability that the system moves from state `s` to state `u`. -/
+  prob : (ι → Q) → (ι → Q) → ℝ
+  /-- Probabilities are nonnegative. -/
+  nonneg : ∀ s u, 0 ≤ prob s u
+  /-- For each current state, the next-state probabilities sum to one. -/
+  normalized : ∀ s, ∑ u, prob s u = 1
 
-/-- The marginal effect repertoire of the part `Aᶜ`. -/
+variable {ι Q : Type} [Fintype ι] [DecidableEq ι] [Fintype Q]
+
+/-- The elements on one side of the bipartition determined by `S`. -/
+abbrev Part (S : Finset ι) : Type := {i : ι // i ∈ S}
+
+/-- The elements on the other side of the bipartition determined by `S`. -/
+abbrev CoPart (S : Finset ι) : Type := {i : ι // i ∉ S}
+
+/-- Restriction of a global state to the `S`-part of the system. -/
+
+def margA (T : TPM ι Q) (S : Finset ι) (s : ι → Q) (a : Part S → Q) : ℝ :=
+  ∑ b : CoPart S → Q, joint T S s a b
+
+/-- The marginal distribution of the next state of the complementary part. -/

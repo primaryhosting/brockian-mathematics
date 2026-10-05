@@ -1,4 +1,6 @@
 import Mathlib
+import RequestProject.Paley
+
 /-!
 # Ramsey 4 4
 Category: Pure Mathematics
@@ -7,17 +9,17 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option maxHeartbeats 1000000
+namespace Math
 
-open scoped Classical
+open Finset
 
-namespace Ramsey44
+/-! ## Monochromatic cliques for a two-colouring -/
 
-variable {V : Type*}
+variable {α : Type*} [DecidableEq α] {c : α → α → Bool} {x : Bool}
 
-/-- `Arr G s p q` says that inside the vertex set `s` there is either a `p`-clique of `G`
-or a `q`-clique of the complement of `G` (i.e. an independent set of size `q`). -/
+/-- `S` is a monochromatic clique of colour `x` for the two-colouring `c`. -/
 
 def isQR (n : ℕ) : Bool :=
   n == 1 || n == 2 || n == 4 || n == 8 || n == 9 || n == 13 || n == 15 || n == 16
 
+/-- The Paley two-colouring of the complete graph on 17 vertices. -/

@@ -1,26 +1,35 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-noncomputable def devPayoff (G : FiniteGame ι S) (i : ι) (s : S i)
-    (x : (i : ι) → S i → ℝ) : ℝ :=
-  expectedPayoff G i (Function.update x i (pureVec s))
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
 
-/-- `x` is a (mixed strategy) Nash equilibrium: it is a mixed profile and no player can
-strictly improve his expected payoff by unilaterally switching to another mixed strategy. -/
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+noncomputable def devPayoff (u : ι → (∀ j, S j) → ℝ) (i : ι) (s : S i)
+    (x : ∀ j, S j → ℝ) : ℝ :=
+  ∑ p : (∀ j, S j), (if p i = s then (1 : ℝ) else 0) *
+    ((∏ j ∈ univ.erase i, x j (p j)) * u i p)
+
+omit [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)] in

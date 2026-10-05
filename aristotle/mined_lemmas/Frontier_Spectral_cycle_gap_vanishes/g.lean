@@ -30,12 +30,11 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option grind.warning false
+namespace Frontier
+namespace Spectral
 
-namespace Frontier.Spectral
-
-/-- The Fiedler value (algebraic connectivity) of the cycle graph `C n`. -/
+/-- The Fiedler value of the cycle graph `C n`. -/
 
 noncomputable def g (n : ℕ) : ℝ := 2 - 2 * Real.cos (2 * Real.pi / n)
 
-/-- The spectral gap of the cycle family vanishes: `g n → 0` as `n → ∞`. -/
+/-- The argument `2π/n` tends to `0` as `n → ∞`. -/

@@ -1,11 +1,3 @@
-/-
-# Scholze Perfectoid Tilt
-Category: Frontier — Fields Medal Work
-Target: Frontier.scholze_perfectoid_tilt
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -16,68 +8,50 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Contents
-
-* `Frontier.TiltMonoid` and `Frontier.sharp`: the multiplicative tilt `lim_{x ↦ xᵖ} M` of a
-  commutative monoid and the sharp map `x ↦ x♯`.
-* `Frontier.IsPerfectoidField`: perfectoid fields (rank one valuation with a
-  pseudo-uniformizer `ϖ` such that `v p ≤ (v ϖ)^p`, complete valuation ring, Frobenius
-  surjective on `𝒪/p`).
-* `Frontier.TiltingEquivalence`: the statement of Scholze's tilting theorem at the level of
-  fields: the tilt `K♭` exists, is a perfectoid field of characteristic `p`, its
-  multiplicative monoid is `lim_{x ↦ xᵖ} K`, and its valuation is transported along `♯`.
-* `Frontier.untiltSystem_bijective` / `Frontier.preTiltMulEquivTiltMonoid`: the
-  characteristic-free core of the correspondence, for every `p`-adically complete ring `O`:
-  Fontaine's `O♭ = lim_{Frob} O/p` is multiplicatively `lim_{x ↦ xᵖ} O`, via untilting.
-* `Frontier.isAdicComplete_integer_of_isPerfectoidField` and
-  `Frontier.nonempty_preTilt_mulEquiv_tiltMonoid`: this applies to the ring of integers of
-  any perfectoid field, in any characteristic.
-* `Frontier.scholze_perfectoid_tilt`: the characteristic `p` base case of the tilting
-  equivalence, where tilting is the identity.
--/
-
 open scoped BigOperators
 open scoped Real
+open scoped NNReal
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped NNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Frontier
 
-universe u
+/-! ## The tilt
 
-open Ideal
+For a multiplicative monoid `R` and an exponent `p`, the *tilt* of `R` is the inverse limit
+`lim_{x ↦ xᵖ} R`, realised as the monoid of sequences `(x₀, x₁, x₂, …)` with `xₙ₊₁ᵖ = xₙ`.
+For a perfectoid field `K` this is Scholze's `K♭` (described through its multiplicative
+monoid; in characteristic `p` the addition is the pointwise one). -/
+structure Tilt (R : Type*) [Monoid R] (p : ℕ) where
+  /-- The `n`-th component of a compatible system of `p`-power roots. -/
+  coeff : ℕ → R
+  /-- Compatibility: the `(n+1)`-st component is a `p`-th root of the `n`-th one. -/
+  pow_coeff_succ : ∀ n : ℕ, coeff (n + 1) ^ p = coeff n
 
-/-!
-## The multiplicative tilt
+namespace Tilt
 
-For a commutative monoid `M`, the *multiplicative tilt* is the inverse limit of the system
-`⋯ → M → M → M` where each transition map is `x ↦ x ^ p`.  For a perfectoid field `K` this
-inverse limit is (multiplicatively) the tilt `K♭` of `K`, and the projection to the `0`-th
-component is Scholze's *sharp* map `x ↦ x♯`.
--/
+variable {R : Type*} {p : ℕ}
 
-/-- The multiplicative tilt of a commutative monoid `M`: the inverse limit of
-`M` along the `p`-power map. -/
-abbrev TiltMonoid (M : Type*) [CommMonoid M] (p : ℕ) : Type _ := Monoid.perfection M p
+@[ext]
 
-/-- The *sharp* map `TiltMonoid M p →* M`, `x ↦ x♯`, given by the `0`-th component of a
-compatible system of `p`-power roots. -/
+def sharp [CommMonoid R] (f : Tilt R p) : R := f.coeff 0
 
-def sharp (M : Type*) [CommMonoid M] (p : ℕ) : TiltMonoid M p →* M where
-  toFun x := (x : ℕ → M) 0
-  map_one' := rfl
-  map_mul' _ _ := rfl
-
+@[simp]

@@ -8,14 +8,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Berry Phase Quantized
-Category: Frontier Physics
-Target: Frontier.berry_phase_quantized
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -41,39 +33,63 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- The Berry curvature of a Berry connection one-form `A = A₁ dx + A₂ dy` on the
-(two–dimensional) parameter space `ℝ × ℝ`: it is the exterior derivative
-`F = ∂₁A₂ - ∂₂A₁`. -/
+/-- The Berry phase accumulated along the closed rectangular loop
+`(a,c) → (b,c) → (b,d) → (a,d) → (a,c)` in a two-dimensional parameter space,
+for a Berry connection with components `A₁, A₂`.  It is the line integral
+`∮ A₁ dx + A₂ dy` around the boundary of the rectangle `[a,b] × [c,d]`. -/
 
-theorem berry_phase_quantized (A₁ A₂ : ℝ × ℝ → ℝ)
-    (h₁ : ContDiff ℝ 1 A₁) (h₂ : ContDiff ℝ 1 A₂) (a₁ a₂ b₁ b₂ : ℝ) :
-    berryPhase A₁ A₂ a₁ a₂ b₁ b₂ =
-      ∫ x in a₁..b₁, ∫ y in a₂..b₂, berryCurvature A₁ A₂ (x, y) := by
-  have hcurv : Continuous (berryCurvature A₁ A₂) := by
-    have e₂ : Continuous fun p : ℝ × ℝ => fderiv ℝ A₂ p (1, 0) :=
-      (h₂.continuous_fderiv one_ne_zero).clm_apply continuous_const
-    have e₁ : Continuous fun p : ℝ × ℝ => fderiv ℝ A₁ p (0, 1) :=
-      (h₁.continuous_fderiv one_ne_zero).clm_apply continuous_const
-    simpa [berryCurvature] using e₂.sub e₁
-  have hcompact : IsCompact ((Set.uIcc a₁ b₁) ×ˢ (Set.uIcc a₂ b₂)) :=
-    isCompact_uIcc.prod isCompact_uIcc
-  have key := MeasureTheory.integral2_divergence_prod_of_hasFDerivAt
-    (E := ℝ) A₂ (fun p => -A₁ p) (fun p => fderiv ℝ A₂ p) (fun p => -(fderiv ℝ A₁ p))
-    a₁ a₂ b₁ b₂
-    (h₂.continuous.continuousOn) ((h₁.continuous.neg).continuousOn)
-    (fun p _ => (h₂.differentiable one_ne_zero p).hasFDerivAt)
-    (fun p _ => ((h₁.differentiable one_ne_zero p).hasFDerivAt).neg)
-    (by
-      have : MeasureTheory.IntegrableOn (berryCurvature A₁ A₂)
-          ((Set.uIcc a₁ b₁) ×ˢ (Set.uIcc a₂ b₂)) :=
-        hcurv.continuousOn.integrableOn_compact hcompact
-      simpa [berryCurvature, sub_eq_add_neg] using this)
-  simp only [berryCurvature, sub_eq_add_neg] at key ⊢
-  simp only [intervalIntegral.integral_neg, ContinuousLinearMap.neg_apply] at key
-  rw [key]
-  simp [berryPhase, sub_eq_add_neg]
-  abel
+theorem berry_phase_quantized (A₁ A₂ F₁ F₂ : ℝ → ℝ → ℝ) (a b c d : ℝ)
+    (hA₂ : ∀ x y : ℝ, HasDerivAt (fun t : ℝ => A₂ t y) (F₁ x y) x)
+    (hA₁ : ∀ x y : ℝ, HasDerivAt (fun t : ℝ => A₁ x t) (F₂ x y) y)
+    (hF₁ : Continuous fun p : ℝ × ℝ => F₁ p.1 p.2)
+    (hF₂ : Continuous fun p : ℝ × ℝ => F₂ p.1 p.2)
+    (hcA₁ : Continuous fun p : ℝ × ℝ => A₁ p.1 p.2)
+    (hcA₂ : Continuous fun p : ℝ × ℝ => A₂ p.1 p.2) :
+    berryPhaseLoop A₁ A₂ a b c d = berryCurvatureFlux F₁ F₂ a b c d ∧
+      ∀ n : ℤ, berryCurvatureFlux F₁ F₂ a b c d = 2 * Real.pi * n →
+        Complex.exp (Complex.I * (berryPhaseLoop A₁ A₂ a b c d : ℂ)) = 1 := by
+  have hA₂b : Continuous fun y : ℝ => A₂ b y :=
+    hcA₂.comp (continuous_const.prodMk continuous_id)
+  have hA₂a : Continuous fun y : ℝ => A₂ a y :=
+    hcA₂.comp (continuous_const.prodMk continuous_id)
+  have hA₁d : Continuous fun x : ℝ => A₁ x d :=
+    hcA₁.comp (continuous_id.prodMk continuous_const)
+  have hA₁c : Continuous fun x : ℝ => A₁ x c :=
+    hcA₁.comp (continuous_id.prodMk continuous_const)
+  -- First iterated integral: flux of `∂₁A₂`.
+  have h1 : (∫ y in c..d, ∫ x in a..b, F₁ x y)
+      = (∫ y in c..d, A₂ b y) - (∫ y in c..d, A₂ a y) := by
+    have : (∫ y in c..d, ∫ x in a..b, F₁ x y) = ∫ y in c..d, (A₂ b y - A₂ a y) := by
+      refine intervalIntegral.integral_congr ?_
+      intro y _
+      exact integral_partial_one A₂ F₁ hA₂ hF₁ a b y
+    rw [this]
+    exact intervalIntegral.integral_sub (hA₂b.intervalIntegrable c d)
+      (hA₂a.intervalIntegrable c d)
+  -- Second iterated integral: flux of `∂₂A₁`.
+  have h2 : (∫ x in a..b, ∫ y in c..d, F₂ x y)
+      = (∫ x in a..b, A₁ x d) - (∫ x in a..b, A₁ x c) := by
+    have : (∫ x in a..b, ∫ y in c..d, F₂ x y) = ∫ x in a..b, (A₁ x d - A₁ x c) := by
+      refine intervalIntegral.integral_congr ?_
+      intro x _
+      exact integral_partial_two A₁ F₂ hA₁ hF₂ c d x
+    rw [this]
+    exact intervalIntegral.integral_sub (hA₁d.intervalIntegrable a b)
+      (hA₁c.intervalIntegrable a b)
+  have hstokes : berryPhaseLoop A₁ A₂ a b c d = berryCurvatureFlux F₁ F₂ a b c d := by
+    unfold berryPhaseLoop berryCurvatureFlux
+    rw [h1, h2]
+    ring
+  refine ⟨hstokes, ?_⟩
+  intro n hn
+  rw [hstokes, hn]
+  have : ((2 * Real.pi * (n : ℝ) : ℝ) : ℂ) = (n : ℂ) * (2 * (Real.pi : ℂ)) := by
+    push_cast
+    ring
+  rw [this]
+  have hmul : Complex.I * ((n : ℂ) * (2 * (Real.pi : ℂ)))
+      = (n : ℂ) * (2 * (Real.pi : ℂ) * Complex.I) := by ring
+  rw [hmul, Complex.exp_int_mul_two_pi_mul_I]
 
-/-- A concrete instance of the theorem, witnessing that it is not vacuous: for the symmetric-gauge
-Berry connection `A = (-y/2) dx + (x/2) dy`, whose Berry curvature is the constant `1`, the Berry
-phase around a rectangular loop equals the enclosed area `(b₁ - a₁) * (b₂ - a₂)`. -/
+end Frontier
+

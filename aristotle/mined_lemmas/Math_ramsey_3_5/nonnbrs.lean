@@ -3,31 +3,54 @@ import Mathlib
 open scoped BigOperators
 open scoped Real
 open scoped Nat
+open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
-set_option maxRecDepth 100000
+set_option maxRecDepth 4000
 set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+/-
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Ramsey 3 5
+Category: Pure Mathematics
+Target: Math.ramsey_3_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Finset SimpleGraph
 
 namespace Math
 
-/-! ## Cliques and independent sets inside a finite set of vertices -/
+/-! ## The Ramsey property -/
 
-section General
+/-- `RamseyProp n s t` says: every simple graph on `n` vertices contains either a clique of
+size `s`, or an independent set of size `t` (a clique of size `t` in the complement).
+Equivalently, every 2-colouring of the edges of `K n` has a red `K s` or a blue `K t`. -/
 
-variable {V : Type*} [DecidableEq V] {G : SimpleGraph V} {s t : Finset V} {n : ℕ} {v : V}
+def nonnbrs (G : SimpleGraph V) [DecidableRel G.Adj] (A : Finset V) (v : V) : Finset V :=
+  (A.erase v).filter (fun u => ¬ G.Adj v u)
 
-/-- `CliqueOn G s n` : the vertex set `s` contains a clique of `G` with `n` vertices. -/
-
-def nonnbrs (G : SimpleGraph V) [DecidableRel G.Adj] (s : Finset V) (v : V) : Finset V :=
-  (s.erase v).filter (fun w => ¬ G.Adj v w)
-
-variable [DecidableRel G.Adj]
-
-omit [DecidableEq V] in

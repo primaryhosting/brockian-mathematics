@@ -1,20 +1,4 @@
-/-
-# Distance Nonneg
-Category: Riemann Program
-Target: Riemann.BaezDuarte.distance_nonneg
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
-
-/-!
-# Distance Nonneg
-Category: Riemann Program
-Target: Riemann.BaezDuarte.distance_nonneg
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
 
 open scoped BigOperators
 open scoped Real
@@ -39,15 +23,21 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Riemann
-namespace BaezDuarte
+/-!
+# Distance Nonneg
+Category: Riemann Program
+Target: Riemann.BaezDuarte.distance_nonneg
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-- Baez-Duarte / Nyman-Beurling shape: the squared distance from a vector to a
-subspace is nonnegative.  Concretely, for all real `x y`, `0 ≤ (x - y)^2`.
-Closed by Mathlib's `sq_nonneg`. -/
+namespace Riemann.BaezDuarte
 
-theorem distance_nonneg (x y : ℝ) : 0 ≤ (x - y) ^ 2 := sq_nonneg (x - y)
+/-- Baez-Duarte / Nyman-Beurling shape: a squared distance is nonnegative.
+Concretely, for all real `x y`, `0 ≤ (x - y)^2`. -/
 
-end BaezDuarte
-end Riemann
+theorem distance_nonneg (x y : ℝ) : 0 ≤ (x - y) ^ 2 := by
+  positivity
+
+end Riemann.BaezDuarte
 

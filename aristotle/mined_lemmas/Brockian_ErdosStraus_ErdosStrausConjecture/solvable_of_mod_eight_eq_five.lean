@@ -23,9 +23,7 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-
-/-!
+/-
 # Erdos Straus Conjecture
 Category: Brockian Conjecture
 Target: Brockian.ErdosStraus.ErdosStrausConjecture
@@ -33,32 +31,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-`ErdosStrausConjecture` is a well-known open problem, so this file does not prove it
-outright.  What is proved here, unconditionally and axiom-cleanly, is:
-
-* `solvable_of_dvd`: solvability passes from a divisor to any positive multiple;
-* explicit parametric solutions for `n` even, `3 ∣ n`, `n ≡ 3 (mod 4)`, `n ≡ 2 (mod 3)`
-  and `n ≡ 5 (mod 8)`;
-* `solvable_of_mod_24_ne_one`: the conjecture holds for every `n ≥ 2` with `n % 24 ≠ 1`;
-* `erdosStrausConjecture_iff_primes`: the conjecture is *equivalent* to its special case
-  for primes `p ≡ 1 (mod 24)`.
--/
+import Mathlib
 
 namespace Brockian.ErdosStraus
 
-/-- `Solvable n` says that `4 / n` can be written as a sum of three (not necessarily
-distinct) positive unit fractions. -/
+/-- `ErdosStrausSolvable n` says that `4 / n` is a sum of three unit fractions with
+positive natural denominators. -/
 
-theorem solvable_of_mod_eight_eq_five {n : ℕ} (h : n % 8 = 5) : Solvable n := by
+theorem solvable_of_mod_eight_eq_five {n : ℕ} (h : n % 8 = 5) : ErdosStrausSolvable n := by
   obtain ⟨k, rfl⟩ : ∃ k, n = 8 * k + 5 := ⟨n / 8, by omega⟩
-  refine ⟨2 * k + 2, (8 * k + 5) * (k + 1), 2 * ((8 * k + 5) * (k + 1)),
-    by positivity, by positivity, by positivity, ?_⟩
-  have h1 : ((k : ℚ) + 1) ≠ 0 := by positivity
-  have h2 : (8 * (k : ℚ) + 5) ≠ 0 := by positivity
-  push_cast
-  field_simp
-  ring
+  exact solvable_of_nat_eq (by omega) (show 0 < 2 * k + 2 by omega)
+    (show 0 < (8 * k + 5) * (2 * k + 2) by positivity)
+    (show 0 < (8 * k + 5) * (k + 1) by positivity) (by ring)
 
-/-- **Partial result**: the Erdős–Straus conjecture holds for every `n ≥ 2` with
-`n % 24 ≠ 1`. -/
+/-- **Main unconditional result.** The Erdős–Straus conjecture holds for every `n ≥ 2` whose
+residue modulo `24` is different from `1`. -/

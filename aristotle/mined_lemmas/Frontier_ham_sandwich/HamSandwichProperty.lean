@@ -1,4 +1,20 @@
+/-
+# Ham Sandwich
+Category: Frontier Physics
+Target: Frontier.ham_sandwich
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
+/-!
+# Ham Sandwich
+Category: Frontier Physics
+Target: Frontier.ham_sandwich
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -23,31 +39,29 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-!
-# Ham–Sandwich: statement and the one-dimensional base case
-
-The Ham–Sandwich theorem states that any `n` finite (Borel) measures on `ℝⁿ` can be
-simultaneously bisected by a single affine hyperplane.  Here "bisected by the hyperplane
-`{x | ⟪v, x⟫ = c}`" is taken in the usual measure-theoretic sense, which is the correct
-formulation for measures that may have atoms: each of the two *open* half-spaces carries at
-most half of the total mass (equivalently, each *closed* half-space carries at least half).
-
-This file gives the formal statement `HamSandwichProperty n` in arbitrary dimension and a
-complete, axiom-clean proof of the base case `n = 1` (`Frontier.ham_sandwich`), where the
-hyperplane is a point and bisection is the existence of a median.
--/
-
 namespace Frontier
 
-open MeasureTheory Set Filter
+open MeasureTheory Filter Set Topology
+open scoped ENNReal
 
-/-- The hyperplane `{x | ⟪v, x⟫ = c}` bisects the measure `μ`: both open half-spaces
-determined by it carry at most half of the total mass of `μ`. -/
+/-!
+## Step 1: existence of a median for a finite measure on `ℝ`
+
+A *median* of a finite measure `ν` on `ℝ` is a point `c` such that both closed half-lines
+`Iic c` and `Ici c` carry at least half of the total mass.  This is the one-dimensional
+form of "bisection by a hyperplane"; it is obtained by taking `c` to be the infimum of the
+set of points where the cumulative distribution function has reached half of the total mass.
+-/
+
+/-- **Existence of a median.**  Every finite measure `ν` on `ℝ` admits a point `c` such that
+each of the two closed half-lines determined by `c` carries at least half of the total mass. -/
 
 def HamSandwichProperty (n : ℕ) : Prop :=
-  ∀ μ : Fin n → MeasureTheory.Measure (EuclideanSpace ℝ (Fin n)),
-    (∀ i, MeasureTheory.IsFiniteMeasure (μ i)) →
-      ∃ v : EuclideanSpace ℝ (Fin n), ∃ c : ℝ, v ≠ 0 ∧ ∀ i, BisectedBy (μ i) v c
+  ∀ μ : Fin n → Measure (EuclideanSpace ℝ (Fin n)), (∀ i, IsFiniteMeasure (μ i)) →
+    ∃ (v : EuclideanSpace ℝ (Fin n)) (c : ℝ), v ≠ 0 ∧ ∀ i,
+      (μ i) Set.univ ≤ 2 * (μ i) {x | inner ℝ v x ≤ c} ∧
+      (μ i) Set.univ ≤ 2 * (μ i) {x | c ≤ inner ℝ v x}
 
-/-- Every finite Borel measure on `ℝ` has a median: a point `c` such that both `Iio c` and
-`Ioi c` carry at most half of the total mass. -/
+/-- **Ham–Sandwich theorem, base case `n = 1`.**  A single finite measure on `ℝ¹` can be
+bisected by a hyperplane (i.e. a point): there is `v ≠ 0` and `c : ℝ` so that both closed
+half-spaces `{x | ⟪v, x⟫ ≤ c}` and `{x | c ≤ ⟪v, x⟫}` carry at least half of the total mass. -/

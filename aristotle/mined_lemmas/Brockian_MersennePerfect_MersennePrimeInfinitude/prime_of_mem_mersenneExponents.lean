@@ -30,39 +30,43 @@ Target: Brockian.MersennePerfect.MersennePrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+-- (The header above is a plain block comment rather than a module docstring `/-!`,
+-- because Lean 4 requires `import` commands to precede any module docstring.)
 
 import Mathlib
+import Archive.Wiedijk100Theorems.PerfectNumbers
 
 /-!
-# Mersenne Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.MersennePerfect.MersennePrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
-
-The infinitude of Mersenne primes is a famous open problem, so what is established here is a
-*Lean-checked conditional reduction*: the set of Mersenne prime exponents is infinite **iff**
-the set of even perfect numbers is infinite.  This is obtained from an explicit, unconditional
-bijection (Euclid–Euler): the strictly monotone map `k ↦ 2 ^ (k - 1) * (2 ^ k - 1)` carries the
-set of exponents `k` with `2 ^ k - 1` prime *onto* the set of even perfect numbers.
-
-The proof of the Euclid–Euler theorem itself is reproduced here (it lives in the `Archive`
-component of Mathlib, which is not importable from this project); the argument follows
-`Archive/Wiedijk100Theorems/PerfectNumbers.lean` by Aaron Anderson.
+The unconditional statement "there are infinitely many Mersenne primes" is a famous open
+problem, so what is proved here is a Lean-checked *reduction*: the set of Mersenne prime
+exponents is infinite **iff** the set of even perfect numbers is infinite.  The reduction
+goes through the Euclid–Euler correspondence.
 -/
 
 namespace Brockian.MersennePerfect
 
-open ArithmeticFunction Finset
-open scoped sigma
+/-- The set of exponents `p` for which `mersenne p = 2 ^ p - 1` is prime. -/
 
-/-! ## Euclid–Euler -/
+theorem prime_of_mem_mersenneExponents {p : ℕ} (hp : p ∈ MersenneExponents) : p.Prime :=
+  Nat.Prime.of_mersenne hp
 
+example : (3 : ℕ) ∈ MersennePrimes := ⟨by norm_num, 2, by decide⟩
 
-theorem prime_of_mem_mersenneExponents {k : ℕ} (hk : k ∈ MersenneExponents) : k.Prime :=
-  Nat.Prime.of_mersenne hk
+example : (7 : ℕ) ∈ MersennePrimes := ⟨by norm_num, 3, by decide⟩
 
-/-! ## The Euclid–Euler bijection -/
+example : (31 : ℕ) ∈ MersennePrimes := ⟨by norm_num, 5, by decide⟩
 
-/-- **Euclid–Euler, set form**: the map `k ↦ 2 ^ (k - 1) * (2 ^ k - 1)` sends the set of
-Mersenne prime exponents exactly onto the set of even perfect numbers. -/
+example : (127 : ℕ) ∈ MersennePrimes := ⟨by norm_num, 7, by decide⟩
+
+/-- The first four even perfect numbers, obtained from the first four Mersenne primes. -/
+example : ({6, 28, 496, 8128} : Set ℕ) ⊆ EvenPerfects := by
+  have h : ∀ p : ℕ, p ∈ MersenneExponents → euclidPerfect p ∈ EvenPerfects := fun _ h =>
+    euclidPerfect_mem_evenPerfects h
+  rintro n (rfl | rfl | rfl | rfl)
+  · simpa [euclidPerfect, mersenne] using h 2 (by norm_num [MersenneExponents, mersenne])
+  · simpa [euclidPerfect, mersenne] using h 3 (by norm_num [MersenneExponents, mersenne])
+  · simpa [euclidPerfect, mersenne] using h 5 (by norm_num [MersenneExponents, mersenne])
+  · simpa [euclidPerfect, mersenne] using h 7 (by norm_num [MersenneExponents, mersenne])
+
+end Brockian.MersennePerfect
+

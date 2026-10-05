@@ -5,65 +5,38 @@ Target: QC.robertson_uncertainty
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
-/-!
-# Robertson Uncertainty
-Category: Quantum Computing
-Target: QC.robertson_uncertainty
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames false
-set_option pp.structureInstances true
-set_option pp.coercions.types false
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+open scoped InnerProductSpace
 
 namespace QC
 
-variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
-/-- An operator `A` on a complex inner product space is *symmetric* (an observable) if
-`⟪A x, y⟫ = ⟪x, A y⟫` for all `x, y`. -/
+/-- The expectation value `⟨A⟩ψ = ⟪ψ, A ψ⟫` of an observable `A` in the state `ψ`. -/
 
-lemma stddev_sq (A : H →ₗ[ℂ] H) (hA : IsSymmetricOp A) (ψ : H) (hψ : ‖ψ‖ = 1) :
-    ((stddev A ψ : ℂ)) ^ 2 = expect (A ∘ₗ A) ψ - (expect A ψ) ^ 2 := by
-  have hnorm : (inner ℂ ψ ψ : ℂ) = 1 := by
-    rw [inner_self_eq_norm_sq_to_K, hψ]; norm_num
-  have ha : (starRingEnd ℂ) (expect A ψ) = expect A ψ := expect_conj A hA ψ
-  have h1 : ((stddev A ψ : ℂ)) ^ 2
-      = (inner ℂ (A ψ - expect A ψ • ψ) (A ψ - expect A ψ • ψ) : ℂ) := by
-    rw [inner_self_eq_norm_sq_to_K]
-    norm_cast
-  have h2 : (inner ℂ (A ψ) ψ : ℂ) = expect A ψ := by
-    rw [← ha]; unfold expect; rw [inner_conj_symm]
-  have h4 : (inner ℂ (A ψ) (A ψ) : ℂ) = expect (A ∘ₗ A) ψ := by
-    unfold expect; rw [hA]; rfl
-  rw [h1, inner_sub_left, inner_sub_right, inner_sub_right, inner_smul_left, inner_smul_left,
-    inner_smul_right, inner_smul_right, h2, hnorm, ha, h4]
-  show _ = _
-  unfold expect
-  ring
+theorem stdDev_sq {A : H →L[ℂ] H} (hA : IsSelfAdjoint A) {psi : H} (hpsi : ‖psi‖ = 1) :
+    (stdDev A psi) ^ 2 = (expect (A ∘L A) psi).re - ((expect A psi).re) ^ 2 := by
+  have hself : ⟪psi, psi⟫_ℂ = 1 := by
+    rw [inner_self_eq_norm_sq_to_K, hpsi]; norm_num
+  have hAs : ⟪A psi, psi⟫_ℂ = expect A psi := by
+    rw [inner_isSelfAdjoint_left hA]; rfl
+  have hEA : ⟪psi, A psi⟫_ℂ = expect A psi := rfl
+  have hca := conj_expect hA psi
+  have him : (expect A psi).im = 0 := Complex.conj_eq_iff_im.mp hca
+  have hAA : ⟪A psi, A psi⟫_ℂ = expect (A ∘L A) psi := by
+    rw [inner_isSelfAdjoint_left hA]; rfl
+  set u : H := A psi - (expect A psi) • psi with hu
+  have hexp : ⟪u, u⟫_ℂ = expect (A ∘L A) psi - (expect A psi) ^ 2 := by
+    rw [hu]
+    simp only [inner_sub_left, inner_sub_right, inner_smul_left, inner_smul_right,
+      hself, hAs, hEA, hAA, hca]
+    ring
+  have h2 : (⟪u, u⟫_ℂ).re = ‖u‖ ^ 2 := by
+    simpa using inner_self_eq_norm_sq (𝕜 := ℂ) u
+  rw [stdDev, ← hu, ← h2, hexp]
+  simp [Complex.sub_re, pow_two, Complex.mul_re, him]
 
-/-- **Robertson uncertainty relation.**  For observables (symmetric operators) `A`, `B`
-on a complex inner product space and a unit state `ψ`,
-`ΔA · ΔB ≥ ½ |⟨[A, B]⟩|`. -/
+/-- The commutator expectation is the difference of the two inner products of the
+centered vectors. -/

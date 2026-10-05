@@ -23,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Counting Diverges Of Candidate
+Category: Brockian (Open Discharge)
+Target: Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+
 /-!
 # Counting Diverges Of Candidate
 Category: Brockian (Open Discharge)
@@ -32,41 +41,36 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
--- Note: Lean 4 requires `import` lines to precede every other token in a file
--- (a module doc comment before an `import` is a syntax error), so the required
--- header comment is placed immediately after the single `import Mathlib` line.
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
 
-open Filter Set
-open scoped Topology
+set_option maxHeartbeats 1000000
 
 namespace Brockian.Weyl.WeylLawTarget
 
+open Filter Set
+
 /-- A *candidate spectrum* for a Weyl law: a nondecreasing sequence of real
-"eigenvalues" `mu 0 ≤ mu 1 ≤ ⋯` diverging to `+∞`.  This is the standard shape
-of the spectrum of an operator with compact resolvent. -/
+"eigenvalues" that tends to `+∞`. -/
 structure Candidate where
-  /-- The candidate eigenvalue sequence, listed with multiplicity. -/
-  mu : ℕ → ℝ
+  /-- The eigenvalue sequence. -/
+  lam : ℕ → ℝ
   /-- The eigenvalues are listed in nondecreasing order. -/
-  mono : Monotone mu
-  /-- The eigenvalues tend to `+∞`; equivalently, the spectrum is discrete. -/
-  diverges : Tendsto mu atTop atTop
+  mono : Monotone lam
+  /-- The eigenvalues tend to `+∞` (discreteness of the spectrum). -/
+  tendsto_atTop : Filter.Tendsto lam Filter.atTop Filter.atTop
 
-/-- The eigenvalue counting function `N(λ) = #{n | mu n ≤ λ}` of a candidate
-spectrum. -/
+/-- The eigenvalue counting function `N(t) = #{n : λ n ≤ t}` of a candidate spectrum. -/
 
-theorem finite_sublevel (C : Candidate) (lam : ℝ) :
-    {n : ℕ | C.mu n ≤ lam}.Finite := by
-  obtain ⟨N, hN⟩ := (C.diverges.eventually_gt_atTop lam).exists_forall_of_atTop
+theorem finite_sublevel (C : Candidate) (t : ℝ) : {n : ℕ | C.lam n ≤ t}.Finite := by
+  obtain ⟨N, hN⟩ := (C.tendsto_atTop.eventually_gt_atTop t).exists_forall_of_atTop
   refine Set.Finite.subset (Set.finite_Iio N) ?_
   intro n hn
   simp only [Set.mem_setOf_eq] at hn
+  simp only [Set.mem_Iio]
   by_contra hcon
-  exact absurd hn (not_le.2 (hN n (not_lt.1 hcon)))
+  exact absurd hn (not_le.mpr (hN n (not_lt.mp hcon)))
 
-/-- **Weyl-law target, unconditional form.**  For any candidate spectrum the
-eigenvalue counting function diverges: `N(λ) → ∞` as `λ → ∞`.
-
-The hypothesis previously assumed — that the counting function of the candidate
-is unbounded — is discharged here from the defining properties of a candidate
-spectrum (monotonicity and divergence of the eigenvalue sequence). -/
+/-- The counting function is at least `m + 1` once `t` reaches `λ m`. -/

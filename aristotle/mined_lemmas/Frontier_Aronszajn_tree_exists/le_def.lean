@@ -1,6 +1,11 @@
+/-
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
--- (Lean 4 requires `import` commands to precede any module docstring, so the required
--- header comment is reproduced verbatim immediately below.)
 
 /-!
 # Aronszajn Tree Exists
@@ -10,14 +15,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open Ordinal Set Cardinal
-open scoped Ordinal
+open Ordinal Cardinal Set
 
 namespace Aronszajn
 
-/-! ## Countable ordinals -/
+/-! ## Cofinal `ω`-sequences in countable limit ordinals -/
 
-/-- An ordinal is countable (i.e. its set of predecessors is countable) iff it is `< ω₁`. -/
+/-- `c` is a nondecreasing `ω`-indexed sequence, starting at `0`, cofinal in `l`. -/
 
-lemma le_def {a b : Tree} : a ≤ b ↔ lvl a ≤ lvl b ∧ ∀ ξ < lvl a, fn a ξ = fn b ξ := Iff.rfl
+theorem le_def {s t : Node} : s ≤ t ↔ s.len ≤ t.len ∧ ∀ ξ < s.len, s.fn ξ = t.fn ξ := Iff.rfl
 

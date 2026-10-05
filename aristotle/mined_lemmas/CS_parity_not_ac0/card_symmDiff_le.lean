@@ -1,41 +1,68 @@
-import RequestProject.Basic
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+import RequestProject.PolySpace
 
 /-!
-# Unbounded fan-in Boolean circuits, the class `AC⁰`, and `PARITY`
+# Parity Not Ac 0
+Category: Frontier Cs
+Target: CS.parity_not_ac0
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-A `Circuit n` is a Boolean circuit on `n` inputs built from constants, input
-variables, negations, and *unbounded fan-in* `AND`/`OR` gates.
+/-!
+## Unbounded fan-in Boolean circuits and their low-degree approximation
 
-* `Circuit.depth` counts the maximal number of `AND`/`OR` gates on a root-to-leaf
-  path (negations are free, as is standard for `AC⁰`).
-* `Circuit.size` counts the number of `AND`/`OR` gates.
-
-`InAC0 f` says that the family `f` is computed by circuits of some fixed depth and
-polynomial size.  Making negations free and not counting them in the size only
-makes the class larger, hence the lower bound proved later stronger.
+We define constant-depth, unbounded fan-in Boolean circuits over the basis
+`{¬, ∨, ∧}` and prove Razborov's approximation lemma: a circuit of size `s`
+and depth `d` is computed by a function of `F₃`-degree at most `(2ℓ)^d`
+on all but a `s·2^{-ℓ}` fraction of the inputs.
 -/
 
 namespace CS
 
-/-- Boolean circuits with unbounded fan-in `AND`/`OR` gates. -/
-inductive Circuit (n : ℕ) where
-  | const : Bool → Circuit n
-  | var : Fin n → Circuit n
-  | neg : Circuit n → Circuit n
-  | or : (m : ℕ) → (Fin m → Circuit n) → Circuit n
-  | and : (m : ℕ) → (Fin m → Circuit n) → Circuit n
+open Finset
 
-namespace Circuit
+/-- Unbounded fan-in Boolean circuits on `n` inputs. -/
+inductive Circ (n : ℕ) where
+  | var : Fin n → Circ n
+  | cst : Bool → Circ n
+  | neg : Circ n → Circ n
+  | orG : (k : ℕ) → (Fin k → Circ n) → Circ n
+  | andG : (k : ℕ) → (Fin k → Circ n) → Circ n
 
 /-- The Boolean function computed by a circuit. -/
 
-lemma card_symmDiff_le {n : ℕ} (T U : Finset (Fin n)) :
-    (symmDiff T U).card ≤ T.card + U.card := by
-  have : symmDiff T U ⊆ T ∪ U := by
-    intro i hi
-    simp [Finset.mem_symmDiff] at hi
-    simp
-    tauto
-  exact le_trans (Finset.card_le_card this) (Finset.card_union_le _ _)
+lemma card_symmDiff_le {ι : Type*} [DecidableEq ι] (S T : Finset ι) :
+    (symmDiff S T).card ≤ S.card + T.card := by
+  have h : symmDiff S T ⊆ S ∪ T := by
+    rw [← Finset.sup_eq_union]; exact (symmDiff_le_sup : symmDiff S T ≤ S ⊔ T)
+  exact le_trans (Finset.card_le_card h) (Finset.card_union_le _ _)
 
-/-- The finite set of monomials of degree at most `k`. -/
+/-! ### Monomials and the degree filtration -/
+
+/-- The monomial `∏_{i ∈ S} x i`. -/

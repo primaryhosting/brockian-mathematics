@@ -1,5 +1,13 @@
 import Mathlib
 
+/-!
+# Simon Algorithm
+Category: Frontier Qi
+Target: QI.simon_algorithm
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,39 +31,14 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Simon Algorithm
-Category: Frontier Qi
-Target: QI.simon_algorithm
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-import Mathlib
-
-/-!
-# Simon Algorithm
-Category: Frontier Qi
-Target: QI.simon_algorithm
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-set_option autoImplicit false
-set_option maxHeartbeats 1000000
-
-open scoped BigOperators
-
 namespace QI
 
-/-! ## Basic setup: the group `(ZMod 2)^n` -/
+/-! ## The Boolean cube as an `𝔽₂`-vector space -/
 
-/-- The domain of Simon's problem: bit strings of length `n`, viewed as the
-elementary abelian group `(ZMod 2)^n` under bitwise XOR (= addition). -/
-abbrev Vec (n : ℕ) := Fin n → ZMod 2
-
-variable {n : ℕ}
+/-- `n`-bit strings, viewed as the elementary abelian 2-group `(ℤ/2)ⁿ`;
+addition is bitwise XOR. -/
+abbrev V (n : ℕ) : Type := Fin n → ZMod 2
 
 
-lemma zmod2_add_self (a : ZMod 2) : a + a = 0 := by revert a; decide
+lemma zmod2_add_self (a : ZMod 2) : a + a = 0 := by decide +revert
 

@@ -41,19 +41,18 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.RepunitPrimes
+namespace Brockian
+namespace RepunitPrimes
 
-open Finset
-
-/-- The `n`-th base-ten repunit `1, 11, 111, ...` (with `repunit 0 = 0`). -/
+/-- The `n`-th repunit: the base-ten number consisting of `n` digits `1`,
+i.e. `repunit n = (10 ^ n - 1) / 9`. -/
 
 lemma repunit_dvd_repunit {m n : ℕ} (h : m ∣ n) : repunit m ∣ repunit n := by
   obtain ⟨k, rfl⟩ := h
   induction k with
   | zero => simp
   | succ k ih =>
-      have hmk : m * (k + 1) = m * k + m := by ring
-      rw [hmk, repunit_add]
-      exact Dvd.dvd.add ih (Dvd.dvd.mul_left dvd_rfl _)
+      have : m * (k + 1) = m * k + m := by ring
+      rw [this, repunit_add]
+      exact Nat.dvd_add ih (dvd_mul_left (repunit m) (10 ^ (m * k)))
 
-/-- If a repunit is prime, then its index is prime. -/

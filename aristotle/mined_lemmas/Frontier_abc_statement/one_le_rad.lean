@@ -5,25 +5,29 @@ Target: Frontier.abc_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
 import Mathlib
 
-/-!
-Mathlib does not state the `abc` conjecture. The closest existing material is
-`UniqueFactorizationMonoid.radical` (`Mathlib/RingTheory/Radical.lean`), a general radical
-of an element of a UFM, and the Mason–Stothers theorem
-(`Mathlib/NumberTheory/FLT/MasonStothers.lean`), the polynomial analogue of `abc`.
-Neither closes the statement below, so the radical for `ℕ` and both formulations of the
-conjecture are set up here from scratch.
--/
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Frontier
 
-open scoped BigOperators
+/-- The radical of a natural number: the product of its distinct prime factors. -/
 
-/-- The radical of a natural number: the product of its distinct prime factors.
-By convention `rad 0 = rad 1 = 1`. -/
+lemma one_le_rad (n : ℕ) : (1 : ℝ) ≤ (rad n : ℝ) := by
+  exact_mod_cast rad_pos n
 
-lemma one_le_rad (n : ℕ) : 1 ≤ rad n :=
-  Finset.one_le_prod' fun _ hp => (Nat.prime_of_mem_primeFactors hp).one_lt.le
-
+/-- An `abc`-triple: positive coprime `a`, `b` with `a + b = c`. -/

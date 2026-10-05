@@ -1,19 +1,9 @@
-/-
-# Kruskal Katona
-Category: Frontier Math
-Target: Math2.kruskal_katona
-Statement: The Kruskal–Katona theorem on shadows of set systems.
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
 # Kruskal Katona
 Category: Frontier Math
 Target: Math2.kruskal_katona
-Statement: The Kruskal–Katona theorem on shadows of set systems.
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
@@ -37,15 +27,11 @@ set_option grind.warning false
 namespace Math2
 
 open Finset
-open Finset.Colex
 
 variable {n : ℕ}
 
-/-- The (lower) shadow of a family of finite sets: all sets obtained from a member of the
-family by deleting a single element. -/
+/-- The shadow of a family `𝒜` of finite sets: all the sets obtained from a member of `𝒜` by
+deleting one element. -/
 
-def ColexLt (A B : Finset (Fin n)) : Prop :=
-  ∃ a ∈ B, a ∉ A ∧ ∀ b ∈ A, b ∉ B → b < a
+def ColexLt (s t : Finset (Fin n)) : Prop := ∃ a ∈ t, a ∉ s ∧ ∀ b ∈ s, b ∉ t → b < a
 
-/-- `𝒞` is an initial segment of the colexicographic order on `r`-sets: all its members have
-size `r`, and any `r`-set below a member of `𝒞` in colex is again in `𝒞`. -/

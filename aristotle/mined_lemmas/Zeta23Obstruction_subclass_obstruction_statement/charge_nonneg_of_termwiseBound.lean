@@ -1,12 +1,11 @@
-import Mathlib
-
-/-!
+/-
 # Subclass Obstruction Statement
 Category: Brockian Conjecture
 Target: Zeta23Obstruction.subclass_obstruction_statement
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,22 +32,52 @@ set_option grind.warning false
 
 namespace Zeta23Obstruction
 
-/-- A *configuration* of deep-pair data: finitely many species, indexed by `ι`, each
-carrying a nonnegative weight and a "deep point" at which the fixed kernel is evaluated. -/
-structure Configuration (ι : Type) where
-  /-- The nonnegative weight (mass) attached to each species. -/
-  weight : ι → ℝ
-  /-- The deep point at which the fixed kernel is sampled for each species. -/
-  deep : ι → ℝ
+/-- A **fixed-kernel pointwise-discard certificate**.
+
+Abstract model of the certificates in the subclass under consideration: the certificate is
+determined by one *fixed* kernel `R : ℝ → ℝ`, together with a region `shallow` of the parameter
+line on which the kernel is discarded pointwise, i.e. on which it is *assumed* nonnegative
+(`h_pos`).  Nothing at all is assumed about `R` off `shallow`; in the intended application the
+values of `R` off `shallow` are the values of its analytic continuation at the deep points. -/
+structure Certificate where
+  /-- The fixed kernel of the certificate. -/
+  R : ℝ → ℝ
+  /-- The region on which the kernel is discarded pointwise. -/
+  shallow : Set ℝ
+  /-- Pointwise discard: on the shallow region the kernel is nonnegative. -/
+  h_pos : ∀ x ∈ shallow, 0 ≤ R x
+
+/-- A **configuration** with `n` species: each species `i` sits at a point `z i` of the parameter
+line and carries a nonnegative weight `w i`.  This is the finite-dimensional stand-in for the
+configuration data that the certificate's linear charging chain is applied to. -/
+structure Config (n : ℕ) where
+  /-- Location of each species. -/
+  z : Fin n → ℝ
+  /-- Nonnegative weight (charge) of each species. -/
+  w : Fin n → ℝ
   /-- Weights are nonnegative. -/
-  weight_nonneg : ∀ i, 0 ≤ weight i
+  hw : ∀ i, 0 ≤ w i
 
-/-- The linear charge functional attached to a fixed kernel `R`: the total charge of a
-configuration is the `R`-weighted sum over species.  It is linear in the weight vector. -/
+/-- **Per-species linear charging**: the certificate's linear functional evaluated on a
+configuration, i.e. the weighted sum of the kernel values at the species' locations. -/
 
-theorem charge_nonneg_of_termwiseBound {ι : Type} [Fintype ι] (R : ℝ → ℝ)
-    (C : Configuration ι) (h : TermwiseBound R C) : 0 ≤ charge R C :=
-  Finset.sum_nonneg fun i _ => h i
+theorem charge_nonneg_of_termwiseBound (C : Certificate) {n : ℕ} (cfg : Config n)
+    (h : TermwiseBound C cfg) : 0 ≤ charge C cfg :=
+  Finset.sum_nonneg fun i _ => mul_nonneg (cfg.hw i) (h i)
 
-/-- **Fixed kernel + pointwise discard has no slack**: validity of the certificate is
-*equivalent* to global nonnegativity of the kernel. -/
+/-- **Subclass obstruction.**
+
+Let `C` be a fixed-kernel pointwise-discard certificate (so its kernel `R` is assumed nonnegative
+only on the shallow region, via pointwise discard), and suppose there is a single *deep* point
+`z₀` (a point off the shallow region, i.e. one reached only by analytic continuation) at which the
+kernel takes a negative value, `C.R z₀ < 0`.  Then:
+
+1. the certificate is **not** valid against deep-pair configurations; and
+2. there is an explicit deep-pair configuration — the pair of species both sitting at `z₀` with
+   unit weights — on which the chain's termwise bound fails and, moreover, the linear charge the
+   certificate produces is strictly negative; and
+3. conversely, validity against deep-pair configurations forces the kernel to be nonnegative at
+   *every* deep point, so no such bad value can exist.
+
+This is the class-named, abstract form of the obstruction: fixed kernel + pointwise discard +
+one bad deep value ⟹ the certificate is invalid. -/

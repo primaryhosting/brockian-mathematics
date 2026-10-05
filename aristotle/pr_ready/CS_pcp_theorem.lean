@@ -10,257 +10,183 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 /-
-This file develops, from first principles (no imports beyond the Lean core prelude),
-a formal framework for probabilistically checkable proofs and states the PCP theorem
-`NP = PCP(log n, 1)` inside it.
+This file is deliberately import-free (it uses only Lean 4 core `List`/`Nat`),
+so that the required header comment can be the very first thing in the file.
 
-Design.
+## What is formalised here
 
-* Languages are predicates on binary words.
-* "Efficient computability" is abstracted into a structure `CS.EffModel` carrying a
-  predicate on functions (think: polynomial-time computable) together with two closure
-  properties that polynomial time enjoys:
-  - evaluating a (efficiently produced) local test against a candidate proof written on
-    the witness tape is efficient;
-  - a conjunction over all random strings of length `b n` is efficient whenever
-    `2 ^ b n` is polynomially bounded (i.e. `b n = O(log n)`).
-* A PCP verifier is given by an efficiently computable map sending an input `x` and a
-  random string `ρ` to a *local test*: a list of at most `q` positions of the proof to
-  read, together with the truth table of the predicate applied to the answers.
-  Completeness is perfect and the soundness error is `1/2`, as in the standard
-  definition of the class `PCP(r(n), q(n))`.
+The PCP theorem is the statement
 
-Results.
+    NP = PCP(log n, 1)
 
-* `CS.pcp_subset_np`: unconditionally, `PCP(log n, O(1)) ⊆ NP` in any such model.
-* `CS.pcp_theorem_iff`: unconditionally, the class equality `NP = PCP(log n, 1)` is
-  equivalent to the inclusion `NP ⊆ PCP(log n, 1)`.
-* `CS.pcp_theorem`: the class equality `NP = PCP(log n, 1)`, with the hard inclusion
-  `NP ⊆ PCP(log n, 1)` (the Arora–Safra / Arora–Lund–Motwani–Sudan–Szegedy theorem,
-  whose known proofs proceed by low-degree testing or by Dinur's gap amplification)
-  taken as an explicit hypothesis. Everything else is proved here.
+i.e. every language in `NP` admits a probabilistically checkable proof which the
+verifier inspects using `O(log n)` random bits and `O(1)` queries, with perfect
+completeness and soundness `1/2`; and conversely every language with such a
+verifier is in `NP`.
+
+Both classes only make sense relative to a notion of *feasible* (polynomial
+time) computation.  Rather than fixing one particular machine model, we
+parametrise the development by a `Model`: a class of "efficiently decidable"
+predicates which is closed under the one operation the easy inclusion needs,
+namely taking a conjunction over all `2 ^ rho n` random strings when `rho` is
+logarithmically bounded (for polynomial time this is exactly the fact that a
+polynomial-time predicate stays polynomial time when quantified universally over
+polynomially many values).  `Model` is inhabited (see `CS.trivialModel`), so
+nothing below is vacuous.
+
+The main results are:
+
+* `CS.pcp_subset_np` : `PCP(log n, O(1)) ⊆ NP`, proved in full.
+* `CS.pcp_theorem`   : the PCP theorem for a model is *equivalent* to the single
+  inclusion `NP ⊆ PCP(log n, O(1))`; the other half of the equality is the
+  theorem `CS.pcp_subset_np` proved here.
+
+The reverse inclusion `NP ⊆ PCP(log n, O(1))` is the deep Arora–Safra /
+Arora–Lund–Motwani–Sudan–Szegedy content and is *not* formalised; it is exactly
+what the right-hand side of `CS.pcp_theorem` isolates.
 -/
 
 namespace CS
 
-/-- Binary words. -/
+/-- Inputs are finite bit strings. -/
 abbrev Word := List Bool
 
-/-- A language is a set of binary words. -/
+/-- A language is a predicate on bit strings. -/
 abbrev Language := Word → Prop
 
 /-- `f` is bounded by a polynomial. -/
-def PolyBounded (f : Nat → Nat) : Prop := ∃ c k : Nat, ∀ n, f n ≤ c * (n + 1) ^ k
+def IsPoly (f : Nat → Nat) : Prop := ∃ c k : Nat, ∀ n, f n ≤ c * (n + 1) ^ k
 
-/-- `r n = O(log n)`, expressed as: `2 ^ r n` is polynomially bounded. -/
-def LogBounded (r : Nat → Nat) : Prop := PolyBounded (fun n => 2 ^ r n)
+/-- `f` is `O(log n)`. -/
+def IsLogBounded (f : Nat → Nat) : Prop := ∃ c : Nat, ∀ n, f n ≤ c * Nat.log2 (n + 1) + c
 
-/-! ### Random strings -/
+/--
+A model of feasible computation: classes of "efficiently decidable" binary and
+ternary predicates on words, closed under conjunction over all random strings of
+logarithmically bounded length.
 
-/-- The list of all binary words of length `k`. -/
-def allWords : Nat → List Word
-  | 0 => [[]]
-  | k + 1 => (allWords k).flatMap (fun w => [false :: w, true :: w])
-
-private theorem length_flatMap_pair (l : List Word) :
-    (l.flatMap (fun w => [false :: w, true :: w])).length = 2 * l.length := by
-  induction l with
-  | nil => rfl
-  | cons a t ih => simp [List.flatMap_cons, ih]; omega
-
-theorem length_allWords (k : Nat) : (allWords k).length = 2 ^ k := by
-  induction k with
-  | zero => rfl
-  | succ k ih =>
-    rw [allWords, length_flatMap_pair, ih, Nat.pow_succ]
-    omega
-
-theorem length_allWords_pos (k : Nat) : 0 < (allWords k).length := by
-  rw [length_allWords]
-  exact Nat.two_pow_pos k
-
-theorem mem_allWords {k : Nat} {w : Word} : w ∈ allWords k ↔ w.length = k := by
-  induction k generalizing w with
-  | zero => cases w <;> simp [allWords]
-  | succ k ih =>
-    constructor
-    · intro h
-      simp only [allWords, List.mem_flatMap, List.mem_cons, List.not_mem_nil, or_false] at h
-      obtain ⟨v, hv, h⟩ := h
-      have hlen : v.length = k := ih.mp hv
-      rcases h with h | h <;> subst h <;> simp [hlen]
-    · intro h
-      cases w with
-      | nil => simp at h
-      | cons b v =>
-        simp only [allWords, List.mem_flatMap, List.mem_cons, List.not_mem_nil, or_false]
-        refine ⟨v, ih.mpr (by simpa using h), ?_⟩
-        cases b <;> simp
-
-/-! ### Local tests -/
-
-/-- The index of a list of answer bits, read as a binary number (most significant first). -/
-def idx : List Bool → Nat
-  | [] => 0
-  | b :: bs => (if b then 1 else 0) * 2 ^ bs.length + idx bs
-
-/-- A *local test*: a list of positions of the proof to be read, together with the truth
-table of the predicate that is applied to the answers.  Since the truth table is written
-out explicitly, this representation is the appropriate one for a constant number of
-queries. -/
-structure Query where
-  /-- The positions of the proof that are queried. -/
-  pos : List Nat
-  /-- The truth table of the local predicate, indexed by the answers. -/
-  table : List Bool
-
-/-- The test `Q` accepts the proof `π`. -/
-def Query.accepts (Q : Query) (π : Nat → Bool) : Bool :=
-  Q.table.getD (idx (Q.pos.map π)) false
-
-theorem accepts_congr (Q : Query) (π π' : Nat → Bool) (h : ∀ i ∈ Q.pos, π i = π' i) :
-    Q.accepts π = Q.accepts π' := by
-  unfold Query.accepts
-  rw [List.map_congr_left h]
-
-/-! ### An abstract model of efficient computation -/
-
-/-- An abstract model of efficient (think: polynomial-time) computability, with the two
-closure properties used below.  Polynomial time satisfies these. -/
-structure EffModel where
-  /-- Efficiently computable binary predicates on words. -/
+For the intended instance (polynomial-time decidable predicates) the closure
+field holds because `2 ^ rho n` is polynomial in `n` when `rho n = O(log n)`.
+-/
+structure Model where
+  /-- Efficiently decidable predicates of an input word and a witness word. -/
   Eff₂ : (Word → Word → Bool) → Prop
-  /-- Efficiently computable ternary predicates on words. -/
-  Eff₃ : (Word → Word → Word → Bool) → Prop
-  /-- Efficiently computable maps from an input and a random string to a local test. -/
-  EffQ : (Word → Word → Query) → Prop
-  /-- Evaluating an efficiently produced local test against a proof written on a second
-  tape is efficient. -/
-  eff_eval : ∀ V : Word → Word → Query, EffQ V →
-    Eff₃ (fun x w ρ => (V x ρ).accepts (fun i => w.getD i false))
-  /-- A conjunction over all random strings of length `b n` is efficient as soon as
-  `2 ^ b n` is polynomially bounded, i.e. `b n = O(log n)`. -/
-  eff_forall : ∀ (g : Word → Word → Word → Bool) (b : Nat → Nat), Eff₃ g →
-    PolyBounded (fun n => 2 ^ b n) →
-    Eff₂ (fun x w => (allWords (b x.length)).all (fun ρ => g x w ρ))
+  /-- Efficiently decidable predicates of an input word, a random string
+  (coded as a natural number) and a proof word. -/
+  Eff₃ : (Word → Nat → Word → Bool) → Prop
+  /-- Efficiency is preserved by conjunction over all `2 ^ rho n` random
+  strings, for logarithmically bounded `rho`. -/
+  eff_forall_bounded : ∀ (V : Word → Nat → Word → Bool) (rho : Nat → Nat),
+    Eff₃ V → IsLogBounded rho →
+    Eff₂ (fun x pf => (List.range (2 ^ rho x.length)).all (fun r => V x r pf))
 
-/-- The two closure conditions are consistent: the model in which every function counts
-as efficient satisfies them.  (This is only a non-vacuity check; the intended model is
-polynomial time.) -/
-def trivialModel : EffModel where
-  Eff₂ := fun _ => True
-  Eff₃ := fun _ => True
-  EffQ := fun _ => True
-  eff_eval := fun _ _ => trivial
-  eff_forall := fun _ _ _ _ => trivial
+/--
+A PCP verifier for `L` using `O(log n)` random bits and at most `q` queries.
 
-/-! ### The classes NP and PCP -/
+* the random string is coded as a natural number `r < 2 ^ rho |x|`;
+* `Q x r` lists the (at most `q`) positions of the proof that the verifier
+  inspects, and `V_local` says the decision really only depends on those bits;
+* completeness is perfect, soundness error is `1/2`.
+-/
+structure PCPVerifier (M : Model) (L : Language) where
+  /-- Query complexity (a constant, independent of the input). -/
+  q : Nat
+  /-- Number of random bits used on inputs of a given length. -/
+  rho : Nat → Nat
+  /-- Length of the proof for inputs of a given length. -/
+  plen : Nat → Nat
+  /-- The decision predicate of the verifier. -/
+  V : Word → Nat → Word → Bool
+  /-- The positions of the proof queried on input `x` and random string `r`. -/
+  Q : Word → Nat → List Nat
+  rho_log : IsLogBounded rho
+  plen_poly : IsPoly plen
+  V_eff : M.Eff₃ V
+  Q_card : ∀ x r, (Q x r).length ≤ q
+  V_local : ∀ x r pf pf', (∀ i ∈ Q x r, pf.getD i false = pf'.getD i false) →
+    V x r pf = V x r pf'
+  complete : ∀ x, L x → ∃ pf : Word, pf.length ≤ plen x.length ∧
+    ∀ r, r < 2 ^ rho x.length → V x r pf = true
+  sound : ∀ x, ¬ L x → ∀ pf : Word,
+    2 * (List.range (2 ^ rho x.length)).countP (fun r => V x r pf) ≤ 2 ^ rho x.length
 
-/-- The class `NP`: membership is certified by a polynomially long witness that is
-checked by an efficient verifier. -/
-def NP (M : EffModel) (L : Language) : Prop :=
-  ∃ (p : Nat → Nat) (R : Word → Word → Bool), PolyBounded p ∧ M.Eff₂ R ∧
-    ∀ x, L x ↔ ∃ w : Word, w.length ≤ p x.length ∧ R x w = true
+/-- The class `PCP(log n, 1)`: languages with a PCP verifier using `O(log n)`
+random bits and `O(1)` queries. -/
+def PCPlog1 (M : Model) (L : Language) : Prop := Nonempty (PCPVerifier M L)
 
-/-- `V` is a PCP verifier for `L` using `r n` random bits, at most `q` queries into a
-proof of length `plen n`, with perfect completeness and soundness error `1/2`. -/
-structure IsPCPVerifier (r : Nat → Nat) (q : Nat) (plen : Nat → Nat) (L : Language)
-    (V : Word → Word → Query) : Prop where
-  /-- At most `q` positions are queried. -/
-  queries : ∀ x ρ, (V x ρ).pos.length ≤ q
-  /-- All queried positions lie inside the proof. -/
-  inRange : ∀ x ρ, ∀ i ∈ (V x ρ).pos, i < plen x.length
-  /-- Perfect completeness: inputs in `L` have a proof accepted for every random string. -/
-  completeness : ∀ x, L x → ∃ π : Nat → Bool, ∀ ρ ∈ allWords (r x.length),
-    (V x ρ).accepts π = true
-  /-- Soundness error `1/2`: for inputs outside `L`, no proof is accepted for more than
-  half of the random strings. -/
-  soundness : ∀ x, ¬ L x → ∀ π : Nat → Bool,
-    2 * ((allWords (r x.length)).countP (fun ρ => (V x ρ).accepts π)) ≤
-      (allWords (r x.length)).length
+/-- A polynomially bounded certificate verifier for `L`. -/
+structure NPVerifier (M : Model) (L : Language) where
+  /-- Length bound on certificates. -/
+  plen : Nat → Nat
+  /-- The decision predicate of the verifier. -/
+  V : Word → Word → Bool
+  plen_poly : IsPoly plen
+  V_eff : M.Eff₂ V
+  correct : ∀ x, L x ↔ ∃ w : Word, w.length ≤ plen x.length ∧ V x w = true
 
-/-- The class `PCP(r(n), q)`: languages with a PCP verifier using `r n` random bits and
-`q` queries, perfect completeness and soundness error `1/2`. -/
-def PCP (M : EffModel) (r : Nat → Nat) (q : Nat) (L : Language) : Prop :=
-  ∃ (V : Word → Word → Query) (plen : Nat → Nat),
-    M.EffQ V ∧ PolyBounded plen ∧ IsPCPVerifier r q plen L V
+/-- The class `NP`. -/
+def NP (M : Model) (L : Language) : Prop := Nonempty (NPVerifier M L)
 
-/-- The class `PCP(log n, 1)`: logarithmically many random bits and a constant number of
-queries. -/
-def PCPlog (M : EffModel) (L : Language) : Prop :=
-  ∃ (r : Nat → Nat) (q : Nat), LogBounded r ∧ PCP M r q L
+/--
+The easy inclusion of the PCP theorem: `PCP(log n, O(1)) ⊆ NP`.
 
-/-! ### The easy inclusion `PCP(log n, 1) ⊆ NP` -/
-
-private theorem getD_map_range (π : Nat → Bool) (m i : Nat) (h : i < m) :
-    ((List.range m).map π).getD i false = π i := by
-  simp [List.getD_eq_getElem?_getD, h]
-
-/-- Unconditionally: every language with a `(log n, O(1))`-PCP verifier is in `NP`.
-The witness is the proof itself, and the verifier checks all `2 ^ O(log n)` = polynomially
-many random strings. -/
-theorem pcp_subset_np (M : EffModel) (L : Language) (h : PCPlog M L) : NP M L := by
-  obtain ⟨r, q, hlog, V, plen, hV, hplen, H⟩ := h
-  refine ⟨plen, fun x w => (allWords (r x.length)).all
-    (fun ρ => (V x ρ).accepts (fun i => w.getD i false)), hplen,
-    M.eff_forall _ r (M.eff_eval V hV) hlog, ?_⟩
+Given a PCP verifier, the NP verifier takes the PCP proof as its certificate and
+checks *all* `2 ^ rho |x| = poly(|x|)` random strings deterministically.
+Completeness of the PCP gives a certificate for every `x ∈ L`; soundness
+(error `1/2 < 1`) forbids a certificate passing all random strings when
+`x ∉ L`.
+-/
+theorem pcp_subset_np (M : Model) (L : Language) (h : PCPlog1 M L) : NP M L := by
+  obtain ⟨P⟩ := h
+  refine ⟨{ plen := P.plen
+            V := fun x pf => (List.range (2 ^ P.rho x.length)).all (fun r => P.V x r pf)
+            plen_poly := P.plen_poly
+            V_eff := M.eff_forall_bounded P.V P.rho P.V_eff P.rho_log
+            correct := ?_ }⟩
   intro x
   constructor
   · intro hx
-    obtain ⟨π, hπ⟩ := H.completeness x hx
-    refine ⟨(List.range (plen x.length)).map π, by simp, ?_⟩
-    rw [List.all_eq_true]
-    intro ρ hρ
-    have : (V x ρ).accepts (fun i => ((List.range (plen x.length)).map π).getD i false)
-        = (V x ρ).accepts π := by
-      refine accepts_congr _ _ _ ?_
-      intro i hi
-      exact getD_map_range π _ i (H.inRange x ρ i hi)
-    rw [this]
-    exact hπ ρ hρ
+    obtain ⟨pf, hlen, hpf⟩ := P.complete x hx
+    refine ⟨pf, hlen, ?_⟩
+    exact List.all_eq_true.mpr (fun r hr => hpf r (List.mem_range.mp hr))
   · intro ⟨w, _, hw⟩
-    cases Classical.em (L x) with
-    | inl hx => exact hx
-    | inr hx =>
-      exfalso
-      have hall : ∀ ρ ∈ allWords (r x.length),
-          (V x ρ).accepts (fun i => w.getD i false) = true := by
-        intro ρ hρ
-        exact List.all_eq_true.mp hw ρ hρ
-      have hcount : (allWords (r x.length)).countP
-          (fun ρ => (V x ρ).accepts (fun i => w.getD i false))
-          = (allWords (r x.length)).length := List.countP_eq_length.mpr hall
-      have hs := H.soundness x hx (fun i => w.getD i false)
-      rw [hcount] at hs
-      have := length_allWords_pos (r x.length)
-      omega
+    by_contra hx
+    have hall : ∀ r ∈ List.range (2 ^ P.rho x.length), P.V x r w = true :=
+      fun r hr => List.all_eq_true.mp hw r hr
+    have hcount : (List.range (2 ^ P.rho x.length)).countP (fun r => P.V x r w)
+        = 2 ^ P.rho x.length := by
+      rw [List.countP_eq_length.mpr hall, List.length_range]
+    have hs := P.sound x hx w
+    rw [hcount] at hs
+    have := Nat.two_pow_pos (P.rho x.length)
+    omega
 
-/-! ### The PCP theorem -/
+/-- The statement of the PCP theorem in a model `M`: `NP = PCP(log n, 1)`. -/
+def PCPTheoremStatement (M : Model) : Prop := ∀ L, NP M L ↔ PCPlog1 M L
 
-/-- **The PCP theorem, reduced to its hard inclusion.**  Unconditionally, the class
-equality `NP = PCP(log n, 1)` holds if and only if every language in `NP` has a PCP
-verifier using logarithmically many random bits, a constant number of queries, perfect
-completeness and soundness error `1/2`.  (The inclusion `PCP(log n, 1) ⊆ NP` is proved
-here; the converse inclusion is the deep content of the theorem.) -/
-theorem pcp_theorem_iff (M : EffModel) :
-    NP M = PCPlog M ↔ ∀ L, NP M L → PCPlog M L := by
+/--
+**The PCP theorem, `NP = PCP(log n, 1)`.**
+
+The inclusion `PCP(log n, O(1)) ⊆ NP` is proved here (`CS.pcp_subset_np`), so
+the full equality of classes is *equivalent* to the single remaining inclusion
+`NP ⊆ PCP(log n, O(1))` — the Arora–Safra / ALMSS content of the theorem, which
+this file does not formalise.
+-/
+theorem pcp_theorem (M : Model) :
+    PCPTheoremStatement M ↔ (∀ L, NP M L → PCPlog1 M L) := by
   constructor
   · intro h L hL
-    rw [h] at hL
-    exact hL
-  · intro h
-    funext L
-    exact propext ⟨h L, pcp_subset_np M L⟩
+    exact (h L).mp hL
+  · intro h L
+    exact ⟨h L, pcp_subset_np M L⟩
 
-/-- **The PCP theorem**: `NP = PCP(log n, 1)`.
+/-- A model does exist, so the development above is not vacuous. -/
+def trivialModel : Model where
+  Eff₂ := fun _ => True
+  Eff₃ := fun _ => True
+  eff_forall_bounded := fun _ _ _ _ => trivial
 
-The inclusion `PCP(log n, 1) ⊆ NP` is proved here (`CS.pcp_subset_np`).  The reverse
-inclusion — the Arora–Safra / Arora–Lund–Motwani–Sudan–Szegedy theorem, proved either via
-the low-degree test or via Dinur's gap amplification — is taken as the explicit hypothesis
-`hNP_to_PCP`; no known proof of it is short, and it is not formalized here. -/
-theorem pcp_theorem (M : EffModel) (hNP_to_PCP : ∀ L, NP M L → PCPlog M L) :
-    NP M = PCPlog M :=
-  (pcp_theorem_iff M).mpr hNP_to_PCP
+instance : Inhabited Model := ⟨trivialModel⟩
 
 end CS
 

@@ -1,3 +1,10 @@
+/-
+# Gaussian Correlation
+Category: Frontier — Fields Medal Work
+Target: Frontier.gaussian_correlation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -8,89 +15,42 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Overview
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
-The Gaussian correlation inequality (conjectured by Das Gupta–Eaton–Olkin–Perlman–Savage–Sobel,
-proved by Thomas Royen in 2014) states that for a centred Gaussian measure `μ` on `ℝⁿ` and two
-symmetric convex sets `K`, `L`,
-`μ (K ∩ L) ≥ μ K * μ L`.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-Mathlib (as of the pinned version) contains no form of this inequality: a search for
-`gaussian_correlation` and related names returns nothing, and there is no lemma relating the
-measure of an intersection of convex sets to the product of the measures. What Mathlib does
-provide, and what we use here, is the theory of Gaussian measures
-(`ProbabilityTheory.gaussianReal`, `ProbabilityTheory.IsGaussian`), convexity, and the general
-measure-theoretic API.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-This file therefore:
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
 
-* formalises the general statement as `Frontier.GaussianCorrelation E`;
-* proves the base case, dimension one, as `Frontier.gaussian_correlation`
-  (in fact in the stronger form `Frontier.correlation_real`, valid for *any* probability measure
-  on `ℝ`, since two symmetric convex subsets of `ℝ` are automatically nested);
-* proves a Lean-checked reduction, `Frontier.GaussianCorrelation.of_continuousLinearEquiv`,
-  saying that the statement only depends on the space up to continuous linear isomorphism, and
-  deduces the dimension-one case for `Fin 1 → ℝ` and for `EuclideanSpace ℝ (Fin 1)`;
-* proves the "independent blocks" case in arbitrary dimension,
-  `Frontier.correlation_prod_of_independent_blocks`, where the inequality holds with equality.
+set_option grind.warning false
 
-The full theorem in dimension `≥ 2` (Royen's proof) is not formalised here.
--/
-
-open MeasureTheory ProbabilityTheory Set
-open scoped ENNReal NNReal
+open MeasureTheory ProbabilityTheory
 
 namespace Frontier
 
-/-!
-## The statement
--/
+/-- The standard Gaussian measure on `ℝ^n`, defined as the `n`-fold product of the
+standard Gaussian measure on `ℝ`. -/
 
-/-- The Gaussian correlation inequality for the real normed space `E`: for every symmetric
-(equivalently, centred) Gaussian measure `μ` on `E` and all symmetric convex measurable sets
-`K`, `L`, one has `μ K * μ L ≤ μ (K ∩ L)`.
+def GaussianCorrelation (n : ℕ) : Prop :=
+  ∀ K L : Set (Fin n → ℝ), Convex ℝ K → Convex ℝ L → IsSymmetric K → IsSymmetric L →
+    stdGaussian n K * stdGaussian n L ≤ stdGaussian n (K ∩ L)
 
-Symmetry of a set `S` is expressed as `∀ x ∈ S, -x ∈ S`, and centredness of `μ` as invariance
-under `x ↦ -x`. -/
+/-! ### A general reduction: the inequality holds whenever the two sets are nested -/
 
-theorem GaussianCorrelation.of_continuousLinearEquiv
-    {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [MeasurableSpace E] [BorelSpace E]
-    [NormedAddCommGroup F] [NormedSpace ℝ F] [MeasurableSpace F] [BorelSpace F]
-    (e : E ≃L[ℝ] F) (hF : GaussianCorrelation F) : GaussianCorrelation E := by
-  intro μ hμ hsymm K L hKm hLm hKc hLc hKs hLs
-  haveI : IsGaussian μ := hμ
-  have he : Measurable (⇑e) := e.continuous.measurable
-  have hes : Measurable (⇑e.symm) := e.symm.continuous.measurable
-  have hnegE : Measurable (fun x : E => -x) := measurable_neg
-  have hnegF : Measurable (fun y : F => -y) := measurable_neg
-  set ν : Measure F := μ.map (⇑e) with hνdef
-  have hνG : IsGaussian ν := isGaussian_map_of_measurable (L := (e : E →L[ℝ] F)) he
-  have hνsymm : ν.map (fun y => -y) = ν := by
-    rw [hνdef, Measure.map_map hnegF he,
-      show ((fun y : F => -y) ∘ ⇑e) = (⇑e) ∘ (fun x : E => -x) by funext x; simp,
-      ← Measure.map_map he hnegE, hsymm]
-  set K' : Set F := ⇑e.symm ⁻¹' K with hK'
-  set L' : Set F := ⇑e.symm ⁻¹' L with hL'
-  have hK'm : MeasurableSet K' := hes hKm
-  have hL'm : MeasurableSet L' := hes hLm
-  have hK'c : Convex ℝ K' := hKc.linear_preimage (e.symm : F →ₗ[ℝ] E)
-  have hL'c : Convex ℝ L' := hLc.linear_preimage (e.symm : F →ₗ[ℝ] E)
-  have hK's : ∀ y ∈ K', -y ∈ K' := by
-    intro y hy
-    simp only [hK', mem_preimage, map_neg]
-    exact hKs _ hy
-  have hL's : ∀ y ∈ L', -y ∈ L' := by
-    intro y hy
-    simp only [hL', mem_preimage, map_neg]
-    exact hLs _ hy
-  have hpre : ∀ S : Set E, ⇑e ⁻¹' (⇑e.symm ⁻¹' S) = S := by
-    intro S; ext x; simp
-  have hνK : ν K' = μ K := by rw [hνdef, Measure.map_apply he hK'm, hpre]
-  have hνL : ν L' = μ L := by rw [hνdef, Measure.map_apply he hL'm, hpre]
-  have hνKL : ν (K' ∩ L') = μ (K ∩ L) := by
-    rw [hνdef, Measure.map_apply he (hK'm.inter hL'm), Set.preimage_inter, hpre, hpre]
-  have hmain := hF ν hνG hνsymm K' L' hK'm hL'm hK'c hL'c hK's hL's
-  rwa [hνK, hνL, hνKL] at hmain
-
-/-- The Gaussian correlation inequality on the one-dimensional space `Fin 1 → ℝ`. -/
+/-- If one of the two sets is contained in the other, the Gaussian correlation inequality
+holds in every dimension (no convexity or symmetry needed): this is just the fact that a
+probability measure is bounded by `1`. -/

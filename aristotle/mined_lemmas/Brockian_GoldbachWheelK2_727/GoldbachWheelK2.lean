@@ -1,19 +1,22 @@
 import Mathlib
 
-set_option maxHeartbeats 1000000
-set_option autoImplicit false
+/-!
+# Goldbach Wheel K 2 727
+Category: Brockian Corpus
+Target: Brockian.GoldbachWheelK2_727
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 20000
 
 namespace Brockian
 
-/-- The *Goldbach wheel condition of order 2* for a modulus `m`:
-every even number `n` is congruent, modulo `m`, to a sum `a + b` of two natural numbers
-that are both coprime to `m`.
+/-- The Goldbach "wheel" statement with `K = 2` spokes at modulus `M`:
+every even number `n` with `4 ≤ n ≤ 2 * M` is a sum of two primes. -/
 
-This is the condition saying that the "wheel" of modulus `m` does not obstruct
-Goldbach-type representations of even numbers as sums of two numbers coprime to `m`
-(in particular, as sums of two primes not dividing `m`). -/
+def GoldbachWheelK2 (M : Nat) : Prop :=
+  ∀ n : Nat, Even n → 4 ≤ n → n ≤ 2 * M →
+    ∃ p q : Nat, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n
 
-def GoldbachWheelK2 (m : ℕ) : Prop :=
-  ∀ n : ℕ, Even n → ∃ a b : ℕ, Nat.Coprime a m ∧ Nat.Coprime b m ∧ (a + b) % m = n % m
-
-/-- To be coprime to `m` it suffices to share no prime factor with `m`. -/

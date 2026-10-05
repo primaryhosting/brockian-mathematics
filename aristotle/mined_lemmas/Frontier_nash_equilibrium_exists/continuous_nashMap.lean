@@ -1,29 +1,37 @@
 /-
-Two player zero sum finite games: the von Neumann minimax theorem, proved
-unconditionally (via the separating hyperplane theorem, without Brouwer).
-This is the unconditional "base case" of Nash's theorem.
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import RequestProject.NashEquilibrium
+import Mathlib
 
 /-!
-# Minimax for two player zero sum finite games
+# Nash Equilibrium Exists
+Category: Frontier Mind
+Target: Frontier.nash_equilibrium_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-open scoped BigOperators
 
 namespace Frontier
 
-variable {m n : Type} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+open Finset
 
-/-- The vector of expected payoffs to the row player against the mixed strategy `y`. -/
+/-! ## Finite games in normal form -/
 
-theorem continuous_nashMap (G : FiniteGame ι S) : Continuous (nashMap G) := by
+variable {ι : Type} [Fintype ι] [DecidableEq ι]
+  {S : ι → Type} [∀ i, Fintype (S i)] [∀ i, DecidableEq (S i)]
+
+/-- A probability distribution on the (finite) pure strategy set of a player. -/
+
+lemma continuous_nashMap (u : ι → (∀ j, S j) → ℝ) : Continuous (nashMap u) := by
   refine continuous_pi fun i => continuous_pi fun s => ?_
-  have hcoord : Continuous fun x : (i : ι) → S i → ℝ => x i s := by fun_prop
-  have hnum : Continuous fun x : (i : ι) → S i → ℝ => x i s + gain G i s x :=
-    hcoord.add (continuous_gain G i s)
-  have hden : Continuous fun x : (i : ι) → S i → ℝ => 1 + ∑ t : S i, gain G i t x :=
-    continuous_const.add (continuous_finset_sum _ fun t _ => continuous_gain G i t)
-  exact hnum.div hden fun x => ne_of_gt (one_add_sum_gain_pos G i x)
+  refine Continuous.div ((continuous_coord i s).add (continuous_gain u i s))
+    (continuous_const.add (continuous_finset_sum _ fun t _ => continuous_gain u i t)) ?_
+  intro x
+  have := one_le_denom u i x
+  linarith
 

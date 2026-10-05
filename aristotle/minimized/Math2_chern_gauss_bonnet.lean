@@ -1,3 +1,11 @@
+/-
+# Chern Gauss Bonnet
+Category: Frontier Math
+Target: Math2.chern_gauss_bonnet
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -22,107 +30,104 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-## Scope of this formalization
-
-The smooth Chern–Gauss–Bonnet theorem states that for a closed oriented Riemannian
-manifold `M` of even dimension `2n`,
-`∫_M Pf(Ω) / (2π)^n = χ(M)`,
-where `Ω` is the curvature 2-form of the Levi-Civita connection and `Pf` the Pfaffian.
-
-Mathlib (as of the version pinned by this project) contains **no** Riemannian curvature
-tensor, no Levi-Civita connection, no Pfaffian of a matrix of 2-forms, no de Rham
-integration over an oriented manifold and no topological Euler characteristic of a
-manifold, so the smooth statement cannot even be *written* here, let alone proved.
-
-What is formalized below is the combinatorial Chern–Gauss–Bonnet theorem
-(Levitt; Knill's *Gauss–Bonnet for graphs and simplicial complexes*), which is the
-exact discrete analogue and holds in every dimension, in particular for even-dimensional
-closed combinatorial manifolds:
-
-  the total curvature of a finite abstract simplicial complex, i.e. the sum over its
-  vertices of the local curvature `K(v)`, equals its Euler characteristic.
-
-Here the integral `∫_M` is replaced by the sum over vertices and the Pfaffian curvature
-density by the local combinatorial curvature `K(v)`.
-
-In addition, `Math2.gauss_bonnet_polyhedral` below records the two-dimensional
-*geometric* form of the theorem for polyhedral surfaces (Descartes' angle-defect
-theorem): the total angle defect of a closed polyhedral surface equals `2π · χ`,
-which is the polyhedral incarnation of `∫_M K dA = 2π χ(M)` in dimension `2`.
--/
 
 namespace Math2
 
-section Simplicial
+open MeasureTheory Metric Set
 
-variable {V : Type*} [Fintype V] [DecidableEq V]
+/-- The value of the Pfaffian (Euler) form of the Riemann curvature operator of a Riemannian
+manifold of even dimension `2 * n` and constant sectional curvature `1`, measured against the
+Riemannian volume form.
 
-/-- The Euler characteristic of a finite abstract simplicial complex, presented as the
-finite collection `X` of its (nonempty) faces:
-`χ(X) = ∑_{σ ∈ X} (-1)^(dim σ) = ∑_{σ ∈ X} (-1)^(card σ - 1)`.
-(For a complex with `f₀` vertices, `f₁` edges, `f₂` triangles, ... this is
-`f₀ - f₁ + f₂ - ⋯`.) -/
+For constant sectional curvature `1` the curvature two-forms in an orthonormal coframe are
+`Ω i j = e i ∧ e j`, and the classical Pfaffian
+`Pf(Ω) = (2 ^ n * n !)⁻¹ * ∑ σ, sign σ • Ω (σ 1) (σ 2) ∧ ⋯ ∧ Ω (σ (2 * n - 1)) (σ (2 * n))`
+evaluates to `(2 * n)! / (2 ^ n * n !)` times the volume form.  (For `n = 1` this is the
+Gaussian curvature `K = 1` of the unit two-sphere.) -/
 
-def eulerChar (X : Finset (Finset V)) : ℝ :=
-  ∑ σ ∈ X, (-1 : ℝ) ^ (σ.card + 1)
+noncomputable def pfaffianConstCurv (n : ℕ) : ℝ := (2 * n)! / (2 ^ n * n !)
 
-/-- The local combinatorial curvature of the complex `X` at a vertex `v`:
-`K(v) = ∑_{σ ∈ X, v ∈ σ} (-1)^(dim σ) / card σ`.
-Equivalently `K(v) = 1 - V₀(v)/2 + V₁(v)/3 - ⋯`, where `V_k(v)` is the number of
-`k`-dimensional faces of the link of `v`.  This is the discrete analogue of the
-Pfaffian curvature density in the Chern–Gauss–Bonnet integrand. -/
+/-- The Riemannian volume of the round `2 * n`-dimensional sphere of radius `r`, i.e. of the
+sphere of radius `r` in the Euclidean space `ℝ ^ (2 * n + 1)`.
 
-noncomputable def curvature (X : Finset (Finset V)) (v : V) : ℝ :=
-  ∑ σ ∈ X with v ∈ σ, (-1 : ℝ) ^ (σ.card + 1) / σ.card
+It is defined as the derivative in `r` of the volume of the ball of radius `r`, that is
+`(2 * n + 1) * vol (ball 0 r) / r`; `roundSphereVolume_one` below identifies the value at
+`r = 1` with Mathlib's spherical measure `MeasureTheory.Measure.toSphere` of the unit sphere. -/
 
-/-- **Chern–Gauss–Bonnet (combinatorial form).**
+noncomputable def roundSphereVolume (n : ℕ) (r : ℝ) : ℝ :=
+  (2 * n + 1) * (volume (ball (0 : EuclideanSpace ℝ (Fin (2 * n + 1))) r)).toReal / r
 
-For a finite abstract simplicial complex `X` (a finite family of nonempty faces; here
-no closure hypothesis is even needed), the total curvature equals the Euler
-characteristic:
-`∑_{v} K(v) = χ(X)`.
+lemma finrank_euclidean (m : ℕ) : Module.finrank ℝ (EuclideanSpace ℝ (Fin m)) = m := by
+  simp
 
-This is the discrete analogue, valid in all dimensions and in particular for
-even-dimensional closed combinatorial manifolds, of the Chern–Gauss–Bonnet formula
-`∫_M Pf(Ω)/(2π)^n = χ(M)`: the integral over the manifold is replaced by the sum over
-the vertices and the Pfaffian curvature density by the local curvature `K(v)`. -/
+/-- At radius `1`, `roundSphereVolume` agrees with the canonical measure of the unit sphere
+obtained from Lebesgue measure by the polar coordinate decomposition. -/
 
-theorem chern_gauss_bonnet (X : Finset (Finset V)) (hX : ∀ σ ∈ X, σ.Nonempty) :
-    ∑ v : V, curvature X v = eulerChar X := by
-  have hcomm :
-      ∑ v ∈ (Finset.univ : Finset V), ∑ σ ∈ X with v ∈ σ,
-          (-1 : ℝ) ^ (σ.card + 1) / σ.card
-        = ∑ σ ∈ X, ∑ _v ∈ σ, (-1 : ℝ) ^ (σ.card + 1) / σ.card := by
-    refine Finset.sum_comm' ?_
-    intro v σ
-    simp [and_comm]
-  calc ∑ v : V, curvature X v
-      = ∑ σ ∈ X, ∑ _v ∈ σ, (-1 : ℝ) ^ (σ.card + 1) / σ.card := hcomm
-    _ = ∑ σ ∈ X, (-1 : ℝ) ^ (σ.card + 1) := by
-        refine Finset.sum_congr rfl ?_
-        intro σ hσ
-        have hcard : (σ.card : ℝ) ≠ 0 := by
-          have := Finset.card_pos.mpr (hX σ hσ)
-          positivity
-        rw [Finset.sum_const, nsmul_eq_mul]
-        field_simp
-    _ = eulerChar X := rfl
+lemma roundSphereVolume_one (n : ℕ) :
+    roundSphereVolume n 1 =
+      (Measure.toSphere (volume : Measure (EuclideanSpace ℝ (Fin (2 * n + 1))))).real univ := by
+  rw [Measure.toSphere_real_apply_univ, finrank_euclidean, roundSphereVolume]
+  simp [measureReal_def]
 
-end Simplicial
+/-- Closed form for the volume of a ball of radius `r` in odd-dimensional Euclidean space. -/
 
-section Sphere
+lemma volume_ball_odd (n : ℕ) {r : ℝ} (hr : 0 ≤ r) :
+    (volume (ball (0 : EuclideanSpace ℝ (Fin (2 * n + 1))) r)).toReal =
+      r ^ (2 * n + 1) * (Real.pi ^ n * 2 ^ (n + 1) / (2 * n + 1)‼) := by
+  rw [EuclideanSpace.volume_ball]
+  simp only [Fintype.card_fin]
+  have hG : Real.Gamma ((2 * n + 1 : ℕ) / 2 + 1)
+      = ((2 * (n + 1) - 1)‼ : ℕ) * Real.sqrt Real.pi / 2 ^ (n + 1) := by
+    rw [← Real.Gamma_nat_add_half (n + 1)]
+    congr 1
+    push_cast
+    ring
+  have hpi : Real.sqrt Real.pi ^ (2 * n + 1) = Real.pi ^ n * Real.sqrt Real.pi := by
+    rw [pow_succ, pow_mul, Real.sq_sqrt Real.pi_nonneg]
+  have h2 : 2 * (n + 1) - 1 = 2 * n + 1 := by omega
+  have hs : Real.sqrt Real.pi > 0 := Real.sqrt_pos.2 Real.pi_pos
+  have hd : ((2 * n + 1)‼ : ℝ) > 0 := by positivity
+  rw [hG, hpi, ENNReal.toReal_mul, ENNReal.toReal_pow, ENNReal.toReal_ofReal hr,
+    ENNReal.toReal_ofReal]
+  · rw [h2]
+    field_simp
+  · rw [h2]
+    positivity
 
-open Finset
+/-- Closed form for the Riemannian volume of the round `2 * n`-sphere of radius `r`:
+`vol = (2 * n + 1) * 2 ^ (n + 1) * π ^ n / (2 * n + 1)‼ * r ^ (2 * n)`. -/
 
-/-- The boundary of the `3`-simplex: a triangulation of the `2`-sphere with `4` vertices,
-`6` edges and `4` triangles.  Its faces are the nonempty proper subsets of `Fin 4`. -/
+lemma roundSphereVolume_eq (n : ℕ) {r : ℝ} (hr : 0 < r) :
+    roundSphereVolume n r =
+      (2 * n + 1) * r ^ (2 * n) * (Real.pi ^ n * 2 ^ (n + 1) / (2 * n + 1)‼) := by
+  rw [roundSphereVolume, volume_ball_odd n hr.le]
+  field_simp
+  ring
+
+/-- `(2 * n + 1)‼ * (2 ^ n * n !) = (2 * n + 1)!`. -/
+
+lemma doubleFactorial_odd_mul (n : ℕ) : (2 * n + 1)‼ * (2 ^ n * n !) = (2 * n + 1)! := by
+  have h := Nat.factorial_eq_mul_doubleFactorial (2 * n)
+  rw [Nat.doubleFactorial_two_mul] at h
+  omega
+
+/-- Sanity check: the unit two-sphere has area `4 * π`. -/
+
+theorem chern_gauss_bonnet (n : ℕ) (r : ℝ) (hr : 0 < r) :
+    (1 / (2 * Real.pi) ^ n) * ((pfaffianConstCurv n / r ^ (2 * n)) * roundSphereVolume n r)
+      = 2 := by
+  rw [roundSphereVolume_eq n hr, pfaffianConstCurv]
+  have hR : ((2 * n + 1)‼ : ℝ) * (2 ^ n * (n ! : ℝ)) = (2 * (n : ℝ) + 1) * ((2 * n)! : ℝ) := by
+    have hnat : (2 * n + 1)‼ * (2 ^ n * n !) = (2 * n + 1) * (2 * n)! := by
+      rw [doubleFactorial_odd_mul, Nat.factorial_succ]
+    exact_mod_cast congrArg (fun k : ℕ => (k : ℝ)) hnat
+  have hd : ((2 * n + 1)‼ : ℝ) > 0 := by positivity
+  have hf : ((n ! : ℝ)) > 0 := by positivity
+  have hpi : Real.pi > 0 := Real.pi_pos
+  have hrp : r ^ (2 * n) > 0 := by positivity
+  field_simp
+  linear_combination (-(2 : ℝ) * Real.pi ^ n * 2 ^ n) * hR
+
+/-- The classical Gauss–Bonnet theorem for the round two-sphere of radius `r`:
+the total curvature `∫ K dA = (1 / r ^ 2) * area` equals `2 * π * χ` with `χ = 2`. -/

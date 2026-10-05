@@ -1,28 +1,32 @@
+/-
+# Huckel C 18
+Category: Chemistry
+Target: Chem.huckel_C18
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Huckel C 18
+Category: Chemistry
+Target: Chem.huckel_C18
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+The Hückel model for the annulene `C₁₈` uses the adjacency matrix of the cycle
+graph `C₁₈`.  We show that its eigenvalues are exactly the `18` numbers
+`2 cos (2πk/18)`, `k = 0, …, 17`.
+-/
 
 namespace Chem
 
-open Complex Polynomial Matrix
+open Complex Matrix
 
-/-- The primitive 18-th root of unity `exp (2πi/18)`. -/
+/-- The adjacency matrix of the cycle graph `C₁₈` on the vertex set `Fin 18`:
+vertices `i` and `j` are adjacent iff they are consecutive modulo `18`. -/
 
 lemma zeta_primitive : IsPrimitiveRoot zeta 18 := by
   have := Complex.isPrimitiveRoot_exp 18 (by norm_num)
-  convert this using 2
+  simpa [zeta] using this
 

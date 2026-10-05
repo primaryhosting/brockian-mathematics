@@ -1,49 +1,31 @@
-import Mathlib
+/-
+Models of ZFC given by suitable classes of ZFC sets.
+-/
+import RequestProject.SetLanguage
 
 /-!
-# Inaccessible Implies Con ZFC
-Category: Frontier — Set Theory
-Target: Frontier.inaccessible_implies_ConZFC
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Classes of sets that model ZFC
+
+We isolate a set of closure conditions on a class `P : ZFSet.{u} → Prop`
+(`Frontier.IsZFCClass`) which guarantee that the structure with domain `{x : ZFSet // P x}`
+and the real membership relation is a model of the first-order theory `Frontier.ZFC`.
+
+The conditions are: transitivity, closure under pairing, unions, power sets, the presence of
+`ω`, and closure under (second-order) replacement.
+
+The class of *all* sets satisfies these conditions, so `ZFSet.{u}` itself is a model of ZFC.
 -/
 
-universe u
+universe u w
 
 namespace Frontier
 
-open FirstOrder Language ZFSet Ordinal Cardinal Order Set
+open FirstOrder Language ZFSet
 
-/-! ## Cardinal arithmetic of the von Neumann hierarchy below an inaccessible -/
+/-- The `setLang`-structure on a type equipped with a binary relation. -/
 
-variable {κ : Cardinal.{u}}
+theorem vonNeumann_models_ZFC {κ : Cardinal.{u}} (hκ : κ.IsInaccessible) :
+    VClass (fun x : ZFSet.{u} => x.rank < κ.ord) ⊨ ZFC.{u + 1} :=
+  VClass.models_ZFC (isZFCClass_rank_lt hκ)
 
-/-- Below an inaccessible cardinal `κ`, all the beth-numbers are smaller than `κ`. -/
-
-theorem vonNeumann_models_ZFC (hκ : κ.IsInaccessible) :
-    (vonNeumann κ.ord : Type (u+1)) ⊨ ZFC := by
-  have hA : (vonNeumann κ.ord).IsTransitive := isTransitive_vonNeumann _
-  have hsep : ∀ p : ZFSet.{u} → Prop, ∀ x ∈ vonNeumann κ.ord, ZFSet.sep p x ∈ vonNeumann κ.ord :=
-    fun p x hx => sep_mem_vonNeumann p hx
-  have hrange : ∀ x ∈ vonNeumann κ.ord, ∀ f : ↥x → ZFSet.{u},
-      (∀ i, f i ∈ vonNeumann κ.ord) → ZFSet.range f ∈ vonNeumann κ.ord :=
-    fun x hx f hf => range_mem_vonNeumann hκ hx f hf
-  refine (Theory.model_iff _).mpr ?_
-  rintro s ((hs | ⟨⟨k, φ⟩, rfl⟩) | ⟨⟨k, φ⟩, rfl⟩)
-  · rcases hs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    · exact models_extAx hA
-    · exact models_emptyAx (empty_mem_vonNeumann hκ)
-    · exact models_pairAx fun x hx y hy => pair_mem_vonNeumann hκ hx hy
-    · exact models_unionAx hA fun x hx => sUnion_mem_vonNeumann hx
-    · exact models_powerAx hA fun x hx => powerset_mem_vonNeumann hκ hx
-    · exact models_infinityAx hA (omega_mem_vonNeumann hκ)
-    · exact models_foundationAx hA
-    · exact models_choiceAx hA hrange
-  · exact models_sepAx hsep k φ
-  · exact models_repAx (empty_mem_vonNeumann hκ) hsep hrange k φ
-
-/-! ## Main results -/
-
-/-- **An inaccessible cardinal yields a model of ZFC.**  If `κ` is a (strongly) inaccessible
-cardinal, then the level `V_κ` of the von Neumann hierarchy is a model of the first-order theory
-`ZFC`; in particular `ZFC` is consistent (satisfiable). -/
+/-- The same model, described explicitly as the level `V_ κ.ord` of the von Neumann hierarchy. -/

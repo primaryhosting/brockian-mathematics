@@ -9,39 +9,62 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 /-
-Note on the header: Lean 4 requires `import` to be the very first command of a file, so the
-required header block is placed immediately after `import Mathlib`.
+Note on the file layout: Lean 4 requires the `import` block to be the very first
+command in a file, so the module docstring above is placed directly after it.
 
-This file formalises the statement of the Birch--Swinnerton-Dyer conjecture
+## Contents
 
-  ord_{s = 1} L(E, s) = rank E(ℚ)
-
-for elliptic curves over `ℚ` given by a global minimal integral Weierstrass model, and proves
-the rank-zero base case together with a Lean-checked reduction of the rank-zero case of the
-conjecture to the equivalence `L(E, 1) ≠ 0 ↔ E(ℚ) finite`.
+* `Frontier.mordellWeilRank` : the algebraic rank of `E(ℚ)`, defined as the
+  `ℚ`-dimension of `ℚ ⊗[ℤ] E(ℚ)` (as an element of `ℕ∞`, so that it is honest
+  even without appealing to the Mordell–Weil theorem, which is not in Mathlib).
+* `Frontier.IsHasseWeilLFunction` : the characterising properties of the
+  Hasse–Weil `L`-function `L(E, s)` of an elliptic curve given by a global
+  minimal integral Weierstrass model: it is entire (modularity) and on the
+  half-plane `Re s > 3/2` it is given by the Euler product
+  `∏_p (1 - a_p p^{-s} + ε_p p^{1-2s})⁻¹`.
+* `Frontier.BSDConjecture` : the rank part of the Birch–Swinnerton-Dyer
+  conjecture, `ord_{s=1} L(E, s) = rank E(ℚ)`.
+* `Frontier.BSD_statement` : the Lean-checked reduction proved here — the
+  conjecture implies, for every curve and every function satisfying the
+  defining properties of its `L`-function, both the order-of-vanishing identity
+  and the rank-zero criterion `L(E, 1) = 0 ↔ 1 ≤ rank E(ℚ)`.
+* `Frontier.hasseWeilLFunction_unique` : the analytic rank appearing in the
+  statement is well defined, i.e. an `L`-function satisfying the defining
+  properties is unique.
+* `Frontier.mordellWeilRank_eq_zero_iff_isTorsion` and
+  `Frontier.mordellWeilRank_eq_zero_of_finite` : the base case, that the rank
+  vanishes exactly for a torsion group of rational points, in particular for a
+  curve with finitely many rational points.
+* `Frontier.lFunction_one_ne_zero_of_finite` : the conjecture applied in that
+  base case, giving `L(E, 1) ≠ 0` for a curve with finitely many rational
+  points.
 -/
-
-namespace Frontier
 
 open WeierstrassCurve
 
-/-! ## The Mordell–Weil group and its rank -/
+namespace Frontier
 
-/-- The group `E(ℚ)` of rational points of the elliptic curve given by the integral
-Weierstrass model `W` over `ℤ`. -/
-abbrev RatPoints (W : WeierstrassCurve ℤ) : Type := (W.baseChange ℚ).toAffine.Point
+/-! ## The algebraic side: the Mordell–Weil rank -/
 
-/-- The algebraic rank of `E(ℚ)`: the rank of the Mordell–Weil group as a `ℤ`-module. -/
+/-- The Mordell–Weil rank of the group `E(ℚ)` of rational points of an elliptic curve `E/ℚ`,
+namely the `ℚ`-dimension of `ℚ ⊗[ℤ] E(ℚ)`, valued in `ℕ∞` (so an infinite rank, which the
+Mordell–Weil theorem rules out, would be recorded as `⊤` rather than as junk). -/
 
 def IsGlobalMinimalModel (W : WeierstrassCurve ℤ) : Prop :=
-  ∀ (W' : WeierstrassCurve ℤ) (C : VariableChange ℚ),
-    W'.baseChange ℚ = C • W.baseChange ℚ → W.Δ.natAbs ≤ W'.Δ.natAbs
+  W.Δ ≠ 0 ∧ ∀ W' : WeierstrassCurve ℤ, IsIntegralModelOf W' W → W.Δ.natAbs ≤ W'.Δ.natAbs
 
-/-- `a : ℕ → ℂ` is the sequence of Dirichlet coefficients of the Hasse–Weil `L`-series of the
-global minimal Weierstrass model `W`, i.e.
+/-- The defining properties of the Hasse–Weil `L`-function `L(E, s)` of the elliptic curve given
+by the integral Weierstrass model `W`:
 
-  `L(E, s) = ∑ n, a n / n ^ s = ∏_{p good} (1 - a_p p^{-s} + p^{1 - 2s})⁻¹
-                                 ∏_{p bad}  (1 - a_p p^{-s})⁻¹`.
+* it is entire — this is the analytic continuation supplied by the modularity theorem;
+* on the half-plane `Re s > 3/2` it is given by the Euler product
+  `∏_p (1 - a_p p^{-s} + ε_p p^{1-2s})⁻¹`, the product being over all primes. -/
+structure IsHasseWeilLFunction (W : WeierstrassCurve ℤ) (L : ℂ → ℂ) : Prop where
+  entire : ∀ s : ℂ, AnalyticAt ℂ L s
+  hasEulerProduct : ∀ s : ℂ, 3 / 2 < s.re →
+    HasProd (fun p : Nat.Primes => (eulerFactorInv W (p : ℕ) s)⁻¹) (L s)
 
-This is expressed through the multiplicativity of `a`, the value of `a` at primes, and the
-Euler-factor recursions at prime powers. -/
+/-- **The Birch–Swinnerton-Dyer conjecture** (rank part): for every elliptic curve `E/ℚ`, given
+by a global minimal Weierstrass model, the order of vanishing at `s = 1` of its Hasse–Weil
+`L`-function equals the rank of the Mordell–Weil group `E(ℚ)`:
+`ord_{s=1} L(E, s) = rank E(ℚ)`. -/

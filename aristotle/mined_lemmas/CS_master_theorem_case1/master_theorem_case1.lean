@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Master Theorem Case 1
 Category: Computer Science
 Target: CS.master_theorem_case1
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,110 +33,76 @@ set_option grind.warning false
 
 namespace CS
 
-/-- `((b:ℝ)^k) ^ (log_b a + t) = a^k * (b^t)^k` (real powers).
-Specializing `t = 0` gives `(b^k)^{log_b a} = a^k`, i.e. `n^{log_b a} = a^k` for `n = b^k`. -/
+/-- Commuting a natural power with a real power: `(b ^ k) ^ c = (b ^ c) ^ k`. -/
 
 theorem master_theorem_case1
-    (a : ℝ) (b : ℕ) (ha : 1 ≤ a) (hb : 2 ≤ b)
-    (eps C : ℝ) (heps : 0 < eps) (hC : 0 < C)
-    (T f : ℕ → ℝ)
-    (hf0 : ∀ n, 0 ≤ f n)
-    (hf : ∀ n : ℕ, 1 ≤ n → f n ≤ C * (n : ℝ) ^ (Real.logb b a - eps))
-    (hT1 : 0 < T 1)
-    (hrec : ∀ k : ℕ, T (b ^ (k + 1)) = a * T (b ^ k) + f (b ^ (k + 1))) :
+    {a b eps C : ℝ} {f T : ℕ → ℝ}
+    (ha : 1 ≤ a) (hb : 1 < b) (heps : 0 < eps) (hC : 0 < C)
+    (hf0 : ∀ k, 0 ≤ f k)
+    (hfO : ∀ k, f k ≤ C * ((b ^ k : ℝ)) ^ (Real.logb b a - eps))
+    (hT0 : 0 < T 0)
+    (hrec : ∀ k, T (k + 1) = a * T k + f (k + 1)) :
     ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ 0 < c₂ ∧ ∀ k : ℕ,
-      c₁ * ((b ^ k : ℕ) : ℝ) ^ (Real.logb b a) ≤ T (b ^ k) ∧
-        T (b ^ k) ≤ c₂ * ((b ^ k : ℕ) : ℝ) ^ (Real.logb b a) := by
-  have hb1 : (1 : ℝ) < (b : ℝ) := by exact_mod_cast hb
-  have hb0 : (0 : ℝ) < (b : ℝ) := by linarith
-  have ha0 : (0 : ℝ) < a := by linarith
-  set r : ℝ := (b : ℝ) ^ (-eps) with hrdef
+      c₁ * ((b ^ k : ℝ)) ^ (Real.logb b a) ≤ T k ∧
+        T k ≤ c₂ * ((b ^ k : ℝ)) ^ (Real.logb b a) := by
+  have hb0 : (0 : ℝ) < b := lt_trans one_pos hb
+  have ha0 : (0 : ℝ) < a := lt_of_lt_of_le one_pos ha
+  set r : ℝ := (b : ℝ) ^ (-eps) with hr_def
   have hr0 : 0 < r := Real.rpow_pos_of_pos hb0 _
-  have hr1 : r < 1 := Real.rpow_lt_one_of_one_lt_of_neg hb1 (by linarith)
-  -- `n ^ (log_b a) = a ^ k` for `n = b ^ k`
-  have hcast : ∀ k : ℕ, ((b ^ k : ℕ) : ℝ) = ((b : ℝ)) ^ k := by
-    intro k; push_cast; ring
-  have hpow : ∀ k : ℕ, ((b ^ k : ℕ) : ℝ) ^ (Real.logb b a) = a ^ k := by
-    intro k
-    rw [hcast k]
-    have := rpow_pow_logb_add a b ha0 hb k 0
-    simpa using this
-  -- `n ^ (log_b a - ε) = a ^ k * r ^ k` for `n = b ^ k`
-  have hpow' : ∀ k : ℕ, ((b ^ k : ℕ) : ℝ) ^ (Real.logb b a - eps) = a ^ k * r ^ k := by
-    intro k
-    rw [hcast k, sub_eq_add_neg]
-    exact rpow_pow_logb_add a b ha0 hb k (-eps)
-  -- lower bound
-  have hlow : ∀ k : ℕ, T 1 * a ^ k ≤ T (b ^ k) := by
+  have hr1 : r < 1 := Real.rpow_lt_one_of_one_lt_of_neg hb (neg_neg_iff_pos.mpr heps)
+  set D : ℝ := C * r / (1 - r) with hD_def
+  have h1r : 0 < 1 - r := sub_pos.mpr hr1
+  have hD0 : 0 < D := div_pos (mul_pos hC hr0) h1r
+  have h1rne : (1 - r) ≠ 0 := ne_of_gt h1r
+  have hDkey : C * r + D * r = D := by
+    rw [hD_def]
+    field_simp
+    ring
+  set M : ℝ := T 0 + D with hM_def
+  -- Lower bound
+  have hlow : ∀ k : ℕ, T 0 * a ^ k ≤ T k := by
     intro k
     induction k with
     | zero => simp
     | succ k ih =>
+        have hfk : 0 ≤ f (k + 1) := hf0 _
+        have hmul : a * (T 0 * a ^ k) ≤ a * T k := mul_le_mul_of_nonneg_left ih ha0.le
+        have hpk : T 0 * a ^ (k + 1) = a * (T 0 * a ^ k) := by ring
         rw [hrec k]
-        have h1 : a * (T 1 * a ^ k) ≤ a * T (b ^ k) := by
-          exact mul_le_mul_of_nonneg_left ih ha0.le
-        have h2 := hf0 (b ^ (k + 1))
-        calc T 1 * a ^ (k + 1) = a * (T 1 * a ^ k) := by ring
-          _ ≤ a * T (b ^ k) := h1
-          _ ≤ a * T (b ^ k) + f (b ^ (k + 1)) := by linarith
-  -- upper bound, with a strengthened induction hypothesis
-  have hup : ∀ k : ℕ, T (b ^ k) ≤ a ^ k * (T 1 + C * ∑ i ∈ Finset.range k, r ^ (i + 1)) := by
+        linarith
+  -- Upper bound, with a strengthened induction hypothesis
+  have hup : ∀ k : ℕ, T k ≤ a ^ k * (M - D * r ^ k) := by
     intro k
     induction k with
-    | zero => simp
+    | zero => simp [hM_def]
     | succ k ih =>
-        have hbk1 : 1 ≤ b ^ (k + 1) := Nat.one_le_pow _ _ (by omega)
-        have hfb : f (b ^ (k + 1)) ≤ C * (a ^ (k + 1) * r ^ (k + 1)) := by
-          have := hf (b ^ (k + 1)) hbk1
-          rwa [hpow' (k + 1)] at this
-        have h1 : a * T (b ^ k) ≤ a * (a ^ k * (T 1 + C * ∑ i ∈ Finset.range k, r ^ (i + 1))) :=
+        have hfk : f (k + 1) ≤ C * (a ^ (k + 1) * r ^ (k + 1)) := by
+          have := hfO (k + 1)
+          rwa [rpow_logb_sub_pow ha0 hb (k + 1)] at this
+        have hmul : a * T k ≤ a * (a ^ k * (M - D * r ^ k)) :=
           mul_le_mul_of_nonneg_left ih ha0.le
-        rw [hrec k, Finset.sum_range_succ]
-        calc a * T (b ^ k) + f (b ^ (k + 1))
-            ≤ a * (a ^ k * (T 1 + C * ∑ i ∈ Finset.range k, r ^ (i + 1)))
-                + C * (a ^ (k + 1) * r ^ (k + 1)) := by linarith
-          _ = a ^ (k + 1) * (T 1 + C * ((∑ i ∈ Finset.range k, r ^ (i + 1)) + r ^ (k + 1))) := by
-                ring
-  -- the geometric tail is bounded uniformly in `k`
-  have hgeom : ∀ k : ℕ, (∑ i ∈ Finset.range k, r ^ (i + 1)) ≤ (1 - r)⁻¹ := by
-    intro k
-    have h1 : (∑ i ∈ Finset.range k, r ^ (i + 1)) = r * ∑ i ∈ Finset.range k, r ^ i := by
-      rw [Finset.mul_sum]
-      exact Finset.sum_congr rfl (fun i _ => by ring)
-    have h2 := geom_partial_sum_le r hr0.le hr1 k
-    have h3 : (0 : ℝ) < (1 - r)⁻¹ := inv_pos.mpr (by linarith)
-    rw [h1]
-    nlinarith
-  refine ⟨T 1, T 1 + C * (1 - r)⁻¹, hT1, ?_, ?_⟩
-  · have : (0 : ℝ) < C * (1 - r)⁻¹ := mul_pos hC (inv_pos.mpr (by linarith))
-    linarith
-  · intro k
-    have hak : (0 : ℝ) < a ^ k := pow_pos ha0 k
-    constructor
-    · rw [hpow k]; exact hlow k
-    · rw [hpow k]
-      have h1 := hup k
-      have h2 : C * ∑ i ∈ Finset.range k, r ^ (i + 1) ≤ C * (1 - r)⁻¹ :=
-        mul_le_mul_of_nonneg_left (hgeom k) hC.le
-      have h3 : a ^ k * (T 1 + C * ∑ i ∈ Finset.range k, r ^ (i + 1))
-          ≤ a ^ k * (T 1 + C * (1 - r)⁻¹) := by
-        apply mul_le_mul_of_nonneg_left _ hak.le
+        have hak : (0 : ℝ) < a ^ k := pow_pos ha0 k
+        have hrk : (0 : ℝ) < r ^ k := pow_pos hr0 k
+        rw [hrec k]
+        have hzero : D - (C * r + D * r) = 0 := by rw [hDkey]; ring
+        have hstep : a * (a ^ k * (M - D * r ^ k)) + C * (a ^ (k + 1) * r ^ (k + 1))
+            ≤ a ^ (k + 1) * (M - D * r ^ (k + 1)) := by
+          have hid : a ^ (k + 1) * (M - D * r ^ (k + 1))
+              - (a * (a ^ k * (M - D * r ^ k)) + C * (a ^ (k + 1) * r ^ (k + 1)))
+              = a * a ^ k * r ^ k * (D - (C * r + D * r)) := by ring
+          rw [hzero, mul_zero] at hid
+          linarith
         linarith
-      calc T (b ^ k) ≤ a ^ k * (T 1 + C * ∑ i ∈ Finset.range k, r ^ (i + 1)) := h1
-        _ ≤ a ^ k * (T 1 + C * (1 - r)⁻¹) := h3
-        _ = (T 1 + C * (1 - r)⁻¹) * a ^ k := by ring
-
-/-- Sanity check that the hypotheses of `master_theorem_case1` are satisfiable
-(so the theorem is not vacuous): `T n = n`, `f = 0`, `a = b = 2`, `ε = C = 1`. -/
-example : ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ 0 < c₂ ∧ ∀ k : ℕ,
-    c₁ * ((2 ^ k : ℕ) : ℝ) ^ (Real.logb 2 2) ≤ ((2 ^ k : ℕ) : ℝ) ∧
-      ((2 ^ k : ℕ) : ℝ) ≤ c₂ * ((2 ^ k : ℕ) : ℝ) ^ (Real.logb 2 2) := by
-  have h := master_theorem_case1 2 2 (by norm_num) (by norm_num) 1 1 (by norm_num) (by norm_num)
-    (fun n => (n : ℝ)) (fun _ => 0) (fun _ => le_rfl)
-    (fun n _ => by simp)
-    (by norm_num)
-    (fun k => by push_cast [pow_succ]; ring)
-  simpa using h
+  refine ⟨T 0, M, hT0, by positivity, fun k => ?_⟩
+  have hpow : ((b ^ k : ℝ)) ^ (Real.logb b a) = a ^ k := rpow_logb_pow ha0 hb k
+  refine ⟨?_, ?_⟩
+  · rw [hpow]; exact hlow k
+  · rw [hpow]
+    have hak : (0 : ℝ) < a ^ k := pow_pos ha0 k
+    have hnn : (0 : ℝ) ≤ a ^ k * (D * r ^ k) :=
+      le_of_lt (mul_pos hak (mul_pos hD0 (pow_pos hr0 k)))
+    have hid : a ^ k * (M - D * r ^ k) = M * a ^ k - a ^ k * (D * r ^ k) := by ring
+    linarith [hup k]
 
 end CS
 

@@ -1,12 +1,12 @@
-/-
+import Mathlib
+
+/-!
 # Pentagon Pentagon Equivariance General
 Category: Brockian Corpus
 Target: Brockian.PentagonPentagonEquivarianceGeneral
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,21 +33,21 @@ set_option grind.warning false
 
 namespace Brockian
 
-open Complex DihedralGroup
+/-- The planar rotation matrix by an angle `t`. -/
 
-/-! ## Vertices of the regular `n`-gon
+noncomputable def dihedralRep (n : ℕ) : DihedralGroup n →* Matrix (Fin 2) (Fin 2) ℝ where
+  toFun g := match g with
+    | DihedralGroup.r i => rot (ang n i)
+    | DihedralGroup.sr i => refl * rot (ang n i)
+  map_one' := by simpa using rot_ang_zero n
+  map_mul' := by
+    rintro (i | i) (j | j)
+    · simpa [DihedralGroup.r_mul_r] using (rot_ang_mul n i j).symm
+    · show refl * rot (ang n (j - i)) = rot (ang n i) * (refl * rot (ang n j))
+      rw [← mul_assoc, rot_ang_mul_refl, mul_assoc, rot_ang_mul, sub_eq_neg_add]
+    · show refl * rot (ang n (i + j)) = refl * rot (ang n i) * rot (ang n j)
+      rw [mul_assoc, rot_ang_mul]
+    · show rot (ang n (j - i)) = refl * rot (ang n i) * (refl * rot (ang n j))
+      rw [mul_assoc, ← mul_assoc (rot (ang n i)) refl, rot_ang_mul_refl, ← mul_assoc,
+        ← mul_assoc, refl_mul_refl, one_mul, rot_ang_mul, sub_eq_neg_add]
 
-The vertices of the regular `n`-gon inscribed in the unit circle of `ℂ` are indexed by
-`ZMod n`; the vertex with index `k` is `exp (2 * π * I * k / n)`.  We use Mathlib's additive
-character `ZMod.toCircle : AddChar (ZMod N) Circle`, so that the "rotation" identity
-`vertex (a + b) = vertex a * vertex b` is inherited from `AddChar.map_add_eq_mul`. -/
-
-/-- The `k`-th vertex of the regular `n`-gon inscribed in the unit circle of `ℂ`,
-namely `exp (2 * π * I * k / n)`. -/
-
-noncomputable def dihedralRep (g : DihedralGroup n) (z : ℂ) : ℂ :=
-  match g with
-  | r i => vertex n i * z
-  | sr i => (starRingEnd ℂ) (vertex n i * z)
-
-omit [NeZero n] in

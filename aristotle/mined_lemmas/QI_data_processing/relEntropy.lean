@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Data Processing
-Category: Frontier Qi
-Target: QI.data_processing
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,59 +31,54 @@ Category: Frontier Qi
 Target: QI.data_processing
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-## Contents
-
-We work with finite-dimensional quantum systems, i.e. complex matrices `Matrix n n ℂ`.
-
-* `QI.Channel ι n m` is a CPTP map (quantum channel) given in Kraus form: a family of Kraus
-  operators `K i : Matrix m n ℂ` with `∑ i, (K i)ᴴ * K i = 1`.  `QI.Channel.map` is the
-  Schrödinger picture action `X ↦ ∑ i, K i * X * (K i)ᴴ`; it is proved to be positive
-  (`QI.Channel.map_posSemidef`) and trace preserving (`QI.Channel.trace_map`).
-* `QI.posPartTrace X` is the trace of the positive part of a Hermitian matrix, defined
-  variationally as `sup { Re Tr (X P) : 0 ≤ P ≤ 1 }` and valued in `ℝ≥0∞`.  Theorem
-  `QI.posPartTrace_eq_sum_eigenvalues` identifies it with `∑ᵢ (λᵢ)₊`, the usual
-  `Tr X₊`, for Hermitian `X`.
-* `QI.posPartTrace_map_le` is the data processing inequality for the hockey-stick
-  divergence: `Tr (Φ(X))₊ ≤ Tr X₊` for every channel `Φ`.
-* `QI.relEntropy ρ σ` is the quantum relative entropy, expressed through Frenkel's integral
-  formula
-  `D(ρ ‖ σ) = ∫_0^∞ (Tr (ρ - tσ)₊ - (Tr ρ) (1 - t)₊) dt / t`,
-  written as a lower Lebesgue integral (so its value lies in `ℝ≥0∞`, with `∞` allowed).
-* `QI.data_processing` is the **data processing inequality**: `D(Φ(ρ) ‖ Φ(σ)) ≤ D(ρ ‖ σ)`
-  for every channel `Φ` and all `ρ`, `σ`.
-
-## Remarks on the definition of relative entropy
-
-That the integral formula above computes `Tr ρ (log ρ - log σ)` for arbitrary (in particular
-non-commuting) density matrices is a theorem of P. E. Frenkel, *Integral formula for quantum
-relative entropy implies data processing inequality*, J. Phys. A **56** (2023) 385303;
-that identification is *not* formalised here.  What is formalised, besides the data processing
-inequality itself, are the following consistency results:
-
-* `QI.relEntropy_diagonal` (in `RequestProject.ClassicalCase`): for commuting states, i.e. for
-  diagonal density matrices with entries given by probability vectors `p`, `q` with `q > 0`,
-  the formula returns the classical Kullback-Leibler divergence `∑ᵢ pᵢ log (pᵢ / qᵢ)`.
-* `QI.relEntropy_self`: `D(ρ ‖ ρ) = 0`.
-* `QI.relEntropy_conj_unitary`: invariance under simultaneous unitary conjugation.
-
-The data processing inequality proved here is in fact slightly stronger than the standard
-statement in two ways: the integrand inequality only uses that the dual of the channel maps
-effects to effects, and the states `ρ`, `σ` are arbitrary matrices.
 -/
 
-open scoped ENNReal ComplexOrder
-open Matrix MeasureTheory
+/-
+Scope note.
+
+The data-processing inequality states that relative entropy is monotone under
+channels.  This file develops the inequality in the *commutative* (equivalently:
+jointly diagonalisable / classical) sector of quantum information theory, where a
+CPTP map restricted to a commuting family of states is exactly a stochastic map
+between the corresponding spectra, and the quantum relative entropy
+`Tr ρ (log ρ - log σ)` is exactly the Kullback-Leibler divergence of the two
+spectra.
+
+Everything below is proved from scratch: the log-sum inequality (from convexity
+of `x ↦ x log x`), the data-processing inequality `QI.data_processing`, and, as a
+corollary of it, Gibbs' inequality (nonnegativity of relative entropy).
+
+The last section leaves the commutative sector: it proves the data-processing
+inequality `QI.data_processing_max` for the max-relative entropy
+`D_max(ρ‖σ) = log inf {λ ≥ 0 | ρ ≤ λ σ}` for arbitrary, possibly noncommuting,
+density matrices and arbitrary positive trace-preserving maps (in particular all
+CPTP maps).
+-/
+
+open Finset
 
 namespace QI
 
-variable {n m ι : Type*} [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m] [Fintype ι]
+variable {ι κ : Type*}
 
-/-- An *effect* (or *test operator*) is a matrix `P` with `0 ≤ P ≤ 1`. -/
+/-- Relative entropy (Kullback–Leibler divergence) of two finite nonnegative
+weight vectors, with the usual conventions `0 log (0/b) = 0` and
+`0 log (0/0) = 0` (implemented via `Real.log 0 = 0` and `x / 0 = 0`). -/
 
-noncomputable def relEntropy (ρ σ : Matrix n n ℂ) : ℝ≥0∞ :=
-  ∫⁻ t in Set.Ioi (0 : ℝ),
-    (posPartTrace (ρ - (t : ℂ) • σ) - ENNReal.ofReal (ρ.trace.re * max 0 (1 - t)))
-      / ENNReal.ofReal t
+noncomputable def relEntropy [Fintype ι] (p q : ι → ℝ) : ℝ :=
+  ∑ i, p i * Real.log (p i / q i)
 
-/-- **Data processing inequality**: quantum relative entropy is monotone under CPTP maps. -/
+/-- A (classical) channel from `ι` to `κ`: a column-stochastic matrix. -/
+structure Channel (ι κ : Type*) [Fintype κ] where
+  /-- The transition matrix: `mat k i` is the probability of output `k` on input `i`. -/
+  mat : κ → ι → ℝ
+  /-- Transition probabilities are nonnegative. -/
+  mat_nonneg : ∀ k i, 0 ≤ mat k i
+  /-- Each column sums to one. -/
+  col_sum : ∀ i, ∑ k, mat k i = 1
+
+namespace Channel
+
+variable [Fintype ι] [Fintype κ]
+
+/-- The action of a channel on a weight vector. -/

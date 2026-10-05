@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Borel Determinacy
 Category: Frontier — Set Theory
@@ -7,54 +8,51 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-universe u
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-variable {X : Type u}
+/-!
+## Infinite two-person games of perfect information
 
-/-- A strategy assigns a move to every finite position of the game. -/
-abbrev Strategy (X : Type u) := List X → X
+Fix a nonempty set `X` of moves.  A *play* is an element of `ℕ → X` (for `X = ℕ` this is
+Baire space); a *position* is a finite list of moves.  Players I and II alternate moves,
+producing an infinite play, and player I wins iff the play belongs to the payoff set `A`.
 
-/-- The move played at position `q`: player I (resp. II) moves at positions of
-even (resp. odd) length. -/
+The parameter `s : Bool` records which player moves first: for `s = false` player I moves
+at positions of even length (the usual convention), for `s = true` the roles are
+interchanged.  Carrying this parameter lets a single Gale–Stewart argument serve both
+players.
+-/
 
-def BorelDeterminacyStatement (X : Type u) [Nonempty X] [TopologicalSpace X] : Prop :=
-  ∀ A : Set (ℕ → X), IsBorelPayoff A → Determined A
+variable {X : Type*} [Inhabited X]
 
-/-! ### Unravelings (Martin coverings) and the reduction to the open case -/
+/-- `moverIsI s h` is `true` exactly when player I is to move at the position `h`. -/
 
-/-- An *unraveling* of a payoff set `A ⊆ ℕ → X` (an abstract form of a Martin covering
-whose covering game has clopen payoff): an auxiliary game on moves `Y` whose payoff set
-`payoff` is topologically simple (open or closed) and is the pullback of `A` along a
-projection `proj` of plays, together
-with maps lifting strategies of the auxiliary game to strategies of the original game in
-such a way that every play against a lifted strategy is the projection of some play
-against the original strategy.
+def BorelDeterminacyStatement : Prop :=
+  ∀ A : Set (ℕ → ℕ), @MeasurableSet (ℕ → ℕ) (borel (ℕ → ℕ)) A → Determined A
 
-Martin's unraveling theorem states that every Borel `A` admits such an unraveling; it is
-the only ingredient of Martin's proof that is not formalized here. -/
-structure Unraveling (A : Set (ℕ → X)) where
-  /-- the move set of the auxiliary (covering) game -/
-  Y : Type u
-  [nonemptyY : Nonempty Y]
-  /-- projection of plays of the covering game to plays of the original game -/
-  proj : (ℕ → Y) → (ℕ → X)
-  /-- the payoff set of the covering game -/
-  payoff : Set (ℕ → Y)
-  /-- the covering game has a topologically simple (open or closed, e.g. clopen) payoff -/
-  simple_payoff : IsOpenPayoff payoff ∨ IsOpenPayoff payoffᶜ
-  pullback : payoff = proj ⁻¹' A
-  /-- lifting of player I's strategies -/
-  liftI : Strategy Y → Strategy X
-  /-- lifting of player II's strategies -/
-  liftII : Strategy Y → Strategy X
-  liftI_spec : ∀ (s : Strategy Y) (τ : Strategy X), ∃ t : Strategy Y,
-    proj (playFrom [] s t) = playFrom [] (liftI s) τ
-  liftII_spec : ∀ (t : Strategy Y) (σ : Strategy X), ∃ s : Strategy Y,
-    proj (playFrom [] s t) = playFrom [] σ (liftII t)
+/-! ## Basic properties of plays -/
 
-attribute [instance] Unraveling.nonemptyY
-
-/-- Any open payoff set is unraveled by itself (the identity covering); in particular
-unravelings exist. -/
+omit [Inhabited X] in

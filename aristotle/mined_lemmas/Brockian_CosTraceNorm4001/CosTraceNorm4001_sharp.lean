@@ -1,31 +1,27 @@
 import Mathlib
 
 /-!
-# A trace-norm bound for the matrix cosine
-
-For a Hermitian complex matrix `A` we define the matrix cosine and sine by
-
-  `cos A = (exp (I • A) + exp (-(I • A))) / 2`,  `sin A = (exp (I • A) - exp (-(I • A))) / (2 I)`,
-
-and the trace norm (nuclear norm) of a matrix `M` as the sum of its singular values, i.e.
-the sum of the square roots of the eigenvalues of `Mᴴ * M`.
-
-The main result `Brockian.CosTraceNorm4001` states `‖cos A‖₁ ≤ card n`.
+# Cos Trace Norm 4001
+Category: Brockian Corpus
+Target: Brockian.CosTraceNorm4001
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+open Matrix Finset
 
 namespace Brockian
 
-open Matrix
-open scoped ComplexOrder
-
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- The trace norm (nuclear norm) of a complex matrix: the sum of its singular values,
-i.e. the sum of the square roots of the eigenvalues of `Mᴴ * M`. -/
+/-- Unfolding of the unitary conjugation star-algebra automorphism used by the matrix
+spectral theorem. -/
 
 theorem CosTraceNorm4001_sharp :
-    traceNorm (matCos (0 : Matrix n n ℂ)) = (Fintype.card n : ℝ) := by
-  rw [matCos_zero, traceNorm_one]
+    ‖((1 : Matrix n n ℂ) * hermCos (A := (0 : Matrix n n ℂ)) Matrix.isHermitian_zero).trace‖
+      = (Fintype.card n : ℝ) := by
+  rw [hermCos_zero, Matrix.one_mul, Matrix.trace_one]
+  simp
 
 end Brockian
 

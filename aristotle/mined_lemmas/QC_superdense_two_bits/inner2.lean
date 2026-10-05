@@ -1,4 +1,3 @@
--- (Lean requires `import` to come first in a file; the required header comment follows.)
 import Mathlib
 
 /-!
@@ -9,29 +8,30 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-!
-## Superdense coding
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped Matrix
 
-Alice and Bob share the Bell pair `|Φ⁺⟩ = (|00⟩ + |11⟩)/√2`.  Alice wants to send two
-classical bits `(a, b)` to Bob.  She applies the Pauli operator `Z^b X^a` to *her* qubit
-only (one qubit!) and sends it to Bob.  Bob then holds one of the four Bell states
-`(Z^b X^a ⊗ I)|Φ⁺⟩`, and these four states are pairwise distinct — indeed pairwise
-orthogonal unit vectors — so the two bits are recoverable.
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-A two-qubit state is modelled as its amplitude array `ψ : Matrix (Fin 2) (Fin 2) ℂ`,
-where `ψ i j` is the amplitude of `|i j⟩`.  With this encoding, acting by a one-qubit
-operator `U` on the *first* qubit, i.e. `U ⊗ I`, is exactly left multiplication `U * ψ`,
-and the Bell state `|Φ⁺⟩` is `(1/√2) • 1`.
--/
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace QC
 
-open Matrix
+/-- A two-qubit state: `ψ (i, j)` is the amplitude of the basis state `|i⟩ ⊗ |j⟩`.
+The first factor is Alice's qubit, the second is Bob's. -/
+abbrev TwoQubit := Fin 2 × Fin 2 → ℂ
 
-/-- Amplitude array of a two-qubit state: `ψ i j` is the amplitude of `|i j⟩`. -/
-abbrev TwoQubit := Matrix (Fin 2) (Fin 2) ℂ
+/-- The Bell state `(|00⟩ + |11⟩)/√2`, shared in advance between Alice and Bob. -/
 
-/-- The Pauli `X` (bit flip) gate. -/
-
-noncomputable def inner2 (φ ψ : TwoQubit) : ℂ := ∑ i, ∑ j, (starRingEnd ℂ) (φ i j) * ψ i j
+noncomputable def inner2 (u v : TwoQubit) : ℂ := ∑ p, (starRingEnd ℂ) (u p) * v p
 

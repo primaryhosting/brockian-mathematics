@@ -1,4 +1,11 @@
 import Mathlib
+/-!
+# Binary Search Correct
+Category: Computer Science
+Target: CS.binary_search_correct
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
@@ -25,11 +32,12 @@ set_option grind.warning false
 
 namespace CS
 
-variable {α : Type*} [LinearOrder α] [Inhabited α]
+variable {α : Type*} [LinearOrder α]
 
-/-- Auxiliary binary search: looks for `k` in the index range `[lo, hi)` of the array `a`. -/
+/-- Auxiliary binary search: searches for `key` in the half-open index range
+`[lo, hi)` of the array `a`. -/
 
-def bsearch (a : Array α) (k : α) : Option ℕ := bsearchAux a k 0 a.size
+def bsearch (a : Array α) (key : α) : Option ℕ :=
+  bsearchAux a key 0 a.size
 
-/-- Soundness of the auxiliary search: any returned index lies in `[lo, hi)` and holds the key.
-No sortedness assumption is needed here. -/
+/-- `Sorted a` says the array `a` is sorted in non-decreasing order. -/

@@ -6,29 +6,29 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option autoImplicit false
+
 namespace CS
 
-/-- Euclid's algorithm, by repeated remainder.
-
-The recursion terminates because the second argument strictly decreases at every
-recursive call (`Nat.mod_lt`); this is exactly what the `termination_by` /
-`decreasing_by` clauses certify, so `euclid` is a total function. -/
+/-- **Euclid's algorithm.**  On input `(a, b)` it returns `b` when `a = 0`, and otherwise
+recurses on `(b % a, a)`.  The recursion is well founded: the first argument strictly
+decreases at every step (`b % (a+1) < a+1`), which is exactly the termination argument
+discharged by `decreasing_by` below.  Consequently `euclid` is a total function, i.e. the
+algorithm terminates on every input. -/
 
 theorem euclid_eq_gcd (a b : Nat) : euclid a b = Nat.gcd a b := by
-  induction b using Nat.strongRecOn generalizing a with
-  | ind b ih =>
-    match b with
-    | 0 => simp [Nat.gcd_zero_right]
-    | (n + 1) =>
-      rw [euclid_succ, ih (a % (n + 1)) (Nat.mod_lt _ (Nat.succ_pos n))]
-      rw [Nat.gcd_comm (n + 1) (a % (n + 1)), ← Nat.gcd_rec (n + 1) a,
-        Nat.gcd_comm (n + 1) a]
+  fun_induction euclid a b with
+  | case1 b => rw [Nat.gcd_zero_left]
+  | case2 n b ih => rw [ih]; exact (Nat.gcd_rec (n + 1) b).symm
 
-/-- **Correctness of Euclid's algorithm.**  For all naturals `a b`, the value
-returned by `euclid a b` — a total function, since the recursion terminates: the
-second argument strictly decreases at each step, see `euclid_measure_decreasing`
-— equals `Nat.gcd a b`, is a common divisor of `a` and `b`, and is divisible by
-every common divisor of `a` and `b`.
+/--
+**Correctness (and termination) of Euclid's algorithm.**
 
-The divisibility facts come from the library lemmas `Nat.gcd_dvd_left`,
-`Nat.gcd_dvd_right` and `Nat.dvd_gcd`. -/
+`CS.euclid` is defined by well-founded recursion on its first argument, which strictly
+decreases at each recursive call (see `CS.euclid_measure_decreases`); hence it is a
+total function and the algorithm terminates on all inputs.
+
+This theorem states that the value it returns really is `gcd a b`: it coincides with
+`Nat.gcd a b`, it is a common divisor of `a` and `b`, and every common divisor of `a`
+and `b` divides it — i.e. it is the greatest common divisor.
+-/

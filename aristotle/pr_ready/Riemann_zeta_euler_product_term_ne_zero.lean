@@ -25,30 +25,28 @@ set_option autoImplicit false
 
 set_option grind.warning false
 
-namespace Riemann.zeta
+namespace Riemann
+namespace zeta
 
-/-- For `s : ℂ` with `1 < s.re` and `p` a prime, the Euler factor
-`1 - (p : ℂ) ^ (-s)` is nonzero.
-
-The proof shows `‖(p : ℂ) ^ (-s)‖ = (p : ℝ) ^ (-s.re) < 1`, using
-`Complex.norm_cpow_eq_rpow_re_of_pos` and `Real.rpow_lt_one_of_one_lt_of_neg`. -/
-theorem euler_product_term_ne_zero
-    {s : ℂ} (hs : 1 < s.re) {p : ℕ} (hp : Nat.Prime p) :
+/-- For `p` a prime and `s` with `1 < s.re`, the Euler factor `1 - p ^ (-s)` is nonzero. -/
+theorem euler_product_term_ne_zero {s : ℂ} (hs : 1 < s.re) {p : ℕ} (hp : p.Prime) :
     (1 - (p : ℂ) ^ (-s)) ≠ 0 := by
-  have hp0 : (0 : ℝ) < (p : ℝ) := by exact_mod_cast hp.pos
-  have hcast : ((p : ℂ)) = ((p : ℝ) : ℂ) := by push_cast; ring
-  have habs : ‖((p : ℂ)) ^ (-s)‖ = (p : ℝ) ^ (-s.re) := by
-    rw [hcast, Complex.norm_cpow_eq_rpow_re_of_pos hp0]
-    simp
-  have hlt : ‖((p : ℂ)) ^ (-s)‖ < 1 := by
-    rw [habs]
-    apply Real.rpow_lt_one_of_one_lt_of_neg
-    · exact_mod_cast hp.one_lt
-    · linarith
+  have hp2 : (2 : ℕ) ≤ p := hp.two_le
+  have hp1 : (1 : ℝ) < (p : ℝ) := by exact_mod_cast lt_of_lt_of_le one_lt_two hp2
+  have hppos : (0 : ℝ) < (p : ℝ) := lt_trans one_pos hp1
+  have hnorm : ‖(p : ℂ) ^ (-s)‖ = (p : ℝ) ^ (-s.re) := by
+    have := Complex.norm_cpow_eq_rpow_re_of_pos (x := (p : ℝ)) hppos (-s)
+    simpa using this
+  have hlt : ‖(p : ℂ) ^ (-s)‖ < 1 := by
+    rw [hnorm]
+    refine Real.rpow_lt_one_of_one_lt_of_neg hp1 ?_
+    simp only [Left.neg_neg_iff]
+    linarith
   intro h
-  have h1 : ((p : ℂ)) ^ (-s) = 1 := by linear_combination -h
-  rw [h1] at hlt
+  have hone : (p : ℂ) ^ (-s) = 1 := (sub_eq_zero.mp h).symm
+  rw [hone] at hlt
   simp at hlt
 
-end Riemann.zeta
+end zeta
+end Riemann
 

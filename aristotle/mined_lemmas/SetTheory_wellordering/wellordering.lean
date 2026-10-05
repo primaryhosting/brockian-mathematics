@@ -1,5 +1,4 @@
-import Mathlib
-/-!
+/-
 # Wellordering
 Category: Frontier Wave 2 (deeper machinery)
 Target: SetTheory.wellordering
@@ -7,17 +6,41 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 namespace SetTheory
 
-/-- **Zermelo's well-ordering theorem**: every type admits a well-order.
-
-For any type `α` there exists a relation `r : α → α → Prop` which is a well-order
-(`IsWellOrder α r`, i.e. `r` is trichotomous, transitive and well-founded).
-
-This is exactly Mathlib's instance `IsWellOrder.subtype_nonempty`. -/
+/-- **Zermelo's well-ordering theorem**: every type carries a well-order.
+Formally, for any type `α` the subtype of relations `r : α → α → Prop` satisfying
+`IsWellOrder α r` is nonempty.  Recall that `IsWellOrder α r` packages together
+trichotomy, transitivity and well-foundedness of `r`, so such an `r` is in particular
+a strict linear order whose associated `≤` is a `LinearOrder` on `α`. -/
 
 theorem wellordering (α : Type*) : Nonempty { r : α → α → Prop // IsWellOrder α r } :=
-  IsWellOrder.subtype_nonempty
+  ⟨⟨WellOrderingRel, WellOrderingRel.isWellOrder⟩⟩
 
-/-- An explicit unpacking of `SetTheory.wellordering`: every type carries a linear order
+/-- A packaged form of the well-ordering theorem: every type admits a linear order
 whose strict part `<` is well-founded. -/

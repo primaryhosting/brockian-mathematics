@@ -1,26 +1,54 @@
-import RequestProject.Wedge
-
-/-!
-# Splitting the unit ball by three planes through the origin
+/-
+# Gauss Bonnet Polygon
+Category: Pure Mathematics
+Target: Math.gauss_bonnet_polygon
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Math
+import RequestProject.SphericalWedge
 
-open MeasureTheory Metric Real Set
-open scoped RealInnerProductSpace ENNReal
+/-!
+# Gauss Bonnet Polygon
 
-/-- The closed unit ball of `E3`, as a set. -/
+Category: Pure Mathematics.  Target: `Math.gauss_bonnet_polygon`.
 
-lemma volume_hyperplane (n : E3) (hn : n ≠ 0) : volume {x : E3 | ⟪x, n⟫ = 0} = 0 := by
-  have hset : {x : E3 | ⟪x, n⟫ = 0}
-      = ((LinearMap.ker (innerSL ℝ n).toLinearMap : Submodule ℝ E3) : Set E3) := by
-    ext x
-    simp [LinearMap.mem_ker, real_inner_comm x n]
-  rw [hset]
+## Overview
+
+We prove Girard's theorem (the Gauss–Bonnet theorem for a geodesic triangle on the unit
+sphere): the sum of the three interior angles of a spherical triangle equals `π` plus the
+area of the triangle.
+
+The area of a region `S` of the unit sphere in `ℝ³` is defined as three times the Lebesgue
+volume of the cone over `S` with apex the origin (this is the standard normalisation: the
+cone over the whole sphere is the unit ball, of volume `4π/3`, giving total area `4π`).
+
+The proof is the classical "lune" argument.  The three great circles through the pairs of
+vertices cut the sphere into eight triangles; each of the three lunes containing the
+triangle `T` decomposes as `T` together with one of the neighbouring triangles.
+-/
+
+open MeasureTheory Metric Real Set InnerProductGeometry Pointwise
+
+noncomputable section
+
+namespace GaussBonnet
+
+/-! ### Step 4: the normals to the sides of a spherical triangle -/
+
+/-- The interior angle at the vertex `u` of the spherical triangle with vertices `u`, `v`, `w`:
+the angle between the tangent directions at `u` of the two geodesics from `u` to `v` and
+from `u` to `w`. -/
+
+lemma volume_hyperplane (c : E3) (hc : c ≠ 0) : volume {x : E3 | inner ℝ c x = (0 : ℝ)} = 0 := by
+  have h : {x : E3 | inner ℝ c x = (0 : ℝ)}
+      = (LinearMap.ker ((innerSL ℝ c : E3 →L[ℝ] ℝ) : E3 →ₗ[ℝ] ℝ) : Submodule ℝ E3) := by
+    ext x; simp [LinearMap.mem_ker]
+  rw [h]
   apply Measure.addHaar_submodule
-  intro h
-  have hmem : n ∈ LinearMap.ker (innerSL ℝ n).toLinearMap := by rw [h]; trivial
-  simp only [LinearMap.mem_ker] at hmem
-  exact hn (by simpa using hmem)
+  intro htop
+  have hcc : ((innerSL ℝ c : E3 →L[ℝ] ℝ) : E3 →ₗ[ℝ] ℝ) c = 0 := by
+    rw [← LinearMap.mem_ker, htop]; trivial
+  exact hc (by simpa using hcc)
 
-/-- Splitting a set along a hyperplane through the origin. -/
+/-- The eight open sectors of the unit ball cut out by three linear functionals. -/

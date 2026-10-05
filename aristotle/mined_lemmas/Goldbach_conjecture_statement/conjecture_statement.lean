@@ -8,7 +8,6 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -33,9 +32,14 @@ set_option pp.piBinderTypes true
 set_option grind.warning false
 
 /-- The strong Goldbach conjecture: every even natural number greater than `2`
-is a sum of two primes. This is only stated here, not proved. -/
+is the sum of two primes. This is only *stated* here, never proved. -/
 
-theorem conjecture_statement : Goldbach ↔ Goldbach := Iff.rfl
+theorem conjecture_statement : Goldbach ↔ Goldbach := by
+  constructor
+  · intro h
+    exact h
+  · intro h
+    exact h
 
 end Goldbach
 

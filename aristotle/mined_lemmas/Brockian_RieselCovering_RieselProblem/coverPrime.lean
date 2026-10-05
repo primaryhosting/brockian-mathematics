@@ -33,19 +33,9 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Riesel Problem
-Category: Brockian Conjecture
-Target: Brockian.RieselCovering.RieselProblem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Brockian.RieselCovering
 
-namespace Brockian
-namespace RieselCovering
-
-/-- A *Riesel number* is an odd natural number `k` such that `k * 2 ^ n - 1` is
-composite for every `n ≥ 1`. -/
+/-- The Riesel number under consideration: `509203`. -/
 
 def coverPrime (r : ℕ) : ℕ :=
   [3, 5, 3, 241, 3, 5, 3, 13, 3, 5, 3, 7,

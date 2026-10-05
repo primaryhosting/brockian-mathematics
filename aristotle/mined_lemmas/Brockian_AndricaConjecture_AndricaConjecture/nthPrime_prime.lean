@@ -30,19 +30,14 @@ Target: Brockian.AndricaConjecture.AndricaConjecture
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above uses `/- -/` rather than `/-! -/` because Lean 4 does not allow a
--- module docstring to precede the `import` line.)
 
 import Mathlib
 
 namespace Brockian.AndricaConjecture
 
-open scoped Nat
+open Real
 
-/-! ## The sequence of primes -/
+/-- `nthPrime n` is the `n`-th prime number (`nthPrime 0 = 2`). -/
 
-/-- The set of primes is infinite. -/
-
-theorem nthPrime_prime (n : ℕ) : Nat.Prime (nthPrime n) :=
-  Nat.nth_mem_of_infinite setOf_prime_infinite n
+lemma nthPrime_prime (n : ℕ) : Nat.Prime (nthPrime n) := Nat.prime_nth_prime n
 

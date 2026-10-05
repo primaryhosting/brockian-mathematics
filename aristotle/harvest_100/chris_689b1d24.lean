@@ -1,0 +1,320 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+import Brockian.BrocardProblem
+
+/-!
+# Brocard's problem, in Mathlib's vocabulary
+
+`Brockian/BrocardProblem.lean` is import-free (so that the required header
+comment can be its first line), and therefore defines factorial itself as
+`Brockian.BrocardProblem.fact`.  Here we check that `fact` agrees with Mathlib's
+`Nat.factorial` and restate the two main results using `Nat.factorial`.
+-/
+
+namespace Brockian.BrocardProblem
+
+open Nat
+
+/-- The self-contained factorial of `Brockian/BrocardProblem.lean` agrees with
+Mathlib's `Nat.factorial`. -/
+theorem fact_eq_factorial (n : ℕ) : fact n = n ! := by
+  induction n with
+  | zero => rfl
+  | succ k ih => simp [fact, Nat.factorial, ih]
+
+/-- **Unconditional partial result, Mathlib form.**  The only solutions of
+`n ! + 1 = m ^ 2` with `n ≤ 1000` are `n = 4, 5, 7`. -/
+theorem brocard_factorial_verified_upTo_1000 {n m : ℕ} (hn : n ≤ 1000) (h : n ! + 1 = m ^ 2) :
+    n = 4 ∨ n = 5 ∨ n = 7 :=
+  brocard_verified_upTo_1000 hn (by rw [fact_eq_factorial]; exact h)
+
+/-- **Brocard's conjecture, conditionally, Mathlib form.**  If every `n > 1000`
+admits a modular non-residue certificate for `n ! + 1`, then the only solutions
+of `n ! + 1 = m ^ 2` are `n = 4, 5, 7`. -/
+theorem brocard_factorial_conjecture
+    (H : ∀ n : ℕ, 1000 < n → ∃ p : ℕ, 0 < p ∧ ∀ x < p, x * x % p ≠ (n ! + 1) % p)
+    (n m : ℕ) (h : n ! + 1 = m ^ 2) : n = 4 ∨ n = 5 ∨ n = 7 := by
+  refine BrocardConjecture (fun k hk => ?_) n m (by rw [fact_eq_factorial]; exact h)
+  simpa [HasCertificate, fact_eq_factorial] using H k hk
+
+end Brockian.BrocardProblem
+
+/-!
+# Brocard Conjecture
+Category: Brockian Conjecture
+Target: Brockian.BrocardProblem.BrocardConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+## Brocard's problem
+
+Brocard's problem asks for all solutions in natural numbers of
+
+  `n ! + 1 = m ^ 2`.
+
+The only known solutions are `n = 4, 5, 7` (with `m = 5, 11, 71`), and the
+assertion that there are no others is *Brocard's conjecture*, an open problem.
+
+This file is deliberately self-contained (it has no `import`s, so that the
+required header comment can be the very first thing in the file: Lean does not
+allow a module docstring to precede an `import`).  Factorial is therefore
+defined here as `Brockian.BrocardProblem.fact`; the companion file
+`Brockian/BrocardMathlib.lean` proves `fact n = Nat.factorial n` and restates
+the results in Mathlib's vocabulary.
+
+Contents:
+
+* `ne_sq_of_mod_witness` — the certificate lemma: a natural number that is a
+  quadratic non-residue modulo some `p > 0` is not a perfect square;
+* `certificate_of_le_1000` — for every `8 ≤ n ≤ 1000` an explicit modulus `p`
+  (a prime `> n`) is exhibited, together with the value `r = (n ! + 1) % p`,
+  such that `n ! + 1` is a non-residue mod `p`; this is checked by the kernel;
+* `brocard_verified_upTo_1000` — the unconditional partial result: the only
+  solutions with `n ≤ 1000` are `n = 4, 5, 7`;
+* `BrocardConjecture` — the conditional reduction: Brocard's conjecture follows
+  from the existence of a modular non-residue certificate for every `n > 1000`.
+-/
+
+namespace Brockian.BrocardProblem
+
+/-- Factorial, `fact n = n !`. -/
+def fact : Nat → Nat
+  | 0 => 1
+  | n + 1 => (n + 1) * fact n
+
+/-- The assertion of Brocard's conjecture: the only solutions of `n ! + 1 = m ^ 2`
+are `n = 4, 5, 7`. -/
+def BrocardStatement : Prop :=
+  ∀ n m : Nat, fact n + 1 = m ^ 2 → n = 4 ∨ n = 5 ∨ n = 7
+
+/-- A *modular non-residue certificate* for `n`: a modulus `p > 0` such that
+`n ! + 1` is not a square modulo `p`. -/
+def HasCertificate (n : Nat) : Prop :=
+  ∃ p : Nat, 0 < p ∧ ∀ x < p, x * x % p ≠ (fact n + 1) % p
+
+/-- The certificate lemma: if `a` is not a square modulo some positive `p`, then
+`a` is not a perfect square. -/
+theorem ne_sq_of_mod_witness {a p : Nat} (hp : 0 < p)
+    (h : ∀ x < p, x * x % p ≠ a % p) (m : Nat) : a ≠ m ^ 2 := by
+  rintro rfl
+  refine h (m % p) (Nat.mod_lt _ hp) ?_
+  rw [← Nat.mul_mod]
+  simp [Nat.pow_succ]
+
+/-- A certificate for `n` rules out every solution of `n ! + 1 = m ^ 2`. -/
+theorem not_sq_of_certificate {n : Nat} (h : HasCertificate n) (m : Nat) :
+    fact n + 1 ≠ m ^ 2 := by
+  obtain ⟨p, hp, hx⟩ := h
+  exact ne_sq_of_mod_witness hp hx m
+
+/-! ### The certificate table for `8 ≤ n ≤ 1000` -/
+
+/-- `witTable` lists, for `n = 8, 9, …, 1000` (in this order), a pair `(p, r)`
+where `p` is a prime larger than `n` modulo which `n ! + 1` is a quadratic
+non-residue, and `r = (n ! + 1) % p`. -/
+def witTable : List (Nat × Nat) :=
+ [
+  (11,6), (11,2), (13,7), (13,2), (29,17), (23,19), (31,30), (37,19), (19,10), (19,2),
+  (31,30), (23,5), (29,27), (31,6), (37,31), (59,39), (31,23), (31,24), (29,15), (29,2),
+  (43,30), (37,15), (37,14), (41,27), (41,13), (37,32), (37,19), (37,2), (41,30), (43,20),
+  (53,39), (43,37), (43,22), (43,2), (47,46), (61,44), (53,50), (53,33), (71,68), (53,20),
+  (53,12), (67,50), (53,27), (53,2), (59,55), (59,31), (67,50), (59,11), (59,30), (59,2),
+  (61,31), (61,2), (67,5), (67,44), (89,38), (67,57), (67,34), (67,2), (71,69), (71,13),
+  (79,63), (73,62), (83,14), (79,75), (83,57), (79,28), (79,24), (83,19), (97,15), (89,28),
+  (83,39), (83,15), (83,42), (83,2), (89,12), (89,24), (97,41), (103,27), (101,51), (101,8),
+  (101,11), (101,83), (101,8), (97,39), (97,5), (97,82), (101,32), (103,45), (107,54), (101,18),
+  (101,51), (101,2), (139,132), (113,58), (107,50), (109,11), (107,54), (107,2), (109,55), (109,2),
+  (127,77), (113,20), (137,90), (131,8), (127,45), (127,20), (139,128), (151,147), (131,103), (131,14),
+  (137,31), (149,147), (127,125), (131,119), (131,118), (137,66), (139,102), (131,120), (137,116), (131,23),
+  (131,66), (131,2), (137,91), (149,51), (157,69), (137,24), (139,111), (151,130), (139,70), (139,2),
+  (151,114), (173,32), (151,119), (163,112), (151,51), (151,54), (149,32), (151,113), (149,75), (149,2),
+  (157,66), (163,122), (173,105), (193,47), (163,27), (163,67), (157,79), (157,2), (173,108), (163,73),
+  (163,130), (163,137), (163,82), (163,2), (167,161), (173,8), (173,111), (181,151), (179,104), (173,63),
+  (181,104), (173,30), (173,87), (173,2), (193,132), (179,92), (193,180), (181,90), (179,90), (179,2),
+  (181,91), (181,2), (193,154), (191,106), (191,11), (191,112), (191,179), (193,80), (199,38), (191,33),
+  (197,98), (197,13), (211,72), (197,111), (223,208), (199,69), (197,99), (197,2), (227,14), (211,63),
+  (211,39), (239,89), (211,164), (223,93), (211,112), (211,168), (211,98), (227,193), (211,168), (211,177),
+  (211,106), (211,2), (223,123), (229,6), (227,42), (223,190), (223,84), (223,6), (223,189), (227,145),
+  (227,67), (223,187), (233,114), (229,116), (227,105), (227,39), (227,114), (227,2), (229,115), (229,2),
+  (233,166), (233,40), (251,203), (239,149), (241,34), (241,219), (239,230), (239,41), (241,11), (241,202),
+  (251,132), (251,186), (257,220), (269,179), (271,269), (257,209), (269,267), (251,229), (251,116), (251,43),
+  (251,126), (251,2), (257,127), (269,106), (257,183), (271,76), (263,251), (271,76), (271,231), (263,161),
+  (269,28), (263,45), (269,10), (269,198), (269,236), (293,93), (283,223), (269,46), (269,135), (269,2),
+  (311,307), (277,119), (277,6), (281,166), (277,151), (277,232), (277,139), (277,2), (307,12), (281,48),
+  (311,82), (307,52), (283,142), (283,2), (293,177), (311,191), (293,19), (307,236), (293,130), (293,106),
+  (293,62), (293,50), (293,147), (293,2), (311,86), (307,300), (311,198), (307,288), (307,221), (331,148),
+  (311,213), (307,13), (307,224), (307,198), (307,244), (331,282), (307,154), (307,2), (311,299), (313,61),
+  (313,14), (313,262), (317,130), (317,178), (331,52), (347,253), (317,159), (317,2), (331,176), (331,199),
+  (331,75), (331,106), (331,170), (349,290), (359,358), (331,129), (331,98), (337,248), (331,263), (331,277),
+  (331,166), (331,2), (347,22), (337,133), (337,15), (359,228), (359,70), (347,175), (349,331), (349,229),
+  (347,200), (349,302), (347,41), (349,35), (349,112), (349,33), (347,174), (347,2), (349,175), (349,2),
+  (353,251), (367,22), (359,126), (359,78), (373,371), (367,165), (367,71), (359,61), (379,206), (373,242),
+  (379,340), (367,177), (373,43), (379,342), (367,108), (367,307), (373,260), (373,167), (373,331), (383,60),
+  (389,212), (373,312), (373,187), (373,2), (379,11), (397,41), (389,165), (379,317), (379,190), (379,2),
+  (389,145), (401,359), (389,124), (397,359), (397,189), (401,84), (389,82), (419,234), (389,195), (389,2),
+  (431,224), (409,238), (397,339), (401,17), (397,216), (409,362), (397,199), (397,2), (409,161), (401,68),
+  (419,124), (409,254), (419,232), (409,221), (409,97), (421,329), (421,319), (409,342), (421,120), (419,133),
+  (421,188), (419,275), (421,267), (421,288), (421,365), (419,214), (419,193), (419,71), (419,210), (419,2),
+  (421,211), (421,2), (443,134), (431,334), (431,21), (431,272), (439,434), (439,85), (433,348), (431,73),
+  (433,19), (433,362), (439,369), (449,231), (443,245), (439,151), (461,247), (439,367), (461,395), (461,226),
+  (449,26), (457,369), (443,222), (443,2), (449,281), (449,117), (449,319), (449,76), (479,333), (463,41),
+  (463,327), (457,212), (457,352), (457,180), (457,20), (461,343), (463,369), (467,57), (463,237), (461,78),
+  (461,231), (461,2), (467,444), (479,281), (467,215), (467,79), (467,234), (467,2), (499,426), (499,373),
+  (479,153), (487,133), (479,269), (491,312), (487,63), (491,307), (491,200), (487,466), (487,243), (491,103),
+  (487,353), (491,201), (487,233), (491,397), (491,365), (491,35), (491,254), (491,447), (499,283), (503,239),
+  (491,246), (491,2), (499,374), (499,11), (499,430), (509,149), (499,396), (499,417), (499,250), (499,2),
+  (509,250), (587,483), (509,15), (509,398), (509,276), (521,307), (523,455), (509,86), (509,255), (509,2),
+  (521,371), (541,434), (547,245), (521,299), (521,445), (521,96), (523,33), (521,344), (523,224), (523,232),
+  (557,427), (547,220), (523,262), (523,2), (541,410), (541,213), (541,184), (547,466), (557,110), (547,22),
+  (569,12), (541,185), (557,11), (541,224), (541,158), (547,63), (557,364), (541,267), (541,294), (541,452),
+  (541,271), (541,2), (571,428), (547,352), (547,434), (547,457), (547,274), (547,2), (557,477), (557,254),
+  (557,509), (557,393), (563,389), (557,312), (557,117), (569,422), (557,279), (557,2), (563,460), (569,539),
+  (563,259), (563,95), (563,282), (563,2), (569,261), (569,148), (577,231), (569,96), (577,357), (571,477),
+  (571,286), (571,2), (577,348), (577,227), (599,404), (577,482), (593,417), (587,351), (593,395), (607,248),
+  (587,418), (587,187), (593,468), (593,327), (593,566), (587,99), (587,294), (587,2), (601,516), (607,54),
+  (593,421), (599,311), (601,175), (599,158), (601,35), (601,330), (599,575), (599,101), (607,68), (601,502),
+  (617,415), (607,321), (607,189), (619,321), (613,319), (607,507), (631,487), (613,303), (613,339), (617,405),
+  (631,582), (613,512), (613,307), (613,2), (631,473), (617,104), (631,565), (631,442), (619,310), (619,2),
+  (631,19), (631,416), (647,264), (641,92), (631,563), (631,553), (631,554), (631,469), (631,185), (641,136),
+  (691,447), (641,549), (643,126), (641,27), (643,426), (647,439), (641,358), (641,423), (647,207), (641,108),
+  (653,102), (647,491), (643,322), (643,2), (647,621), (653,588), (661,18), (653,473), (653,615), (653,235),
+  (659,620), (659,401), (653,327), (653,2), (661,2), (659,336), (659,303), (661,326), (659,330), (659,2),
+  (661,331), (661,2), (683,657), (673,66), (673,632), (677,270), (677,566), (673,629), (673,316), (673,130),
+  (677,423), (683,596), (683,462), (677,379), (677,142), (677,114), (677,339), (677,2), (683,444), (709,502),
+  (701,308), (709,118), (683,342), (683,2), (691,455), (701,185), (709,360), (701,278), (691,548), (701,689),
+  (691,346), (691,2), (701,578), (701,540), (701,57), (709,526), (701,333), (709,356), (701,147), (709,79),
+  (701,351), (701,2), (719,154), (719,123), (709,581), (709,66), (719,508), (709,592), (709,355), (709,2),
+  (733,406), (719,516), (719,399), (757,35), (727,656), (727,282), (719,690), (727,217), (727,533), (733,60),
+  (727,626), (727,90), (743,540), (733,653), (727,213), (727,607), (733,294), (739,118), (733,283), (739,517),
+  (739,237), (739,597), (733,367), (733,2), (739,390), (751,738), (739,586), (739,617), (739,370), (739,2),
+  (757,541), (743,125), (761,305), (751,517), (761,610), (751,354), (751,534), (751,558), (751,220), (761,600),
+  (757,195), (757,720), (761,228), (761,14), (773,475), (757,632), (757,379), (757,2), (761,540), (769,132),
+  (821,540), (811,117), (787,277), (769,140), (797,209), (773,463), (769,33), (769,642), (773,599), (773,278),
+  (773,162), (773,130), (773,387), (773,2), (787,460), (787,658), (787,117), (809,432), (809,340), (787,346),
+  (827,89), (787,444), (787,48), (787,506), (797,190), (797,543), (787,394), (787,2), (797,28), (797,528),
+  (809,17), (811,22), (797,591), (797,446), (797,167), (797,134), (797,399), (797,2), (811,647), (811,689),
+  (809,306), (811,277), (809,754), (839,166), (811,68), (809,210), (809,574), (809,136), (811,643), (821,523),
+  (811,406), (811,2), (821,781), (821,411), (829,262), (823,210), (821,253), (827,736), (827,186), (827,632),
+  (821,411), (821,2), (829,662), (829,516), (827,380), (829,77), (827,414), (827,2), (829,415), (829,2),
+  (839,397), (877,786), (853,562), (853,454), (839,699), (859,32), (857,823), (853,375), (853,467), (857,312),
+  (853,98), (859,534), (853,595), (863,376), (859,411), (857,176), (853,705), (857,734), (857,508), (859,739),
+  (853,463), (863,431), (853,427), (853,2), (857,608), (881,452), (859,681), (877,536), (859,430), (859,2),
+  (863,828), (863,145), (887,696), (881,426), (881,736), (877,54), (883,724), (881,326), (881,412), (877,32),
+  (887,386), (877,479), (881,498), (887,803), (877,476), (877,732), (877,439), (877,2), (883,819), (883,391),
+  (883,700), (883,737), (883,442), (883,2), (887,851), (907,601), (907,713), (919,497), (907,611), (911,393),
+  (941,653), (911,666), (907,680), (919,148), (907,608), (907,573), (937,514), (907,347), (907,730), (907,874),
+  (907,307), (911,536), (907,811), (907,583), (929,48), (907,757), (907,454), (907,2), (919,699), (911,153),
+  (937,896), (919,398), (929,130), (919,96), (919,255), (919,315), (919,269), (937,661), (947,417), (947,779),
+  (929,436), (937,489), (929,133), (929,803), (937,86), (929,241), (929,659), (937,824), (947,130), (947,262),
+  (937,421), (941,765), (941,66), (937,368), (937,40), (937,782), (953,133), (947,275), (941,197), (941,158),
+  (941,471), (941,2), (947,268), (967,592), (977,661), (953,520), (947,474), (947,2), (953,500), (967,726),
+  (967,731), (953,160), (971,77), (983,877), (967,721), (971,617), (971,210), (967,830), (971,640), (977,408),
+  (971,750), (971,723), (971,798), (1009,923), (983,649), (991,78), (971,825), (971,883), (971,446), (971,163),
+  (971,486), (971,2), (983,149), (1009,332), (983,860), (977,164), (983,637), (983,811), (983,229), (983,599),
+  (991,347), (991,804), (991,87), (997,439), (991,804), (991,514), (997,661), (991,736), (1009,851), (997,179),
+  (1031,998), (1009,57), (1013,511), (1021,57), (997,541), (1009,887), (997,499), (997,2), (1019,882), (1013,98),
+  (1039,756), (1009,811), (1013,597)
+ ]
+
+/-- The certificate data attached to `n` (meaningful for `8 ≤ n ≤ 1000`). -/
+def wit (n : Nat) : Nat × Nat := witTable.getD (n - 8) (0, 0)
+
+/-- The computable check that `(p, r)` is a valid certificate for `n`. -/
+def checkPair (n p r : Nat) : Bool :=
+  (0 < p) && ((fact n + 1) % p == r) && ((List.range p).all fun x => x * x % p != r)
+
+/-- The computable check of all certificates for `n = 8, …, k + 7`. -/
+def checkAll (k : Nat) : Bool :=
+  (List.range k).all fun i => checkPair (i + 8) (wit (i + 8)).1 (wit (i + 8)).2
+
+set_option maxRecDepth 100000 in
+/-- All 993 certificates in the table are valid (checked by the kernel). -/
+theorem checkAll_true : checkAll 993 = true := by decide +kernel
+
+theorem checkPair_true_of_range {n : Nat} (h8 : 8 ≤ n) (h1000 : n ≤ 1000) :
+    checkPair n (wit n).1 (wit n).2 = true := by
+  have h := List.all_eq_true.mp checkAll_true (n - 8) (List.mem_range.mpr (by omega))
+  simpa [Nat.sub_add_cancel h8] using h
+
+/-- Every `n` with `8 ≤ n ≤ 1000` has a modular non-residue certificate. -/
+theorem certificate_of_le_1000 {n : Nat} (h8 : 8 ≤ n) (h1000 : n ≤ 1000) :
+    HasCertificate n := by
+  have h := checkPair_true_of_range h8 h1000
+  simp only [checkPair, Bool.and_eq_true, decide_eq_true_eq, beq_iff_eq,
+    List.all_eq_true, List.mem_range, bne_iff_ne, ne_eq] at h
+  obtain ⟨⟨hp, hr⟩, hx⟩ := h
+  refine ⟨(wit n).1, hp, fun x hxlt => ?_⟩
+  rw [hr]
+  exact hx x hxlt
+
+/-! ### Small values -/
+
+/-- Brocard's conjecture for `n ≤ 7`: `0! + 1 = 2`, `1! + 1 = 2`, `2! + 1 = 3`,
+`3! + 1 = 7` and `6! + 1 = 721` are not squares, while `4! + 1 = 5 ^ 2`,
+`5! + 1 = 11 ^ 2`, `7! + 1 = 71 ^ 2`. -/
+theorem brocard_small {n m : Nat} (hn : n ≤ 7) (h : fact n + 1 = m ^ 2) :
+    n = 4 ∨ n = 5 ∨ n = 7 := by
+  match n, hn with
+  | 0, _ =>
+    exact absurd h (ne_sq_of_mod_witness (a := fact 0 + 1) (p := 3) (by omega) (by decide) m)
+  | 1, _ =>
+    exact absurd h (ne_sq_of_mod_witness (a := fact 1 + 1) (p := 3) (by omega) (by decide) m)
+  | 2, _ =>
+    exact absurd h (ne_sq_of_mod_witness (a := fact 2 + 1) (p := 4) (by omega) (by decide) m)
+  | 3, _ =>
+    exact absurd h (ne_sq_of_mod_witness (a := fact 3 + 1) (p := 4) (by omega) (by decide) m)
+  | 4, _ => exact Or.inl rfl
+  | 5, _ => exact Or.inr (Or.inl rfl)
+  | 6, _ =>
+    exact absurd h (ne_sq_of_mod_witness (a := fact 6 + 1) (p := 11) (by omega) (by decide) m)
+  | 7, _ => exact Or.inr (Or.inr rfl)
+
+/-! ### The verified range and the conditional theorem -/
+
+/-- **Unconditional partial result.**  Brocard's conjecture holds for all
+`n ≤ 1000`: the only solutions of `n ! + 1 = m ^ 2` with `n ≤ 1000` are
+`n = 4, 5, 7`. -/
+theorem brocard_verified_upTo_1000 {n m : Nat} (hn : n ≤ 1000) (h : fact n + 1 = m ^ 2) :
+    n = 4 ∨ n = 5 ∨ n = 7 := by
+  by_cases h8 : n ≤ 7
+  · exact brocard_small h8 h
+  · exact absurd h (not_sq_of_certificate (certificate_of_le_1000 (by omega) hn) m)
+
+/-- **Brocard's conjecture, conditionally.**  If every `n > 1000` admits a
+modular non-residue certificate for `n ! + 1`, then the only solutions of
+`n ! + 1 = m ^ 2` are `n = 4, 5, 7`.  The range `n ≤ 1000` is verified
+unconditionally, so the hypothesis is only about `n > 1000`. -/
+theorem BrocardConjecture (H : ∀ n : Nat, 1000 < n → HasCertificate n) : BrocardStatement := by
+  intro n m h
+  by_cases hn : n ≤ 1000
+  · exact brocard_verified_upTo_1000 hn h
+  · exact absurd h (not_sq_of_certificate (H n (by omega)) m)
+
+end Brockian.BrocardProblem
+

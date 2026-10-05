@@ -30,31 +30,29 @@ Target: Brockian.MersennePerfect.MersennePrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` lines to precede any module docstring `/-! ... -/`, so the
--- header above is written as a plain block comment; its text is otherwise verbatim.)
+-- (The header above is a plain block comment rather than a module docstring `/-!`,
+-- because Lean 4 requires `import` commands to precede any module docstring.)
+
 import Mathlib
 import Archive.Wiedijk100Theorems.PerfectNumbers
 
 /-!
-The infinitude of Mersenne primes is a famous open problem, so what is established here is a
-Lean-checked **conditional reduction**: the set of Mersenne primes is infinite **if and only if**
-the set of even perfect numbers is infinite.  The main target
-`Brockian.MersennePerfect.MersennePrimeInfinitude` is the substantive direction: from the
-infinitude of even perfect numbers one obtains infinitely many primes `p` with `2 ^ p - 1` prime.
-
-The bridge is the Euclid–Euler theorem (available in Mathlib's archive as
-`Theorems100.Nat.even_and_perfect_iff`).
+The unconditional statement "there are infinitely many Mersenne primes" is a famous open
+problem, so what is proved here is a Lean-checked *reduction*: the set of Mersenne prime
+exponents is infinite **iff** the set of even perfect numbers is infinite.  The reduction
+goes through the Euclid–Euler correspondence.
 -/
 
 namespace Brockian.MersennePerfect
 
-/-- `p` is a *Mersenne exponent* when `mersenne p = 2 ^ p - 1` is prime. -/
+/-- The set of exponents `p` for which `mersenne p = 2 ^ p - 1` is prime. -/
 
-theorem image_subset_evenPerfects :
-    (fun k : ℕ => 2 ^ k * mersenne (k + 1)) '' {k : ℕ | MersenneExponent (k + 1)} ⊆
-      evenPerfects := by
-  rintro n ⟨k, hk, rfl⟩
-  exact evenPerfect_iff.2 ⟨k, hk, rfl⟩
+lemma image_subset_evenPerfects :
+    euclidPerfect '' MersenneExponents ⊆ EvenPerfects := by
+  rintro n ⟨p, hp, rfl⟩
+  exact euclidPerfect_mem_evenPerfects hp
 
-/-- If there are infinitely many even perfect numbers, then there are infinitely many
-Mersenne exponents. -/
+/-- **Mersenne prime infinitude, reduced to even perfect numbers.**
+There are infinitely many Mersenne primes (equivalently, infinitely many exponents `p` with
+`2 ^ p - 1` prime) if and only if there are infinitely many even perfect numbers.
+Both implications go through the Euclid–Euler correspondence `p ↦ 2 ^ (p - 1) * (2 ^ p - 1)`. -/

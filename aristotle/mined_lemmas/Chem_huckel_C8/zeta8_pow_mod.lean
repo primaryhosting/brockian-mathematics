@@ -1,28 +1,27 @@
+/-
+# Huckel C 8
+Category: Chemistry
+Target: Chem.huckel_C8
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option grind.warning false
+/-!
+# Huckel C 8
+Category: Chemistry
+Target: Chem.huckel_C8
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace Chem
 
-open Polynomial
+/-- The adjacency matrix of the cycle graph `C₈`, indexed by `ZMod 8`
+(vertex `i` is adjacent to `i + 1` and `i - 1`), with complex entries. -/
 
-/-- A primitive 8-th root of unity. -/
-
-theorem zeta8_pow_mod (n : ℕ) : zeta8 ^ (n % 8) = zeta8 ^ n := by
-  conv_rhs => rw [← Nat.div_add_mod n 8]
+lemma zeta8_pow_mod (m : ℕ) : zeta8 ^ (m % 8) = zeta8 ^ m := by
+  conv_rhs => rw [← Nat.div_add_mod m 8]
   rw [pow_add, pow_mul, zeta8_pow_eight, one_pow, one_mul]
 
+/-- The additive character `x ↦ ζ₈ˣ` on `ZMod 8`. -/

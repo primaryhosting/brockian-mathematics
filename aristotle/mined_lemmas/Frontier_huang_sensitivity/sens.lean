@@ -1,23 +1,34 @@
-import RequestProject.Degree
+/-
+# Huang Sensitivity
+Category: Frontier — Fields Medal Work
+Target: Frontier.huang_sensitivity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-open Finset
+import Mathlib
+
+/-!
+# Huang Sensitivity
+Category: Frontier — Fields Medal Work
+Target: Frontier.huang_sensitivity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 8000
 
 namespace Frontier
 
-/-! # Huang's sensitivity theorem: `s(f) ≥ √(deg f)`
+/-! ## Basic definitions for Boolean functions on the hypercube -/
 
-Using the full-degree case `Frontier.huang_sensitivity` together with a restriction argument
-to a subcube, we obtain the general statement: the sensitivity of a Boolean function is at
-least the square root of its degree.
--/
+/-- The character `χ_S(x) = ∏_{i ∈ S} (-1)^{x i}`, valued in `ℤ`. -/
 
-section Coeff
+def sens {n : ℕ} (f : (Fin n → Bool) → Bool) : ℕ :=
+  (Finset.univ : Finset (Fin n → Bool)).sup (sensAt f)
 
-variable {n : ℕ}
+/-! ## Elementary facts about coordinate flips -/
 
-/-- Uniqueness of the multilinear representation. -/
-
-def sens (f : Q n → Bool) (x : Q n) : ℕ :=
-  (univ.filter (fun i : Fin n => f (flipAt x i) ≠ f x)).card
-
-/-- The sensitivity of a Boolean function. -/

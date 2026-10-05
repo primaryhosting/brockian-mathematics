@@ -1,40 +1,39 @@
-import Mathlib
-
-/-!
-# No machine can always correctly predict its own next output
-
-This file formalises the diagonal self-reference argument showing that no machine can
-always correctly predict its own output before producing it.
-
-* `Frontier.self_nonprediction_abstract` is the abstract "base case": in any system of
-  machines in which the diagonal machine (the one that runs the predictor on itself and
-  then outputs something different) exists, the predictor must be wrong somewhere.
-* `Frontier.self_nonprediction` is the concrete instance for actual machines: for every
-  *computable* predictor `P` assigning to each program `c` a guess `P c` at the value that
-  `c` itself outputs (on input `0`), there is a program `c` whose own output is not
-  `P c` (it either diverges or outputs a different number).  The diagonal machine is
-  produced by Kleene's recursion theorem (`Nat.Partrec.Code.fixed_point`).
+/-
+# Self Nonprediction
+Category: Frontier Mind
+Target: Frontier.self_nonprediction
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib.Computability.PartrecCode
 
 namespace Frontier
 
 open Nat.Partrec Nat.Partrec.Code
 
-/-- Abstract diagonal argument: if `out` gives the output of each machine, `P` is a
-predictor, and there is a machine `d` that outputs something different from `P d`
-(the diagonal machine), then `P` mispredicts some machine. -/
+/-- **Self nonprediction.**
 
-theorem self_nonprediction {P : Code → ℕ} (hP : Computable P) :
-    ∃ c : Code, eval c 0 ≠ Part.some (P c) := by
-  -- The diagonal machine: on any input it outputs `P c + 1`, one more than the prediction
-  -- made for it.
-  have hf : Computable fun c : Code => Code.const (P c + 1) :=
-    (Code.primrec_const.to_comp).comp (Primrec.succ.to_comp.comp hP)
-  obtain ⟨c, hc⟩ := fixed_point hf
-  refine ⟨c, ?_⟩
-  have h0 : eval c 0 = Part.some (P c + 1) := by
-    rw [← hc]; simp [eval_const]
-  rw [h0]
+No machine can always correctly predict its own next output before producing it.
+
+Formalisation: machines are indices (`Nat.Partrec.Code`) for partial recursive functions, and a
+*predictor* is any total computable map `predict : Code → ℕ` assigning to each machine the value it
+is predicted to output.  Then some machine `c` refutes the predictor *about itself*: `c` halts on
+every input, and its actual output `predict c + 1` differs from the prediction `predict c` that the
+predictor makes about `c`.
+
+The proof is the diagonal self-reference argument, using Kleene's second recursion theorem
+(`Nat.Partrec.Code.fixed_point₂`): build the machine that consults the predictor about its own code
+and then outputs something else. -/
+
+theorem self_nonprediction {predict : Code → ℕ} (hp : Computable predict) :
+    ∃ c : Code, ∀ n : ℕ, eval c n = Part.some (predict c + 1) ∧ predict c ∉ eval c n := by
+  obtain ⟨c, hc⟩ :=
+    fixed_point₂ (f := fun (c : Code) (_ : ℕ) => (Part.some (predict c + 1) : Part ℕ))
+      (Computable₂.partrec₂
+        ((Computable.succ.comp hp).comp Computable.fst))
+  refine ⟨c, fun n => ⟨by rw [hc], ?_⟩⟩
+  rw [hc]
   simp
 
 end Frontier

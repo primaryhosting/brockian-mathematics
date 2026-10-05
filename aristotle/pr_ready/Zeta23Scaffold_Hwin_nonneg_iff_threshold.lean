@@ -9,29 +9,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace Zeta23Scaffold
-
-/-- The "window" function `H(λ) = 2 - 1/λ - λ/3`. -/
-noncomputable def Hwin (lam : ℝ) : ℝ := 2 - 1 / lam - lam / 3
-
-/-- On `0 < λ ≤ 1`, we have `H(λ) ≥ 0` iff `λ ≥ 3 - √6 = 0.5505…`. -/
-theorem Hwin_nonneg_iff_threshold (lam : ℝ) (hpos : 0 < lam) (hle : lam ≤ 1) :
-    0 ≤ Hwin lam ↔ 3 - Real.sqrt 6 ≤ lam := by
-  have h6 : (Real.sqrt 6) ^ 2 = 6 := Real.sq_sqrt (by norm_num)
-  have key : Hwin lam * (3 * lam) = -(lam ^ 2 - 6 * lam + 3) := by
-    rw [Hwin]; field_simp; ring
-  have h3lam : 0 < 3 * lam := by linarith
-  constructor
-  · intro h
-    have hq : lam ^ 2 - 6 * lam + 3 ≤ 0 := by
-      nlinarith [mul_nonneg h (le_of_lt h3lam)]
-    nlinarith [h6, Real.sqrt_nonneg 6]
-  · intro h
-    have hq : lam ^ 2 - 6 * lam + 3 ≤ 0 := by nlinarith [h6]
-    have hmul : 0 ≤ Hwin lam * (3 * lam) := by rw [key]; linarith
-    exact nonneg_of_mul_nonneg_right (by linarith [hmul, mul_comm (Hwin lam) (3 * lam)]) h3lam
-
-end Zeta23Scaffold
+/-
+# Hwin Nonneg Iff Threshold
+Category: A Assembly
+Target: Zeta23Scaffold.Hwin_nonneg_iff_threshold
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
@@ -48,12 +32,25 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+namespace Zeta23Scaffold
+
+/-- The window function `H(λ) = 2 - 1/λ - λ/3`. -/
+noncomputable def Hwin (lam : ℝ) : ℝ := 2 - 1 / lam - lam / 3
+
+/-- On `0 < λ ≤ 1`, `H(λ) ≥ 0` iff `λ ≥ 3 - √6` (with `3 - √6 = 0.5505...`). -/
+theorem Hwin_nonneg_iff_threshold (lam : ℝ) (hpos : 0 < lam) (hle : lam ≤ 1) :
+    0 ≤ Hwin lam ↔ 3 - Real.sqrt 6 ≤ lam := by
+  have h6 : (Real.sqrt 6) ^ 2 = 6 := Real.sq_sqrt (by norm_num)
+  have hnn : 0 ≤ Real.sqrt 6 := Real.sqrt_nonneg 6
+  have hlt3 : Real.sqrt 6 < 3 := by nlinarith
+  have hgt2 : (2 : ℝ) < Real.sqrt 6 := by nlinarith
+  have h3 : (0 : ℝ) < 3 * lam := by linarith
+  have hx : Hwin lam = (-(lam ^ 2 - 6 * lam + 3)) / (3 * lam) := by
+    unfold Hwin; field_simp; ring
+  rw [hx, le_div_iff₀ h3]
+  constructor <;> intro h <;> nlinarith
+
+end Zeta23Scaffold
 

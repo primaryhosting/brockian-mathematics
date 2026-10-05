@@ -9,59 +9,49 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 open scoped BigOperators
-open scoped Real
 open scoped Nat
-open scoped Classical
-open scoped Pointwise
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
+set_option maxHeartbeats 1000000
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-open ArithmeticFunction
-open scoped ArithmeticFunction.sigma
-
 namespace Brockian
-
 namespace BetrothedNumbers
 
-/-- `m` and `n` form a *betrothed* (quasi-amicable) pair:
-both are positive and `σ m = σ n = m + n + 1`. -/
+open ArithmeticFunction Finset
 
-lemma prod_le_four_mul_prod_pred {S : Finset ℕ} (hS : ∀ p ∈ S, p.Prime) (hcard : S.card ≤ 3) :
-    ∏ p ∈ S, p ≤ 4 * ∏ p ∈ S, (p - 1) := by
-  have h : S.card = 0 ∨ S.card = 1 ∨ S.card = 2 ∨ S.card = 3 := by omega
-  rcases h with h | h | h | h
-  · rw [Finset.card_eq_zero] at h; subst h; simp
-  · obtain ⟨a, rfl⟩ := Finset.card_eq_one.mp h
-    simp only [Finset.prod_singleton]
-    have := (hS a (by simp)).two_le
-    omega
-  · obtain ⟨a, b, hab, rfl⟩ := Finset.card_eq_two.mp h
-    rw [Finset.prod_pair hab, Finset.prod_pair hab]
-    exact two_bound_sym (hS a (by simp)) (hS b (by simp)) hab
-  · obtain ⟨a, b, c, hab, hac, hbc, rfl⟩ := Finset.card_eq_three.mp h
-    have ha := hS a (by simp)
-    have hb := hS b (by simp)
-    have hc := hS c (by simp)
-    rw [Finset.prod_insert (by simp [hab, hac]), Finset.prod_insert (by simp [hbc]),
-      Finset.prod_singleton, Finset.prod_insert (by simp [hab, hac]),
-      Finset.prod_insert (by simp [hbc]), Finset.prod_singleton]
-    calc a * (b * c) = a * b * c := by ring
-      _ ≤ 4 * ((a - 1) * (b - 1) * (c - 1)) := three_bound_sym ha hb hc hab hac hbc
-      _ = 4 * ((a - 1) * ((b - 1) * (c - 1))) := by ring
+/-- `Betrothed m n` says that `m` and `n` are *betrothed* (quasi-amicable) numbers:
+both are positive and each one's sum of divisors equals `m + n + 1`. -/
 
-/-- A number with at most three distinct prime factors is not `4`-abundant. -/
+lemma prod_le_four_mul_prod_pred {P : Finset ℕ} (hP : ∀ p ∈ P, p.Prime) (h3 : P.card ≤ 3) :
+    ∏ p ∈ P, p ≤ 4 * ∏ p ∈ P, (p - 1) := by
+  rcases lt_or_ge P.card 3 with hlt | hge
+  · -- crude bound `p ≤ 2 * (p - 1)`, giving `∏ p ≤ 2 ^ card * ∏ (p - 1) ≤ 4 * ∏ (p - 1)`
+    have hstep : ∏ p ∈ P, p ≤ ∏ p ∈ P, (2 * (p - 1)) := by
+      refine Finset.prod_le_prod' ?_
+      intro p hp
+      have := (hP p hp).two_le
+      omega
+    have hsplit : ∏ p ∈ P, (2 * (p - 1)) = 2 ^ P.card * ∏ p ∈ P, (p - 1) := by
+      rw [Finset.prod_mul_distrib, Finset.prod_const]
+    have hpow : (2:ℕ) ^ P.card ≤ 4 := by
+      calc (2:ℕ) ^ P.card ≤ 2 ^ 2 := Nat.pow_le_pow_right (by norm_num) (by omega)
+        _ = 4 := by norm_num
+    calc ∏ p ∈ P, p ≤ 2 ^ P.card * ∏ p ∈ P, (p - 1) := by rw [← hsplit]; exact hstep
+      _ ≤ 4 * ∏ p ∈ P, (p - 1) := Nat.mul_le_mul_right _ hpow
+  · have hc : P.card = 3 := le_antisymm h3 hge
+    obtain ⟨a, b, c, hab, hac, hbc, rfl⟩ := Finset.card_eq_three.mp hc
+    have ha : a.Prime := hP a (by simp)
+    have hb : b.Prime := hP b (by simp)
+    have hcp : c.Prime := hP c (by simp)
+    have h1 : ∏ p ∈ ({a, b, c} : Finset ℕ), p = a * b * c := by
+      rw [Finset.prod_insert (by simp [hab, hac]), Finset.prod_insert (by simp [hbc]),
+        Finset.prod_singleton, ← mul_assoc]
+    have h2 : ∏ p ∈ ({a, b, c} : Finset ℕ), (p - 1) = (a - 1) * ((b - 1) * (c - 1)) := by
+      rw [Finset.prod_insert (by simp [hab, hac]), Finset.prod_insert (by simp [hbc]),
+        Finset.prod_singleton]
+    rw [h1, h2, ← mul_assoc (a - 1) (b - 1) (c - 1)]
+    exact three_primes_distinct ha hb hcp hab hac hbc
+
+/-- If `σ(N) > 4N` then `N` has at least four distinct prime factors. -/

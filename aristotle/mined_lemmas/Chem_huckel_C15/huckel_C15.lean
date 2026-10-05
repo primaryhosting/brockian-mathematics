@@ -1,48 +1,19 @@
+/-
+# Huckel C 15
+Category: Chemistry
+Target: Chem.huckel_C15
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
-# Hückel spectrum of the cycle graph `C₁₅`
-
-The eigenvalues of the adjacency matrix of the cycle graph `C₁₅` (the Hückel spectrum of a
-15-membered annulene, in units of β above α) are exactly the numbers `2 cos (2πk/15)`
-for `k = 0, …, 14`.
-
-The proof writes the adjacency matrix as `S + S¹⁴`, where `S` is the cyclic shift permutation
-matrix, identifies the spectrum of `S` with the set of 15-th roots of unity, and then applies
-the polynomial spectral mapping theorem over `ℂ`.
+# Huckel C 15
+Category: Chemistry
+Target: Chem.huckel_C15
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Chem
-
-open Matrix Polynomial Complex
-
-/-- The cyclic shift permutation matrix on `Fin 15`: `shift i j = 1` iff `i - 1 = j`. -/
-
-theorem huckel_C15 :
-    spectrum ℂ ((SimpleGraph.cycleGraph 15).adjMatrix ℂ) =
-      Set.range fun k : Fin 15 => ((2 * Real.cos (2 * Real.pi * k / 15) : ℝ) : ℂ) := by
-  have hp : (SimpleGraph.cycleGraph 15).adjMatrix ℂ = aeval shift (X + X ^ 14 : ℂ[X]) := by
-    simp [adjMatrix_eq]
-  have hdeg : 0 < (X + X ^ 14 : ℂ[X]).degree := by
-    have h : (X + X ^ 14 : ℂ[X]).degree = 14 := by compute_degree!
-    rw [h]; decide
-  rw [hp, spectrum.map_polynomial_aeval_of_degree_pos shift _ hdeg, spectrum_shift]
-  have hprim := Complex.isPrimitiveRoot_exp 15 (by norm_num)
-  ext μ
-  constructor
-  · rintro ⟨ν, hν, rfl⟩
-    obtain ⟨k, hk, rfl⟩ := hprim.eq_pow_of_pow_eq_one hν
-    refine ⟨⟨k, hk⟩, ?_⟩
-    simpa using (add_pow_fourteen_eq_two_cos k).symm
-  · rintro ⟨k, rfl⟩
-    refine ⟨(Complex.exp (2 * Real.pi * Complex.I / 15)) ^ (k : ℕ), ?_, ?_⟩
-    · show _ ^ 15 = 1
-      rw [← pow_mul, mul_comm (k : ℕ) 15, pow_mul, exp_pow_fifteen, one_pow]
-    · simpa using add_pow_fourteen_eq_two_cos (k : ℕ)
-
-end Chem
-
-import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -58,12 +29,56 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+namespace Chem
+
+open Finset SimpleGraph
+
+/-- A primitive 15-th root of unity. -/
+
+theorem huckel_C15 (μ : ℂ) :
+    (∃ v : Fin 15 → ℂ, v ≠ 0 ∧
+        ((cycleGraph 15).adjMatrix ℂ).mulVec v = μ • v) ↔
+      ∃ k : Fin 15, μ = 2 * Real.cos (2 * Real.pi * (k : ℕ) / 15) := by
+  constructor
+  · rintro ⟨v, hv, hA⟩
+    have heig : ∀ i : Fin 15, v (i - 1) + v (i + 1) = μ * v i := by
+      intro i
+      have h := congrFun hA i
+      rw [adj_mulVec] at h
+      simpa using h
+    have hex : ∃ k : Fin 15, (∑ i : Fin 15, chi (-((k : ℕ) : ℤ)) i * v i) ≠ 0 := by
+      by_contra hcon
+      push_neg at hcon
+      apply hv
+      funext j
+      have hinv := dft_inversion v j
+      rw [Finset.sum_congr rfl (fun k _ => by rw [hcon k, mul_zero])] at hinv
+      simp only [Finset.sum_const, smul_zero] at hinv
+      have : (15 : ℂ) * v j = 0 := hinv.symm
+      simpa using this
+    obtain ⟨k, hk⟩ := hex
+    refine ⟨k, ?_⟩
+    have key := dft_eigen v μ heig k
+    have hμ : μ = W ((k : ℕ) : ℤ) + W (-((k : ℕ) : ℤ)) := mul_right_cancel₀ hk key
+    rw [hμ, W_val_add_neg]
+  · rintro ⟨k, rfl⟩
+    refine ⟨fun j => chi ((k : ℕ) : ℤ) j, ?_, ?_⟩
+    · intro hzero
+      have h0 : chi ((k : ℕ) : ℤ) 0 = 0 := congrFun hzero 0
+      rw [chi_zero] at h0
+      exact one_ne_zero h0
+    · funext j
+      rw [adj_mulVec]
+      simp only [Pi.smul_apply, smul_eq_mul]
+      rw [← W_val_add_neg k]
+      have hj : j = (j - 1) + 1 := by simp
+      set i : Fin 15 := j - 1 with hi
+      rw [hj]
+      simp only [chi_step]
+      have h1 : W ((k : ℕ) : ℤ) * W (-((k : ℕ) : ℤ)) = 1 := W_mul_neg _
+      linear_combination (-(chi ((k : ℕ) : ℤ) i)) * h1
+
+end Chem
 

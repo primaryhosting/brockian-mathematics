@@ -1,52 +1,41 @@
+/-
+# Huckel C 14
+Category: Chemistry
+Target: Chem.huckel_C14
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Hückel theory for the C₁₄ ring
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+The adjacency eigenvalues of the cycle graph `C₁₄` are exactly the numbers
+`2 * cos (2πk/14)` for `k = 0, …, 13`.
+-/
 
 namespace Chem
 
-open Matrix SimpleGraph
+open Finset Complex
 
-/-- The adjacency matrix of the cycle graph `C₁₄`, viewed with vertex set `ZMod 14`
-(which is definitionally `Fin 14`). -/
+/-- A primitive 14-th root of unity. -/
 
-lemma sum_ch (c : ZMod 14) : (∑ j : ZMod 14, ch (j * c)) = if c = 0 then 14 else 0 := by
-  by_cases hc : c = 0
-  · subst hc; simp [ch_zero]
-  · simp only [hc, if_false]
-    set S : ℂ := ∑ j : ZMod 14, ch (j * c) with hS
-    have hshift : ch c * S = S := by
-      rw [hS, Finset.mul_sum]
-      have : ∀ j : ZMod 14, ch c * ch (j * c) = ch ((j + 1) * c) := by
-        intro j
-        rw [← ch_add]
-        ring_nf
-      rw [Finset.sum_congr rfl (fun j _ => this j)]
-      exact Fintype.sum_equiv (Equiv.addRight (1 : ZMod 14)) _ _ (fun j => rfl)
-    have hne : ch c ≠ 1 := fun h => hc ((ch_eq_one_iff c).1 h)
-    have : (ch c - 1) * S = 0 := by linear_combination hshift
-    rcases mul_eq_zero.1 this with h | h
-    · exact absurd (sub_eq_zero.1 h) hne
+lemma sum_ch (d : Fin 14) : ∑ k : Fin 14, ch (k * d) = if d = 0 then 14 else 0 := by
+  by_cases hd : d = 0
+  · subst hd
+    simp [ch_zero]
+  · simp only [hd, if_false]
+    set S := ∑ k : Fin 14, ch (k * d) with hS
+    have key : ch d * S = S := by
+      calc ch d * S = ∑ k : Fin 14, ch ((k + 1) * d) := by
+            rw [hS, Finset.mul_sum]
+            refine Finset.sum_congr rfl (fun k _ => ?_)
+            rw [add_mul, one_mul, ch_add, mul_comm]
+        _ = S := Fintype.sum_equiv (Equiv.addRight (1 : Fin 14)) _ _ (fun k => rfl)
+    have hz : (ch d - 1) * S = 0 := by rw [sub_mul, one_mul, key, sub_self]
+    rcases mul_eq_zero.1 hz with h | h
+    · exact absurd ((ch_eq_one_iff d).1 (by linear_combination h)) hd
     · exact h
 
-/-- The (unnormalised) discrete Fourier matrix. -/
+/-- The discrete Fourier coefficients of a function on `Fin 14`. -/

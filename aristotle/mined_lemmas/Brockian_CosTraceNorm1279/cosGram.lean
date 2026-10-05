@@ -1,5 +1,3 @@
-import Mathlib
-
 /-!
 # Cos Trace Norm 1279
 Category: Brockian Corpus
@@ -7,6 +5,8 @@ Target: Brockian.CosTraceNorm1279
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,9 +33,12 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- The cosine Gram matrix of a family of angles: `C i j = cos (θ i - θ j)`. -/
+open Matrix
 
-noncomputable def cosGram (n : ℕ) (θ : Fin n → ℝ) : Matrix (Fin n) (Fin n) ℝ :=
-  Matrix.of fun i j => Real.cos (θ i - θ j)
+/-- The "cosine kernel" matrix attached to a family of angles `x : Fin n → ℝ`:
+its `(i, j)` entry is `cos (x i - x j)`. -/
 
-/-- The `2 × n` matrix whose columns are the unit vectors `(cos θ j, sin θ j)`. -/
+noncomputable def cosGram {n : ℕ} (x : Fin n → ℝ) : Matrix (Fin n) (Fin n) ℝ :=
+  Matrix.of fun i j => Real.cos (x i - x j)
+
+/-- The `n × 2` matrix whose rows are the unit vectors `(cos (x i), sin (x i))`. -/

@@ -1,5 +1,4 @@
 import Mathlib
-
 /-!
 # Instance 1000
 Category: Frontier — Prime Numbers
@@ -10,7 +9,8 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Goldbach
 
-/-- 1000 is a sum of two primes: `3` and `997` are prime and `3 + 997 = 1000`. -/
+/-- **Goldbach instance for 1000**: `1000` is a sum of two primes, namely
+`3` and `997`. -/
 
 theorem instance_1000 : Nat.Prime 3 ∧ Nat.Prime 997 ∧ 3 + 997 = 1000 :=
   ⟨by norm_num, by norm_num, by norm_num⟩

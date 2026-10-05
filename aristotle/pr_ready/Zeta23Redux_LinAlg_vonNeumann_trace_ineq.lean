@@ -10,172 +10,6 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 open scoped BigOperators
-open Matrix
-
-namespace Zeta23Redux.LinAlg
-
-variable {n : Type*} [Fintype n] [DecidableEq n]
-
-/-- The squared moduli along a row of a unitary matrix sum to `1`. -/
-lemma sum_sq_norm_row (T : Matrix n n ℂ) (h : T * Tᴴ = 1) (i : n) :
-    ∑ j, ‖T i j‖ ^ 2 = 1 := by
-  have h1 : (T * Tᴴ) i i = 1 := by rw [h]; simp
-  have h2 : ((∑ j, ‖T i j‖ ^ 2 : ℝ) : ℂ) = 1 := by
-    rw [← h1]; simp [Matrix.mul_apply, Matrix.conjTranspose_apply, Complex.mul_conj']
-  exact_mod_cast h2
-
-/-- The squared moduli along a column of a unitary matrix sum to `1`. -/
-lemma sum_sq_norm_col (T : Matrix n n ℂ) (h : Tᴴ * T = 1) (j : n) :
-    ∑ i, ‖T i j‖ ^ 2 = 1 := by
-  have h1 : (Tᴴ * T) j j = 1 := by rw [h]; simp
-  have h2 : ((∑ i, ‖T i j‖ ^ 2 : ℝ) : ℂ) = 1 := by
-    rw [← h1]; simp [Matrix.mul_apply, Matrix.conjTranspose_apply, mul_comm, Complex.mul_conj']
-  exact_mod_cast h2
-
-/-- The basic bilinear identity: the trace of `diagonal lam * T * diagonal xi * Tᴴ` is the real
-bilinear form in `lam` and `xi` given by the entrywise squared moduli of `T`. -/
-lemma trace_diag_mul_diag (lam xi : n → ℝ) (T : Matrix n n ℂ) :
-    (diagonal (fun i => (lam i : ℂ)) * T * diagonal (fun j => (xi j : ℂ)) * Tᴴ).trace
-      = ((∑ i, ∑ j, lam i * xi j * ‖T i j‖ ^ 2 : ℝ) : ℂ) := by
-  rw [Matrix.trace]
-  push_cast
-  refine Finset.sum_congr rfl fun i _ => ?_
-  simp only [Matrix.diag_apply, Matrix.mul_apply, Matrix.conjTranspose_apply, Matrix.diagonal_apply,
-    ite_mul, zero_mul, mul_ite, mul_zero, Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ,
-    if_true]
-  refine Finset.sum_congr rfl fun j _ => ?_
-  rw [Complex.star_def]
-  linear_combination ((lam i : ℂ) * (xi j : ℂ)) * Complex.mul_conj' (T i j)
-
-/-- Rearrangement against a doubly stochastic matrix: for monovarying `mu`, `nu`, the bilinear
-form `∑ i, ∑ j, mu i * nu j * S i j` is maximised at the identity.  This is Birkhoff's theorem
-combined with the rearrangement inequality. -/
-lemma sum_bilin_le_of_doublyStochastic (mu nu : n → ℝ) (hmn : Monovary mu nu)
-    (S : Matrix n n ℝ) (hS : S ∈ doublyStochastic ℝ n) :
-    ∑ i, ∑ j, mu i * nu j * S i j ≤ ∑ i, mu i * nu i := by
-  obtain ⟨w, hw0, hw1, hwS⟩ := exists_eq_sum_perm_of_mem_doublyStochastic hS
-  have hSij : ∀ i j, S i j = ∑ σ : Equiv.Perm n, w σ * (σ.permMatrix ℝ) i j := by
-    intro i j
-    rw [← hwS]
-    simp [Matrix.sum_apply]
-  have hinner : ∀ (σ : Equiv.Perm n) (i : n),
-      ∑ j, mu i * nu j * (w σ * (σ.permMatrix ℝ) i j) = w σ * (mu i * nu (σ i)) := by
-    intro σ i
-    simp [Equiv.Perm.permMatrix, PEquiv.toMatrix_apply, Equiv.toPEquiv_apply, mul_comm,
-      mul_left_comm]
-  have key : ∑ i, ∑ j, mu i * nu j * S i j
-      = ∑ σ : Equiv.Perm n, w σ * ∑ i, mu i * nu (σ i) := by
-    calc ∑ i, ∑ j, mu i * nu j * S i j
-        = ∑ i, ∑ j, ∑ σ : Equiv.Perm n, mu i * nu j * (w σ * (σ.permMatrix ℝ) i j) := by
-          simp only [hSij, Finset.mul_sum]
-      _ = ∑ i, ∑ σ : Equiv.Perm n, ∑ j, mu i * nu j * (w σ * (σ.permMatrix ℝ) i j) :=
-          Finset.sum_congr rfl fun i _ => Finset.sum_comm
-      _ = ∑ σ : Equiv.Perm n, ∑ i, ∑ j, mu i * nu j * (w σ * (σ.permMatrix ℝ) i j) :=
-          Finset.sum_comm
-      _ = ∑ σ : Equiv.Perm n, w σ * ∑ i, mu i * nu (σ i) := by
-          refine Finset.sum_congr rfl fun σ _ => ?_
-          rw [Finset.mul_sum]
-          exact Finset.sum_congr rfl fun i _ => hinner σ i
-  rw [key]
-  calc ∑ σ : Equiv.Perm n, w σ * ∑ i, mu i * nu (σ i)
-      ≤ ∑ _σ : Equiv.Perm n, w _σ * ∑ i, mu i * nu i :=
-        Finset.sum_le_sum fun σ _ =>
-          mul_le_mul_of_nonneg_left hmn.sum_mul_comp_perm_le_sum_mul (hw0 σ)
-    _ = ∑ i, mu i * nu i := by rw [← Finset.sum_mul, hw1, one_mul]
-
-/-- Von Neumann's trace inequality, in the form where the two Hermitian matrices are given
-explicitly as unitary conjugates of real diagonal matrices, and `mu`, `nu` are arbitrary
-rearrangements of the diagonals that monovary. -/
-lemma vonNeumann_aux (U V : Matrix n n ℂ) (hUU : Uᴴ * U = 1) (hUU' : U * Uᴴ = 1)
-    (hVV : Vᴴ * V = 1) (hVV' : V * Vᴴ = 1) (lam xi mu nu : n → ℝ) (sA sB : Equiv.Perm n)
-    (hmu : mu = lam ∘ sA) (hnu : nu = xi ∘ sB) (hmn : Monovary mu nu) :
-    ((U * diagonal (fun i => (lam i : ℂ)) * Uᴴ) *
-      (V * diagonal (fun i => (xi i : ℂ)) * Vᴴ)).trace.re ≤ ∑ i, mu i * nu i := by
-  set T : Matrix n n ℂ := Uᴴ * V with hTdef
-  have hT : Tᴴ = Vᴴ * U := by simp [hTdef, Matrix.conjTranspose_mul]
-  have hTT : T * Tᴴ = 1 := by
-    rw [hT, hTdef]
-    calc Uᴴ * V * (Vᴴ * U) = Uᴴ * (V * Vᴴ) * U := by simp [Matrix.mul_assoc]
-      _ = 1 := by rw [hVV']; simp [hUU]
-  have hTT' : Tᴴ * T = 1 := by
-    rw [hT, hTdef]
-    calc Vᴴ * U * (Uᴴ * V) = Vᴴ * (U * Uᴴ) * V := by simp [Matrix.mul_assoc]
-      _ = 1 := by rw [hUU']; simp [hVV]
-  have hX : (U * diagonal (fun i => (lam i : ℂ)) * Uᴴ) *
-      (V * diagonal (fun i => (xi i : ℂ)) * Vᴴ)
-      = U * (diagonal (fun i => (lam i : ℂ)) * (Uᴴ * V) *
-          diagonal (fun i => (xi i : ℂ)) * Vᴴ) := by
-    simp [Matrix.mul_assoc]
-  have hXU : (diagonal (fun i => (lam i : ℂ)) * (Uᴴ * V) *
-      diagonal (fun i => (xi i : ℂ)) * Vᴴ) * U
-      = diagonal (fun i => (lam i : ℂ)) * T * diagonal (fun i => (xi i : ℂ)) * Tᴴ := by
-    rw [hT, hTdef]; simp [Matrix.mul_assoc]
-  have htr : ((U * diagonal (fun i => (lam i : ℂ)) * Uᴴ) *
-      (V * diagonal (fun i => (xi i : ℂ)) * Vᴴ)).trace
-      = ((∑ i, ∑ j, lam i * xi j * ‖T i j‖ ^ 2 : ℝ) : ℂ) := by
-    rw [hX, Matrix.trace_mul_comm, hXU, trace_diag_mul_diag]
-  rw [htr, Complex.ofReal_re]
-  set S : Matrix n n ℝ := Matrix.of fun a b => ‖T (sA a) (sB b)‖ ^ 2 with hSdef
-  have hSmem : S ∈ doublyStochastic ℝ n := by
-    rw [mem_doublyStochastic_iff_sum]
-    refine ⟨fun i j => ?_, fun a => ?_, fun b => ?_⟩
-    · simp only [hSdef, Matrix.of_apply]
-      positivity
-    · have := Equiv.sum_comp sB (fun j => ‖T (sA a) j‖ ^ 2)
-      simpa [hSdef] using this.trans (sum_sq_norm_row T hTT (sA a))
-    · have := Equiv.sum_comp sA (fun i => ‖T i (sB b)‖ ^ 2)
-      simpa [hSdef] using this.trans (sum_sq_norm_col T hTT' (sB b))
-  have hreindex : ∑ i, ∑ j, lam i * xi j * ‖T i j‖ ^ 2 = ∑ a, ∑ b, mu a * nu b * S a b := by
-    rw [← Equiv.sum_comp sA (fun i => ∑ j, lam i * xi j * ‖T i j‖ ^ 2)]
-    refine Finset.sum_congr rfl fun a _ => ?_
-    rw [← Equiv.sum_comp sB (fun j => lam (sA a) * xi j * ‖T (sA a) j‖ ^ 2)]
-    simp [hmu, hnu, hSdef]
-  rw [hreindex]
-  exact sum_bilin_le_of_doublyStochastic mu nu hmn S hSmem
-
-/-- **Von Neumann's trace inequality** for Hermitian matrices.
-If `mu` and `nu` list the eigenvalues of the Hermitian matrices `A` and `B` respectively,
-both in the same (decreasing) order, then `Re (tr (A * B)) ≤ ∑ i, mu i * nu i`. -/
-theorem vonNeumann_trace_ineq {d : ℕ} {A B : Matrix (Fin d) (Fin d) ℂ}
-    (hA : A.IsHermitian) (hB : B.IsHermitian) (mu nu : Fin d → ℝ)
-    (sA sB : Equiv.Perm (Fin d))
-    (hmu : mu = hA.eigenvalues ∘ sA) (hnu : nu = hB.eigenvalues ∘ sB)
-    (hmuAnti : Antitone mu) (hnuAnti : Antitone nu) :
-    (A * B).trace.re ≤ ∑ i, mu i * nu i := by
-  have hUU : (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ)ᴴ *
-      (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) = 1 := by
-    simpa [Matrix.star_eq_conjTranspose] using
-      Unitary.star_mul_self_of_mem hA.eigenvectorUnitary.2
-  have hUU' : (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) *
-      (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ)ᴴ = 1 := by
-    simpa [Matrix.star_eq_conjTranspose] using
-      Unitary.mul_star_self_of_mem hA.eigenvectorUnitary.2
-  have hVV : (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ)ᴴ *
-      (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) = 1 := by
-    simpa [Matrix.star_eq_conjTranspose] using
-      Unitary.star_mul_self_of_mem hB.eigenvectorUnitary.2
-  have hVV' : (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) *
-      (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ)ᴴ = 1 := by
-    simpa [Matrix.star_eq_conjTranspose] using
-      Unitary.mul_star_self_of_mem hB.eigenvectorUnitary.2
-  have hAeq : A = (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) *
-      diagonal (fun i => ((hA.eigenvalues i : ℝ) : ℂ)) *
-      (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ)ᴴ := by
-    conv_lhs => rw [hA.spectral_theorem]
-    simp [Matrix.star_eq_conjTranspose, Function.comp_def]
-  have hBeq : B = (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) *
-      diagonal (fun i => ((hB.eigenvalues i : ℝ) : ℂ)) *
-      (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ)ᴴ := by
-    conv_lhs => rw [hB.spectral_theorem]
-    simp [Matrix.star_eq_conjTranspose, Function.comp_def]
-  rw [hAeq, hBeq]
-  exact vonNeumann_aux _ _ hUU hUU' hVV hVV' hA.eigenvalues hB.eigenvalues mu nu sA sB hmu hnu
-    (hmuAnti.monovary hnuAnti)
-
-end Zeta23Redux.LinAlg
-
-
-open scoped BigOperators
 open scoped Real
 open scoped Nat
 open scoped Classical
@@ -183,18 +17,174 @@ open scoped Pointwise
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+namespace Zeta23Redux.LinAlg
+
+open Matrix Finset
+
+variable {d : ℕ}
+
+/-- Two antitone functions monovary. -/
+lemma monovary_of_antitone {mu nu : Fin d → ℝ} (hmu : Antitone mu) (hnu : Antitone nu) :
+    Monovary mu nu := by
+  intro i j hij
+  rcases le_or_gt i j with h | h
+  · exact absurd (hnu h) (not_le.mpr hij)
+  · exact hmu h.le
+
+/-- Rearrangement inequality in the form we need: pairing two antitone sequences in order is
+optimal. -/
+lemma sum_mul_comp_perm_le {mu nu : Fin d → ℝ} (hmu : Antitone mu) (hnu : Antitone nu)
+    (τ : Equiv.Perm (Fin d)) : ∑ i, mu i * nu (τ i) ≤ ∑ i, mu i * nu i := by
+  have := (monovary_of_antitone hmu hnu).sum_smul_comp_perm_le_sum_smul (σ := τ)
+  simpa [smul_eq_mul] using this
+
+/-- If `mu`, `nu` are antitone reorderings of `a`, `b`, then any permuted pairing of `a` with `b`
+is dominated by the sorted pairing. -/
+lemma sum_perm_le {a b mu nu : Fin d → ℝ} (hmu : Antitone mu) (hnu : Antitone nu)
+    (pa pb : Equiv.Perm (Fin d)) (hma : mu = a ∘ pa) (hnb : nu = b ∘ pb)
+    (σ : Equiv.Perm (Fin d)) : ∑ i, a i * b (σ i) ≤ ∑ i, mu i * nu i := by
+  set τ : Equiv.Perm (Fin d) := pa.trans (σ.trans pb.symm) with hτ
+  have key : ∑ i, a i * b (σ i) = ∑ k, mu k * nu (τ k) := by
+    rw [← Equiv.sum_comp pa fun i => a i * b (σ i)]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    have h1 : mu k = a (pa k) := by rw [hma]; rfl
+    have h2 : nu (τ k) = b (σ (pa k)) := by rw [hnb]; simp [hτ]
+    rw [h1, h2]
+  rw [key]
+  exact sum_mul_comp_perm_le hmu hnu τ
+
+/-- The bilinear pairing of `a` and `b` against a doubly stochastic matrix is bounded by the
+sorted pairing.  This is the Birkhoff step: a doubly stochastic matrix is a convex combination
+of permutation matrices, and a linear functional bounded on the permutation matrices is bounded
+on their convex hull. -/
+lemma sum_doublyStochastic_le {a b mu nu : Fin d → ℝ} (hmu : Antitone mu) (hnu : Antitone nu)
+    (pa pb : Equiv.Perm (Fin d)) (hma : mu = a ∘ pa) (hnb : nu = b ∘ pb)
+    {S : Matrix (Fin d) (Fin d) ℝ} (hS : S ∈ doublyStochastic ℝ (Fin d)) :
+    ∑ i, ∑ j, a i * b j * S i j ≤ ∑ i, mu i * nu i := by
+  set c : ℝ := ∑ i, mu i * nu i with hc
+  set f : Matrix (Fin d) (Fin d) ℝ → ℝ := fun M => ∑ i, ∑ j, a i * b j * M i j with hf
+  have hlin : IsLinearMap ℝ f := by
+    constructor
+    · intro M N
+      simp only [hf, Matrix.add_apply, mul_add, Finset.sum_add_distrib]
+    · intro r M
+      simp only [hf, Matrix.smul_apply, smul_eq_mul, Finset.mul_sum]
+      exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by ring
+  have hconv : Convex ℝ {M : Matrix (Fin d) (Fin d) ℝ | f M ≤ c} := convex_halfSpace_le hlin c
+  have hsub : {x : Matrix (Fin d) (Fin d) ℝ | ∃ σ, Equiv.Perm.permMatrix ℝ σ = x} ⊆
+      {M : Matrix (Fin d) (Fin d) ℝ | f M ≤ c} := by
+    rintro _ ⟨σ, rfl⟩
+    have hval : f (Equiv.Perm.permMatrix ℝ σ) = ∑ i, a i * b (σ i) := by
+      simp [hf, Equiv.Perm.permMatrix, PEquiv.toMatrix_apply]
+    show f _ ≤ c
+    rw [hval]
+    exact sum_perm_le hmu hnu pa pb hma hnb σ
+  have h := convexHull_min hsub hconv
+  rw [← doublyStochastic_eq_convexHull_permMatrix] at h
+  exact h hS
+
+/-- `z * star z` is the squared norm of `z`. -/
+lemma mul_star_eq_normSq (z : ℂ) : z * star z = ((‖z‖ ^ 2 : ℝ) : ℂ) := by
+  rw [Complex.star_def, Complex.mul_conj]
+  norm_cast
+  exact Complex.normSq_eq_norm_sq z
+
+/-- The entrywise squared modulus of a unitary matrix is doubly stochastic. -/
+lemma normSq_mem_doublyStochastic {W : Matrix (Fin d) (Fin d) ℂ}
+    (hW : W ∈ Matrix.unitaryGroup (Fin d) ℂ) :
+    (Matrix.of fun i j => ‖W i j‖ ^ 2) ∈ doublyStochastic ℝ (Fin d) := by
+  have h1 : star W * W = 1 := hW.1
+  have h2 : W * star W = 1 := hW.2
+  rw [mem_doublyStochastic_iff_sum]
+  refine ⟨fun i j => by simp, fun i => ?_, fun j => ?_⟩
+  · have hi := congrFun (congrFun h2 i) i
+    simp only [Matrix.mul_apply, Matrix.star_apply, Matrix.one_apply_eq] at hi
+    have hcast : ((∑ j, ‖W i j‖ ^ 2 : ℝ) : ℂ) = 1 := by
+      rw [Complex.ofReal_sum, ← hi]
+      exact Finset.sum_congr rfl fun j _ => (mul_star_eq_normSq (W i j)).symm
+    exact_mod_cast hcast
+  · have hj := congrFun (congrFun h1 j) j
+    simp only [Matrix.mul_apply, Matrix.star_apply, Matrix.one_apply_eq] at hj
+    have hcast : ((∑ i, ‖W i j‖ ^ 2 : ℝ) : ℂ) = 1 := by
+      rw [Complex.ofReal_sum, ← hj]
+      refine Finset.sum_congr rfl fun i _ => ?_
+      rw [mul_comm]
+      exact (mul_star_eq_normSq (W i j)).symm
+    exact_mod_cast hcast
+
+/-- Trace of `diagonal a * W * diagonal b * star W` in terms of squared moduli of the entries
+of `W`. -/
+lemma trace_diag_conj (a b : Fin d → ℝ) (W : Matrix (Fin d) (Fin d) ℂ) :
+    (Matrix.diagonal (fun i => (a i : ℂ)) * W * Matrix.diagonal (fun j => (b j : ℂ)) * star W).trace
+      = ((∑ i, ∑ j, a i * b j * ‖W i j‖ ^ 2 : ℝ) : ℂ) := by
+  rw [Matrix.trace, Complex.ofReal_sum]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [Complex.ofReal_sum]
+  simp only [Matrix.diag_apply, Matrix.mul_apply, Matrix.diagonal_apply, Matrix.star_apply,
+    Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, if_true, ite_mul, zero_mul,
+    mul_ite, mul_zero]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Complex.ofReal_mul, Complex.ofReal_mul, ← mul_star_eq_normSq]
+  ring
+
+/-- **Von Neumann's trace inequality** for Hermitian complex matrices: if `mu` and `nu` list the
+eigenvalues of the Hermitian matrices `A` and `B` in the same (decreasing) order, then
+`Re (tr (A * B)) ≤ ∑ i, mu i * nu i`.
+
+The proof diagonalises both matrices, reduces the trace to a bilinear form against the entrywise
+squared modulus of a unitary matrix — which is doubly stochastic — and then concludes by
+Birkhoff's theorem together with the rearrangement inequality. -/
+theorem vonNeumann_trace_ineq {A B : Matrix (Fin d) (Fin d) ℂ}
+    (hA : A.IsHermitian) (hB : B.IsHermitian) {mu nu : Fin d → ℝ}
+    (hmu : Antitone mu) (hnu : Antitone nu)
+    (pa pb : Equiv.Perm (Fin d))
+    (hmuA : mu = hA.eigenvalues ∘ pa) (hnuB : nu = hB.eigenvalues ∘ pb) :
+    (A * B).trace.re ≤ ∑ i, mu i * nu i := by
+  set a := hA.eigenvalues with ha
+  set b := hB.eigenvalues with hb
+  set U : Matrix (Fin d) (Fin d) ℂ := (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) with hU
+  set V : Matrix (Fin d) (Fin d) ℂ := (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) with hV
+  set Da : Matrix (Fin d) (Fin d) ℂ := Matrix.diagonal (fun i => ((a i : ℝ) : ℂ)) with hDa
+  set Db : Matrix (Fin d) (Fin d) ℂ := Matrix.diagonal (fun i => ((b i : ℝ) : ℂ)) with hDb
+  have hAeq : A = U * Da * star U := by
+    conv_lhs => rw [hA.spectral_theorem, Unitary.conjStarAlgAut_apply]
+    simp [hU, hDa, ha, Function.comp_def]
+  have hBeq : B = V * Db * star V := by
+    conv_lhs => rw [hB.spectral_theorem, Unitary.conjStarAlgAut_apply]
+    simp [hV, hDb, hb, Function.comp_def]
+  set W : Matrix (Fin d) (Fin d) ℂ := star U * V with hW
+  have hWu : W ∈ Matrix.unitaryGroup (Fin d) ℂ := by
+    have hUu : U ∈ Matrix.unitaryGroup (Fin d) ℂ := hA.eigenvectorUnitary.2
+    have hVu : V ∈ Matrix.unitaryGroup (Fin d) ℂ := hB.eigenvectorUnitary.2
+    exact mul_mem (Unitary.star_mem hUu) hVu
+  have hstarW : star W = star V * U := by
+    rw [hW, Matrix.star_mul, star_star]
+  have htr : (A * B).trace = (Da * W * Db * star W).trace := by
+    rw [hAeq, hBeq]
+    rw [show U * Da * star U * (V * Db * star V) = U * (Da * star U * V * Db * star V) by
+      noncomm_ring]
+    rw [Matrix.trace_mul_comm]
+    congr 1
+    rw [hstarW, hW]
+    noncomm_ring
+  rw [htr, trace_diag_conj a b W, Complex.ofReal_re]
+  exact sum_doublyStochastic_le hmu hnu pa pb hmuA hnuB (normSq_mem_doublyStochastic hWu)
+
+/-- Any finite family of reals can be listed in decreasing order, so the hypotheses of
+`vonNeumann_trace_ineq` are always satisfiable. -/
+lemma exists_antitone_reindex (f : Fin d → ℝ) : ∃ p : Equiv.Perm (Fin d), Antitone (f ∘ p) := by
+  refine ⟨Tuple.sort fun i => -f i, ?_⟩
+  have h := Tuple.monotone_sort fun i => -f i
+  intro i j hij
+  have hij' := h hij
+  simp only [Function.comp_apply] at hij' ⊢
+  linarith
+
+end Zeta23Redux.LinAlg
 

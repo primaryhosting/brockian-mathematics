@@ -8,6 +8,20 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+namespace Zeta23Scaffold
+
+/-- The window function `H(λ) = 2 - 1/λ - λ/3`. -/
+
+theorem assembly_window_constants :
+    Hwin 1 = 2 / 3 ∧ Hd 1 = 5 / 6 ∧ Fwin 1 = 3 / 4 ∧ 2 * Fwin 1 - 1 = 1 / 2 := by
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> norm_num [Hwin, Hd, Fwin]
+
+end Zeta23Scaffold
+
+#print axioms Zeta23Scaffold.assembly_window_constants
+
+import Mathlib
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -30,15 +44,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Zeta23Scaffold
-
-/-- The window function `H(λ) = 2 - 1/λ - λ/3`. -/
-
-theorem assembly_window_constants :
-    Hwin 1 = 2 / 3 ∧ Hd 1 = 5 / 6 ∧ Fwin 1 = 3 / 4 ∧ 2 * Fwin 1 - 1 = 1 / 2 := by
-  refine ⟨?_, ?_, ?_, ?_⟩ <;>
-    simp only [Hd, Hwin, Fwin] <;> norm_num
-
-end Zeta23Scaffold
 

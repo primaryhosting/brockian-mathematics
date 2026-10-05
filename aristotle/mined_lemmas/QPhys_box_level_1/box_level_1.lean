@@ -23,26 +23,30 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Box Level 1
+Category: Quantum Physics
+Target: QPhys.box_level_1
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
 namespace QPhys
 
-/-- Energy levels of a quantum particle of mass `m` in a one-dimensional infinite
-potential well ("particle in a box") of width `L`, in units where the reduced
-Planck constant is `hbar`:  `E n = n² π² ħ² / (2 m L²)`. -/
+/-- Energy levels of a particle of mass `m` in a one-dimensional infinite
+potential well ("particle in a box") of width `L`, with reduced Planck
+constant `hbar`:  `E n = n² π² ħ² / (2 m L²)`. -/
 
-theorem box_level_1 (hbar m L : ℝ) (hhbar : hbar ≠ 0) (hm : 0 < m) (hL : 0 < L) :
+theorem box_level_1 {hbar m L : ℝ} (hhbar : 0 < hbar) (hm : 0 < m) (hL : 0 < L) :
     boxEnergy hbar m L 1 / boxEnergy hbar m L 1 = (1 : ℝ) ^ 2 := by
-  have h : boxEnergy hbar m L 1 ≠ 0 := by
-    have : (0:ℝ) < Real.pi ^ 2 * hbar ^ 2 := by positivity
-    unfold boxEnergy
-    have h2 : (0:ℝ) < 2 * m * L ^ 2 := by positivity
-    push_cast
-    rw [ne_eq, div_eq_zero_iff]
-    push_neg
-    constructor
-    · nlinarith
-    · exact ne_of_gt h2
-  rw [div_self h]
-  norm_num
+  have hpos : 0 < boxEnergy hbar m L 1 := by
+    have : boxEnergy hbar m L 1 = (Real.pi ^ 2 * hbar ^ 2) / (2 * m * L ^ 2) := by
+      simp [boxEnergy]
+    rw [this]
+    positivity
+  rw [div_self hpos.ne', one_pow]
 
 end QPhys
 

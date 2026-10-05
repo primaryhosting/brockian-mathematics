@@ -33,36 +33,19 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Riesel Problem
-Category: Brockian Conjecture
-Target: Brockian.RieselCovering.RieselProblem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
+namespace Brockian.RieselCovering
 
-namespace Brockian
-namespace RieselCovering
+/-- The Riesel number under consideration: `509203`. -/
 
-/-- A *Riesel number* is an odd natural number `k` such that `k * 2 ^ n - 1` is
-composite for every `n ≥ 1`. -/
+lemma coverPrime_dvd (n : ℕ) : coverPrime (n % 24) ∣ k * 2 ^ n - 1 := by
+  set p := coverPrime (n % 24) with hpdef
+  have hmod : (k * 2 ^ n) % p = 1 := by
+    rw [Nat.mul_mod, two_pow_mod_period (two_pow_24_mod (n % 24)) n, ← Nat.mul_mod]
+    exact cover_residue (Nat.mod_lt _ (by norm_num))
+  have hdm := Nat.div_add_mod (k * 2 ^ n) p
+  exact ⟨(k * 2 ^ n) / p, by omega⟩
 
-theorem coverPrime_dvd (n : ℕ) : coverPrime (n % 24) ∣ 509203 * 2 ^ n - 1 := by
-  have hr : n % 24 < 24 := Nat.mod_lt _ (by norm_num)
-  set r := n % 24
-  set p := coverPrime r
-  have h24 : (2 : ℕ) ^ 24 ≡ 1 [MOD p] := coverPrime_pow24 r hr
-  have hq : ((2 : ℕ) ^ 24) ^ (n / 24) ≡ 1 [MOD p] := by
-    simpa using h24.pow (n / 24)
-  have hn : 24 * (n / 24) + r = n := Nat.div_add_mod n 24
-  have hsplit : (2 : ℕ) ^ n = ((2 : ℕ) ^ 24) ^ (n / 24) * 2 ^ r := by
-    rw [← pow_mul, ← pow_add, hn]
-  have hbase : 509203 * 2 ^ r ≡ 1 [MOD p] := coverPrime_dvd_base r hr
-  have hmain : 509203 * 2 ^ n ≡ 1 [MOD p] := by
-    calc 509203 * 2 ^ n = ((2 : ℕ) ^ 24) ^ (n / 24) * (509203 * 2 ^ r) := by
-          rw [hsplit]; ring
-      _ ≡ 1 * 1 [MOD p] := hq.mul hbase
-      _ = 1 := by ring
-  have h1 : 1 ≤ 509203 * 2 ^ n := Nat.one_le_iff_ne_zero.2 (by positivity)
-  exact (Nat.modEq_iff_dvd' h1).1 hmain.symm
-
+/-- **The Riesel problem, covering-set half.**
+`509203` is a Riesel number: for every `n`, the number `509203 * 2 ^ n - 1` is composite
+(not prime).  This is witnessed by the covering set `{3, 5, 7, 13, 17, 241}` of primes,
+which divides the sequence periodically with period `24`. -/

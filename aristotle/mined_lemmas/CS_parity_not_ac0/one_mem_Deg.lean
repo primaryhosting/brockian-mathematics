@@ -1,35 +1,27 @@
-import RequestProject.Basic
+import Mathlib
 
 /-!
-# Unbounded fan-in Boolean circuits, the class `AC⁰`, and `PARITY`
-
-A `Circuit n` is a Boolean circuit on `n` inputs built from constants, input
-variables, negations, and *unbounded fan-in* `AND`/`OR` gates.
-
-* `Circuit.depth` counts the maximal number of `AND`/`OR` gates on a root-to-leaf
-  path (negations are free, as is standard for `AC⁰`).
-* `Circuit.size` counts the number of `AND`/`OR` gates.
-
-`InAC0 f` says that the family `f` is computed by circuits of some fixed depth and
-polynomial size.  Making negations free and not counting them in the size only
-makes the class larger, hence the lower bound proved later stronger.
+# Parity Not Ac 0
+Category: Frontier Cs
+Target: CS.parity_not_ac0
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+
+open scoped BigOperators
 
 namespace CS
 
-/-- Boolean circuits with unbounded fan-in `AND`/`OR` gates. -/
-inductive Circuit (n : ℕ) where
-  | const : Bool → Circuit n
-  | var : Fin n → Circuit n
-  | neg : Circuit n → Circuit n
-  | or : (m : ℕ) → (Fin m → Circuit n) → Circuit n
-  | and : (m : ℕ) → (Fin m → Circuit n) → Circuit n
+/-- The field with three elements. -/
+abbrev F3 := ZMod 3
 
-namespace Circuit
+/-- The Boolean cube on `n` coordinates. -/
+abbrev Cube (n : ℕ) := Fin n → Bool
 
-/-- The Boolean function computed by a circuit. -/
+/-- `±1` encoding of a Boolean value inside `F3`. -/
 
-lemma one_mem_Deg {n k : ℕ} : (1 : Fn n) ∈ Deg n k := by
-  have := @mon_mem_Deg n k ∅ (by simp)
+lemma one_mem_Deg {n D : ℕ} : (1 : Cube n → F3) ∈ Deg n D := by
+  have := mono_mem_Deg (A := (∅ : Finset (Fin n))) (D := D) (by simp)
   simpa using this
 

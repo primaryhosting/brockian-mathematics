@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
 # No Clean Proved With Escape
 Category: Proof-Carrying Apps
@@ -6,68 +31,74 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on imports: the required header above must be the very first thing in the file, and
-Lean forbids any `import` after a leading module doc-comment.  The development below is
-therefore carried out in plain Lean 4 core (`Init`), with no Mathlib import; every notion
-used (`List`, membership, decidability) is available there.
--/
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-/-- A capability is an abstract resource token that the isolation engine mediates. -/
-abbrev Cap := Nat
+universe u v
 
-/-- An application, described by the list of capabilities it *declares* it will use.
-This declaration is what the proof carried by the app talks about. -/
-structure App where
-  declared : List Cap
-  deriving DecidableEq
+/-- An abstract model of a sandboxed application: a labelled transition system whose
+labels are the observable effects (syscalls, resource accesses, ...) that the isolation
+engine mediates. -/
+structure Machine (State : Type u) (Effect : Type v) where
+  /-- The set of admissible initial states. -/
+  init : State → Prop
+  /-- `step s e s'` : from state `s` the app may perform effect `e` and move to `s'`. -/
+  step : State → Effect → State → Prop
 
-/-- A sandbox policy, described by the list of capabilities the isolation engine actually
-*grants* at run time. -/
-structure Policy where
-  granted : List Cap
-  deriving DecidableEq
+variable {State : Type u} {Effect : Type v}
 
-/-- An execution trace is the list of capabilities exercised, in order. -/
-abbrev Trace := List Cap
+/-- A sandbox policy: the predicate holding of exactly the permitted effects. -/
+abbrev Policy (Effect : Type v) : Type v := Effect → Prop
 
-/-- A trace is *clean* for an app when every capability it exercises was declared. -/
+/-- States reachable from an initial state by finitely many steps. -/
+inductive Reach (M : Machine State Effect) : State → Prop
+  | init {s : State} (h : M.init s) : Reach M s
+  | step {s : State} {e : Effect} {s' : State}
+      (hs : Reach M s) (hstep : M.step s e s') : Reach M s'
 
-def Clean (a : App) (t : Trace) : Prop := ∀ c ∈ t, c ∈ a.declared
+/-- The app *escapes* the sandbox described by `allowed` if some reachable state can
+perform an effect outside the policy. -/
 
-/-- An app is *proved* against a policy when its carried certificate checks out, i.e. every
-declared capability is granted by the policy. -/
+def Escapes (M : Machine State Effect) (allowed : Policy Effect) : Prop :=
+  ∃ s e s', Reach M s ∧ M.step s e s' ∧ ¬ allowed e
 
-def Proved (p : Policy) (a : App) : Prop := ∀ c ∈ a.declared, c ∈ p.granted
+/-- A proof certificate carried by the app: an inductive invariant witnessing that every
+effect the app can ever perform lies inside the policy. This is exactly the artifact the
+isolation engine's checker validates. -/
+structure Certificate (M : Machine State Effect) (allowed : Policy Effect) where
+  /-- The claimed inductive invariant. -/
+  Inv : State → Prop
+  /-- The invariant holds initially. -/
+  init_mem : ∀ s, M.init s → Inv s
+  /-- The invariant is preserved by every step. -/
+  step_closed : ∀ s e s', Inv s → M.step s e s' → Inv s'
+  /-- Every effect enabled in an invariant state is permitted by the policy. -/
+  effects_allowed : ∀ s e s', Inv s → M.step s e s' → allowed e
 
-/-- A trace *escapes* the sandbox when it exercises some capability that is not granted. -/
+/-- An app is *proved clean* when it carries a valid certificate. -/
 
-def Escapes (p : Policy) (t : Trace) : Prop := ∃ c ∈ t, c ∉ p.granted
+def ProvedClean (M : Machine State Effect) (allowed : Policy Effect) : Prop :=
+  Nonempty (Certificate M allowed)
 
-/-! ### The engine's checks are effective -/
+/-- A valid certificate over-approximates reachability. -/
 
-instance (a : App) (t : Trace) : Decidable (Clean a t) := by
-  unfold Clean; infer_instance
+theorem Certificate.reach_imp {M : Machine State Effect} {allowed : Policy Effect}
+    (C : Certificate M allowed) : ∀ {s : State}, Reach M s → C.Inv s := by
+  intro s hs
+  induction hs with
+  | init h => exact C.init_mem _ h
+  | step _ hstep ih => exact C.step_closed _ _ _ ih hstep
 
-instance (p : Policy) (a : App) : Decidable (Proved p a) := by
-  unfold Proved; infer_instance
+/-- **Soundness of the isolation engine.** No app is simultaneously proved clean and able
+to escape its sandbox. -/
 
-instance (p : Policy) (t : Trace) : Decidable (Escapes p t) := by
-  unfold Escapes; infer_instance
+theorem no_clean_proved_with_escape (M : Machine State Effect) (allowed : Policy Effect) :
+    ¬ (ProvedClean M allowed ∧ Escapes M allowed) := by
+  rintro ⟨⟨C⟩, s, e, s', hreach, hstep, hbad⟩
+  exact hbad (C.effects_allowed s e s' (C.reach_imp hreach) hstep)
 
-/-! ### Soundness of the isolation engine -/
-
-/-- **Main theorem (soundness).** No clean run of a proved app ever escapes the sandbox:
-if every capability used was declared, and every declared capability is granted, then no
-used capability can be ungranted. -/
-
-theorem no_clean_proved_with_escape
-    (p : Policy) (a : App) (t : Trace)
-    (hc : Clean a t) (hp : Proved p a) : ¬ Escapes p t := by
-  rintro ⟨c, hct, hcg⟩
-  exact hcg (hp c (hc c hct))
-
-/-- Predicate-level restatement: no triple `(app, trace)` is simultaneously clean, proved
-and escaping. -/
+/-- **Completeness of the certificate discipline.** If an app cannot escape, then the
+reachability predicate itself is a valid certificate, so the app is provably clean. -/

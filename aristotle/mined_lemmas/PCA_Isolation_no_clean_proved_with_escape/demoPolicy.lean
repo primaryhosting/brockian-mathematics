@@ -6,69 +6,48 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-set_option autoImplicit false
+/-!
+## Overview
+
+This module formalises the model of a capability-based *isolation engine* for
+proof-carrying applications, together with its soundness **and** completeness.
+
+* A region (`Region`) is an abstract resource name; a capability set (`CapSet`)
+  is a decidable set of regions, represented by its characteristic function.
+* An application's code is a program (`Prog`) of a small nondeterministic
+  language with capability acquisition/release and resource accesses.
+* `Exec` is the operational semantics of the isolation engine at run time: a
+  resource access only produces an observable effect when the corresponding
+  capability is currently held; otherwise the engine *denies* it silently.
+* `App.Escapes` says that some run of the application observably touches a
+  resource outside its policy (its sandbox boundary).
+* `Cert` is the proof system for capability certificates that a proof-carrying
+  app ships with its code, and `check` is the engine's decidable checker.
+
+The main results are:
+
+* `cert_sound`  : a valid certificate forbids any escape;
+* `check_cert`  : the checker synthesises a certificate (so `Clean → Proved`);
+* `check_complete` : if the checker rejects, an escaping run really exists;
+* `no_clean_proved_with_escape` : the target theorem;
+* `clean_proved_iff_no_escape` : soundness *and* completeness of the engine.
+
+The development is deliberately self-contained (no imports), so that the header
+comment above is literally the first thing in the file.
+-/
 
 namespace PCA.Isolation
 
-/-- Capabilities an app may exercise (e.g. file handles, sockets, syscalls). -/
-abbrev Cap : Type := Nat
+/-! ## Capability sets -/
 
-/-- A sandbox policy is the predicate describing which capabilities the
-isolation engine permits. -/
-abbrev Policy : Type := Cap → Prop
+/-- Abstract resource names. -/
+abbrev Region := Nat
 
-/-- A minimal app language for the isolation engine: capability uses, sequencing,
-resolved conditionals, and bounded loops. -/
-inductive Prog : Type
-  | skip : Prog
-  | use : Cap → Prog
-  | seq : Prog → Prog → Prog
-  | ite : Bool → Prog → Prog → Prog
-  | loop : Nat → Prog → Prog
-  deriving DecidableEq
+/-- A capability set, represented by its characteristic function. -/
+abbrev CapSet := Region → Bool
 
-namespace Prog
+/-- Add a capability. -/
 
-/-- `rep n t` is `t` repeated `n` times, the trace of a bounded loop body. -/
+def demoPolicy : CapSet := fun r => r == 0
 
-def demoPolicy : Policy := fun c => c = 0 ∨ c = 1
-
-/-- A concrete app that the engine certifies. -/
-example : ProvedClean demoPolicy (.seq (.use 0) (.loop 3 (.use 1))) :=
-  Safe.seq (Safe.use (Or.inl rfl)) (Safe.loop_succ (Safe.use (Or.inr rfl)))
-
-/-- A concrete app that escapes the sandbox. -/
-example : Escapes demoPolicy (.seq (.use 0) (.use 2)) :=
-  ⟨2, by simp, by simp [demoPolicy]⟩
-
-/-- Hence that app is not certified by the engine. -/
-example : ¬ ProvedClean demoPolicy (.seq (.use 0) (.use 2)) := fun h =>
-  no_clean_proved_with_escape _ _ ⟨h, ⟨2, by simp, by simp [demoPolicy]⟩⟩
-
-end PCA.Isolation
-
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
+/-- The empty capability set. -/

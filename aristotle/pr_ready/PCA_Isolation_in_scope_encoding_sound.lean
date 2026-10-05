@@ -8,98 +8,75 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 
 
--- This development needs no Mathlib import: every lemma used
--- (`List.isPrefixOf_iff_prefix`, `List.any_eq_true`, `decidable_of_iff`)
--- is available in the Lean 4 core library, and the required header comment
--- must be the first thing in the file (Lean forbids `import` after a `/-! -/`
--- module docstring).
-
+set_option maxRecDepth 4000
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-/-! ## The isolation model
-
-A *resource* is identified by a hierarchical path (a list of path components).
-A *scope* granted to an application is a path prefix: holding the scope `s`
-authorises access to every resource whose path extends `s.root`.
-
-The isolation engine of a proof-carrying app does not reason with the
-propositional predicate directly; it evaluates a decidable *encoding*
-(a `Bool`-valued function) built from `List.isPrefixOf` / `List.any`.
-The theorems below state that this encoding is sound and complete with
-respect to the intended semantics. -/
-
-/-- A resource path: a list of hierarchical components. -/
+/-- A resource is identified by a hierarchical path: a list of name segments,
+read from the root downwards. -/
 abbrev Path := List String
 
-/-- A capability scope: everything below `root` is authorised. -/
+/-- The isolation policy of a sandboxed app: a list of granted subtrees
+(`roots`) together with a list of explicitly revoked subtrees (`denied`). -/
 structure Scope where
-  root : Path
-  deriving DecidableEq
+  /-- Subtrees the app has been granted access to. -/
+  roots : List Path
+  /-- Subtrees carved out of the grants; denial takes precedence. -/
+  denied : List Path
+  deriving Repr
 
-/-- Semantics of a single scope: `s` covers `p` when `s.root` is a prefix of `p`. -/
-def Scope.Covers (s : Scope) (p : Path) : Prop := s.root <+: p
+/-- Declarative semantics of the isolation engine: a resource `p` lies in the
+scope `s` when some granted root is an ancestor of (or equal to) `p`, and no
+denied subtree is an ancestor of (or equal to) `p`. -/
+def InScope (s : Scope) (p : Path) : Prop :=
+  (∃ r ∈ s.roots, r <+: p) ∧ ∀ d ∈ s.denied, ¬ d <+: p
 
-/-- Boolean encoding of `Scope.Covers`, as evaluated by the isolation engine. -/
-def Scope.coversB (s : Scope) (p : Path) : Bool := s.root.isPrefixOf p
+/-- The executable encoding of the scope check used by the isolation engine. -/
+def encodeInScope (s : Scope) (p : Path) : Bool :=
+  s.roots.any (fun r => r.isPrefixOf p) && !s.denied.any (fun d => d.isPrefixOf p)
 
-/-- A policy is the list of scopes granted to an application. -/
-abbrev Policy := List Scope
+/-- **Soundness and completeness of the `in scope` encoding.**
+The boolean decision procedure `encodeInScope` returns `true` on exactly those
+resource paths that the declarative isolation model `InScope` admits. -/
+theorem in_scope_encoding_sound (s : Scope) (p : Path) :
+    encodeInScope s p = true ↔ InScope s p := by
+  unfold encodeInScope InScope
+  simp only [Bool.and_eq_true, Bool.not_eq_true', List.any_eq_true,
+    List.any_eq_false, List.isPrefixOf_iff_prefix]
 
-/-- Semantics: a path is in scope for a policy when some granted scope covers it. -/
-def InScope (pol : Policy) (p : Path) : Prop := ∃ s ∈ pol, s.Covers p
+/-- Decidability of the declarative model, transported along the encoding. -/
+instance instDecidableInScope (s : Scope) (p : Path) : Decidable (InScope s p) :=
+  decidable_of_iff _ (in_scope_encoding_sound s p)
 
-/-- The engine's decision procedure: the boolean encoding of `InScope`. -/
-def inScopeB (pol : Policy) (p : Path) : Bool := pol.any (fun s => s.coversB p)
+/-- Denial always wins: a path lying under a denied subtree is never in scope. -/
+theorem not_inScope_of_denied {s : Scope} {p : Path} {d : Path}
+    (hd : d ∈ s.denied) (hdp : d <+: p) : ¬ InScope s p := by
+  rintro ⟨-, h⟩
+  exact h d hd hdp
 
-/-- Soundness and completeness of the single-scope encoding.
-The Mathlib/core lemma `List.isPrefixOf_iff_prefix` closes this immediately. -/
-theorem covers_encoding_sound (s : Scope) (p : Path) :
-    s.coversB p = true ↔ s.Covers p :=
-  List.isPrefixOf_iff_prefix
+/-- Scopes are closed downwards along the resource hierarchy in the following
+sense: extending an in-scope path keeps it inside every granted root, so it can
+only leave the scope by hitting an explicit denial. -/
+theorem inScope_append {s : Scope} {p q : Path} (hp : InScope s p)
+    (hq : ∀ d ∈ s.denied, ¬ d <+: (p ++ q)) : InScope s (p ++ q) := by
+  obtain ⟨⟨r, hr, hrp⟩, -⟩ := hp
+  exact ⟨⟨r, hr, hrp.trans (List.prefix_append p q)⟩, hq⟩
 
-/-- **Main theorem.** The isolation engine's boolean encoding of "the requested
-resource is in scope" is sound and complete with respect to the intended
-semantics: `inScopeB pol p` returns `true` exactly when some granted scope of
-the policy covers the requested path.
+/-- An empty grant list isolates the app completely. -/
+theorem not_inScope_of_no_roots {s : Scope} (h : s.roots = []) (p : Path) :
+    ¬ InScope s p := by
+  rintro ⟨⟨r, hr, -⟩, -⟩
+  rw [h] at hr
+  exact absurd hr (List.not_mem_nil)
 
-The proof reduces to `List.any_eq_true` together with the core lemma
-`List.isPrefixOf_iff_prefix`. -/
-theorem in_scope_encoding_sound (pol : Policy) (p : Path) :
-    inScopeB pol p = true ↔ InScope pol p := by
-  simp only [inScopeB, InScope, List.any_eq_true, covers_encoding_sound]
+end Isolation
+end PCA
 
-/-! ## Consequences for isolation -/
-
-/-- Soundness direction: a `true` verdict is justified by an actual grant. -/
-theorem in_scope_of_encoding (pol : Policy) (p : Path) (h : inScopeB pol p = true) :
-    InScope pol p := (in_scope_encoding_sound pol p).1 h
-
-/-- Isolation: if the engine denies access, no granted scope covers the path. -/
-theorem not_in_scope_of_encoding_false (pol : Policy) (p : Path)
-    (h : inScopeB pol p = false) : ¬ InScope pol p := by
-  intro hp
-  have := (in_scope_encoding_sound pol p).2 hp
-  simp [h] at this
-
-/-- The semantic predicate is decidable, with the engine's encoding as decision
-procedure. -/
-instance (pol : Policy) (p : Path) : Decidable (InScope pol p) :=
-  decidable_of_iff _ (in_scope_encoding_sound pol p)
-
-/-- The empty policy grants nothing: total isolation. -/
-theorem not_in_scope_nil (p : Path) : ¬ InScope [] p := by
-  simp [InScope]
-
-/-- Monotonicity: enlarging a policy can only enlarge the set of in-scope paths. -/
-theorem in_scope_mono {pol pol' : Policy} (h : pol ⊆ pol') {p : Path}
-    (hp : InScope pol p) : InScope pol' p := by
-  obtain ⟨s, hs, hcov⟩ := hp
-  exact ⟨s, h hs, hcov⟩
-
-end PCA.Isolation
-
+section AxiomAudit
+open PCA.Isolation
 #print axioms PCA.Isolation.in_scope_encoding_sound
+end AxiomAudit
 

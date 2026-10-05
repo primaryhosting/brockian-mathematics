@@ -1,41 +1,37 @@
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-!
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-
-The limit step of the transfinite construction: at a countable limit ordinal `a`
-we build a nice partial injection with domain `a` coherent with all previous ones,
-by an `ω`-recursion along a cofinal sequence, reserving one new value at each stage
-so that the resulting function still omits infinitely many naturals.
+This file contains auxiliary material used in the construction of an Aronszajn tree:
+basic facts about countable ordinals, a dependent-choice helper, and the key
+"extension" lemma for almost-disjoint modifications of injections into `ℕ`.
 -/
-import RequestProject.Aronszajn.Step
-
-open Ordinal Cardinal Set
 
 namespace Aronszajn
 
+open Set Cardinal Ordinal
+open scoped Ordinal
 
-def CoInf (a : Ordinal.{0}) (f : Ordinal.{0} → ℕ) : Prop := {n : ℕ | ∀ b < a, f b ≠ n}.Infinite
+/-! ### Countability of initial segments -/
 
-/-- `f` and `g` differ at only finitely many places below `a`. -/
+/-- An initial segment of the ordinals is countable iff it lies below `ω₁`. -/
+
+theorem CoInf.of_diffSet_finite {α : Ordinal.{0}} {f g : Ordinal.{0} → ℕ} (hf : CoInf α f)
+    (hd : (diffSet α f g).Finite) : CoInf α g := by
+  have hsub : ((f '' Set.Iio α)ᶜ \ (g '' (diffSet α f g))) ⊆ (g '' Set.Iio α)ᶜ := by
+    intro n hn
+    intro hmem
+    rcases image_subset_of_diffSet α f g hmem with h | h
+    · exact hn.1 h
+    · exact hn.2 h
+  exact (hf.diff (hd.image g)).mono hsub
+
+/-! ### The extension lemma -/
+
+/-- Given a finite set `E` of ordinals and an infinite set `S ⊆ ℕ`, there is a function
+which is injective on `E` with all values on `E` lying in `S`. -/

@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 # Gibbs Phase Rule
 Category: Chemistry
 Target: Chem.gibbs_phase_rule
@@ -6,46 +8,36 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
 open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace Chem
 
-/-- The number of intensive state variables describing a heterogeneous system with `C`
-components distributed over `P` phases: the temperature, the pressure, and, for every one of
-the `P` phases, the `C` mole fractions of the components in that phase. -/
+/-- The intensive state variables of a system with `C` chemical components distributed over
+`P` phases: temperature, pressure, and the `C` mole fractions of each of the `P` phases,
+i.e. `2 + P * C` real variables. -/
+abbrev StateVars (C P : ℕ) : Type := Fin (2 + P * C) → ℝ
 
-theorem phases_le (C P : ℕ) {V W : Type*} [AddCommGroup V] [Module ℝ V] [FiniteDimensional ℝ V]
-    [AddCommGroup W] [Module ℝ W] (hP : 1 ≤ P)
-    (f : V →ₗ[ℝ] W) (hf : Function.Surjective f)
-    (hV : Module.finrank ℝ V = numVariables C P)
-    (hW : Module.finrank ℝ W = numConstraints C P) :
-    P ≤ C + 2 := by
-  have h := gibbs_phase_rule C P hP f hf hV hW
-  omega
+/-- The equilibrium constraints on the intensive variables: one normalization condition
+`∑ mole fractions = 1` per phase (`P` equations) together with the equality of the chemical
+potential of each component across consecutive phases (`C * (P - 1)` equations). -/
+abbrev Constraints (C P : ℕ) : Type := Fin (P + C * (P - 1)) → ℝ
 
-/-- A completely explicit model, with no hypotheses beyond `1 ≤ P ≤ C + 2`, in which the phase
-rule can be read off: the projection off a `C + 2 - P`-dimensional space of free variables is a
-surjective constraint map of the right dimensions, and its kernel has dimension `C - P + 2`. -/
+/-- Number of variables minus number of constraints, computed in `ℤ`. -/
+
+theorem phases_le (C P : ℕ) (hP : 1 ≤ P) (L : StateVars C P →ₗ[ℝ] Constraints C P)
+    (hL : Function.Surjective L) : P ≤ C + 2 := by
+  have h := LinearMap.finrank_range_add_finrank_ker L
+  rw [LinearMap.range_eq_top.mpr hL] at h
+  simp only [finrank_top, Module.finrank_fin_fun] at h
+  obtain ⟨Q, rfl⟩ := Nat.exists_eq_add_of_le hP
+  simp only [Nat.add_sub_cancel_left] at h
+  nlinarith [h, Nat.zero_le (Module.finrank ℝ (LinearMap.ker L))]
+
+/-- **Gibbs phase rule.**  For a system of `C` components in `P ≥ 1` phases the intensive state
+is described by `2 + P * C` variables (temperature, pressure and the mole fractions in every
+phase), subject to `P + C * (P - 1)` independent equilibrium constraints (normalization of the
+mole fractions in each phase and equality of the chemical potentials across the phases).
+If the constraint map `L` is linear and independent (surjective), the space of admissible
+variations — the direction space of the affine set of equilibrium states — has dimension
+
+`F = C - P + 2`. -/

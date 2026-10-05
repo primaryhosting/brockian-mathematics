@@ -5,9 +5,8 @@ Target: Frontier.margulis_superrigidity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
--- (Lean 4 requires `import` to precede every command, including module docstrings, so the
--- header above is written as an ordinary comment and repeated as a module docstring below.)
+-- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the header
+-- above is a plain block comment; it is repeated verbatim as a module docstring below.)
 
 import Mathlib
 
@@ -44,22 +43,32 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-! ## The shape of the superrigidity conclusion -/
+/-!
+## Setting
+
+Margulis superrigidity states: if `G` is a semisimple Lie group of real rank at least `2`
+(with finite centre and no compact factors), `Γ ≤ G` an irreducible lattice, and
+`rho : Γ → H` a homomorphism into a simple Lie group whose image is Zariski dense and
+unbounded, then `rho` is the restriction of a *continuous* homomorphism `G → H`.
+
+The conclusion of the theorem is the statement `ExtendsToContinuousHom` below.
+
+Margulis' proof proceeds through the **graph closure**: one forms the closure `Λ` of the
+graph `{(γ, rho γ) : γ ∈ Γ}` inside `G × H`, which is a closed subgroup, and the whole
+analytic work (boundary maps, higher rank, Zariski density) goes into proving that `Λ`
+projects *bijectively* onto `G`, i.e. that `Λ` is the graph of a map. The results below
+formalise this reduction: once the graph closure is a graph, superrigidity follows, and
+the resulting extension is automatically continuous. We also prove the degenerate base
+cases unconditionally.
+-/
 
 section Defs
 
 variable {G H : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
 
-/-- The conclusion of a superrigidity theorem: the *abstract* group homomorphism
-`rho : Γ →* H`, defined on a subgroup `Γ` of a topological group `G`, is the restriction of a
-*continuous* homomorphism defined on all of `G`. -/
+/-- `rho : Γ →* H` is the restriction of a continuous homomorphism defined on all of `G`. -/
 
-theorem ExtendsToContinuousHom.virtually {Γ : Subgroup G} {rho : Γ →* H}
-    (h : ExtendsToContinuousHom Γ rho) : VirtuallyExtendsToContinuousHom Γ rho := by
-  obtain ⟨F, hFc, hF⟩ := h
-  exact ⟨⊤, inferInstance, F, hFc, fun γ _ => hF γ⟩
+def ExtendsToContinuousHom (Γ : Subgroup G) (rho : Γ →* H) : Prop :=
+  ∃ σ : G →* H, Continuous σ ∧ ∀ γ : Γ, σ (γ : G) = rho γ
 
-/-- Uniqueness of the extension: a continuous homomorphism on `G` is determined by its
-restriction to a dense subgroup, provided the target is Hausdorff.  (For a lattice `Γ` in a
-connected group `G` the relevant density statement is the density of `Γ` in `G/`(compact), the
-point being that the extension in Margulis' theorem is unique whenever it exists on a dense set.) -/
+/-- The graph of `rho : Γ →* H`, as a subgroup of `G × H`. -/

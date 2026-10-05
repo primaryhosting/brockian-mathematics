@@ -41,22 +41,20 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-namespace Brockian.RepunitPrimes
+namespace Brockian
+namespace RepunitPrimes
 
-open Finset
+/-- The `n`-th repunit: the base-ten number consisting of `n` digits `1`,
+i.e. `repunit n = (10 ^ n - 1) / 9`. -/
 
-/-- The `n`-th base-ten repunit `1, 11, 111, ...` (with `repunit 0 = 0`). -/
+theorem RepunitPrimeInfinitude
+    (h : ∀ N : ℕ, ∃ n, N < n ∧ Nat.Prime (repunit n)) :
+    repunitPrimes.Infinite := by
+  apply Set.infinite_of_forall_exists_gt
+  intro a
+  obtain ⟨n, hn, hp⟩ := h a
+  refine ⟨repunit n, ⟨hp, n, rfl⟩, ?_⟩
+  exact lt_of_lt_of_le hn (le_repunit n)
 
-theorem RepunitPrimeInfinitude :
-    (∀ N : ℕ, ∃ n : ℕ, N < n ∧ Nat.Prime (repunit n)) ↔ RepunitPrimeSet.Infinite := by
-  constructor
-  · intro H
-    refine Set.infinite_of_forall_exists_gt fun N => ?_
-    obtain ⟨n, hn, hprime⟩ := H N
-    exact ⟨repunit n, ⟨hprime, ⟨n, rfl⟩⟩, lt_of_lt_of_le hn (le_repunit n)⟩
-  · intro H N
-    obtain ⟨p, ⟨hp, n, rfl⟩, hlt⟩ := H.exists_gt (repunit N)
-    exact ⟨n, repunit_strictMono.lt_iff_lt.mp hlt, hp⟩
-
-/-- Every index of a repunit prime is itself prime, so the conjecture may equivalently be
-stated over prime indices. -/
+/-- Equivalently: the hypothesis of `RepunitPrimeInfinitude` is *equivalent* to the infinitude
+of the set of repunit primes. -/

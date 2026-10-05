@@ -41,37 +41,31 @@ set_option grind.warning false
 
 namespace Frontier
 
-/-- Cohomological data attached to a smooth projective variety of dimension `dim` over the
-finite field `𝔽_q`: for each degree `i` the (multi)set `frobEigenvalues i` of eigenvalues of
-the geometric Frobenius acting on the `i`-th étale cohomology group, which vanishes outside
-degrees `0, …, 2 dim`.
-
-Étale cohomology is not available in Mathlib, so the cohomological input of the Weil
-conjectures is packaged here as data; all statements below are statements about this data. -/
+/-- The cohomological data attached to a smooth projective variety of dimension `dim`
+over the finite field `𝔽_q`: for each degree `i`, the multiset `eigen i` of eigenvalues
+of the geometric Frobenius acting on the `i`-th ℓ-adic cohomology group. -/
 structure WeilData where
-  /-- The size of the base field. -/
+  /-- The cardinality of the base finite field. -/
   q : ℕ
-  /-- The base field is a genuine finite field, so it has at least two elements. -/
-  one_lt_q : 1 < q
+  /-- The base field is a genuine finite field. -/
+  hq : 1 < q
   /-- The dimension of the variety. -/
   dim : ℕ
-  /-- The eigenvalues of the geometric Frobenius on the `i`-th cohomology group. -/
-  frobEigenvalues : ℕ → Multiset ℂ
-  /-- Cohomology vanishes above degree `2 dim`. -/
-  vanishing : ∀ i, 2 * dim < i → frobEigenvalues i = 0
+  /-- Multiset of Frobenius eigenvalues in cohomological degree `i`. -/
+  eigen : ℕ → Multiset ℂ
+  /-- Cohomology vanishes above degree `2 * dim`. -/
+  vanish : ∀ i, 2 * dim < i → eigen i = 0
+  /-- Frobenius acts invertibly, so all eigenvalues are nonzero. -/
+  nonzero : ∀ i, ∀ a ∈ eigen i, a ≠ 0
 
 namespace WeilData
 
 variable (W : WeilData)
 
-/-- The number of `𝔽_{q^m}`-rational points of the variety, as computed by the
-Grothendieck–Lefschetz trace formula
-`N_m = ∑_i (-1)^i ∑_j α_{i,j}^m`. -/
+/-- The Lefschetz trace formula prediction for the number of `𝔽_{q^m}`-rational points:
+`N_m = ∑_i (-1)^i tr(Frob^m ∣ H^i)`. -/
 
 noncomputable def pointCount (m : ℕ) : ℂ :=
-  ∑ i ∈ Finset.range (2 * W.dim + 1),
-    (-1 : ℂ) ^ i * ((W.frobEigenvalues i).map (fun α => α ^ m)).sum
+  ∑ i ∈ Finset.range (2 * W.dim + 1), (-1 : ℂ) ^ i * (((W.eigen i).map (fun a => a ^ m)).sum)
 
-/-- The **Riemann hypothesis over finite fields** (Deligne's theorem, "Weil I"): every
-eigenvalue of the geometric Frobenius on the `i`-th cohomology group is an algebraic number
-all of whose archimedean absolute values equal `q^(i/2)`; i.e. `H^i` is pure of weight `i`. -/
+/-- The characteristic polynomial `P_i(T) = det(1 - Frob ⬝ T ∣ H^i)`, evaluated at `T`. -/

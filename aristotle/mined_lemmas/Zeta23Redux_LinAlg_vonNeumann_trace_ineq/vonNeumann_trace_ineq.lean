@@ -1,61 +1,69 @@
-/-
+import Mathlib
+/-!
 # Von Neumann Trace Ineq
 Category: Zeta-23 §3 Linear Algebra (re-derivation)
 Target: Zeta23Redux.LinAlg.vonNeumann_trace_ineq
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-import Mathlib
 
 open scoped BigOperators
-open Finset
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Zeta23Redux.LinAlg
 
-/-- Abel summation / Hardy–Littlewood–Pólya: if `m` is decreasing on `range d` and the partial
-sums of `f` are dominated by those of `g`, with equal total sums, then `∑ m f ≤ ∑ m g`. -/
+open Matrix Finset
 
-theorem vonNeumann_trace_ineq {d : ℕ} {A B : Matrix (Fin d) (Fin d) ℂ}
-    (hA : A.IsHermitian) (hB : B.IsHermitian)
-    (mu nu : Fin d → ℝ) (sA sB : Equiv.Perm (Fin d))
-    (hmu : ∀ i, mu i = hA.eigenvalues (sA i))
-    (hnu : ∀ i, nu i = hB.eigenvalues (sB i))
-    (hmuAnti : Antitone mu) (hnuAnti : Antitone nu) :
-    (Matrix.trace (A * B)).re ≤ ∑ i, mu i * nu i := by
-  rw [trace_mul_eq_conj_diag hA hB, trace_conj_diag]
-  simp only [Complex.re_sum, Complex.ofReal_re]
+variable {d : ℕ}
+
+/-- Two antitone functions monovary. -/
+
+theorem vonNeumann_trace_ineq {A B : Matrix (Fin d) (Fin d) ℂ}
+    (hA : A.IsHermitian) (hB : B.IsHermitian) {mu nu : Fin d → ℝ}
+    (hmu : Antitone mu) (hnu : Antitone nu)
+    (pa pb : Equiv.Perm (Fin d))
+    (hmuA : mu = hA.eigenvalues ∘ pa) (hnuB : nu = hB.eigenvalues ∘ pb) :
+    (A * B).trace.re ≤ ∑ i, mu i * nu i := by
+  set a := hA.eigenvalues with ha
+  set b := hB.eigenvalues with hb
   set U : Matrix (Fin d) (Fin d) ℂ := (hA.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) with hU
   set V : Matrix (Fin d) (Fin d) ℂ := (hB.eigenvectorUnitary : Matrix (Fin d) (Fin d) ℂ) with hV
+  set Da : Matrix (Fin d) (Fin d) ℂ := Matrix.diagonal (fun i => ((a i : ℝ) : ℂ)) with hDa
+  set Db : Matrix (Fin d) (Fin d) ℂ := Matrix.diagonal (fun i => ((b i : ℝ) : ℂ)) with hDb
+  have hAeq : A = U * Da * star U := by
+    conv_lhs => rw [hA.spectral_theorem, Unitary.conjStarAlgAut_apply]
+    simp [hU, hDa, ha, Function.comp_def]
+  have hBeq : B = V * Db * star V := by
+    conv_lhs => rw [hB.spectral_theorem, Unitary.conjStarAlgAut_apply]
+    simp [hV, hDb, hb, Function.comp_def]
   set W : Matrix (Fin d) (Fin d) ℂ := star U * V with hW
-  have hUU : star U * U = 1 := Matrix.UnitaryGroup.star_mul_self _
-  have hUU' : U * star U = 1 := Matrix.mem_unitaryGroup_iff.mp hA.eigenvectorUnitary.2
-  have hVV : star V * V = 1 := Matrix.UnitaryGroup.star_mul_self _
-  have hVV' : V * star V = 1 := Matrix.mem_unitaryGroup_iff.mp hB.eigenvectorUnitary.2
-  have hWs : star W = star V * U := by rw [hW, Matrix.star_mul, star_star]
-  have hW1 : W * star W = 1 := by
-    rw [hW, hWs]
-    calc star U * V * (star V * U) = star U * (V * star V) * U := by simp [mul_assoc]
-      _ = 1 := by rw [hVV', mul_one, hUU]
-  have hW2 : star W * W = 1 := by
-    rw [hW, hWs]
-    calc star V * U * (star U * V) = star V * (U * star U) * V := by simp [mul_assoc]
-      _ = 1 := by rw [hUU', mul_one, hVV]
-  have reindex : ∑ k, ∑ l, hA.eigenvalues k * hB.eigenvalues l * Complex.normSq (W k l)
-      = ∑ i, ∑ j, mu i * nu j * Complex.normSq (W (sA i) (sB j)) := by
-    rw [← Equiv.sum_comp sA
-      (fun k => ∑ l, hA.eigenvalues k * hB.eigenvalues l * Complex.normSq (W k l))]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    rw [← Equiv.sum_comp sB
-      (fun l => hA.eigenvalues (sA i) * hB.eigenvalues l * Complex.normSq (W (sA i) l))]
-    exact Finset.sum_congr rfl fun j _ => by rw [hmu, hnu]
-  rw [reindex]
-  refine dstoch_le_fin mu nu (fun i j => Complex.normSq (W (sA i) (sB j)))
-    (fun i j => Complex.normSq_nonneg _) ?_ ?_ hmuAnti hnuAnti
-  · intro i
-    rw [Equiv.sum_comp sB (fun l => Complex.normSq (W (sA i) l))]
-    exact normSq_row_sum W hW1 _
-  · intro j
-    rw [Equiv.sum_comp sA (fun k => Complex.normSq (W k (sB j)))]
-    exact normSq_col_sum W hW2 _
+  have hWu : W ∈ Matrix.unitaryGroup (Fin d) ℂ := by
+    have hUu : U ∈ Matrix.unitaryGroup (Fin d) ℂ := hA.eigenvectorUnitary.2
+    have hVu : V ∈ Matrix.unitaryGroup (Fin d) ℂ := hB.eigenvectorUnitary.2
+    exact mul_mem (Unitary.star_mem hUu) hVu
+  have hstarW : star W = star V * U := by
+    rw [hW, Matrix.star_mul, star_star]
+  have htr : (A * B).trace = (Da * W * Db * star W).trace := by
+    rw [hAeq, hBeq]
+    rw [show U * Da * star U * (V * Db * star V) = U * (Da * star U * V * Db * star V) by
+      noncomm_ring]
+    rw [Matrix.trace_mul_comm]
+    congr 1
+    rw [hstarW, hW]
+    noncomm_ring
+  rw [htr, trace_diag_conj a b W, Complex.ofReal_re]
+  exact sum_doublyStochastic_le hmu hnu pa pb hmuA hnuB (normSq_mem_doublyStochastic hWu)
 
-/-- Every finite tuple of reals can be reindexed by a permutation so as to become decreasing. -/
+/-- Any finite family of reals can be listed in decreasing order, so the hypotheses of
+`vonNeumann_trace_ineq` are always satisfiable. -/

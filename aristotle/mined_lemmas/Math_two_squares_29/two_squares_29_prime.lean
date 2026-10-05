@@ -2,9 +2,9 @@ import Mathlib
 import RequestProject.TwoSquares29
 
 /-!
-# Two Squares 29, stated with Mathlib's `Nat.Prime`
+# Two Squares 29 (Mathlib restatement)
 
-A restatement of `Math.two_squares_29` using Mathlib's `Nat.Prime` predicate.
+A restatement of `Math.two_squares_29` using Mathlib's `Nat.Prime`.
 -/
 
 namespace Math
@@ -26,12 +26,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 namespace Math
 
-/-- **Two squares for 29.** The number `29` is prime (it is at least `2` and has no
-divisor strictly between `1` and itself), and it is a sum of two squares,
+/--
+**Two squares for 29.**
+
+`29` is a prime number (spelled out elementarily: it is greater than `1` and its only
+natural-number divisors are `1` and itself) and it is a sum of two squares,
 namely `29 = 2 ^ 2 + 5 ^ 2`.
 
-The statement is phrased with an elementary, import-free description of primality
-so that the file can literally begin with the required header comment (a module
-documentation comment must precede any `import`, which Lean does not allow).
-The file `TwoSquares29Mathlib.lean` re-derives the same result in terms of
-Mathlib's `Nat.Prime`. -/
+The header comment above must be the very first thing in this file, and Lean requires
+`import` commands to precede any module documentation, so this file is deliberately
+self-contained and uses only the Lean core library.  A Mathlib-flavoured restatement,
+phrased with `Nat.Prime`, is provided in `RequestProject/TwoSquares29Mathlib.lean`.
+-/

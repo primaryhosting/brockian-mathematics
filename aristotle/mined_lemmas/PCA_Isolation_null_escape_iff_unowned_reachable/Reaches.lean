@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-!
 # Null Escape Iff Unowned Reachable
 Category: Proof-Carrying Apps
@@ -6,53 +31,47 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
-Note on imports: the required header above is a module docstring, which Lean parses as a
-command, so no `import` line may follow it.  The development below is therefore fully
-self-contained in core Lean 4: it builds the small amount of graph theory it needs
-(reflexive-transitive closure, and reference traces through the object graph) from scratch.
-The two transfer lemmas `PCA.Isolation.reaches_of_chainFrom` and
-`PCA.Isolation.exists_chainFrom_of_reaches` below play the role of Mathlib's
-`List.relationReflTransGen_of_exists_isChain` and
-`List.exists_isChain_ne_nil_of_relationReflTransGen`, which are the Mathlib lemmas that would
-close these steps if Mathlib were available in this file.
--/
-
-namespace PCA.Isolation
+set_option autoImplicit false
 
 universe u
 
-/-- An abstract model of an isolation engine's object graph.
+namespace PCA.Isolation
 
-* `root` marks the entry points (the capability roots the engine scans from);
-* `edge a b` means object `a` holds a reference to object `b`;
-* `owned v` means object `v` belongs to the isolation domain (it is *owned*).
+/-- A model of an isolation boundary inside a proof-carrying application.
+
+* `ref a b` holds when object `a` stores a reference to object `b`;
+* `roots v` holds when object `v` is directly exposed at the isolation boundary
+  (i.e. it can be named from outside the isolate);
+* `owned v` holds when object `v` is owned by the isolate.
 -/
 structure Model (V : Type u) where
-  /-- The entry points of the object graph. -/
-  root : V → Prop
-  /-- `edge a b` holds when object `a` references object `b`. -/
-  edge : V → V → Prop
-  /-- `owned v` holds when `v` lies inside the isolation domain. -/
+  /-- `ref a b` holds when object `a` stores a reference to object `b`. -/
+  ref : V → V → Prop
+  /-- Objects directly exposed at the isolation boundary. -/
+  roots : V → Prop
+  /-- Objects owned by the isolate. -/
   owned : V → Prop
 
-variable {V : Type u}
+variable {V : Type u} (M : Model V)
 
-/-- Reflexive-transitive closure of a relation: `Reaches e a b` means `b` can be obtained
-from `a` by following finitely many `e`-edges. -/
-inductive Reaches (e : V → V → Prop) : V → V → Prop
-  /-- Every object reaches itself. -/
-  | refl (a : V) : Reaches e a a
-  /-- Reachability extends along an edge. -/
-  | tail {a b c : V} : Reaches e a b → e b c → Reaches e a c
+/-- The escape set computed by the isolation engine, presented as the least
+fixpoint of its transfer function: roots escape, and anything referenced from an
+escaping object escapes. -/
+inductive Escapes (M : Model V) : V → Prop
+  | root {v : V} : M.roots v → Escapes M v
+  | ref {u v : V} : Escapes M u → M.ref u v → Escapes M v
 
-/-- `v` is reachable in the model when some root reaches it along finitely many edges. -/
+/-- Concrete semantics: `Reach M a b` holds when `b` can be obtained from `a` by
+following a finite chain of references. -/
+inductive Reach (M : Model V) : V → V → Prop
+  | refl {a : V} : Reach M a a
+  | tail {a b c : V} : Reach M a b → M.ref b c → Reach M a c
 
-theorem Reaches.head {e : V → V → Prop} {a b c : V} (hab : e a b) (h : Reaches e b c) :
-    Reaches e a c := by
-  induction h with
-  | refl => exact Reaches.tail (Reaches.refl a) hab
-  | tail _ hcd ih => exact Reaches.tail ih hcd
+/-- An object is *reachable* when it can be obtained by following references from
+an object exposed at the isolation boundary. -/
 
-/-- Soundness of traces: following a concrete trace witnesses reachability of its last
-object. (Mathlib analogue: `List.relationReflTransGen_of_exists_isChain`.) -/
+def Reaches (v : V) : Prop := ∃ r, M.roots r ∧ Reach M r v
+
+/-- The engine reports a *null escape*: some object in its computed escape set is
+not owned by the isolate, so a dereference through the boundary must be nulled
+out rather than served. -/

@@ -23,14 +23,6 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-/-
-# Mersenne Prime Infinitude
-Category: Brockian Conjecture
-Target: Brockian.MersennePerfect.MersennePrimeInfinitude
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -39,26 +31,34 @@ Category: Brockian Conjecture
 Target: Brockian.MersennePerfect.MersennePrimeInfinitude
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-The infinitude of Mersenne primes is a famous open problem, so what is established here is a
-*Lean-checked conditional reduction*: the set of Mersenne prime exponents is infinite **iff**
-the set of even perfect numbers is infinite.  This is obtained from an explicit, unconditional
-bijection (Euclid–Euler): the strictly monotone map `k ↦ 2 ^ (k - 1) * (2 ^ k - 1)` carries the
-set of exponents `k` with `2 ^ k - 1` prime *onto* the set of even perfect numbers.
+/-!
+## Overview
 
-The proof of the Euclid–Euler theorem itself is reproduced here (it lives in the `Archive`
-component of Mathlib, which is not importable from this project); the argument follows
-`Archive/Wiedijk100Theorems/PerfectNumbers.lean` by Aaron Anderson.
+Whether there are infinitely many Mersenne primes is a well-known open problem, so no
+unconditional proof is attempted here.  What is proved is an *unconditional equivalence*:
+
+  there are infinitely many Mersenne primes  ↔  there are infinitely many even perfect numbers.
+
+The equivalence rests on the Euclid–Euler theorem, which is developed from scratch below
+(`Brockian.MersennePerfect.even_and_perfect_iff`), together with an explicit size estimate
+translating "unboundedly large even perfect numbers" into "unboundedly large Mersenne
+exponents".
+
+The main statement `Brockian.MersennePerfect.MersennePrimeInfinitude` is this equivalence.
+Two conditional corollaries are also recorded.
 -/
 
 namespace Brockian.MersennePerfect
 
 open ArithmeticFunction Finset
+
 open scoped sigma
 
-/-! ## Euclid–Euler -/
-
+/-- The set of exponents `p` for which `mersenne p = 2 ^ p - 1` is prime. -/
 
 def EvenPerfects : Set ℕ := {n : ℕ | Even n ∧ n.Perfect}
 
-/-- The Euclid–Euler map `k ↦ 2 ^ (k - 1) * (2 ^ k - 1)`. -/
+/-! ### The Euclid–Euler theorem -/
+

@@ -5,6 +5,7 @@ Target: Math2.gromov_nonsqueezing
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
@@ -20,7 +21,6 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped RealInnerProductSpace
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -34,17 +34,16 @@ set_option grind.warning false
 
 namespace Math2
 
-variable {n : ℕ}
+open Complex
 
-/-- The standard symplectic vector space `ℝ^(2n+2)`, realised as the Euclidean space with
-index set `Fin (n+1) ⊕ Fin (n+1)`: the `Sum.inl` coordinates are the positions `q₀,…,qₙ`
-and the `Sum.inr` coordinates are the conjugate momenta `p₀,…,pₙ`. -/
-abbrev SymplecticSpace (n : ℕ) := EuclideanSpace ℝ (Fin (n + 1) ⊕ Fin (n + 1))
+/-- The standard symplectic vector space `ℝ^{2(n+1)}`, modelled as `ℂ^{n+1}` viewed as a
+real vector space. -/
+abbrev SympSpace (n : ℕ) : Type := EuclideanSpace ℂ (Fin (n + 1))
 
-/-- The standard symplectic form `ω(x, y) = ∑ᵢ (x_{qᵢ} y_{pᵢ} - x_{pᵢ} y_{qᵢ})`. -/
+/-- The standard symplectic form on `ℂ^{n+1} ≅ ℝ^{2(n+1)}`:
+`ω(z, w) = Im ⟪z, w⟫ = ∑ᵢ (xᵢ y'ᵢ - yᵢ x'ᵢ)`. -/
 
-def omegaForm (x y : SymplecticSpace n) : ℝ :=
-  ∑ i : Fin (n + 1), (x (Sum.inl i) * y (Sum.inr i) - x (Sum.inr i) * y (Sum.inl i))
+noncomputable def omegaForm {n : ℕ} (z w : SympSpace n) : ℝ := (inner ℂ z w : ℂ).im
 
-/-- The standard complex structure `J(q, p) = (p, -q)`; it relates the symplectic form and the
-Euclidean inner product via `ω(x, y) = ⟪x, J y⟫`. -/
+/-- A real-linear automorphism of `ℂ^{n+1}` is *symplectic* (a linear symplectomorphism)
+if it preserves the standard symplectic form. -/

@@ -1,33 +1,50 @@
-import RequestProject.Basic
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
 
 /-!
-# Unbounded fan-in Boolean circuits, the class `AC⁰`, and `PARITY`
+## Characters and low-degree functions over `𝔽₃`
 
-A `Circuit n` is a Boolean circuit on `n` inputs built from constants, input
-variables, negations, and *unbounded fan-in* `AND`/`OR` gates.
+Boolean inputs are encoded multiplicatively: `true ↦ -1`, `false ↦ 1` (`CS.sgn`),
+and also additively `true ↦ 1`, `false ↦ 0` (`CS.bit`).
 
-* `Circuit.depth` counts the maximal number of `AND`/`OR` gates on a root-to-leaf
-  path (negations are free, as is standard for `AC⁰`).
-* `Circuit.size` counts the number of `AND`/`OR` gates.
-
-`InAC0 f` says that the family `f` is computed by circuits of some fixed depth and
-polynomial size.  Making negations free and not counting them in the size only
-makes the class larger, hence the lower bound proved later stronger.
+For `S : Finset (Fin n)` the *character* `chi S` is the multilinear monomial
+`x ↦ ∏ i ∈ S, sgn (x i)`; `V n D` is the space of functions `(Fin n → Bool) → 𝔽₃`
+spanned by characters of degree at most `D`.
 -/
 
 namespace CS
 
-/-- Boolean circuits with unbounded fan-in `AND`/`OR` gates. -/
-inductive Circuit (n : ℕ) where
-  | const : Bool → Circuit n
-  | var : Fin n → Circuit n
-  | neg : Circuit n → Circuit n
-  | or : (m : ℕ) → (Fin m → Circuit n) → Circuit n
-  | and : (m : ℕ) → (Fin m → Circuit n) → Circuit n
+/-- The field with three elements. -/
+abbrev F : Type := ZMod 3
 
-namespace Circuit
+/-- Boolean inputs on `n` variables. -/
+abbrev Inp (n : ℕ) : Type := Fin n → Bool
 
-/-- The Boolean function computed by a circuit. -/
+/-- Multiplicative (`±1`) encoding of a bit. -/
 
-def bit (b : Bool) : ZMod 3 := if b then 1 else 0
+def bit (b : Bool) : F := if b then 1 else 0
 

@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Kochen Specker 18
 Category: Frontier Phys
 Target: Phys.kochen_specker_18
@@ -8,19 +6,43 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
 open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
 
 namespace Phys
 
-/-- The 18 vectors of the Cabello–Estebaranz–García-Alcaine Kochen–Specker set in `ℝ⁴`. -/
+/-! ### The 18 vectors
 
-theorem ksVec_ne_zero (i : Fin 18) : ksVec i ≠ 0 := by
+We use the Cabello–Estebaranz–García-Alcaine 18-vector, 9-basis Kochen–Specker set in `ℝ⁴`.
+The vectors have integer coordinates, listed here as rows. -/
+
+/-- Integer coordinates of the 18 Kochen–Specker vectors. -/
+
+lemma ksVec_ne_zero (i : Fin 18) : ksVec i ≠ 0 := by
+  have hd : ∀ i : Fin 18, ksDot i i ≠ 0 := by decide
   intro h
-  have h3 := congrFun h 3
-  have h2 := congrFun h 2
-  have h1 := congrFun h 1
-  have h0 := congrFun h 0
-  fin_cases i <;> simp [ksVec] at h0 h1 h2 h3
+  have h0 : inner ℝ (ksVec i) (ksVec i) = ((ksDot i i : ℤ) : ℝ) := inner_ksVec i i
+  rw [h] at h0
+  simp only [inner_zero_left] at h0
+  exact hd i (by exact_mod_cast h0.symm)
 
-/-- Within each of the nine listed quadruples, the four vectors are pairwise orthogonal;
-hence each quadruple really is an orthogonal basis of `ℝ⁴`. -/
+/-! ### `{0,1}`-colorings -/
+
+/-- A `{0,1}`-coloring (in the sense of Kochen–Specker) of the 18 vectors: no two orthogonal
+vectors are both colored `1`, and in every orthogonal basis of `ℝ⁴` formed by four of the
+vectors at least one is colored `1`. -/

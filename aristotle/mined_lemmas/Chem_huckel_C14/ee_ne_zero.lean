@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Huckel C 14
 Category: Chemistry
 Target: Chem.huckel_C14
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,11 +33,9 @@ set_option grind.warning false
 
 namespace Chem
 
-open scoped Matrix
+/-- The standard additive character `ZMod 14 → ℂ`, `j ↦ exp (2πI j / 14)`. -/
 
-/-! ### A primitive 14-th root of unity and the associated character -/
+lemma ee_ne_zero (k : ZMod 14) : ee k ≠ 0 := by
+  rw [ee_apply]; exact Complex.exp_ne_zero _
 
-/-- A primitive 14-th root of unity. -/
-
-theorem ee_ne_zero (m : ℤ) : ee m ≠ 0 := zpow_ne_zero _ om_ne_zero
-
+/-- `ee k + ee (-k) = 2 cos (2π k.val / 14)`. -/

@@ -9,333 +9,256 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-
-# Uhlmann Fidelity
-Category: Frontier Qi
-Target: QI.uhlmann_fidelity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
-/-!
-# Uhlmann Fidelity
-Category: Frontier Qi
-Target: QI.uhlmann_fidelity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
+open scoped ComplexOrder
+open scoped MatrixOrder
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxHeartbeats 400000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-## Uhlmann's theorem
-
-We work with finite-dimensional quantum systems, states being described by density
-matrices (positive semidefinite matrices) on `ℂ^n`.
-
-A *purification* of a state `ρ` on `ℂ^n` by an ancilla system `ℂ^m` is a vector
-`ψ : n × m → ℂ` (i.e. an element of `ℂ^n ⊗ ℂ^m`) whose reduced state on the first
-factor, `Tr_2 |ψ⟩⟨ψ|`, is `ρ`.
-
-The *fidelity* of two states is `F(ρ, σ) = Tr √(√ρ σ √ρ)`.
-
-Uhlmann's theorem states that `F(ρ, σ)` is the maximum of `|⟨ψ, ψ₂⟩|` over all
-purifications `ψ` of `ρ` and `ψ₂` of `σ` (using an ancilla of the same dimension).
--/
 
 namespace QI
 
 open Matrix
-open scoped MatrixOrder ComplexOrder
+
+noncomputable section
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- The partial trace over the second (ancilla) factor of `ℂ^n ⊗ ℂ^m`. -/
-noncomputable def ptraceRight {m : Type*} [Fintype m] (X : Matrix (n × m) (n × m) ℂ) : Matrix n n ℂ :=
-  Matrix.of fun i j => ∑ k, X (i, k) (j, k)
+/-! ## Extending a partial isometry -/
 
-/-- The rank-one operator `|ψ⟩⟨ψ|` associated with a vector `ψ`. -/
-def ketBra {N : Type*} (ψ : N → ℂ) : Matrix N N ℂ :=
-  Matrix.of fun a b => ψ a * star (ψ b)
-
-/-- `ψ : n × m → ℂ` is a purification of the state `ρ` on `ℂ^n` if the reduced density
-matrix of `|ψ⟩⟨ψ|` on the first factor is `ρ`. -/
-def IsPurification {m : Type*} [Fintype m] (ρ : Matrix n n ℂ) (ψ : n × m → ℂ) : Prop :=
-  ptraceRight (ketBra ψ) = ρ
-
-/-- The (Uhlmann) fidelity `F(ρ, σ) = Tr √(√ρ σ √ρ)` of two states. -/
-noncomputable def fidelity (ρ σ : Matrix n n ℂ) : ℝ :=
-  (CFC.sqrt (CFC.sqrt ρ * σ * CFC.sqrt ρ)).trace.re
-
-section Aux
-
-omit [DecidableEq n] in
-/-- The dot product `x⋆ ⬝ y` is the inner product of the corresponding Euclidean vectors. -/
-theorem dotProduct_eq_inner (u v : n → ℂ) :
-    star u ⬝ᵥ v = inner ℂ (WithLp.toLp 2 u : EuclideanSpace ℂ n) (WithLp.toLp 2 v) := by
-  rw [EuclideanSpace.inner_eq_star_dotProduct]; simp [dotProduct_comm]
-
-omit [DecidableEq n] in
-/-- Cauchy-Schwarz: if `y` has the same norm as `x`, then `|⟨x, y⟩| ≤ ‖x‖²`. -/
-theorem norm_dotProduct_le (x y : n → ℂ) (h : star y ⬝ᵥ y = star x ⬝ᵥ x) :
-    ‖star x ⬝ᵥ y‖ ≤ (star x ⬝ᵥ x).re := by
-  set X : EuclideanSpace ℂ n := WithLp.toLp 2 x
-  set Y : EuclideanSpace ℂ n := WithLp.toLp 2 y
-  have hXX : (inner ℂ X X : ℂ).re = ‖X‖ ^ 2 := by
-    simpa using (inner_self_eq_norm_sq (𝕜 := ℂ) X)
-  have hYY : (inner ℂ Y Y : ℂ).re = ‖Y‖ ^ 2 := by
-    simpa using (inner_self_eq_norm_sq (𝕜 := ℂ) Y)
-  have h2 : ‖X‖ = ‖Y‖ := by
-    have : ‖Y‖ ^ 2 = ‖X‖ ^ 2 := by
-      rw [← hXX, ← hYY, ← dotProduct_eq_inner, ← dotProduct_eq_inner, h]
-    nlinarith [norm_nonneg X, norm_nonneg Y]
-  rw [dotProduct_eq_inner x y, dotProduct_eq_inner x x, hXX]
-  calc ‖(inner ℂ X Y : ℂ)‖ ≤ ‖X‖ * ‖Y‖ := norm_inner_le_norm _ _
-    _ = ‖X‖ ^ 2 := by rw [← h2]; ring
-
-/-- If `P` is positive semidefinite and `V` is an isometry then `‖Tr (V P)‖ ≤ Tr P`. -/
-theorem norm_trace_mul_le_trace (P V : Matrix n n ℂ) (hP : P.PosSemidef) (hV : Vᴴ * V = 1) :
-    ‖(V * P).trace‖ ≤ P.trace.re := by
-  set S := CFC.sqrt P with hS
-  have hSS : S * S = P := CFC.sqrt_mul_sqrt_self P hP.nonneg
-  have hSh : Sᴴ = S := (CFC.sqrt_nonneg P).posSemidef.1
-  have hconj : ∀ i k, star (S k i) = S i k := by
-    intro i k
-    have := congrFun (congrFun hSh i) k
-    simpa [Matrix.conjTranspose_apply] using this
-  have key : (V * P).trace = (S * V * S).trace := by
-    rw [← hSS, ← Matrix.mul_assoc, Matrix.trace_mul_comm (V * S) S, Matrix.mul_assoc]
-  set x : n → n → ℂ := fun i k => S k i with hx
-  have hentry : ∀ i, (S * V * S) i i = star (x i) ⬝ᵥ (V *ᵥ x i) := by
-    intro i
-    simp only [Matrix.mul_apply, Matrix.mulVec, dotProduct, Pi.star_apply, hx, hconj,
-      Finset.sum_mul, Finset.mul_sum]
-    rw [Finset.sum_comm]
-    exact Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => by ring
-  have hdiag : ∀ i, P i i = star (x i) ⬝ᵥ x i := by
-    intro i
-    rw [← hSS]
-    simp only [Matrix.mul_apply, dotProduct, Pi.star_apply, hx, hconj]
-  have hiso : ∀ i, star (V *ᵥ x i) ⬝ᵥ (V *ᵥ x i) = star (x i) ⬝ᵥ x i := by
-    intro i
-    rw [star_mulVec, ← dotProduct_mulVec, Matrix.mulVec_mulVec, hV, one_mulVec]
-  calc ‖(V * P).trace‖ = ‖∑ i, (S * V * S) i i‖ := by rw [key, Matrix.trace]; rfl
-    _ ≤ ∑ i, ‖(S * V * S) i i‖ := norm_sum_le _ _
-    _ ≤ ∑ i, (star (x i) ⬝ᵥ x i).re := by
-        refine Finset.sum_le_sum fun i _ => ?_
-        rw [hentry i]
-        exact norm_dotProduct_le _ _ (hiso i)
-    _ = P.trace.re := by
-        rw [Matrix.trace, Complex.re_sum]
-        exact Finset.sum_congr rfl fun i _ => by rw [← hdiag i]; rfl
-
-omit [DecidableEq n] in
-/-- Two square matrices agree as soon as they act identically on all vectors. -/
-theorem matrix_ext_of_mulVec {A B : Matrix n n ℂ} (h : ∀ v, A *ᵥ v = B *ᵥ v) : A = B := by
-  ext i j
-  have := congrFun (h (Pi.single j 1)) i
-  simpa [Matrix.mulVec_single] using this
-
-/-- `Matrix.toEuclideanLin` acts by matrix-vector multiplication. -/
-theorem toEuclideanLin_apply_eq (M : Matrix n n ℂ) (v : EuclideanSpace ℂ n) :
-    Matrix.toEuclideanLin M v = WithLp.toLp 2 (M *ᵥ WithLp.ofLp v) := rfl
-
-/-- If `M` and `P` have the same "norm function", the assignment `P x ↦ M x` extends to a
-linear isometry of the whole space. -/
-theorem exists_isometry_of_norm_eq (P M : Matrix n n ℂ)
-    (hnorm : ∀ x : EuclideanSpace ℂ n, ‖Matrix.toEuclideanLin M x‖ = ‖Matrix.toEuclideanLin P x‖) :
-    ∃ F : EuclideanSpace ℂ n →ₗᵢ[ℂ] EuclideanSpace ℂ n,
-      ∀ x, F (Matrix.toEuclideanLin P x) = Matrix.toEuclideanLin M x := by
-  set p := Matrix.toEuclideanLin P with hp
-  set m := Matrix.toEuclideanLin M with hm
+/-- If `‖p x‖ = ‖m x‖` for all `x`, then the assignment `p x ↦ m x` extends to a global
+linear isometry `w` of the (finite dimensional) space, i.e. `w (p x) = m x` for all `x`. -/
+lemma exists_isometry_of_norm_eq {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+    [FiniteDimensional ℂ E] (p m : E →ₗ[ℂ] E) (h : ∀ x, ‖p x‖ = ‖m x‖) :
+    ∃ w : E →ₗᵢ[ℂ] E, ∀ x, w (p x) = m x := by
   have hker : LinearMap.ker p ≤ LinearMap.ker m := by
     intro x hx
-    have : ‖m x‖ = 0 := by rw [hnorm x, LinearMap.mem_ker.1 hx, norm_zero]
-    simpa [LinearMap.mem_ker] using norm_eq_zero.1 this
-  set q := (LinearMap.ker p).liftQ m hker with hq
-  set e := p.quotKerEquivRange with he
-  set f₀ : (LinearMap.range p) →ₗ[ℂ] EuclideanSpace ℂ n := q ∘ₗ (e.symm : _ →ₗ[ℂ] _) with hf0
-  have hf₀ : ∀ x, f₀ ⟨p x, ⟨x, rfl⟩⟩ = m x := by
+    have hx' : p x = 0 := hx
+    have hn := h x
+    rw [hx', norm_zero] at hn
+    exact LinearMap.mem_ker.mpr (by simpa using (norm_eq_zero.mp hn.symm))
+  set g : (E ⧸ LinearMap.ker p) →ₗ[ℂ] E := (LinearMap.ker p).liftQ m hker with hg
+  set L0 : (LinearMap.range p) →ₗ[ℂ] E := g ∘ₗ (p.quotKerEquivRange.symm : _ →ₗ[ℂ] _) with hL0def
+  have hL0 : ∀ x : E, L0 ⟨p x, ⟨x, rfl⟩⟩ = m x := by
     intro x
-    have hex : e (Submodule.Quotient.mk x) = ⟨p x, ⟨x, rfl⟩⟩ :=
-      Subtype.ext (LinearMap.quotKerEquivRange_apply_mk p x)
-    have hsymm : e.symm ⟨p x, ⟨x, rfl⟩⟩ = Submodule.Quotient.mk x := by
-      rw [← hex, LinearEquiv.symm_apply_apply]
-    simp [hf0, hsymm, hq]
-  have hnorm₀ : ∀ y : LinearMap.range p, ‖f₀ y‖ = ‖(y : EuclideanSpace ℂ n)‖ := by
+    simp only [hL0def, LinearMap.coe_comp, Function.comp_apply]
+    rw [LinearEquiv.coe_coe, LinearMap.quotKerEquivRange_symm_apply_image]
+    simp [hg]
+  have hnorm : ∀ y : (LinearMap.range p), ‖L0 y‖ = ‖y‖ := by
     rintro ⟨y, x, rfl⟩
-    rw [hf₀ x]
-    exact hnorm x
-  refine ⟨LinearIsometry.extend ⟨f₀, hnorm₀⟩, fun x => ?_⟩
-  have := LinearIsometry.extend_apply (⟨f₀, hnorm₀⟩ : (LinearMap.range p) →ₗᵢ[ℂ] EuclideanSpace ℂ n)
-    ⟨p x, ⟨x, rfl⟩⟩
-  simpa [hf₀ x] using this
+    rw [hL0 x]
+    simpa using (h x).symm
+  let L : (LinearMap.range p) →ₗᵢ[ℂ] E := ⟨L0, hnorm⟩
+  refine ⟨L.extend, fun x => ?_⟩
+  have h1 := LinearIsometry.extend_apply L ⟨p x, ⟨x, rfl⟩⟩
+  simpa [L, hL0 x] using h1
 
-/-- **Polar decomposition**: every square complex matrix `M` factors as `M = Q * √(Mᴴ M)`
-with `Q` unitary. -/
-theorem exists_polar (M : Matrix n n ℂ) :
-    ∃ Q : Matrix n n ℂ, Qᴴ * Q = 1 ∧ Q * Qᴴ = 1 ∧ M = Q * CFC.sqrt (Mᴴ * M) := by
+/-! ## Polar decomposition of a square complex matrix -/
+
+lemma toEuclideanLin_mul' (A B : Matrix n n ℂ) : Matrix.toEuclideanLin (A * B) =
+    (Matrix.toEuclideanLin A) ∘ₗ (Matrix.toEuclideanLin B) := toLpLin_mul 2 2 2 A B
+
+lemma norm_sq_toEuclideanLin (M : Matrix n n ℂ) (x : EuclideanSpace ℂ n) :
+    ‖Matrix.toEuclideanLin M x‖ ^ 2 = (inner ℂ x (Matrix.toEuclideanLin (Mᴴ * M) x)).re := by
+  rw [toEuclideanLin_mul', Matrix.toEuclideanLin_conjTranspose_eq_adjoint,
+    LinearMap.comp_apply, LinearMap.adjoint_inner_right, ← inner_self_eq_norm_sq (𝕜 := ℂ)]
+  rfl
+
+/-- **Polar decomposition**: every square complex matrix factors as `M = U * √(Mᴴ M)` with
+`U` unitary. -/
+lemma exists_unitary_polar (M : Matrix n n ℂ) :
+    ∃ U : Matrix n n ℂ, Uᴴ * U = 1 ∧ U * Uᴴ = 1 ∧ M = U * CFC.sqrt (Mᴴ * M) := by
   set P := CFC.sqrt (Mᴴ * M) with hPdef
-  have hPS : (Mᴴ * M).PosSemidef := Matrix.posSemidef_conjTranspose_mul_self M
-  have hPP : P * P = Mᴴ * M := CFC.sqrt_mul_sqrt_self _ hPS.nonneg
-  have hPh : Pᴴ = P := (CFC.sqrt_nonneg (Mᴴ * M)).posSemidef.1
-  have hdot : ∀ x : n → ℂ, star (M *ᵥ x) ⬝ᵥ (M *ᵥ x) = star (P *ᵥ x) ⬝ᵥ (P *ᵥ x) := by
-    intro x
-    rw [star_mulVec, ← dotProduct_mulVec, Matrix.mulVec_mulVec,
-      star_mulVec, ← dotProduct_mulVec, Matrix.mulVec_mulVec, hPh, hPP]
+  have hMM : (Mᴴ * M).PosSemidef := Matrix.posSemidef_conjTranspose_mul_self M
+  have hP : P.PosSemidef := (CFC.sqrt_nonneg (Mᴴ * M)).posSemidef
+  have hPP : Pᴴ * P = Mᴴ * M := by
+    rw [hP.isHermitian.eq]
+    exact CFC.sqrt_mul_sqrt_self (Mᴴ * M) (ha := hMM.nonneg)
   have hnorm : ∀ x : EuclideanSpace ℂ n,
-      ‖Matrix.toEuclideanLin M x‖ = ‖Matrix.toEuclideanLin P x‖ := by
+      ‖Matrix.toEuclideanLin P x‖ = ‖Matrix.toEuclideanLin M x‖ := by
     intro x
-    have h1 : ‖Matrix.toEuclideanLin M x‖ ^ 2 = ‖Matrix.toEuclideanLin P x‖ ^ 2 := by
-      rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (Matrix.toEuclideanLin M x),
-        ← inner_self_eq_norm_sq (𝕜 := ℂ) (Matrix.toEuclideanLin P x),
-        toEuclideanLin_apply_eq, toEuclideanLin_apply_eq,
-        ← dotProduct_eq_inner, ← dotProduct_eq_inner, hdot]
-    nlinarith [norm_nonneg (Matrix.toEuclideanLin M x), norm_nonneg (Matrix.toEuclideanLin P x)]
-  obtain ⟨F, hF⟩ := exists_isometry_of_norm_eq P M hnorm
-  set Q := Matrix.toEuclideanLin.symm F.toLinearMap with hQdef
-  have hQvec : ∀ v : n → ℂ, Q *ᵥ v = WithLp.ofLp (F (WithLp.toLp 2 v)) := by
-    intro v
-    have hQe : Matrix.toEuclideanLin Q = F.toLinearMap := by
-      rw [hQdef, LinearEquiv.apply_symm_apply]
-    have := congrArg (fun (g : EuclideanSpace ℂ n →ₗ[ℂ] EuclideanSpace ℂ n) =>
-      g (WithLp.toLp 2 v)) hQe
-    simpa [toEuclideanLin_apply_eq] using congrArg WithLp.ofLp this
-  have hQP : M = Q * P := by
-    refine (matrix_ext_of_mulVec ?_).symm
-    intro v
-    rw [← Matrix.mulVec_mulVec, hQvec]
-    have := hF (WithLp.toLp 2 v)
-    simp only [toEuclideanLin_apply_eq] at this
-    simpa using congrArg WithLp.ofLp this
-  have hiso : Qᴴ * Q = 1 := by
-    ext i j
-    have h1 : star ((Pi.single i (1:ℂ) : n → ℂ)) ⬝ᵥ (Pi.single j (1:ℂ) : n → ℂ)
-        = star (Q *ᵥ Pi.single i 1) ⬝ᵥ (Q *ᵥ Pi.single j 1) := by
-      rw [dotProduct_eq_inner, dotProduct_eq_inner, hQvec, hQvec]
-      simp
-    simp only [Matrix.mul_apply, Matrix.conjTranspose_apply, Matrix.one_apply, RCLike.star_def]
-    rw [show ∑ k, (starRingEnd ℂ) (Q k i) * Q k j
-          = star (Q *ᵥ (Pi.single i (1:ℂ) : n → ℂ)) ⬝ᵥ (Q *ᵥ (Pi.single j (1:ℂ) : n → ℂ)) by
-        simp [dotProduct, Matrix.mulVec_single], ← h1]
-    simp [dotProduct, Pi.single_apply, eq_comm]
-  exact ⟨Q, hiso, mul_eq_one_comm.1 hiso, hQP⟩
+    have h1 := norm_sq_toEuclideanLin P x
+    have h2 := norm_sq_toEuclideanLin M x
+    rw [hPP] at h1
+    exact (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp (h1.trans h2.symm)
+  obtain ⟨w, hw⟩ := exists_isometry_of_norm_eq _ _ hnorm
+  have hunit : (Matrix.toEuclideanLin.symm w.toLinearMap)ᴴ *
+      (Matrix.toEuclideanLin.symm w.toLinearMap) = 1 := by
+    apply Matrix.toEuclideanLin.injective
+    rw [toEuclideanLin_mul', Matrix.toEuclideanLin_conjTranspose_eq_adjoint, toLpLin_one]
+    refine LinearMap.ext fun x => ?_
+    refine ext_inner_left ℂ fun y => ?_
+    rw [LinearMap.comp_apply, LinearMap.adjoint_inner_right]
+    simp only [LinearEquiv.apply_symm_apply, LinearMap.id_apply]
+    exact w.inner_map_map y x
+  refine ⟨Matrix.toEuclideanLin.symm w.toLinearMap, hunit, mul_eq_one_comm.mp hunit, ?_⟩
+  apply Matrix.toEuclideanLin.injective
+  rw [toEuclideanLin_mul']
+  refine LinearMap.ext fun x => ?_
+  simp only [LinearMap.comp_apply, LinearEquiv.apply_symm_apply]
+  exact (hw x).symm
 
-/-- If `A * Aᴴ = ρ`, then `A = √ρ * U` for some unitary `U`. -/
-theorem exists_unitary_of_mul_conjTranspose {A ρ : Matrix n n ℂ} (hA : A * Aᴴ = ρ) :
+/-- Left polar decomposition: `M = √(M Mᴴ) * U` with `U` unitary. -/
+lemma exists_unitary_polar_left (M : Matrix n n ℂ) :
+    ∃ U : Matrix n n ℂ, Uᴴ * U = 1 ∧ U * Uᴴ = 1 ∧ M = CFC.sqrt (M * Mᴴ) * U := by
+  obtain ⟨U, h1, h2, h3⟩ := exists_unitary_polar Mᴴ
+  rw [Matrix.conjTranspose_conjTranspose] at h3
+  refine ⟨Uᴴ, by simpa using h2, by simpa using h1, ?_⟩
+  have h4 := congrArg Matrix.conjTranspose h3
+  rw [Matrix.conjTranspose_conjTranspose, Matrix.conjTranspose_mul,
+    ((CFC.sqrt_nonneg (M * Mᴴ)).posSemidef :
+      (CFC.sqrt (M * Mᴴ) : Matrix n n ℂ).PosSemidef).isHermitian.eq] at h4
+  exact h4
+
+/-- Every matrix `A` with `A Aᴴ = ρ` is of the form `√ρ * U` with `U` unitary; conversely all
+such matrices satisfy `A Aᴴ = ρ` when `ρ` is positive semidefinite. -/
+lemma exists_unitary_of_mul_conjTranspose_eq {ρ A : Matrix n n ℂ} (h : A * Aᴴ = ρ) :
     ∃ U : Matrix n n ℂ, Uᴴ * U = 1 ∧ U * Uᴴ = 1 ∧ A = CFC.sqrt ρ * U := by
-  obtain ⟨Q, hQ1, hQ2, hQP⟩ := exists_polar Aᴴ
-  rw [Matrix.conjTranspose_conjTranspose, hA] at hQP
-  refine ⟨Qᴴ, by simpa using hQ2, by simpa using hQ1, ?_⟩
-  have := congrArg Matrix.conjTranspose hQP
-  rwa [Matrix.conjTranspose_conjTranspose, Matrix.conjTranspose_mul,
-    (CFC.sqrt_nonneg ρ).posSemidef.1] at this
+  obtain ⟨U, h1, h2, h3⟩ := exists_unitary_polar_left A
+  exact ⟨U, h1, h2, by rwa [h] at h3⟩
 
-end Aux
+/-! ## The Hilbert–Schmidt inner product and the trace bound -/
 
-section Bridge
+/-- Hilbert–Schmidt vectorisation of a matrix. -/
+def vecHS (A : Matrix n n ℂ) : EuclideanSpace ℂ (n × n) := WithLp.toLp 2 (fun p => A p.1 p.2)
 
 omit [DecidableEq n] in
-/-- The reduced density matrix of `|ψ⟩⟨ψ|`, written via the matricization of `ψ`. -/
-theorem ptraceRight_ketBra (ψ : n × n → ℂ) :
-    ptraceRight (ketBra ψ) = (Matrix.of fun i k => ψ (i, k)) * (Matrix.of fun i k => ψ (i, k))ᴴ := by
-  ext i j
-  simp [ptraceRight, ketBra, Matrix.mul_apply, Matrix.conjTranspose_apply]
+lemma inner_vecHS (A B : Matrix n n ℂ) : inner ℂ (vecHS A) (vecHS B) = (Aᴴ * B).trace := by
+  rw [PiLp.inner_apply]
+  simp only [vecHS, Matrix.trace, Matrix.mul_apply, Matrix.diag_apply, Matrix.conjTranspose_apply,
+    Fintype.sum_prod_type, RCLike.inner_apply]
+  rw [Finset.sum_comm]
+  simp [RCLike.star_def, mul_comm]
 
 omit [DecidableEq n] in
-/-- The overlap of two vectors, written via their matricizations. -/
-theorem overlap_eq_trace (ψ ψ₂ : n × n → ℂ) :
-    ∑ a, star (ψ a) * ψ₂ a =
-      ((Matrix.of fun i k => ψ (i, k))ᴴ * (Matrix.of fun i k => ψ₂ (i, k))).trace := by
-  rw [Matrix.trace]
-  simp only [Matrix.diag_apply, Matrix.mul_apply, Matrix.conjTranspose_apply, Matrix.of_apply]
-  rw [Fintype.sum_prod_type, Finset.sum_comm]
+lemma norm_vecHS (A : Matrix n n ℂ) : ‖vecHS A‖ = Real.sqrt ((Aᴴ * A).trace.re) := by
+  rw [← Real.sqrt_sq (norm_nonneg (vecHS A)), ← inner_self_eq_norm_sq (𝕜 := ℂ), inner_vecHS]
+  rfl
 
-end Bridge
+omit [DecidableEq n] in
+/-- Cauchy–Schwarz for the Hilbert–Schmidt (Frobenius) inner product on matrices. -/
+lemma norm_trace_conjTranspose_mul_le (A B : Matrix n n ℂ) :
+    ‖(Aᴴ * B).trace‖ ≤ Real.sqrt ((Aᴴ * A).trace.re) * Real.sqrt ((Bᴴ * B).trace.re) := by
+  rw [← inner_vecHS, ← norm_vecHS, ← norm_vecHS]
+  exact norm_inner_le_norm (𝕜 := ℂ) (vecHS A) (vecHS B)
 
-/-- **Uhlmann's theorem.** For states (positive semidefinite matrices) `ρ` and `σ` on `ℂ^n`,
-the fidelity `F(ρ, σ) = Tr √(√ρ σ √ρ)` is the maximum of the overlap `|⟨ψ, ψ₂⟩|` taken over
-all purifications `ψ` of `ρ` and `ψ₂` of `σ` in `ℂ^n ⊗ ℂ^n`. -/
+omit [DecidableEq n] in
+lemma re_trace_nonneg {P : Matrix n n ℂ} (hP : P.PosSemidef) : 0 ≤ P.trace.re := by
+  have h := hP.trace_nonneg
+  rw [Complex.le_def] at h
+  simpa using h.1
+
+omit [DecidableEq n] in
+lemma norm_trace_eq_re {P : Matrix n n ℂ} (hP : P.PosSemidef) : ‖P.trace‖ = P.trace.re := by
+  have h := hP.trace_nonneg
+  rw [Complex.le_def] at h
+  simp only [Complex.zero_re, Complex.zero_im] at h
+  rw [Complex.norm_def, Complex.normSq_apply, ← h.2]
+  simp [Real.sqrt_mul_self h.1]
+
+/-- If `P` is positive semidefinite and `V` is unitary then `|tr (V P)| ≤ tr P`. -/
+lemma norm_trace_unitary_mul_le {P V : Matrix n n ℂ} (hP : P.PosSemidef) (hV : Vᴴ * V = 1) :
+    ‖(V * P).trace‖ ≤ P.trace.re := by
+  set S := CFC.sqrt P with hSdef
+  have hS : S.PosSemidef := (CFC.sqrt_nonneg P).posSemidef
+  have hSS : S * S = P := CFC.sqrt_mul_sqrt_self P (ha := hP.nonneg)
+  have hSh : Sᴴ = S := hS.isHermitian.eq
+  have key : (V * P).trace = (Sᴴ * (V * S)).trace := by
+    rw [hSh, ← hSS, ← Matrix.mul_assoc, ← Matrix.mul_assoc, Matrix.trace_mul_cycle]
+  have h1 : (Sᴴ * S).trace = P.trace := by rw [hSh, hSS]
+  have h2 : ((V * S)ᴴ * (V * S)).trace = P.trace := by
+    rw [Matrix.conjTranspose_mul, Matrix.mul_assoc, ← Matrix.mul_assoc Vᴴ V S, hV,
+      Matrix.one_mul, hSh, hSS]
+  have hcs := norm_trace_conjTranspose_mul_le S (V * S)
+  rw [h1, h2] at hcs
+  rw [key]
+  calc ‖(Sᴴ * (V * S)).trace‖ ≤ Real.sqrt (P.trace.re) * Real.sqrt (P.trace.re) := hcs
+    _ = P.trace.re := Real.mul_self_sqrt (re_trace_nonneg hP)
+
+/-! ## Fidelity and Uhlmann's theorem -/
+
+/-- The (Uhlmann) fidelity of two positive semidefinite matrices,
+`F(ρ, σ) = tr √(√ρ σ √ρ)`. -/
+def fidelity (ρ σ : Matrix n n ℂ) : ℝ :=
+  (CFC.sqrt (CFC.sqrt ρ * σ * CFC.sqrt ρ)).trace.re
+
+/-- Sanity check on the definition: `F(ρ, ρ) = tr ρ` (so `F(ρ, ρ) = 1` for a state `ρ`). -/
+lemma fidelity_self {ρ : Matrix n n ℂ} (hρ : ρ.PosSemidef) : fidelity ρ ρ = ρ.trace.re := by
+  have hRR : CFC.sqrt ρ * CFC.sqrt ρ = ρ := CFC.sqrt_mul_sqrt_self ρ (ha := hρ.nonneg)
+  have h : CFC.sqrt ρ * ρ * CFC.sqrt ρ = ρ ^ 2 := by
+    calc CFC.sqrt ρ * ρ * CFC.sqrt ρ
+        = CFC.sqrt ρ * (CFC.sqrt ρ * CFC.sqrt ρ) * CFC.sqrt ρ := by rw [hRR]
+      _ = (CFC.sqrt ρ * CFC.sqrt ρ) * (CFC.sqrt ρ * CFC.sqrt ρ) := by noncomm_ring
+      _ = ρ ^ 2 := by rw [hRR, sq]
+  rw [fidelity, h, CFC.sqrt_sq ρ (ha := hρ.nonneg)]
+
+/-- **Uhlmann's theorem**.  For positive semidefinite `ρ σ : Matrix n n ℂ`, the fidelity
+`F(ρ, σ) = tr √(√ρ σ √ρ)` is the maximum of the overlaps `|⟪ψ, φ⟫|` taken over all
+purifications `ψ` of `ρ` and `φ` of `σ`.
+
+A purification of `ρ` on `ℂⁿ ⊗ ℂⁿ` is encoded by its matrix of coefficients
+`A : Matrix n n ℂ` (that is, `ψ = ∑ i j, A i j • (eᵢ ⊗ eⱼ)`); the condition that its reduced
+state (the partial trace over the ancilla) equals `ρ` reads `A * Aᴴ = ρ`, and the overlap of
+two such vectors is `⟪ψ, φ⟫ = tr (Aᴴ B)`. -/
 theorem uhlmann_fidelity {ρ σ : Matrix n n ℂ} (hρ : ρ.PosSemidef) (hσ : σ.PosSemidef) :
-    IsGreatest {x : ℝ | ∃ ψ ψ₂ : n × n → ℂ, IsPurification ρ ψ ∧ IsPurification σ ψ₂ ∧
-      x = ‖∑ a, star (ψ a) * ψ₂ a‖} (fidelity ρ σ) := by
+    IsGreatest {x : ℝ | ∃ A B : Matrix n n ℂ,
+      A * Aᴴ = ρ ∧ B * Bᴴ = σ ∧ x = ‖(Aᴴ * B).trace‖} (fidelity ρ σ) := by
   set R := CFC.sqrt ρ with hRdef
   set T := CFC.sqrt σ with hTdef
-  have hRR : R * R = ρ := CFC.sqrt_mul_sqrt_self _ hρ.nonneg
-  have hTT : T * T = σ := CFC.sqrt_mul_sqrt_self _ hσ.nonneg
-  have hRh : Rᴴ = R := (CFC.sqrt_nonneg ρ).posSemidef.1
-  have hTh : Tᴴ = T := (CFC.sqrt_nonneg σ).posSemidef.1
-  set M := T * R with hMdef
-  have hMh : Mᴴ = R * T := by rw [hMdef, Matrix.conjTranspose_mul, hRh, hTh]
-  have hMM : Mᴴ * M = R * σ * R := by
-    rw [hMh, hMdef, ← hTT]
-    simp [Matrix.mul_assoc]
-  set P := CFC.sqrt (Mᴴ * M) with hPdef
-  have hPS : P.PosSemidef := (CFC.sqrt_nonneg _).posSemidef
-  have hfid : fidelity ρ σ = P.trace.re := by rw [fidelity, hPdef, hMM]
-  obtain ⟨Q, hQ1, hQ2, hQP⟩ := exists_polar M
-  have hMhP : Mᴴ = P * Qᴴ := by
-    rw [hQP, Matrix.conjTranspose_mul, ← hPdef, (CFC.sqrt_nonneg (Mᴴ * M)).posSemidef.1]
+  have hR : R.PosSemidef := (CFC.sqrt_nonneg ρ).posSemidef
+  have hT : T.PosSemidef := (CFC.sqrt_nonneg σ).posSemidef
+  have hRR : R * R = ρ := CFC.sqrt_mul_sqrt_self ρ (ha := hρ.nonneg)
+  have hTT : T * T = σ := CFC.sqrt_mul_sqrt_self σ (ha := hσ.nonneg)
+  have hRh : Rᴴ = R := hR.isHermitian.eq
+  have hTh : Tᴴ = T := hT.isHermitian.eq
+  have hYY : (R * T) * (R * T)ᴴ = R * σ * R := by
+    rw [Matrix.conjTranspose_mul, hRh, hTh, Matrix.mul_assoc, ← Matrix.mul_assoc T T R, hTT,
+      ← Matrix.mul_assoc]
+  obtain ⟨U, hU1, hU2, hU3⟩ := exists_unitary_polar_left (R * T)
+  rw [hYY] at hU3
+  set P := CFC.sqrt (R * σ * R) with hPdef
+  have hP : P.PosSemidef := (CFC.sqrt_nonneg _).posSemidef
+  have hfid : fidelity ρ σ = P.trace.re := rfl
   constructor
-  · -- the maximum is attained, by the purifications `√ρ` and `√σ Q`
-    refine ⟨fun a => R a.1 a.2, fun a => (T * Q) a.1 a.2, ?_, ?_, ?_⟩
-    · show ptraceRight (ketBra _) = ρ
-      rw [ptraceRight_ketBra]
-      show R * Rᴴ = ρ
-      rw [hRh, hRR]
-    · show ptraceRight (ketBra _) = σ
-      rw [ptraceRight_ketBra]
-      show T * Q * (T * Q)ᴴ = σ
-      rw [Matrix.conjTranspose_mul, hTh, Matrix.mul_assoc, ← Matrix.mul_assoc Q, hQ2,
-        Matrix.one_mul, hTT]
-    · rw [overlap_eq_trace]
-      show _ = ‖(Rᴴ * (T * Q)).trace‖
-      rw [hRh, ← Matrix.mul_assoc, ← hMh, hMhP, Matrix.mul_assoc, hQ1, Matrix.mul_one, hfid]
-      exact Complex.re_eq_norm.mpr hPS.trace_nonneg
-  · -- every overlap of purifications is bounded by the fidelity
-    rintro x ⟨ψ, ψ₂, hψ, hψ₂, rfl⟩
-    rw [IsPurification, ptraceRight_ketBra] at hψ hψ₂
-    obtain ⟨U, hU1, hU2, hAU⟩ := exists_unitary_of_mul_conjTranspose hψ
-    obtain ⟨V, hV1, hV2, hBV⟩ := exists_unitary_of_mul_conjTranspose hψ₂
-    rw [overlap_eq_trace, hAU, hBV, hfid]
-    have hW : (V * Uᴴ)ᴴ * (V * Uᴴ) = 1 := by
-      rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose, Matrix.mul_assoc,
-        ← Matrix.mul_assoc Vᴴ, hV1, Matrix.one_mul, hU2]
-    have hiso : (Qᴴ * (V * Uᴴ))ᴴ * (Qᴴ * (V * Uᴴ)) = 1 := by
-      rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose, Matrix.mul_assoc,
-        ← Matrix.mul_assoc Q, hQ2, Matrix.one_mul, hW]
-    have hkey : ((R * U)ᴴ * (T * V)).trace = (Qᴴ * (V * Uᴴ) * P).trace := by
+  · refine ⟨R, T * Uᴴ, ?_, ?_, ?_⟩
+    · rw [hRh, hRR]
+    · rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose, hTh, Matrix.mul_assoc,
+        ← Matrix.mul_assoc Uᴴ U T, hU1, Matrix.one_mul, hTT]
+    · have hRT : Rᴴ * (T * Uᴴ) = P := by
+        rw [hRh, ← Matrix.mul_assoc, hU3, Matrix.mul_assoc, hU2, Matrix.mul_one]
+      rw [hRT, hfid, norm_trace_eq_re hP]
+  · rintro x ⟨A, B, hA, hB, rfl⟩
+    obtain ⟨U₁, hU11, hU12, rfl⟩ := exists_unitary_of_mul_conjTranspose_eq hA
+    obtain ⟨U₂, hU21, hU22, rfl⟩ := exists_unitary_of_mul_conjTranspose_eq hB
+    rw [← hRdef, ← hTdef] at *
+    have hV : ((U * (U₂ * U₁ᴴ))ᴴ) * (U * (U₂ * U₁ᴴ)) = 1 := by
+      have h : (U * (U₂ * U₁ᴴ))ᴴ * (U * (U₂ * U₁ᴴ)) = U₁ * (U₂ᴴ * ((Uᴴ * U) * U₂) * U₁ᴴ) := by
+        simp only [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose]
+        noncomm_ring
+      rw [h, hU1, Matrix.one_mul, hU21, Matrix.one_mul, hU12]
+    have htr : ((R * U₁)ᴴ * (T * U₂)).trace = ((U * (U₂ * U₁ᴴ)) * P).trace := by
       rw [Matrix.conjTranspose_mul, hRh]
-      calc (Uᴴ * R * (T * V)).trace = (Uᴴ * (R * T * V)).trace := by simp [Matrix.mul_assoc]
-        _ = (R * T * V * Uᴴ).trace := Matrix.trace_mul_comm _ _
-        _ = (R * T * (V * Uᴴ)).trace := by simp [Matrix.mul_assoc]
-        _ = (Mᴴ * (V * Uᴴ)).trace := by rw [hMh]
-        _ = (P * (Qᴴ * (V * Uᴴ))).trace := by rw [hMhP]; simp [Matrix.mul_assoc]
-        _ = (Qᴴ * (V * Uᴴ) * P).trace := Matrix.trace_mul_comm _ _
-    rw [hkey]
-    exact norm_trace_mul_le_trace P _ hPS hiso
+      calc (U₁ᴴ * R * (T * U₂)).trace = (U₁ᴴ * ((R * T) * U₂)).trace := by
+            rw [Matrix.mul_assoc, Matrix.mul_assoc]
+        _ = (U₁ᴴ * ((P * U) * U₂)).trace := by rw [hU3]
+        _ = (((P * U) * U₂) * U₁ᴴ).trace := Matrix.trace_mul_comm _ _
+        _ = (P * (U * (U₂ * U₁ᴴ))).trace := by
+            rw [show (P * U) * U₂ * U₁ᴴ = P * (U * (U₂ * U₁ᴴ)) from by noncomm_ring]
+        _ = ((U * (U₂ * U₁ᴴ)) * P).trace := Matrix.trace_mul_comm _ _
+    rw [htr, hfid]
+    exact norm_trace_unitary_mul_le hP hV
+
+end
 
 end QI
 

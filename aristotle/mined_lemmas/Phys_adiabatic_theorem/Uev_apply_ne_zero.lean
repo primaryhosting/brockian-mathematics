@@ -1,0 +1,59 @@
+import Mathlib
+/-!
+# Adiabatic Theorem
+Category: Frontier Phys
+Target: Phys.adiabatic_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Phys
+
+open Set
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
+
+/-- Kato's adiabatic generator associated with a smooth family of spectral projections
+`P` with derivative `P'`: `K(s) = [P'(s), P(s)] = P'(s)P(s) - P(s)P'(s)`. -/
+
+lemma Uev_apply_ne_zero (t : ℝ) : Uev t psi0 ≠ 0 := by
+  intro h
+  have hcomm : Commute ((-t) • (-(sigma3 * sigma1))) (t • (-(sigma3 * sigma1))) := by
+    simp only [Commute, SemiconjBy, smul_mul_assoc, mul_smul_comm, smul_smul]
+    rw [mul_comm ((-t : ℝ)) t]
+  have hinv : Uev (-t) * Uev t = 1 := by
+    rw [Uev, Uev, ← exp_add_of_commute hcomm]
+    simp
+  have := congrArg (fun T : (ℂ × ℂ) →L[ℂ] (ℂ × ℂ) => T psi0) hinv
+  simp only [ContinuousLinearMap.coe_mul, Function.comp_apply,
+    ContinuousLinearMap.one_apply] at this
+  rw [h] at this
+  simp only [map_zero] at this
+  exact absurd this.symm (by simp [psi0, Prod.ext_iff])
+
+/-- **The adiabatic theorem for the spin-1/2 in a rotating field.**  All the hypotheses of
+`Phys.adiabatic_theorem` are met by a genuinely time-dependent Hamiltonian, and the state
+followed by the adiabatic evolution stays a nonzero instantaneous eigenvector of `H t`. -/

@@ -1,46 +1,43 @@
-/-
+import Mathlib
+
+/-!
 # Kadison Singer
 Category: Frontier — Fields Medal Work
 Target: Frontier.kadison_singer
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (Lean requires `import` to precede any module docstring `/-! ... -/`, so the required
--- header above is written as a plain block comment.)
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped Matrix
 
-import Mathlib
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
 
-/-!
-The Kadison–Singer problem asks whether every pure state on a maximal abelian self-adjoint
-subalgebra (MASA) of `B(ℓ²)` extends uniquely to a state on `B(ℓ²)`.  It was answered
-affirmatively by Marcus, Spielman and Srivastava via the method of interlacing families of
-polynomials.
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
 
-This file formalizes and proves in full the *finite-dimensional* case — the base case of the
-Kadison–Singer question: for the diagonal MASA of the matrix algebra `Mₙ(ℂ)`, the pure state
-`d ↦ d i` of the diagonal has a unique extension to a state on `Mₙ(ℂ)`, namely `A ↦ A i i`.
-
-Here a *state* is a unital positive ℂ-linear functional (`Frontier.IsState`), and the pure
-states of the diagonal algebra `ℂⁿ` are exactly the coordinate evaluations `d ↦ d i`.
-
-The proof is the classical one: positivity of `phi` yields a positive semidefinite Hermitian
-sesquilinear form `(X, Y) ↦ phi (Xᴴ * Y)`, and the degenerate case of the Cauchy–Schwarz
-inequality forces `phi` to vanish on every matrix unit other than `E i i`.
--/
+set_option grind.warning false
 
 namespace Frontier
 
-open Matrix ComplexOrder
-
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- A *state* on the matrix algebra `Mₙ(ℂ)`: a unital, positive linear functional. -/
+/-- A *state* on the matrix algebra `M_n(ℂ)`: a unital positive linear functional.
+Positivity is expressed by requiring `f (Xᴴ * X)` to be a nonnegative real number. -/
+structure IsState (f : Matrix n n ℂ →ₗ[ℂ] ℂ) : Prop where
+  unital : f 1 = 1
+  pos : ∀ X : Matrix n n ℂ, ∃ r : ℝ, 0 ≤ r ∧ f (Xᴴ * X) = (r : ℂ)
 
-def ExtendsDiagonalPureState (i : n) (phi : Matrix n n ℂ →ₗ[ℂ] ℂ) : Prop :=
-  ∀ d : n → ℂ, phi (Matrix.diagonal d) = d i
+/-- `f` extends the pure state `d ↦ d i` of the diagonal MASA `D_n ⊆ M_n(ℂ)`.
+(The pure states of the commutative algebra `D_n ≃ ℂ^n` are exactly the evaluations.) -/
 
-section Auxiliary
+def ExtendsDiagonalPureState (i : n) (f : Matrix n n ℂ →ₗ[ℂ] ℂ) : Prop :=
+  ∀ d : n → ℂ, f (Matrix.diagonal d) = d i
 
-variable {phi : Matrix n n ℂ →ₗ[ℂ] ℂ}
-
-/-- Positivity of `phi` on `(s • X + t • Y)ᴴ * (s • X + t • Y)`, expanded. -/
+/-- The functional `A ↦ A i i` on `M_n(ℂ)`. -/

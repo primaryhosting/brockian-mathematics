@@ -23,7 +23,16 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
+/-
+# Even Perfect Infinitude
+Category: Brockian Conjecture
+Target: Brockian.MersennePerfect.EvenPerfectInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
+import Archive.Wiedijk100Theorems.PerfectNumbers
 
 /-!
 # Even Perfect Infinitude
@@ -36,17 +45,8 @@ Provenance: Aristotle theorem prover (Harmonic)
 namespace Brockian
 namespace MersennePerfect
 
-open ArithmeticFunction Finset
-open scoped sigma
+/-- The set of even perfect natural numbers. -/
 
-/-! ## The Euclid–Euler theorem
+def evenPerfects : Set ℕ := {n : ℕ | Even n ∧ Nat.Perfect n}
 
-The proofs in this section follow the classical Euclid–Euler argument (as formalized in
-`Archive/Wiedijk100Theorems/PerfectNumbers.lean` in mathlib, which is not available as an
-import here). -/
-
-
-def EvenPerfects : Set ℕ := {n : ℕ | Even n ∧ Nat.Perfect n}
-
-/-- The set of Mersenne exponents, i.e. those `p` for which `mersenne p = 2 ^ p - 1` is prime.
-(Such a `p` is automatically prime.) -/
+/-- The set of exponents `p` for which the Mersenne number `2 ^ p - 1` is prime. -/

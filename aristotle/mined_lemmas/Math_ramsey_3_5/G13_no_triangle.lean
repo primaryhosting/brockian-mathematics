@@ -1,3 +1,28 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
 /-
 # Ramsey 3 5
 Category: Pure Mathematics
@@ -5,6 +30,7 @@ Target: Math.ramsey_3_5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
 import Mathlib
 
 /-!
@@ -13,29 +39,20 @@ Category: Pure Mathematics
 Target: Math.ramsey_3_5
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-(Lean requires `import` to come first in a file, so the header above the import is a plain
-block comment and this is the module docstring with the same content.)
-
-Mathlib does not contain Ramsey numbers, so the whole development is built here:
-the recursion `R(3,t+1) ≤ t + R(3,t)`, the parity refinement giving `R(3,4) ≤ 9`,
-hence `R(3,5) ≤ 14`, and the circulant graph `C₁₃(1,5)` witnessing `R(3,5) > 13`.
 -/
 
-set_option maxHeartbeats 2000000
+open Finset SimpleGraph
 
-namespace Math
+namespace Ramsey35
 
-open Finset
+variable {V : Type*} [DecidableEq V]
 
-/-! ## The Ramsey property -/
+/-! ### Basic clique helpers -/
 
-/-- `RamseyProp n s t` says that every simple graph on `n` vertices contains either a clique
-of size `s` or an independent set of size `t` (equivalently, a clique of size `t` in the
-complement).  `R(s,t)` is the least `n` with this property. -/
+omit [DecidableEq V] in
+/-- A finset all of whose distinct pairs are non-adjacent is a clique in the complement. -/
 
-theorem G13_no_triangle : ∀ a b c : Fin 13, a < b → b < c →
-    ¬ (G13.Adj a b ∧ G13.Adj a c ∧ G13.Adj b c) := by
-  decide +kernel
+lemma G13_no_triangle : ∀ a b c : Fin 13, ¬ (adjB a b ∧ adjB b c ∧ adjB a c) := by decide
 
-set_option maxRecDepth 100000 in
+set_option maxRecDepth 10000 in
+set_option maxHeartbeats 2000000 in

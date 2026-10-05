@@ -1,0 +1,49 @@
+/-
+# Rank Trace Ineq
+Category: Brockian Corpus
+Target: Zeta23Core.rank_trace_ineq
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Rank Trace Ineq
+Category: Brockian Corpus
+Target: Zeta23Core.rank_trace_ineq
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Pointwise
+open scoped ComplexOrder
+
+open Matrix
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Zeta23Core
+
+variable {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n] [DecidableEq n]
+
+/-! ### Basic notions -/
+
+/-- The real part of the trace of a matrix. -/
+
+lemma rtr_proj_split (hE2 : E * E = E) (M : Matrix n n 𝕜) :
+    rtr (E * M * E) + rtr ((1 - E) * M * (1 - E)) = rtr M := by
+  rw [rtr_conj_proj hE2, rtr_conj_proj (proj_compl_sq hE2), ← rtr_add, ← Matrix.mul_add]
+  simp
+
+omit [DecidableEq n] in

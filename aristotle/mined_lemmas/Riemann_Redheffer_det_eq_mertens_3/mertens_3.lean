@@ -1,14 +1,5 @@
 import Mathlib
 
-/-!
-# Det Eq Mertens 3
-Category: Frontier Wave 2 (deeper machinery)
-Target: Riemann.Redheffer.det_eq_mertens_3
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -32,17 +23,22 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-namespace Riemann
-namespace Redheffer
+import Mathlib
+/-!
+# Det Eq Mertens 3
+Category: Frontier Wave 2 (deeper machinery)
+Target: Riemann.Redheffer.det_eq_mertens_3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-- The 3×3 Redheffer matrix: `R i j = 1` if `j = 0` or `(i+1) ∣ (j+1)`, else `0`
-(with 0-indexed `Fin 3`). -/
+namespace Riemann.Redheffer
+
+/-- The `3 × 3` Redheffer matrix (0-indexed): `R i j = 1` when `j = 0` or
+`(i+1) ∣ (j+1)`, and `0` otherwise. -/
 
 theorem mertens_3 :
-    ∑ n ∈ Finset.Icc 1 3, (ArithmeticFunction.moebius n : ℤ) = -1 := by
-  have h1 : Finset.Icc 1 3 = ({1, 2, 3} : Finset ℕ) := rfl
-  rw [h1]
-  simp [ArithmeticFunction.moebius_apply_prime Nat.prime_two,
-    ArithmeticFunction.moebius_apply_prime Nat.prime_three]
+    ((ArithmeticFunction.moebius 1 : ℤ) + ArithmeticFunction.moebius 2
+      + ArithmeticFunction.moebius 3) = -1 := by
+  simp [ArithmeticFunction.moebius_apply_prime, Nat.prime_two, Nat.prime_three]
 
-/-- The determinant of the 3×3 Redheffer matrix equals the Mertens function `M 3`. -/

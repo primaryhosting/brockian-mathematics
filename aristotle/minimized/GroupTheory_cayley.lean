@@ -33,21 +33,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-# Cayley
-Category: Frontier Wave 2 (deeper machinery)
-Target: GroupTheory.cayley
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 namespace GroupTheory
 
-/-- **Cayley's theorem**: every group embeds into the symmetric group on its
-underlying set, i.e. there is an injective group homomorphism `G →* Equiv.Perm G`. -/
+/-- **Cayley's theorem**: every group `G` embeds into the symmetric group on its
+underlying set, via an injective group homomorphism `G →* Equiv.Perm G`. -/
 theorem cayley (G : Type*) [Group G] :
-    ∃ f : G →* Equiv.Perm G, Function.Injective f :=
-  ⟨MulAction.toPermHom G G, MulAction.toPerm_injective⟩
+    ∃ f : G →* Equiv.Perm G, Function.Injective f := by
+  refine ⟨MulAction.toPermHom G G, fun a b hab => ?_⟩
+  have h := congrArg (fun e : Equiv.Perm G => e 1) hab
+  simpa using h
 
 end GroupTheory
 

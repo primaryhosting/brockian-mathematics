@@ -1,0 +1,56 @@
+/-
+# Bertrand Postulate
+Category: Pure Mathematics
+Target: Math.bertrand_postulate
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean 4 does not permit a module docstring `/-! ... -/` before `import`,
+-- so the requested header appears above as a plain comment and is repeated
+-- verbatim as a module docstring immediately after the imports.)
+
+import Mathlib
+
+/-!
+# Bertrand Postulate
+Category: Pure Mathematics
+Target: Math.bertrand_postulate
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Math
+
+/-- **Bertrand's postulate**: for every `n ≥ 1` there is a prime `p` with `n < p ≤ 2n`.
+This follows from Mathlib's `Nat.exists_prime_lt_and_le_two_mul` (also known as `Nat.bertrand`). -/
+theorem bertrand_postulate (n : ℕ) (hn : 1 ≤ n) :
+    ∃ p : ℕ, Nat.Prime p ∧ n < p ∧ p ≤ 2 * n :=
+  Nat.exists_prime_lt_and_le_two_mul n (Nat.one_le_iff_ne_zero.mp hn)
+
+end Math
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+

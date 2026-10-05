@@ -1,0 +1,50 @@
+/-!
+# P Vs NP Statement
+Category: Frontier — Moonshot
+Target: Frontier.P_vs_NP_statement
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+A self-contained formalization of the P vs NP question in terms of time-bounded
+(deterministic and nondeterministic) single-tape Turing machines and polynomial-time
+many-one reducibility.
+
+The development is elementary and depends on nothing beyond the Lean 4 prelude, so that
+the file can literally begin with the header comment above.
+
+Main declarations:
+
+* `Frontier.Machine`             : single-tape Turing machine with finite control;
+* `Frontier.AcceptsWithin`       : acceptance within a given number of steps;
+* `Frontier.Deterministic`       : determinism of the transition relation;
+* `Frontier.DecidesInPolyTime`   : deciding a language within a polynomial time bound;
+* `Frontier.P`, `Frontier.NP`    : the two complexity classes;
+* `Frontier.PolyReducible`       : polynomial-time many-one reducibility `≤ₚ`;
+* `Frontier.NPComplete`          : NP-completeness;
+* `Frontier.P_vs_NP_statement`   : the statement of the P vs NP problem, in the form
+  `P ≠ NP ↔ ∃ L, L ∈ NP ∧ L ∉ P`.
+-/
+
+namespace Frontier
+
+/-- Words are finite binary strings. -/
+abbrev Word : Type := List Bool
+
+/-- A language is a set of words, represented by its membership predicate. -/
+abbrev Language : Type := Word → Prop
+
+/-- The direction in which the tape head moves in one step. -/
+inductive Dir : Type
+  | left : Dir
+  | right : Dir
+  | stay : Dir
+
+/-- The displacement of the head associated with a direction. -/
+
+theorem NPComplete_mem_P_of_P_eq_NP (L : Language) (h : P = NP) (hL : NPComplete L) : P L :=
+  h ▸ hL.1
+
+/-- Conversely, exhibiting an `NP`-complete language outside `P` separates the two
+classes. -/

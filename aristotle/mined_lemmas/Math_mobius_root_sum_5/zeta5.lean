@@ -23,11 +23,31 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-open Finset
+/-
+# Mobius Root Sum 5
+Category: Pure Mathematics
+Target: Math.mobius_root_sum_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Mobius Root Sum 5
+Category: Pure Mathematics
+Target: Math.mobius_root_sum_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Finset Polynomial
 
 namespace Math
 
-/-- A fixed primitive 5-th root of unity in `ℂ`. -/
+open scoped ArithmeticFunction
+
+/-- The Möbius function at `5` is `-1`. -/
 
 noncomputable def zeta5 : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5)
 

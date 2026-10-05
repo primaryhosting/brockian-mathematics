@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Heine Cantor
 Category: Frontier Wave 2 (deeper machinery)
@@ -32,11 +33,11 @@ set_option grind.warning false
 
 namespace Topology
 
-/-- **Heine–Cantor theorem**: a continuous map from a compact uniform space to any
+/-- **Heine–Cantor theorem**: a continuous map from a compact uniform space to a
 uniform space is uniformly continuous. -/
-
-theorem heine_cantor {X Y : Type*} [UniformSpace X] [UniformSpace Y] [CompactSpace X]
-    {f : X → Y} (hf : Continuous f) : UniformContinuous f :=
+theorem heine_cantor {X : Type*} {Y : Type*} [UniformSpace X] [UniformSpace Y]
+    [CompactSpace X] {f : X → Y} (hf : Continuous f) : UniformContinuous f :=
   CompactSpace.uniformContinuous_of_continuous hf
 
-/-- Local version: a map continuous on a compact set is uniformly continuous on it. -/
+end Topology
+

@@ -1,6 +1,4 @@
-import Mathlib
-
-/-!
+/-
 # Fullerene Pentagons
 Category: Chemistry
 Target: Chem.fullerene_pentagons
@@ -8,78 +6,36 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+import Mathlib
+
+/-!
+# Fullerene Pentagons
+
+A trivalent polyhedron all of whose faces are pentagons or hexagons has exactly 12 pentagons.
+-/
+
 namespace Chem
 
-open Finset
+/-- Arithmetic core of the fullerene count: if `p` faces are pentagons and `h` faces are
+hexagons, every vertex has degree `3`, and Euler's formula `V - E + F = 2` holds, then
+`p = 12`. -/
 
-/-! ### Combinatorial model of a trivalent polyhedron -/
-
-/--
-A **trivalent polyhedron**, combinatorially: finite types of vertices, edges and faces
-together with the incidence maps `edgeEnds` (endpoints of an edge) and `faceEdges` (edges
-bounding a face), subject to
-
-* `card_edgeEnds`      : every edge has exactly two endpoints;
-* `trivalent`          : every vertex lies on exactly three edges;
-* `card_faces_of_edge` : every edge lies on exactly two faces;
-* `euler`              : Euler's formula `V - E + F = 2`, stated subtraction-free.
--/
-structure TrivalentPolyhedron where
-  /-- The vertices. -/
-  Vert : Type
-  /-- The edges. -/
-  Edge : Type
-  /-- The faces. -/
-  Face : Type
-  [fintypeVert : Fintype Vert]
-  [fintypeEdge : Fintype Edge]
-  [fintypeFace : Fintype Face]
-  [decEqVert : DecidableEq Vert]
-  [decEqEdge : DecidableEq Edge]
-  /-- The set of endpoints of an edge. -/
-  edgeEnds : Edge → Finset Vert
-  /-- The set of edges bounding a face. -/
-  faceEdges : Face → Finset Edge
-  /-- Every edge has exactly two endpoints. -/
-  card_edgeEnds : ∀ e, (edgeEnds e).card = 2
-  /-- Every vertex lies on exactly three edges. -/
-  trivalent : ∀ v, (univ.filter fun e => v ∈ edgeEnds e).card = 3
-  /-- Every edge lies on exactly two faces. -/
-  card_faces_of_edge : ∀ e, (univ.filter fun f => e ∈ faceEdges f).card = 2
-  /-- Euler's formula `V - E + F = 2`, written without subtraction. -/
-  euler : Fintype.card Vert + Fintype.card Face = Fintype.card Edge + 2
-
-attribute [instance] TrivalentPolyhedron.fintypeVert TrivalentPolyhedron.fintypeEdge
-  TrivalentPolyhedron.fintypeFace TrivalentPolyhedron.decEqVert TrivalentPolyhedron.decEqEdge
-
-/--
-A **fullerene**: a trivalent polyhedron all of whose faces are pentagons or hexagons.
-This is the standard combinatorial model of a fullerene molecule, whose carbon atoms are
-the vertices and whose bonds are the edges.
--/
-structure Fullerene extends TrivalentPolyhedron where
-  /-- Every face is bounded by five or by six edges. -/
-  pentagon_or_hexagon : ∀ f : Face, (faceEdges f).card = 5 ∨ (faceEdges f).card = 6
-
-/-- Double counting of a relation between two finite types: summing the row sizes and
-summing the column sizes give the same total. -/
-
-theorem fullerene_pentagons_arith
-    (V E F p h : ℕ)
-    (euler : V + F = E + 2)
-    (trivalent : 3 * V = 2 * E)
-    (faces : F = p + h)
-    (incidences : 5 * p + 6 * h = 2 * E) :
+theorem fullerene_pentagons_arith (V E F p h : ℕ)
+    (euler : (V : ℤ) - (E : ℤ) + (F : ℤ) = 2)
+    (trivalent : 2 * E = 3 * V)
+    (face_count : p + h = F)
+    (edge_count : 5 * p + 6 * h = 2 * E) :
     p = 12 := by
   omega
 
-/-! ### The main theorem -/
+/-- **Fullerene pentagon count.**
 
-/--
-**Every fullerene has exactly twelve pentagonal faces.**
+Let a polyhedron be given combinatorially by a finite vertex set `𝒱`, a finite edge set `ℰ`
+and a finite face set `ℱ`, satisfying Euler's formula.  Assume:
 
-For a trivalent polyhedron (in the combinatorial sense of `Chem.TrivalentPolyhedron`:
-Euler's formula holds, every vertex lies on three edges, every edge has two endpoints and
-borders two faces) all of whose faces are pentagons or hexagons, the number of pentagons is
-exactly `12` — independently of the number of hexagons.
--/
+* it is *trivalent*: each vertex lies on exactly `3` edges, so `2 * #ℰ = 3 * #𝒱`
+  (each edge has two endpoints);
+* every face is a pentagon or a hexagon, `size f ∈ {5, 6}`, and each edge lies on exactly two
+  faces, so the face sizes sum to `2 * #ℰ`.
+
+Then exactly `12` faces are pentagons. -/

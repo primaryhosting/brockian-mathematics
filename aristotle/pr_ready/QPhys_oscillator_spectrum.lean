@@ -17,165 +17,13 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-
 /-!
 # Oscillator Spectrum
-
-(Lean requires `import` commands to precede every other command, including module
-documentation, so the header comment above is a plain block comment.)
-
-We realise the one-dimensional quantum harmonic oscillator algebraically on the Fock space
-`ℕ →₀ ℂ`, whose basis vector `Finsupp.single n 1` is the number state `|n⟩`.  The ladder
-operators `a` (`QPhys.ann`) and `a†` (`QPhys.cre`) satisfy the canonical commutation
-relation `[a, a†] = 1`, the number operator `N = a† a` acts diagonally, and the Hamiltonian
-`H = ℏω (a†a + ½)` has eigenvalues exactly `ℏω(n + ½)`, `n ∈ ℕ`.
+Category: Quantum Physics
+Target: QPhys.oscillator_spectrum
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace QPhys
-
-/-! ## Ladder operators -/
-
-/-- The annihilation (lowering) operator, `a |n⟩ = √n |n-1⟩`.  For `n = 0` the prefactor
-`√0 = 0` vanishes, so `|0⟩` is the vacuum. -/
-noncomputable def ann : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) :=
-  Finsupp.lsum ℂ fun n => LinearMap.toSpanSingleton ℂ _ (Finsupp.single (n - 1) (Real.sqrt n : ℂ))
-
-/-- The creation (raising) operator, `a† |n⟩ = √(n+1) |n+1⟩`. -/
-noncomputable def cre : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) :=
-  Finsupp.lsum ℂ fun n =>
-    LinearMap.toSpanSingleton ℂ _ (Finsupp.single (n + 1) (Real.sqrt (n + 1) : ℂ))
-
-/-- The number operator `N = a† a`. -/
-noncomputable def numOp : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) := cre ∘ₗ ann
-
-/-- The Hamiltonian of the harmonic oscillator, `H = ℏω (a† a + ½)`. -/
-noncomputable def hamiltonian (hbar omega : ℝ) : (ℕ →₀ ℂ) →ₗ[ℂ] (ℕ →₀ ℂ) :=
-  ((hbar * omega : ℝ) : ℂ) • (numOp + (1 / 2 : ℂ) • LinearMap.id)
-
-@[simp] lemma ann_single (n : ℕ) (c : ℂ) :
-    ann (Finsupp.single n c) = c • Finsupp.single (n - 1) (Real.sqrt n : ℂ) := by
-  simp [ann, LinearMap.toSpanSingleton_apply]
-
-@[simp] lemma cre_single (n : ℕ) (c : ℂ) :
-    cre (Finsupp.single n c) = c • Finsupp.single (n + 1) (Real.sqrt (n + 1) : ℂ) := by
-  simp [cre, LinearMap.toSpanSingleton_apply]
-
-private lemma sqrt_mul_sqrt_succ (m : ℕ) :
-    ((Real.sqrt (m + 1) : ℂ)) * (Real.sqrt (m + 1) : ℂ) = ((m : ℂ) + 1) := by
-  rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by positivity)]
-  push_cast; ring
-
-/-! ## The number operator is diagonal -/
-
-/-- `a† a` is diagonal in the number basis: `(N v) n = n * v n`. -/
-theorem numOp_apply (v : ℕ →₀ ℂ) (n : ℕ) : (numOp v) n = (n : ℂ) * v n := by
-  induction v using Finsupp.induction_linear with
-  | zero => simp
-  | add f g hf hg => simp [hf, hg]; ring
-  | single a b =>
-      rw [numOp, LinearMap.comp_apply, ann_single, map_smul, cre_single]
-      rcases a with _ | m
-      · simp only [Nat.cast_zero, Real.sqrt_zero, Complex.ofReal_zero, Finsupp.single_apply]
-        push_cast
-        split_ifs with h <;> simp [h]
-      · simp only [Nat.add_sub_cancel, Finsupp.smul_single, Finsupp.single_apply, smul_eq_mul]
-        split_ifs with h
-        · subst h
-          push_cast
-          linear_combination b * sqrt_mul_sqrt_succ m
-        · ring
-
-/-- `a a†` is diagonal in the number basis: `(a a† v) n = (n+1) * v n`. -/
-theorem ann_cre_apply (v : ℕ →₀ ℂ) (n : ℕ) : (ann (cre v)) n = ((n : ℂ) + 1) * v n := by
-  induction v using Finsupp.induction_linear with
-  | zero => simp
-  | add f g hf hg => simp [hf, hg]; ring
-  | single a b =>
-      rw [cre_single, map_smul, ann_single]
-      simp only [Nat.add_sub_cancel, Finsupp.smul_single, Finsupp.single_apply, smul_eq_mul]
-      split_ifs with h
-      · subst h
-        push_cast
-        linear_combination b * sqrt_mul_sqrt_succ a
-      · ring
-
-/-- The canonical commutation relation `[a, a†] = 1`. -/
-theorem commutator_ann_cre : ann ∘ₗ cre - cre ∘ₗ ann = LinearMap.id := by
-  refine LinearMap.ext fun v => Finsupp.ext fun k => ?_
-  simp only [LinearMap.sub_apply, LinearMap.coe_comp, Function.comp_apply, LinearMap.id_coe,
-    id_eq, Finsupp.sub_apply]
-  rw [ann_cre_apply, show cre (ann v) = numOp v from rfl, numOp_apply]
-  ring
-
-/-- `N |n⟩ = n |n⟩`. -/
-theorem numOp_single (n : ℕ) (c : ℂ) :
-    numOp (Finsupp.single n c) = (n : ℂ) • Finsupp.single n c := by
-  refine Finsupp.ext fun k => ?_
-  rw [numOp_apply, Finsupp.smul_apply, smul_eq_mul]
-  rcases eq_or_ne n k with rfl | h
-  · rfl
-  · rw [Finsupp.single_apply, if_neg h]; ring
-
-/-! ## Ladder construction of the eigenstates -/
-
-/-- The vacuum `|0⟩` is annihilated by `a`. -/
-theorem ann_vacuum : ann (Finsupp.single 0 (1 : ℂ)) = 0 := by simp
-
-/-- The `n`-th excited state is produced from the vacuum by the raising operator:
-`(a†)^n |0⟩ = √(n!) |n⟩`. -/
-theorem cre_pow_vacuum (n : ℕ) :
-    (cre ^ n) (Finsupp.single 0 (1 : ℂ)) = Finsupp.single n ((Real.sqrt n.factorial : ℂ)) := by
-  induction n with
-  | zero => simp
-  | succ m ih =>
-      rw [pow_succ', show ((cre * cre ^ m) (Finsupp.single 0 (1 : ℂ)))
-            = cre ((cre ^ m) (Finsupp.single 0 (1 : ℂ))) from rfl, ih, cre_single, Finsupp.smul_single, smul_eq_mul]
-      congr 1
-      rw [← Complex.ofReal_mul, ← Real.sqrt_mul (Nat.cast_nonneg _)]
-      norm_cast
-      rw [Nat.factorial_succ]
-      push_cast
-      rw [mul_comm]
-
-/-- The energy eigenstates: `H |n⟩ = ℏω (n + ½) |n⟩`. -/
-theorem hamiltonian_eigenstate (hbar omega : ℝ) (n : ℕ) (c : ℂ) :
-    hamiltonian hbar omega (Finsupp.single n c)
-      = (((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2)) • Finsupp.single n c := by
-  rw [hamiltonian]
-  simp only [LinearMap.smul_apply, LinearMap.add_apply, LinearMap.id_coe, id_eq, numOp_single,
-    LinearMap.smul_apply]
-  rw [← add_smul, smul_smul]
-
-/-! ## The spectrum -/
-
-/-- **Spectrum of the quantum harmonic oscillator.**
-A complex number `lam` is an eigenvalue of the harmonic-oscillator Hamiltonian
-`H = ℏω (a†a + ½)` on the Fock space `ℕ →₀ ℂ` if and only if `lam = ℏω (n + ½)` for some
-natural number `n`; that is, the spectrum is exactly `{ℏω(n + ½) : n ∈ ℕ}`.  The eigenvector
-for the level `n` is the ladder-operator state `(a†)^n |0⟩` (see `QPhys.cre_pow_vacuum`). -/
-theorem oscillator_spectrum (hbar omega : ℝ) (lam : ℂ) :
-    (∃ v : ℕ →₀ ℂ, v ≠ 0 ∧ hamiltonian hbar omega v = lam • v) ↔
-      ∃ n : ℕ, lam = ((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2) := by
-  constructor
-  · rintro ⟨v, hv, hEq⟩
-    obtain ⟨n, hn⟩ := Finsupp.support_nonempty_iff.mpr hv
-    refine ⟨n, ?_⟩
-    have hvn : v n ≠ 0 := Finsupp.mem_support_iff.mp hn
-    have h1 : (hamiltonian hbar omega v) n
-        = ((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2) * v n := by
-      rw [hamiltonian]
-      simp only [LinearMap.smul_apply, LinearMap.add_apply, LinearMap.id_coe, id_eq,
-        Finsupp.coe_smul, Pi.smul_apply, Finsupp.add_apply, smul_eq_mul, numOp_apply]
-      ring
-    have h2 : (hamiltonian hbar omega v) n = lam * v n := by
-      rw [hEq]; simp
-    exact (mul_right_cancel₀ hvn (h1.symm.trans h2)).symm
-  · rintro ⟨n, rfl⟩
-    exact ⟨Finsupp.single n 1, Finsupp.single_ne_zero.mpr one_ne_zero,
-      hamiltonian_eigenstate hbar omega n 1⟩
-
-end QPhys
-
 
 open scoped BigOperators
 open scoped Real
@@ -199,4 +47,145 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace QPhys
+
+/-- The state space of the quantum harmonic oscillator, in the occupation-number
+(Fock) representation: a state is described by its sequence of coefficients in the
+number basis. -/
+abbrev Fock : Type := ℕ → ℂ
+
+/-- The `n`-th number-basis state `|n⟩`. -/
+noncomputable def basisState (n : ℕ) : Fock := fun m => if m = n then 1 else 0
+
+/-- The annihilation (lowering) operator `a`, with `a |n⟩ = √n |n-1⟩`. -/
+noncomputable def annihilation : Fock →ₗ[ℂ] Fock where
+  toFun v := fun n => (Real.sqrt (n + 1) : ℂ) * v (n + 1)
+  map_add' u v := by funext n; simp [mul_add]
+  map_smul' c v := by funext n; simp [smul_eq_mul]; ring
+
+/-- The creation (raising) operator `a†`, with `a† |n⟩ = √(n+1) |n+1⟩`. -/
+noncomputable def creation : Fock →ₗ[ℂ] Fock where
+  toFun v := fun n => (Real.sqrt n : ℂ) * v (n - 1)
+  map_add' u v := by funext n; simp [mul_add]
+  map_smul' c v := by funext n; simp [smul_eq_mul]; ring
+
+/-- The number operator `N = a† a`. -/
+noncomputable def numberOp : Fock →ₗ[ℂ] Fock := creation ∘ₗ annihilation
+
+/-- The Hamiltonian of the quantum harmonic oscillator,
+`H = ℏω (a† a + 1/2)`. -/
+noncomputable def hamiltonian (hbar omega : ℝ) : Fock →ₗ[ℂ] Fock :=
+  ((hbar * omega : ℝ) : ℂ) • (numberOp + ((1 / 2 : ℂ) • LinearMap.id))
+
+section Basic
+
+lemma annihilation_apply (v : Fock) (n : ℕ) :
+    annihilation v n = (Real.sqrt (n + 1) : ℂ) * v (n + 1) := rfl
+
+lemma creation_apply (v : Fock) (n : ℕ) :
+    creation v n = (Real.sqrt n : ℂ) * v (n - 1) := rfl
+
+lemma sqrt_mul_self_cast (x : ℝ) (hx : 0 ≤ x) :
+    ((Real.sqrt x : ℂ)) * (Real.sqrt x : ℂ) = (x : ℂ) := by
+  rw [← Complex.ofReal_mul, Real.mul_self_sqrt hx]
+
+/-- The number operator is diagonal in the number basis: `(N v) n = n * v n`. -/
+lemma numberOp_apply (v : Fock) (n : ℕ) : numberOp v n = (n : ℂ) * v n := by
+  cases n with
+  | zero => simp [numberOp, creation_apply]
+  | succ m =>
+      simp only [numberOp, LinearMap.comp_apply, creation_apply, annihilation_apply,
+        Nat.succ_sub_one]
+      push_cast
+      rw [← mul_assoc, sqrt_mul_self_cast _ (by positivity)]
+      push_cast
+      ring
+
+/-- The canonical commutation relation `[a, a†] = 1`. -/
+lemma commutator_annihilation_creation :
+    annihilation ∘ₗ creation - creation ∘ₗ annihilation = LinearMap.id := by
+  ext v n
+  have hac : annihilation (creation v) n = ((n : ℂ) + 1) * v n := by
+    rw [annihilation_apply, creation_apply]
+    simp only [Nat.add_sub_cancel]
+    push_cast
+    rw [← mul_assoc, sqrt_mul_self_cast _ (by positivity)]
+    push_cast
+    ring
+  have hca : creation (annihilation v) n = (n : ℂ) * v n := numberOp_apply v n
+  simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.id_apply, Pi.sub_apply]
+  rw [hac, hca]
+  ring
+
+/-- Action of the lowering operator on a number state: `a |n+1⟩ = √(n+1) |n⟩`. -/
+lemma annihilation_basisState (n : ℕ) :
+    annihilation (basisState (n + 1)) = (Real.sqrt (n + 1) : ℂ) • basisState n := by
+  funext m
+  by_cases h : m = n
+  · subst h; simp [annihilation_apply, basisState]
+  · simp [annihilation_apply, basisState, h]
+
+lemma annihilation_basisState_zero : annihilation (basisState 0) = 0 := by
+  funext m
+  simp [annihilation_apply, basisState]
+
+/-- Action of the raising operator on a number state: `a† |n⟩ = √(n+1) |n+1⟩`. -/
+lemma creation_basisState (n : ℕ) :
+    creation (basisState n) = (Real.sqrt (n + 1) : ℂ) • basisState (n + 1) := by
+  funext m
+  cases m with
+  | zero => simp [creation_apply, basisState]
+  | succ k =>
+      by_cases h : k = n
+      · subst h; simp [creation_apply, basisState]
+      · simp [creation_apply, basisState, h]
+
+lemma basisState_ne_zero (n : ℕ) : basisState n ≠ 0 := by
+  intro h
+  have : basisState n n = 0 := by rw [h]; rfl
+  simp [basisState] at this
+
+lemma hamiltonian_apply (hbar omega : ℝ) (v : Fock) (n : ℕ) :
+    hamiltonian hbar omega v n = ((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2) * v n := by
+  simp only [hamiltonian, LinearMap.smul_apply, LinearMap.add_apply, Pi.smul_apply,
+    LinearMap.id_apply, smul_eq_mul, Pi.add_apply]
+  rw [numberOp_apply]
+  ring
+
+/-- Each number state `|n⟩` is an eigenstate of `H` with eigenvalue `ℏω(n + 1/2)`. -/
+lemma hamiltonian_basisState (hbar omega : ℝ) (n : ℕ) :
+    hamiltonian hbar omega (basisState n)
+      = (((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2)) • basisState n := by
+  funext m
+  rw [hamiltonian_apply]
+  by_cases h : m = n
+  · subst h; simp [basisState]
+  · simp [basisState, h]
+
+end Basic
+
+/-- **Spectrum of the quantum harmonic oscillator.**
+For the Hamiltonian `H = ℏω (a†a + 1/2)` built from the ladder operators `a`, `a†`
+acting on the Fock space of occupation-number sequences, the set of eigenvalues of
+`H` is exactly `{ℏω(n + 1/2) : n ∈ ℕ}`. -/
+theorem oscillator_spectrum (hbar omega : ℝ) :
+    {lam : ℂ | ∃ v : Fock, v ≠ 0 ∧ hamiltonian hbar omega v = lam • v}
+      = {lam : ℂ | ∃ n : ℕ, lam = ((hbar * omega : ℝ) : ℂ) * ((n : ℂ) + 1 / 2)} := by
+  ext lam
+  constructor
+  · rintro ⟨v, hv, hHv⟩
+    obtain ⟨n, hn⟩ : ∃ n : ℕ, v n ≠ 0 := by
+      by_contra h
+      push_neg at h
+      exact hv (funext fun n => h n)
+    refine ⟨n, ?_⟩
+    have h1 : hamiltonian hbar omega v n = lam * v n := by
+      rw [hHv]; rfl
+    rw [hamiltonian_apply] at h1
+    exact (mul_right_cancel₀ hn h1).symm
+  · rintro ⟨n, rfl⟩
+    exact ⟨basisState n, basisState_ne_zero n, hamiltonian_basisState hbar omega n⟩
+
+end QPhys
 

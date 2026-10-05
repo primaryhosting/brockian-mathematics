@@ -1,28 +1,3 @@
-import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 /-
 # Pbr Theorem
 Category: Frontier Qi
@@ -41,21 +16,41 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
 namespace QI
 
-open Finset
+open MeasureTheory MeasureTheory.Measure Complex
 
-/-! ## The quantum ingredients
+noncomputable section
 
-We work with two qubits, i.e. with `ℂ⁴` indexed by `Fin 4`, where the index `2*a + b`
-stands for the product basis vector `|a⟩ ⊗ |b⟩`.
--/
+/-! ## The quantum input: the Pusey–Barrett–Rudolph measurement on two qubits -/
 
-/-- The inner product on `ℂ⁴` (conjugate-linear in the first argument). -/
+/-- The real number `1/√2`, viewed as a complex amplitude. -/
 
-@[simp] lemma rt_mul_rt : rt * rt = 1 / 2 := by
-  have h : (Real.sqrt 2) * (Real.sqrt 2) = 2 := Real.mul_self_sqrt (by norm_num)
-  rw [rt, ← Complex.ofReal_mul,
-    show (Real.sqrt 2)⁻¹ * (Real.sqrt 2)⁻¹ = ((Real.sqrt 2) * (Real.sqrt 2))⁻¹ by field_simp, h]
-  norm_num
+lemma rt_mul_rt : rt * rt = 1 / 2 := by
+  have h : (Real.sqrt 2) ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+  have h2 : ((Real.sqrt 2 : ℝ) : ℂ) ^ 2 = 2 := by
+    exact_mod_cast congrArg (fun x : ℝ => (x : ℂ)) h
+  have hne : ((Real.sqrt 2 : ℝ) : ℂ) ≠ 0 := by
+    intro h0
+    rw [h0] at h2
+    norm_num at h2
+  simp only [rt, Complex.ofReal_inv]
+  field_simp
+  linear_combination -h2
 

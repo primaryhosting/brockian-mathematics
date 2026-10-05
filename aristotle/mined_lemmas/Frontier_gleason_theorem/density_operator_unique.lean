@@ -1,11 +1,3 @@
-/-
-# Gleason Theorem
-Category: Frontier Physics
-Target: Frontier.gleason_theorem
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
 import Mathlib
 
 /-!
@@ -14,59 +6,52 @@ Category: Frontier Physics
 Target: Frontier.gleason_theorem
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
-
-## Contents
-
-* `Frontier.QuantumMeasure`: a finitely additive probability measure on the lattice of subspaces
-  of a complex Hilbert space (equivalently, on orthogonal projections).
-* `Frontier.IsDensityOperator`: self-adjoint, positive semidefinite, unit trace.
-* `Frontier.gleason_theorem`: the target statement.  Gleason's theorem is derived, in a fully
-  Lean-checked way, from Gleason's *frame function theorem* `hFrame` (the deep analytic input,
-  taken here as an explicit hypothesis): every quantum measure on a space of dimension `≥ 3` is
-  `U ↦ tr (ρ P_U)` for a density operator `ρ`.
-* `Frontier.gleason_theorem_of_finrank_eq_one`: unconditional base case in dimension one.
-* `Frontier.QuantumMeasure.ofDensity`: the converse direction, proved unconditionally -- every
-  density operator defines a quantum measure through the Born rule.
-* `Frontier.density_operator_unique`: the density operator is unique.
 -/
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 open scoped InnerProductSpace
-open Submodule
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 
 namespace Frontier
 
-variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
-/-- A *quantum measure* (finitely additive probability measure on the lattice of closed
-subspaces, equivalently on orthogonal projections) on an inner product space `E`. -/
-structure QuantumMeasure (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℂ E] where
-  /-- The measure of a subspace. -/
-  toFun : Submodule ℂ E → ℝ
-  /-- A quantum measure is nonnegative. -/
-  nonneg : ∀ U, 0 ≤ toFun U
-  /-- A quantum measure is normalized: the whole space has measure `1`. -/
-  normalized : toFun ⊤ = 1
-  /-- A quantum measure is additive on orthogonal subspaces. -/
-  additive : ∀ U V : Submodule ℂ E, U ⟂ V → toFun (U ⊔ V) = toFun U + toFun V
+/-- A *frame function of weight one*, Gleason's formulation of a quantum measure:
+a function on the unit sphere which is nonnegative and whose values sum to `1`
+over every orthonormal basis. -/
+structure IsFrameFunction (f : H → ℝ) : Prop where
+  nonneg : ∀ x : H, ‖x‖ = 1 → 0 ≤ f x
+  sum_eq_one : ∀ b : OrthonormalBasis (Fin (Module.finrank ℂ H)) ℂ H, ∑ i, f (b i) = 1
 
-/-- A *density operator*: a positive semidefinite self-adjoint operator of trace one. -/
-structure IsDensityOperator (ρ : E →ₗ[ℂ] E) : Prop where
-  /-- Density operators are self-adjoint. -/
-  isSymmetric : ρ.IsSymmetric
-  /-- Density operators are positive semidefinite. -/
-  nonneg : ∀ x : E, 0 ≤ (⟪x, ρ x⟫_ℂ).re
-  /-- Density operators have unit trace. -/
-  trace_one : LinearMap.trace ℂ E ρ = 1
+/-- A density operator: a positive (hence self-adjoint) operator of trace one. -/
 
-/-- The orthogonal projection onto a subspace `U`, viewed as an endomorphism of `E`. -/
+theorem density_operator_unique {S T : H →L[ℂ] H} (hS : IsDensityOperator S)
+    (hT : IsDensityOperator T)
+    (h : ∀ x : H, ‖x‖ = 1 → RCLike.re ⟪S x, x⟫_ℂ = RCLike.re ⟪T x, x⟫_ℂ) : S = T := by
+  refine eq_of_inner_apply_self_unit S T (fun x _ => ?_)
+  have hS' := (ContinuousLinearMap.isPositive_iff_complex S).mp hS.1 x
+  have hT' := (ContinuousLinearMap.isPositive_iff_complex T).mp hT.1 x
+  rw [← hS'.1, ← hT'.1, h x ‹‖x‖ = 1›]
 
-theorem density_operator_unique [FiniteDimensional ℂ E] {ρ σ : E →ₗ[ℂ] E}
-    (h : ∀ U : Submodule ℂ E,
-      LinearMap.trace ℂ E (ρ ∘ₗ projLM U) = LinearMap.trace ℂ E (σ ∘ₗ projLM U)) :
-    ρ = σ := by
-  refine eq_of_inner_self_eq_on_sphere fun x hx => ?_
-  rw [← trace_comp_projLM_singleton ρ hx, ← trace_comp_projLM_singleton σ hx]
-  exact h _
+end Frontier
 
-/-- The core of Gleason's theorem: a quantum measure whose restriction to rays is the quadratic
-form of a self-adjoint operator is the Born measure of a density operator. -/

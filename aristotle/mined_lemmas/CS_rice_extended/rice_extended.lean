@@ -2,38 +2,29 @@
 # Rice Extended
 Category: Frontier Cs
 Target: CS.rice_extended
-Statement: The set of indices of a nontrivial semantic property is not recursive (Rice).
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
-/-!
-# Rice Extended
-Category: Frontier Cs
-Target: CS.rice_extended
-Statement: The set of indices of a nontrivial semantic property is not recursive (Rice).
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-
-open scoped Classical
-
-set_option maxHeartbeats 1000000
 
 namespace CS
 
-open Nat.Partrec Nat.Partrec.Code ComputablePred
+open Nat.Partrec Nat.Partrec.Code
 
-/-- The index set of a property `P` of partial functions: the set of (codes of) programs
-whose computed partial function has the property `P`. -/
+/-- A set of codes is *semantic* (extensional) if membership only depends on the
+partial function computed by the code. -/
 
-theorem rice_extended (P : Set (ℕ →. ℕ)) (hP : Nontrivial P) :
-    ¬ ComputablePred (fun c : Nat.Partrec.Code => c ∈ indexSet P) := by
-  rintro h
-  obtain ⟨⟨f, hfp, hfP⟩, ⟨g, hgp, hgP⟩⟩ := hP
-  exact hgP (ComputablePred.rice P h hfp hgp hfP)
+theorem rice_extended (C : Set Code) (hsem : Semantic C)
+    (hin : ∃ cf : Code, cf ∈ C) (hout : ∃ cg : Code, cg ∉ C) :
+    ¬ ComputablePred (fun c : Code => c ∈ C) := by
+  intro h
+  obtain ⟨cf, hcf⟩ := hin
+  obtain ⟨cg, hcg⟩ := hout
+  rcases (ComputablePred.rice₂ C hsem).1 h with rfl | rfl
+  · exact hcf
+  · exact hcg (Set.mem_univ _)
 
-/-- The same statement phrased for natural-number indices: the set of natural numbers
-coding programs with a nontrivial semantic property is not recursive. -/
+/-- The same statement phrased for a property of partial functions: if `C` is a set of
+partial functions containing the value of some code and omitting the value of some code,
+then the set of codes computing a function in `C` is not decidable. -/

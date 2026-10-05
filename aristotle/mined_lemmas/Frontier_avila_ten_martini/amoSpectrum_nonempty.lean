@@ -1,3 +1,10 @@
+/-
+# Avila Ten Martini
+Category: Frontier — Fields Medal Work
+Target: Frontier.avila_ten_martini
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 import Mathlib
 
 /-!
@@ -6,6 +13,18 @@ Category: Frontier — Fields Medal Work
 Target: Frontier.avila_ten_martini
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
+
+## Contents
+
+* `Frontier.amo`: the almost Mathieu operator `H_{lam, alpha, theta}` on `ℓ²(ℤ)`, constructed as
+  a bounded operator from a general bounded weighted composition operator.
+* `Frontier.amo_isSelfAdjoint`: it is selfadjoint.
+* `Frontier.amoSpectrum`: its spectrum, as a subset of `ℝ`; it is nonempty, compact and contained
+  in `[-(2 + 2|lam|), 2 + 2|lam|]`.
+* `Frontier.IsCantorSet`: nonempty, compact, perfect and totally disconnected subsets of `ℝ`.
+* `Frontier.avila_ten_martini`: the Ten Martini statement, reduced (with a Lean-checked proof) to
+  the two analytic inputs of the Avila–Jitomirskaya theorem, namely that the spectrum has no
+  isolated points and that all spectral gaps are open.
 -/
 
 open scoped BigOperators
@@ -13,36 +32,63 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
+open scoped ENNReal
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxHeartbeats 20000
 set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Frontier
 
-noncomputable section
+/-! ## The Hilbert space `ℓ²(ℤ)` and weighted shift operators -/
 
-/-! ## The Hilbert space `ℓ²(ℤ)` -/
+/-- The Hilbert space `ℓ²(ℤ)` of square-summable complex sequences indexed by `ℤ`. -/
+abbrev L2Z := lp (fun _ : ℤ => ℂ) 2
 
-/-- The Hilbert space `ℓ²(ℤ; ℂ)` on which the almost Mathieu operator acts. -/
-abbrev Ell2 := lp (fun _ : ℤ => ℂ) 2
-
-instance : Nontrivial Ell2 := by
-  refine ⟨lp.single 2 0 1, 0, ?_⟩
+instance : Nontrivial L2Z := by
+  refine ⟨lp.single 2 (0:ℤ) (1:ℂ), 0, ?_⟩
   intro h
-  have := congrArg (fun f : Ell2 => (f : ℤ → ℂ) 0) h
-  simp at this
+  have hval := congrArg (fun f : L2Z => (f : ℤ → ℂ) 0) h
+  simp at hval
 
 
 theorem amoSpectrum_nonempty (lam alpha theta : ℝ) : (amoSpectrum lam alpha theta).Nonempty := by
   obtain ⟨z, hz⟩ := spectrum.nonempty (amo lam alpha theta)
   refine ⟨z.re, ?_⟩
-  have := (amo_isSelfAdjoint lam alpha theta).mem_spectrum_eq_re hz
-  simpa [amoSpectrum, ← this] using hz
+  have hreal : z = (z.re : ℂ) := (amo_isSelfAdjoint lam alpha theta).mem_spectrum_eq_re hz
+  show ((z.re : ℝ) : ℂ) ∈ spectrum ℂ (amo lam alpha theta)
+  rw [← hreal]
+  exact hz
 
+/-! ## The Ten Martini reduction -/
+
+/-- **Ten Martini problem (Lean-checked reduction).**
+
+For every nonzero coupling `lam`, every irrational flux `alpha` and every phase `theta`, the
+spectrum of the almost Mathieu operator `H_{lam, alpha, theta}` on `ℓ²(ℤ)` is a Cantor set,
+given the two analytic inputs of the Avila–Jitomirskaya proof, stated here in exactly the same
+generality as the conclusion:
+
+* `hNoIsolatedPoints`: the spectrum has no isolated points;
+* `hGapsOpen`: all the spectral gaps predicted by gap labelling are open, i.e. the spectrum is
+  nowhere dense (equivalently, it has empty interior).
+
+Everything else is proved unconditionally in this file: the almost Mathieu operator is a
+well-defined bounded selfadjoint operator on `ℓ²(ℤ)` (`amo`, `amo_isSelfAdjoint`), its real
+spectrum is nonempty (`amoSpectrum_nonempty`) and compact (`amoSpectrum_isCompact`), and a
+subset of `ℝ` with empty interior is totally disconnected
+(`isTotallyDisconnected_of_interior_eq_empty`). Thus Cantor-ness of the spectrum is reduced
+exactly to the two inputs above. -/

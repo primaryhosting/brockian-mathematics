@@ -1,35 +1,10 @@
-import Mathlib
-
-/-!
+/-
 # Bekenstein Bound
 Category: Frontier Phys
 Target: Phys.bekenstein_bound
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Phys
-
-open Real
-
-/-- The Bekenstein–Hawking entropy `S = k c³ A / (4 G ℏ)` of a black hole whose horizon
-has radius `r` (so horizon area `A = 4π r²`), in terms of Boltzmann's constant `k`,
-Newton's constant `G`, the reduced Planck constant `hbar` and the speed of light `c`. -/
-
-theorem bekenstein_bound {k G hbar c R E S : ℝ} (hk : 0 < k) (hG : 0 < G) (hhbar : 0 < hbar)
-    (hc : 0 < c) (hE : 0 ≤ E) (hfit : schwarzschildRadius G c E ≤ R)
-    (hGSL : S ≤ bhEntropy k G hbar c (schwarzschildRadius G c E)) :
-    S ≤ 2 * π * k * R * E / (hbar * c) := by
-  set r := schwarzschildRadius G c E
-  refine hGSL.trans ?_
-  rw [bhEntropy_eq_bekenstein hG.ne' hhbar.ne' hc.ne',
-    schwarzschildEnergy_schwarzschildRadius hG.ne' hc.ne']
-  have hpos : 0 < hbar * c := mul_pos hhbar hc
-  rw [div_le_div_iff_of_pos_right hpos]
-  have h2 : (0:ℝ) ≤ 2 * π * k := by positivity
-  exact mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hfit h2) hE
-
-end Phys
 
 import Mathlib
 
@@ -47,12 +22,25 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
+namespace Phys
+
+/-- The Bekenstein bound expression `2 π k R E / (ℏ c)`: the maximal thermodynamic
+entropy of a system of total energy `E` that fits inside a sphere of radius `R`,
+where `k` is Boltzmann's constant, `hbar` the reduced Planck constant and `c` the
+speed of light. -/
+
+theorem bekenstein_bound
+    (k R E hbar c G S ΔA ΔS : ℝ)
+    (hc : c ≠ 0) (hhbar : hbar ≠ 0) (hG : G ≠ 0)
+    (hArea : ΔA = 8 * Real.pi * G * E * R / c ^ 4)
+    (hEntropy : ΔS = bekensteinHawkingEntropy k ΔA hbar c G)
+    (hGSL : S ≤ ΔS) :
+    S ≤ bekensteinBoundValue k R E hbar c := by
+  subst hArea
+  subst hEntropy
+  rwa [bekensteinHawkingEntropy_areaIncrease k R E hbar c G hc hhbar hG] at hGSL
+
+/-- Explicit form of the Bekenstein bound: under the same physical inputs,
+`S ≤ 2 π k R E / (ℏ c)`. -/

@@ -1,14 +1,3 @@
-/-
-# Margulis Superrigidity
-Category: Frontier Abel
-Target: Frontier.margulis_superrigidity
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
--- (Lean 4 requires `import` to precede every command, including module docstrings, so the
--- header above is written as an ordinary comment and repeated as a module docstring below.)
-
 import Mathlib
 
 /-!
@@ -33,38 +22,61 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
+
+open MeasureTheory
 
 namespace Frontier
 
-/-! ## The shape of the superrigidity conclusion -/
+/-!
+## Overview
+
+Margulis' superrigidity theorem says that a linear representation of an irreducible lattice `Γ`
+in a higher-rank semisimple group `G` is, up to passing to a subgroup of finite index, the
+restriction of a continuous representation of the ambient group `G`.
+
+This file
+
+* sets up the general notion of *extending a homomorphism defined on a subgroup to a continuous
+  homomorphism of the ambient topological group* (`Frontier.ExtendsTo`, `Frontier.Superrigid`,
+  `Frontier.VirtuallySuperrigid`);
+* records elementary structural facts about this notion (the base case `Frontier.superrigid_top`,
+  behaviour under composition and products, uniqueness of extensions, the reduction to the closure
+  of the image, and the vanishing of superrigid homomorphisms into abelian targets);
+* states Margulis superrigidity for the concrete higher-rank family `SL(n, ℝ)`, `n ≥ 3`, with a
+  genuine (polynomial) definition of Zariski density of the image
+  (`Frontier.MargulisSuperrigiditySL`);
+* proves, as `Frontier.margulis_superrigidity`, the Lean-checked reduction of that statement to
+  the statement in which one is allowed first to replace the lattice by an arbitrary subgroup of
+  finite index — the standard normalisation step at the start of the proof.
+
+The deep analytic content of Margulis' theorem (the construction of a measurable equivariant map
+to a boundary, and its algebraicity) is *not* proved here: it is isolated in the hypothesis of
+`Frontier.margulis_superrigidity`.
+-/
+
+/-! ## The extension property -/
 
 section Defs
 
 variable {G H : Type*} [Group G] [TopologicalSpace G] [Group H] [TopologicalSpace H]
 
-/-- The conclusion of a superrigidity theorem: the *abstract* group homomorphism
-`rho : Γ →* H`, defined on a subgroup `Γ` of a topological group `G`, is the restriction of a
-*continuous* homomorphism defined on all of `G`. -/
+/-- `Φ : G →* H` is a continuous extension of the homomorphism `ρ : Γ →* H` defined on the
+subgroup `Γ ≤ G`. -/
+structure ExtendsTo (Γ : Subgroup G) (ρ : Γ →* H) (Φ : G →* H) : Prop where
+  /-- The extension is continuous on the ambient group. -/
+  continuous : Continuous Φ
+  /-- The extension restricts to `ρ` on `Γ`. -/
+  eqOn : ∀ γ : Γ, Φ (γ : G) = ρ γ
 
-theorem margulis_superrigidity {G H : Type*} [Group G] [TopologicalSpace G]
-    [CommGroup H] [TopologicalSpace H]
-    (hH : ∀ (h : H) (n : ℕ), 0 < n → h ^ n = 1 → h = 1)
-    (Γ : Subgroup G) [Finite (Abelianization Γ)] (Admissible : (Γ →* H) → Prop) :
-    MargulisSuperrigid Γ Admissible := by
-  intro rho _
-  refine ⟨⊤, inferInstance, 1, continuous_const, fun γ _ => ?_⟩
-  simp [hom_trivial_of_abelianization_finite hH Γ rho γ]
+/-- The homomorphism `ρ : Γ →* H` is *superrigid*: it extends to a continuous homomorphism
+`G →* H`. -/
 
-/-! ## Non-vacuity of the base case -/
+theorem margulis_superrigidity :
+    MargulisSuperrigiditySLAfterFiniteIndex → MargulisSuperrigiditySL := by
+  intro h n m hn Γ ρ hlat hZD
+  obtain ⟨Γ₁, hle, hidx, hvs⟩ := h n m hn Γ ρ hlat hZD
+  exact VirtuallySuperrigid.of_le hle hidx hvs
 
-section Sanity
-
-/-- The additive group of the reals, written multiplicatively, is torsion free. -/
+/-- Conversely (and trivially), the statement of Margulis superrigidity implies the form in which
+one first passes to a finite-index subgroup, so the two formulations are equivalent. -/

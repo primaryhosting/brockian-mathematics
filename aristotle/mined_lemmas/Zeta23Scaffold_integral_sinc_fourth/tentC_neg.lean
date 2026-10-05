@@ -8,13 +8,29 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-open MeasureTheory Real Complex
-open scoped FourierTransform
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+open MeasureTheory Real FourierTransform Complex
 
 namespace Zeta23Scaffold
 
-/-- Explicit antiderivative computation: the interval integral of a linear function times a
-complex exponential. -/
+/-! ## The tent function -/
 
-lemma tentC_neg (t : ℝ) : tentC (-t) = tentC t := by simp [tentC]
+/-- The tent (triangle) function, supported on `[-1, 1]`. -/
+
+lemma tentC_neg (x : ℝ) : tentC (-x) = tentC x := by unfold tentC; rw [tent_neg]
 

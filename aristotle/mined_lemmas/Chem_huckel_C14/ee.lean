@@ -1,12 +1,12 @@
-import Mathlib
-
-/-!
+/-
 # Huckel C 14
 Category: Chemistry
 Target: Chem.huckel_C14
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 open scoped BigOperators
 open scoped Real
@@ -33,11 +33,9 @@ set_option grind.warning false
 
 namespace Chem
 
-open scoped Matrix
+/-- The standard additive character `ZMod 14 → ℂ`, `j ↦ exp (2πI j / 14)`. -/
 
-/-! ### A primitive 14-th root of unity and the associated character -/
+noncomputable def ee : AddChar (ZMod 14) ℂ := ZMod.stdAddChar
 
-/-- A primitive 14-th root of unity. -/
-
-noncomputable def ee (m : ℤ) : ℂ := om ^ m
-
+/-- Adjacency matrix of the cycle graph `C₁₄`, with vertices indexed by `ZMod 14`:
+`i` and `j` are adjacent iff they differ by `±1`. -/

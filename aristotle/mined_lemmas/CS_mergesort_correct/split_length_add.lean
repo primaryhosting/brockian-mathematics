@@ -1,48 +1,19 @@
 import Mathlib
-
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+import RequestProject.Main
 
 /-!
-# Mergesort Correct
-Category: Computer Science
-Target: CS.mergesort_correct
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
+# Mergesort on a linear order
+
+A Mathlib-facing corollary of `CS.mergesort_correct`: on any linear order,
+`CS.mergeSort (· ≤ ·)` produces a `List.Sorted (· ≤ ·)` permutation of its input.
 -/
 
 namespace CS
 
-universe u
-
-variable {α : Type u}
-
-/-- Merge two lists with respect to a boolean comparison `le`. -/
+/-- On a linear order, `mergeSort (· ≤ ·) l` is sorted and a permutation of `l`. -/
 
 theorem split_length_add (l : List α) :
     (split l).1.length + (split l).2.length = l.length := by
-  induction l using split.induct with
-  | case1 => simp [split]
-  | case2 x => simp [split]
-  | case3 x y t ih => simp only [split, List.length_cons]; omega
+  have h := (split_perm l).length_eq
+  simpa using h
 

@@ -23,52 +23,47 @@ set_option pp.piBinderTypes true
 
 set_option grind.warning false
 
-import Mathlib
-/-!
+/-
 # Same Parity Betrothed Exists
 Category: Brockian Conjecture
 Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
+import Mathlib
 
--- (Lean requires `import` to be the very first command in a file, so the header module
--- docstring above sits immediately after the single `import Mathlib` line.)
+/-!
+# Same Parity Betrothed Exists
+Category: Brockian Conjecture
+Target: Brockian.BetrothedNumbers.SameParityBetrothedExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 
-namespace Brockian
-namespace BetrothedNumbers
+Two distinct positive integers `m`, `n` are *betrothed* (quasi-amicable) when the sum of the
+proper divisors of each is one more than the other, i.e. `σ₁ m = σ₁ n = m + n + 1`.
+All known betrothed pairs consist of one even and one odd number, and it is an open
+problem whether a betrothed pair of equal parity exists.
+
+This file proves a structural reduction for that open problem: in any same-parity betrothed
+pair, each member is a perfect square or twice a perfect square (and if both members are odd,
+each is a perfect square).  The main statement
+`Brockian.BetrothedNumbers.SameParityBetrothedExists` records the resulting equivalence.
+-/
+
+namespace Brockian.BetrothedNumbers
 
 open Finset
 
 /-- The sum-of-divisors function `σ₁`. -/
 
-theorem squareOrTwiceSquare_of_odd_sigmaOne {n : ℕ} (hn : n ≠ 0) (h : Odd (sigmaOne n)) :
+lemma squareOrTwiceSquare_of_odd_sigmaOne {n : ℕ} (hn : n ≠ 0) (h : Odd (sigmaOne n)) :
     SquareOrTwiceSquare n := by
-  set k := n.factorization 2 with hk
-  set m := ordCompl[2] n with hmdef
-  have hsplit : 2 ^ k * m = n := Nat.ordProj_mul_ordCompl_eq_self n 2
-  have hcop : Nat.Coprime (2 ^ k) m :=
-    Nat.Coprime.pow_left _ (Nat.coprime_ordCompl Nat.prime_two hn)
-  have hmodd : Odd m := Nat.odd_iff.mpr (by
-    have := Nat.not_dvd_ordCompl Nat.prime_two hn
-    omega)
-  have hprod : sigmaOne n = sigmaOne (2 ^ k) * sigmaOne m := by
-    rw [← hsplit, sigmaOne_mul_of_coprime hcop]
-  have hoddm : Odd (sigmaOne m) := by
-    rw [hprod] at h
-    exact (Nat.odd_mul.mp h).2
-  obtain ⟨j, hj⟩ := isSquare_of_odd_of_odd_sigmaOne hmodd hoddm
-  rcases Nat.even_or_odd k with he | ho
-  · obtain ⟨t, ht⟩ := he
-    left
-    refine ⟨2 ^ t * j, ?_⟩
-    rw [← hsplit, hj, ht, pow_add]
-    ring
-  · obtain ⟨t, ht⟩ := ho
-    right
-    refine ⟨2 ^ t * j, ?_⟩
-    rw [← hsplit, hj, ht, mul_pow, ← pow_mul]
-    ring
+  obtain ⟨k, m, hmo, rfl⟩ := Nat.exists_eq_two_pow_mul_odd hn
+  have hcop : Nat.Coprime (2 ^ k) m := Nat.Coprime.pow_left k (Nat.coprime_two_left.mpr hmo)
+  rw [sigmaOne_mul_of_coprime hcop, Nat.odd_mul] at h
+  obtain ⟨t, rfl⟩ := isSquare_of_odd_of_odd_sigmaOne m hmo h.2
+  rcases Nat.even_or_odd k with ⟨j, hj⟩ | ⟨j, hj⟩
+  · exact Or.inl ⟨2 ^ j * t, by subst hj; ring⟩
+  · exact Or.inr ⟨2 ^ j * t, by subst hj; ring⟩
 
-/-! ### The converse: a full characterization of numbers with odd divisor sum -/
-
+/-- Both members of a betrothed pair have sum of divisors `m + n + 1`. -/

@@ -1,46 +1,43 @@
-import Mathlib
-import RequestProject.Main
-
 /-!
-# In-scope encoding soundness, Mathlib (`Finset`) formulation
-
-`RequestProject/Main.lean` states and proves the target theorem
-`PCA.Isolation.in_scope_encoding_sound` for policies given as lists.  (That file must
-begin with the prescribed header docstring, which Lean does not allow to precede an
-`import`, so it is written against Lean's core `List`/`String` API only.)
-
-This companion file works in full Mathlib and restates the same soundness /
-completeness result for policies given as `Finset`s of paths, deriving it from the
-encoding lemmas of `RequestProject.Main`.
+# In Scope Encoding Sound
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.in_scope_encoding_sound
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
 
+set_option maxRecDepth 4000
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-namespace PCA.Isolation
+namespace PCA
+namespace Isolation
 
-/-- The isolation policy with policy sets given as `Finset`s of paths. -/
-structure FinScope where
-  /-- Roots of the sub-trees the app may access. -/
-  allowed : Finset Path
-  /-- Roots of the sub-trees explicitly denied to the app. -/
-  denied : Finset Path
+/-- A resource is identified by a hierarchical path: a list of name segments,
+read from the root downwards. -/
+abbrev Path := List String
 
-/-- Abstract scope membership for a `Finset`-valued policy. -/
+/-- The isolation policy of a sandboxed app: a list of granted subtrees
+(`roots`) together with a list of explicitly revoked subtrees (`denied`). -/
+structure Scope where
+  /-- Subtrees the app has been granted access to. -/
+  roots : List Path
+  /-- Subtrees carved out of the grants; denial takes precedence. -/
+  denied : List Path
+  deriving Repr
+
+/-- Declarative semantics of the isolation engine: a resource `p` lies in the
+scope `s` when some granted root is an ancestor of (or equal to) `p`, and no
+denied subtree is an ancestor of (or equal to) `p`. -/
 
 theorem in_scope_encoding_sound (s : Scope) (p : Path) :
-    InScopeEnc (encPaths s.allowed) (encPaths s.denied) (encPath p) ↔ InScope s p := by
-  constructor
-  · rintro ⟨⟨q, hq, hqp⟩, hd⟩
-    obtain ⟨r, hr, rfl⟩ := mem_encPaths_iff.mp hq
-    refine ⟨⟨r, hr, (encPath_prefix_iff r p).mp hqp⟩, ?_⟩
-    intro d hdmem hdp
-    exact hd (encPath d) (encPath_mem_encPaths hdmem) ((encPath_prefix_iff d p).mpr hdp)
-  · rintro ⟨⟨r, hr, hrp⟩, hd⟩
-    refine ⟨⟨encPath r, encPath_mem_encPaths hr, (encPath_prefix_iff r p).mpr hrp⟩, ?_⟩
-    intro q hq hqp
-    obtain ⟨d, hdmem, rfl⟩ := mem_encPaths_iff.mp hq
-    exact hd d hdmem ((encPath_prefix_iff d p).mp hqp)
+    encodeInScope s p = true ↔ InScope s p := by
+  unfold encodeInScope InScope
+  simp only [Bool.and_eq_true, Bool.not_eq_true', List.any_eq_true,
+    List.any_eq_false, List.isPrefixOf_iff_prefix]
 
-end PCA.Isolation
+/-- Decidability of the declarative model, transported along the encoding. -/
+instance instDecidableInScope (s : Scope) (p : Path) : Decidable (InScope s p) :=
+  decidable_of_iff _ (in_scope_encoding_sound s p)
 
+/-- Denial always wins: a path lying under a denied subtree is never in scope. -/

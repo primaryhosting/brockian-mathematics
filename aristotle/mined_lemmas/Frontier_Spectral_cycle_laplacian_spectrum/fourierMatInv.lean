@@ -1,4 +1,5 @@
 import Mathlib
+
 /-!
 # Cycle Laplacian Spectrum
 Category: Frontier — Spectral Geometry
@@ -25,11 +26,11 @@ set_option grind.warning false
 
 namespace Frontier.Spectral
 
-open Complex Matrix ZMod AddChar Finset
+open Matrix
 
-/-- The generating vector of the cycle Laplacian: `2` at `0`, `-1` at `±1`, `0` elsewhere. -/
+/-- The graph Laplacian of the cycle graph `C n`: the `n × n` circulant matrix with `2` on the
+diagonal and `-1` on the two cyclic off-diagonals. -/
 
-noncomputable def fourierMatInv (n : ℕ) [NeZero n] : Matrix (ZMod n) (ZMod n) ℂ :=
-  Matrix.of fun k j => (n : ℂ)⁻¹ * ZMod.stdAddChar (-(k * j))
+noncomputable def fourierMatInv (n : ℕ) : Matrix (Fin n) (Fin n) ℂ :=
+  Matrix.of fun i j => (n : ℂ)⁻¹ * (cycleRoot n ^ (i.val * j.val))⁻¹
 
-/-- The eigenvalue attached to the frequency `k`. -/

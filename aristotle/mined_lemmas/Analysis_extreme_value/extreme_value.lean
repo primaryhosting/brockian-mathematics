@@ -1,4 +1,4 @@
-/-
+/-!
 # Extreme Value
 Category: Frontier Wave 2 (deeper machinery)
 Target: Analysis.extreme_value
@@ -7,31 +7,17 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 import Mathlib
 
-/-!
-# Extreme Value
-Category: Frontier Wave 2 (deeper machinery)
-Target: Analysis.extreme_value
-Verification: pending
-Provenance: Aristotle theorem prover (Harmonic)
--/
-
-open scoped Classical
-
 set_option autoImplicit false
 
 namespace Analysis
 
-variable {X : Type*} [TopologicalSpace X]
+/-- **Extreme value theorem**: a real-valued function that is continuous on a nonempty
+compact set `s` attains a maximum value on `s`. -/
 
-/-- Key intermediate lemma: the continuous image of a nonempty compact set is a nonempty
-compact set of reals, hence it is bounded above and contains its supremum. -/
-
-theorem extreme_value {s : Set X} {f : X → ℝ}
+theorem extreme_value {X : Type*} [TopologicalSpace X] {s : Set X} {f : X → ℝ}
     (hs : IsCompact s) (hne : s.Nonempty) (hf : ContinuousOn f s) :
-    ∃ x ∈ s, ∀ y ∈ s, f y ≤ f x := by
-  obtain ⟨M, hM, hMmax⟩ := exists_mem_image_forall_le hs hne hf
-  obtain ⟨x, hx, rfl⟩ := hM
-  exact ⟨x, hx, fun y hy => hMmax (f y) ⟨y, hy, rfl⟩⟩
+    ∃ x ∈ s, ∀ y ∈ s, f y ≤ f x :=
+  hs.exists_forall_ge hne hf
 
 end Analysis
 
