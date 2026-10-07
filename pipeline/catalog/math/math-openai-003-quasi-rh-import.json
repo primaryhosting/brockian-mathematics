@@ -1,0 +1,66 @@
+{
+  "id": "math-openai-003-quasi-rh-import",
+  "domain": "math",
+  "title": "Import of the openai/math 003 zero-free half-plane Re s > 7/8 into the Brockian corpus",
+  "statement": "Audit the Lean formalization of openai/math family 003 (every Dirichlet L-function, including ζ, is zero-free on Re s > 7/8; commit adc7f1241b42e322a6451854ab7e4b4c146bf78a), then import it through a single Mathlib-only trust boundary: ζ_B(s) = (1 − 5^{−s}) ζ(s) is zero-free on Re s > 7/8, the four L(s, χ mod 5) are zero-free there, and every zero of ζ_B in the critical strip has 1/8 ≤ Re ρ ≤ 7/8. The external theorem enters only as a hypothesis of a θ-parametrised transfer (θ = 1 Mathlib, θ = 7/8 external, θ = 1/2 RH); never as an axiom.",
+  "source": {
+    "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/docs/003.md",
+    "citation": "OpenAI, 'The Quasi-Riemann Hypothesis: A Zero-Free Half-Plane Re(s) > 7/8' (2026-09-30) and 'Uniform exclusion of Landau–Siegel zeros' (2026-10-01); Lean comparator challenges QuasiRiemannHypothesis.lean, DirichletSevenEighths.lean",
+    "external_status": "partial"
+  },
+  "status": "conditional",
+  "difficulty": 2,
+  "tags": [
+    "riemann-zeta",
+    "dirichlet-l-functions",
+    "zero-free-region",
+    "external-input",
+    "mod-5",
+    "brockian-zeta",
+    "provenance"
+  ],
+  "formal_targets": [
+    {"kind": "lean_def", "name": "Brockian.QuasiRHTransfer.zetaB", "path": "Brockian/QuasiRHTransfer.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRHTransfer.eulerFactor_five_ne_zero", "path": "Brockian/QuasiRHTransfer.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRHTransfer.zetaB_eq_zero_iff", "path": "Brockian/QuasiRHTransfer.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRHTransfer.zetaB_eq_LFunctionTrivChar", "path": "Brockian/QuasiRHTransfer.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRHTransfer.zetaB_ne_zero_of_zeroFree", "path": "Brockian/QuasiRHTransfer.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRHTransfer.riemannZeta_ne_zero_of_zetaB_zeroFree", "path": "Brockian/QuasiRHTransfer.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRHTransfer.zetaB_zero_strip_of_zeroFree", "path": "Brockian/QuasiRHTransfer.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRH003.zetaB_ne_zero_of_seven_eighths_lt_re", "path": "formal/QuasiRH003/Import003.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRH003.LFunction_mod5_ne_zero_of_seven_eighths_lt_re", "path": "formal/QuasiRH003/Import003.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRH003.zetaB_zero_strip", "path": "formal/QuasiRH003/Import003.lean"},
+    {"kind": "paper", "name": "Static audit of openai/math 003", "path": "writeups/openai-math-003-quasi-rh-audit.md"}
+  ],
+  "attack_modes": ["literature", "formalize", "dual_prover"],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "Mathlib-only transfer kernel-checked at lean-4.32.0 by CI (check_lean_modules.py), then AXLE-attested",
+      "external 003 closure kernel-checked inside openai/math (Mode B in formal/QuasiRH003/Import003.lean): lake build + #print axioms + comparator",
+      "axioms ⊆ {propext, Classical.choice, Quot.sound}",
+      "statement fidelity: challenge statements are against Mathlib riemannZeta / DirichletCharacter.LFunction with zero custom definitions",
+      "provenance tag ⟨ext: openai/math 003 @ adc7f124⟩ attached to every consumer theorem"
+    ]
+  },
+  "risk_tier": 2,
+  "notes": "Static audit done 2026-10-07: 2,924-module / 489k-line closure, zero sorry/axiom/unsafe/native_decide, no metaprogramming; pins verified upstream. Three provenance findings travel with the result: (1) the PNT+ 'compatibility patch' creates 47 files absent upstream incl. the whole SiegelZeros/ support (PNT+-derived, Cipollina/Kebekus); (2) PNT+ Wiener.lean is replaced by a trimmed port; (3) the Hecke statement rests on a ~150-line definition in the challenge file. Not formalized by 003: the 11/12 alternate proof (weaker half-plane, human-edited) and the prime-distribution applications ψ(x;q,a) — so ψ(x;5,a) = x/4 + O(x^{7/8+ε}) stays paper-level. The Siegel theorem as formalized is implied by the 7/8 Dirichlet theorem (c = log(3)/8) but its proof shares 0 modules with the 7/8 closure. Status is CONDITIONAL until Mode B runs; the Mathlib-only half becomes PROVED on CI + AXLE independently of 003.",
+  "attempts": [
+    {
+      "ts": "2026-10-07T09:00:00Z",
+      "mode": "literature",
+      "result": "conditional",
+      "note": "Static audit of openai/math @ adc7f124: statement fidelity, import-closure walk, token scan, dependency-patch provenance, upstream pin verification. No kernel run (toolchain unreachable from the audit environment). Mathlib-only transfer drafted with every lemma checked at both Mathlib pins; θ = 7/8 instantiation and scattering targets drafted for Mode B.",
+      "agent": "claude",
+      "artifacts": [
+        "writeups/openai-math-003-quasi-rh-audit.md",
+        "provenance/external-inputs/openai-math-003/manifest.json",
+        "Brockian/QuasiRHTransfer.lean",
+        "formal/QuasiRH003/Import003.lean",
+        "scripts/audit_external_lean_closure.py"
+      ]
+    }
+  ],
+  "ledger_refs": [],
+  "priority": 88
+}

@@ -861,3 +861,4 @@ import Brockian.ZumkellerStructure
 import Brockian.AliquotStructure
 import Brockian.LandauProblem
 import Brockian.CharactersQ
+import Brockian.QuasiRHTransfer
