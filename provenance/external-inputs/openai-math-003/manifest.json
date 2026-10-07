@@ -1,0 +1,111 @@
+{
+  "external_input": "openai/math family 003 — the quasi-Riemann hypothesis (zero-free half-plane Re s > 7/8)",
+  "audited_on": "2026-10-07",
+  "audit_kind": "static (import-closure walk + token scan + statement review); NO kernel run",
+  "audit_writeup": "writeups/openai-math-003-quasi-rh-audit.md",
+  "consumer_modules": {
+    "mathlib_only_transfer": "Brockian/QuasiRHTransfer.lean",
+    "instantiation_theta_7_8": "formal/QuasiRH003/Import003.lean",
+    "open_targets": "formal/QuasiRH003/Targets.lean"
+  },
+  "source": {
+    "repository": "https://github.com/openai/math",
+    "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+    "commit_date": "2026-10-06T14:58:50-07:00",
+    "commit_message": "Initial commit",
+    "lean_toolchain": "leanprover/lean4:v4.34.1",
+    "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+    "mathlib_rev_verified_upstream": true,
+    "scope_note": "lean/docs/003.md",
+    "checker": "leanprover/comparator",
+    "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+    "enable_nanoda": false
+  },
+  "theorems_consumed": [
+    {
+      "name": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+      "statement": "{s : ℂ} (hs : (7 / 8 : ℝ) < s.re) : riemannZeta s ≠ 0",
+      "stated_against": "Mathlib riemannZeta (analytic continuation)",
+      "challenge_file": "lean/ComparatorChallenges/QuasiRiemannHypothesis.lean",
+      "challenge_sha256": "065f8c9a01d28db78c8b1bfc5083b535082a2d2aac2230d563f98b8caa812cc5",
+      "solution_module": "OAI.NumberTheory.DirichletL.Nonvanishing",
+      "custom_definitions_in_challenge": 0
+    },
+    {
+      "name": "OAI.DirichletCharacter.LFunction_ne_zero_of_seven_eighths_lt_re",
+      "statement": "{q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {s : ℂ} (hs : (7 / 8 : ℝ) < s.re) (hpole : ¬ (χ = 1 ∧ s = 1)) : DirichletCharacter.LFunction χ s ≠ 0",
+      "stated_against": "Mathlib DirichletCharacter.LFunction (analytic continuation), uniform in q and χ",
+      "challenge_file": "lean/ComparatorChallenges/DirichletSevenEighths.lean",
+      "challenge_sha256": "8fb13ad977bca104591fcbc6ef01a58496e7385053c9b1445f95749afc0eff54",
+      "solution_module": "OAI.NumberTheory.DirichletL.Nonvanishing",
+      "custom_definitions_in_challenge": 0
+    }
+  ],
+  "theorems_reviewed_not_consumed": [
+    {
+      "name": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+      "challenge_file": "lean/ComparatorChallenges/HeckeSevenEighths.lean",
+      "challenge_sha256": "cb5e404fa65a502c0a9006b9ad45c28914feb79e4b7b1ffcf05e4af82ed0cfc2",
+      "caveat": "HeckeFamily.LFunction is DEFINED inside the challenge file (~150 lines, theta/WeakFEPair construction); its identity with the classical Hecke L-function is a definition to trust, not a verified theorem (definition_names: [])."
+    },
+    {
+      "name": "OAI.SiegelZeros.WeightedTorusJets.exists_absolute_real_zero_gap",
+      "challenge_file": "lean/ComparatorChallenges/SiegelZeros.lean",
+      "challenge_sha256": "bedaac0248a641910f79a380d9702d82c6bfbbfd3760a69d27c72c5d8fb136ce",
+      "caveat": "As formalized, implied by the Dirichlet 7/8 theorem in three lines (c = log(3)/8). Proof is nonetheless independent: 0 shared modules with the 7/8 closure."
+    }
+  ],
+  "closures": {
+    "dirichlet_zeta_7_8": {
+      "root": "OAI.NumberTheory.DirichletL.Nonvanishing",
+      "internal_modules": 2924,
+      "internal_lines": 489414,
+      "module_list": "closure_dirichlet_zeta_7_8.txt",
+      "mathlib_modules_imported": 248,
+      "other_externals": ["PrimeNumberTheoremAnd.Wiener", "RellichKondrachov.Analysis.FunctionalSpaces.Sobolev.Euclidean.Rellich", "Lean.Elab.Tactic.Omega"]
+    },
+    "hecke_7_8": {
+      "root": "OAI.NumberTheory.DirichletL.Hecke.Nonvanishing",
+      "internal_modules": 2925,
+      "internal_lines": 489450,
+      "module_list": "closure_hecke_7_8.txt"
+    },
+    "siegel": {
+      "root": "OAI.NumberTheory.SiegelZeros.Main",
+      "internal_modules": 306,
+      "internal_lines": 70124,
+      "module_list": "closure_siegel.txt",
+      "mathlib_modules_imported": 322,
+      "other_externals": ["PrimeNumberTheoremAnd.SiegelZeros.HadamardSupport", "Lean.Elab.Tactic.Omega"],
+      "shared_modules_with_dirichlet_zeta_7_8": 0
+    }
+  },
+  "token_scan_comments_stripped": {
+    "sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0, "implemented_by": 0, "extern": 0,
+    "native_decide": 0, "opaque": 0, "partial_def": 0, "maxHeartbeats_0": 0,
+    "macro_elab_syntax": 0,
+    "decide_7_8": 754, "decide_siegel": 83
+  },
+  "dependency_provenance_findings": [
+    "patches/PrimeNumberTheoremAnd-lean4341.patch (2.0 MB) touches 55 files and CREATES 47 absent from the pinned upstream PNT+ commit c39a7511, including the whole PrimeNumberTheoremAnd/SiegelZeros/ directory imported by every Siegel module. NOTICE.md there attributes the material to PNT+ (Cipollina, Kebekus). Accurate provenance: PNT+-derived, captured from another revision, vendored via patch.",
+    "The same patch REPLACES PrimeNumberTheoremAnd/Wiener.lean (+439/-2716 lines) with a 'compatibility port' retaining the declarations used; the Wiener–Ikehara module in the 7/8 closure is OpenAI's rewrite, kernel-checked at build, not upstream verbatim.",
+    "Patch additions contain no sorry/axiom/unsafe/native_decide.",
+    "Pins verified upstream: mathlib4 d13f23b7 (2026-09-24), PrimeNumberTheoremAnd c39a7511 (2026-10-01), rellich-kondrachov 70f85d4c (2026-05-14). No Mathlib patch exists; consumed statements are against unmodified Mathlib."
+  ],
+  "not_formalized_in_003": [
+    "The 11/12 alternate proof (weaker half-plane, different method, human-edited write-up): no formalization.yaml entry, no comparator challenge.",
+    "The paper's prime-distribution applications (ψ(x; q, a) = x/φ(q) + O(x^{7/8+ε})): scope note excludes them. Paper-level only."
+  ],
+  "kernel_check_status": "OUTSTANDING — see formal/QuasiRH003/Import003.lean MODE B. Until it runs, every consumer theorem is CONDITIONAL, not PROVED.",
+  "audited_file_hashes_sha256": {
+    "lean/ComparatorChallenges/QuasiRiemannHypothesis.lean": "065f8c9a01d28db78c8b1bfc5083b535082a2d2aac2230d563f98b8caa812cc5",
+    "lean/ComparatorChallenges/DirichletSevenEighths.lean": "8fb13ad977bca104591fcbc6ef01a58496e7385053c9b1445f95749afc0eff54",
+    "lean/ComparatorChallenges/HeckeSevenEighths.lean": "cb5e404fa65a502c0a9006b9ad45c28914feb79e4b7b1ffcf05e4af82ed0cfc2",
+    "lean/ComparatorChallenges/SiegelZeros.lean": "bedaac0248a641910f79a380d9702d82c6bfbbfd3760a69d27c72c5d8fb136ce",
+    "lean/OAI/NumberTheory/DirichletL/Nonvanishing.lean": "d98c4a7e074469b429890e1c21b8cc76c410026525a776895293cdc0f9e6ae89",
+    "lean/OAI/NumberTheory/DirichletL/Detector/FinalAssemblyUnconditional.lean": "0f52159a2929e7b20646f8394589d25a1a637c2f78746ad9d1447871577af615",
+    "lean/lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+    "lean/lake-manifest.json": "cf6105a25d9dca2f166b241d9191bd12c7e13305890dc9c4d0952351cccc0794",
+    "lean/patches/PrimeNumberTheoremAnd-lean4341.patch": "0890432340c0025973bcfe070b634355fa366cc831595f68526e4c73c8903d82"
+  }
+}

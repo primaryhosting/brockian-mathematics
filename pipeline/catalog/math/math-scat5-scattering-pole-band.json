@@ -1,0 +1,52 @@
+{
+  "id": "math-scat5-scattering-pole-band",
+  "domain": "math",
+  "title": "Poles of the Γ₀(5) scattering determinant lie in the band 1/16 ≤ Re s ≤ 7/16",
+  "statement": "Let φ(s) = √π Γ(s − 1/2) ζ(2s − 1) / (Γ(s) ζ(2s)) be the SL₂(ℤ) scattering function and det Φ(s) = φ(s)² (26 − 5^{2s} − 5^{2−2s}) / (5^{2s} − 1)² the scattering determinant of Γ₀(5) (cusps ∞, 0; standard explicit Γ₀(p) matrix with p = 5). Claim: every pole of det Φ in the open strip 0 < Re s < 1/2 satisfies 1/16 ≤ Re s ≤ 7/16. Formal shape (Mathlib has no pole API): φ and det Φ are DifferentiableAt every s in the open strip with Re s ∉ [1/16, 7/16]. Under RH the band collapses to Re s = 1/4; the gap between the band and the line is RH itself, re-expressed for an object the programme already owns.",
+  "source": {
+    "citation": "Corollary of openai/math 003 (zero strip 1/8 ≤ Re ρ ≤ 7/8, via Brockian.QuasiRH003.riemannZeta_zero_strip) applied to the explicit Γ₀(p) scattering matrix (Hejhal; Huxley 1984; Iwaniec, Spectral Methods). Cross-check the constants against the Fricke-channel derivation in Structural_Theorems_Pass_3.",
+    "external_status": "unknown"
+  },
+  "status": "open",
+  "difficulty": 2,
+  "tags": [
+    "scattering-determinant",
+    "gamma0-5",
+    "fricke-channels",
+    "eisenstein-series",
+    "riemann-zeta",
+    "explanatory-structure",
+    "external-input"
+  ],
+  "formal_targets": [
+    {"kind": "lean_def", "name": "Brockian.QuasiRH003.Targets.scatteringFunction", "path": "formal/QuasiRH003/Targets.lean"},
+    {"kind": "lean_def", "name": "Brockian.QuasiRH003.Targets.scatteringDet5", "path": "formal/QuasiRH003/Targets.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRH003.Targets.scatteringFunction_differentiableAt_of_outside_band", "path": "formal/QuasiRH003/Targets.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRH003.Targets.scatteringDet5_differentiableAt_of_outside_band", "path": "formal/QuasiRH003/Targets.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.QuasiRH003.Targets.scatteringFunction_differentiableAt_of_RH", "path": "formal/QuasiRH003/Targets.lean"},
+    {"kind": "compute_cert", "name": "pole scan of det Φ on 0 < Re s < 1/2, |Im s| ≤ 50 (argument principle on small squares; every pole must sit at ρ/2 for an LMFDB zero ρ)", "path": null}
+  ],
+  "attack_modes": ["formalize", "compute", "decompose"],
+  "verification": {
+    "backend": "hybrid",
+    "criteria": [
+      "Targets A and B close with no sorry inside openai/math (Mode B), axioms ⊆ {propext, Classical.choice, Quot.sound}",
+      "elementary factor: poles only on Re s = 0, zeros only on Re s ∈ {0, 1}; M_p(s)·M_p(1−s) = I (hand-checked 2026-10-07; re-derive against Pass 3)",
+      "numerical falsifier: no pole of det Φ off Re s = 1/4 for |Im s| ≤ 50 (any such pole falsifies the matrix, not the theorem)"
+    ]
+  },
+  "risk_tier": 2,
+  "notes": "Decision this result changes: whether the Fricke-channel / scattering object becomes the first place in the programme where an external zero-free input is visible in the lab's own geometry — a theorem attached to the 'explanatory structure' organizing principle rather than a construction. Proof route for A: Γ(s−1/2), Γ(s) differentiable, Γ(s) ≠ 0 (Re s > 0, s ≠ 1/2); ζ(2s−1) differentiable (2s−1 ≠ 1); ζ(2s) differentiable (2s ≠ 1) and nonzero by riemannZeta_zero_strip at 2s (real part in (0,1) outside [1/8,7/8]); quotient rule. B adds 5^{2s} ≠ 1 from ‖5^{2s}‖ = 5^{2 Re s} > 1. Claims NOTHING about D₅, the golden ratio, the C₅ spectrum, or the C₂₀ reconstruction theorem; the band comes from 003's Eisenstein-field method, not pentagonal structure. Inherits 003's risk and adds none: a zero of ζ with Re ρ outside [1/8, 7/8] would falsify both. Blocked on math-openai-003-quasi-rh-import reaching PROVED (Mode B).",
+  "attempts": [
+    {
+      "ts": "2026-10-07T09:00:00Z",
+      "mode": "decompose",
+      "result": "scaffold",
+      "note": "Definitions and three target statements drafted (formal/QuasiRH003/Targets.lean, sorry by design). Elementary-factor analysis and the functional-equation identity for the Γ₀(p) matrix checked by hand. Next: Mode B build, Pass-3 convention cross-check, mpmath pole scan as the experiment sidecar, then close A and B.",
+      "agent": "claude",
+      "artifacts": ["formal/QuasiRH003/Targets.lean"]
+    }
+  ],
+  "ledger_refs": [],
+  "priority": 70
+}
