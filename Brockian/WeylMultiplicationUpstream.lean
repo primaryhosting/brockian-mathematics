@@ -6,6 +6,7 @@
 import Brockian.WeylMaximalMultiplication
 
 open MeasureTheory
+open scoped ENNReal
 
 namespace Brockian.Weyl.MultiplicationUpstream
 

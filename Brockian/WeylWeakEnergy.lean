@@ -7,7 +7,7 @@ import Brockian.WeylWeakRegularityClosed
 import Brockian.WeylWeakPrimitiveClassical
 
 open MeasureTheory Complex
-open scoped ENNReal SchwartzMap Laplacian
+open scoped ENNReal SchwartzMap Laplacian InnerProductSpace ComplexConjugate
 
 namespace Brockian.WeylWeakEnergy
 
@@ -185,7 +185,7 @@ theorem potentialMulCLM_coeFn
     (potentialMulCLM V hVc M hV u : Real -> Complex) =ᵐ[volume]
       fun x => (V x : Complex) * (u : Real -> Complex) x := by
   unfold potentialMulCLM
-  filter_upwards [coeFn_mulLpCLM _ _ _ _ u] with x hx
+  filter_upwards [Brockian.SpectralGate1.coeFn_mulLpCLM _ _ _ _ u] with x hx
   simpa only [Pi.smul_apply, Pi.mul_apply, smul_eq_mul] using hx
 
 /-- The conjugated weak-equation right-hand side is exactly `V u - conj(z) u`

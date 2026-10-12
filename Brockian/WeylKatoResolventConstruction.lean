@@ -15,6 +15,7 @@ import Brockian.WeylKatoRellichTransfer
 namespace Brockian.Weyl.KatoResolventConstruction
 
 open scoped InnerProductSpace
+open Brockian.Weyl.Operator
 open Brockian.Weyl.Cayley
 open Brockian.Weyl.KatoRellichScaffold
 open Brockian.Weyl.KatoUnbounded

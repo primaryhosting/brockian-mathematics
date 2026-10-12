@@ -2,7 +2,7 @@ import Brockian.WeylMaximalMultiplication
 import Brockian.WeylSchrodingerGate1Final
 
 open MeasureTheory
-open scoped InnerProductSpace
+open scoped InnerProductSpace ENNReal
 
 namespace Brockian.Weyl.FreeLaplacianCorrected
 

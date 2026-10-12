@@ -39,7 +39,10 @@ jobs:
             Brockian.SieveSpectrumDeletion Brockian.OddPerfectThreePrimes \
             Brockian.SingularSeriesConvergence Brockian.ConfiningSpectralShape \
             Brockian.WeylKatoRellichTransfer Brockian.WeylWeakRegularityClosed \
-            Brockian.WeylWeakRegularityDischarge
+            Brockian.WeylWeakRegularityDischarge \
+            Brockian.WeylKatoResolventPackage Brockian.WeylKatoResolventConstruction \
+            Brockian.WeylWeakPrimitiveLocal Brockian.WeylMultiplicationUpstream \
+            Brockian.WeylWeakEnergy Brockian.WeylFreeLaplacianCorrected
 
       - name: Audit the entire imported corpus
         if: ${{ !cancelled() && steps.cache.outcome == 'success' }}
