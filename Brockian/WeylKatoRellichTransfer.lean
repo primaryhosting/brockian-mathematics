@@ -27,6 +27,7 @@ namespace Brockian.Weyl.KatoRellichTransfer
 
 open scoped InnerProductSpace
 open Brockian.Weyl.Cayley
+open Brockian.Weyl.Operator
 open Brockian.Weyl.KatoRellichScaffold
 open Brockian.Weyl.KatoUnbounded
 open Brockian.Weyl.KatoNeumann

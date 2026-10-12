@@ -40,6 +40,7 @@ import Brockian.RiemannScaffold
 
 open MeasureTheory Complex Filter Topology
 open Brockian.RiemannScaffold
+open Brockian.SpectralGate1
 open Brockian.Weyl.OperatorChoice
 open Brockian.Weyl.Confining
 

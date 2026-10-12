@@ -15,7 +15,7 @@ import Mathlib
 import Brockian.WeylWeakRegularityScaffold
 
 open MeasureTheory Complex
-open scoped ENNReal SchwartzMap Laplacian
+open scoped ENNReal SchwartzMap Laplacian ComplexConjugate
 
 namespace Brockian.WeylWeakRegularityClosed
 

@@ -42,7 +42,7 @@ theorem locallyIntegrable_intervalIntegrable
     {f : ℝ → ℂ} (hf : LocallyIntegrable f volume) (a b : ℝ) :
     IntervalIntegrable f volume a b :=
   intervalIntegrable_iff.mpr
-    ((hf.integrableOn_isCompact isCompact_uIcc).mono_set uIoc_subset_uIcc)
+    ((hf.integrableOn_isCompact isCompact_uIcc).mono_set Set.uIoc_subset_uIcc)
 
 /-- A locally integrable function has a continuous interval-integral primitive. -/
 theorem locallyIntegrable_continuous_primitive

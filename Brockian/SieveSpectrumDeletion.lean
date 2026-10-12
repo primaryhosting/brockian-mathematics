@@ -1,3 +1,6 @@
+import Mathlib
+import Brockian.SieveSpectrumBlocks
+
 /-!
 # Twin-unit deletion masks on the canonical sieve blocks
 
@@ -7,9 +10,6 @@ twin-admissible residue has one of the three modulo-15 lanes, gives the exact
 equivalence between surviving wheel sites and surviving block coordinates,
 and defines the corresponding deletion mask on each potential path.
 -/
-
-import Mathlib
-import Brockian.SieveSpectrumBlocks
 
 set_option autoImplicit false
 
