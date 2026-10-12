@@ -18,6 +18,7 @@ import Brockian.WeylKatoRellich
 
 namespace Brockian.Weyl.KatoConcreteApplication
 
+open Brockian.Weyl.Operator
 open Brockian.Weyl.KatoUnbounded
 open Brockian.Weyl.SchrodingerMinimal
 open Brockian.Weyl.SchrodingerGate1Closed

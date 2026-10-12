@@ -42,7 +42,8 @@ jobs:
             Brockian.WeylWeakRegularityDischarge \
             Brockian.WeylKatoResolventPackage Brockian.WeylKatoResolventConstruction \
             Brockian.WeylWeakPrimitiveLocal Brockian.WeylMultiplicationUpstream \
-            Brockian.WeylWeakEnergy Brockian.WeylFreeLaplacianCorrected
+            Brockian.WeylWeakEnergy Brockian.WeylFreeLaplacianCorrected \
+            Brockian.WeylSchrodingerGate1Closed Brockian.WeylKatoConcreteApplication
 
       - name: Audit the entire imported corpus
         if: ${{ !cancelled() && steps.cache.outcome == 'success' }}
