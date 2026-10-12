@@ -16,6 +16,7 @@ open scoped InnerProductSpace
 namespace Brockian.Weyl.SchrodingerGate1Closed
 
 open Brockian.Weyl.Operator
+open Brockian.Weyl.Cayley
 open Brockian.Weyl.SchrodingerMinimal
 open Brockian.Weyl.ClosedRange
 open Brockian.Weyl.KatoResolventPackage

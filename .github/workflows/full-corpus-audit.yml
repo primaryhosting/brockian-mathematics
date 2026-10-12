@@ -1,6 +1,8 @@
 name: full-corpus-audit
 
 on:
+  push:
+    branches: [repair/full-corpus-build-2026-10-12]
   workflow_dispatch:
   schedule:
     - cron: "17 6 * * 1,4"
@@ -9,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: full-corpus-audit
+  group: full-corpus-audit-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -27,9 +29,24 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
 
       - name: Fetch Mathlib cache
+        id: cache
         run: lake exe cache get
 
+      - name: Kernel-check the repaired modules
+        run: |
+          lake build \
+            Brockian.SieveSpectrumCounts Brockian.SieveSpectrumBlocks \
+            Brockian.SieveSpectrumDeletion Brockian.OddPerfectThreePrimes \
+            Brockian.SingularSeriesConvergence Brockian.ConfiningSpectralShape \
+            Brockian.WeylKatoRellichTransfer Brockian.WeylWeakRegularityClosed \
+            Brockian.WeylWeakRegularityDischarge \
+            Brockian.WeylKatoResolventPackage Brockian.WeylKatoResolventConstruction \
+            Brockian.WeylWeakPrimitiveLocal Brockian.WeylMultiplicationUpstream \
+            Brockian.WeylWeakEnergy Brockian.WeylFreeLaplacianCorrected \
+            Brockian.WeylSchrodingerGate1Closed Brockian.WeylKatoConcreteApplication
+
       - name: Audit the entire imported corpus
+        if: ${{ !cancelled() && steps.cache.outcome == 'success' }}
         run: lake build
 
       - name: Record audit provenance

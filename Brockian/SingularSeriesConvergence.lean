@@ -157,7 +157,7 @@ theorem summable_localFactorAt_sub_one (G : Finset ℕ)
   set N := G.sup id + 1 with hN
   rw [← summable_nat_add_iff N]
   have hbase : Summable (fun n : ℕ => (1 : ℝ) / (n : ℝ) ^ 2) :=
-    summable_one_div_nat_pow.mpr (by norm_num)
+    Real.summable_one_div_nat_pow.mpr (by norm_num)
   have hshift : Summable (fun n : ℕ => (1 : ℝ) / ((n + N : ℕ) : ℝ) ^ 2) :=
     (summable_nat_add_iff (f := fun m : ℕ => (1 : ℝ) / (m : ℝ) ^ 2) N).mpr hbase
   have hg : Summable

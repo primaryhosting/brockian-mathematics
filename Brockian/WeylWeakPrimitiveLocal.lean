@@ -55,7 +55,7 @@ theorem primitiveModel_of_distributionalPrimitiveIdentity
   y'_integral := h.y'_integral
   memL2 := Lp.memLp g
   memL2' := h.memL2_y'
-  represents := EventuallyEq.rfl
+  represents := Filter.EventuallyEq.rfl
 
 /-- The distributional primitive hypothesis discharges
 `WeakToPrimitiveRegularity`. -/
